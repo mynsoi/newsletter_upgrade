@@ -1,0 +1,20 @@
+
+## 문서 (외부)
+  T1  enriched     58건
+  T2  enriched     50건
+  T3  enriched     70건
+  T5  enriched     99건
+
+## Claims
+  총 934건
+    neutral        353건
+    cautious       295건
+    optimistic     191건
+    conditional     95건
+
+## 내부 자료
+  A등급 API가능: 3건
+
+## 아티클
+  approved   1건
+

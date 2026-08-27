@@ -1,0 +1,10 @@
+data/
+__pycache__/
+*.pyc
+.env
+.venv/
+.pytest_cache/
+internal/**/*.md
+!internal/**/_TEMPLATE*.md
+!internal/B등급_투입후보목록.md
+*.egg-info/

@@ -1,0 +1,130 @@
+{
+  "topic": "심리적 안전감과 AI 실험 문화",
+  "slug": "psych-safety-ai-experiment",
+  "collected_at": "2026-08-25",
+  "prompt_version": "v2 (스팟체크 통과 기준)",
+  "conditions": {
+    "independent_sources": ["theory-canon", "hbr", "arxiv-cs-cy", "mckinsey-insights", "mit-smr"],
+    "independent_sources_count": 5,
+    "opposing_stance": "optimistic 2건 vs cautious 5건 확보",
+    "t1_t2_count": "T1 9건(이론 7 + arxiv 2), T2 1건 — 충족",
+    "theory_claims": 7,
+    "verdict": "강제 조건 3건 모두 충족 + 이론 claim 권장 조건 충족"
+  },
+  "claims": [
+    {
+      "id": "1A0367ECCCADD33D1B907BA7883",
+      "text": "심리적 안전감 — 대인관계 위험을 감수해도 안전하다는 팀 구성원의 공유된 믿음 — 은 학습 행동을 매개로 팀 성과에 기여한다",
+      "source": "theory-canon", "tier": "T1", "stance": "neutral", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "이론 렌즈 — 핵심 매개 구조"
+    },
+    {
+      "id": "1A0367ECCCBD77FFC9213452C61",
+      "text": "심리적 안전감은 발언(voice)·정보 공유·실수 보고·도움 요청 행동과 정적으로 연관된다 (메타분석에서 일관되게 지지)",
+      "source": "theory-canon", "tier": "T1", "stance": "neutral", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "이론 렌즈 — AI 실험 공유 행동과 연결"
+    },
+    {
+      "id": "1A0367ECCCB9B262609BECC7D47",
+      "text": "심리적 안전감은 기준을 낮추는 관용이나 무조건적 친절이 아니라, 대인관계 리스크에 따르는 발언 비용을 낮추는 조건이다",
+      "source": "theory-canon", "tier": "T1", "stance": "neutral", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "통념 교정 — 안전감=관용 오해 차단"
+    },
+    {
+      "id": "1A0367ECCCB631D3AEEF5E5BD82",
+      "text": "심리적 안전감이 높아도 성과 기준·책무성이 함께 높지 않으면 학습·성과로 이어지지 않는다 (안전감 단독으로는 안주 영역이 될 수 있음)",
+      "source": "theory-canon", "tier": "T1", "stance": "conditional", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "경계 조건 — 통념과의 충돌 핵심"
+    },
+    {
+      "id": "1A0367ECCCB9868B4BC0F52E812",
+      "text": "발언 행동의 효과는 위계 문화·권력거리 등 조직·국가 맥락에 따라 달라져, 개입 효과의 일반화에 주의가 필요하다",
+      "source": "theory-canon", "tier": "T1", "stance": "conditional", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "경계 조건 — 한국 대기업 맥락 적용 시 주의점"
+    },
+    {
+      "id": "1A0367ECCCB6D61B699D3529DBC",
+      "text": "리더의 포용적 행동(질문하기, 자신의 실수 인정, 접근 가능성)은 심리적 안전감 형성의 주요 선행 요인이다",
+      "source": "theory-canon", "tier": "T1", "stance": "neutral", "evidence_type": "theory",
+      "doc": "심리적 안전감 (Psychological Safety)", "role": "리더 액션 근거"
+    },
+    {
+      "id": "1A0367ECCC0EE18ADF670779721",
+      "text": "성공 경험이 많은 유능한 전문가일수록 실패에서 배우는 경험이 적어 방어적 추론에 더 취약하다",
+      "source": "theory-canon", "tier": "T1", "stance": "neutral", "evidence_type": "theory",
+      "doc": "조직학습 — 단일고리/이중고리 학습", "role": "교차 해석 — 고성과자의 AI 역량 격차 은폐"
+    },
+    {
+      "id": "1A0330B3EF21A9883F75660F925",
+      "text": "조직들은 AI 도입 실패 시 직원들의 두려움이나 기술 부족을 원인으로 잘못 진단한다",
+      "source": "hbr", "tier": "T3", "stance": "cautious", "evidence_type": "opinion",
+      "doc": "“Leadership Drift” Is Stalling Your AI Strategy", "role": "관찰된 신호 — 오진 프레임"
+    },
+    {
+      "id": "1A0330B3EE7D30789937AC79ADE",
+      "text": "AI 도입 지연의 원인으로 직원 저항이 아닌 리더십 팀의 문제가 주요 원인이다",
+      "source": "hbr", "tier": "T3", "stance": "neutral", "evidence_type": "case",
+      "doc": "“Leadership Drift” Is Stalling Your AI Strategy", "role": "관찰된 신호 — 책임 소재 전환"
+    },
+    {
+      "id": "1A0330C7DD8FA16CCCA91898DB0",
+      "text": "IT 팀은 통제, 표준화, 위험 감소를 추구하는 반면 AI 팀은 실험, 유연성, 빠른 학습을 추구한다",
+      "source": "hbr", "tier": "T3", "stance": "neutral", "evidence_type": "opinion",
+      "doc": "AI and IT Teams Often Clash. But They Don’t Have To.", "role": "관찰된 신호 — 실험 문화 vs 통제 문화 긴장"
+    },
+    {
+      "id": "1A0330C8E32B503932BDDE2207D",
+      "text": "AI 도입의 성공은 기술 측면만큼이나 업무 재설계, 신뢰 구축, 인재 개발, 인간 판단의 질 보호 같은 조직 차원의 요소에 달려 있다",
+      "source": "hbr", "tier": "T3", "stance": "conditional", "evidence_type": "opinion",
+      "doc": "The Hidden Realities of AI Adoption", "role": "교차 해석 — 조직 요소 프레임"
+    },
+    {
+      "id": "1A0330A0ACA6187D27D315CD639",
+      "text": "엔터프라이즈 AI 도입 성공은 기술 구축보다는 조직 인력 관리와 문화 변화가 더 중요한 요소다",
+      "source": "mckinsey-insights", "tier": "T2", "stance": "neutral", "evidence_type": "opinion",
+      "doc": "AI transformations: Views from AMD, Dell, Liquid AI, and Mercedes-Benz", "role": "관찰된 신호 — T2 교차 확인"
+    },
+    {
+      "id": "1A03303F7F3D083D911688D4963",
+      "text": "기술적 가용성이 AI 위임 채택 변동의 대부분을 설명하지만, 고학력 직종에서의 부족분은 설명하지 못한다",
+      "source": "arxiv-cs-cy", "tier": "T1", "stance": "cautious", "evidence_type": "data",
+      "doc": "Who Delegates to AI? Evidence from 53,000 Agent Configurations", "role": "관찰된 신호 — 채택 격차의 비기술 요인 (T1 데이터)"
+    },
+    {
+      "id": "1A03303F7F32AF0EBC5C1F21C6C",
+      "text": "고학력 직종에서의 AI 위임 채택 부족은 사전 명시가 어려운 업무나 업무 코드화 속도에 대한 전문가의 재량권을 반영할 수 있다",
+      "source": "arxiv-cs-cy", "tier": "T1", "stance": "conditional", "evidence_type": "theory",
+      "doc": "Who Delegates to AI? Evidence from 53,000 Agent Configurations", "role": "교차 해석 — 전문가 집단의 위임 회피"
+    },
+    {
+      "id": "1A0330BC7AB775F7FB59B39747D",
+      "text": "생성형 AI의 가장 큰 조직적 수익은 기성 생산성 도구가 아닌 조직 전체 솔루션에서 창출된다",
+      "source": "hbr", "tier": "T3", "stance": "optimistic", "evidence_type": "opinion",
+      "doc": "AI Experiments Need Domain Experts. Here’s How to Support Them.", "role": "상반 관점 — 실험 투자의 기대 수익"
+    },
+    {
+      "id": "1A0330C45EC6C7D9FE3F05A5357",
+      "text": "AI 도입으로 인한 생산성 증가와 고객 만족도 향상이 동시에 가능하다",
+      "source": "hbr", "tier": "T3", "stance": "optimistic", "evidence_type": "opinion",
+      "doc": "Why Great Turnarounds Start with Culture, Not Strategy", "role": "상반 관점 — 낙관 측"
+    },
+    {
+      "id": "1A0330A8454BABCB1A4E195471D",
+      "text": "근로자들이 생산성 향상을 보고했음에도 불구하고 기업의 실제 수익에는 약속된 이점이 나타나지 않았다",
+      "source": "hbr", "tier": "T3", "stance": "cautious", "evidence_type": "data",
+      "doc": "4 Steps to Transform the “Middle Office” with AI", "role": "상반 관점 — 개인 체감과 조직 성과의 간극"
+    },
+    {
+      "id": "1A0330AC2D57A625CE54F97ED94",
+      "text": "AI 기술 도입 시 조직 내 신뢰 구축이 사용자 수용의 가장 중요한 선행 조건이다",
+      "source": "hbr", "tier": "T3", "stance": "conditional", "evidence_type": "opinion",
+      "doc": "Can an AI-Powered Scribe Curb Physician Burnout?", "role": "교차 해석 — 신뢰·안전감 연결"
+    },
+    {
+      "id": "1A0330D8805CE8904DA8CFB8188",
+      "text": "예외적 성공 이후 혁신가에게 지위와 특권을 부여하면 타인의 의견에 저항하고 협업을 줄이게 된다",
+      "source": "mit-smr", "tier": "T3", "stance": "cautious", "evidence_type": "theory",
+      "doc": "How to Avoid Innovation One-Hit Wonders", "role": "보조 — 실험 성공 사례 관리의 역효과 (mit-smr 출처 확보)"
+    }
+  ]
+}

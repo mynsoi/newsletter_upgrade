@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Test Feed</title>
+  <item>
+    <title>AI adoption and team productivity</title>
+    <link>https://example.com/articles/ai-productivity</link>
+    <author>Jane Doe</author>
+    <pubDate>Mon, 10 Aug 2026 09:00:00 GMT</pubDate>
+    <description>A study on how generative AI tools changed productivity patterns across junior and senior staff in knowledge work teams.</description>
+  </item>
+  <item>
+    <title>Rethinking performance reviews</title>
+    <link>https://example.com/articles/performance-reviews</link>
+    <pubDate>Tue, 11 Aug 2026 09:00:00 GMT</pubDate>
+    <description>Why annual performance reviews fail in AI-augmented workplaces and what continuous feedback systems look like.</description>
+  </item>
+</channel>
+</rss>

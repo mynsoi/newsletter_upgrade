@@ -1,0 +1,80 @@
+sources:
+- id: arxiv-cs-cy
+  name: arXiv - Computers and Society
+  tier: T1
+  type: rss
+  feed_url: https://rss.arxiv.org/rss/cs.CY
+  lang: en
+  verified: true
+- id: arxiv-cs-hc
+  name: arXiv - Human-Computer Interaction
+  tier: T1
+  type: rss
+  feed_url: https://rss.arxiv.org/rss/cs.HC
+  lang: en
+  verified: true
+- id: mckinsey-insights
+  name: McKinsey Insights
+  tier: T2
+  type: rss
+  feed_url: https://www.mckinsey.com/insights/rss
+  lang: en
+  verified: true
+- id: deloitte-insights
+  name: Deloitte Insights
+  tier: T2
+  type: rss
+  feed_url: https://www2.deloitte.com/us/en/insights.rss.html
+  lang: en
+  verified: false
+  note: 2026-08-24 검증 실패(HTTP 404). 대체 URL(insights/rss.xml 등)도 404 — 공개 RSS 폐지로 판단,
+    뉴스레터 인박스 경로(Phase 1) 전환 필요
+- id: bcg-publications
+  name: BCG Publications
+  tier: T2
+  type: rss
+  feed_url: https://www.bcg.com/rss
+  lang: en
+  verified: false
+  note: 2026-08-24 검증 실패(HTTP 403, 봇 차단 추정). 대체 URL도 404 — 뉴스레터 인박스 경로(Phase 1) 전환
+    필요
+- id: hbr
+  name: Harvard Business Review
+  tier: T3
+  type: rss
+  feed_url: http://feeds.hbr.org/harvardbusiness
+  lang: en
+  verified: true
+  note: RSS는 요약만 제공. 전문은 구독 계정 뉴스레터 인박스로 수집(Phase 1). https(feeds.hbr.org)는 사내망에서
+    접속 실패해 http 경로 사용(2026-08-24 확인)
+- id: mit-smr
+  name: MIT Sloan Management Review
+  tier: T3
+  type: rss
+  feed_url: https://sloanreview.mit.edu/feed/
+  lang: en
+  verified: true
+- id: ms-worklab
+  name: Microsoft WorkLab
+  tier: T4
+  type: rss
+  feed_url: https://www.microsoft.com/en-us/worklab/feed
+  lang: en
+  verified: false
+  note: 2026-08-24 검증 실패 — /feed·/rss 모두 HTML 반환(RSS 미제공 추정). 뉴스레터 인박스 경로(Phase 1)
+    전환 필요
+- id: hankyung-it
+  name: 한국경제 IT
+  tier: T5
+  type: rss
+  feed_url: https://www.hankyung.com/feed/it
+  lang: ko
+  verified: true
+- id: mk-economy
+  name: 매일경제 경제
+  tier: T5
+  type: rss
+  feed_url: https://www.mk.co.kr/rss/30100041/
+  lang: ko
+  verified: true
+  note: 피드 URL 불확실 — validate로 확인
