@@ -20,8 +20,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, connect, migrate, new_id  # noqa: E402
 
 PROMPT_PATH = ROOT / "prompts" / "claim_extraction.md"
+GATE_PROMPT_PATH = ROOT / "prompts" / "relevance_gate.md"
 SETTINGS_PATH = ROOT / "config" / "settings.yaml"
 MAX_BODY_CHARS = 24000
+GATE_BODY_CHARS = 4000
 
 VALID_STANCE = {"optimistic", "cautious", "conditional", "neutral"}
 VALID_EVIDENCE = {"survey", "experiment", "case", "data", "theory", "opinion"}
@@ -58,6 +60,25 @@ def parse_claims(raw: str) -> list[dict]:
     return valid
 
 
+def select_target_docs(conn, limit: int):
+    """추출 대상: status='new'이면서 summary_only가 아닌 문서 (A3 게이트)."""
+    return conn.execute(
+        "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0 "
+        "ORDER BY collected_at LIMIT ?",
+        (limit,),
+    ).fetchall()
+
+
+def check_relevance(title: str, body: str, model: str) -> bool:
+    """A1 게이트: '일·조직·인재·AI와 일' 주제 판별. 첫 토큰 IRRELEVANT면 무관."""
+    template = GATE_PROMPT_PATH.read_text(encoding="utf-8")
+    prompt = (template
+              .replace("{title}", title or "(무제)")
+              .replace("{body}", body[:GATE_BODY_CHARS]))
+    raw = call_model(prompt, model).strip().upper()
+    return not raw.startswith("IRRELEVANT")
+
+
 def call_model(prompt: str, model: str) -> str:
     import anthropic  # 지연 임포트 — dry-run 시 SDK 불필요
     client = anthropic.Anthropic()
@@ -83,19 +104,34 @@ def main() -> int:
 
     conn = connect()
     migrate(conn)
-    docs = conn.execute(
-        "SELECT * FROM documents WHERE status='new' ORDER BY collected_at LIMIT ?",
-        (args.limit,),
-    ).fetchall()
-    print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run})")
+    docs = select_target_docs(conn, args.limit)
+    print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run}) — summary_only 제외")
 
     total_claims = 0
+    gated = 0
     for d in docs:
         body = (ROOT / d["raw_path"]).read_text(encoding="utf-8")
         prompt = build_prompt(d["title"], d["tier"], body)
         if args.dry_run:
             print(f"  DRY  [{d['tier']}] {d['title'][:60]}  (prompt {len(prompt):,}자)")
             continue
+
+        # A1 관련성 게이트 — 무관 문서는 추출하지 않고 rejected 처리
+        try:
+            relevant = check_relevance(d["title"], body, model)
+        except Exception as e:  # noqa: BLE001 — 게이트 실패가 추출을 막지 않도록
+            print(f"  게이트 오류 [{d['id']}]: {type(e).__name__} — 추출 단계로 진행")
+            relevant = True
+        if not relevant:
+            conn.execute("UPDATE documents SET status='rejected' WHERE id=?", (d["id"],))
+            conn.execute(
+                "INSERT OR IGNORE INTO tags (document_id, axis, value) VALUES (?, 'gate', 'off_topic')",
+                (d["id"],))
+            conn.commit()
+            gated += 1
+            print(f"  무관 [{d['tier']}] {d['title'][:50]} → rejected (관련성 게이트)")
+            continue
+
         try:
             raw = call_model(prompt, model)
             claims = parse_claims(raw)
@@ -120,7 +156,8 @@ def main() -> int:
         print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건")
 
     if not args.dry_run:
-        print(f"\n총 {total_claims}건 claim 추출. 다음: eval/claim_spotcheck.md 절차로 정확도 스팟체크")
+        print(f"\n총 {total_claims}건 claim 추출, 관련성 게이트 제외 {gated}건. "
+              "다음: eval/claim_spotcheck.md 절차로 정확도 스팟체크")
     return 0
 
 

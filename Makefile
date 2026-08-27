@@ -9,11 +9,13 @@ init:
 validate:
 	$(PYTHON) src/collectors/validate_sources.py
 
-collect:
+collect:                 # rss + api 소스 모두 수집
 	$(PYTHON) src/collectors/rss.py
+	$(PYTHON) src/collectors/api.py
 
 collect-fast:            # 본문 추출 없이 피드 요약만 (빠른 동작 확인용)
 	$(PYTHON) src/collectors/rss.py --no-body
+	$(PYTHON) src/collectors/api.py
 
 sync:
 	$(PYTHON) src/internal_sync.py

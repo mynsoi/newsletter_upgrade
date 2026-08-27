@@ -21,7 +21,8 @@ import trafilatura
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, content_hash, migrate, new_id  # noqa: E402
+from db import ROOT, connect, migrate  # noqa: E402
+from collectors.store import store_document  # noqa: E402
 
 SOURCES_PATH = ROOT / "config" / "sources.yaml"
 RAW_DIR = ROOT / "data" / "raw"
@@ -85,45 +86,12 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
             if html:
                 body = extract_body(html)
         text = body or summary
-        if not text.strip():
-            stats["failed"] += 1
-            continue
 
-        c_hash = content_hash(text)
-        if conn.execute(
-            "SELECT 1 FROM documents WHERE content_hash = ?", (c_hash,)
-        ).fetchone():
-            stats["dup"] += 1
-            continue
-
-        doc_id = new_id()
-        raw_path = RAW_DIR / source["id"] / f"{doc_id}.txt"
-        raw_path.parent.mkdir(parents=True, exist_ok=True)
-        raw_path.write_text(text, encoding="utf-8")
-        try:
-            raw_ref = str(raw_path.relative_to(ROOT))
-        except ValueError:
-            raw_ref = str(raw_path)
-
-        title = entry.get("title", "(무제)")
-        conn.execute(
-            """INSERT INTO documents
-               (id, source_id, tier, url, title, author, published_at,
-                lang, raw_path, content_hash, status)
-               VALUES (?,?,?,?,?,?,?,?,?,?, 'new')""",
-            (doc_id, source["id"], source["tier"], url, title,
-             entry.get("author"), parse_date(entry), source.get("lang"),
-             raw_ref, c_hash),
-        )
-        conn.execute(
-            "INSERT INTO documents_fts (id, title, body) VALUES (?,?,?)",
-            (doc_id, title, text[:20000]),
-        )
-        conn.execute(
-            "INSERT OR IGNORE INTO tags (document_id, axis, value) VALUES (?, 'tier', ?)",
-            (doc_id, source["tier"]),
-        )
-        stats["new"] += 1
+        # 저장은 공용 로직으로 — 중복 제거·summary_only 규칙을 api 수집기와 동일 적용
+        result = store_document(
+            conn, source, url=url, title=entry.get("title", "(무제)"), text=text,
+            author=entry.get("author"), published=parse_date(entry), raw_dir=RAW_DIR)
+        stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
     conn.commit()
     return stats
 

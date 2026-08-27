@@ -1,0 +1,74 @@
+# 소스 검증 워크플로 (α3 실측을 Actions 환경에서 수행)
+#
+# 원칙: 소스 상태 변경은 사람이 확인 후 커밋한다.
+# 이 워크플로는 sources.yaml을 절대 자동 커밋하지 않는다 — 갱신본·보고서를
+# 아티팩트로 올리고, 결과 요약과 diff를 저장소 이슈로 남길 뿐이다.
+name: validate-sources
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Run validate
+        id: validate
+        continue-on-error: true # 실패해도 보고·이슈 생성은 진행
+        run: |
+          set -o pipefail
+          python src/collectors/validate_sources.py | tee validate-report.txt
+
+      - name: Diff sources.yaml (자동 커밋하지 않음)
+        run: git diff --no-color config/sources.yaml > sources.yaml.diff || true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: validate-results
+          path: |
+            validate-report.txt
+            sources.yaml.diff
+            config/sources.yaml
+          retention-days: 30
+
+      - name: Create issue with summary and diff
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          STATUS="${{ steps.validate.outcome }}"
+          [ "$STATUS" = "success" ] && BADGE="전체 통과" || BADGE="실패 있음"
+          {
+            echo "## 소스 검증 결과 — $BADGE ($(date -u +%F) UTC, run: ${{ github.run_id }})"
+            echo
+            echo '```'
+            cat validate-report.txt
+            echo '```'
+            echo
+            echo "### sources.yaml 변경분 (자동 커밋하지 않음 — 사람이 확인 후 커밋)"
+            if [ -s sources.yaml.diff ]; then
+              echo '```diff'
+              cat sources.yaml.diff
+              echo '```'
+            else
+              echo "변경 없음"
+            fi
+            echo
+            echo "_갱신된 sources.yaml 전문과 보고서는 이 run의 validate-results 아티팩트에 있습니다._"
+          } > issue-body.md
+          gh issue create \
+            --title "validate: 소스 검증 $BADGE ($(date -u +%F))" \
+            --body-file issue-body.md
