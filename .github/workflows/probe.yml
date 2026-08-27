@@ -1,0 +1,52 @@
+# 소스 접근성 프로브 (α3 실측 보조 도구)
+# 특정 URL을 Actions 환경에서 curl(브라우저형 헤더)과 파이프라인 클라이언트(httpx)로
+# 각각 요청해 차단 여부를 비교한다. 클라우드 IP 차단 vs 클라이언트 지문 차단을 구분하기 위함.
+name: probe-source
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "검사할 URL"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: curl with browser headers
+        run: |
+          echo "== curl (browser UA + common headers)"
+          curl -s -o body.txt -w "HTTP %{http_code} (%{http_version})\n" \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36" \
+            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+            -H "Accept-Language: en-US,en;q=0.9" \
+            --max-time 30 -L "${{ inputs.url }}" || echo "curl failed"
+          head -c 200 body.txt; echo
+      - name: httpx with browser headers (pipeline client)
+        run: |
+          pip -q install httpx
+          python - <<'EOF'
+          import httpx
+          url = "${{ inputs.url }}"
+          for label, ua in (
+              ("pipeline-UA", "SK-CultureInsights-Pipeline/0.1 (feed validation)"),
+              ("browser-UA", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"),
+          ):
+              try:
+                  r = httpx.get(url, follow_redirects=True, timeout=30,
+                                headers={"User-Agent": ua,
+                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                                         "Accept-Language": "en-US,en;q=0.9"})
+                  feed = "<rss" in r.text[:500] or "<feed" in r.text[:500]
+                  print(f"httpx {label}: HTTP {r.status_code}, feed={feed}")
+              except Exception as e:
+                  print(f"httpx {label}: ERR {type(e).__name__}")
+          EOF
