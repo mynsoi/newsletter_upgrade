@@ -176,11 +176,13 @@ def check_newsletter(source: dict) -> tuple[str, str]:
 
 # ---------- 2순위: RSS 관례 경로 탐지 ----------
 
-def probe_rss(source: dict, client: httpx.Client) -> tuple[str | None, str, bool]:
+def probe_rss(source: dict, client: httpx.Client) -> tuple[str | None, str, bool, bool]:
     """기존 feed_url → 관례 경로 순으로 시도.
 
-    반환: (통과한 URL 또는 None, 메시지, 서버 응답을 한 번이라도 받았는지 여부).
+    반환: (통과한 URL 또는 None, 메시지, 서버 응답 수신 여부, 4xx 수신 여부).
     세 번째 값이 False면 전부 접속 실패 — 네트워크 문제로 취급한다.
+    네 번째 값이 True면 4xx 차단 응답이 있었다 — 실측 통과 이력이 있는 소스는
+    강등하지 않고 "환경 차단 의심"으로 분류하는 데 쓴다.
     """
     candidates: list[str] = []
     if source.get("feed_url"):
@@ -200,18 +202,21 @@ def probe_rss(source: dict, client: httpx.Client) -> tuple[str | None, str, bool
                 if u not in candidates:
                     candidates.append(u)
     if not candidates:
-        return None, "feed_url·homepage 없음 — 탐지 후보를 만들 수 없음", True
+        return None, "feed_url·homepage 없음 — 탐지 후보를 만들 수 없음", True, False
 
     got_response = False
+    saw_4xx = False
     last = ""
     for u in candidates:
         ok, msg = check_rss_url(u, client)
         if ok:
-            return u, msg, True
+            return u, msg, True, False
         if not msg.startswith(CONN_FAIL):
             got_response = True
+        if re.match(r"HTTP 4\d\d", msg):
+            saw_4xx = True
         last = f"{u} → {msg}"
-    return None, f"RSS 미발견 (시도 {len(candidates)}건, 마지막: {last})", got_response
+    return None, f"RSS 미발견 (시도 {len(candidates)}건, 마지막: {last})", got_response, saw_4xx
 
 
 # ---------- note 관리 ----------
@@ -257,7 +262,7 @@ def validate_source(source: dict, client: httpx.Client) -> tuple[str, str]:
 
     # 2순위: RSS (기존 feed_url + 관례 경로 탐지)
     orig_feed = source.get("feed_url")
-    url, msg, got_response = probe_rss(source, client)
+    url, msg, got_response, saw_4xx = probe_rss(source, client)
     if url:
         source["type"] = "rss"
         source["feed_url"] = url
@@ -278,6 +283,13 @@ def validate_source(source: dict, client: httpx.Client) -> tuple[str, str]:
             status, nmsg = check_newsletter(source)
             return "NEWS", nmsg
         return "FAIL", f"전 후보 {CONN_FAIL} — 네트워크 확인 필요, 유형 유지(type={old_type})"
+
+    # 실측 통과 이력이 있는 소스가 4xx를 받으면 강등하지 않는다 —
+    # 실행 환경(클라우드 IP·클라이언트 지문) 차단일 가능성이 높으므로 사람 확인으로 넘긴다
+    if saw_4xx and old_type in ("rss", "api") and "실측 통과" in (source.get("note") or ""):
+        source["verified"] = False
+        set_auto_note(source, "환경 차단 의심(4xx) — 확인 필요 (실측 통과 이력 있음, 강등 보류)")
+        return "FAIL", f"환경 차단 의심(4xx) — 확인 필요, 유형 유지(type={old_type}) — {msg}"
 
     # 3순위: 기타 — newsletter로 분류
     source["type"] = "newsletter"

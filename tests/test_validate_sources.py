@@ -174,6 +174,36 @@ def test_fallback_to_newsletter_when_nothing_found():
     assert "[자동검증" in s["note"] and "API·RSS 미발견" in s["note"]
 
 
+def test_4xx_with_passed_history_not_demoted():
+    """실측 통과 이력(note)이 있는 소스가 4xx를 받으면 강등 대신 '환경 차단 의심' 분류."""
+    client = FakeClient(default=FakeResponse(403, "Forbidden"))
+    s = {"id": "wharton", "type": "rss", "feed_url": "http://w.edu/feed",
+         "verified": True, "note": "편입 권고. 2026-08-27 피드 실측 통과"}
+    mark, msg = vs.validate_source(s, client)
+    assert mark == "FAIL" and "환경 차단 의심" in msg
+    assert s["type"] == "rss"            # 강등 금지
+    assert s["verified"] is False
+    assert "환경 차단 의심(4xx)" in s["note"]
+    assert s["note"].startswith("편입 권고")  # 사람 note 보존
+
+
+def test_4xx_without_passed_history_still_demoted():
+    """실측 통과 이력이 없으면 기존대로 newsletter 강등."""
+    client = FakeClient(default=FakeResponse(403, "Forbidden"))
+    s = {"id": "unknown-src", "type": "rss", "feed_url": "http://x.com/feed"}
+    mark, msg = vs.validate_source(s, client)
+    assert mark == "NEWS" and s["type"] == "newsletter"
+
+
+def test_non4xx_definitive_failure_still_demoted_despite_history():
+    """4xx가 아닌 확정 실패(파싱 실패 등)는 실측 이력이 있어도 정상 강등."""
+    client = FakeClient(default=FakeResponse(200, "<html>not a feed</html>"))
+    s = {"id": "gone-src", "type": "rss", "feed_url": "http://x.com/feed",
+         "note": "2026-08-20 피드 실측 통과"}
+    mark, msg = vs.validate_source(s, client)
+    assert mark == "NEWS" and s["type"] == "newsletter"
+
+
 def test_network_failure_keeps_type():
     """전 후보 접속 실패면 네트워크 문제로 보고 유형을 강등하지 않는다."""
     client = FakeClient(default=httpx.ConnectError("net down"))
