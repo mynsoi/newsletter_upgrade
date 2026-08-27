@@ -24,6 +24,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
 
+# Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 SOURCES_PATH = ROOT / "config" / "sources.yaml"
 RAW_DIR = ROOT / "data" / "raw"
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)"
