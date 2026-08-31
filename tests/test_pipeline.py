@@ -12,6 +12,7 @@ sys.path.insert(0, str(REPO / "src"))
 @pytest.fixture()
 def test_db(tmp_path, monkeypatch):
     monkeypatch.setenv("PIPELINE_DB", str(tmp_path / "test.db"))
+    monkeypatch.delenv("DATABASE_URL", raising=False)  # 로컬 테스트는 SQLite 모드 강제
     # db 모듈 재로드로 경로 반영
     for mod in ["db"]:
         if mod in sys.modules:
@@ -44,7 +45,6 @@ def test_rss_collect_with_local_fixture(test_db, tmp_path, monkeypatch):
 
     fixture = (Path(__file__).parent / "fixtures" / "sample_feed.xml").read_text(encoding="utf-8")
     monkeypatch.setattr(rss, "fetch_url", lambda url, client: fixture)
-    monkeypatch.setattr(rss, "RAW_DIR", tmp_path / "raw")
 
     source = {"id": "test-src", "tier": "T3", "feed_url": "http://x/feed", "lang": "en"}
     stats = rss.collect_source(source, conn, client=None, fetch_full=False)
@@ -53,11 +53,11 @@ def test_rss_collect_with_local_fixture(test_db, tmp_path, monkeypatch):
     stats2 = rss.collect_source(source, conn, client=None, fetch_full=False)
     assert stats2["new"] == 0 and stats2["dup"] == 2
 
-    row = conn.execute("SELECT tier, status FROM documents LIMIT 1").fetchone()
+    row = conn.execute("SELECT tier, status, body FROM documents LIMIT 1").fetchone()
     assert row["tier"] == "T3" and row["status"] == "new"
-    # FTS 검색 동작
-    hit = conn.execute(
-        "SELECT id FROM documents_fts WHERE documents_fts MATCH 'productivity'").fetchall()
+    assert row["body"]  # 원문이 body 컬럼에 저장됨 (raw_path 파일 대체)
+    # 검색 동작 (FTS5 → db.search: PostgreSQL 검색함수 / SQLite LIKE 폴백)
+    hit = db.search(conn, "documents", "productivity")
     assert len(hit) >= 1
 
 

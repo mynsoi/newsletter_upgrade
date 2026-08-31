@@ -12,7 +12,7 @@ import httpx
 import trafilatura
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, content_hash, migrate, new_id  # noqa: E402
+from db import connect, content_hash, migrate, new_id  # noqa: E402
 
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (manual ingest)"
 
@@ -54,21 +54,16 @@ def main() -> int:
         return 0
 
     doc_id = new_id()
-    raw_path = ROOT / "data" / "raw" / "manual" / f"{doc_id}.txt"
-    raw_path.parent.mkdir(parents=True, exist_ok=True)
-    raw_path.write_text(body, encoding="utf-8")
-
     conn.execute(
         """INSERT INTO documents (id, source_id, tier, url, title, author,
-           published_at, lang, raw_path, content_hash, status)
+           published_at, lang, body, content_hash, status)
            VALUES (?,?,?,?,?,?,?,?,?,?, 'new')""",
         (doc_id, "manual", args.tier, args.url, title,
          (meta.author if meta else None), (meta.date if meta else None),
-         None, str(raw_path.relative_to(ROOT)), c_hash),
+         None, body, c_hash),
     )
-    conn.execute("INSERT INTO documents_fts (id, title, body) VALUES (?,?,?)",
-                 (doc_id, title, body[:20000]))
-    conn.execute("INSERT OR IGNORE INTO tags (document_id, axis, value) VALUES (?, 'tier', ?)",
+    conn.execute("INSERT INTO tags (document_id, axis, value) VALUES (?, 'tier', ?) "
+                 "ON CONFLICT DO NOTHING",
                  (doc_id, args.tier))
     conn.commit()
     print(f"등록 완료: [{args.tier}] {title}\n  id={doc_id}")

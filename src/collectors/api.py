@@ -36,7 +36,6 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 SOURCES_PATH = ROOT / "config" / "sources.yaml"
-RAW_DIR = ROOT / "data" / "raw"
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)"
 REQUEST_INTERVAL = 3.0      # 초 — API 예절 (arXiv 권고 준수)
 PAGE_SIZE = 50
@@ -168,7 +167,7 @@ def collect_source(source: dict, conn, client: httpx.Client,
                 continue
             result = store_document(
                 conn, source, url=it["url"], title=it["title"], text=it["text"],
-                author=it["author"], published=it["published"], raw_dir=RAW_DIR)
+                author=it["author"], published=it["published"])
             stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
         conn.commit()
 

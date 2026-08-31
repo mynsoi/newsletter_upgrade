@@ -110,7 +110,7 @@ def main() -> int:
     total_claims = 0
     gated = 0
     for d in docs:
-        body = (ROOT / d["raw_path"]).read_text(encoding="utf-8")
+        body = d["body"] or ""
         prompt = build_prompt(d["title"], d["tier"], body)
         if args.dry_run:
             print(f"  DRY  [{d['tier']}] {d['title'][:60]}  (prompt {len(prompt):,}자)")
@@ -148,8 +148,6 @@ def main() -> int:
                  c["stance"], c.get("metric"),
                  float(conf) if conf is not None else None),
             )
-            conn.execute("INSERT INTO claims_fts (id, claim_text) VALUES (?,?)",
-                         (new_id(), c["claim_text"]))
         conn.execute("UPDATE documents SET status='enriched' WHERE id=?", (d["id"],))
         conn.commit()
         total_claims += len(claims)

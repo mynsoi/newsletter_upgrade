@@ -12,6 +12,7 @@ sys.path.insert(0, str(REPO / "src"))
 @pytest.fixture()
 def test_db(tmp_path, monkeypatch):
     monkeypatch.setenv("PIPELINE_DB", str(tmp_path / "test.db"))
+    monkeypatch.delenv("DATABASE_URL", raising=False)  # 로컬 테스트는 SQLite 모드 강제
     for mod in ["db"]:
         if mod in sys.modules:
             del sys.modules[mod]
@@ -84,7 +85,6 @@ class FakeClient:
 @pytest.fixture()
 def api(tmp_path, monkeypatch):
     import collectors.api as api_mod
-    monkeypatch.setattr(api_mod, "RAW_DIR", tmp_path / "raw")
     monkeypatch.setattr(api_mod.time, "sleep", lambda s: None)
     return api_mod
 
@@ -174,7 +174,7 @@ def test_cross_collector_dedup(test_db, api, tmp_path):
     conn, db = test_db
     from collectors.store import store_document
     store_document(conn, {"id": "rss-src", "tier": "T3"}, url="http://arxiv.org/abs/2601.00001",
-                   title="이미 수집됨", text="x" * 900, raw_dir=tmp_path / "raw")
+                   title="이미 수집됨", text="x" * 900)
     client = FakeClient({api.arxiv_url(ARXIV_SOURCE): FakeResponse(200, ARXIV_ATOM)})
     stats = api.collect_source(ARXIV_SOURCE, conn, client)
     assert stats["dup"] == 1 and stats["new"] == 1
@@ -187,9 +187,9 @@ def test_select_target_docs_excludes_summary_only(test_db):
     import enrich.extract_claims as ec
     for i, so in enumerate([0, 1]):
         conn.execute(
-            "INSERT INTO documents (id, source_id, tier, url, raw_path, status, summary_only) "
+            "INSERT INTO documents (id, source_id, tier, url, body, status, summary_only) "
             "VALUES (?,?,?,?,?,'new',?)",
-            (f"D{i}", "s", "T1", f"http://x/{i}", "data/raw/x.txt", so))
+            (f"D{i}", "s", "T1", f"http://x/{i}", "본문 텍스트", so))
     conn.commit()
     docs = ec.select_target_docs(conn, 10)
     assert [d["id"] for d in docs] == ["D0"]  # summary_only=1 제외

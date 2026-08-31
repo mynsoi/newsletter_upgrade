@@ -29,7 +29,6 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 SOURCES_PATH = ROOT / "config" / "sources.yaml"
-RAW_DIR = ROOT / "data" / "raw"
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)"
 REQUEST_INTERVAL = 3.0  # 초 — 같은 도메인 연속 요청 간격
 MAX_ITEMS_PER_FEED = 50
@@ -94,7 +93,7 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
         # 저장은 공용 로직으로 — 중복 제거·summary_only 규칙을 api 수집기와 동일 적용
         result = store_document(
             conn, source, url=url, title=entry.get("title", "(무제)"), text=text,
-            author=entry.get("author"), published=parse_date(entry), raw_dir=RAW_DIR)
+            author=entry.get("author"), published=parse_date(entry))
         stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
     conn.commit()
     return stats

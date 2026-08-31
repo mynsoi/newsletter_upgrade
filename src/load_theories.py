@@ -97,27 +97,24 @@ def load() -> int:
             conn.execute("DELETE FROM claims WHERE document_id=?", (row["id"],))
             doc_id = row["id"]
             conn.execute(
-                "UPDATE documents SET content_hash=?, status='enriched' WHERE id=?",
-                (c_hash, doc_id),
+                "UPDATE documents SET content_hash=?, body=?, status='enriched' WHERE id=?",
+                (c_hash, body, doc_id),
             )
         else:
             doc_id = new_id()
-            try:
-                raw_ref = str(path.relative_to(ROOT))
-            except ValueError:
-                raw_ref = str(path)
             conn.execute(
                 """INSERT INTO documents
                    (id, source_id, tier, title, author, published_at, lang,
-                    raw_path, content_hash, status)
+                    body, content_hash, status)
                    VALUES (?, ?, 'T1', ?, ?, ?, 'ko', ?, ?, 'enriched')""",
                 (doc_id, SOURCE_ID, name, str(meta.get("originators", "")),
                  str(meta.get("year", "")) or None,
-                 raw_ref, c_hash),
+                 body, c_hash),
             )
             conn.execute(
-                "INSERT OR IGNORE INTO tags (document_id, axis, value) VALUES "
-                "(?, 'tier', 'T1'), (?, 'content_type', 'theory'), (?, 'field', ?)",
+                "INSERT INTO tags (document_id, axis, value) VALUES "
+                "(?, 'tier', 'T1'), (?, 'content_type', 'theory'), (?, 'field', ?) "
+                "ON CONFLICT DO NOTHING",
                 (doc_id, doc_id, doc_id, str(meta.get("field", ""))),
             )
 
@@ -128,8 +125,6 @@ def load() -> int:
                    VALUES (?, ?, ?, 'theory', ?, 1.0)""",
                 (new_id(), doc_id, text, stance),
             )
-            conn.execute("INSERT INTO claims_fts (id, claim_text) VALUES (?,?)",
-                         (new_id(), text))
         conn.commit()
         stats["indexed"] += 1
         stats["claims"] += len(claims)

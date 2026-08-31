@@ -92,19 +92,16 @@ def sync() -> int:
         conn.execute(
             """INSERT INTO internal_docs
                (id, path, title, type, speaker, security, effective_date,
-                content_hash, api_eligible, indexed_at)
-               VALUES (?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)
+                body, content_hash, api_eligible, indexed_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)
                ON CONFLICT(id) DO UPDATE SET
                  title=excluded.title, type=excluded.type, speaker=excluded.speaker,
                  security=excluded.security, effective_date=excluded.effective_date,
-                 content_hash=excluded.content_hash, api_eligible=excluded.api_eligible,
-                 indexed_at=CURRENT_TIMESTAMP""",
+                 body=excluded.body, content_hash=excluded.content_hash,
+                 api_eligible=excluded.api_eligible, indexed_at=CURRENT_TIMESTAMP""",
             (rel, str(path), meta.get("title"), meta.get("type"), meta.get("speaker"),
-             sec, str(meta.get("date", "")) or None, c_hash, api_eligible),
+             sec, str(meta.get("date", "")) or None, body, c_hash, api_eligible),
         )
-        conn.execute("DELETE FROM internal_fts WHERE id=?", (rel,))
-        conn.execute("INSERT INTO internal_fts (id, title, body) VALUES (?,?,?)",
-                     (rel, meta.get("title", ""), body[:20000]))
 
         sup = meta.get("supersedes")
         if sup:
