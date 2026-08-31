@@ -5,7 +5,9 @@ rss/api 수집기가 문서를 저장할 때 반드시 이 모듈을 거친다.
 
 동일 적용 규칙:
 - 중복 제거: URL 일치 또는 content_hash(공백·대소문자 정규화) 일치 시 저장하지 않음
-- summary_only(A3): 본문 800자 미만이면 summary_only=1 — claim 추출(enrich)에서 제외
+- summary_only(A3): 본문 800자 미만이면 summary_only=1 — claim 추출(enrich)에서 제외.
+  단 type=api 소스(arXiv·OSF 초록형)는 면제 — 초록이 문서의 완결된 본문이므로
+  길이와 무관하게 추출 대상이다 (2026-08-31 관문 사전 점검 ④ 결정)
 - 원문은 documents.body 컬럼에 직접 저장 (raw_path 파일 참조 폐지 — DB 이중지원 전환)
 """
 from __future__ import annotations
@@ -35,7 +37,11 @@ def store_document(conn, source: dict, *, url: str, title: str, text: str,
         return "dup"
 
     doc_id = new_id()
-    summary_only = 1 if len(text.strip()) < SUMMARY_ONLY_THRESHOLD else 0
+    # A3 임계 — api 소스(초록형)는 면제: 초록은 요약이 아니라 완결된 본문이다
+    if source.get("type") == "api":
+        summary_only = 0
+    else:
+        summary_only = 1 if len(text.strip()) < SUMMARY_ONLY_THRESHOLD else 0
     title = title or "(무제)"
     conn.execute(
         """INSERT INTO documents

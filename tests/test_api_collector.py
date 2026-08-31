@@ -116,9 +116,27 @@ def test_arxiv_collect_dedup_and_summary_only(test_db, api):
     long_doc = rows["http://arxiv.org/abs/2601.00001"]
     short_doc = rows["http://arxiv.org/abs/2601.00002"]
     assert long_doc["summary_only"] == 0
-    assert short_doc["summary_only"] == 1          # A3: 800자 미만 표시
+    assert short_doc["summary_only"] == 0          # api 소스(초록형)는 A3 임계 면제
     assert long_doc["tier"] == "T1" and long_doc["status"] == "new"
     assert long_doc["published_at"] == "2026-08-20"
+
+
+def test_summary_only_threshold_applies_to_rss_but_not_api(test_db):
+    """A3 임계: rss는 800자 미만이면 summary_only=1, api(초록형)는 면제."""
+    conn, db = test_db
+    from collectors.store import store_document
+    short = "짧은 본문."
+    store_document(conn, {"id": "r", "tier": "T3", "type": "rss"},
+                   url="http://x/rss-short", title="t", text=short)
+    store_document(conn, {"id": "a", "tier": "T1", "type": "api"},
+                   url="http://x/api-short", title="t", text=short + " 다른 내용")
+    rows = {r["url"]: r["summary_only"] for r in
+            conn.execute("SELECT url, summary_only FROM documents")}
+    assert rows["http://x/rss-short"] == 1
+    assert rows["http://x/api-short"] == 0
+    # 빈 본문은 유형과 무관하게 저장 자체를 거부
+    assert store_document(conn, {"id": "a", "tier": "T1", "type": "api"},
+                          url="http://x/api-empty", title="t", text="  ") == "empty"
 
 
 def test_osf_collect_json(test_db, api):
