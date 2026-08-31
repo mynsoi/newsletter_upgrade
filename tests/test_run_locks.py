@@ -128,10 +128,13 @@ def test_collection_date_uses_kst_not_runner_timezone(test_db, monkeypatch):
 def spy_workers(monkeypatch):
     import collectors.collect as collect
     calls = {"rss": [], "api": []}
+    # 실제 워커와 동일하게 {"targets", "failed"} 집계를 반환한다
     monkeypatch.setattr(collect.rss, "run",
-                        lambda *a, **k: calls["rss"].append(k))
+                        lambda *a, **k: (calls["rss"].append(k),
+                                         {"targets": 1, "failed": 0})[1])
     monkeypatch.setattr(collect.api, "run",
-                        lambda *a, **k: calls["api"].append(k))
+                        lambda *a, **k: (calls["api"].append(k),
+                                         {"targets": 1, "failed": 0})[1])
     return collect, calls
 
 
@@ -171,6 +174,109 @@ def test_orchestrator_marks_failed_on_worker_error(test_db, spy_workers):
     collect.rss.run = lambda *a, **k: calls["rss"].append(k)
     assert collect.run() == 0
     assert len(calls["rss"]) == 1
+
+
+def test_orchestrator_marks_failed_when_all_sources_fail(test_db, spy_workers, monkeypatch):
+    """전 소스 실패는 인프라 문제 가능성 — completed 가 아니라 failed 로 남겨 재시도한다."""
+    collect, calls = spy_workers
+    monkeypatch.setattr(collect.rss, "run",
+                        lambda *a, **k: {"targets": 2, "failed": 2})
+    monkeypatch.setattr(collect.api, "run",
+                        lambda *a, **k: {"targets": 1, "failed": 1})
+    assert collect.run() == 1
+    conn, db = test_db
+    assert conn.execute("SELECT status FROM collection_runs").fetchone()["status"] == "failed"
+    # 다음 실행이 자동 재시도 가능
+    assert db.begin_collection(conn, "retry-host") == "acquired"
+
+
+def test_orchestrator_partial_failure_still_completed(test_db, spy_workers, monkeypatch):
+    """일부 소스 실패는 소스 개별 문제로 보고 completed (validate 로 점검)."""
+    collect, calls = spy_workers
+    monkeypatch.setattr(collect.rss, "run",
+                        lambda *a, **k: {"targets": 3, "failed": 1})
+    assert collect.run() == 0
+    conn, db = test_db
+    assert conn.execute("SELECT status FROM collection_runs").fetchone()["status"] == "completed"
+
+
+def test_worker_run_returns_failure_stats(test_db, monkeypatch):
+    """워커 run() 이 {"targets","failed"} 집계를 반환한다 (오케스트레이터 판정 근거)."""
+    import collectors.rss as rss
+    monkeypatch.setattr(rss, "fetch_url", lambda url, client: None)  # 전 피드 접속 실패
+    monkeypatch.setattr(rss, "load_sources", lambda: [
+        {"id": "s1", "type": "rss", "tier": "T3", "name": "S1", "feed_url": "http://x/1"},
+        {"id": "s2", "type": "rss", "tier": "T3", "name": "S2", "feed_url": "http://x/2"},
+    ])
+    monkeypatch.setattr(rss.time, "sleep", lambda s: None)
+    assert rss.run(force=True) == {"targets": 2, "failed": 2}
+
+    conn, db = test_db
+    db.begin_collection(conn, "h")
+    db.finish_collection(conn, ok=True)
+    assert rss.run() == {"targets": 0, "failed": 0}  # 오늘 완료 → 조기 종료도 집계 반환
+
+
+def test_begin_collection_failed_race_loser_sees_running(test_db):
+    """failed 회수 경쟁에서 진 프로세스는 acquired 가 아니라 running 을 받아야 한다."""
+    conn, db = test_db
+    db.begin_collection(conn, "winner")  # 실제 행은 running(방금 시작 — 회수 불가)
+
+    class RaceConn:
+        """SELECT status 만 'failed' 로 속여, 판독 직후 경쟁자가 회수한 상황을 재현."""
+
+        def __init__(self, real):
+            self._real = real
+
+        def execute(self, sql, params=()):
+            if sql.startswith("SELECT status FROM collection_runs"):
+                class _C:
+                    def fetchone(self):
+                        return {"status": "failed"}
+                return _C()
+            return self._real.execute(sql, params)
+
+        def commit(self):
+            self._real.commit()
+
+    assert db.begin_collection(RaceConn(conn), "loser") == "running"
+    assert conn.execute("SELECT host FROM collection_runs").fetchone()["host"] == "winner"
+
+
+# --------------------------------------------------------------------------- #
+# 커넥션 래퍼 — % 리터럴 안전성                                                 #
+# --------------------------------------------------------------------------- #
+def test_execute_without_params_keeps_percent_literals(test_db):
+    """파라미터가 없으면 SQL 을 원문 그대로 실행 — psycopg 의 % 오인 방지."""
+    conn, db = test_db
+
+    class RecCursor:
+        def __init__(self, log):
+            self._log = log
+
+        def execute(self, sql, *args):
+            self._log.append((sql, args))
+
+    class RecRaw:
+        def __init__(self):
+            self.log = []
+
+        def cursor(self):
+            return RecCursor(self.log)
+
+    raw = RecRaw()
+    pg = db.Connection(raw, is_postgres=True)
+    pg.execute("SELECT proname FROM pg_proc WHERE proname LIKE 'search_%'")
+    sql, args = raw.log[0]
+    assert "LIKE 'search_%'" in sql and args == ()  # 치환·파라미터 전달 없음
+
+    pg.execute("SELECT ?", (1,))
+    sql2, args2 = raw.log[1]
+    assert sql2 == "SELECT %s" and args2 == ((1,),)  # 파라미터 있으면 기존과 동일
+
+    # 실제 SQLite 커넥션에서도 % 리터럴 무파라미터 쿼리 정상 동작
+    row = conn.execute("SELECT 1 AS ok WHERE 'search_documents' LIKE 'search_%'").fetchone()
+    assert row["ok"] == 1
 
 
 def test_worker_direct_run_blocked_after_completed(test_db, monkeypatch):

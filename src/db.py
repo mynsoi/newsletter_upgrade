@@ -67,7 +67,13 @@ class Connection:
 
     def execute(self, sql: str, params=()):
         cur = self._raw.cursor()
-        cur.execute(_translate(sql, self.is_postgres), tuple(params))
+        params = tuple(params)
+        if params:
+            cur.execute(_translate(sql, self.is_postgres), params)
+        else:
+            # 파라미터가 없으면 params 인자 자체를 생략하고 원문 그대로 실행 —
+            # psycopg가 SQL 내 % 리터럴(LIKE 'x%' 등)을 플레이스홀더로 오인하지 않도록.
+            cur.execute(sql)
         return _Cursor(cur)
 
     def executemany(self, sql: str, seq):
@@ -242,12 +248,13 @@ def begin_collection(conn: Connection, host: str, *, force: bool = False,
     if status == "completed":
         return "done"
     if status == "failed":
-        conn.execute(
+        cur = conn.execute(
             "UPDATE collection_runs SET status='running', host=?, started_at=?, finished_at=NULL "
             "WHERE run_date=? AND status='failed'",
             (host, now, today))
         conn.commit()
-        return "acquired"
+        # rowcount 0 = 다른 프로세스가 그 사이에 failed 를 먼저 회수함 — 중복 실행 금지
+        return "acquired" if cur.rowcount == 1 else "running"
 
     # status == 'running' — 크래시로 남은 오래된 기록만 회수
     cur = conn.execute(

@@ -100,7 +100,9 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
 
 
 def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
-        force: bool = False) -> None:
+        force: bool = False) -> dict:
+    """반환: {"targets": 대상 소스 수, "failed": 소스 단위 실패 수} — 오케스트레이터가
+    전량 실패를 판정하는 데 쓴다."""
     from handoff import ensure_active
     ensure_active("수집")
     conn = connect()
@@ -111,7 +113,7 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
     if not force and collection_done_today(conn):
         print("오늘 수집이 이미 완료됨 — 우회하려면 --force")
         conn.close()
-        return
+        return {"targets": 0, "failed": 0}
 
     sources = load_sources()
     if source_ids:
@@ -136,6 +138,7 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
         print(f"\n[경고] 피드 실패 소스: {', '.join(failed_feeds)}")
         print("      `make validate`로 URL을 점검하고 sources.yaml을 수정하세요.")
     conn.close()
+    return {"targets": len(targets), "failed": len(failed_feeds)}
 
 
 if __name__ == "__main__":
