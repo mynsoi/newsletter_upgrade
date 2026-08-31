@@ -226,15 +226,25 @@ def test_release_enrich_lock(test_db):
 
 
 def _run_enrich(monkeypatch, model_output="[]"):
+    """model_output: 문자열(고정 응답) | Exception(항상 raise) | list(호출 순서별 응답/예외)."""
     import enrich.extract_claims as ec
     monkeypatch.setattr(sys, "argv", ["extract_claims"])
     monkeypatch.setattr(ec, "check_relevance", lambda *a, **k: True)
     if isinstance(model_output, Exception):
-        def boom(*a, **k):
+        def call(*a, **k):
             raise model_output
-        monkeypatch.setattr(ec, "call_model", boom)
+    elif isinstance(model_output, list):
+        seq = iter(model_output)
+
+        def call(*a, **k):
+            item = next(seq)
+            if isinstance(item, Exception):
+                raise item
+            return item
     else:
-        monkeypatch.setattr(ec, "call_model", lambda *a, **k: model_output)
+        def call(*a, **k):
+            return model_output
+    monkeypatch.setattr(ec, "call_model", call)
     return ec
 
 
@@ -249,7 +259,7 @@ def test_enrich_main_skips_locked_doc_and_cleans_lock(test_db, monkeypatch):
     assert db.claim_document_for_enrich(conn, "D0") is True  # 다른 프로세스가 선점한 상태
 
     ec = _run_enrich(monkeypatch, CLAIM_JSON)
-    ec.main()
+    assert ec.main() == 0  # 잠금 건너뜀은 실패가 아님
 
     d0 = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D0'").fetchone()
     d1 = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
@@ -262,9 +272,55 @@ def test_enrich_main_releases_lock_on_model_failure(test_db, monkeypatch):
     conn, db = test_db
     _add_new_doc(conn, "D1")
     ec = _run_enrich(monkeypatch, RuntimeError("API 오류"))
-    ec.main()
+    assert ec.main() == 1  # 기술적 처리 실패 → non-zero
     row = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
     assert row["status"] == "new" and row["enrich_locked_at"] is None  # 재시도 가능 상태로 복원
+
+
+def test_enrich_main_exit_nonzero_on_api_failure(test_db, monkeypatch, capsys):
+    conn, db = test_db
+    _add_new_doc(conn, "DA")
+    _add_new_doc(conn, "DB")
+    ec = _run_enrich(monkeypatch, RuntimeError("503 Service Unavailable"))
+    assert ec.main() == 1
+    out = capsys.readouterr().out
+    assert "DA" in out and "DB" in out and "처리 실패 2건" in out
+    for did in ("DA", "DB"):
+        row = conn.execute(
+            "SELECT status, enrich_locked_at FROM documents WHERE id=?", (did,)).fetchone()
+        assert row["status"] == "new" and row["enrich_locked_at"] is None
+
+
+def test_enrich_main_parse_error_counts_as_failure(test_db, monkeypatch):
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, "이건 JSON 배열이 아님")  # parse_claims → ValueError
+    assert ec.main() == 1
+    assert conn.execute(
+        "SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+
+
+def test_enrich_main_zero_claims_is_not_failure(test_db, monkeypatch):
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, "[]")  # 정상 응답, claim 0건
+    assert ec.main() == 0
+    row = conn.execute(
+        "SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
+    assert row["status"] == "enriched" and row["enrich_locked_at"] is None
+    assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0
+
+
+def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    _add_new_doc(conn, "D2")
+    # select_target_docs는 collected_at 순 — 첫 문서 성공, 둘째 문서 API 오류
+    ec = _run_enrich(monkeypatch, [CLAIM_JSON, RuntimeError("timeout")])
+    assert ec.main() == 1
+    statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
+    assert "enriched" in statuses.values()  # 성공분은 반영
+    assert "new" in statuses.values()       # 실패분은 재시도 가능
 
 
 # --------------------------------------------------------------------------- #
