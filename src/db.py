@@ -14,7 +14,7 @@ import os
 import secrets
 import sqlite3
 import time
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -182,6 +182,16 @@ def search(conn: Connection, target: str, query: str) -> list:
 # (SQLite·PostgreSQL 공통: 잠금 타임스탬프는 파이썬 UTC 문자열로 통일해          #
 #  두 백엔드의 CURRENT_TIMESTAMP 표현/시간대 차이에 의존하지 않는다)             #
 # --------------------------------------------------------------------------- #
+# 수집 "달력일" 기준 타임존 — GitHub Actions(UTC 러너)와 국내 PC(KST)가
+# 항상 동일한 날짜 키(collection_runs.run_date)를 쓰도록 KST(UTC+9)로 고정한다.
+# begin_collection / finish_collection / collection_done_today 이 모두 이 값을 쓴다.
+_KST = timezone(timedelta(hours=9))
+
+
+def _collection_date() -> str:
+    return datetime.now(_KST).date().isoformat()
+
+
 def _utcnow_str() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
@@ -206,7 +216,7 @@ def begin_collection(conn: Connection, host: str, *, force: bool = False,
       - force=True → 상태와 무관하게 running 으로 갱신하고 'acquired'
     수집 종료 시 finish_collection() 으로 completed/failed 를 확정해야 한다.
     """
-    today = date.today().isoformat()
+    today = _collection_date()
     now = _utcnow_str()
     if force:
         conn.execute(
@@ -252,7 +262,7 @@ def finish_collection(conn: Connection, *, ok: bool) -> None:
     """오늘자 수집 결과를 확정. ok=False 면 failed 로 남겨 다음 실행이 재시도한다."""
     conn.execute(
         "UPDATE collection_runs SET status=?, finished_at=? WHERE run_date=?",
-        ("completed" if ok else "failed", _utcnow_str(), date.today().isoformat()))
+        ("completed" if ok else "failed", _utcnow_str(), _collection_date()))
     conn.commit()
 
 
@@ -264,7 +274,7 @@ def collection_done_today(conn: Connection) -> bool:
     """
     row = conn.execute(
         "SELECT 1 FROM collection_runs WHERE run_date=? AND status='completed'",
-        (date.today().isoformat(),)).fetchone()
+        (_collection_date(),)).fetchone()
     return row is not None
 
 

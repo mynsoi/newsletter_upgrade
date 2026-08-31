@@ -1,12 +1,18 @@
-# 소스 검증 워크플로 (α3 실측을 Actions 환경에서 수행)
+# 소스 검증 워크플로 (Actions 환경에서 소스 실측/검증만 수행)
 #
 # 원칙: 소스 상태 변경은 사람이 확인 후 커밋한다.
-# 이 워크플로는 sources.yaml을 절대 자동 커밋하지 않는다 — 갱신본·보고서를
-# 아티팩트로 올리고, 결과 요약과 diff를 저장소 이슈로 남길 뿐이다.
+# 이 워크플로는 sources.yaml을 절대 자동 커밋하지 않는다 — 갱신본·보고서·diff를
+# 아티팩트로 올린다. 검증에 FAIL이 있을 때만 Issue를 만들고, 연속 실패는 하나의
+# 열린 Issue에 코멘트를 누적하며, 정상 복구되면 자동 close 한다 (collect.yml과 통일).
+# DB에 접속하지 않으므로 secret 불필요.
 name: validate-sources
 
 on:
   workflow_dispatch:
+
+concurrency:
+  group: validate-sources
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -22,20 +28,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
+      - name: 의존성 설치
         run: pip install -e .
 
-      - name: Run validate
+      - name: 소스 검증 실행
         id: validate
-        continue-on-error: true # 실패해도 보고·이슈 생성은 진행
+        continue-on-error: true
         run: |
           set -o pipefail
-          python src/collectors/validate_sources.py | tee validate-report.txt
+          python src/collectors/validate_sources.py 2>&1 | tee validate-report.txt
 
-      - name: Diff sources.yaml (자동 커밋하지 않음)
+      - name: sources.yaml diff (자동 커밋하지 않음)
         run: git diff --no-color config/sources.yaml > sources.yaml.diff || true
 
-      - name: Upload artifacts
+      - name: 아티팩트 업로드
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: validate-results
@@ -44,31 +51,61 @@ jobs:
             sources.yaml.diff
             config/sources.yaml
           retention-days: 30
+          if-no-files-found: warn
 
-      - name: Create issue with summary and diff
+      - name: 결과 판정 및 실패 알림 (Issue)
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
+          R_VALIDATE: ${{ steps.validate.outcome }}
         run: |
-          STATUS="${{ steps.validate.outcome }}"
-          [ "$STATUS" = "success" ] && BADGE="전체 통과" || BADGE="실패 있음"
-          {
-            echo "## 소스 검증 결과 — $BADGE ($(date -u +%F) UTC, run: ${{ github.run_id }})"
-            echo
-            echo '```'
-            cat validate-report.txt
-            echo '```'
-            echo
-            echo "### sources.yaml 변경분 (자동 커밋하지 않음 — 사람이 확인 후 커밋)"
-            if [ -s sources.yaml.diff ]; then
-              echo '```diff'
-              cat sources.yaml.diff
-              echo '```'
+          set -euo pipefail
+          LABEL="validate-failure"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          NOW_KST="$(TZ=Asia/Seoul date '+%F %T KST')"
+
+          gh label create "$LABEL" --color B60205 \
+            --description "소스 검증 워크플로 실패 (자동)" 2>/dev/null || true
+
+          open_issue() {
+            gh issue list --label "$LABEL" --state open --limit 1 --json number --jq '.[0].number // empty'
+          }
+
+          if [ "$R_VALIDATE" != "success" ]; then
+            {
+              echo "## 소스 검증 실패 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo "- validate 단계 결과: $R_VALIDATE"
+              echo
+              echo '<details><summary>validate-report.txt</summary>'
+              echo; echo '```'
+              tail -n 120 validate-report.txt 2>/dev/null || echo "(보고서 없음)"
+              echo '```'; echo '</details>'
+              echo
+              if [ -s sources.yaml.diff ]; then
+                echo "### sources.yaml 변경분 (자동 커밋하지 않음 — 사람이 확인 후 커밋)"
+                echo '```diff'; cat sources.yaml.diff; echo '```'
+              fi
+              echo
+              echo "_갱신된 sources.yaml 전문·보고서는 이 run의 validate-results 아티팩트에 있습니다._"
+            } > issue-body.md
+
+            EXISTING="$(open_issue || true)"
+            if [ -n "$EXISTING" ]; then
+              gh issue comment "$EXISTING" --body-file issue-body.md
+              echo "기존 이슈 #$EXISTING 에 재발 코멘트 추가"
             else
-              echo "변경 없음"
+              gh issue create --title "validate: 소스 검증 실패 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$LABEL" --body-file issue-body.md
             fi
-            echo
-            echo "_갱신된 sources.yaml 전문과 보고서는 이 run의 validate-results 아티팩트에 있습니다._"
-          } > issue-body.md
-          gh issue create \
-            --title "validate: 소스 검증 $BADGE ($(date -u +%F))" \
-            --body-file issue-body.md
+            exit 1
+          fi
+
+          # 검증 통과 — 열려 있던 실패 이슈가 있으면 자동 종료
+          EXISTING="$(open_issue || true)"
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" \
+              --comment "정상 복구 — 검증 통과 ($NOW_KST). 자동 종료. $RUN_URL"
+            echo "이슈 #$EXISTING 자동 종료"
+          fi

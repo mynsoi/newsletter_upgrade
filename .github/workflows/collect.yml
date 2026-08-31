@@ -1,0 +1,159 @@
+# 일일 수집 워크플로 — rss + api 수집 → claim 추출
+#
+# 스케줄: 매일 21:00 UTC = 06:00 KST(익일). 수동 실행(workflow_dispatch)도 가능.
+# 중복 방지: make collect 은 src/collectors/collect.py 오케스트레이터를 통해
+#   collection_runs(run_date PK, KST 달력일) 를 원자적으로 선점한다. 오늘 이미
+#   completed 면 "오늘 완료됨"으로 즉시 종료(정상). 도중 실패는 failed 로 남아
+#   다음 실행이 자동 재시도한다. → Actions 와 개발 PC 가 같은 잠금을 공유한다.
+# 비밀값: DATABASE_URL, ANTHROPIC_API_KEY 는 GitHub Secrets 로만 주입한다.
+name: daily-collect
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 21:00 UTC / 06:00 KST(익일)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "하루 1회 제한을 무시하고 재수집 (collect.py --force)"
+        type: boolean
+        default: false
+
+# 스케줄과 수동 실행이 겹쳐도 러너를 낭비하지 않도록 (잠금은 DB에서도 걸리지만 이중 안전)
+concurrency:
+  group: daily-collect
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        id: deps
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          pip install -e . 2>&1 | tee logs/deps.log
+
+      - name: 마이그레이션 (make init)
+        id: init
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::secrets.DATABASE_URL 미설정" ; exit 1
+          fi
+          make init 2>&1 | tee logs/init.log
+
+      - name: 수집 (make collect)
+        id: collect
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ "${{ inputs.force }}" = "true" ]; then
+            python src/collectors/collect.py --force 2>&1 | tee logs/collect.log
+          else
+            make collect 2>&1 | tee logs/collect.log
+          fi
+
+      - name: claim 추출 (make enrich)
+        id: enrich
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "::error::secrets.ANTHROPIC_API_KEY 미설정" ; exit 1
+          fi
+          make enrich 2>&1 | tee logs/enrich.log
+
+      - name: 현황 요약 (make stats)
+        id: stats
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          make stats 2>&1 | tee logs/stats.log
+
+      - name: 로그 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-collect-logs
+          path: logs/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: 결과 판정 및 실패 알림 (Issue)
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          R_DEPS: ${{ steps.deps.outcome }}
+          R_INIT: ${{ steps.init.outcome }}
+          R_COLLECT: ${{ steps.collect.outcome }}
+          R_ENRICH: ${{ steps.enrich.outcome }}
+        run: |
+          set -euo pipefail
+          LABEL="daily-collect-failure"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          NOW_KST="$(TZ=Asia/Seoul date '+%F %T KST')"
+
+          gh label create "$LABEL" --color B60205 \
+            --description "일일 수집 워크플로 실패 (자동)" 2>/dev/null || true
+
+          FAILED=""
+          for pair in "deps:$R_DEPS" "init:$R_INIT" "collect:$R_COLLECT" "enrich:$R_ENRICH"; do
+            name="${pair%%:*}"; res="${pair#*:}"
+            if [ "$res" != "success" ]; then FAILED="$FAILED $name($res)"; fi
+          done
+
+          open_issue() {
+            gh issue list --label "$LABEL" --state open --limit 1 --json number --jq '.[0].number // empty'
+          }
+
+          if [ -n "$FAILED" ]; then
+            {
+              echo "## 일일 수집 실패 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo "- 실패/미실행 단계:$FAILED"
+              echo
+              for f in collect enrich init deps; do
+                if [ -f "logs/$f.log" ]; then
+                  echo "<details><summary>logs/$f.log (마지막 40줄)</summary>"
+                  echo; echo '```'
+                  tail -n 40 "logs/$f.log"
+                  echo '```'; echo '</details>'
+                fi
+              done
+            } > issue-body.md
+
+            EXISTING="$(open_issue || true)"
+            if [ -n "$EXISTING" ]; then
+              gh issue comment "$EXISTING" --body-file issue-body.md
+              echo "기존 이슈 #$EXISTING 에 재발 코멘트 추가"
+            else
+              gh issue create --title "일일 수집 실패 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$LABEL" --body-file issue-body.md
+            fi
+            exit 1
+          fi
+
+          # 전 단계 성공 — 열려 있던 실패 이슈가 있으면 자동 종료
+          EXISTING="$(open_issue || true)"
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" \
+              --comment "정상 복구 — run 성공 ($NOW_KST). 자동 종료. $RUN_URL"
+            echo "이슈 #$EXISTING 자동 종료"
+          fi

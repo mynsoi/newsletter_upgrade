@@ -5,7 +5,7 @@
 """
 import os
 import sys
-from datetime import date
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -101,6 +101,24 @@ def test_collection_done_today_is_readonly(test_db):
     conn, db = test_db
     assert db.collection_done_today(conn) is False
     assert conn.execute("SELECT COUNT(*) n FROM collection_runs").fetchone()["n"] == 0
+
+
+def test_collection_date_uses_kst_not_runner_timezone(test_db, monkeypatch):
+    """21:30 UTC = 익일 06:30 KST — Actions(UTC 러너)와 국내 PC가 같은 날짜 키를 써야 한다."""
+    conn, db = test_db
+
+    class FakeDateTime:
+        @staticmethod
+        def now(tz=None):
+            base = datetime(2026, 8, 31, 21, 30, tzinfo=timezone.utc)
+            return base.astimezone(tz) if tz is not None else base
+
+    monkeypatch.setattr(db, "datetime", FakeDateTime)
+    assert db._collection_date() == "2026-09-01"
+
+    db.begin_collection(conn, "actions-runner-utc")
+    assert conn.execute("SELECT run_date FROM collection_runs").fetchone()["run_date"] \
+        in ("2026-09-01", "2026-09-01T00:00:00")  # sqlite: 문자열 그대로
 
 
 # --------------------------------------------------------------------------- #
@@ -259,12 +277,7 @@ def test_locks_on_postgres(monkeypatch):
     import db
     assert db.IS_POSTGRES
 
-    class FakeDate:
-        @staticmethod
-        def today():
-            return date(2099, 12, 31)
-
-    monkeypatch.setattr(db, "date", FakeDate)
+    monkeypatch.setattr(db, "_collection_date", lambda: "2099-12-31")
     conn = db.connect()
     db.migrate(conn)
     try:
