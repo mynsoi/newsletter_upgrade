@@ -44,7 +44,7 @@ def test_rss_collect_with_local_fixture(test_db, tmp_path, monkeypatch):
     import collectors.rss as rss
 
     fixture = (Path(__file__).parent / "fixtures" / "sample_feed.xml").read_text(encoding="utf-8")
-    monkeypatch.setattr(rss, "fetch_url", lambda url, client: fixture)
+    monkeypatch.setattr(rss, "fetch_url", lambda url, client, curl_headers=None: fixture)
 
     source = {"id": "test-src", "tier": "T3", "feed_url": "http://x/feed", "lang": "en"}
     stats = rss.collect_source(source, conn, client=None, fetch_full=False)
@@ -59,6 +59,38 @@ def test_rss_collect_with_local_fixture(test_db, tmp_path, monkeypatch):
     # 검색 동작 (FTS5 → db.search: PostgreSQL 검색함수 / SQLite LIKE 폴백)
     hit = db.search(conn, "documents", "productivity")
     assert len(hit) >= 1
+
+
+def test_fetch_url_curl_fallback(monkeypatch):
+    """request_headers 소스는 httpx 실패 시 curl 폴백, 그 외 소스는 기존과 동일."""
+    import httpx
+    import collectors.rss as rss
+
+    class BoomClient:
+        def get(self, url, **kw):
+            raise httpx.HTTPError("403")
+
+    monkeypatch.setattr(rss, "fetch_via_curl", lambda url, headers=None: "<rss>ok</rss>")
+    assert rss.fetch_url("http://x/feed", BoomClient(),
+                         curl_headers={"User-Agent": "UA"}) == "<rss>ok</rss>"
+    assert rss.fetch_url("http://x/feed", BoomClient()) is None
+
+
+def test_fetch_via_curl_builds_command(monkeypatch):
+    import collectors.rss as rss
+    calls = {}
+
+    class R:
+        returncode = 0
+        stdout = "<rss/>".encode()
+
+    monkeypatch.setattr(rss.subprocess, "run",
+                        lambda cmd, capture_output, timeout: calls.setdefault("cmd", cmd) and R() or R())
+    out = rss.fetch_via_curl("http://x/feed", {"User-Agent": "UA1", "Accept": "a/b"})
+    assert out == "<rss/>"
+    cmd = calls["cmd"]
+    assert cmd[0] == "curl" and cmd[-1] == "http://x/feed"
+    assert "User-Agent: UA1" in cmd and "Accept: a/b" in cmd
 
 
 def test_internal_sync_rejects_c_and_gates_b(test_db, tmp_path, monkeypatch):

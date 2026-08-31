@@ -59,15 +59,20 @@ def _translate(sql: str, is_postgres: bool) -> str:
 
 
 class Connection:
-    """sqlite3.Connection / psycopg.Connection 을 감싸 동일 API를 제공."""
+    """sqlite3.Connection / psycopg.Connection 을 감싸 동일 API를 제공.
 
-    def __init__(self, raw, is_postgres: bool):
+    PostgreSQL 모드에서는 수집처럼 오래 걸리는 작업 중 유휴 연결이 끊길 수 있어
+    (Supabase 풀러·NAT 타임아웃), 연결 오류 시 1회 자동 재연결 후 재시도한다.
+    쓰기는 소스/페이지 단위로 커밋하고 URL 중복 제거가 있어 재시도로 안전하다.
+    """
+
+    def __init__(self, raw, is_postgres: bool, reconnect=None):
         self._raw = raw
         self.is_postgres = is_postgres
+        self._reconnect = reconnect  # () -> raw connection (PostgreSQL 전용)
 
-    def execute(self, sql: str, params=()):
+    def _cursor_execute(self, sql: str, params: tuple):
         cur = self._raw.cursor()
-        params = tuple(params)
         if params:
             cur.execute(_translate(sql, self.is_postgres), params)
         else:
@@ -75,6 +80,30 @@ class Connection:
             # psycopg가 SQL 내 % 리터럴(LIKE 'x%' 등)을 플레이스홀더로 오인하지 않도록.
             cur.execute(sql)
         return _Cursor(cur)
+
+    def execute(self, sql: str, params=()):
+        params = tuple(params)
+        if not (self.is_postgres and self._reconnect):
+            return self._cursor_execute(sql, params)
+        import psycopg
+        try:
+            return self._cursor_execute(sql, params)
+        except psycopg.OperationalError:
+            # 일시적 네트워크 장애(유휴 종료·DNS 플랩)에 대비해 백오프를 두고 재연결
+            last: Exception | None = None
+            for delay in (5, 15, 30):
+                print(f"    ! DB 연결 끊김 — {delay}초 후 재연결 시도")
+                try:
+                    self._raw.close()
+                except Exception:  # noqa: BLE001 — 이미 죽은 연결 정리 실패는 무시
+                    pass
+                time.sleep(delay)
+                try:
+                    self._raw = self._reconnect()
+                    return self._cursor_execute(sql, params)
+                except psycopg.OperationalError as e:
+                    last = e
+            raise last
 
     def executemany(self, sql: str, seq):
         cur = self._raw.cursor()
@@ -108,9 +137,15 @@ def connect() -> Connection:
         import psycopg
         from psycopg.rows import dict_row
 
-        # Supabase 트랜잭션 풀러(pgbouncer) 호환 위해 prepared statement 비활성화.
-        raw = psycopg.connect(url, row_factory=dict_row, prepare_threshold=None)
-        return Connection(raw, is_postgres=True)
+        def _open():
+            # prepare_threshold=None: Supabase 트랜잭션 풀러(pgbouncer) 호환.
+            # keepalives: 느린 수집 중 NAT/풀러의 유휴 연결 종료 완화.
+            return psycopg.connect(
+                url, row_factory=dict_row, prepare_threshold=None,
+                keepalives=1, keepalives_idle=30, keepalives_interval=10,
+                keepalives_count=3)
+
+        return Connection(_open(), is_postgres=True, reconnect=_open)
 
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     raw = sqlite3.connect(DB_PATH)

@@ -56,11 +56,13 @@ def run(source_ids: list[str] | None = None, *, fetch_full: bool = True,
         a = api.run(source_ids, backfill=backfill, force=True) or {"targets": 0, "failed": 0}
         targets = r["targets"] + a["targets"]
         failed = r["failed"] + a["failed"]
-        # 전량 실패 = 인프라 문제(네트워크·DB 등) 가능성 — failed 로 남겨 자동 재시도.
-        # 일부 실패는 소스 개별 문제로 보고 completed (개별 소스는 validate 로 점검).
-        ok = not (targets > 0 and failed >= targets)
+        # 과반 실패 = 인프라 문제(네트워크·DB 등) 가능성 — failed 로 남겨 자동 재시도.
+        # (첫 관문 실측에서 31/32 실패가 '전량 아님'으로 completed 처리된 사례 반영해
+        #  전량 기준 → 과반 기준으로 강화, 2026-08-31)
+        # 절반 이하 실패는 소스 개별 문제로 보고 completed (개별 소스는 validate 로 점검).
+        ok = not (targets > 0 and failed * 2 > targets)
         if not ok:
-            print(f"[수집 실패] 전 소스 실패 ({failed}/{targets}) — failed 로 기록, 다음 실행이 자동 재시도")
+            print(f"[수집 실패] 과반 소스 실패 ({failed}/{targets}) — failed 로 기록, 다음 실행이 자동 재시도")
         elif failed:
             print(f"[주의] 일부 소스 실패 ({failed}/{targets}) — completed 로 기록, `make validate`로 점검 필요")
     except Exception as e:  # noqa: BLE001 — 실패를 failed 로 기록하고 비정상 종료 (SystemExit 는 그대로 전파)

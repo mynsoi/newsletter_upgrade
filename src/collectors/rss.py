@@ -9,6 +9,7 @@ sources.yaml의 type=rss 소스를 순회하며:
 """
 from __future__ import annotations
 
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -39,12 +40,37 @@ def load_sources() -> list[dict]:
     return data.get("sources", [])
 
 
-def fetch_url(url: str, client: httpx.Client) -> str | None:
+def fetch_via_curl(url: str, headers: dict | None = None) -> str | None:
+    """curl 폴백 — WAF가 파이썬 HTTP 클라이언트의 TLS 지문을 차단하는 소스용.
+
+    예: Knowledge at Wharton — httpx는 브라우저형 헤더로도 403이지만 curl은 통과
+    (2026-08-27 probe run 33068739104 실측). request_headers 가 등재된 소스만 사용.
+    """
+    cmd = ["curl", "-sSL", "--fail", "--max-time", "30"]
+    for k, v in (headers or {}).items():
+        cmd += ["-H", f"{k}: {v}"]
+    cmd.append(url)
+    try:
+        r = subprocess.run(cmd, capture_output=True, timeout=45)
+        if r.returncode == 0 and r.stdout:
+            return r.stdout.decode("utf-8", errors="replace")
+    except (subprocess.TimeoutExpired, OSError):
+        pass
+    print(f"    ! curl 폴백도 실패 {url}")
+    return None
+
+
+def fetch_url(url: str, client: httpx.Client,
+              curl_headers: dict | None = None) -> str | None:
+    """httpx 로 요청, 실패 시 curl_headers 가 주어진 소스만 curl 폴백."""
     try:
         r = client.get(url, follow_redirects=True, timeout=20)
         r.raise_for_status()
         return r.text
     except httpx.HTTPError as e:
+        if curl_headers is not None:
+            print(f"    ! httpx 실패({type(e).__name__}) → curl 폴백: {url}")
+            return fetch_via_curl(url, curl_headers)
         print(f"    ! fetch 실패 {url}: {type(e).__name__}")
         return None
 
@@ -63,7 +89,8 @@ def parse_date(entry) -> str | None:
 
 def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = True) -> dict:
     stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0}
-    feed_xml = fetch_url(source["feed_url"], client)
+    curl_headers = source.get("request_headers")  # 있으면 httpx 실패 시 curl 폴백
+    feed_xml = fetch_url(source["feed_url"], client, curl_headers)
     if feed_xml is None:
         stats["failed"] = -1  # 피드 자체 실패
         return stats
@@ -85,7 +112,7 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
         body = None
         if fetch_full:
             time.sleep(REQUEST_INTERVAL)
-            html = fetch_url(url, client)
+            html = fetch_url(url, client, curl_headers)
             if html:
                 body = extract_body(html)
         text = body or summary

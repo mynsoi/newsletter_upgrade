@@ -190,6 +190,26 @@ def test_orchestrator_marks_failed_when_all_sources_fail(test_db, spy_workers, m
     assert db.begin_collection(conn, "retry-host") == "acquired"
 
 
+def test_orchestrator_marks_failed_on_majority_failure(test_db, spy_workers, monkeypatch):
+    """과반 실패(예: 18/25)는 인프라 문제로 보고 failed — 첫 관문 31/32 completed 사례 방지."""
+    collect, calls = spy_workers
+    monkeypatch.setattr(collect.rss, "run", lambda *a, **k: {"targets": 20, "failed": 18})
+    monkeypatch.setattr(collect.api, "run", lambda *a, **k: {"targets": 5, "failed": 0})
+    assert collect.run() == 1
+    conn, db = test_db
+    assert conn.execute("SELECT status FROM collection_runs").fetchone()["status"] == "failed"
+
+
+def test_orchestrator_exactly_half_failure_completed(test_db, spy_workers, monkeypatch):
+    """정확히 절반 실패는 completed (과반 기준 경계)."""
+    collect, calls = spy_workers
+    monkeypatch.setattr(collect.rss, "run", lambda *a, **k: {"targets": 4, "failed": 2})
+    monkeypatch.setattr(collect.api, "run", lambda *a, **k: {"targets": 0, "failed": 0})
+    assert collect.run() == 0
+    conn, db = test_db
+    assert conn.execute("SELECT status FROM collection_runs").fetchone()["status"] == "completed"
+
+
 def test_orchestrator_partial_failure_still_completed(test_db, spy_workers, monkeypatch):
     """일부 소스 실패는 소스 개별 문제로 보고 completed (validate 로 점검)."""
     collect, calls = spy_workers
@@ -203,7 +223,7 @@ def test_orchestrator_partial_failure_still_completed(test_db, spy_workers, monk
 def test_worker_run_returns_failure_stats(test_db, monkeypatch):
     """워커 run() 이 {"targets","failed"} 집계를 반환한다 (오케스트레이터 판정 근거)."""
     import collectors.rss as rss
-    monkeypatch.setattr(rss, "fetch_url", lambda url, client: None)  # 전 피드 접속 실패
+    monkeypatch.setattr(rss, "fetch_url", lambda url, client, curl_headers=None: None)  # 전 피드 접속 실패
     monkeypatch.setattr(rss, "load_sources", lambda: [
         {"id": "s1", "type": "rss", "tier": "T3", "name": "S1", "feed_url": "http://x/1"},
         {"id": "s2", "type": "rss", "tier": "T3", "name": "S2", "feed_url": "http://x/2"},
@@ -285,7 +305,7 @@ def test_worker_direct_run_blocked_after_completed(test_db, monkeypatch):
     db.finish_collection(conn, ok=True)
 
     import collectors.rss as rss
-    monkeypatch.setattr(rss, "fetch_url", lambda url, client: None)
+    monkeypatch.setattr(rss, "fetch_url", lambda url, client, curl_headers=None: None)
     called = []
     monkeypatch.setattr(rss, "load_sources", lambda: called.append(1) or [])
     rss.run()  # collection_done_today → True → 즉시 반환

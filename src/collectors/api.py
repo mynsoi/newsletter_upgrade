@@ -39,7 +39,8 @@ SOURCES_PATH = ROOT / "config" / "sources.yaml"
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)"
 REQUEST_INTERVAL = 3.0      # 초 — API 예절 (arXiv 권고 준수)
 PAGE_SIZE = 50
-MAX_BACKFILL_PAGES = 20     # 소급 수집 시 소스당 최대 페이지 (폭주 방지)
+MAX_BACKFILL_PAGES = 160    # 소급 수집 시 소스당 최대 페이지 (폭주 방지 — 8,000건/소스)
+                            # 2026-08-31 관문 소급: 최대 카테고리 cs.HC 1년치 6,849건(137페이지) 커버 위해 20→160
 
 
 def fetch_text(url: str, client: httpx.Client) -> str | None:
