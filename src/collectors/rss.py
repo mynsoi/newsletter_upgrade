@@ -21,7 +21,7 @@ import trafilatura
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, migrate  # noqa: E402
+from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
@@ -99,11 +99,20 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
     return stats
 
 
-def run(source_ids: list[str] | None = None, fetch_full: bool = True) -> None:
+def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
+        force: bool = False) -> None:
     from handoff import ensure_active
     ensure_active("수집")
     conn = connect()
     migrate(conn)
+
+    # 하루 1회 잠금 확인. force=True 는 오케스트레이터(collect.py)가 이미 daily
+    # lock 을 선점했다는 내부 신호이며, 이때는 재확인을 생략한다.
+    if not force and collection_done_today(conn):
+        print("오늘 수집이 이미 완료됨 — 우회하려면 --force")
+        conn.close()
+        return
+
     sources = load_sources()
     if source_ids:
         sources = [s for s in sources if s["id"] in source_ids]
@@ -132,5 +141,6 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True) -> None:
 if __name__ == "__main__":
     args = sys.argv[1:]
     fast = "--no-body" in args
+    force = "--force" in args
     ids = [a for a in args if not a.startswith("--")] or None
-    run(ids, fetch_full=not fast)
+    run(ids, fetch_full=not fast, force=force)

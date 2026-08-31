@@ -17,7 +17,9 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, migrate, new_id  # noqa: E402
+from db import (  # noqa: E402
+    ROOT, claim_document_for_enrich, connect, migrate, new_id, release_enrich_lock,
+)
 
 PROMPT_PATH = ROOT / "prompts" / "claim_extraction.md"
 GATE_PROMPT_PATH = ROOT / "prompts" / "relevance_gate.md"
@@ -109,12 +111,22 @@ def main() -> int:
 
     total_claims = 0
     gated = 0
+    locked = 0
     for d in docs:
         body = d["body"] or ""
-        prompt = build_prompt(d["title"], d["tier"], body)
+
         if args.dry_run:
+            prompt = build_prompt(d["title"], d["tier"], body)
             print(f"  DRY  [{d['tier']}] {d['title'][:60]}  (prompt {len(prompt):,}자)")
             continue
+
+        # 문서 단위 원자적 선점 — 두 프로세스가 같은 문서를 동시에 처리하지 않도록.
+        if not claim_document_for_enrich(conn, d["id"]):
+            locked += 1
+            print(f"  건너뜀 [{d['tier']}] {d['title'][:50]} — 다른 프로세스가 처리 중")
+            continue
+
+        prompt = build_prompt(d["title"], d["tier"], body)
 
         # A1 관련성 게이트 — 무관 문서는 추출하지 않고 rejected 처리
         try:
@@ -123,9 +135,12 @@ def main() -> int:
             print(f"  게이트 오류 [{d['id']}]: {type(e).__name__} — 추출 단계로 진행")
             relevant = True
         if not relevant:
-            conn.execute("UPDATE documents SET status='rejected' WHERE id=?", (d["id"],))
             conn.execute(
-                "INSERT OR IGNORE INTO tags (document_id, axis, value) VALUES (?, 'gate', 'off_topic')",
+                "UPDATE documents SET status='rejected', enrich_locked_at=NULL WHERE id=?",
+                (d["id"],))
+            conn.execute(
+                "INSERT INTO tags (document_id, axis, value) VALUES (?, 'gate', 'off_topic') "
+                "ON CONFLICT DO NOTHING",
                 (d["id"],))
             conn.commit()
             gated += 1
@@ -136,6 +151,7 @@ def main() -> int:
             raw = call_model(prompt, model)
             claims = parse_claims(raw)
         except Exception as e:  # noqa: BLE001 — 개별 문서 실패가 배치를 중단시키지 않도록
+            release_enrich_lock(conn, d["id"])  # 실패 → 잠금 해제, 다음 실행이 재시도
             print(f"  실패 [{d['id']}] {d['title'][:50]}: {type(e).__name__}: {e}")
             continue
         for c in claims:
@@ -148,13 +164,17 @@ def main() -> int:
                  c["stance"], c.get("metric"),
                  float(conf) if conf is not None else None),
             )
-        conn.execute("UPDATE documents SET status='enriched' WHERE id=?", (d["id"],))
+        # 정상 완료 → status 전이 + 잠금 정리를 한 번에
+        conn.execute(
+            "UPDATE documents SET status='enriched', enrich_locked_at=NULL WHERE id=?",
+            (d["id"],))
         conn.commit()
         total_claims += len(claims)
         print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건")
 
     if not args.dry_run:
-        print(f"\n총 {total_claims}건 claim 추출, 관련성 게이트 제외 {gated}건. "
+        print(f"\n총 {total_claims}건 claim 추출, 관련성 게이트 제외 {gated}건, "
+              f"동시성 잠금으로 건너뜀 {locked}건. "
               "다음: eval/claim_spotcheck.md 절차로 정확도 스팟체크")
     return 0
 

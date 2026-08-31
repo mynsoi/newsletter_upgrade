@@ -14,6 +14,7 @@ import os
 import secrets
 import sqlite3
 import time
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -174,6 +175,119 @@ def search(conn: Connection, target: str, query: str) -> list:
     return conn.execute(
         f"SELECT * FROM {table} WHERE {where}", tuple([like] * len(cols))
     ).fetchall()
+
+
+# --------------------------------------------------------------------------- #
+# 실행 잠금 — 하루 1회 수집 보장 / claim 추출 문서 단위 동시성 제어              #
+# (SQLite·PostgreSQL 공통: 잠금 타임스탬프는 파이썬 UTC 문자열로 통일해          #
+#  두 백엔드의 CURRENT_TIMESTAMP 표현/시간대 차이에 의존하지 않는다)             #
+# --------------------------------------------------------------------------- #
+def _utcnow_str() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _hours_ago_str(hours: int) -> str:
+    return (datetime.now(timezone.utc) - timedelta(hours=hours)).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def begin_collection(conn: Connection, host: str, *, force: bool = False,
+                     stale_running_hours: int = 3) -> str:
+    """오늘자 수집 실행권을 원자적으로 선점한다 (collection_runs.run_date PK).
+
+    반환:
+      'acquired' — 이 프로세스가 오늘 수집을 진행한다 (row status='running')
+      'done'     — 오늘 이미 completed (재실행 불필요)
+      'running'  — 다른 프로세스가 방금 시작해 진행 중 (중복 실행 방지)
+
+    규칙:
+      - completed  → 'done'
+      - failed     → 자동 재시도 허용 (running 으로 되돌리고 'acquired')
+      - running    → stale_running_hours 초과한 기록만 회수해 'acquired', 아니면 'running'
+      - force=True → 상태와 무관하게 running 으로 갱신하고 'acquired'
+    수집 종료 시 finish_collection() 으로 completed/failed 를 확정해야 한다.
+    """
+    today = date.today().isoformat()
+    now = _utcnow_str()
+    if force:
+        conn.execute(
+            "INSERT INTO collection_runs (run_date, host, status, started_at, finished_at) "
+            "VALUES (?,?, 'running', ?, NULL) "
+            "ON CONFLICT (run_date) DO UPDATE SET host=excluded.host, status='running', "
+            "started_at=excluded.started_at, finished_at=NULL",
+            (today, host, now))
+        conn.commit()
+        return "acquired"
+
+    cur = conn.execute(
+        "INSERT INTO collection_runs (run_date, host, status, started_at) "
+        "VALUES (?,?, 'running', ?) ON CONFLICT (run_date) DO NOTHING",
+        (today, host, now))
+    conn.commit()
+    if cur.rowcount == 1:
+        return "acquired"
+
+    row = conn.execute(
+        "SELECT status FROM collection_runs WHERE run_date=?", (today,)).fetchone()
+    status = row["status"] if row else None
+    if status == "completed":
+        return "done"
+    if status == "failed":
+        conn.execute(
+            "UPDATE collection_runs SET status='running', host=?, started_at=?, finished_at=NULL "
+            "WHERE run_date=? AND status='failed'",
+            (host, now, today))
+        conn.commit()
+        return "acquired"
+
+    # status == 'running' — 크래시로 남은 오래된 기록만 회수
+    cur = conn.execute(
+        "UPDATE collection_runs SET host=?, started_at=?, finished_at=NULL "
+        "WHERE run_date=? AND status='running' AND started_at < ?",
+        (host, now, today, _hours_ago_str(stale_running_hours)))
+    conn.commit()
+    return "acquired" if cur.rowcount == 1 else "running"
+
+
+def finish_collection(conn: Connection, *, ok: bool) -> None:
+    """오늘자 수집 결과를 확정. ok=False 면 failed 로 남겨 다음 실행이 재시도한다."""
+    conn.execute(
+        "UPDATE collection_runs SET status=?, finished_at=? WHERE run_date=?",
+        ("completed" if ok else "failed", _utcnow_str(), date.today().isoformat()))
+    conn.commit()
+
+
+def collection_done_today(conn: Connection) -> bool:
+    """오늘 수집이 completed 인지 (읽기 전용 — 잠금을 취득하지 않는다).
+
+    워커(rss/api)를 직접 실행할 때 이 값만 확인한다. collection_runs 행의
+    생성·상태 전이는 오케스트레이터(collect.py) 또는 --force 만 담당한다.
+    """
+    row = conn.execute(
+        "SELECT 1 FROM collection_runs WHERE run_date=? AND status='completed'",
+        (date.today().isoformat(),)).fetchone()
+    return row is not None
+
+
+def claim_document_for_enrich(conn: Connection, doc_id: str, *,
+                              reclaim_hours: int = 6) -> bool:
+    """문서를 claim 추출 대상으로 원자적으로 선점한다.
+
+    status='new' 이고 (미선점 또는 reclaim_hours 초과한 선점)일 때만 성공.
+    반환 True: 이 프로세스가 소유 / False: 다른 프로세스가 처리 중이거나 상태가 바뀜.
+    """
+    cur = conn.execute(
+        "UPDATE documents SET enrich_locked_at=? "
+        "WHERE id=? AND status='new' "
+        "AND (enrich_locked_at IS NULL OR enrich_locked_at < ?)",
+        (_utcnow_str(), doc_id, _hours_ago_str(reclaim_hours)))
+    conn.commit()
+    return cur.rowcount == 1
+
+
+def release_enrich_lock(conn: Connection, doc_id: str) -> None:
+    """처리 실패 시 문서 잠금을 즉시 해제 (다음 실행이 바로 재시도할 수 있도록)."""
+    conn.execute("UPDATE documents SET enrich_locked_at=NULL WHERE id=?", (doc_id,))
+    conn.commit()
 
 
 # --------------------------------------------------------------------------- #

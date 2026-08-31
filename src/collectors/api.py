@@ -28,7 +28,7 @@ import httpx
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, migrate  # noqa: E402
+from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
@@ -184,11 +184,19 @@ def collect_source(source: dict, conn, client: httpx.Client,
 
 
 def run(source_ids: list[str] | None = None,
-        backfill: tuple[str, str] | None = None) -> None:
+        backfill: tuple[str, str] | None = None, *, force: bool = False) -> None:
     from handoff import ensure_active
     ensure_active("수집")
     conn = connect()
     migrate(conn)
+
+    # 하루 1회 잠금 확인. force=True 는 오케스트레이터(collect.py)가 이미 daily
+    # lock 을 선점했다는 내부 신호이며, 이때는 재확인을 생략한다.
+    if not force and collection_done_today(conn):
+        print("오늘 수집이 이미 완료됨 — 우회하려면 --force")
+        conn.close()
+        return
+
     sources = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8")).get("sources", [])
     if source_ids:
         sources = [s for s in sources if s["id"] in source_ids]
@@ -218,6 +226,7 @@ def _parse_args(argv: list[str]):
     p.add_argument("ids", nargs="*", help="특정 소스 id만 수집 (생략 시 전체)")
     p.add_argument("--backfill", nargs=2, metavar=("FROM", "TO"),
                    help="기간 지정 과거분 소급 수집 (YYYY-MM-DD YYYY-MM-DD)")
+    p.add_argument("--force", action="store_true", help="하루 1회 제한을 우회하고 재수집")
     args = p.parse_args(argv)
     if args.backfill:
         try:
@@ -231,4 +240,4 @@ def _parse_args(argv: list[str]):
 
 if __name__ == "__main__":
     a = _parse_args(sys.argv[1:])
-    run(a.ids or None, tuple(a.backfill) if a.backfill else None)
+    run(a.ids or None, tuple(a.backfill) if a.backfill else None, force=a.force)
