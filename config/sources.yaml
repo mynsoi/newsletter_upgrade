@@ -707,7 +707,7 @@ sources:
   name: LinkedIn Talent Blog
   tier: T4
   type: browse
-  browse_mode: list  # 단, robots 전면 Disallow — 월간 라운드는 선별적으로(note 참조)
+  browse_mode: item  # robots 전면 Disallow + 약관 — 목록 순회 금지, 건별만
   role: T4 기업 — 채용·인재 시장 데이터 (Atlassian 대신 선별)
   description: LinkedIn 인재 데이터 기반 채용·스킬 트렌드. Global Talent Trends.
   topics: 채용 · 인재 육성 — 인재 시장 데이터
@@ -720,7 +720,9 @@ sources:
   lang: en
   note: 'Atlassian과 1곳 선별. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://www.linkedin.com/index.xml → HTTP 404) / 2026-09-01
-    probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) → 월간 브라우저 라운드 + A4 시 NL
+    probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) / 2026-09-01 운영 변경 —
+    robots 전면 Disallow + 자동화 접근 금지 약관 — 목록 순회 금지, 사람이 리포트를 발견했을 때만
+    건별 등록(Global Talent Trends 등 연간 리포트)
     재검토'
 - id: atlassian-worklife
   name: Atlassian Work Life

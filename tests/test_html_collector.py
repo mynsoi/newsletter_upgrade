@@ -220,6 +220,34 @@ def test_ingest_file_new_dup_and_missing_fields(test_db, tmp_path, monkeypatch):
     assert bad.exists()  # 오류 파일은 이동하지 않음
 
 
+def test_ingest_pdf_pair(test_db, tmp_path, monkeypatch):
+    """PDF + 동명 .yaml 머리말 쌍: pypdf 추출로 등재, 두 파일 모두 ingested/ 이동."""
+    conn, db = test_db
+    import collectors.ingest_file as ing
+    src = {"id": "samjong-kpmg", "tier": "T2", "type": "browse", "lang": "ko"}
+    monkeypatch.setattr(ing, "load_source",
+                        lambda sid: src if sid == "samjong-kpmg" else None)
+    monkeypatch.setattr(ing, "pdf_to_text", lambda data: "PDF에서 추출한 리포트 본문. " * 60)
+
+    pdf = tmp_path / "report-a.pdf"
+    pdf.write_bytes(b"%PDF-fake")
+    (tmp_path / "report-a.yaml").write_text(
+        "source_id: samjong-kpmg\nurl: http://x/report-a\ntitle: 리포트A\n"
+        "published: 2026-08-30\nfetched_by: browse\n", encoding="utf-8")
+    assert ing.ingest(pdf, conn) == "new"
+    assert (tmp_path / "ingested" / "report-a.pdf").exists()
+    assert (tmp_path / "ingested" / "report-a.yaml").exists()
+    row = conn.execute("SELECT * FROM documents WHERE url='http://x/report-a'").fetchone()
+    assert row["body"].startswith("PDF에서 추출한 리포트 본문")
+    assert row["summary_only"] == 0 and row["fetched_by"] == "browse"
+
+    # .yaml 짝 없는 PDF는 오류 — 파일은 이동하지 않음
+    orphan = tmp_path / "orphan.pdf"
+    orphan.write_bytes(b"%PDF-fake")
+    assert ing.ingest(orphan, conn) == "error"
+    assert orphan.exists()
+
+
 def test_ingest_file_upgrades_summary_only_doc(test_db, tmp_path, monkeypatch):
     """격상: RSS가 요약만 준 문서(summary_only=1)를 브라우저 전문으로 교체하고
     추출 대기(status=new)로 되돌린다. 임계 미달이면 격상하지 않는다."""

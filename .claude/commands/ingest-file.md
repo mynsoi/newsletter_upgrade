@@ -5,6 +5,8 @@
 절차:
 1. 대상 파일의 frontmatter(source_id·url·title·published)와 본문이 갖춰졌는지 확인한다.
    본문은 원문 그대로여야 한다 — 요약·재구성된 텍스트는 등재하지 않는다 (절대 규칙 8).
+   PDF는 동명의 .yaml 머리말 파일과 쌍으로 넘긴다(report.pdf + report.yaml) —
+   본문은 pypdf로 추출되며, 처리 후 두 파일 모두 ingested/로 이동된다.
 2. `python src/collectors/ingest_file.py <파일경로>` 실행.
    - 저장은 store.py 경유: URL·내용 해시 중복 제거, summary_only 규칙 동일 적용
    - 격상: 같은 URL의 기존 문서가 summary_only=1(요약뿐)이고 새 본문이 더 길면서

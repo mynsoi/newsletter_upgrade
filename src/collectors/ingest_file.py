@@ -1,6 +1,6 @@
 """파일 등재 — 브라우저 보조 수집(browse)·구독 전문 파일을 documents에 등록 (A5, /ingest-file).
 
-파일 형식: YAML frontmatter + 본문
+파일 형식 ①: YAML frontmatter + 본문 (.md)
   ---
   source_id: knowledge-wharton   # sources.yaml에 등재된 id
   url: https://...
@@ -10,6 +10,10 @@
   fetched_by: browse             # 선택 (기록용)
   ---
   (본문 — 원문 그대로. 이 스크립트는 본문을 어떤 식으로도 변형하지 않는다: 절대 규칙 8)
+
+파일 형식 ②: PDF + 동명의 .yaml 머리말 쌍 (report.pdf + report.yaml)
+  .yaml에 위와 같은 메타(source_id·url·title·…)를 넣으면 PDF 본문을 pypdf로
+  추출해 등재한다. 처리 후 두 파일 모두 ingested/로 이동.
 
 저장은 collectors.store 경유 — URL·내용 해시 중복 제거와 summary_only 규칙을
 자동 수집 경로와 동일하게 적용한다. 등재(신규/중복) 처리된 파일은 같은 위치의
@@ -27,6 +31,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, connect, migrate  # noqa: E402
+from collectors.html_list import pdf_to_text  # noqa: E402
 from collectors.store import store_document  # noqa: E402
 from internal_sync import parse_frontmatter  # noqa: E402
 
@@ -47,7 +52,20 @@ def load_source(source_id: str) -> dict | None:
 
 def ingest(path: Path, conn) -> str:
     """파일 1건 등재. 반환: 'new' | 'dup' | 'upgraded' | 'error'."""
-    meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
+    companion = None  # PDF일 때 함께 이동할 .yaml 머리말 파일
+    if path.suffix.lower() == ".pdf":
+        companion = path.with_suffix(".yaml")
+        if not companion.exists():
+            print(f"  오류  {path.name} — 동명의 .yaml 머리말 파일이 없음")
+            return "error"
+        meta = yaml.safe_load(companion.read_text(encoding="utf-8")) or {}
+        try:
+            body = pdf_to_text(path.read_bytes())
+        except Exception as e:  # noqa: BLE001 — 손상 PDF 등은 파일을 남기고 보고만
+            print(f"  오류  {path.name} — PDF 텍스트 추출 실패: {type(e).__name__}")
+            return "error"
+    else:
+        meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
     missing = [k for k in REQUIRED if not meta.get(k)]
     if missing:
         print(f"  오류  {path.name} — frontmatter 필수 필드 누락: {', '.join(missing)}")
@@ -79,6 +97,8 @@ def ingest(path: Path, conn) -> str:
     done_dir = path.parent / "ingested"
     done_dir.mkdir(exist_ok=True)
     shutil.move(str(path), done_dir / path.name)
+    if companion is not None:
+        shutil.move(str(companion), done_dir / companion.name)
     return result
 
 
