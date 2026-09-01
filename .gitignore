@@ -8,3 +8,4 @@ internal/**/*.md
 !internal/**/_TEMPLATE*.md
 !internal/내부자료_등록목록.md
 *.egg-info/
+inbox/

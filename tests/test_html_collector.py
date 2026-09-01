@@ -191,6 +191,35 @@ def test_run_returns_stats_and_respects_lock(test_db, hcol, monkeypatch):
     assert hcol.run() == {"targets": 0, "failed": 0}  # 오늘 완료 → 조기 종료
 
 
+# ---------- /ingest-file (브라우저 경로 진입점) ----------
+
+def test_ingest_file_new_dup_and_missing_fields(test_db, tmp_path, monkeypatch):
+    conn, db = test_db
+    import collectors.ingest_file as ing
+    monkeypatch.setattr(ing, "load_source",
+                        lambda sid: {"id": sid, "tier": "T2", "type": "browse", "lang": "en"}
+                        if sid == "knowledge-wharton" else None)
+
+    doc = tmp_path / "knowledge-wharton_2026-08-24_test.md"
+    doc.write_text("---\nsource_id: knowledge-wharton\nurl: http://x/a\n"
+                   "title: 테스트\npublished: 2026-08-24\nfetched_by: browse\n---\n"
+                   + "본문 원문 그대로. " * 100, encoding="utf-8")
+    assert ing.ingest(doc, conn) == "new"
+    assert (tmp_path / "ingested" / doc.name).exists()  # 처리 후 이동
+    row = conn.execute("SELECT * FROM documents WHERE url='http://x/a'").fetchone()
+    assert row["source_id"] == "knowledge-wharton" and row["published_at"] == "2026-08-24"
+
+    dup = tmp_path / "dup.md"
+    dup.write_text("---\nsource_id: knowledge-wharton\nurl: http://x/a\ntitle: 테스트\n---\n다른 본문",
+                   encoding="utf-8")
+    assert ing.ingest(dup, conn) == "dup"  # URL 중복 — 자동 수집과 동일 규칙
+
+    bad = tmp_path / "bad.md"
+    bad.write_text("---\nsource_id: knowledge-wharton\n---\n본문", encoding="utf-8")
+    assert ing.ingest(bad, conn) == "error"  # url/title 누락
+    assert bad.exists()  # 오류 파일은 이동하지 않음
+
+
 # ---------- 무유입 경보 ----------
 
 def _mk_sources():

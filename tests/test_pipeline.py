@@ -13,9 +13,10 @@ sys.path.insert(0, str(REPO / "src"))
 def test_db(tmp_path, monkeypatch):
     monkeypatch.setenv("PIPELINE_DB", str(tmp_path / "test.db"))
     monkeypatch.delenv("DATABASE_URL", raising=False)  # 로컬 테스트는 SQLite 모드 강제
-    # db 모듈 재로드로 경로 반영
-    for mod in ["db"]:
-        if mod in sys.modules:
+    # db 및 db를 참조하는 모듈 재로드로 경로 반영 (모듈 캐시가 이전 임시 DB에 묶이는 것 방지)
+    for mod in list(sys.modules):
+        if mod in ("db", "handoff", "internal_sync", "load_theories", "stats") \
+                or mod.startswith(("collectors", "enrich")):
             del sys.modules[mod]
     import db
     conn = db.connect()
