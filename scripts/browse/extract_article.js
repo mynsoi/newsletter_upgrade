@@ -80,7 +80,8 @@ function extractArticle(opts = {}) {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   const title = norm((ogTitle && ogTitle.content) || document.title);
   const slug = (() => {
-    const seg = location.pathname.split("/").filter(Boolean).pop() || "";
+    const seg = (location.pathname.split("/").filter(Boolean).pop() || "")
+      .replace(/\.[a-z0-9]+$/i, "");  // .html 등 확장자 제거
     const s = (seg || title.toLowerCase()).toLowerCase()
       .replace(/[^a-z0-9가-힣-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
     return s || "article";

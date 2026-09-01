@@ -231,9 +231,30 @@ sources:
   status: active
   homepage: https://www2.deloitte.com/us/en/insights.html
   lang: en
+  browse_container: '[role="main"]'
+  browse_exclude:  # AEM 컴포넌트 — 모달·부록 아코디언·저작권·프로모/관련글·저자·인포그래픽 공유·소셜·우측 레일·목차
+    - .cmp-di-modal
+    - .cmp-di-accordion
+    - .cmp-di-copyright
+    - .cmp-di-promo
+    - .cmp-di-promo-container
+    - .cmp-di-authors
+    - .diauthors
+    - '[class*=''infographic'']'
+    - .cmp-di-share-bar
+    - .cmp-di-social-share
+    - .cmp-di-right-rail
+    - .cmp-di-link-list
+    - .cmp-di-breadcrumb
+    - nav
+    - aside
+    - footer
+    - figcaption
+    - form
   note: '2026-08-24 검증 실패(HTTP 404), 공개 RSS 폐지로 판단 — NL 전환 / [자동검증 2026-08-27] API·RSS
     미발견: RSS 미발견 (시도 6건, 마지막: https://www2.deloitte.com/index.xml → HTTP 404) / 2026-09-01
-    probe B — 목록 JS 렌더(정적 HTML에 글 카드 없음) → 월간 브라우저 라운드'
+    probe B — 목록 JS 렌더(정적 HTML에 글 카드 없음) → 월간 브라우저 라운드 / 2026-09-01 browse 선택자 실측
+    (extract_article.js, 기사 1건 등재)'
 - id: bcg-publications
   name: BCG Publications
   tier: T2
