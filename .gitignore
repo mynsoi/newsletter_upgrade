@@ -6,5 +6,5 @@ __pycache__/
 .pytest_cache/
 internal/**/*.md
 !internal/**/_TEMPLATE*.md
-!internal/B등급_투입후보목록.md
+!internal/추상화요지_작성목록.md
 *.egg-info/
