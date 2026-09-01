@@ -88,7 +88,7 @@ def parse_date(entry) -> str | None:
 
 
 def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = True) -> dict:
-    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0}
+    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "up": 0}
     curl_headers = source.get("request_headers")  # 있으면 httpx 실패 시 curl 폴백
     feed_xml = fetch_url(source["feed_url"], client, curl_headers)
     if feed_xml is None:
@@ -121,7 +121,7 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
         result = store_document(
             conn, source, url=url, title=entry.get("title", "(무제)"), text=text,
             author=entry.get("author"), published=parse_date(entry))
-        stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
+        stats[{"new": "new", "dup": "dup", "empty": "failed", "upgraded": "up"}[result]] += 1
     conn.commit()
     return stats
 
@@ -158,7 +158,8 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
                 failed_feeds.append(s["id"])
                 print("    → 피드 접속 실패")
             else:
-                print(f"    → 신규 {st['new']} / 중복 {st['dup']} / 본문실패 {st['failed']} (피드 {st['seen']}건)")
+                up = f" / 격상 {st['up']}" if st.get("up") else ""
+                print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문실패 {st['failed']} (피드 {st['seen']}건)")
             time.sleep(REQUEST_INTERVAL)
 
     if failed_feeds:

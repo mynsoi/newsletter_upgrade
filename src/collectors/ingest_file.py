@@ -46,7 +46,7 @@ def load_source(source_id: str) -> dict | None:
 
 
 def ingest(path: Path, conn) -> str:
-    """파일 1건 등재. 반환: 'new' | 'dup' | 'error'."""
+    """파일 1건 등재. 반환: 'new' | 'dup' | 'upgraded' | 'error'."""
     meta, body = parse_frontmatter(path.read_text(encoding="utf-8"))
     missing = [k for k in REQUIRED if not meta.get(k)]
     if missing:
@@ -62,9 +62,13 @@ def ingest(path: Path, conn) -> str:
 
     result = store_document(
         conn, source, url=str(meta["url"]), title=str(meta["title"]), text=body,
-        published=str(meta.get("published") or "") or None)
+        published=str(meta.get("published") or "") or None,
+        fetched_by=str(meta.get("fetched_by") or "browse"))
     if result == "new":
         print(f"  등재  {path.name} → documents ({len(body):,}자)")
+    elif result == "upgraded":
+        print(f"  격상  {path.name} — 요약뿐이던 기존 문서의 본문을 전문으로 교체 "
+              f"({len(body):,}자, 추출 대기로 복귀)")
     elif result == "dup":
         print(f"  중복  {path.name} — 같은 URL/내용이 이미 등재됨 (파이프라인 중복 제거)")
     else:
@@ -84,7 +88,7 @@ def main(argv: list[str]) -> int:
         return 2
     conn = connect()
     migrate(conn)
-    counts = {"new": 0, "dup": 0, "error": 0}
+    counts = {"new": 0, "dup": 0, "upgraded": 0, "error": 0}
     for arg in argv:
         p = Path(arg)
         if not p.exists():
@@ -93,7 +97,8 @@ def main(argv: list[str]) -> int:
             continue
         counts[ingest(p, conn)] += 1
     conn.close()
-    print(f"\n완료: 신규 {counts['new']} / 중복 {counts['dup']} / 오류 {counts['error']}")
+    print(f"\n완료: 신규 {counts['new']} / 중복 {counts['dup']} / "
+          f"격상 {counts['upgraded']} / 오류 {counts['error']}")
     return 0 if counts["error"] == 0 else 1
 
 

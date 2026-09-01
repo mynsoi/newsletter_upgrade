@@ -133,7 +133,7 @@ def extract_published(html: str) -> str | None:
 
 
 def collect_source(source: dict, conn, client: httpx.Client) -> dict:
-    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "robots": 0}
+    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "robots": 0, "up": 0}
     curl_headers = source.get("request_headers")
     pattern = source.get("link_pattern")
     if not pattern or not list_entries(source):
@@ -206,7 +206,7 @@ def collect_source(source: dict, conn, client: httpx.Client) -> dict:
 
         result = store_document(conn, source, url=url, title=title, text=text,
                                 published=published)
-        stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
+        stats[{"new": "new", "dup": "dup", "empty": "failed", "upgraded": "up"}[result]] += 1
     conn.commit()
     return stats
 
@@ -239,7 +239,8 @@ def run(source_ids: list[str] | None = None, *, force: bool = False) -> dict:
                 print("    → 목록 수집 실패")
             else:
                 extra = f" / robots 제외 {st['robots']}" if st["robots"] else ""
-                print(f"    → 신규 {st['new']} / 중복 {st['dup']} / 본문실패 {st['failed']}"
+                up = f" / 격상 {st['up']}" if st.get("up") else ""
+                print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문실패 {st['failed']}"
                       f" (링크 {st['seen']}건{extra})")
             time.sleep(REQUEST_INTERVAL)
 

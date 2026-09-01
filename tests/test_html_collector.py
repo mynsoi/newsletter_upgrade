@@ -220,6 +220,49 @@ def test_ingest_file_new_dup_and_missing_fields(test_db, tmp_path, monkeypatch):
     assert bad.exists()  # 오류 파일은 이동하지 않음
 
 
+def test_ingest_file_upgrades_summary_only_doc(test_db, tmp_path, monkeypatch):
+    """격상: RSS가 요약만 준 문서(summary_only=1)를 브라우저 전문으로 교체하고
+    추출 대기(status=new)로 되돌린다. 임계 미달이면 격상하지 않는다."""
+    conn, db = test_db
+    import collectors.ingest_file as ing
+    from collectors.store import store_document
+    src = {"id": "knowledge-wharton", "tier": "T2", "type": "html", "lang": "en"}
+    monkeypatch.setattr(ing, "load_source",
+                        lambda sid: src if sid == "knowledge-wharton" else None)
+
+    # RSS 요약만 등재된 상태 (800자 미만 → summary_only=1)
+    assert store_document(conn, src, url="http://x/up", title="요약",
+                          text="피드가 제공한 짧은 요약. " * 15) == "new"
+    conn.execute("UPDATE documents SET status='enriched' WHERE url='http://x/up'")
+    row = conn.execute("SELECT summary_only FROM documents WHERE url='http://x/up'").fetchone()
+    assert row["summary_only"] == 1
+
+    # 더 길지만 여전히 800자 미만 → 격상하지 않고 중복 유지
+    short = tmp_path / "short.md"
+    short.write_text("---\nsource_id: knowledge-wharton\nurl: http://x/up\ntitle: 조금 긴 요약\n---\n"
+                     + "여전히 요약 수준. " * 30, encoding="utf-8")
+    assert ing.ingest(short, conn) == "dup"
+
+    # 브라우저 전문(임계 통과·기존보다 김) → 격상
+    full = tmp_path / "full.md"
+    full.write_text("---\nsource_id: knowledge-wharton\nurl: http://x/up\n"
+                    "title: 전문\nfetched_by: browse\n---\n"
+                    + "브라우저로 확보한 전문 본문. " * 100, encoding="utf-8")
+    assert ing.ingest(full, conn) == "upgraded"
+    row = conn.execute("SELECT * FROM documents WHERE url='http://x/up'").fetchone()
+    assert row["summary_only"] == 0
+    assert row["status"] == "new"                      # 추출 대기로 복귀
+    assert row["fetched_by"] == "browse"
+    assert row["body"].startswith("브라우저로 확보한 전문 본문")
+    assert (tmp_path / "ingested" / "full.md").exists()
+
+    # 이미 전문인 문서에 재등재 → 현행 중복 규칙 유지
+    again = tmp_path / "again.md"
+    again.write_text("---\nsource_id: knowledge-wharton\nurl: http://x/up\ntitle: 재등재\n---\n"
+                     + "또 다른 전문 텍스트. " * 200, encoding="utf-8")
+    assert ing.ingest(again, conn) == "dup"
+
+
 # ---------- 무유입 경보 ----------
 
 def _mk_sources():

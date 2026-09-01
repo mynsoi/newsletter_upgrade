@@ -140,7 +140,7 @@ def pick_adapter(source: dict) -> str | None:
 
 def collect_source(source: dict, conn, client: httpx.Client,
                    backfill: tuple[str, str] | None = None) -> dict:
-    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0}
+    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "up": 0}
     kind = pick_adapter(source)
     if kind is None:
         print(f"    ! 지원하지 않는 api 소스 (arXiv/OSF 아님)")
@@ -177,7 +177,7 @@ def collect_source(source: dict, conn, client: httpx.Client,
             result = store_document(
                 conn, source, url=it["url"], title=it["title"], text=it["text"],
                 author=it["author"], published=it["published"])
-            stats[{"new": "new", "dup": "dup", "empty": "failed"}[result]] += 1
+            stats[{"new": "new", "dup": "dup", "empty": "failed", "upgraded": "up"}[result]] += 1
         conn.commit()
 
         if kind == "arxiv":
@@ -224,7 +224,8 @@ def run(source_ids: list[str] | None = None,
                 failed.append(s["id"])
                 print("    → 수집 실패")
             else:
-                print(f"    → 신규 {st['new']} / 중복 {st['dup']} / 본문없음 {st['failed']} (응답 {st['seen']}건)")
+                up = f" / 격상 {st['up']}" if st.get("up") else ""
+                print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문없음 {st['failed']} (응답 {st['seen']}건)")
             time.sleep(REQUEST_INTERVAL)
 
     if failed:

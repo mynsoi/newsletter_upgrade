@@ -106,7 +106,7 @@ def test_arxiv_collect_dedup_and_summary_only(test_db, api):
     conn, db = test_db
     client = FakeClient({api.arxiv_url(ARXIV_SOURCE): FakeResponse(200, ARXIV_ATOM)})
     stats = api.collect_source(ARXIV_SOURCE, conn, client)
-    assert stats == {"seen": 2, "new": 2, "dup": 0, "failed": 0}
+    assert stats == {"seen": 2, "new": 2, "dup": 0, "failed": 0, "up": 0}
 
     # 재수집 시 전량 중복 (rss와 동일 규칙)
     stats2 = api.collect_source(ARXIV_SOURCE, conn, client)
@@ -144,7 +144,7 @@ def test_osf_collect_json(test_db, api):
     client = FakeClient({api.osf_url(OSF_SOURCE): FakeResponse(200, OSF_JSON)})
     stats = api.collect_source(OSF_SOURCE, conn, client)
     # 설명이 빈 항목은 empty → failed로 집계
-    assert stats == {"seen": 2, "new": 1, "dup": 0, "failed": 1}
+    assert stats == {"seen": 2, "new": 1, "dup": 0, "failed": 1, "up": 0}
     row = conn.execute("SELECT * FROM documents").fetchone()
     assert row["url"] == "https://osf.io/abc12"
     assert row["published_at"] == "2026-08-19"
