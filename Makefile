@@ -1,4 +1,4 @@
-.PHONY: init validate collect collect-fast sync enrich theories stats test handoff receive
+.PHONY: init validate collect collect-fast sync enrich theories stats sources-doc test handoff receive
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -26,6 +26,9 @@ enrich-dry:
 
 theories:
 	$(PYTHON) src/load_theories.py
+
+sources-doc:             # sources.yaml → docs/소스_카탈로그.md 재생성 (md 직접 수정 금지)
+	$(PYTHON) src/sources_doc.py
 
 stats:
 	$(PYTHON) src/stats.py

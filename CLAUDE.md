@@ -28,6 +28,8 @@
   각 단계 산출물을 `content/` 하위 파일로 남기고 커밋한다.
 - DB 스키마 변경은 `migrations/`에 번호 순 SQL 파일로만 한다. 기존 마이그레이션 수정 금지.
 - 새 소스 추가는 `config/sources.yaml` 수정으로만 한다. 코드에 URL 하드코딩 금지.
+- 소스 변경 후에는 `make sources-doc`으로 docs/소스_카탈로그.md를 재생성해 동기화한다
+  (md는 파생 문서 — 직접 수정 금지, 확정본은 sources.yaml).
 - 프롬프트는 `prompts/` 파일이 유일한 원본이다. 코드 안에 프롬프트 문자열을 넣지 않는다.
 - 실패·반려는 삭제하지 않고 `content/rejected/`에 사유 코드(부록 B)와 함께 보관한다.
 
