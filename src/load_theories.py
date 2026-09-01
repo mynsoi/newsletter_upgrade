@@ -102,14 +102,16 @@ def load() -> int:
             )
         else:
             doc_id = new_id()
+            year_s = str(meta.get("year", "")).strip()
+            # published_at 은 DATE 컬럼 — 카드의 연도만 있는 경우 해당 연도 1월 1일로 저장
+            published = f"{year_s}-01-01" if year_s.isdigit() and len(year_s) == 4 else None
             conn.execute(
                 """INSERT INTO documents
                    (id, source_id, tier, title, author, published_at, lang,
                     body, content_hash, status)
                    VALUES (?, ?, 'T1', ?, ?, ?, 'ko', ?, ?, 'enriched')""",
                 (doc_id, SOURCE_ID, name, str(meta.get("originators", "")),
-                 str(meta.get("year", "")) or None,
-                 body, c_hash),
+                 published, body, c_hash),
             )
             conn.execute(
                 "INSERT INTO tags (document_id, axis, value) VALUES "
