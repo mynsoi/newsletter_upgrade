@@ -93,7 +93,9 @@ def test_fetch_via_curl_builds_command(monkeypatch):
     assert "User-Agent: UA1" in cmd and "Accept: a/b" in cmd
 
 
-def test_internal_sync_rejects_c_and_gates_b(test_db, tmp_path, monkeypatch):
+def test_internal_sync_simplified_policy(test_db, tmp_path, monkeypatch):
+    """등급 미운용(2026-09-03): 등록 문서는 전부 api_eligible=1,
+    구 등급 표기(B·C 등)가 남은 파일은 안전 가드로 등록 보류."""
     conn, db = test_db
     import internal_sync as isync
 
@@ -102,33 +104,37 @@ def test_internal_sync_rejects_c_and_gates_b(test_db, tmp_path, monkeypatch):
     (internal / "skms" / "a-doc.md").write_text(
         "---\ntitle: 공개자료\ntype: skms\nsecurity: A\ndate: 2026-01-01\n---\n본문 A",
         encoding="utf-8")
-    (internal / "skms" / "b-doc.md").write_text(
-        "---\ntitle: 사내한자료\ntype: skms\nsecurity: B\ndate: 2026-01-01\n---\n본문 B",
+    (internal / "skms" / "no-grade.md").write_text(
+        "---\ntitle: 표기없음\ntype: skms\ndate: 2026-01-01\n---\n본문 무표기",
         encoding="utf-8")
-    (internal / "skms" / "c-doc.md").write_text(
-        "---\ntitle: 기밀\ntype: skms\nsecurity: C\ndate: 2026-01-01\n---\n절대 색인 금지",
+    (internal / "skms" / "legacy-b.md").write_text(
+        "---\ntitle: 구B표기\ntype: skms\nsecurity: B\ndate: 2026-01-01\n---\n본문 B",
+        encoding="utf-8")
+    (internal / "skms" / "legacy-c.md").write_text(
+        "---\ntitle: 구C표기\ntype: skms\nsecurity: C\ndate: 2026-01-01\n---\n절대 등록 금지",
         encoding="utf-8")
     (internal / "skms" / "_TEMPLATE.md").write_text("---\nsecurity: A\n---\n템플릿", encoding="utf-8")
+    (internal / "내부자료_등록목록.md").write_text("# 목록", encoding="utf-8")  # 루트 파일 제외 확인
 
     monkeypatch.setattr(isync, "INTERNAL_DIR", internal)
-    monkeypatch.setattr(isync, "load_settings", lambda: {"b_grade_api_approved": False})
-    # sync는 같은 PIPELINE_DB 파일에 자체 연결을 생성 — 커밋 후 우리 conn으로 검증
-
-    isync.sync()
+    rc = isync.sync()
+    assert rc == 1  # 보류 발생 시 비정상 코드로 표면화
 
     rows = {r["id"]: r for r in conn.execute("SELECT * FROM internal_docs")}
-    assert "skms/a-doc.md" in rows and rows["skms/a-doc.md"]["api_eligible"] == 1
-    assert "skms/b-doc.md" in rows and rows["skms/b-doc.md"]["api_eligible"] == 0  # 이행기 게이트
-    assert "skms/c-doc.md" not in rows  # C등급 색인 거부
-    assert not any("TEMPLATE" in k for k in rows)
+    assert rows["skms/a-doc.md"]["api_eligible"] == 1
+    assert rows["skms/no-grade.md"]["api_eligible"] == 1   # 표기 없어도 등록 (등급 미운용)
+    assert rows["skms/no-grade.md"]["security"] == "A"     # 스키마 호환 고정값
+    assert "skms/legacy-b.md" not in rows  # 구 등급 표기 → 보류
+    assert "skms/legacy-c.md" not in rows
+    assert not any("TEMPLATE" in k or "등록목록" in k for k in rows)
 
-    # 승인 후 재색인 시 B등급 API 적격 전환
-    monkeypatch.setattr(isync, "load_settings", lambda: {"b_grade_api_approved": True})  # 승인 상태 시뮬레이션
-    (internal / "skms" / "b-doc.md").write_text(
-        "---\ntitle: 사내한자료\ntype: skms\nsecurity: B\ndate: 2026-01-01\n---\n본문 B 수정",
+    # 표기 제거 후 재확인하면 등록됨 (C 표기 파일은 삭제됐다고 가정)
+    (internal / "skms" / "legacy-b.md").write_text(
+        "---\ntitle: 구B표기\ntype: skms\ndate: 2026-01-01\n---\n본문 B (공개 확인 완료)",
         encoding="utf-8")
-    isync.sync()
-    row = conn.execute("SELECT api_eligible FROM internal_docs WHERE id='skms/b-doc.md'").fetchone()
+    (internal / "skms" / "legacy-c.md").unlink()
+    assert isync.sync() == 0
+    row = conn.execute("SELECT api_eligible FROM internal_docs WHERE id='skms/legacy-b.md'").fetchone()
     assert row["api_eligible"] == 1
 
 

@@ -43,14 +43,12 @@ def main() -> int:
 
     section("내부 자료")
     rows = conn.execute(
-        "SELECT security, api_eligible, COUNT(*) n FROM internal_docs "
-        "GROUP BY security, api_eligible"
+        "SELECT type, COUNT(*) n FROM internal_docs GROUP BY type"
     ).fetchall()
     if not rows:
         print("  (없음 — internal/에 파일 등록 후 make sync)")
     for r in rows:
-        api = "API가능" if r["api_eligible"] else "API제외(이행기)"
-        print(f"  {r['security']}등급 {api}: {r['n']}건")
+        print(f"  {r['type'] or '(유형 미기재)'}: {r['n']}건")
 
     section("아티클")
     rows = conn.execute(

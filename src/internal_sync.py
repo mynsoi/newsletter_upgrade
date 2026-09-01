@@ -1,12 +1,15 @@
 """internal/ 디렉토리 색인 — SKMS·경영층 메시지 등 내부 자료.
 
-보안 규칙 (기획서 4.1, CLAUDE.md 절대 규칙 4):
-  - security: C → 색인 자체를 거부하고 경고 (파일 내용을 읽는 즉시 중단)
-  - security: B → 색인은 하되, api_eligible=0.
-                  config/settings.yaml의 b_grade_api_approved: true 일 때만 api_eligible=1
-  - security: A → api_eligible=1
-  - _TEMPLATE 파일과 밑줄로 시작하는 파일은 건너뜀
+정책 (2026-09-03 단순화 — CLAUDE.md 절대 규칙 4, 기획서 v1.5):
+  - internal/에는 공개 가능 판단이 끝난 자료만 등록한다. 등급 체계는 미운용.
+  - 이 폴더의 텍스트는 아티클 생성 시 외부 API로 전송된다.
+  - 안전 가드: 프론트매터에 'A' 외의 security 표기(B·C 등 구 등급)가 남아 있으면
+    실수 방지를 위해 등록을 보류하고 경고한다 — 공개 가능 여부를 재확인하고
+    표기를 제거(또는 A로 정정)한 뒤 다시 sync 한다.
+  - _TEMPLATE 파일과 밑줄로 시작하는 파일, internal/ 루트 파일(목록 등)은 건너뜀
   - supersedes 관계를 반영해 대체된 문서를 표시
+
+DB의 security·api_eligible 컬럼은 스키마 호환을 위해 유지하며 'A'·1로 고정 기록한다.
 
 사용: make sync
 """
@@ -21,13 +24,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import ROOT, connect, content_hash, migrate  # noqa: E402
 
 INTERNAL_DIR = ROOT / "internal"
-SETTINGS_PATH = ROOT / "config" / "settings.yaml"
-
-
-def load_settings() -> dict:
-    if SETTINGS_PATH.exists():
-        return yaml.safe_load(SETTINGS_PATH.read_text(encoding="utf-8")) or {}
-    return {}
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -44,12 +40,13 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     return meta, parts[2].strip()
 
 
-def peek_security(path: Path) -> str | None:
-    """본문을 읽기 전에 security 필드만 확인 (C등급 노출 최소화)."""
+def legacy_grade_mark(path: Path) -> str | None:
+    """본문을 읽기 전에 구 등급 표기(A 외의 security 값)만 확인하는 안전 가드."""
     with path.open(encoding="utf-8") as f:
         head = f.read(2000)
     meta, _ = parse_frontmatter(head)
-    return str(meta.get("security", "")).upper() or None
+    sec = str(meta.get("security", "")).upper() or None
+    return sec if sec not in (None, "A") else None
 
 
 def sync() -> int:
@@ -57,26 +54,20 @@ def sync() -> int:
     ensure_active("내부 자료 색인")
     conn = connect()
     migrate(conn)
-    settings = load_settings()
-    b_approved = bool(settings.get("b_grade_api_approved", False))
-    print(f"B등급 API 전송 승인 상태: {'승인됨' if b_approved else '미승인 (이행기 — 색인만 수행)'}")
 
-    # 색인 대상: 하위 폴더(skms/ 등)의 .md만. 루트 파일(후보목록 등)과 _TEMPLATE은 제외.
+    # 색인 대상: 하위 폴더(skms/ 등)의 .md만. 루트 파일(등록목록 등)과 _TEMPLATE은 제외.
     files = sorted(p for p in INTERNAL_DIR.rglob("*.md")
                    if not p.name.startswith("_") and p.parent != INTERNAL_DIR)
-    stats = {"indexed": 0, "skipped": 0, "rejected_c": 0, "invalid": 0}
+    stats = {"indexed": 0, "skipped": 0, "held": 0}
 
     for path in files:
         rel = path.relative_to(INTERNAL_DIR).as_posix()
 
-        sec = peek_security(path)
-        if sec == "C":
-            print(f"  거부  {rel} — security: C 문서는 파이프라인 투입 금지 (기획서 4.1)")
-            stats["rejected_c"] += 1
-            continue
-        if sec not in ("A", "B"):
-            print(f"  오류  {rel} — security 필드가 A/B가 아님 (값: {sec}). 프론트매터를 확인하세요.")
-            stats["invalid"] += 1
+        mark = legacy_grade_mark(path)
+        if mark is not None:
+            print(f"  보류  {rel} — 구 등급 표기(security: {mark}) 발견. 등급 체계는 미운용 — "
+                  "공개 가능 여부 재확인 후 표기를 제거하고 다시 sync 하세요.")
+            stats["held"] += 1
             continue
 
         text = path.read_text(encoding="utf-8")
@@ -88,19 +79,18 @@ def sync() -> int:
             stats["skipped"] += 1
             continue
 
-        api_eligible = 1 if (sec == "A" or (sec == "B" and b_approved)) else 0
         conn.execute(
             """INSERT INTO internal_docs
                (id, path, title, type, speaker, security, effective_date,
                 body, content_hash, api_eligible, indexed_at)
-               VALUES (?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP)
+               VALUES (?,?,?,?,?, 'A', ?,?,?, 1, CURRENT_TIMESTAMP)
                ON CONFLICT(id) DO UPDATE SET
                  title=excluded.title, type=excluded.type, speaker=excluded.speaker,
-                 security=excluded.security, effective_date=excluded.effective_date,
+                 security='A', effective_date=excluded.effective_date,
                  body=excluded.body, content_hash=excluded.content_hash,
-                 api_eligible=excluded.api_eligible, indexed_at=CURRENT_TIMESTAMP""",
+                 api_eligible=1, indexed_at=CURRENT_TIMESTAMP""",
             (rel, str(path), meta.get("title"), meta.get("type"), meta.get("speaker"),
-             sec, str(meta.get("date", "")) or None, body, c_hash, api_eligible),
+             str(meta.get("date", "")) or None, body, c_hash),
         )
 
         sup = meta.get("supersedes")
@@ -110,15 +100,14 @@ def sync() -> int:
                 if (path.parent / sup).exists() else sup
             conn.execute("UPDATE internal_docs SET superseded_by=? WHERE id=?", (rel, sup_rel))
 
-        grade_note = "" if api_eligible else "  [API 전송 제외 — B등급 이행기]"
-        print(f"  색인  {rel} (security={sec}){grade_note}")
+        print(f"  색인  {rel}")
         stats["indexed"] += 1
 
     conn.commit()
     print(f"\n완료: 색인 {stats['indexed']} / 변경없음 {stats['skipped']} / "
-          f"C거부 {stats['rejected_c']} / 형식오류 {stats['invalid']}")
+          f"등급 표기 보류 {stats['held']}")
     conn.close()
-    return 0 if stats["invalid"] == 0 and stats["rejected_c"] == 0 else 1
+    return 0 if stats["held"] == 0 else 1
 
 
 if __name__ == "__main__":
