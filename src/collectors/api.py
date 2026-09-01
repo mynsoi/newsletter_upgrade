@@ -156,6 +156,14 @@ def collect_source(source: dict, conn, client: httpx.Client,
     for page in range(max_pages):
         text = fetch_text(url, client)
         if text is None:
+            # arXiv는 장시간 연속 요청에 간헐 오류를 반환 — 대기 후 재시도 (2026-08-31 소급 실측)
+            for wait in (20, 60):
+                print(f"    … {wait}초 대기 후 재시도")
+                time.sleep(wait)
+                text = fetch_text(url, client)
+                if text is not None:
+                    break
+        if text is None:
             if page == 0:
                 stats["failed"] = -1
             break
