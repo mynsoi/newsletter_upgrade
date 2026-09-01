@@ -218,7 +218,28 @@ sources:
   lang: en
   verified: true
   inflow_alert_days: 14
-  note: 현행(본문 미확보) — 기존 feed_url 유지, NL로 전문 보완 필수
+  browse_container: main  # 격상용 browse 보조 경로 (type은 rss 유지) — 본문은 .mdc-o-content-body
+  browse_exclude:
+    - '[class*=''Disclaimer'']'
+    - '[class*=''disclaimer'']'
+    - '[class*=''Byline'']'
+    - '[class*=''byline'']'
+    - '[class*=''related'']'
+    - '[class*=''Related'']'
+    - '[class*=''signup'']'
+    - '[class*=''Signup'']'
+    - '[class*=''Subscribe'']'
+    - '[class*=''share'']'
+    - '[class*=''author'']'
+    - '[class*=''Author'']'
+    - nav
+    - aside
+    - footer
+    - figcaption
+    - form
+  note: '현행(본문 미확보) — 기존 feed_url 유지, NL로 전문 보완 필수 / 2026-09-01 격상 실전 검증 —
+    RSS 요약(170자)을 브라우저 전문(21,545자)으로 교체 성공(격상 1, summary_only 0·status new 복귀).
+    기사 페이지는 인앱 브라우저 차단(Access Denied) — 실제 Chrome 경유 필요. browse 선택자 실측 기록'
 - id: deloitte-insights
   name: Deloitte Insights
   tier: T2
@@ -255,7 +276,7 @@ sources:
   note: '2026-08-24 검증 실패(HTTP 404), 공개 RSS 폐지로 판단 — NL 전환 / [자동검증 2026-08-27] API·RSS
     미발견: RSS 미발견 (시도 6건, 마지막: https://www2.deloitte.com/index.xml → HTTP 404) / 2026-09-01
     probe B — 목록 JS 렌더(정적 HTML에 글 카드 없음) → 월간 브라우저 라운드 / 2026-09-01 browse 선택자 실측
-    (extract_article.js, 기사 1건 등재)'
+    (extract_article.js, 기사 1건 등재) / 월간 라운드 예산: 약 15분(최대 5건, 건당 2~3분 실측)'
 - id: bcg-publications
   name: BCG Publications
   tier: T2
@@ -268,10 +289,26 @@ sources:
   constraints: 사이트 봇 차단(403) → 뉴스레터 경로
   status: active
   homepage: https://www.bcg.com
+  list_url: https://www.bcg.com/publications
   lang: en
+  browse_container: main
+  browse_exclude:  # 구독 위젯·관련글·공유·저자 위젯 (본문은 .ReadingExperience-articleBody)
+    - '[class*=''StickyToolbarWidget'']'
+    - '[class*=''Subscribe'']'
+    - '[class*=''related'']'
+    - '[class*=''Related'']'
+    - '[class*=''share'']'
+    - '[class*=''author'']'
+    - nav
+    - aside
+    - footer
+    - figcaption
+    - form
   note: '2026-08-24 검증 실패(HTTP 403, 봇 차단 추정) — NL 전환 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://www.bcg.com/index.xml → HTTP 404) / 2026-09-01 probe
-    B — 목록 JS 렌더 + 브라우저형 요청만 403(봇 UA 200)인 특이 차단 → 월간 브라우저 라운드'
+    B — 목록 JS 렌더 + 브라우저형 요청만 403(봇 UA 200)인 특이 차단 → 월간 브라우저 라운드 / 2026-09-01
+    파일럿 — 인앱 브라우저에서는 정상 열람(쿠키 배너만 처리), browse 선택자 실측, 기사 1건 등재 / 월간
+    라운드 예산: 약 10분(최대 3건, 건당 2~3분 실측)'
 - id: knowledge-wharton
   name: Knowledge at Wharton
   tier: T2
@@ -331,7 +368,8 @@ sources:
   lang: en
   note: '경로 변동 이력 주의. 2026-08-27 공식 주소 확인(gx/en/research-insights.html), RSS 미제공 /
     [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.pwc.com/index.xml
-    → HTTP 404) / 2026-09-01 probe B — 목록 JS 렌더(정적 HTML은 내비게이션만) → 월간 브라우저 라운드'
+    → HTTP 404) / 2026-09-01 probe B — 목록 JS 렌더(정적 HTML은 내비게이션만) → 월간 브라우저 라운드 /
+    월간 라운드 예산: 약 10분(최대 3건, 건당 2~3분 실측)'
 - id: samil-pwc
   name: 삼일PwC 경영연구원
   tier: T2
@@ -361,7 +399,7 @@ sources:
   name: 삼정KPMG 경제연구원
   tier: T2
   type: browse
-  browse_mode: list
+  browse_mode: item  # 라운드 제외 — 사람이 발견한 리포트만 건별 (OCR 도입 전까지 실효 수집 불가)
   role: T2 국내 — 경제연구원 이슈리포트 (PDF 수기 등록)
   description: 삼정KPMG 경제연구원 이슈리포트. 국내 산업·경제 동향.
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 이슈
@@ -374,6 +412,9 @@ sources:
   lang: ko
   note: NL/수기 — 이슈리포트 주력. 2026-08-27 공식 주소 확인(경제연구원 ERI Insights) / 2026-09-01 probe
     B — 목록이 동적 필터(정적 HTML은 오류 문구), 과거 리포트는 외부 아카이브(launch.kpmg.com) → 월간 브라우저 라운드
+    / 2026-09-01 파일럿 — PDF 쌍 경로 동작 확인. 단 리포트 PDF가 암호화+이미지형(45p 중 텍스트 29자)이라
+    pypdf 추출 불가, 소개 페이지도 요약뿐(900자) / 2026-09-01 운영 — 이미지형 PDF(OCR 필요)·주제 적합
+    0/8 — 라운드 제외, 분기 1회 사람 확인, OCR 도입 시 재검토
 - id: josh-bersin
   name: Josh Bersin
   tier: T2
@@ -409,7 +450,8 @@ sources:
   note: '국내 T2 — POSRI와 1곳 선별. 2026-08-27 주소 확인(lgbr.co.kr), RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400)
     / 2026-09-01 probe B — 목록(business·economy/list.do)은 정적이나 본문 링크가 javascript:fnView()
-    — 리버스 성공 시 html 승격 여지 → 월간 브라우저 라운드'
+    — 리버스 성공 시 html 승격 여지 → 월간 브라우저 라운드 / 월간 라운드 예산: 약 10분(최대 3건, 건당
+    2~3분 실측)'
 - id: posri
   name: POSRI(포스코경영연구원)
   tier: T2
@@ -436,7 +478,34 @@ sources:
   lang: en
   verified: true
   note: RSS는 요약만 제공 — 구독 NL로 전문 확보(C1·C2). https(feeds.hbr.org)는 사내망에서 접속 실패해 http
-    경로 사용(2026-08-24 확인) / 요약은 RSS, 전문은 browse 건별
+    경로 사용(2026-08-24 확인) / 2026-09-01 역할 정리 — 영문 hbr.org 신호용(요약 수집), 한국판 전문은
+    hbr-korea(건별)
+- id: hbr-korea
+  name: HBR Korea(하버드비즈니스리뷰 한국판)
+  tier: T3
+  type: browse
+  browse_mode: item  # 유료 — 건별 선별만, 목록 순회 금지
+  role: HBR 핵심 아티클의 한국어 전문 — 유료 건별
+  description: 하버드비즈니스리뷰 한국판. 유료 구독, 사용자 지정 건별 선별 수집.
+  topics: 리더십 · 조직 설계 · 인재 육성 · 일하는 방식 — 광역
+  frequency: 격주
+  constraints: 유료 — 구독 세션 건별 선별(/browse-collect). Chrome 자동 다운로드 허용 필요(PC당 최초 1회)
+  status: active
+  trial_until: '2026-10-02'
+  homepage: https://www.hbrkorea.com
+  lang: ko
+  browse_container: '#article_body'  # DBR과 동일 구조 — br 구분 본문(extract_article.js br 폴백)
+  browse_exclude:
+    - .relate_article
+    - .fix-func-list
+    - nav
+    - aside
+    - footer
+    - figcaption
+    - form
+  license_note: 구독 계정 열람 — 내부 저장 범위 확인 중
+  note: '2026-09-01 파일럿 — hbr(영문 RSS) 건별 경로에서 분리 신설. 기사 2건 등재(source_id 이관),
+    로그인 세션 정상, 유료 잘림 없음 / 월간 라운드 예산: 건별 약 6분/건'
 - id: mit-smr
   name: MIT Sloan Management Review
   tier: T3
@@ -479,7 +548,8 @@ sources:
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://dbr.donga.com/index.xml → 파싱은 되나 항목 0건) / 유료 — 구독
     세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성 / 2026-09-01 browse 선택자 실측 — 로그인
-    세션에서 기사 1건 등재(br 폴백), 내부 저장 범위 확인 중(license_note 기재)'
+    세션에서 기사 1건 등재(br 폴백), 내부 저장 범위 확인 중(license_note 기재) / 월간 라운드 예산: 건별
+    약 6분/건'
 - id: hr-insight
   name: HR Insight
   tier: T3
@@ -497,7 +567,8 @@ sources:
   lang: ko
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 주소 확인(hrinsight.co.kr), RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.hrinsight.co.kr/index.xml → HTTP
-    404) / 유료 — 구독 세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성'
+    404) / 유료 — 구독 세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성 / 월간 라운드 예산:
+    건별 약 6분/건'
 - id: aihr-blog
   name: AIHR Blog
   tier: T3
@@ -722,7 +793,7 @@ sources:
     RSS 미발견 (시도 6건, 마지막: https://www.linkedin.com/index.xml → HTTP 404) / 2026-09-01
     probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) / 2026-09-01 운영 변경 —
     robots 전면 Disallow + 자동화 접근 금지 약관 — 목록 순회 금지, 사람이 리포트를 발견했을 때만
-    건별 등록(Global Talent Trends 등 연간 리포트)
+    건별 등록(Global Talent Trends 등 연간 리포트) / 월간 라운드 예산: 건별 약 3분/건(비유료)
     재검토'
 - id: atlassian-worklife
   name: Atlassian Work Life

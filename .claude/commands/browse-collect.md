@@ -27,8 +27,15 @@ sources.yaml에서 해당 소스의 `browse_mode`(list|item)를 확인해 모드
 8. **로그인 수행·폼 제출 금지.** 로그인 "상태 확인"만 한다 (로그아웃·마이페이지 표시 여부).
    로그인이 풀려 있으면 멈추고 사용자에게 알린다.
 9. 페이지 간 이동 시 3초 이상 간격을 둔다.
+10. **사전 조건: Chrome 자동 다운로드 허용(PC당 최초 1회).** 실제 Chrome은 스크립트
+    다운로드를 기본 차단한다 — 파일이 생성되지 않으면 멈추고 사용자에게 허용을 요청한다
+    (주소창의 차단 아이콘 → 항상 허용).
 
 ## 목록 모드 — `/browse-collect <소스ID>` (browse_mode: list)
+
+보조 대상: **mckinsey-insights** — type은 rss를 유지하되(요약 자동 수집) RSS 요약본
+(summary_only=1)을 전문으로 격상하는 용도로 이 모드를 쓸 수 있다.
+browse_container/browse_exclude는 첫 실행 시 실측해 기록한다.
 
 1. 소스의 `list_url`(없으면 homepage)을 연다. 스크립트 렌더링 사이트는 목록·본문이
    뜰 때까지 대기 후 진행한다 (Deloitte·BCG·PwC 등 probe B 판정 소스).
