@@ -1,64 +1,77 @@
 # AI 시대 일하는 방식 인사이트 파이프라인
 
-AI·조직문화 콘텐츠를 수집·교차해 주 1편 인사이트 아티클을 만드는 파이프라인.
-**현재 Phase 1** — 실행 계획·분업: `docs/phase1-plan.md` / 운영 규칙: `CLAUDE.md` / 전체 설계: `docs/기획서.md`(v0.15)
-Phase 0 결과: 아티클 1편(content/published/), 이론 카드 5장. 데이터는 Supabase 공유 DB에 재수집으로 구축한다(git에 데이터 없음). **시작은 docs/phase1-plan.md 0단계부터.**
+외부 AI·조직문화 콘텐츠(논문·컨설팅 리포트·저널·기업 자료·뉴스)를 자동 수집해 **claim(검증 가능한 주장) 단위**로 분해하고, 확립된 조직 이론과 SK 내부 자료(A등급 공개 자료)를 결합해 **다중 출처 교차 기반 인사이트 아티클을 주 1편** 만드는 반자동 파이프라인. Claude Code가 개발·실행을 담당하고, 사람은 방향 선택과 최종 승인만 맡는다.
 
-## 시작하기
+**현재 상태 (2026-09-03)**: Phase 1(데이터 기반 완성) — 소스 카탈로그 확정(47건), Supabase 공유 DB + GitHub Actions 일일 수집 가동 중(문서 22,000+건), 이론 카드 30장, 내부 자료 등록 완료. claim 추출(enrich)은 API 크레딧 충전 대기로 일시 정지(`enrich_enabled: false`).
+
+## 문서는 3개가 전부다
+
+| 문서 | 역할 | 위치 |
+|---|---|---|
+| **기획서** | 설계와 결정 — 무엇을·왜 | `docs/기획서.md` |
+| **실행계획·분업안** | 지금 무엇을 누가 — 체크박스가 현황판 | `docs/phase1-plan.md` |
+| **저장소** | 어떻게 — 코드·운영 규칙(`CLAUDE.md`)·지시문(`prompts/`) | 이 저장소 |
+
+파생 뷰: `docs/소스_카탈로그.md` (확정본은 `config/sources.yaml`, `make sources-doc`로 재생성 — md 직접 수정 금지).
+
+## 아키텍처
+
+```
+GitHub Actions (매일 06:00 KST) ──collect──▶ Supabase PostgreSQL ◀── PC A / PC B (Claude Code로 작업)
+   rss → api → html 순 수집, 일일 잠금,          documents · claims · internal_docs · articles
+   무유입 경보(7일) → 이슈 자동 생성
+```
+
+- **수집 경로** (기획서 4.2): API(arXiv·OSF, 소급 가능) → RSS → HTML 목록 수집(A-PDF 포함) → 브라우저 보조(`/browse-collect`, Claude in Chrome — 사람이 실행하는 월간 라운드) → 유료 소스는 구독 세션에서 건별 선별 → 수기(`/ingest-url`, `/ingest-file`). 뉴스레터 인박스 경로는 폐기(2026-09-02).
+- **품질 게이트**: 관련성 판별(경량 모델) → 본문 길이 임계(800자 미만 `summary_only`, API 초록형 면제) → claim 추출(지침 v2, `prompts/claim_extraction.md`) → 아티클 검증(실사용 claim 기준 출처 3곳+·상반 stance·40% 룰·수치 대조).
+- **내부 자료**: A등급(공개 가능)만 등록. `internal/`의 텍스트는 아티클 생성 시 외부 API로 전송된다 — 전송돼도 되는 내용만. C등급은 색인 거부, B 표기는 전송 자동 제외(안전벨트).
+- **비밀값**: `DATABASE_URL`, `ANTHROPIC_API_KEY`는 각 PC 환경변수 + GitHub Secrets에만. 어떤 파일에도 쓰지 않는다.
+
+## 시작하기 (새 팀원)
 
 ```bash
-# 의존성 (uv 권장, pip도 가능)
-uv sync                # 또는: pip install feedparser trafilatura httpx pyyaml anthropic pytest
-
-make init              # DB 초기화
-make test              # 동작 확인 (네트워크 불필요)
+git clone <저장소>
+uv sync                          # 또는 pip install -r ...
+export DATABASE_URL=...          # Supabase 연결 문자열 (없으면 SQLite 로컬 모드 — 테스트용)
+export ANTHROPIC_API_KEY=...
+make test                        # 네트워크 없이 76건
+make init                        # 스키마 확인
+claude                           # Claude Code 실행 후 /status
 ```
 
-## Phase 0 체크리스트 (기획서 부록 A 대응)
+## 일상 운영 명령
 
-| # | 작업 | 방법 | 상태 |
-|---|---|---|---|
-| 1 | 보안 검토 요청서 제출 | `docs/보안검토요청서_초안.md`를 사내 양식에 이관 후 제출 (**첫 주 내**) | ☐ 사람 |
-| 2 | 유료 구독 계약 | HBR·MIT SMR·DBR 구독 + 뉴스레터 수집용 전용 메일 계정 생성 | ☐ 사람 |
-| 3 | 소스 10개 등록·검증 | `config/sources.yaml` 확인 → `make validate` → 실패 URL 수정 | ☐ |
-| 4 | 최근 3개월 수집 | `make collect` (빠른 확인은 `make collect-fast`) → `make stats` | ☐ |
-| 5 | claim 추출 + 스팟체크 | `export ANTHROPIC_API_KEY=...` → `make enrich` → `eval/claim_spotcheck.md` 절차 | ☐ |
-| 6 | 내부 자료 등록 | A등급 3건을 `internal/*/`에 템플릿 형식으로 저장 → `make sync`. B등급 후보는 `internal/B등급_투입후보목록.md`에 목록만 | ☐ |
-| 6-1 | 이론 카드 5장 (★표시) | Claude Code에서 `/add-theory <이론명>` → 초안 검수 → status: reviewed → `make theories` | ☐ |
-| 7 | 아티클 1편 수동 제작 | Claude Code에서 `/draft <주제>` — 증거수집→앵글→초안→검증을 단계별 확인하며 진행 | ☐ |
-| 8 | 루브릭 채점·보고 | `eval/rubric.md` 8항목 채점 → 의사결정 회의 제출 | ☐ |
-
-## Claude Code 슬래시 커맨드
-
-| 커맨드 | 용도 |
+| 명령 | 역할 |
 |---|---|
-| `/collect` | 소스 검증 + 수집 + 결과 보고 |
-| `/ingest-url <URL>` | 발견한 자료 수기 등록 (티어 자동 판단) |
-| `/sync-internal` | 내부 자료 재색인 (C등급 자동 거부) |
-| `/add-theory <이론명>` | 이론 카드 초안 생성 → 사람 검수 후 색인 (draft는 색인 거부) |
-| `/draft <주제>` | Phase 0 수동 아티클 제작 절차 (단계별 확인) |
-| `/publish <slug>` | 승인 체크리스트 + 승인/반려 처리 |
-| `/status` | 현황 요약 (교대 인수인계용) |
+| `make validate` | 전 소스 접속 검증 (API 질의 / RSS 4단계 / HTML 목록 링크 수) — PC·Actions 양쪽에서 |
+| `make collect` | rss+api+html 통합 수집 (하루 1회 잠금, 우회 `--force`) |
+| `make enrich` | 관련성 게이트 + claim 추출 (`enrich_enabled` 확인) |
+| `make theories` / `make sync` | 이론 카드(reviewed만) / 내부 자료 색인 |
+| `make sources-doc` | 소스 카탈로그 md 재생성 |
+| `make stats` | 현황 집계 |
 
-## 보안 관련 동작 (기획서 4.1)
+Claude Code 슬래시 커맨드: `/collect` `/ingest-url` `/add-theory` `/sync-internal` `/draft` `/publish` `/status` (+ 예정: `/ingest-file`, `/browse-collect`). 각 커맨드는 `.claude/commands/`의 한국어 절차서다.
 
-- `security: C` 파일은 색인 코드가 **본문을 읽지 않고 거부**합니다.
-- `security: B` 파일은 색인되지만, `config/settings.yaml`의 `b_grade_api_approved: false`(기본값)인 동안
-  **외부 API 전송 대상에서 자동 제외**됩니다. 보안 검토 승인 후에만 플래그를 변경하고,
-  커밋 메시지에 승인 근거(문서번호)를 남깁니다.
-- `data/`와 `internal/` 본문은 `.gitignore`로 버전관리에서 제외됩니다.
+## 소스 카탈로그 (47건 active)
 
-## 디렉토리
+T1 실증 연구 · T2 컨설팅/싱크탱크 · T3 저널 · T4 기업 1차 자료 · T5 뉴스(신호 감지 전용, 단독 근거 금지) · TC 이론 카드. 수집 유형: API 5 · RSS 27 · HTML 7 · 브라우저 8. 신규 편입 소스는 1개월 시험 운영 후 월간 성과 리뷰에서 재판정(추가=합의+검증+시험 / 제거=6개월 무인용 / 장애=수리→브라우저 전환→제외). 상세는 `docs/소스_카탈로그.md`.
+
+## 협업 규칙 (2인)
+
+- 주 단위 당번 교대. 당번은 운영(수집 점검·스팟체크·`/draft`·`/publish`), 비당번은 콘텐츠(이론 카드·내부 요지·문서). 어느 PC에서든 가능.
+- 작업 시작 시 "최신 내용 받아줘", 끝낼 때 "커밋하고 푸시해줘" — Claude Code에 말로.
+- 영역 분리: `src/` `migrations/` `.github/`는 인프라 담당, `knowledge/` `internal/` `prompts/` `docs/`는 콘텐츠 담당. 같은 파일을 동시에 만지지 않는다.
+
+## 폴더
 
 ```
-.claude/commands/   운영 인터페이스 (슬래시 커맨드)
-config/             sources.yaml(소스 카탈로그) · settings.yaml(승인 플래그·모델)
-migrations/         DB 스키마 (번호 순 SQL)
-knowledge/theories/ 전통 HR·조직 이론 카드 (정전 지식베이스 — 기획서 3.5)
-prompts/            claim 추출 프롬프트 · 금지 상투구 목록
-src/                collectors(rss·validate·ingest) · enrich(claim 추출) · internal_sync · stats
-internal/           내부 자료 (템플릿 + B등급 후보 목록)
-content/            파이프라인 산출물 (topics/evidence/angles/drafts/published/rejected)
-eval/               품질 루브릭 · 스팟체크 절차
-docs/               보안 검토 요청서 초안 (+ 기획서 사본 배치 권장)
+config/       sources.yaml(소스 확정본) · settings.yaml(모델·플래그)
+src/          collectors/(rss·api·html_list·store·validate) · enrich/ · db.py · collect.py
+prompts/      claim_extraction.md(v2) · relevance_gate.md · 작성 지침
+knowledge/    theories/ 이론 카드 30장 (reviewed만 색인)
+internal/     A등급 내부 자료 (git 제외, 템플릿·요지 목록만 추적)
+content/      topics · evidence · angles · drafts · published · reports
+docs/         기획서 · phase1-plan · 소스_카탈로그(파생)
+eval/         루브릭 · 스팟체크 기록 · Phase 0 결과
+tests/        76건
 ```
