@@ -9,13 +9,14 @@
  * 동작:
  *  - 컨테이너(기본 "article") 안의 p·h2·h3·h4·li·blockquote를 문서 순서대로 수집.
  *    소제목(h2~h4)은 "## ", 목록 항목(li)은 "- ", 인용 블록(blockquote)은 "> " 접두.
+ *  - p·h 구조가 없는 사이트(<br> 구분 본문 — 국내 사이트에 흔함)는 br 폴백으로 문단 분리.
  *  - 비본문 블록(저자 소개·관련 기사·공유 버튼·구독 유도 등)은 exclude 선택자로 제외.
  *  - 원문 텍스트는 변형하지 않는다(공백 정규화만) — 요약·재구성 금지(절대 규칙 8).
  *  - YAML 머리말(source_id·url·title·published·fetched_at·fetched_by·license_note)을
  *    붙여 "<source_id>_<발행일>_<슬러그>.md"로 다운로드한다.
- *    (참고: 인앱 브라우저에서는 다운로드가 GUID 이름의 .tmp로 떨어질 수 있음 —
- *     반환되는 stats.filename·bytesApprox로 파일을 식별해 개명한다.)
- *  - 반환값: { filename, published, blocks: {p,h,li,blockquote}, chars, bytesApprox }
+ *    (참고: 인앱 브라우저에서는 다운로드가 완료 전 GUID 이름의 .tmp로 보일 수 있음 —
+ *     완료를 기다린 뒤 반환되는 stats.filename·bytesApprox로 파일을 식별한다.)
+ *  - 반환값: { filename, published, mode, blocks: {p,h,li,blockquote}, chars, bytesApprox }
  */
 function extractArticle(opts = {}) {
   const container = opts.container || "article";
@@ -58,6 +59,24 @@ function extractArticle(opts = {}) {
     else { text = norm(el.textContent); prefix = "## "; blocks.h += text ? 1 : 0; }
     if (text) lines.push(prefix + text);
   }
+
+  // br 폴백: 제외 요소 제거 후 연속 br·블록 경계를 문단 구분으로,
+  // 단일 br(문단 내 줄바꿈)은 공백으로 처리한다.
+  let mode = "blocks";
+  if (!lines.length) {
+    mode = "br-fallback";
+    const SEP = "\u0001";  // 문단 경계 마커 (본문에 나올 수 없는 제어문자)
+    const clone = root.cloneNode(true);
+    if (exclSel) clone.querySelectorAll(exclSel).forEach((n) => n.remove());
+    clone.querySelectorAll("script,style,noscript").forEach((n) => n.remove());
+    clone.querySelectorAll("br").forEach((n) => n.replaceWith(SEP));
+    for (const el of clone.querySelectorAll(
+      "div,section,table,tr,ul,ol,li,h1,h2,h3,h4,h5,h6,p,blockquote")) el.append(SEP + SEP);
+    for (const seg of clone.textContent.split(/\u0001{2,}/)) {
+      const t = norm(seg.replace(/\u0001/g, " "));
+      if (t) { lines.push(t); blocks.p += 1; }
+    }
+  }
   if (!lines.length) throw new Error("본문 블록이 비어 있음 — container/exclude 확인 필요");
 
   // 발행일: meta → time → ld+json 순 (Wharton은 ld+json에만 있음)
@@ -80,7 +99,8 @@ function extractArticle(opts = {}) {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   const title = norm((ogTitle && ogTitle.content) || document.title);
   const slug = (() => {
-    const seg = (location.pathname.split("/").filter(Boolean).pop() || "")
+    // URL 끝 세그먼트가 무의미한 사이트(DBR의 /ac/m_best 등)는 opts.slug로 지정
+    const seg = opts.slug || (location.pathname.split("/").filter(Boolean).pop() || "")
       .replace(/\.[a-z0-9]+$/i, "");  // .html 등 확장자 제거
     const s = (seg || title.toLowerCase()).toLowerCase()
       .replace(/[^a-z0-9가-힣-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
@@ -113,5 +133,5 @@ function extractArticle(opts = {}) {
   a.remove();
 
   const chars = lines.join("\n\n").length;
-  return { filename, published, blocks, chars, bytesApprox: new TextEncoder().encode(md).length };
+  return { filename, published, mode, blocks, chars, bytesApprox: new TextEncoder().encode(md).length };
 }

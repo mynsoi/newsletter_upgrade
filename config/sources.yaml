@@ -223,6 +223,7 @@ sources:
   name: Deloitte Insights
   tier: T2
   type: browse
+  browse_mode: list
   role: T2 컨설팅 — 인적자본 리서치 (NL 경로)
   description: 딜로이트 리서치. Human Capital Trends 연례 조사가 대표 자산.
   topics: 인재 육성 · 조직 문화 — 인적자본 대규모 설문
@@ -259,6 +260,7 @@ sources:
   name: BCG Publications
   tier: T2
   type: browse
+  browse_mode: list
   role: T2 컨설팅 — 조직 전략 리포트 (NL 경로)
   description: BCG 리서치. 조직 전략·AI 전환 조사. AI at Work 시리즈.
   topics: 조직 설계 · AI 리터러시 — 조직 전환 조사
@@ -316,6 +318,7 @@ sources:
   name: PwC 글로벌 Insights
   tier: T2
   type: browse
+  browse_mode: list
   role: T2 컨설팅 — 글로벌 워크포스 조사 (NL 경로)
   description: PwC 글로벌. Workforce Hopes and Fears 등 대규모 워크포스 조사, Responsible AI.
   topics: 인재 육성 · AI 거버넌스 — 글로벌 워크포스 설문
@@ -358,6 +361,7 @@ sources:
   name: 삼정KPMG 경제연구원
   tier: T2
   type: browse
+  browse_mode: list
   role: T2 국내 — 경제연구원 이슈리포트 (PDF 수기 등록)
   description: 삼정KPMG 경제연구원 이슈리포트. 국내 산업·경제 동향.
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 이슈
@@ -391,6 +395,7 @@ sources:
   name: LG경영연구원
   tier: T2
   type: browse
+  browse_mode: list
   role: T2 국내 — 경영 환경·노동 시장 분석 (POSRI 대신 선별)
   description: 국내 경영연구원. 경영 환경·노동시장 분석 국문 리포트.
   topics: 일하는 방식 · 조직 문화 — 한국 맥락의 경영 환경 분석
@@ -451,6 +456,7 @@ sources:
   name: DBR(동아비즈니스리뷰)
   tier: T3
   type: browse
+  browse_mode: item  # 유료 — 건별 선별만, 목록 순회 금지
   role: T3 국내 저널 — 국내 기업 사례·경영 해설 (구독 계약 중)
   description: 동아비즈니스리뷰. 국내 대표 경영 저널, 국내 기업 사례 풍부. 유료.
   topics: 리더십 · 조직 설계 · 조직 문화 — 국내 기업 사례·경영 해설 (광역)
@@ -461,13 +467,24 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://dbr.donga.com
   lang: ko
+  browse_container: .article-free-zone
+  browse_exclude:  # 본문이 p 없이 <br> 구분 텍스트 → extract_article.js br 폴백 사용
+    - .relate_article
+    - .fix-func-list
+    - nav
+    - aside
+    - footer
+    - figcaption
+    - form
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://dbr.donga.com/index.xml → 파싱은 되나 항목 0건) / 유료 — 구독
-    세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성'
+    세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성 / 2026-09-01 browse 선택자 실측 — 로그인
+    세션에서 기사 1건 등재(br 폴백), 내부 저장 범위 확인 중(license_note 기재)'
 - id: hr-insight
   name: HR Insight
   tier: T3
   type: browse
+  browse_mode: item  # 유료 — 건별 선별만, 목록 순회 금지
   role: T3 국내 — HR 실무 심층 기사 (구독 계약 중)
   description: 국내 HR 전문 월간지. HR 실무 심층 기사·제도 사례.
   topics: 평가·보상 · 인재 육성 · 채용 — 국내 HR 제도·실무
@@ -690,6 +707,7 @@ sources:
   name: LinkedIn Talent Blog
   tier: T4
   type: browse
+  browse_mode: list  # 단, robots 전면 Disallow — 월간 라운드는 선별적으로(note 참조)
   role: T4 기업 — 채용·인재 시장 데이터 (Atlassian 대신 선별)
   description: LinkedIn 인재 데이터 기반 채용·스킬 트렌드. Global Talent Trends.
   topics: 채용 · 인재 육성 — 인재 시장 데이터
