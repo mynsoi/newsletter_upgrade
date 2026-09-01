@@ -21,13 +21,51 @@ from __future__ import annotations
 import argparse
 import socket
 import sys
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import begin_collection, connect, finish_collection, migrate  # noqa: E402
+from db import ROOT, begin_collection, connect, finish_collection, migrate  # noqa: E402
 import collectors.rss as rss  # noqa: E402
 import collectors.api as api  # noqa: E402
+import collectors.html_list as html  # noqa: E402
+
+AUTO_TYPES = ("api", "rss", "html")  # 자동 수집 유형 — 무유입 경보 대상
+
+
+def inflow_alerts(conn, sources: list[dict]) -> list[str]:
+    """소스별 최근 유입일 점검 — HTML 파서가 조용히 깨지는 것을 잡는 필수 장치.
+
+    대상: active + 자동 수집 유형(api/rss/html) + inflow_alert != false.
+    기준: inflow_alert_days(기본 7일) 초과 무유입, 또는 유입 기록 자체가 없음.
+    """
+    last_by_src: dict[str, datetime] = {}
+    for r in conn.execute(
+            "SELECT source_id, MAX(collected_at) AS last FROM documents GROUP BY source_id"):
+        v = r["last"]
+        if isinstance(v, str):  # SQLite는 문자열
+            v = datetime.fromisoformat(v.split(".")[0].replace("T", " ").strip())
+        if v is not None and v.tzinfo is None:
+            v = v.replace(tzinfo=timezone.utc)
+        last_by_src[r["source_id"]] = v
+
+    now = datetime.now(timezone.utc)
+    alerts = []
+    for s in sources:
+        if s.get("status") != "active" or s.get("type") not in AUTO_TYPES:
+            continue
+        if s.get("inflow_alert") is False:
+            continue
+        limit_days = int(s.get("inflow_alert_days", 7))
+        last = last_by_src.get(s["id"])
+        if last is None:
+            alerts.append(f"[무유입 경보] {s['id']} — 유입 기록 없음 (기준 {limit_days}일)")
+        elif now - last > timedelta(days=limit_days):
+            days = (now - last).days
+            alerts.append(f"[무유입 경보] {s['id']} — {days}일째 신규 유입 없음 (기준 {limit_days}일)")
+    return alerts
 
 
 def run(source_ids: list[str] | None = None, *, fetch_full: bool = True,
@@ -54,8 +92,9 @@ def run(source_ids: list[str] | None = None, *, fetch_full: bool = True,
         # force=True: 오케스트레이터가 이미 daily lock 을 선점 → 워커는 재확인 생략
         r = rss.run(source_ids, fetch_full=fetch_full, force=True) or {"targets": 0, "failed": 0}
         a = api.run(source_ids, backfill=backfill, force=True) or {"targets": 0, "failed": 0}
-        targets = r["targets"] + a["targets"]
-        failed = r["failed"] + a["failed"]
+        h = html.run(source_ids, force=True) or {"targets": 0, "failed": 0}
+        targets = r["targets"] + a["targets"] + h["targets"]
+        failed = r["failed"] + a["failed"] + h["failed"]
         # 과반 실패 = 인프라 문제(네트워크·DB 등) 가능성 — failed 로 남겨 자동 재시도.
         # (첫 관문 실측에서 31/32 실패가 '전량 아님'으로 completed 처리된 사례 반영해
         #  전량 기준 → 과반 기준으로 강화, 2026-08-31)
@@ -72,6 +111,14 @@ def run(source_ids: list[str] | None = None, *, fetch_full: bool = True,
     finally:
         conn = connect()
         finish_collection(conn, ok=ok)
+        # 매일 실행 끝에 소스별 최근 유입일 점검 (7일 연속 무유입 경보)
+        try:
+            src_cfg = yaml.safe_load(
+                (ROOT / "config" / "sources.yaml").read_text(encoding="utf-8")).get("sources", [])
+            for line in inflow_alerts(conn, src_cfg):
+                print(line)
+        except Exception as e:  # noqa: BLE001 — 경보 실패가 수집 결과를 바꾸지 않도록
+            print(f"[경보 점검 실패] {type(e).__name__}: {e}")
         conn.close()
         print(f"수집 {'완료' if ok else '실패'}로 기록됨 (collection_runs {today})")
     return 0 if ok else 1

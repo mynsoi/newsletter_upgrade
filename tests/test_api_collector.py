@@ -213,6 +213,18 @@ def test_select_target_docs_excludes_summary_only(test_db):
     assert [d["id"] for d in docs] == ["D0"]  # summary_only=1 제외
 
 
+def test_enrich_disabled_flag_skips_cleanly(test_db, tmp_path, monkeypatch):
+    """enrich_enabled: false면 API 호출 없이 정상 종료(0) — 크레딧 대기 중 안전장치."""
+    import enrich.extract_claims as ec
+    settings = tmp_path / "settings.yaml"
+    settings.write_text("enrich_enabled: false\n", encoding="utf-8")
+    monkeypatch.setattr(ec, "SETTINGS_PATH", settings)
+    monkeypatch.setattr(ec, "call_model",
+                        lambda *a: (_ for _ in ()).throw(AssertionError("호출되면 안 됨")))
+    monkeypatch.setattr(sys, "argv", ["extract_claims.py"])
+    assert ec.main() == 0
+
+
 def test_check_relevance_parses_verdict(monkeypatch):
     import enrich.extract_claims as ec
     monkeypatch.setattr(ec, "call_model", lambda prompt, model: "IRRELEVANT")

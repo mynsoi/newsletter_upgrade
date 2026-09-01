@@ -238,6 +238,38 @@ def test_manual_skipped_untouched():
     assert mark == "SKIP" and s == {"id": "leadership-msg", "type": "manual"}
 
 
+def test_browse_skipped_untouched():
+    s = {"id": "deloitte", "type": "browse", "homepage": "https://x.com"}
+    mark, msg = vs.validate_source(s, FakeClient())
+    assert mark == "SKIP" and "브라우저" in msg and s["type"] == "browse"
+
+
+HTML_LIST = ('<a href="/news/a-one">1</a><a href="/news/b-two">2</a>'
+             '<a href="/news/c-three">3</a><a href="/news/d-four">4</a>')
+
+
+def test_html_source_checked_not_reassigned():
+    """type=html은 재배정 없이 목록 접속+링크 추출 기준으로 검사한다."""
+    client = FakeClient({"https://ex.com/news": FakeResponse(200, HTML_LIST)})
+    s = {"id": "hai", "type": "html", "list_url": "https://ex.com/news",
+         "link_pattern": r'href="(/news/[a-z\-]+)"'}
+    mark, msg = vs.validate_source(s, client)
+    assert mark == "OK" and "링크 4개" in msg
+    assert s["type"] == "html" and s["verified"] is True
+
+    # 링크 수 미달 → FAIL (파서 깨짐 신호)
+    client2 = FakeClient({"https://ex.com/news": FakeResponse(200, '<a href="/news/a-one">1</a>')})
+    s2 = {"id": "hai", "type": "html", "list_url": "https://ex.com/news",
+          "link_pattern": r'href="(/news/[a-z\-]+)"'}
+    mark2, msg2 = vs.validate_source(s2, client2)
+    assert mark2 == "FAIL" and "기준" in msg2 and s2["verified"] is False
+
+    # min_links로 기준 조정 가능
+    s3 = dict(s2, min_links=1)
+    mark3, _ = vs.validate_source(s3, client2)
+    assert mark3 == "OK"
+
+
 # ---------- main: 표 보고·유형별 집계·파일 갱신·종료 코드 ----------
 
 @pytest.fixture()
@@ -275,7 +307,7 @@ def test_main_table_summary_and_updates(sources_file, monkeypatch, capsys):
     assert "api        : 1/1 통과" in out
     assert "rss        : 1/1 통과" in out
     assert "수신 확인됨 0 / 구독 대기 2" in out
-    assert "manual     : 1건 SKIP" in out
+    assert "manual·browse : 1건 SKIP" in out
     assert "검증 결과: 2/2 통과" in out
 
     saved = {s["id"]: s for s in

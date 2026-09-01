@@ -8,3 +8,8 @@ b_grade_api_approved: false
 # claim 추출에 사용할 모델 (태깅·추출은 경량, 작성은 상위 모델 — 기획서 8장)
 enrich_model: claude-haiku-4-5-20251001
 write_model: claude-sonnet-4-6
+
+# claim 추출(게이트+추출 API 호출) 활성화 여부.
+# 2026-09-01 false — 크레딧 충전 대기. 충전 후 true로 변경하면 일일 스케줄과
+# 수동 make enrich가 재개된다 (false면 스킵하고 정상 종료 — 실패 이슈 안 뜸).
+enrich_enabled: false

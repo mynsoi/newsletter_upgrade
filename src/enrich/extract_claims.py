@@ -107,6 +107,10 @@ def main() -> int:
     from handoff import ensure_active
     ensure_active("claim 추출")
     settings = yaml.safe_load(SETTINGS_PATH.read_text(encoding="utf-8")) or {}
+    if settings.get("enrich_enabled", True) is False and not args.dry_run:
+        print("enrich_enabled: false — claim 추출 비활성화 상태(크레딧 대기). "
+              "config/settings.yaml에서 true로 변경 시 재개. 정상 종료.")
+        return 0
     model = settings.get("enrich_model", "claude-haiku-4-5-20251001")
 
     conn = connect()

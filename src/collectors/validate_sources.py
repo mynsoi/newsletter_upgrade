@@ -163,6 +163,40 @@ def check_api(source: dict, client: httpx.Client) -> tuple[bool, str]:
     return True, f"OK — JSON 응답, 항목 {n}건"
 
 
+def check_html(source: dict, client: httpx.Client) -> tuple[bool, str]:
+    """type=html 검사: 목록 페이지 접속 + link_pattern으로 링크 N개 이상 추출되는지."""
+    urls = source.get("list_url")
+    urls = [urls] if isinstance(urls, str) else list(urls or [])
+    pattern = source.get("link_pattern")
+    if not urls or not pattern:
+        return False, "list_url/link_pattern 미설정 — html 소스는 목록 URL·추출 규칙이 필요"
+    from collectors.html_list import extract_links  # noqa: PLC0415 — 순환 없음
+    from collectors.rss import fetch_via_curl  # noqa: PLC0415
+
+    total = 0
+    for url in urls:
+        text = None
+        try:
+            r = client.get(url, follow_redirects=True, timeout=20)
+            if r.status_code == 200:
+                text = r.text
+            else:
+                msg = f"HTTP {r.status_code}"
+        except httpx.HTTPError as e:
+            msg = f"{CONN_FAIL}: {type(e).__name__}"
+        if text is None and source.get("request_headers") is not None:
+            text = fetch_via_curl(url, source["request_headers"])
+            if text is not None:
+                msg = "curl 폴백 통과"
+        if text is None:
+            return False, f"목록 접속 실패 ({url} → {msg})"
+        total += len(extract_links(text, url, pattern, source.get("link_exclude")))
+    min_links = int(source.get("min_links", 3))
+    if total < min_links:
+        return False, f"목록 링크 {total}개 — 기준({min_links}개) 미달, 추출 규칙 점검 필요"
+    return True, f"OK — 목록 {len(urls)}쪽, 링크 {total}개 추출"
+
+
 def check_newsletter(source: dict) -> tuple[str, str]:
     """자동 검증 불가 — subscription_status만 정규화·보고한다."""
     status = source.get("subscription_status") or "구독 대기"
@@ -245,6 +279,14 @@ def validate_source(source: dict, client: httpx.Client) -> tuple[str, str]:
     old_type = source.get("type")
     if old_type == "manual":
         return "SKIP", "manual — 검증 대상 아님 (배정·검사 생략)"
+    if old_type == "browse":
+        return "SKIP", "browse — 월간 브라우저 라운드 (자동 검증 대상 아님)"
+    if old_type == "html":
+        # 명시적 배정 유형 — 재배정하지 않고 목록·추출 규칙만 검사
+        ok, msg = check_html(source, client)
+        source["verified"] = bool(ok)
+        set_auto_note(source, None if ok else f"html 검사 실패: {msg}")
+        return ("OK" if ok else "FAIL"), msg
 
     # 1순위: 공식 API (내장 목록 매칭, 또는 이미 api로 정의된 소스)
     rule = find_known_api(source)
@@ -305,7 +347,7 @@ def main() -> int:
     data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8"))
     sources = data.get("sources", [])
     rows: list[tuple[str, str, str, str]] = []
-    net = {"rss": [0, 0], "api": [0, 0]}  # type → [통과, 전체]
+    net = {"rss": [0, 0], "api": [0, 0], "html": [0, 0]}  # type → [통과, 전체]
     news = {s: 0 for s in NEWSLETTER_STATUSES}
     skipped = 0
     fail = 0
@@ -350,17 +392,17 @@ def main() -> int:
             print(f"  {sid}: {old} → {new}")
 
     print("\n유형별 집계:")
-    for stype in ("api", "rss"):
+    for stype in ("api", "rss", "html"):
         if net[stype][1]:
             print(f"  {stype:<10} : {net[stype][0]}/{net[stype][1]} 통과")
     if sum(news.values()):
         print(f"  newsletter : 수신 확인됨 {news['수신 확인됨']} / 구독 대기 {news['구독 대기']} (자동 검증 불가)")
     if skipped:
-        print(f"  manual     : {skipped}건 SKIP")
+        print(f"  manual·browse : {skipped}건 SKIP")
 
-    ok_count = net["rss"][0] + net["api"][0]
-    total = net["rss"][1] + net["api"][1]
-    print(f"\n검증 결과: {ok_count}/{total} 통과 (rss+api) — sources.yaml에 type·verified·note 기록 완료")
+    ok_count = net["rss"][0] + net["api"][0] + net["html"][0]
+    total = net["rss"][1] + net["api"][1] + net["html"][1]
+    print(f"\n검증 결과: {ok_count}/{total} 통과 (rss+api+html) — sources.yaml에 type·verified·note 기록 완료")
     if fail:
         print("실패 소스는 note의 [자동검증] 사유를 확인해 수정 후 재실행하거나 뉴스레터 경로로 전환하세요.")
     return 0 if fail == 0 else 1

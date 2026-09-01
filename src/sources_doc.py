@@ -20,8 +20,9 @@ DOC_PATH = ROOT / "docs" / "소스_카탈로그.md"
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-TYPE_ORDER = {"api": 0, "rss": 1, "newsletter": 2, "manual": 3}
-TYPE_WORD = {"api": "API", "rss": "RSS", "newsletter": "뉴스레터", "manual": "수기"}
+TYPE_ORDER = {"api": 0, "rss": 1, "html": 2, "newsletter": 3, "browse": 4, "manual": 5}
+TYPE_WORD = {"api": "API", "rss": "RSS", "html": "HTML", "newsletter": "뉴스레터",
+             "browse": "브라우저", "manual": "수기"}
 TIER_TITLES = {
     "T1": "실증 연구·데이터 — 수치 근거 (가장 믿을 만함)",
     "T2": "컨설팅·리서치·싱크탱크 — 분석 틀·프레임워크",
@@ -36,8 +37,12 @@ def collect_path(s: dict) -> str:
     t = s["type"]
     if t in ("api", "rss"):
         return f"{TYPE_WORD[t]} · 상시 자동 (Actions 매일 06:00)"
+    if t == "html":
+        return "HTML 목록 · 상시 자동 (Actions 매일 06:00)"
     if t == "newsletter":
         return f"뉴스레터 · {s.get('subscription_status', '구독 대기')} → A4 구축 후 자동"
+    if t == "browse":
+        return "브라우저 · 월간 수동 라운드 (자동화 부적합)"
     return "수기 · 수기 등록 (/ingest-url · /ingest-file)"
 
 
@@ -55,7 +60,10 @@ def constraints_full(s: dict) -> str:
 
 
 def card_url(s: dict) -> str | None:
-    return s.get("feed_url") or s.get("endpoint") or s.get("homepage")
+    lu = s.get("list_url")
+    if isinstance(lu, list):
+        lu = lu[0] if lu else None
+    return s.get("feed_url") or lu or s.get("endpoint") or s.get("homepage")
 
 
 def render(sources: list[dict]) -> str:
@@ -69,8 +77,8 @@ def render(sources: list[dict]) -> str:
 
     tier_counts = " · ".join(f"{t} {len(by_tier.get(t, []))}" for t in sorted(by_tier))
     type_counts = {t: sum(1 for s in active if s["type"] == t) for t in TYPE_ORDER}
-    type_line = (f"API {type_counts['api']} · RSS {type_counts['rss']} · "
-                 f"뉴스레터 {type_counts['newsletter']} · 수기 {type_counts['manual']}")
+    type_line = " · ".join(f"{TYPE_WORD[t]} {type_counts[t]}"
+                           for t in TYPE_ORDER if type_counts[t])
 
     L: list[str] = []
     L.append("# 소스 카탈로그 (사람용 뷰)")

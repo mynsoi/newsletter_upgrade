@@ -127,7 +127,7 @@ def test_collection_date_uses_kst_not_runner_timezone(test_db, monkeypatch):
 @pytest.fixture()
 def spy_workers(monkeypatch):
     import collectors.collect as collect
-    calls = {"rss": [], "api": []}
+    calls = {"rss": [], "api": [], "html": []}
     # 실제 워커와 동일하게 {"targets", "failed"} 집계를 반환한다
     monkeypatch.setattr(collect.rss, "run",
                         lambda *a, **k: (calls["rss"].append(k),
@@ -135,15 +135,19 @@ def spy_workers(monkeypatch):
     monkeypatch.setattr(collect.api, "run",
                         lambda *a, **k: (calls["api"].append(k),
                                          {"targets": 1, "failed": 0})[1])
+    monkeypatch.setattr(collect.html, "run",
+                        lambda *a, **k: (calls["html"].append(k),
+                                         {"targets": 1, "failed": 0})[1])
     return collect, calls
 
 
 def test_orchestrator_runs_both_once_then_noop(test_db, spy_workers):
     collect, calls = spy_workers
     assert collect.run() == 0
-    assert len(calls["rss"]) == 1 and len(calls["api"]) == 1
+    assert len(calls["rss"]) == 1 and len(calls["api"]) == 1 and len(calls["html"]) == 1
     assert calls["rss"][0].get("force") is True  # 워커에 내부 신호 전달
     assert calls["api"][0].get("force") is True
+    assert calls["html"][0].get("force") is True
 
     conn, db = test_db
     assert conn.execute("SELECT status FROM collection_runs").fetchone()["status"] == "completed"
@@ -356,6 +360,12 @@ def _run_enrich(monkeypatch, model_output="[]"):
     import enrich.extract_claims as ec
     monkeypatch.setattr(sys, "argv", ["extract_claims"])
     monkeypatch.setattr(ec, "check_relevance", lambda *a, **k: True)
+
+    class _FakeSettings:  # 실제 config의 enrich_enabled: false와 무관하게 테스트는 활성 상태로
+        def read_text(self, encoding=None):
+            return "enrich_enabled: true\nenrich_model: test-model\n"
+
+    monkeypatch.setattr(ec, "SETTINGS_PATH", _FakeSettings())
     if isinstance(model_output, Exception):
         def call(*a, **k):
             raise model_output

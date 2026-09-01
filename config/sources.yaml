@@ -95,24 +95,25 @@ sources:
   homepage: https://www.nber.org
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 주간 다량 — 키워드 필터 전제. PC 403·Actions 통과(2026-08-27) — 수집 주체 Actions
 - id: ssrn
   name: SSRN
   tier: T1
   type: newsletter
-  role: T1 실증 — 경영·조직 프리프린트 (eJournal 메일 알림)
   description: 경영·사회과학 프리프린트의 본산. arXiv에 없는 경영학·조직행동 연구가 여기 산다.
   topics: 리더십 · 조직 설계 · 평가·보상 · 조직 문화 — 경영학 연구 광역
   frequency: 주 (알림)
   constraints: 공개 RSS·API 없음 → eJournal 메일 알림 구독. 뉴스레터 수집기(A4) 구축 후 활성
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://www.ssrn.com
   lang: en
-  subscription_status: 구독 대기
   note: '메일 알림(NL) 방식 전제 — 경영·조직 프리프린트, eJournal 알림 구독 / [자동검증 2026-08-27] API·RSS
-    미발견: RSS 미발견 (시도 6건, 마지막: https://www.ssrn.com/index.xml → HTTP 403)'
+    미발견: RSS 미발견 (시도 6건, 마지막: https://www.ssrn.com/index.xml → HTTP 403) / 뉴스레터 경로
+    폐기 — 대체 소스로 커버(α4 후속)'
+  excluded_at: '2026-09-02'
 - id: psyarxiv
   name: PsyArXiv (OSF Preprints)
   tier: T1
@@ -130,11 +131,12 @@ sources:
   homepage: https://osf.io/preprints/psyarxiv
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 조직심리 프리프린트 — OSF API 우선 확인. 2026-08-27 OSF API 응답 실측 정상(JSON, 3건)
 - id: stanford-hai
   name: Stanford HAI
   tier: T1
-  type: newsletter
+  type: html
   role: T1 데이터 — 연간 AI Index 핵심 지표
   description: 스탠퍼드 인간중심 AI 연구소. 연 1회 AI Index 리포트(글로벌 AI 지표 총람)가 핵심 자산.
   topics: AI 거버넌스 · AI 리터러시 — AI 도입·투자·정책의 연간 정량 지표
@@ -143,16 +145,19 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url: https://hai.stanford.edu/news
+  link_pattern: href="(/news/[a-z0-9\-]+)"
   homepage: https://hai.stanford.edu
   lang: en
-  subscription_status: 구독 대기
+  allow_feed_discovery: false
+  inflow_alert_days: 35
   note: 'NL — 연간 AI Index 핵심. 2026-08-27 확인 — rss.xml 404, RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://hai.stanford.edu/index.xml → RSS/Atom
-    파싱 실패 (피드 형식 아님))'
+    파싱 실패 (피드 형식 아님)) / 2026-09-01 probe A(정적·전 방식 200·본문 HTML) → html 전환'
 - id: brookings-future-of-work
   name: Brookings (Future of Work)
   tier: T1
-  type: newsletter
+  type: html
   role: T1 거버넌스 — 일의 미래 정책 연구
   description: 미국 싱크탱크. 일의 미래·자동화·노동정책 연구.
   topics: AI 거버넌스 · 채용 — 정책 관점의 고용 영향
@@ -161,16 +166,19 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url: https://www.brookings.edu/topics/workforce-development/
+  link_pattern: href="(https://www\.brookings\.edu/articles/[^"]+)"
   homepage: https://www.brookings.edu
   lang: en
-  subscription_status: 구독 대기
+  allow_feed_discovery: false
+  inflow_alert_days: 14
   note: '거버넌스 축. 2026-08-27 확인 — /feed·토픽 feed 모두 HTML 반환, 구 webfeeds 도메인 소멸(RSS 폐지)
     → NL 경로 / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.brookings.edu/index.xml
-    → HTTP 404)'
+    → HTTP 404) / 2026-09-01 probe A(정적·본문 HTML 게이트 없음) → html 전환'
 - id: oecd-employment-ai
   name: OECD (고용·AI)
   tier: T1
-  type: newsletter
+  type: html
   role: T1 거버넌스 — 고용·AI 국제 정책 지표
   description: OECD 고용·AI 정책 리포트. 국제 비교 지표와 권고.
   topics: AI 거버넌스 · 채용 — 국가 간 비교 통계·정책 권고
@@ -179,11 +187,22 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url:
+  - https://www.oecd.org/en/topics/employment.html
+  - https://www.oecd.org/en/topics/artificial-intelligence.html
+  link_pattern: href="((?:https://www\.oecd\.org)?/en/(?:publications|blogs|data/insights)/[^"]+\.html)"
   homepage: https://www.oecd.org
   lang: en
-  subscription_status: 구독 대기
+  allow_feed_discovery: false
+  inflow_alert_days: 35
+  request_headers: &id001
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+      like Gecko) Chrome/128.0 Safari/537.36
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    Accept-Language: en-US,en;q=0.9
   note: '거버넌스 축 / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.oecd.org/index.xml
-    → HTTP 403)'
+    → HTTP 403) / 2026-09-01 probe A-PDF(httpx 403·curl 200 — 지문 차단) → html 전환, curl
+    폴백 전제'
 - id: mckinsey-insights
   name: McKinsey Insights
   tier: T2
@@ -197,11 +216,12 @@ sources:
   feed_url: https://www.mckinsey.com/insights/rss
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 현행(본문 미확보) — 기존 feed_url 유지, NL로 전문 보완 필수
 - id: deloitte-insights
   name: Deloitte Insights
   tier: T2
-  type: newsletter
+  type: browse
   role: T2 컨설팅 — 인적자본 리서치 (NL 경로)
   description: 딜로이트 리서치. Human Capital Trends 연례 조사가 대표 자산.
   topics: 인재 육성 · 조직 문화 — 인적자본 대규모 설문
@@ -210,13 +230,13 @@ sources:
   status: active
   homepage: https://www2.deloitte.com/us/en/insights.html
   lang: en
-  subscription_status: 구독 대기
   note: '2026-08-24 검증 실패(HTTP 404), 공개 RSS 폐지로 판단 — NL 전환 / [자동검증 2026-08-27] API·RSS
-    미발견: RSS 미발견 (시도 6건, 마지막: https://www2.deloitte.com/index.xml → HTTP 404)'
+    미발견: RSS 미발견 (시도 6건, 마지막: https://www2.deloitte.com/index.xml → HTTP 404) / 2026-09-01
+    probe B — 목록 JS 렌더(정적 HTML에 글 카드 없음) → 월간 브라우저 라운드'
 - id: bcg-publications
   name: BCG Publications
   tier: T2
-  type: newsletter
+  type: browse
   role: T2 컨설팅 — 조직 전략 리포트 (NL 경로)
   description: BCG 리서치. 조직 전략·AI 전환 조사. AI at Work 시리즈.
   topics: 조직 설계 · AI 리터러시 — 조직 전환 조사
@@ -225,9 +245,9 @@ sources:
   status: active
   homepage: https://www.bcg.com
   lang: en
-  subscription_status: 구독 대기
   note: '2026-08-24 검증 실패(HTTP 403, 봇 차단 추정) — NL 전환 / [자동검증 2026-08-27] API·RSS 미발견:
-    RSS 미발견 (시도 6건, 마지막: https://www.bcg.com/index.xml → HTTP 404)'
+    RSS 미발견 (시도 6건, 마지막: https://www.bcg.com/index.xml → HTTP 404) / 2026-09-01 probe
+    B — 목록 JS 렌더 + 브라우저형 요청만 403(봇 UA 200)인 특이 차단 → 월간 브라우저 라운드'
 - id: knowledge-wharton
   name: Knowledge at Wharton
   tier: T2
@@ -243,6 +263,7 @@ sources:
   feed_url: https://knowledge.wharton.upenn.edu/feed/
   lang: en
   verified: true
+  inflow_alert_days: 14
   request_headers:
     User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
       like Gecko) Chrome/128.0 Safari/537.36
@@ -267,11 +288,12 @@ sources:
   homepage: https://www.bain.com/insights
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: RSS 실패 시 NL 예상 — 2026-08-27 공식 RSS(all-insights-mailings) 발견, 실측 통과(항목 100건)
 - id: pwc-global-insights
   name: PwC 글로벌 Insights
   tier: T2
-  type: newsletter
+  type: browse
   role: T2 컨설팅 — 글로벌 워크포스 조사 (NL 경로)
   description: PwC 글로벌. Workforce Hopes and Fears 등 대규모 워크포스 조사, Responsible AI.
   topics: 인재 육성 · AI 거버넌스 — 글로벌 워크포스 설문
@@ -282,14 +304,13 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://www.pwc.com/gx/en/research-insights.html
   lang: en
-  subscription_status: 구독 대기
   note: '경로 변동 이력 주의. 2026-08-27 공식 주소 확인(gx/en/research-insights.html), RSS 미제공 /
     [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.pwc.com/index.xml
-    → HTTP 404)'
+    → HTTP 404) / 2026-09-01 probe B — 목록 JS 렌더(정적 HTML은 내비게이션만) → 월간 브라우저 라운드'
 - id: samil-pwc
   name: 삼일PwC 경영연구원
   tier: T2
-  type: manual
+  type: html
   role: T2 국내 — 산업·경영 리포트 (PDF 수기 등록)
   description: 삼일PwC 경영연구원 Samil Insight. 국내 산업·경영 리포트(PDF).
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 관점
@@ -298,14 +319,23 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url: https://www.pwc.com/kr/ko/insights/samil-insight.html
+  link_pattern: href="((?:https://www\.pwc\.com)?/kr/ko/insights/[a-z0-9\-/]+\.html)"
+  link_exclude: /(insights|samil-insight|global-trends|industry-focus|issue-report|issue-brief|eri)\.html$
+  min_links: 2
   homepage: https://www.pwc.com/kr/ko/insights/samil-insight.html
   lang: ko
+  allow_feed_discovery: false
+  inflow_alert_days: 35
   note: NL/수기 리포트 — PDF는 /ingest-file. 2026-08-27 공식 주소 확인(Samil Insight, pwc.com/kr
-    산하 — samil.pwc.com 아님)
+    산하 — samil.pwc.com 아님) / 2026-09-01 probe A-PDF 잠정(정적 목록에 리포트 링크 노출, 표본 부족) →
+    html 전환, 1개월 관찰 / 2026-09-02 점검 — 수집물이 리포트 소개 페이지로 확인 → follow_pdf로 PDF 본문 추적,
+    issue-brief 허브 제외
+  follow_pdf: true
 - id: samjong-kpmg
   name: 삼정KPMG 경제연구원
   tier: T2
-  type: manual
+  type: browse
   role: T2 국내 — 경제연구원 이슈리포트 (PDF 수기 등록)
   description: 삼정KPMG 경제연구원 이슈리포트. 국내 산업·경제 동향.
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 이슈
@@ -316,7 +346,8 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://kpmg.com/kr/ko/insights/eri.html
   lang: ko
-  note: NL/수기 — 이슈리포트 주력. 2026-08-27 공식 주소 확인(경제연구원 ERI Insights)
+  note: NL/수기 — 이슈리포트 주력. 2026-08-27 공식 주소 확인(경제연구원 ERI Insights) / 2026-09-01 probe
+    B — 목록이 동적 필터(정적 HTML은 오류 문구), 과거 리포트는 외부 아카이브(launch.kpmg.com) → 월간 브라우저 라운드
 - id: josh-bersin
   name: Josh Bersin
   tier: T2
@@ -332,11 +363,12 @@ sources:
   feed_url: https://joshbersin.com/feed/
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: AI×HR 시장 지도. 2026-08-27 피드 실측 통과
 - id: lg-business-research
   name: LG경영연구원
   tier: T2
-  type: newsletter
+  type: browse
   role: T2 국내 — 경영 환경·노동 시장 분석 (POSRI 대신 선별)
   description: 국내 경영연구원. 경영 환경·노동시장 분석 국문 리포트.
   topics: 일하는 방식 · 조직 문화 — 한국 맥락의 경영 환경 분석
@@ -347,9 +379,10 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://www.lgbr.co.kr
   lang: ko
-  subscription_status: 구독 대기
   note: '국내 T2 — POSRI와 1곳 선별. 2026-08-27 주소 확인(lgbr.co.kr), RSS 미제공 / [자동검증 2026-08-27]
-    API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400)'
+    API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400)
+    / 2026-09-01 probe B — 목록(business·economy/list.do)은 정적이나 본문 링크가 javascript:fnView()
+    — 리버스 성공 시 html 승격 여지 → 월간 브라우저 라운드'
 - id: posri
   name: POSRI(포스코경영연구원)
   tier: T2
@@ -376,7 +409,7 @@ sources:
   lang: en
   verified: true
   note: RSS는 요약만 제공 — 구독 NL로 전문 확보(C1·C2). https(feeds.hbr.org)는 사내망에서 접속 실패해 http
-    경로 사용(2026-08-24 확인)
+    경로 사용(2026-08-24 확인) / 요약은 RSS, 전문은 browse 건별
 - id: mit-smr
   name: MIT Sloan Management Review
   tier: T3
@@ -390,11 +423,12 @@ sources:
   feed_url: https://sloanreview.mit.edu/feed/
   lang: en
   verified: true
-  note: 유지 + 구독
+  inflow_alert_days: 14
+  note: 유지 + 구독 / 요약은 RSS, 전문은 browse 건별
 - id: dbr
   name: DBR(동아비즈니스리뷰)
   tier: T3
-  type: newsletter
+  type: browse
   role: T3 국내 저널 — 국내 기업 사례·경영 해설 (구독 계약 중)
   description: 동아비즈니스리뷰. 국내 대표 경영 저널, 국내 기업 사례 풍부. 유료.
   topics: 리더십 · 조직 설계 · 조직 문화 — 국내 기업 사례·경영 해설 (광역)
@@ -405,13 +439,13 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://dbr.donga.com
   lang: ko
-  subscription_status: 구독 대기
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
-    RSS 미발견 (시도 6건, 마지막: https://dbr.donga.com/index.xml → 파싱은 되나 항목 0건)'
+    RSS 미발견 (시도 6건, 마지막: https://dbr.donga.com/index.xml → 파싱은 되나 항목 0건) / 유료 — 구독
+    세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성'
 - id: hr-insight
   name: HR Insight
   tier: T3
-  type: newsletter
+  type: browse
   role: T3 국내 — HR 실무 심층 기사 (구독 계약 중)
   description: 국내 HR 전문 월간지. HR 실무 심층 기사·제도 사례.
   topics: 평가·보상 · 인재 육성 · 채용 — 국내 HR 제도·실무
@@ -422,10 +456,9 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://www.hrinsight.co.kr
   lang: ko
-  subscription_status: 구독 대기
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 주소 확인(hrinsight.co.kr), RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.hrinsight.co.kr/index.xml → HTTP
-    404)'
+    404) / 유료 — 구독 세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성'
 - id: aihr-blog
   name: AIHR Blog
   tier: T3
@@ -441,6 +474,7 @@ sources:
   feed_url: https://www.aihr.com/blog/feed/
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 편입 권고 — 실행 액션 재료. 2026-08-27 피드 실측 통과
 - id: mit-tech-review
   name: MIT Technology Review
@@ -473,6 +507,7 @@ sources:
   feed_url: https://charterworks.com/feed/
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 일하는 방식 전문 NL. 2026-08-27 주소 확인(charterworks.com) — RSS도 제공, 실측 통과
 - id: fastcompany-worklife
   name: Fast Company (Work Life)
@@ -506,37 +541,44 @@ sources:
   feed_url: https://hrbulletin.net/feed/
   lang: ko
   verified: true
+  inflow_alert_days: 14
   note: 국내 HR 큐레이션 NL. 2026-08-27 주소 확인(hrbulletin.net) — RSS 실측 통과
 - id: wanted-insaloon
   name: 원티드 인살롱
   tier: T3
   type: manual
-  role: T3 국내 — HR 실무자 커뮤니티 글 (수기 선별)
   description: 원티드의 HR 실무자 커뮤니티. 현장 실무자의 경험담·사례.
   topics: 채용 · 조직 문화 — 국내 현장 관점
   frequency: 비정기 (수기)
   constraints: RSS 미제공 → 좋은 글 발견 시 /ingest-url. 품질 편차 주의
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://hr.wanted.co.kr
   lang: ko
-  note: 국내 HR 커뮤니티 — 품질 편차 주의. 2026-08-27 주소 확인(hr.wanted.co.kr), RSS 미제공 → 수기
+  note: 국내 HR 커뮤니티 — 품질 편차 주의. 2026-08-27 주소 확인(hr.wanted.co.kr), RSS 미제공 → 수기 / 뉴스레터
+    경로 폐기 — 대체 소스로 커버(α4 후속)
+  excluded_at: '2026-09-02'
 - id: ms-worklab
   name: Microsoft WorkLab
   tier: T4
-  type: newsletter
+  type: html
   role: T4 기업 — MS 하이브리드 워크 데이터·리포트 (NL 재시도)
   description: MS의 일의 미래 연구. Work Trend Index(대규모 설문+행동 데이터)가 대표 자산.
   topics: 일하는 방식 — 하이브리드·AI 협업 데이터
   frequency: 월
   constraints: RSS 미제공 → 뉴스레터. Work Trend Index는 PDF 수기 등록
   status: active
+  list_url: https://www.microsoft.com/en-us/worklab
+  link_pattern: href="?(/en-us/worklab/(?:[a-z0-9\-]+/)?[a-z0-9\-]{8,})
+  link_exclude: /(articles|podcasts|newsletter|work-trend-index|topics|home)$
   homepage: https://www.microsoft.com/en-us/worklab
   lang: en
-  subscription_status: 구독 대기
+  allow_feed_discovery: false
+  inflow_alert_days: 35
   note: '2026-08-24 검증 실패(RSS 미제공) — NL 재시도 / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견
-    (시도 6건, 마지막: https://www.microsoft.com/index.xml → HTTP 404)'
+    (시도 6건, 마지막: https://www.microsoft.com/index.xml → HTTP 404) / 2026-09-01 probe
+    A(글 링크가 페이지 데이터에 정적 포함) → html 전환, NL 재시도 대체'
 - id: onemodel-blog
   name: One Model Blog
   tier: T4
@@ -552,6 +594,7 @@ sources:
   feed_url: https://www.onemodel.co/blog/rss.xml
   lang: en
   verified: true
+  inflow_alert_days: 14
   note: 편입 권고 — 홍보 문구 필터 대상. 2026-08-27 피드 실측 통과
 - id: innofit-blog
   name: 이노핏파트너스 블로그
@@ -568,6 +611,7 @@ sources:
   feed_url: https://blog.innofitpartners.com/rss
   lang: ko
   verified: true
+  inflow_alert_days: 14
   note: 편입 권고 — HRD×AI 적합도 높음. 2026-08-27 피드 실측 통과
 - id: carrot-global-blog
   name: 캐럿글로벌 블로그
@@ -584,6 +628,7 @@ sources:
   feed_url: https://www.carrotglobalblog.com/feed
   lang: ko
   verified: true
+  inflow_alert_days: 14
   note: 편입 — 국내 교육 사례 재료. 2026-08-27 피드 실측 통과
 - id: worklytics-blog
   name: Worklytics
@@ -600,29 +645,29 @@ sources:
   feed_url: https://www.worklytics.co/blog/rss.xml
   lang: en
   verified: true
+  inflow_alert_days: 35
   note: 편입 — 갱신 낮음, 데이터 리포트 가치. 2026-08-27 피드 실측 통과(항목 100건)
 - id: a16z
   name: a16z
   tier: T4
   type: newsletter
-  role: T4 투자 — 낙관 stance 공급원 (일·조직 교집합만)
   description: 벤처캐피털 관점의 AI 산업 방향. 낙관적 stance의 대표 공급원.
   topics: AI 리터러시 — 산업 방향·낙관 관점
   frequency: 주
   constraints: RSS 폐지 → 뉴스레터. 일·조직 교집합 콘텐츠만 게이트 통과 예상. stance 균형용
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://a16z.com
   lang: en
-  subscription_status: 구독 대기
   note: '조건부 — 낙관 stance 공급원, 일·조직 교집합만. 2026-08-27 확인 — /feed 404(RSS 폐지) → NL 경로
     / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://a16z.com/index.xml
-    → HTTP 404)'
+    → HTTP 404) / 뉴스레터 경로 폐기 — 대체 소스로 커버(α4 후속)'
+  excluded_at: '2026-09-02'
 - id: linkedin-talent-blog
   name: LinkedIn Talent Blog
   tier: T4
-  type: newsletter
+  type: browse
   role: T4 기업 — 채용·인재 시장 데이터 (Atlassian 대신 선별)
   description: LinkedIn 인재 데이터 기반 채용·스킬 트렌드. Global Talent Trends.
   topics: 채용 · 인재 육성 — 인재 시장 데이터
@@ -633,9 +678,10 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://www.linkedin.com/business/talent/blog
   lang: en
-  subscription_status: 구독 대기
   note: 'Atlassian과 1곳 선별. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
-    RSS 미발견 (시도 6건, 마지막: https://www.linkedin.com/index.xml → HTTP 404)'
+    RSS 미발견 (시도 6건, 마지막: https://www.linkedin.com/index.xml → HTTP 404) / 2026-09-01
+    probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) → 월간 브라우저 라운드 + A4 시 NL
+    재검토'
 - id: atlassian-worklife
   name: Atlassian Work Life
   tier: T4
@@ -651,7 +697,7 @@ sources:
 - id: ai-lab-enterprise-reports
   name: Anthropic·OpenAI 기업 활용 리포트
   tier: T4
-  type: manual
+  type: html
   role: T4 1차 — Anthropic·OpenAI 기업 활용 리포트 (발행 시 수기)
   description: Anthropic·OpenAI의 기업 활용 리포트(Economic Index 등). AI 사용 실태 1차 데이터.
   topics: AI 리터러시 · 일하는 방식 — 실제 사용 데이터
@@ -660,12 +706,21 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url:
+  - https://www.anthropic.com/research
+  - https://openai.com/news/
+  link_pattern: href="((?:https://www\.anthropic\.com)?/(?:research|news)/[A-Za-z0-9\-]+|/index/[A-Za-z0-9\-]+)"
+  link_exclude: /(research/index|news/rss|research$|news$)
   lang: en
-  note: 발행 시 /ingest-url — 피드 등재 아님
+  allow_feed_discovery: false
+  inflow_alert_days: 35
+  request_headers: *id001
+  note: 발행 시 /ingest-url — 피드 등재 아님 / 2026-09-01 probe A(Anthropic 정적 200·OpenAI curl
+    200, news RSS 존재 확인) → html 전환, 수기 대체
 - id: google-rework
   name: Google re:Work
   tier: T4
-  type: manual
+  type: html
   role: T4 1차 — 구글 조직 연구 아카이브 (정적 백필)
   description: 구글 조직 연구 아카이브(팀 효과성·매니저 행동 등). 갱신 없음.
   topics: 조직 문화 · 리더십 — 고전 조직 연구
@@ -674,9 +729,19 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
+  list_url:
+  - https://rework.withgoogle.com/intl/en/subjects/hiring
+  - https://rework.withgoogle.com/intl/en/subjects/learning-development
+  - https://rework.withgoogle.com/intl/en/subjects/managers
+  - https://rework.withgoogle.com/intl/en/subjects/org-management
+  - https://rework.withgoogle.com/intl/en/subjects/people-analytics
+  link_pattern: href="((?:https://rework\.withgoogle\.com)?/intl/en/guides/[a-z0-9\-]+/?)"
   homepage: https://rework.withgoogle.com
   lang: en
-  note: 수기 백필 전용(정적)
+  allow_feed_discovery: false
+  inflow_alert: false
+  note: 수기 백필 전용(정적) / 2026-09-01 probe A(정적 아카이브·index.rss 존재) → html 전환, 백필 전용 —
+    무유입 경보 제외 / 목록은 subjects 5개 페이지가 정적(guides 인덱스는 JS·index.rss는 빈 채널)
 - id: lemonbase-blog
   name: 레몬베이스 블로그
   tier: T4
@@ -704,6 +769,7 @@ sources:
   feed_url: https://flex.team/blog/rss.xml
   lang: ko
   verified: true
+  inflow_alert_days: 35
   note: 1곳 선별. 2026-08-27 주소 확인 — HTML 피드 링크 선언에서 rss.xml 발견, 실측 통과
 - id: hrdive
   name: HR Dive
@@ -872,14 +938,15 @@ sources:
   name: 슈퍼브AI 블로그
   tier: T5
   type: manual
-  role: T5 — 비전AI 기업 블로그 (주제 적합성 관찰 대상)
   description: 국내 비전 AI 기업 블로그. 제조·물류 AI 중심.
   topics: AI 리터러시 — AI 기업 관점 (주제 적합성 낮음)
   frequency: 주 (수기)
   constraints: 수기 등록. 일·조직 교집합 글만 선별 등록
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://blog-ko.superb-ai.com
   lang: ko
-  note: 제외 권고 — 주제 부적합(비전 AI). 2026-08-27 확인 — RSS 미제공
+  note: 제외 권고 — 주제 부적합(비전 AI). 2026-08-27 확인 — RSS 미제공 / 뉴스레터 경로 폐기 — 대체 소스로 커버(α4
+    후속)
+  excluded_at: '2026-09-02'

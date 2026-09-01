@@ -112,6 +112,33 @@ jobs:
           gh label create "$LABEL" --color B60205 \
             --description "일일 수집 워크플로 실패 (자동)" 2>/dev/null || true
 
+          # 무유입 경보 — HTML 파서·피드가 조용히 깨지는 것 감지 (성공/실패와 무관하게 이슈로 경고)
+          ALERT_LABEL="inflow-alert"
+          ALERTS="$(grep "무유입 경보" logs/collect.log 2>/dev/null || true)"
+          if [ -n "$ALERTS" ]; then
+            gh label create "$ALERT_LABEL" --color D93F0B \
+              --description "소스 무유입 경보 (자동)" 2>/dev/null || true
+            {
+              echo "## 소스 무유입 경보 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo
+              echo '```'
+              echo "$ALERTS"
+              echo '```'
+              echo
+              echo "목록·피드 구조 변경으로 수집이 조용히 깨졌는지 점검하세요 (\`make validate\`)."
+            } > alert-body.md
+            EX_ALERT="$(gh issue list --label "$ALERT_LABEL" --state open --limit 1 --json number --jq '.[0].number // empty' || true)"
+            if [ -n "$EX_ALERT" ]; then
+              gh issue comment "$EX_ALERT" --body-file alert-body.md
+              echo "무유입 경보 — 기존 이슈 #$EX_ALERT 에 코멘트 추가"
+            else
+              gh issue create --title "무유입 경보 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$ALERT_LABEL" --body-file alert-body.md
+            fi
+          fi
+
           FAILED=""
           for pair in "deps:$R_DEPS" "init:$R_INIT" "collect:$R_COLLECT" "enrich:$R_ENRICH"; do
             name="${pair%%:*}"; res="${pair#*:}"
