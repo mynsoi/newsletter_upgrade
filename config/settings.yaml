@@ -7,6 +7,10 @@ enrich_model: claude-haiku-4-5-20251001
 write_model: claude-sonnet-4-6
 
 # claim 추출(게이트+추출 API 호출) 활성화 여부.
-# 2026-09-01 false — 크레딧 충전 대기. 충전 후 true로 변경하면 일일 스케줄과
-# 수동 make enrich가 재개된다 (false면 스킵하고 정상 종료 — 실패 이슈 안 뜸).
-enrich_enabled: false
+# 2026-09-04 true — 크레딧 충전 완료, 재개. false로 바꾸면 스킵하고 정상 종료(실패 이슈 안 뜸).
+enrich_enabled: true
+
+# 일반 실행(일일 스케줄·수동 make enrich) 1회 처리 상한. --limit로 재정의 가능.
+# 2026-08-31 관측: 상한 30건이 실제 병목이었음(기획서 8장) — 정상 운영 500건으로 상향.
+# 백로그 처리(--backlog)는 이 값을 쓰지 않는다 — --cost-cap이 대신 경계가 된다.
+enrich_daily_limit: 500

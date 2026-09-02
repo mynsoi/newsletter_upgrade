@@ -30,11 +30,11 @@ def test_db(tmp_path, monkeypatch):
     conn.close()
 
 
-def _add_new_doc(conn, doc_id, body="본문 " * 300):
+def _add_new_doc(conn, doc_id, body="본문 " * 300, tier="T3", collected_at=None):
     conn.execute(
-        "INSERT INTO documents (id, source_id, tier, url, title, body, status) "
-        "VALUES (?,?,?,?,?,?,'new')",
-        (doc_id, "s", "T3", f"http://x/{doc_id}", f"문서 {doc_id}", body))
+        "INSERT INTO documents (id, source_id, tier, url, title, body, status, collected_at) "
+        "VALUES (?,?,?,?,?,?,'new', COALESCE(?, CURRENT_TIMESTAMP))",
+        (doc_id, "s", tier, f"http://x/{doc_id}", f"문서 {doc_id}", body, collected_at))
     conn.commit()
 
 
@@ -355,17 +355,23 @@ def test_release_enrich_lock(test_db):
     assert db.claim_document_for_enrich(conn, "D1") is True
 
 
-def _run_enrich(monkeypatch, model_output="[]"):
-    """model_output: 문자열(고정 응답) | Exception(항상 raise) | list(호출 순서별 응답/예외)."""
+def _run_enrich(monkeypatch, model_output="[]", settings_extra="", argv=None):
+    """model_output: 문자열(고정 응답) | ModelReply | Exception(항상 raise) |
+    list(호출 순서별 응답/예외 — 문자열은 ModelReply(text, 0, 0)로 자동 래핑됨).
+    check_relevance는 항상 True로 고정(별도 게이트 동작을 테스트하는 케이스는 직접 patch)."""
     import enrich.extract_claims as ec
-    monkeypatch.setattr(sys, "argv", ["extract_claims"])
+    monkeypatch.setattr(sys, "argv", ["extract_claims"] + (argv or []))
     monkeypatch.setattr(ec, "check_relevance", lambda *a, **k: True)
 
     class _FakeSettings:  # 실제 config의 enrich_enabled: false와 무관하게 테스트는 활성 상태로
         def read_text(self, encoding=None):
-            return "enrich_enabled: true\nenrich_model: test-model\n"
+            return f"enrich_enabled: true\nenrich_model: test-model\n{settings_extra}"
 
     monkeypatch.setattr(ec, "SETTINGS_PATH", _FakeSettings())
+
+    def _wrap(item):
+        return ec.ModelReply(item, 0, 0) if isinstance(item, str) else item
+
     if isinstance(model_output, Exception):
         def call(*a, **k):
             raise model_output
@@ -376,10 +382,10 @@ def _run_enrich(monkeypatch, model_output="[]"):
             item = next(seq)
             if isinstance(item, Exception):
                 raise item
-            return item
+            return _wrap(item)
     else:
         def call(*a, **k):
-            return model_output
+            return _wrap(model_output)
     monkeypatch.setattr(ec, "call_model", call)
     return ec
 
@@ -497,6 +503,82 @@ def test_enrich_long_doc_merges_chunk_claims_with_cap(test_db, monkeypatch):
     assert texts.count("공통 주장") == 1        # 청크 경계 중복 제거
     assert conn.execute(
         "SELECT status FROM documents WHERE id='L1'").fetchone()["status"] == "enriched"
+
+
+def test_select_target_docs_round_robin_interleaves_tiers(test_db):
+    """T1이 21,000건+로 압도적이어도 라운드로빈은 다른 티어를 굶기지 않는다."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_new_doc(conn, "A1", tier="T1", collected_at="2026-01-01 00:00:01")
+    _add_new_doc(conn, "A2", tier="T1", collected_at="2026-01-01 00:00:02")
+    _add_new_doc(conn, "B1", tier="T2", collected_at="2026-01-01 00:00:01")
+    _add_new_doc(conn, "C1", tier="T3", collected_at="2026-01-01 00:00:01")
+    _add_new_doc(conn, "C2", tier="T3", collected_at="2026-01-01 00:00:02")
+    _add_new_doc(conn, "C3", tier="T3", collected_at="2026-01-01 00:00:03")
+
+    order = [r["id"] for r in ec.select_target_docs_round_robin(conn, 6)]
+    assert order == ["A1", "B1", "C1", "A2", "C2", "C3"]  # 티어 내부는 collected_at 순 유지
+
+    # limit이 부족하면 앞쪽 라운드만 — 한 티어가 통째로 먼저 소진되지 않는다
+    assert [r["id"] for r in ec.select_target_docs_round_robin(conn, 3)] == ["A1", "B1", "C1"]
+
+
+def test_backlog_processes_round_robin_across_tiers(test_db, monkeypatch, capsys):
+    conn, db = test_db
+    for i in range(3):
+        _add_new_doc(conn, f"T1_{i}", tier="T1", collected_at=f"2026-01-01 00:00:0{i}")
+        _add_new_doc(conn, f"T2_{i}", tier="T2", collected_at=f"2026-01-01 00:00:0{i}")
+
+    ec = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--backlog", "--limit", "4"])
+    assert ec.main() == 0
+
+    out = capsys.readouterr().out
+    assert "T1 2" in out and "T2 2" in out  # 한쪽 티어로 쏠리지 않았다는 실측
+    enriched = {r["id"] for r in conn.execute("SELECT id FROM documents WHERE status='enriched'")}
+    assert len(enriched) == 4
+    assert any(i.startswith("T1_") for i in enriched) and any(i.startswith("T2_") for i in enriched)
+
+
+def test_backlog_cost_cap_stops_before_next_doc_but_finishes_current(test_db, monkeypatch):
+    """상한 도달 시 진행 중이던 문서는 끝까지 처리하고, 다음 문서는 아예 손대지 않는다
+    (락도 걸지 않는다 — 재시도가 아니라 '아직 처리 안 함' 상태로 남긴다)."""
+    conn, db = test_db
+    import enrich.extract_claims as ec_probe
+    for i, doc_id in enumerate(["A", "B", "C"]):
+        _add_new_doc(conn, doc_id, tier="T3", collected_at=f"2026-01-01 00:00:0{i}")
+
+    # $1/$5 per 1M 토큰 — 문서 1건당(청크 1개) 입력 2,000,000 토큰 = $2.00
+    replies = [ec_probe.ModelReply(CLAIM_JSON, 2_000_000, 0),
+              ec_probe.ModelReply(CLAIM_JSON, 2_000_000, 0)]
+    ec = _run_enrich(monkeypatch, replies, argv=["--backlog", "--cost-cap", "3"])
+    monkeypatch.setitem(ec.MODEL_PRICING, "test-model", (1.0, 5.0))
+    assert ec.main() == 0
+
+    statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
+    assert statuses["A"] == "enriched" and statuses["B"] == "enriched"  # 상한 넘겨도 진행 중 문서는 완주
+    assert statuses["C"] == "new"
+    assert conn.execute(
+        "SELECT enrich_locked_at FROM documents WHERE id='C'").fetchone()["enrich_locked_at"] is None
+
+
+def test_cost_cap_rejects_unknown_model_pricing(test_db, monkeypatch, capsys):
+    """단가를 모르는 모델로 --cost-cap을 걸면 상한을 신뢰할 수 없으므로 아예 중단한다."""
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, "[]", argv=["--cost-cap", "5"])  # test-model은 가격표에 없음
+    assert ec.main() == 2
+    assert "단가를 모른다" in capsys.readouterr().out
+    assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+
+
+def test_normal_run_default_limit_comes_from_settings(test_db, monkeypatch):
+    conn, db = test_db
+    for i in range(3):
+        _add_new_doc(conn, f"D{i}")
+    ec = _run_enrich(monkeypatch, "[]", settings_extra="enrich_daily_limit: 2\n")
+    assert ec.main() == 0
+    statuses = [r["status"] for r in conn.execute("SELECT status FROM documents")]
+    assert statuses.count("enriched") == 2 and statuses.count("new") == 1
 
 
 def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):

@@ -1,0 +1,90 @@
+# 백로그 claim 추출 — 수동 실행 전용(workflow_dispatch)
+#
+# 일일 정상 운영분(enrich_daily_limit, 기본 500건)은 daily-collect.yml의
+# "claim 추출(make enrich)" 단계가 이미 매일 처리한다. 이 워크플로는 그 바깥의
+# 대량 백로그(추출 대기 누적분)를 티어별 라운드로빈 + 비용 상한으로 처리한다.
+#
+# 재개 가능: 문서 1건씩 커밋되므로 타임아웃·중단 후 재실행해도 처리된 분은 남고
+# 나머지(status='new')만 이어서 처리된다.
+# 비밀값: ANTHROPIC_API_KEY, DATABASE_URL 은 GitHub Secrets 로만 주입한다.
+name: enrich-backlog
+
+on:
+  workflow_dispatch:
+    inputs:
+      cost_cap:
+        description: "실측 비용(USD) 상한 — 도달 시 새 문서를 더 집지 않고 중단"
+        type: string
+        required: true
+        default: "5"
+      limit:
+        description: "처리할 문서 수 상한 (비워두면 비용 상한까지 무제한)"
+        type: string
+        required: false
+        default: ""
+
+# 두 백로그 실행이 겹치면 비용 상한을 각자 독립적으로 계산해 실측 총액이 두 배로
+# 뛸 수 있다 — 직렬화해 방지.
+concurrency:
+  group: enrich-backlog
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  enrich-backlog:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -e .
+
+      - name: 마이그레이션 (make init)
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::secrets.DATABASE_URL 미설정" ; exit 1
+          fi
+          make init
+
+      - name: 백로그 처리
+        id: run
+        run: |
+          set -o pipefail
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "::error::secrets.ANTHROPIC_API_KEY 미설정" ; exit 1
+          fi
+          ARGS="--backlog --cost-cap ${{ inputs.cost_cap }}"
+          if [ -n "${{ inputs.limit }}" ]; then
+            ARGS="$ARGS --limit ${{ inputs.limit }}"
+          fi
+          echo "실행: python src/enrich/extract_claims.py $ARGS"
+          python src/enrich/extract_claims.py $ARGS 2>&1 | tee enrich-backlog.log
+
+      - name: 요약 (Step Summary)
+        if: always()
+        run: |
+          {
+            echo "## 백로그 claim 추출 결과"
+            echo
+            echo '```'
+            tail -n 20 enrich-backlog.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 로그 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: enrich-backlog-log
+          path: enrich-backlog.log
+          retention-days: 30
+          if-no-files-found: warn

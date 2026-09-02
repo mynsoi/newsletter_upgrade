@@ -227,7 +227,7 @@ def test_enrich_disabled_flag_skips_cleanly(test_db, tmp_path, monkeypatch):
 
 def test_check_relevance_parses_verdict(monkeypatch):
     import enrich.extract_claims as ec
-    monkeypatch.setattr(ec, "call_model", lambda prompt, model: "IRRELEVANT")
+    monkeypatch.setattr(ec, "call_model", lambda prompt, model: ec.ModelReply("IRRELEVANT"))
     assert ec.check_relevance("제목", "본문", "m") is False
-    monkeypatch.setattr(ec, "call_model", lambda prompt, model: "relevant — 관련 문서")
+    monkeypatch.setattr(ec, "call_model", lambda prompt, model: ec.ModelReply("relevant — 관련 문서"))
     assert ec.check_relevance("제목", "본문", "m") is True
