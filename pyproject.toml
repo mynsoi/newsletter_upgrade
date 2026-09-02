@@ -11,6 +11,7 @@ dependencies = [
     "anthropic>=0.40",
     "psycopg[binary]>=3.2",
     "pypdf>=4.0",
+    "cryptography>=3.1",
 ]
 
 [dependency-groups]
