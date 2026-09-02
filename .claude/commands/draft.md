@@ -16,6 +16,13 @@ Phase 2에서 자동화 예정. 현재는 아래 수동 절차를 Claude Code가
    - 모든 문단에 근거 claim ID를 HTML 주석으로 병기
    - 내부 자료 사용 시 api_eligible=1 문서만 사용
 ⑤ 검증 → content/drafts/{slug}-verification.md
-   - 수치 대조(claims의 metric과 일치), 단독출처 40% 룰, banned_phrases 검사,
-     eval/rubric.md 8항목 자체 채점
-   - 18점 미만이면 ④ 재실행 (최대 2회)
+   - **실사용 기준(A2)**: `python src/verify_article.py content/drafts/{slug}.md` 실행.
+     evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**(문단 뒤 `<!-- claims: ... -->`)
+     만으로 강제 조건을 재계산한다 — 독립 출처 3곳+ / 상반 stance(optimistic·cautious 각 1건+) /
+     단일 출처 40% 이하 / 수치는 사용 claim의 metric·text와 대조.
+     · evidence에 없는 claim ID나 출처를 본문이 인용하면 **실패**하고 해당 문장을 지목한다.
+     · 참고자료는 실사용 문서만 남긴다 — 리포트 4장의 목록을 본문에 반영.
+     · 리포트 1장의 "문장 ↔ claim ID 대응"으로 사람이 근거를 따라 읽을 수 있다.
+     · 액션·참고자료 섹션의 처방 값(2주·주 1회)과 달력 연도(2026년)는 수치 검사에서 면제.
+   - 이어서 banned_phrases 검사, eval/rubric.md 8항목 자체 채점
+   - 검증 실패(exit 1)거나 18점 미만이면 ④ 재실행 (최대 2회)
