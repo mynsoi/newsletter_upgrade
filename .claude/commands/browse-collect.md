@@ -36,6 +36,10 @@ sources.yaml에서 해당 소스의 `browse_mode`(list|item)를 확인해 모드
 보조 대상: **mckinsey-insights** — type은 rss를 유지하되(요약 자동 수집) RSS 요약본
 (summary_only=1)을 전문으로 격상하는 용도로 이 모드를 쓸 수 있다.
 browse_container/browse_exclude는 첫 실행 시 실측해 기록한다.
+- **배치 규칙**: 세션당 **2~3건**, 요청 간 **수십 초 간격**. `Access Denied`(WAF)가 뜨면
+  그 세션의 McKinsey 작업을 중단하고 남은 건은 이월로 기록한다 — 우회 시도 금지.
+- **팟캐스트·영상 문서는 격상 후보에서 제외**한다: 본문 페이지에 전문이 없어
+  (트랜스크립트는 별도 페이지) 추출해도 800자 임계 미달로 격상되지 않는다.
 
 1. 소스의 `list_url`(없으면 homepage)을 연다. 스크립트 렌더링 사이트는 목록·본문이
    뜰 때까지 대기 후 진행한다 (Deloitte·BCG·PwC 등 probe B 판정 소스).

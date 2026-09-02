@@ -240,7 +240,12 @@ sources:
     - form
   note: '현행(본문 미확보) — 기존 feed_url 유지, NL로 전문 보완 필수 / 2026-09-01 격상 실전 검증 —
     RSS 요약(170자)을 브라우저 전문(21,545자)으로 교체 성공(격상 1, summary_only 0·status new 복귀).
-    기사 페이지는 인앱 브라우저 차단(Access Denied) — 실제 Chrome 경유 필요. browse 선택자 실측 기록'
+    기사 페이지는 인앱 브라우저 차단(Access Denied) — 실제 Chrome 경유 필요. browse 선택자 실측 기록
+    / 2026-09-02 배치 규칙 확정 — WAF가 짧은 간격 반복 요청에 민감(2건 연속·3초 간격에서 차단).
+    세션당 2~3건·요청 간 수십 초, Access Denied 시 그 세션 중단·이월. 라운드 1회차 격상 12/12 완료
+    (7건 + 이월 4건 + 팟캐스트 1건 제외) / 팟캐스트·영상 문서는 격상 후보 제외 — 본문 페이지에 전문이
+    없어(트랜스크립트 별도 페이지) 800자 임계 미달. 실측 예: are-you-settling-for-a-b-plus-life 658자
+    / 라운드 예산: 격상 건당 약 2분 + 요청 간격, 세션당 2~3건'
 - id: deloitte-insights
   name: Deloitte Insights
   tier: T2
@@ -277,7 +282,8 @@ sources:
   note: '2026-08-24 검증 실패(HTTP 404), 공개 RSS 폐지로 판단 — NL 전환 / [자동검증 2026-08-27] API·RSS
     미발견: RSS 미발견 (시도 6건, 마지막: https://www2.deloitte.com/index.xml → HTTP 404) / 2026-09-01
     probe B — 목록 JS 렌더(정적 HTML에 글 카드 없음) → 월간 브라우저 라운드 / 2026-09-01 browse 선택자 실측
-    (extract_article.js, 기사 1건 등재) / 월간 라운드 예산: 약 15분(최대 5건, 건당 2~3분 실측)'
+    (extract_article.js, 기사 1건 등재) / 라운드 예산(2026-09 실측): 목록 확인 약 3분 30초 +
+    수집 건당 2~3분. 라운드 1회차는 30일 내 적합 신규 0건(기등재)'
 - id: bcg-publications
   name: BCG Publications
   tier: T2
@@ -308,8 +314,9 @@ sources:
   note: '2026-08-24 검증 실패(HTTP 403, 봇 차단 추정) — NL 전환 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://www.bcg.com/index.xml → HTTP 404) / 2026-09-01 probe
     B — 목록 JS 렌더 + 브라우저형 요청만 403(봇 UA 200)인 특이 차단 → 월간 브라우저 라운드 / 2026-09-01
-    파일럿 — 인앱 브라우저에서는 정상 열람(쿠키 배너만 처리), browse 선택자 실측, 기사 1건 등재 / 월간
-    라운드 예산: 약 10분(최대 3건, 건당 2~3분 실측)'
+    파일럿 — 인앱 브라우저에서는 정상 열람(쿠키 배너만 처리), browse 선택자 실측, 기사 1건 등재 / 라운드
+    예산(2026-09 실측): 목록 확인 약 3분(쿠키 배너 포함) + 수집 건당 2~3분. 라운드 1회차는 목록 7건 중
+    적합 1건이 기등재라 신규 0건'
 - id: knowledge-wharton
   name: Knowledge at Wharton
   tier: T2
@@ -356,7 +363,7 @@ sources:
   name: PwC 글로벌 Insights
   tier: T2
   type: browse
-  browse_mode: list
+  browse_mode: item  # 라운드 제외 — 연례 리포트 발행 시 건별 등재
   role: T2 컨설팅 — 글로벌 워크포스 조사 (NL 경로)
   description: PwC 글로벌. Workforce Hopes and Fears 등 대규모 워크포스 조사, Responsible AI.
   topics: 인재 육성 · AI 거버넌스 — 글로벌 워크포스 설문
@@ -369,8 +376,17 @@ sources:
   lang: en
   note: '경로 변동 이력 주의. 2026-08-27 공식 주소 확인(gx/en/research-insights.html), RSS 미제공 /
     [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.pwc.com/index.xml
-    → HTTP 404) / 2026-09-01 probe B — 목록 JS 렌더(정적 HTML은 내비게이션만) → 월간 브라우저 라운드 /
-    월간 라운드 예산: 약 10분(최대 3건, 건당 2~3분 실측)'
+    → HTTP 404) / 2026-09-01 probe B — 목록 JS 렌더(정적 HTML은 내비게이션만) / 2026-09-02 건별 전환 —
+    발행 패턴이 연 단위 리포트+팟캐스트 — 목록 라운드 실효 없음(2026-09 실측 0/0). 연례 리포트 발행 시
+    건별 등재. 2025-11 Global Workforce Hopes and Fears 백필 등재(27,961자) / 라운드 예산: 건별 약 5분/건'
+  browse_container: .text-component  # 본문 블록 다수 — 각 블록을 문서 순서대로 이어붙인다
+  browse_exclude:
+    - nav
+    - footer
+    - aside
+    - form
+    - '[class*=''cookie'']'
+    - '[class*=''vjs-'']'
 - id: samil-pwc
   name: 삼일PwC 경영연구원
   tier: T2
@@ -437,7 +453,7 @@ sources:
   name: LG경영연구원
   tier: T2
   type: browse
-  browse_mode: list
+  browse_mode: item  # 보류(발행 정체) — 라운드 제외, 신규 발행 확인 시 건별
   role: T2 국내 — 경영 환경·노동 시장 분석 (POSRI 대신 선별)
   description: 국내 경영연구원. 경영 환경·노동시장 분석 국문 리포트.
   topics: 일하는 방식 · 조직 문화 — 한국 맥락의 경영 환경 분석
@@ -451,8 +467,11 @@ sources:
   note: '국내 T2 — POSRI와 1곳 선별. 2026-08-27 주소 확인(lgbr.co.kr), RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400)
     / 2026-09-01 probe B — 목록(business·economy/list.do)은 정적이나 본문 링크가 javascript:fnView()
-    — 리버스 성공 시 html 승격 여지 → 월간 브라우저 라운드 / 월간 라운드 예산: 약 10분(최대 3건, 건당
-    2~3분 실측)'
+    / 2026-09-02 진단 — 보류(발행 정체). 로그인 게이트 아님(사이트에 로그인·회원가입 기능 자체 없음).
+    목록 폼의 sort를 RANK/DATE 모두 실측했으나 결과 동일, 최신이 2026-02-10(id 19747)에서 멈춤.
+    경제 목록 2025-12-22, 공지사항 2022-04-22로 사이트 전반이 정체. 페이지 자체가 "연구 자료 중 일부를
+    공유"한다고 명시해 공개분은 큐레이션된 소수(총 3341건, 1페이지 12건이 2025-06~2026-02 분포).
+    frequency "월 수회"는 실측과 불일치 — 라운드 제외, 분기 1회 사람 확인 후 신규 발행 시 건별 등재'
 - id: posri
   name: POSRI(포스코경영연구원)
   tier: T2
