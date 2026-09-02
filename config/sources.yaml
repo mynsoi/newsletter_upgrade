@@ -505,8 +505,18 @@ sources:
     - figcaption
     - form
   license_note: 구독 계정 열람 — 내부 저장 범위 확인 중
+  browse_list_urls:  # 건별 선별 보조 — 제목·URL 수준만 확인(본문은 사용자 선택 후)
+    - https://www.hbrkorea.com/article/latest  # 최신 통합(디지털+매거진) 약 28건 — 1순위
+    - https://www.hbrkorea.com/article/topics/category_id/2_1  # 인사조직 30건/페이지
+    - https://www.hbrkorea.com/article/topics/category_id/8_1  # 리더십 30건/페이지
+    - https://www.hbrkorea.com/magazine  # 매거진 랜딩 — 최신호 확인 후 목차로 이동
+    # 최신호 목차: /magazine/view/pub_year/<연도>/pub_no/<홀수월> (2026.9-10월호 = .../2026/pub_no/9, 19건)
+    # 다음 페이지: /article/topics/page/<N>/category_id/<카테고리>, /article/digital/page/<N>
   note: '2026-09-01 파일럿 — hbr(영문 RSS) 건별 경로에서 분리 신설. 기사 2건 등재(source_id 이관),
-    로그인 세션 정상, 유료 잘림 없음 / 월간 라운드 예산: 건별 약 6분/건'
+    로그인 세션 정상, 유료 잘림 없음 / 월간 라운드 예산: 건별 약 6분/건 / 2026-09-02 목록 사각지대 진단 —
+    홈은 8건(디지털 4·매거진 4)만 노출하고 매거진 슬롯이 회전해 최신호 대부분이 홈에 안 뜸.
+    browse_list_urls 신설로 대체. 매거진 아티클은 발행일 메타가 없어 호 라벨(예 2026. 9-10월호)의
+    첫 달 1일로 근사 기재'
 - id: mit-smr
   name: MIT Sloan Management Review
   tier: T3
@@ -546,11 +556,18 @@ sources:
     - footer
     - figcaption
     - form
+  license_note: 구독 계정 열람 — 내부 저장 범위 확인 중
+  browse_list_urls:  # 건별 선별 보조 — 제목·URL 수준만 확인(본문은 사용자 선택 후)
+    - https://dbr.donga.com/magazine  # 호수별 랜딩 — 최신호 번호·발행일 확인 후 목차로 이동
+    # 최신호 목차: /magazine/mcontents/pub_number/<호수> (448호 = 2026-08-25, 22건 전량)
+    # 격주 발행이므로 월간 라운드에서는 최신 2개 호 목차를 확인한다
+    - https://dbr.donga.com  # 홈 — 에디터픽·DBR First 등 호 목차 밖 노출분 보완
   note: '계약 중 — 구독 완료 시 편입. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://dbr.donga.com/index.xml → 파싱은 되나 항목 0건) / 유료 — 구독
     세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성 / 2026-09-01 browse 선택자 실측 — 로그인
     세션에서 기사 1건 등재(br 폴백), 내부 저장 범위 확인 중(license_note 기재) / 월간 라운드 예산: 건별
-    약 6분/건'
+    약 6분/건 / 2026-09-02 목록 실측 — 홈은 18건이 여러 호에 걸쳐 회전 노출되므로 호 목차가 정본.
+    browse_list_urls 신설'
 - id: hr-insight
   name: HR Insight
   tier: T3
