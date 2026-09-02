@@ -447,6 +447,58 @@ def test_enrich_main_zero_claims_is_not_failure(test_db, monkeypatch):
     assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0
 
 
+def test_pack_chunks_splits_long_body_by_section(test_db):
+    """장문 분할: 소제목 경계 우선, 한도 초과 절은 문단으로 재분할, 짧은 조각 제외."""
+    import enrich.extract_claims as ec
+
+    short = "짧은 본문. " * 10
+    assert len(ec.pack_chunks(short)) == 1  # 한도 이하는 그대로 1청크
+
+    body = "\n\n".join([
+        "## 1장 도입",
+        "도입 문단. " * 30,
+        "## 2장 본론",
+        "본론 문단. " * 4000,   # 한 절이 한도(24,000자)를 크게 넘음
+        "## 3장 결론",
+        "결론 문단. " * 30,
+    ])
+    chunks = ec.pack_chunks(body)
+    assert 1 < len(chunks) <= ec.MAX_CHUNKS
+    assert all(len(t) <= ec.MAX_BODY_CHARS for _, t in chunks)   # 프롬프트 한도 준수
+    assert all(len(t) >= ec.MIN_CHUNK_CHARS for _, t in chunks)  # 무의미한 조각 없음
+    assert any("장" in label for label, _ in chunks)             # 소제목이 라벨로 살아 있음
+
+    # 상한을 넘는 초장문은 MAX_CHUNKS에서 끊긴다 (비용 방어)
+    huge = ("문단입니다. " * 3000 + "\n\n") * 30
+    assert len(ec.pack_chunks(huge)) == ec.MAX_CHUNKS
+
+
+def test_enrich_long_doc_merges_chunk_claims_with_cap(test_db, monkeypatch):
+    """청크별 추출 결과를 합치되 중복 claim은 제거하고 문서당 상한을 적용한다."""
+    conn, db = test_db
+    long_body = ("서로 다른 문단 내용. " * 2500 + "\n\n") * 3  # 한도 초과 → 분할
+    conn.execute(
+        "INSERT INTO documents (id, source_id, tier, url, title, body, status, summary_only) "
+        "VALUES ('L1','s','T2','http://x/l1','장문', ?, 'new', 0)", (long_body,))
+    conn.commit()
+
+    # 청크마다 같은 claim 1건 + 고유 claim 1건을 반환 → 중복 1건만 남아야 함
+    seq = []
+    for i in range(ec_chunk_count := 5):
+        seq.append(f'[{{"claim_text": "공통 주장", "stance": "neutral", "evidence_type": "case"}},'
+                   f' {{"claim_text": "고유 주장 {i}", "stance": "neutral", "evidence_type": "case"}}]')
+    ec = _run_enrich(monkeypatch, seq)
+    monkeypatch.setattr(ec, "MAX_CLAIMS_PER_DOC", 4)
+    assert ec.main() == 0
+
+    texts = [r["claim_text"] for r in conn.execute(
+        "SELECT claim_text FROM claims WHERE document_id='L1'")]
+    assert len(texts) <= 4                      # 문서당 상한 적용
+    assert texts.count("공통 주장") == 1        # 청크 경계 중복 제거
+    assert conn.execute(
+        "SELECT status FROM documents WHERE id='L1'").fetchone()["status"] == "enriched"
+
+
 def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
     conn, db = test_db
     _add_new_doc(conn, "D1")

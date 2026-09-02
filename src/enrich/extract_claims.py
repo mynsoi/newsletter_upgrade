@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -32,6 +33,15 @@ SETTINGS_PATH = ROOT / "config" / "settings.yaml"
 MAX_BODY_CHARS = 24000
 GATE_BODY_CHARS = 4000
 
+# 장문 분할 — 프롬프트 한도를 넘는 본문이 조용히 잘리는 것을 막는다.
+# 임계를 8만 자로 두면 24k~80k 구간(2026-09-04 실측 26건)이 계속 잘리므로
+# 프롬프트 한도와 같은 값으로 잡았다. 비용 사정이 바뀌면 이 상수만 올리면 된다.
+LONG_DOC_CHARS = MAX_BODY_CHARS
+MAX_CHUNKS = 8            # 문서당 청크 상한 (비용 방어 — 24k×8 = 최대 19.2만 자 처리)
+MIN_CHUNK_CHARS = 200     # 이보다 짧은 조각은 버린다 (claim이 나올 수 없는데 호출만 소모)
+MAX_CLAIMS_PER_DOC = 20   # 문서당 claim 상한 (장문 1건이 근거 풀을 잠식하지 않도록)
+HEADING_RE = re.compile(r"^(#{1,4}\s+\S|제?\s?\d+\s*(장|절|부)\b|CHAPTER\b|Chapter\b)")
+
 VALID_STANCE = {"optimistic", "cautious", "conditional", "neutral"}
 VALID_EVIDENCE = {"survey", "experiment", "case", "data", "theory", "opinion"}
 
@@ -42,6 +52,72 @@ def build_prompt(title: str, tier: str, body: str) -> str:
             .replace("{title}", title or "(무제)")
             .replace("{tier}", tier)
             .replace("{body}", body[:MAX_BODY_CHARS]))
+
+
+def split_sections(body: str) -> list[tuple[str, str]]:
+    """본문을 장·절 경계로 자른다. 반환: [(소제목, 본문), ...].
+
+    소제목이 없는 문서(PDF 추출본 등)는 전체를 한 절로 본다 — 이후 pack_chunks가
+    문단 단위로 다시 나눈다.
+    """
+    lines = body.split("\n")
+    sections: list[tuple[str, list[str]]] = []
+    head, buf = "", []
+    for line in lines:
+        if HEADING_RE.match(line.strip()) and buf:
+            sections.append((head, buf))
+            head, buf = line.strip().lstrip("# ").strip()[:60], []
+        elif HEADING_RE.match(line.strip()):
+            head = line.strip().lstrip("# ").strip()[:60]
+        else:
+            buf.append(line)
+    if buf or head:
+        sections.append((head, buf))
+    return [(h, "\n".join(b).strip()) for h, b in sections if "\n".join(b).strip()]
+
+
+def pack_chunks(body: str, chunk_chars: int = MAX_BODY_CHARS,
+                max_chunks: int = MAX_CHUNKS) -> list[tuple[str, str]]:
+    """장·절을 chunk_chars 이하 청크로 묶는다. 한 절이 한도를 넘으면 문단(\\n\\n)으로 쪼갠다.
+
+    반환: [(라벨, 본문), ...] — 라벨은 보고·디버깅용(첫 소제목 또는 '본문 n').
+    max_chunks를 넘는 뒷부분은 버린다(비용 방어) — 호출부가 잘림 여부를 보고한다.
+    """
+    pieces: list[tuple[str, str]] = []
+    for head, text in split_sections(body):
+        if len(text) <= chunk_chars:
+            pieces.append((head, text))
+            continue
+        cur: list[str] = []
+        size = 0
+        for para in text.split("\n\n"):
+            # 문단 하나가 한도를 넘으면 그 문단만 잘라 담는다(줄 경계 유지 불가 시)
+            while len(para) > chunk_chars:
+                if cur:
+                    pieces.append((head, "\n\n".join(cur)))
+                    cur, size = [], 0
+                pieces.append((head, para[:chunk_chars]))
+                para = para[chunk_chars:]
+            if size + len(para) + 2 > chunk_chars and cur:
+                pieces.append((head, "\n\n".join(cur)))
+                cur, size = [], 0
+            cur.append(para)
+            size += len(para) + 2
+        if cur:
+            pieces.append((head, "\n\n".join(cur)))
+
+    # 인접한 짧은 절들을 한도까지 합쳐 호출 횟수를 줄인다
+    merged: list[tuple[str, str]] = []
+    for head, text in pieces:
+        if merged and len(merged[-1][1]) + len(text) + 2 <= chunk_chars:
+            prev_head, prev_text = merged[-1]
+            merged[-1] = (prev_head or head, prev_text + "\n\n" + text)
+        else:
+            merged.append((head, text))
+
+    # 합치고도 남은 아주 짧은 조각은 버린다 — claim이 나올 수 없는데 호출만 잡아먹는다
+    kept = [(h, t) for h, t in merged if len(t) >= MIN_CHUNK_CHARS] or merged[:1]
+    return [(h or f"본문 {i + 1}", t) for i, (h, t) in enumerate(kept[:max_chunks])]
 
 
 def parse_claims(raw: str) -> list[dict]:
@@ -101,7 +177,8 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--limit", type=int, default=30)
     p.add_argument("--dry-run", action="store_true",
-                   help="API 호출 없이 대상 문서와 프롬프트 길이만 출력")
+                   help="API 호출 없이 대상 문서와 분할 계획만 출력")
+    p.add_argument("--doc-id", help="특정 문서 1건만 처리 (장문 분할 점검용)")
     args = p.parse_args()
 
     from handoff import ensure_active
@@ -115,7 +192,10 @@ def main() -> int:
 
     conn = connect()
     migrate(conn)
-    docs = select_target_docs(conn, args.limit)
+    if args.doc_id:
+        docs = conn.execute("SELECT * FROM documents WHERE id = ?", (args.doc_id,)).fetchall()
+    else:
+        docs = select_target_docs(conn, args.limit)
     print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run}) — summary_only 제외")
 
     total_claims = 0
@@ -126,9 +206,22 @@ def main() -> int:
     for d in docs:
         body = d["body"] or ""
 
+        chunks = (pack_chunks(body) if len(body) > LONG_DOC_CHARS
+                  else [("전체", body)])
+        covered = sum(len(t) for _, t in chunks)
+
         if args.dry_run:
             prompt = build_prompt(d["title"], d["tier"], body)
-            print(f"  DRY  [{d['tier']}] {d['title'][:60]}  (prompt {len(prompt):,}자)")
+            note = ""
+            if len(chunks) > 1:
+                pct = covered * 100 // max(len(body), 1)
+                note = (f"  → 분할 {len(chunks)}청크, 처리 {covered:,}자/{len(body):,}자({pct}%)"
+                        + (f"  ※ MAX_CHUNKS({MAX_CHUNKS}) 상한으로 뒷부분 제외"
+                           if len(chunks) >= MAX_CHUNKS else ""))
+            print(f"  DRY  [{d['tier']}] {(d['title'] or '')[:60]}  "
+                  f"(본문 {len(body):,}자, prompt {len(prompt):,}자){note}")
+            for label, text in chunks[:MAX_CHUNKS] if len(chunks) > 1 else []:
+                print(f"         · {label[:44]:<44} {len(text):,}자")
             continue
 
         # 문서 단위 원자적 선점 — 두 프로세스가 같은 문서를 동시에 처리하지 않도록.
@@ -137,16 +230,42 @@ def main() -> int:
             print(f"  건너뜀 [{d['tier']}] {d['title'][:50]} — 다른 프로세스가 처리 중")
             continue
 
-        prompt = build_prompt(d["title"], d["tier"], body)
+        # 청크별 A1 관련성 게이트 + 추출. 장문은 무관한 장(章)을 걸러 비용을 아낀다.
+        claims: list[dict] = []
+        seen_texts: set[str] = set()
+        any_relevant = False
+        chunk_failed = False
+        for label, text in chunks:
+            try:
+                relevant = check_relevance(d["title"], text, model)
+            except Exception as e:  # noqa: BLE001 — 게이트 실패가 추출을 막지 않도록
+                gate_errors += 1
+                print(f"  게이트 오류 [{d['id']}/{label[:20]}]: {type(e).__name__} — 추출 진행")
+                relevant = True
+            if not relevant:
+                continue
+            any_relevant = True
+            try:
+                raw = call_model(build_prompt(d["title"], d["tier"], text), model)
+                for c in parse_claims(raw):
+                    key = c["claim_text"].strip()
+                    if key in seen_texts:      # 청크 경계에서 같은 주장이 겹칠 수 있다
+                        continue
+                    seen_texts.add(key)
+                    claims.append(c)
+            except Exception as e:  # noqa: BLE001 — 개별 문서 실패가 배치를 중단시키지 않도록
+                chunk_failed = True
+                print(f"  실패 [{d['id']}/{label[:20]}]: {type(e).__name__}: {e}")
+                break
+            if len(claims) >= MAX_CLAIMS_PER_DOC:
+                break
 
-        # A1 관련성 게이트 — 무관 문서는 추출하지 않고 rejected 처리
-        try:
-            relevant = check_relevance(d["title"], body, model)
-        except Exception as e:  # noqa: BLE001 — 게이트 실패가 추출을 막지 않도록
-            gate_errors += 1
-            print(f"  게이트 오류 [{d['id']}]: {type(e).__name__} — 추출 단계로 진행")
-            relevant = True
-        if not relevant:
+        if chunk_failed:
+            release_enrich_lock(conn, d["id"])  # 실패 → 잠금 해제, 다음 실행이 재시도
+            failed_docs.append(d["id"])         # 기술적 처리 실패 (API 호출·파싱) — 최종 exit code에 반영
+            continue
+
+        if not any_relevant:
             conn.execute(
                 "UPDATE documents SET status='rejected', enrich_locked_at=NULL WHERE id=?",
                 (d["id"],))
@@ -159,14 +278,7 @@ def main() -> int:
             print(f"  무관 [{d['tier']}] {d['title'][:50]} → rejected (관련성 게이트)")
             continue
 
-        try:
-            raw = call_model(prompt, model)
-            claims = parse_claims(raw)
-        except Exception as e:  # noqa: BLE001 — 개별 문서 실패가 배치를 중단시키지 않도록
-            release_enrich_lock(conn, d["id"])  # 실패 → 잠금 해제, 다음 실행이 재시도
-            failed_docs.append(d["id"])         # 기술적 처리 실패 (API 호출·파싱) — 최종 exit code에 반영
-            print(f"  실패 [{d['id']}] {d['title'][:50]}: {type(e).__name__}: {e}")
-            continue
+        claims = claims[:MAX_CLAIMS_PER_DOC]
         for c in claims:
             conf = c.get("confidence")
             conn.execute(
@@ -183,7 +295,8 @@ def main() -> int:
             (d["id"],))
         conn.commit()
         total_claims += len(claims)
-        print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건")
+        split_note = f" (분할 {len(chunks)}청크)" if len(chunks) > 1 else ""
+        print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건{split_note}")
 
     if not args.dry_run:
         print(f"\n총 {total_claims}건 claim 추출, 관련성 게이트 제외 {gated}건, "
