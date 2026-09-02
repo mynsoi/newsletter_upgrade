@@ -90,7 +90,9 @@ def extract_links(html: str, base_url: str, pattern: str,
 def pdf_to_text(data: bytes) -> str:
     from pypdf import PdfReader
     reader = PdfReader(BytesIO(data))
-    return "\n".join((page.extract_text() or "") for page in reader.pages)
+    text = "\n".join((page.extract_text() or "") for page in reader.pages)
+    # 일부 PDF 폰트 매핑은 NUL(0x00)을 뱉는다 — PostgreSQL text가 거부하므로 제거
+    return text.replace("\x00", "")
 
 
 def fetch_document(url: str, client: httpx.Client,

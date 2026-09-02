@@ -1060,3 +1060,17 @@ sources:
   note: 제외 권고 — 주제 부적합(비전 AI). 2026-08-27 확인 — RSS 미제공 / 뉴스레터 경로 폐기 — 대체 소스로 커버(α4
     후속)
   excluded_at: '2026-09-02'
+- id: academic-canon
+  name: 학술 정전(수기 백필)
+  tier: T1
+  type: manual
+  role: T1 실증 — 동료심사 논문·주요 기관 보고서·전문서 수기 백필
+  description: arXiv·NBER 등 전용 소스에 들어가지 않는 동료심사 논문, 주요 기관 보고서(WEF 등),
+    전문 단행본을 /ingest-file로 개별 등재하는 백필 전용 소스. 아티클 근거·이론 카드 원천으로 활용.
+  topics: AX & 일의 미래 · 조직 문화 · People Analytics — 학술·기관 1차 문헌
+  frequency: 비정기 (수기)
+  constraints: 수기 등록 전용(/ingest-file). 공개·오픈액세스본만 등재(절대 규칙 6). 자동 검증 대상 아님
+  status: active
+  confirmed_at: '2026-09-02'
+  lang: en
+  note: 2026-09-02 신설 — C 카테고리 학술 PDF 백필용. arXiv/NBER 전용 소스로 커버되지 않는 저널·기관보고서·전문서 담당
