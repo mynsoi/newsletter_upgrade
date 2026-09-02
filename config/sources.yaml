@@ -8,6 +8,7 @@
 # 결정 로그:
 #   2026-08-31 α4 확정: 51건 active(신규 41건 시험 중), 3건 excluded, 중앙일보 미등재(섹션 피드 부재)
 #   2026-09-02 뉴스레터 경로 폐기 — 4건 제외(SSRN·a16z·인살롱·슈퍼브AI), html 7·browse 8 재배정, active 47
+#   2026-09-04 C1(구독 계약) 폐기 — 현 계정(HBR Korea·DBR)+건별로 운영, LinkedIn 제외, HR Insight 보류. active 47
 #
 # 주의: make validate 는 이 파일을 yaml.dump 로 재기록하므로 이 주석 블록이 사라질 수 있다.
 #       사라졌으면 git 이력(α4 반영 커밋)에서 복원할 것.
@@ -520,7 +521,7 @@ sources:
   lang: en
   verified: true
   inflow_alert_days: 14
-  note: 유지 + 구독 / 요약은 RSS, 전문은 browse 건별
+  note: 유지 / RSS 요약 신호용(전문 경로 없음 — 구독 미보유)
 - id: dbr
   name: DBR(동아비즈니스리뷰)
   tier: T3
@@ -565,10 +566,7 @@ sources:
   trial_until: '2026-09-30'
   homepage: https://www.hrinsight.co.kr
   lang: ko
-  note: '계약 중 — 구독 완료 시 편입. 2026-08-27 주소 확인(hrinsight.co.kr), RSS 미제공 / [자동검증 2026-08-27]
-    API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.hrinsight.co.kr/index.xml → HTTP
-    404) / 유료 — 구독 세션에서 건별 선별(/browse-collect), 구독 계약(C1) 후 활성 / 월간 라운드 예산:
-    건별 약 6분/건'
+  note: 보류 — 구독 검토 중(현재 수집 경로 없음). 운영 중 국내 HR 실무 재료 부족 신호가 확인되면 구독 결정
 - id: aihr-blog
   name: AIHR Blog
   tier: T3
@@ -784,17 +782,16 @@ sources:
   topics: 채용 · 인재 육성 — 인재 시장 데이터
   frequency: 주
   constraints: RSS 미제공 → 뉴스레터. Atlassian 대신 선별(α4, 채용 축 보강)
-  status: active
+  status: excluded
+  excluded_at: '2026-09-04'
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   homepage: https://www.linkedin.com/business/talent/blog
   lang: en
   note: 'Atlassian과 1곳 선별. 2026-08-27 확인 — RSS 미제공 / [자동검증 2026-08-27] API·RSS 미발견:
     RSS 미발견 (시도 6건, 마지막: https://www.linkedin.com/index.xml → HTTP 404) / 2026-09-01
-    probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) / 2026-09-01 운영 변경 —
-    robots 전면 Disallow + 자동화 접근 금지 약관 — 목록 순회 금지, 사람이 리포트를 발견했을 때만
-    건별 등록(Global Talent Trends 등 연간 리포트) / 월간 라운드 예산: 건별 약 3분/건(비유료)
-    재검토'
+    probe B — robots.txt 전면 Disallow(크롤 정책상 금지, 기술적으론 200) / 2026-09-04 α4 후속 제외 —
+    robots·약관상 건별 전용이라 실질 수기와 동일, 채용 축은 NBER·HR Dive가 커버. 연간 리포트(Global
+    Talent Trends) 필요 시 거버넌스 규칙으로 재편입'
 - id: atlassian-worklife
   name: Atlassian Work Life
   tier: T4
