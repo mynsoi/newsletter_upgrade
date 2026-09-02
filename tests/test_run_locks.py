@@ -593,6 +593,41 @@ def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
     assert "new" in statuses.values()       # 실패분은 재시도 가능
 
 
+def test_enrich_main_low_failure_rate_is_success_with_warning(test_db, monkeypatch, capsys):
+    """실패율이 5% 미만(21건 중 1건)이면 경고만 남기고 exit 0 — 대량 백로그 실행에서
+    문서 1~2건의 일시적 오류로 워크플로 전체가 실패 처리되지 않아야 한다."""
+    conn, db = test_db
+    doc_ids = [f"D{i}" for i in range(21)]
+    for i, doc_id in enumerate(doc_ids):
+        _add_new_doc(conn, doc_id, collected_at=f"2026-01-01 00:00:{i:02d}")
+
+    replies = [CLAIM_JSON] * 20 + [RuntimeError("일시적 오류")]
+    ec = _run_enrich(monkeypatch, replies, argv=["--limit", "21"])
+    assert ec.main() == 0
+    out = capsys.readouterr().out
+    assert "[경고]" in out and "처리 실패 1건" in out
+
+    statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
+    assert list(statuses.values()).count("enriched") == 20
+    failed_id = doc_ids[-1]
+    assert statuses[failed_id] == "new"  # 재시도 가능 상태 그대로 (exit 0이어도 락 해제는 동일)
+    assert conn.execute(
+        "SELECT enrich_locked_at FROM documents WHERE id=?", (failed_id,)
+    ).fetchone()["enrich_locked_at"] is None
+
+
+def test_enrich_main_exact_5pct_failure_rate_is_hard_failure(test_db, monkeypatch):
+    """정확히 5%(20건 중 1건)는 '미만'이 아니므로 여전히 exit 1 — 기준의 경계값 확인."""
+    conn, db = test_db
+    doc_ids = [f"E{i}" for i in range(20)]
+    for i, doc_id in enumerate(doc_ids):
+        _add_new_doc(conn, doc_id, collected_at=f"2026-01-01 01:00:{i:02d}")
+
+    replies = [CLAIM_JSON] * 19 + [RuntimeError("오류")]
+    ec = _run_enrich(monkeypatch, replies, argv=["--limit", "20"])
+    assert ec.main() == 1
+
+
 # --------------------------------------------------------------------------- #
 # PostgreSQL 모드 (DATABASE_URL 설정 시에만)                                   #
 # --------------------------------------------------------------------------- #

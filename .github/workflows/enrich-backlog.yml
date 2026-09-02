@@ -7,30 +7,63 @@
 # 재개 가능: 문서 1건씩 커밋되므로 타임아웃·중단 후 재실행해도 처리된 분은 남고
 # 나머지(status='new')만 이어서 처리된다.
 # 비밀값: ANTHROPIC_API_KEY, DATABASE_URL 은 GitHub Secrets 로만 주입한다.
+#
+# 연쇄 실행(2026-09-04 추가): 한 실행은 최대 BACKLOG_BATCH_LIMIT(2,500)건만 처리하고,
+# 종료 시 잔여 status='new'가 있으면 이 워크플로를 스스로 다시 트리거한다.
+# - cost_cap은 "이번 실행 하나"가 아니라 "체인 전체 누적"에 대한 총 상한이다.
+#   각 회차는 (총상한 - 이전 회차까지의 누적 비용)만큼만 남은 예산으로 돈다.
+# - chain_iteration / cumulative_cost / cumulative_docs 는 체인이 내부적으로 이어받는
+#   상태값이다 — 사람이 새로 체인을 시작할 때는 손대지 않고 기본값(1 / 0 / 0)으로 둔다.
+# - 무한 루프 방지: chain_iteration이 12를 넘으면 예산이 남아도 더 이어가지 않는다.
+# - 다음 회차 트리거는 GITHUB_TOKEN으로 `gh workflow run`을 호출한다. GitHub는 종종
+#   GITHUB_TOKEN이 발생시킨 이벤트가 새 워크플로 실행을 못 만들게 막는데, workflow_dispatch를
+#   API로 명시 호출하는 경우는 보통 이 제한을 받지 않는다 — 다만 조직 정책에 따라 막힐 수
+#   있으니, 체인이 조용히 끊기면(Step Summary에 "다음 회차 트리거"가 안 보이는데 잔여가
+#   있는 경우) repo secrets에 `workflow` 스코프 PAT을 `WORKFLOW_TRIGGER_TOKEN`으로 추가한다
+#   (아래 env에서 있으면 우선 사용하도록 폴백 처리돼 있다).
 name: enrich-backlog
 
 on:
   workflow_dispatch:
     inputs:
       cost_cap:
-        description: "실측 비용(USD) 상한 — 도달 시 새 문서를 더 집지 않고 중단"
+        description: "체인 전체 누적 실측 비용(USD) 상한 — 도달 시 연쇄 중단"
         type: string
         required: true
         default: "5"
       limit:
-        description: "처리할 문서 수 상한 (비워두면 비용 상한까지 무제한)"
+        description: "체인 전체 누적 처리 문서 수 상한 (비워두면 비용 상한까지 무제한)"
         type: string
         required: false
         default: ""
+      chain_iteration:
+        description: "내부용 — 연쇄 실행 회차(1부터). 사람이 새로 시작할 때는 그대로 둔다."
+        type: string
+        required: false
+        default: "1"
+      cumulative_cost:
+        description: "내부용 — 이전 회차까지 누적 실측 비용(USD). 사람이 새로 시작할 때는 0."
+        type: string
+        required: false
+        default: "0"
+      cumulative_docs:
+        description: "내부용 — 이전 회차까지 누적 처리 문서 수. 사람이 새로 시작할 때는 0."
+        type: string
+        required: false
+        default: "0"
 
 # 두 백로그 실행이 겹치면 비용 상한을 각자 독립적으로 계산해 실측 총액이 두 배로
-# 뛸 수 있다 — 직렬화해 방지.
+# 뛸 수 있다 — 직렬화해 방지. 체인의 다음 회차도 같은 그룹이라 앞 회차 종료를 기다린다.
 concurrency:
   group: enrich-backlog
   cancel-in-progress: false
 
 permissions:
   contents: read
+  actions: write  # 체인의 다음 회차를 gh workflow run으로 트리거하기 위해 필요
+
+env:
+  BACKLOG_BATCH_LIMIT: 2500  # 회차당 처리 문서 수 상한
 
 jobs:
   enrich-backlog:
@@ -55,25 +88,49 @@ jobs:
           fi
           make init
 
-      - name: 백로그 처리
+      - name: 백로그 처리 (회차 ${{ inputs.chain_iteration }})
         id: run
         run: |
-          set -o pipefail
           if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
             echo "::error::secrets.ANTHROPIC_API_KEY 미설정" ; exit 1
           fi
-          ARGS="--backlog --cost-cap ${{ inputs.cost_cap }}"
+
+          COST_CAP="${{ inputs.cost_cap }}"
+          CUM_COST="${{ inputs.cumulative_cost }}"
+          REMAIN_COST=$(python -c "print(max(0.0, float('$COST_CAP') - float('$CUM_COST')))")
+
+          BATCH_LIMIT="$BACKLOG_BATCH_LIMIT"
           if [ -n "${{ inputs.limit }}" ]; then
-            ARGS="$ARGS --limit ${{ inputs.limit }}"
+            REMAIN_DOCS=$(python -c "print(max(0, int('${{ inputs.limit }}') - int('${{ inputs.cumulative_docs }}')))")
+            if [ "$REMAIN_DOCS" -lt "$BATCH_LIMIT" ]; then BATCH_LIMIT="$REMAIN_DOCS"; fi
           fi
-          echo "실행: python src/enrich/extract_claims.py $ARGS"
-          python src/enrich/extract_claims.py $ARGS 2>&1 | tee enrich-backlog.log
+
+          BUDGET_LEFT=$(python -c "print(1 if $REMAIN_COST > 0 else 0)")
+          if [ "$BUDGET_LEFT" = "0" ] || [ "$BATCH_LIMIT" -le 0 ]; then
+            echo "이번 회차는 예산/건수 상한에 이미 도달해 처리 없이 종료" | tee enrich-backlog.log
+            echo "exit_code=0" >> "$GITHUB_OUTPUT"
+            echo "run_cost=0" >> "$GITHUB_OUTPUT"
+            echo "run_docs=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "실행: python src/enrich/extract_claims.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT"
+          set +e
+          python src/enrich/extract_claims.py --backlog --cost-cap "$REMAIN_COST" --limit "$BATCH_LIMIT" 2>&1 | tee enrich-backlog.log
+          EC=${PIPESTATUS[0]}
+          set -e
+
+          echo "exit_code=$EC" >> "$GITHUB_OUTPUT"
+          RUN_COST=$(grep -oP '실측 비용 \$\K[0-9.]+' enrich-backlog.log | tail -1)
+          RUN_DOCS=$(grep -oP '백로그 처리 \K[0-9]+' enrich-backlog.log | tail -1)
+          echo "run_cost=${RUN_COST:-0}" >> "$GITHUB_OUTPUT"
+          echo "run_docs=${RUN_DOCS:-0}" >> "$GITHUB_OUTPUT"
 
       - name: 요약 (Step Summary)
         if: always()
         run: |
           {
-            echo "## 백로그 claim 추출 결과"
+            echo "## 백로그 claim 추출 결과 (회차 ${{ inputs.chain_iteration }}/12)"
             echo
             echo '```'
             tail -n 20 enrich-backlog.log || true
@@ -84,7 +141,75 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: enrich-backlog-log
+          name: enrich-backlog-log-round${{ inputs.chain_iteration }}
           path: enrich-backlog.log
           retention-days: 30
           if-no-files-found: warn
+
+      - name: 체인 판단 및 다음 회차 트리거
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TRIGGER_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          EC="${{ steps.run.outputs.exit_code }}"
+          RUN_COST="${{ steps.run.outputs.run_cost }}"
+          RUN_DOCS="${{ steps.run.outputs.run_docs }}"
+          ITER="${{ inputs.chain_iteration }}"
+          COST_CAP="${{ inputs.cost_cap }}"
+          LIMIT="${{ inputs.limit }}"
+
+          NEW_CUM_COST=$(python -c "print(round(float('${{ inputs.cumulative_cost }}') + float('$RUN_COST'), 4))")
+          NEW_CUM_DOCS=$(( ${{ inputs.cumulative_docs }} + RUN_DOCS ))
+          NEW_ITER=$(( ITER + 1 ))
+
+          {
+            echo
+            echo "### 연쇄 상태 (회차 ${ITER})"
+            echo "- 이번 회차: exit=${EC}, 비용 \$${RUN_COST}, 처리 시도 ${RUN_DOCS}건"
+            echo "- 누적: 비용 \$${NEW_CUM_COST} / 총상한 \$${COST_CAP}, 처리 ${NEW_CUM_DOCS}건"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          STOP_REASON=""
+          if [ "$EC" = "2" ]; then STOP_REASON="모델 단가 설정 오류(exit 2) — 확인 필요, 연쇄 중단"; fi
+          if [ -z "$STOP_REASON" ] && [ "$EC" = "1" ]; then STOP_REASON="실패율 5% 이상(exit 1) — 확인 필요, 연쇄 중단"; fi
+          if [ -z "$STOP_REASON" ] && [ "$(python -c "print(1 if $NEW_CUM_COST >= float('$COST_CAP') else 0)")" = "1" ]; then
+            STOP_REASON="누적 비용이 총 상한(\$${COST_CAP})에 도달"
+          fi
+          if [ -z "$STOP_REASON" ] && [ -n "$LIMIT" ] && [ "$NEW_CUM_DOCS" -ge "$LIMIT" ]; then
+            STOP_REASON="누적 처리 건수가 상한(${LIMIT}건)에 도달"
+          fi
+          if [ -z "$STOP_REASON" ] && [ "$NEW_ITER" -gt 12 ]; then
+            STOP_REASON="연쇄 실행 12회 안전장치 도달"
+          fi
+          if [ -z "$STOP_REASON" ]; then
+            REMAIN_NEW=$(python -c 'import sys; sys.path.insert(0,"src"); import db; conn=db.connect(); print(conn.execute("SELECT COUNT(*) c FROM documents WHERE status=? AND COALESCE(summary_only,0)=0", ("new",)).fetchone()["c"])')
+            echo "- 잔여 백로그(status=new): ${REMAIN_NEW}건" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$REMAIN_NEW" -le 0 ]; then
+              STOP_REASON="백로그 소진(잔여 0건)"
+            fi
+          fi
+
+          if [ -n "$STOP_REASON" ]; then
+            echo "연쇄 중단: $STOP_REASON"
+            echo "- **연쇄 중단**: ${STOP_REASON}" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "다음 회차(${NEW_ITER}/12) 트리거 — 누적 비용 \$${NEW_CUM_COST}로 이어서 실행"
+            echo "- **다음 회차(${NEW_ITER}/12) 트리거**" >> "$GITHUB_STEP_SUMMARY"
+            if gh workflow run enrich-backlog.yml \
+              --ref "${{ github.ref_name }}" \
+              -f cost_cap="$COST_CAP" \
+              -f limit="$LIMIT" \
+              -f chain_iteration="$NEW_ITER" \
+              -f cumulative_cost="$NEW_CUM_COST" \
+              -f cumulative_docs="$NEW_CUM_DOCS"; then
+              :
+            else
+              MANUAL_CMD="gh workflow run enrich-backlog.yml -f cost_cap=$COST_CAP -f limit=$LIMIT -f chain_iteration=$NEW_ITER -f cumulative_cost=$NEW_CUM_COST -f cumulative_docs=$NEW_CUM_DOCS"
+              echo "::warning::다음 회차 자동 트리거 실패(GITHUB_TOKEN 워크플로 재귀 실행 제한 가능성) — repo secrets에 workflow 스코프 PAT을 WORKFLOW_TRIGGER_TOKEN으로 추가하거나 수동 실행: $MANUAL_CMD"
+              echo "- **다음 회차 자동 트리거 실패** — 수동 실행: \`$MANUAL_CMD\`" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
+
+      - name: 실패율 5% 이상이면 이 실행 자체도 실패로 표시
+        if: steps.run.outputs.exit_code == '1' || steps.run.outputs.exit_code == '2'
+        run: exit 1

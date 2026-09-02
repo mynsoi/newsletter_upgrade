@@ -65,6 +65,11 @@ MODEL_PRICING: dict[str, tuple[float, float]] = {
 }
 _DATED_SUFFIX_RE = re.compile(r"-\d{8}$")
 
+# 실패율이 이 값 미만이면 "정상 종료"로 본다(exit 0, 경고 로그만 남김) — 대량 백로그
+# 실행에서 개별 문서 1~2건의 일시적 API/파싱 오류로 워크플로 전체가 실패 처리되는 것을
+# 막기 위함. 실패 문서는 락이 해제돼 다음 실행에서 자동 재시도되므로 데이터 유실은 없다.
+FAILURE_RATE_WARN_THRESHOLD = 0.05
+
 
 def _price_for(model: str) -> tuple[float, float] | None:
     """모델 ID(날짜 접미사 포함 가능)로 (입력가, 출력가)를 찾는다. 모르면 None."""
@@ -259,6 +264,7 @@ class RunStats:
     gated: int = 0
     locked: int = 0
     gate_errors: int = 0
+    processed_count: int = 0  # 락 선점에 성공해 실제로 처리를 시도한 문서 수 (실패율의 분모)
     failed_docs: list[str] = field(default_factory=list)
 
 
@@ -272,6 +278,7 @@ def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
         stats.locked += 1
         print(f"  건너뜀 [{d['tier']}] {d['title'][:50]} — 다른 프로세스가 처리 중")
         return
+    stats.processed_count += 1
 
     claims: list[dict] = []
     seen_texts: set[str] = set()
@@ -449,9 +456,17 @@ def main(argv: list[str] | None = None) -> int:
               f"— 실측 비용 ${cost.cost:.4f}"
               + (f" (상한 ${args.cost_cap} 도달로 중단)" if cost.cap_hit else ""))
         if stats.failed_docs:
+            failure_rate = (len(stats.failed_docs) / stats.processed_count
+                            if stats.processed_count else 1.0)
             print(f"[실패] 기술적 처리 실패(API 호출·파싱) {len(stats.failed_docs)}건 "
                   f"— doc id: {', '.join(stats.failed_docs)}")
             print("정상 처리분은 반영됨. 실패 문서는 잠금 해제됨 — 재실행 시 자동 재시도.")
+            if failure_rate < FAILURE_RATE_WARN_THRESHOLD:
+                print(f"[경고] 실패율 {failure_rate:.1%} — 허용 기준"
+                      f"({FAILURE_RATE_WARN_THRESHOLD:.0%}) 미만이라 정상 종료 처리(exit 0).")
+                return 0
+            print(f"[오류] 실패율 {failure_rate:.1%} — 허용 기준"
+                  f"({FAILURE_RATE_WARN_THRESHOLD:.0%}) 이상이라 exit 1.")
             return 1
         print("다음: eval/claim_spotcheck.md 절차로 정확도 스팟체크")
     return 0
