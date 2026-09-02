@@ -50,7 +50,8 @@ make test        # 테스트
 ```
 
 커맨드(.claude/commands): /collect /status /sync-internal /add-theory /draft /publish
-/ingest-url /ingest-file(브라우저 경로 진입점) /browse-collect(목록 라운드·건별 선별 —
+/ingest-url /ingest-file(브라우저 경로 진입점) /browse-collect(목록·건별 개별 절차)
+/browse-round(월간 브라우저 라운드 전체 — 목록 순회+격상+유료 건별 보조+보고서.
 본문 저장은 scripts/browse/extract_article.js, 에이전트는 본문 미열람)
 
 ## 문체 규칙 (아티클 생성 시)

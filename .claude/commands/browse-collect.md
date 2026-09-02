@@ -41,20 +41,25 @@ browse_container/browse_exclude는 첫 실행 시 실측해 기록한다.
    뜰 때까지 대기 후 진행한다 (Deloitte·BCG·PwC 등 probe B 판정 소스).
 2. **최근 30일 신규 항목 중 텍스트 기사만** 후보로 고른다:
    - 제외: 팟캐스트 · 영상 · 외부 기고(사이트 밖 링크) · 게이트 리포트(다운로드 폼 뒤)
-   - 우선: 인재 · 조직 · AI(일하는 방식) 주제
-3. 후보 URL을 DB와 대조해 **없는 URL만** 순서대로 처리한다 (있으면 건너뜀 —
+   - 적합 기준: 인재 · 조직 · AI와 일(일하는 방식) 주제
+3. **건수 규칙**: 적합 문서는 원칙적으로 **전부 수집**한다. 단 적합 문서 수가 소스별
+   기본값(sources.yaml note의 "월간 라운드 예산" 건수)을 넘으면 멈추고
+   **"적합 N건 발견 — 기본값 초과분: [제목들]. 전부 진행할까?"** 를 확인한 뒤 진행한다.
+4. 후보 URL을 DB와 대조해 **없는 URL만** 순서대로 처리한다 (있으면 건너뜀 —
    단 기존 문서가 summary_only=1이면 처리 대상: 격상 경로).
-4. **목록 항목이 PDF면**(링크 확장자 또는 응답 content-type) extract_article.js 대신
+5. **목록 항목이 PDF면**(링크 확장자 또는 응답 content-type) extract_article.js 대신
    파일을 다운로드하고, 동명의 `.yaml` 머리말(source_id·url·title·published·
    fetched_at·fetched_by: browse)을 만들어 함께 `inbox/<소스ID>/`로 이동한다 —
    /ingest-file이 pypdf로 텍스트를 추출해 등재한다.
-5. 각 기사에서 공통 절차 3~5를 수행하고, 라운드 종료 후 공통 6 형식으로 보고한다.
+6. 각 기사에서 공통 절차 3~5를 수행하고, 라운드 종료 후 공통 6 형식에
+   **"발견 적합 X건 vs 수집 Y건"** 을 병기해 보고한다.
 
 ## 건별 모드 — `/browse-collect <URL...>` (browse_mode: item)
 
 **대상 소스는 이 모드만 쓴다. 목록 순회 금지.**
-- 유료 소스(hbr · mit-smr · dbr · hr-insight): 정식 구독 계정의 세션에서
-  사용자가 지정한 글만 건별 선별한다 (절대 규칙 6).
+- 유료 소스(hbr-korea · dbr — 구독 보유분): 정식 구독 계정의 세션에서
+  사용자가 지정한 글만 건별 선별한다 (절대 규칙 6). mit-smr·hr-insight는
+  구독 미보유로 건별 경로 없음(2026-09-04 C1 폐기).
 - linkedin-talent-blog: robots 전면 Disallow + 자동화 접근 금지 약관 —
   사람이 리포트를 발견했을 때만 건별 등록(Global Talent Trends 등 연간 리포트).
 
