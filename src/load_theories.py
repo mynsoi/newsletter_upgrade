@@ -11,6 +11,7 @@
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -18,6 +19,11 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import ROOT, connect, content_hash, migrate, new_id  # noqa: E402
+
+# Windows 콘솔(cp949)에서 한글·특수문자(—) 출력이 깨지거나 UnicodeEncodeError로
+# 죽지 않도록 (rss.py·api.py·extract_claims.py 와 동일). Actions(UTF-8)에서는 영향 없음.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 THEORY_DIR = ROOT / "knowledge" / "theories"
 SOURCE_ID = "theory-canon"
@@ -37,7 +43,12 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
 
 
 def extract_bullets(body: str, heading: str) -> list[str]:
-    """'## heading' 섹션의 불릿 목록 추출 (주석 제외)."""
+    """'## heading' 섹션의 불릿 목록 추출.
+
+    제외 대상: HTML 주석 불릿, 그리고 '전체가 괄호로 감싼 순수 메모'인 불릿
+    (예: "- (추후 개발)"). 앞에 출처·계열을 괄호로 표기한 명제
+    (예: "- (Cohen & Levinthal 1990) 흡수역량은 …")는 claim으로 살린다.
+    """
     lines = body.splitlines()
     out, in_section = [], False
     for line in lines:
@@ -45,10 +56,13 @@ def extract_bullets(body: str, heading: str) -> list[str]:
         if s.startswith("## "):
             in_section = s[3:].strip().startswith(heading)
             continue
-        if in_section and s.startswith("- ") and not s.startswith("- ("):
+        if in_section and s.startswith("- "):
             item = s[2:].strip()
-            if item and "<!--" not in item:
-                out.append(item)
+            if not item or "<!--" in item:
+                continue
+            if re.fullmatch(r"\([^()]*\)", item):  # 순수 괄호 메모만 제외
+                continue
+            out.append(item)
     return out
 
 
