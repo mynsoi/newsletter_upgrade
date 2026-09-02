@@ -42,6 +42,11 @@ NUMBER_RE = re.compile(r"\d[\d,.]*\s*(?:~\s*\d[\d,.]*\s*)?(?:%|퍼센트|배|년
 CALENDAR_YEAR_RE = re.compile(r"^(?:19|20)\d{2}\s*년$")
 # 내부 자료(SKMS·경영층 메시지)는 claims 테이블을 거치지 않으므로 claim 대조 대상이 아니다
 INTERNAL_REF_HINTS = ("내부:", "skms", "신년사", "internal/")
+# 근거를 끌어다 쓰는 전형적 표현 — 주석 없는 문단에 있으면 claim 주석 누락을 의심한다
+EVIDENTIAL_RE = re.compile(
+    r"에\s*따르면|(?:연구|조사|설문|실험|보고서|분석|통계)\s*(?:결과|에서)|메타\s*분석"
+    r"|보고(?:됐|된|되었)|관측(?:됐|된|되었)|실측(?:됐|된|되었)"
+    r"|according to|study (?:finds|shows)|research shows", re.I)
 
 MIN_INDEPENDENT_SOURCES = 3
 MAX_SINGLE_SOURCE_RATIO = 0.40
@@ -138,7 +143,9 @@ def parse_article(md: str) -> tuple[list[Segment], list[str]]:
 
 
 def _first_sentence(text: str, limit: int = 70) -> str:
-    s = re.split(r"(?<=[.!?。])\s|(?<=다)\s", text.strip())[0]
+    """표·목록에 넣어도 깨지지 않도록 한 줄로 접은 첫 문장."""
+    flat = re.sub(r"\s+", " ", text.strip()).replace("|", "\\|")
+    s = re.split(r"(?<=[.!?。])\s|(?<=다)\s", flat)[0]
     return (s[:limit] + "…") if len(s) > limit else s
 
 
@@ -244,8 +251,29 @@ def verify(md: str, evidence: dict) -> dict:
             issues.append(Issue("warn", "참고자료 실사용 없음",
                                 f"사용 claim과 연결되지 않는 참고자료 항목 — 실사용만 남긴다: “{ref[:60]}”"))
 
+    # 8) 근거 주석 누락 의심 — 주석 없는 문단인데 정량·인용 표현이 있으면 사람 검토로 넘긴다
+    missing_marks: list[tuple[Segment, str]] = []
+    for seg in segments:
+        if seg.claim_ids or "참고자료" in seg.heading:
+            continue
+        reasons = []
+        if EVIDENTIAL_RE.search(seg.text):
+            reasons.append("인용 표현")
+        # 액션 섹션의 수치는 처방 값이므로 근거 주석 대상이 아니다 (인용 표현만 본다)
+        nums = [t.strip() for t in NUMBER_RE.findall(seg.text)
+                if not CALENDAR_YEAR_RE.match(t.strip())]
+        if nums and not seg.exempt:
+            reasons.append(f"수치({', '.join(nums[:3])})")
+        if reasons:
+            missing_marks.append((seg, " · ".join(reasons)))
+            issues.append(Issue(
+                "warn", "근거 주석 누락 의심",
+                f"{' · '.join(reasons)}이 있는데 `<!-- claims: ... -->` 주석이 없음",
+                f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"))
+
     return {
         "segments": segments, "used_segments": used_segments, "used": used, "unused": unused,
+        "missing_marks": missing_marks,
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
         "numbers": numbers, "references": references, "used_docs": used_docs,
         "issues": issues,
@@ -253,11 +281,19 @@ def verify(md: str, evidence: dict) -> dict:
     }
 
 
+def _rel(p: Path) -> str:
+    """리포트에는 저장소 상대경로로 적는다 (실행 위치에 따라 달라지지 않도록)."""
+    try:
+        return p.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return p.as_posix()
+
+
 def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -> str:
     used, counts = r["used"], r["counts"]
     lines = [
         f"# 검증 리포트 (실사용 기준) — {slug}", "",
-        f"대상: `{article_path.as_posix()}` · 증거: `{evidence_path.as_posix()}`",
+        f"대상: `{_rel(article_path)}` · 증거: `{_rel(evidence_path)}`",
         f"판정: **{'통과' if r['passed'] else '실패'}** "
         f"(실패 {sum(1 for i in r['issues'] if i.level == 'fail')}건 · "
         f"경고 {sum(1 for i in r['issues'] if i.level == 'warn')}건)",
@@ -304,14 +340,24 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
     else:
         lines.append("검사 대상 수치 없음 (액션·참고자료 섹션은 면제).")
 
-    lines += ["", "## 4. 참고자료 (실사용 문서만)", ""]
+    lines += ["", "## 4. 근거 주석 누락 의심 (사람 검토)", ""]
+    if r["missing_marks"]:
+        lines += ["주석 없는 문단 중 정량·인용 표현이 있는 것 — 근거를 달았는지 확인한다.", "",
+                  "| 위치 | 사유 | 문장 |", "|---|---|---|"]
+        for seg, reason in r["missing_marks"]:
+            lines.append(f"| {seg.heading or '-'} {seg.line}행 | {reason} | "
+                         f"{_first_sentence(seg.text, 60)} |")
+    else:
+        lines.append("없음.")
+
+    lines += ["", "## 5. 참고자료 (실사용 문서만)", ""]
     if r["used_docs"]:
         for src, docs in sorted(r["used_docs"].items()):
             lines.append(f"- **{src}**: {' / '.join(sorted(docs))}")
     else:
         lines.append("(사용 claim 없음)")
 
-    lines += ["", "## 5. 지적 사항", ""]
+    lines += ["", "## 6. 지적 사항", ""]
     if not r["issues"]:
         lines.append("없음.")
     for i in r["issues"]:

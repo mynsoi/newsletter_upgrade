@@ -163,6 +163,69 @@ def test_references_are_built_from_used_docs_only():
     assert any(i.kind == "참고자료 실사용 없음" for i in r["issues"])
 
 
+def test_flags_paragraphs_missing_claim_comment():
+    """주석 없는 문단에 수치·인용 표현이 있으면 경고로 지목한다."""
+    md = """<!-- slug: t -->
+## 관찰된 신호
+
+근거를 단 문단이다.
+<!-- claims: C1 -->
+
+한 조사에 따르면 상황이 달라졌다고 한다.
+
+응답자 63% 가 그렇게 답했다.
+
+주장만 있고 수치도 인용도 없는 문단이다.
+
+## 다음 주에 시도할 것
+
+주 1회 2주 동안 기록한다.
+
+메타분석 결과를 참고해 설계한다.
+"""
+    r = va.verify(md, BASE)
+    marks = {seg.line: reason for seg, reason in r["missing_marks"]}
+    sentences = [seg.text for seg, _ in r["missing_marks"]]
+
+    assert any("조사에 따르면" in s for s in sentences)      # 인용 표현
+    assert any("63%" in s for s in sentences)                # 수치
+    assert not any("주장만 있고" in s for s in sentences)     # 평서 문단은 잡지 않음
+    assert not any("주 1회 2주" in s for s in sentences)      # 액션의 처방 값은 면제
+    assert any("메타분석" in s for s in sentences)            # 액션이어도 인용 표현은 잡는다
+    assert all("수치" in v or "인용 표현" in v for v in marks.values())
+    assert all(i.level == "warn" for i in r["issues"] if i.kind == "근거 주석 누락 의심")
+
+
+def test_missing_claim_comment_ignores_year_and_references():
+    md = """<!-- slug: t -->
+## SK 맥락에서의 의미
+
+2026년 신년사에서 언급된 방향과 맞닿는다.
+<!-- claims: C1 -->
+
+2020년에 개정된 기준을 따른다.
+
+## 참고자료
+
+- HBR: 47% 라는 수치가 담긴 기사
+"""
+    r = va.verify(md, BASE)
+    sentences = [seg.text for seg, _ in r["missing_marks"]]
+    assert not any("2020년" in s for s in sentences)   # 달력 연도만 있는 문단은 제외
+    assert not any("참고자료" in s or "47%" in s for s in sentences)  # 참고자료 섹션 제외
+
+
+def test_report_includes_missing_comment_section():
+    md = GOOD_ARTICLE + "\n한 연구 결과 수치가 12% 라고 한다.\n"
+    r = va.verify(md, BASE)
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "근거 주석 누락 의심" in report
+    assert "12%" in report
+    # 표가 깨지지 않도록 문장 발췌는 한 줄로 접힌다
+    table_rows = [ln for ln in report.splitlines() if ln.startswith("| ") and "12%" in ln]
+    assert table_rows and all(ln.count("\n") == 0 for ln in table_rows)
+
+
 def test_report_includes_sentence_to_claim_mapping():
     r = va.verify(GOOD_ARTICLE, BASE)
     report = va.render_report("t", Path("a.md"), Path("e.json"), r)
