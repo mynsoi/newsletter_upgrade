@@ -1,0 +1,444 @@
+{
+  "topic": "생산성 역설 — 개인 생산성은 올랐는데 조직 성과는 그대로인 이유",
+  "slug": "ai-productivity-paradox",
+  "collected_at": "2026-09-03",
+  "prompt_version": "v2 (스팟체크 통과 기준)",
+  "conditions": {
+    "independent_sources": [
+      "bain-insights",
+      "bcg-publications",
+      "charter",
+      "fastcompany-worklife",
+      "hr-bulletin",
+      "josh-bersin",
+      "knowledge-wharton",
+      "mckinsey-insights",
+      "psyarxiv",
+      "theory-canon",
+      "worklytics-blog"
+    ],
+    "independent_sources_count": 11,
+    "opposing_stance": "optimistic 9건 vs cautious 11건 확보",
+    "t1_t2_count": "T1 10건, T2 21건 — 충족",
+    "theory_claims": 12,
+    "single_source_share": "이론 카드 제외 최다 출처 mckinsey-insights 9/38건 (23%) — A2의 40% 상한 이내",
+    "verdict": "강제 조건 3건 모두 충족 + 이론 claim 권장 조건 충족"
+  },
+  "theory_lenses": [
+    {
+      "card": "sociotechnical-systems",
+      "title": "사회기술시스템 이론",
+      "use": "기술 시스템만 최적화하면 사회 시스템이 훼손돼 전체 성과가 떨어진다 — 개인 도구 보급과 조직 성과의 단절을 설명하는 1차 렌즈"
+    },
+    {
+      "card": "absorptive-capacity",
+      "title": "흡수역량",
+      "use": "조직 역량은 개인 지식의 합이 아니라 지식이 연결되는 구조에 의존하며, 사회적 통합 기제가 없으면 잠재가 실현으로 넘어가지 않는다 — 2차 렌즈로 교차"
+    }
+  ],
+  "cautions": [
+    "생산성-임금 괴리 수치 2건(josh-bersin 30년/14%·2%, fastcompany 1979년 이후/93.2%·33.7%)은 기준연도와 측정 방식이 다르다. 두 수치를 합산·평균하거나 같은 문장에서 호환되게 쓰지 않는다.",
+    "80% 개인 생산성 향상 보고는 mckinsey-insights와 charter 두 출처에 각각 존재한다. 같은 원조사를 인용했을 가능성이 있으므로 '독립 출처 2곳'으로 세지 않는다.",
+    "낙관 측 수치(EBITDA 3배·20% 개선 등)는 'AI 도입에 성공한 기업' 표본에 한정된 값이다. 전체 평균으로 확대 해석하지 않는다."
+  ],
+  "claims": [
+    {
+      "id": "1A0607DF60981B2C0DA6222AADD",
+      "text": "작업 시스템은 기술 시스템과 사회 시스템의 결합체이며, 전체 성과는 한쪽의 극대화가 아니라 양자의 공동 최적화(joint optimization)에 달려 있다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "사회기술시스템 이론 (Sociotechnical Systems Theory)",
+      "role": "이론 렌즈① — 공동 최적화가 전체 성과를 결정"
+    },
+    {
+      "id": "1A0607DF63454168F88ACB2DAE6",
+      "text": "기술 시스템만 최적화하는 설계는 사회 시스템(협동 구조·역할 관계)을 훼손해 전체 성과를 떨어뜨릴 수 있다 (탄광 장벽식 채탄 사례가 원형)",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "사회기술시스템 이론 (Sociotechnical Systems Theory)",
+      "role": "이론 렌즈① 핵심 — 기술만 최적화하면 전체 성과가 오히려 하락"
+    },
+    {
+      "id": "1A0607DF6F0A7D1181BDB3257D7",
+      "text": "통제된 실험이 어려운 현장 사례 연구에 기반한 이론이라 효과 크기의 정량적 일반화에는 한계가 있다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "사회기술시스템 이론 (Sociotechnical Systems Theory)",
+      "role": "경계 조건① — 효과 크기의 정량적 일반화 한계"
+    },
+    {
+      "id": "1A0607DF7240DD43147FC3728C5",
+      "text": "공동 최적화의 조작적 정의와 측정이 모호해 \"무엇이 최적화됐는가\"에 대한 엄밀한 실증 검증이 어렵다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "사회기술시스템 이론 (Sociotechnical Systems Theory)",
+      "role": "경계 조건① — '무엇이 최적화됐나'의 측정 모호성"
+    },
+    {
+      "id": "1A0607D5104DE01945F5624F6F4",
+      "text": "(원개념) 흡수역량은 개인 수준 지식의 단순 합이 아니라 구성원 간 지식이 소통·연결되는 조직 구조에 의존한다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "흡수역량 (Absorptive Capacity)",
+      "role": "이론 렌즈② 핵심 — 조직 역량은 개인 지식의 합이 아니라 연결 구조에 의존"
+    },
+    {
+      "id": "1A0607D5137D6B024DB55C20055",
+      "text": "(Zahra & George 2002, 재개념화) 흡수역량을 잠재적 흡수역량(획득·동화)과 실현된 흡수역량(변환·활용)의 두 하위 차원으로 재정의하고, 이를 동적역량의 하나로 위치시켰다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "흡수역량 (Absorptive Capacity)",
+      "role": "이론 렌즈② — 잠재적 흡수역량과 실현된 흡수역량의 구분"
+    },
+    {
+      "id": "1A0607D521FDE54EF67456FFE97",
+      "text": "(Zahra & George 후속 논의) 잠재적 흡수역량이 높아도 사회적 통합 기제가 없으면 실현된 흡수역량으로 이어지지 않을 수 있다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "흡수역량 (Absorptive Capacity)",
+      "role": "이론 렌즈② 핵심 — 사회적 통합 기제가 없으면 잠재가 실현으로 안 넘어감"
+    },
+    {
+      "id": "1A0607D51ED29068A42FB970DB9",
+      "text": "흡수역량은 다수 연구에서 R&D 지출로 대리측정되어 개념과 측정의 괴리가 크다는 비판이 있다(reification 비판, Lane et al. 2006)",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "흡수역량 (Absorptive Capacity)",
+      "role": "경계 조건② — 개념과 측정의 괴리 비판"
+    },
+    {
+      "id": "1A0607DAD69753F46F212F204D2",
+      "text": "선언된 목표보다 실제로 측정·보상되는 것이 행동을 지배한다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "role": "보조 이론 — 측정·보상되는 것이 행동을 지배 (측정 설계 논점)"
+    },
+    {
+      "id": "1A064222FC5C1993D9D1580B9B2",
+      "text": "AI 시스템은 생산성 향상과 과부하, 자율성 증대와 통제 상실, 역량 확대와 역량 저하 등 거의 모든 차원에서 동시에 자원과 부담으로 작용할 수 있다",
+      "source": "psyarxiv",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "Auswirkungen von Künstlicher Intelligenz auf psychische Belastung in der Arbeitswelt – ein Überblick",
+      "role": "보조 이론(T1) — AI는 자원이자 부담으로 동시 작용"
+    },
+    {
+      "id": "1A0611B63577F068A985377A9BE",
+      "text": "AI가 개별 직원의 생산성을 향상시켰다고 보고하는 응답자가 다수이다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "survey",
+      "doc": "The state of AI in 2026: On the road to ROI",
+      "role": "관찰된 신호 — 개인 생산성 향상 체감 (상반 관점: 낙관)",
+      "metric": "응답자의 80%가 AI로 인한 개인 생산성 향상 보고"
+    },
+    {
+      "id": "1A061318D65472EFF98A680E413",
+      "text": "응답자의 80%가 AI로 인한 개인 생산성 향상을 보고했다",
+      "source": "charter",
+      "tier": "T3",
+      "stance": "optimistic",
+      "evidence_type": "survey",
+      "doc": "Why you shouldn’t give AI agents a name",
+      "role": "관찰된 신호 — 동일 지표의 타 출처 교차 확인",
+      "metric": "80%"
+    },
+    {
+      "id": "1A0640EA93CAC1BC0B545F443E6",
+      "text": "생성형 AI 보조자 도입 시 평균 생산성이 14% 향상되었으나, 신입 직원은 34% 향상되어 기존 강력한 성과자의 실무 관행이 전파되면서 효과가 커진다",
+      "source": "worklytics-blog",
+      "tier": "T4",
+      "stance": "conditional",
+      "evidence_type": "experiment",
+      "doc": "How to Measure AI Skills Across Your Workforce Beyond Survey | Worklytics",
+      "role": "관찰된 신호 — 실험 근거, 신입에서 효과가 더 큼",
+      "metric": "assistant raised productivity 14% on average and 34% for novices"
+    },
+    {
+      "id": "1A0611FD78092D819824F7C0CD5",
+      "text": "AI 도입에 성공한 기업들은 투자 1달러당 평균 3달러의 증분 EBITDA를 실현했다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "data",
+      "doc": "The new management playbook for AI: How to move faster and create more value",
+      "role": "상반 관점(낙관) — 성공 기업의 투자 대비 EBITDA",
+      "metric": "$1 of investment realized $3 of incremental EBITDA"
+    },
+    {
+      "id": "1A0611FD6D365BE42A1E3CB5B14",
+      "text": "연구 대상 20개 기업은 평균적으로 3년 후 EBITDA를 20% 개선했다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "data",
+      "doc": "The new management playbook for AI: How to move faster and create more value",
+      "role": "상반 관점(낙관) — 3년 후 EBITDA 개선 실측",
+      "metric": "20 percent on average"
+    },
+    {
+      "id": "1A0614191F9C213B9A8CE686DFB",
+      "text": "BCG 2026 AI 레이더 설문에서 CEO들의 AI ROI에 대한 낙관도가 1년 전보다 높아졌다",
+      "source": "bcg-publications",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "survey",
+      "doc": "Look Past Productivity to Get Real Value from AI",
+      "role": "상반 관점(낙관) — 경영진 ROI 낙관도 상승",
+      "metric": "82%"
+    },
+    {
+      "id": "1A0611B62AAAE645DCE4AD5741A",
+      "text": "개별 직원의 생산성 향상 효과에도 불구하고 기업 전체 EBIT 영향은 변화가 없다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "The state of AI in 2026: On the road to ROI",
+      "role": "통념과의 충돌 핵심 — 개인 향상에도 전사 EBIT는 그대로",
+      "metric": "EBIT 긍정적 기여 보고: 37% (전년도와 동일)"
+    },
+    {
+      "id": "1A059B60EA5B8BE66BBA731A360",
+      "text": "산업 분야 CEO의 대다수는 자신들의 AI 프로그램이 기대에 미치지 못하고 있다고 인식하며, 이유는 역량 부족, 확장 실패한 파일럿, 증명되지 않은 투자 수익률이다",
+      "source": "bain-insights",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "<![CDATA[ Industrial CEOs: Is AI the Least of Their Worries?]]>",
+      "role": "통념과의 충돌 — CEO 다수가 기대 미달로 인식",
+      "metric": "90%"
+    },
+    {
+      "id": "1A0612C89106DA3372FB4B2018E",
+      "text": "개인 단위의 생산성 향상은 최대 10~20% 수준에 그친다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "The Rise Of The Supermanager: A New Role In The World of AI",
+      "role": "통념과의 충돌 — 개인 단위 향상의 상한",
+      "metric": "10-20%"
+    },
+    {
+      "id": "1A0612A86DC02A2F6A7FAC65756",
+      "text": "AI 도구의 기술 성능 향상 속도와 조직의 비즈니스 생산성 향상 속도 간에 격차가 증가하고 있다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "The Rise Of The Supermanager",
+      "role": "통념과의 충돌 — 기술 성능과 조직 생산성의 격차 확대"
+    },
+    {
+      "id": "1A06143B9FF7FC6E1962FB1F0FF",
+      "text": "현재 AI 인프라 투자는 아직 생산성 데이터에는 나타나지 않은 생산성 호황에 기반하고 있다",
+      "source": "knowledge-wharton",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "Can AI Productivity Grow Fast Enough to Justify Big Tech’s Spending?",
+      "role": "통념과의 충돌 — 아직 생산성 데이터에 없는 호황에 기반한 투자"
+    },
+    {
+      "id": "1A0640B80E95CD0FE1FC2F4F1D5",
+      "text": "소프트웨어 엔지니어 설문 응답자 중 AI 생산성 향상을 의미 있다고 보고한 비율이 낮다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "Beyond the copilot: Scaling the agentic product development life cycle",
+      "role": "통념과의 충돌 — 일부는 오히려 팀 생산성 감소를 보고",
+      "metric": "이사급 이상: 25%만 '의미 있는' 가속화 보고, 30%는 팀 생산성 감소 보고"
+    },
+    {
+      "id": "1A0640B7F8B28E2DE659DBDFA0C",
+      "text": "프로세스 재설계 후 AI를 도입한 조직이 기존 업무 방식에 AI를 덧붙인 조직보다 생산성 향상이 크다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "survey",
+      "doc": "Beyond the copilot: Scaling the agentic product development life cycle",
+      "role": "메커니즘 핵심 — 재설계 후 도입이 덧붙이기보다 성과가 크다 (이론①의 실증 대응)",
+      "metric": "프로세스 재설계 후 도입: 20% 이상 생산성 향상 확률 2배 이상"
+    },
+    {
+      "id": "1A0611C09CA8CDC985C4E4BFBE1",
+      "text": "에이전틱 기술 도입에 성공하는 조직은 기술 투자 1달러당 프로세스 재설계에 3달러, 역량 구축과 채택에 5달러를 지출하는 1:3:5 패턴을 따른다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "opinion",
+      "doc": "How to close the agentic adoption gap",
+      "role": "메커니즘 — 기술보다 재설계·역량에 더 쓰는 투자 배분",
+      "metric": "1:3:5 투자 패턴"
+    },
+    {
+      "id": "1A059B749912D2D796717A8764B",
+      "text": "기능별로 분산된 AI 도입은 각 팀의 생산성을 높이지만 팀 간 업무 연계의 문제는 해결하지 못한다",
+      "source": "bain-insights",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "<![CDATA[Why Pharma Transformations Stall—and How to Fix Them]]>",
+      "role": "메커니즘 — 국지적 향상이 팀 간 연계 문제를 못 푼다"
+    },
+    {
+      "id": "1A059B747B179648F58ABD6145A",
+      "text": "제약사가 변화에 빠르게 대응할 수 있는 역량을 구축하지 못한 경우, AI 도입이 어제의 업무를 자동화하는 것으로 귀결되어 근본적인 업무 재설계를 이루지 못한다",
+      "source": "bain-insights",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "<![CDATA[Why Pharma Transformations Stall—and How to Fix Them]]>",
+      "role": "메커니즘 — 재설계 없는 도입은 '어제의 업무'를 자동화"
+    },
+    {
+      "id": "1A06132308CD805C65088E74D1D",
+      "text": "SAP의 자율 엔터프라이즈 아키텍처는 기존 비즈니스 프로세스를 자동화하는 데 중점을 두고 있으며, 프로세스 재설계보다는 현재 시스템의 운영 효율성 향상에 초점을 맞추고 있다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "neutral",
+      "evidence_type": "case",
+      "doc": "SAP’s Autonomous Enterprise – It Now Calls Itself An AI Company",
+      "role": "메커니즘 — 재설계보다 기존 프로세스 자동화에 초점을 둔 실제 사례"
+    },
+    {
+      "id": "1A0612474F0481486912CE8AFF5",
+      "text": "AI를 통한 10배~100배 규모의 비즈니스 혁신 사례들은 모두 일자리 감소가 아닌 비즈니스 프로세스 재설계에서 시작한다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "case",
+      "doc": "Is Block’s Decision To Layoff 40% of Its Workforce A Bellwether Or Not?",
+      "role": "메커니즘 — 대형 성과 사례의 공통 출발점은 재설계"
+    },
+    {
+      "id": "1A061323341352E0D50F9C1D7B8",
+      "text": "AI 에이전트 기반의 프로세스 재설계 (Stage 3~4)는 단순 자동화 (Stage 2)만으로 달성하는 ROI보다 5~10배 높은 수익 창출이 가능하다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "optimistic",
+      "evidence_type": "theory",
+      "doc": "SAP’s Autonomous Enterprise – It Now Calls Itself An AI Company",
+      "role": "메커니즘 — 재설계 단계와 단순 자동화의 ROI 격차",
+      "metric": "Stage 3~4: Stage 2 대비 5~10배 높은 ROI"
+    },
+    {
+      "id": "1A0640B7E0AAFE9269708045AA8",
+      "text": "AI를 도입한 소프트웨어 조직 간 생산성 향상 정도가 크게 차이난다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "neutral",
+      "evidence_type": "survey",
+      "doc": "Beyond the copilot: Scaling the agentic product development life cycle",
+      "role": "교차 해석 — 조직 간 편차가 평균값을 무의미하게 만든다",
+      "metric": "상위 20% 엔지니어 평균 55% vs 하위 80% 평균 3%"
+    },
+    {
+      "id": "1A0614933CB7B21D7D00348EFD6",
+      "text": "생성형 AI 지원으로 경험 부족한 상담사의 생산성과 서비스 품질이 가장 크게 개선되었으나, 숙련된 상담사의 지표는 개선되지 않았거나 악화되기도 했다",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "stance": "conditional",
+      "evidence_type": "case",
+      "doc": "The Economic Potential of Generative AI: The Next Productivity Frontier",
+      "role": "교차 해석 — 숙련도에 따라 효과 방향이 갈린다"
+    },
+    {
+      "id": "1A06147EAA51520609B13FD56B2",
+      "text": "한 배포에서 주간 절감 시간이 약 1,240시간으로 연간 생산성 가치 $2.4M에 해당하며, 자동화 가능한 업무의 68%는 여전히 AI 미지원 상태다",
+      "source": "worklytics-blog",
+      "tier": "T4",
+      "stance": "conditional",
+      "evidence_type": "data",
+      "doc": "How to Identify Which Tasks Employees Automate with AI  | Worklytics",
+      "role": "교차 해석 — 절감 시간은 크지만 대상 업무의 상당 부분이 미적용",
+      "metric": "1,240 hours/week saved; $2.4M annualized value; 68% automatable work without AI"
+    },
+    {
+      "id": "1A0640CE8D14EF1CF80125300E2",
+      "text": "직장의 낮은 생산성은 기술 부족이나 개인의 태만이 아니라 일의 구조와 조직 문화에서 비롯될 수 있다",
+      "source": "hr-bulletin",
+      "tier": "T3",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "“일 할 시간이 없다”",
+      "role": "SK 맥락 연결 — 낮은 생산성의 원인은 일의 구조와 문화"
+    },
+    {
+      "id": "1A061413509032C29FFD314F9FF",
+      "text": "생산성 개선을 위해서는 AI와 기술뿐만 아니라 모든 구성원을 새로운 업무 방식으로 전환하고 업무 흐름에서 숙련도를 높일 수 있는 공간 조성이 성공의 관건이다",
+      "source": "hr-bulletin",
+      "tier": "T3",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "데이터로 엿보는 구성원의 마음",
+      "role": "액션 근거 — 업무 방식 전환과 숙련 공간 조성이 관건"
+    },
+    {
+      "id": "1A06143B8A56CCCCB24D85B996B",
+      "text": "1990년대 후반 광섬유 케이블 구축은 약 1.3배에서 1.5배의 생산성 향상을 가져왔다",
+      "source": "knowledge-wharton",
+      "tier": "T2",
+      "stance": "neutral",
+      "evidence_type": "data",
+      "doc": "Can AI Productivity Grow Fast Enough to Justify Big Tech’s Spending?",
+      "role": "역사 대조 — 과거 인프라 투자기의 생산성 향상 폭",
+      "metric": "1.3 to 1.5x productivity gain"
+    },
+    {
+      "id": "1A06135224EC3964BA9BD077EBC",
+      "text": "지난 30년간 노동생산성은 14% 증가했으나 임금은 2%만 증가했다",
+      "source": "josh-bersin",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "data",
+      "doc": "Affordability Is Not Just Inflation: It’s Time For A Historic Shift In Wages.",
+      "role": "남은 쟁점 — 생산성과 임금의 괴리 (지표 A)",
+      "metric": "생산성 14%, 임금 2%"
+    },
+    {
+      "id": "1A0613654FB8CF7B1CA26E1A34A",
+      "text": "1979년 이후 근로자 생산성은 크게 증가했지만 시간당 임금 상승폭은 훨씬 낮다",
+      "source": "fastcompany-worklife",
+      "tier": "T3",
+      "stance": "cautious",
+      "evidence_type": "data",
+      "doc": "Why the dream of ‘having it all’ is finally dead",
+      "role": "남은 쟁점 — 생산성과 임금의 괴리 (지표 B, 기준연도·측정이 A와 다름)",
+      "metric": "생산성 93.2% 증가, 시간당 임금 33.7% 증가"
+    },
+    {
+      "id": "1A0612F815EE453599BFC7968DD",
+      "text": "최근 몇 년간 노동 생산성은 기록적 수준으로 올랐지만 근로자의 GDP 점유율은 기록적 수준으로 내려갔다",
+      "source": "charter",
+      "tier": "T3",
+      "stance": "cautious",
+      "evidence_type": "data",
+      "doc": "A new ‘social contract’ that helps all workers benefit from AI",
+      "role": "남은 쟁점 — 생산성 상승과 근로자 몫의 반대 방향 이동"
+    }
+  ]
+}
