@@ -439,6 +439,28 @@
       "evidence_type": "data",
       "doc": "A new ‘social contract’ that helps all workers benefit from AI",
       "role": "남은 쟁점 — 생산성 상승과 근로자 몫의 반대 방향 이동"
+    },
+    {
+      "id": "1A061419353AEB682D9B0086FA3",
+      "text": "실제로 비용 감소나 수익 증가로 측정되는 의미 있는 AI 가치를 얻고 있는 기업의 비중은 매우 낮다",
+      "source": "bcg-publications",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "Look Past Productivity to Get Real Value from AI",
+      "role": "상반 관점(신중) — 낙관도와 짝을 이루는 실제 가치 실현 비중",
+      "metric": "6%"
+    },
+    {
+      "id": "1A06149CEE1D5B06DF881EC0048",
+      "text": "AI 도입으로 시간을 절감한 직원 중 66%가 절감된 시간을 어떻게 사용할지에 대한 지침을 거의 받지 못하거나 전혀 받지 못한다",
+      "source": "bcg-publications",
+      "tier": "T2",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "BCG AI at Work 2026 (Fourth Edition): Strategy Matters More Than Tools — survey slideshow",
+      "role": "메커니즘 핵심 — 절감된 시간의 사용 지침 부재 (논지 직결)",
+      "metric": "66%"
     }
   ]
 }

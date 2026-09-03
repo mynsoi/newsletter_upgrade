@@ -314,6 +314,24 @@ def test_internal_quote_check_skipped_without_db():
     assert "내부 자료를 읽지 못해" in report
 
 
+def test_prose_recommendation_paragraph_exempts_prescriptive_values():
+    """박스 구조를 없애고 제언형 산문으로 써도 기간·횟수는 처방 값으로 인식한다.
+    (2026-09-03 D1 편집 피드백 ⑧ — '리더가 할 일' 마커가 사라진 형태)"""
+    md = GOOD_ARTICLE + """
+## 우리 조직에 적용해본다면
+
+팀에서는 AI가 줄여준 시간을 모아 보는 일부터 해볼 수 있습니다. 4주쯤 지나 그 시간으로
+새로 시작한 일을 말할 수 있다면 통로가 생긴 것입니다. 개인은 한 줄씩 적어 두는 것으로
+충분합니다. 2주쯤 모이면 어디서 여유가 생기는지 보이기 시작합니다.
+"""
+    r = va.verify(md, BASE)
+    checked = {tok: status for _, tok, status in r["numbers"]}
+    assert checked.get("4주") == "prescriptive"
+    assert checked.get("2주") == "prescriptive"
+    assert not [i for i in r["issues"] if i.kind == "근거 주석 누락 의심"]
+    assert r["passed"] is True
+
+
 def test_action_paragraph_quotes_are_not_treated_as_citations():
     """액션 문단의 따옴표는 확인지표 이름이지 인용이 아니다 — 오탐을 만들지 않는다."""
     md = GOOD_ARTICLE + """
