@@ -136,11 +136,11 @@ def test_number_check_uses_used_claim_metric_and_exempts_year_and_actions():
 <!-- claims: C3 -->
 """
     r = va.verify(md, ev)
-    checked = {tok: ok for _, tok, ok in r["numbers"]}
-    assert checked.get("47%") is True                      # 사용 claim의 metric과 일치
-    assert checked.get("88%") is False                     # 근거 없음 → 실패
+    checked = {tok: status for _, tok, status in r["numbers"]}
+    assert checked.get("47%") == "ok"                      # 사용 claim의 metric과 일치
+    assert checked.get("88%") == "fail"                    # 근거 없음 → 실패
     assert "2026년" not in checked                          # 달력 연도는 서지 표기 — 면제
-    assert "2주" not in checked and "1회" not in checked     # 액션 섹션 면제
+    assert checked.get("2주") == "prescriptive"             # 액션 섹션의 기간 값은 처방 값
     assert any(i.kind == "수치 근거 없음" for i in r["issues"] if i.level == "fail")
 
 
@@ -232,6 +232,122 @@ def test_report_includes_sentence_to_claim_mapping():
     assert "본문 사용 claim (문장 ↔ claim ID)" in report
     assert "첫 문단이다" in report and "`C1`" in report
     assert "강제 조건 재계산" in report and "참고자료 (실사용 문서만)" in report
+
+
+def test_action_marker_paragraph_exempts_prescriptive_values_without_section_name():
+    """소제목이 메시지 문장이어도(article_style 4절) 액션 마커로 처방 값을 인식한다."""
+    md = """<!-- slug: t -->
+## 먼저 정할 것은 도구가 아니라 목적지입니다
+
+첫 문단이다.
+<!-- claims: C1 -->
+
+**리더가 할 일.** 팀장은 4주 안에 쓸 곳을 정합니다. 확인지표는 4주 뒤 회의입니다.
+
+**실무자가 할 일.** 구성원은 2주 동안 주 1회 기록합니다.
+"""
+    r = va.verify(md, BASE)
+    checked = {tok: status for _, tok, status in r["numbers"]}
+    assert checked.get("4주") == "prescriptive"
+    assert checked.get("2주") == "prescriptive"
+    # 처방 값이므로 "근거 주석 누락 의심" 경고도 뜨지 않는다
+    assert not [i for i in r["issues"] if i.kind == "근거 주석 누락 의심"]
+
+
+def test_prescriptive_exemption_does_not_hide_real_numbers_in_action_paragraph():
+    """액션 문단이라도 기간·횟수가 아닌 수치(%)는 그대로 근거 대조한다."""
+    md = """<!-- slug: t -->
+## 무엇을 할 것인가
+
+첫 문단이다.
+<!-- claims: C1 -->
+
+**리더가 할 일.** 팀장은 2주 안에 생산성 88% 향상을 목표로 잡습니다.
+"""
+    r = va.verify(md, BASE)
+    checked = {tok: status for _, tok, status in r["numbers"]}
+    assert checked.get("2주") == "prescriptive"
+    assert checked.get("88%") == "fail"        # 근거 없는 수치는 여전히 잡힌다
+    assert any(i.kind == "수치 근거 없음" for i in r["issues"] if i.level == "fail")
+
+
+INTERNAL = [{"id": "internal/ceo.md", "title": "이천포럼 CEO 패널토의",
+             "speaker": "SK이노베이션 E&S 대표이사",
+             "body": "제가 말씀드리고 싶은 건, 사람이 남는다는 문제가 아니라 "
+                     "사람의 남는 시간을 어디에 쓸 것인가의 문제입니다."}]
+
+
+def test_internal_quote_matches_source_text():
+    md = GOOD_ARTICLE + """
+대표이사는 **"사람의 남는 시간을 어디에 쓸 것인가의 문제"**라고 정리했습니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, INTERNAL)
+    q = [x for x in r["quotes"] if x["status"] == "match"]
+    assert q and q[0]["doc"] == "이천포럼 CEO 패널토의"
+    assert q[0]["speaker"] == "SK이노베이션 E&S 대표이사"
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "내부 자료 인용 대조" in report
+    assert "발언 맥락 왜곡 여부는 사람 확인 항목" in report
+
+
+def test_internal_quote_not_found_is_warned():
+    md = GOOD_ARTICLE + """
+대표이사는 **"우리는 내년까지 전 직원을 재배치하겠습니다"**라고 말했습니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, INTERNAL)
+    assert any(i.kind == "인용 원문 미확인" for i in r["issues"])
+    assert r["passed"] is True          # 경고일 뿐 실패는 아니다 (사람 확인 항목)
+
+
+def test_internal_quote_check_skipped_without_db():
+    """DB를 못 읽으면 단정하지 않고 '확인 불가'로 남긴다."""
+    md = GOOD_ARTICLE + """
+대표이사는 **"확인할 수 없는 인용문입니다"**라고 말했습니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, [])
+    assert r["internal_available"] is False
+    assert not [i for i in r["issues"] if i.kind == "인용 원문 미확인"]
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "내부 자료를 읽지 못해" in report
+
+
+def test_action_paragraph_quotes_are_not_treated_as_citations():
+    """액션 문단의 따옴표는 확인지표 이름이지 인용이 아니다 — 오탐을 만들지 않는다."""
+    md = GOOD_ARTICLE + """
+**리더가 할 일.** 확인지표는 "재배치한 시간으로 새로 시작한 일"을 말할 수 있는지입니다.
+"""
+    r = va.verify(md, BASE, INTERNAL)
+    assert not [i for i in r["issues"] if i.kind == "인용 원문 미확인"]
+    assert not [q for q in r["quotes"] if q["status"] == "unmatched"]
+
+
+def test_cdata_wrapper_stripped_from_reference_titles():
+    ev = evidence(
+        claim("C1", "bain-insights", "optimistic",
+              doc="<![CDATA[Why Pharma Transformations Stall]]>"),
+        claim("C2", "mckinsey-insights", "cautious", doc="The state of AI"),
+        claim("C3", "theory-canon", "neutral", doc="흡수역량 (Absorptive Capacity)"),
+    )
+    md = GOOD_ARTICLE + """
+## 참고자료
+
+- Bain Insights, "Why Pharma Transformations Stall"
+"""
+    r = va.verify(md, ev)
+    assert r["used_docs"]["bain-insights"] == {"Why Pharma Transformations Stall"}
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "CDATA" not in report
+    # 제목이 정리되면 참고자료 실사용 매칭도 성공한다
+    assert not [i for i in r["issues"] if i.kind == "참고자료 실사용 없음"]
+
+
+def test_clean_title_handles_plain_and_wrapped():
+    assert va.clean_title("<![CDATA[ Industrial CEOs ]]>") == "Industrial CEOs"
+    assert va.clean_title("평범한 제목") == "평범한 제목"
+    assert va.clean_title("") == ""
 
 
 def test_cli_writes_report_and_exit_code(tmp_path, monkeypatch, capsys):

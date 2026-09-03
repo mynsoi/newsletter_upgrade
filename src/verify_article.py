@@ -9,8 +9,13 @@ evidence 파일 전체가 아니라 **본문이 실제로 인용한 claim**만�
   3. 상반 stance — optimistic·cautious 각 1건 이상 (CLAUDE.md 절대 규칙 2)
   4. 단일 출처 40% 초과 금지 (기획서 6.3)
   5. 수치 대조 — 본문 수치가 사용 claim의 metric/text에 있는지 (절대 규칙 3)
-     · 액션·참고자료 섹션은 면제(처방 값·서지 연도는 근거 수치가 아님)
-  6. 참고자료 — 실사용 문서만 남기고, 올바른 목록을 리포트에 생성
+     · 달력 연도·참고자료 섹션은 면제(서지 정보)
+     · 액션 문단의 기간·횟수(N주·주 N회 등)는 "처방 값"으로 분류해 대조하지 않는다.
+       액션 판정은 섹션 이름이 아니라 문단의 액션 마커("리더가 할 일" 등)로 한다 —
+       소제목을 메시지 문장으로 쓰라는 문체 지침과 충돌하지 않도록.
+  6. 내부 자료 인용 대조 — 본문 직접 인용을 internal_docs 원문과 문구 대조
+     · 문구 일치까지만 기계 검증. 발언 맥락 왜곡 여부는 사람 확인 항목이다.
+  7. 참고자료 — 실사용 문서만 남기고, 올바른 목록을 리포트에 생성 (CDATA 래퍼 제거)
 
 사용:
   python src/verify_article.py content/drafts/{slug}.md [--evidence ...] [--out ...] [--stdout]
@@ -52,6 +57,25 @@ MIN_INDEPENDENT_SOURCES = 3
 MAX_SINGLE_SOURCE_RATIO = 0.40
 # 수치 대조·출처 검사를 면제하는 섹션 (처방 값·서지 정보)
 EXEMPT_HEADING_HINTS = ("시도할 것", "참고자료", "액션", "리더용", "실무자용")
+# 액션 마커 문단 — 소제목을 메시지 문장으로 쓰라는 문체 지침(article_style 4절) 때문에
+# 섹션 이름만으로는 액션을 못 찾는다. 문단 자체의 마커로도 인식한다.
+ACTION_MARKER_RE = re.compile(
+    r"(?:리더|실무자|팀장|구성원|매니저|담당자)\s*(?:가|는|들이|들은)?\s*할\s*일"
+    r"|리더용|실무자용|시도할\s*것|확인\s*지표|점검\s*지표")
+# 처방 값 — 액션에서 "언제까지·몇 번"을 정하는 기간·횟수 단위. 근거 수치가 아니므로
+# 우연히 claim 숫자에 매칭돼 "근거 있음"으로 잘못 통과하는 일이 없도록 따로 분류한다.
+PRESCRIPTIVE_UNIT_RE = re.compile(r"^\d[\d,.]*\s*(?:주|개월|일|년|회|건|개|차례|분|시간)$")
+# 본문의 직접 인용 — 내부 자료(경영층 발언 등) 원문 대조 대상
+QUOTE_RE = re.compile(r"[\"“]([^\"“”]{10,200})[\"”]")
+# RSS CDATA 래퍼가 제목에 섞여 들어온 경우 (bain-insights 등) 리포트에서는 벗겨 쓴다
+CDATA_RE = re.compile(r"<!\[CDATA\[(.*?)\]\]>", re.S)
+
+
+def clean_title(title: str) -> str:
+    """CDATA 래퍼·잉여 공백을 벗긴 문서 제목."""
+    if not title:
+        return title
+    return CDATA_RE.sub(r"\1", title).strip()
 
 
 @dataclass
@@ -64,7 +88,13 @@ class Segment:
 
     @property
     def exempt(self) -> bool:
+        """섹션 이름 기반 면제 (참고자료·액션 섹션)."""
         return any(h in self.heading for h in EXEMPT_HEADING_HINTS)
+
+    @property
+    def is_action(self) -> bool:
+        """액션 문단인가 — 섹션 이름 또는 문단 안의 액션 마커로 판정."""
+        return self.exempt or bool(ACTION_MARKER_RE.search(self.text))
 
 
 @dataclass
@@ -78,6 +108,30 @@ class Issue:
 def load_evidence(path: Path) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
     return {c["id"]: c for c in data.get("claims", [])}
+
+
+def load_internal_docs() -> list[dict]:
+    """internal_docs에서 api_eligible=1 문서를 읽어온다 (인용 원문 대조용).
+
+    DB에 붙지 못하면 빈 목록을 반환한다 — 검증 자체는 DB 없이도 돌아야 하므로
+    내부 인용 대조만 "확인 불가"로 남기고 나머지 검사는 그대로 진행한다.
+    """
+    try:
+        from db import connect
+        conn = connect()
+        rows = conn.execute(
+            "SELECT id, title, speaker, body FROM internal_docs WHERE api_eligible = 1"
+        ).fetchall()
+        conn.close()
+        return [{"id": r["id"], "title": r["title"], "speaker": r["speaker"],
+                 "body": r["body"] or ""} for r in rows]
+    except Exception:  # noqa: BLE001 — DB 없음·스키마 미적용 등은 치명적이지 않다
+        return []
+
+
+def _squash(s: str) -> str:
+    """공백·문장부호 차이를 무시한 대조용 정규화."""
+    return re.sub(r"[\s·,.\"'“”‘’]+", "", s or "")
 
 
 def source_aliases() -> dict[str, str]:
@@ -149,8 +203,12 @@ def _first_sentence(text: str, limit: int = 70) -> str:
     return (s[:limit] + "…") if len(s) > limit else s
 
 
-def verify(md: str, evidence: dict) -> dict:
-    """실사용 기준 검증 결과를 dict로 반환."""
+def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> dict:
+    """실사용 기준 검증 결과를 dict로 반환.
+
+    internal_docs를 주면 본문의 직접 인용을 내부 자료 원문과 대조한다(문구 일치까지만 —
+    발언 맥락 왜곡 여부는 사람 확인 항목이다, CLAUDE.md 문체 규칙).
+    """
     segments, references = parse_article(md)
     used_segments = [s for s in segments if s.claim_ids]
     issues: list[Issue] = []
@@ -216,27 +274,36 @@ def verify(md: str, evidence: dict) -> dict:
     # 6) 수치 대조 — 사용 claim의 metric/text에 근거가 있는지
     haystack = " ".join((c.get("metric") or "") + " " + (c.get("text") or "") for c in used)
     hay_digits = set(re.findall(r"\d[\d,.]*", haystack))
-    numbers: list[tuple[Segment, str, bool]] = []
+    # status: "ok"(근거 있음) | "fail"(근거 없음) | "prescriptive"(처방 값 — 대조 대상 아님)
+    numbers: list[tuple[Segment, str, str]] = []
     for seg in segments:
-        if seg.exempt:
+        if "참고자료" in seg.heading:      # 서지 정보 — 통째 면제
             continue
         for token in NUMBER_RE.findall(seg.text):
-            if CALENDAR_YEAR_RE.match(token.strip()):   # 연도 표기는 서지 정보 — 근거 수치 아님
+            tok = token.strip()
+            if CALENDAR_YEAR_RE.match(tok):             # 연도 표기는 서지 정보 — 근거 수치 아님
                 continue
-            digits = re.findall(r"\d[\d,.]*", token)
+            # 액션 문단의 기간·횟수는 실행 처방으로 제안한 값이다. 근거 대조를 하면
+            # 한 자리 숫자가 claim의 큰 수에 부분 일치해 "근거 있음"으로 잘못 통과한다.
+            if seg.is_action and PRESCRIPTIVE_UNIT_RE.match(tok):
+                numbers.append((seg, tok, "prescriptive"))
+                continue
+            digits = re.findall(r"\d[\d,.]*", tok)
             ok = all(any(d.rstrip(".,") in h or h in d.rstrip(".,") for h in hay_digits)
                      for d in digits) if digits else True
-            numbers.append((seg, token.strip(), ok))
+            numbers.append((seg, tok, "ok" if ok else "fail"))
             if not ok:
                 issues.append(Issue(
                     "fail", "수치 근거 없음",
-                    f"본문 수치 “{token.strip()}”가 사용 claim의 metric·text에 없음",
+                    f"본문 수치 “{tok}”가 사용 claim의 metric·text에 없음",
                     f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"))
 
     # 7) 참고자료 — 실사용 문서만
     used_docs: dict[str, set[str]] = {}
     for c in used:
-        used_docs.setdefault(c.get("source", "?"), set()).add(c.get("doc") or "(문서명 없음)")
+        # 수집 단계에서 섞여 들어온 CDATA 래퍼는 벗겨서 싣는다 (참고자료에 그대로 나가지 않도록)
+        used_docs.setdefault(c.get("source", "?"), set()).add(
+            clean_title(c.get("doc") or "") or "(문서명 없음)")
     for ref in references:
         low = ref.lower()
         if any(h in low for h in INTERNAL_REF_HINTS):   # 내부 자료는 claim 대조 대상이 아님
@@ -259,10 +326,12 @@ def verify(md: str, evidence: dict) -> dict:
         reasons = []
         if EVIDENTIAL_RE.search(seg.text):
             reasons.append("인용 표현")
-        # 액션 섹션의 수치는 처방 값이므로 근거 주석 대상이 아니다 (인용 표현만 본다)
+        # 액션 문단의 처방 값은 근거 주석 대상이 아니다 (인용 표현만 본다).
+        # 섹션 이름이 아니라 문단의 액션 마커로 판정하므로 소제목이 메시지 문장이어도 걸린다.
         nums = [t.strip() for t in NUMBER_RE.findall(seg.text)
-                if not CALENDAR_YEAR_RE.match(t.strip())]
-        if nums and not seg.exempt:
+                if not CALENDAR_YEAR_RE.match(t.strip())
+                and not (seg.is_action and PRESCRIPTIVE_UNIT_RE.match(t.strip()))]
+        if nums:
             reasons.append(f"수치({', '.join(nums[:3])})")
         if reasons:
             missing_marks.append((seg, " · ".join(reasons)))
@@ -271,11 +340,40 @@ def verify(md: str, evidence: dict) -> dict:
                 f"{' · '.join(reasons)}이 있는데 `<!-- claims: ... -->` 주석이 없음",
                 f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"))
 
+    # 9) 내부 자료 인용 대조 — 본문의 직접 인용이 내부 문서 원문과 문구까지 일치하는지
+    quotes: list[dict] = []
+    docs = internal_docs or []
+    for seg in segments:
+        # 액션 문단의 따옴표는 인용이 아니라 확인지표에 이름을 붙인 표현이다
+        # ("재배치한 시간으로 새로 시작한 일"). 대조 대상으로 잡으면 오탐만 쌓인다.
+        if "참고자료" in seg.heading or seg.is_action:
+            continue
+        for q in QUOTE_RE.findall(seg.text):
+            hit = next((d for d in docs if _squash(q) in _squash(d["body"])), None)
+            if hit:
+                quotes.append({"quote": q, "seg": seg, "status": "match",
+                               "doc": clean_title(hit["title"]), "speaker": hit.get("speaker")})
+                continue
+            # 내부 자료에 없으면 외부 claim 본문에서 온 인용인지 확인한다
+            if any(_squash(q) in _squash((c.get("text") or "") + (c.get("metric") or ""))
+                   for c in used):
+                quotes.append({"quote": q, "seg": seg, "status": "external",
+                               "doc": "(사용 claim 본문)", "speaker": None})
+                continue
+            quotes.append({"quote": q, "seg": seg, "status": "unmatched",
+                           "doc": None, "speaker": None})
+            if docs:   # DB를 못 읽었으면 단정하지 않는다
+                issues.append(Issue(
+                    "warn", "인용 원문 미확인",
+                    f"직접 인용 “{q[:40]}…”의 원문을 내부 자료·사용 claim에서 찾지 못함",
+                    f"{seg.heading or '(제목 없음)'} / {seg.line}행"))
+
     return {
         "segments": segments, "used_segments": used_segments, "used": used, "unused": unused,
         "missing_marks": missing_marks,
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
         "numbers": numbers, "references": references, "used_docs": used_docs,
+        "quotes": quotes, "internal_available": bool(docs),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
     }
@@ -333,14 +431,40 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
         "## 3. 수치 대조 (절대 규칙 3)", "",
     ]
     if r["numbers"]:
+        verdict = {"ok": "✅ 사용 claim에 있음", "fail": "❌ 근거 없음",
+                   "prescriptive": "— 해당 없음 · 처방 값(실행 제안)"}
         lines += ["| 본문 수치 | 위치 | 근거 |", "|---|---|---|"]
-        for seg, token, ok in r["numbers"]:
+        for seg, token, status in r["numbers"]:
             lines.append(f"| {token} | {seg.heading or '-'} {seg.line}행 | "
-                         f"{'✅ 사용 claim에 있음' if ok else '❌ 근거 없음'} |")
+                         f"{verdict.get(status, status)} |")
+        n_pres = sum(1 for _, _, s in r["numbers"] if s == "prescriptive")
+        if n_pres:
+            lines += ["", f"처방 값 {n_pres}건은 근거 대조 대상이 아니다 — 액션에서 제안한 "
+                          "기간·횟수이므로 claim 수치와 우연히 일치해도 근거로 세지 않는다."]
     else:
-        lines.append("검사 대상 수치 없음 (액션·참고자료 섹션은 면제).")
+        lines.append("검사 대상 수치 없음 (참고자료 섹션은 면제).")
 
-    lines += ["", "## 4. 근거 주석 누락 의심 (사람 검토)", ""]
+    lines += ["", "## 4. 내부 자료 인용 대조 (경영층 발언·SKMS)", ""]
+    if not r.get("internal_available"):
+        lines.append("내부 자료를 읽지 못해 대조하지 못했다 (DB 미연결) — 사람 확인 필요.")
+    elif not r.get("quotes"):
+        lines.append("본문에 직접 인용 없음.")
+    else:
+        mark = {"match": "✅ 원문 문구 일치", "external": "· 외부 claim 본문에서 인용",
+                "unmatched": "⚠️ 원문 미확인"}
+        lines += ["| 본문 인용 | 위치 | 대조 대상 | 결과 |", "|---|---|---|---|"]
+        for q in r["quotes"]:
+            src = q["doc"] or "찾지 못함"
+            if q.get("speaker"):
+                src += f" ({q['speaker']})"
+            lines.append(f"| “{q['quote'][:50]}{'…' if len(q['quote']) > 50 else ''}” | "
+                         f"{q['seg'].heading or '-'} {q['seg'].line}행 | {src} | "
+                         f"{mark.get(q['status'], q['status'])} |")
+        if any(q["status"] == "match" for q in r["quotes"]):
+            lines += ["", "> 문구 일치까지만 기계 검증했다. **발언 맥락 왜곡 여부는 사람 확인 항목**"
+                          "이다 (CLAUDE.md 문체 규칙 — 경영층 인용은 발언 맥락 확인 후 발행)."]
+
+    lines += ["", "## 5. 근거 주석 누락 의심 (사람 검토)", ""]
     if r["missing_marks"]:
         lines += ["주석 없는 문단 중 정량·인용 표현이 있는 것 — 근거를 달았는지 확인한다.", "",
                   "| 위치 | 사유 | 문장 |", "|---|---|---|"]
@@ -350,14 +474,14 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
     else:
         lines.append("없음.")
 
-    lines += ["", "## 5. 참고자료 (실사용 문서만)", ""]
+    lines += ["", "## 6. 참고자료 (실사용 문서만)", ""]
     if r["used_docs"]:
         for src, docs in sorted(r["used_docs"].items()):
             lines.append(f"- **{src}**: {' / '.join(sorted(docs))}")
     else:
         lines.append("(사용 claim 없음)")
 
-    lines += ["", "## 6. 지적 사항", ""]
+    lines += ["", "## 7. 지적 사항", ""]
     if not r["issues"]:
         lines.append("없음.")
     for i in r["issues"]:
@@ -387,7 +511,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"evidence 파일 없음: {evidence_path}")
         return 2
 
-    result = verify(md, load_evidence(evidence_path))
+    result = verify(md, load_evidence(evidence_path), load_internal_docs())
     report = render_report(slug, article_path, evidence_path, result)
 
     if args.stdout:
