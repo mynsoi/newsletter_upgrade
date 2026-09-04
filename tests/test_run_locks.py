@@ -523,6 +523,74 @@ def test_select_target_docs_round_robin_interleaves_tiers(test_db):
     assert [r["id"] for r in ec.select_target_docs_round_robin(conn, 3)] == ["A1", "B1", "C1"]
 
 
+def _add_doc_with_source(conn, doc_id, source_id, published_at, tier="T3"):
+    conn.execute(
+        "INSERT INTO documents (id, source_id, tier, url, title, body, status, published_at) "
+        "VALUES (?,?,?,?,?,?,'new',?)",
+        (doc_id, source_id, tier, f"http://x/{doc_id}", f"문서 {doc_id}", "본문 " * 300,
+         published_at))
+    conn.commit()
+
+
+def test_build_doc_filters_passes_like_pattern_as_parameter(test_db):
+    """'%'가 SQL 본문에 들어가면 psycopg가 자리표시자로 오인한다 — 반드시 파라미터로."""
+    import enrich.extract_claims as ec
+    where, params = ec.build_doc_filters(["arxiv-*"], "2026-03-01")
+    assert "%" not in where                      # SQL 조각에는 % 리터럴이 없어야 한다
+    assert params == ["arxiv-%", "2026-03-01"]   # 와일드카드는 파라미터 값 안에서만
+    assert ec.build_doc_filters() == ("", [])    # 기본값은 필터 없음
+
+
+def test_tier_filters_exclude_sources_and_old_docs(test_db):
+    """계층1(arXiv 제외)·계층2(발행일 하한)가 의도한 문서만 집는지 실측."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_doc_with_source(conn, "AX_OLD", "arxiv-cs-hc", "2025-06-01")
+    _add_doc_with_source(conn, "AX_NEW", "arxiv-cs-cy", "2026-06-01")
+    _add_doc_with_source(conn, "HBR", "hbr-korea", "2026-08-01")
+    _add_doc_with_source(conn, "NODATE", "ms-worklab", None)
+
+    # 계층1: arXiv 제외 전부 — 발행일이 없는 문서도 포함된다
+    tier1 = {r["id"] for r in ec.select_target_docs_round_robin(conn, 10, ["arxiv-*"], None)}
+    assert tier1 == {"HBR", "NODATE"}
+
+    # 계층2: 발행일 하한만 — 하한 이후 발행분. published_at이 NULL이면 제외
+    tier2 = {r["id"] for r in ec.select_target_docs_round_robin(conn, 10, None, "2026-03-01")}
+    assert tier2 == {"AX_NEW", "HBR"}
+    assert "NODATE" not in tier2 and "AX_OLD" not in tier2
+
+    # 필터 없음 = 전부 (보류분도 삭제되지 않고 그대로 남아 있다)
+    assert len(ec.select_target_docs_round_robin(conn, 10)) == 4
+    # 일반 실행 경로에도 같은 필터가 걸린다
+    assert {r["id"] for r in ec.select_target_docs(conn, 10, ["arxiv-*"], None)} == {"HBR", "NODATE"}
+
+
+def test_backlog_tier1_leaves_excluded_docs_untouched(test_db, monkeypatch):
+    """계층1 실행 후 arXiv 문서는 손대지 않은 채 status='new'로 남아야 한다(보류 = 보존)."""
+    conn, db = test_db
+    _add_doc_with_source(conn, "AX1", "arxiv-cs-hc", "2025-06-01")
+    _add_doc_with_source(conn, "HBR1", "hbr-korea", "2026-08-01")
+
+    ec = _run_enrich(monkeypatch, CLAIM_JSON,
+                     argv=["--backlog", "--exclude-sources", "arxiv-*"])
+    assert ec.main() == 0
+
+    statuses = {r["id"]: (r["status"], r["enrich_locked_at"])
+                for r in conn.execute("SELECT id, status, enrich_locked_at FROM documents")}
+    assert statuses["HBR1"][0] == "enriched"
+    assert statuses["AX1"] == ("new", None)  # 잠금도 걸리지 않음 — 필터만 풀면 그대로 재개
+
+
+def test_published_after_rejects_bad_date_format(test_db, monkeypatch, capsys):
+    """형식이 틀리면 조용히 0건을 집어 '백로그가 비었다'로 오인하기 쉽다 — 즉시 중단."""
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, "[]", argv=["--backlog", "--published-after", "2026/03/01"])
+    assert ec.main() == 2
+    assert "YYYY-MM-DD" in capsys.readouterr().out
+    assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+
+
 def test_backlog_processes_round_robin_across_tiers(test_db, monkeypatch, capsys):
     conn, db = test_db
     for i in range(3):

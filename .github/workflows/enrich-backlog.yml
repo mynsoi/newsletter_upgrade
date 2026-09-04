@@ -8,6 +8,17 @@
 # 나머지(status='new')만 이어서 처리된다.
 # 비밀값: ANTHROPIC_API_KEY, DATABASE_URL 은 GitHub Secrets 로만 주입한다.
 #
+# 계층 실행(2026-09-04 확정): 백로그를 한 번에 다 돌리지 않고 밀도 높은 순서로 나눠 돈다.
+#   계층1  exclude_sources=arxiv-*                    922건   arXiv 제외 전부
+#   계층2  published_after=2026-03-01               7,414건   arXiv 최근 6개월
+#          (계층1이 끝난 뒤 실행하면 잔여가 arXiv뿐이라 이 인자만으로 계층2가 된다)
+#   보류   (실행하지 않음)                         13,699건   arXiv 12개월 이전분
+# 보류분은 삭제하지 않는다 — 문서는 그대로 두고 status='new'로 남겨, 필요해지면 필터만
+# 풀어 이어서 처리한다. arXiv를 뒤로 미루는 근거는 게이트 차단율로, arXiv 66~76% 대
+# 나머지 소스 0~6%(2026-09-04 실측)라 같은 비용으로 건지는 claim이 훨씬 적다.
+# 계층 필터는 연쇄 회차마다 그대로 이어진다 — 잔여 건수도 같은 필터로 세므로, 보류 계층이
+# 남아 있어도 현재 계층이 끝나면 연쇄가 멈춘다.
+#
 # 연쇄 실행(2026-09-04 추가): 한 실행은 최대 BACKLOG_BATCH_LIMIT(2,500)건만 처리하고,
 # 종료 시 잔여 status='new'가 있으면 이 워크플로를 스스로 다시 트리거한다.
 # - cost_cap은 "이번 실행 하나"가 아니라 "체인 전체 누적"에 대한 총 상한이다.
@@ -33,6 +44,16 @@ on:
         default: "5"
       limit:
         description: "체인 전체 누적 처리 문서 수 상한 (비워두면 비용 상한까지 무제한)"
+        type: string
+        required: false
+        default: ""
+      exclude_sources:
+        description: "제외할 source_id 패턴(쉼표 구분, '*' 와일드카드). 계층1은 'arxiv-*'"
+        type: string
+        required: false
+        default: ""
+      published_after:
+        description: "발행일 하한 YYYY-MM-DD. 계층2는 '2026-03-01' (빈 값이면 하한 없음)"
         type: string
         required: false
         default: ""
@@ -114,9 +135,19 @@ jobs:
             exit 0
           fi
 
-          echo "실행: python src/enrich/extract_claims.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT"
+          # 계층 필터 — 연쇄 회차마다 그대로 이어져야 한다(안 그러면 다음 회차가 보류
+          # 계층인 arXiv 옛날분을 집는다). 아래 트리거 단계에서도 같은 값을 넘긴다.
+          FILTER_ARGS=""
+          if [ -n "${{ inputs.exclude_sources }}" ]; then
+            FILTER_ARGS="$FILTER_ARGS --exclude-sources ${{ inputs.exclude_sources }}"
+          fi
+          if [ -n "${{ inputs.published_after }}" ]; then
+            FILTER_ARGS="$FILTER_ARGS --published-after ${{ inputs.published_after }}"
+          fi
+
+          echo "실행: python src/enrich/extract_claims.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT$FILTER_ARGS"
           set +e
-          python src/enrich/extract_claims.py --backlog --cost-cap "$REMAIN_COST" --limit "$BATCH_LIMIT" 2>&1 | tee enrich-backlog.log
+          python src/enrich/extract_claims.py --backlog --cost-cap "$REMAIN_COST" --limit "$BATCH_LIMIT" $FILTER_ARGS 2>&1 | tee enrich-backlog.log
           EC=${PIPESTATUS[0]}
           set -e
 
@@ -157,6 +188,13 @@ jobs:
           ITER="${{ inputs.chain_iteration }}"
           COST_CAP="${{ inputs.cost_cap }}"
           LIMIT="${{ inputs.limit }}"
+          EXCLUDE="${{ inputs.exclude_sources }}"
+          PUBLISHED_AFTER="${{ inputs.published_after }}"
+
+          # 단계마다 셸이 새로 뜨므로 계층 필터를 여기서 다시 조립한다(앞 단계와 같은 값)
+          FILTER_ARGS=""
+          if [ -n "$EXCLUDE" ]; then FILTER_ARGS="$FILTER_ARGS --exclude-sources $EXCLUDE"; fi
+          if [ -n "$PUBLISHED_AFTER" ]; then FILTER_ARGS="$FILTER_ARGS --published-after $PUBLISHED_AFTER"; fi
 
           NEW_CUM_COST=$(python -c "print(round(float('${{ inputs.cumulative_cost }}') + float('$RUN_COST'), 4))")
           NEW_CUM_DOCS=$(( ${{ inputs.cumulative_docs }} + RUN_DOCS ))
@@ -182,8 +220,10 @@ jobs:
             STOP_REASON="연쇄 실행 12회 안전장치 도달"
           fi
           if [ -z "$STOP_REASON" ]; then
-            REMAIN_NEW=$(python -c 'import sys; sys.path.insert(0,"src"); import db; conn=db.connect(); print(conn.execute("SELECT COUNT(*) c FROM documents WHERE status=? AND COALESCE(summary_only,0)=0", ("new",)).fetchone()["c"])')
-            echo "- 잔여 백로그(status=new): ${REMAIN_NEW}건" >> "$GITHUB_STEP_SUMMARY"
+            # 같은 계층 필터를 적용해 센다 — 보류 계층(arXiv 옛날분)을 잔여로 오인하면
+            # 처리할 게 없는데도 12회까지 헛돈다.
+            REMAIN_NEW=$(python src/enrich/extract_claims.py --count-remaining $FILTER_ARGS)
+            echo "- 잔여 백로그(현재 계층 기준): ${REMAIN_NEW}건" >> "$GITHUB_STEP_SUMMARY"
             if [ "$REMAIN_NEW" -le 0 ]; then
               STOP_REASON="백로그 소진(잔여 0건)"
             fi
@@ -199,12 +239,14 @@ jobs:
               --ref "${{ github.ref_name }}" \
               -f cost_cap="$COST_CAP" \
               -f limit="$LIMIT" \
+              -f exclude_sources="$EXCLUDE" \
+              -f published_after="$PUBLISHED_AFTER" \
               -f chain_iteration="$NEW_ITER" \
               -f cumulative_cost="$NEW_CUM_COST" \
               -f cumulative_docs="$NEW_CUM_DOCS"; then
               :
             else
-              MANUAL_CMD="gh workflow run enrich-backlog.yml -f cost_cap=$COST_CAP -f limit=$LIMIT -f chain_iteration=$NEW_ITER -f cumulative_cost=$NEW_CUM_COST -f cumulative_docs=$NEW_CUM_DOCS"
+              MANUAL_CMD="gh workflow run enrich-backlog.yml -f cost_cap=$COST_CAP -f limit=$LIMIT -f exclude_sources=$EXCLUDE -f published_after=$PUBLISHED_AFTER -f chain_iteration=$NEW_ITER -f cumulative_cost=$NEW_CUM_COST -f cumulative_docs=$NEW_CUM_DOCS"
               echo "::warning::다음 회차 자동 트리거 실패(GITHUB_TOKEN 워크플로 재귀 실행 제한 가능성) — repo secrets에 workflow 스코프 PAT을 WORKFLOW_TRIGGER_TOKEN으로 추가하거나 수동 실행: $MANUAL_CMD"
               echo "- **다음 회차 자동 트리거 실패** — 수동 실행: \`$MANUAL_CMD\`" >> "$GITHUB_STEP_SUMMARY"
             fi

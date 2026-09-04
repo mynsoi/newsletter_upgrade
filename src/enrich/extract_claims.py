@@ -5,6 +5,15 @@
       python src/enrich/extract_claims.py --backlog --limit 500 --cost-cap 5
       python src/enrich/extract_claims.py --backlog --cost-cap 100   # 잔여 전량, 비용 상한만
 
+백로그 계층 (2026-09-04 확정 — 실측 규모는 그 시점 기준):
+  계층1  --exclude-sources 'arxiv-*'          922건   arXiv 제외 전부
+  계층2  --published-after 2026-03-01       7,414건   arXiv 최근 6개월
+                                                     (계층1이 끝나면 잔여는 arXiv뿐)
+  보류   (실행하지 않음)                   13,699건   arXiv 12개월 이전분
+보류분은 **삭제하지 않는다** — 문서는 그대로 두고 status='new'로 남겨, 나중에 필요해지면
+필터만 풀어 그대로 이어서 처리한다. arXiv 구간을 뒤로 미루는 이유는 비용 대비 밀도로,
+게이트 차단율이 66~76%(2026-09-04 실측)로 다른 소스(0~6%)보다 압도적으로 높기 때문이다.
+
 - 프롬프트 원본: prompts/claim_extraction.md (코드 내 프롬프트 금지 — CLAUDE.md)
 - 모델: config/settings.yaml의 enrich_model (추출은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
@@ -206,29 +215,55 @@ def parse_claims(raw: str) -> list[dict]:
     return valid
 
 
-def select_target_docs(conn, limit: int):
+def build_doc_filters(exclude_sources: list[str] | None = None,
+                      published_after: str | None = None) -> tuple[str, list]:
+    """계층 필터를 WHERE 절 조각과 파라미터로 만든다. 반환: (SQL 조각, 파라미터 목록).
+
+    LIKE 패턴은 SQL 본문이 아니라 **파라미터로** 넘긴다 — 패턴의 '%'가 SQL 문자열에
+    들어 있으면 psycopg가 자리표시자로 오인해 터진다(db.py의 % 리터럴 주의사항과 같은 이유).
+    published_after는 published_at이 NULL인 문서를 **제외**한다 — 발행일을 모르는 문서를
+    "하한 이후"라고 단정할 근거가 없다.
+    """
+    clauses, params = [], []
+    for pattern in exclude_sources or []:
+        clauses.append("source_id NOT LIKE ?")
+        params.append(pattern.replace("*", "%"))
+    if published_after:
+        clauses.append("published_at >= ?")
+        params.append(published_after)
+    return ("".join(f" AND {c}" for c in clauses), params)
+
+
+def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = None,
+                       published_after: str | None = None):
     """추출 대상: status='new'이면서 summary_only가 아닌 문서, collected_at 순 (일반 실행)."""
+    where, params = build_doc_filters(exclude_sources, published_after)
     return conn.execute(
-        "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0 "
-        "ORDER BY collected_at LIMIT ?",
-        (limit,),
+        "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0"
+        f"{where} ORDER BY collected_at LIMIT ?",
+        (*params, limit),
     ).fetchall()
 
 
-def select_target_docs_round_robin(conn, limit: int):
+def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] | None = None,
+                                   published_after: str | None = None):
     """추출 대상을 티어별로 번갈아 뽑는다 (T1이 21,000건+로 압도적이라 순서대로면 다른
     티어가 굶는다). 윈도우 함수로 "티어 내 순번"을 매겨 그 순번 우선으로 정렬한다
     — collected_at 순은 티어 내에서 유지된다. (O(n log n) — SQLite 3.25+·PostgreSQL 공통)
+
+    계층 필터는 순번을 매기기 **전에** 적용한다 — 걸러낸 뒤의 집합 안에서 라운드로빈이
+    돌아야 제외된 소스가 순번만 잡아먹고 사라지는 일이 없다.
     """
+    where, params = build_doc_filters(exclude_sources, published_after)
     return conn.execute(
-        """SELECT * FROM (
+        f"""SELECT * FROM (
              SELECT *, ROW_NUMBER() OVER (PARTITION BY tier ORDER BY collected_at) AS _rank
              FROM documents
-             WHERE status = 'new' AND COALESCE(summary_only, 0) = 0
+             WHERE status = 'new' AND COALESCE(summary_only, 0) = 0{where}
            ) ranked
            ORDER BY _rank, tier
            LIMIT ?""",
-        (limit,),
+        (*params, limit),
     ).fetchall()
 
 
@@ -373,10 +408,36 @@ def main(argv: list[str] | None = None) -> int:
                    help="티어별 라운드로빈으로 선정 + 비용 상한 적용(백로그 처리용)")
     p.add_argument("--cost-cap", type=float, default=None,
                    help="실측 비용(USD)이 이 값에 닿으면 새 문서를 더 집지 않고 중단")
+    p.add_argument("--exclude-sources",
+                   help="제외할 source_id 패턴(쉼표 구분, '*' 와일드카드). 예: 'arxiv-*'")
+    p.add_argument("--published-after",
+                   help="발행일 하한(YYYY-MM-DD). 이 날짜 이후 발행분만 처리 "
+                        "(published_at이 비어 있는 문서는 제외된다)")
     p.add_argument("--dry-run", action="store_true",
                    help="API 호출 없이 대상 문서와 분할 계획만 출력")
     p.add_argument("--doc-id", help="특정 문서 1건만 처리 (장문 분할 점검용)")
+    p.add_argument("--count-remaining", action="store_true",
+                   help="현재 필터 기준 남은 대상 문서 수만 출력하고 종료 (연쇄 실행 판단용)")
     args = p.parse_args(argv)
+
+    exclude_sources = [s.strip() for s in (args.exclude_sources or "").split(",") if s.strip()]
+    if args.published_after and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args.published_after):
+        # 형식이 틀리면 조용히 0건을 집어 "백로그가 비었다"로 오인하기 쉽다 — 즉시 중단.
+        print(f"오류: --published-after 는 YYYY-MM-DD 형식이어야 한다 (받은 값: "
+              f"{args.published_after})")
+        return 2
+
+    if args.count_remaining:
+        # 숫자만 출력한다 — 워크플로가 그대로 변수에 담는다(같은 필터 로직을 재사용해
+        # 연쇄 실행이 '보류 계층'을 잔여로 오인하고 헛도는 것을 막는다).
+        where, params = build_doc_filters(exclude_sources, args.published_after)
+        conn = connect()
+        print(conn.execute(
+            "SELECT COUNT(*) c FROM documents "
+            f"WHERE status='new' AND COALESCE(summary_only, 0) = 0{where}",
+            tuple(params)).fetchone()["c"])
+        conn.close()
+        return 0
 
     from handoff import ensure_active
     ensure_active("claim 추출")
@@ -410,14 +471,17 @@ def main(argv: list[str] | None = None) -> int:
         base_limit = args.limit  # None = 무제한(비용 상한만이 경계)
         mode = f"limit={base_limit}" if base_limit is not None else "limit=무제한(비용 상한만)"
         print(f"백로그 모드 — 티어별 라운드로빈, {mode}"
-              + (f", cost_cap=${args.cost_cap}" if args.cost_cap is not None else ""))
+              + (f", cost_cap=${args.cost_cap}" if args.cost_cap is not None else "")
+              + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
+              + (f", 발행일 하한={args.published_after}" if args.published_after else ""))
         processed = 0
         while True:
             remaining = None if base_limit is None else base_limit - processed
             if remaining is not None and remaining <= 0:
                 break
             batch_limit = BACKLOG_BATCH_SIZE if remaining is None else min(BACKLOG_BATCH_SIZE, remaining)
-            docs = select_target_docs_round_robin(conn, batch_limit)
+            docs = select_target_docs_round_robin(conn, batch_limit, exclude_sources,
+                                                  args.published_after)
             if not docs:
                 break
             for d in docs:
@@ -439,9 +503,11 @@ def main(argv: list[str] | None = None) -> int:
     else:
         base_limit = args.limit if args.limit is not None else settings.get(
             "enrich_daily_limit", DEFAULT_DAILY_LIMIT)
-        docs = select_target_docs(conn, base_limit)
+        docs = select_target_docs(conn, base_limit, exclude_sources, args.published_after)
         print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— summary_only 제외")
+              f"— summary_only 제외"
+              + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
+              + (f", 발행일 하한={args.published_after}" if args.published_after else ""))
         for d in docs:
             if args.dry_run:
                 print_dry_run(d, d["body"] or "")
