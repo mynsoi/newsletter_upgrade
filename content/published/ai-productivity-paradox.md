@@ -1,5 +1,12 @@
 # 아낀 시간은 어디로 갔을까
 
+<!-- slug: ai-productivity-paradox | angle: B (연결 — 아낀 시간의 통로 부재) | evidence: content/evidence/ai-productivity-paradox.json -->
+<!-- 발행 승인: 2026-09-04 · 루브릭 평균 22.5/24 (김산결 22 · 이소민 23)
+     채점표: eval/scores/ai-productivity-paradox-김산결.md, eval/scores/ai-productivity-paradox-이소민.md
+     캘리브레이션: eval/calibration-2026-09.md
+     A2 검증: content/drafts/ai-productivity-paradox-verification.md (통과 · 실패 0 · 경고 0)
+     승인 게이트 ⑥ 4항목 전건 통과 (톤·경영층 인용·검증 플래그·저작권) -->
+
 **세 줄 요약**
 
 - AI로 개인이 아낀 시간은 진짜입니다. 다만 그 시간이 조직의 성과로 건너가는 통로가 대부분의 회사에는 아직 없습니다.
