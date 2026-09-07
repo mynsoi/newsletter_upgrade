@@ -302,6 +302,10 @@ def api_generate_images():
                 filepath = tmp_dir / filename
                 filepath.write_bytes(img_data)
                 images.append(f"/tmp-images/{filename}")
+            except openai.AuthenticationError as e:
+                return jsonify({"error": "API 키가 유효하지 않습니다. 키를 확인해 주세요."}), 401
+            except openai.RateLimitError as e:
+                return jsonify({"error": "API 요청 한도 초과입니다. 잠시 후 다시 시도해 주세요."}), 429
             except Exception as e:
                 return jsonify({"error": f"이미지 생성 실패 (후보 {i+1}): {e}"}), 500
 

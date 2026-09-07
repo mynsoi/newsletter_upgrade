@@ -546,9 +546,10 @@ async function generateImages() {
 
   for (let idx = 0; idx < sections.length; idx++) {
     const key = sections[idx];
+    const sectionName = key === 'hero' ? '히어로' : articleData.sections[parseInt(key.split('-')[1])].heading;
     const pct = Math.round(((idx) / sections.length) * 100);
     document.getElementById('status-text').textContent =
-      '이미지 생성 중... (' + (idx + 1) + '/' + sections.length + ')';
+      '이미지 생성 중... (' + (idx + 1) + '/' + sections.length + ') — ' + sectionName + ' (후보 3장, 약 30초~1분 소요)';
     document.getElementById('progress-fill').style.width = pct + '%';
 
     const promptArea = document.getElementById('prompt-' + key);
