@@ -300,18 +300,18 @@ def api_parse():
 _IMAGE_STYLES = [
     {
         "label": "일러스트",
-        "prefix": "Modern flat business illustration, vibrant colors, clean vector shapes, warm palette.",
-        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions in the image.",
+        "prefix": "Clean flat-style business illustration. Warm color palette, simple friendly figures, modern workplace setting.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image.",
     },
     {
         "label": "포토",
-        "prefix": "Candid editorial photograph with cinematic color grading. Vary the composition: use close-ups of hands or objects, over-the-shoulder angles, bird's-eye table shots, or silhouette framing. Capture the specific emotion and moment described in the scene — avoid generic stock-photo poses.",
-        "suffix": "Do NOT include any text, words, letters, numbers, labels, or watermarks in the image.",
+        "prefix": "ONE single editorial photograph — not a collage, not a grid, not multiple frames. Professional stock photo of a real workplace moment. Choose ONE composition that best fits the topic: a close-up of hands shaking, one person at a desk seen from behind, a team huddled over a laptop shot over-the-shoulder, hands gesturing mid-conversation, or two colleagues talking in side profile. Never show a direct frontal face. Real office with natural window light or warm indoor lighting. Shallow depth of field, soft bokeh. Muted warm tones. High-resolution photojournalistic quality — Harvard Business Review or Fast Company cover.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or watermarks. Never show a direct frontal face — use back views, silhouettes, side profiles, or hand close-ups only.",
     },
     {
         "label": "컨셉 아트",
-        "prefix": "Editorial concept illustration blending realism with subtle stylization — think Offpiste magazine or Monocle cover art. Recognizable people or objects with slightly exaggerated proportions, muted palette with one warm accent color, clean negative space.",
-        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions in the image.",
+        "prefix": "Stylized 3D rendered scene — not a single isolated icon, but a small environment or arrangement that tells a story. Pick ONE key object from the topic and place it in context with surrounding objects that give it meaning: a glowing sticky note among dozens of faded ones on a wall, an office chair in a sunlit room by a window, one open box glowing among rows of closed identical boxes, a lit desk lamp on one desk in a dark open-plan office, a compass on a cluttered table of maps. The hero object stands out through warm golden light or color while the surroundings stay muted cool-gray. Smooth stylized 3D materials, soft rounded edges, clay-render aesthetic. Cinematic composition with depth — foreground/background layers, shallow depth of field. No human figures.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image. Do NOT include any people, faces, hands, or human figures.",
     },
 ]
 
@@ -357,7 +357,7 @@ def api_generate_images():
     user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
     size = "1536x1024"
-    quality = "low"
+    quality = "medium"
     tmp_dir = Path(tempfile.gettempdir()) / "newsletter_images"
     tmp_dir.mkdir(exist_ok=True)
 
