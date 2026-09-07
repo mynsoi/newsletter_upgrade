@@ -11,10 +11,26 @@ import base64
 import tempfile
 from pathlib import Path
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
 
 from flask import Flask, request, jsonify, send_from_directory, send_file
 import markdown as md_lib
 import openai
+
+# ── .env 로드 ──
+def _load_dotenv():
+    """ROOT/.env 파일이 있으면 환경변수로 로드한다."""
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if env_path.exists():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip())
+
+_load_dotenv()
 
 # ── 경로 ──
 ROOT = Path(__file__).resolve().parent.parent
@@ -187,17 +203,38 @@ def render_article_html(article: dict, image_paths: dict) -> str:
 
     # 본문 HTML
     md_converter = md_lib.Markdown(extensions=["extra"])
+    image_positions = article.get("image_positions", {})
     body_parts = []
     for i, sec in enumerate(article["sections"]):
-        body_parts.append(f'<h2>{sec["heading"]}</h2>')
         img_key = f"section-{i}"
+        img_tag = ""
         if img_key in image_paths:
-            body_parts.append(
+            img_tag = (
                 f'<img class="section-image" src="{image_paths[img_key]}" '
                 f'alt="{sec["heading"]}">'
             )
-        body_parts.append(md_converter.convert(sec["body"]))
-        md_converter.reset()
+
+        body_parts.append(f'<h2>{sec["heading"]}</h2>')
+
+        raw_pos = image_positions.get(img_key)
+        paragraphs = [p for p in sec["body"].split("\n\n") if p.strip()]
+
+        if isinstance(raw_pos, int) and img_tag and paragraphs:
+            para_idx = max(0, min(raw_pos, len(paragraphs)))
+            before = "\n\n".join(paragraphs[:para_idx])
+            after = "\n\n".join(paragraphs[para_idx:])
+            if before:
+                body_parts.append(md_converter.convert(before))
+                md_converter.reset()
+            body_parts.append(img_tag)
+            if after:
+                body_parts.append(md_converter.convert(after))
+                md_converter.reset()
+        else:
+            if img_tag:
+                body_parts.append(img_tag)
+            body_parts.append(md_converter.convert(sec["body"]))
+            md_converter.reset()
 
     body_html = "\n".join(body_parts)
 
@@ -260,56 +297,119 @@ def api_parse():
         return jsonify({"error": f"파싱 실패: {e}"}), 500
 
 
+_IMAGE_STYLES = [
+    {
+        "label": "일러스트",
+        "prefix": "Modern flat business illustration, vibrant colors, clean vector shapes, warm palette.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions in the image.",
+    },
+    {
+        "label": "포토",
+        "prefix": "Candid editorial photograph with cinematic color grading. Vary the composition: use close-ups of hands or objects, over-the-shoulder angles, bird's-eye table shots, or silhouette framing. Capture the specific emotion and moment described in the scene — avoid generic stock-photo poses.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or watermarks in the image.",
+    },
+    {
+        "label": "컨셉 아트",
+        "prefix": "Editorial concept illustration blending realism with subtle stylization — think Offpiste magazine or Monocle cover art. Recognizable people or objects with slightly exaggerated proportions, muted palette with one warm accent color, clean negative space.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions in the image.",
+    },
+]
+
+
+def _build_scene_prompt(heading: str, body: str, style: dict, is_hero: bool) -> str:
+    body_snippet = re.sub(r"\s+", " ", body or "")[:400]
+    if is_hero:
+        scene = f"Wide panoramic scene for a newsletter cover. Topic: {heading}."
+    else:
+        scene = f"Scene illustrating: {heading}."
+    if body_snippet:
+        scene += f" Context: {body_snippet}"
+    return f"{style['prefix']} {scene} {style['suffix']}"
+
+
+def _generate_one(client, prompt: str, size: str, quality: str, key: str, idx: int, tmp_dir: Path):
+    import sys
+    print(f"  [{key}] 후보 {idx+1}/3 생성 시작...", flush=True)
+    response = client.images.generate(
+        model="gpt-image-1",
+        prompt=prompt,
+        size=size,
+        quality=quality,
+        n=1,
+    )
+    img_data = base64.b64decode(response.data[0].b64_json)
+    print(f"  [{key}] 후보 {idx+1}/3 완료 ({len(img_data)} bytes)", flush=True)
+    filename = f"{key}_candidate_{idx}.png"
+    filepath = tmp_dir / filename
+    filepath.write_bytes(img_data)
+    return f"/tmp-images/{filename}"
+
+
 @app.route("/api/generate-images", methods=["POST"])
 def api_generate_images():
-    """DALL-E 3로 이미지 후보 3장을 생성한다."""
+    """스타일별 후보 3장을 병렬 생성한다."""
     data = request.json
-    prompt = data.get("prompt", "")
+    heading = data.get("heading", "")
+    body = data.get("body", "")
+    prompt_override = data.get("prompt", "")
     is_hero = data.get("is_hero", False)
     key = data.get("key", "unknown")
     user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
-    if not prompt:
-        return jsonify({"error": "프롬프트가 비어 있습니다."}), 400
-
-    size = "1792x1024"
-
-    images = []
+    size = "1536x1024"
+    quality = "low"
     tmp_dir = Path(tempfile.gettempdir()) / "newsletter_images"
     tmp_dir.mkdir(exist_ok=True)
 
-    has_key = user_api_key or os.environ.get("OPENAI_API_KEY")
+    env_key = os.environ.get("OPENAI_API_KEY", "")
+    has_key = user_api_key or env_key
     use_placeholder = not has_key
+    print(f"  [이미지 생성] key={key}, 모드={'DALL-E' if has_key else '플레이스홀더'}, 크기={size}, 화질={quality}", flush=True)
 
-    for i in range(3):
-        if use_placeholder:
-            images.append(
-                f"https://picsum.photos/seed/{key}{i}/1792/1024"
-            )
+    if use_placeholder:
+        images = [f"https://picsum.photos/seed/{key}{i}/1536/1024" for i in range(3)]
+        labels = [s["label"] for s in _IMAGE_STYLES]
+        return jsonify({"images": images, "labels": labels, "key": key})
+
+    try:
+        client = get_openai_client(user_api_key or None)
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 400
+
+    prompts = []
+    for i, style in enumerate(_IMAGE_STYLES):
+        if prompt_override:
+            p = f"{style['prefix']} {prompt_override} {style['suffix']}"
         else:
-            try:
-                client = get_openai_client(user_api_key or None)
-                response = client.images.generate(
-                    model="dall-e-3",
-                    prompt=prompt,
-                    size=size,
-                    quality="standard",
-                    n=1,
-                    response_format="b64_json",
-                )
-                img_data = base64.b64decode(response.data[0].b64_json)
-                filename = f"{key}_candidate_{i}.png"
-                filepath = tmp_dir / filename
-                filepath.write_bytes(img_data)
-                images.append(f"/tmp-images/{filename}")
-            except openai.AuthenticationError as e:
-                return jsonify({"error": "API 키가 유효하지 않습니다. 키를 확인해 주세요."}), 401
-            except openai.RateLimitError as e:
-                return jsonify({"error": "API 요청 한도 초과입니다. 잠시 후 다시 시도해 주세요."}), 429
-            except Exception as e:
-                return jsonify({"error": f"이미지 생성 실패 (후보 {i+1}): {e}"}), 500
+            p = _build_scene_prompt(heading, body, style, is_hero)
+        prompts.append(p)
 
-    return jsonify({"images": images, "key": key})
+    images = [None, None, None]
+    errors = []
+
+    def gen(idx):
+        return idx, _generate_one(client, prompts[idx], size, quality, key, idx, tmp_dir)
+
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        futures = [pool.submit(gen, i) for i in range(3)]
+        for future in futures:
+            try:
+                idx, url = future.result()
+                images[idx] = url
+            except openai.AuthenticationError:
+                errors.append("API 키가 유효하지 않습니다.")
+            except openai.RateLimitError:
+                errors.append("API 요청 한도 초과입니다.")
+            except Exception as e:
+                errors.append(str(e))
+
+    if errors and not any(images):
+        return jsonify({"error": errors[0]}), 500
+
+    labels = [s["label"] for s in _IMAGE_STYLES]
+    result_images = [img or f"https://picsum.photos/seed/{key}{i}/1536/1024"
+                     for i, img in enumerate(images)]
+    return jsonify({"images": result_images, "labels": labels, "key": key})
 
 
 @app.route("/tmp-images/<filename>")

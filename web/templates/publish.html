@@ -120,6 +120,15 @@ h1 {
 .image-candidate.hero-candidate img {
   aspect-ratio: 16 / 7;
 }
+.image-candidate .style-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 11px; font-weight: 600;
+  text-align: center;
+}
 .image-candidate .check {
   display: none;
   position: absolute;
@@ -135,6 +144,82 @@ h1 {
 }
 .image-candidate.selected .check {
   display: block;
+}
+
+/* --- 이미지 배치 에디터 --- */
+.layout-editor {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--canvas);
+}
+.layout-editor-label {
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.layout-para {
+  font-size: 13px; line-height: 1.7;
+  color: var(--ink-secondary);
+  padding: 6px 0;
+}
+.layout-drop-zone {
+  position: relative;
+  height: 8px;
+  margin: 2px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.layout-drop-zone::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  transform: translateY(-50%);
+  transition: all 0.2s;
+}
+.layout-drop-zone:hover {
+  height: 40px;
+  background: var(--accent-soft);
+}
+.layout-drop-zone:hover::before {
+  height: 3px;
+  background: var(--accent);
+}
+.layout-drop-zone:hover::after {
+  content: "여기에 이미지 배치";
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px; font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.layout-drop-zone.active {
+  height: auto;
+  padding: 6px 0;
+  background: var(--accent-soft);
+  cursor: default;
+}
+.layout-drop-zone.active::before { display: none; }
+.layout-drop-zone.active::after { display: none; }
+.layout-drop-zone.active:hover { background: var(--accent-soft); }
+.layout-placed-img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 8px;
+  display: block;
+  margin: 4px auto;
+}
+.layout-move-hint {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 4px;
 }
 
 /* --- 프롬프트 아코디언 --- */
@@ -393,6 +478,7 @@ h1 {
 <script>
 let articleData = null;
 let selectedImages = {};
+let imagePositions = {};
 let currentTags = [];
 
 // --- API 키 관리 ---
@@ -496,36 +582,80 @@ function renderParsed(data) {
   const container = document.getElementById('image-sections');
   container.innerHTML = '';
 
+  imagePositions = {};
+
   // 히어로 섹션
-  const heroSection = createImageSection('hero', '히어로 이미지', data.title, true);
+  const heroSection = createImageSection('hero', '히어로 이미지', data.title, '', true);
   container.appendChild(heroSection);
 
   // 소제목별 섹션
   data.sections.forEach((sec, i) => {
-    const section = createImageSection('section-' + i, sec.heading, sec.heading, false);
+    const key = 'section-' + i;
+    imagePositions[key] = 0;
+    const section = createImageSection(key, sec.heading, sec.heading, sec.body, false);
     container.appendChild(section);
   });
 }
 
-function createImageSection(key, label, heading, isHero) {
+function createImageSection(key, label, heading, body, isHero) {
   const div = document.createElement('div');
   div.className = 'card image-section';
   div.dataset.key = key;
-
-  const promptDefault = isHero
-    ? '뉴스레터 히어로 이미지. 주제: ' + heading + '. 넓은 구도, 추상적이고 세련된 비즈니스 일러스트레이션.'
-    : '뉴스레터 섹션 이미지. 주제: ' + heading + '. 깔끔하고 미니멀한 비즈니스 일러스트레이션.';
+  div.dataset.heading = heading;
+  div.dataset.body = body || '';
 
   div.innerHTML =
     '<div class="card-label">' + label + '</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
+      '<button class="btn btn-primary btn-sm section-gen-btn" onclick="generateSingleSection(\'' + key + '\')">이미지 생성</button>' +
+      '<span style="font-size:12px;color:var(--ink-muted)">~30초 · ~$0.15</span>' +
+    '</div>' +
     '<div class="image-candidates" id="candidates-' + key + '"></div>' +
-    '<button class="prompt-toggle" onclick="togglePrompt(this)">프롬프트 보기</button>' +
+    (isHero ? '' : '<div class="layout-editor" id="layout-' + key + '" style="display:none"></div>') +
+    '<button class="prompt-toggle" onclick="togglePrompt(this)">프롬프트 편집</button>' +
     '<div class="prompt-edit-area" id="prompt-' + key + '">' +
-      '<textarea>' + promptDefault + '</textarea>' +
+      '<textarea placeholder="비워 두면 본문 내용 기반으로 자동 생성됩니다"></textarea>' +
       '<button class="btn btn-outline btn-sm" onclick="regenerateImages(\'' + key + '\')">재생성</button>' +
     '</div>';
 
   return div;
+}
+
+function showLayoutEditor(key) {
+  const editor = document.getElementById('layout-' + key);
+  if (!editor) return;
+
+  const sectionIdx = parseInt(key.split('-')[1]);
+  const sec = articleData.sections[sectionIdx];
+  if (!sec) return;
+
+  const paragraphs = sec.body.split(/\n\n+/).filter(p => p.trim());
+  const imgUrl = selectedImages[key];
+
+  let html = '<div class="layout-editor-label">이미지 배치 (클릭하여 위치 선택)</div>';
+
+  for (let i = 0; i <= paragraphs.length; i++) {
+    const isActive = imagePositions[key] === i;
+    html += '<div class="layout-drop-zone' + (isActive ? ' active' : '') + '" '
+          + 'onclick="placeImageAt(\'' + key + '\', ' + i + ')">';
+    if (isActive && imgUrl) {
+      html += '<img class="layout-placed-img" src="' + imgUrl + '" alt="배치된 이미지">';
+      html += '<div class="layout-move-hint">다른 위치를 클릭하면 이동합니다</div>';
+    }
+    html += '</div>';
+
+    if (i < paragraphs.length) {
+      html += '<div class="layout-para">' + paragraphs[i].replace(/\n/g, ' ') + '</div>';
+    }
+  }
+
+  editor.innerHTML = html;
+  editor.style.display = 'block';
+}
+
+function placeImageAt(key, paragraphIndex) {
+  imagePositions[key] = paragraphIndex;
+  showLayoutEditor(key);
 }
 
 function togglePrompt(btn) {
@@ -538,6 +668,7 @@ function togglePrompt(btn) {
 async function generateImages() {
   const btn = document.getElementById('generate-btn');
   btn.disabled = true;
+  btn.textContent = '전체 생성 중...';
   const statusBar = document.getElementById('status-bar');
   statusBar.classList.add('show');
 
@@ -546,54 +677,74 @@ async function generateImages() {
 
   for (let idx = 0; idx < sections.length; idx++) {
     const key = sections[idx];
-    const sectionName = key === 'hero' ? '히어로' : articleData.sections[parseInt(key.split('-')[1])].heading;
     const pct = Math.round(((idx) / sections.length) * 100);
+    const sectionName = key === 'hero' ? '히어로' : articleData.sections[parseInt(key.split('-')[1])].heading;
     document.getElementById('status-text').textContent =
-      '이미지 생성 중... (' + (idx + 1) + '/' + sections.length + ') — ' + sectionName + ' (후보 3장, 약 30초~1분 소요)';
+      '전체 생성 중... (' + (idx + 1) + '/' + sections.length + ') — ' + sectionName;
     document.getElementById('progress-fill').style.width = pct + '%';
-
-    const promptArea = document.getElementById('prompt-' + key);
-    const prompt = promptArea ? promptArea.querySelector('textarea').value : '';
-    const isHero = key === 'hero';
-
-    try {
-      const resp = await fetch('/api/generate-images', {
-        method: 'POST',
-        headers: getApiKeyHeaders(),
-        body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
-      });
-      const data = await resp.json();
-      if (data.error) { showError(data.error); return; }
-      renderCandidates(key, data.images, isHero);
-    } catch (err) {
-      showError('이미지 생성 실패 (' + key + '): ' + err.message);
-      return;
-    }
+    await generateSingleSection(key);
   }
 
   document.getElementById('progress-fill').style.width = '100%';
-  document.getElementById('status-text').textContent = '이미지 생성 완료! 각 섹션에서 이미지를 선택해 주세요.';
+  document.getElementById('status-text').textContent = '전체 생성 완료! 각 섹션에서 이미지를 선택해 주세요.';
   btn.style.display = 'none';
 }
 
-async function regenerateImages(key) {
+async function generateSingleSection(key) {
+  const sectionDiv = document.querySelector('.image-section[data-key="' + key + '"]');
+  const heading = sectionDiv ? sectionDiv.dataset.heading : '';
+  const body = sectionDiv ? sectionDiv.dataset.body : '';
   const promptArea = document.getElementById('prompt-' + key);
-  const prompt = promptArea.querySelector('textarea').value;
+  const promptOverride = promptArea ? promptArea.querySelector('textarea').value.trim() : '';
   const isHero = key === 'hero';
+
+  const genBtn = sectionDiv.querySelector('.section-gen-btn');
+  if (genBtn) { genBtn.disabled = true; genBtn.textContent = '생성 중...'; }
 
   const statusBar = document.getElementById('status-bar');
   statusBar.classList.add('show');
-  document.getElementById('status-text').textContent = key + ' 이미지 재생성 중...';
+  const sectionName = isHero ? '히어로' : heading;
+  document.getElementById('status-text').textContent =
+    sectionName + ' — 3가지 스타일 병렬 생성 중 (~30초, ~$0.15)';
 
   try {
     const resp = await fetch('/api/generate-images', {
       method: 'POST',
       headers: getApiKeyHeaders(),
-      body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
+      body: JSON.stringify({ heading, body, prompt: promptOverride, is_hero: isHero, key })
+    });
+    const data = await resp.json();
+    if (data.error) { showError(data.error); if (genBtn) { genBtn.disabled = false; genBtn.textContent = '이미지 생성'; } return; }
+    renderCandidates(key, data.images, isHero, data.labels);
+    document.getElementById('status-text').textContent = sectionName + ' 생성 완료!';
+    if (genBtn) genBtn.style.display = 'none';
+  } catch (err) {
+    showError('생성 실패 (' + key + '): ' + err.message);
+    if (genBtn) { genBtn.disabled = false; genBtn.textContent = '이미지 생성'; }
+  }
+}
+
+async function regenerateImages(key) {
+  const sectionDiv = document.querySelector('.image-section[data-key="' + key + '"]');
+  const heading = sectionDiv ? sectionDiv.dataset.heading : '';
+  const body = sectionDiv ? sectionDiv.dataset.body : '';
+  const promptArea = document.getElementById('prompt-' + key);
+  const promptOverride = promptArea.querySelector('textarea').value.trim();
+  const isHero = key === 'hero';
+
+  const statusBar = document.getElementById('status-bar');
+  statusBar.classList.add('show');
+  document.getElementById('status-text').textContent = (isHero ? '히어로' : heading) + ' 재생성 중... (~40초)';
+
+  try {
+    const resp = await fetch('/api/generate-images', {
+      method: 'POST',
+      headers: getApiKeyHeaders(),
+      body: JSON.stringify({ heading, body, prompt: promptOverride, is_hero: isHero, key })
     });
     const data = await resp.json();
     if (data.error) { showError(data.error); return; }
-    renderCandidates(key, data.images, isHero);
+    renderCandidates(key, data.images, isHero, data.labels);
     delete selectedImages[key];
     checkAllSelected();
     document.getElementById('status-text').textContent = '재생성 완료!';
@@ -602,13 +753,16 @@ async function regenerateImages(key) {
   }
 }
 
-function renderCandidates(key, images, isHero) {
+function renderCandidates(key, images, isHero, labels) {
   const container = document.getElementById('candidates-' + key);
   container.innerHTML = '';
   images.forEach((url, i) => {
     const div = document.createElement('div');
     div.className = 'image-candidate' + (isHero ? ' hero-candidate' : '');
-    div.innerHTML = '<img src="' + url + '" alt="후보 ' + (i + 1) + '"><div class="check">✓</div>';
+    const labelTag = labels && labels[i]
+      ? '<div class="style-label">' + labels[i] + '</div>'
+      : '';
+    div.innerHTML = '<img src="' + url + '" alt="후보 ' + (i + 1) + '">' + labelTag + '<div class="check">✓</div>';
     div.addEventListener('click', () => selectCandidate(key, div, url));
     container.appendChild(div);
   });
@@ -619,6 +773,10 @@ function selectCandidate(key, el, url) {
   parent.querySelectorAll('.image-candidate').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   selectedImages[key] = url;
+  if (key !== 'hero') {
+    if (imagePositions[key] === undefined) imagePositions[key] = 0;
+    showLayoutEditor(key);
+  }
   checkAllSelected();
 }
 
@@ -642,7 +800,8 @@ function publishArticle() {
     body: JSON.stringify({
       article: Object.assign({}, articleData, {
         tags: currentTags,
-        issue_number: document.getElementById('issue-number').value || ''
+        issue_number: document.getElementById('issue-number').value || '',
+        image_positions: imagePositions
       }),
       selected_images: selectedImages
     })
