@@ -34,32 +34,32 @@
 
 - **claim**: 개인용 AI 시스템이 사용자를 대신해 계획을 세우고 행동하려면 사용자의 목표, 제약, 진행 중인 약속에 대한 모델을 필요로 한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C1-2 [cautious/theory]
 
 - **claim**: 개인용 AI 시스템의 관찰 범위가 넓어진다고 해서 반드시 사용자 지원 품질이 향상되지는 않는다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C1-3 [neutral/theory]
 
 - **claim**: 개인용 AI의 관찰 병목 현상은 협력적 구조를 가지고 있으며, 시스템의 유용성 평가, 사용자의 신뢰, 그리고 향후 접근 권한 부여 간의 피드백 루프로 작동한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C1-4 [optimistic/opinion]
 
 - **claim**: AI 시스템의 검사 가능하고 유용한 동작이 사용자로 하여금 관찰 채널을 유지하거나 확대하는 동기를 제공할 수 있다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` X-distortion `
 
 ### C1-5 [neutral/case]
 
 - **claim**: Organizm 프로토타입의 6개월 사용 기록은 관찰 품질이 개인 AI의 성능에 미치는 영향을 측정하기 위한 평가 방향을 제시한다
 - **metric**: 6개월
 - **원문 대응**: We report a preliminary single-subject account from Organizm, a prototype used over six months, and outline evaluation directions for measuring how observation quality shapes personal AI.
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,100자)</summary>
@@ -84,45 +84,45 @@ A personal AI system needs a model of the user's goals, constraints, and ongoing
 - **claim**: 의료용 대규모 언어모델과 임상 AI 도구들이 의료 상담 권장사항을 직접 적용할 경우 심각한 해를 초래할 가능성이 있다
 - **metric**: up to 24.6% of cases
 - **원문 대응**: Across 20 notable LLMs and 4 widely used retrieval-augmented generation (RAG) clinical AI tools, direct application of recommendations carried potential for severe harm in up to 24.6% of cases, with errors of omission accounting for more than 80% of severe errors.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-2 [cautious/data]
 
 - **claim**: 의료 AI 시스템들이 생성한 오류 중 80% 이상이 누락 오류이다
 - **metric**: more than 80% of severe errors
 - **원문 대응**: Across 20 notable LLMs and 4 widely used retrieval-augmented generation (RAG) clinical AI tools, direct application of recommendations carried potential for severe harm in up to 24.6% of cases, with errors of omission accounting for more than 80% of severe errors.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-3 [optimistic/data]
 
 - **claim**: 임상 AI 도구들이 일반형 대규모 언어모델보다 의료 안전 성능이 우수하다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-4 [optimistic/data]
 
 - **claim**: 다중 에이전트 AI 팀 구성이 일반형 모델의 의료 상담 성능을 추가로 개선한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-5 [optimistic/experiment]
 
 - **claim**: AI 지원을 받은 의사들이 일반적인 자료만 사용한 경우보다 진료 성능이 향상되었다
 - **metric**: 101 U.S.-licensed generalist physicians
 - **원문 대응**: In a randomized study of 101 U.S.-licensed generalist physicians, AI assistance improved physician performance compared to conventional resources.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-6 [cautious/experiment]
 
 - **claim**: AI 지원을 받은 의사들이 AI가 생성한 가치 있는 권장사항을 빈번하게 채택하지 않았다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C2-7 [conditional/opinion]
 
 - **claim**: 의사가 AI의 모든 권장사항을 채택했다면 인간-AI 결합 응답이 단독으로 사용한 인간과 AI 시스템 모두를 능가했을 것이다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,899자)</summary>
@@ -146,40 +146,40 @@ Large language models (LLMs) and medical AI tools are routinely used by physicia
 
 - **claim**: 기존의 AI 교육 제공은 기술 개발 중심의 전문가 과정과 단기 일반 소양 프로그램의 양극단으로 나뉘어 있어 학문적 연구에 필요한 지속적이고 실무 기반의 역량을 개발하기에 부족하다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` X-distortion `
 
 ### C3-2 [neutral/theory]
 
 - **claim**: AI 보조 문헌 검토에 필요한 역량 개발을 위해 개별 논문 이해, 지식 분류체계 구축·검증, 연구 공백 식별, 문헌 검토 합성이라는 4개의 순차적 모듈로 구성된 교과 설계가 인지적 요구를 효과적으로 충족시킨다
 - **원문 대응**: This paper reports the design, theoretical rationale, and implementation of BSTA 495/395: Getting Started with AI-Assisted Research, developed and delivered at Lehigh University (Spring 2026).
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C3-3 [optimistic/survey]
 
 - **claim**: AI 동반 연구 교육을 받은 학생들의 환각 탐지 능력에 대한 자신감이 크게 증가했다
 - **metric**: d = +1.45
 - **원문 대응**: Pre- and post-course survey data from the inaugural offering indicate substantial self-reported confidence gains, with the largest in hallucination detection (d = +1.45), responsible AI use (d = +1.33), and AI attribution practice (d = +2.40), consistent with the course's design emphasis.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C3-4 [optimistic/survey]
 
 - **claim**: AI 동반 연구 교육을 받은 학생들의 책임감 있는 AI 사용에 대한 자신감이 크게 증가했다
 - **metric**: d = +1.33
 - **원문 대응**: Pre- and post-course survey data from the inaugural offering indicate substantial self-reported confidence gains, with the largest in hallucination detection (d = +1.45), responsible AI use (d = +1.33), and AI attribution practice (d = +2.40), consistent with the course's design emphasis.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C3-5 [optimistic/survey]
 
 - **claim**: AI 동반 연구 교육을 받은 학생들의 AI 출처 표기 실무에 대한 자신감이 크게 증가했다
 - **metric**: d = +2.40
 - **원문 대응**: Pre- and post-course survey data from the inaugural offering indicate substantial self-reported confidence gains, with the largest in hallucination detection (d = +1.45), responsible AI use (d = +1.33), and AI attribution practice (d = +2.40), consistent with the course's design emphasis.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C3-6 [cautious/opinion]
 
 - **claim**: 학문적 연구에 AI를 책임감 있게 활용하기 위해서는 도구 사용 능력뿐 아니라 비판적 판단력이 필요하다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,735자)</summary>
@@ -204,34 +204,34 @@ The rapid integration of generative AI into academic workflows demands curricula
 - **claim**: CentaurTA Studio는 개방형 코딩과 테마 구성 작업에서 기준선 시스템을 지속적으로 능가하는 성능을 달성했다
 - **metric**: 최대 92.12% 정확도
 - **원문 대응**: We present \textbf{CentaurTA Studio}, a web-based system for self-improving human--agent collaboration in open coding and theme construction.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C4-2 [optimistic/experiment]
 
 - **claim**: 루브릭 기반 LLM 판정자와 인간 주석자 간의 합의 수준은 상당한 신뢰도에 도달했다
 - **metric**: 평균 κ = 0.68
 - **원문 대응**: Agreement between the rubric-based LLM judge and human annotators reaches substantial reliability (average $κ= 0.68$).
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C4-3 [cautious/experiment]
 
 - **claim**: 인간-에이전트 협업 시스템에서 피드백 루프를 제거하면 성능이 감소한다
 - **metric**: 90%에서 81%로 감소
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C4-4 [optimistic/experiment]
 
 - **claim**: CentaurTA Studio 시스템은 약 10회의 반복 라운드(약 25분)에서 최고 성능에 도달한다
 - **metric**: 10 iterative rounds (약 25분)
 - **원문 대응**: The full system reaches peak performance within 10 iterative rounds (about 25 minutes), demonstrating improved efficiency over expert-only refinement.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C4-5 [conditional/experiment]
 
 - **claim**: Critic 컴포넌트나 조기 종료 메커니즘을 제거하면 정확도가 저하되거나 상호작용 비용이 증가한다
 - **원문 대응**: Ablation studies show that removing the feedback loop reduces performance from 90\% to 81\%, while eliminating the Critic or early stopping degrades accuracy or increases interaction cost.
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,252자)</summary>
@@ -256,31 +256,31 @@ Thematic analysis is difficult to scale: manual workflows are labor-intensive, w
 
 - **claim**: 지연된 피드백 환경에서 인간은 실패의 원인이 된 구체적인 행동을 올바르게 식별하지 못한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C5-2 [cautious/experiment]
 
 - **claim**: 다중 AI 에이전트 시스템에서 인간은 책임을 AI 에이전트들 간에 잘못 귀속시킨다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C5-3 [cautious/experiment]
 
 - **claim**: 지연된 피드백 조건에서 인간은 긍정적 결과보다 부정적 결과에 더 강한 행동 조정을 보인다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C5-4 [cautious/experiment]
 
 - **claim**: 인간이 실제 성과 저하의 원인과 약하게 관련된 의사결정을 체계적으로 수정한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C5-5 [cautious/theory]
 
 - **claim**: 지연된 결과를 포함한 다중 자율 에이전트 시스템에서는 인지 편향이 증폭될 수 있다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,440자)</summary>
@@ -304,25 +304,25 @@ Human decision-making is strongly influenced by cognitive biases, particularly u
 
 - **claim**: 과다 교육(over-education)과 과다 기술(over-skilling)은 임금 감소와 연관이 있다
 - **원문 대응**: Once unobserved heterogeneity is controlled for, over-education and over-skilling are associated with wage penalties, whereas under-education and under-skilling are linked to wage premiums.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C6-2 [neutral/data]
 
 - **claim**: 과소 교육(under-education)과 과소 기술(under-skilling)은 임금 증가와 연관이 있다
 - **원문 대응**: Once unobserved heterogeneity is controlled for, over-education and over-skilling are associated with wage penalties, whereas under-education and under-skilling are linked to wage premiums.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C6-3 [neutral/theory]
 
 - **claim**: 교육 유형의 불일치와 기술 유형의 불일치 간에는 개념적·경험적 차이가 존재한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C6-4 [neutral/opinion]
 
 - **claim**: 노동 불일치 분석에서 지표 선택이 결과에 미치는 영향은 중요하다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,051자)</summary>
@@ -346,33 +346,33 @@ This paper analyses the distinction between educational and skill types of labou
 
 - **claim**: 위기 대응 및 커뮤니티 동원 상황에서 LLM 기반 소셜 시뮬레이터는 개별 행동의 타당성에 대해 검증되지만, 현실의 시간적 패턴(버스트성, 헤비테일 분포)을 재현하는지는 검증되지 않는다
 - **원문 대응**: Such settings are increasingly modeled with LLM-based social simulators, yet these simulators are validated on whether each action is individually plausible, not on whether actions are timed as in reality.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C7-2 [cautious/experiment]
 
 - **claim**: 표준 LLM 전용 시뮬레이터는 현실의 버스트 타이밍을 거의 재현하지 못하며, 에이전트들이 거의 정기적인 시간 간격으로 행동한다
 - **metric**: median burstiness: $B=-0.14$
 - **원문 대응**: The LLM-only baseline yields no bursty agents (median burstiness $B=-0.14$); a single data-calibrated gate is then sufficient to lift per-agent timing above the burst threshold (median $B\approx0.37$) without degrading LLM content decisions.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C7-3 [optimistic/experiment]
 
 - **claim**: 데이터 캘리브레이션된 자기자극 채널을 단일 게이트로 추가하면 LLM의 콘텐츠 결정을 저하시키지 않으면서 에이전트 타이밍의 버스트성 기준을 넘길 수 있다
 - **metric**: median burstiness: $B\approx0.37$
 - **원문 대응**: The LLM-only baseline yields no bursty agents (median burstiness $B=-0.14$); a single data-calibrated gate is then sufficient to lift per-agent timing above the burst threshold (median $B\approx0.37$) without degrading LLM content decisions.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C7-4 [conditional/theory]
 
 - **claim**: LLM 기반 위기 대응 시뮬레이션에서 시간적 현실성은 에이전트가 행동하는 시점(자기자극과 위기 활성화 메커니즘으로 제어)을 에이전트가 무엇을 하는지(LLM으로 제어)로부터 분리함으로써 가장 잘 달성된다
 - **원문 대응**: Such settings are increasingly modeled with LLM-based social simulators, yet these simulators are validated on whether each action is individually plausible, not on whether actions are timed as in reality.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C7-5 [neutral/data]
 
 - **claim**: 오프라인 자원봉사의 버스트성 타이밍은 주로 내생적이며 자기자극적이고, COVID-19 팬데믹으로 인해 증폭되지만 일일 활동 주기에 의해 생성되지는 않는다
 - **원문 대응**: We examine this gap using a multi-year, city-scale log of offline volunteering in Shenzhen that spans the COVID-19 pandemic.
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (1,892자)</summary>
@@ -396,25 +396,25 @@ Human collective participation is rarely steady in time: it is bursty, with shor
 
 - **claim**: 인구구조 변화는 생산성과 잠재성장률, 장기 균형금리에 영향을 미치는 핵심 변수다
 - **원문 대응**: 신현송 한국은행 총재가 고령화와 저출산 등 인구구조 변화가 생산성과 잠재성장률, 장기 균형금리를 좌우하는 핵심 변수라고 강조했다.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C8-2 [optimistic/opinion]
 
 - **claim**: 기술 발전과 AI는 감소하는 노동력을 상쇄할 수 있는 가능성이 있다
 - **원문 대응**: 그는 “기술이 줄어드는 노동력을 상쇄할 수 있는지를 살펴볼 것”이라며 “AI가 힘을 보태고 있다는 증거를 확인하는 동시에 AI가 만병통치약은 아닐 수 있다는 이야기도 듣게 될 것”이라고 말했다.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C8-3 [optimistic/opinion]
 
 - **claim**: AI가 노동력 감소를 보완하고 있다는 증거가 있다
 - **원문 대응**: 그는 “기술이 줄어드는 노동력을 상쇄할 수 있는지를 살펴볼 것”이라며 “AI가 힘을 보태고 있다는 증거를 확인하는 동시에 AI가 만병통치약은 아닐 수 있다는 이야기도 듣게 될 것”이라고 말했다.
-- **판정**: `___`
+- **판정**: ` X-distortion `
 
 ### C8-4 [cautious/opinion]
 
 - **claim**: AI는 고령화 대응의 만능 해결책이 아닐 수 있다
 - **원문 대응**: 신 총재는 고령화 대응의 기회 요인으로 기술 발전과 AI도 언급했다.
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (975자)</summary>
@@ -447,56 +447,56 @@ Human collective participation is rarely steady in time: it is bursty, with shor
 - **claim**: 신입사원들은 온보딩 과정에서 평균 13개의 문서를 받고 첫 주에 약 12시간을 투자하여 자료를 검토한다
 - **metric**: 평균 13개 문서, 약 12시간
 - **원문 대응**: - Onboarding can sometimes emphasize volume over clarity, according to a new Adobe report that found that employees reported getting an average of 13 onboarding documents and spending about 12 hours looking over materials in their first week at a new job.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-2 [cautious/survey]
 
 - **claim**: 신입사원들이 받는 온보딩 자료 중 60%만이 필요하다고 평가된다
 - **metric**: 60%
 - **원문 대응**: - However, employees said only 60% of the onboarding materials they receive are necessary.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-3 [cautious/survey]
 
 - **claim**: 온보딩 중 받은 정보의 50% 이상을 기억하는 직원은 56%에 불과하며, 나머지 44%는 절반 이하만 기억한다
 - **metric**: 56%, 44%
 - **원문 대응**: Meanwhile, just 56% of employees reported retaining more than half of the information they receive during onboarding, with another 44% saying they retained half or less.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-4 [cautious/survey]
 
 - **claim**: 신입사원의 4명 중 1명이 온보딩이 혼란스럽거나 정보 격차가 있었다고 보고했으며, 이것이 업무 성과나 자신감에 중대하거나 중간 정도의 부정적 영향을 미쳤다
 - **metric**: 4명 중 1명
 - **원문 대응**: When employees did receive AI policy information during their onboarding, 38% said they retained less than half of it, with 14% reporting that they retained “little to none of it.”
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-5 [cautious/survey]
 
 - **claim**: 5명 중 1명 이상의 직원이 온보딩 경험으로 인해 회사 입사 결정을 재고하게 되었다
 - **metric**: 5명 중 1명 이상
 - **원문 대응**: In addition, more than 1 in 5 employees said their onboarding experience made them question their decision to join a company.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-6 [cautious/survey]
 
 - **claim**: 상위 10% 직원의 경우 온보딩 과정에 30개 이상의 문서가 포함될 수 있으며 검토에 35시간 이상이 소요될 수 있다
 - **metric**: 30개 이상 문서, 35시간 이상
 - **원문 대응**: For the top 10% of employees, the onboarding process could include more than 30 documents that can take more than 35 hours to review.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-7 [cautious/survey]
 
 - **claim**: 직원의 38%는 온보딩 중 기업 AI 정책에 대한 정보를 전혀 받지 못했다
 - **metric**: 38%
 - **원문 대응**: Meanwhile, 38% of employees said their onboarding didn’t include any information on corporate AI policies at all.
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C9-8 [cautious/survey]
 
 - **claim**: AI 정책 정보를 받은 직원 중 38%는 그 중 절반 미만만 기억했으며, 14%는 거의 기억하지 못했다
 - **metric**: 38%, 14%
 - **원문 대응**: When employees did receive AI policy information during their onboarding, 38% said they retained less than half of it, with 14% reporting that they retained “little to none of it.”
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (2,363자)</summary>
@@ -530,38 +530,38 @@ In a June interview, the vice president of HR and talent management at ServiceMa
 
 - **claim**: AI 도입으로 인해 투자자들의 자산관리자에 대한 기대 수준이 상향되었다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C10-2 [optimistic/case]
 
 - **claim**: 직원들에게 AI 도구를 먼저 제공한 후 상향식 활용 사례가 하향식으로 지정된 사용 사례보다 더 효과적이었다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C10-3 [optimistic/case]
 
 - **claim**: 대규모 기관 고객 온보딩 프로세스를 AI와 프로세스 개선을 통해 25단계에서 5단계로 단축할 수 있다
 - **metric**: 25단계 → 5단계
 - **원문 대응**: - The state of AI in 2025: Agents, innovation, and transformation
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C10-4 [optimistic/opinion]
 
 - **claim**: 생성형 AI와 고급 기술을 활용하면 펀드 매니저의 매도 시점 결정에서 감정을 제거하고 객관적인 검토가 가능하다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C10-5 [conditional/opinion]
 
 - **claim**: AI 도입 시 완전히 하향식으로 통제하는 방식과 완전히 상향식 기업가적 방식 모두를 피하고 균형을 맞춰야 한다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 ### C10-6 [neutral/opinion]
 
 - **claim**: 신뢰 구축에서 가장 중요한 요소는 일관성이며, 일관성이 깨지면 신뢰를 회복하기 매우 어렵다
 - **원문 대응**: (수동 확인 필요)
-- **판정**: `___`
+- **판정**: ` O `
 
 <details>
 <summary>본문 전문 (20,747자)</summary>
@@ -668,10 +668,10 @@ Culture really matters, as does getting a real handle on it. Collaboration was a
 | 항목 | 건수 |
 |---|---|
 | 총 claim | 55 |
-| O (정확) | |
-| X-hallucination | |
-| X-distortion | |
-| X-metric | |
-| X-missing (추가 발견) | |
-| ? (보류) | |
-| **정확도** (O / 판정 가능 건수) | |
+| O (정확) | 52 |
+| X-hallucination | 0 |
+| X-distortion | 3 |
+| X-metric | 0 |
+| X-missing (추가 발견) | 0 |
+| ? (보류) | 0 |
+| **정확도** (O / 판정 가능 건수) | **94.5%** (52/55) |
