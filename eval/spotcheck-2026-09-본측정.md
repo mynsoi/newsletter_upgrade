@@ -5,6 +5,22 @@
 시드: 20260907  
 총 claim: 55건
 
+## 판정 요약
+
+55건 중 **O 52 / X-distortion 3** → **정확도 94.5%**, Exit 기준(90%) 통과.
+
+X-hallucination 0 · X-metric 0 — 날조·수치 오류 없음.
+
+실패 유형 전원 **opinion 계열 뉘앙스 왜곡**:
+
+| ID | stance/type | 왜곡 내용 |
+|---|---|---|
+| C1-4 | optimistic/opinion | 가능성("can give") → 단정("제공한다")으로 변환 |
+| C3-1 | neutral/opinion | 중립적 현황 서술 → "부족하다"로 부정 판단 강화 |
+| C8-3 | optimistic/opinion | 조건부("증거를 확인하는 동시에…만병통치약은 아닐 수 있다") → 독립 긍정 주장으로 분리 |
+
+→ **v3 프롬프트 보강 시 표적**: opinion stance의 가능성·조건부 표현 보존 규칙 추가 예정.
+
 ## 층화 배분
 
 | 층 | 모집단(enriched) | 비중 | 배분 |
