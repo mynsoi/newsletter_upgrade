@@ -169,11 +169,9 @@ body {
   margin-bottom: 40px;
 }
 .tldr-label {
-  font-family: var(--en);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--accent);
   margin-bottom: 12px;
 }
@@ -193,11 +191,13 @@ body {
   margin-top: 6px;
 }
 .tldr li::before {
-  content: "—";
+  content: "•";
   position: absolute;
   left: 0;
   color: var(--accent);
   font-weight: 700;
+  font-size: 16px;
+  line-height: 1.72;
 }
 
 /* --- 본문 --- */
@@ -231,8 +231,6 @@ body {
 /* 소제목 이미지 */
 .section-image {
   width: 100%;
-  max-height: 360px;
-  object-fit: cover;
   border-radius: var(--r-card);
   margin: 8px 0 28px;
   display: block;

@@ -28,13 +28,15 @@ app = Flask(__name__)
 # ── OpenAI 클라이언트 ──
 _client = None
 
-def get_openai_client():
+def get_openai_client(api_key: str = None):
     global _client
+    key = api_key or os.environ.get("OPENAI_API_KEY")
+    if not key:
+        raise RuntimeError("API 키가 설정되지 않았습니다.")
+    if api_key:
+        return openai.OpenAI(api_key=api_key)
     if _client is None:
-        api_key = os.environ.get("OPENAI_API_KEY")
-        if not api_key:
-            raise RuntimeError("OPENAI_API_KEY 환경변수가 설정되지 않았습니다.")
-        _client = openai.OpenAI(api_key=api_key)
+        _client = openai.OpenAI(api_key=key)
     return _client
 
 
@@ -69,10 +71,10 @@ def parse_article_md(text: str) -> dict:
     # claims 주석 제거
     clean_text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
 
-    # 세 줄 요약 (TL;DR) 추출 — **세 줄 요약** 아래 목록
+    # TL;DR / 세 줄 요약 추출
     tldr_points = []
     tldr_match = re.search(
-        r"\*\*세 줄 요약\*\*\s*\n((?:\s*-\s+.+\n?)+)", clean_text
+        r"\*\*(?:TL;DR|세 줄 요약)\*\*\s*\n((?:\s*-\s+.+\n?)+)", clean_text
     )
     if tldr_match:
         for line in tldr_match.group(1).strip().split("\n"):
@@ -110,6 +112,8 @@ def parse_article_md(text: str) -> dict:
             body = part[heading_match.end():].strip()
             sections.append({"heading": heading, "body": body})
 
+    tags = _extract_tags(clean_text, sections)
+
     return {
         "title": title,
         "slug": slug or _slugify(title),
@@ -117,12 +121,44 @@ def parse_article_md(text: str) -> dict:
         "tldr_points": tldr_points,
         "sections": sections,
         "references": references,
+        "tags": tags,
     }
 
 
 def _slugify(text: str) -> str:
     text = re.sub(r"[^\w\s-]", "", text)
     return re.sub(r"[\s]+", "-", text).strip("-").lower()[:60]
+
+
+_TAG_KEYWORDS = {
+    "AI 생산성": ["생산성", "productivity", "효율", "시간 절감"],
+    "AI 도구": ["도구", "tool", "코파일럿", "copilot", "챗봇", "chatbot"],
+    "조직 변화": ["조직 변화", "변화 관리", "change management", "전환"],
+    "리더십": ["리더", "leader", "경영", "management", "매니저"],
+    "협업": ["협업", "collaboration", "팀워크", "소통"],
+    "조직 문화": ["문화", "culture", "심리적 안전", "psychological safety"],
+    "인재 관리": ["인재", "talent", "채용", "hiring", "온보딩"],
+    "자동화": ["자동화", "automation", "워크플로", "workflow"],
+    "데이터·분석": ["데이터", "data", "분석", "analytics", "측정"],
+    "의사결정": ["의사결정", "decision", "판단", "거버넌스"],
+    "교육·성장": ["교육", "학습", "learning", "스킬", "skill", "역량"],
+    "디지털 전환": ["디지털 전환", "DX", "digital transformation"],
+    "보상·평가": ["보상", "평가", "성과", "KPI", "performance"],
+    "조직 역량": ["흡수역량", "역량", "capability", "absorptive"],
+}
+
+
+def _extract_tags(text: str, sections: list) -> list:
+    """본문과 소제목에서 키워드 매칭으로 태그를 추출한다."""
+    combined = text.lower()
+    for sec in sections:
+        combined += " " + sec["heading"].lower()
+
+    matched = []
+    for tag, keywords in _TAG_KEYWORDS.items():
+        if any(kw.lower() in combined for kw in keywords):
+            matched.append(tag)
+    return matched[:5] if matched else ["AI & 업무"]
 
 
 # ══════════════════════════════════════════════════════════════
@@ -134,8 +170,15 @@ def render_article_html(article: dict, image_paths: dict) -> str:
     template_path = TEMPLATES_DIR / "article.html"
     template = template_path.read_text(encoding="utf-8")
 
-    # 태그 (slug에서 추출하거나 기본값)
-    tags_html = '<span class="tag">AI &amp; 조직</span>'
+    # 태그
+    tags = article.get("tags", ["AI & 업무"])
+    tags_html = "\n      ".join(
+        f'<span class="tag">{tag}</span>' for tag in tags
+    )
+
+    # 호수 (issue_number)
+    issue_number = article.get("issue_number", "")
+    issue_label = f"Issue #{issue_number}" if issue_number else article["pub_date"]
 
     # TL;DR
     tldr_items = "\n".join(
@@ -170,11 +213,11 @@ def render_article_html(article: dict, image_paths: dict) -> str:
     html = template
     replacements = {
         "{{ title }}": article["title"],
-        "{{ issue_label }}": article["pub_date"],
+        "{{ issue_label }}": issue_label,
         "{{ hero_image }}": hero_img,
         "{{ kicker }}": "Insight Weekly",
         "{% for tag in tags %}\n      <span class=\"tag\">{{ tag }}</span>\n      {% endfor %}": tags_html,
-        "{{ author }}": "기업문화팀",
+        "{{ author }}": "기업문화AX팀",
         "{{ pub_date }}": article["pub_date"],
         "{% for point in tldr_points %}\n      <li>{{ point }}</li>\n      {% endfor %}": tldr_items,
         "{{ body_html }}": body_html,
@@ -224,28 +267,28 @@ def api_generate_images():
     prompt = data.get("prompt", "")
     is_hero = data.get("is_hero", False)
     key = data.get("key", "unknown")
+    user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
     if not prompt:
         return jsonify({"error": "프롬프트가 비어 있습니다."}), 400
 
-    size = "1792x1024" if is_hero else "1024x1024"
+    size = "1792x1024"
 
     images = []
     tmp_dir = Path(tempfile.gettempdir()) / "newsletter_images"
     tmp_dir.mkdir(exist_ok=True)
 
-    # 플레이스홀더 모드: OPENAI_API_KEY가 없으면 picsum 이미지 사용
-    use_placeholder = not os.environ.get("OPENAI_API_KEY")
+    has_key = user_api_key or os.environ.get("OPENAI_API_KEY")
+    use_placeholder = not has_key
 
     for i in range(3):
         if use_placeholder:
-            w, h = (1792, 1024) if is_hero else (1024, 1024)
             images.append(
-                f"https://picsum.photos/seed/{key}{i}/{w}/{h}"
+                f"https://picsum.photos/seed/{key}{i}/1792/1024"
             )
         else:
             try:
-                client = get_openai_client()
+                client = get_openai_client(user_api_key or None)
                 response = client.images.generate(
                     model="dall-e-3",
                     prompt=prompt,

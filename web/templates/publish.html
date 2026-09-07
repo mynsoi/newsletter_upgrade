@@ -113,7 +113,7 @@ h1 {
 }
 .image-candidate img {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
 }
@@ -228,6 +228,82 @@ h1 {
   margin-bottom: 16px;
 }
 
+/* --- 태그 편집 --- */
+.tag-editor { margin-top: 12px; }
+.tag-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 8px;
+}
+.tag-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--r-chip);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.tag-chip .remove-tag {
+  cursor: pointer; font-size: 14px; line-height: 1;
+  opacity: 0.6;
+}
+.tag-chip .remove-tag:hover { opacity: 1; }
+.tag-add-row {
+  display: flex; gap: 6px; align-items: center;
+}
+.tag-add-row input {
+  font-family: var(--kr); font-size: 13px;
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; width: 140px; color: var(--ink);
+}
+.tag-add-row input:focus {
+  outline: none; border-color: var(--accent);
+}
+
+/* --- 호수 입력 --- */
+.issue-input-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 10px;
+}
+.issue-input-row label {
+  font-size: 13px; font-weight: 600; color: var(--ink-secondary);
+}
+.issue-input-row input {
+  font-family: var(--kr); font-size: 13px;
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; width: 60px; text-align: center; color: var(--ink);
+}
+.issue-input-row input:focus {
+  outline: none; border-color: var(--accent);
+}
+
+/* --- API 키 설정 --- */
+.api-key-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  border: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+.api-key-bar label {
+  font-size: 13px; font-weight: 600; color: var(--ink-secondary);
+  white-space: nowrap;
+}
+.api-key-bar input {
+  flex: 1;
+  font-family: var(--en); font-size: 13px;
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 7px 12px; color: var(--ink);
+}
+.api-key-bar input:focus {
+  outline: none; border-color: var(--accent);
+}
+.api-key-status {
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.api-key-status.saved { color: var(--accent); }
+.api-key-status.empty { color: var(--ink-muted); }
+
 /* --- 에러 --- */
 .error {
   background: #FDE8E8;
@@ -253,6 +329,14 @@ h1 {
   <h1>아티클 발행 도구</h1>
   <p class="subtitle">.md 파일을 업로드하면 이미지를 생성하고 웹 페이지로 변환합니다.</p>
 
+  <div class="api-key-bar">
+    <label>OpenAI API Key</label>
+    <input type="password" id="api-key-input" placeholder="sk-proj-..."
+           oninput="saveApiKey()">
+    <button class="btn btn-outline btn-sm" onclick="toggleKeyVisibility()" id="key-toggle-btn">보기</button>
+    <span class="api-key-status empty" id="api-key-status">미설정</span>
+  </div>
+
   <div class="upload-zone" id="upload-zone">
     <p class="label">.md 파일을 드래그하거나 클릭해서 업로드</p>
     <p>마크다운 아티클 파일을 선택하세요</p>
@@ -269,6 +353,19 @@ h1 {
         <span id="article-slug"></span> · <span id="article-date"></span>
         · 소제목 <span id="section-count"></span>개
       </p>
+      <div class="issue-input-row">
+        <label>호수</label>
+        <input type="number" id="issue-number" min="1" placeholder="#">
+      </div>
+      <div class="tag-editor">
+        <div class="card-label" style="margin-top:12px">태그</div>
+        <div class="tag-chips" id="tag-chips"></div>
+        <div class="tag-add-row">
+          <input type="text" id="tag-input" placeholder="태그 추가…"
+                 onkeydown="if(event.key==='Enter'){addTag();event.preventDefault();}">
+          <button class="btn btn-outline btn-sm" onclick="addTag()">추가</button>
+        </div>
+      </div>
     </div>
 
     <div id="image-sections"></div>
@@ -296,6 +393,54 @@ h1 {
 <script>
 let articleData = null;
 let selectedImages = {};
+let currentTags = [];
+
+// --- API 키 관리 ---
+function loadApiKey() {
+  try {
+    const key = localStorage.getItem('openai_api_key') || '';
+    document.getElementById('api-key-input').value = key;
+    updateKeyStatus(key);
+  } catch (e) {}
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  try { localStorage.setItem('openai_api_key', key); } catch (e) {}
+  updateKeyStatus(key);
+}
+
+function updateKeyStatus(key) {
+  const status = document.getElementById('api-key-status');
+  if (key && key.startsWith('sk-')) {
+    status.textContent = '저장됨';
+    status.className = 'api-key-status saved';
+  } else {
+    status.textContent = key ? '형식 확인' : '미설정 (플레이스홀더 모드)';
+    status.className = 'api-key-status empty';
+  }
+}
+
+function toggleKeyVisibility() {
+  const input = document.getElementById('api-key-input');
+  const btn = document.getElementById('key-toggle-btn');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '숨기기';
+  } else {
+    input.type = 'password';
+    btn.textContent = '보기';
+  }
+}
+
+function getApiKeyHeaders() {
+  const key = document.getElementById('api-key-input').value.trim();
+  const headers = { 'Content-Type': 'application/json' };
+  if (key) headers['X-OpenAI-Key'] = key;
+  return headers;
+}
+
+loadApiKey();
 
 // --- 파일 업로드 ---
 const zone = document.getElementById('upload-zone');
@@ -345,6 +490,9 @@ function renderParsed(data) {
   document.getElementById('generate-btn').style.display = '';
   document.getElementById('generate-btn').disabled = false;
 
+  currentTags = data.tags || [];
+  renderTags();
+
   const container = document.getElementById('image-sections');
   container.innerHTML = '';
 
@@ -354,7 +502,7 @@ function renderParsed(data) {
 
   // 소제목별 섹션
   data.sections.forEach((sec, i) => {
-    const section = createImageSection('section-' + i, '섹션 ' + (i + 1), sec.heading, false);
+    const section = createImageSection('section-' + i, sec.heading, sec.heading, false);
     container.appendChild(section);
   });
 }
@@ -370,7 +518,6 @@ function createImageSection(key, label, heading, isHero) {
 
   div.innerHTML =
     '<div class="card-label">' + label + '</div>' +
-    '<div class="image-section-title">' + heading + '</div>' +
     '<div class="image-candidates" id="candidates-' + key + '"></div>' +
     '<button class="prompt-toggle" onclick="togglePrompt(this)">프롬프트 보기</button>' +
     '<div class="prompt-edit-area" id="prompt-' + key + '">' +
@@ -411,7 +558,7 @@ async function generateImages() {
     try {
       const resp = await fetch('/api/generate-images', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getApiKeyHeaders(),
         body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
       });
       const data = await resp.json();
@@ -440,7 +587,7 @@ async function regenerateImages(key) {
   try {
     const resp = await fetch('/api/generate-images', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getApiKeyHeaders(),
       body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
     });
     const data = await resp.json();
@@ -492,7 +639,10 @@ function publishArticle() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      article: articleData,
+      article: Object.assign({}, articleData, {
+        tags: currentTags,
+        issue_number: document.getElementById('issue-number').value || ''
+      }),
       selected_images: selectedImages
     })
   })
@@ -504,6 +654,33 @@ function publishArticle() {
       '발행 완료! 파일: ' + data.output_path;
   })
   .catch(err => showError('발행 실패: ' + err.message));
+}
+
+// --- 태그 관리 ---
+function renderTags() {
+  const container = document.getElementById('tag-chips');
+  container.innerHTML = '';
+  currentTags.forEach((tag, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.innerHTML = tag + ' <span class="remove-tag" onclick="removeTag(' + i + ')">×</span>';
+    container.appendChild(chip);
+  });
+}
+
+function addTag() {
+  const input = document.getElementById('tag-input');
+  const val = input.value.trim();
+  if (val && !currentTags.includes(val)) {
+    currentTags.push(val);
+    renderTags();
+  }
+  input.value = '';
+}
+
+function removeTag(idx) {
+  currentTags.splice(idx, 1);
+  renderTags();
 }
 
 function showError(msg) {
