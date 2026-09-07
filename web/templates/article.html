@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-wordmark" href="#">Insight Weekly</a>
+    <div class="site-header-meta">{{ issue_label }}</div>
+  </div>
+</header>
+
+<div class="hero">
+  <img src="{{ hero_image }}" alt="{{ title }}">
+  <div class="hero-scrim"></div>
+  <div class="hero-caption">
+    <div class="hero-kicker">{{ kicker }}</div>
+    <h1 class="hero-title">{{ title }}</h1>
+  </div>
+</div>
+
+<main class="article-page">
+
+  <div class="meta-bar">
+    <div class="tags">
+      {% for tag in tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <div class="author-line">
+      <span class="author-name">{{ author }}</span>
+      <span class="author-sep">·</span>
+      <span>{{ pub_date }}</span>
+    </div>
+  </div>
+
+  <section class="tldr">
+    <div class="tldr-label">TL;DR</div>
+    <ul>
+      {% for point in tldr_points %}
+      <li>{{ point }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <article class="article-body">
+    {{ body_html }}
+  </article>
+
+  <section class="references">
+    <h3>참고자료</h3>
+    <ul>
+      {% for ref in references %}
+      <li>{{ ref }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  Insight Weekly · 기업문화팀 발행<br>
+  매주 목요일 발행합니다.
+</footer>
+
+</body>
+</html>

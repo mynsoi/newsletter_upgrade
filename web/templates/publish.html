@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아티클 발행 도구</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #0B6E4F;
+  --accent-soft: #DCEFE7;
+  --accent-ink: #fff;
+  --canvas: #F7F8FA;
+  --surface: #FFFFFF;
+  --ink: #101114;
+  --ink-secondary: #3D4148;
+  --ink-muted: #6E7278;
+  --line: #DFE1E5;
+  --r-card: 16px;
+  --r-chip: 999px;
+  --danger: #D32F2F;
+  --kr: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+  --en: "Archivo", var(--kr);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--kr);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  padding: 32px 24px 80px;
+}
+
+.container { max-width: 960px; margin: 0 auto; }
+
+h1 {
+  font-size: 28px; font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+.subtitle { font-size: 14px; color: var(--ink-muted); margin-bottom: 32px; }
+
+/* --- 업로드 영역 --- */
+.upload-zone {
+  border: 2px dashed var(--line);
+  border-radius: var(--r-card);
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.upload-zone p { font-size: 15px; color: var(--ink-muted); }
+.upload-zone .label {
+  font-size: 16px; font-weight: 700; color: var(--accent);
+  margin-bottom: 6px;
+}
+#file-input { display: none; }
+
+/* --- 파싱 결과 미리보기 --- */
+.parsed { display: none; margin-top: 32px; }
+.parsed.show { display: block; }
+
+.card {
+  background: var(--surface);
+  border-radius: var(--r-card);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+}
+.card-label {
+  font-family: var(--en);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.card h2 {
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.02em; word-break: keep-all;
+  margin-bottom: 8px;
+}
+.card .meta { font-size: 13px; color: var(--ink-muted); }
+
+/* --- 이미지 섹션 --- */
+.image-section { margin-bottom: 28px; }
+.image-section-title {
+  font-size: 15px; font-weight: 700; margin-bottom: 12px;
+  word-break: keep-all;
+}
+.image-candidates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.image-candidate {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.15s;
+}
+.image-candidate.selected {
+  border-color: var(--accent);
+}
+.image-candidate img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.image-candidate.hero-candidate img {
+  aspect-ratio: 16 / 7;
+}
+.image-candidate .check {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px; height: 24px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+}
+.image-candidate.selected .check {
+  display: block;
+}
+
+/* --- 프롬프트 아코디언 --- */
+.prompt-toggle {
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  background: none; border: none; cursor: pointer;
+  padding: 4px 0;
+}
+.prompt-toggle::after { content: " ▸"; font-size: 10px; }
+.prompt-toggle.open::after { content: " ▾"; }
+.prompt-edit-area {
+  display: none; margin-top: 8px;
+}
+.prompt-edit-area.show { display: flex; gap: 8px; }
+.prompt-edit-area textarea {
+  flex: 1;
+  font-family: var(--kr);
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  resize: vertical;
+  min-height: 60px;
+  color: var(--ink);
+}
+.prompt-edit-area textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* --- 버튼 --- */
+.btn {
+  font-family: var(--kr);
+  font-size: 13px; font-weight: 600;
+  border: none; border-radius: var(--r-chip);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-outline {
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.btn-sm { font-size: 12px; padding: 6px 12px; }
+.btn-lg { font-size: 15px; padding: 12px 28px; }
+
+/* --- 진행 상태 --- */
+.status-bar {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  border: 1px solid var(--line);
+}
+.status-bar.show { display: block; }
+.status-text { font-size: 14px; color: var(--ink-secondary); }
+.progress {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* --- 최종 발행 --- */
+.publish-actions {
+  display: none;
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  border: 1px solid var(--accent);
+  text-align: center;
+}
+.publish-actions.show { display: block; }
+.publish-actions p {
+  font-size: 14px; color: var(--ink-secondary);
+  margin-bottom: 16px;
+}
+
+/* --- 에러 --- */
+.error {
+  background: #FDE8E8;
+  color: var(--danger);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-top: 12px;
+  display: none;
+}
+.error.show { display: block; }
+
+/* --- 반응형 --- */
+@media (max-width: 640px) {
+  body { padding: 20px 16px 60px; }
+  .image-candidates { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>아티클 발행 도구</h1>
+  <p class="subtitle">.md 파일을 업로드하면 이미지를 생성하고 웹 페이지로 변환합니다.</p>
+
+  <div class="upload-zone" id="upload-zone">
+    <p class="label">.md 파일을 드래그하거나 클릭해서 업로드</p>
+    <p>마크다운 아티클 파일을 선택하세요</p>
+    <input type="file" id="file-input" accept=".md">
+  </div>
+
+  <div class="error" id="error"></div>
+
+  <div class="parsed" id="parsed">
+    <div class="card">
+      <div class="card-label">Article Preview</div>
+      <h2 id="article-title"></h2>
+      <p class="meta">
+        <span id="article-slug"></span> · <span id="article-date"></span>
+        · 소제목 <span id="section-count"></span>개
+      </p>
+    </div>
+
+    <div id="image-sections"></div>
+
+    <div class="status-bar" id="status-bar">
+      <div class="status-text" id="status-text">이미지 생성 중...</div>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="btn btn-primary btn-lg" id="generate-btn" onclick="generateImages()">
+        이미지 생성 시작
+      </button>
+    </div>
+
+    <div class="publish-actions" id="publish-actions">
+      <p>모든 이미지를 선택했습니다. HTML 페이지를 생성할 수 있습니다.</p>
+      <button class="btn btn-primary btn-lg" onclick="publishArticle()">
+        HTML 페이지 생성
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let articleData = null;
+let selectedImages = {};
+
+// --- 파일 업로드 ---
+const zone = document.getElementById('upload-zone');
+const fileInput = document.getElementById('file-input');
+
+zone.addEventListener('click', () => fileInput.click());
+zone.addEventListener('dragover', e => {
+  e.preventDefault();
+  zone.classList.add('dragover');
+});
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => {
+  if (e.target.files.length) handleFile(e.target.files[0]);
+});
+
+function handleFile(file) {
+  if (!file.name.endsWith('.md')) {
+    showError('.md 파일만 업로드할 수 있습니다.');
+    return;
+  }
+  const formData = new FormData();
+  formData.append('file', file);
+
+  fetch('/api/parse', { method: 'POST', body: formData })
+    .then(r => r.json())
+    .then(data => {
+      if (data.error) { showError(data.error); return; }
+      articleData = data;
+      selectedImages = {};
+      renderParsed(data);
+    })
+    .catch(err => showError('파일 파싱 실패: ' + err.message));
+}
+
+function renderParsed(data) {
+  document.getElementById('article-title').textContent = data.title;
+  document.getElementById('article-slug').textContent = data.slug;
+  document.getElementById('article-date').textContent = data.pub_date;
+  document.getElementById('section-count').textContent = data.sections.length;
+  document.getElementById('parsed').classList.add('show');
+  document.getElementById('publish-actions').classList.remove('show');
+  document.getElementById('generate-btn').style.display = '';
+  document.getElementById('generate-btn').disabled = false;
+
+  const container = document.getElementById('image-sections');
+  container.innerHTML = '';
+
+  // 히어로 섹션
+  const heroSection = createImageSection('hero', '히어로 이미지', data.title, true);
+  container.appendChild(heroSection);
+
+  // 소제목별 섹션
+  data.sections.forEach((sec, i) => {
+    const section = createImageSection('section-' + i, '섹션 ' + (i + 1), sec.heading, false);
+    container.appendChild(section);
+  });
+}
+
+function createImageSection(key, label, heading, isHero) {
+  const div = document.createElement('div');
+  div.className = 'card image-section';
+  div.dataset.key = key;
+
+  const promptDefault = isHero
+    ? '뉴스레터 히어로 이미지. 주제: ' + heading + '. 넓은 구도, 추상적이고 세련된 비즈니스 일러스트레이션.'
+    : '뉴스레터 섹션 이미지. 주제: ' + heading + '. 깔끔하고 미니멀한 비즈니스 일러스트레이션.';
+
+  div.innerHTML =
+    '<div class="card-label">' + label + '</div>' +
+    '<div class="image-section-title">' + heading + '</div>' +
+    '<div class="image-candidates" id="candidates-' + key + '"></div>' +
+    '<button class="prompt-toggle" onclick="togglePrompt(this)">프롬프트 보기</button>' +
+    '<div class="prompt-edit-area" id="prompt-' + key + '">' +
+      '<textarea>' + promptDefault + '</textarea>' +
+      '<button class="btn btn-outline btn-sm" onclick="regenerateImages(\'' + key + '\')">재생성</button>' +
+    '</div>';
+
+  return div;
+}
+
+function togglePrompt(btn) {
+  btn.classList.toggle('open');
+  const area = btn.nextElementSibling;
+  area.classList.toggle('show');
+}
+
+// --- 이미지 생성 ---
+async function generateImages() {
+  const btn = document.getElementById('generate-btn');
+  btn.disabled = true;
+  const statusBar = document.getElementById('status-bar');
+  statusBar.classList.add('show');
+
+  const sections = ['hero'];
+  articleData.sections.forEach((_, i) => sections.push('section-' + i));
+
+  for (let idx = 0; idx < sections.length; idx++) {
+    const key = sections[idx];
+    const pct = Math.round(((idx) / sections.length) * 100);
+    document.getElementById('status-text').textContent =
+      '이미지 생성 중... (' + (idx + 1) + '/' + sections.length + ')';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    const promptArea = document.getElementById('prompt-' + key);
+    const prompt = promptArea ? promptArea.querySelector('textarea').value : '';
+    const isHero = key === 'hero';
+
+    try {
+      const resp = await fetch('/api/generate-images', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
+      });
+      const data = await resp.json();
+      if (data.error) { showError(data.error); return; }
+      renderCandidates(key, data.images, isHero);
+    } catch (err) {
+      showError('이미지 생성 실패 (' + key + '): ' + err.message);
+      return;
+    }
+  }
+
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('status-text').textContent = '이미지 생성 완료! 각 섹션에서 이미지를 선택해 주세요.';
+  btn.style.display = 'none';
+}
+
+async function regenerateImages(key) {
+  const promptArea = document.getElementById('prompt-' + key);
+  const prompt = promptArea.querySelector('textarea').value;
+  const isHero = key === 'hero';
+
+  const statusBar = document.getElementById('status-bar');
+  statusBar.classList.add('show');
+  document.getElementById('status-text').textContent = key + ' 이미지 재생성 중...';
+
+  try {
+    const resp = await fetch('/api/generate-images', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt, is_hero: isHero, key: key })
+    });
+    const data = await resp.json();
+    if (data.error) { showError(data.error); return; }
+    renderCandidates(key, data.images, isHero);
+    delete selectedImages[key];
+    checkAllSelected();
+    document.getElementById('status-text').textContent = '재생성 완료!';
+  } catch (err) {
+    showError('재생성 실패: ' + err.message);
+  }
+}
+
+function renderCandidates(key, images, isHero) {
+  const container = document.getElementById('candidates-' + key);
+  container.innerHTML = '';
+  images.forEach((url, i) => {
+    const div = document.createElement('div');
+    div.className = 'image-candidate' + (isHero ? ' hero-candidate' : '');
+    div.innerHTML = '<img src="' + url + '" alt="후보 ' + (i + 1) + '"><div class="check">✓</div>';
+    div.addEventListener('click', () => selectCandidate(key, div, url));
+    container.appendChild(div);
+  });
+}
+
+function selectCandidate(key, el, url) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.image-candidate').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedImages[key] = url;
+  checkAllSelected();
+}
+
+function checkAllSelected() {
+  const needed = ['hero'];
+  articleData.sections.forEach((_, i) => needed.push('section-' + i));
+  const allDone = needed.every(k => selectedImages[k]);
+  const actions = document.getElementById('publish-actions');
+  if (allDone) {
+    actions.classList.add('show');
+  } else {
+    actions.classList.remove('show');
+  }
+}
+
+// --- 발행 ---
+function publishArticle() {
+  fetch('/api/publish', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      article: articleData,
+      selected_images: selectedImages
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.error) { showError(data.error); return; }
+    window.open(data.preview_url, '_blank');
+    document.getElementById('status-text').textContent =
+      '발행 완료! 파일: ' + data.output_path;
+  })
+  .catch(err => showError('발행 실패: ' + err.message));
+}
+
+function showError(msg) {
+  const el = document.getElementById('error');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 6000);
+}
+</script>
+</body>
+</html>
