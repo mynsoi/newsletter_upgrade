@@ -299,24 +299,52 @@ def api_parse():
 
 _IMAGE_STYLES = [
     {
-        "label": "일러스트",
-        "prefix": "Clean flat-style business illustration. Warm color palette, simple friendly figures, modern workplace setting.",
+        "label": "일러스트 A",
+        "prefix": "Clean flat-style business illustration. Warm color palette — orange, amber, coral tones. Simple friendly figures, modern workplace setting.",
+        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image.",
+    },
+    {
+        "label": "일러스트 B",
+        "prefix": "Clean flat-style business illustration. Cool color palette — navy, teal, slate blue tones. Simple friendly figures, modern workplace setting.",
         "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image.",
     },
     {
         "label": "포토",
-        "prefix": "ONE single editorial photograph — not a collage, not a grid, not multiple frames. Professional stock photo of a real workplace moment. Choose ONE composition that best fits the topic: a close-up of hands shaking, one person at a desk seen from behind, a team huddled over a laptop shot over-the-shoulder, hands gesturing mid-conversation, or two colleagues talking in side profile. Never show a direct frontal face. Real office with natural window light or warm indoor lighting. Shallow depth of field, soft bokeh. Muted warm tones. High-resolution photojournalistic quality — Harvard Business Review or Fast Company cover.",
+        "prefix": "ONE single editorial photograph — not a collage, not a grid, not multiple frames. Professional stock photo of a real workplace moment. Never show a direct frontal face. Real office with natural window light or warm indoor lighting. Shallow depth of field, soft bokeh. Muted warm tones. High-resolution photojournalistic quality — Harvard Business Review or Fast Company cover.",
         "suffix": "Do NOT include any text, words, letters, numbers, labels, or watermarks. Never show a direct frontal face — use back views, silhouettes, side profiles, or hand close-ups only.",
-    },
-    {
-        "label": "컨셉 아트",
-        "prefix": "Stylized 3D rendered scene — not a single isolated icon, but a small environment or arrangement that tells a story. Pick ONE key object from the topic and place it in context with surrounding objects that give it meaning: a glowing sticky note among dozens of faded ones on a wall, an office chair in a sunlit room by a window, one open box glowing among rows of closed identical boxes, a lit desk lamp on one desk in a dark open-plan office, a compass on a cluttered table of maps. The hero object stands out through warm golden light or color while the surroundings stay muted cool-gray. Smooth stylized 3D materials, soft rounded edges, clay-render aesthetic. Cinematic composition with depth — foreground/background layers, shallow depth of field. No human figures.",
-        "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image. Do NOT include any people, faces, hands, or human figures.",
     },
 ]
 
 
-def _build_scene_prompt(heading: str, body: str, style: dict, is_hero: bool) -> str:
+_COMPOSITION_HINTS = {
+    "일러스트 A": [
+        "Wide establishing shot showing a full scene with multiple figures.",
+        "Close-up focused on one or two characters interacting.",
+        "Bird's-eye overhead view looking down at a workspace.",
+        "Split or contrasting composition showing before/after or two sides.",
+        "One character in foreground with activity in background.",
+        "Isometric angled view of an office or meeting environment.",
+    ],
+    "일러스트 B": [
+        "One character in foreground with activity in background.",
+        "Isometric angled view of an office or meeting environment.",
+        "Wide establishing shot showing a full scene with multiple figures.",
+        "Close-up focused on one or two characters interacting.",
+        "Split or contrasting composition showing before/after or two sides.",
+        "Bird's-eye overhead view looking down at a workspace.",
+    ],
+    "포토": [
+        "Tight close-up of hands or objects on a desk.",
+        "One person seen from behind, looking out a window or at a screen.",
+        "Over-the-shoulder shot of a team collaborating around a table.",
+        "Wide environmental shot of an empty or sparsely occupied office space.",
+        "Side-profile silhouette against bright window light.",
+        "Bird's-eye flat-lay of work items arranged on a surface.",
+    ],
+}
+
+
+def _build_scene_prompt(heading: str, body: str, style: dict, is_hero: bool, section_index: int = 0) -> str:
     body_snippet = re.sub(r"\s+", " ", body or "")[:400]
     if is_hero:
         scene = f"Wide panoramic scene for a newsletter cover. Topic: {heading}."
@@ -324,6 +352,10 @@ def _build_scene_prompt(heading: str, body: str, style: dict, is_hero: bool) -> 
         scene = f"Scene illustrating: {heading}."
     if body_snippet:
         scene += f" Context: {body_snippet}"
+    hints = _COMPOSITION_HINTS.get(style["label"], [])
+    composition = hints[section_index % len(hints)] if hints else ""
+    if composition and not is_hero:
+        scene += f" Composition: {composition}"
     return f"{style['prefix']} {scene} {style['suffix']}"
 
 
@@ -354,6 +386,7 @@ def api_generate_images():
     prompt_override = data.get("prompt", "")
     is_hero = data.get("is_hero", False)
     key = data.get("key", "unknown")
+    section_index = data.get("section_index", 0)
     user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
     size = "1536x1024"
@@ -381,7 +414,7 @@ def api_generate_images():
         if prompt_override:
             p = f"{style['prefix']} {prompt_override} {style['suffix']}"
         else:
-            p = _build_scene_prompt(heading, body, style, is_hero)
+            p = _build_scene_prompt(heading, body, style, is_hero, section_index)
         prompts.append(p)
 
     images = [None, None, None]
