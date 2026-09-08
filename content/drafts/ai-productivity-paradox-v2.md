@@ -1,17 +1,12 @@
 # 아낀 시간에는 다음 자리가 필요합니다
 
 <!-- slug: ai-productivity-paradox | 판본: v2.2 | angle: B (연결 — 아낀 시간의 통로 부재) | evidence: content/evidence/ai-productivity-paradox.json -->
-<!-- 모델: claude-opus-5 · 생성일: 2026-09-08 -->
-<!-- 지침 판본: prompts/article_style.md @ f106e23 (분량 기준 1,500~1,800자 개정 반영) -->
+<!-- 모델: claude-opus-5 -->
+<!-- 생성일: 2026-09-08 -->
+<!-- 지침 판본: prompts/article_style.md @ f106e23 (분량 기준 1,500~1,800자 개정 반영) · draft.md ④⑤ -->
 <!-- 내부 자료: internal_docs `leadership-messages/2026-06-이천포럼-패널토의.md` (api_eligible=1 · 시점 2026-06) -->
-<!-- 상태: **승인**(재승인 완료) — 2026-09-08 재작성본(v2.2)으로 본문 교체 후 승인 게이트 ⑥ 사람 확인 완료. -->
-<!-- 승인 게이트 ⑥ 4항목(톤·강도·민감표현 / 경영층 인용 맥락·supersedes / 검증 리포트 플래그 / 저작권) 전건 통과 — 2026-09-08 사람 확인, 특이사항 없음. 내부 자료 인용의 발언 맥락 왜곡 없음을 포함한다. -->
-<!-- 루브릭 채점: **생략**(2026-09-08 운영 판단). 이 본문에는 사람 채점 점수가 없다 — `articles.rubric_score`가 NULL인 이유다. 기획서 6.5의 2인 채점을 이번 편에 적용하지 않기로 한 결정이며, 다음 편의 채점 체제를 바꾸는 것은 아니다. -->
-<!-- 이전 발행본: 「아낀 시간은 어디로 갔을까」 (2026-09-04 승인 · 루브릭 평균 22.5/24 — 김산결 22 · 이소민 23 · eval/calibration-2026-09.md). -->
-<!-- 그 승인 기록은 이전 본문에 대한 것이며 이 본문에는 적용되지 않는다. 이전 본문: git show 2b21cda:content/published/ai-productivity-paradox.md -->
-<!-- 현재 본문 A2 검증: content/drafts/ai-productivity-paradox-verification.md (통과 · 실패 0 · 경고 0) -->
-<!-- 참고(사람 채점 아님) — Claude 자체 채점 23/24와 이전 발행본과의 항목별 대조: eval/scores/ai-productivity-paradox-발행본-v2-비교채점-claude.md -->
-<!-- 승인 시 함께 확인된 판단: 내부 자료 인용의 발언 맥락(v2 검증 리포트 8장), 이론 경계 조건·표본 한정 고지를 뺀 결정(10장). -->
+<!-- 발행본(content/published/ai-productivity-paradox.md)은 수정하지 않는다. 이 파일은 재작성본이다. -->
+<!-- 개정: v2.1 팀장 피드백 7건 반영 → v2.2 분량 기준 개정 반영 (2,264자 → 본문 압축, claim 구성 동일) -->
 
 **세 줄 요약**
 

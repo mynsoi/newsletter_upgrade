@@ -273,6 +273,7 @@ def test_prescriptive_exemption_does_not_hide_real_numbers_in_action_paragraph()
 
 INTERNAL = [{"id": "internal/ceo.md", "title": "이천포럼 CEO 패널토의",
              "speaker": "SK이노베이션 E&S 대표이사",
+             "effective_date": "2026-08-20",
              "body": "제가 말씀드리고 싶은 건, 사람이 남는다는 문제가 아니라 "
                      "사람의 남는 시간을 어디에 쓸 것인가의 문제입니다."}]
 
@@ -382,3 +383,191 @@ def test_cli_writes_report_and_exit_code(tmp_path, monkeypatch, capsys):
     bad = tmp_path / "bad.md"
     bad.write_text(GOOD_ARTICLE + "\n문제 문단.\n<!-- claims: ZZZ -->\n", encoding="utf-8")
     assert va.main([str(bad), "--evidence", str(ev), "--out", str(out)]) == 1  # 실패 시 비정상 종료
+
+
+# --- 내부 자료 시점 표기 (article_style 5절) -------------------------------------
+
+INTERNAL_REF_SECTION = """
+## 참고자료
+
+- 내부: 이천포럼 CEO 패널토의
+"""
+
+
+def test_internal_reference_without_year_is_warned():
+    """인용부호 없는 간접 서술도 잡는다 — 제목 낱말('이천포럼')로 문단을 찾는다."""
+    md = GOOD_ARTICLE + """
+이천포럼 패널토의에서 남는 시간을 어디에 쓸 것인가의 문제로 규정했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, INTERNAL)
+    warn = [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert warn and "2026년" in warn[0].message
+    assert r["passed"] is True            # 경고일 뿐 실패는 아니다
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "시점 표기" in report and "⚠️ 없음" in report
+
+
+def test_internal_reference_with_year_passes():
+    md = GOOD_ARTICLE + """
+2026년 이천포럼 패널토의에서 남는 시간을 어디에 쓸 것인가의 문제로 규정했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, INTERNAL)
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert r["internal_refs"] and r["internal_refs"][0]["dated"] is True
+    assert "✅ 있음" in va.render_report("t", Path("a.md"), Path("e.json"), r)
+
+
+def test_internal_date_check_skipped_without_db():
+    md = GOOD_ARTICLE + """
+이천포럼 패널토의에서 남는 시간의 쓰임을 논의했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, [])
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert r["internal_refs"] == []
+
+
+def test_generic_title_tokens_do_not_match():
+    """'CEO'·'패널토의' 같은 흔한 낱말로는 무관한 문단을 내부 인용으로 잡지 않는다."""
+    assert va._title_tokens("2026 이천포럼 CEO 패널토의") == ["이천포럼"]
+    md = GOOD_ARTICLE + """
+설문에서 CEO들의 투자 수익 낙관도가 1년 전보다 높아졌습니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, INTERNAL)
+    assert r["internal_refs"] == []
+
+
+def test_year_bearing_title_token_does_not_match_every_paragraph():
+    """'2026년 …신년사' 같은 제목의 '2026년'이 연도 쓴 문단마다 걸리면 안 된다."""
+    assert va._title_tokens("2026년 SK이노베이션 E&S 신년사") == ["SK이노베이션", "E&S", "신년사"]
+    assert va._title_tokens("SK그룹 사례를 통한 의미부여와 의미형성") == ["SK그룹", "의미형성"]
+    docs = [{"id": "internal/ny.md", "title": "2026년 SK이노베이션 E&S 신년사",
+             "speaker": "대표이사", "effective_date": "2026-01-01", "body": "본문"}]
+    md = GOOD_ARTICLE + """
+McKinsey가 해마다 돌리는 2026년판 설문을 보면 응답이 갈립니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, docs)
+    assert r["internal_refs"] == []
+
+
+def test_undeclared_internal_doc_is_not_matched_indirectly():
+    """참고자료에 밝히지 않은 내부 문서는 제목 낱말만으로 잡지 않는다 (오탐 차단)."""
+    docs = [{"id": "internal/x.md", "title": "회장과의 대화 (4) AI 혁신 불안과 에이전트 활용",
+             "speaker": "회장", "effective_date": "2026-06-01", "body": "본문"}]
+    md = GOOD_ARTICLE + """
+에이전트를 도입한 팀에서는 검토 시간이 줄었다고 말합니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, docs)
+    assert r["internal_refs"] == []
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+
+
+# --- 작성 모델 기록 (config/settings.yaml write_model 대조용) -------------------
+
+def test_write_model_from_yaml_frontmatter():
+    md = "---\nmodel: claude-opus-5\ndate: 2026-09-08\n---\n\n# 제목\n"
+    assert va.parse_write_model(md) == "claude-opus-5"
+
+
+def test_write_model_from_html_comment_with_multiple_fields():
+    """<!-- 모델: x · 생성일: y --> 처럼 한 줄에 여러 필드가 와도 모델만 집는다."""
+    md = "<!-- 모델: claude-fable-5-1 · 생성일: 2026-09-08 · base: 376850a -->\n\n# 제목\n"
+    assert va.parse_write_model(md) == "claude-fable-5-1"
+
+
+def test_write_model_absent_is_empty_not_error():
+    assert va.parse_write_model("# 제목\n\n본문입니다.\n") == ""
+
+
+def test_write_model_ignores_body_mentions():
+    """머리말 범위 밖(본문)의 'model:' 표기는 집지 않는다."""
+    md = "# 제목\n" + "\n본문 문장입니다.\n" * 20 + "\nmodel: 엉뚱한값\n"
+    assert va.parse_write_model(md) == ""
+
+
+def test_write_model_appears_in_report():
+    md = "<!-- 모델: claude-opus-5 -->\n" + GOOD_ARTICLE
+    r = va.verify(md, BASE)
+    assert r["write_model"] == "claude-opus-5"
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "작성 모델: claude-opus-5" in report
+    assert "머리말 미기재" in va.render_report(
+        "t", Path("a.md"), Path("e.json"), va.verify(GOOD_ARTICLE, BASE))
+
+
+# --- 참고자료 제목 중복 (같은 출처의 별개 글이 제목 앞부분을 공유하는 경우) ---------- #
+# 실제 사례: josh-bersin "The Rise Of The Supermanager"(2025-10-20)와
+# "The Rise Of The Supermanager: A New Role In The World of AI"(2025-09-23)는
+# URL·발행일·본문이 다른 별개 글인데 참고자료에서는 같은 글로 보였다.
+
+SUPERMANAGER_A = "The Rise Of The Supermanager"
+SUPERMANAGER_B = "The Rise Of The Supermanager: A New Role In The World of AI"
+BERSIN_DATES = {
+    ("josh-bersin", SUPERMANAGER_A): "2025-10-20",
+    ("josh-bersin", SUPERMANAGER_B): "2025-09-23",
+    ("hbr", "HBR 기사 A"): "2026-01-02",
+}
+
+
+def test_reference_titles_annotate_only_indistinguishable_titles():
+    out = va.reference_titles("josh-bersin", {SUPERMANAGER_A, SUPERMANAGER_B, "Affordability Is Not Just Inflation"},
+                              BERSIN_DATES)
+    assert out == [
+        "Affordability Is Not Just Inflation",           # 구분되므로 발행일 없음
+        f"{SUPERMANAGER_A} (2025-10-20)",
+        f"{SUPERMANAGER_B} (2025-09-23)",
+    ]
+
+
+def test_reference_titles_leave_unique_title_alone_even_with_date():
+    """발행일을 알아도 제목이 구분되면 병기하지 않는다 — 목록이 서지 정보로 붐비지 않게."""
+    assert va.reference_titles("hbr", {"HBR 기사 A"}, BERSIN_DATES) == ["HBR 기사 A"]
+
+
+def test_reference_titles_survive_missing_dates():
+    """DB를 못 읽어 발행일이 없으면 제목 그대로 둔다 (검증은 DB 없이도 돌아야 한다)."""
+    assert va.reference_titles("josh-bersin", {SUPERMANAGER_A, SUPERMANAGER_B}, {}) == [
+        SUPERMANAGER_A, SUPERMANAGER_B]
+    assert va.reference_titles("josh-bersin", {SUPERMANAGER_A}, None) == [SUPERMANAGER_A]
+
+
+def test_report_disambiguates_same_source_documents_with_publish_date():
+    ev = evidence(
+        claim("C1", "josh-bersin", "optimistic", doc=SUPERMANAGER_A),
+        claim("C2", "josh-bersin", "cautious", doc=SUPERMANAGER_B),
+        claim("C3", "mckinsey-insights", "cautious", doc="McKinsey 리포트"),
+        claim("C4", "theory-canon", "neutral", tier="T1", etype="theory", doc="흡수역량"),
+    )
+    md = """<!-- slug: t -->
+# 제목
+
+## 관찰된 신호
+
+첫 문단이다.
+<!-- claims: C1 -->
+
+둘째 문단이다.
+<!-- claims: C2 -->
+
+셋째 문단이다.
+<!-- claims: C3, C4 -->
+"""
+    r = va.verify(md, ev, None, BERSIN_DATES)
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert f"{SUPERMANAGER_A} (2025-10-20)" in report
+    assert f"{SUPERMANAGER_B} (2025-09-23)" in report
+    assert "McKinsey 리포트 (" not in report          # 구분되는 제목에는 붙이지 않는다
+
+
+def test_cdata_title_is_cleaned_before_date_annotation():
+    """CDATA 래퍼가 섞인 제목도 벗긴 뒤 발행일과 짝지어야 한다."""
+    # 앞 14자가 같아야 구분 불가로 잡힌다 (REF_TITLE_KEY_LEN)
+    a, b = "같은 앞부분을 공유하는 기사 하나", "같은 앞부분을 공유하는 기사 둘"
+    dates = {("bain-insights", a): "2026-02-01", ("bain-insights", b): "2026-03-01"}
+    out = va.reference_titles("bain-insights", {f"<![CDATA[{a}]]>", b}, dates)
+    assert out == [f"{b} (2026-03-01)", f"{a} (2026-02-01)"]
