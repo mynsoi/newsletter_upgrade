@@ -18,6 +18,8 @@ evidence 파일 전체가 아니라 **본문이 실제로 인용한 claim**만�
      · 내부 자료를 인용한 문단에 연도 표기가 없으면 "내부 자료 시점 미표기"로 경고한다
        (article_style 5절 — 연례 행사·정기 발행물은 어느 해 것인지가 근거의 일부다).
   7. 참고자료 — 실사용 문서만 남기고, 올바른 목록을 리포트에 생성 (CDATA 래퍼 제거)
+     · 한 출처 안에서 제목만으로 구분되지 않는 문서에는 발행일을 병기한다
+       (같은 제목 앞부분을 쓰는 별개 글 — 예: josh-bersin의 Supermanager 2편)
   8. 작성 모델 — 초안 머리말의 모델 표기를 읽어 리포트 머리에 남긴다 (검사가 아니라 기록.
      config/settings.yaml의 write_model과 대조할 수 있도록)
 
@@ -91,6 +93,9 @@ TITLE_TOKEN_STOP = {"ceo", "패널토의", "메시지", "발표", "자료", "보
 # 조사·어미가 붙은 어절은 고유명사가 아니라 서술형 제목의 조각이다("사례를", "중심으로").
 # 이런 말로 문단을 찾으면 무관한 본문이 걸린다.
 PARTICLE_TAIL_RE = re.compile(r"(?:의|를|을|와|과|로|으로|에|에서|는|은|이|가|도|만|과의|와의)$")
+# 참고자료에서 문서를 특정하는 제목 앞부분의 길이. 검사 7의 문서명 매칭과 같은 값을 쓴다 —
+# 이 범위가 겹치는 두 문서는 목록에서 구분되지 않으므로 발행일을 병기한다.
+REF_TITLE_KEY_LEN = 14
 # RSS CDATA 래퍼가 제목에 섞여 들어온 경우 (bain-insights 등) 리포트에서는 벗겨 쓴다
 CDATA_RE = re.compile(r"<!\[CDATA\[(.*?)\]\]>", re.S)
 
@@ -153,6 +158,49 @@ def load_internal_docs() -> list[dict]:
                 for r in rows]
     except Exception:  # noqa: BLE001 — DB 없음·스키마 미적용 등은 치명적이지 않다
         return []
+
+
+def load_document_dates() -> dict[tuple[str, str], str]:
+    """(source_id, 제목) → 발행일(YYYY-MM-DD). DB를 못 읽으면 빈 dict.
+
+    참고자료에서 제목만으로 구분되지 않는 문서를 발행일로 갈라 놓기 위한 것이다
+    (예: josh-bersin의 "The Rise Of The Supermanager"와 "…: A New Role In The World of AI"는
+    URL·발행일·본문이 다른 별개 글인데 제목 앞부분이 같다).
+    """
+    try:
+        from db import connect
+        conn = connect()
+        rows = conn.execute(
+            "SELECT source_id, title, published_at FROM documents "
+            "WHERE title IS NOT NULL AND published_at IS NOT NULL"
+        ).fetchall()
+        conn.close()
+        return {(r["source_id"], clean_title(r["title"])): str(r["published_at"])[:10]
+                for r in rows}
+    except Exception:  # noqa: BLE001 — DB 없이도 검증은 돌아야 한다
+        return {}
+
+
+def _ref_key(title: str) -> str:
+    """참고자료 대조가 쓰는 제목 식별 범위 — 이 범위가 같으면 목록에서 구분되지 않는다."""
+    return re.split(r"[(（]", clean_title(title))[0].strip().lower()[:REF_TITLE_KEY_LEN]
+
+
+def reference_titles(source: str, docs, dates: dict[tuple[str, str], str] | None = None) -> list[str]:
+    """한 출처의 참고자료 표기 목록.
+
+    같은 출처 안에서 제목이 서로 구분되지 않는 문서(앞부분이 같아 `_ref_key`가 겹치는 경우)
+    에만 발행일을 병기한다. 발행일을 모르면 제목 그대로 둔다 — DB 없이 돌 때도 깨지지 않게.
+    """
+    dates = dates or {}
+    titles = sorted(clean_title(d) or "(문서명 없음)" for d in docs)
+    collided = {k for k in (_ref_key(t) for t in titles)
+                if sum(1 for t in titles if _ref_key(t) == k) > 1}
+    out = []
+    for t in titles:
+        day = dates.get((source, t))
+        out.append(f"{t} ({day})" if day and _ref_key(t) in collided else t)
+    return out
 
 
 def _squash(s: str) -> str:
@@ -289,7 +337,8 @@ def _first_sentence(text: str, limit: int = 70) -> str:
     return (s[:limit] + "…") if len(s) > limit else s
 
 
-def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> dict:
+def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
+           doc_dates: dict[tuple[str, str], str] | None = None) -> dict:
     """실사용 기준 검증 결과를 dict로 반환.
 
     internal_docs를 주면 본문의 직접 인용을 내부 자료 원문과 대조한다(문구 일치까지만 —
@@ -397,7 +446,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> 
         by_source = any(sid in low or alias in low
                         for alias, sid in aliases.items() if sid in used_docs)
         # 문서명 매칭은 괄호 앞 제목만 본다("심리적 안전감 (Psychological Safety)" → "심리적 안전감")
-        by_doc = any(re.split(r"[(（]", doc)[0].strip().lower()[:14] in low
+        by_doc = any(_ref_key(doc) in low
                      for docs in used_docs.values() for doc in docs
                      if len(re.split(r"[(（]", doc)[0].strip()) >= 4)
         if not (by_source or by_doc):
@@ -486,6 +535,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> 
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
         "numbers": numbers, "references": references, "used_docs": used_docs,
         "quotes": quotes, "internal_refs": internal_refs, "internal_available": bool(docs),
+        "doc_dates": doc_dates or {},
         "write_model": parse_write_model(md),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
@@ -603,7 +653,8 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
     lines += ["", "## 6. 참고자료 (실사용 문서만)", ""]
     if r["used_docs"]:
         for src, docs in sorted(r["used_docs"].items()):
-            lines.append(f"- **{src}**: {' / '.join(sorted(docs))}")
+            titles = reference_titles(src, docs, r.get("doc_dates"))
+            lines.append(f"- **{src}**: {' / '.join(titles)}")
     else:
         lines.append("(사용 claim 없음)")
 
@@ -637,7 +688,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"evidence 파일 없음: {evidence_path}")
         return 2
 
-    result = verify(md, load_evidence(evidence_path), load_internal_docs())
+    result = verify(md, load_evidence(evidence_path), load_internal_docs(),
+                    load_document_dates())
     report = render_report(slug, article_path, evidence_path, result)
 
     if args.stdout:

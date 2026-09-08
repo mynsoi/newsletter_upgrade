@@ -71,8 +71,8 @@
 - McKinsey Insights, "The state of AI in 2026: On the road to ROI"
 - McKinsey Insights, "The new management playbook for AI: How to move faster and create more value"
 - McKinsey Insights, "Beyond the copilot: Scaling the agentic product development life cycle"
-- Josh Bersin, "The Rise Of The Supermanager: A New Role In The World of AI"
-- Josh Bersin, "The Rise Of The Supermanager"
+- Josh Bersin, "The Rise Of The Supermanager: A New Role In The World of AI" (2025-09-23)
+- Josh Bersin, "The Rise Of The Supermanager" (2025-10-20)
 - Bain Insights, "Industrial CEOs: Is AI the Least of Their Worries?"
 - Bain Insights, "Why Pharma Transformations Stall—and How to Fix Them"
 - BCG Publications, "Look Past Productivity to Get Real Value from AI"

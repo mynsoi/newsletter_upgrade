@@ -102,7 +102,7 @@
 - **bain-insights**: Industrial CEOs: Is AI the Least of Their Worries? / Why Pharma Transformations Stall—and How to Fix Them
 - **bcg-publications**: BCG AI at Work 2026 (Fourth Edition): Strategy Matters More Than Tools — survey slideshow / Look Past Productivity to Get Real Value from AI
 - **hr-bulletin**: “일 할 시간이 없다” / 데이터로 엿보는 구성원의 마음
-- **josh-bersin**: The Rise Of The Supermanager / The Rise Of The Supermanager: A New Role In The World of AI
+- **josh-bersin**: The Rise Of The Supermanager (2025-10-20) / The Rise Of The Supermanager: A New Role In The World of AI (2025-09-23)
 - **mckinsey-insights**: Beyond the copilot: Scaling the agentic product development life cycle / The new management playbook for AI: How to move faster and create more value / The state of AI in 2026: On the road to ROI
 - **theory-canon**: 사회기술시스템 이론 (Sociotechnical Systems Theory) / 흡수역량 (Absorptive Capacity)
 - **worklytics-blog**: How to Identify Which Tasks Employees Automate with AI  | Worklytics
@@ -167,6 +167,11 @@ AX 인프라 투자 금액, 외부 인재 영입 계획, Citadel 수익 수치)�
   압축 과정에서 뺀 서술 2건: 사회기술시스템 문단의 "탄광의 일이 지금 사무실에서 되풀이됩니다"(이론→현재 연결 문장),
   Bain 문단의 기대 미달 사유(역량 부족·확장 실패 파일럿). 둘 다 claim 인용이 아니라 해설이다.
 - 금지 표현 목록 미운용 (2026-09 폐지 · `prompts/banned_phrases.txt` 없음).
+- 참고자료의 Josh Bersin 두 항목은 **별개 글**이다 — "The Rise Of The Supermanager"
+  (`1A0566FFBF99849787E402CB3C1` · joshbersin.com/2025/10/… · 2025-10-20)와
+  "…: A New Role In The World of AI"(`1A0567044A695C5BC560699DD2F` · /2025/09/… · 2025-09-23)로
+  URL·발행일·본문 해시가 모두 다르다. 제목 앞부분이 같아 목록에서 구분되지 않으므로
+  `verify_article.py`가 발행일을 병기한다(2026-09-08 추가).
 - **삭제로 사라진 고지 2건** (팀장 판단으로 뺀 것이며 검증 실패 사유는 아니다)
   - 낙관 수치의 표본 한정 주의 — evidence `cautions` 3번("성공한 기업 표본에 한정된 값,
     전체 평균으로 확대 해석 금지"). 본문에서는 "성공 사례로 고른 기업 20곳"이라는 표현과

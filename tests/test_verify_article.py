@@ -498,3 +498,76 @@ def test_write_model_appears_in_report():
     assert "작성 모델: claude-opus-5" in report
     assert "머리말 미기재" in va.render_report(
         "t", Path("a.md"), Path("e.json"), va.verify(GOOD_ARTICLE, BASE))
+
+
+# --- 참고자료 제목 중복 (같은 출처의 별개 글이 제목 앞부분을 공유하는 경우) ---------- #
+# 실제 사례: josh-bersin "The Rise Of The Supermanager"(2025-10-20)와
+# "The Rise Of The Supermanager: A New Role In The World of AI"(2025-09-23)는
+# URL·발행일·본문이 다른 별개 글인데 참고자료에서는 같은 글로 보였다.
+
+SUPERMANAGER_A = "The Rise Of The Supermanager"
+SUPERMANAGER_B = "The Rise Of The Supermanager: A New Role In The World of AI"
+BERSIN_DATES = {
+    ("josh-bersin", SUPERMANAGER_A): "2025-10-20",
+    ("josh-bersin", SUPERMANAGER_B): "2025-09-23",
+    ("hbr", "HBR 기사 A"): "2026-01-02",
+}
+
+
+def test_reference_titles_annotate_only_indistinguishable_titles():
+    out = va.reference_titles("josh-bersin", {SUPERMANAGER_A, SUPERMANAGER_B, "Affordability Is Not Just Inflation"},
+                              BERSIN_DATES)
+    assert out == [
+        "Affordability Is Not Just Inflation",           # 구분되므로 발행일 없음
+        f"{SUPERMANAGER_A} (2025-10-20)",
+        f"{SUPERMANAGER_B} (2025-09-23)",
+    ]
+
+
+def test_reference_titles_leave_unique_title_alone_even_with_date():
+    """발행일을 알아도 제목이 구분되면 병기하지 않는다 — 목록이 서지 정보로 붐비지 않게."""
+    assert va.reference_titles("hbr", {"HBR 기사 A"}, BERSIN_DATES) == ["HBR 기사 A"]
+
+
+def test_reference_titles_survive_missing_dates():
+    """DB를 못 읽어 발행일이 없으면 제목 그대로 둔다 (검증은 DB 없이도 돌아야 한다)."""
+    assert va.reference_titles("josh-bersin", {SUPERMANAGER_A, SUPERMANAGER_B}, {}) == [
+        SUPERMANAGER_A, SUPERMANAGER_B]
+    assert va.reference_titles("josh-bersin", {SUPERMANAGER_A}, None) == [SUPERMANAGER_A]
+
+
+def test_report_disambiguates_same_source_documents_with_publish_date():
+    ev = evidence(
+        claim("C1", "josh-bersin", "optimistic", doc=SUPERMANAGER_A),
+        claim("C2", "josh-bersin", "cautious", doc=SUPERMANAGER_B),
+        claim("C3", "mckinsey-insights", "cautious", doc="McKinsey 리포트"),
+        claim("C4", "theory-canon", "neutral", tier="T1", etype="theory", doc="흡수역량"),
+    )
+    md = """<!-- slug: t -->
+# 제목
+
+## 관찰된 신호
+
+첫 문단이다.
+<!-- claims: C1 -->
+
+둘째 문단이다.
+<!-- claims: C2 -->
+
+셋째 문단이다.
+<!-- claims: C3, C4 -->
+"""
+    r = va.verify(md, ev, None, BERSIN_DATES)
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert f"{SUPERMANAGER_A} (2025-10-20)" in report
+    assert f"{SUPERMANAGER_B} (2025-09-23)" in report
+    assert "McKinsey 리포트 (" not in report          # 구분되는 제목에는 붙이지 않는다
+
+
+def test_cdata_title_is_cleaned_before_date_annotation():
+    """CDATA 래퍼가 섞인 제목도 벗긴 뒤 발행일과 짝지어야 한다."""
+    # 앞 14자가 같아야 구분 불가로 잡힌다 (REF_TITLE_KEY_LEN)
+    a, b = "같은 앞부분을 공유하는 기사 하나", "같은 앞부분을 공유하는 기사 둘"
+    dates = {("bain-insights", a): "2026-02-01", ("bain-insights", b): "2026-03-01"}
+    out = va.reference_titles("bain-insights", {f"<![CDATA[{a}]]>", b}, dates)
+    assert out == [f"{b} (2026-03-01)", f"{a} (2026-02-01)"]
