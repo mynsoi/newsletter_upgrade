@@ -465,3 +465,36 @@ def test_undeclared_internal_doc_is_not_matched_indirectly():
     r = va.verify(md, BASE, docs)
     assert r["internal_refs"] == []
     assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+
+
+# --- 작성 모델 기록 (config/settings.yaml write_model 대조용) -------------------
+
+def test_write_model_from_yaml_frontmatter():
+    md = "---\nmodel: claude-opus-5\ndate: 2026-09-08\n---\n\n# 제목\n"
+    assert va.parse_write_model(md) == "claude-opus-5"
+
+
+def test_write_model_from_html_comment_with_multiple_fields():
+    """<!-- 모델: x · 생성일: y --> 처럼 한 줄에 여러 필드가 와도 모델만 집는다."""
+    md = "<!-- 모델: claude-fable-5-1 · 생성일: 2026-09-08 · base: 376850a -->\n\n# 제목\n"
+    assert va.parse_write_model(md) == "claude-fable-5-1"
+
+
+def test_write_model_absent_is_empty_not_error():
+    assert va.parse_write_model("# 제목\n\n본문입니다.\n") == ""
+
+
+def test_write_model_ignores_body_mentions():
+    """머리말 범위 밖(본문)의 'model:' 표기는 집지 않는다."""
+    md = "# 제목\n" + "\n본문 문장입니다.\n" * 20 + "\nmodel: 엉뚱한값\n"
+    assert va.parse_write_model(md) == ""
+
+
+def test_write_model_appears_in_report():
+    md = "<!-- 모델: claude-opus-5 -->\n" + GOOD_ARTICLE
+    r = va.verify(md, BASE)
+    assert r["write_model"] == "claude-opus-5"
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "작성 모델: claude-opus-5" in report
+    assert "머리말 미기재" in va.render_report(
+        "t", Path("a.md"), Path("e.json"), va.verify(GOOD_ARTICLE, BASE))

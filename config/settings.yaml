@@ -4,7 +4,9 @@
 
 # claim 추출에 사용할 모델 (태깅·추출은 경량, 작성은 상위 모델 — 기획서 8장)
 enrich_model: claude-haiku-4-5-20251001
-write_model: claude-sonnet-4-6
+# 2026-09-08 claude-sonnet-4-6 → claude-opus-5. 블라인드 문체 테스트 5종 비교 결과
+# (2인 + AI 평가, eval/style-feedback-log.md). 이 값이 작성 모델의 정본이다.
+write_model: claude-opus-5
 
 # claim 추출(게이트+추출 API 호출) 활성화 여부.
 # 2026-09-04 true — 크레딧 충전 완료, 재개. false로 바꾸면 스킵하고 정상 종료(실패 이슈 안 뜸).

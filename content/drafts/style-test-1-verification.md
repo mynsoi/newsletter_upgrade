@@ -1,6 +1,7 @@
 # 검증 리포트 (실사용 기준) — style-test-1
 
 대상: `content/drafts/style-test-1.md` · 증거: `content/evidence/ai-productivity-paradox.json`
+작성 모델: claude-fable-5-1 (정본은 `config/settings.yaml`의 `write_model`)
 판정: **통과** (실패 0건 · 경고 2건)
 
 > 이 리포트는 evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**만으로 계산한다.

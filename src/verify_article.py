@@ -18,6 +18,8 @@ evidence 파일 전체가 아니라 **본문이 실제로 인용한 claim**만�
      · 내부 자료를 인용한 문단에 연도 표기가 없으면 "내부 자료 시점 미표기"로 경고한다
        (article_style 5절 — 연례 행사·정기 발행물은 어느 해 것인지가 근거의 일부다).
   7. 참고자료 — 실사용 문서만 남기고, 올바른 목록을 리포트에 생성 (CDATA 래퍼 제거)
+  8. 작성 모델 — 초안 머리말의 모델 표기를 읽어 리포트 머리에 남긴다 (검사가 아니라 기록.
+     config/settings.yaml의 write_model과 대조할 수 있도록)
 
 사용:
   python src/verify_article.py content/drafts/{slug}.md [--evidence ...] [--out ...] [--stdout]
@@ -74,6 +76,10 @@ ACTION_MARKER_RE = re.compile(
 PRESCRIPTIVE_UNIT_RE = re.compile(r"^\d[\d,.]*\s*(?:주|개월|일|년|회|건|개|차례|분|시간)$")
 # 본문의 직접 인용 — 내부 자료(경영층 발언 등) 원문 대조 대상
 QUOTE_RE = re.compile(r"[\"“]([^\"“”]{10,200})[\"”]")
+# 초안 머리말의 작성 모델 표기 — YAML(`model: x`)과 HTML 주석(`<!-- 모델: x -->`) 둘 다 받는다.
+# 회차마다 머리말 형식이 갈려서 한쪽만 보면 놓친다.
+WRITE_MODEL_RE = re.compile(
+    r"^\s*(?:-\s*)?(?:write_?model|model|모델|작성\s*모델)\s*[:：]\s*(.+?)\s*$", re.M | re.I)
 # 시점 표기 — 내부 자료를 인용한 문단에 연도가 있는지 본다 (2026년 / 2026 / '26년 아님)
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 # 내부 문서 제목에서 이 문서를 특정하는 낱말만 골라낸다. 짧거나 흔한 말은 오탐이 된다
@@ -152,6 +158,23 @@ def load_internal_docs() -> list[dict]:
 def _squash(s: str) -> str:
     """공백·문장부호 차이를 무시한 대조용 정규화."""
     return re.sub(r"[\s·,.\"'“”‘’]+", "", s or "")
+
+
+def parse_write_model(md: str, head_lines: int = 15) -> str:
+    """초안 머리말에서 작성 모델 표기를 읽는다. 없으면 빈 문자열.
+
+    머리말 형식이 회차마다 달라(YAML 블록 / HTML 주석 / 한 줄에 여러 필드) 앞부분만
+    훑고 첫 매칭을 쓴다. 본문에 모델 이름이 나와도 집지 않도록 범위를 머리말로 제한한다.
+    검사가 아니라 기록이므로, 없으면 실패시키지 않고 빈 값을 돌려준다.
+    """
+    head = "\n".join(md.splitlines()[:head_lines])
+    # "<!-- 모델: x · 생성일: y -->"처럼 한 줄에 여러 필드가 오는 형태를 풀어 준다
+    flat = re.sub(r"<!--|-->", "\n", head)
+    flat = re.sub(r"\s+·\s+", "\n", flat)
+    m = WRITE_MODEL_RE.search(flat)
+    if not m:
+        return ""
+    return m.group(1).strip().strip("\"'")
 
 
 def _title_tokens(title: str) -> list[str]:
@@ -463,6 +486,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> 
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
         "numbers": numbers, "references": references, "used_docs": used_docs,
         "quotes": quotes, "internal_refs": internal_refs, "internal_available": bool(docs),
+        "write_model": parse_write_model(md),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
     }
@@ -481,6 +505,8 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
     lines = [
         f"# 검증 리포트 (실사용 기준) — {slug}", "",
         f"대상: `{_rel(article_path)}` · 증거: `{_rel(evidence_path)}`",
+        f"작성 모델: {r.get('write_model') or '**머리말 미기재**'} "
+        f"(정본은 `config/settings.yaml`의 `write_model`)",
         f"판정: **{'통과' if r['passed'] else '실패'}** "
         f"(실패 {sum(1 for i in r['issues'] if i.level == 'fail')}건 · "
         f"경고 {sum(1 for i in r['issues'] if i.level == 'warn')}건)",
