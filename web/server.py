@@ -504,8 +504,8 @@ def api_publish():
 
 @app.route("/api/send-email", methods=["POST"])
 def api_send_email():
-    """발행된 아티클을 .eml 파일로 생성하여 다운로드한다."""
-    from email_renderer import render_email_html, build_eml
+    """발행된 아티클을 이미지 기반 .eml 파일로 생성하여 다운로드한다."""
+    from email_renderer import build_image_eml
 
     data = request.json
     slug = data.get("slug", "")
@@ -526,16 +526,11 @@ def api_send_email():
         return jsonify({"error": "article.json을 찾을 수 없습니다."}), 404
 
     article = json.loads(article_json.read_text(encoding="utf-8"))
-
-    image_paths = {}
-    for f in out_dir.glob("*.png"):
-        key = f.stem
-        image_paths[key] = f.name
+    subject = f"[Insight Weekly] {article['title']}"
+    preview_url = f"http://localhost:5001/preview/{slug}/"
 
     try:
-        email_html, embedded_images = render_email_html(article, image_paths, out_dir)
-        subject = f"[Insight Weekly] {article['title']}"
-        eml_bytes = build_eml(subject, email_html, embedded_images, recipients, cc)
+        eml_bytes = build_image_eml(subject, preview_url, out_dir, recipients, cc)
 
         eml_path = out_dir / "newsletter.eml"
         eml_path.write_bytes(eml_bytes)
