@@ -472,6 +472,25 @@ h1 {
         HTML 페이지 생성
       </button>
     </div>
+
+    <div class="card" id="email-section" style="display:none;margin-top:24px;">
+      <div class="card-label">이메일 파일 생성</div>
+      <p style="font-size:14px;color:var(--ink-muted);margin-bottom:16px;">
+        발행된 아티클을 .eml 파일로 다운로드합니다. VDI Outlook에서 열어 발송하세요.
+      </p>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">수신자 (쉼표로 구분)</label>
+        <input type="text" id="email-to" placeholder="user1@sk.com, user2@sk.com"
+          style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--kr);">
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">참조 CC (선택)</label>
+        <input type="text" id="email-cc" placeholder="cc1@sk.com"
+          style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--kr);">
+      </div>
+      <button class="btn btn-primary" onclick="sendEmail()">.eml 파일 다운로드</button>
+      <span id="email-status" style="font-size:13px;color:var(--ink-muted);margin-left:12px;"></span>
+    </div>
   </div>
 </div>
 
@@ -481,6 +500,7 @@ let selectedImages = {};
 let imagePositions = {};
 let skippedSections = {};
 let currentTags = [];
+let publishedSlug = '';
 
 // --- API 키 관리 ---
 function loadApiKey() {
@@ -852,6 +872,8 @@ function publishArticle() {
     window.open(data.preview_url, '_blank');
     document.getElementById('status-text').textContent =
       '발행 완료! 파일: ' + data.output_path;
+    publishedSlug = articleData.slug;
+    document.getElementById('email-section').style.display = 'block';
   })
   .catch(err => showError('발행 실패: ' + err.message));
 }
@@ -881,6 +903,39 @@ function addTag() {
 function removeTag(idx) {
   currentTags.splice(idx, 1);
   renderTags();
+}
+
+function sendEmail() {
+  var toInput = document.getElementById('email-to').value.trim();
+  if (!toInput) { showError('수신자를 입력해 주세요.'); return; }
+  var recipients = toInput.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var ccInput = document.getElementById('email-cc').value.trim();
+  var cc = ccInput ? ccInput.split(',').map(function(s) { return s.trim(); }).filter(Boolean) : [];
+
+  var statusEl = document.getElementById('email-status');
+  statusEl.textContent = '.eml 생성 중...';
+
+  fetch('/api/send-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug: publishedSlug, recipients: recipients, cc: cc })
+  })
+  .then(function(r) {
+    if (!r.ok) { return r.json().then(function(d) { throw new Error(d.error || '생성 실패'); }); }
+    return r.blob();
+  })
+  .then(function(blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'newsletter.eml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    statusEl.textContent = '다운로드 완료! VDI Outlook에서 열어 발송하세요.';
+  })
+  .catch(function(err) { showError('이메일 생성 실패: ' + err.message); statusEl.textContent = ''; });
 }
 
 function showError(msg) {

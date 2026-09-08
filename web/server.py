@@ -489,6 +489,9 @@ def api_publish():
     html_path = out_dir / "index.html"
     html_path.write_text(html, encoding="utf-8")
 
+    article_json_path = out_dir / "article.json"
+    article_json_path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
+
     # 임시 이미지 정리
     for f in tmp_dir.glob("*.png"):
         f.unlink(missing_ok=True)
@@ -497,6 +500,50 @@ def api_publish():
         "output_path": str(out_dir.relative_to(ROOT)),
         "preview_url": f"/preview/{slug}/",
     })
+
+
+@app.route("/api/send-email", methods=["POST"])
+def api_send_email():
+    """발행된 아티클을 .eml 파일로 생성하여 다운로드한다."""
+    from email_renderer import render_email_html, build_eml
+
+    data = request.json
+    slug = data.get("slug", "")
+    recipients = data.get("recipients", [])
+    cc = data.get("cc", [])
+
+    if not slug:
+        return jsonify({"error": "slug가 필요합니다."}), 400
+    if not recipients:
+        return jsonify({"error": "수신자가 필요합니다."}), 400
+
+    out_dir = OUTPUT_DIR / slug
+    if not out_dir.exists():
+        return jsonify({"error": f"발행물을 찾을 수 없습니다: {slug}"}), 404
+
+    article_json = out_dir / "article.json"
+    if not article_json.exists():
+        return jsonify({"error": "article.json을 찾을 수 없습니다."}), 404
+
+    article = json.loads(article_json.read_text(encoding="utf-8"))
+
+    image_paths = {}
+    for f in out_dir.glob("*.png"):
+        key = f.stem
+        image_paths[key] = f.name
+
+    try:
+        email_html, embedded_images = render_email_html(article, image_paths, out_dir)
+        subject = f"[Insight Weekly] {article['title']}"
+        eml_bytes = build_eml(subject, email_html, embedded_images, recipients, cc)
+
+        eml_path = out_dir / "newsletter.eml"
+        eml_path.write_bytes(eml_bytes)
+
+        return send_file(eml_path, as_attachment=True, download_name="newsletter.eml",
+                         mimetype="message/rfc822")
+    except Exception as e:
+        return jsonify({"error": f"이메일 생성 실패: {str(e)}"}), 500
 
 
 @app.route("/preview/<slug>/")
