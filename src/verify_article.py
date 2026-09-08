@@ -15,6 +15,8 @@ evidence 파일 전체가 아니라 **본문이 실제로 인용한 claim**만�
        소제목을 메시지 문장으로 쓰라는 문체 지침과 충돌하지 않도록.
   6. 내부 자료 인용 대조 — 본문 직접 인용을 internal_docs 원문과 문구 대조
      · 문구 일치까지만 기계 검증. 발언 맥락 왜곡 여부는 사람 확인 항목이다.
+     · 내부 자료를 인용한 문단에 연도 표기가 없으면 "내부 자료 시점 미표기"로 경고한다
+       (article_style 5절 — 연례 행사·정기 발행물은 어느 해 것인지가 근거의 일부다).
   7. 참고자료 — 실사용 문서만 남기고, 올바른 목록을 리포트에 생성 (CDATA 래퍼 제거)
 
 사용:
@@ -72,6 +74,17 @@ ACTION_MARKER_RE = re.compile(
 PRESCRIPTIVE_UNIT_RE = re.compile(r"^\d[\d,.]*\s*(?:주|개월|일|년|회|건|개|차례|분|시간)$")
 # 본문의 직접 인용 — 내부 자료(경영층 발언 등) 원문 대조 대상
 QUOTE_RE = re.compile(r"[\"“]([^\"“”]{10,200})[\"”]")
+# 시점 표기 — 내부 자료를 인용한 문단에 연도가 있는지 본다 (2026년 / 2026 / '26년 아님)
+YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+# 내부 문서 제목에서 이 문서를 특정하는 낱말만 골라낸다. 짧거나 흔한 말은 오탐이 된다
+# ("CEO", "메시지"가 걸리면 무관한 문단까지 내부 인용으로 잡힌다).
+TITLE_TOKEN_STOP = {"ceo", "패널토의", "메시지", "발표", "자료", "보고", "회의", "말씀",
+                    "토의", "간담회", "워크숍", "워크샵", "세미나", "가이드", "지침", "문서",
+                    "타운홀미팅", "상반기", "하반기", "wrap", "script", "vision", "system",
+                    "management", "why", "next", "free", "human", "resource", "session"}
+# 조사·어미가 붙은 어절은 고유명사가 아니라 서술형 제목의 조각이다("사례를", "중심으로").
+# 이런 말로 문단을 찾으면 무관한 본문이 걸린다.
+PARTICLE_TAIL_RE = re.compile(r"(?:의|를|을|와|과|로|으로|에|에서|는|은|이|가|도|만|과의|와의)$")
 # RSS CDATA 래퍼가 제목에 섞여 들어온 경우 (bain-insights 등) 리포트에서는 벗겨 쓴다
 CDATA_RE = re.compile(r"<!\[CDATA\[(.*?)\]\]>", re.S)
 
@@ -125,11 +138,13 @@ def load_internal_docs() -> list[dict]:
         from db import connect
         conn = connect()
         rows = conn.execute(
-            "SELECT id, title, speaker, body FROM internal_docs WHERE api_eligible = 1"
+            "SELECT id, title, speaker, body, effective_date "
+            "FROM internal_docs WHERE api_eligible = 1"
         ).fetchall()
         conn.close()
         return [{"id": r["id"], "title": r["title"], "speaker": r["speaker"],
-                 "body": r["body"] or ""} for r in rows]
+                 "body": r["body"] or "", "effective_date": r["effective_date"]}
+                for r in rows]
     except Exception:  # noqa: BLE001 — DB 없음·스키마 미적용 등은 치명적이지 않다
         return []
 
@@ -137,6 +152,49 @@ def load_internal_docs() -> list[dict]:
 def _squash(s: str) -> str:
     """공백·문장부호 차이를 무시한 대조용 정규화."""
     return re.sub(r"[\s·,.\"'“”‘’]+", "", s or "")
+
+
+def _title_tokens(title: str) -> list[str]:
+    """내부 문서를 특정하는 제목 낱말 — 간접 서술(인용부호 없는 언급)을 잡기 위한 것.
+
+    "2026 이천포럼 CEO 패널토의" → ["이천포럼"]. 연도가 섞인 어절("2026년"),
+    조사가 붙은 어절("사례를", "회장의"), 흔한 낱말은 버린다. 남는 게 없으면 빈
+    목록이고, 그 문서는 간접 서술로 찾지 않는다.
+    """
+    toks = re.split(r"[\s·,()\[\]—–\-/_:]+", clean_title(title) or "")
+    return [t for t in toks
+            if len(t) >= 3
+            and not YEAR_RE.search(t)                 # "2026년"은 아무 문단에나 걸린다
+            and not PARTICLE_TAIL_RE.search(t)
+            and t.lower() not in TITLE_TOKEN_STOP]
+
+
+def _declared_internal_docs(references: list[str], docs: list[dict]) -> list[dict]:
+    """참고자료의 `내부:` 항목이 가리키는 내부 문서만 골라낸다.
+
+    간접 서술을 제목 낱말로 찾을 때, 내부 문서 전체(수십 건)를 대상으로 하면 "에이전트",
+    "인프라" 같은 제목 낱말이 무관한 문단에 걸린다. 아티클이 참고자료에 스스로 밝힌
+    문서로 후보를 좁히면 그 오탐이 사라진다. 직접 인용 대조(9)는 이 제한을 받지 않는다.
+    """
+    internal_refs = [r for r in references if any(h in r.lower() for h in INTERNAL_REF_HINTS)]
+    out = []
+    for d in docs:
+        title = clean_title(d.get("title") or "")
+        squashed = _squash(title)
+        toks = _title_tokens(title)
+        for ref in internal_refs:
+            if (squashed and squashed in _squash(ref)) or                sum(1 for t in toks if t in ref) >= 2:
+                out.append(d)
+                break
+    return out
+
+
+def _doc_year(doc: dict) -> str:
+    """내부 자료의 시점 — 머리말 date(effective_date)의 연도. 없으면 제목에서 찾는다."""
+    m = YEAR_RE.search(str(doc.get("effective_date") or ""))
+    if not m:
+        m = YEAR_RE.search(clean_title(doc.get("title") or ""))
+    return m.group(0) if m else ""
 
 
 def source_aliases() -> dict[str, str]:
@@ -373,12 +431,38 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None) -> 
                     f"직접 인용 “{q[:40]}…”의 원문을 내부 자료·사용 claim에서 찾지 못함",
                     f"{seg.heading or '(제목 없음)'} / {seg.line}행"))
 
+    # 10) 내부 자료 인용의 시점 표기 — 연례 행사·정기 발행물은 어느 해 것인지가 근거의
+    #     일부다(article_style 5절). 직접 인용뿐 아니라 인용부호 없는 간접 서술도 본다:
+    #     "이천포럼 패널토의에서 …" 처럼 쓰면 인용부호가 없어 9)에서는 잡히지 않는다.
+    #     액션 문단도 대상이다 — 수치 면제와 달리 시점 표기는 면제 사유가 없다.
+    internal_refs: list[dict] = []
+    quoted_doc = {id(q["seg"]): q["doc"] for q in quotes if q["status"] == "match"}
+    declared = _declared_internal_docs(references, docs)
+    for seg in segments:
+        if "참고자료" in seg.heading:
+            continue
+        doc = next((d for d in docs if clean_title(d["title"]) == quoted_doc.get(id(seg))), None)
+        if doc is None:
+            doc = next((d for d in declared
+                        if any(t in seg.text for t in _title_tokens(d["title"]))), None)
+        if doc is None:
+            continue
+        title, year = clean_title(doc["title"]), _doc_year(doc)
+        dated = bool(YEAR_RE.search(seg.text))
+        internal_refs.append({"seg": seg, "doc": title, "year": year, "dated": dated})
+        if not dated:
+            issues.append(Issue(
+                "warn", "내부 자료 시점 미표기",
+                f"내부 자료 「{title}」를 인용했는데 문단에 연도 표기가 없음"
+                + (f" — 자료 시점은 {year}년이다" if year else ""),
+                f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"))
+
     return {
         "segments": segments, "used_segments": used_segments, "used": used, "unused": unused,
         "missing_marks": missing_marks,
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
         "numbers": numbers, "references": references, "used_docs": used_docs,
-        "quotes": quotes, "internal_available": bool(docs),
+        "quotes": quotes, "internal_refs": internal_refs, "internal_available": bool(docs),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
     }
@@ -468,6 +552,17 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
         if any(q["status"] == "match" for q in r["quotes"]):
             lines += ["", "> 문구 일치까지만 기계 검증했다. **발언 맥락 왜곡 여부는 사람 확인 항목**"
                           "이다 (CLAUDE.md 문체 규칙 — 경영층 인용은 발언 맥락 확인 후 발행)."]
+
+    if r.get("internal_available"):
+        lines += ["", "**시점 표기** (article_style 5절 — 내부 자료 인용은 연도 명시가 필수)", ""]
+        if not r.get("internal_refs"):
+            lines.append("본문에 내부 자료 인용 없음.")
+        else:
+            lines += ["| 인용한 내부 자료 | 위치 | 자료 시점 | 본문 연도 표기 |", "|---|---|---|---|"]
+            for ref in r["internal_refs"]:
+                lines.append(f"| {ref['doc']} | {ref['seg'].heading or '-'} {ref['seg'].line}행 | "
+                             f"{ref['year'] + '년' if ref['year'] else '(미상)'} | "
+                             f"{'✅ 있음' if ref['dated'] else '⚠️ 없음'} |")
 
     lines += ["", "## 5. 근거 주석 누락 의심 (사람 검토)", ""]
     if r["missing_marks"]:

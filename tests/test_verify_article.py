@@ -273,6 +273,7 @@ def test_prescriptive_exemption_does_not_hide_real_numbers_in_action_paragraph()
 
 INTERNAL = [{"id": "internal/ceo.md", "title": "이천포럼 CEO 패널토의",
              "speaker": "SK이노베이션 E&S 대표이사",
+             "effective_date": "2026-08-20",
              "body": "제가 말씀드리고 싶은 건, 사람이 남는다는 문제가 아니라 "
                      "사람의 남는 시간을 어디에 쓸 것인가의 문제입니다."}]
 
@@ -382,3 +383,85 @@ def test_cli_writes_report_and_exit_code(tmp_path, monkeypatch, capsys):
     bad = tmp_path / "bad.md"
     bad.write_text(GOOD_ARTICLE + "\n문제 문단.\n<!-- claims: ZZZ -->\n", encoding="utf-8")
     assert va.main([str(bad), "--evidence", str(ev), "--out", str(out)]) == 1  # 실패 시 비정상 종료
+
+
+# --- 내부 자료 시점 표기 (article_style 5절) -------------------------------------
+
+INTERNAL_REF_SECTION = """
+## 참고자료
+
+- 내부: 이천포럼 CEO 패널토의
+"""
+
+
+def test_internal_reference_without_year_is_warned():
+    """인용부호 없는 간접 서술도 잡는다 — 제목 낱말('이천포럼')로 문단을 찾는다."""
+    md = GOOD_ARTICLE + """
+이천포럼 패널토의에서 남는 시간을 어디에 쓸 것인가의 문제로 규정했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, INTERNAL)
+    warn = [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert warn and "2026년" in warn[0].message
+    assert r["passed"] is True            # 경고일 뿐 실패는 아니다
+    report = va.render_report("t", Path("a.md"), Path("e.json"), r)
+    assert "시점 표기" in report and "⚠️ 없음" in report
+
+
+def test_internal_reference_with_year_passes():
+    md = GOOD_ARTICLE + """
+2026년 이천포럼 패널토의에서 남는 시간을 어디에 쓸 것인가의 문제로 규정했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, INTERNAL)
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert r["internal_refs"] and r["internal_refs"][0]["dated"] is True
+    assert "✅ 있음" in va.render_report("t", Path("a.md"), Path("e.json"), r)
+
+
+def test_internal_date_check_skipped_without_db():
+    md = GOOD_ARTICLE + """
+이천포럼 패널토의에서 남는 시간의 쓰임을 논의했습니다.
+<!-- claims: C1 -->
+""" + INTERNAL_REF_SECTION
+    r = va.verify(md, BASE, [])
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
+    assert r["internal_refs"] == []
+
+
+def test_generic_title_tokens_do_not_match():
+    """'CEO'·'패널토의' 같은 흔한 낱말로는 무관한 문단을 내부 인용으로 잡지 않는다."""
+    assert va._title_tokens("2026 이천포럼 CEO 패널토의") == ["이천포럼"]
+    md = GOOD_ARTICLE + """
+설문에서 CEO들의 투자 수익 낙관도가 1년 전보다 높아졌습니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, INTERNAL)
+    assert r["internal_refs"] == []
+
+
+def test_year_bearing_title_token_does_not_match_every_paragraph():
+    """'2026년 …신년사' 같은 제목의 '2026년'이 연도 쓴 문단마다 걸리면 안 된다."""
+    assert va._title_tokens("2026년 SK이노베이션 E&S 신년사") == ["SK이노베이션", "E&S", "신년사"]
+    assert va._title_tokens("SK그룹 사례를 통한 의미부여와 의미형성") == ["SK그룹", "의미형성"]
+    docs = [{"id": "internal/ny.md", "title": "2026년 SK이노베이션 E&S 신년사",
+             "speaker": "대표이사", "effective_date": "2026-01-01", "body": "본문"}]
+    md = GOOD_ARTICLE + """
+McKinsey가 해마다 돌리는 2026년판 설문을 보면 응답이 갈립니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, docs)
+    assert r["internal_refs"] == []
+
+
+def test_undeclared_internal_doc_is_not_matched_indirectly():
+    """참고자료에 밝히지 않은 내부 문서는 제목 낱말만으로 잡지 않는다 (오탐 차단)."""
+    docs = [{"id": "internal/x.md", "title": "회장과의 대화 (4) AI 혁신 불안과 에이전트 활용",
+             "speaker": "회장", "effective_date": "2026-06-01", "body": "본문"}]
+    md = GOOD_ARTICLE + """
+에이전트를 도입한 팀에서는 검토 시간이 줄었다고 말합니다.
+<!-- claims: C1 -->
+"""
+    r = va.verify(md, BASE, docs)
+    assert r["internal_refs"] == []
+    assert not [i for i in r["issues"] if i.kind == "내부 자료 시점 미표기"]
