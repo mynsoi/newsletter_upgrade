@@ -122,7 +122,9 @@
 `git show 2b21cda:content/drafts/ai-productivity-paradox-verification.md`.
 
 - 상태: **재승인 대기** (`articles.status='review'`, `rubric_score=NULL`)
+- 루브릭 채점은 생략하기로 했다(2026-09-08 운영 판단). `rubric_score`가 비어 있는 것은
+  누락이 아니라 그 결정의 결과다. 남은 게이트는 승인 게이트 ⑥ 하나다.
 - 내부 자료 대조·루브릭 자체 채점·삭제된 고지 기록은
   `content/drafts/ai-productivity-paradox-v2-verification.md` 8~10장에 있다.
-- 재승인 전 사람 확인 항목: 승인 게이트 ⑥ 4항목, 내부 자료 인용의 발언 맥락 왜곡 여부,
-  이론 경계 조건·표본 한정 고지를 뺀 판단.
+- 재승인 전 사람 확인 항목: 승인 게이트 ⑥ 4항목(톤·경영층 인용·검증 플래그·저작권),
+  내부 자료 인용의 발언 맥락 왜곡 여부, 이론 경계 조건·표본 한정 고지를 뺀 판단.
