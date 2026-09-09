@@ -1,4 +1,4 @@
-.PHONY: init validate collect collect-fast sync enrich theories stats sources-doc test handoff receive
+.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories stats sources-doc test handoff receive
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -23,6 +23,12 @@ enrich:
 
 enrich-dry:
 	$(PYTHON) src/enrich/extract_claims.py --dry-run
+
+embed:                   # claim 임베딩 일반 실행 (embedding IS NULL, 일일 상한까지 — A6)
+	$(PYTHON) src/search/embed.py
+
+embed-backfill:          # claim 임베딩 상한 없이 잔여 전량 변환
+	$(PYTHON) src/search/embed.py --backfill
 
 theories:
 	$(PYTHON) src/load_theories.py

@@ -4,7 +4,11 @@ Phase 2에서 자동화 예정. 현재는 아래 수동 절차를 Claude Code가
 각 단계 산출물을 파일로 저장하고 다음 단계 진행 전 사용자 확인을 받는다.
 
 ② 증거 수집 → content/evidence/{slug}.json
-   - claims 테이블에서 주제 관련 claim 검색 (FTS)
+   - claims 테이블에서 주제 관련 claim 검색: `python src/search/semantic.py "질의" [--tiers ..]
+     [--stances ..] [--published-after ..] [--published-before ..]` (내부는 hybrid_search() —
+     키워드+의미 검색을 합쳐 반환). 결과의 match_type(키워드/의미/둘 다)을 확인해 의미 검색으로만
+     찾힌 claim은 실제 관련성을 사람이 한 번 더 확인한다. OpenAI 키가 없거나 SQLite 모드면
+     키워드 검색만 자동 폴백(오류 아님) — A6, docs/phase2-plan.md
    - 강제 조건 확인: 독립 출처 3곳+ / 상반 stance 1건+ / T1·T2 2건+
    - 권장: 이론 claim(evidence_type='theory') 1건+ 포함 — 현상을 이론의 경계 조건과 대조하는 각도 우선 (기획서 3.5)
    - 미충족 시 중단하고 "증거 부족" 보고 (CLAUDE.md 절대 규칙 2)
