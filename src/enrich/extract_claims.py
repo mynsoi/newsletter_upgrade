@@ -17,7 +17,8 @@
 - 프롬프트 원본: prompts/claim_extraction.md (코드 내 프롬프트 금지 — CLAUDE.md)
 - 모델: config/settings.yaml의 enrich_model (추출은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
-- 일반 실행은 collected_at 순, --backlog는 티어별 라운드로빈(T1이 21,000건+로 압도적이라
+- 일반 실행은 collected_at **역순**(최신 수집분 우선 — 2026-09-09, 그날 유입이 누적
+  백로그 뒤에서 굶지 않도록), --backlog는 티어별 라운드로빈(T1이 21,000건+로 압도적이라
   순서대로면 다른 티어가 굶는다) + 실측 비용이 --cost-cap(USD)에 닿으면 새 문서를 더 이상
   집지 않고 중단한다(진행 중이던 문서는 끝까지 처리 — 락을 반쯤 걸린 채로 남기지 않는다).
 """
@@ -236,11 +237,21 @@ def build_doc_filters(exclude_sources: list[str] | None = None,
 
 def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = None,
                        published_after: str | None = None):
-    """추출 대상: status='new'이면서 summary_only가 아닌 문서, collected_at 순 (일반 실행)."""
+    """추출 대상: status='new'이면서 summary_only가 아닌 문서, **최신 수집분 우선**
+    (collected_at 역순, 일반 실행).
+
+    2026-09-09 오름차순 → 내림차순. 오름차순일 때 일일 상한 500칸이 관문 수집(2026-08-31)의
+    arXiv 백로그로 전량 채워져, 그날 새로 들어온 T2~T4 문서가 백로그 12,000여 건 뒤에서
+    3주 넘게 대기했다. 일일 실행은 "오늘 들어온 것을 오늘 처리한다"가 목적이고, 누적
+    백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
+
+    상한이 그날 유입보다 크면 남는 칸은 자연히 그 다음으로 새 문서부터 채워지므로,
+    백로그도 최신 쪽부터 함께 줄어든다 — 처리 용량이 놀지 않는다.
+    """
     where, params = build_doc_filters(exclude_sources, published_after)
     return conn.execute(
         "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0"
-        f"{where} ORDER BY collected_at LIMIT ?",
+        f"{where} ORDER BY collected_at DESC LIMIT ?",
         (*params, limit),
     ).fetchall()
 
@@ -505,7 +516,7 @@ def main(argv: list[str] | None = None) -> int:
             "enrich_daily_limit", DEFAULT_DAILY_LIMIT)
         docs = select_target_docs(conn, base_limit, exclude_sources, args.published_after)
         print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— summary_only 제외"
+              f"— 최신 수집분 우선, summary_only 제외"
               + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
               + (f", 발행일 하한={args.published_after}" if args.published_after else ""))
         for d in docs:

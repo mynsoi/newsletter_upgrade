@@ -5,6 +5,10 @@
 #   collection_runs(run_date PK, KST 달력일) 를 원자적으로 선점한다. 오늘 이미
 #   completed 면 "오늘 완료됨"으로 즉시 종료(정상). 도중 실패는 failed 로 남아
 #   다음 실행이 자동 재시도한다. → Actions 와 개발 PC 가 같은 잠금을 공유한다.
+# claim 추출 순서: 일일 실행은 **최신 수집분 우선**(collected_at 역순, 상한
+#   config/settings.yaml enrich_daily_limit=500)이다. 그날 유입을 그날 처리하는 것이 목적이고,
+#   누적 백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
+#   상한이 그날 유입보다 크면 남는 칸이 백로그 최신 쪽부터 채워져 용량이 놀지 않는다.
 # 비밀값: DATABASE_URL, ANTHROPIC_API_KEY 는 GitHub Secrets 로만 주입한다.
 name: daily-collect
 

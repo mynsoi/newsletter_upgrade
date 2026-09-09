@@ -565,6 +565,20 @@ def test_tier_filters_exclude_sources_and_old_docs(test_db):
     assert {r["id"] for r in ec.select_target_docs(conn, 10, ["arxiv-*"], None)} == {"HBR", "NODATE"}
 
 
+def test_normal_run_takes_newest_collected_first(test_db):
+    """일반 실행(일일 수집)은 최신 수집분부터 집는다 — 그날 들어온 문서가 누적 백로그
+    뒤에서 굶지 않도록 한 2026-09-09 변경. 백로그 경로(라운드로빈)는 이 규칙과 무관하다."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_new_doc(conn, "OLD", collected_at="2026-08-31 08:47:29")
+    _add_new_doc(conn, "MID", collected_at="2026-09-05 06:10:00")
+    _add_new_doc(conn, "NEW", collected_at="2026-09-09 06:10:00")
+
+    assert [r["id"] for r in ec.select_target_docs(conn, 3)] == ["NEW", "MID", "OLD"]
+    # 상한이 유입보다 작으면 오래된 백로그는 뒤로 밀린다
+    assert [r["id"] for r in ec.select_target_docs(conn, 1)] == ["NEW"]
+
+
 def test_backlog_tier1_leaves_excluded_docs_untouched(test_db, monkeypatch):
     """계층1 실행 후 arXiv 문서는 손대지 않은 채 status='new'로 남아야 한다(보류 = 보존)."""
     conn, db = test_db
@@ -653,7 +667,7 @@ def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
     conn, db = test_db
     _add_new_doc(conn, "D1")
     _add_new_doc(conn, "D2")
-    # select_target_docs는 collected_at 순 — 첫 문서 성공, 둘째 문서 API 오류
+    # select_target_docs는 collected_at 역순 — 먼저 처리된 문서 성공, 나중 문서 API 오류
     ec = _run_enrich(monkeypatch, [CLAIM_JSON, RuntimeError("timeout")])
     assert ec.main() == 1
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
@@ -677,7 +691,7 @@ def test_enrich_main_low_failure_rate_is_success_with_warning(test_db, monkeypat
 
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
     assert list(statuses.values()).count("enriched") == 20
-    failed_id = doc_ids[-1]
+    failed_id = doc_ids[0]  # 최신 수집분 우선 정렬 → 마지막에 처리되는 것은 가장 오래된 D0
     assert statuses[failed_id] == "new"  # 재시도 가능 상태 그대로 (exit 0이어도 락 해제는 동일)
     assert conn.execute(
         "SELECT enrich_locked_at FROM documents WHERE id=?", (failed_id,)
