@@ -145,6 +145,28 @@ h1 {
 .image-candidate.selected .check {
   display: block;
 }
+.image-candidate .regen-one {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px; height: 28px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.image-candidate .regen-one:hover {
+  background: var(--accent);
+}
+.image-candidate.selected .regen-one {
+  display: block;
+}
 
 /* --- 이미지 배치 에디터 --- */
 .layout-editor {
@@ -762,9 +784,15 @@ async function regenerateImages(key) {
   const promptOverride = promptArea.querySelector('textarea').value.trim();
   const isHero = key === 'hero';
 
+  // 선택된 스타일이 있으면 그것만 재생성
+  const selectedCandidate = document.querySelector('#candidates-' + key + ' .image-candidate.selected');
+  if (selectedCandidate && selectedCandidate.dataset.styleIndex !== undefined) {
+    return regenOne(key, parseInt(selectedCandidate.dataset.styleIndex));
+  }
+
   const statusBar = document.getElementById('status-bar');
   statusBar.classList.add('show');
-  document.getElementById('status-text').textContent = (isHero ? '히어로' : heading) + ' 재생성 중... (~40초)';
+  document.getElementById('status-text').textContent = (isHero ? '히어로' : heading) + ' 전체 재생성 중... (~40초)';
 
   try {
     const resp = await fetch('/api/generate-images', {
@@ -786,16 +814,69 @@ async function regenerateImages(key) {
 function renderCandidates(key, images, isHero, labels) {
   const container = document.getElementById('candidates-' + key);
   container.innerHTML = '';
+  const cacheBust = Date.now();
   images.forEach((url, i) => {
     const div = document.createElement('div');
     div.className = 'image-candidate' + (isHero ? ' hero-candidate' : '');
+    div.dataset.styleIndex = i;
     const labelTag = labels && labels[i]
       ? '<div class="style-label">' + labels[i] + '</div>'
       : '';
-    div.innerHTML = '<img src="' + url + '" alt="후보 ' + (i + 1) + '">' + labelTag + '<div class="check">✓</div>';
+    const displayUrl = url.startsWith('http') ? url : url + '?t=' + cacheBust;
+    div.innerHTML = '<img src="' + displayUrl + '" alt="후보 ' + (i + 1) + '">'
+      + '<button class="regen-one" title="이 스타일만 재생성" onclick="event.stopPropagation(); regenOne(\'' + key + '\', ' + i + ')">↻</button>'
+      + labelTag + '<div class="check">✓</div>';
     div.addEventListener('click', () => selectCandidate(key, div, url));
     container.appendChild(div);
   });
+}
+
+async function regenOne(key, styleIndex) {
+  const sectionDiv = document.querySelector('.image-section[data-key="' + key + '"]');
+  const heading = sectionDiv ? sectionDiv.dataset.heading : '';
+  const body = sectionDiv ? sectionDiv.dataset.body : '';
+  const promptArea = document.getElementById('prompt-' + key);
+  const promptOverride = promptArea ? promptArea.querySelector('textarea').value.trim() : '';
+  const isHero = key === 'hero';
+
+  const candidate = document.querySelector('#candidates-' + key + ' .image-candidate[data-style-index="' + styleIndex + '"]');
+  if (candidate) {
+    const img = candidate.querySelector('img');
+    img.style.opacity = '0.4';
+  }
+
+  document.getElementById('status-bar').classList.add('show');
+  var label = ['일러스트 A', '일러스트 B', '포토'][styleIndex] || '';
+  document.getElementById('status-text').textContent = label + ' 재생성 중... (~15초)';
+
+  try {
+    const resp = await fetch('/api/generate-images', {
+      method: 'POST',
+      headers: getApiKeyHeaders(),
+      body: JSON.stringify({ heading, body, prompt: promptOverride, is_hero: isHero, key, section_index: isHero ? -1 : parseInt(key.split('-')[1]), style_index: styleIndex })
+    });
+    const data = await resp.json();
+    if (data.error) { showError(data.error); return; }
+
+    if (candidate) {
+      const newUrl = data.image + '?t=' + Date.now();
+      const img = candidate.querySelector('img');
+      img.src = newUrl;
+      img.style.opacity = '1';
+      // 기존 클릭 리스너를 교체하기 위해 요소를 복제
+      const newCandidate = candidate.cloneNode(true);
+      newCandidate.addEventListener('click', () => selectCandidate(key, newCandidate, data.image));
+      newCandidate.querySelector('.regen-one').addEventListener('click', (e) => { e.stopPropagation(); regenOne(key, styleIndex); });
+      candidate.parentNode.replaceChild(newCandidate, candidate);
+      if (newCandidate.classList.contains('selected')) {
+        selectedImages[key] = data.image;
+      }
+    }
+    document.getElementById('status-text').textContent = label + ' 재생성 완료!';
+  } catch (err) {
+    showError('재생성 실패: ' + err.message);
+    if (candidate) candidate.querySelector('img').style.opacity = '1';
+  }
 }
 
 function selectCandidate(key, el, url) {

@@ -404,6 +404,7 @@ def api_generate_images():
     is_hero = data.get("is_hero", False)
     key = data.get("key", "unknown")
     section_index = data.get("section_index", 0)
+    style_index = data.get("style_index")  # None이면 전체, 0/1/2이면 해당 스타일만
     user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
     size = "1536x1024"
@@ -425,6 +426,19 @@ def api_generate_images():
         client = get_openai_client(user_api_key or None)
     except RuntimeError as e:
         return jsonify({"error": str(e)}), 400
+
+    # 단일 스타일 재생성
+    if style_index is not None:
+        style = _IMAGE_STYLES[style_index]
+        if prompt_override:
+            p = f"{style['prefix']} {prompt_override} {style['suffix']}"
+        else:
+            p = _build_scene_prompt(heading, body, style, is_hero, section_index)
+        try:
+            url = _generate_one(client, p, size, quality, key, style_index, tmp_dir)
+            return jsonify({"image": url, "style_index": style_index, "label": style["label"], "key": key})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     prompts = []
     for i, style in enumerate(_IMAGE_STYLES):
