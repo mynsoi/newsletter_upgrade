@@ -1,0 +1,80 @@
+# claim 임베딩 일괄 백필 — 수동 실행 전용(workflow_dispatch)
+#
+# A6(의미 기반 검색) 최초 도입 시 기존 claim 전량을 pgvector 임베딩으로 채우는 1회성
+# 작업. 일일 증분은 collect.yml의 "claim 임베딩(make embed)" 단계가 담당한다(그날
+# 신규 claim만, embedding IS NULL 대상이라 증분 안전). 이 워크플로는 상한 없이
+# (--backfill) 잔여 전량을 처리한 뒤, A6 동의어 리콜 검수 자료를
+# scripts/semantic_recall_check.py로 생성해 Step Summary에 남긴다.
+#
+# 비밀값: DATABASE_URL, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는 GitHub Secrets 로만 주입한다.
+name: embed-backfill
+
+on:
+  workflow_dispatch: {}
+
+concurrency:
+  group: embed-backfill
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  embed-backfill:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      OPENAI_API_KEY_EMBED: ${{ secrets.OPENAI_API_KEY_EMBED }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -e .
+
+      - name: 마이그레이션 (make init)
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::secrets.DATABASE_URL 미설정" ; exit 1
+          fi
+          make init
+
+      - name: 임베딩 백필 (make embed-backfill)
+        run: |
+          if [ -z "${OPENAI_API_KEY_EMBED:-}${OPENAI_API_KEY:-}" ]; then
+            echo "::error::secrets.OPENAI_API_KEY_EMBED / OPENAI_API_KEY 둘 다 미설정" ; exit 1
+          fi
+          make embed-backfill 2>&1 | tee embed-backfill.log
+
+      - name: 동의어 리콜 검수 자료 생성
+        run: python scripts/semantic_recall_check.py 2>&1 | tee recall-check.log
+
+      - name: 요약 (Step Summary)
+        if: always()
+        run: |
+          {
+            echo "## 임베딩 백필 결과"
+            echo
+            echo '```'
+            tail -n 30 embed-backfill.log || true
+            echo '```'
+            echo
+            if [ -f recall-check.log ]; then
+              cat recall-check.log
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 로그 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: embed-backfill-logs
+          path: |
+            embed-backfill.log
+            recall-check.log
+          retention-days: 30
+          if-no-files-found: warn

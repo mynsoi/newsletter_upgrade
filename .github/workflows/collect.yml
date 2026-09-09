@@ -9,7 +9,11 @@
 #   config/settings.yaml enrich_daily_limit=500)이다. 그날 유입을 그날 처리하는 것이 목적이고,
 #   누적 백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
 #   상한이 그날 유입보다 크면 남는 칸이 백로그 최신 쪽부터 채워져 용량이 놀지 않는다.
-# 비밀값: DATABASE_URL, ANTHROPIC_API_KEY 는 GitHub Secrets 로만 주입한다.
+# claim 임베딩(A6, pgvector 의미 검색): enrich 뒤 그날 신규 claim만 변환한다
+#   (embedding IS NULL 대상 — src/search/embed.py). OPENAI_API_KEY_EMBED 우선,
+#   없으면 OPENAI_API_KEY, 둘 다 없으면 "건너뜀(키 대기)"으로 성공 처리한다.
+# 비밀값: DATABASE_URL, ANTHROPIC_API_KEY, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는
+#   GitHub Secrets 로만 주입한다.
 name: daily-collect
 
 on:
@@ -37,6 +41,8 @@ jobs:
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY_EMBED: ${{ secrets.OPENAI_API_KEY_EMBED }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -83,6 +89,13 @@ jobs:
           fi
           make enrich 2>&1 | tee logs/enrich.log
 
+      - name: claim 임베딩 (make embed)
+        id: embed
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          make embed 2>&1 | tee logs/embed.log
+
       - name: 현황 요약 (make stats)
         id: stats
         continue-on-error: true
@@ -107,6 +120,7 @@ jobs:
           R_INIT: ${{ steps.init.outcome }}
           R_COLLECT: ${{ steps.collect.outcome }}
           R_ENRICH: ${{ steps.enrich.outcome }}
+          R_EMBED: ${{ steps.embed.outcome }}
         run: |
           set -euo pipefail
           LABEL="daily-collect-failure"
@@ -144,7 +158,7 @@ jobs:
           fi
 
           FAILED=""
-          for pair in "deps:$R_DEPS" "init:$R_INIT" "collect:$R_COLLECT" "enrich:$R_ENRICH"; do
+          for pair in "deps:$R_DEPS" "init:$R_INIT" "collect:$R_COLLECT" "enrich:$R_ENRICH" "embed:$R_EMBED"; do
             name="${pair%%:*}"; res="${pair#*:}"
             if [ "$res" != "success" ]; then FAILED="$FAILED $name($res)"; fi
           done
@@ -160,7 +174,7 @@ jobs:
               echo "- run: $RUN_URL"
               echo "- 실패/미실행 단계:$FAILED"
               echo
-              for f in collect enrich init deps; do
+              for f in collect enrich embed init deps; do
                 if [ -f "logs/$f.log" ]; then
                   echo "<details><summary>logs/$f.log (마지막 40줄)</summary>"
                   echo; echo '```'

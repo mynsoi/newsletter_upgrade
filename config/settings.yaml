@@ -19,3 +19,9 @@ enrich_enabled: true
 # (2단계 처리 — src/enrich/extract_claims.py main()).
 # 백로그 처리(--backlog)는 이 값을 쓰지 않는다 — --cost-cap이 대신 경계가 된다.
 enrich_daily_limit: 1000
+
+# A6 의미 기반 검색(pgvector) — claim 임베딩 일반 실행(일일 증분) 1회 처리 상한.
+# embedding IS NULL인 claim만 대상이라 이미 변환된 claim은 재계산하지 않는다 —
+# 이 상한은 사실상 "그날 새로 추출된 claim" 규모다. --backfill(잔여 전량)은 이 값을 쓰지 않는다.
+# 2026-09-09 최초 도입.
+embed_daily_limit: 2000
