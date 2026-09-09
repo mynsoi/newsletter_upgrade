@@ -217,13 +217,21 @@ def parse_claims(raw: str) -> list[dict]:
 
 
 def build_doc_filters(exclude_sources: list[str] | None = None,
-                      published_after: str | None = None) -> tuple[str, list]:
+                      published_after: str | None = None,
+                      tiers: list[str] | None = None,
+                      collected_since: str | None = None,
+                      collected_before: str | None = None) -> tuple[str, list]:
     """계층 필터를 WHERE 절 조각과 파라미터로 만든다. 반환: (SQL 조각, 파라미터 목록).
 
     LIKE 패턴은 SQL 본문이 아니라 **파라미터로** 넘긴다 — 패턴의 '%'가 SQL 문자열에
     들어 있으면 psycopg가 자리표시자로 오인해 터진다(db.py의 % 리터럴 주의사항과 같은 이유).
     published_after는 published_at이 NULL인 문서를 **제외**한다 — 발행일을 모르는 문서를
     "하한 이후"라고 단정할 근거가 없다.
+
+    collected_since / collected_before는 일일 실행의 2단계 처리가 쓰는 경계다. 같은 값을
+    한쪽은 하한(>=)으로, 다른 쪽은 상한(<)으로 주면 두 단계가 문서를 겹치지 않게 나눠
+    갖는다 — 중복 선정을 id 집합으로 걸러낼 필요가 없다.
+    tiers는 T2~T5처럼 특정 티어만 처리할 때 쓴다(빈 목록은 필터 없음과 같다).
     """
     clauses, params = [], []
     for pattern in exclude_sources or []:
@@ -232,11 +240,21 @@ def build_doc_filters(exclude_sources: list[str] | None = None,
     if published_after:
         clauses.append("published_at >= ?")
         params.append(published_after)
+    if tiers:
+        clauses.append(f"tier IN ({', '.join('?' for _ in tiers)})")
+        params.extend(tiers)
+    if collected_since:
+        clauses.append("collected_at >= ?")
+        params.append(collected_since)
+    if collected_before:
+        clauses.append("collected_at < ?")
+        params.append(collected_before)
     return ("".join(f" AND {c}" for c in clauses), params)
 
 
 def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = None,
-                       published_after: str | None = None):
+                       published_after: str | None = None, tiers: list[str] | None = None,
+                       collected_since: str | None = None, collected_before: str | None = None):
     """추출 대상: status='new'이면서 summary_only가 아닌 문서, **최신 수집분 우선**
     (collected_at 역순, 일반 실행).
 
@@ -248,7 +266,8 @@ def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = Non
     상한이 그날 유입보다 크면 남는 칸은 자연히 그 다음으로 새 문서부터 채워지므로,
     백로그도 최신 쪽부터 함께 줄어든다 — 처리 용량이 놀지 않는다.
     """
-    where, params = build_doc_filters(exclude_sources, published_after)
+    where, params = build_doc_filters(exclude_sources, published_after, tiers,
+                                      collected_since, collected_before)
     return conn.execute(
         "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0"
         f"{where} ORDER BY collected_at DESC LIMIT ?",
@@ -257,7 +276,10 @@ def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = Non
 
 
 def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] | None = None,
-                                   published_after: str | None = None):
+                                   published_after: str | None = None,
+                                   tiers: list[str] | None = None,
+                                   collected_since: str | None = None,
+                                   collected_before: str | None = None):
     """추출 대상을 티어별로 번갈아 뽑는다 (T1이 21,000건+로 압도적이라 순서대로면 다른
     티어가 굶는다). 윈도우 함수로 "티어 내 순번"을 매겨 그 순번 우선으로 정렬한다
     — collected_at 순은 티어 내에서 유지된다. (O(n log n) — SQLite 3.25+·PostgreSQL 공통)
@@ -265,7 +287,8 @@ def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] 
     계층 필터는 순번을 매기기 **전에** 적용한다 — 걸러낸 뒤의 집합 안에서 라운드로빈이
     돌아야 제외된 소스가 순번만 잡아먹고 사라지는 일이 없다.
     """
-    where, params = build_doc_filters(exclude_sources, published_after)
+    where, params = build_doc_filters(exclude_sources, published_after, tiers,
+                                      collected_since, collected_before)
     return conn.execute(
         f"""SELECT * FROM (
              SELECT *, ROW_NUMBER() OVER (PARTITION BY tier ORDER BY collected_at) AS _rank
@@ -276,6 +299,42 @@ def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] 
            LIMIT ?""",
         (*params, limit),
     ).fetchall()
+
+
+def latest_collection_cutoff(conn) -> str | None:
+    """이번(가장 최근) 수집 실행이 시작된 시각. 일일 실행에서 "이번에 들어온 문서"와
+    "그 전부터 쌓여 있던 백로그"를 가르는 경계다.
+
+    collection_runs.started_at을 쓰는 이유: 달력일로 자르면 Actions(UTC 21시 = KST 익일
+    06시)에서 실행일과 collected_at의 날짜가 어긋난다. 수집 실행 시작 시각을 쓰면 그
+    실행이 집어넣은 문서만 정확히 "신규"가 된다.
+
+    수집 이력이 없으면(첫 실행·테스트) None을 돌려주고, 호출부는 2단계를 나누지 않고
+    최신 순 한 덩어리로 처리한다.
+    """
+    row = conn.execute(
+        "SELECT started_at FROM collection_runs ORDER BY started_at DESC LIMIT 1").fetchone()
+    if not row or not row["started_at"]:
+        return None
+    started = row["started_at"]
+    if isinstance(started, str):
+        return started[:19]
+    return started.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def process_batch(conn, docs, model, cost, stats, *, dry_run: bool) -> None:
+    """선정된 문서를 순서대로 처리. 비용 상한에 닿으면 남은 문서는 건드리지 않는다."""
+    for d in docs:
+        if not dry_run and cost.cap_reached():
+            cost.cap_hit = True
+            print(f"  중단 — 비용 상한(${cost.cap}) 도달, 실측 ${cost.cost:.4f} "
+                  f"(이 문서부터 처리하지 않음, 다음 실행에서 재시도)")
+            return
+        if dry_run:
+            print_dry_run(d, d["body"] or "")
+            cost.tier_counts[d["tier"]] = cost.tier_counts.get(d["tier"], 0) + 1
+        else:
+            process_doc(conn, d, model, cost, stats)
 
 
 def check_relevance(title: str, body: str, model: str, cost: CostState | None = None) -> bool:
@@ -424,6 +483,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--published-after",
                    help="발행일 하한(YYYY-MM-DD). 이 날짜 이후 발행분만 처리 "
                         "(published_at이 비어 있는 문서는 제외된다)")
+    p.add_argument("--tiers",
+                   help=f"처리할 티어만 지정(쉼표 구분). 예: 'T2,T3,T4,T5'. "
+                        f"허용값 {'/'.join(TIER_ORDER)}")
     p.add_argument("--dry-run", action="store_true",
                    help="API 호출 없이 대상 문서와 분할 계획만 출력")
     p.add_argument("--doc-id", help="특정 문서 1건만 처리 (장문 분할 점검용)")
@@ -432,6 +494,13 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
 
     exclude_sources = [s.strip() for s in (args.exclude_sources or "").split(",") if s.strip()]
+    tiers = [t.strip().upper() for t in (args.tiers or "").split(",") if t.strip()]
+    unknown = [t for t in tiers if t not in TIER_ORDER]
+    if unknown:
+        # 오타를 그냥 두면 0건을 집고 "잔여 없음"으로 오인하기 쉽다 — 즉시 중단.
+        print(f"오류: 알 수 없는 티어 {', '.join(unknown)} "
+              f"(허용값: {', '.join(TIER_ORDER)})")
+        return 2
     if args.published_after and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args.published_after):
         # 형식이 틀리면 조용히 0건을 집어 "백로그가 비었다"로 오인하기 쉽다 — 즉시 중단.
         print(f"오류: --published-after 는 YYYY-MM-DD 형식이어야 한다 (받은 값: "
@@ -441,7 +510,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.count_remaining:
         # 숫자만 출력한다 — 워크플로가 그대로 변수에 담는다(같은 필터 로직을 재사용해
         # 연쇄 실행이 '보류 계층'을 잔여로 오인하고 헛도는 것을 막는다).
-        where, params = build_doc_filters(exclude_sources, args.published_after)
+        where, params = build_doc_filters(exclude_sources, args.published_after, tiers)
         conn = connect()
         print(conn.execute(
             "SELECT COUNT(*) c FROM documents "
@@ -484,7 +553,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"백로그 모드 — 티어별 라운드로빈, {mode}"
               + (f", cost_cap=${args.cost_cap}" if args.cost_cap is not None else "")
               + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
-              + (f", 발행일 하한={args.published_after}" if args.published_after else ""))
+              + (f", 발행일 하한={args.published_after}" if args.published_after else "")
+              + (f", 티어={','.join(tiers)}" if tiers else ""))
         processed = 0
         while True:
             remaining = None if base_limit is None else base_limit - processed
@@ -492,38 +562,52 @@ def main(argv: list[str] | None = None) -> int:
                 break
             batch_limit = BACKLOG_BATCH_SIZE if remaining is None else min(BACKLOG_BATCH_SIZE, remaining)
             docs = select_target_docs_round_robin(conn, batch_limit, exclude_sources,
-                                                  args.published_after)
+                                                  args.published_after, tiers)
             if not docs:
                 break
-            for d in docs:
-                if not args.dry_run and cost.cap_reached():
-                    cost.cap_hit = True
-                    print(f"  중단 — 비용 상한(${args.cost_cap}) 도달, 실측 ${cost.cost:.4f} "
-                          f"(이 문서부터 처리하지 않음, 다음 실행에서 재시도)")
-                    break
-                if args.dry_run:
-                    print_dry_run(d, d["body"] or "")
-                    cost.tier_counts[d["tier"]] = cost.tier_counts.get(d["tier"], 0) + 1
-                else:
-                    process_doc(conn, d, model, cost, stats)
+            process_batch(conn, docs, model, cost, stats, dry_run=args.dry_run)
             processed += len(docs)
-            if cost.cap_hit:
+            if cost.cap_hit or args.dry_run:
                 break
         print(f"백로그 처리 {processed}건 시도 (티어 분포: "
               f"{', '.join(f'{t} {cost.tier_counts.get(t, 0)}' for t in TIER_ORDER if cost.tier_counts.get(t))})")
     else:
         base_limit = args.limit if args.limit is not None else settings.get(
             "enrich_daily_limit", DEFAULT_DAILY_LIMIT)
-        docs = select_target_docs(conn, base_limit, exclude_sources, args.published_after)
-        print(f"대상 문서 {len(docs)}건 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— 최신 수집분 우선, summary_only 제외"
-              + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
-              + (f", 발행일 하한={args.published_after}" if args.published_after else ""))
-        for d in docs:
-            if args.dry_run:
-                print_dry_run(d, d["body"] or "")
-            else:
-                process_doc(conn, d, model, cost, stats)
+        cutoff = latest_collection_cutoff(conn)
+        common = dict(exclude_sources=exclude_sources, published_after=args.published_after,
+                      tiers=tiers)
+        filter_note = ((f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
+                       + (f", 발행일 하한={args.published_after}" if args.published_after else "")
+                       + (f", 티어={','.join(tiers)}" if tiers else ""))
+        print(f"일반 실행 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
+              f"— summary_only 제외{filter_note}")
+
+        # 1단계: 이번 수집분을 먼저 비운다 (최신 순).
+        fresh = select_target_docs(conn, base_limit, collected_since=cutoff, **common)
+        print(f"  ① 신규 수집분 {len(fresh)}건"
+              + (f" (수집 실행 시작 {cutoff} 이후)" if cutoff else " (수집 이력 없음 — 전체 최신 순)"))
+        process_batch(conn, fresh, model, cost, stats, dry_run=args.dry_run)
+
+        # 2단계: 남은 칸으로 그 이전의 백로그를 처리한다. 여기서는 티어별 라운드로빈을
+        # 쓴다 — 백로그는 T1(arXiv)이 90%대라 최신 순으로 집으면 다른 티어가 다시 굶는다.
+        remaining = base_limit - len(fresh)
+        if cutoff and remaining > 0 and not cost.cap_hit:
+            print(f"  ② 백로그 {remaining}건까지 (티어별 라운드로빈, 수집 실행 시작 이전분)")
+            done = 0
+            while done < remaining and not cost.cap_hit:
+                batch = select_target_docs_round_robin(
+                    conn, min(BACKLOG_BATCH_SIZE, remaining - done),
+                    collected_before=cutoff, **common)
+                if not batch:
+                    break
+                process_batch(conn, batch, model, cost, stats, dry_run=args.dry_run)
+                done += len(batch)
+                if args.dry_run:
+                    break  # dry-run은 status를 바꾸지 않아 같은 문서가 다시 잡힌다
+            print(f"  ② 백로그 {done}건 시도")
+        elif remaining > 0 and not cutoff:
+            print("  ② 건너뜀 — 수집 이력이 없어 신규/백로그 경계를 정할 수 없다")
 
     if not args.dry_run:
         print(f"\n총 {stats.total_claims}건 claim 추출, 관련성 게이트 제외 {stats.gated}건, "

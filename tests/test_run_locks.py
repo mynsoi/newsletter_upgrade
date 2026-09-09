@@ -579,6 +579,84 @@ def test_normal_run_takes_newest_collected_first(test_db):
     assert [r["id"] for r in ec.select_target_docs(conn, 1)] == ["NEW"]
 
 
+def _add_collection_run(conn, started_at, run_date="2026-09-09"):
+    conn.execute(
+        "INSERT INTO collection_runs (run_date, host, status, started_at) "
+        "VALUES (?, 'h', 'completed', ?)", (run_date, started_at))
+    conn.commit()
+
+
+def test_latest_collection_cutoff_uses_run_start(test_db):
+    """신규/백로그 경계는 달력일이 아니라 '가장 최근 수집 실행의 시작 시각'이다."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    assert ec.latest_collection_cutoff(conn) is None  # 수집 이력 없음
+    _add_collection_run(conn, "2026-09-08 21:04:02", run_date="2026-09-09")
+    _add_collection_run(conn, "2026-09-07 21:04:40", run_date="2026-09-08")
+    assert ec.latest_collection_cutoff(conn) == "2026-09-08 21:04:02"
+
+
+def test_normal_run_fresh_inflow_first_then_backlog(test_db, monkeypatch):
+    """일일 실행 2단계: 이번 수집분을 먼저 비우고, 남는 칸으로 그 이전 백로그를 처리한다.
+    상한이 부족하면 백로그가 밀리고 신규분은 절대 밀리지 않는다."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_collection_run(conn, "2026-09-09 00:00:00")
+    _add_new_doc(conn, "OLD_A", collected_at="2026-08-31 08:47:29", tier="T1")
+    _add_new_doc(conn, "OLD_B", collected_at="2026-09-01 08:00:00", tier="T5")
+    _add_new_doc(conn, "FRESH_1", collected_at="2026-09-09 00:05:00", tier="T3")
+    _add_new_doc(conn, "FRESH_2", collected_at="2026-09-09 00:06:00", tier="T5")
+
+    # 상한 3 = 신규 2건 전부 + 백로그 1건
+    ec_mod = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--limit", "3"])
+    assert ec_mod.main() == 0
+    statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
+    assert statuses["FRESH_1"] == "enriched" and statuses["FRESH_2"] == "enriched"
+    assert list(statuses.values()).count("enriched") == 3      # 백로그는 1건만
+    assert list(statuses.values()).count("new") == 1           # 나머지 백로그는 다음 실행으로
+
+
+def test_normal_run_fresh_inflow_never_starved_by_backlog(test_db, monkeypatch):
+    """백로그가 상한보다 많아도 신규 수집분이 먼저다 (2026-09-09 전환의 핵심)."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_collection_run(conn, "2026-09-09 00:00:00")
+    for i in range(5):
+        _add_new_doc(conn, f"BACKLOG_{i}", collected_at=f"2026-08-31 08:47:{i:02d}", tier="T1")
+    _add_new_doc(conn, "FRESH", collected_at="2026-09-09 00:05:00", tier="T3")
+
+    ec_mod = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--limit", "1"])
+    assert ec_mod.main() == 0
+    statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
+    assert statuses["FRESH"] == "enriched"
+    assert all(statuses[f"BACKLOG_{i}"] == "new" for i in range(5))
+
+
+def test_tier_filter_limits_selection(test_db):
+    """--tiers 는 지정한 티어만 집는다 (T2~T5 잔류분 처리용)."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_new_doc(conn, "A1", tier="T1")
+    _add_new_doc(conn, "B1", tier="T2")
+    _add_new_doc(conn, "E1", tier="T5")
+
+    picked = {r["id"] for r in ec.select_target_docs(conn, 10, tiers=["T2", "T5"])}
+    assert picked == {"B1", "E1"}
+    rr = {r["id"] for r in ec.select_target_docs_round_robin(conn, 10, tiers=["T2", "T5"])}
+    assert rr == {"B1", "E1"}
+    assert len(ec.select_target_docs(conn, 10)) == 3  # 필터 없으면 전부
+
+
+def test_unknown_tier_value_is_rejected(test_db, monkeypatch, capsys):
+    """티어 오타를 그냥 두면 0건을 집고 '잔여 없음'으로 오인한다 — 즉시 중단."""
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, "[]", argv=["--tiers", "T2,T9"])
+    assert ec.main() == 2
+    assert "알 수 없는 티어" in capsys.readouterr().out
+    assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+
+
 def test_backlog_tier1_leaves_excluded_docs_untouched(test_db, monkeypatch):
     """계층1 실행 후 arXiv 문서는 손대지 않은 채 status='new'로 남아야 한다(보류 = 보존)."""
     conn, db = test_db
