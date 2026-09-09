@@ -98,6 +98,15 @@ def parse_article_md(text: str) -> dict:
             if item:
                 tldr_points.append(item)
 
+    # 도입 문단 (TL;DR과 첫 ## 사이)
+    intro = ""
+    if tldr_match:
+        tldr_end = tldr_match.end()
+        first_h2 = clean_text.find("\n## ", tldr_end)
+        if first_h2 != -1:
+            intro = clean_text[tldr_end:first_h2].strip()
+            intro = re.sub(r"<!--.*?-->", "", intro, flags=re.DOTALL).strip()
+
     # 본문 섹션 (## 헤더별 분할)
     sections = []
     body_start = clean_text.find("\n## ")
@@ -135,6 +144,7 @@ def parse_article_md(text: str) -> dict:
         "slug": slug or _slugify(title),
         "pub_date": pub_date,
         "tldr_points": tldr_points,
+        "intro": intro,
         "sections": sections,
         "references": references,
         "tags": tags,
@@ -205,6 +215,13 @@ def render_article_html(article: dict, image_paths: dict) -> str:
     md_converter = md_lib.Markdown(extensions=["extra"])
     image_positions = article.get("image_positions", {})
     body_parts = []
+
+    # 도입 문단 (TL;DR과 첫 소제목 사이)
+    intro = article.get("intro", "")
+    if intro:
+        body_parts.append(f'<div class="intro">{md_converter.convert(intro)}</div>')
+        md_converter.reset()
+
     for i, sec in enumerate(article["sections"]):
         img_key = f"section-{i}"
         img_tag = ""
@@ -468,15 +485,16 @@ def api_publish():
     image_paths = {}
     for key, url in selected.items():
         if url.startswith("http"):
-            # 외부 URL(플레이스홀더 모드) — URL 그대로 사용
             image_paths[key] = url
         else:
             src_filename = url.split("/")[-1]
             src_path = tmp_dir / src_filename
+            dest_name = f"{key}.png"
+            dest_path = out_dir / dest_name
             if src_path.exists():
-                dest_name = f"{key}.png"
-                dest_path = out_dir / dest_name
                 shutil.copy2(src_path, dest_path)
+                image_paths[key] = dest_name
+            elif dest_path.exists():
                 image_paths[key] = dest_name
 
     # CSS 복사
