@@ -13,7 +13,7 @@
 |---|---|---|---|
 | ① | **발행 방식·디자인 확정 + C3 파일럿 독자** | 동료(별도 브랜치 진행 중) | 머지 규칙: 머지 전 상호 통지 + `make test` 통과 |
 | ② | **한국어 문체 개선** | 공동 | 팀장 요구사항 상세 접수 대기 |
-| ③ | **A6. 의미 기반 검색** (pgvector) | 당번 | 🔧 2026-09-09 구현 완료(claims.embedding vector(1536)+HNSW, src/search/embed.py·semantic.py) — 백필 실행 중, 완료 후 갱신 |
+| ③ | **A6. 의미 기반 검색** (pgvector) | 당번 | ✅ 2026-09-09 — claims.embedding vector(1536)+HNSW, src/search/embed.py(text-embedding-3-small)·semantic.py(hybrid_search), 일일 증분(collect.yml) 가동. 백필 17,661건 완료($0.0202). 리콜 실험: [`eval/semantic-search-synonym-recall-2026-09.md`](../eval/semantic-search-synonym-recall-2026-09.md) |
 | ④ | **토픽 발굴 자동화** (③~④ 단계) | 당번 | 기획서 8장 ③ 구현 |
 
 ---
@@ -77,5 +77,5 @@
 - [ ] 자동 초안 3연속 루브릭 18점+
 - [ ] 편집 소요 60분 이내 안정화
 - [ ] 평가 기준셋 20편 구축
-- [ ] A6 의미 검색 가동
+- [x] A6 의미 검색 가동 ✅ 2026-09-09
 - [ ] 토픽 발굴 자동화 가동
