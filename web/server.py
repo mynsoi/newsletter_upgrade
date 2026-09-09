@@ -380,7 +380,7 @@ def _generate_one(client, prompt: str, size: str, quality: str, key: str, idx: i
     import sys
     print(f"  [{key}] 후보 {idx+1}/3 생성 시작...", flush=True)
     response = client.images.generate(
-        model="gpt-image-1",
+        model="gpt-image-2.5-flare",
         prompt=prompt,
         size=size,
         quality=quality,
