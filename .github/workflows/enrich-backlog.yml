@@ -20,6 +20,12 @@
 # 계층 필터는 연쇄 회차마다 그대로 이어진다 — 잔여 건수도 같은 필터로 세므로, 필터 밖 문서가
 # 남아 있어도 현재 계층이 끝나면 연쇄가 멈춘다.
 #
+# only_summary (2026-09-10 추가): migrations/008로 추출 대상에 편입된 T5 요약뿐 문서
+# (summary_only=1)만 처리하는 소급 실행 모드. 스크립트의 --only-summary로 전달된다.
+# 여기서 나온 claim은 from_summary=1로 저장돼 토픽 신호에는 쓰이고 증거 수집에서는 제외된다.
+# PC 실행이 사내망의 api.anthropic.com 차단으로 불가능한 것도 이 경로를 쓰는 이유이며,
+# "수집·추출 주체는 Actions"라는 원칙과도 맞다.
+#
 # 연쇄 실행(2026-09-04 추가): 한 실행은 최대 BACKLOG_BATCH_LIMIT(2,500)건만 처리하고,
 # 종료 시 잔여 status='new'가 있으면 이 워크플로를 스스로 다시 트리거한다.
 # - cost_cap은 "이번 실행 하나"가 아니라 "체인 전체 누적"에 대한 총 상한이다.
@@ -58,6 +64,11 @@ on:
         type: string
         required: false
         default: ""
+      only_summary:
+        description: "요약뿐인 문서(T5 summary_only)만 처리 — migrations/008 편입분 소급 추출"
+        type: boolean
+        required: false
+        default: false
       chain_iteration:
         description: "내부용 — 연쇄 실행 회차(1부터). 사람이 새로 시작할 때는 그대로 둔다."
         type: string
@@ -145,6 +156,10 @@ jobs:
           if [ -n "${{ inputs.published_after }}" ]; then
             FILTER_ARGS="$FILTER_ARGS --published-after ${{ inputs.published_after }}"
           fi
+          # boolean 입력은 표현식에서 "true"/"false" 문자열로 펼쳐진다
+          if [ "${{ inputs.only_summary }}" = "true" ]; then
+            FILTER_ARGS="$FILTER_ARGS --only-summary"
+          fi
 
           echo "실행: python src/enrich/extract_claims.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT$FILTER_ARGS"
           set +e
@@ -191,11 +206,15 @@ jobs:
           LIMIT="${{ inputs.limit }}"
           EXCLUDE="${{ inputs.exclude_sources }}"
           PUBLISHED_AFTER="${{ inputs.published_after }}"
+          ONLY_SUMMARY="${{ inputs.only_summary }}"
 
-          # 단계마다 셸이 새로 뜨므로 계층 필터를 여기서 다시 조립한다(앞 단계와 같은 값)
+          # 단계마다 셸이 새로 뜨므로 계층 필터를 여기서 다시 조립한다(앞 단계와 같은 값).
+          # 잔여 건수(--count-remaining)도 같은 필터로 세야 한다 — only_summary를 빠뜨리면
+          # 소급분이 끝났는데도 전체 백로그 1만여 건을 잔여로 보고 연쇄가 계속된다.
           FILTER_ARGS=""
           if [ -n "$EXCLUDE" ]; then FILTER_ARGS="$FILTER_ARGS --exclude-sources $EXCLUDE"; fi
           if [ -n "$PUBLISHED_AFTER" ]; then FILTER_ARGS="$FILTER_ARGS --published-after $PUBLISHED_AFTER"; fi
+          if [ "$ONLY_SUMMARY" = "true" ]; then FILTER_ARGS="$FILTER_ARGS --only-summary"; fi
 
           NEW_CUM_COST=$(python -c "print(round(float('${{ inputs.cumulative_cost }}') + float('$RUN_COST'), 4))")
           NEW_CUM_DOCS=$(( ${{ inputs.cumulative_docs }} + RUN_DOCS ))
@@ -242,12 +261,13 @@ jobs:
               -f limit="$LIMIT" \
               -f exclude_sources="$EXCLUDE" \
               -f published_after="$PUBLISHED_AFTER" \
+              -f only_summary="$ONLY_SUMMARY" \
               -f chain_iteration="$NEW_ITER" \
               -f cumulative_cost="$NEW_CUM_COST" \
               -f cumulative_docs="$NEW_CUM_DOCS"; then
               :
             else
-              MANUAL_CMD="gh workflow run enrich-backlog.yml -f cost_cap=$COST_CAP -f limit=$LIMIT -f exclude_sources=$EXCLUDE -f published_after=$PUBLISHED_AFTER -f chain_iteration=$NEW_ITER -f cumulative_cost=$NEW_CUM_COST -f cumulative_docs=$NEW_CUM_DOCS"
+              MANUAL_CMD="gh workflow run enrich-backlog.yml -f cost_cap=$COST_CAP -f limit=$LIMIT -f exclude_sources=$EXCLUDE -f published_after=$PUBLISHED_AFTER -f only_summary=$ONLY_SUMMARY -f chain_iteration=$NEW_ITER -f cumulative_cost=$NEW_CUM_COST -f cumulative_docs=$NEW_CUM_DOCS"
               echo "::warning::다음 회차 자동 트리거 실패(GITHUB_TOKEN 워크플로 재귀 실행 제한 가능성) — repo secrets에 workflow 스코프 PAT을 WORKFLOW_TRIGGER_TOKEN으로 추가하거나 수동 실행: $MANUAL_CMD"
               echo "- **다음 회차 자동 트리거 실패** — 수동 실행: \`$MANUAL_CMD\`" >> "$GITHUB_STEP_SUMMARY"
             fi
