@@ -11,9 +11,9 @@
 
 | # | 항목 | 소관 | 상태 |
 |---|---|---|---|
-| ① | **발행 방식·디자인 확정 + C3 파일럿 독자** | 동료(별도 브랜치 진행 중) | 머지 규칙: 머지 전 상호 통지 + `make test` 통과 |
-| ② | **한국어 문체 개선** | 공동 | 팀장 요구사항 상세 접수 대기 |
-| ③ | **A6. 의미 기반 검색** (pgvector) | 당번 | ✅ 2026-09-09 — claims.embedding vector(1536)+HNSW, src/search/embed.py(text-embedding-3-small)·semantic.py(hybrid_search), 일일 증분(collect.yml) 가동. 백필 17,661건 완료($0.0202). 리콜 실험: [`eval/semantic-search-synonym-recall-2026-09.md`](../eval/semantic-search-synonym-recall-2026-09.md) |
+| ① | **발행 방식·디자인 확정 + C3 파일럿 독자** | 동료(별도 브랜치 진행 중) | ◐ **방식 확정(2026-09-09) · 구현 병합 보류** — 아티클(md) → 이미지 포함 HTML 웹페이지(gpt-image-1) → 외부 호스팅(URL 사내 한정·noindex) → 아웃룩 메일 발송 + 아카이브 목록. 구현은 동료 브랜치 2개(feature-web-design·feature-email-publish)에 준비됨, 통합 지시문 4건(정본 연결·아카이브·비밀값 규칙 정합·환경 이식성) 대기 — 병합 시점은 담당자 판단. 잔여 결정: 호스팅 플랫폼(IT 협의), C3는 리더 컨펌 후. 머지 규칙: 머지 전 상호 통지 + `make test` 통과 |
+| ② | **한국어 문체 개선** | 공동 | ✅ **2026-09-08 1차 완료** — 문체 정본을 `prompts/article_style.md`로 단일화(draft.md 규칙 이관·banned_phrases 목록 폐지), write_model = **Opus 5** 확정(5개 모델 블라인드 테스트), 팀장 피드백 2건을 규칙·검증기에 반영. 피드백 이력: [`eval/style-feedback-log.md`](../eval/style-feedback-log.md) |
+| ③ | **A6. 의미 기반 검색** (pgvector) | 당번 | ✅ **2026-09-09 완료** — claims.embedding vector(1536)+HNSW, src/search/embed.py(text-embedding-3-small)·semantic.py(hybrid_search), 일일 증분(collect.yml) 가동. 백필 17,661건 완료($0.0202). 리콜 실험: [`eval/semantic-search-synonym-recall-2026-09.md`](../eval/semantic-search-synonym-recall-2026-09.md) |
 | ④ | **토픽 발굴 자동화** (③~④ 단계) | 당번 | 기획서 8장 ③ 구현 |
 
 ---
