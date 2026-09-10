@@ -1,6 +1,7 @@
 [Phase 0: 수동 절차] 토픽 1건으로 아티클 초안을 만든다: $ARGUMENTS
 
-Phase 2에서 자동화 예정. 현재는 아래 수동 절차를 Claude Code가 단계별로 수행하되,
+토픽 발굴(③)은 `/topics`로 자동화됐다 — 이 커맨드는 그 후보 중 사람이 고른 1건을 받아
+④부터 진행한다. 현재는 아래 수동 절차를 Claude Code가 단계별로 수행하되,
 각 단계 산출물을 파일로 저장하고 다음 단계 진행 전 사용자 확인을 받는다.
 
 ② 증거 수집 → content/evidence/{slug}.json
@@ -9,6 +10,9 @@ Phase 2에서 자동화 예정. 현재는 아래 수동 절차를 Claude Code가
      키워드+의미 검색을 합쳐 반환). 결과의 match_type(키워드/의미/둘 다)을 확인해 의미 검색으로만
      찾힌 claim은 실제 관련성을 사람이 한 번 더 확인한다. OpenAI 키가 없거나 SQLite 모드면
      키워드 검색만 자동 폴백(오류 아님) — A6, docs/phase2-plan.md
+   - 요약뿐인 문서에서 뽑힌 claim(`from_summary=1` — T5 예고문 등)은 기본적으로 검색에서
+     빠진다. 증거로 쓸 수 없기 때문이며 신호 확인 목적이면 `--include-from-summary`로만
+     본다 — 그렇게 본 claim을 증거 파일에 넣지 않는다 (migrations/008)
    - 강제 조건 확인: 독립 출처 3곳+ / 상반 stance 1건+ / T1·T2 2건+
    - 권장: 이론 claim(evidence_type='theory') 1건+ 포함 — 현상을 이론의 경계 조건과 대조하는 각도 우선 (기획서 3.5)
    - 미충족 시 중단하고 "증거 부족" 보고 (CLAUDE.md 절대 규칙 2)

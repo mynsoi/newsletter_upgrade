@@ -49,10 +49,11 @@ make collect     # 전체 소스 수집 실행
 make sync        # internal/ 재색인
 make stats       # 현황 요약
 make sources-doc # sources.yaml → docs/소스_카탈로그.md 재생성
+make topics      # 토픽 발굴 (③단계) — content/topics/YYYY-WW.md 생성
 make test        # 테스트
 ```
 
-커맨드(.claude/commands): /collect /status /sync-internal /add-theory /draft /publish
+커맨드(.claude/commands): /collect /status /sync-internal /add-theory /topics /draft /publish
 /ingest-url /ingest-file(브라우저 경로 진입점) /browse-collect(목록·건별 개별 절차)
 /browse-round(월간 브라우저 라운드 전체 — 목록 순회+격상+유료 건별 보조+보고서.
 본문 저장은 scripts/browse/extract_article.js, 에이전트는 본문 미열람)
@@ -75,4 +76,10 @@ make test        # 테스트
 아키텍처: Supabase 공유 PostgreSQL(DATABASE_URL) + GitHub Actions 일일 수집.
 DATABASE_URL 없으면 SQLite 로컬 모드(테스트용). 비밀값은 절대 파일에 쓰지 않는다.
 핸드오프(/handoff, /receive)는 폐기됨 — 비상용 코드만 유지.
-topics/draft 완전 자동화는 Phase 2 예정, 지금은 `.claude/commands/draft.md` 절차를 따른다.
+③ 토픽 발굴은 `/topics`(src/topics/discover.py)로 자동화됨 — 신호 산출은 결정적이고
+주제 한 줄·예상 앵글만 판단이 들어간다. draft 완전 자동화는 잔여 과제이며,
+지금은 `.claude/commands/draft.md` 절차를 따른다.
+
+**신호와 증거의 분리**: T5(뉴스) 요약뿐 문서에서 뽑은 claim은 `claims.from_summary=1`로
+표시된다. 토픽 신호 집계에는 포함되지만 증거 수집(hybrid_search)에서는 기본 제외다 —
+예고문 몇 줄에서 뽑은 claim을 논지의 근거로 쓰지 않기 위함이다 (migrations/008).

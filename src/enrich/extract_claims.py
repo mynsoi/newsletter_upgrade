@@ -17,6 +17,10 @@
 일일 여유 용량으로 흡수하므로 별도 예산 결정이 필요 없다.
 T2~T5 잔류분은 2026-09-09에 전량 처리됐다(770건 · $3.37 · claim 993건).
 
+- summary_only(본문 800자 미만) 문서는 원칙적으로 제외하되, **T5(신호 감지 전용 소스)만
+  예외로 포함**한다(SUMMARY_CLAIM_TIERS · migrations/008). 여기서 나온 claim은
+  claims.from_summary=1로 표시돼 토픽 신호 집계에는 쓰이고 증거 수집에서는 기본 제외된다.
+  소급 실행은 --only-summary.
 - 프롬프트 원본: prompts/claim_extraction.md (코드 내 프롬프트 금지 — CLAUDE.md)
 - 모델: config/settings.yaml의 enrich_model (추출은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
@@ -64,6 +68,13 @@ HEADING_RE = re.compile(r"^(#{1,4}\s+\S|제?\s?\d+\s*(장|절|부)\b|CHAPTER\b|C
 
 BACKLOG_BATCH_SIZE = 500  # --backlog 시 한 번에 DB에서 가져오는 문서 수 (본문 전체 메모리 적재 방지)
 TIER_ORDER = ("T1", "T2", "T3", "T4", "T5")
+
+# summary_only(본문 800자 미만) 문서 중 claim 추출을 허용하는 티어 (migrations/008).
+# T5는 "요즘 무슨 일이 있나" 신호 감지 전용 소스라(기획서 4.1) RSS가 요약 몇 줄만 주는 것이
+# 정상이다. 여기서 나온 claim은 claims.from_summary=1로 표시돼 토픽 신호 집계에는 쓰이고
+# 증거 수집(hybrid_search)에서는 기본 제외된다.
+# T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다.
+SUMMARY_CLAIM_TIERS = ("T5",)
 
 VALID_STANCE = {"optimistic", "cautious", "conditional", "neutral"}
 VALID_EVIDENCE = {"survey", "experiment", "case", "data", "theory", "opinion"}
@@ -219,11 +230,22 @@ def parse_claims(raw: str) -> list[dict]:
     return valid
 
 
+def summary_gate_sql() -> str:
+    """추출 대상 문서의 summary_only 조건. SUMMARY_CLAIM_TIERS는 요약뿐이어도 통과시킨다.
+
+    티어 값은 코드 상수(SUMMARY_CLAIM_TIERS)라 SQL에 리터럴로 박아도 안전하다 —
+    외부 입력이 섞이지 않는다.
+    """
+    tiers = ", ".join(f"'{t}'" for t in SUMMARY_CLAIM_TIERS)
+    return f"(COALESCE(summary_only, 0) = 0 OR tier IN ({tiers}))"
+
+
 def build_doc_filters(exclude_sources: list[str] | None = None,
                       published_after: str | None = None,
                       tiers: list[str] | None = None,
                       collected_since: str | None = None,
-                      collected_before: str | None = None) -> tuple[str, list]:
+                      collected_before: str | None = None,
+                      only_summary: bool = False) -> tuple[str, list]:
     """계층 필터를 WHERE 절 조각과 파라미터로 만든다. 반환: (SQL 조각, 파라미터 목록).
 
     LIKE 패턴은 SQL 본문이 아니라 **파라미터로** 넘긴다 — 패턴의 '%'가 SQL 문자열에
@@ -235,6 +257,7 @@ def build_doc_filters(exclude_sources: list[str] | None = None,
     한쪽은 하한(>=)으로, 다른 쪽은 상한(<)으로 주면 두 단계가 문서를 겹치지 않게 나눠
     갖는다 — 중복 선정을 id 집합으로 걸러낼 필요가 없다.
     tiers는 T2~T5처럼 특정 티어만 처리할 때 쓴다(빈 목록은 필터 없음과 같다).
+    only_summary는 소급 실행 전용 — summary_only=1 문서만 집는다(migrations/008 편입분).
     """
     clauses, params = [], []
     for pattern in exclude_sources or []:
@@ -252,14 +275,18 @@ def build_doc_filters(exclude_sources: list[str] | None = None,
     if collected_before:
         clauses.append("collected_at < ?")
         params.append(collected_before)
+    if only_summary:
+        # 소급 실행 전용 — 이미 처리된 전문 문서를 건드리지 않고 요약뿐인 문서만 집는다.
+        clauses.append("COALESCE(summary_only, 0) = 1")
     return ("".join(f" AND {c}" for c in clauses), params)
 
 
 def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = None,
                        published_after: str | None = None, tiers: list[str] | None = None,
-                       collected_since: str | None = None, collected_before: str | None = None):
-    """추출 대상: status='new'이면서 summary_only가 아닌 문서, **최신 수집분 우선**
-    (collected_at 역순, 일반 실행).
+                       collected_since: str | None = None, collected_before: str | None = None,
+                       only_summary: bool = False):
+    """추출 대상: status='new'이면서 summary_gate_sql()을 통과한 문서(전문 문서 + T5
+    요약분), **최신 수집분 우선** (collected_at 역순, 일반 실행).
 
     2026-09-09 오름차순 → 내림차순. 오름차순일 때 일일 상한 500칸이 관문 수집(2026-08-31)의
     arXiv 백로그로 전량 채워져, 그날 새로 들어온 T2~T4 문서가 백로그 12,000여 건 뒤에서
@@ -270,9 +297,9 @@ def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = Non
     백로그도 최신 쪽부터 함께 줄어든다 — 처리 용량이 놀지 않는다.
     """
     where, params = build_doc_filters(exclude_sources, published_after, tiers,
-                                      collected_since, collected_before)
+                                      collected_since, collected_before, only_summary)
     return conn.execute(
-        "SELECT * FROM documents WHERE status='new' AND COALESCE(summary_only, 0) = 0"
+        f"SELECT * FROM documents WHERE status='new' AND {summary_gate_sql()}"
         f"{where} ORDER BY collected_at DESC LIMIT ?",
         (*params, limit),
     ).fetchall()
@@ -282,7 +309,8 @@ def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] 
                                    published_after: str | None = None,
                                    tiers: list[str] | None = None,
                                    collected_since: str | None = None,
-                                   collected_before: str | None = None):
+                                   collected_before: str | None = None,
+                                   only_summary: bool = False):
     """추출 대상을 티어별로 번갈아 뽑는다 (T1이 21,000건+로 압도적이라 순서대로면 다른
     티어가 굶는다). 윈도우 함수로 "티어 내 순번"을 매겨 그 순번 우선으로 정렬한다
     — collected_at 순은 티어 내에서 유지된다. (O(n log n) — SQLite 3.25+·PostgreSQL 공통)
@@ -291,12 +319,12 @@ def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] 
     돌아야 제외된 소스가 순번만 잡아먹고 사라지는 일이 없다.
     """
     where, params = build_doc_filters(exclude_sources, published_after, tiers,
-                                      collected_since, collected_before)
+                                      collected_since, collected_before, only_summary)
     return conn.execute(
         f"""SELECT * FROM (
              SELECT *, ROW_NUMBER() OVER (PARTITION BY tier ORDER BY collected_at) AS _rank
              FROM documents
-             WHERE status = 'new' AND COALESCE(summary_only, 0) = 0{where}
+             WHERE status = 'new' AND {summary_gate_sql()}{where}
            ) ranked
            ORDER BY _rank, tier
            LIMIT ?""",
@@ -437,15 +465,19 @@ def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
         return
 
     claims = claims[:MAX_CLAIMS_PER_DOC]
+    # 요약뿐인 문서(T5)에서 나온 claim은 from_summary=1로 표시한다 — 토픽 신호에는 쓰이고
+    # 증거 수집(hybrid_search)에서는 기본 제외된다 (migrations/008).
+    from_summary = 1 if (d["summary_only"] or 0) else 0
     for c in claims:
         conf = c.get("confidence")
         conn.execute(
             """INSERT INTO claims
-               (id, document_id, claim_text, evidence_type, stance, metric, confidence)
-               VALUES (?,?,?,?,?,?,?)""",
+               (id, document_id, claim_text, evidence_type, stance, metric, confidence,
+                from_summary)
+               VALUES (?,?,?,?,?,?,?,?)""",
             (new_id(), d["id"], c["claim_text"], c["evidence_type"],
              c["stance"], c.get("metric"),
-             float(conf) if conf is not None else None),
+             float(conf) if conf is not None else None, from_summary),
         )
     conn.execute(
         "UPDATE documents SET status='enriched', enrich_locked_at=NULL WHERE id=?",
@@ -453,7 +485,8 @@ def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
     conn.commit()
     stats.total_claims += len(claims)
     split_note = f" (분할 {len(chunks)}청크)" if len(chunks) > 1 else ""
-    print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건{split_note}")
+    summary_note = " ※요약뿐(from_summary=1)" if from_summary else ""
+    print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건{split_note}{summary_note}")
 
 
 def print_dry_run(d, body: str) -> None:
@@ -489,6 +522,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--tiers",
                    help=f"처리할 티어만 지정(쉼표 구분). 예: 'T2,T3,T4,T5'. "
                         f"허용값 {'/'.join(TIER_ORDER)}")
+    p.add_argument("--only-summary", action="store_true",
+                   help=f"summary_only=1 문서만 처리 (소급 실행 전용). 추출 대상이 되는 티어는 "
+                        f"{'/'.join(SUMMARY_CLAIM_TIERS)} 뿐이므로 사실상 그 티어의 요약분이다")
     p.add_argument("--dry-run", action="store_true",
                    help="API 호출 없이 대상 문서와 분할 계획만 출력")
     p.add_argument("--doc-id", help="특정 문서 1건만 처리 (장문 분할 점검용)")
@@ -513,11 +549,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.count_remaining:
         # 숫자만 출력한다 — 워크플로가 그대로 변수에 담는다(같은 필터 로직을 재사용해
         # 연쇄 실행이 '보류 계층'을 잔여로 오인하고 헛도는 것을 막는다).
-        where, params = build_doc_filters(exclude_sources, args.published_after, tiers)
+        where, params = build_doc_filters(exclude_sources, args.published_after, tiers,
+                                          only_summary=args.only_summary)
         conn = connect()
         print(conn.execute(
             "SELECT COUNT(*) c FROM documents "
-            f"WHERE status='new' AND COALESCE(summary_only, 0) = 0{where}",
+            f"WHERE status='new' AND {summary_gate_sql()}{where}",
             tuple(params)).fetchone()["c"])
         conn.close()
         return 0
@@ -557,7 +594,8 @@ def main(argv: list[str] | None = None) -> int:
               + (f", cost_cap=${args.cost_cap}" if args.cost_cap is not None else "")
               + (f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
               + (f", 발행일 하한={args.published_after}" if args.published_after else "")
-              + (f", 티어={','.join(tiers)}" if tiers else ""))
+              + (f", 티어={','.join(tiers)}" if tiers else "")
+              + (", 요약뿐 문서만(--only-summary)" if args.only_summary else ""))
         processed = 0
         while True:
             remaining = None if base_limit is None else base_limit - processed
@@ -565,7 +603,8 @@ def main(argv: list[str] | None = None) -> int:
                 break
             batch_limit = BACKLOG_BATCH_SIZE if remaining is None else min(BACKLOG_BATCH_SIZE, remaining)
             docs = select_target_docs_round_robin(conn, batch_limit, exclude_sources,
-                                                  args.published_after, tiers)
+                                                  args.published_after, tiers,
+                                                  only_summary=args.only_summary)
             if not docs:
                 break
             process_batch(conn, docs, model, cost, stats, dry_run=args.dry_run)
@@ -579,12 +618,13 @@ def main(argv: list[str] | None = None) -> int:
             "enrich_daily_limit", DEFAULT_DAILY_LIMIT)
         cutoff = latest_collection_cutoff(conn)
         common = dict(exclude_sources=exclude_sources, published_after=args.published_after,
-                      tiers=tiers)
+                      tiers=tiers, only_summary=args.only_summary)
         filter_note = ((f", 제외 소스={','.join(exclude_sources)}" if exclude_sources else "")
                        + (f", 발행일 하한={args.published_after}" if args.published_after else "")
-                       + (f", 티어={','.join(tiers)}" if tiers else ""))
+                       + (f", 티어={','.join(tiers)}" if tiers else "")
+                       + (", 요약뿐 문서만(--only-summary)" if args.only_summary else ""))
         print(f"일반 실행 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— summary_only 제외{filter_note}")
+              f"— summary_only는 {'/'.join(SUMMARY_CLAIM_TIERS)}만 포함{filter_note}")
 
         # 1단계: 이번 수집분을 먼저 비운다 (최신 순).
         fresh = select_target_docs(conn, base_limit, collected_since=cutoff, **common)

@@ -4,6 +4,10 @@
 기존 claim 추출 필터(src/enrich/extract_claims.py build_doc_filters)와 같은 값 형식을 쓴다
 (tiers/stances는 목록, published_after/before는 YYYY-MM-DD).
 
+요약뿐인 문서에서 뽑힌 claim(claims.from_summary=1 — T5 RSS 예고문 등)은 기본적으로
+제외된다. 증거로 쓸 수 없기 때문이며(기획서 4장), 그 claim들은 토픽 신호 집계
+(src/topics/discover.py)에서만 쓰인다. 신호 확인 목적이면 --include-from-summary.
+
 의미 검색은 SQLite 모드이거나 OpenAI 키가 없으면 자동으로 건너뛰고 키워드 검색만
 반환한다(오류가 아니라 정상 폴백). 결과마다 match_type을 표기해 사람이 확인할 수 있게
 한다: 'keyword' | 'semantic' | 'both'.
@@ -34,9 +38,18 @@ _SELECT_COLS = (
 
 def _claim_filters(tiers: list[str] | None = None, stances: list[str] | None = None,
                    published_after: str | None = None,
-                   published_before: str | None = None) -> tuple[str, list]:
-    """claims/documents 조인 대상 필터. 반환: (WHERE 조각, 파라미터 목록)."""
+                   published_before: str | None = None,
+                   include_from_summary: bool = False) -> tuple[str, list]:
+    """claims/documents 조인 대상 필터. 반환: (WHERE 조각, 파라미터 목록).
+
+    include_from_summary는 기본 False — 요약뿐인 문서(T5 RSS 예고문 등)에서 뽑힌 claim은
+    증거로 쓸 수 없다(기획서 4장 "예고문 몇 줄에서 뽑은 claim은 신뢰할 수 없다").
+    그 claim들은 토픽 신호 집계(src/topics/discover.py)에서만 쓰이고, 여기서는
+    명시적으로 켜야 나온다 (migrations/008).
+    """
     clauses, params = [], []
+    if not include_from_summary:
+        clauses.append("COALESCE(c.from_summary, 0) = 0")
     if tiers:
         clauses.append(f"d.tier IN ({', '.join('?' for _ in tiers)})")
         params.extend(tiers)
@@ -53,9 +66,11 @@ def _claim_filters(tiers: list[str] | None = None, stances: list[str] | None = N
 
 
 def keyword_search(conn, query: str, *, tiers=None, stances=None, published_after=None,
-                   published_before=None, limit: int = DEFAULT_LIMIT) -> list[dict]:
+                   published_before=None, limit: int = DEFAULT_LIMIT,
+                   include_from_summary: bool = False) -> list[dict]:
     """트라이그램 유사도(PostgreSQL) / LIKE(SQLite) 기반 claim_text 검색."""
-    where, params = _claim_filters(tiers, stances, published_after, published_before)
+    where, params = _claim_filters(tiers, stances, published_after, published_before,
+                                   include_from_summary)
     if conn.is_postgres:
         sql = (f"SELECT {_SELECT_COLS}, similarity(c.claim_text, ?) AS score "
                "FROM claims c JOIN documents d ON d.id = c.document_id "
@@ -75,11 +90,13 @@ def keyword_search(conn, query: str, *, tiers=None, stances=None, published_afte
 
 def semantic_search(conn, query_vector: list[float], *, tiers=None, stances=None,
                     published_after=None, published_before=None,
-                    limit: int = DEFAULT_LIMIT) -> list[dict]:
+                    limit: int = DEFAULT_LIMIT,
+                    include_from_summary: bool = False) -> list[dict]:
     """코사인 거리(<=>) 기반 claim 임베딩 검색. PostgreSQL 전용 — 그 외는 빈 목록."""
     if not conn.is_postgres:
         return []
-    where, params = _claim_filters(tiers, stances, published_after, published_before)
+    where, params = _claim_filters(tiers, stances, published_after, published_before,
+                                   include_from_summary)
     vec = to_vector_literal(query_vector)
     sql = (f"SELECT {_SELECT_COLS}, 1 - (c.embedding <=> ?::{VECTOR_TYPE}) AS score "
            "FROM claims c JOIN documents d ON d.id = c.document_id "
@@ -95,12 +112,15 @@ def semantic_search(conn, query_vector: list[float], *, tiers=None, stances=None
 def hybrid_search(query: str, *, tiers: list[str] | None = None,
                   stances: list[str] | None = None, published_after: str | None = None,
                   published_before: str | None = None, limit: int = DEFAULT_LIMIT,
-                  conn=None) -> list[dict]:
+                  conn=None, include_from_summary: bool = False) -> list[dict]:
     """키워드 + 의미 검색 결과를 합쳐 반환한다 (score 내림차순, 최대 limit건).
 
     두 검색 모두에 걸린 claim은 match_type='both'로 표시되고 semantic_score도 함께 남는다.
     SQLite 모드이거나 OpenAI 키가 없으면 키워드 검색 결과만 반환한다(자동 폴백, 오류 아님).
     conn을 넘기면 그 연결을 재사용(테스트용) — 생략 시 이 함수가 열고 닫는다.
+
+    요약뿐인 문서에서 뽑힌 claim(from_summary=1)은 **기본 제외**된다 — 증거로 쓸 수 없기
+    때문이다. 신호 확인 목적으로 보려면 include_from_summary=True (migrations/008).
     """
     owns_conn = conn is None
     if owns_conn:
@@ -109,12 +129,14 @@ def hybrid_search(query: str, *, tiers: list[str] | None = None,
     try:
         keyword_hits = keyword_search(conn, query, tiers=tiers, stances=stances,
                                       published_after=published_after,
-                                      published_before=published_before, limit=limit)
+                                      published_before=published_before, limit=limit,
+                                      include_from_summary=include_from_summary)
         vec = embed_one(query) if conn.is_postgres else None
         semantic_hits = (
             semantic_search(conn, vec, tiers=tiers, stances=stances,
                             published_after=published_after,
-                            published_before=published_before, limit=limit)
+                            published_before=published_before, limit=limit,
+                            include_from_summary=include_from_summary)
             if vec is not None else []
         )
 
@@ -151,6 +173,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--published-after", help="YYYY-MM-DD")
     p.add_argument("--published-before", help="YYYY-MM-DD")
     p.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
+    p.add_argument("--include-from-summary", action="store_true",
+                   help="요약뿐인 문서(T5 예고문 등)에서 뽑힌 claim도 포함 — 신호 확인용. "
+                        "증거로는 쓰지 않는다(기본 제외)")
     args = p.parse_args(argv)
 
     tiers = [t.strip().upper() for t in (args.tiers or "").split(",") if t.strip()]
@@ -158,7 +183,8 @@ def main(argv: list[str] | None = None) -> int:
 
     rows = hybrid_search(args.query, tiers=tiers or None, stances=stances or None,
                          published_after=args.published_after,
-                         published_before=args.published_before, limit=args.limit)
+                         published_before=args.published_before, limit=args.limit,
+                         include_from_summary=args.include_from_summary)
     _print_cli(rows)
     return 0
 

@@ -1,4 +1,4 @@
-.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories stats sources-doc test handoff receive
+.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -32,6 +32,9 @@ embed-backfill:          # claim 임베딩 상한 없이 잔여 전량 변환
 
 theories:
 	$(PYTHON) src/load_theories.py
+
+topics:                  # 토픽 발굴 — content/topics/YYYY-WW.md 생성 (③단계)
+	$(PYTHON) src/topics/discover.py
 
 sources-doc:             # sources.yaml → docs/소스_카탈로그.md 재생성 (md 직접 수정 금지)
 	$(PYTHON) src/sources_doc.py

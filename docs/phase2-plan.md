@@ -14,7 +14,7 @@
 | ① | **발행 방식·디자인 확정 + C3 파일럿 독자** | 동료(별도 브랜치 진행 중) | ◐ **방식 확정(2026-09-09) · 구현 병합 보류** — 아티클(md) → 이미지 포함 HTML 웹페이지(gpt-image-1) → 외부 호스팅(URL 사내 한정·noindex) → 아웃룩 메일 발송 + 아카이브 목록. 구현은 동료 브랜치 2개(feature-web-design·feature-email-publish)에 준비됨, 통합 지시문 4건(정본 연결·아카이브·비밀값 규칙 정합·환경 이식성) 대기 — 병합 시점은 담당자 판단. 잔여 결정: 호스팅 플랫폼(IT 협의), C3는 리더 컨펌 후. 머지 규칙: 머지 전 상호 통지 + `make test` 통과 |
 | ② | **한국어 문체 개선** | 공동 | ✅ **2026-09-08 1차 완료** — 문체 정본을 `prompts/article_style.md`로 단일화(draft.md 규칙 이관·banned_phrases 목록 폐지), write_model = **Opus 5** 확정(5개 모델 블라인드 테스트), 팀장 피드백 2건을 규칙·검증기에 반영. 피드백 이력: [`eval/style-feedback-log.md`](../eval/style-feedback-log.md) |
 | ③ | **A6. 의미 기반 검색** (pgvector) | 당번 | ✅ **2026-09-09 완료** — claims.embedding halfvec(1536)+HNSW(2026-09-10 vector→halfvec 전환, DB 478→325MB), src/search/embed.py(text-embedding-3-small)·semantic.py(hybrid_search), 일일 증분(collect.yml) 가동. 백필 17,661건 완료($0.0202). 리콜 실험: [`eval/semantic-search-synonym-recall-2026-09.md`](../eval/semantic-search-synonym-recall-2026-09.md) |
-| ④ | **토픽 발굴 자동화** (③~④ 단계) | 당번 | 기획서 8장 ③ 구현 |
+| ④ | **토픽 발굴 자동화** (③ 단계) | 당번 | ✅ **2026-09-10 완료** — `src/topics/discover.py` + `/topics` 커맨드 + `make topics`. published_at 기준 14일 창 군집화(pgvector k-NN + 리더 군집), 급증도는 창 전체 대비 **비중** 비(일별 유입량이 아직 정상 상태가 아니라 건수 배수는 부풀어 보인다), 교차 가능성 4조건, 주제 축(이론 카드 field)별 미개척도 가중. T5 요약분 claim은 `from_summary=1`로 신호에만 반영(migrations/008) |
 
 ---
 
@@ -83,4 +83,4 @@
 - [ ] 편집 소요 60분 이내 안정화
 - [ ] 평가 기준셋 20편 구축
 - [x] A6 의미 검색 가동 ✅ 2026-09-09
-- [ ] 토픽 발굴 자동화 가동
+- [x] 토픽 발굴 자동화 가동 ✅ 2026-09-10

@@ -119,9 +119,16 @@ def test_claim_filters_build_where_and_params():
     assert params == ["T1", "T2", "optimistic", "2026-01-01", "2026-07-01"]
 
 
-def test_claim_filters_empty_when_no_args():
+def test_claim_filters_excludes_from_summary_by_default():
+    """인자를 주지 않아도 요약뿐 문서의 claim은 빠진다 — 증거로 쓸 수 없기 때문 (migrations/008)."""
     from search.semantic import _claim_filters
     where, params = _claim_filters()
+    assert where.strip() == "AND COALESCE(c.from_summary, 0) = 0" and params == []
+
+
+def test_claim_filters_can_include_from_summary_explicitly():
+    from search.semantic import _claim_filters
+    where, params = _claim_filters(include_from_summary=True)
     assert where == "" and params == []
 
 
