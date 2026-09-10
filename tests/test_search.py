@@ -179,7 +179,7 @@ def test_semantic_search_ranks_by_cosine_distance_on_postgres():
             del sys.modules[mod]
     import db
     assert db.IS_POSTGRES
-    from search.embed import to_vector_literal
+    from search.embed import VECTOR_TYPE, to_vector_literal
     from search.semantic import hybrid_search, semantic_search
 
     conn = db.connect()
@@ -202,9 +202,9 @@ def test_semantic_search_ranks_by_cosine_distance_on_postgres():
 
         near_vec = [1.0] + [0.0] * 1535
         far_vec = [0.0] * 1535 + [1.0]
-        conn.execute("UPDATE claims SET embedding = ?::vector WHERE id = ?",
+        conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
                     (to_vector_literal(near_vec), near_id))
-        conn.execute("UPDATE claims SET embedding = ?::vector WHERE id = ?",
+        conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
                     (to_vector_literal(far_vec), far_id))
         conn.commit()
 

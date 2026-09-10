@@ -1,4 +1,4 @@
-"""claims.claim_text를 OpenAI 임베딩으로 변환해 claims.embedding(vector)에 저장.
+"""claims.claim_text를 OpenAI 임베딩으로 변환해 claims.embedding(halfvec)에 저장.
 
 PostgreSQL 전용 — SQLite 모드는 vector 컬럼이 없으므로 즉시 정상 종료(키워드 검색만 사용,
 migrations/005_claims_embedding.sql 참고). 키 로드는 OPENAI_API_KEY_EMBED가 있으면 그것을,
@@ -35,6 +35,10 @@ if hasattr(sys.stdout, "reconfigure"):
 
 MODEL = "text-embedding-3-small"
 DIMENSIONS = 1536
+# 저장 타입 — 2바이트 반정밀도 halfvec (migrations/006). 값·인덱스 용량이 vector의
+# 절반이고 코사인 상위 k 정렬은 동등하다. 텍스트 입력 형식은 vector와 같으므로
+# to_vector_literal()은 그대로 쓴다. 타입을 바꿀 땐 이 상수와 마이그레이션만 손대면 된다.
+VECTOR_TYPE = "halfvec"
 BATCH_SIZE = 100
 DEFAULT_DAILY_LIMIT = 2000
 # $ / 1M 토큰 — OpenAI 공식 요금표(text-embedding-3-small). 단가가 바뀌면 이 값만 갱신.
@@ -55,7 +59,10 @@ def get_client():
 
 
 def to_vector_literal(vec: list[float]) -> str:
-    """pgvector 텍스트 입력 형식('[0.1,0.2,...]')으로 직렬화 — ?::vector 캐스트와 함께 쓴다."""
+    """pgvector 텍스트 입력 형식('[0.1,0.2,...]')으로 직렬화 — ?::halfvec 캐스트와 함께 쓴다.
+
+    vector·halfvec의 텍스트 입력 형식이 동일해서 저장 타입이 바뀌어도 이 함수는 그대로다.
+    """
     return "[" + ",".join(repr(float(x)) for x in vec) + "]"
 
 
@@ -112,7 +119,7 @@ def run(limit: int | None) -> int:
         vecs, tokens = embed_texts(client, texts)
         total_tokens += tokens
         for row, vec in zip(batch, vecs):
-            conn.execute("UPDATE claims SET embedding = ?::vector WHERE id = ?",
+            conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
                          (to_vector_literal(vec), row["id"]))
         conn.commit()
         done += len(batch)

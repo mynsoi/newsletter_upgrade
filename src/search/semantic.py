@@ -1,4 +1,4 @@
-"""claim 하이브리드 검색 — 키워드(트라이그램/LIKE) + 의미(pgvector 코사인) 결합.
+"""claim 하이브리드 검색 — 키워드(트라이그램/LIKE) + 의미(pgvector halfvec 코사인) 결합.
 
 /draft ② 증거 수집이 이 모듈의 hybrid_search()를 쓴다. 티어·stance·기간 필터는
 기존 claim 추출 필터(src/enrich/extract_claims.py build_doc_filters)와 같은 값 형식을 쓴다
@@ -19,7 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import connect, migrate  # noqa: E402
-from search.embed import embed_one, to_vector_literal  # noqa: E402
+from search.embed import VECTOR_TYPE, embed_one, to_vector_literal  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -81,10 +81,10 @@ def semantic_search(conn, query_vector: list[float], *, tiers=None, stances=None
         return []
     where, params = _claim_filters(tiers, stances, published_after, published_before)
     vec = to_vector_literal(query_vector)
-    sql = (f"SELECT {_SELECT_COLS}, 1 - (c.embedding <=> ?::vector) AS score "
+    sql = (f"SELECT {_SELECT_COLS}, 1 - (c.embedding <=> ?::{VECTOR_TYPE}) AS score "
            "FROM claims c JOIN documents d ON d.id = c.document_id "
            f"WHERE c.embedding IS NOT NULL{where} "
-           "ORDER BY c.embedding <=> ?::vector LIMIT ?")
+           f"ORDER BY c.embedding <=> ?::{VECTOR_TYPE} LIMIT ?")
     rows = conn.execute(sql, tuple([vec, *params, vec, limit])).fetchall()
     out = [dict(r) for r in rows]
     for r in out:
