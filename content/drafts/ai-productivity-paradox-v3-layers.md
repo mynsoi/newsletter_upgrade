@@ -85,6 +85,8 @@ AI로 줄인 시간이 결국 어디에 쓰였는지 가장 먼저 아는 사람
 - McKinsey Insights, "The state of AI in 2026: On the road to ROI"
 - McKinsey Insights, "The new management playbook for AI: How to move faster and create more value"
 - McKinsey Insights, "Beyond the copilot: Scaling the agentic product development life cycle"
+- McKinsey Insights, "How to close the agentic adoption gap"
+- McKinsey Insights, "The Economic Potential of Generative AI: The Next Productivity Frontier"
 - Josh Bersin, "The Rise Of The Supermanager: A New Role In The World of AI" (2025-09-23)
 - Josh Bersin, "The Rise Of The Supermanager" (2025-10-20)
 - Bain Insights, "Industrial CEOs: Is AI the Least of Their Worries?"
