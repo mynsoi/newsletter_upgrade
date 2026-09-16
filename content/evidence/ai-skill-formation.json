@@ -1,7 +1,7 @@
 {
   "topic": "AI를 쓰는 방식이 숙련과 판단력을 기르기도 하고 깎기도 한다",
   "slug": "ai-skill-formation",
-  "collected_at": "2026-09-16 (④-L3에서 claim 1건 추가)",
+  "collected_at": "2026-09-16 (④-L3에서 1건, ⑤ 편집에서 3건 추가)",
   "prompt_version": "v2 (스팟체크 통과 기준)",
   "search_note": "의미+키워드 하이브리드 검색(src/search/semantic.py). OPENAI_API_KEY 설정 후 의미 검색 적용. 요약뿐 문서(from_summary=1) claim 없음.",
   "conditions": {
@@ -406,6 +406,36 @@
       "evidence_type": "opinion",
       "doc": "The essential human skills for AI success? Focus on the 5Cs",
       "role": "제도 층위 — AI 시대의 역량은 기술 교육으로 채워지는 종류가 아니라는 견해 (④-L3에서 추가)"
+    },
+    {
+      "id": "1A06BA158653D8CA7245D2115BA",
+      "text": "AI 챗봇의 기본 보조 모드는 포괄적이고 일회적인 응답을 제공하여 실무자들이 자신의 사고를 통해 데이터 리터러시를 발전시킬 기회를 훼손할 수 있다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "Disrupting Cognitive Passivity: Rethinking AI-Assisted Data Literacy through Cognitive Alignment",
+      "role": "팀 층위 — 챗봇의 기본 응답 방식이 스스로 생각을 발전시킬 기회를 줄인다 (⑤ 단계에서 추가)"
+    },
+    {
+      "id": "1A073811A6768C27FEDC7B3CDBC",
+      "text": "개별 프롬프팅 중심의 AI 활용은 이미 특권받거나 동기가 높은 학생들을 더욱 유리하게 하여 형평성 격차를 심화시킬 수 있다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom",
+      "role": "팀 층위 — 각자 프롬프트를 던지는 방식에 머물면 앞선 사람만 더 앞서간다 (⑤ 단계에서 추가)"
+    },
+    {
+      "id": "1A073811B673D5B51AA042031D7",
+      "text": "학생들은 그룹 작업이 AI 단독 사용보다 더 깊은 이해와 창의적 문제해결을 촉진한다고 평가한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "survey",
+      "doc": "From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom",
+      "role": "팀 층위 — 함께 쓰는 배치가 혼자 쓰는 것보다 깊은 이해·문제해결로 이어진다는 평가 (⑤ 단계에서 추가)"
     }
   ]
 }
