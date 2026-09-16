@@ -1,7 +1,7 @@
 {
   "topic": "AI를 쓰는 방식이 숙련과 판단력을 기르기도 하고 깎기도 한다",
   "slug": "ai-skill-formation",
-  "collected_at": "2026-09-16",
+  "collected_at": "2026-09-16 (④-L3에서 claim 1건 추가)",
   "prompt_version": "v2 (스팟체크 통과 기준)",
   "search_note": "의미+키워드 하이브리드 검색(src/search/semantic.py). OPENAI_API_KEY 설정 후 의미 검색 적용. 요약뿐 문서(from_summary=1) claim 없음.",
   "conditions": {
@@ -20,7 +20,7 @@
     "opposing_stance": "optimistic 5건 vs cautious 12건 확보",
     "t1_t2_count": "T1 29건, T2 0건 — T1만으로 충족",
     "theory_claims": 14,
-    "single_source_share": "evidence 파일 전체 기준 최다 출처 arxiv-cs-cy 17/35건 (49%) — 40% 상한은 '본문이 실제 인용한 claim'에 적용되므로(A2·verify_article.py) 초안 단계에서 인용 비중을 관리한다",
+    "single_source_share": "evidence 파일 전체 기준 최다 출처 arxiv-cs-cy 17/36건 (47%) — 40% 상한은 '본문이 실제 인용한 claim'에 적용된다(A2·verify_article.py)",
     "verdict": "강제 조건 3건 모두 충족 + 이론 claim 권장 조건 충족",
     "arxiv_concentration": "arxiv-cs-cy 17건 + arxiv-cs-hc 8건 = 25/35건. source_id는 다르지만 둘 다 arXiv 프리프린트다 — 실질 독립성이 낮다고 보고 본문 인용을 분산한다"
   },
@@ -396,6 +396,16 @@
       "evidence_type": "theory",
       "doc": "조직학습 — 단일고리/이중고리 학습 (Single-loop / Double-loop Learning)",
       "role": "경계 조건② — 안정적 반복 과업에서는 단일고리가 더 효율적일 수 있다"
+    },
+    {
+      "id": "1A06A1F87868470D12C32A98E02",
+      "text": "AI 시대에 직무 성공을 위해서는 전통적인 기술 학습 방식이 아닌 인간의 본질적 역량이 더 중요하다",
+      "source": "ms-worklab",
+      "tier": "T4",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "The essential human skills for AI success? Focus on the 5Cs",
+      "role": "제도 층위 — AI 시대의 역량은 기술 교육으로 채워지는 종류가 아니라는 견해 (④-L3에서 추가)"
     }
   ]
 }
