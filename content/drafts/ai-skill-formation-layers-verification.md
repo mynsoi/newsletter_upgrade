@@ -37,27 +37,25 @@
 - `1A0607DAFA4381CBD476204D2BB` · theory-canon · T1 · neutral/theory — 학습은 구체적 경험, 반성적 관찰, 추상적 개념화, 능동적 실험이라는 네 가지 양식이 순환적으로 맞물리는 과정으로 모형화된다(
 - `1A06B272A9EB2798036C2463C95` · arxiv-cs-cy · T1 · cautious/theory — AI에 반복적으로 의존하면 인지적 오프로딩을 조장하고 지속적 노력의 기회를 감소시키며 독립적 비판적 사고를 약화시킬 수 있다
 
-**[경험이 쌓여도 실력으로 굳지 않을 수 있습니다] 42행** — “조직에도 비슷한 구분이 있습니다.”
-- `1A0607DD6D629B8E9AFE611C51C` · theory-canon · T1 · neutral/theory — 단일고리 학습은 오류를 기존의 지배 변수(목표·전제·규범) 안에서 수정하고, 이중고리 학습은 지배 변수 자체를 검토·수정한다
-- `1A0607DD70E4413E39868E7F201` · theory-canon · T1 · neutral/theory — 조직에는 당혹·위협을 회피하려는 방어적 루틴이 형성되며, 이것이 이중고리 학습을 체계적으로 억제한다
-
-**[경험이 쌓여도 실력으로 굳지 않을 수 있습니다] 45행** — “여기서 두 가지를 덧붙여야 이야기가 기울지 않습니다.”
-- `1A0607DD7B9DC60CECDCB52430C` · theory-canon · T1 · conditional/theory — 이중고리 학습이 항상 우월한 것은 아니다 — 안정적 환경의 반복 과업에서는 단일고리 수정이 더 효율적일 수 있다
+**[경험이 쌓여도 실력으로 굳지 않을 수 있습니다] 42행** — “다만 이 이야기는 아직 증명된 것이 아닙니다.”
 - `1A06B0F292B81C85CBD89E0E0ED` · arxiv-cs-cy · T1 · cautious/opinion — 현재의 측정 방법론으로는 인구 규모에서 AI가 역량 형성을 훼손하는지 여부를 결정할 수 없다
 - `1A06BACFE1EF4B4C276B532480D` · arxiv-cs-hc · T1 · optimistic/opinion — AI 도구가 인간의 명확화와 정당화를 요구하는 질문 형태의 도발을 통해 비판적 사고를 유도할 수 있다
 
-**[우리 조직에 적용해본다면] 53행** — “**임원에게 이것은 평가와 보상의 문제입니다.** 구성원이 AI를 어떻게 쓰는지는 각자의 습관처럼 보이지만, 그 습관을 만드는 것은 조직이 무엇을 성과로 인정하느…”
+**[우리 조직에 적용해본다면] 50행** — “**임원에게 이것은 평가와 보상의 문제입니다.** 구성원이 AI를 어떻게 쓰는지는 각자의 습관처럼 보이지만, 그 습관을 만드는 것은 조직이 무엇을 성과로 인정하느…”
 - `1A06A1D4580D672D9118667AACB` · ms-worklab · T4 · cautious/opinion — AI는 판단력을 자동으로 높이거나 호기심을 증진시키지 않으며, 오히려 기존 시스템에 내재된 인센티브를 증폭시킨다.
 - `1A06B0F281FC1FCB708EEC800B3` · arxiv-cs-cy · T1 · cautious/theory — 현재의 측정 시스템은 기존 전문성의 활용을 미래 전문성의 형성보다 더 용이하게 관찰한다
+- `1A06A1222D7817B682CFAF37640` · hrdive · T5 · optimistic/survey — 기술 도입의 결과로 직원 역량 강화를 우선시하는 기업이 증가했으며, 이들은 재교육과 핵심 인재 개발 노력을 확대하고 있다
+- `1A0611ADEA503E5E1D8F2F68903` · hbr · T3 · optimistic/case — AI 재교육 및 훈련 프로그램에 2천만 달러 규모의 기금을 마련했으며, 향후 1~2년 내 이를 2배 또는 3배 증가시킬 계획이
 - `1A06A1F87868470D12C32A98E02` · ms-worklab · T4 · conditional/opinion — AI 시대에 직무 성공을 위해서는 전통적인 기술 학습 방식이 아닌 인간의 본질적 역량이 더 중요하다
 
-**[우리 조직에 적용해본다면] 57행** — “**팀장이 할 일은 팀원들이 AI를 어떻게 쓰는지 아는 데서 시작합니다.** 학부생의 프로그래밍 협업을 살핀 연구에서는 서로가 상대의 AI 사용을 잘못 알고 있을…”
+**[우리 조직에 적용해본다면] 54행** — “**팀장이 할 일은 팀원들이 AI를 어떻게 쓰는지 아는 데서 시작합니다.** 학부생의 프로그래밍 협업을 살핀 연구에서는 서로가 상대의 AI 사용을 잘못 알고 있을…”
 - `1A06ACFA02FB1C65BD1E9F02C11` · arxiv-cs-cy · T1 · cautious/data — AI 사용 인식 불일치의 부정적 영향은 프로그래밍 기초 능력이 낮은 팀에서 더 크다
 - `1A073811A6768C27FEDC7B3CDBC` · arxiv-cs-cy · T1 · cautious/opinion — 개별 프롬프팅 중심의 AI 활용은 이미 특권받거나 동기가 높은 학생들을 더욱 유리하게 하여 형평성 격차를 심화시킬 수 있다
 - `1A06BA158653D8CA7245D2115BA` · arxiv-cs-hc · T1 · cautious/opinion — AI 챗봇의 기본 보조 모드는 포괄적이고 일회적인 응답을 제공하여 실무자들이 자신의 사고를 통해 데이터 리터러시를 발전시킬 기
+- `1A06BA1597157EA3657ADE992AE` · arxiv-cs-hc · T1 · conditional/theory — 인지적 수동성을 해소하려면 단순히 AI가 숙고적 사고를 촉진하도록 하는 것보다 인지적 정렬을 통한 역동적이고 적응적인 전략이 
 - `1A073811B673D5B51AA042031D7` · arxiv-cs-cy · T1 · conditional/survey — 학생들은 그룹 작업이 AI 단독 사용보다 더 깊은 이해와 창의적 문제해결을 촉진한다고 평가한다
 
-**[우리 조직에 적용해본다면] 61행** — “**팀원에게 이것은 자기 점검의 문제입니다.** 앞에서 본 세 갈래 가운데 내가 어디에 있는지는 성과표에 나오지 않습니다.”
+**[우리 조직에 적용해본다면] 58행** — “**팀원에게 이것은 자기 점검의 문제입니다.** 앞에서 본 세 갈래 가운데 내가 어디에 있는지는 성과표에 나오지 않습니다.”
 - `1A06B272BAA36DA9E7F103C6DCE` · arxiv-cs-cy · T1 · cautious/survey — AI 사용자 중 상당수가 지속적 노력에 대한 인내심 감소를 보고했다
 - `1A06B272C32F2DD0AD5A8DE7934` · arxiv-cs-cy · T1 · cautious/experiment — 개인의 배경 특성만으로는 설명할 수 없는 정도로 인내심 감소와 의존성 경향이 낮은 추론 성능과 더 강하게 연관되어 있다
 - `1A0A71F9343FF30D7FF7DDA0883` · arxiv-cs-hc · T1 · cautious/case — AI의 출력 품질은 이를 활용하는 인간의 전문성에 근본적으로 의존한다
@@ -68,7 +66,7 @@
 
 | 조건 | 기준 | 실측 | 판정 |
 |---|---|---|---|
-| 독립 출처 | 3곳 이상 | 6곳 (arxiv-cs-cy 10, arxiv-cs-hc 8, theory-canon 4, ms-worklab 2, fastcompany-worklife 1, hr-bulletin 1) | ✅ |
+| 독립 출처 | 3곳 이상 | 8곳 (arxiv-cs-cy 10, arxiv-cs-hc 9, ms-worklab 2, fastcompany-worklife 1, hr-bulletin 1, theory-canon 1, hrdive 1, hbr 1) | ✅ |
 | 상반 stance | optimistic·cautious 각 1건+ | cautious, conditional, neutral, optimistic | ✅ |
 | 단일 출처 비중 | 40% 이하 | arxiv-cs-cy 38% | ✅ |
 
@@ -84,7 +82,7 @@
 
 | 인용한 내부 자료 | 위치 | 자료 시점 | 본문 연도 표기 |
 |---|---|---|---|
-| 회장과의 대화 (1) AI 네이티브 기업으로의 전환 — 최태원 회장, 2026 이천포럼 | 우리 조직에 적용해본다면 50행 | 2026년 | ✅ 있음 |
+| 회장과의 대화 (1) AI 네이티브 기업으로의 전환 — 최태원 회장, 2026 이천포럼 | 우리 조직에 적용해본다면 47행 | 2026년 | ✅ 있음 |
 
 ## 5. 근거 주석 누락 의심 (사람 검토)
 
@@ -95,9 +93,11 @@
 - **arxiv-cs-cy**: Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights / From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom / Students' Perception Accuracy of Partners' AI Use and its Relation to Collaboration Performance / Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap
 - **arxiv-cs-hc**: AI as Equalizer or Amplifier? Task Complexity as the Moderating Factor for Human Expertise in Hybrid Intelligence Systems / Disrupting Cognitive Passivity: Rethinking AI-Assisted Data Literacy through Cognitive Alignment / Promoting Critical Thinking With Domain-Specific Generative AI Provocations / Understanding Critical Thinking in Generative Artificial Intelligence Use: Development, Validation, and Correlates of the Critical Thinking in AI Use Scale
 - **fastcompany-worklife**: In the age of AI, how much work you do matters less than it used to. Here’s what matters more
+- **hbr**: Why Great Turnarounds Start with Culture, Not Strategy
 - **hr-bulletin**: AI를 통한 지능 확장? AI와의 협업을 최적화하기 위한 4가지 원칙
+- **hrdive**: US firms plan to increase employee base salary budgets by an average 3.3% in 2027
 - **ms-worklab**: AI@Work: Stop blaming AI and start deciding / The essential human skills for AI success? Focus on the 5Cs
-- **theory-canon**: 경험학습 사이클 (Experiential Learning Cycle) / 조직학습 — 단일고리/이중고리 학습 (Single-loop / Double-loop Learning)
+- **theory-canon**: 경험학습 사이클 (Experiential Learning Cycle)
 
 ## 7. 지적 사항
 
@@ -106,22 +106,22 @@
 ---
 
 <!-- 아래 8~10장은 draft-layers ⑤의 수기 항목이다. `verify_article.py` 재실행 시 덮어써지므로
-     재실행 후에는 이 블록을 다시 붙인다. 판본: v4-layers (2026-09-16, 편집 피드백 21+8+9건 반영).
+     재실행 후에는 이 블록을 다시 붙인다. 판본: v5-layers (2026-09-16, 편집 피드백 21+8+9건 + 3장 구조 수정).
      루브릭 자체 채점은 사람 채점의 독립성을 위해 이 리포트에 싣지 않는다 —
      eval/scores/ai-skill-formation-layers-claude.md (사람 채점 완료 후 열람). -->
 
 ## 8. 1차 테스트(D1)와의 비교
 
-| 항목 | 1차 D1 v3-layers | **2차 v4-layers** |
+| 항목 | 1차 D1 v3-layers | **2차 v5-layers** |
 |---|---|---|
 | 방식 | 발행본에 레이어를 덧댐 (같은 증거·같은 논지) | **새 주제·새 증거로 처음부터** |
-| 코어 | 1,652자 | 1,848자 |
-| 레이어 | 임원 356 · 팀장 341 · 팀원 323 | 임원 339 · 팀장 343 · 팀원 301 |
-| 독자 열람(코어+레이어 1개) | 최대 2,008자 | 최대 2,191자 (기준 2,200 이내) |
-| 사용 claim | 21건 / 출처 7곳 | 26건 / 출처 6곳 |
+| 코어 | 1,652자 | 1,601자 |
+| 레이어 | 임원 356 · 팀장 341 · 팀원 323 | 임원 387 · 팀장 397 · 팀원 301 |
+| 독자 열람(코어+레이어 1개) | 최대 2,008자 | 최대 1,998자 |
+| 사용 claim | 21건 / 출처 7곳 | 26건 / 출처 8곳 |
 | 최대 의존 출처 | mckinsey-insights 29% | arxiv-cs-cy 38% |
 | 살아남은 레이어 | 3개 (생략 0) | 3개 (생략 0) |
-| 채점 전 편집 | 사용자 피드백 2회 반영 | **사용자 피드백 21 + 8 + 9건 반영** (조건 동일) |
+| 채점 전 편집 | 사용자 피드백 2회 반영 | **사용자 피드백 21 + 8 + 9건 + 구조 수정 반영** (조건 동일) |
 | 검증 | 통과 (실패 0 · 경고 0) | 통과 (실패 0 · 경고 0) |
 
 생략 규칙은 2차에서도 검증되지 않았다. ④-L1에서 임원 층위 claim이 5건으로 확인돼 증거를 따랐다
@@ -180,4 +180,13 @@
 - **편집 중 두 번 기준을 넘겨 되돌렸다**: ① 반증 문단에 arXiv claim을 하나 더 붙였다가 단일 출처 비중이
   41%로 초과(검증 실패) → 문장을 덜어 38%로 복귀 ② 분량이 2,261자까지 늘어 독자 열람 기준(2,200)을
   넘겨 코어를 줄였다. 이 과정에서 자문("~할까요")이 두 번 나온 것도 함께 정리했다(article_style 6절 ⑶).
+- **3장 구조 수정(2026-09-16, 편집자 요청)**: 단일고리/이중고리 학습 문단을 **삭제**했다.
+  이론 카드 2장 교차(기획서 3.5·article_style 8절)를 지키려고 넣었지만, 그 개념을 뒤에서 한 번도
+  회수하지 않았고 개인 학습 → 조직 습성으로 층위가 튀어 독자가 관계를 읽지 못했다.
+  반증 조건은 루브릭 항목 1이 요구하므로 두 문장으로 줄여 남겼다.
+  **대가**: 이론 카드가 경험학습 사이클 1장만 남아 기획서 3.5의 "2장 교차" 권장을 충족하지 못한다.
+  3차에서 이론 교차를 논지에 회수되는 형태로 다시 시도한다.
+- **출처 균형 재조정**: 이론 claim 3건이 빠지면서 arXiv 비중이 43%로 올라 검증이 실패했다.
+  임원 레이어에 hrdive·hbr claim(역량 강화 우선 기업 증가 · 재교육 기금 확대)을 넣어
+  "교육 과정만으로는 메우기 어렵다"는 문장과 대비를 만들고 비중을 38%로 낮췄다. 실사용 출처는 6곳 → 8곳.
 - 금지 표현 목록 미운용 (2026-09 폐지 · `prompts/banned_phrases.txt` 없음).
