@@ -1,5 +1,7 @@
 # 아티클 채점표 — ai-productivity-paradox v3-layers (세그먼트 레이어 테스트 · D1)
 
+> **이번 테스트 미사용** — 2026-09-16 김산결 1인 채점으로 진행하기로 했다(사용자 결정). 이 템플릿은 2차 테스트용으로 남겨 둔다.
+
 > **대상**: `content/drafts/ai-productivity-paradox-v3-layers.md` (코어 + 임원·팀장·팀원 레이어)
 > **함께 열람**: `content/drafts/ai-productivity-paradox-v3-layers-verification.md` (문장↔claim 대응표)
 > **독립 채점 규칙**: ① 두 채점자가 **같은 날** 채점한다 ② 작성 완료 전까지 서로 점수·사유를 공유하지 않는다
