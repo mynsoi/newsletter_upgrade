@@ -1,0 +1,35 @@
+# PR 테스트 워크플로
+#
+# DATABASE_URL을 주입하지 않는다 — 공유 Supabase에 PR마다 테스트 데이터를 쓰지 않기 위해서다.
+# src/db.py가 DATABASE_URL이 없으면 SQLite 로컬 모드로 떨어지므로 대부분의 테스트가 그대로 돌고,
+# Postgres 전용 테스트(pgvector 질의 등) 3건만 skip 된다. 그 3건은 사람이 로컬에서 확인한다.
+name: test
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: |
+          pip install -e .
+          pip install pytest
+
+      - name: 테스트 (SQLite 로컬 모드)
+        run: pytest -q
