@@ -269,6 +269,20 @@ def _sub(col: str, dims: int) -> str:
     return f"subvector({col}::vector, 1, {int(dims)})"
 
 
+def _no_nan(sim: str) -> str:
+    """NaN 유사도를 배제하는 조건 — 유사도 임계 비교에는 반드시 함께 건다.
+
+    pgvector에서 영벡터와의 코사인 거리는 NaN이고 `1 - NaN`도 NaN인데,
+    **PostgreSQL은 NaN을 모든 수보다 크게 취급한다.** 그래서 `sim >= threshold` 필터를
+    NaN이 그대로 통과해 엉뚱한 간선·집계가 생긴다
+    (`SELECT (1 - ('[0,0,0]'::vector <=> '[1,0,0]'::vector)) >= 0.9` 이 실제로 true다).
+    임베딩 1536차원 전체로는 0이 아니어도 `_sub`로 앞 dims 차원만 자르면 영벡터가 될 수
+    있으므로 이 저장소에서도 실제로 발생할 수 있는 조건이다.
+    PostgreSQL에서 NaN = NaN 은 true라 `<> 'NaN'` 으로 NaN만 정확히 걸러진다.
+    """
+    return f"({sim}) <> 'NaN'::float8"
+
+
 def fetch_window_claims(conn, w: Window) -> list[dict]:
     """최근 창의 claim + 문서 메타. 임베딩이 없는 claim은 군집화할 수 없어 제외한다."""
     rows = conn.execute(
@@ -305,6 +319,8 @@ def knn_edges(conn, w: Window, *, dims: int = CLUSTER_DIMS, k: int = KNN_K,
     그래서 차원을 CLUSTER_DIMS로 줄인다 — 3,700건 규모에서 10초대다.
     """
     sub = _sub("cl.embedding", dims)
+    sim = "1 - (a.v <=> b.v)"
+    no_nan = _no_nan(sim)
     rows = conn.execute(
         f"""WITH w AS (
               SELECT cl.id, {sub} AS v
@@ -312,13 +328,13 @@ def knn_edges(conn, w: Window, *, dims: int = CLUSTER_DIMS, k: int = KNN_K,
               WHERE d.published_at >= ? AND d.published_at < ?
                 AND cl.embedding IS NOT NULL
             )
-            SELECT a.id AS src, b.id AS dst, 1 - (a.v <=> b.v) AS sim
+            SELECT a.id AS src, b.id AS dst, {sim} AS sim
             FROM w a
             JOIN LATERAL (
               SELECT b2.id, b2.v FROM w b2 WHERE b2.id <> a.id
               ORDER BY b2.v <=> a.v LIMIT {int(k)}
             ) b ON TRUE
-            WHERE 1 - (a.v <=> b.v) >= ?""",
+            WHERE {no_nan} AND {sim} >= ?""",
         (w.recent_start.isoformat(), w.recent_end.isoformat(), threshold),
     ).fetchall()
     return [(r["src"], r["dst"], float(r["sim"])) for r in rows]
@@ -342,6 +358,8 @@ def signal_counts(conn, centroid: str, w: Window, *, dims: int = CLUSTER_DIMS,
     것이 없으므로 같은 잣대(중심에서 임계 이상)로 양쪽을 세야 배수가 의미를 갖는다.
     """
     sub = _sub("cl.embedding", dims)
+    sim = f"1 - ({sub} <=> ?::vector)"
+    no_nan = _no_nan(sim)
     row = conn.execute(
         f"""SELECT
               SUM(CASE WHEN d.published_at >= ? THEN 1 ELSE 0 END) AS recent_claims,
@@ -351,10 +369,11 @@ def signal_counts(conn, centroid: str, w: Window, *, dims: int = CLUSTER_DIMS,
             FROM claims cl JOIN documents d ON d.id = cl.document_id
             WHERE d.published_at >= ? AND d.published_at < ?
               AND cl.embedding IS NOT NULL
-              AND 1 - ({sub} <=> ?::vector) >= ?""",
+              AND {no_nan} AND {sim} >= ?""",
         (w.recent_start.isoformat(), w.recent_start.isoformat(),
          w.recent_start.isoformat(), w.recent_start.isoformat(),
-         w.base_start.isoformat(), w.recent_end.isoformat(), centroid, threshold),
+         w.base_start.isoformat(), w.recent_end.isoformat(),
+         centroid, centroid, threshold),
     ).fetchone()
     return {k: int(row[k] or 0) for k in
             ("recent_claims", "recent_docs", "prior_claims", "prior_docs")}
@@ -368,14 +387,17 @@ def theory_cards_for(conn, centroid: str, *, dims: int = CLUSTER_DIMS,
     카드 1장 = 문서 1건이고 그 안의 명제가 claim이므로, 카드 단위로 최대 유사도를 본다.
     """
     sub = _sub("cl.embedding", dims)
+    sim = f"1 - ({sub} <=> ?::vector)"
+    no_nan = _no_nan(sim)
     rows = conn.execute(
-        f"""SELECT d.id, d.title, MAX(1 - ({sub} <=> ?::vector)) AS sim
+        f"""SELECT d.id, d.title, MAX({sim}) AS sim
             FROM claims cl JOIN documents d ON d.id = cl.document_id
             WHERE d.source_id = 'theory-canon' AND cl.embedding IS NOT NULL
+              AND {no_nan}
             GROUP BY d.id, d.title
-            HAVING MAX(1 - ({sub} <=> ?::vector)) >= ?
+            HAVING MAX({sim}) >= ?
             ORDER BY sim DESC LIMIT ?""",
-        (centroid, centroid, threshold, limit),
+        (centroid, centroid, centroid, threshold, limit),
     ).fetchall()
     return [{"id": r["id"], "title": r["title"], "sim": float(r["sim"])} for r in rows]
 
