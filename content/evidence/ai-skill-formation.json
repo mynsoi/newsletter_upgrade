@@ -1,0 +1,441 @@
+{
+  "topic": "AI를 쓰는 방식이 숙련과 판단력을 기르기도 하고 깎기도 한다",
+  "slug": "ai-skill-formation",
+  "collected_at": "2026-09-16 (④-L3에서 1건, ⑤ 편집에서 3건 추가)",
+  "prompt_version": "v2 (스팟체크 통과 기준)",
+  "search_note": "의미+키워드 하이브리드 검색(src/search/semantic.py). OPENAI_API_KEY 설정 후 의미 검색 적용. 요약뿐 문서(from_summary=1) claim 없음.",
+  "conditions": {
+    "independent_sources": [
+      "ai-post",
+      "arxiv-cs-cy",
+      "arxiv-cs-hc",
+      "fastcompany-worklife",
+      "hbr",
+      "hr-bulletin",
+      "hrdive",
+      "ms-worklab",
+      "theory-canon"
+    ],
+    "independent_sources_count": 9,
+    "opposing_stance": "optimistic 5건 vs cautious 12건 확보",
+    "t1_t2_count": "T1 29건, T2 0건 — T1만으로 충족",
+    "theory_claims": 14,
+    "single_source_share": "evidence 파일 전체 기준 최다 출처 arxiv-cs-cy 17/36건 (47%) — 40% 상한은 '본문이 실제 인용한 claim'에 적용된다(A2·verify_article.py)",
+    "verdict": "강제 조건 3건 모두 충족 + 이론 claim 권장 조건 충족",
+    "arxiv_concentration": "arxiv-cs-cy 17건 + arxiv-cs-hc 8건 = 25/35건. source_id는 다르지만 둘 다 arXiv 프리프린트다 — 실질 독립성이 낮다고 보고 본문 인용을 분산한다"
+  },
+  "theory_lenses": [
+    {
+      "card": "kolb-experiential-learning",
+      "title": "경험학습 사이클",
+      "use": "경험이 학습이 되려면 반성적 관찰 단계가 필요하다 — AI가 그 단계를 대신하면 경험이 쌓여도 숙련이 남지 않는다는 해석의 1차 렌즈"
+    },
+    {
+      "card": "organizational-learning-argyris",
+      "title": "단일고리/이중고리 학습",
+      "use": "AI로 더 빨리 고치는 것은 단일고리에 가깝다. 전제 자체를 다시 보는 이중고리가 유지되는지를 묻는 2차 렌즈"
+    }
+  ],
+  "cautions": [
+    "출처 편중: 증거의 다수가 arXiv 프리프린트(cs.CY·cs.HC)다. 본문에서는 한 출처가 인용 claim의 40%를 넘지 않게 고르고, 국내 매체(hr-bulletin)·업계 매체·이론 카드를 섞어 논지를 받친다.",
+    "arxiv(cs.CY·cs.HC) claim이 다수다. 동료심사를 거치지 않은 프리프린트가 섞여 있으므로 '연구에 따르면'으로 단정하지 말고 어떤 연구인지 성격을 밝혀 쓴다.",
+    "학생·학습 실험 기반 claim은 사내 업무로 옮길 때 외적 타당도가 다르다. 본문에서 대상(학생/직장인)을 밝히지 않고 일반화하지 않는다.",
+    "AI as Equalizer or Amplifier와 Critical Thinking in the Age of AI는 각각 단일 연구다. 두 건을 합쳐 '여러 연구'로 쓰지 않는다.",
+    "hrdive(T5)·ai-post(T5)는 보조 근거다. 논지의 축을 이 둘에 걸지 않는다.",
+    "HBR의 2천만 달러 기금은 한 기업 사례다. 업계 평균처럼 쓰지 않는다."
+  ],
+  "claims": [
+    {
+      "id": "1A06E59479F9279D4E32DEB9068",
+      "text": "생성형 AI를 업무 프로세스에 내재화할 때 학습 효과와 일상화 효과가 나타난다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "Generative AI in Knowledge Work: Perception, Usefulness, and Acceptance of Microsoft 365 Copilot",
+      "role": "관찰된 신호 — 업무에 내재화되면 학습 효과와 일상화 효과가 함께 나타난다"
+    },
+    {
+      "id": "1A06B0F2605979D6B483AEAFD70",
+      "text": "AI 사용은 숙련된 업무에 집중되어 있으며 즉각적인 작업 수행을 지원하는 경향이 있다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "data",
+      "doc": "Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap",
+      "role": "관찰된 신호 — AI 사용이 이미 숙련된 업무에 몰려 있다"
+    },
+    {
+      "id": "1A06B272CB8A8A4C12D454CADC9",
+      "text": "AI 사용자는 과도 의존형, 혼합전략형, 균형잡힌 지원추구형 등 서로 다른 행동 프로필을 나타낸다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "data",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "관찰된 신호 — 사용자 행동이 세 유형으로 갈린다"
+    },
+    {
+      "id": "1A06B272BAA36DA9E7F103C6DCE",
+      "text": "AI 사용자 중 상당수가 지속적 노력에 대한 인내심 감소를 보고했다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "관찰된 신호 — 지속적 노력에 대한 인내심 감소 보고"
+    },
+    {
+      "id": "1A06B272A9EB2798036C2463C95",
+      "text": "AI에 반복적으로 의존하면 인지적 오프로딩을 조장하고 지속적 노력의 기회를 감소시키며 독립적 비판적 사고를 약화시킬 수 있다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "통념과의 충돌 핵심 — 반복 의존이 인지적 오프로딩을 부르고 독립적 사고를 약화시킬 수 있다"
+    },
+    {
+      "id": "1A082F4FDC2562D08166CDB1E0C",
+      "text": "AI 사용은 비판적 사고력 약화, 기술 능력 저하, 불안감 증가라는 위험을 초래한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "doc": "Human-AI Interactions: Cognitive, Behavioral, and Emotional Impacts",
+      "role": "통념과의 충돌 — 비판적 사고력·기술 능력 저하 위험"
+    },
+    {
+      "id": "1A06B272C32F2DD0AD5A8DE7934",
+      "text": "개인의 배경 특성만으로는 설명할 수 없는 정도로 인내심 감소와 의존성 경향이 낮은 추론 성능과 더 강하게 연관되어 있다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "experiment",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "통념과의 충돌 — 인내심 감소·의존 경향이 낮은 추론 성능과 연관"
+    },
+    {
+      "id": "1A0A2BC71AF9F0220CD81DC611C",
+      "text": "AI가 기초 업무를 대체하면서 신입 사원 교육 기회가 차단되는 숙련 사다리 단절이 발생하고 있다",
+      "source": "ai-post",
+      "tier": "T5",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "\"짤리진 않았는데 월급이 깎였다?\"…AI가 내 통장부터 노리는 진짜 이유",
+      "role": "통념과의 충돌(보조·T5) — 기초 업무 대체로 신입 교육 기회가 끊긴다는 현장 지적"
+    },
+    {
+      "id": "1A06B272D3FF0D59E39488094BA",
+      "text": "AI가 비판적 사고에 미치는 영향은 균일하게 부정적이거나 긍정적이지 않으며, 그것이 사용되는 방식에 따라 달라진다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "메커니즘 핵심 — 영향의 방향은 '쓰는 방식'이 가른다 (논지 직결)"
+    },
+    {
+      "id": "1A0A71F94412287A1C43E27272C",
+      "text": "AI는 구조화된 일상적 업무에서는 성과 격차를 균등화하지만, 깊이 있는 판단이 필요한 복잡한 업무에서는 기존의 격차를 증폭시킨다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "AI as Equalizer or Amplifier? Task Complexity as the Moderating Factor for Human Expertise in Hybrid Intelligence Systems",
+      "role": "메커니즘 핵심 — 일상 업무는 격차를 좁히고 복잡한 판단 업무는 격차를 키운다"
+    },
+    {
+      "id": "1A0A71F9244C2E888A3851F57B1",
+      "text": "생성형 AI는 일상적 업무에서 초보자와 전문가 간의 성과 격차를 좁힌다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "AI as Equalizer or Amplifier? Task Complexity as the Moderating Factor for Human Expertise in Hybrid Intelligence Systems",
+      "role": "메커니즘 — 일상 업무에서 초보자·전문가 격차 축소"
+    },
+    {
+      "id": "1A0A71F93C25C6AEAAB346538ED",
+      "text": "AI 활용의 효과성은 프롬프트 작성 능력보다 도메인 전문성에 의해 결정된다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "case",
+      "doc": "AI as Equalizer or Amplifier? Task Complexity as the Moderating Factor for Human Expertise in Hybrid Intelligence Systems",
+      "role": "메커니즘 — 효과를 가르는 것은 프롬프트 기술이 아니라 도메인 전문성"
+    },
+    {
+      "id": "1A0A71F9343FF30D7FF7DDA0883",
+      "text": "AI의 출력 품질은 이를 활용하는 인간의 전문성에 근본적으로 의존한다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "case",
+      "doc": "AI as Equalizer or Amplifier? Task Complexity as the Moderating Factor for Human Expertise in Hybrid Intelligence Systems",
+      "role": "메커니즘 — 산출 품질이 사용자의 전문성에 의존"
+    },
+    {
+      "id": "1A06B272DC5A67958A65D70813E",
+      "text": "효과적인 인간-AI 협업은 인지적 노력을 대체하기보다는 성찰, 검증, 지속적 인지적 노력을 지원해야 한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "Critical Thinking in the Age of Artificial Intelligence: A Survey-Based Study with Machine Learning Insights",
+      "role": "메커니즘 — 협업 설계가 성찰·검증·인지적 노력을 지원해야 한다"
+    },
+    {
+      "id": "1A06BACFE1EF4B4C276B532480D",
+      "text": "AI 도구가 인간의 명확화와 정당화를 요구하는 질문 형태의 도발을 통해 비판적 사고를 유도할 수 있다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "optimistic",
+      "evidence_type": "opinion",
+      "doc": "Promoting Critical Thinking With Domain-Specific Generative AI Provocations",
+      "role": "상반 관점(낙관) — 질문형 도발로 비판적 사고를 오히려 끌어낼 수 있다"
+    },
+    {
+      "id": "1A0A2DACD931C736F45D0252DB6",
+      "text": "AI 사용 시 비판적 사고 성향이 높을수록 검증 전략을 더 자주, 다양하게 사용한다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "optimistic",
+      "evidence_type": "experiment",
+      "doc": "Understanding Critical Thinking in Generative Artificial Intelligence Use: Development, Validation, and Correlates of the Critical Thinking in AI Use Scale",
+      "role": "상반 관점(낙관) — 비판적 사고 성향이 높을수록 검증 전략을 다양하게 쓴다"
+    },
+    {
+      "id": "1A0A2DACE3E387129C5561C7BB3",
+      "text": "AI 사용 시 비판적 사고 성향이 높을수록 사실 판단 정확도가 더 높다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "optimistic",
+      "evidence_type": "experiment",
+      "doc": "Understanding Critical Thinking in Generative Artificial Intelligence Use: Development, Validation, and Correlates of the Critical Thinking in AI Use Scale",
+      "role": "상반 관점(낙관) — 비판적 사고 성향과 사실 판단 정확도의 관계"
+    },
+    {
+      "id": "1A073811BE76F31029273D4ED0F",
+      "text": "AI 자문 시점의 타이밍이 학습 성과에 상당한 영향을 미친다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "case",
+      "doc": "From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom",
+      "role": "메커니즘 — AI 도움을 주는 시점이 학습 성과를 가른다"
+    },
+    {
+      "id": "1A06BA1597157EA3657ADE992AE",
+      "text": "인지적 수동성을 해소하려면 단순히 AI가 숙고적 사고를 촉진하도록 하는 것보다 인지적 정렬을 통한 역동적이고 적응적인 전략이 필요하다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "Disrupting Cognitive Passivity: Rethinking AI-Assisted Data Literacy through Cognitive Alignment",
+      "role": "메커니즘 — 인지적 수동성은 적응적 설계로만 풀린다"
+    },
+    {
+      "id": "1A06B0F28A591BAA13A4AFC9E37",
+      "text": "기술 변화라는 상황에서 역사적으로 사회의 회복 메커니즘은 기술 도입에 따른 역량 형성이었다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap",
+      "role": "교차 해석 — 기술 변화의 회복 메커니즘은 역사적으로 역량 형성이었다"
+    },
+    {
+      "id": "1A06B0F281FC1FCB708EEC800B3",
+      "text": "현재의 측정 시스템은 기존 전문성의 활용을 미래 전문성의 형성보다 더 용이하게 관찰한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "doc": "Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap",
+      "role": "측정 논점 핵심 — 측정 체계가 기존 전문성의 '활용'은 보지만 '형성'은 잘 못 본다"
+    },
+    {
+      "id": "1A06B0F271243090816D3F074CD",
+      "text": "대규모 배포 데이터는 사용자가 AI 지원 없이 작업을 독립적으로 수행할 수 있는 능력 발달 여부를 관찰하지 못한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "doc": "Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap",
+      "role": "측정 논점 — 배포 데이터로는 AI 없이 해내는 능력의 발달을 관찰하지 못한다"
+    },
+    {
+      "id": "1A06B0F292B81C85CBD89E0E0ED",
+      "text": "현재의 측정 방법론으로는 인구 규모에서 AI가 역량 형성을 훼손하는지 여부를 결정할 수 없다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "Toward Measuring AI's Effects on Skill Formation: The Stock-Formation Gap",
+      "role": "반증 조건 — 현재 방법론으로는 역량 형성 훼손 여부를 단정할 수 없다"
+    },
+    {
+      "id": "1A0737E49BA1279065970BAF891",
+      "text": "조직의 효과적인 AI 인력 개발은 단발성 교육이 아닌 인프라로서의 역량 형성을 필요로 한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "The AI Pyramid A Conceptual Framework for Workforce Capability in the Age of AI",
+      "role": "제도 층위 — 단발성 교육이 아니라 인프라로서의 역량 형성"
+    },
+    {
+      "id": "1A06AD148EA0FE9317C4B05AD0F",
+      "text": "AI 시대 적응을 위해 직원에게 재교육 기회를 제공하는 것이 필요하다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "Directors Duties in the Age of Agentic Artificial Intelligence",
+      "role": "제도 층위 — 재교육 기회 제공을 경영진의 의무로 보는 논의"
+    },
+    {
+      "id": "1A06A1D4580D672D9118667AACB",
+      "text": "AI는 판단력을 자동으로 높이거나 호기심을 증진시키지 않으며, 오히려 기존 시스템에 내재된 인센티브를 증폭시킨다.",
+      "source": "ms-worklab",
+      "tier": "T4",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "AI@Work: Stop blaming AI and start deciding",
+      "role": "제도 층위 — AI는 판단력을 자동으로 높이지 않고 기존 인센티브를 증폭한다"
+    },
+    {
+      "id": "1A0611ADEA503E5E1D8F2F68903",
+      "text": "AI 재교육 및 훈련 프로그램에 2천만 달러 규모의 기금을 마련했으며, 향후 1~2년 내 이를 2배 또는 3배 증가시킬 계획이다.",
+      "source": "hbr",
+      "tier": "T3",
+      "stance": "optimistic",
+      "evidence_type": "case",
+      "doc": "Why Great Turnarounds Start with Culture, Not Strategy",
+      "role": "제도 층위(사례) — 재교육 기금 규모와 증액 계획",
+      "metric": "$20 million"
+    },
+    {
+      "id": "1A06A1222D7817B682CFAF37640",
+      "text": "기술 도입의 결과로 직원 역량 강화를 우선시하는 기업이 증가했으며, 이들은 재교육과 핵심 인재 개발 노력을 확대하고 있다",
+      "source": "hrdive",
+      "tier": "T5",
+      "stance": "optimistic",
+      "evidence_type": "survey",
+      "doc": "US firms plan to increase employee base salary budgets by an average 3.3% in 2027",
+      "role": "제도 층위(보조·T5) — 역량 강화를 우선하는 기업 비중",
+      "metric": "65%"
+    },
+    {
+      "id": "1A06ACFA02FB1C65BD1E9F02C11",
+      "text": "AI 사용 인식 불일치의 부정적 영향은 프로그래밍 기초 능력이 낮은 팀에서 더 크다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "data",
+      "doc": "Students' Perception Accuracy of Partners' AI Use and its Relation to Collaboration Performance",
+      "role": "팀 층위 — 서로의 AI 사용을 잘못 알고 있을 때의 타격이 기초 능력이 낮은 팀에서 더 크다"
+    },
+    {
+      "id": "1A0613EBC51A501110988C13BEE",
+      "text": "AI의 산출물을 무조건적으로 받아들이지 말고 인간의 비판적 사고와 전문성을 발휘하여 검토해야 한다",
+      "source": "hr-bulletin",
+      "tier": "T3",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "AI를 통한 지능 확장? AI와의 협업을 최적화하기 위한 4가지 원칙",
+      "role": "SK 맥락 연결 — 산출물을 그대로 받지 말고 검토하라는 국내 HR 매체의 원칙"
+    },
+    {
+      "id": "1A06A1577699DB95A338297E094",
+      "text": "AI 시대에 직장에서 업무량보다 판단력과 재량이 더 중요한 역할을 한다",
+      "source": "fastcompany-worklife",
+      "tier": "T3",
+      "stance": "neutral",
+      "evidence_type": "opinion",
+      "doc": "In the age of AI, how much work you do matters less than it used to. Here’s what matters more",
+      "role": "SK 맥락 연결 — 업무량보다 판단과 재량이 중요해진다"
+    },
+    {
+      "id": "1A0607DAFA4381CBD476204D2BB",
+      "text": "학습은 구체적 경험, 반성적 관찰, 추상적 개념화, 능동적 실험이라는 네 가지 양식이 순환적으로 맞물리는 과정으로 모형화된다(모든 학습이 이 순서를 그대로 밟는다는 뜻은 아니다)",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "경험학습 사이클 (Experiential Learning Cycle)",
+      "role": "이론 렌즈① — 경험학습 사이클의 네 양식(반성적 관찰이 핵심 고리)"
+    },
+    {
+      "id": "1A0607DD6D629B8E9AFE611C51C",
+      "text": "단일고리 학습은 오류를 기존의 지배 변수(목표·전제·규범) 안에서 수정하고, 이중고리 학습은 지배 변수 자체를 검토·수정한다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "조직학습 — 단일고리/이중고리 학습 (Single-loop / Double-loop Learning)",
+      "role": "이론 렌즈② 핵심 — 단일고리와 이중고리 학습의 구분"
+    },
+    {
+      "id": "1A0607DD70E4413E39868E7F201",
+      "text": "조직에는 당혹·위협을 회피하려는 방어적 루틴이 형성되며, 이것이 이중고리 학습을 체계적으로 억제한다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "doc": "조직학습 — 단일고리/이중고리 학습 (Single-loop / Double-loop Learning)",
+      "role": "이론 렌즈② — 방어적 루틴이 이중고리 학습을 억제한다"
+    },
+    {
+      "id": "1A0607DD7B9DC60CECDCB52430C",
+      "text": "이중고리 학습이 항상 우월한 것은 아니다 — 안정적 환경의 반복 과업에서는 단일고리 수정이 더 효율적일 수 있다",
+      "source": "theory-canon",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "doc": "조직학습 — 단일고리/이중고리 학습 (Single-loop / Double-loop Learning)",
+      "role": "경계 조건② — 안정적 반복 과업에서는 단일고리가 더 효율적일 수 있다"
+    },
+    {
+      "id": "1A06A1F87868470D12C32A98E02",
+      "text": "AI 시대에 직무 성공을 위해서는 전통적인 기술 학습 방식이 아닌 인간의 본질적 역량이 더 중요하다",
+      "source": "ms-worklab",
+      "tier": "T4",
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "doc": "The essential human skills for AI success? Focus on the 5Cs",
+      "role": "제도 층위 — AI 시대의 역량은 기술 교육으로 채워지는 종류가 아니라는 견해 (④-L3에서 추가)"
+    },
+    {
+      "id": "1A06BA158653D8CA7245D2115BA",
+      "text": "AI 챗봇의 기본 보조 모드는 포괄적이고 일회적인 응답을 제공하여 실무자들이 자신의 사고를 통해 데이터 리터러시를 발전시킬 기회를 훼손할 수 있다",
+      "source": "arxiv-cs-hc",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "Disrupting Cognitive Passivity: Rethinking AI-Assisted Data Literacy through Cognitive Alignment",
+      "role": "팀 층위 — 챗봇의 기본 응답 방식이 스스로 생각을 발전시킬 기회를 줄인다 (⑤ 단계에서 추가)"
+    },
+    {
+      "id": "1A073811A6768C27FEDC7B3CDBC",
+      "text": "개별 프롬프팅 중심의 AI 활용은 이미 특권받거나 동기가 높은 학생들을 더욱 유리하게 하여 형평성 격차를 심화시킬 수 있다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "doc": "From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom",
+      "role": "팀 층위 — 각자 프롬프트를 던지는 방식에 머물면 앞선 사람만 더 앞서간다 (⑤ 단계에서 추가)"
+    },
+    {
+      "id": "1A073811B673D5B51AA042031D7",
+      "text": "학생들은 그룹 작업이 AI 단독 사용보다 더 깊은 이해와 창의적 문제해결을 촉진한다고 평가한다",
+      "source": "arxiv-cs-cy",
+      "tier": "T1",
+      "stance": "conditional",
+      "evidence_type": "survey",
+      "doc": "From Individual Prompts to Collective Intelligence: Mainstreaming Generative AI in the Classroom",
+      "role": "팀 층위 — 함께 쓰는 배치가 혼자 쓰는 것보다 깊은 이해·문제해결로 이어진다는 평가 (⑤ 단계에서 추가)"
+    }
+  ]
+}

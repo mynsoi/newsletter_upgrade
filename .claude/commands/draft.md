@@ -39,6 +39,9 @@
        검증기는 제언형 문단도 액션 마커로 인식해 기간·횟수를 "처방 값"으로 분류한다 —
        면제받자고 소제목에 "액션" 같은 라벨을 붙일 필요는 없다.
    - 내부 자료 사용 시 api_eligible=1 문서만 사용
+   - **세그먼트 레이어(선택)**: `prompts/segment_layers.md`의 적용 조건을 만족하면 ④ 대신
+     `.claude/commands/draft-layers.md`(④-L1~L3)로 쓴다. 2026-09-17 조건부 옵션으로 확정 —
+     매 편 강제가 아니며, 조건 미달이면 이 절차대로 제언형 문단으로 쓴다 (eval/layer-test-2026-09.md)
 ⑤ 검증 → content/drafts/{slug}-verification.md
    - **실사용 기준(A2)**: `python src/verify_article.py content/drafts/{slug}.md` 실행.
      evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**(문단 뒤 `<!-- claims: ... -->`)
