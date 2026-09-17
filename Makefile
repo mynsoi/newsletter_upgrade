@@ -1,4 +1,4 @@
-.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive
+.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -50,3 +50,6 @@ receive:
 
 test:
 	$(PYTHON) -m pytest tests/ -q
+
+publish-ui:              # 아티클 발행 도구 로컬 서버 (http://localhost:5001)
+	$(PYTHON) web/server.py
