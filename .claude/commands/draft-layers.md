@@ -1,6 +1,7 @@
-[테스트: 세그먼트 레이어] 기존 발행본에 레이어를 붙인다: $ARGUMENTS
+[선택 절차: 세그먼트 레이어] 코어 + 역할별 레이어로 아티클을 쓴다: $ARGUMENTS
 
-이 커맨드는 draft.md ④(초안)와 ⑤(검증) 사이에 들어가는 실험 단계다. draft.md를 대체하지 않는다.
+2026-09-17 조건부 옵션으로 확정된 절차다(eval/layer-test-2026-09.md). draft.md ④를 대신하며,
+`prompts/segment_layers.md`의 적용 조건을 만족하는 편에만 쓴다. 조건 미달이면 draft.md ④로 돌아간다.
 
 전제: prompts/article_style.md와 prompts/segment_layers.md를 먼저 읽는다.
 작성 모델은 config/settings.yaml의 write_model. 실행 전 /model로 확인하고 초안 머리말에 기록.
