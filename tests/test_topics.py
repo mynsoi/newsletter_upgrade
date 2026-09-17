@@ -480,7 +480,12 @@ def test_knn_edges_and_centroid_on_postgres():
     conn = db.connect()
     db.migrate(conn)
     marker = "pg-topics-test"
-    as_of = date.today()
+    # 공유 Supabase DB의 데이터 양에 판정이 좌우되지 않도록 창을 테스트 전용 날짜로 민다.
+    # 실제 문서의 published_at은 여기까지 오지 않으므로 창 안에는 이 테스트가 넣은
+    # claim 3건만 들어간다 (2026-09-17: 창 안 claim 수에 따라 통과·실패가 갈렸던 회귀).
+    # PID로 한 번 더 어긋내는 이유는 같은 공유 DB에 테스트가 동시에 돌 수 있어서다 —
+    # 간격 50일은 창 길이(14+28일)보다 넓어 서로의 창에 끼어들지 않는다.
+    as_of = date.today() + timedelta(days=3650 + (os.getpid() % 500) * 50)
     w = resolve_window(as_of)
     try:
         # 최근 창에 서로 가까운 claim 2건 + 멀리 떨어진 claim 1건
@@ -505,22 +510,28 @@ def test_knn_edges_and_centroid_on_postgres():
         conn.commit()
 
         edges = knn_edges(conn, w, k=40, threshold=0.9)
-        mine = {(a, b) for a, b, _ in edges if a in ids.values() and b in ids.values()}
-        assert (ids["n1"], ids["n2"]) in mine or (ids["n2"], ids["n1"]) in mine
-        assert not any(ids["far"] in pair for pair in mine)   # 먼 벡터는 이어지지 않는다
+        assert {(a, b) for a, b, _ in edges} == {(ids["n1"], ids["n2"]),
+                                                 (ids["n2"], ids["n1"])}
+        # "far"는 앞 CLUSTER_DIMS 차원을 자르면 영벡터가 되고, 영벡터와의 코사인 거리는
+        # NaN이다. PostgreSQL은 NaN을 모든 수보다 크게 보므로 가드가 없으면 `sim >= 임계`를
+        # 통과해 엉뚱한 간선이 생긴다 — 먼 벡터는 어느 쪽으로도 이어지지 않아야 한다.
+        assert all(ids["far"] not in (a, b) for a, b, _ in edges)
+        assert all(sim == sim for _, _, sim in edges)  # NaN이 섞이지 않았다 (NaN != NaN)
 
-        clusters = leader_cluster(list(ids.values()),
-                                  [e for e in edges if e[0] in ids.values()])
+        clusters = leader_cluster(list(ids.values()), edges)
         assert any(set(c) == {ids["n1"], ids["n2"]} for c in clusters)
+        assert [ids["far"]] in clusters   # 홀로 남아 MIN_CLUSTER_CLAIMS에서 걸러진다
 
         centroid = cluster_centroid(conn, [ids["n1"], ids["n2"]])
         assert centroid.startswith("[")
         counts = signal_counts(conn, centroid, w, threshold=0.9)
-        assert counts["recent_claims"] >= 2 and counts["recent_docs"] >= 1
+        # 반경 안에는 가까운 2건만 — 영벡터("far")가 NaN으로 딸려 들어오면 3이 된다.
+        assert counts == {"recent_claims": 2, "recent_docs": 1,
+                          "prior_claims": 0, "prior_docs": 0}
 
         recent_total, prior_total = window_totals(conn, w)
         window_claims = fetch_window_claims(conn, w)
-        assert recent_total == len(window_claims) and prior_total >= 0
+        assert recent_total == len(window_claims) == 3 and prior_total == 0
 
         # Phase 0 유산처럼 claim ID가 현재 DB에 없으면 축을 추정하지 않고 '미상'으로 남긴다
         axis, note = article_axis(conn, {"claim_ids": ["없는ID"], "slug": "x"}, {})
