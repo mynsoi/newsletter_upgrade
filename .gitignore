@@ -9,3 +9,9 @@ internal/**/*.md
 !internal/내부자료_등록목록.md
 *.egg-info/
 inbox/
+
+# 다른 에이전트 도구가 CLAUDE.md·.claude/commands를 변환해 만든 파생물 (2026-09-17)
+# 정본은 CLAUDE.md와 .claude/commands 하나뿐이다 — 사본을 저장소에 두면 두 벌이 갈라진다.
+# 다른 도구로도 파이프라인을 돌리기로 하면 파생 문서(make sources-doc 방식)로 정식화한다.
+.agents/
+AGENTS.md
