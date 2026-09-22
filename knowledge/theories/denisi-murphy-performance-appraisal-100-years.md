@@ -36,5 +36,5 @@ core_refs:
 - Woehr, D.J. & Huffcutt, A.I. (1994). Rater training for performance appraisal: A quantitative review. Journal of Occupational and Organizational Psychology, 67(3), 189-205.
 
 ## 검수 메모 (색인 대상 아님)
-- 2026-09-22 AI 검수 반영: 척도·훈련 효과와 동기·능력 비교의 단정을 완화하고, 개인 수행·기업 성과를 구분하며 연구 공백의 시점을 명시했다. 근거: [원 논문](https://doi.org/10.1037/apl0000085), pp. 423-425, 427-430. 사람 검수 완료를 의미하지 않으므로 status는 draft를 유지한다.
+- 2026-09-22 AI 검수 반영: 척도·훈련 효과와 동기·능력 비교의 단정을 완화하고, 개인 수행·기업 성과를 구분하며 연구 공백의 시점을 명시했다. 근거: [원 논문](https://doi.org/10.1037/apl0000085), pp. 423-425, 427-430. 이후 사람 검수(김산결, 2026-09-22) 완료 — status reviewed.
 - Scullen et al.(2000)의 수치는 확인했으나 DB의 manual 자료 자체는 확인하지 않았다. 따라서 그 자료의 직접 출처까지 확정한 것은 아니며, 해당 claim을 보강할 때는 두 표본의 수치와 분산 분해라는 의미를 함께 밝혀야 한다.

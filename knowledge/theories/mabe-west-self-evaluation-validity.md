@@ -36,5 +36,5 @@ core_refs:
 - Gignac, G.E. & Zajenkowski, M. (2020). The Dunning-Kruger effect is (mostly) a statistical artefact. Intelligence, 80, 101449. — 별도 후속 논쟁의 참고 문헌.
 
 ## 검수 메모 (색인 대상 아님)
-- 2026-09-22 AI 검수 반영: 55개 연구·평균 r=.29·SD=.25는 [저자 소속 대학의 서지·초록](https://asu.elsevierpure.com/en/publications/validity-of-self-evaluation-of-ability-a-review-and-meta-analysis/)에서, 평정 간 보정 상관은 [Harris & Schaubroeck(1988) 출판사 초록](https://onlinelibrary.wiley.com/doi/10.1111/j.1744-6570.1988.tb00631.x)에서 확인했다. 사람 검수 완료를 의미하지 않으므로 status는 draft를 유지한다.
+- 2026-09-22 AI 검수 반영: 55개 연구·평균 r=.29·SD=.25는 [저자 소속 대학의 서지·초록](https://asu.elsevierpure.com/en/publications/validity-of-self-evaluation-of-ability-a-review-and-meta-analysis/)에서, 평정 간 보정 상관은 [Harris & Schaubroeck(1988) 출판사 초록](https://onlinelibrary.wiley.com/doi/10.1111/j.1744-6570.1988.tb00631.x)에서 확인했다. 이후 사람 검수(김산결, 2026-09-22) 완료 — status reviewed.
 - 보상·승진에 쓰일 때 차이가 커진다는 문장은 Harris & Schaubroeck(1988)의 직접 결론으로 귀속하지 않았다. Heidemeier & Moser의 공개 저자 원고에서는 인사결정·개발 목적 모두 연구 목적보다 큰 자기–상사 평균차가 보고되지만, 공개 원고는 최종 출판본과 다를 수 있어 평가 목적의 세부 결과는 추가 대조가 필요하다.
