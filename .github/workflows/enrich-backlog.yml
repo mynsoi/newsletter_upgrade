@@ -1,9 +1,15 @@
 # 백로그 claim 추출 — 수동 실행 전용(workflow_dispatch)
 #
-# 일일 정상 운영분(enrich_daily_limit, 기본 500건)은 collect.yml(daily-collect)의
+# 일일 정상 운영분(config/settings.yaml enrich_daily_limit)은 collect.yml(daily-collect)의
 # "claim 추출(make enrich)" 단계가 **최신 수집분부터** 매일 처리한다. 이 워크플로는 그
 # 바깥의 대량 백로그(추출 대기 누적분)를 티어별 라운드로빈 + 비용 상한으로 처리한다.
 # 즉 분업은 방향으로 갈린다 — 일일은 큐의 최신 끝, 백로그는 티어를 고르게 훑는다.
+#
+# ⚠ Actions 사용 시간 (2026-09-22): 무료 제공량(월 2,000분)을 9월에 다 썼고, 이 워크플로의
+# 연쇄 실행이 그중 504분을 차지했다. 지출 한도는 올리지 않기로 했으므로 **대량 처리는 PC에서
+# 같은 명령으로 돌린다** — `python src/enrich/extract_claims.py --backlog --cost-cap N ...`
+# (인자는 아래 inputs와 같다. 소스별로 --exclude-sources를 나눠 두 프로세스로 돌리면 시간이
+# 반으로 준다 — 문서 잠금이 있어 겹쳐도 안전하다). 이 워크플로는 PC를 쓸 수 없을 때만 쓴다.
 #
 # 재개 가능: 문서 1건씩 커밋되므로 타임아웃·중단 후 재실행해도 처리된 분은 남고
 # 나머지(status='new')만 이어서 처리된다.
