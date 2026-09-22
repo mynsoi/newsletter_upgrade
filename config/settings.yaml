@@ -32,3 +32,11 @@ enrich_daily_limit: 400
 # 이 상한은 사실상 "그날 새로 추출된 claim" 규모다. --backfill(잔여 전량)은 이 값을 쓰지 않는다.
 # 2026-09-09 최초 도입.
 embed_daily_limit: 2000
+
+# arXiv claim 임베딩 보존 기간(개월). 발행 후 이 기간이 지난 arXiv claim은 벡터를 비우고
+# 다시 채우지 않는다 — src/search/embed.py가 매 실행 앞에서 경계 넘은 분을 비운다.
+# 2026-09-22 도입: DB 387MB(무료 500MB·400MB 트리거 직전)에서 arXiv claim이 70%(23,634건)였다.
+# /topics는 발행일 최근 42일 창만 써서 영향 없음. 증거 수집에서는 키워드 검색으로만 걸린다.
+# 사람이 골라 넣은 문서(fetched_by='browse')는 기간과 무관하게 유지. 0이면 비활성(전량 유지).
+# 값을 늘리면 경계 안으로 돌아온 claim은 다음 실행부터 다시 임베딩된다(일 상한 embed_daily_limit, 소액).
+embed_arxiv_retention_months: 6

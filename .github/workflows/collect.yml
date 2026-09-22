@@ -10,7 +10,9 @@
 #   누적 백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
 #   상한이 그날 유입보다 크면 남는 칸이 백로그 최신 쪽부터 채워져 용량이 놀지 않는다.
 # claim 임베딩(A6, pgvector 의미 검색): enrich 뒤 그날 신규 claim만 변환한다
-#   (embedding IS NULL 대상 — src/search/embed.py). OPENAI_API_KEY_EMBED 우선,
+#   (embedding IS NULL 대상 — src/search/embed.py). 변환 전에 발행 6개월이 지난 arXiv claim의
+#   벡터를 비운다(settings.yaml embed_arxiv_retention_months — DB 용량 절감, 2026-09-22).
+#   비운 claim은 대상에서 빠지므로 다시 채워지지 않는다. OPENAI_API_KEY_EMBED 우선,
 #   없으면 OPENAI_API_KEY, 둘 다 없으면 "건너뜀(키 대기)"으로 성공 처리한다.
 # 비밀값: DATABASE_URL, ANTHROPIC_API_KEY, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는
 #   GitHub Secrets 로만 주입한다.
