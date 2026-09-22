@@ -247,4 +247,25 @@ HBR Korea 주제별 목록에 노출된 글 중 슬롯에 정확히 맞는데 �
 | hbr-korea | 1483 | `1A0C7CA0B963A3FE7E45B3FEA32` | 4,013 |
 
 - 1,500~2,100자대 DBR 6건(12277·12260·12262·11877·11896·11912)은 DBR 연구 브리프 코너 분량이라 정상으로 본다 — 잘림이 아니다.
-- **게이트·추출은 미실행** — 이 세션에 `ANTHROPIC_API_KEY`가 없다. 키 등록 후 이 32건만 `--doc-id`로 돌린다(Actions 워크플로에는 문서 지정 입력이 없어 백로그 전체를 건드리게 된다).
+- 게이트·추출: 아래 「게이트·추출 결과」 절 (2026-09-22 키 등록 후 실행).
+
+## 게이트·추출 결과 (2026-09-22)
+
+- 실행: `src/enrich/extract_claims.py --doc-id` 32건 개별 실행 (model=claude-haiku-4-5-20251001). Actions는 월 무료 사용량 소진으로 예약 실행이 막혀 있고 문서 지정 입력도 없어 로컬에서 돌렸다.
+- **게이트 통과 31 · 차단 1 · 처리 실패 0** — 차단: DBR 12242 「주식 쏠림·성과급 갈등…」(off_topic 판정, `content/rejected/` 대상 아님 — 게이트 차단은 documents.status=rejected + tags.gate로 보관)
+- **claim 231건** — dbr 179건(23건) · hbr-korea 52건(8건). stance: cautious 72 · neutral 84 · optimistic 48 · conditional 27
+- 비용 **$0.58** (추출) + 임베딩 $0.001 (`src/search/embed.py`, 신규 claim 포함 905건)
+
+### 슬롯별 재료 (수집 시 슬롯 표시 기준)
+
+| 슬롯 | 문서 | claim | 출처 | stance | 수치 claim | 판정 |
+|---|---|---|---|---|---|---|
+| 10/9 (→ 10/8 창간 흡수) | 5 | 38 | dbr 30 · hbr-korea 8 | cautious 13 · optimistic 12 · neutral 7 · conditional 6 | 11 | 실험 근거 14건(AI를 상사·동료·도구로 인식할 때의 성과·책임 귀속) — 창간호 묶음 6 논지 보강 |
+| 10/16 | 13 | 83 | dbr 45 · hbr-korea 38 | cautious 26 · optimistic 17 · neutral 26 · conditional 14 | 16 | **직장 맥락 재료 확보** — 이전엔 교육 맥락 arXiv뿐. 남은 관문: 피드백 개입 이론 카드 검수 |
+| 10/23 | 13 (+차단 1) | 110 | dbr 104 · hbr-korea 6 | cautious 33 · optimistic 19 · neutral 51 · conditional 7 | 49 | 공정성·보상·초고성과자 재료 두꺼움. 출처가 DBR에 쏠림(104/110) |
+
+### 주의 — 새 재료가 키워드 검색에 거의 안 잡힌다
+
+같은 절차로 키워드 5건을 다시 돌렸더니 신규 claim 231건 중 키워드 풀에 들어온 것은 K2 2건 · K3 1건 · K4 2건뿐이었다. 질의당 상위 60건을 arXiv(T1) claim이 채우기 때문이다. 또 DBR·HBR Korea는 **T3**라 "T1·T2 2건+" 기준에는 보태지 못한다 — 출처 수·상반 stance·직장 맥락을 채우는 재료다.
+
+→ `/draft` ② 증거 수집에서 이 슬롯들을 다룰 때는 기본 hybrid_search(상위 20건)만 믿지 말고 **`--tiers T3` 검색을 한 번 더** 돌려야 이번 백필분이 증거로 올라온다. 잔여 과제 「항목 2(출처 다양성) 개선」과 같은 문제다.
