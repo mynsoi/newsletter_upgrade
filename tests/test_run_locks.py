@@ -741,6 +741,31 @@ def test_normal_run_default_limit_comes_from_settings(test_db, monkeypatch):
     assert statuses.count("enriched") == 2 and statuses.count("new") == 1
 
 
+def test_truncated_reply_fails_loudly_and_keeps_doc_new(test_db, monkeypatch, capsys):
+    """응답이 출력 상한에서 잘리면(stop_reason='max_tokens') 앞부분만 저장하지 않고 실패한다.
+    2026-09-28: max_tokens=2000이던 시절 24k 청크에서 JSON이 닫히지 않아 "JSON 배열을 찾을
+    수 없음"으로 반복 실패했다 — 원인이 드러나는 메시지로 바꾼 회귀 테스트."""
+    conn, db = test_db
+    import enrich.extract_claims as ec
+    _add_new_doc(conn, "D1")
+    # 잘린 응답: 배열이 닫히지 않았고 stop_reason이 max_tokens
+    cut = CLAIM_JSON.rstrip().rstrip("]").rstrip()
+    ec_mod = _run_enrich(monkeypatch, ec.ModelReply(cut, 10, 20, True))
+    assert ec_mod.main() == 1
+    out = capsys.readouterr().out
+    assert "출력 상한" in out and "잘렸" in out
+    assert "JSON 배열을 찾을 수 없음" not in out           # 원인을 뭉개지 않는다
+    assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+    assert conn.execute("SELECT count(*) c FROM claims").fetchone()["c"] == 0  # 반쪽 저장 없음
+
+
+def test_output_token_cap_is_generous_enough_for_claim_cap():
+    """claim 상한(20건)을 담을 수 있는 출력 상한인지 — 2000으로 되돌아가면 잡는다."""
+    import enrich.extract_claims as ec
+    assert ec.MAX_OUTPUT_TOKENS >= 4000
+    assert ec.ModelReply("x").truncated is False   # 기본값은 '잘리지 않음'
+
+
 def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
     conn, db = test_db
     _add_new_doc(conn, "D1")

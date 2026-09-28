@@ -64,6 +64,11 @@ LONG_DOC_CHARS = MAX_BODY_CHARS
 MAX_CHUNKS = 8            # 문서당 청크 상한 (비용 방어 — 24k×8 = 최대 19.2만 자 처리)
 MIN_CHUNK_CHARS = 200     # 이보다 짧은 조각은 버린다 (claim이 나올 수 없는데 호출만 소모)
 MAX_CLAIMS_PER_DOC = 20   # 문서당 claim 상한 (장문 1건이 근거 풀을 잠식하지 않도록)
+# 응답 토큰 상한. 2026-09-28 2,000 → 8,000: claim이 많이 나오는 24k 청크에서 응답이 상한에
+# 걸려 JSON 배열이 닫히지 않고 "JSON 배열을 찾을 수 없음"으로 반복 실패했다(aihr-blog
+# 「11 HR Trends for 2027」 3회 연속). 실제 출력 토큰만 과금되므로 상한을 올려도 비용은
+# 늘지 않는다. claim 20건 + 근거 문장이 넉넉히 들어가는 크기다.
+MAX_OUTPUT_TOKENS = 8000
 HEADING_RE = re.compile(r"^(#{1,4}\s+\S|제?\s?\d+\s*(장|절|부)\b|CHAPTER\b|Chapter\b)")
 
 BACKLOG_BATCH_SIZE = 500  # --backlog 시 한 번에 DB에서 가져오는 문서 수 (본문 전체 메모리 적재 방지)
@@ -107,6 +112,7 @@ class ModelReply:
     text: str
     input_tokens: int = 0
     output_tokens: int = 0
+    truncated: bool = False   # stop_reason='max_tokens' — 응답이 상한에서 잘렸다
 
 
 @dataclass
@@ -385,13 +391,14 @@ def call_model(prompt: str, model: str) -> ModelReply:
     client = anthropic.Anthropic()
     msg = client.messages.create(
         model=model,
-        max_tokens=2000,
+        max_tokens=MAX_OUTPUT_TOKENS,
         messages=[{"role": "user", "content": prompt}],
     )
     text = "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
     usage = getattr(msg, "usage", None)
     return ModelReply(text, getattr(usage, "input_tokens", 0) or 0,
-                      getattr(usage, "output_tokens", 0) or 0)
+                      getattr(usage, "output_tokens", 0) or 0,
+                      getattr(msg, "stop_reason", None) == "max_tokens")
 
 
 @dataclass
@@ -433,6 +440,12 @@ def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
         try:
             reply = call_model(build_prompt(d["title"], d["tier"], text), model)
             cost.record(model, reply)
+            if reply.truncated:
+                # 잘린 응답은 파싱하지 않는다 — 앞부분만 저장하면 근거가 반쪽이 된다.
+                # 파싱 오류로 뭉개지 않고 원인을 그대로 알린다(MAX_OUTPUT_TOKENS 참고).
+                raise ValueError(
+                    f"응답이 출력 상한({MAX_OUTPUT_TOKENS} 토큰)에서 잘렸다 — "
+                    f"청크를 더 쪼개거나 MAX_OUTPUT_TOKENS를 올려야 한다")
             for c in parse_claims(reply.text):
                 key = c["claim_text"].strip()
                 if key in seen_texts:      # 청크 경계에서 같은 주장이 겹칠 수 있다
