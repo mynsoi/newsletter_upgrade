@@ -5,6 +5,7 @@ year: 1982
 field: 평가·공정성
 status: reviewed                    # draft(LLM 초안, 색인 안 됨) | reviewed(사람 검수 완료 — 이때만 색인)
 reviewed_by: 김산결                     # 검수자 이름 (reviewed 전환 시 필수)
+reviewed_at: 2026-09-22           # 검수 완료일
 core_refs:
   - "Mabe, P.A. III & West, S.G. (1982). Validity of self-evaluation of ability: A review and meta-analysis. Journal of Applied Psychology, 67(3), 280-296."
   - "Harris, M.M. & Schaubroeck, J. (1988). A meta-analysis of self-supervisor, self-peer, and peer-supervisor ratings. Personnel Psychology, 41(1), 43-62."

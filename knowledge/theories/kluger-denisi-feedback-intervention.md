@@ -5,6 +5,7 @@ year: 1996
 field: 평가·공정성
 status: reviewed                    # draft(LLM 초안, 색인 안 됨) | reviewed(사람 검수 완료 — 이때만 색인)
 reviewed_by: 김산결                    # 검수자 이름 (reviewed 전환 시 필수)
+reviewed_at: 2026-09-22           # 검수 완료일
 core_refs:
   - "Kluger, A.N. & DeNisi, A. (1996). The effects of feedback interventions on performance: A historical review, a meta-analysis, and a preliminary feedback intervention theory. Psychological Bulletin, 119(2), 254-284."
   - "Kluger, A.N. & DeNisi, A. (1998). Feedback interventions: Toward the understanding of a double-edged sword. Current Directions in Psychological Science, 7(3), 67-72."

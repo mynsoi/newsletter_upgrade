@@ -5,6 +5,7 @@ year: 2017
 field: 평가·공정성
 status: reviewed                    # draft(LLM 초안, 색인 안 됨) | reviewed(사람 검수 완료 — 이때만 색인)
 reviewed_by: 김산결                    # 검수자 이름 (reviewed 전환 시 필수)
+reviewed_at: 2026-09-22           # 검수 완료일
 core_refs:
   - "DeNisi, A.S. & Murphy, K.R. (2017). Performance appraisal and performance management: 100 years of progress? Journal of Applied Psychology, 102(3), 421-433."
   - "Murphy, K.R. & Cleveland, J.N. (1995). Understanding Performance Appraisal: Social, Organizational, and Goal-Based Perspectives. Sage."

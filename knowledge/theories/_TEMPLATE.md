@@ -5,6 +5,7 @@ year: 1976
 field: 조직행동론/직무설계        # 동기·직무설계 | 팀·리더십 | 조직설계·변화 | 학습·HRD | 평가·공정성 | 문화
 status: draft                    # draft(LLM 초안, 색인 안 됨) | reviewed(사람 검수 완료 — 이때만 색인)
 reviewed_by:                     # 검수자 이름 (reviewed 전환 시 필수)
+reviewed_at:                     # 검수 완료일 YYYY-MM-DD (reviewed 전환 시 함께 기재)
 core_refs:
   - "Hackman, J.R. & Oldham, G.R. (1976). Motivation through the design of work. Organizational Behavior and Human Performance, 16(2)."
 ---
