@@ -162,7 +162,7 @@ Claude 자문 + 리더 의견을 거쳐 사용자가 확정했다.
   claim 1,322건 · 게이트 차단 2,534건(89%) · 실패 0 · 비용 $3.44. 이제 추출 대기는 0건이고,
   남은 `new` 273건은 전부 `summary_only`(본문 800자 미만 — 격상 전까지 추출 대상 아님).
   **`arxiv-cs-si`는 차단율 96%**(1,430건 중 claim이 나온 문서 60건, claim 233건)로 비용 대비
-  밀도가 가장 낮다 — 월간 소스 리뷰에서 카테고리 유지 여부를 볼 근거.
+  밀도가 가장 낮다 — 2026-09-30 월간 소스 리뷰에서 퇴출(수집 중단, 기존 문서·claim은 유지).
 - **DB 용량 — ✅ 2026-09-22 절감 적용: 387MB → 263MB** (무료 500MB, 여유 237MB)
   - **arXiv 임베딩 보존 기간 6개월** (`settings.yaml embed_arxiv_retention_months`): 발행 6개월이
     지난 arXiv claim은 벡터를 비우고 다시 채우지 않는다. `embed.py`가 일일 실행마다 경계를 넘은
@@ -183,7 +183,12 @@ Claude 자문 + 리더 의견을 거쳐 사용자가 확정했다.
 - **테스트**: PR마다 `.github/workflows/test.yml`이 SQLite 로컬 모드로 pytest를 돌린다.
   Postgres 전용 3건은 skip되므로 pgvector 관련 변경은 로컬에서 `make test`로 따로 확인한다.
 - **월간 브라우저 라운드**: 10월 초 예정 (`/browse-round`)
-- **월간 소스 리뷰**: 9월 말 — 시험 기간(trial_until 2026-09-30) 만료 소스 정식/퇴출 판정
+- **월간 소스 리뷰 — ✅ 2026-09 완료 (9/30)**: 시험 소스 37곳 → 정식 23 · 연장 7 · 퇴출·휴면 7, active 48 → 41
+  ([`content/reports/source-review-2026-09.md`](../content/reports/source-review-2026-09.md)). 퇴출: arxiv-cs-si(차단 96%) ·
+  mk-economy · chosun-economy(요약 100%) · samil-pwc / 휴면: samjong-kpmg · lg-business-research · hr-insight.
+  인용 원장(`article_sources`)이 비어 있어 파일의 claim ID 역추적을 대리 지표로 썼다 — 원장 기록 복구 전까지 같은 방식.
+  **다음 판정: 연장 7곳(stanford-hai · brookings · oecd · onemodel · carrot · flex · donga) 2026-12-31.**
+  10·11월 리뷰는 정식 소스의 무유입·수집 실패 점검 위주.
 - **머지 규칙** (동료 병행 개발): 머지 전 상호 통지 + `make test` 통과 필수
 
 ---

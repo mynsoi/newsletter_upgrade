@@ -10,6 +10,7 @@
 #   2026-09-02 뉴스레터 경로 폐기 — 4건 제외(SSRN·a16z·인살롱·슈퍼브AI), html 7·browse 8 재배정, active 47
 #   2026-09-04 C1(구독 계약) 폐기 — 현 계정(HBR Korea·DBR)+건별로 운영, LinkedIn 제외, HR Insight 보류. active 47
 #   2026-09-04 유료 소스 약관 검토 생략 결정 — 건별 소량·내부 한정 원칙으로 운영
+#   2026-09-30 월간 소스 리뷰(시험 소스 37곳) — 정식 23 · 연장 7(~2026-12-31) · 퇴출·휴면 7. content/reports/source-review-2026-09.md
 #
 # 주의: make validate 는 이 파일을 yaml.dump 로 재기록하므로 이 주석 블록이 사라질 수 있다.
 #       사라졌으면 git 이력(α4 반영 커밋)에서 복원할 것.
@@ -57,7 +58,6 @@ sources:
   constraints: 주제 무관 경제학 논문 다수 → 게이트 차단율 높은 것이 정상. 시험 운영 중
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://rss.arxiv.org/rss/econ.GN
   endpoint: https://export.arxiv.org/api/query
   test_query: https://export.arxiv.org/api/query?search_query=cat:econ.GN&sortBy=submittedDate&sortOrder=descending&max_results=3
@@ -73,7 +73,7 @@ sources:
   topics: 조직 설계 — 협업 구조·네트워크 관점
   frequency: 일
   constraints: 빈도 낮고 교집합 좁음 → 시험 기간 후 게이트 차단율로 재판정
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   feed_url: https://rss.arxiv.org/rss/cs.SI
@@ -81,7 +81,9 @@ sources:
   test_query: https://export.arxiv.org/api/query?search_query=cat:cs.SI&sortBy=submittedDate&sortOrder=descending&max_results=3
   lang: en
   verified: true
-  note: 선택 후보 — 협업 네트워크 연구, 회의에서 결정
+  note: '선택 후보 — 협업 네트워크 연구, 회의에서 결정 / 2026-09-30 월간 소스 리뷰 — 퇴출: 사용 흔적 없음 + 게이트 차단 96%
+    (claim 388건)'
+  excluded_at: '2026-09-30'
 - id: nber-working-papers
   name: NBER Working Papers
   tier: T1
@@ -93,7 +95,6 @@ sources:
   constraints: PC에서는 403(봇 차단), Actions에서만 수집. 키워드 필터 전제(주제 무관 논문 다수)
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://back.nber.org/rss/new.xml
   homepage: https://www.nber.org
   lang: en
@@ -128,7 +129,6 @@ sources:
   constraints: OSF API로 수집(초록). 필드 전반 논문 중 조직 관련만 게이트 통과
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   endpoint: https://api.osf.io/v2/preprints/
   test_query: https://api.osf.io/v2/preprints/?filter[provider]=psyarxiv&page[size]=3
   homepage: https://osf.io/preprints/psyarxiv
@@ -147,7 +147,7 @@ sources:
   constraints: RSS 미제공 → 뉴스레터. AI Index 발행 시 /ingest-url로 별도 등록 권장
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   list_url: https://hai.stanford.edu/news
   link_pattern: href="(/news/[a-z0-9\-]+)"
   homepage: https://hai.stanford.edu
@@ -168,7 +168,7 @@ sources:
   constraints: RSS 폐지 확인 → 뉴스레터 경로
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   list_url: https://www.brookings.edu/topics/workforce-development/
   link_pattern: href="(https://www\.brookings\.edu/articles/[^"]+)"
   homepage: https://www.brookings.edu
@@ -189,7 +189,7 @@ sources:
   constraints: RSS 미제공(403) → 뉴스레터. 대형 리포트는 PDF 수기 등록
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   list_url:
   - https://www.oecd.org/en/topics/employment.html
   - https://www.oecd.org/en/topics/artificial-intelligence.html
@@ -329,7 +329,6 @@ sources:
   constraints: 클라우드 IP 차단 이력 → 브라우저형 요청 헤더로 구제(설정 기록됨). 편입 권고 1순위였던 고가성비 소스
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://knowledge.wharton.upenn.edu/feed/
   lang: en
   verified: true
@@ -353,7 +352,6 @@ sources:
   constraints: RSS 항목 400건+ 제공(아카이브 풍부)
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.bain.com/rss-feed/all-insights-mailings/
   homepage: https://www.bain.com/insights
   lang: en
@@ -372,7 +370,6 @@ sources:
   constraints: RSS 미제공 → 뉴스레터. 사이트 경로 변동 이력
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   homepage: https://www.pwc.com/gx/en/research-insights.html
   lang: en
   note: '경로 변동 이력 주의. 2026-08-27 공식 주소 확인(gx/en/research-insights.html), RSS 미제공 /
@@ -397,7 +394,7 @@ sources:
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 관점
   frequency: 월
   constraints: 수기 등록(PDF는 /ingest-file). 월 1회 리포트 페이지 확인 루틴 권장
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   list_url: https://www.pwc.com/kr/ko/insights/samil-insight.html
@@ -408,11 +405,12 @@ sources:
   lang: ko
   allow_feed_discovery: false
   inflow_alert_days: 35
-  note: NL/수기 리포트 — PDF는 /ingest-file. 2026-08-27 공식 주소 확인(Samil Insight, pwc.com/kr
-    산하 — samil.pwc.com 아님) / 2026-09-01 probe A-PDF 잠정(정적 목록에 리포트 링크 노출, 표본 부족) →
-    html 전환, 1개월 관찰 / 2026-09-02 점검 — 수집물이 리포트 소개 페이지로 확인 → follow_pdf로 PDF 본문 추적,
-    issue-brief 허브 제외
+  note: 'NL/수기 리포트 — PDF는 /ingest-file. 2026-08-27 공식 주소 확인(Samil Insight, pwc.com/kr
+    산하 — samil.pwc.com 아님) / 2026-09-01 probe A-PDF 잠정(정적 목록에 리포트 링크 노출, 표본 부족) → html
+    전환, 1개월 관찰 / 2026-09-02 점검 — 수집물이 리포트 소개 페이지로 확인 → follow_pdf로 PDF 본문 추적, issue-brief
+    허브 제외 / 2026-09-30 월간 소스 리뷰 — 퇴출: 사용 흔적 없음 + 게이트 차단 80% (claim 5건)'
   follow_pdf: true
+  excluded_at: '2026-09-30'
 - id: samjong-kpmg
   name: 삼정KPMG 경제연구원
   tier: T2
@@ -423,16 +421,18 @@ sources:
   topics: AI 거버넌스 · 조직 설계 — 국내 산업 이슈
   frequency: 월
   constraints: 수기 등록(PDF). 월 1회 확인 루틴 권장
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://kpmg.com/kr/ko/insights/eri.html
   lang: ko
   note: NL/수기 — 이슈리포트 주력. 2026-08-27 공식 주소 확인(경제연구원 ERI Insights) / 2026-09-01 probe
-    B — 목록이 동적 필터(정적 HTML은 오류 문구), 과거 리포트는 외부 아카이브(launch.kpmg.com) → 월간 브라우저 라운드
-    / 2026-09-01 파일럿 — PDF 쌍 경로 동작 확인. 단 리포트 PDF가 암호화+이미지형(45p 중 텍스트 29자)이라
-    pypdf 추출 불가, 소개 페이지도 요약뿐(900자) / 2026-09-01 운영 — 이미지형 PDF(OCR 필요)·주제 적합
-    0/8 — 라운드 제외, 분기 1회 사람 확인, OCR 도입 시 재검토
+    B — 목록이 동적 필터(정적 HTML은 오류 문구), 과거 리포트는 외부 아카이브(launch.kpmg.com) → 월간 브라우저 라운드 /
+    2026-09-01 파일럿 — PDF 쌍 경로 동작 확인. 단 리포트 PDF가 암호화+이미지형(45p 중 텍스트 29자)이라 pypdf 추출 불가,
+    소개 페이지도 요약뿐(900자) / 2026-09-01 운영 — 이미지형 PDF(OCR 필요)·주제 적합 0/8 — 라운드 제외, 분기 1회 사람
+    확인, OCR 도입 시 재검토 / 2026-09-30 월간 소스 리뷰 — 휴면(시험 기간 유입 0건). OCR 구현 시 재개(phase2 수요
+    트리거)
+  excluded_at: '2026-09-30'
 - id: josh-bersin
   name: Josh Bersin
   tier: T2
@@ -444,11 +444,10 @@ sources:
   constraints: RSS 아카이브 800건+. 의견(opinion) 유형 claim 비중 높음
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://joshbersin.com/feed/
   lang: en
   verified: true
-  inflow_alert_days: 14
+  inflow_alert_days: 21
   note: AI×HR 시장 지도. 2026-08-27 피드 실측 통과
 - id: lg-business-research
   name: LG경영연구원
@@ -460,19 +459,20 @@ sources:
   topics: 일하는 방식 · 조직 문화 — 한국 맥락의 경영 환경 분석
   frequency: 월 수회
   constraints: RSS 미제공 → 뉴스레터. POSRI 대신 선별(α4)
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://www.lgbr.co.kr
   lang: ko
   note: '국내 T2 — POSRI와 1곳 선별. 2026-08-27 주소 확인(lgbr.co.kr), RSS 미제공 / [자동검증 2026-08-27]
-    API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400)
-    / 2026-09-01 probe B — 목록(business·economy/list.do)은 정적이나 본문 링크가 javascript:fnView()
-    / 2026-09-02 진단 — 보류(발행 정체). 로그인 게이트 아님(사이트에 로그인·회원가입 기능 자체 없음).
-    목록 폼의 sort를 RANK/DATE 모두 실측했으나 결과 동일, 최신이 2026-02-10(id 19747)에서 멈춤.
-    경제 목록 2025-12-22, 공지사항 2022-04-22로 사이트 전반이 정체. 페이지 자체가 "연구 자료 중 일부를
-    공유"한다고 명시해 공개분은 큐레이션된 소수(총 3341건, 1페이지 12건이 2025-06~2026-02 분포).
-    frequency "월 수회"는 실측과 불일치 — 라운드 제외, 분기 1회 사람 확인 후 신규 발행 시 건별 등재'
+    API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://www.lgbr.co.kr/index.xml → HTTP 400) /
+    2026-09-01 probe B — 목록(business·economy/list.do)은 정적이나 본문 링크가 javascript:fnView()
+    / 2026-09-02 진단 — 보류(발행 정체). 로그인 게이트 아님(사이트에 로그인·회원가입 기능 자체 없음). 목록 폼의 sort를 RANK/DATE
+    모두 실측했으나 결과 동일, 최신이 2026-02-10(id 19747)에서 멈춤. 경제 목록 2025-12-22, 공지사항 2022-04-22로
+    사이트 전반이 정체. 페이지 자체가 "연구 자료 중 일부를 공유"한다고 명시해 공개분은 큐레이션된 소수(총 3341건, 1페이지 12건이 2025-06~2026-02
+    분포). frequency "월 수회"는 실측과 불일치 — 라운드 제외, 분기 1회 사람 확인 후 신규 발행 시 건별 등재 / 2026-09-30
+    월간 소스 리뷰 — 휴면(시험 기간 유입 0건). 사이트 발행 재개 시 재개'
+  excluded_at: '2026-09-30'
 - id: posri
   name: POSRI(포스코경영연구원)
   tier: T2
@@ -564,7 +564,6 @@ sources:
   constraints: 구독 계약 후 활성(C1). 계약 시 내부 저장 허용 범위 확인
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   homepage: https://dbr.donga.com
   lang: ko
   browse_container: .article-free-zone
@@ -598,12 +597,14 @@ sources:
   topics: 평가·보상 · 인재 육성 · 채용 — 국내 HR 제도·실무
   frequency: 월
   constraints: 구독 계약 후 활성(C1)
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   homepage: https://www.hrinsight.co.kr
   lang: ko
-  note: 보류 — 구독 검토 중(현재 수집 경로 없음). 운영 중 국내 HR 실무 재료 부족 신호가 확인되면 구독 결정
+  note: 보류 — 구독 검토 중(현재 수집 경로 없음). 운영 중 국내 HR 실무 재료 부족 신호가 확인되면 구독 결정 / 2026-09-30 월간
+    소스 리뷰 — 휴면(시험 기간 유입 0건). 증거 수집에서 HR 전문 매체 부족 신호 시 구독 검토와 함께 재개(phase2 수요 트리거)
+  excluded_at: '2026-09-30'
 - id: aihr-blog
   name: AIHR Blog
   tier: T3
@@ -615,7 +616,6 @@ sources:
   constraints: 교육 상품 유도 문구 혼재. theory/opinion 유형 claim 비중 높음
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.aihr.com/blog/feed/
   lang: en
   verified: true
@@ -632,7 +632,6 @@ sources:
   constraints: 기술 기사 대부분 주제 무관 → 관련성 게이트 의존 큼. 시험 기간 후 차단율로 재판정
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.technologyreview.com/feed/
   lang: en
   verified: true
@@ -648,7 +647,6 @@ sources:
   constraints: 뉴스레터 기반 매체지만 RSS 제공 확인
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://charterworks.com/feed/
   lang: en
   verified: true
@@ -665,7 +663,6 @@ sources:
   constraints: 섹션 피드 한정(전체 피드 탐지 금지). 가벼운 기사 비중 있음
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.fastcompany.com/work-life/rss
   lang: en
   verified: true
@@ -682,7 +679,6 @@ sources:
   constraints: RSS 아카이브 280건+. 벤치마크 역추적(원출처 발굴)에도 유용
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://hrbulletin.net/feed/
   lang: ko
   verified: true
@@ -735,11 +731,11 @@ sources:
   constraints: 제품 홍보 문구 혼재 → 홍보성 claim 필터 대상
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   feed_url: https://www.onemodel.co/blog/rss.xml
   lang: en
   verified: true
-  inflow_alert_days: 14
+  inflow_alert_days: 28
   note: 편입 권고 — 홍보 문구 필터 대상. 2026-08-27 피드 실측 통과
 - id: innofit-blog
   name: 이노핏파트너스 블로그
@@ -752,7 +748,6 @@ sources:
   constraints: 교육 상품 홍보성 감안. 국내 T4 적합도 최고
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://blog.innofitpartners.com/rss
   lang: ko
   verified: true
@@ -769,7 +764,7 @@ sources:
   constraints: 자사 사례·상품 홍보성 감안. 어학 교육 콘텐츠는 게이트 차단 예상
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   feed_url: https://www.carrotglobalblog.com/feed
   lang: ko
   verified: true
@@ -786,7 +781,6 @@ sources:
   constraints: 갱신 낮으나 데이터 리포트 발행 시 가치 큼
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.worklytics.co/blog/rss.xml
   lang: en
   verified: true
@@ -852,7 +846,6 @@ sources:
   constraints: 수기 등록. 발행 시 /ingest-url
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   list_url:
   - https://www.anthropic.com/research
   - https://openai.com/news/
@@ -875,7 +868,6 @@ sources:
   constraints: 수기 백필 전용. 이론 카드 원천으로도 활용
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   list_url:
   - https://rework.withgoogle.com/intl/en/subjects/hiring
   - https://rework.withgoogle.com/intl/en/subjects/learning-development
@@ -912,7 +904,7 @@ sources:
   constraints: HTML 피드 선언에서 RSS 발견. 레몬베이스 대신 선별(α4)
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   feed_url: https://flex.team/blog/rss.xml
   lang: ko
   verified: true
@@ -929,7 +921,6 @@ sources:
   constraints: HR 전문이라 게이트 부담 최소. 뉴스레터 병행 가능
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.hrdive.com/feeds/news/
   lang: en
   verified: true
@@ -945,7 +936,6 @@ sources:
   constraints: AI 산업 뉴스 중심 → 일·조직 교집합만 게이트 통과
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.aitimes.com/rss/allArticle.xml
   lang: ko
   verified: true
@@ -961,7 +951,6 @@ sources:
   constraints: 한경IT와 역할 중복 → 시험 기간 후 택일 검토
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://feeds.feedburner.com/zdkorea
   homepage: https://zdnet.co.kr
   lang: ko
@@ -978,7 +967,6 @@ sources:
   constraints: AI타임스와 보도 중복 관찰 대상
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.newstheai.com/rss/allArticle.xml
   lang: ko
   verified: true
@@ -994,7 +982,6 @@ sources:
   constraints: 지속성·중복 관찰 대상
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://www.aipostkorea.com/rss/allArticle.xml
   lang: ko
   verified: true
@@ -1023,13 +1010,15 @@ sources:
   topics: (광역 경제) — 국내 경제 신호
   frequency: 일 (약 50편)
   constraints: Phase 0 오염 사례(부동산 등 무관 기사)의 진원 → 게이트 차단율 관찰 후 재판정
-  status: active
+  status: excluded
   trial_until: '2026-09-30'
   feed_url: https://www.mk.co.kr/rss/30100041/
   lang: ko
   verified: true
   allow_feed_discovery: false
-  note: 제외 1순위 — 노이즈 최다(Phase 0 오염 진원). 섹션 한정 소스 — 관례 경로 탐지 금지
+  note: '제외 1순위 — 노이즈 최다(Phase 0 오염 진원). 섹션 한정 소스 — 관례 경로 탐지 금지 / 2026-09-30 월간 소스 리뷰
+    — 퇴출: 사용 흔적 없음 + 게이트 차단 87% (claim 482건)'
+  excluded_at: '2026-09-30'
 - id: chosun-economy
   name: 조선일보 경제
   tier: T5
@@ -1039,15 +1028,17 @@ sources:
   topics: (광역 경제) — 종합지 경제 신호
   frequency: 일 (약 100편)
   constraints: 섹션 한정. 조선비즈 피드도 정상 → 운영 후 실질 경로 택일
-  status: active
+  status: excluded
   confirmed_at: '2026-08-31'
   trial_until: '2026-09-30'
   feed_url: https://www.chosun.com/arc/outboundfeeds/rss/category/economy/?outputType=xml
   lang: ko
   verified: true
   allow_feed_discovery: false
-  note: 규칙 5 — 경제 섹션 피드만 등재(전체 피드 금지). 2026-08-27 경제 카테고리 피드 실측 통과. 조선비즈 피드(biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml)도
-    정상 확인 — 실질 경로 선택은 회의 판단
+  note: '규칙 5 — 경제 섹션 피드만 등재(전체 피드 금지). 2026-08-27 경제 카테고리 피드 실측 통과. 조선비즈 피드(biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml)도
+    정상 확인 — 실질 경로 선택은 회의 판단 / 2026-09-30 월간 소스 리뷰 — 퇴출: 본문 확보 불가(요약 100%) — 증거로 쓸 claim
+    0건 (claim 18건)'
+  excluded_at: '2026-09-30'
 - id: donga-economy
   name: 동아일보 경제
   tier: T5
@@ -1059,7 +1050,7 @@ sources:
   constraints: 섹션 한정
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
+  trial_until: '2026-12-31'
   feed_url: https://rss.donga.com/economy.xml
   lang: ko
   verified: true
@@ -1076,7 +1067,6 @@ sources:
   constraints: 보도자료성 claim 유입 관찰 대상. HR Dive와 중복 시 제외 검토
   status: active
   confirmed_at: '2026-08-31'
-  trial_until: '2026-09-30'
   feed_url: https://techrseries.com/feed/
   lang: en
   verified: true
