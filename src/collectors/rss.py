@@ -24,6 +24,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
+from collectors.pubdate import extract_published  # noqa: E402
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
 if hasattr(sys.stdout, "reconfigure"):
@@ -110,17 +111,22 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
 
         summary = entry.get("summary", "") or ""
         body = None
+        published = parse_date(entry)
         if fetch_full:
             time.sleep(REQUEST_INTERVAL)
             html = fetch_url(url, client, curl_headers)
             if html:
                 body = extract_body(html)
+                # 피드에 날짜가 없는 소스(NBER 등)는 본문 페이지의 표준 메타에서 찾는다
+                if published is None:
+                    published = extract_published(
+                        html, text_dates=bool(source.get("date_from_text")))
         text = body or summary
 
         # 저장은 공용 로직으로 — 중복 제거·summary_only 규칙을 api 수집기와 동일 적용
         result = store_document(
             conn, source, url=url, title=entry.get("title", "(무제)"), text=text,
-            author=entry.get("author"), published=parse_date(entry))
+            author=entry.get("author"), published=published)
         stats[{"new": "new", "dup": "dup", "empty": "failed", "upgraded": "up"}[result]] += 1
     conn.commit()
     return stats

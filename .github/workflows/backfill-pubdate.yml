@@ -1,0 +1,54 @@
+# 발행일 소급 — 수동 실행 전용(workflow_dispatch)
+#
+# 발행일(published_at)이 빈 문서의 본문 페이지를 다시 받아 발행일을 채운다(src/collectors/backfill_pubdate.py).
+# 2026-09-30 월간 소스 리뷰에서 발행일이 없어 토픽 발굴에 안 잡히는 claim 약 386건을 확인했고,
+# 수집기는 그날 고쳐 신규분은 채워진다. 이 워크플로는 이미 쌓인 분 — 특히 NBER — 을 위한 것이다.
+#
+# 왜 Actions인가: NBER 논문 페이지는 PC(사내망)에서 파이프라인 User-Agent를 막는다(403).
+# 클라우드 IP에서는 같은 User-Agent로 받아진다(9월 NBER 본문 76% 확보). 브라우저로 위장해
+# 우회하지 않는다. PC에서 받아지는 소스(stanford-hai·ai-lab-enterprise-reports)는 PC에서 돌렸다.
+#
+# 사용 시간: 요청 간격 3초 × 171건 ≈ 9분. 매일 도는 수집에 넣지 않은 이유 — 날짜가 원래 없는 문서를
+# 매번 다시 받게 된다(no_pubdate 소스 외에도 페이지에 날짜가 없는 개별 글이 있다).
+# 비밀값: DATABASE_URL 은 GitHub Secrets 로만 주입한다.
+name: backfill-pubdate
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "쉼표 구분 source_id (비우면 대상 소스 전부)"
+        type: string
+        required: false
+        default: "nber-working-papers"
+      limit:
+        description: "처리할 문서 수 상한 (비우면 전부)"
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -e .
+
+      - name: 발행일 소급
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.source }}" ]; then ARGS="$ARGS --source ${{ inputs.source }}"; fi
+          if [ -n "${{ inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
+          python src/collectors/backfill_pubdate.py $ARGS

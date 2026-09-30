@@ -124,14 +124,8 @@ def extract_title(html: str) -> str | None:
     return None
 
 
-def extract_published(html: str) -> str | None:
-    for pat in (r'property="article:published_time"[^>]+content="(\d{4}-\d{2}-\d{2})',
-                r'"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})',
-                r'<time[^>]+datetime="(\d{4}-\d{2}-\d{2})'):
-        m = re.search(pat, html)
-        if m:
-            return m.group(1)
-    return None
+# 발행일 추출은 rss 수집기와 공용 — collectors/pubdate.py (2026-09-30 이관, 이름은 호환용으로 유지)
+from collectors.pubdate import extract_published  # noqa: E402,F401
 
 
 def collect_source(source: dict, conn, client: httpx.Client) -> dict:
@@ -188,7 +182,8 @@ def collect_source(source: dict, conn, client: httpx.Client) -> dict:
             page_html = data.decode("utf-8", errors="replace")
             text = extract_body(page_html) or ""
             title = extract_title(page_html) or url.rsplit("/", 1)[-1]
-            published = extract_published(page_html)
+            published = extract_published(page_html,
+                                          text_dates=bool(source.get("date_from_text")))
             # follow_pdf: 본문이 리포트 '소개 페이지'인 소스(삼일PwC 등)는 페이지 내
             # PDF 링크를 따라가 PDF 텍스트를 본문으로 쓴다 (더 길 때만 대체)
             if source.get("follow_pdf"):

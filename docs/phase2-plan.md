@@ -183,6 +183,14 @@ Claude 자문 + 리더 의견을 거쳐 사용자가 확정했다.
 - **테스트**: PR마다 `.github/workflows/test.yml`이 SQLite 로컬 모드로 pytest를 돌린다.
   Postgres 전용 3건은 skip되므로 pgvector 관련 변경은 로컬에서 `make test`로 따로 확인한다.
 - **월간 브라우저 라운드**: 10월 초 예정 (`/browse-round`)
+- **발행일 누락 — 2026-09-30 수정** (소스 리뷰 부수 발견 ②): 발행일이 비면 claim이 토픽 발굴(발행일 창)에 안 잡힌다.
+  발행일 추출을 `src/collectors/pubdate.py`로 공용화 — 표준 메타(Open Graph · JSON-LD · 학술 `citation_publication_date` ·
+  DC · `<time>`)를 순서대로 보고, 수정일(modified·lastmod)은 쓰지 않는다. RSS 수집기는 피드에 날짜가 없으면 본문 페이지에서
+  찾는다(NBER). 본문 글자 날짜는 소스가 `date_from_text: true`로 켠 곳만(stanford-hai). 페이지에 날짜가 아예 없는
+  `ms-worklab`은 `no_pubdate: true` — 비워 둔다(사이트맵 lastmod는 일괄 수정일이라 부적합).
+  소급(`src/collectors/backfill_pubdate.py`): PC에서 stanford-hai 14 · ai-lab 20건 채움(claim 80건 복귀).
+  **잔여: NBER 171건(claim 134)은 PC에서 파이프라인 UA가 403 — 10/1 Actions 복귀 후 `backfill-pubdate` 워크플로를
+  수동 실행**(기본 입력이 nber-working-papers, 약 9분). 브라우저 위장으로 우회하지 않는다.
 - **월간 소스 리뷰 — ✅ 2026-09 완료 (9/30)**: 시험 소스 37곳 → 정식 23 · 연장 7 · 퇴출·휴면 7, active 48 → 41
   ([`content/reports/source-review-2026-09.md`](../content/reports/source-review-2026-09.md)). 퇴출: arxiv-cs-si(차단 96%) ·
   mk-economy · chosun-economy(요약 100%) · samil-pwc / 휴면: samjong-kpmg · lg-business-research · hr-insight.

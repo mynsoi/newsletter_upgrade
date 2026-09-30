@@ -154,6 +154,8 @@ sources:
   lang: en
   allow_feed_discovery: false
   inflow_alert_days: 35
+  # 페이지에 발행일 메타가 없고 본문 글자('September 25, 2026')만 있다 — 글자 날짜 인식을 켠다
+  date_from_text: true
   note: 'NL — 연간 AI Index 핵심. 2026-08-27 확인 — rss.xml 404, RSS 미제공 / [자동검증 2026-08-27]
     API·RSS 미발견: RSS 미발견 (시도 6건, 마지막: https://hai.stanford.edu/index.xml → RSS/Atom
     파싱 실패 (피드 형식 아님)) / 2026-09-01 probe A(정적·전 방식 200·본문 HTML) → html 전환'
@@ -717,6 +719,9 @@ sources:
   lang: en
   allow_feed_discovery: false
   inflow_alert_days: 35
+  # 페이지에 발행일이 없다(메타·JSON·본문 모두). 사이트맵 lastmod는 수정일이라 쓰지 않는다 —
+  # 발행일 소급(backfill_pubdate.py) 대상에서 뺀다. 토픽 신호엔 안 잡히고 증거 검색엔 쓰인다
+  no_pubdate: true
   note: '2026-08-24 검증 실패(RSS 미제공) — NL 재시도 / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견
     (시도 6건, 마지막: https://www.microsoft.com/index.xml → HTTP 404) / 2026-09-01 probe
     A(글 링크가 페이지 데이터에 정적 포함) → html 전환, NL 재시도 대체'
