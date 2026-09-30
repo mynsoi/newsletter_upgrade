@@ -9,4 +9,8 @@
 절차:
 1. 체크리스트를 사용자와 함께 확인
 2. 통과 시: 파일을 content/published/로 이동, articles 테이블 status='approved' 갱신
+   → **인용 원장 기록 (필수)**: `python src/article_ledger.py record {slug}`
+     본문의 `<!-- claims: -->` 주석을 문단 단위로 article_sources에 쓴다(재실행 안전 — 본문을 고쳐 재승인하면 다시 돌린다).
+     DB에 없는 claim이 있으면 기록하지 않고 실패한다 — 검증 리포트를 다시 확인할 것.
+     이 원장이 비면 "6개월 무인용 소스 퇴출"(기획서 4.2)을 셀 수 없다(2026-09-30 월간 소스 리뷰에서 0행으로 발견).
 3. 반려 시: content/rejected/로 이동, 부록 B 코드(R-01~R-08)를 파일명 뒤에 기록

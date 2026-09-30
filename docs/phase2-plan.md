@@ -186,7 +186,10 @@ Claude 자문 + 리더 의견을 거쳐 사용자가 확정했다.
 - **월간 소스 리뷰 — ✅ 2026-09 완료 (9/30)**: 시험 소스 37곳 → 정식 23 · 연장 7 · 퇴출·휴면 7, active 48 → 41
   ([`content/reports/source-review-2026-09.md`](../content/reports/source-review-2026-09.md)). 퇴출: arxiv-cs-si(차단 96%) ·
   mk-economy · chosun-economy(요약 100%) · samil-pwc / 휴면: samjong-kpmg · lg-business-research · hr-insight.
-  인용 원장(`article_sources`)이 비어 있어 파일의 claim ID 역추적을 대리 지표로 썼다 — 원장 기록 복구 전까지 같은 방식.
+  인용 원장(`article_sources`)이 비어 있어 파일의 claim ID 역추적을 대리 지표로 썼다.
+  **→ 2026-09-30 원장 복구**: `src/article_ledger.py`(발행본 claims 주석 → 문단 단위 기록, 재실행 안전),
+  `/publish` 승인 단계에 기록을 필수로 넣었고 D1을 소급 기록(claim 18건·출처 7곳). 다음 리뷰부터는
+  `make citations`(소스별 인용 claim·아티클 수·마지막 인용일)로 판정한다 — 대리 지표는 보조로만.
   **다음 판정: 연장 7곳(stanford-hai · brookings · oecd · onemodel · carrot · flex · donga) 2026-12-31.**
   10·11월 리뷰는 정식 소스의 무유입·수집 실패 점검 위주.
 - **머지 규칙** (동료 병행 개발): 머지 전 상호 통지 + `make test` 통과 필수

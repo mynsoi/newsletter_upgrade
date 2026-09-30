@@ -1,4 +1,4 @@
-.PHONY: init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui
+.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -41,6 +41,9 @@ sources-doc:             # sources.yaml → docs/소스_카탈로그.md 재생�
 
 stats:
 	$(PYTHON) src/stats.py
+
+citations:               # 소스별 인용 횟수 — 인용 원장(article_sources), 월간 소스 리뷰용
+	$(PYTHON) src/article_ledger.py sources
 
 handoff:
 	$(PYTHON) src/handoff.py

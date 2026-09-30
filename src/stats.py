@@ -59,6 +59,17 @@ def main() -> int:
     for r in rows:
         print(f"  {r['status']:<10} {r['n']}건")
 
+    section("인용 원장 (article_sources)")
+    approved = conn.execute("SELECT COUNT(*) n FROM articles WHERE status='approved'").fetchone()["n"]
+    ledgered = conn.execute("SELECT COUNT(DISTINCT article_id) n FROM article_sources").fetchone()["n"]
+    cited = conn.execute(
+        "SELECT COUNT(DISTINCT s.claim_id) c, COUNT(DISTINCT d.source_id) src FROM article_sources s "
+        "JOIN claims c ON c.id = s.claim_id JOIN documents d ON d.id = c.document_id").fetchone()
+    print(f"  기록된 아티클 {ledgered} / 승인 {approved}편 · 인용 claim {cited['c']}건 · 출처 {cited['src']}곳")
+    if ledgered < approved:
+        print("  [주의] 원장이 없는 승인 아티클이 있다 — python src/article_ledger.py record <slug>")
+    print("  소스별 인용: make citations")
+
     print()
     return 0
 
