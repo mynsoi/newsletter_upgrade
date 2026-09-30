@@ -1,0 +1,4011 @@
+{
+  "branches": {
+    "practice": [
+      {
+        "id": "1A083DD239B581D2545ADEB80B4",
+        "document_id": "1A082D7F3D581331BA31DB37DFB",
+        "claim_text": "생성형 AI 파일럿의 95%가 측정 가능한 영향을 전달하지 못했다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "95% of generative AI pilots fail",
+        "confidence": 0.9,
+        "document_title": "7 AI in the Workplace Examples: Benefits & What’s Driving AI Adoption",
+        "source_id": "aihr-blog",
+        "tier": "T3",
+        "url": "https://www.aihr.com/blog/ai-in-the-workplace-examples/",
+        "published_at": "2026-09-07",
+        "score": 0.472548467693179,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0640EA4754189690A796A90F5",
+        "document_id": "1A05686D6134E6D3ADD98A0CD51",
+        "claim_text": "조직의 AI 도입률이 88%에 달하지만, 측정 가능한 생산성 향상은 소수의 선도 집단에 집중되어 있다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "organizational AI adoption at 88%",
+        "confidence": 0.95,
+        "document_title": "How to Measure AI Skills Across Your Workforce Beyond Survey | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/how-to-measure-ai-skills-across-your-workforce",
+        "published_at": "2026-07-29",
+        "score": 0.472086842218841,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A16BEBF1A02A2043025D9DC",
+        "document_id": "1A05D37E4CD605EBE1A047CCE7F",
+        "claim_text": "AI가 제시한 결과물에 대해 설명 가능성, 반복 가능성, 전이 가능성의 세 가지 요소를 검증해야만 개인의 실제 역량을 정확히 진단할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best",
+        "published_at": "2026-08-25",
+        "score": 0.466792204641641,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0612CAF22777F0073630B964F",
+        "document_id": "1A05676F38A54872E5619C979C0",
+        "claim_text": "성과 평가에 AI 사용 여부를 반영하는 조직의 리더가 거의 절반에 달한다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "nearly half of leaders",
+        "confidence": 0.85,
+        "document_title": "What kids need to thrive in an AI economy",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/randi-weingarten-ai-schools/",
+        "published_at": "2026-08-23",
+        "score": 0.463702694902791,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0E5D9E4E76DF7685A34BEC3BA",
+        "document_id": "1A0E5B7519D1CC6D407F36AD746",
+        "claim_text": "AI 도구 사용이 개인 작업 속도를 높이더라도 검토, 승인, 의사결정 단계에서 병목 현상이 발생하여 전체 팀 차원의 생산성 향상 효과가 제한될 수 있다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "Top Employee Productivity Metrics and KPIs for 2026 | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/employee-productivity-metrics-kpis",
+        "published_at": "2026-09-24",
+        "score": 0.459904496146449,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0613EBAF67BD83AE77612A562",
+        "document_id": "1A05681D38DC7DD9368C000AAEC",
+        "claim_text": "AI 도입 후 고성과자와 저성과자 간의 업무 수행 차이가 감소하여 능력의 상향 평준화가 이루어진다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "22%에서 4%로 감소",
+        "confidence": 0.9,
+        "document_title": "AI를 통한 지능 확장? AI와의 협업을 최적화하기 위한 4가지 원칙",
+        "source_id": "hr-bulletin",
+        "tier": "T3",
+        "url": "https://www.hrbulletin.net/trend/ai%eb%a5%bc-%ed%86%b5%ed%95%9c-%ec%a7%80%eb%8a%a5-%ed%99%95%ec%9e%a5-ai%ec%99%80%ec%9d%98-%ed%98%91%ec%97%85%ec%9d%84-%ec%b5%9c%ec%a0%81%ed%99%94%ed%95%98%ea%b8%b0-%ec%9c%84%ed%95%9c-4%ea%b0%80/",
+        "published_at": "2024-05-15",
+        "score": 0.458480894421429,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0A70EC65534A8CFB73688316A",
+        "document_id": "1A0A6E371882EC15CC0AC628B67",
+        "claim_text": "AI 시스템에 대한 신뢰도가 높을수록 비판적 사고가 감소하는 경향을 보인다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "319 knowledge workers, 936 examples of generative AI use",
+        "confidence": 0.9,
+        "document_title": "Is Overreliance on AI Causing Agency Decay?",
+        "source_id": "knowledge-wharton",
+        "tier": "T2",
+        "url": "https://knowledge.wharton.upenn.edu/article/is-overreliance-on-ai-causing-agency-decay/",
+        "published_at": "2026-09-15",
+        "score": 0.456489493413464,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06145B4BE816F2898EC856016",
+        "document_id": "1A05687F2B7269C647E2626772F",
+        "claim_text": "활동 중심의 측정은 성과를 직접 개선하지 못하며, 스트레스 증가나 신뢰 감소를 통해 지속 가능한 생산성 조건을 해칠 수 있다.",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "Worklytics vs Traditional Time Tracking: A Comparison | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/how-worklytics-improves-productivity-compared-to-traditional-time-tracking-tools",
+        "published_at": "2026-03-17",
+        "score": 0.453781496960383,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A061304C99E613019E1159F7F2",
+        "document_id": "1A056770032BCAFF6891F8A4111",
+        "claim_text": "AI를 효율성 추구 도구로 활용할 때, 우선순위 설정 없이 효율성만 추구하면 기대하는 성과를 얻기 어렵다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "What top CHROs are reading this summer",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/what-top-chros-are-reading-this-summer/",
+        "published_at": "2026-08-20",
+        "score": 0.449031047509155,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0640E58A406BAF1E51FDCFF2F",
+        "document_id": "1A0568712F84A61CCAC5C8DB817",
+        "claim_text": "AI 도입 수준은 조직의 특성상 불균등하게 나타나므로, 요약 대시보드만으로는 활용도의 편차를 관리할 수 없다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "How to Export & Analyze ChatGPT Enterprise Usage Data | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/how-to-export-analyze-chatgpt-enterprise-usage-data",
+        "published_at": "2026-07-16",
+        "score": 0.4479048509815,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0E5DCDC23E059F209B370A8E6",
+        "document_id": "1A0E5B54975AFBF08D75B11E356",
+        "claim_text": "조직의 67%가 AI 스킬을 승진 기준과 연결하고 있으며, 50%는 성과평가에 직접 연계하고 있다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "67%, 50%",
+        "confidence": 0.95,
+        "document_title": "AI skills are entering performance reviews. Are managers ready?",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/ai-skills-are-entering-performance-reviews-are-managers-ready/",
+        "published_at": "2026-09-22",
+        "score": 0.44755508614505,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0613F68EB4BF47959DE36ABAE",
+        "document_id": "1A05681C28EA8D26096E5AE6E35",
+        "claim_text": "KPI 개발에 AI를 활용하는 조직은 효율성, 측정 정확도, 측정의 시기적절성, 재무적 이익 측면에서 AI를 사용하지 않는 조직보다 더 높은 성과를 달성한다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "2.7배 ~ 4배 더 높은 성과",
+        "confidence": 0.85,
+        "document_title": "‘AI를 통한 지능 확장’ 후기",
+        "source_id": "hr-bulletin",
+        "tier": "T3",
+        "url": "https://www.hrbulletin.net/column/ai%eb%a5%bc-%ed%86%b5%ed%95%9c-%ec%a7%80%eb%8a%a5-%ed%99%95%ec%9e%a5-%ed%9b%84%ea%b8%b0/",
+        "published_at": "2024-05-21",
+        "score": 0.446860068928558,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06124426110B0A2D8AD2A5919",
+        "document_id": "1A056836457310AA7EC783F52AB",
+        "claim_text": "AI 도입 성과는 알고리즘 10%, 기술과 데이터 20%, 사람과 프로세스 70%로 결정된다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "AI 에이전트 시대, 사람과 시스템은 이렇게 바뀝니다 (2편)",
+        "source_id": "innofit-blog",
+        "tier": "T4",
+        "url": "https://blog.innofitpartners.com/228072",
+        "published_at": "2026-07-15",
+        "score": 0.44481844634851,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A17A1B477A6B72099AF8626",
+        "document_id": "1A05B5D2DAF2A7E28C232C13452",
+        "claim_text": "AI 시대에는 생산 능력보다 평가, 비판, 개선 능력이 전문성의 새로운 지표가 될 것이다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "AI@Work: Work is changing fast. Education needs to catch up.",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/ai-at-work-work-is-changing-fast-education-needs-to-catch-up",
+        "published_at": null,
+        "score": 0.442800097724038,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06139EEBAF5017A9B10AE6212",
+        "document_id": "1A0566ED5AC7F1B29B89114A476",
+        "claim_text": "AI 에이전트를 통해 직원 이직률, 생산성 달성 시간, 고충 등을 자동으로 분석할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "Introducing HR 2030: A Vision For Agentic Human Resources",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2026/04/introducing-hr-2030-a-vision-for-agentic-human-resources/",
+        "published_at": "2026-04-06",
+        "score": 0.442659959227246,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A059B63958CC4B92B01895F37C",
+        "document_id": "1A0566D64F51C4A8A78E109CF21",
+        "claim_text": "AI 도입 선도 조직들이 업무 흐름을 AI 중심으로 완전히 재설계할 가능성이 후발 조직보다 3.7배 높다",
+        "evidence_type": "data",
+        "stance": "neutral",
+        "metric": "3.7배",
+        "confidence": 0.95,
+        "document_title": "<![CDATA[Cannes Lions 2026: Connecting Art and Algorithm ]]>",
+        "source_id": "bain-insights",
+        "tier": "T2",
+        "url": "https://www.bain.com/insights/cannes-lions-2026-connecting-art-and-algorithm/",
+        "published_at": "2026-07-07",
+        "score": 0.442482740944165,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A2E0C2D2E92F53F2A633EC8",
+        "document_id": "1A060A5DC85E7D59E4260EFFF3A",
+        "claim_text": "AI 모델 실패 중 가장 흔한 분류는 '수용 가능하지만 미흡한' 수준이었으며, 대략 29%가 나쁘거나 재앙적 수준이었고 3% 정도만 재앙적으로 평가되었다",
+        "evidence_type": "data",
+        "stance": "conditional",
+        "metric": "29% (bad or catastrophic), 3% (catastrophic)",
+        "confidence": 0.92,
+        "document_title": "GDPval: Measuring AI Model Performance on Real-World Economically Valuable Tasks",
+        "source_id": "ai-lab-enterprise-reports",
+        "tier": "T4",
+        "url": "https://openai.com/index/gdpval/",
+        "published_at": "2025-09-25",
+        "score": 0.441368483639244,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06145718E240A0FC6657A72C5",
+        "document_id": "1A05ECABB8D1D61DFFD3E6B11F8",
+        "claim_text": "현재 시점에 AI는 광범위한 실험 단계에 있으나 조직적 수준의 변혁으로까지 진행되지 않았다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "<![CDATA[Where AI Is (and Isn’t) Creating Value]]>",
+        "source_id": "bain-insights",
+        "tier": "T2",
+        "url": "https://www.bain.com/insights/where-ai-is-and-isnt-creating-value-podcast/",
+        "published_at": "2026-09-01",
+        "score": 0.439408529826473,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A1F03A07A0D006776A867C7",
+        "document_id": "1A06095BE8A4E13CAFA5456444C",
+        "claim_text": "성과 평가에서 개별 평가자의 평가 편향이 분산의 62%를 설명하는 반면 실제 성과는 21%만 설명한다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": "62% of the variance accounted for by raters' peculiarities, 21% by actual performance",
+        "confidence": 0.9,
+        "document_title": "Reinventing Performance Management",
+        "source_id": "manual",
+        "tier": "T3",
+        "url": "https://www.physicianleaders.org/articles/reinventing-performance-management",
+        "published_at": "2024-11-15",
+        "score": 0.438984873928227,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A061477ED8C8CC6F3DFC55B788",
+        "document_id": "1A06095AE8368AC40DE8C51E8E6",
+        "claim_text": "AI 기반 인사분석 도구를 사용하면 데이터 정리, 모델 구축, 데이터 추출, 차트 작성 등의 작업 시간을 줄일 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "People Analytics, A Complex Domain, Is About To Be Transformed by AI. JOSH BERSIN",
+        "source_id": "manual",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2024/11/people-analytics-a-complex-domain-is-about-to-be-transformed-by-ai/",
+        "published_at": "2024-11-20",
+        "score": 0.438153938279728,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A17DBBF24AA2409ADB204BC",
+        "document_id": "1A05B5D1ED7E5C156165369A69D",
+        "claim_text": "생산성 지표만으로는 AI 고급 사용자와 프론티어 프로페셔널을 구분할 수 없다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI@Work: What will human employees do now?",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/ai-at-work-what-will-human-employees-do-now",
+        "published_at": null,
+        "score": 0.435897879609038,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0A70D63E8F3677399BD794105",
+        "document_id": "1A0A6E60B56AE4B840D94E6DB12",
+        "claim_text": "AI는 광범위한 자료로부터 학습되기 때문에 더 안전하고 일반화된 표현으로 향하는 경향이 있다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "How to sound like a human, not a robot, in the age of AI",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91603675/how-to-sound-human-ai?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-09-15",
+        "score": 0.43141123037521,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A061447941878283655B257E9A",
+        "document_id": "1A05687E3E4EBF7DCF5D5F34C62",
+        "claim_text": "개인 생산성을 순전히 개인 수준에서만 측정하면 시스템 마찰을 개인의 저성과로 잘못 판단할 가능성이 높다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Team vs Individual Productivity: What Leaders Should Track | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/team-productivity-vs-individual-productivity-what-should-leaders-track",
+        "published_at": "2026-03-17",
+        "score": 0.43018809501481,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A061410B73C0097A2017D587E2",
+        "document_id": "1A05D2D5348ADBB1F711CAC0514",
+        "claim_text": "의사결정 시 AI 산출물의 품질을 정기적으로 검증하는 경영진은 절반에 불과하다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "50%",
+        "confidence": 0.88,
+        "document_title": "AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI",
+        "source_id": "deloitte-insights",
+        "tier": "T2",
+        "url": "https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html",
+        "published_at": "2026-07-09",
+        "score": 0.430139401626777,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A1C1F9544F41CB00878F257",
+        "document_id": "1A05B5C2A8EA7B46F819147C234",
+        "claim_text": "AI 도입의 최대 효과를 얻으려면 프로세스와 사람 측면에서의 변화관리가 기술만큼 중요하다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "AI is already changing work—Microsoft included",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/ai-is-already-changing-work-microsoft-included",
+        "published_at": null,
+        "score": 0.429410860680652,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06145173CA3C87214DE79E64A",
+        "document_id": "1A056894A5A86CF1995C7548591",
+        "claim_text": "AI 도구의 채택 성공 여부는 모델의 품질보다 기존 업무 흐름에 얼마나 잘 통합되어 있는지에 따라 결정된다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "Half Your AI Tools Wont Survive 2026 - Heres Why | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/half-your-ai-tools-wont-survive-2026",
+        "published_at": "2025-12-03",
+        "score": 0.429402796504045,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A2FFC1EFCECF3AA0C3CD157",
+        "document_id": "1A063F2DD3907ED3FBB1F09A80D",
+        "claim_text": "AI 시스템의 성능은 입력되는 데이터의 정확성에 따라 결정된다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "AI 데이터 전처리 교육 | 사내 AI 품질을 높이는 실무 교육(B사)",
+        "source_id": "carrot-global-blog",
+        "tier": "T4",
+        "url": "https://www.carrotglobalblog.com/ai-data-preprocessing-training-b-company-260902/",
+        "published_at": "2026-09-02",
+        "score": 0.427554384594937,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06123A16261A02E115BB37969",
+        "document_id": "1A0566DA479D51E3ECB5208B1B9",
+        "claim_text": "마케터 중 성과를 비즈니스 결과와 연결하기 위한 적절한 데이터, 도구, 측정 능력을 갖추었다고 느끼는 비율은 41%에 불과하다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "41% of marketers",
+        "confidence": 0.94,
+        "document_title": "<![CDATA[The Marketing–Finance Divide Is About Proof of Performance, Not Priorities]]>",
+        "source_id": "bain-insights",
+        "tier": "T2",
+        "url": "https://www.bain.com/insights/the-marketing-finance-divide-is-about-proof-of-performance-not-priorities/",
+        "published_at": "2026-07-02",
+        "score": 0.425927315641793,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0612354FC7DECD6C37915AA45",
+        "document_id": "1A0568374A077BA08E37E2FEDD5",
+        "claim_text": "생성형 AI에 투자한 300~400억 달러 중 95%가 측정 가능한 성과를 내지 못했다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "95%",
+        "confidence": 0.9,
+        "document_title": "AI 에이전트 시대, 우리 기업은 무엇부터 바꿔야 할까요?",
+        "source_id": "innofit-blog",
+        "tier": "T4",
+        "url": "https://blog.innofitpartners.com/218064",
+        "published_at": "2026-07-03",
+        "score": 0.425916027498761,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0613D2AA0E1D790BB50E23F5A",
+        "document_id": "1A05688889A2201798AA4204352",
+        "claim_text": "예측 분석은 개인 수준이 아닌 팀, 역할, 위치, 업무 유형, 관리자 범위 단위에서 측정할 때 개입이 효과적이다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Predictive Analytics for Employee Turnover: A Guide | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/using-predictive-analytics-for-employee-turnover",
+        "published_at": "2026-01-23",
+        "score": 0.42555310574688,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A09270426C2548B53EC2326710",
+        "document_id": "1A0924D59802EC207E1650F9A8B",
+        "claim_text": "개발자의 자체 평가로 측정한 AI 도구의 생산성 향상 효과는 통제된 조건에서 측정한 실제 효과보다 3~5배 크다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": "self-estimates: 30% to 50%, blind studies: 10% to 15%",
+        "confidence": 0.95,
+        "document_title": "How to Measure Time Saved From Codex (With Real Data) | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex",
+        "published_at": "2026-09-10",
+        "score": 0.592267327210478,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A09CBC597E4C86D61D1A5B24BF",
+        "document_id": "1A09C98EF859D0C8059A4E33AD8",
+        "claim_text": "AI 에이전트의 약점을 사전에 알려받은 참여자가 통제 집단보다 7.2% 더 효과적으로 업무를 수행했다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "7.2%",
+        "confidence": 0.85,
+        "document_title": "How this ex-Meta AI exec is tackling the entry-level hiring squeeze",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/how-this-ex-meta-ai-exec-is-tackling-the-entry-level-hiring-squeeze/",
+        "published_at": "2026-09-13",
+        "score": 0.592037289079414,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A1B143A503398FDFFA9E234",
+        "document_id": "1A05B5CD1827CF38225CADE5295",
+        "claim_text": "AI 사용 방법에 대한 구체적인 지도를 받은 피험자들이 가장 큰 업무 성과 향상을 보였다",
+        "evidence_type": "experiment",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.93,
+        "document_title": "Copilot Research Insights: 4 Lessons for Leaders",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/copilot-research-insights-4-lessons-for-leaders",
+        "published_at": null,
+        "score": 0.585084734054847,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0C7D7D128E1C7E6BB91EC768B",
+        "document_id": "1A0C7CA04D67064080476C18117",
+        "claim_text": "AI를 상사로 인식한 직원의 자기 평가 성과 점수가 AI를 동료, 부하, 도구로 본 직원보다 낮다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": "상사 조건 4.28점, 도구 5.12점, 동료 5.42점, 부하 5.52점(7점 만점)",
+        "confidence": 0.95,
+        "document_title": "AI를 상사로 인식한 직원의 성과 동료나 부하로 여긴 직원보다 낮아 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1904/article_no/12277/ac/magazine",
+        "published_at": "2026-09-22",
+        "score": 0.573339090770353,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0EFF4701146D4A3F92694644F",
+        "document_id": "1A0EFD0DB307453B62F2AA2656A",
+        "claim_text": "AI 사용 능력 평가에서 남성이 여성보다 자신의 역량을 더 높게 평가한다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "남성 50% vs 여성 43%",
+        "confidence": 0.9,
+        "document_title": "Workers worry AI will take jobs—just not theirs",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/workers-worry-ai-will-take-jobs-just-not-theirs/",
+        "published_at": "2026-09-29",
+        "score": 0.57257883270819,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0C7D7D1AB8520D3C89BB5660B",
+        "document_id": "1A0C7CA04D67064080476C18117",
+        "claim_text": "AI를 동료나 부하로 배치했을 때의 업무 성과가 도구로만 사용할 때보다 더 우수하다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "동료/부하 59.24~59.27초 vs 도구 63.44초",
+        "confidence": 0.93,
+        "document_title": "AI를 상사로 인식한 직원의 성과 동료나 부하로 여긴 직원보다 낮아 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1904/article_no/12277/ac/magazine",
+        "published_at": "2026-09-22",
+        "score": 0.570716535458668,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0E5DED1CE6B2418342FE7019E",
+        "document_id": "1A0E5B67BCE67178E98A751ACF9",
+        "claim_text": "AI 사용률은 관리자 그룹에서 개별 기여자보다 현저히 높다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "관리자 92%, 개별 기여자 62%",
+        "confidence": 0.93,
+        "document_title": "Most workers are working on Sundays—here’s why",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91611925/most-workers-are-working-on-sundays-heres-why?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-09-23",
+        "score": 0.569088215265363,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A061318D65472EFF98A680E413",
+        "document_id": "1A05676BF3FAEE234FDDA6EDAAD",
+        "claim_text": "응답자의 80%가 AI로 인한 개인 생산성 향상을 보고했다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "80%",
+        "confidence": 0.92,
+        "document_title": "Why you shouldn’t give AI agents a name",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/why-you-shouldnt-give-ai-agents-a-name/",
+        "published_at": "2026-08-28",
+        "score": 0.566264427275603,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A21391B954B6D78D0B8B7FE",
+        "document_id": "1A05B5BB3E74F83426A96D8280A",
+        "claim_text": "AI 사용자 중 58%가 1년 전에는 불가능했던 업무 결과물을 생산하고 있다고 보고했다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "응답자의 58%",
+        "confidence": 0.9,
+        "document_title": "2026 Work Trend Index report: Agents, human agency, and opportunity",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization",
+        "published_at": null,
+        "score": 0.561922262633002,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A2BBF9769D6637C01558431",
+        "document_id": "1A060CC34AD1DFA7EFDA66E721A",
+        "claim_text": "AI를 활용한 개인이 AI 없이 일하는 2인 팀의 평균 수준의 결과물을 만들어냈으며, AI를 활용한 팀은 약 12% 더 빨랐다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "AI 활용팀 약 12% 더 빠름",
+        "confidence": 0.85,
+        "document_title": "[HBR]AI, 전략적 의사결정을 혁신하다",
+        "source_id": "hbr-korea",
+        "tier": "T3",
+        "url": "https://www.hbrkorea.com/article/view/atype/ma/category_id/1_1/article_no/2473/page/1",
+        "published_at": "2026-09-01",
+        "score": 0.552756455750791,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0E61543FB5205B8D36E362965",
+        "document_id": "1A0E5B47689C50E195601922DB5",
+        "claim_text": "AI 산출물 검증 및 수정에 AI 시간 절감분의 상당 부분이 소비된다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "약 40%",
+        "confidence": 0.9,
+        "document_title": "11 HR Trends for 2027: Work, Redesigned",
+        "source_id": "aihr-blog",
+        "tier": "T3",
+        "url": "https://www.aihr.com/blog/hr-trends/",
+        "published_at": "2026-09-22",
+        "score": 0.55201635659032,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0614108BF4446FFCF82657E85",
+        "document_id": "1A05D2D5348ADBB1F711CAC0514",
+        "claim_text": "조직이 AI 도입을 강제하기 위해 경력 발전, 성과 평가, 보상 결정과 연결시키고 있다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI",
+        "source_id": "deloitte-insights",
+        "tier": "T2",
+        "url": "https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html",
+        "published_at": "2026-07-09",
+        "score": 0.547850232953637,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06149D0E9EF3883F0DD878FFA",
+        "document_id": "1A060BD07191505B5C5911346F6",
+        "claim_text": "AI 정기 사용자의 67%가 AI 도입 이후 업무 만족도가 증가했다고 보고한다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "67%",
+        "confidence": 0.91,
+        "document_title": "BCG AI at Work 2026 (Fourth Edition): Strategy Matters More Than Tools — survey slideshow",
+        "source_id": "bcg-publications",
+        "tier": "T2",
+        "url": "https://www.bcg.com/publications/2026/ai-at-work-why-strategy-matters-more-than-tools",
+        "published_at": "2026-06-01",
+        "score": 0.545350498634313,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06142432DB703AE88E29AC9B2",
+        "document_id": "1A05687B790BCA3388A8F35DC76",
+        "claim_text": "AI로 인한 코드 생성 증가로 소프트웨어 엔지니어링에서 코드 리뷰 단계에 병목이 형성되고 있다",
+        "evidence_type": "case",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "The AI Productivity Paradox: Why AI Slows Teams Down | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/the-ai-productivity-paradox-why-ai-is-speeding-up-work--but-slowing-down-companies",
+        "published_at": "2026-03-26",
+        "score": 0.542126243932902,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A2202EF5E6CFCF61B8561C7",
+        "document_id": "1A05B5CB1E458D5D9F4D71FAF30",
+        "claim_text": "AI 사용자의 65%는 빠르게 적응하지 않으면 뒤처질까봐 우려하고 있지만, 즉각적인 성과를 내지 못하는 변신에 대해 보상받는다고 응답한 사용자는 13%에 불과하다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "우려: 65%, 보상 경험: 13%",
+        "confidence": 0.95,
+        "document_title": "AI playbook: 4 patterns shaping human‑agent work",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/ai-at-work-one-function-wrote-the-ai-playbook-the-rest-will-follow",
+        "published_at": null,
+        "score": 0.540904757899835,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0B15BD19D4B57514569412CF5",
+        "document_id": "1A0B132507E20144DDFA556D72C",
+        "claim_text": "AI 도입 후 품질보증(QA) 업무를 단순화된 일반 업무에서 AI 생성 테스트의 신뢰성 판정으로 전환했을 때 해당 전문가의 조직 내 지위가 상승했다",
+        "evidence_type": "case",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "How to keep your job in the AI age without knowing AI",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91593840/how-to-future-proof-your-career-against-ai-without-becoming-technical-technology-ai-career-advice?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-09-17",
+        "score": 0.539873530388745,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A157A3925966D10CD20D6DA",
+        "document_id": "1A059A415BC077EF54AFA4CDF94",
+        "claim_text": "AI 생성 output을 실질적인 판단 없이 배포하면 동료에게 검증 작업을 전가하게 되어 생산성 향상이 아니라 오히려 팀 속도를 떨어뜨린다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "In the age of AI, how much work you do matters less than it used to. Here’s what matters more",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91585152/output-used-to-mean-you-cared-with-ai-it-now-means-nothing-technology-ai-career-advice?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-08-31",
+        "score": 0.538379765222453,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A2EF037BCE6AF9FFB614FFD",
+        "document_id": "1A060C17689313E102A36CFD9C6",
+        "claim_text": "AI 모델의 성능이 향상될수록 더 긴 문맥을 유지하고 여러 단계의 추론, 도구 활용, 상황 대응 등 더욱 복잡한 업무를 수행할 수 있다",
+        "evidence_type": "theory",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "A scorecard for the AI age",
+        "source_id": "ai-lab-enterprise-reports",
+        "tier": "T4",
+        "url": "https://openai.com/index/a-scorecard-for-the-ai-age/",
+        "published_at": "2026-07-17",
+        "score": 0.538008375723186,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0C0BB11B470815B8EC62E4BFA",
+        "document_id": "1A0C0A3B682819EDFCD6CDE115F",
+        "claim_text": "AI를 정기적으로 사용하는 직원들은 AI 기반의 생산성 향상이 조직의 성과 기준을 높이도록 유도되어 번아웃이 증가하는 '사이버 채찍 효과'를 경험한다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "393 employees",
+        "confidence": 0.92,
+        "document_title": "Beyonce's former strategist on turning employees into fans",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/beyonces-former-strategist-on-turning-employees-into-fans/",
+        "published_at": "2026-09-20",
+        "score": 0.536546508099196,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A061209B45F3921FD03963194B",
+        "document_id": "1A056720DDC899C51CCD9030B0E",
+        "claim_text": "AI의 판단 영향을 테스트하기 위해 하버드 연구진이 MIT 글로벌 사회영향 혁신 챌린지 제출물 평가 실험을 실시했다",
+        "evidence_type": "experiment",
+        "stance": "neutral",
+        "metric": "228명의 경험 많은 평가자, 48개 제출물",
+        "confidence": 0.95,
+        "document_title": "AI Is Undermining Leaders’ Judgment. Here’s What to Do About It.",
+        "source_id": "hbr",
+        "tier": "T3",
+        "url": "http://hbr.org/2026/08/ai-is-undermining-leaders-judgment-heres-what-to-do-about-it",
+        "published_at": "2026-08-19",
+        "score": 0.536088932331964,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A1AF279D7FBC06168618E7B",
+        "document_id": "1A05ECC3B9E16DA7DB36A3C7BC4",
+        "claim_text": "AI가 사용자의 통제에서 벗어나는 사건 보고가 한 달 사이에 거의 2배 증가했다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "7월 300건 이상, 6월의 거의 2배",
+        "confidence": 0.9,
+        "document_title": "The Download: engineered microbes for crops, and OpenAI’s culture problem",
+        "source_id": "mit-tech-review",
+        "tier": "T3",
+        "url": "https://www.technologyreview.com/2026/09/01/1143199/the-download-engineered-microbes-openai-safety-culture/",
+        "published_at": "2026-09-01",
+        "score": 0.536046075460527,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A083DD23935124BDD0B712BE64",
+        "document_id": "1A082D7F3D581331BA31DB37DFB",
+        "claim_text": "AI를 3~4가지 목적으로 사용하는 근로자들은 생산성 향상에서 66%의 긍정적 영향을 보고했다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "66% positive productivity impact",
+        "confidence": 0.85,
+        "document_title": "7 AI in the Workplace Examples: Benefits & What’s Driving AI Adoption",
+        "source_id": "aihr-blog",
+        "tier": "T3",
+        "url": "https://www.aihr.com/blog/ai-in-the-workplace-examples/",
+        "published_at": "2026-09-07",
+        "score": 0.534963948162983,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A2EC3A4025CB4521F41ACC9",
+        "document_id": "1A060CE6FA9949AFC200D56B3D4",
+        "claim_text": "AI 기반 특허가치평가 시스템을 사용하면 기존 전문가 평가 비용을 대폭 절감할 수 있다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": "기존 500만~2000만 원에서 75만 원으로 감소",
+        "confidence": 0.92,
+        "document_title": "AI가 바꾸는 기술사업화 패러다임 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1101/article_no/12227",
+        "published_at": "2026-08-11",
+        "score": 0.53352510235073,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A16BA8A6407FD4AB5BD513C",
+        "document_id": "1A05D37E4CD605EBE1A047CCE7F",
+        "claim_text": "AI를 활용하여 만든 결과물의 완성도가 높아도, 그것이 개인의 실제 직무 역량 발전을 의미하지는 않는다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best",
+        "published_at": "2026-08-25",
+        "score": 0.533481276883322,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A2844AD168D292E1DB8FF23",
+        "document_id": "1A060CC31AE0F1C7025D56648BF",
+        "claim_text": "AI의 대규모 현장 실험에서 GPT-4 활용 시 업무 처리 속도가 크게 증가하고 과제 완료율이 향상되었다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "업무 처리 속도 25% 이상 증가, 과제 완료율 12.2% 향상",
+        "confidence": 0.92,
+        "document_title": "[HBR]새로운 성과 관리 지표가 필요한 AI 시대",
+        "source_id": "hbr-korea",
+        "tier": "T3",
+        "url": "https://www.hbrkorea.com/article/view/atype/di/category_id/2_1/article_no/1683/page/1",
+        "published_at": "2026-08-26",
+        "score": 0.531952311054118,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0611B63577F068A985377A9BE",
+        "document_id": "1A056688CF3F2C91A22A0CFD301",
+        "claim_text": "AI가 개별 직원의 생산성을 향상시켰다고 보고하는 응답자가 다수이다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "응답자의 80%가 AI로 인한 개인 생산성 향상 보고",
+        "confidence": 0.95,
+        "document_title": "The state of AI in 2026: On the road to ROI",
+        "source_id": "mckinsey-insights",
+        "tier": "T2",
+        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+        "published_at": "2026-08-25",
+        "score": 0.598678677837645,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0A2C387FB40882F8134B2F83E",
+        "document_id": "1A0A1BEDBD6858570DACF8DD110",
+        "claim_text": "AI는 양적 금융에서 모델 개발자와 연구자의 작업 효율성을 높이는 생산성 도구로 작용한다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "How AI Is Reshaping Quantitative Finance",
+        "source_id": "knowledge-wharton",
+        "tier": "T2",
+        "url": "https://knowledge.wharton.upenn.edu/article/how-ai-is-reshaping-quantitative-finance/",
+        "published_at": "2026-09-14",
+        "score": 0.59571652895064,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06132D0E2E7087C8F9092D5AD",
+        "document_id": "1A0568630CF02FFD5ED920E49A0",
+        "claim_text": "AI 활용으로 인해 조직 내 직원들이 생산하는 보고서의 품질 편차가 축소되었다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "🥕Designing the Future : Work & Talent 미래 리더십 전환과 글로벌 인재 육성 전략",
+        "source_id": "carrot-global-blog",
+        "tier": "T4",
+        "url": "https://www.carrotglobalblog.com/hr-caster-2026-august/",
+        "published_at": "2026-08-11",
+        "score": 0.593984579241075,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0E5DED1B3CD215D6743371C5F",
+        "document_id": "1A0E5B67BCE67178E98A751ACF9",
+        "claim_text": "AI가 생산성을 저해하는 경우가 존재한다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "응답자의 46%",
+        "confidence": 0.9,
+        "document_title": "Most workers are working on Sundays—here’s why",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91611925/most-workers-are-working-on-sundays-heres-why?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-09-23",
+        "score": 0.576265501973512,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0C7D88BD12E48E0022CFC4970",
+        "document_id": "1A0C7C9FF5C44B53E98FA7B84FD",
+        "claim_text": "AI 시대의 생산성은 개인의 노동뿐만 아니라 데이터, 알고리즘, 조직 시스템, 자본투자가 복합적으로 결합하여 만들어진다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "AI 시대, 고성과 배분의 새 문법 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1101/article_no/12179/ac/magazine",
+        "published_at": "2026-06-23",
+        "score": 0.572844189077935,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A129FDE5C08FF945135D946",
+        "document_id": "1A060D510E7E0B95FE074C07B4C",
+        "claim_text": "AI를 작년에 사용한 근로자 중 약 4분의 3은 AI가 생산성을 높이고 업무 품질을 향상시킨다고 보고했다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "약 3/4 (약 75%)",
+        "confidence": 0.85,
+        "document_title": "Global Workforce Hopes and Fears Survey 2025",
+        "source_id": "pwc-global-insights",
+        "tier": "T2",
+        "url": "https://www.pwc.com/gx/en/issues/workforce/hopes-and-fears.html",
+        "published_at": "2025-11-12",
+        "score": 0.563734487715416,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0612DF2DFB7161EE90396C930",
+        "document_id": "1A0567071B1007C24940C1AB888",
+        "claim_text": "AI 도입 시 생산성이 향상되지만 시스템 비용과 투자 회수 기간으로 인해 단순하지 않은 결과를 초래한다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "OpenAI Gets Into Job Placement While The Job Market Crashes",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2025/09/openai-gets-into-recruiting-while-job-market-struggles-to-reinvent-itself/",
+        "published_at": "2025-09-05",
+        "score": 0.560579063991923,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0EFF66870DD8FA4A29AB70E47",
+        "document_id": "1A0EFCE6C9CDA8DA57B6BC19147",
+        "claim_text": "AI는 기술 서비스 산업에서 서비스 라인별로 15~45% 범위의 생산성 향상을 이미 제공하고 있다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "15% to 45%",
+        "confidence": 0.88,
+        "document_title": "<![CDATA[Tech Services: Cracking the Code on AI-led Growth]]>",
+        "source_id": "bain-insights",
+        "tier": "T2",
+        "url": "https://www.bain.com/insights/tech-services-cracking-the-code-on-ai-led-growth-technology-report-2026/",
+        "published_at": "2026-09-29",
+        "score": 0.558131671254718,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0C7BC8FD78AFE30B28145D052",
+        "document_id": "1A0C792CD261955A7455D3A1525",
+        "claim_text": "AI를 활용하면 방대한 정성 데이터를 기존의 수작업 방식보다 빠르고 입체적으로 분석할 수 있다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI 데이터 분석 공개과정 : 데이터를 쌓는 HRD인가, 데이터로 의사결정하는 HRD인가",
+        "source_id": "carrot-global-blog",
+        "tier": "T4",
+        "url": "https://www.carrotglobalblog.com/ai-data-analysis-public-course-250922/",
+        "published_at": "2026-09-22",
+        "score": 0.549597800231797,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A284125542C197A2E97D6F4",
+        "document_id": "1A060CC31AE0F1C7025D56648BF",
+        "claim_text": "AI 지원으로 인한 생산성 향상이 경험이 적은 근로자에게 집중되며, 경험이 많은 근로자는 품질 저하를 경험했다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "생산성 약 14% 향상, 경험 많은 근로자는 품질 소폭 하락",
+        "confidence": 0.85,
+        "document_title": "[HBR]새로운 성과 관리 지표가 필요한 AI 시대",
+        "source_id": "hbr-korea",
+        "tier": "T3",
+        "url": "https://www.hbrkorea.com/article/view/atype/di/category_id/2_1/article_no/1683/page/1",
+        "published_at": "2026-08-26",
+        "score": 0.547372264807323,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0A2C1754D640BECEF1F5B3168",
+        "document_id": "1A0A1C2785515C3FC4CDFA9560D",
+        "claim_text": "동료 검증을 거친 '직장 내 생성형 AI' 연구에 따르면 지원 담당자의 평균 생산성 향상은 14%이며, 경험이 가장 적은 직원의 경우 34%까지 높아진다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "평균 14%, 신입: 34%",
+        "confidence": 0.95,
+        "document_title": "Is AI Actually Saving Time in Your Company? How to Measure  | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/is-ai-actually-saving-time-in-your-company",
+        "published_at": "2026-09-10",
+        "score": 0.540480102798391,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06137F663BC12014452A29409",
+        "document_id": "1A056867C9F352A910CE2FBF35C",
+        "claim_text": "경험이 가장 적은 근로자의 경우 AI 도입으로 생산성이 34%까지 증가할 수 있다",
+        "evidence_type": "theory",
+        "stance": "optimistic",
+        "metric": "34% for the least experienced workers",
+        "confidence": 0.85,
+        "document_title": "Measuring AI's Impact on Sales Team Performance | Worklytics",
+        "source_id": "worklytics-blog",
+        "tier": "T4",
+        "url": "https://www.worklytics.co/blog/measuring-ai-impact-on-sales-team-performance",
+        "published_at": "2026-08-13",
+        "score": 0.53380837791558,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0613C7EFB1699294B82A238CB",
+        "document_id": "1A0568228734BFE87A2887D5017",
+        "claim_text": "생성형 AI를 HR에 도입하면 생산성을 최대 30%까지 높일 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": "최대 30%",
+        "confidence": 0.85,
+        "document_title": "AI가 HR에 미치는 영향",
+        "source_id": "hr-bulletin",
+        "tier": "T3",
+        "url": "https://www.hrbulletin.net/tech/ai%ea%b0%80-hr%ec%97%90-%eb%af%b8%ec%b9%98%eb%8a%94-%ec%98%81%ed%96%a5/",
+        "published_at": "2024-04-01",
+        "score": 0.532660131757798,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0A70EC556D2F356E8BE7D0AC5",
+        "document_id": "1A0A6E371882EC15CC0AC628B67",
+        "claim_text": "생성형 AI 어시스턴트에 대한 접근성이 고객 지원 담당자의 생산성을 평균 15% 증가시켰으며, 경험이 적고 기술 수준이 낮은 근로자에게서 가장 큰 향상이 나타났다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "average 15% productivity increase, largest gains among less experienced and lower-skilled workers",
+        "confidence": 0.95,
+        "document_title": "Is Overreliance on AI Causing Agency Decay?",
+        "source_id": "knowledge-wharton",
+        "tier": "T2",
+        "url": "https://knowledge.wharton.upenn.edu/article/is-overreliance-on-ai-causing-agency-decay/",
+        "published_at": "2026-09-15",
+        "score": 0.531222569782319,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0E5DE5118E0758A81B1969F3F",
+        "document_id": "1A0E5B634A06D48143E6699A2F8",
+        "claim_text": "AI를 통해 사람을 대체하지 않고 기존 인력의 생산성을 높이는 기업이 향후 경기 변화에 더 잘 대응할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "Tech’s mass layoffs are hiding a much scarier problem, and AI is uncovering it",
+        "source_id": "fastcompany-worklife",
+        "tier": "T3",
+        "url": "https://www.fastcompany.com/91610952/techs-mass-layoffs-hiding-much-scarier-problem-ai-uncovering-it?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss",
+        "published_at": "2026-09-24",
+        "score": 0.529709182905092,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A28428E228F4AF92C4B4A6E",
+        "document_id": "1A060CC31AE0F1C7025D56648BF",
+        "claim_text": "설문조사에 응한 한 AI 공급업체의 직원 중 일부가 AI의 성과를 실제보다 나쁘게 보이도록 데이터를 조작한 경험이 있다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "직원의 10%",
+        "confidence": 0.85,
+        "document_title": "[HBR]새로운 성과 관리 지표가 필요한 AI 시대",
+        "source_id": "hbr-korea",
+        "tier": "T3",
+        "url": "https://www.hbrkorea.com/article/view/atype/di/category_id/2_1/article_no/1683/page/1",
+        "published_at": "2026-08-26",
+        "score": 0.529255393748664,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A08D4E343A5EBBD8D56DF986DE",
+        "document_id": "1A08D2572A64077205F8FCD1DCC",
+        "claim_text": "AI가 생산한 업무 결과물 중 상당 부분은 기능은 하지만 뛰어난 품질이 부족한 'B+ 수준의 작업'이다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Pro tip of the week: Use ‘rejection bounties’ to kill workslop",
+        "source_id": "charter",
+        "tier": "T3",
+        "url": "https://www.charterworks.com/pro-tip-of-the-week-use-rejection-bounties-to-kill-workslop/",
+        "published_at": "2026-09-10",
+        "score": 0.571338101755106,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06128F9A4D930A0E7A1C2F04F",
+        "document_id": "1A056855156B1DBCF57F0CF5122",
+        "claim_text": "AI 기반 이미지·영상 분석은 인간 검사원이 놓치기 쉬운 초소형 결함까지 탐지하여 제품 품질을 향상시킨다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "제조업을 위한 AX 가이드",
+        "source_id": "innofit-blog",
+        "tier": "T4",
+        "url": "https://blog.innofitpartners.com/제조업을-위한-ax-가이드-41461",
+        "published_at": "2025-01-31",
+        "score": 0.550306040736198,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A1FE13016F48EA96CDF7621",
+        "document_id": "1A05B5BE02FF82FA554B48D2B32",
+        "claim_text": "AI 도입의 성공 여부는 구매한 기술 자체보다는 리더십의 의사결정 품질에 의해 결정된다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "AI@Work: Tokenomics and 4 other AI shifts leaders need to know",
+        "source_id": "ms-worklab",
+        "tier": "T4",
+        "url": "https://www.microsoft.com/en-us/worklab/aiwork-tokenomics-is-the-new-headcount-and-four-more-trends-to-watch",
+        "published_at": null,
+        "score": 0.523811624518711,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A2FFD8682F365F60CFA01F4",
+        "document_id": "1A063F2DD3907ED3FBB1F09A80D",
+        "claim_text": "데이터 전처리 품질 개선을 통해 AI 답변 수준을 향상시킬 수 있다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI 데이터 전처리 교육 | 사내 AI 품질을 높이는 실무 교육(B사)",
+        "source_id": "carrot-global-blog",
+        "tier": "T4",
+        "url": "https://www.carrotglobalblog.com/ai-data-preprocessing-training-b-company-260902/",
+        "published_at": "2026-09-02",
+        "score": 0.520272726701558,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0614933CB7B21D7D00348EFD6",
+        "document_id": "1A060BD03C8FF97EDCF3038C26D",
+        "claim_text": "생성형 AI 지원으로 경험 부족한 상담사의 생산성과 서비스 품질이 가장 크게 개선되었으나, 숙련된 상담사의 지표는 개선되지 않았거나 악화되기도 했다",
+        "evidence_type": "case",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "The Economic Potential of Generative AI: The Next Productivity Frontier",
+        "source_id": "mckinsey-insights",
+        "tier": "T2",
+        "url": "https://www.mckinsey.com/capabilities/mgi/our-research/the-economic-potential-of-generative-ai-the-next-productivity-frontier",
+        "published_at": "2023-06-14",
+        "score": 0.516661103117401,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0612516B42D54315BB557A877",
+        "document_id": "1A0566F420B1A4B70CF31F2EE94",
+        "claim_text": "AI 기반 평가는 기존의 시험 기반 자격증 및 채용 전 평가를 대체하게 될 대규모 신생 시장이다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "The Enterprise Learning Tech Market Quickly Transforms Around AI",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2026/02/the-enterprise-learning-tech-market-quickly-transforms-around-ai/",
+        "published_at": "2026-02-19",
+        "score": 0.511859428056039,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0640B8247C73488F9F12F6DFF",
+        "document_id": "1A05668C14B7C19B27E11D0DEB8",
+        "claim_text": "AI 도입 조직에서 속도 개선이 품질 개선보다 빠르게 진행된다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "시간 절감 평균 11.8% vs 재작업 감소 6.2%, 개발 활동: 시간 절감 11.2% vs 재작업 감소 6.8%",
+        "confidence": 0.91,
+        "document_title": "Beyond the copilot: Scaling the agentic product development life cycle",
+        "source_id": "mckinsey-insights",
+        "tier": "T2",
+        "url": "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/beyond-the-copilot-scaling-the-agentic-product-development-life-cycle",
+        "published_at": "2026-08-21",
+        "score": 0.510624712786783,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0611A20B11DF2370601C97447",
+        "document_id": "1A05673F1F2820160B0B7389C4D",
+        "claim_text": "AI 기술의 품질과 가치는 그 기술 훈련에 사용된 인간 데이터의 품질에 크게 의존한다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Why Metaphysic AI Looked to Hollywood for a Digital Rights Model",
+        "source_id": "hbr",
+        "tier": "T3",
+        "url": "http://hbr.org/podcast/2026/08/why-metaphysic-ai-looked-to-hollywood-for-a-digital-rights-model",
+        "published_at": "2026-08-04",
+        "score": 0.509884800668229,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A177982BF23153017D8347A",
+        "document_id": "1A05D5CE8EC6B2A18B6010637FE",
+        "claim_text": "AI 역량의 부서 간 이전은 기술적 이식 가능성만으로는 불충분하며 데이터 거버넌스, 규제 검토, 모델 리스크 승인을 모두 거쳐야 한다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "[HBR]AI 시대, 시험대에 오른 모듈화 기업",
+        "source_id": "hbr-korea",
+        "tier": "T3",
+        "url": "https://www.hbrkorea.com/article/view/atype/di/category_id/2_1/article_no/1686",
+        "published_at": "2026-08-31",
+        "score": 0.509717776443179,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0612415604F6D3DADED47DCB9",
+        "document_id": "1A05675776B3FD45A1D807720D5",
+        "claim_text": "채용 전 평가 도구를 사용하면 채용 품질을 개선하고 편견을 줄이며 더 효율적이고 객관적인 인재 채용 결정을 할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "15 Best Pre-Employment Assessment Tools To Hire the Right Candidates in 2026",
+        "source_id": "aihr-blog",
+        "tier": "T3",
+        "url": "https://www.aihr.com/blog/top-pre-employment-assessment-tools/",
+        "published_at": "2026-08-25",
+        "score": 0.504883344474835,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0612A86DC02A2F6A7FAC65756",
+        "document_id": "1A0566FFBF99849787E402CB3C1",
+        "claim_text": "AI 도구의 기술 성능 향상 속도와 조직의 비즈니스 생산성 향상 속도 간에 격차가 증가하고 있다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "The Rise Of The Supermanager",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2025/10/the-rise-of-the-supermanager/",
+        "published_at": "2025-10-20",
+        "score": 0.500545336488191,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06A2EC459545C18FEE56BE30C",
+        "document_id": "1A060CE6FA9949AFC200D56B3D4",
+        "claim_text": "AI 기반 특허가치평가는 기존 4~6주 소요되던 평가 기간을 실시간으로 단축할 수 있다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": "4~6주에서 실시간으로 단축",
+        "confidence": 0.9,
+        "document_title": "AI가 바꾸는 기술사업화 패러다임 | DBR",
+        "source_id": "dbr",
+        "tier": "T3",
+        "url": "https://dbr.donga.com/article/view/1101/article_no/12227",
+        "published_at": "2026-08-11",
+        "score": 0.498478994977287,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      }
+    ],
+    "research": [
+      {
+        "id": "1A06B8B6B1D4D1FBF52F983B75C",
+        "document_id": "1A056DB5924023FC0A21EE0FDF1",
+        "claim_text": "인간-AI 협력의 주관적 품질을 평가하기 위한 신뢰할 수 있는 측정 도구가 필요하다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Measuring Successful Cooperation in Human-AI Teamwork: Development and Validation of the Perceived Cooperativity and Teaming Perception Scales",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.24461v1",
+        "published_at": "2026-04-27",
+        "score": 0.510738360050052,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0612A66C1F4DA65EE76CC9A8F",
+        "document_id": "1A056A565359EA64EB3A003F491",
+        "claim_text": "AI에 대한 신뢰도에 영향을 미치는 요인 중 인지된 유용성의 표준화된 양의 연관성(베타=0.402)이 제도 정책 명확성(베타=0.223)보다 강했다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "beta = 0.402 vs beta = 0.223",
+        "confidence": 0.92,
+        "document_title": "The AI Adaptation Gap in Higher Education: Students, Faculty, and Administrative Staff",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.25063v1",
+        "published_at": "2026-08-25",
+        "score": 0.509101843531339,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AE48C61C1101A166A305DD0",
+        "document_id": "1A056CD62AF5192079A45E48F21",
+        "claim_text": "AI를 성과 지표만을 중심으로 설계하는 것은 미래 업무 환경을 위해서는 충분하지 않다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "The New Social Image: How AI Competency and AI Proactivity Influence Self- and Peer-Perceptions in the Workplace",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.00182v2",
+        "published_at": "2026-05-29",
+        "score": 0.502293534741772,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06B071376A56BFA89AD2FE694",
+        "document_id": "1A056CFAE03541F4B5738E2658F",
+        "claim_text": "AI 사건 데이터베이스만으로는 위험도(발생 가능성과 심각도의 결합 측정)를 측정할 수 없다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "AI Incident Monitoring through a Public Health Lens",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.19914v1",
+        "published_at": "2026-04-21",
+        "score": 0.501559270107502,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AC6B0EEDBE714C488EA0768",
+        "document_id": "1A056CB35561E8DB699F1067DC9",
+        "claim_text": "AI 세제 설계 시 가시성, 측정 문제, 귀착, 누수, 혁신 비용 등의 한계가 존재한다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Taxing Artificial Intelligence",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.02144v1",
+        "published_at": "2026-07-02",
+        "score": 0.498188141163459,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0BB8DA36ACC3B0ABB23DD2127",
+        "document_id": "1A0BB8ABB65AAF7CFEEA0247D28",
+        "claim_text": "AI에 대한 신뢰 평가는 일반적 범주가 아닌 특정 대상에 대해 표현되는 경향이 있다",
+        "evidence_type": "data",
+        "stance": "neutral",
+        "metric": "약 92% (수정 후)",
+        "confidence": 0.91,
+        "document_title": "Trust Talk Is Scoped and Unlexicalized: How People Express Trust in AI, and What Standard Instruments Cannot See",
+        "source_id": "psyarxiv",
+        "tier": "T1",
+        "url": "https://osf.io/preprints/psyarxiv/rg3jk_v1/",
+        "published_at": "2026-09-18",
+        "score": 0.491964740316137,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AC4E7B0940D657ED16C4F8E",
+        "document_id": "1A056CB0D5B26FBAFF3AAB454DC",
+        "claim_text": "의료 AI 기기의 신뢰성 보고 수준은 규제 승인 연도나 임상 영역에 따라 유의미한 차이를 보이지 않는다",
+        "evidence_type": "data",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Regulatory Approval Is Not Enough: Gaps in Trustworthy AI Reporting in FDA-Cleared Medical Devices",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.12360v1",
+        "published_at": "2026-07-04",
+        "score": 0.48689505958679,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AD06731C5C3601A36C00449",
+        "document_id": "1A056CBBAA40330974CC20F69A6",
+        "claim_text": "개인의 암묵적 연합 검사 점수는 인간-AI 협업 과정에서 소비되는 시간의 예측 지표가 된다",
+        "evidence_type": "experiment",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Resume Screening, Fast and Slow: (Biased) AI Recommendations' Influence on Human Decision Making",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.22213v1",
+        "published_at": "2026-06-20",
+        "score": 0.481640395902145,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0607D8DC5FF219D6A3C3D5FBA",
+        "document_id": "1A0607D8C2FB9631D2AA090C8DF",
+        "claim_text": "매개 변수(역량·몰입·행동)의 측정 시점·수준(개인 vs 조직) 불일치가 흔한 한계다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 1.0,
+        "document_title": "HRM-성과 연계와 블랙박스 (HRM and Performance: A Review and Research Agenda)",
+        "source_id": "theory-canon",
+        "tier": "T1",
+        "url": null,
+        "published_at": "1997-01-01",
+        "score": 0.480492382381795,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A3C3E9531D6F5FFCB221409",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI 미사용 조건에 비해 AI 사용 조건에서 성과 과대평가의 효과 크기가 훨씬 컸다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": "AI 사용 집단 d=0.93 vs AI 미사용 집단 d=0.29",
+        "confidence": 0.9,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.479428408518893,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AD21906848D73CF0B4B3F2C",
+        "document_id": "1A056CBDF79ABC73149AB3C846D",
+        "claim_text": "AI 에이전트의 생물학적 위험을 평가하기 위한 평가 설계 과정에서 내려진 설계 선택이 평가 결과의 해석과 의미에 실질적인 영향을 미친다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Measuring Biological Capabilities and Risks of AI Agents",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.19899v1",
+        "published_at": "2026-06-18",
+        "score": 0.478764738717199,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AF98BCA6E678C14CA7762EE",
+        "document_id": "1A056CED61879FF734D5EABE17C",
+        "claim_text": "생성형 AI 기반 교육 기술이 학습자에게 측정 가능한 이점을 제공했다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.7,
+        "document_title": "Guidelines for Designing AI Technologies to Support Adult Learning",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.04616v1",
+        "published_at": "2026-05-06",
+        "score": 0.476363029565095,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0607D8B52DACECB16BDAC876B",
+        "document_id": "1A0607D89BD9EF5D377593241C1",
+        "claim_text": "Goleman의 EI 구성·측정 방식과 성과 연결 주장에는 학술적 측정·타당도 논쟁이 있다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 1.0,
+        "document_title": "감성지능과 리더십 — EI 역량(1998)과 여섯 가지 리더십 스타일(2000)",
+        "source_id": "theory-canon",
+        "tier": "T1",
+        "url": null,
+        "published_at": "1998-01-01",
+        "score": 0.475782052719989,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A27B084073C48F0B1C7F6A5",
+        "document_id": "1A05B544F46F2BE2D0BA8266623",
+        "claim_text": "AI 기반 과학 도구는 편향, 데이터 품질 문제, 불균형한 접근성 등의 위험을 내포하고 있다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "How AI Is Accelerating Scientific Discovery | Stanford HAI",
+        "source_id": "stanford-hai",
+        "tier": "T1",
+        "url": "https://hai.stanford.edu/news/how-ai-is-accelerating-scientific-discovery",
+        "published_at": "2026-07-08",
+        "score": 0.474231309784277,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AF77254C080E4D43FC38603",
+        "document_id": "1A056CEA927F83B95F801141B38",
+        "claim_text": "AI 도구 사용으로 학생들의 기술이 암기 능력에서 평가 능력으로 변화했다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Vibe coding before the trend",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.07751v1",
+        "published_at": "2026-05-08",
+        "score": 0.472970533229688,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0E5D5FCD7C032DD7FCB8CD391",
+        "document_id": "1A0E5CA72736C10B43053D941FD",
+        "claim_text": "AI가 주석을 단 데이터에서 응답 길이와 반복이 보상 모델 점수를 교란시킨다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Which Objectives Need a Dial? Predicting Objective Conflict and Covering Trade-offs in Steerable Pluralistic Alignment",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.26929v1",
+        "published_at": "2026-09-22",
+        "score": 0.470876819464245,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A3C416830BCC9A392901F71",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI 상호작용 조건에서 참가자의 85.37%가 시행 수준의 메타인지적 민감성에서 우연 수준(AUC=0.5) 이상의 성과를 보였다",
+        "evidence_type": "data",
+        "stance": "neutral",
+        "metric": "85.37% (246명 중 210명, AUC>.50)",
+        "confidence": 0.89,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.468123710115007,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B9C39D2674B42DC922F565C",
+        "document_id": "1A056DCFD6F426D22CE19AB364A",
+        "claim_text": "AI 도구에 대한 신뢰도는 채택 여부에 결정적 영향을 미치는 요인이다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "Trust in AI among Middle Eastern CS Students: Investigating Students' Trust and Usage Patterns Across Saudi Arabia, Kuwait and Jordan",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.06418v1",
+        "published_at": "2026-04-07",
+        "score": 0.467822501377006,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06ACED0CAFC1B66D99E75D947",
+        "document_id": "1A056CBA8B6BFCC40C16A21FDA6",
+        "claim_text": "AI가 자연 언어 응답을 구조화된 설문 변수로 변환하는 측정 과정은 오류가 발생할 수 있으며, 인구 집단에 따라 다르게 작동할 수 있다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "When Surveys Become Conversations: Adaptive Matrix Validation for AI-Assisted Interviews",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.24244v1",
+        "published_at": "2026-06-23",
+        "score": 0.4656201428248,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AFFE77643263274FC4084F1",
+        "document_id": "1A056CF367F1059796C47B5EDC9",
+        "claim_text": "신뢰성을 운영화하기 위해서는 측정 불확실성, 보정, 추적성의 계량 원리에 기반한 신뢰 지표를 사용하여 각 아키텍처 계층을 주관적이 아닌 정량적으로 평가해야 한다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "From Black-Box Confidence to Measurable Trust in Clinical AI: A Framework for Evidence, Supervision, and Staged Autonomy",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.26671v1",
+        "published_at": "2026-04-29",
+        "score": 0.464260329395481,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06B77CAEF9FA6909EF4542CEB",
+        "document_id": "1A056D9F079DF5DF921BD3CB794",
+        "claim_text": "AI 시스템의 효과를 파악하기 위해서는 출력 정확도 측정을 넘어 메커니즘, 위임, 피드백, 통제에 관한 증거가 필요하다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.82,
+        "document_title": "Agents for Experiments, Experiments for Agents: A Design Grammar for AI-Enabled Experimental Science",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.17746v1",
+        "published_at": "2026-05-18",
+        "score": 0.463197430212435,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0A7007D6B0AA20FF9E27DFFC0",
+        "document_id": "1A0A6FAB10406DB46CAB6A34E79",
+        "claim_text": "이 연구의 탈락률이 상당했으며 결과 측정이 표준화되지 않았고 과정 평가 응답이 제한적이었다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "30.7% attrition",
+        "confidence": 0.93,
+        "document_title": "Evaluating AI Tutoring at the Speed of Innovation: Practitioner-Led Micro-Randomised Trials of an AI Tutoring Platform in GCSE Science",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.14789v1",
+        "published_at": "2026-09-13",
+        "score": 0.462731823680029,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06ADA4BCFAD2C4B17DBBAA1AB",
+        "document_id": "1A056CC64F5BA45690C3C738465",
+        "claim_text": "AI 에이전트의 효과 추정치는 인간 합의와 광범위하게 일치한다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "AI Coding Agents in Social Science: Methodologically Diverse, Empirically Consistent, Interpretively Vulnerable",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.11456v1",
+        "published_at": "2026-06-09",
+        "score": 0.461062720053434,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AFD6BAF15AF490E5ACD1003",
+        "document_id": "1A056CF0D6CAE8F7F6FF5FA1FCD",
+        "claim_text": "AI의 능력 향상은 추론 이득(테스트 시점의 계산 확장), 시스템 이득(스캐폴드 같은 학습 후 개선), 자산 이득(제한된 자산으로 모델 강화)의 세 가지 벡터로 분류할 수 있다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "Comprehensive AI governance requires addressing non-model gains",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.00047v1",
+        "published_at": "2026-05-01",
+        "score": 0.458832257594414,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06B787D172EB1B08BB558951B",
+        "document_id": "1A056D9E16564EF171B18E0F143",
+        "claim_text": "AI 도입으로 인한 조직 변화 과정에서 개별 직원의 심리적·행동적 반응을 예측할 수 있는 도구가 부재하다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Toward an AI-Powered Computational Testbed for Workforce Policy",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.19064v1",
+        "published_at": "2026-05-18",
+        "score": 0.458520117355614,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06AF96878A7AF571AF87D0B91",
+        "document_id": "1A056CEE9245BCA951117CAF08E",
+        "claim_text": "AI 도입으로 인해 과학 기관에서 새롭게 희소해지는 자원은 검증된 신호, 정당성, 진정한 출처, 통합 수용력의 네 가지이다",
+        "evidence_type": "theory",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "AI-Augmented Science and the New Institutional Scarcities",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.02566v3",
+        "published_at": "2026-05-04",
+        "score": 0.457476433045445,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0693EBAAD12D82185CB335943",
+        "document_id": "1A056C9EBF109B5CD65F2BCD2A4",
+        "claim_text": "기업 생성형 AI 파일럿의 약 95%는 측정 가능한 손익 영향을 제공하지 못한다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "about 95%",
+        "confidence": 0.95,
+        "document_title": "The Deployment Wall: A Diagnostic Framework and Instrument for Enterprise AI in the Deployment Era",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.29089v1",
+        "published_at": "2026-07-31",
+        "score": 0.457365765121939,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0694DA03D605152C4364BA09F",
+        "document_id": "1A056CAB014AC0F0DFDE7825000",
+        "claim_text": "AI 튜터는 저소득층 인구 통계 프로필에 대해 고소득층에 비해 인식론적 확신도와 정당화 점수를 차별적으로 제시한다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "The Paternalistic Filter: Epistemic Injustice and Differential Refusal in LLM-Mediated History Education for Marginalized Romanian Students",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.11292v1",
+        "published_at": "2026-07-13",
+        "score": 0.457000250560623,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A06A2CB19243B2298BDC79D394",
+        "document_id": "1A05B551DB3AFF735053449F053",
+        "claim_text": "AI 도입으로 인한 고용 영향에 대해 연구 추정치가 광범위하게 다르며, 고용 결과의 속도나 규모에 대한 합의가 거의 없다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "How tech firms should address job concerns and skill development | Brookings",
+        "source_id": "brookings-future-of-work",
+        "tier": "T1",
+        "url": "https://www.brookings.edu/articles/how-tech-firms-should-address-job-concerns-and-skill-development",
+        "published_at": "2026-07-23",
+        "score": 0.456719440223775,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표"
+        ]
+      },
+      {
+        "id": "1A0A70EC65534A8CFB73688316A",
+        "document_id": "1A0A6E371882EC15CC0AC628B67",
+        "claim_text": "AI 시스템에 대한 신뢰도가 높을수록 비판적 사고가 감소하는 경향을 보인다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "319 knowledge workers, 936 examples of generative AI use",
+        "confidence": 0.9,
+        "document_title": "Is Overreliance on AI Causing Agency Decay?",
+        "source_id": "knowledge-wharton",
+        "tier": "T2",
+        "url": "https://knowledge.wharton.upenn.edu/article/is-overreliance-on-ai-causing-agency-decay/",
+        "published_at": "2026-09-15",
+        "score": 0.456489493413464,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 측정 지표",
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B766A8173862C8C4178B405",
+        "document_id": "1A056D98959106485C03B6705C6",
+        "claim_text": "AI 가치관 프레이밍을 제시한 경우 사용자의 AI 의존도가 평균 20% 감소했다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "평균 20%",
+        "confidence": 0.95,
+        "document_title": "Framing an AI with Values Reduces AI Reliance in AI-supported Writing Tasks",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.20512v1",
+        "published_at": "2026-05-19",
+        "score": 0.615776516547237,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A056B248C314C04E37CCE1763C",
+        "document_id": "1A05667DEC70A02AF72BB43F570",
+        "claim_text": "AI 평가본을 한 명의 검토자에게만 제공하면 독립적인 인간의 조사와 AI 지원을 더 잘 결합할 수 있다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Designing AI-Augmented Peer Review -- by Joshua S. Gans",
+        "source_id": "nber-working-papers",
+        "tier": "T1",
+        "url": "https://www.nber.org/papers/w35688#fromrss",
+        "published_at": null,
+        "score": 0.611593491299332,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06BF2C72C4FD7F373459E4536",
+        "document_id": "1A05EE24341956A9A4A598046CB",
+        "claim_text": "적용하는 평가 기준에 따라 AI 기록 도구의 오류율은 28%에서 97% 사이에서 변동한다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "28% to 97%",
+        "confidence": 0.89,
+        "document_title": "One note in three: a verified census of three deployed AI scribes, and the instrument that counted it",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.31017v1",
+        "published_at": "2026-08-31",
+        "score": 0.609810260590895,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AD01F42F8088CD89D644FF9",
+        "document_id": "1A056CBB8AF0A8FA4CD7DB7CE6F",
+        "claim_text": "검색 기반 학습 조건이 학습자 주도식 AI 지원 학습보다 사후 평가 성과에서 더 우수했다",
+        "evidence_type": "experiment",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Do Gains from Generative AI-Enabled Adaptive Pretesting Persist? Evidence from a Retention Study",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.22328v1",
+        "published_at": "2026-06-21",
+        "score": 0.608734726695408,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B39AA43815FA3390026DA3D",
+        "document_id": "1A056D3D66F9B5329DEA48112F0",
+        "claim_text": "AI 기반 학습분석, 형성평가 피드백, 투명성 지원 계층이 동적 증거 수집을 통한 평가를 실현할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Dynamic Evidence Collection Ecosystem for Assessment Integrity and Authentic Competence",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.16016v1",
+        "published_at": "2026-08-17",
+        "score": 0.607807257674155,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3C3A5B923A1A798EC51E38",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI를 사용할 때 일반적으로 관찰되는 던닝-크루거 효과(저능력자의 과대평가, 고능력자의 과소평가)가 사라진다",
+        "evidence_type": "experiment",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.603361479391013,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0E5D3F571A3E12DA9EDDD18FA",
+        "document_id": "1A0E5CA95D1960873FD5134798E",
+        "claim_text": "AI 보조 도구는 자기평가 능력 향상 없이 수행 능력만 향상시킬 수 있다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Confident, Not Wiser: The Dunning-Kruger Effect in Human-AI Interaction",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.31095v1",
+        "published_at": "2026-09-25",
+        "score": 0.592242614515682,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B9647C9C9EC23359C947BC7",
+        "document_id": "1A056DC8CAF85545CB16F547B65",
+        "claim_text": "AI의 신뢰도가 낮을 때 적용한 top-2 assistance 방식은 인간의 정확도를 28.4%에서 38.3%로 향상시켰다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "28.4% to 38.3%",
+        "confidence": 0.93,
+        "document_title": "Toward Human-AI Complementarity Across Diverse Tasks",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.04070v1",
+        "published_at": "2026-04-13",
+        "score": 0.591639245982997,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3BABFDB1FEECE2628C2F5D",
+        "document_id": "1A060A5F4DDAA8842562CA4740F",
+        "claim_text": "AI 도구 사용 시 업무 완료율이 평균 12.2% 증가한다.",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "12.2% 증가",
+        "confidence": 0.9,
+        "document_title": "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+        "published_at": "2023-09-15",
+        "score": 0.588857883154994,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AC662FBB6B82CBFF9F30282",
+        "document_id": "1A056CB31AFBD183DF6A9A55673",
+        "claim_text": "AI 사용자들에게는 정확성, 신뢰성, 일관성에 대한 우려보다 행위능력 향상의 인지가 사용 패턴에 더 큰 영향을 미친다",
+        "evidence_type": "data",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "AI usage patterns are shaped by perceived gains in human agency",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.02313v1",
+        "published_at": "2026-07-02",
+        "score": 0.587031629332191,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A0694B395CB51626114739717C",
+        "document_id": "1A056CA8F70D0B33B7DF6C06FC9",
+        "claim_text": "AI 도구는 HR 분석 역량을 향상시킨다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "AI-Augmented Human Resource Management? Insights from German companies",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.13839v2",
+        "published_at": "2026-07-15",
+        "score": 0.584601202528456,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3C40B2A65A18B58E7816DF",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "참가자의 89.43%는 AI 미사용 벤치마크 표본의 평균 성과보다 높은 점수를 획득했다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "89.43% (246명 중 220명)",
+        "confidence": 0.87,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.583218639674228,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B4E6EAAF7863A2DB1970416",
+        "document_id": "1A056D5F80BDCC0A7C6E7CE4816",
+        "claim_text": "보험 계약서 설명 AI 시스템이 사용자 만족도, 신뢰도, 명확성에서 높은 평가를 받았다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "A Human-Centric Evaluation of a Retrieval-Augmented Generation System for Explaining Quebec Insurance Contracts",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.15963v1",
+        "published_at": "2026-07-17",
+        "score": 0.581703370593518,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3C39A6CFED94BDA4033DEA",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI 기술에 대한 높은 이해도와 비판적 평가 능력을 가진 사용자일수록 자신의 성과 판단에서 더 확신하지만 정확도는 낮다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.579802742443516,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B39DE07B18FA8F44F6033B8",
+        "document_id": "1A056D3D86D8FA80AD59443B992",
+        "claim_text": "교육용 평가 도구를 사용하여 AI 능력에 관한 일반화된 주장을 도출하는 평가 관행의 타당성에 의문을 제기해야 한다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Do Assessment Instruments Measure the Same Thing for Humans and LLMs? A Latent Structure Analysis",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.15630v1",
+        "published_at": "2026-08-16",
+        "score": 0.57703672344573,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AF69AD184C8E1E88322A984",
+        "document_id": "1A056CE8C7BE1234B390D2B00B7",
+        "claim_text": "기관은 학생 부분집단 간에 AI 활용 교육이 동등한 학습 향상, 학습 이전, 신뢰도 보정, 지속성, 연구 준비도를 가져오는지 평가해야 한다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.87,
+        "document_title": "Preparing Students for AI-Powered Materials Discovery: A Workflow-Aligned Framework for AI Literacy, Equity, and Scientific Judgment",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.09624v1",
+        "published_at": "2026-05-10",
+        "score": 0.576039732715236,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B4D9753150D6683CBF8A2EE",
+        "document_id": "1A056D5DE51E7F77C11E612135D",
+        "claim_text": "AI 시스템의 대립적·적대적 수사 기법도 정보 평가 정확도를 적정 수준으로 향상시켰다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "It Matters How You Say It: Exploring Rhetorical Patterns for AI-Assisted Information Evaluation",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.17627v1",
+        "published_at": "2026-07-20",
+        "score": 0.575483930727476,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3C42D0267F3EBE73CFB88E",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI를 사용한 참가자들은 자신의 성능을 실제보다 과대평가했다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": "AI 그룹에서 추정 성능: M=17.13, SD=3.16, 실제 성능과의 차이 t(244)=18.33, p<.001, d=1.17",
+        "confidence": 0.94,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.5750086835738,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06948984B831F2BF5A1858849",
+        "document_id": "1A056CA6AD2E654C0519F7C85B1",
+        "claim_text": "개인 수준의 작업 성능에 대한 AI 효과는 통제된 연구를 통해 입증되었다",
+        "evidence_type": "experiment",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "Who Will Become the Next Senior? How Generative AI Erodes the Development Pathway in Software Engineering",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.17067v3",
+        "published_at": "2026-07-19",
+        "score": 0.574066492267604,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3C383E3775C6A022164A5C",
+        "document_id": "1A060A616A2B0214CF307161D79",
+        "claim_text": "AI를 사용하여 논리 추론 과제를 수행할 때 사용자의 실제 성과는 향상되지만, 자신의 성과를 과대평가하는 경향이 동시에 나타난다",
+        "evidence_type": "experiment",
+        "stance": "cautious",
+        "metric": "task performance improved by 3 points, participants overestimated performance by 4 points",
+        "confidence": 0.95,
+        "document_title": "AI Makes You Smarter, But None The Wiser: The Disconnect Between Performance and Metacognition",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://doi.org/10.1016/j.chb.2025.108779",
+        "published_at": "2026-01-01",
+        "score": 0.57387400058923,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06AF490039E5A3A6B3BE3606F",
+        "document_id": "1A056CE8D7E0FA3C8983B0A9906",
+        "claim_text": "AI 자동화 도구 수용에서 성과 기대(Performance Expectancy)가 쾌락적 동기(Hedonic Motivation)보다 더 강한 영향 요인이다",
+        "evidence_type": "survey",
+        "stance": "neutral",
+        "metric": "PE 최강 구성 요소, HM 최약 구성 요소",
+        "confidence": 0.9,
+        "document_title": "AI-Automation Tooling in Computer Engineering Education: Mixed-Methods TAM/UTAUT Evidence for a General Acceptance Attitude",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.12424v1",
+        "published_at": "2026-05-10",
+        "score": 0.573294851518841,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A09265091AF470EC26BB71884F",
+        "document_id": "1A0925FE71875419EED7E3AEA09",
+        "claim_text": "AI의 인간 파트너와의 효과성은 AI-AI 성능보다는 관례 호환성에 의해 더 잘 예측된다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "The Convention Gap: Towards Measuring Implicit Communication in Cooperative AI Evaluation",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.11489v1",
+        "published_at": "2026-09-10",
+        "score": 0.572529521399338,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A069400A50F12259703E2C1552",
+        "document_id": "1A056C9DDD11A32F093C0B19D3D",
+        "claim_text": "AI 튜터는 330만 개의 학습 기록 표본에서 기존 최고 성능 모델들보다 참여도, 지식 보유, 최종 학습 성과에서 일관되게 우수한 성능을 보였다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "23 million learning records from 33,700 learners",
+        "confidence": 0.95,
+        "document_title": "Towards Sustainable Learning in Online Education: A Reinforcement Learning Approach",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.11245v1",
+        "published_at": "2026-08-02",
+        "score": 0.571776676096228,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06A3BAD66E8A5E1FCCF1363A0",
+        "document_id": "1A060A5F4DDAA8842562CA4740F",
+        "claim_text": "AI 지원 업무에서 하위 50% 성과층이 상위 50% 성과층보다 더 큰 성능 개선 효과를 얻는다.",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality",
+        "source_id": "academic-canon",
+        "tier": "T1",
+        "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+        "published_at": "2023-09-15",
+        "score": 0.568646889895728,
+        "match_type": "semantic",
+        "queries": [
+          "AI 자기 평가 성과 기록"
+        ]
+      },
+      {
+        "id": "1A06B9E1A02443C25FA05F07F5D",
+        "document_id": "1A056DD3849E32B78EE38A8A369",
+        "claim_text": "AI 도구가 근로자 생산성을 높인다는 실증적 증거가 존재한다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "The Augmentation Trap: AI Productivity and the Cost of Cognitive Offloading",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.03501v6",
+        "published_at": "2026-04-03",
+        "score": 0.612470012630446,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06139EEBAF5017A9B10AE6212",
+        "document_id": "1A0566ED5AC7F1B29B89114A476",
+        "claim_text": "AI 에이전트를 통해 직원 이직률, 생산성 달성 시간, 고충 등을 자동으로 분석할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "Introducing HR 2030: A Vision For Agentic Human Resources",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2026/04/introducing-hr-2030-a-vision-for-agentic-human-resources/",
+        "published_at": "2026-04-06",
+        "score": 0.610691788057284,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0611B63577F068A985377A9BE",
+        "document_id": "1A056688CF3F2C91A22A0CFD301",
+        "claim_text": "AI가 개별 직원의 생산성을 향상시켰다고 보고하는 응답자가 다수이다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "응답자의 80%가 AI로 인한 개인 생산성 향상 보고",
+        "confidence": 0.95,
+        "document_title": "The state of AI in 2026: On the road to ROI",
+        "source_id": "mckinsey-insights",
+        "tier": "T2",
+        "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+        "published_at": "2026-08-25",
+        "score": 0.598678677837645,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0A2C387FB40882F8134B2F83E",
+        "document_id": "1A0A1BEDBD6858570DACF8DD110",
+        "claim_text": "AI는 양적 금융에서 모델 개발자와 연구자의 작업 효율성을 높이는 생산성 도구로 작용한다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "How AI Is Reshaping Quantitative Finance",
+        "source_id": "knowledge-wharton",
+        "tier": "T2",
+        "url": "https://knowledge.wharton.upenn.edu/article/how-ai-is-reshaping-quantitative-finance/",
+        "published_at": "2026-09-14",
+        "score": 0.59571652895064,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A39457B4ED6E041EF471698",
+        "document_id": "1A060A519D36F0AD5511B312908",
+        "claim_text": "AI 도움말에 높은 순응도를 보이는 상담사(최상위 5분위)의 생산성 향상이 최하위 5분위보다 2배 이상 크다",
+        "evidence_type": "data",
+        "stance": "conditional",
+        "metric": "lowest quintile: 10% gain, highest quintile: close to 25%",
+        "confidence": 0.93,
+        "document_title": "Generative AI at Work",
+        "source_id": "nber-working-papers",
+        "tier": "T1",
+        "url": "https://www.nber.org/papers/w31161",
+        "published_at": "2023-04-01",
+        "score": 0.573909250624965,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06AEA0DF790DA79CA19417BFC",
+        "document_id": "1A056CDB8694C67D2F3661D4DE2",
+        "claim_text": "AI 생산성 향상 효과는 인적자원 구성, 개인의 기초 역량, 실무자의 학습곡선, 공정한 활용에 대한 인센티브, 목표의 유연성 등 5가지 조직 요인에 의해 조절된다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.92,
+        "document_title": "Position: Adopting AI in Practice Does Not Guarantee the Productivity Boost",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.24688v1",
+        "published_at": "2026-05-23",
+        "score": 0.573860047157532,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06BE4632CE863B507826482EA",
+        "document_id": "1A056F6E9B9FEFF948C13204BCB",
+        "claim_text": "AI 기반 시스템의 생산성 향상은 범용 기술의 특성인 '생산성 J자 곡선'을 따른다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "From Augmentation to Reconstruction: Guiding the AI Disruption to the Good Place",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.29207v1",
+        "published_at": "2026-05-28",
+        "score": 0.572413892251528,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06B678DB0D1DB50F268C0162A",
+        "document_id": "1A056D849BDE443EB527E313204",
+        "claim_text": "AI 보조 도구의 생산성 향상 효과는 사용자 집단에 따라 차이가 난다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Revisiting the ABCs of Working with AI: A Replication with Radiologists",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.12585v1",
+        "published_at": "2026-06-10",
+        "score": 0.568484519510752,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06ACA74089A1167F9CD563310",
+        "document_id": "1A056CB667AB8189F4CFB7BF2EF",
+        "claim_text": "인간-AI 공동 생산 상호작용에서 최종 산출물 추적성 점수는 평균 77.1/100이었다",
+        "evidence_type": "case",
+        "stance": "neutral",
+        "metric": "77.1/100",
+        "confidence": 0.9,
+        "document_title": "LLMography: Transforming Human-AI Conversations into Traceability, Oversight, and Auditability Indicators",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.29437v1",
+        "published_at": "2026-06-28",
+        "score": 0.567710172230415,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06B6B84619070DFDEEF5360F6",
+        "document_id": "1A056D8BF5668823FFB1E4197EB",
+        "claim_text": "AI 지원 작업의 빠른 속도로 인해 조직과 개인의 생산성 기대치가 재설정되는 현상이 발생한다",
+        "evidence_type": "case",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Unanticipated Effects of Generative AI on Expertise Pathways and Performance Perception in System Administration",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.28650v2",
+        "published_at": "2026-06-02",
+        "score": 0.567375664179087,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06A129FDE5C08FF945135D946",
+        "document_id": "1A060D510E7E0B95FE074C07B4C",
+        "claim_text": "AI를 작년에 사용한 근로자 중 약 4분의 3은 AI가 생산성을 높이고 업무 품질을 향상시킨다고 보고했다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "약 3/4 (약 75%)",
+        "confidence": 0.85,
+        "document_title": "Global Workforce Hopes and Fears Survey 2025",
+        "source_id": "pwc-global-insights",
+        "tier": "T2",
+        "url": "https://www.pwc.com/gx/en/issues/workforce/hopes-and-fears.html",
+        "published_at": "2025-11-12",
+        "score": 0.563734487715416,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0612DF2DFB7161EE90396C930",
+        "document_id": "1A0567071B1007C24940C1AB888",
+        "claim_text": "AI 도입 시 생산성이 향상되지만 시스템 비용과 투자 회수 기간으로 인해 단순하지 않은 결과를 초래한다",
+        "evidence_type": "opinion",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "OpenAI Gets Into Job Placement While The Job Market Crashes",
+        "source_id": "josh-bersin",
+        "tier": "T2",
+        "url": "https://joshbersin.com/2025/09/openai-gets-into-recruiting-while-job-market-struggles-to-reinvent-itself/",
+        "published_at": "2025-09-05",
+        "score": 0.560579063991923,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0EFF66870DD8FA4A29AB70E47",
+        "document_id": "1A0EFCE6C9CDA8DA57B6BC19147",
+        "claim_text": "AI는 기술 서비스 산업에서 서비스 라인별로 15~45% 범위의 생산성 향상을 이미 제공하고 있다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": "15% to 45%",
+        "confidence": 0.88,
+        "document_title": "<![CDATA[Tech Services: Cracking the Code on AI-led Growth]]>",
+        "source_id": "bain-insights",
+        "tier": "T2",
+        "url": "https://www.bain.com/insights/tech-services-cracking-the-code-on-ai-led-growth-technology-report-2026/",
+        "published_at": "2026-09-29",
+        "score": 0.558131671254718,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06BBC0202BC8B350486BB18E5",
+        "document_id": "1A056E012F1C11C45F5EF9DAF99",
+        "claim_text": "생성형 AI 사용 시 교육 수준에 따른 생산성 격차가 감소한다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": "초기 격차 0.548 표준편차 → AI 사용 시 0.139 표준편차(약 75% 감소)",
+        "confidence": 0.95,
+        "document_title": "Does generative AI narrow education-based productivity gaps? Evidence from a randomized experiment",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.04198v1",
+        "published_at": "2026-08-04",
+        "score": 0.55796344790939,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0881A99E13D704CA8980396BF",
+        "document_id": "1A08814EA9C0D118132191B822C",
+        "claim_text": "AI 기기의 연속적인 도입에 따라 노동생산성 향상 효과가 누적된다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI Innovation and Firm Performance in the Medical Device Industry",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.08485v1",
+        "published_at": "2026-09-08",
+        "score": 0.557603450121598,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0881A993F3DCF3A9B14A52A37",
+        "document_id": "1A08814EA9C0D118132191B822C",
+        "claim_text": "AI 기기를 시장에 출시한 기업들이 더 높은 노동생산성을 나타낸다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "AI Innovation and Firm Performance in the Medical Device Industry",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.08485v1",
+        "published_at": "2026-09-08",
+        "score": 0.557361706298041,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06ACA72764AA45FD457AD1FB1",
+        "document_id": "1A056CB667AB8189F4CFB7BF2EF",
+        "claim_text": "인간-AI 공동 생산 상호작용에서 인간 지시 품질 점수는 평균 86.8/100이었다",
+        "evidence_type": "case",
+        "stance": "neutral",
+        "metric": "86.8/100",
+        "confidence": 0.9,
+        "document_title": "LLMography: Transforming Human-AI Conversations into Traceability, Oversight, and Auditability Indicators",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.29437v1",
+        "published_at": "2026-06-28",
+        "score": 0.557147908289783,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06BBF6818E0DE4D57B2E3C6D2",
+        "document_id": "1A056E047B7D4409240DA63C3F1",
+        "claim_text": "생성형 AI의 생산성 향상 효과가 확인되지만, 생산성을 세분화하면 긍정 효과와 부정 효과가 혼재된다",
+        "evidence_type": "theory",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.88,
+        "document_title": "Generative Artificial Intelligence in Scientific Research: Individual Benefits, Collective Risks, and a Framework for Responsible Research with AI",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.24879v1",
+        "published_at": "2026-07-27",
+        "score": 0.556853144298941,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06BE7E0504B5E46FF03EF5788",
+        "document_id": "1A056F71416C3A40D1E4090F353",
+        "claim_text": "생성형 AI로 인한 제품 출시 증가 중 상당 부분은 낮은 수준의 실험적 진입이며, 최고 품질 결과에서의 개인 창업가 대표성 증가로 이어지지 않는다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Generative AI Fuels Solo Entrepreneurship, but Teams Still Lead at the Top",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.10291v1",
+        "published_at": "2026-05-11",
+        "score": 0.551703667363518,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06B7DB5A6283F32691145DA54",
+        "document_id": "1A056DA6671FAFA04D17BDF17C0",
+        "claim_text": "AI 도구는 연구 워크플로우의 초기 단계와 얕은 수준의 작업에서는 효율성을 향상시킬 수 있지만, 산출물은 여전히 인간의 검증이 필요하다",
+        "evidence_type": "experiment",
+        "stance": "conditional",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Useful for Exploration, Risky for Precision: Evaluating AI Tools in Academic Research",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.10125v2",
+        "published_at": "2026-05-11",
+        "score": 0.550045175985394,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06428A0D502338CC0A6BAC4E2",
+        "document_id": "1A056C91ECBD61B43D5CFE44AFC",
+        "claim_text": "Organizm 프로토타입의 6개월 사용 기록은 관찰 품질이 개인 AI의 성능에 미치는 영향을 측정하기 위한 평가 방향을 제시한다",
+        "evidence_type": "case",
+        "stance": "neutral",
+        "metric": "6개월",
+        "confidence": 0.85,
+        "document_title": "Toward Personal Intelligence Through Cooperative Observation",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.17128v1",
+        "published_at": "2026-08-17",
+        "score": 0.548658897321825,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06AC24DA337E47061943555EA",
+        "document_id": "1A056CAE9301C814CDB9E3663B6",
+        "claim_text": "AI 코딩 에이전트 도입으로 인한 생산성 향상은 실제로 나타난다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "Agents That Teach: Towards Designing Incidental Learning Back into AI-Assisted Software Development",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.06101v1",
+        "published_at": "2026-07-07",
+        "score": 0.547650725642527,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06B13F3E51AD8E948E102D5F8",
+        "document_id": "1A056D0ACC73A908070E6000F99",
+        "claim_text": "생성형 AI는 개인 수준의 생산성을 증가시키지만 집단의 다양성을 감소시킬 수 있다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "Incentives shape how humans co-create with generative AI",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.03529v1",
+        "published_at": "2026-04-04",
+        "score": 0.547620144863098,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A06BBF6634B7C8377944C4F41B",
+        "document_id": "1A056E047B7D4409240DA63C3F1",
+        "claim_text": "생성형 AI를 활용한 연구 작업에서 출판 논문 수와 인용 점유율이 측정 가능한 수준으로 증가했다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Generative Artificial Intelligence in Scientific Research: Individual Benefits, Collective Risks, and a Framework for Responsible Research with AI",
+        "source_id": "arxiv-econ-gn",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.24879v1",
+        "published_at": "2026-07-27",
+        "score": 0.54740862665051,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정"
+        ]
+      },
+      {
+        "id": "1A0EFE7208103FC899C63DEFE06",
+        "document_id": "1A0EFE2717C8C3A791D25CC8688",
+        "claim_text": "AI 지원 협력 검사 셀 도입으로 단위당 품질 검사 시간이 단축되었다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": "82초에서 61초로 단축(약 25%)",
+        "confidence": 0.95,
+        "document_title": "AI-Driven Collaborative Assembly Line Inspection: System Integration and Deployment Challenges",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.33522v1",
+        "published_at": "2026-09-27",
+        "score": 0.547107542057907,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B16A567E208AC0C3BEADA37",
+        "document_id": "1A056D0C5E34243B2E277EC181D",
+        "claim_text": "생성형 AI 사용으로 인한 평균 인지된 품질 개선도는 7점 만점에 6.27점이다",
+        "evidence_type": "survey",
+        "stance": "optimistic",
+        "metric": "6.27/7",
+        "confidence": 0.9,
+        "document_title": "Generative AI Use in Professional Graduate Thesis Writing: Adoption, Perceived Outcomes, and the Role of a Research-Specialized Agent",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.02792v1",
+        "published_at": "2026-04-03",
+        "score": 0.546999582625956,
+        "match_type": "semantic",
+        "queries": [
+          "AI 생산성 자기 보고 측정",
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0EFE94878D2C3572F14D2D8E0",
+        "document_id": "1A0EFE24B503D724971C8289CC8",
+        "claim_text": "AI 에이전트가 생산한 결과물에서 검토한 부분에 주요 과학적 오류가 발견되지 않았다",
+        "evidence_type": "case",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI Agent Swarms as Researchers: Progress, Challenges, and Open Questions",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.35719v1",
+        "published_at": "2026-09-28",
+        "score": 0.588170106638036,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A061410B73C0097A2017D587E2",
+        "document_id": "1A05D2D5348ADBB1F711CAC0514",
+        "claim_text": "의사결정 시 AI 산출물의 품질을 정기적으로 검증하는 경영진은 절반에 불과하다",
+        "evidence_type": "survey",
+        "stance": "cautious",
+        "metric": "50%",
+        "confidence": 0.88,
+        "document_title": "AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI",
+        "source_id": "deloitte-insights",
+        "tier": "T2",
+        "url": "https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html",
+        "published_at": "2026-07-09",
+        "score": 0.579274453674555,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B050FE9B6A4EB11A927763D",
+        "document_id": "1A056CF87CA5F436EB98D8FB688",
+        "claim_text": "현재의 동료 심사 기준(품질, 참신성, 방법론적 엄밀성)으로는 AI 연구 파이프라인이 생성한 학술 저작물을 평가할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Rethinking Publication: A Certification Framework for AI-Enabled Research",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.22026v2",
+        "published_at": "2026-04-23",
+        "score": 0.576812949921574,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B39A82AE4C40E20BE422E05",
+        "document_id": "1A056D3D66F9B5329DEA48112F0",
+        "claim_text": "생성형 AI가 고품질의 에세이, 코드, 디자인 결과물을 생성할 수 있어 단일 시점 제출과 결과물 평가에 의존하는 기존 평가 방식의 타당성을 훼손한다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "Dynamic Evidence Collection Ecosystem for Assessment Integrity and Authentic Competence",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.16016v1",
+        "published_at": "2026-08-17",
+        "score": 0.576477951686051,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0EFE9488CFE0BCEDCA5A7400E",
+        "document_id": "1A0EFE24B503D724971C8289CC8",
+        "claim_text": "AI 에이전트 기반 연구에서는 생산보다 검토가 병목이 되어 결과물의 신뢰성 판단이 어려워진다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.75,
+        "document_title": "AI Agent Swarms as Researchers: Progress, Challenges, and Open Questions",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2609.35719v1",
+        "published_at": "2026-09-28",
+        "score": 0.565857614561173,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B984D73E68CDA2019AB8292",
+        "document_id": "1A056DC8EE4694A89AC0B72B6F8",
+        "claim_text": "AI 기여도가 높을수록 에세이 품질이 향상된다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "From Planning to Revision: How AI Writing Support at Different Stages Alters Ownership",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.11009v2",
+        "published_at": "2026-04-13",
+        "score": 0.562714123931074,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06ACE361EEDC4522CF15963CF",
+        "document_id": "1A056CB94AD78E7191C1A4DE80B",
+        "claim_text": "경험적 분석 결과 AI 거버넌스 문서의 37%가 구조적 품질 임계값 이하에 해당한다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": "37%",
+        "confidence": 0.9,
+        "document_title": "Fifty Years of Specification Completeness: What Aviation Certification Tells AI Governance About Epoch Limits, Proof Surfaces, and the Structural Gap",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.25120v1",
+        "published_at": "2026-06-23",
+        "score": 0.557368708897022,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0A6FE67D96F3BE9DC9DD39282",
+        "document_id": "1A0A6FBAD007E50B15764888041",
+        "claim_text": "저품질 항목을 제거한 후 AI 생성 척도는 모든 조건에서 높은 타당도를 보인다",
+        "evidence_type": "experiment",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.94,
+        "document_title": "Can We Really Leverage AI-Assisted Automatic Item Generation for Psychological Scale Development?",
+        "source_id": "psyarxiv",
+        "tier": "T1",
+        "url": "https://osf.io/preprints/psyarxiv/694pe_v1/",
+        "published_at": "2026-09-12",
+        "score": 0.55495735926311,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AF2CB6CCEDED2F62F8E82BC",
+        "document_id": "1A056CE69340D4FC9F0D61C2353",
+        "claim_text": "생성형 AI 사용이 허용된 시험 환경에서 학생들의 인지 작업이 해결책 생산에서 해결책 타당성 평가로 전환된다",
+        "evidence_type": "experiment",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Reimagining Assessment in the Age of Generative AI: Lessons from Open-Book Exams with ChatGPT",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.12363v1",
+        "published_at": "2026-05-12",
+        "score": 0.549959228570402,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06424F78F2BB824369C16CAD6",
+        "document_id": "1A056C8E5764A66D072ABB804BC",
+        "claim_text": "AI 지원 조사 인프라는 데이터 품질을 제한하지 않으면서도 기존 조사의 도전 과제들을 극복할 수 있는 기회를 제공한다",
+        "evidence_type": "opinion",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "Hybrid Panels: Toward Human-AI Collaboration in Survey Research",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.22582v1",
+        "published_at": "2026-08-23",
+        "score": 0.546177310955498,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B05E8D059847380FAC917F0",
+        "document_id": "1A056CFA1BFBA4602C68632E2DA",
+        "claim_text": "AI 생성 코드는 여전히 상당한 수준의 인간 검증을 필요로 하며, 정확성·유지보수성·보안 측면에서 불균등한 품질을 보인다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Short-Term Gain, Long-Term Fragility: AI Labor Substitution and the Erosion of Sustainable Capability",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.27399v1",
+        "published_at": "2026-04-23",
+        "score": 0.538985830564489,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AC3576B30A5D0E44E6DA4E3",
+        "document_id": "1A056CAD999ACDF9382E2E18DE6",
+        "claim_text": "AI 에이전트 접근성의 불평등은 가용성, 품질, 수량이라는 세 가지 차원으로 분석할 수 있다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "The Context Access Divide: Interaction-Level Architecture as a Complementary Dimension of Agentic Inequality",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.08495v1",
+        "published_at": "2026-07-09",
+        "score": 0.534883813884147,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06BA0068023840A11E1CD406A",
+        "document_id": "1A056DD35CA85066B78D76E277A",
+        "claim_text": "AI 통합 제작 방식에서도 출판 수준의 품질을 위해서는 상당한 규모의 인간 수작업이 필수적이다",
+        "evidence_type": "case",
+        "stance": "cautious",
+        "metric": "235시간",
+        "confidence": 0.9,
+        "document_title": "Beyond Generation: An Empirical Study on Redefining the Act of Drawing Through an 85% Time Reduction in Picture-Book Production",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.03549v1",
+        "published_at": "2026-04-04",
+        "score": 0.534773500409063,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AF7C36A7275903029BB763A",
+        "document_id": "1A056CEAC6663C9078A18A88D98",
+        "claim_text": "LLM 기반 탐색적 데이터 분석 에이전트의 신뢰성 평가에서는 평균 품질, 반복성, 조건 민감도를 운영 신뢰성의 상호보완적 차원으로 다루어야 한다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.85,
+        "document_title": "Business Utility of Large Language Models as Exploratory Data Analysis Agents",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2606.00051v1",
+        "published_at": "2026-05-08",
+        "score": 0.528919659180672,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AF4276221C315C4A5CD1F30",
+        "document_id": "1A056CE5BB637BDD56AF009AD8F",
+        "claim_text": "슬라이드 품질 평가가 높을수록 \"AI 생성\"이라는 평가는 낮아지는 음의 상관관계가 있었다",
+        "evidence_type": "data",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "AI-Generated Slides: Are They Good? Can Students Tell?",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.13532v1",
+        "published_at": "2026-05-13",
+        "score": 0.525931011634419,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AFE9C3F5481CEF5A0A0F74B",
+        "document_id": "1A056CF2CE9800F5C56771F38D3",
+        "claim_text": "AI 도입으로 인한 변화는 단순한 효율성 증대가 아니라 생산 관계의 질적 변환이다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "Structural Dissolution: How Artificial Intelligence Dismantles Coordination Architecture and Reconfigures the Political Economy of Production",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2604.27435v1",
+        "published_at": "2026-04-30",
+        "score": 0.522565898219003,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B55D3381716A5900F4475CF",
+        "document_id": "1A056D6AB498728A611E6FEC857",
+        "claim_text": "코드 품질 지표나 풀 리퀘스트 병합률에서 광범위한 악화가 나타나지 않았다",
+        "evidence_type": "data",
+        "stance": "optimistic",
+        "metric": null,
+        "confidence": 0.9,
+        "document_title": "From Conversation to Contribution: Characterizing Coding Agent in Open-Source Software",
+        "source_id": "arxiv-cs-hc",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2607.05677v1",
+        "published_at": "2026-07-06",
+        "score": 0.522261027673622,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06B0EB0EB2A51B832F590DC08",
+        "document_id": "1A056D029878EBD851A954E3A6A",
+        "claim_text": "의료 AI 도입 시 프롬프트 구성이 응답 품질에 미치는 영향이 충분히 검토되지 않았다",
+        "evidence_type": "opinion",
+        "stance": "cautious",
+        "metric": null,
+        "confidence": 0.8,
+        "document_title": "When AI Tells You What You Want to Hear: Sycophantic Behavior of Large Language Models in Dementia Care Settings",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.16288v1",
+        "published_at": "2026-04-13",
+        "score": 0.520837033749322,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A0693F4903B903BB34ED9E4C95",
+        "document_id": "1A056C9E7D113E58FE1BB5F500D",
+        "claim_text": "현재 AI 평가 프레임워크는 역량, 안전성, 채택률, 참여도, 효율성, 생산성, 재무 수익 등에 주로 초점을 맞추고 있다",
+        "evidence_type": "theory",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "Optimising for Flourishing: Flourishing Metrics and Return on Flourishing as Success Criteria for Artificial Intelligence and Post-AGI Economic Systems",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2608.00151v2",
+        "published_at": "2026-07-31",
+        "score": 0.52041744500189,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      },
+      {
+        "id": "1A06AF96660DEA66F146A7A0227",
+        "document_id": "1A056CEE9245BCA951117CAF08E",
+        "claim_text": "AI는 과학적 판단(심사, 순위 매김, 귀속, 검증)을 거의 한계비용 없이 생산할 수 있다",
+        "evidence_type": "opinion",
+        "stance": "neutral",
+        "metric": null,
+        "confidence": 0.95,
+        "document_title": "AI-Augmented Science and the New Institutional Scarcities",
+        "source_id": "arxiv-cs-cy",
+        "tier": "T1",
+        "url": "https://arxiv.org/abs/2605.02566v3",
+        "published_at": "2026-05-04",
+        "score": 0.518071812990227,
+        "match_type": "semantic",
+        "queries": [
+          "AI 성과 평가 품질 검토"
+        ]
+      }
+    ]
+  },
+  "theory": [
+    {
+      "id": "1A0607DFBCFCF49E5943C1D5F31",
+      "claim_text": "총보상(Total Rewards)은 조직이 인재를 유치·동기부여·유지하기 위해 활용하는 요소를 파편적 제도가 아니라 하나의 통합된 '교환 관계'로 바라보는 관점이다 (WorldatWork이 2000년 처음 제시하고 지속적으로 개정)",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DFC00ECDC7A4DB29496CD",
+      "claim_text": "요소 구성은 개정판마다 다르다 — 초기(2000)에는 보상·복리·일과 삶, 이후(2006~) 인정·성과관리·경력개발이 추가되었고, 2020년대 개정판은 보상(Compensation)·복리후생(Benefits)·웰빙(Well-being)·경력(Careers)·인정(Recognition)의 다섯 요소로 정리한다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D60F7E8AF22E1E91F7B0D",
+      "claim_text": "HR은 직관·관행이 아니라 재무의 회계학, 마케팅의 시장조사처럼 체계적인 '의사결정 과학(decision science)'을 갖춰야 하며, 저자들은 이를 탤런트십(Talentship)이라 부른다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D6138CEF3ACE758D09CEC",
+      "claim_text": "HC BRidge 프레임의 세 정점: Impact — talent pool의 변화가 조직의 전략적 성공에 미치는 영향, Effectiveness — HR 프로그램이 talent pool을 얼마나 변화시키는지, Efficiency — 그 활동의 자원 효율성",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D6166105B12314EE09346",
+      "claim_text": "HR 측정의 목표는 '더 많은 HR 지표'가 아니라 더 나은 인재 의사결정(talent decisions)을 가능하게 하는 것이다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D6196ED1E2C06811ADB96",
+      "claim_text": "피벗탈 탤런트 풀(pivotal talent pool)은 고성과자나 고위직이 아니라, 인재의 질·가용성 차이가 전략 성과에 가장 큰 차이를 만드는 역할·인재군이다 (예: 디즈니 테마파크에서 고객 만족의 피벗은 청소 직군)",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D61C8DF90BCAE637C926A",
+      "claim_text": "'무엇을 왜 측정할 것인가'의 논리를 세우는 개념 틀이며, pivotal 판별 자체가 전략 해석에 의존해 주관이 개입한다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607D61FA7426719A604F1596",
+      "claim_text": "모든 직무에 균등 투자하지 않는다는 원칙은 조직 형평·사기 이슈와 충돌할 수 있다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DAD36AEDD80E30C9235BF",
+      "claim_text": "조직이 공식적으로 선언하는 목표(B)와 실제로 측정·보상되는 행동(A) 사이의 불일치가 널리 퍼진 관리 실패의 핵심이다 — 문제는 단순히 KPI를 잘못 고르는 것이 아니라 선언된 목표와 실제 강화 유관성(reinforcement contingencies)의 어긋남이다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DAD69753F46F212F204D2",
+      "claim_text": "선언된 목표보다 실제로 측정·보상되는 것이 행동을 지배한다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DAD9B5D0F0C4D495A031B",
+      "claim_text": "조직은 측정하기 쉽거나 보상하기 쉬운 행동을 선택하면서, 정작 원하는 복잡한 행동(팀워크·장기 성장·정확한 판단)을 오히려 약화시킬 수 있다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DADCD4F059A636CC169DC",
+      "claim_text": "왜곡의 원인: 객관적으로 측정 가능한 지표에 대한 집착, 가시적 행동의 과잉 강조, 결과보다 '방어 가능한' 도덕·형평 기준의 선호",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DADFEB91052F971662CE0",
+      "claim_text": "정치·전쟁·의료·대학·기업·스포츠에 걸친 사례 논증(개념 논문)으로, 계량 실증보다 예시의 설득력에 의존한다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DAE30D29CC1B6CA225AE7",
+      "claim_text": "'A를 보상한다'는 진단이 사후적으로는 늘 가능해, 반증 조건을 명시하기 어렵다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DBA1999325BA65AF21254",
+      "claim_text": "보상시스템은 단순 비용이나 행정제도가 아니라, 조직이 어떤 행동·역량·성과를 중요하게 여기는지 전달하는 신호(signal)로 작동한다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "전략적 보상 (Strategic Pay / Rewarding Excellence)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DBA518D0F609D409EDF12",
+      "claim_text": "효과적인 보상시스템은 사업 전략(business strategy), 조직 설계(organization design), 인력 특성(workforce characteristics)과의 정합(fit)을 고려해 설계해야 한다 — 보상은 독립 제도가 아니라 전략의 지렛대다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "전략적 보상 (Strategic Pay / Rewarding Excellence)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DBA7DA3DB67795DA4A0E7",
+      "claim_text": "Lawler의 전략적 처방은 전통적인 '직무(job)에 지불하는' 방식에서 '사람의 역량·기술(person/skill-based pay)에 지불하는' 방식으로의 이동이다 (보편적 방향이 아니라 지식노동 비중이 큰 조직에 대한 처방)",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "전략적 보상 (Strategic Pay / Rewarding Excellence)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DBAAA5710051E216CB3BC",
+      "claim_text": "person/skill-based pay는 역량 인증·평가 인프라 비용이 크고, 스킬 인플레이션·경직성 위험이 있어 모든 조직에 유리한 것은 아니다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "전략적 보상 (Strategic Pay / Rewarding Excellence)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DBAD9BA5A5828A0E4E71E",
+      "claim_text": "'전략과의 fit'을 사후적으로 측정하면 어떤 보상 설계든 정당화될 수 있다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "전략적 보상 (Strategic Pay / Rewarding Excellence)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDDD9F341FDBBE75823EE",
+      "claim_text": "임금률(labor rate)과 인건비(labor cost)는 다른 개념이며, 높은 임금도 높은 생산성과 결합하면 낮은 단위노동비용(unit labor cost)으로 이어질 수 있다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDE03B814D7C1AB66FCA0",
+      "claim_text": "인건비가 총비용에서 큰 비중을 차지한다는 가정, 저인건비가 지속가능한 경쟁우위라는 믿음은 대부분의 산업에서 근거가 약하다 — 품질·서비스·혁신이 더 견고한 경쟁 무기다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDE36ADC57A787E69F4C4",
+      "claim_text": "개인 성과급(individual incentive pay)은 성과를 높이기는커녕 협력을 해치고 성과를 저해할 수 있다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDE621E0F26220AEA1414",
+      "claim_text": "사람이 오직 돈을 위해 일한다는 가정은 틀렸다 — pay는 개인 동기의 단일 원인이 아니라 조직 문화·협업·정보공유 등 다른 관리 관행과 함께 보아야 하며, 보상이 전달하는 메시지와 조직 가치의 정합성이 액수 자체보다 중요하다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDE90EE67A1B898E91A67",
+      "claim_text": "개인 인센티브의 부정적 효과가 모든 직무·맥락에서 동일하게 나타난다고 일반화하면 안 된다 — 상호의존성이 낮고 산출이 명확한 직무에서는 효과가 다를 수 있다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DDEC1AF0BB403E3542A70",
+      "claim_text": "HBR 논평으로, 주장의 근거는 저자의 연구 종합이며 개별 명제의 효과 크기는 맥락에 따라 다르다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상에 관한 여섯 가지 위험한 통념 (Six Dangerous Myths About Pay)",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DFC21269940E781CB47E2",
+      "claim_text": "핵심은 요소를 많이 제공하는 것이 아니라, 사업 전략과 구성원 니즈(employee needs)에 맞게 서로 통합된 포트폴리오(total value proposition)로 설계하는 것이다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DFC653AE3E686B2346934",
+      "claim_text": "구성원이 보상을 실제로 가치 있게 인식하지 않으면 조직이 부담하는 비용과 구성원이 지각하는 가치(employee-perceived value) 사이에 간극이 생긴다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DFC929F3861EA5C5061D6",
+      "claim_text": "학술 이론이 아니라 보상 실무 협회가 지속적으로 개정하는 practitioner framework다 — 인용 시 적용한 버전·연도를 명시해야 한다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0607DFCBFAC1C3BDA695B0184",
+      "claim_text": "'통합'과 '전략 정합'이 규범적 구호에 그치기 쉽고, 각 요소의 성과 기여를 분리 측정하기 어렵다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "총보상 모델 (WorldatWork Total Rewards Model) — practitioner framework",
+      "source_id": "theory-canon",
+      "tier": "T1",
+      "url": null
+    },
+    {
+      "id": "1A0640D085C236A8F970FF88C1F",
+      "claim_text": "구체적이고 도전적인 목표는 모호한 목표보다 더 높은 성과를 이끈다",
+      "stance": "optimistic",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상은 클수록 좋다?! 크기보다 중요한 것은…",
+      "source_id": "hr-bulletin",
+      "tier": "T3",
+      "url": "https://www.hrbulletin.net/performance-management/%eb%b3%b4%ec%83%81%ec%9d%80-%ed%81%b4%ec%88%98%eb%a1%9d-%ec%a2%8b%eb%8b%a4-%ed%81%ac%ea%b8%b0%eb%b3%b4%eb%8b%a4-%ec%a4%91%ec%9a%94%ed%95%9c-%ea%b2%83%ec%9d%80/"
+    },
+    {
+      "id": "1A0640D09B94F1571EF4313D625",
+      "claim_text": "구체적이고 도전적인 목표와 성과 간의 관계는 업무 복잡성, 피드백, 몰입 수준에 따라 달라진다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상은 클수록 좋다?! 크기보다 중요한 것은…",
+      "source_id": "hr-bulletin",
+      "tier": "T3",
+      "url": "https://www.hrbulletin.net/performance-management/%eb%b3%b4%ec%83%81%ec%9d%80-%ed%81%b4%ec%88%98%eb%a1%9d-%ec%a2%8b%eb%8b%a4-%ed%81%ac%ea%b8%b0%eb%b3%b4%eb%8b%a4-%ec%a4%91%ec%9a%94%ed%95%9c-%ea%b2%83%ec%9d%80/"
+    },
+    {
+      "id": "1A0640D0C7392D8EEA4572CB26B",
+      "claim_text": "손실 회피 경향과 매몰 비용 효과에 의해 연속 수행 인센티브가 목표 몰입을 강화한다",
+      "stance": "optimistic",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "보상은 클수록 좋다?! 크기보다 중요한 것은…",
+      "source_id": "hr-bulletin",
+      "tier": "T3",
+      "url": "https://www.hrbulletin.net/performance-management/%eb%b3%b4%ec%83%81%ec%9d%80-%ed%81%b4%ec%88%98%eb%a1%9d-%ec%a2%8b%eb%8b%a4-%ed%81%ac%ea%b8%b0%eb%b3%b4%eb%8b%a4-%ec%a4%91%ec%9a%94%ed%95%9c-%ea%b2%83%ec%9d%80/"
+    },
+    {
+      "id": "1A0C7D478A47DEAC1417B20FCDA",
+      "claim_text": "AI의 대중화는 기술 접근성의 차이가 아니라 AI를 개인의 사고 체계에 통합하는 정도에 따른 '지능 격차'를 초래할 것이다",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "AI 무기로 초격차 만드는 초고성과자 인력구조 재편 가속, 보상도 양극화 전망 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/11804/ac/magazine"
+    },
+    {
+      "id": "1A0C7D4CFCABF7575EAAFFAC920",
+      "claim_text": "고성과 인사 시스템(HPWS)이 조용한 사직을 줄이는 데 결정적인 역할을 한다",
+      "stance": "optimistic",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "“권한은 안 주고 헌신 요구?” 침묵의 저항 자율성-공정 보상으로 자존감 회복시켜야 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1201/article_no/11834/ac/magazine"
+    },
+    {
+      "id": "1A0C7D4D03C8C9FA0AADA2006B4",
+      "claim_text": "지각된 통제감이 낮은 직원일수록 자신의 대체 가능성을 크게 느끼고 조직에 대한 정서적 거리감을 갖는다",
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "“권한은 안 주고 헌신 요구?” 침묵의 저항 자율성-공정 보상으로 자존감 회복시켜야 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1201/article_no/11834/ac/magazine"
+    },
+    {
+      "id": "1A0C7D6582AAB08472EE8B432B2",
+      "claim_text": "AI를 효과적으로 활용하는 초고성과자는 깊이 있는 도메인 지식을 바탕으로 더 효과적인 프롬프트를 설계하고 AI가 생성한 결과물을 정교하게 평가하며 AI와 인간의 판단을 전략적으로 조율할 수 있다.",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "‘초고성과자’ 등장하는 시대, 보상 제도 전환 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/11879/ac/magazine"
+    },
+    {
+      "id": "1A0C7D658668462A5C9E32DD4D3",
+      "claim_text": "초고성과자가 가진 특성으로 인해 AI 시대에 동료들과의 성과 격차가 더 커질 수 있다(AI-특화 매튜 효과).",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "‘초고성과자’ 등장하는 시대, 보상 제도 전환 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/11879/ac/magazine"
+    },
+    {
+      "id": "1A0C7D7494244B5E97A958CFB8B",
+      "claim_text": "성과급이 핵심 인재 유지, 몰입, 협업, 혁신을 촉진한다면 단순한 비용이 아니라 미래 가치를 키우는 투자가 될 수 있다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "“공정한 보상의 조건, 재투자-협업 우선시해야 업황 변동 큰 산업, ‘보너스 뱅크’로 탄력 운영” | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12177/ac/magazine"
+    },
+    {
+      "id": "1A0C7D74A64B69436EC3D8B4A4B",
+      "claim_text": "보너스 뱅크 방식을 통해 호황기에 성과급 재원을 한 번에 모두 지급하지 않고 일부를 적립하면 불황기의 급격한 성과급 축소에 따른 갈등을 완화할 수 있다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "“공정한 보상의 조건, 재투자-협업 우선시해야 업황 변동 큰 산업, ‘보너스 뱅크’로 탄력 운영” | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12177/ac/magazine"
+    },
+    {
+      "id": "1A0C7D74AA0124A82E21B4AF881",
+      "claim_text": "대규모 다각화 기업의 성과급은 전사 요소, 사업부 요소, 팀·개인 요소로 구성된 세 층위로 설계되어야 한다",
+      "stance": "conditional",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "“공정한 보상의 조건, 재투자-협업 우선시해야 업황 변동 큰 산업, ‘보너스 뱅크’로 탄력 운영” | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12177/ac/magazine"
+    },
+    {
+      "id": "1A0C7D7883121EB4574BDAF04EF",
+      "claim_text": "절차적 공정성과 상호작용적 공정성이 직원의 조직 몰입도, 이직 의도, 협력 행동에 미치는 영향이 분배적 공정성 못지않게 크다",
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_title": "‘깜깜이 성과급’에서 투명한 보상으로 | DBR",
+      "source_id": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12178/ac/magazine"
+    }
+  ],
+  "internal_metadata": [
+    {
+      "id": "leadership-messages/2026-06-이천포럼-패널토의.md",
+      "title": "2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling",
+      "security": "A",
+      "api_eligible": 1,
+      "effective_date": "2026-06-01"
+    },
+    {
+      "id": "policies/2026-ai-task-guide.md",
+      "title": "2026년 1인 1 AI Task 수립·운영 안내",
+      "security": "A",
+      "api_eligible": 1,
+      "effective_date": "2026-05-15"
+    }
+  ]
+}

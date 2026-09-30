@@ -1,0 +1,275 @@
+{
+  "topic": "AI로 일한 한 해, 무엇을 세어야 하나",
+  "slug": "ai-yearend-what-counts",
+  "collected_at": "2026-09-30",
+  "status": "angle_selection_pending",
+  "search_note": "hybrid_search: 실무 T2,T3,T4 / 연구 T1,T2 각 4개 질의, limit=30. from_summary 제외. 동일 문서 관련 claim과 검수 완료 이론 카드 별도 확인. 검색 후보 전체는 search.json, 문서별 관련 후보는 targeted.json.",
+  "branches": {
+    "practice": {
+      "count": 7,
+      "sources": [
+        "dbr",
+        "deloitte-insights",
+        "mckinsey-insights",
+        "ms-worklab",
+        "worklytics-blog"
+      ]
+    },
+    "research": {
+      "count": 2,
+      "sources": [
+        "academic-canon"
+      ]
+    },
+    "theory": {
+      "count": 2,
+      "sources": [
+        "theory-canon"
+      ]
+    }
+  },
+  "conditions": {
+    "independent_sources": [
+      "academic-canon",
+      "dbr",
+      "deloitte-insights",
+      "mckinsey-insights",
+      "ms-worklab",
+      "theory-canon",
+      "worklytics-blog"
+    ],
+    "independent_sources_count": 7,
+    "stances": {
+      "neutral": 2,
+      "cautious": 7,
+      "conditional": 1,
+      "optimistic": 1
+    },
+    "t1_t2_count": 6,
+    "from_summary_count": 0,
+    "verdict": "② 후보 풀 조건 통과. 본문 실사용 기준 검증은 집필 후 별도."
+  },
+  "theory_lenses": [
+    {
+      "card": "knowledge/theories/kerr-folly-of-rewarding-a.md",
+      "status": "reviewed",
+      "reviewed_by": "이소민",
+      "role": "함정 단락"
+    },
+    {
+      "card": "knowledge/theories/boudreau-ramstad-decision-science.md",
+      "status": "reviewed",
+      "reviewed_by": "이소민",
+      "role": "측정 목적"
+    }
+  ],
+  "independence_note": "T1 실증 2개 claim은 동일한 BCG 실험 1편이다. 서로 다른 연구 2건으로 세지 않는다. 독립 출처 수는 source_id 집계이며 이론 2장도 theory-canon 1곳으로 센다. 실무 기업 블로그와 컨설팅 분석은 독립적 효과 검증으로 취급하지 않는다.",
+  "external_validity_flags": [
+    "T1 두 claim에서 사내 측정·서술 제안으로 넘어가는 문장에 <!-- external-validity: T1 claim ID; 연구 범위; 사내 적용은 편집 제안 --> 표시 예정.",
+    "BCG 과제 실험의 효과를 우리 조직의 성과 수치·연간 평가 타당도로 전이하지 않는다.",
+    "자기보고 과장 연구(논리 추론·학생 표본)를 이번 논지의 직접 증거로 채택하지 않는다."
+  ],
+  "excluded": [
+    {
+      "id": "1A09270426C2548B53EC2326710",
+      "reason": "3~5배 claim은 원문의 서로 다른 수치 범위를 단순 배수로 표현. 동일 조건 직접 비교 연구 확인 안 되어 제외."
+    },
+    {
+      "id": "1A06A3C383E3775C6A022164A5C",
+      "reason": "논리 추론 실험의 과대평가를 연말 자기평가로 전이하지 않음."
+    },
+    {
+      "id": "1A061410B73C0097A2017D587E2",
+      "reason": "절반 수치는 원문에서 재인용. 1차 조사 방법 미대조로 수치 채택 보류."
+    }
+  ],
+  "claims": [
+    {
+      "id": "1A0607D6166105B12314EE09346",
+      "text": "HR 측정의 목표는 '더 많은 HR 지표'가 아니라 더 나은 인재 의사결정(talent decisions)을 가능하게 하는 것이다",
+      "metric": null,
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_id": "1A0607D60958D63E4909A599C00",
+      "doc": "탤런트십과 의사결정 과학 (Talentship / Beyond HR)",
+      "source": "theory-canon",
+      "tier": "T1",
+      "url": null,
+      "published_at": "2007-01-01",
+      "branch": "theory",
+      "role": "무엇을 왜 측정하는가",
+      "caution": "Boudreau·Ramstad 개념 틀. 새 측정법의 인과적 효과 근거가 아니다."
+    },
+    {
+      "id": "1A0607DAD9B5D0F0C4D495A031B",
+      "text": "조직은 측정하기 쉽거나 보상하기 쉬운 행동을 선택하면서, 정작 원하는 복잡한 행동(팀워크·장기 성장·정확한 판단)을 오히려 약화시킬 수 있다",
+      "metric": null,
+      "stance": "neutral",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_id": "1A0607DACD2F590BF749ECBA904",
+      "doc": "A를 보상하며 B를 바라는 어리석음 (On the Folly of Rewarding A, While Hoping for B)",
+      "source": "theory-canon",
+      "tier": "T1",
+      "url": null,
+      "published_at": "1975-01-01",
+      "branch": "theory",
+      "role": "함정 단락 전용",
+      "caution": "Kerr 사례 기반 개념 논문. AI 사용량 보상이 왜곡을 일으켰다는 사내 실증으로 단정하지 않는다."
+    },
+    {
+      "id": "1A061210902EC955B670CEEE43E",
+      "text": "AI를 집중적으로 사용하는 고용량 사용자 집단의 인지적 부담이 감소하지 않고 오히려 증가하는 경향을 보인다",
+      "metric": null,
+      "stance": "cautious",
+      "evidence_type": "case",
+      "from_summary": 0,
+      "document_id": "1A056687280F45D8FD441028843",
+      "doc": "Your AI agents need performance management, too",
+      "source": "mckinsey-insights",
+      "tier": "T2",
+      "url": "https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/your-ai-agents-need-performance-management-too",
+      "published_at": "2026-08-26",
+      "branch": "practice",
+      "role": "함정 단락 전용",
+      "caution": "McKinsey 인터뷰의 전문가 관찰. 계량 조사나 고사용자의 실제 보상 불이익으로 서술 금지."
+    },
+    {
+      "id": "1A0614108BF4446FFCF82657E85",
+      "text": "조직이 AI 도입을 강제하기 위해 경력 발전, 성과 평가, 보상 결정과 연결시키고 있다",
+      "metric": null,
+      "stance": "cautious",
+      "evidence_type": "opinion",
+      "from_summary": 0,
+      "document_id": "1A05D2D5348ADBB1F711CAC0514",
+      "doc": "AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI",
+      "source": "deloitte-insights",
+      "tier": "T2",
+      "url": "https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html",
+      "published_at": "2026-07-09",
+      "branch": "practice",
+      "role": "사용 여부와 평가의 연결",
+      "caution": "Deloitte 분석의 관찰. 모든 조직 또는 우리 제도가 사용량을 보상한다는 증거가 아니다."
+    },
+    {
+      "id": "1A061447941878283655B257E9A",
+      "text": "개인 생산성을 순전히 개인 수준에서만 측정하면 시스템 마찰을 개인의 저성과로 잘못 판단할 가능성이 높다",
+      "metric": null,
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_id": "1A05687E3E4EBF7DCF5D5F34C62",
+      "doc": "Team vs Individual Productivity: What Leaders Should Track | Worklytics",
+      "source": "worklytics-blog",
+      "tier": "T4",
+      "url": "https://www.worklytics.co/blog/team-productivity-vs-individual-productivity-what-should-leaders-track",
+      "published_at": "2026-03-17",
+      "branch": "practice",
+      "role": "개인·팀 측정 단위",
+      "caution": "분석 도구 판매 기업의 해석·제안. 측정 편향의 실험적 입증으로 소개하지 않는다."
+    },
+    {
+      "id": "1A06A16BA8A6407FD4AB5BD513C",
+      "text": "AI를 활용하여 만든 결과물의 완성도가 높아도, 그것이 개인의 실제 직무 역량 발전을 의미하지는 않는다",
+      "metric": null,
+      "stance": "cautious",
+      "evidence_type": "theory",
+      "from_summary": 0,
+      "document_id": "1A05D37E4CD605EBE1A047CCE7F",
+      "doc": "AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야 | DBR",
+      "source": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best",
+      "published_at": "2026-08-25",
+      "branch": "practice",
+      "role": "성과와 역량 분리",
+      "caution": "산출물의 완성도만으로 역량 향상을 확정하지 않는 논거. 개인의 기여가 없다는 뜻은 아니다."
+    },
+    {
+      "id": "1A06A16BEBF1A02A2043025D9DC",
+      "text": "AI가 제시한 결과물에 대해 설명 가능성, 반복 가능성, 전이 가능성의 세 가지 요소를 검증해야만 개인의 실제 역량을 정확히 진단할 수 있다",
+      "metric": null,
+      "stance": "conditional",
+      "evidence_type": "opinion",
+      "from_summary": 0,
+      "document_id": "1A05D37E4CD605EBE1A047CCE7F",
+      "doc": "AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야 | DBR",
+      "source": "dbr",
+      "tier": "T3",
+      "url": "https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best",
+      "published_at": "2026-08-25",
+      "branch": "practice",
+      "role": "본인 기여 설명",
+      "caution": "전문가의 역량 진단 제안. 세 기준을 검증된 평가 척도로 단정하지 않는다."
+    },
+    {
+      "id": "1A06A2202EF5E6CFCF61B8561C7",
+      "text": "AI 사용자의 65%는 빠르게 적응하지 않으면 뒤처질까봐 우려하고 있지만, 즉각적인 성과를 내지 못하는 변신에 대해 보상받는다고 응답한 사용자는 13%에 불과하다",
+      "metric": "우려: 65%, 보상 경험: 13%",
+      "stance": "cautious",
+      "evidence_type": "survey",
+      "from_summary": 0,
+      "document_id": "1A05B5CB1E458D5D9F4D71FAF30",
+      "doc": "AI playbook: 4 patterns shaping human‑agent work",
+      "source": "ms-worklab",
+      "tier": "T4",
+      "url": "https://www.microsoft.com/en-us/worklab/ai-at-work-one-function-wrote-the-ai-playbook-the-rest-will-follow",
+      "published_at": null,
+      "branch": "practice",
+      "role": "함정 단락 전용",
+      "caution": "WorkLab의 설문 인식. 65%와 13%는 다른 문항이며 차이를 개인별 보상 실패율로 계산하지 않는다. 원래 묶음6의 누락 ID 확정은 아님."
+    },
+    {
+      "id": "1A06A3BA7C533B7A15258E936FF",
+      "text": "AI 지원이 가능한 범위 내의 과제에서 AI를 사용한 지식근로자는 AI를 사용하지 않은 근로자보다 더 높은 품질의 솔루션을 제공했다.",
+      "metric": null,
+      "stance": "optimistic",
+      "evidence_type": "experiment",
+      "from_summary": 0,
+      "document_id": "1A060A5F4DDAA8842562CA4740F",
+      "doc": "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality",
+      "source": "academic-canon",
+      "tier": "T1",
+      "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+      "published_at": "2023-09-15",
+      "branch": "research",
+      "role": "품질 개선 가능성",
+      "caution": "T1 전이 표시 필요: BCG 지식근로자의 제한된 실험 과제. 연간 직무성과·국내 사내 평가에 같은 효과가 난다고 일반화하지 않는다."
+    },
+    {
+      "id": "1A06A3BA8791EA9D6D780E3609C",
+      "text": "AI 지원 능력을 벗어나는 복잡한 관리 과제에서 AI를 사용한 지식근로자는 AI를 사용하지 않은 근로자보다 정답을 도출할 확률이 낮았다.",
+      "metric": "19% 낮은 정답률",
+      "stance": "cautious",
+      "evidence_type": "experiment",
+      "from_summary": 0,
+      "document_id": "1A060A5F4DDAA8842562CA4740F",
+      "doc": "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality",
+      "source": "academic-canon",
+      "tier": "T1",
+      "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=64700",
+      "published_at": "2023-09-15",
+      "branch": "research",
+      "role": "과제별 효과 차이",
+      "caution": "T1 전이 표시 필요: 같은 연구의 복잡한 관리 과제 결과. 품질과 정확성을 별도로 확인하자는 편집 제안의 배경이며 사내 평가 방식의 효과 검증이 아니다."
+    },
+    {
+      "id": "1A0927045D10A41AA91C2378D78",
+      "text": "코딩 어시스턴트 도입 후 코드 검토 과정에서 발생하는 월간 풀 리퀘스트 되돌림이 4건에서 17건으로 증가했다",
+      "metric": "monthly PR reverts: 4 to 17",
+      "stance": "cautious",
+      "evidence_type": "case",
+      "from_summary": 0,
+      "document_id": "1A0924D59802EC207E1650F9A8B",
+      "doc": "How to Measure Time Saved From Codex (With Real Data) | Worklytics",
+      "source": "worklytics-blog",
+      "tier": "T4",
+      "url": "https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex",
+      "published_at": "2026-09-10",
+      "branch": "practice",
+      "role": "재작업 함께 집계",
+      "caution": "기업 블로그에 소개된 한 팀의 코드 되돌림 사례. 일반 직무의 효과 크기로 전이하지 않는다. 다른 팀의 처리량 증가와 같은 표본처럼 묶지 않는다."
+    }
+  ]
+}
