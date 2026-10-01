@@ -41,6 +41,24 @@ def load_sources() -> list[dict]:
     return data.get("sources", [])
 
 
+def select_targets(sources: list[dict], source_type: str,
+                   source_ids: list[str] | None = None) -> list[dict]:
+    """수집 대상 — 유형이 맞고 **status가 active인** 소스만. rss·api·html_list 공용.
+
+    2026-10-01 수정: 종전에는 type만 보고 골라서, 월간 소스 리뷰(9/30)에서 excluded로 바꾼
+    mk-economy·chosun-economy·arxiv-cs-si가 다음 날 그대로 수집됐다(87건). 그 전까지 퇴출된
+    소스는 뉴스레터·브라우저·수기 유형이라 자동 수집 대상이 아니어서 드러나지 않았다.
+    소스를 직접 지정해도(--source) 퇴출 소스는 건너뛰고 알린다.
+    """
+    if source_ids:
+        sources = [s for s in sources if s["id"] in source_ids]
+    typed = [s for s in sources if s.get("type") == source_type]
+    skipped = [s["id"] for s in typed if s.get("status") != "active"]
+    if skipped:
+        print(f"  (건너뜀 — status가 active 아님: {', '.join(skipped)})")
+    return [s for s in typed if s.get("status") == "active"]
+
+
 def fetch_via_curl(url: str, headers: dict | None = None) -> str | None:
     """curl 폴백 — WAF가 파이썬 HTTP 클라이언트의 TLS 지문을 차단하는 소스용.
 
@@ -148,10 +166,7 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
         conn.close()
         return {"targets": 0, "failed": 0}
 
-    sources = load_sources()
-    if source_ids:
-        sources = [s for s in sources if s["id"] in source_ids]
-    targets = [s for s in sources if s.get("type") == "rss"]
+    targets = select_targets(load_sources(), "rss", source_ids)
     print(f"수집 대상 {len(targets)}개 소스 (전문 추출: {fetch_full})")
 
     headers = {"User-Agent": USER_AGENT}

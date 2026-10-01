@@ -229,8 +229,8 @@ def test_worker_run_returns_failure_stats(test_db, monkeypatch):
     import collectors.rss as rss
     monkeypatch.setattr(rss, "fetch_url", lambda url, client, curl_headers=None: None)  # 전 피드 접속 실패
     monkeypatch.setattr(rss, "load_sources", lambda: [
-        {"id": "s1", "type": "rss", "tier": "T3", "name": "S1", "feed_url": "http://x/1"},
-        {"id": "s2", "type": "rss", "tier": "T3", "name": "S2", "feed_url": "http://x/2"},
+        {"id": "s1", "type": "rss", "status": "active", "tier": "T3", "name": "S1", "feed_url": "http://x/1"},
+        {"id": "s2", "type": "rss", "status": "active", "tier": "T3", "name": "S2", "feed_url": "http://x/2"},
     ])
     monkeypatch.setattr(rss.time, "sleep", lambda s: None)
     assert rss.run(force=True) == {"targets": 2, "failed": 2}

@@ -31,7 +31,8 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
-from collectors.rss import USER_AGENT, extract_body, fetch_url, fetch_via_curl  # noqa: E402
+from collectors.rss import (  # noqa: E402
+    USER_AGENT, extract_body, fetch_url, fetch_via_curl, select_targets)
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
 if hasattr(sys.stdout, "reconfigure"):
@@ -221,9 +222,7 @@ def run(source_ids: list[str] | None = None, *, force: bool = False) -> dict:
         return {"targets": 0, "failed": 0}
 
     sources = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8")).get("sources", [])
-    if source_ids:
-        sources = [s for s in sources if s["id"] in source_ids]
-    targets = [s for s in sources if s.get("type") == "html"]
+    targets = select_targets(sources, "html", source_ids)  # status active만 (collectors.rss)
     print(f"HTML 목록 수집 대상 {len(targets)}개 소스")
 
     failed = []

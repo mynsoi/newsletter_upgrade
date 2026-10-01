@@ -30,6 +30,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
 from collectors.store import store_document  # noqa: E402
+from collectors.rss import select_targets  # noqa: E402
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
 if hasattr(sys.stdout, "reconfigure"):
@@ -209,9 +210,7 @@ def run(source_ids: list[str] | None = None,
         return {"targets": 0, "failed": 0}
 
     sources = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8")).get("sources", [])
-    if source_ids:
-        sources = [s for s in sources if s["id"] in source_ids]
-    targets = [s for s in sources if s.get("type") == "api"]
+    targets = select_targets(sources, "api", source_ids)  # status active만 (collectors.rss)
     mode = f"소급 {backfill[0]}~{backfill[1]}" if backfill else "일상(최근분)"
     print(f"API 수집 대상 {len(targets)}개 소스 — {mode}")
 
