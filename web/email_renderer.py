@@ -8,6 +8,7 @@
 """
 import io
 import re
+import html
 from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -462,10 +463,28 @@ def capture_article_screenshot(preview_url: str, output_path: Path,
     return output_path
 
 
+def _web_link_row(web_url: str) -> str:
+    """이미지 메일 하단 "웹에서 보기" 줄. 이미지 안의 참고자료 링크는 눌리지 않으므로
+    링크가 필요한 독자를 웹페이지로 보낸다. web_url이 비면 빈 문자열."""
+    if not web_url:
+        return ""
+    url = html.escape(web_url, quote=True)
+    return (
+        f'<tr><td align="center" style="padding:4px 0 28px;font-family:{FONT};font-size:10pt;'
+        f'color:{INK_MUTED};">참고자료 링크는 웹페이지에서 열립니다 &middot; '
+        f'<a href="{url}" target="_blank" style="color:{ACCENT};font-weight:700;'
+        f'text-decoration:underline;">웹에서 보기</a></td></tr>'
+    )
+
+
 def build_image_eml(subject: str, preview_url: str, output_dir: Path,
                     recipients: list[str], cc: list[str] = None,
-                    sender: str = "Insight Weekly <noreply@example.com>") -> bytes:
-    """프리뷰 페이지를 스크린샷으로 캡처하여 이미지 기반 .eml을 빌드한다."""
+                    sender: str = "Insight Weekly <noreply@example.com>",
+                    web_url: str = "") -> bytes:
+    """프리뷰 페이지를 스크린샷으로 캡처하여 이미지 기반 .eml을 빌드한다.
+
+    web_url이 있으면 본문 이미지를 그 주소로 링크하고 하단에 "웹에서 보기" 줄을 붙인다.
+    """
     screenshot_path = output_dir / "email_screenshot.png"
     capture_article_screenshot(preview_url, screenshot_path)
 
@@ -478,7 +497,12 @@ def build_image_eml(subject: str, preview_url: str, output_dir: Path,
     mime_img.add_header("Content-ID", "<article_full>")
     mime_img.add_header("Content-Disposition", "inline", filename="article.png")
 
-    html = f"""<!DOCTYPE html>
+    img_open, img_close = "", ""
+    if web_url:
+        img_open = f'<a href="{html.escape(web_url, quote=True)}" target="_blank">'
+        img_close = "</a>"
+
+    body = f"""<!DOCTYPE html>
 <html lang="ko">
 <head><meta charset="utf-8">
 <style>body{{margin:0;padding:0;background:{CANVAS};}}table{{border-collapse:collapse;}}img{{border:0;}}</style>
@@ -486,10 +510,11 @@ def build_image_eml(subject: str, preview_url: str, output_dir: Path,
 <body style="margin:0;padding:0;background:{CANVAS};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{CANVAS};">
 <tr><td align="center" style="padding:20px 0;">
-<img src="cid:article_full" width="{display_w}"
-  style="display:block;width:{display_w}px;border:0;" alt="Insight Weekly">
+{img_open}<img src="cid:article_full" width="{display_w}"
+  style="display:block;width:{display_w}px;border:0;" alt="Insight Weekly">{img_close}
 </td></tr>
+{_web_link_row(web_url)}
 </table>
 </body></html>"""
 
-    return build_eml(subject, html, [mime_img], recipients, cc, sender)
+    return build_eml(subject, body, [mime_img], recipients, cc, sender)

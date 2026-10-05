@@ -521,6 +521,10 @@ def api_publish():
     html_path = out_dir / "index.html"
     html_path.write_text(html, encoding="utf-8")
 
+    # 아카이브 카드 썸네일용 (web/site_export.py)
+    hero_file = image_paths.get("hero", "")
+    article["hero_file"] = "" if hero_file.startswith("http") else hero_file
+
     article_json_path = out_dir / "article.json"
     article_json_path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -538,6 +542,7 @@ def api_publish():
 def api_send_email():
     """발행된 아티클을 이미지 기반 .eml 파일로 생성하여 다운로드한다."""
     from email_renderer import build_image_eml
+    from site_export import article_web_url
 
     data = request.json
     slug = data.get("slug", "")
@@ -562,7 +567,8 @@ def api_send_email():
     preview_url = f"http://localhost:5001/preview/{slug}/"
 
     try:
-        eml_bytes = build_image_eml(subject, preview_url, out_dir, recipients, cc)
+        eml_bytes = build_image_eml(subject, preview_url, out_dir, recipients, cc,
+                                    web_url=article_web_url(slug))
 
         eml_path = out_dir / "newsletter.eml"
         eml_path.write_bytes(eml_bytes)

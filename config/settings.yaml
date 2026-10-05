@@ -40,3 +40,12 @@ embed_daily_limit: 2000
 # 사람이 골라 넣은 문서(fetched_by='browse')는 기간과 무관하게 유지. 0이면 비활성(전량 유지).
 # 값을 늘리면 경계 안으로 돌아온 claim은 다음 실행부터 다시 임베딩된다(일 상한 embed_daily_limit, 소액).
 embed_arxiv_retention_months: 6
+
+# 웹 발행 — Vercel 정적 배포 (2026-10-05 도입, 창간호 런치 인프라)
+# 발행물은 site/<web_path_token>/<slug>/에, 아카이브 목록은 site/<web_path_token>/index.html에 쌓인다
+# (web/site_export.py). 저장소 루트의 vercel.json이 site/를 출력 디렉토리로 쓰고 전 경로에
+# X-Robots-Tag: noindex를 붙인다. 토큰은 추측 불가 경로용 — 바꾸면 이미 보낸 메일의 링크가 끊긴다.
+# web_base_url은 Vercel 배포 주소가 확정되면 채운다(끝 슬래시 없이, 예: https://xxx.vercel.app).
+# 비어 있으면 메일의 "웹에서 보기" 링크가 빠진다.
+web_base_url: ""
+web_path_token: qvauxq7a4vlgiaey

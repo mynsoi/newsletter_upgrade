@@ -17,3 +17,5 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest>=8.0"]
+# 발행 도구(web/) 전용 — make publish-ui · make site. 설치: pip install --group web
+web = ["flask>=3.0", "markdown>=3.5", "pillow>=10.0", "html2image>=2.0"]
