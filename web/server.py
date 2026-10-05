@@ -272,6 +272,9 @@ def _render_note(note: str, md_converter) -> str:
         return ""
     inner = md_converter.convert(note)
     md_converter.reset()
+    # "※ …" 로 시작하는 줄은 덧붙이는 안내다 — 작은 글자로 낸다(.editor-note p.note-fine).
+    # 위치가 아니라 내용으로 판정하므로 줄 순서가 바뀌어도 따라간다.
+    inner = re.sub(r"<p>(\s*※)", lambda m: '<p class="note-fine">' + m.group(1), inner)
     return f'<section class="editor-note">{inner}</section>'
 
 

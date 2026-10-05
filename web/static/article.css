@@ -176,6 +176,8 @@ body {
   word-break: keep-all;
 }
 .editor-note p:first-child { font-weight: 700; color: var(--ink); }
+/* "※ …" 덧붙이는 안내(담당자 등) — 본문보다 작게 */
+.editor-note p.note-fine { font-size: 13px; color: var(--ink-muted); }
 
 /* --- TL;DR 블록 --- */
 .tldr {

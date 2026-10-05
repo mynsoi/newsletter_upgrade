@@ -622,9 +622,12 @@ def build_teaser_eml(subject: str, article: dict, output_dir: Path,
     note = article.get("note", "")
     if note:
         paras = [x.strip() for x in note.split("\n\n") if x.strip()]
+        # "※ …" 문단은 덧붙이는 안내다 — 웹(.editor-note p.note-fine)과 같이 작은 글자로 낸다
         note_html = "".join(
-            f'<p style="margin:0 0 10px;font-family:{FONT};font-size:11pt;line-height:1.65;'
-            f'word-break:keep-all;color:{INK if i == 0 else INK_SECONDARY};'
+            f'<p style="margin:0 0 10px;font-family:{FONT};'
+            f'font-size:{"9.5pt" if x.lstrip().startswith("※") else "11pt"};line-height:1.65;'
+            f'word-break:keep-all;'
+            f'color:{INK_MUTED if x.lstrip().startswith("※") else (INK if i == 0 else INK_SECONDARY)};'
             f'font-weight:{700 if i == 0 else 400};">{e(x)}</p>'
             for i, x in enumerate(paras))
         rows.append(f'<tr><td bgcolor="#EEF0F3" style="background:#EEF0F3;padding:20px 24px 10px;">'

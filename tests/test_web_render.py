@@ -175,3 +175,57 @@ def test_email_capture_css_does_not_override_font_size():
         f"캡처 CSS에 font-size override가 남아 있다: {capture_rules}"
     assert any("text-decoration: none" in ln for ln in capture_rules)
     assert ".email-part-head" in css and ".email-part-body" in css
+
+
+# ── 편집자 노트의 "※ …" 안내 줄 (2026-10-05: 담당자 안내) ──
+
+NOTE_WITH_FINE = """# 제목
+
+<!-- note -->
+개편 안내 첫 줄.
+
+문의는 담당자에게 보내주세요.
+
+※ 담당자: 기업문화AX팀 홍길동M / 김철수M
+<!-- /note -->
+
+**세 줄 요약**
+
+- 요약 한 줄.
+
+도입 문단.
+
+## 소제목
+
+본문 문단.
+"""
+
+
+def test_note_fine_line_keeps_marker_and_gets_class():
+    """"※ …" 줄은 작은 글자 클래스를 받고 ※ 문자가 사라지지 않는다."""
+    art = server.parse_article_md(NOTE_WITH_FINE)
+    html = server.render_article_html(art, {})
+    assert 'class="note-fine"' in html
+    assert "※ 담당자: 기업문화AX팀 홍길동M / 김철수M" in html
+    assert "\x01" not in html          # 백레퍼런스 사고 재발 방지
+
+
+def test_note_fine_only_applies_to_marker_paragraph():
+    """※ 없는 문단에는 클래스가 붙지 않는다."""
+    art = server.parse_article_md(NOTE_WITH_FINE)
+    html = server.render_article_html(art, {})
+    note = html[html.index('class="editor-note"'):html.index("</section>")]
+    assert note.count('class="note-fine"') == 1
+    assert "<p>개편 안내 첫 줄.</p>" in note
+
+
+def test_teaser_note_fine_line_is_smaller(tmp_path):
+    """teaser 메일에서도 ※ 줄만 작은 글자로 나간다."""
+    art = server.parse_article_md(NOTE_WITH_FINE)
+    eml = email_renderer.build_teaser_eml("제목", art, tmp_path, ["a@example.com"],
+                                          web_url="https://ex.vercel.app/t/s/")
+    msg = email.message_from_bytes(eml)
+    text = next(p for p in msg.walk() if p.get_content_type() == "text/html").get_payload(decode=True).decode()
+    fine = [ln for ln in text.split("<p ") if "※ 담당자" in ln]
+    assert fine and "font-size:9.5pt" in fine[0]
+    assert "font-size:11pt" in text          # 나머지 문단은 그대로
