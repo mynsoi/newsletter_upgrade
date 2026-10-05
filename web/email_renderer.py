@@ -511,7 +511,7 @@ def build_image_eml(subject: str, preview_url: str, output_dir: Path,
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{CANVAS};">
 <tr><td align="center" style="padding:20px 0;">
 {img_open}<img src="cid:article_full" width="{display_w}"
-  style="display:block;width:{display_w}px;border:0;" alt="Insight Weekly">{img_close}
+  style="display:block;width:{display_w}px;max-width:100%;height:auto;border:0;" alt="Insight Weekly">{img_close}
 </td></tr>
 {_web_link_row(web_url)}
 </table>
