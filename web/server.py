@@ -5,6 +5,7 @@
 """
 import os
 import re
+import html
 import json
 import shutil
 import base64
@@ -181,6 +182,26 @@ def _extract_tags(text: str, sections: list) -> list:
 # HTML 렌더링
 # ══════════════════════════════════════════════════════════════
 
+REF_LINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^\s)]+)\)")
+
+
+def _render_ref(ref: str) -> str:
+    """참고자료 한 줄을 HTML로. `[제목](url)`만 <a>로 바꾸고 나머지는 이스케이프한다.
+
+    주소는 http/https만 받는다 — javascript: 같은 스킴이 섞여 들어와도 링크가 되지 않는다.
+    """
+    out, pos = [], 0
+    for m in REF_LINK_RE.finditer(ref):
+        out.append(html.escape(ref[pos:m.start()]))
+        out.append(
+            f'<a href="{html.escape(m.group(2), quote=True)}" '
+            f'target="_blank" rel="noopener noreferrer">{html.escape(m.group(1))}</a>'
+        )
+        pos = m.end()
+    out.append(html.escape(ref[pos:]))
+    return "".join(out)
+
+
 def render_article_html(article: dict, image_paths: dict) -> str:
     """Jinja2 없이 순수 문자열로 아티클 HTML을 렌더링한다."""
     template_path = TEMPLATES_DIR / "article.html"
@@ -238,9 +259,11 @@ def render_article_html(article: dict, image_paths: dict) -> str:
 
     body_html = "\n".join(body_parts)
 
-    # 참고자료
+    # 참고자료 — `[제목](url)` 마크다운 링크를 <a>로 바꾼다.
+    # 형식은 verify_article.reference_lines()가 정한다(draft.md ⑤): 외부 문서만 하이퍼링크가
+    # 붙고 이론 카드·내부 자료는 평문이므로, 링크가 없는 줄은 이스케이프만 거쳐 그대로 나간다.
     ref_items = "\n".join(
-        f"      <li>{ref}</li>" for ref in article["references"]
+        f"      <li>{_render_ref(ref)}</li>" for ref in article["references"]
     )
 
     # 히어로 이미지

@@ -231,7 +231,7 @@ def test_report_includes_sentence_to_claim_mapping():
     report = va.render_report("t", Path("a.md"), Path("e.json"), r)
     assert "본문 사용 claim (문장 ↔ claim ID)" in report
     assert "첫 문단이다" in report and "`C1`" in report
-    assert "강제 조건 재계산" in report and "참고자료 (실사용 문서만)" in report
+    assert "강제 조건 재계산" in report and "참고자료 (실사용 문서만" in report
 
 
 def test_action_marker_paragraph_exempts_prescriptive_values_without_section_name():
@@ -559,9 +559,11 @@ def test_report_disambiguates_same_source_documents_with_publish_date():
 """
     r = va.verify(md, ev, None, BERSIN_DATES)
     report = va.render_report("t", Path("a.md"), Path("e.json"), r)
-    assert f"{SUPERMANAGER_A} (2025-10-20)" in report
-    assert f"{SUPERMANAGER_B} (2025-09-23)" in report
-    assert "McKinsey 리포트 (" not in report          # 구분되는 제목에는 붙이지 않는다
+    # 2026-10-05 참고자료 형식 개정 — `매체·기관명, [제목](url), (연도).`
+    # 제목이 구분되지 않는 문서는 연도 대신 발행일 전체를 적는다.
+    assert f"{SUPERMANAGER_A}, (2025-10-20)." in report
+    assert f"{SUPERMANAGER_B}, (2025-09-23)." in report
+    assert "McKinsey 리포트, (" not in report         # 구분되는 제목에는 붙이지 않는다
 
 
 def test_cdata_title_is_cleaned_before_date_annotation():

@@ -93,6 +93,13 @@ TITLE_TOKEN_STOP = {"ceo", "패널토의", "메시지", "발표", "자료", "보
 # 조사·어미가 붙은 어절은 고유명사가 아니라 서술형 제목의 조각이다("사례를", "중심으로").
 # 이런 말로 문단을 찾으면 무관한 본문이 걸린다.
 PARTICLE_TAIL_RE = re.compile(r"(?:의|를|을|와|과|로|으로|에|에서|는|은|이|가|도|만|과의|와의)$")
+# 이론 카드가 들어오는 출처 id. 참고자료에서 이론 카드 형식으로 낸다.
+THEORY_SOURCE = "theory-canon"
+# sources.yaml의 name이 매체명이 아니라 파이프라인 분류 라벨인 출처
+# (academic-canon="학술 정전(수기 백필)", manual=수동 등록). 여러 발행처의 글이 섞여
+# 들어오므로 출처 단위 기관명을 붙이면 틀린 표기가 된다 — 기관명 없이 제목·링크만 낸다.
+REF_NAME_SKIP = {"academic-canon", "manual"}
+
 # 참고자료에서 문서를 특정하는 제목 앞부분의 길이. 검사 7의 문서명 매칭과 같은 값을 쓴다 —
 # 이 범위가 겹치는 두 문서는 목록에서 구분되지 않으므로 발행일을 병기한다.
 REF_TITLE_KEY_LEN = 14
@@ -181,6 +188,97 @@ def load_document_dates() -> dict[tuple[str, str], str]:
         return {}
 
 
+def load_document_meta() -> dict[tuple[str, str], dict]:
+    """(source_id, 제목) → {"url", "author", "year"}. DB를 못 읽으면 빈 dict.
+
+    참고자료 목록 생성(검사 7·리포트 6장)이 쓴다. 하이퍼링크는 documents.url만 쓰고,
+    url이 없으면 링크 없이 제목만 낸다 — 없는 주소를 만들지 않는다.
+    """
+    try:
+        from db import connect
+        conn = connect()
+        rows = conn.execute(
+            "SELECT source_id, title, url, author, published_at FROM documents "
+            "WHERE title IS NOT NULL"
+        ).fetchall()
+        conn.close()
+        return {(r["source_id"], clean_title(r["title"])): {
+            "url": (r["url"] or "").strip(),
+            "author": (r["author"] or "").strip(),
+            "year": str(r["published_at"])[:4] if r["published_at"] else "",
+        } for r in rows}
+    except Exception:  # noqa: BLE001 — DB 없이도 검증은 돌아야 한다
+        return {}
+
+
+def source_ref_names() -> dict[str, str]:
+    """source_id → 참고자료에 적을 매체·기관명 (sources.yaml의 name)."""
+    out: dict[str, str] = {}
+    try:
+        data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8")) or {}
+    except OSError:
+        return out
+    for s in data.get("sources", []):
+        sid, name = s.get("id"), (s.get("name") or "").strip()
+        if sid and name:
+            out[sid] = name
+    return out
+
+
+def format_reference(source: str, title: str, meta: dict | None,
+                     names: dict[str, str] | None = None,
+                     date_override: str = "") -> str:
+    """참고자료 한 줄. 2026-10-05 형식 확정 — draft.md ⑤·article_style 5절과 같은 규칙.
+
+    · 외부 문서: `매체·기관명, [제목](url), (연도).` — url이 없으면 링크 없이 제목만.
+      매체·기관명을 모르거나 REF_NAME_SKIP 출처면 기관명을 붙이지 않는다(지어내지 않는다).
+    · 이론 카드(theory-canon): 접두어 없이 `이론명(영문명, 저자 연도)` 평문, 링크 없음.
+    · 내부 자료는 이 함수를 쓰지 않는다 — 제목 평문으로 따로 싣는다.
+    """
+    meta = meta or {}
+    # 블로그·매체 제목에 붙어 오는 사이트명 꼬리("… | Worklytics", "… | DBR")를 벗긴다 —
+    # 매체명을 앞에 따로 적으므로 그대로 두면 같은 이름이 두 번 나온다.
+    title = re.sub(r"\s*\|\s*[^|]{1,30}$", "", clean_title(title) or "").strip() or "(문서명 없음)"
+
+    if source == THEORY_SOURCE:
+        # DB 제목 "직무특성모형 (Job Characteristics Model)" → 한글명 + 영문명으로 가른다
+        m = re.match(r"^(.*?)\s*[(（]\s*(.+?)\s*[)）]\s*$", title)
+        ko, en = (m.group(1).strip(), m.group(2).strip()) if m else (title, "")
+        inner = ", ".join(x for x in (en, " ".join(
+            x for x in (meta.get("author", ""), meta.get("year", "")) if x)) if x)
+        return f"{ko}({inner})" if inner else ko
+
+    linked = f"[{title}]({meta['url']})" if meta.get("url") else title
+    name = "" if source in REF_NAME_SKIP else (names or {}).get(source, "")
+    # 같은 출처에 제목이 구분되지 않는 문서가 둘 이상이면 연도 대신 발행일 전체를 적는다
+    # (josh-bersin의 "The Rise Of The Supermanager" 두 편처럼 제목 앞부분이 같은 별개 글).
+    year = date_override or meta.get("year", "")
+    parts = [p for p in (name, linked) if p]
+    line = ", ".join(parts)
+    return f"{line}, ({year})." if year else f"{line}."
+
+
+def reference_lines(used_docs: dict[str, set[str]], meta: dict[tuple[str, str], dict],
+                    names: dict[str, str] | None = None,
+                    internal_titles: list[str] | None = None,
+                    dates: dict[tuple[str, str], str] | None = None) -> list[str]:
+    """실사용 문서의 참고자료 목록. 배열 순서: 외부 → 이론 → 내부.
+
+    외부·이론은 구분이 링크 유무로 드러난다(외부만 하이퍼링크). 내부 자료는 제목 평문.
+    """
+    names, dates = names or {}, dates or {}
+    external, theory = [], []
+    for src in sorted(used_docs):
+        titles = sorted(clean_title(t) for t in used_docs[src])
+        collided = {k for k in (_ref_key(t) for t in titles)
+                    if sum(1 for t in titles if _ref_key(t) == k) > 1}
+        for title in titles:
+            day = dates.get((src, title), "") if _ref_key(title) in collided else ""
+            line = format_reference(src, title, meta.get((src, title)), names, day)
+            (theory if src == THEORY_SOURCE else external).append(line)
+    return external + theory + list(internal_titles or [])
+
+
 def _ref_key(title: str) -> str:
     """참고자료 대조가 쓰는 제목 식별 범위 — 이 범위가 같으면 목록에서 구분되지 않는다."""
     return re.split(r"[(（]", clean_title(title))[0].strip().lower()[:REF_TITLE_KEY_LEN]
@@ -240,14 +338,32 @@ def _title_tokens(title: str) -> list[str]:
             and t.lower() not in TITLE_TOKEN_STOP]
 
 
+def _is_internal_ref(ref: str, docs: list[dict] | None) -> bool:
+    """참고자료 한 줄이 내부 자료인지. 접두어와 제목 둘 다로 판별한다.
+
+    2026-10-05 형식 개정으로 내부 자료에서 "내부:" 접두어가 사라졌다. 접두어만 보면
+    내부 자료가 외부 문서로 잡혀 "참고자료 실사용 없음" 경고가 뜨므로, internal_docs의
+    제목과도 대조한다. 예전 판본(접두어 있음)도 그대로 통과하도록 둘 다 본다.
+    """
+    low = ref.lower()
+    if any(h in low for h in INTERNAL_REF_HINTS):
+        return True
+    squashed_ref = _squash(ref)
+    for d in (docs or []):
+        t = _squash(clean_title(d.get("title") or ""))
+        if t and t in squashed_ref:
+            return True
+    return False
+
+
 def _declared_internal_docs(references: list[str], docs: list[dict]) -> list[dict]:
-    """참고자료의 `내부:` 항목이 가리키는 내부 문서만 골라낸다.
+    """참고자료가 가리키는 내부 문서만 골라낸다 (접두어 없이 제목으로도 알아본다).
 
     간접 서술을 제목 낱말로 찾을 때, 내부 문서 전체(수십 건)를 대상으로 하면 "에이전트",
     "인프라" 같은 제목 낱말이 무관한 문단에 걸린다. 아티클이 참고자료에 스스로 밝힌
     문서로 후보를 좁히면 그 오탐이 사라진다. 직접 인용 대조(9)는 이 제한을 받지 않는다.
     """
-    internal_refs = [r for r in references if any(h in r.lower() for h in INTERNAL_REF_HINTS)]
+    internal_refs = [r for r in references if _is_internal_ref(r, docs)]
     out = []
     for d in docs:
         title = clean_title(d.get("title") or "")
@@ -338,7 +454,8 @@ def _first_sentence(text: str, limit: int = 70) -> str:
 
 
 def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
-           doc_dates: dict[tuple[str, str], str] | None = None) -> dict:
+           doc_dates: dict[tuple[str, str], str] | None = None,
+           doc_meta: dict[tuple[str, str], dict] | None = None) -> dict:
     """실사용 기준 검증 결과를 dict로 반환.
 
     internal_docs를 주면 본문의 직접 인용을 내부 자료 원문과 대조한다(문구 일치까지만 —
@@ -441,7 +558,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
             clean_title(c.get("doc") or "") or "(문서명 없음)")
     for ref in references:
         low = ref.lower()
-        if any(h in low for h in INTERNAL_REF_HINTS):   # 내부 자료는 claim 대조 대상이 아님
+        if _is_internal_ref(ref, internal_docs or []):  # 내부 자료는 claim 대조 대상이 아님
             continue
         by_source = any(sid in low or alias in low
                         for alias, sid in aliases.items() if sid in used_docs)
@@ -536,6 +653,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
         "numbers": numbers, "references": references, "used_docs": used_docs,
         "quotes": quotes, "internal_refs": internal_refs, "internal_available": bool(docs),
         "doc_dates": doc_dates or {},
+        "doc_meta": doc_meta or {},
         "write_model": parse_write_model(md),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
@@ -650,11 +768,19 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
     else:
         lines.append("없음.")
 
-    lines += ["", "## 6. 참고자료 (실사용 문서만)", ""]
+    lines += ["", "## 6. 참고자료 (실사용 문서만 — 본문에 그대로 붙여 넣는 목록)", ""]
     if r["used_docs"]:
-        for src, docs in sorted(r["used_docs"].items()):
-            titles = reference_titles(src, docs, r.get("doc_dates"))
-            lines.append(f"- **{src}**: {' / '.join(titles)}")
+        # internal_refs는 {seg, doc, year, dated} 목록이므로 문서명만 중복 없이 뽑는다
+        seen, internal = set(), []
+        for x in (r.get("internal_refs") or []):
+            t = clean_title(x.get("doc") or "")
+            if t and t not in seen:
+                seen.add(t); internal.append(t)
+        refs = reference_lines(r["used_docs"], r.get("doc_meta") or {},
+                               source_ref_names(), internal, r.get("doc_dates") or {})
+        lines += [f"- {x}" for x in refs]
+        lines += ["", "형식: 외부 문서는 `매체·기관명, [제목](url), (연도).` · 이론 카드는 "
+                  "`이론명(영문명, 저자 연도)` · 내부 자료는 제목 평문. 배열은 외부 → 이론 → 내부."]
     else:
         lines.append("(사용 claim 없음)")
 
@@ -689,7 +815,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     result = verify(md, load_evidence(evidence_path), load_internal_docs(),
-                    load_document_dates())
+                    load_document_dates(), load_document_meta())
     report = render_report(slug, article_path, evidence_path, result)
 
     if args.stdout:

@@ -73,14 +73,19 @@
 
 없음.
 
-## 6. 참고자료 (실사용 문서만)
+## 6. 참고자료 (실사용 문서만 — 본문에 그대로 붙여 넣는 목록)
 
-- **academic-canon**: Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality
-- **arxiv-cs-hc**: When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration / When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration
-- **dbr**: AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야 | DBR
-- **deloitte-insights**: AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI
-- **theory-canon**: 직무특성모형 (Job Characteristics Model)
-- **worklytics-blog**: How to Measure Time Saved From Codex (With Real Data) | Worklytics
+- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700), (2023).
+- arXiv - Human-Computer Interaction, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1), (2026).
+- arXiv - Human-Computer Interaction, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1), (2026).
+- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best), (2026).
+- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html), (2026).
+- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex), (2026).
+- 직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)
+- 2026년 1인 1 AI Task 수립·운영 안내
+- 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling
+
+형식: 외부 문서는 `매체·기관명, [제목](url), (연도).` · 이론 카드는 `이론명(영문명, 저자 연도)` · 내부 자료는 제목 평문. 배열은 외부 → 이론 → 내부.
 
 ## 7. 지적 사항
 
@@ -237,6 +242,63 @@
    예외)"로 정하는데, 제목을 그 예외로 볼지는 정본에 명시돼 있지 않다. 지정된 제목을 그대로
    적용했고, 사내 제도 용어(AI Task·달성실적)를 앞세워 독자가 자기 상황을 바로 알아보는 이점이
    있다고 본다. 제목의 명사구 종결을 허용할지는 정본에 한 줄 더할 사안으로 남긴다.
+
+---
+
+### 11.5 참고자료 형식 개정 적용 (2026-10-05)
+
+참고자료 절만 생성기 산출로 교체했다. 본문·세 줄 요약·소제목·claim 주석은 손대지 않았다
+(참고자료 이전 구간을 해시로 대조해 머리말 판본 줄 외에 동일함을 확인했다).
+
+| 구분 | 형식 | final5 예 |
+|---|---|---|
+| 외부 | `매체·기관명, [제목](url), (연도).` | `Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://…), (2026).` |
+| 외부(기관명 생략) | 여러 발행처가 섞인 출처는 기관명을 붙이지 않는다 | `[Navigating the Jagged Technological Frontier…](https://www.hbs.edu/…), (2023).` |
+| 이론 | `이론명(영문명, 저자 연도)` 평문 | `직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)` |
+| 내부 | 제목 평문 | `2026년 1인 1 AI Task 수립·운영 안내` |
+
+**코드 변경** (`src/verify_article.py`)
+
+- `load_document_meta()` 추가 — documents의 url·author·published_at을 읽는다. url이 없으면
+  링크를 걸지 않는다(없는 주소를 만들지 않는다).
+- `source_ref_names()` 추가 — sources.yaml의 name을 매체·기관명으로 쓴다.
+- `format_reference()`·`reference_lines()` 추가 — 외부 → 이론 → 내부 순으로 배열한다.
+  묶음 구분은 접두어가 아니라 링크 유무로 드러난다.
+- `REF_NAME_SKIP = {"academic-canon", "manual"}` — 두 출처의 sources.yaml name은
+  "학술 정전(수기 백필)"·수동 등록처럼 파이프라인 분류 라벨이고 여러 발행처의 글이 섞여
+  들어오므로, 출처 단위 기관명을 붙이면 틀린 표기가 된다. 기관명 없이 제목·링크만 낸다.
+- 블로그·매체 제목의 사이트명 꼬리("… | Worklytics", "… | DBR")를 벗긴다 — 매체명을 앞에
+  따로 적으므로 그대로 두면 같은 이름이 두 번 나온다.
+- 동명 문서 구분은 유지했다. 같은 출처에 제목이 구분되지 않는 문서가 둘 이상이면 연도 대신
+  발행일 전체를 적는다(josh-bersin의 "The Rise Of The Supermanager" 두 편).
+- `_is_internal_ref()` 추가 — **형식 개정의 부작용을 고친 것이다.** 내부 자료에서 "내부:"
+  접두어가 사라지자 검증기가 내부 자료를 외부 문서로 보고 "참고자료 실사용 없음" 경고를
+  냈다(실제로 발생). 이제 접두어와 internal_docs 제목 둘 다로 판별하므로 예전 판본(접두어
+  있음)도 그대로 통과한다.
+
+**규칙 문서**: `.claude/commands/draft.md` ⑤와 `prompts/article_style.md` 5절에 같은 내용을
+적었다. 본문 목록은 리포트 6장을 그대로 옮기고 손으로 고치지 않는다.
+
+**테스트**: `pytest tests` 226건 통과. 형식이 바뀌어 기대값을 갱신한 테스트 2건이 있다 —
+리포트 6장 제목 문구, 동명 문서 구분 표기(`제목 (날짜)` → `제목, (날짜).`). 검증하는 동작은
+그대로이고 표기만 바뀌었다.
+
+### 11.6 웹 템플릿·메일 확인
+
+**웹 템플릿은 수정이 필요했고 고쳤다.** `web/templates/article.html`은 `<li>{{ ref }}</li>`로
+참고자료를 그대로 출력했고 `web/server.py`도 문자열 치환만 했다. 마크다운 링크가 `<a>`가
+되지 않고 `[제목](url)` 문자 그대로 노출된다. `_render_ref()`를 추가해 고쳤다.
+
+- `[제목](url)`만 `<a href … target="_blank" rel="noopener noreferrer">`로 바꾸고 나머지는
+  HTML 이스케이프한다. 링크가 없는 줄(이론 카드·내부 자료)은 이스케이프만 거쳐 평문으로 나간다.
+- 주소는 http/https만 받는다. `[악성](javascript:alert(1))`은 링크가 되지 않고 문자로 남는다.
+- flask가 이 환경에 없어 모듈을 띄우지 못하므로 함수만 떼어 네 가지 입력으로 확인했고
+  `py_compile`로 문법을 확인했다.
+
+**이미지 메일의 "웹에서 보기" 링크는 이 저장소에서 확인할 수 없다.** 메일 발송 코드가 없다.
+`web/server.py`는 ".md 업로드 → 파싱 → 이미지 생성 → 정적 HTML 생성"까지만 하고, 메일
+발송은 동료의 `feature-email-publish` 브랜치에 준비돼 있으나 **병합 보류 중**이다
+(docs/기획서.md 398행). 병합 시점에 그 브랜치에서 확인할 항목으로 남긴다.
 
 ---
 

@@ -1,6 +1,6 @@
 # AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄
 
-<!-- slug: ai-yearend-what-counts | 판본: layers-final5 (문단 연결어·출처 재명시 손질 · 제목 교체) | angle: C (판단한 부분) | evidence: content/evidence/ai-yearend-what-counts.json -->
+<!-- slug: ai-yearend-what-counts | 판본: layers-final5 (문단 연결어·출처 재명시 손질 · 제목 교체 · 참고자료 형식 개정) | angle: C (판단한 부분) | evidence: content/evidence/ai-yearend-what-counts.json -->
 <!-- 모델: claude-opus-5 · 생성일: 2026-10-02 -->
 <!-- 기반: content/drafts/ai-yearend-what-counts-layers-final4.md (보존) -->
 <!-- 제목 이력: final3 「성과와 함께 판단한 자리도 적어 두면 좋겠습니다」 → final4 「올해 본인 평가에는 무엇을 정했는지도 담아 보면 좋겠습니다」 → 현재 「AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄」(2026-10-02 사용자 지정). 본문·세 줄 요약·소제목은 손대지 않았다. -->
@@ -67,12 +67,12 @@ AI가 쓴 문장 사이에서 내 판단은 저절로 드러나지 않습니다.
 
 ## 참고자료
 
-- Harvard Business School 워킹페이퍼, "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality" (2023)
-- arXiv 프리프린트 (cs.HC), Hengzhi Ye, "When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration" (2026)
-- arXiv 프리프린트 (cs.HC), Denis Lalanne, "When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration" (2026)
-- Worklytics, "How to Measure Time Saved From Codex (With Real Data)" (2026)
-- Deloitte Insights, "AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI" (2026)
-- DBR, "AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야" (2026)
-- 이론 카드: 직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)
-- 내부: 2026년 1인 1 AI Task 수립·운영 안내
-- 내부: 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling
+- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700), (2023).
+- arXiv - Human-Computer Interaction, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1), (2026).
+- arXiv - Human-Computer Interaction, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1), (2026).
+- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best), (2026).
+- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html), (2026).
+- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex), (2026).
+- 직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)
+- 2026년 1인 1 AI Task 수립·운영 안내
+- 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling
