@@ -7,8 +7,9 @@
   (페이지에 발행일이 아예 없는 곳 — ms-worklab. 헛되이 다시 받지 않도록).
 - 발행일만 채운다(`published_at IS NULL`인 행만 갱신). 본문·상태는 건드리지 않는다.
 - 요청 간격은 수집기와 같다. 차단(403 등)된 문서는 건너뛰고 집계에 남긴다.
-- NBER은 PC 네트워크에서 파이프라인 User-Agent가 막힌다 — Actions의 backfill-pubdate 워크플로로 돌린다.
-  차단을 우회하려고 브라우저로 위장하지 않는다.
+- 요청은 수집기와 같은 경로(fetch_document): httpx가 막히면 소스에 request_headers가 있을 때만 curl로
+  다시 시도한다. NBER은 httpx 접속 지문을 막아(IP 무관) request_headers에 파이프라인 UA를 그대로
+  등재해 curl 경로를 켰다(2026-10-01). 브라우저로 위장하지 않는다.
 
 사용:
   python src/collectors/backfill_pubdate.py --dry-run                 # 대상만 센다

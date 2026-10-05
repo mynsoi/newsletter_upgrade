@@ -1,4 +1,4 @@
-.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui
+.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui site
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -56,3 +56,6 @@ test:
 
 publish-ui:              # 아티클 발행 도구 로컬 서버 (http://localhost:5001)
 	$(PYTHON) web/server.py
+
+site:                    # 발행물 → site/ 내보내기 + 아카이브 갱신 (make site SLUG=..., SLUG 없으면 아카이브만)
+	$(PYTHON) web/site_export.py $(or $(SLUG),--index)

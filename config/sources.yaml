@@ -100,6 +100,11 @@ sources:
   lang: en
   verified: true
   inflow_alert_days: 14
+  # 논문 페이지가 httpx 접속 지문을 막는다(PC·Actions 모두 403). curl은 같은 파이프라인 UA로 통과 —
+  # 위장 없이 curl 대체 경로만 켠다(2026-10-01). 피드에 날짜가 없어 발행일은 페이지의
+  # citation_publication_date에서 읽는다(collectors/pubdate.py).
+  request_headers:
+    User-Agent: 'SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)'
   note: 주간 다량 — 키워드 필터 전제. PC 403·Actions 통과(2026-08-27) — 수집 주체 Actions
 - id: ssrn
   name: SSRN

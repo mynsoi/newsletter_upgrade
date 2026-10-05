@@ -4,9 +4,11 @@
 # 2026-09-30 월간 소스 리뷰에서 발행일이 없어 토픽 발굴에 안 잡히는 claim 약 386건을 확인했고,
 # 수집기는 그날 고쳐 신규분은 채워진다. 이 워크플로는 이미 쌓인 분 — 특히 NBER — 을 위한 것이다.
 #
-# 왜 Actions인가: NBER 논문 페이지는 PC(사내망)에서 파이프라인 User-Agent를 막는다(403).
-# 클라우드 IP에서는 같은 User-Agent로 받아진다(9월 NBER 본문 76% 확보). 브라우저로 위장해
-# 우회하지 않는다. PC에서 받아지는 소스(stanford-hai·ai-lab-enterprise-reports)는 PC에서 돌렸다.
+# 용도: PC를 쓸 수 없을 때의 대체 실행 경로. 소급은 기본적으로 PC에서 돌린다.
+# 정정(2026-10-01): "NBER은 클라우드에선 받아진다"는 가정으로 만들었으나 틀렸다 — 첫 실행
+# (run 36829035272)이 171건 전부 403. NBER은 IP가 아니라 httpx 접속 지문을 막고, 9월 "본문 76%"는
+# 피드 요약에 초록 전문이 들어 있어서였다. sources.yaml에 request_headers(파이프라인 UA 그대로)를
+# 등재해 curl 대체 경로를 켜자 PC에서 받아졌다 — NBER 171건은 PC에서 소급했다.
 #
 # 사용 시간: 요청 간격 3초 × 171건 ≈ 9분. 매일 도는 수집에 넣지 않은 이유 — 날짜가 원래 없는 문서를
 # 매번 다시 받게 된다(no_pubdate 소스 외에도 페이지에 날짜가 없는 개별 글이 있다).
@@ -20,7 +22,7 @@ on:
         description: "쉼표 구분 source_id (비우면 대상 소스 전부)"
         type: string
         required: false
-        default: "nber-working-papers"
+        default: ""
       limit:
         description: "처리할 문서 수 상한 (비우면 전부)"
         type: string

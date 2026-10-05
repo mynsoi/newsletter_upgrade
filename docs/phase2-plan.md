@@ -189,8 +189,12 @@ Claude 자문 + 리더 의견을 거쳐 사용자가 확정했다.
   찾는다(NBER). 본문 글자 날짜는 소스가 `date_from_text: true`로 켠 곳만(stanford-hai). 페이지에 날짜가 아예 없는
   `ms-worklab`은 `no_pubdate: true` — 비워 둔다(사이트맵 lastmod는 일괄 수정일이라 부적합).
   소급(`src/collectors/backfill_pubdate.py`): PC에서 stanford-hai 14 · ai-lab 20건 채움(claim 80건 복귀).
-  **잔여: NBER 171건(claim 134)은 PC에서 파이프라인 UA가 403 — 10/1 Actions 복귀 후 `backfill-pubdate` 워크플로를
-  수동 실행**(기본 입력이 nber-working-papers, 약 9분). 브라우저 위장으로 우회하지 않는다.
+  **NBER — 2026-10-01 해결**: Actions 워크플로 첫 실행이 171건 전부 403이었다 — "클라우드에선 받아진다"는 가정이
+  틀렸다(9월 "본문 76%"는 피드 요약에 초록 전문이 들어 있어서였다). 원인은 IP가 아니라 **httpx 접속 지문 차단**이고,
+  curl은 같은 파이프라인 UA로 통과한다. `request_headers`에 파이프라인 UA를 그대로 등재해 curl 대체 경로를 켰다
+  (Wharton과 같은 방식, 위장 없음) → PC에서 소급. 신규분도 같은 경로로 페이지를 받아 발행일이 채워진다.
+- **수집 대상은 status active만 (2026-10-01)**: rss·api·html_list가 type만 보고 대상을 골라, 9/30 퇴출한
+  mk-economy·chosun-economy·arxiv-cs-si가 10/1 Actions에서 87건 수집됐다. `select_targets()`로 수정. 들어온 87건은 유지.
 - **월간 소스 리뷰 — ✅ 2026-09 완료 (9/30)**: 시험 소스 37곳 → 정식 23 · 연장 7 · 퇴출·휴면 7, active 48 → 41
   ([`content/reports/source-review-2026-09.md`](../content/reports/source-review-2026-09.md)). 퇴출: arxiv-cs-si(차단 96%) ·
   mk-economy · chosun-economy(요약 100%) · samil-pwc / 휴면: samjong-kpmg · lg-business-research · hr-insight.
