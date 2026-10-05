@@ -211,15 +211,32 @@ def load_document_meta() -> dict[tuple[str, str], dict]:
         return {}
 
 
+def reader_name(name: str) -> str:
+    """sources.yaml의 운영용 이름 → 독자용 매체명 (2026-10-05).
+
+    운영용 이름에 붙은 구분 꼬리를 뗀다: " - 분야"(arXiv - Human-Computer Interaction → arXiv),
+    띄어 쓴 괄호 한정어(Brookings (Future of Work) → Brookings, OECD (고용·AI) → OECD).
+    붙여 쓴 괄호는 이름의 일부라 남긴다(DBR(동아비즈니스리뷰)). 꼬리를 떼면 빈 이름이 되면 원래 이름.
+    """
+    short = re.split(r"\s+-\s+", name, maxsplit=1)[0]
+    short = re.sub(r"\s+[(（][^()（）]*[)）]\s*$", "", short).strip()
+    return short or name
+
+
 def source_ref_names() -> dict[str, str]:
-    """source_id → 참고자료에 적을 매체·기관명 (sources.yaml의 name)."""
+    """source_id → 참고자료에 적을 독자용 매체·기관명.
+
+    sources.yaml에 `ref_name`이 있으면 그것을, 없으면 `name`을 reader_name()으로 줄여 쓴다.
+    """
     out: dict[str, str] = {}
     try:
         data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8")) or {}
     except OSError:
         return out
     for s in data.get("sources", []):
-        sid, name = s.get("id"), (s.get("name") or "").strip()
+        sid = s.get("id")
+        ref = (s.get("ref_name") or "").strip()
+        name = ref or reader_name((s.get("name") or "").strip())
         if sid and name:
             out[sid] = name
     return out
@@ -230,7 +247,8 @@ def format_reference(source: str, title: str, meta: dict | None,
                      date_override: str = "") -> str:
     """참고자료 한 줄. 2026-10-05 형식 확정 — draft.md ⑤·article_style 5절과 같은 규칙.
 
-    · 외부 문서: `매체·기관명, [제목](url), (연도).` — url이 없으면 링크 없이 제목만.
+    · 외부 문서: `매체·기관명, [제목](url) (연도)` — url이 없으면 링크 없이 제목만.
+      (2026-10-05 다듬기: 연도 앞 쉼표·끝 마침표 제거, 매체명은 독자용 축약 — reader_name)
       매체·기관명을 모르거나 REF_NAME_SKIP 출처면 기관명을 붙이지 않는다(지어내지 않는다).
     · 이론 카드(theory-canon): 접두어 없이 `이론명(영문명, 저자 연도)` 평문, 링크 없음.
     · 내부 자료는 이 함수를 쓰지 않는다 — 제목 평문으로 따로 싣는다.
@@ -255,7 +273,7 @@ def format_reference(source: str, title: str, meta: dict | None,
     year = date_override or meta.get("year", "")
     parts = [p for p in (name, linked) if p]
     line = ", ".join(parts)
-    return f"{line}, ({year})." if year else f"{line}."
+    return f"{line} ({year})" if year else line
 
 
 def reference_lines(used_docs: dict[str, set[str]], meta: dict[tuple[str, str], dict],
@@ -406,6 +424,43 @@ def source_aliases() -> dict[str, str]:
     return out
 
 
+# 편집자 노트(<!-- note --> … <!-- /note -->, 제목과 세 줄 요약 사이) — 개편 인사말 같은 편집 공지.
+# 근거 영역도 분량도 아니므로 검증·분량 계산에서 통째로 뺀다(줄 번호는 유지). 2026-10-05 도입.
+NOTE_RE = re.compile(r"<!--\s*note\s*-->.*?<!--\s*/note\s*-->", re.DOTALL)
+SEGMENT_RE = re.compile(r"<!--\s*segment:\s*([\w-]+)\s*-->")
+
+
+def strip_note(md: str) -> str:
+    """note 구간을 같은 줄 수의 빈 줄로 바꾼다 — 리포트의 행 번호가 원고와 어긋나지 않게."""
+    return NOTE_RE.sub(lambda m: "\n" * m.group(0).count("\n"), md)
+
+
+def measure_length(md: str) -> dict[str, int]:
+    """분량(공백 제외 글자 수). {"core": N, "<역할>": N, ...}
+
+    세는 범위: 제목(# 줄)·주석·참고자료 절·note 구간을 뺀 본문. 마크다운 기호(**, ##, -)는
+    그대로 센다 — 그동안 머리말에 적어 온 분량과 같은 기준이다(final5 코어 1800·리더 311·팀원 324).
+    레이어는 segment 표지부터 그 뒤 첫 claims 주석까지다.
+    """
+    text = strip_note(md).split("\n## 참고자료")[0]
+    out: dict[str, int] = {"core": 0}
+    role = ""
+    for line in text.splitlines():
+        m = SEGMENT_RE.search(line)
+        if m:
+            role = m.group(1)
+            out.setdefault(role, 0)
+            continue
+        if role and CLAIM_COMMENT_RE.search(line):
+            role = ""
+            continue
+        if line.startswith("# "):
+            continue
+        n = len(re.sub(r"\s", "", re.sub(r"<!--.*?-->", "", line)))
+        out[role or "core"] += n
+    return out
+
+
 def parse_article(md: str) -> tuple[list[Segment], list[str]]:
     """문단과 뒤따르는 claims 주석을 짝짓는다. 반환: (문단 목록, 참고자료 항목)."""
     segments: list[Segment] = []
@@ -461,6 +516,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
     internal_docs를 주면 본문의 직접 인용을 내부 자료 원문과 대조한다(문구 일치까지만 —
     발언 맥락 왜곡 여부는 사람 확인 항목이다, CLAUDE.md 문체 규칙).
     """
+    md = strip_note(md)          # 편집자 노트는 근거 영역이 아니다
     segments, references = parse_article(md)
     used_segments = [s for s in segments if s.claim_ids]
     issues: list[Issue] = []
@@ -655,6 +711,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
         "doc_dates": doc_dates or {},
         "doc_meta": doc_meta or {},
         "write_model": parse_write_model(md),
+        "length": measure_length(md),
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
     }
@@ -668,6 +725,17 @@ def _rel(p: Path) -> str:
         return p.as_posix()
 
 
+def _length_line(length: dict[str, int]) -> str:
+    """분량 한 줄 — 레이어가 있으면 독자 열람 최대(코어 + 가장 긴 레이어 1개)도 적는다."""
+    core = length.get("core", 0)
+    layers = {k: v for k, v in length.items() if k != "core"}
+    line = f"분량(공백 제외 · 제목·참고자료·편집자 노트 제외): 코어 {core}자"
+    if layers:
+        line += (" / 레이어 " + " · ".join(f"{k} {v}자" for k, v in layers.items())
+                 + f" / 독자 열람 최대 {core + max(layers.values())}자")
+    return line
+
+
 def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -> str:
     used, counts = r["used"], r["counts"]
     lines = [
@@ -678,6 +746,7 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
         f"판정: **{'통과' if r['passed'] else '실패'}** "
         f"(실패 {sum(1 for i in r['issues'] if i.level == 'fail')}건 · "
         f"경고 {sum(1 for i in r['issues'] if i.level == 'warn')}건)",
+        _length_line(r.get("length") or {}),
         "",
         "> 이 리포트는 evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**만으로 계산한다.",
         "",
@@ -779,7 +848,7 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
         refs = reference_lines(r["used_docs"], r.get("doc_meta") or {},
                                source_ref_names(), internal, r.get("doc_dates") or {})
         lines += [f"- {x}" for x in refs]
-        lines += ["", "형식: 외부 문서는 `매체·기관명, [제목](url), (연도).` · 이론 카드는 "
+        lines += ["", "형식: 외부 문서는 `매체·기관명, [제목](url) (연도)` · 이론 카드는 "
                   "`이론명(영문명, 저자 연도)` · 내부 자료는 제목 평문. 배열은 외부 → 이론 → 내부."]
     else:
         lines.append("(사용 claim 없음)")

@@ -559,11 +559,27 @@ def test_report_disambiguates_same_source_documents_with_publish_date():
 """
     r = va.verify(md, ev, None, BERSIN_DATES)
     report = va.render_report("t", Path("a.md"), Path("e.json"), r)
-    # 2026-10-05 참고자료 형식 개정 — `매체·기관명, [제목](url), (연도).`
+    # 2026-10-05 참고자료 형식 — `매체·기관명, [제목](url) (연도)` (쉼표·마침표 없음)
     # 제목이 구분되지 않는 문서는 연도 대신 발행일 전체를 적는다.
-    assert f"{SUPERMANAGER_A}, (2025-10-20)." in report
-    assert f"{SUPERMANAGER_B}, (2025-09-23)." in report
-    assert "McKinsey 리포트, (" not in report         # 구분되는 제목에는 붙이지 않는다
+    assert f"{SUPERMANAGER_A} (2025-10-20)" in report
+    assert f"{SUPERMANAGER_B} (2025-09-23)" in report
+    assert f"{SUPERMANAGER_A}, (" not in report
+    assert "McKinsey 리포트 (" not in report          # 구분되는 제목에는 붙이지 않는다
+
+
+def test_reader_name_shortens_operational_source_names():
+    assert va.reader_name("arXiv - Human-Computer Interaction") == "arXiv"
+    assert va.reader_name("arXiv - General Economics (API)") == "arXiv"
+    assert va.reader_name("Brookings (Future of Work)") == "Brookings"
+    assert va.reader_name("OECD (고용·AI)") == "OECD"
+    assert va.reader_name("DBR(동아비즈니스리뷰)") == "DBR(동아비즈니스리뷰)"
+    assert va.reader_name("Deloitte Insights") == "Deloitte Insights"
+
+
+def test_format_reference_has_no_trailing_punctuation():
+    line = va.format_reference("x", "제목", {"url": "https://e.com/a", "year": "2026"}, {"x": "매체"})
+    assert line == "매체, [제목](https://e.com/a) (2026)"
+    assert va.format_reference("x", "제목", {}, {"x": "매체"}) == "매체, 제목"
 
 
 def test_cdata_title_is_cleaned_before_date_annotation():
@@ -573,3 +589,48 @@ def test_cdata_title_is_cleaned_before_date_annotation():
     dates = {("bain-insights", a): "2026-02-01", ("bain-insights", b): "2026-03-01"}
     out = va.reference_titles("bain-insights", {f"<![CDATA[{a}]]>", b}, dates)
     assert out == [f"{b} (2026-03-01)", f"{a} (2026-02-01)"]
+
+
+NOTE_MD = """# 제목
+
+<!-- note -->
+금요일 소식이 달라집니다. 숫자 37%와 「인용」이 있어도 검증 대상이 아니다.
+<!-- /note -->
+
+**세 줄 요약**
+
+- 하나
+
+## 소제목
+
+본문 문단이다.
+<!-- claims: C1 -->
+
+<!-- segment: leader -->
+**리더는.** 리더 문단.
+<!-- claims: C2 -->
+
+## 참고자료
+
+- 매체, 제목
+"""
+
+
+def test_note_block_excluded_from_segments_and_length():
+    with_note = va.measure_length(NOTE_MD)
+    without = va.measure_length(va.NOTE_RE.sub("", NOTE_MD))
+    assert with_note == without
+    assert with_note["leader"] == len("**리더는.**리더문단.")
+    segs, _ = va.parse_article(va.strip_note(NOTE_MD))
+    assert not any("금요일" in s.text for s in segs)
+    # 행 번호 유지
+    assert va.strip_note(NOTE_MD).count("\n") == NOTE_MD.count("\n")
+
+
+def test_note_numbers_do_not_trigger_numeric_checks():
+    ev = evidence(
+        claim("C1", "josh-bersin", "optimistic"),
+        claim("C2", "mckinsey-insights", "cautious"),
+    )
+    r = va.verify(NOTE_MD, ev)
+    assert not any("37" in (i.where + i.message) or "금요일" in i.where for i in r["issues"])

@@ -9,7 +9,22 @@
 <!-- 지침 판본: prompts/article_style.md @ HEAD -->
 <!-- 내부 자료: internal_docs `policies/2026-ai-task-guide.md` (api_eligible=1 · 시점 2026) · `leadership-messages/2026-06-이천포럼-패널토의.md` (api_eligible=1 · 시점 2026-06 · 방향 한 줄만 인용, 세부 과업 비중 수치는 삭제) -->
 <!-- 출처 표기 근거: Harvard Business School·Boston Consulting Group·컨설턴트 무작위 배정 현장 실험은 저장 원문에서 확인한 사실이다. 저자명은 documents.author 값이 있는 건만 적었다(Hengzhi Ye · Denis Lalanne · Hackman & Oldham). 확인되지 않는 기관명은 쓰지 않고 매체명만 남겼다. -->
+<!-- 2026-10-05 손질: 창간 인사말을 편집자 노트(note 구간)로 삽입(사용자 지정 문안 — 검증·분량 제외) · 참고자료를 개정 형식 `매체, [제목](url) (연도)`·독자용 매체명으로 재생성. 본문·세 줄 요약·소제목 변동 없음. -->
 <!-- 분량(공백 제외): 코어 1800자 / 레이어 리더 311자 · 팀원 324자 / 독자 열람(코어+레이어 1개) 최대 2124자 — 기준 전건 충족 -->
+
+<!-- note -->
+금요일 AI Newsletter가 달라집니다.
+
+그동안 매주 AI 뉴스의 요약과 시사점을 전해 드린 AI Newsletter가 「AI 시대 일하는 방식」으로 개편됩니다.
+
+한 주에 한 가지 주제를 정해, 외부 연구와 사례, 그리고 우리 회사의 맥락을 엮어 매주 금요일 한 편의 글로 소개해 드리겠습니다.
+
+AI가 가져오는 변화가 우리가 일하는 방식에 어떤 의미가 있는지를 천천히 짚어보는 자리가 필요하다고 생각했습니다.
+
+첫 편은 지금 모두가 작성 중인 본인 평가 이야기입니다. 올해 AI와 함께 한 일을 어떻게 적으면 좋을지 다뤘습니다.
+
+읽고 떠오르는 생각이나 다음에 다루면 좋을 주제는 이 메일에 회신으로 보내주세요.
+<!-- /note -->
 
 **세 줄 요약**
 
@@ -67,12 +82,12 @@ AI가 쓴 문장 사이에서 내 판단은 저절로 드러나지 않습니다.
 
 ## 참고자료
 
-- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700), (2023).
-- arXiv - Human-Computer Interaction, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1), (2026).
-- arXiv - Human-Computer Interaction, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1), (2026).
-- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best), (2026).
-- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html), (2026).
-- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex), (2026).
+- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700) (2023)
+- arXiv, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1) (2026)
+- arXiv, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1) (2026)
+- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best) (2026)
+- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html) (2026)
+- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex) (2026)
 - 직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)
 - 2026년 1인 1 AI Task 수립·운영 안내
 - 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling

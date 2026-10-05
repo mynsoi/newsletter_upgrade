@@ -86,6 +86,13 @@ def parse_article_md(text: str) -> dict:
 
     pub_date, warnings = _read_pub_date(text)
 
+    # 편집자 노트(<!-- note --> … <!-- /note -->) — 본문과 따로 상자로 낸다. 본문 파싱에서는 뺀다
+    note = ""
+    note_match = NOTE_RE.search(text)
+    if note_match:
+        note = re.sub(r"<!--.*?-->", "", note_match.group(1), flags=re.DOTALL).strip()
+        text = text[:note_match.start()] + text[note_match.end():]
+
     # 레이어 표시(<!-- segment: X -->)는 주석 제거 전에 본문 표지로 바꿔 둔다 — 렌더러가 박스로 감싼다
     text = SEGMENT_COMMENT_RE.sub(lambda m: f"{SEGMENT_MARK_PREFIX}{m.group(1)}]]", text)
 
@@ -151,12 +158,14 @@ def parse_article_md(text: str) -> dict:
         "warnings": warnings,
         "tldr_points": tldr_points,
         "intro": intro,
+        "note": note,
         "sections": sections,
         "references": references,
         "tags": tags,
     }
 
 
+NOTE_RE = re.compile(r"<!--\s*note\s*-->(.*?)<!--\s*/note\s*-->", re.DOTALL)
 PUB_DATE_RE = re.compile(r"발행 승인:\s*(\d{4}-\d{2}-\d{2})")
 
 
@@ -257,6 +266,15 @@ def _render_md_blocks(text: str, md_converter) -> str:
     return "\n".join(out)
 
 
+def _render_note(note: str, md_converter) -> str:
+    """편집자 노트 상자(라벨 없음, 연한 배경). 노트가 없으면 빈 문자열."""
+    if not note:
+        return ""
+    inner = md_converter.convert(note)
+    md_converter.reset()
+    return f'<section class="editor-note">{inner}</section>'
+
+
 def render_article_html(article: dict, image_paths: dict, body_class: str = "") -> str:
     """Jinja2 없이 순수 문자열로 아티클 HTML을 렌더링한다.
 
@@ -344,6 +362,7 @@ def render_article_html(article: dict, image_paths: dict, body_class: str = "") 
         "{% for point in tldr_points %}\n      <li>{{ point }}</li>\n      {% endfor %}": tldr_items,
         "{{ body_html }}": body_html,
         "{{ body_class }}": body_class,
+        "{{ note_html }}": _render_note(article.get("note", ""), md_converter),
         "{% for ref in references %}\n      <li>{{ ref }}</li>\n      {% endfor %}": ref_items,
     }
     for key, val in replacements.items():

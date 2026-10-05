@@ -612,6 +612,16 @@ def build_teaser_eml(subject: str, article: dict, output_dir: Path,
         f'font-size:12pt;line-height:1.6;color:{INK_SECONDARY};word-break:keep-all;">{e(pt)}</td></tr>'
         for pt in article.get("tldr_points", [])
     )
+    note = article.get("note", "")
+    if note:
+        paras = [x.strip() for x in note.split("\n\n") if x.strip()]
+        note_html = "".join(
+            f'<p style="margin:0 0 10px;font-family:{FONT};font-size:11pt;line-height:1.65;'
+            f'word-break:keep-all;color:{INK if i == 0 else INK_SECONDARY};'
+            f'font-weight:{700 if i == 0 else 400};">{e(x)}</p>'
+            for i, x in enumerate(paras))
+        rows.append(f'<tr><td bgcolor="#EEF0F3" style="background:#EEF0F3;padding:20px 24px 10px;">'
+                    f'{note_html}</td></tr>')
     rows.append(
         f'<tr><td bgcolor="{SURFACE}" style="background:{SURFACE};padding:24px 24px 28px;">'
         f'<div style="font-family:{FONT};font-size:17pt;font-weight:800;line-height:1.35;color:{INK};word-break:keep-all;'

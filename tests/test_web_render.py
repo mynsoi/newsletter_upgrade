@@ -19,6 +19,12 @@ LAYERED = """# 제목
 <!-- slug: t | 판본: x -->
 <!-- 발행 승인: 2026-10-08 -->
 
+<!-- note -->
+개편 안내 첫 줄.
+
+둘째 문단 안내.
+<!-- /note -->
+
 **세 줄 요약**
 
 - 하나
@@ -100,3 +106,26 @@ def test_teaser_requires_web_url(tmp_path):
     art = server.parse_article_md(LAYERED)
     with pytest.raises(ValueError):
         email_renderer.build_teaser_eml("제목", art, tmp_path, ["a@example.com"])
+
+
+def test_note_block_rendered_as_box_and_kept_out_of_body():
+    art = server.parse_article_md(LAYERED)
+    assert art["note"].startswith("개편 안내 첫 줄.")
+    assert "개편 안내" not in art["intro"] and art["tldr_points"] == ["하나", "둘", "셋"]
+    page = server.render_article_html(art, {})
+    assert '<section class="editor-note"><p>개편 안내 첫 줄.</p>' in page
+    assert page.index("editor-note") < page.index('class="tldr"')
+
+
+def test_no_note_no_box():
+    art = server.parse_article_md(LAYERED.split("<!-- note -->")[0] + LAYERED.split("<!-- /note -->")[1])
+    assert art["note"] == "" and "editor-note" not in server.render_article_html(art, {})
+
+
+def test_teaser_includes_note(tmp_path):
+    art = server.parse_article_md(LAYERED)
+    eml = email_renderer.build_teaser_eml("제목", art, tmp_path, ["a@example.com"],
+                                          web_url="https://ex.vercel.app/t/s/")
+    msg = email.message_from_bytes(eml)
+    text = next(p for p in msg.walk() if p.get_content_type() == "text/html").get_payload(decode=True).decode()
+    assert "개편 안내 첫 줄." in text and "둘째 문단 안내." in text
