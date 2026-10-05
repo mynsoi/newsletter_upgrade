@@ -3,41 +3,42 @@
 대상: `content/drafts/ai-yearend-what-counts-layers-final5.md` · 증거: `content/evidence/ai-yearend-what-counts.json`
 작성 모델: claude-opus-5 (정본은 `config/settings.yaml`의 `write_model`)
 판정: **통과** (실패 0건 · 경고 0건)
+분량(공백 제외 · 제목·참고자료·편집자 노트 제외): 코어 1800자 / 레이어 leader 311자 · member 324자 / 독자 열람 최대 2124자
 
 > 이 리포트는 evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**만으로 계산한다.
 
 ## 1. 본문 사용 claim (문장 ↔ claim ID)
 
-**[AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄] 16행** — “- 올해는 AI와 함께 많은 과제를 하고 결과물도 그만큼 많이 낸 해였습니다.”
+**[AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄] 31행** — “- 올해는 AI와 함께 많은 과제를 하고 결과물도 그만큼 많이 낸 해였습니다.”
 - `1A06A3BAA95A7915D3FFDBC5524` · academic-canon · T1 · optimistic/experiment — AI 지원이 가능한 업무(frontier 내)에서 GPT-4 사용 시 응답 품질이 통제 집단 대비 33.9% 향상된다.
 - `1A0E5D3DB79951D5B0FD89699FE` · arxiv-cs-hc · T1 · cautious/opinion — AI 사용 여부, 공개 여부, 숨겨진 사용 탐지 가능성에 대한 질문은 AI 사용 자체를 책임성의 중심에 놓으면서 더 근본적인 
 - `1A06A16BA8A6407FD4AB5BD513C` · dbr · T3 · cautious/theory — AI를 활용하여 만든 결과물의 완성도가 높아도, 그것이 개인의 실제 직무 역량 발전을 의미하지는 않는다
 
-**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 25행** — “사람과 AI가 함께 일할 때의 책임을 다룬 2026년 연구에서 Hengzhi Ye 외 연구진은 우리 질문이 조금 어긋나 있다고 짚습니다.”
+**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 40행** — “사람과 AI가 함께 일할 때의 책임을 다룬 2026년 연구에서 Hengzhi Ye 외 연구진은 우리 질문이 조금 어긋나 있다고 짚습니다.”
 - `1A0E5D3DB79951D5B0FD89699FE` · arxiv-cs-hc · T1 · cautious/opinion — AI 사용 여부, 공개 여부, 숨겨진 사용 탐지 가능성에 대한 질문은 AI 사용 자체를 책임성의 중심에 놓으면서 더 근본적인 
 
-**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 28행** — “AI 덕분에 성과가 오른 것은 분명합니다.”
+**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 43행** — “AI 덕분에 성과가 오른 것은 분명합니다.”
 - `1A06A3BAA95A7915D3FFDBC5524` · academic-canon · T1 · optimistic/experiment — AI 지원이 가능한 업무(frontier 내)에서 GPT-4 사용 시 응답 품질이 통제 집단 대비 33.9% 향상된다.
 
-**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 31행** — “다만 자기 기여를 스스로 가늠하기는 쉽지 않습니다.”
+**[결과만 보면 AI가 했는지 사람이 했는지 알기 어렵습니다] 46행** — “다만 자기 기여를 스스로 가늠하기는 쉽지 않습니다.”
 - `1A09270426C2548B53EC2326710` · worklytics-blog · T4 · cautious/experiment — 개발자의 자체 평가로 측정한 AI 도구의 생산성 향상 효과는 통제된 조건에서 측정한 실제 효과보다 3~5배 크다
 
-**[무엇을 정했는지까지 정리하면 성과가 더 분명해집니다] 36행** — “비교 기준은 다른 사람이 확인할 근거를 함께 적으면 생깁니다.”
+**[무엇을 정했는지까지 정리하면 성과가 더 분명해집니다] 51행** — “비교 기준은 다른 사람이 확인할 근거를 적으면 생깁니다.”
 - `1A06A16BA8A6407FD4AB5BD513C` · dbr · T3 · cautious/theory — AI를 활용하여 만든 결과물의 완성도가 높아도, 그것이 개인의 실제 직무 역량 발전을 의미하지는 않는다
 
-**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 45행** — “달리 말해, 차이는 그다음에서 생깁니다.”
+**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 60행** — “달리 말해, 차이는 그다음에서 생깁니다.”
 - `1A061410B73C0097A2017D587E2` · deloitte-insights · T2 · cautious/survey — 의사결정 시 AI 산출물의 품질을 정기적으로 검증하는 경영진은 절반에 불과하다
 
-**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 48행** — “Worklytics의 2026년 도입 사례 분석에 소개된 어느 개발 조직은 코딩 도구를 도입한 뒤 월간 되돌림이 4건에서 17건으로 늘었습니다.”
+**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 63행** — “Worklytics의 2026년 도입 사례 분석에 소개된 어느 개발 조직은 코딩 도구를 도입한 뒤 월간 되돌림이 4건에서 17건으로 늘었습니다.”
 - `1A0927045D10A41AA91C2378D78` · worklytics-blog · T4 · cautious/case — 코딩 어시스턴트 도입 후 코드 검토 과정에서 발생하는 월간 풀 리퀘스트 되돌림이 4건에서 17건으로 증가했다
 
-**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 51행** — “Hackman과 Oldham이 1976년에 제시한 직무특성모형은 과업 정체성, 곧 일의 처음부터 끝까지가 내 것이라는 느낌이 책임감과 몰입을 높인다고 봅니다.”
+**[AI를 썼다는 사실만으로는 차이가 보이지 않습니다] 66행** — “Hackman과 Oldham이 1976년에 제시한 직무특성모형은 과업 정체성, 곧 일의 처음부터 끝까지가 내 것이라는 느낌이 책임감과 몰입을 높인다고 봅니다.”
 - `1A0607DA27A9E22BE156637FD46` · theory-canon · T1 · neutral/theory — 기술다양성·과업정체성·과업중요성·자율성·피드백의 5가지 핵심 직무특성이 높은 직무일수록 수행자의 내적 동기와 직무만족이 높다
 
-**[우리 조직에 적용해본다면] 59행** — “**리더가 바꿀 수 있는 것은 평가에서 묻는 질문입니다.** 몇 건을 했는지만 물으면 결과물이 올라오고, 어디서 무엇을 정했는지 물으면 판단이 올라옵니다.”
+**[우리 조직에 적용해본다면] 74행** — “**리더가 바꿀 수 있는 것은 평가에서 묻는 질문입니다.** 몇 건을 했는지만 물으면 결과물이 올라오고, 어디서 무엇을 정했는지 물으면 판단이 올라옵니다.”
 - `1A09270472F0EE7C2F42681D48C` · worklytics-blog · T4 · neutral/data — 팀 매니저의 AI 사용 행동이 가시적이고 1:1 면담에서 이를 언급하는지 여부가 팀 채택률의 선행지표가 된다
 
-**[우리 조직에 적용해본다면] 63행** — “**팀원에게 올해 본인 평가는 기억보다”
+**[우리 조직에 적용해본다면] 78행** — “**팀원에게 올해 본인 평가는 기억보다”
 - `1A06B4F3542AA2D591093EED06B` · arxiv-cs-hc · T1 · neutral/data — AI 사용 빈도가 낮은 사용자는 자신의 저작권 기여도를 더 정확하게 인식한다
 
 사용 claim 9건 / evidence 전체 83건 (미사용 74건)
@@ -54,8 +55,8 @@
 
 | 본문 수치 | 위치 | 근거 |
 |---|---|---|
-| 4건 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 48행 | ✅ 사용 claim에 있음 |
-| 17건 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 48행 | ✅ 사용 claim에 있음 |
+| 4건 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 63행 | ✅ 사용 claim에 있음 |
+| 17건 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 63행 | ✅ 사용 claim에 있음 |
 
 ## 4. 내부 자료 인용 대조 (경영층 발언·SKMS)
 
@@ -65,9 +66,9 @@
 
 | 인용한 내부 자료 | 위치 | 자료 시점 | 본문 연도 표기 |
 |---|---|---|---|
-| 2026년 1인 1 AI Task 수립·운영 안내 | AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄 21행 | 2026년 | ✅ 있음 |
-| 2026년 1인 1 AI Task 수립·운영 안내 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 43행 | 2026년 | ✅ 있음 |
-| 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling | 우리 조직에 적용해본다면 56행 | 2026년 | ✅ 있음 |
+| 2026년 1인 1 AI Task 수립·운영 안내 | AI Task 달성실적, 결과 옆에 판단한 부분도 한 줄 36행 | 2026년 | ✅ 있음 |
+| 2026년 1인 1 AI Task 수립·운영 안내 | AI를 썼다는 사실만으로는 차이가 보이지 않습니다 58행 | 2026년 | ✅ 있음 |
+| 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling | 우리 조직에 적용해본다면 71행 | 2026년 | ✅ 있음 |
 
 ## 5. 근거 주석 누락 의심 (사람 검토)
 
@@ -75,17 +76,17 @@
 
 ## 6. 참고자료 (실사용 문서만 — 본문에 그대로 붙여 넣는 목록)
 
-- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700), (2023).
-- arXiv - Human-Computer Interaction, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1), (2026).
-- arXiv - Human-Computer Interaction, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1), (2026).
-- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best), (2026).
-- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html), (2026).
-- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex), (2026).
+- [Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality](https://www.hbs.edu/faculty/Pages/item.aspx?num=64700) (2023)
+- arXiv, [When AI Blurs the Boundaries of Contribution: An Empirical Study of Authorship Calibration](https://arxiv.org/abs/2607.15006v1) (2026)
+- arXiv, [When No One Owns the Judgment: Accountability Under Contribution Dissolution in Human-AI Collaboration](https://arxiv.org/abs/2609.29312v1) (2026)
+- DBR(동아비즈니스리뷰), [AI로 달성한 고성과를 실력으로 착각 설명·응용할 수 있는지 역량 검증해야](https://dbr.donga.com/article/view/1101/article_no/12247/ac/m_best) (2026)
+- Deloitte Insights, [AI adoption to adaptation: How a new change approach can build the human behaviors needed for AI](https://www.deloitte.com/us/en/insights/topics/talent/ai-adoption-to-ai-adaptation.html) (2026)
+- Worklytics, [How to Measure Time Saved From Codex (With Real Data)](https://www.worklytics.co/blog/how-to-measure-time-saved-from-codex) (2026)
 - 직무특성모형(Job Characteristics Model, Hackman & Oldham 1976)
 - 2026년 1인 1 AI Task 수립·운영 안내
 - 2026 이천포럼 CEO 패널토의 — Free Human Resource·Re-skilling
 
-형식: 외부 문서는 `매체·기관명, [제목](url), (연도).` · 이론 카드는 `이론명(영문명, 저자 연도)` · 내부 자료는 제목 평문. 배열은 외부 → 이론 → 내부.
+형식: 외부 문서는 `매체·기관명, [제목](url) (연도)` · 이론 카드는 `이론명(영문명, 저자 연도)` · 내부 자료는 제목 평문. 배열은 외부 → 이론 → 내부.
 
 ## 7. 지적 사항
 
@@ -175,6 +176,9 @@
 4. **면책 문단 삭제의 영향.** 본문에 근거의 한계를 밝히는 문장이 없다. 9장의 표시로
    충분한지 판단이 필요하다.
 5. **R-08 (D1과의 논지 중복).** D1과 같은 내부 문서를 쓰지만 논지와 독자 행동이 다르다.
+6. **AI Task 평가 반영의 "예정" 표기** — 안내문이 "예정"으로 적은 사안이라 본문도 "볼 예정이라고
+   안내했습니다"로 적었다(11.7). 확정 공지가 확인되면 "본다고 밝혔습니다"로 되돌린다.
+7. **머리말 note 블록을 아티클 분량에 넣을지** — 11.8 참조.
 
 ---
 
@@ -299,6 +303,41 @@
 `web/server.py`는 ".md 업로드 → 파싱 → 이미지 생성 → 정적 HTML 생성"까지만 하고, 메일
 발송은 동료의 `feature-email-publish` 브랜치에 준비돼 있으나 **병합 보류 중**이다
 (docs/기획서.md 398행). 병합 시점에 그 브랜치에서 확인할 항목으로 남긴다.
+
+---
+
+### 11.7 내부 자료 대조 정정 3건 (2026-10-05)
+
+내부 자료 원문과 대조해 세 군데를 고쳤다. 세 건 모두 `internal_docs` 본문에서 확인한 사실이다.
+
+| # | 원문 | 수정 | 확인 근거 |
+|---|---|---|---|
+| 1 | 연말 평가에서 그 달성도를 다른 과제와 함께 **본다고 밝혔습니다** | 연말 평가에서 그 달성도를 다른 과제와 함께 **볼 예정이라고 안내했습니다** | 안내문 본문 "연말 평가 시, 타 Task와 함께 AI Task 목표 달성도 평가를 동시 수행할 **예정**" — 확정 공지가 아니다 |
+| 2 | 올해 AI 활용은 **전사 과제**였습니다 | 올해 AI 활용은 **E&S 전 팀원의 과제**였습니다 | 안내문 "대상: **E&S 전 팀원** (통합운영조직 포함)" — SK 전사가 아니라 E&S 범위다 |
+| 3 | 2026년 이천포럼에서 **우리가 확인한** 방향도 같습니다 | 2026년 이천포럼에서 **우리 경영진이 밝힌** 방향도 같습니다 | 패널토의 `speaker` = SK이노베이션 E&S 대표이사(CEO). "우리" 시점은 유지하면서 발언 귀속을 정확히 했다 |
+
+1번은 안내문이 "예정"으로 적은 사안이다. **확정 공지가 확인되면 되돌릴 문장**이므로 발행 전
+확인 항목(10장)에 남겼다.
+
+**분량 상쇄**: 정정 3건이 정확히 +11자였다. 사용자 지정 문장은 건드리지 않고 군더더기 3곳에서
+13자를 덜어 코어를 1,800자에 맞췄다 — "건수만 보면 **이런 조직도** 성과가", "확인할 근거를
+**함께** 적으면", "관행은 아니**라는 뜻입니**다" → "관행은 아닙니다".
+
+**재검증**: 통과 — 사용 claim 9건·실패 0·경고 0. claim 집합과 참고자료는 변동이 없다.
+내부 자료 시점 표기 3건 모두 ✅.
+
+### 11.8 머리말 note 블록 (발행 안내) — 분량 처리 판단
+
+이 판본의 워킹트리에 `<!-- note -->` ~ `<!-- /note -->`로 감싼 **창간 발행 안내 블록**
+(277자, 공백 제외)이 들어와 있다. "금요일 AI Newsletter가 달라집니다"로 시작해 개편 취지와
+첫 편 소개, 회신 안내로 끝나는 메일 머리말 성격의 글이다. 커밋 `e6b92a8`·`2567e0b` 어디에도
+없었고 이번 작업 중 워킹트리에서 처음 확인했다.
+
+**아티클 본문이 아니라 메일 머리말로 보고 분량 계산에서 제외했다.** 포함하면 코어가
+2,077자가 되어 기준(1,500~1,800)을 넘는다. `<!-- note -->` 마커가 본문과 구분하려는 표시로
+읽혀 그렇게 판단했으나, 이 블록을 아티클 분량에 넣을지는 **사람 확인 항목**으로 남긴다.
+웹·메일 템플릿에서 이 블록을 어디에 놓을지(기사 위 안내 영역인지 본문 첫 단락인지)도
+함께 정해야 한다.
 
 ---
 
