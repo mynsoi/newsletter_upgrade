@@ -449,7 +449,7 @@ def _trim_bottom(img: Image.Image, pad: int = 60) -> Image.Image:
     w, h = img.size
     sample_xs = list(range(10, w - 10, max(1, w // 30)))
     crop_y = h
-    for y in range(h - 1, max(0, h - 10000), -1):
+    for y in range(h - 1, -1, -1):
         pixels = [img.getpixel((x, y))[:3] for x in sample_xs]
         ref = pixels[0]
         is_uniform = all(
@@ -609,12 +609,12 @@ def build_teaser_eml(subject: str, article: dict, output_dir: Path,
     bullets = "".join(
         f'<tr><td style="padding:4px 10px 4px 0;vertical-align:top;color:{ACCENT};font-weight:700;'
         f'font-family:{FONT};font-size:12pt;">&#8226;</td><td style="padding:4px 0;font-family:{FONT};'
-        f'font-size:12pt;line-height:1.6;color:{INK_SECONDARY};">{e(pt)}</td></tr>'
+        f'font-size:12pt;line-height:1.6;color:{INK_SECONDARY};word-break:keep-all;">{e(pt)}</td></tr>'
         for pt in article.get("tldr_points", [])
     )
     rows.append(
         f'<tr><td bgcolor="{SURFACE}" style="background:{SURFACE};padding:24px 24px 28px;">'
-        f'<div style="font-family:{FONT};font-size:17pt;font-weight:800;line-height:1.35;color:{INK};'
+        f'<div style="font-family:{FONT};font-size:17pt;font-weight:800;line-height:1.35;color:{INK};word-break:keep-all;'
         f'margin-bottom:6px;">{e(article["title"])}</div>'
         f'<div style="font-family:{FONT};font-size:10pt;color:{INK_MUTED};margin-bottom:18px;">'
         f'기업문화AX팀 &middot; {e(article.get("pub_date", ""))}</div>'
