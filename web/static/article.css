@@ -201,6 +201,17 @@ body {
 }
 
 /* --- 본문 --- */
+/* 도입 문단 */
+.intro {
+  margin-bottom: 36px;
+}
+.intro p {
+  font-size: 17px;
+  line-height: 1.82;
+  color: var(--ink-secondary);
+  word-break: keep-all;
+}
+
 .article-body {
   padding-bottom: 48px;
 }

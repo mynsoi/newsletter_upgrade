@@ -145,6 +145,28 @@ h1 {
 .image-candidate.selected .check {
   display: block;
 }
+.image-candidate .regen-one {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px; height: 28px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.image-candidate .regen-one:hover {
+  background: var(--accent);
+}
+.image-candidate.selected .regen-one {
+  display: block;
+}
 
 /* --- 이미지 배치 에디터 --- */
 .layout-editor {
@@ -472,6 +494,25 @@ h1 {
         HTML 페이지 생성
       </button>
     </div>
+
+    <div class="card" id="email-section" style="display:none;margin-top:24px;">
+      <div class="card-label">이메일 파일 생성</div>
+      <p style="font-size:14px;color:var(--ink-muted);margin-bottom:16px;">
+        발행된 아티클을 .eml 파일로 다운로드합니다. VDI Outlook에서 열어 발송하세요.
+      </p>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">수신자 (쉼표로 구분)</label>
+        <input type="text" id="email-to" placeholder="user1@sk.com, user2@sk.com"
+          style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--kr);">
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">참조 CC (선택)</label>
+        <input type="text" id="email-cc" placeholder="cc1@sk.com"
+          style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--kr);">
+      </div>
+      <button class="btn btn-primary" onclick="sendEmail()">.eml 파일 다운로드</button>
+      <span id="email-status" style="font-size:13px;color:var(--ink-muted);margin-left:12px;"></span>
+    </div>
   </div>
 </div>
 
@@ -481,6 +522,7 @@ let selectedImages = {};
 let imagePositions = {};
 let skippedSections = {};
 let currentTags = [];
+let publishedSlug = '';
 
 // --- API 키 관리 ---
 function loadApiKey() {
@@ -742,9 +784,15 @@ async function regenerateImages(key) {
   const promptOverride = promptArea.querySelector('textarea').value.trim();
   const isHero = key === 'hero';
 
+  // 선택된 스타일이 있으면 그것만 재생성
+  const selectedCandidate = document.querySelector('#candidates-' + key + ' .image-candidate.selected');
+  if (selectedCandidate && selectedCandidate.dataset.styleIndex !== undefined) {
+    return regenOne(key, parseInt(selectedCandidate.dataset.styleIndex));
+  }
+
   const statusBar = document.getElementById('status-bar');
   statusBar.classList.add('show');
-  document.getElementById('status-text').textContent = (isHero ? '히어로' : heading) + ' 재생성 중... (~40초)';
+  document.getElementById('status-text').textContent = (isHero ? '히어로' : heading) + ' 전체 재생성 중... (~40초)';
 
   try {
     const resp = await fetch('/api/generate-images', {
@@ -766,16 +814,69 @@ async function regenerateImages(key) {
 function renderCandidates(key, images, isHero, labels) {
   const container = document.getElementById('candidates-' + key);
   container.innerHTML = '';
+  const cacheBust = Date.now();
   images.forEach((url, i) => {
     const div = document.createElement('div');
     div.className = 'image-candidate' + (isHero ? ' hero-candidate' : '');
+    div.dataset.styleIndex = i;
     const labelTag = labels && labels[i]
       ? '<div class="style-label">' + labels[i] + '</div>'
       : '';
-    div.innerHTML = '<img src="' + url + '" alt="후보 ' + (i + 1) + '">' + labelTag + '<div class="check">✓</div>';
+    const displayUrl = url.startsWith('http') ? url : url + '?t=' + cacheBust;
+    div.innerHTML = '<img src="' + displayUrl + '" alt="후보 ' + (i + 1) + '">'
+      + '<button class="regen-one" title="이 스타일만 재생성" onclick="event.stopPropagation(); regenOne(\'' + key + '\', ' + i + ')">↻</button>'
+      + labelTag + '<div class="check">✓</div>';
     div.addEventListener('click', () => selectCandidate(key, div, url));
     container.appendChild(div);
   });
+}
+
+async function regenOne(key, styleIndex) {
+  const sectionDiv = document.querySelector('.image-section[data-key="' + key + '"]');
+  const heading = sectionDiv ? sectionDiv.dataset.heading : '';
+  const body = sectionDiv ? sectionDiv.dataset.body : '';
+  const promptArea = document.getElementById('prompt-' + key);
+  const promptOverride = promptArea ? promptArea.querySelector('textarea').value.trim() : '';
+  const isHero = key === 'hero';
+
+  const candidate = document.querySelector('#candidates-' + key + ' .image-candidate[data-style-index="' + styleIndex + '"]');
+  if (candidate) {
+    const img = candidate.querySelector('img');
+    img.style.opacity = '0.4';
+  }
+
+  document.getElementById('status-bar').classList.add('show');
+  var label = ['일러스트 A', '일러스트 B', '포토'][styleIndex] || '';
+  document.getElementById('status-text').textContent = label + ' 재생성 중... (~15초)';
+
+  try {
+    const resp = await fetch('/api/generate-images', {
+      method: 'POST',
+      headers: getApiKeyHeaders(),
+      body: JSON.stringify({ heading, body, prompt: promptOverride, is_hero: isHero, key, section_index: isHero ? -1 : parseInt(key.split('-')[1]), style_index: styleIndex })
+    });
+    const data = await resp.json();
+    if (data.error) { showError(data.error); return; }
+
+    if (candidate) {
+      const newUrl = data.image + '?t=' + Date.now();
+      const img = candidate.querySelector('img');
+      img.src = newUrl;
+      img.style.opacity = '1';
+      // 기존 클릭 리스너를 교체하기 위해 요소를 복제
+      const newCandidate = candidate.cloneNode(true);
+      newCandidate.addEventListener('click', () => selectCandidate(key, newCandidate, data.image));
+      newCandidate.querySelector('.regen-one').addEventListener('click', (e) => { e.stopPropagation(); regenOne(key, styleIndex); });
+      candidate.parentNode.replaceChild(newCandidate, candidate);
+      if (newCandidate.classList.contains('selected')) {
+        selectedImages[key] = data.image;
+      }
+    }
+    document.getElementById('status-text').textContent = label + ' 재생성 완료!';
+  } catch (err) {
+    showError('재생성 실패: ' + err.message);
+    if (candidate) candidate.querySelector('img').style.opacity = '1';
+  }
 }
 
 function selectCandidate(key, el, url) {
@@ -852,6 +953,8 @@ function publishArticle() {
     window.open(data.preview_url, '_blank');
     document.getElementById('status-text').textContent =
       '발행 완료! 파일: ' + data.output_path;
+    publishedSlug = articleData.slug;
+    document.getElementById('email-section').style.display = 'block';
   })
   .catch(err => showError('발행 실패: ' + err.message));
 }
@@ -881,6 +984,39 @@ function addTag() {
 function removeTag(idx) {
   currentTags.splice(idx, 1);
   renderTags();
+}
+
+function sendEmail() {
+  var toInput = document.getElementById('email-to').value.trim();
+  if (!toInput) { showError('수신자를 입력해 주세요.'); return; }
+  var recipients = toInput.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var ccInput = document.getElementById('email-cc').value.trim();
+  var cc = ccInput ? ccInput.split(',').map(function(s) { return s.trim(); }).filter(Boolean) : [];
+
+  var statusEl = document.getElementById('email-status');
+  statusEl.textContent = '.eml 생성 중...';
+
+  fetch('/api/send-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug: publishedSlug, recipients: recipients, cc: cc })
+  })
+  .then(function(r) {
+    if (!r.ok) { return r.json().then(function(d) { throw new Error(d.error || '생성 실패'); }); }
+    return r.blob();
+  })
+  .then(function(blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'newsletter.eml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    statusEl.textContent = '다운로드 완료! VDI Outlook에서 열어 발송하세요.';
+  })
+  .catch(function(err) { showError('이메일 생성 실패: ' + err.message); statusEl.textContent = ''; });
 }
 
 function showError(msg) {

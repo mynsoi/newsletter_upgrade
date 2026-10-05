@@ -98,6 +98,15 @@ def parse_article_md(text: str) -> dict:
             if item:
                 tldr_points.append(item)
 
+    # 도입 문단 (TL;DR과 첫 ## 사이)
+    intro = ""
+    if tldr_match:
+        tldr_end = tldr_match.end()
+        first_h2 = clean_text.find("\n## ", tldr_end)
+        if first_h2 != -1:
+            intro = clean_text[tldr_end:first_h2].strip()
+            intro = re.sub(r"<!--.*?-->", "", intro, flags=re.DOTALL).strip()
+
     # 본문 섹션 (## 헤더별 분할)
     sections = []
     body_start = clean_text.find("\n## ")
@@ -135,6 +144,7 @@ def parse_article_md(text: str) -> dict:
         "slug": slug or _slugify(title),
         "pub_date": pub_date,
         "tldr_points": tldr_points,
+        "intro": intro,
         "sections": sections,
         "references": references,
         "tags": tags,
@@ -205,6 +215,13 @@ def render_article_html(article: dict, image_paths: dict) -> str:
     md_converter = md_lib.Markdown(extensions=["extra"])
     image_positions = article.get("image_positions", {})
     body_parts = []
+
+    # 도입 문단 (TL;DR과 첫 소제목 사이)
+    intro = article.get("intro", "")
+    if intro:
+        body_parts.append(f'<div class="intro">{md_converter.convert(intro)}</div>')
+        md_converter.reset()
+
     for i, sec in enumerate(article["sections"]):
         img_key = f"section-{i}"
         img_tag = ""
@@ -363,7 +380,7 @@ def _generate_one(client, prompt: str, size: str, quality: str, key: str, idx: i
     import sys
     print(f"  [{key}] 후보 {idx+1}/3 생성 시작...", flush=True)
     response = client.images.generate(
-        model="gpt-image-1",
+        model="gpt-image-2.5-flare",
         prompt=prompt,
         size=size,
         quality=quality,
@@ -387,6 +404,7 @@ def api_generate_images():
     is_hero = data.get("is_hero", False)
     key = data.get("key", "unknown")
     section_index = data.get("section_index", 0)
+    style_index = data.get("style_index")  # None이면 전체, 0/1/2이면 해당 스타일만
     user_api_key = request.headers.get("X-OpenAI-Key", "").strip()
 
     size = "1536x1024"
@@ -408,6 +426,19 @@ def api_generate_images():
         client = get_openai_client(user_api_key or None)
     except RuntimeError as e:
         return jsonify({"error": str(e)}), 400
+
+    # 단일 스타일 재생성
+    if style_index is not None:
+        style = _IMAGE_STYLES[style_index]
+        if prompt_override:
+            p = f"{style['prefix']} {prompt_override} {style['suffix']}"
+        else:
+            p = _build_scene_prompt(heading, body, style, is_hero, section_index)
+        try:
+            url = _generate_one(client, p, size, quality, key, style_index, tmp_dir)
+            return jsonify({"image": url, "style_index": style_index, "label": style["label"], "key": key})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     prompts = []
     for i, style in enumerate(_IMAGE_STYLES):
@@ -468,15 +499,16 @@ def api_publish():
     image_paths = {}
     for key, url in selected.items():
         if url.startswith("http"):
-            # 외부 URL(플레이스홀더 모드) — URL 그대로 사용
             image_paths[key] = url
         else:
             src_filename = url.split("/")[-1]
             src_path = tmp_dir / src_filename
+            dest_name = f"{key}.png"
+            dest_path = out_dir / dest_name
             if src_path.exists():
-                dest_name = f"{key}.png"
-                dest_path = out_dir / dest_name
                 shutil.copy2(src_path, dest_path)
+                image_paths[key] = dest_name
+            elif dest_path.exists():
                 image_paths[key] = dest_name
 
     # CSS 복사
@@ -489,6 +521,9 @@ def api_publish():
     html_path = out_dir / "index.html"
     html_path.write_text(html, encoding="utf-8")
 
+    article_json_path = out_dir / "article.json"
+    article_json_path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
+
     # 임시 이미지 정리
     for f in tmp_dir.glob("*.png"):
         f.unlink(missing_ok=True)
@@ -497,6 +532,45 @@ def api_publish():
         "output_path": str(out_dir.relative_to(ROOT)),
         "preview_url": f"/preview/{slug}/",
     })
+
+
+@app.route("/api/send-email", methods=["POST"])
+def api_send_email():
+    """발행된 아티클을 이미지 기반 .eml 파일로 생성하여 다운로드한다."""
+    from email_renderer import build_image_eml
+
+    data = request.json
+    slug = data.get("slug", "")
+    recipients = data.get("recipients", [])
+    cc = data.get("cc", [])
+
+    if not slug:
+        return jsonify({"error": "slug가 필요합니다."}), 400
+    if not recipients:
+        return jsonify({"error": "수신자가 필요합니다."}), 400
+
+    out_dir = OUTPUT_DIR / slug
+    if not out_dir.exists():
+        return jsonify({"error": f"발행물을 찾을 수 없습니다: {slug}"}), 404
+
+    article_json = out_dir / "article.json"
+    if not article_json.exists():
+        return jsonify({"error": "article.json을 찾을 수 없습니다."}), 404
+
+    article = json.loads(article_json.read_text(encoding="utf-8"))
+    subject = f"[Insight Weekly] {article['title']}"
+    preview_url = f"http://localhost:5001/preview/{slug}/"
+
+    try:
+        eml_bytes = build_image_eml(subject, preview_url, out_dir, recipients, cc)
+
+        eml_path = out_dir / "newsletter.eml"
+        eml_path.write_bytes(eml_bytes)
+
+        return send_file(eml_path, as_attachment=True, download_name="newsletter.eml",
+                         mimetype="message/rfc822")
+    except Exception as e:
+        return jsonify({"error": f"이메일 생성 실패: {str(e)}"}), 500
 
 
 @app.route("/preview/<slug>/")
