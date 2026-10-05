@@ -142,3 +142,36 @@ def test_korean_sender_name_encodes_name_only(tmp_path):
     assert msg["From"].endswith("<noreply@example.com>")
     name, addr = email.utils.parseaddr(str(email.header.make_header(email.header.decode_header(msg["From"]))))
     assert name == "이소민/기업문화AX팀" and addr == "noreply@example.com"
+
+
+# ── 메일 캡처 폭 (2026-10-05: 동료 원본 760으로 복귀) ──
+
+def test_email_width_is_colleague_original_760():
+    """캡처 폭은 동료 원본 메일 렌더러의 CONTENT_WIDTH와 같은 760이다.
+
+    폰 375px에서 ×0.49로 줄어든다 — 이 비율이 리허설 체크리스트의 모바일 판정 기준이므로
+    폭을 바꾸면 그 문구도 함께 고쳐야 한다.
+    """
+    assert email_renderer.EMAIL_WIDTH == 760
+    assert email_renderer.EMAIL_WIDTH == email_renderer.CONTENT_WIDTH
+
+
+def test_mail_wrapper_uses_width_constant():
+    """메일 테이블 폭이 상수를 따라간다 — 하드코딩된 숫자가 남아 있지 않다."""
+    w = email_renderer.EMAIL_WIDTH
+    wrapped = email_renderer._wrap_mail("<tr><td>x</td></tr>")
+    assert f'width="{w}"' in wrapped and f"max-width:{w}px" in wrapped
+
+
+def test_email_capture_css_does_not_override_font_size():
+    """캡처 CSS는 글자 크기를 키우지 않는다 — 760px에서는 웹 본문과 같은 크기로 찍는다.
+
+    링크 밑줄·색 제거와 두 장 캡처(머리·본문) 규칙은 유지한다.
+    """
+    css = (Path(__file__).resolve().parent.parent / "web/static/article.css").read_text(encoding="utf-8")
+    capture_rules = [ln for ln in css.splitlines() if ln.strip().startswith(".email-capture")]
+    assert capture_rules, ".email-capture 규칙이 사라졌다"
+    assert not [ln for ln in capture_rules if "font-size" in ln], \
+        f"캡처 CSS에 font-size override가 남아 있다: {capture_rules}"
+    assert any("text-decoration: none" in ln for ln in capture_rules)
+    assert ".email-part-head" in css and ".email-part-body" in css

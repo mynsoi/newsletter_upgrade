@@ -440,9 +440,14 @@ def build_eml(subject: str, html_body: str, embedded_images: list[MIMEImage],
 
 # ── 방법 B: 전체 이미지 기반 이메일 ──
 # 웹페이지를 메일 전용 변형(email-head.html · email-body.html, server.write_email_pages)으로
-# 600px 폭에서 찍는다. 머리(헤더·히어로)와 본문을 따로 찍어 그 사이에 "웹에서 보기" 줄을 넣는다.
+# 760px 폭에서 찍는다. 머리(헤더·히어로)와 본문을 따로 찍어 그 사이에 "웹에서 보기" 줄을 넣는다.
 
-EMAIL_WIDTH = 600   # 폰 375px에서 ×0.625 — 캡처 CSS(article.css .email-capture)가 이 폭 기준
+# 760은 동료 원본 메일 렌더러의 CONTENT_WIDTH와 같은 값이다(2026-10-05 복귀).
+# 데스크톱에서는 본문이 1:1로 보이고, 폰 375px에서는 ×0.49로 줄어든다
+# (375/760 = 0.4934). 600px일 때의 ×0.625보다 작아지므로 폰 독자는 확대하거나
+# "웹에서 보기"로 넘어가야 한다 — 리허설 체크리스트의 모바일 판정 항목 참조.
+# 캡처 CSS(article.css .email-capture)는 이 폭 기준으로 글자를 키우지 않는다.
+EMAIL_WIDTH = 760
 EMAIL_PAGES = ("email-head.html", "email-body.html")
 
 
