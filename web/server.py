@@ -17,6 +17,11 @@ from flask import Flask, request, jsonify, send_from_directory, send_file
 import markdown as md_lib
 import openai
 
+from segments import (
+    SEGMENT_COMMENT_RE, SEGMENT_LABELS, SEGMENT_MARK_PREFIX,
+    split_segment_blocks, strip_segment_marks,
+)
+
 # ── .env 로드 ──
 def _load_dotenv():
     """ROOT/.env 파일이 있으면 환경변수로 로드한다."""
@@ -78,11 +83,10 @@ def parse_article_md(text: str) -> dict:
     if slug_match:
         slug = slug_match.group(1)
 
-    date_match = re.search(r"발행 승인:\s*(\d{4}-\d{2}-\d{2})", text)
-    if date_match:
-        pub_date = date_match.group(1)
-    if not pub_date:
-        pub_date = datetime.now().strftime("%Y-%m-%d")
+    pub_date, warnings = _read_pub_date(text)
+
+    # 레이어 표시(<!-- segment: X -->)는 주석 제거 전에 본문 표지로 바꿔 둔다 — 렌더러가 박스로 감싼다
+    text = SEGMENT_COMMENT_RE.sub(lambda m: f"{SEGMENT_MARK_PREFIX}{m.group(1)}]]", text)
 
     # claims 주석 제거
     clean_text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
@@ -143,12 +147,37 @@ def parse_article_md(text: str) -> dict:
         "title": title,
         "slug": slug or _slugify(title),
         "pub_date": pub_date,
+        "warnings": warnings,
         "tldr_points": tldr_points,
         "intro": intro,
         "sections": sections,
         "references": references,
         "tags": tags,
     }
+
+
+PUB_DATE_RE = re.compile(r"발행 승인:\s*(\d{4}-\d{2}-\d{2})")
+
+
+def _read_pub_date(text: str) -> tuple[str, list[str]]:
+    """머리말(세 줄 요약·첫 소제목 앞)의 주석에서 `발행 승인: YYYY-MM-DD`를 읽는다.
+
+    본문에 같은 문구가 있어도 잡히지 않도록 머리말 주석만 본다. 없으면 오늘 날짜 + 경고.
+    """
+    head_end = len(text)
+    for marker in ("**세 줄 요약**", "**TL;DR**", "\n## "):
+        i = text.find(marker)
+        if i != -1:
+            head_end = min(head_end, i)
+    for comment in re.findall(r"<!--(.*?)-->", text[:head_end], flags=re.DOTALL):
+        m = PUB_DATE_RE.search(comment)
+        if m:
+            return m.group(1), []
+    today = datetime.now().strftime("%Y-%m-%d")
+    return today, [
+        f"머리말에 '<!-- 발행 승인: YYYY-MM-DD -->'가 없어 발행일을 오늘({today})로 넣었습니다. "
+        "승인 기록을 확인하세요."
+    ]
 
 
 def _slugify(text: str) -> str:
@@ -191,8 +220,27 @@ def _extract_tags(text: str, sections: list) -> list:
 # HTML 렌더링
 # ══════════════════════════════════════════════════════════════
 
-def render_article_html(article: dict, image_paths: dict) -> str:
-    """Jinja2 없이 순수 문자열로 아티클 HTML을 렌더링한다."""
+def _render_md_blocks(text: str, md_converter) -> str:
+    out = []
+    for role, chunk in split_segment_blocks(text):
+        inner = md_converter.convert(chunk)
+        md_converter.reset()
+        if role:
+            label = SEGMENT_LABELS.get(role, role)
+            out.append(
+                f'<aside class="layer layer-{role}">'
+                f'<div class="layer-label">{label}</div>{inner}</aside>'
+            )
+        else:
+            out.append(inner)
+    return "\n".join(out)
+
+
+def render_article_html(article: dict, image_paths: dict, body_class: str = "") -> str:
+    """Jinja2 없이 순수 문자열로 아티클 HTML을 렌더링한다.
+
+    body_class: 메일 캡처용 변형(email-capture …) — 웹 발행본은 비워 둔다.
+    """
     template_path = TEMPLATES_DIR / "article.html"
     template = template_path.read_text(encoding="utf-8")
 
@@ -241,17 +289,14 @@ def render_article_html(article: dict, image_paths: dict) -> str:
             before = "\n\n".join(paragraphs[:para_idx])
             after = "\n\n".join(paragraphs[para_idx:])
             if before:
-                body_parts.append(md_converter.convert(before))
-                md_converter.reset()
+                body_parts.append(_render_md_blocks(before, md_converter))
             body_parts.append(img_tag)
             if after:
-                body_parts.append(md_converter.convert(after))
-                md_converter.reset()
+                body_parts.append(_render_md_blocks(after, md_converter))
         else:
             if img_tag:
                 body_parts.append(img_tag)
-            body_parts.append(md_converter.convert(sec["body"]))
-            md_converter.reset()
+            body_parts.append(_render_md_blocks(sec["body"], md_converter))
 
     body_html = "\n".join(body_parts)
 
@@ -275,6 +320,7 @@ def render_article_html(article: dict, image_paths: dict) -> str:
         "{{ pub_date }}": article["pub_date"],
         "{% for point in tldr_points %}\n      <li>{{ point }}</li>\n      {% endfor %}": tldr_items,
         "{{ body_html }}": body_html,
+        "{{ body_class }}": body_class,
         "{% for ref in references %}\n      <li>{{ ref }}</li>\n      {% endfor %}": ref_items,
     }
     for key, val in replacements.items():
@@ -362,7 +408,7 @@ _COMPOSITION_HINTS = {
 
 
 def _build_scene_prompt(heading: str, body: str, style: dict, is_hero: bool, section_index: int = 0) -> str:
-    body_snippet = re.sub(r"\s+", " ", body or "")[:400]
+    body_snippet = re.sub(r"\s+", " ", strip_segment_marks(body or ""))[:400]
     if is_hero:
         scene = f"Wide panoramic scene for a newsletter cover. Topic: {heading}."
     else:
@@ -524,6 +570,8 @@ def api_publish():
     # 아카이브 카드 썸네일용 (web/site_export.py)
     hero_file = image_paths.get("hero", "")
     article["hero_file"] = "" if hero_file.startswith("http") else hero_file
+    # 메일 변형 페이지를 나중에 다시 그릴 때 쓴다 (write_email_pages)
+    article["image_paths"] = image_paths
 
     article_json_path = out_dir / "article.json"
     article_json_path.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -538,16 +586,35 @@ def api_publish():
     })
 
 
+def write_email_pages(article: dict, out_dir: Path) -> None:
+    """메일 캡처용 변형 페이지(email-head.html · email-body.html)를 발행 폴더에 쓴다.
+
+    웹 발행본(index.html)과 같은 내용에 .email-capture CSS(600px·본문 20px·링크 장식 제거)를
+    입힌다. 머리와 본문을 나눠 찍어 그 사이에 "웹에서 보기" 줄을 넣기 위해 두 장이다.
+    """
+    image_paths = article.get("image_paths") or (
+        {"hero": article["hero_file"]} if article.get("hero_file") else {})
+    shutil.copy2(STATIC_DIR / "article.css", out_dir / "style.css")
+    for name, part in (("email-head.html", "head"), ("email-body.html", "body")):
+        page = render_article_html(article, image_paths,
+                                   body_class=f"email-capture email-part-{part}")
+        (out_dir / name).write_text(page, encoding="utf-8")
+
+
 @app.route("/api/send-email", methods=["POST"])
 def api_send_email():
-    """발행된 아티클을 이미지 기반 .eml 파일로 생성하여 다운로드한다."""
-    from email_renderer import build_image_eml
+    """발행된 아티클을 .eml 파일로 생성하여 다운로드한다.
+
+    mode: "image"(기본 — 웹페이지 전문 이미지) | "teaser"(대표 이미지 + 세 줄 요약 + 웹 링크, 폴백)
+    """
+    from email_renderer import build_image_eml, build_teaser_eml
     from site_export import article_web_url
 
     data = request.json
     slug = data.get("slug", "")
     recipients = data.get("recipients", [])
     cc = data.get("cc", [])
+    mode = data.get("mode", "image")
 
     if not slug:
         return jsonify({"error": "slug가 필요합니다."}), 400
@@ -564,16 +631,23 @@ def api_send_email():
 
     article = json.loads(article_json.read_text(encoding="utf-8"))
     subject = f"[Insight Weekly] {article['title']}"
-    preview_url = f"http://localhost:5001/preview/{slug}/"
+    web_url = article_web_url(slug)
 
     try:
-        eml_bytes = build_image_eml(subject, preview_url, out_dir, recipients, cc,
-                                    web_url=article_web_url(slug))
+        if mode == "teaser":
+            eml_bytes = build_teaser_eml(subject, article, out_dir, recipients, cc, web_url=web_url)
+            name = "newsletter-teaser.eml"
+        else:
+            write_email_pages(article, out_dir)
+            preview_base = f"http://localhost:5001/preview/{slug}/"
+            eml_bytes = build_image_eml(subject, preview_base, out_dir, recipients, cc,
+                                        web_url=web_url)
+            name = "newsletter.eml"
 
-        eml_path = out_dir / "newsletter.eml"
+        eml_path = out_dir / name
         eml_path.write_bytes(eml_bytes)
 
-        return send_file(eml_path, as_attachment=True, download_name="newsletter.eml",
+        return send_file(eml_path, as_attachment=True, download_name=name,
                          mimetype="message/rfc822")
     except Exception as e:
         return jsonify({"error": f"이메일 생성 실패: {str(e)}"}), 500

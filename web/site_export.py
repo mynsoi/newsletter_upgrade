@@ -22,7 +22,11 @@ SITE_DIR = ROOT / "site"
 SETTINGS_PATH = ROOT / "config" / "settings.yaml"
 
 # 웹에 올리지 않는 발행 부산물 (메일용)
-_SKIP_FILES = {"newsletter.eml", "email_screenshot.png"}
+_SKIP_FILES = {
+    "newsletter.eml", "newsletter-teaser.eml",
+    "email-head.html", "email-body.html",
+    "email_head.png", "email_body.png", "email_screenshot.png",
+}
 
 
 def load_web_settings() -> dict:

@@ -257,6 +257,30 @@ body {
   color: var(--ink-secondary);
 }
 
+/* 레이어 박스 — <!-- segment: X --> 문단 (prompts/segment_layers.md).
+   코어 문단(캔버스 위 평문)과 갈라 보이도록 흰 바탕 + 역할색 좌측 테두리 + 상단 라벨 */
+.layer {
+  --layer-color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--layer-color);
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+  padding: 18px 22px 2px;
+  margin: 28px 0;
+}
+.layer + .layer { margin-top: -12px; }
+.layer-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--layer-color);
+  margin-bottom: 8px;
+}
+.layer-exec { --layer-color: #6B4FA0; }
+.layer-lead,
+.layer-leader { --layer-color: var(--accent); }
+.layer-member { --layer-color: #2F5D9E; }
+
 /* --- 참고자료 --- */
 .references {
   border-top: 1px solid var(--line);
@@ -312,6 +336,37 @@ body {
     font-size: 15.5px;
   }
 }
+
+/* --- 메일 이미지 캡처 (web/email_renderer.py — 600px 폭으로 찍는다) ---
+   폰 375px에서 600 → 375로 줄어드므로(×0.625) 읽는 글자는 19.2px 이상이어야 실효 12px을 넘는다.
+   이미지 안 링크는 눌리지 않으므로 밑줄·링크색을 지운다. 웹 발행본에는 이 클래스가 없다. */
+.email-capture .site-header { position: static; backdrop-filter: none; }
+.email-capture .site-wordmark { font-size: 20px; }
+.email-capture .site-header-meta { font-size: 19.5px; }
+.email-capture .hero-kicker { font-size: 19.5px; }
+.email-capture .hero-title { font-size: 36px; line-height: 1.3; }
+.email-capture .tag { font-size: 19.5px; }
+.email-capture .author-line { font-size: 19.5px; }
+.email-capture .tldr-label { font-size: 20px; }
+.email-capture .tldr li,
+.email-capture .intro p,
+.email-capture .article-body p,
+.email-capture .article-body blockquote {
+  font-size: 20px;
+  line-height: 1.6;
+}
+.email-capture .tldr li::before { font-size: 20px; line-height: 1.6; }
+.email-capture .article-body h2 { font-size: 26px; margin-top: 40px; }
+.email-capture .layer-label { font-size: 19.5px; }
+.email-capture .references h3 { font-size: 20px; }
+.email-capture .references li { font-size: 19.5px; line-height: 1.6; }
+.email-capture .site-footer { font-size: 19.5px; }
+.email-capture a { color: inherit; text-decoration: none; }
+/* 상단 "웹에서 보기" 줄을 제목 아래에 넣으려고 머리(헤더·히어로)와 본문을 따로 찍는다 */
+.email-part-head .article-page,
+.email-part-head .site-footer { display: none; }
+.email-part-body .site-header,
+.email-part-body .hero { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }

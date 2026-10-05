@@ -17,6 +17,8 @@ from email.mime.image import MIMEImage
 from PIL import Image, ImageDraw, ImageFont
 import markdown as md_lib
 
+from segments import SEGMENT_LABELS, split_segment_blocks
+
 # ── 디자인 토큰 ──
 ACCENT = "#0B6E4F"
 ACCENT_SOFT = "#DCEFE7"
@@ -197,20 +199,14 @@ def render_email_html(article: dict, image_paths: dict, output_dir: Path) -> tup
             before = "\n\n".join(paragraphs[:para_idx])
             after = "\n\n".join(paragraphs[para_idx:])
             if before:
-                html = md_converter.convert(before)
-                md_converter.reset()
-                body_rows.append(_wrap_body_html(html))
+                body_rows.extend(_md_rows(before, md_converter))
             body_rows.append(f'<tr><td style="padding:20px 0;font-family:{FONT};font-size:11pt;">{img_html}</td></tr>')
             if after:
-                html = md_converter.convert(after)
-                md_converter.reset()
-                body_rows.append(_wrap_body_html(html))
+                body_rows.extend(_md_rows(after, md_converter))
         else:
             if img_html:
                 body_rows.append(f'<tr><td style="padding:20px 0;font-family:{FONT};font-size:11pt;">{img_html}</td></tr>')
-            html = md_converter.convert(sec["body"])
-            md_converter.reset()
-            body_rows.append(_wrap_body_html(html))
+            body_rows.extend(_md_rows(sec["body"], md_converter))
 
     body_content = "\n".join(body_rows)
 
@@ -375,6 +371,34 @@ def render_email_html(article: dict, image_paths: dict, output_dir: Path) -> tup
     return email_html, embedded_images
 
 
+# 레이어 역할색 — article.css .layer-* 와 같은 값
+LAYER_COLORS = {"exec": "#6B4FA0", "lead": ACCENT, "leader": ACCENT, "member": "#2F5D9E"}
+
+
+def _md_rows(text: str, md_converter) -> list[str]:
+    """본문 마크다운 → 표 행. 레이어 문단은 흰 바탕·역할색 좌측 테두리·라벨 박스로 감싼다."""
+    rows = []
+    for role, chunk in split_segment_blocks(text):
+        inner = md_converter.convert(chunk)
+        md_converter.reset()
+        if not role:
+            rows.append(_wrap_body_html(inner))
+            continue
+        color = LAYER_COLORS.get(role, ACCENT)
+        label = SEGMENT_LABELS.get(role, role)
+        rows.append(
+            f'<tr><td style="padding:12px 0;">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="{SURFACE}" '
+            f'style="background:{SURFACE};border:1px solid {LINE};border-left:4px solid {color};">'
+            f'<tr><td style="padding:16px 20px 4px;font-family:{FONT};font-size:10pt;font-weight:700;'
+            f'color:{color};">{label}</td></tr>'
+            f'<tr><td style="padding:0 20px 4px;">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'
+            f'{_wrap_body_html(inner)}</table></td></tr></table></td></tr>'
+        )
+    return rows
+
+
 def _wrap_body_html(html: str) -> str:
     html = re.sub(
         r"<p>(.*?)</p>",
@@ -413,9 +437,15 @@ def build_eml(subject: str, html_body: str, embedded_images: list[MIMEImage],
 
 
 # ── 방법 B: 전체 이미지 기반 이메일 ──
+# 웹페이지를 메일 전용 변형(email-head.html · email-body.html, server.write_email_pages)으로
+# 600px 폭에서 찍는다. 머리(헤더·히어로)와 본문을 따로 찍어 그 사이에 "웹에서 보기" 줄을 넣는다.
 
-def _trim_bottom(img: Image.Image) -> Image.Image:
-    """하단의 빈 영역(균일 색상 행)을 제거한다."""
+EMAIL_WIDTH = 600   # 폰 375px에서 ×0.625 — 캡처 CSS(article.css .email-capture)가 이 폭 기준
+EMAIL_PAGES = ("email-head.html", "email-body.html")
+
+
+def _trim_bottom(img: Image.Image, pad: int = 60) -> Image.Image:
+    """하단의 빈 영역(균일 색상 행)을 제거하고 pad 픽셀만 남긴다."""
     w, h = img.size
     sample_xs = list(range(10, w - 10, max(1, w // 30)))
     crop_y = h
@@ -429,7 +459,7 @@ def _trim_bottom(img: Image.Image) -> Image.Image:
             for p in pixels
         )
         if not is_uniform:
-            crop_y = min(y + 60, h)
+            crop_y = min(y + 1 + pad, h)
             break
     if crop_y < h:
         img = img.crop((0, 0, w, crop_y))
@@ -437,8 +467,8 @@ def _trim_bottom(img: Image.Image) -> Image.Image:
 
 
 def capture_article_screenshot(preview_url: str, output_path: Path,
-                               width: int = 760) -> Path:
-    """프리뷰 페이지를 풀페이지 PNG 스크린샷으로 캡처한다."""
+                               width: int = EMAIL_WIDTH, pad: int = 60) -> Path:
+    """프리뷰 페이지를 풀페이지 PNG 스크린샷(2배율)으로 캡처한다."""
     from html2image import Html2Image
     import tempfile
 
@@ -451,70 +481,197 @@ def capture_article_screenshot(preview_url: str, output_path: Path,
             "--disable-gpu",
             "--hide-scrollbars",
             "--force-device-scale-factor=2",
+            "--virtual-time-budget=8000",   # 웹폰트·이미지 로드 대기
         ],
     )
 
-    fname = "article_full.png"
+    fname = "capture.png"
     hti.screenshot(url=preview_url, save_as=fname, size=(width, 8000))
 
     raw = Image.open(Path(tmp_dir) / fname)
-    raw = _trim_bottom(raw)
+    raw = _trim_bottom(raw, pad=pad)
     raw.save(str(output_path), format="PNG", quality=95)
     return output_path
 
 
-def _web_link_row(web_url: str) -> str:
-    """이미지 메일 하단 "웹에서 보기" 줄. 이미지 안의 참고자료 링크는 눌리지 않으므로
-    링크가 필요한 독자를 웹페이지로 보낸다. web_url이 비면 빈 문자열."""
+def _web_link_row(web_url: str, top: bool = False) -> str:
+    """"웹에서 보기" 줄. 이미지 안의 참고자료 링크는 눌리지 않으므로 링크가 필요한 독자를
+    웹페이지로 보낸다. top이면 제목 아래(본문 이미지 위)용 짧은 문구. web_url이 비면 빈 문자열."""
     if not web_url:
         return ""
     url = html.escape(web_url, quote=True)
+    lead = "글자가 작게 보이면" if top else "참고자료 링크는 웹페이지에서 열립니다"
+    pad = "14px 16px" if top else "4px 16px 28px"
     return (
-        f'<tr><td align="center" style="padding:4px 0 28px;font-family:{FONT};font-size:10pt;'
-        f'color:{INK_MUTED};">참고자료 링크는 웹페이지에서 열립니다 &middot; '
+        f'<tr><td align="center" style="padding:{pad};font-family:{FONT};font-size:11pt;'
+        f'line-height:1.5;color:{INK_MUTED};">{lead} &middot; '
         f'<a href="{url}" target="_blank" style="color:{ACCENT};font-weight:700;'
         f'text-decoration:underline;">웹에서 보기</a></td></tr>'
     )
 
 
-def build_image_eml(subject: str, preview_url: str, output_dir: Path,
-                    recipients: list[str], cc: list[str] = None,
-                    sender: str = "Insight Weekly <noreply@example.com>",
-                    web_url: str = "") -> bytes:
-    """프리뷰 페이지를 스크린샷으로 캡처하여 이미지 기반 .eml을 빌드한다.
-
-    web_url이 있으면 본문 이미지를 그 주소로 링크하고 하단에 "웹에서 보기" 줄을 붙인다.
-    """
-    screenshot_path = output_dir / "email_screenshot.png"
-    capture_article_screenshot(preview_url, screenshot_path)
-
-    full_img = Image.open(screenshot_path)
-    display_w = min(full_img.width // 2, CONTENT_WIDTH)
-
-    buf = io.BytesIO()
-    full_img.save(buf, format="PNG", quality=95)
-    mime_img = MIMEImage(buf.getvalue(), _subtype="png")
-    mime_img.add_header("Content-ID", "<article_full>")
-    mime_img.add_header("Content-Disposition", "inline", filename="article.png")
-
-    img_open, img_close = "", ""
+def _img_row(cid: str, display_w: int, alt: str, web_url: str) -> str:
+    img = (f'<img src="cid:{cid}" width="{display_w}" '
+           f'style="display:block;width:{display_w}px;max-width:100%;height:auto;border:0;" '
+           f'alt="{html.escape(alt, quote=True)}">')
     if web_url:
-        img_open = f'<a href="{html.escape(web_url, quote=True)}" target="_blank">'
-        img_close = "</a>"
+        img = f'<a href="{html.escape(web_url, quote=True)}" target="_blank">{img}</a>'
+    return f'<tr><td align="center" style="padding:0;">{img}</td></tr>'
 
-    body = f"""<!DOCTYPE html>
+
+def _wrap_mail(rows: str) -> str:
+    return f"""<!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="utf-8">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <style>body{{margin:0;padding:0;background:{CANVAS};}}table{{border-collapse:collapse;}}img{{border:0;}}</style>
 </head>
 <body style="margin:0;padding:0;background:{CANVAS};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{CANVAS};">
 <tr><td align="center" style="padding:20px 0;">
-{img_open}<img src="cid:article_full" width="{display_w}"
-  style="display:block;width:{display_w}px;max-width:100%;height:auto;border:0;" alt="Insight Weekly">{img_close}
+<table role="presentation" width="{EMAIL_WIDTH}" cellpadding="0" cellspacing="0" style="width:100%;max-width:{EMAIL_WIDTH}px;">
+{rows}
+</table>
 </td></tr>
-{_web_link_row(web_url)}
 </table>
 </body></html>"""
 
-    return build_eml(subject, body, [mime_img], recipients, cc, sender)
+
+def _png_part(path: Path, cid: str) -> MIMEImage:
+    mime_img = MIMEImage(path.read_bytes(), _subtype="png")
+    mime_img.add_header("Content-ID", f"<{cid}>")
+    mime_img.add_header("Content-Disposition", "inline", filename=f"{cid}.png")
+    return mime_img
+
+
+def build_image_eml(subject: str, preview_base: str, output_dir: Path,
+                    recipients: list[str], cc: list[str] = None,
+                    sender: str = "Insight Weekly <noreply@example.com>",
+                    web_url: str = "") -> bytes:
+    """메일 전용 변형 페이지 두 장을 캡처해 이미지 기반 .eml을 빌드한다 (--mode image).
+
+    preview_base: email-head.html · email-body.html이 있는 디렉토리 URL(끝 슬래시 포함).
+    web_url이 있으면 이미지를 그 주소로 링크하고 제목 아래·하단에 "웹에서 보기" 줄을 붙인다.
+    두 장을 이은 전체 이미지(email_screenshot.png)도 남긴다 — 리허설·검토용.
+    """
+    head_png = output_dir / "email_head.png"
+    body_png = output_dir / "email_body.png"
+    capture_article_screenshot(preview_base + EMAIL_PAGES[0], head_png, pad=0)
+    capture_article_screenshot(preview_base + EMAIL_PAGES[1], body_png)
+
+    head_img, body_img = Image.open(head_png), Image.open(body_png)
+    full = Image.new("RGB", (head_img.width, head_img.height + body_img.height))
+    full.paste(head_img, (0, 0))
+    full.paste(body_img, (0, head_img.height))
+    full.save(output_dir / "email_screenshot.png", format="PNG")
+
+    display_w = min(head_img.width // 2, EMAIL_WIDTH)
+    rows = "\n".join([
+        _img_row("article_head", display_w, subject, web_url),
+        _web_link_row(web_url, top=True),
+        _img_row("article_body", display_w, "Insight Weekly", web_url),
+        _web_link_row(web_url),
+    ])
+    parts = [_png_part(head_png, "article_head"), _png_part(body_png, "article_body")]
+    return build_eml(subject, _wrap_mail(rows), parts, recipients, cc, sender)
+
+
+def build_teaser_eml(subject: str, article: dict, output_dir: Path,
+                     recipients: list[str], cc: list[str] = None,
+                     sender: str = "Insight Weekly <noreply@example.com>",
+                     web_url: str = "") -> bytes:
+    """폴백(--mode teaser): 대표 이미지 + 제목 + 세 줄 요약(텍스트) + 웹 링크 버튼.
+
+    본문을 이미지로 넣지 않아 폰에서도 글자가 기기 글꼴 크기로 보인다. 전문은 웹에서 읽는다.
+    """
+    if not web_url:
+        raise ValueError("teaser 메일은 웹 주소가 있어야 합니다 — settings.yaml web_base_url을 채우세요.")
+    e = html.escape
+    url = e(web_url, quote=True)
+    parts: list[MIMEImage] = []
+    issue = article.get("issue_number", "")
+    issue_html = (f'<span style="float:right;font-size:9pt;color:{INK_MUTED};letter-spacing:0.06em;">'
+                  f'Issue #{e(str(issue))}</span>') if issue else ""
+    rows = [
+        f'<tr><td style="padding:0 16px 14px;font-family:Arial,sans-serif;font-size:11pt;'
+        f'font-weight:700;letter-spacing:0.1em;color:{INK};">INSIGHT WEEKLY{issue_html}</td></tr>'
+    ]
+    hero_file = article.get("hero_file", "")
+    if hero_file and (output_dir / hero_file).exists():
+        hero = _crop_to_fill(Image.open(output_dir / hero_file).convert("RGB"),
+                             EMAIL_WIDTH * 2, int(EMAIL_WIDTH * 2 * 9 / 16))
+        buf = io.BytesIO()
+        hero.save(buf, format="PNG")
+        cid, mime = _image_to_cid_pair(buf.getvalue(), "hero")
+        parts.append(mime)
+        rows.append(f'<tr><td style="padding:0;"><a href="{url}" target="_blank">'
+                    f'<img src="{cid}" width="{EMAIL_WIDTH}" alt="" style="display:block;'
+                    f'width:{EMAIL_WIDTH}px;max-width:100%;height:auto;border:0;"></a></td></tr>')
+    bullets = "".join(
+        f'<tr><td style="padding:4px 10px 4px 0;vertical-align:top;color:{ACCENT};font-weight:700;'
+        f'font-family:{FONT};font-size:12pt;">&#8226;</td><td style="padding:4px 0;font-family:{FONT};'
+        f'font-size:12pt;line-height:1.6;color:{INK_SECONDARY};">{e(pt)}</td></tr>'
+        for pt in article.get("tldr_points", [])
+    )
+    rows.append(
+        f'<tr><td bgcolor="{SURFACE}" style="background:{SURFACE};padding:24px 24px 28px;">'
+        f'<div style="font-family:{FONT};font-size:17pt;font-weight:800;line-height:1.35;color:{INK};'
+        f'margin-bottom:6px;">{e(article["title"])}</div>'
+        f'<div style="font-family:{FONT};font-size:10pt;color:{INK_MUTED};margin-bottom:18px;">'
+        f'기업문화AX팀 &middot; {e(article.get("pub_date", ""))}</div>'
+        f'<div style="font-family:{FONT};font-size:10pt;font-weight:700;color:{ACCENT};margin-bottom:6px;">'
+        f'세 줄 요약</div>'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">{bullets}</table>'
+        f'<table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:22px;"><tr>'
+        f'<td bgcolor="{ACCENT}" style="background:{ACCENT};padding:12px 22px;">'
+        f'<a href="{url}" target="_blank" style="font-family:{FONT};font-size:12pt;font-weight:700;'
+        f'color:#FFFFFF;text-decoration:none;">웹에서 전문 보기 &rarr;</a></td></tr></table>'
+        f'</td></tr>'
+    )
+    rows.append(f'<tr><td style="padding:24px 16px 32px;text-align:center;font-family:{FONT};font-size:9pt;'
+                f'line-height:1.7;color:{INK_MUTED};">Insight Weekly &middot; 기업문화AX팀 발행<br>'
+                f'매주 목요일 발행합니다.</td></tr>')
+    return build_eml(subject, _wrap_mail("\n".join(rows)), parts, recipients, cc, sender)
+
+
+def main(argv=None) -> None:
+    """python web/email_renderer.py <slug> --to a@x,b@x [--cc ...] [--mode image|teaser]
+
+    output/<slug>/(발행 도구 결과)로 .eml을 만든다. 리허설 결과에 따라 당일 teaser로 바꿔 보낼 수 있다.
+    """
+    import argparse
+    import json
+    import server
+    from site_export import article_web_url
+
+    ap = argparse.ArgumentParser(description="발행물 → .eml")
+    ap.add_argument("slug")
+    ap.add_argument("--mode", choices=("image", "teaser"), default="image")
+    ap.add_argument("--to", required=True, help="쉼표 구분")
+    ap.add_argument("--cc", default="")
+    ap.add_argument("--out", help="저장 경로 (기본 output/<slug>/newsletter[-teaser].eml)")
+    args = ap.parse_args(argv)
+
+    out_dir = server.OUTPUT_DIR / args.slug
+    article = json.loads((out_dir / "article.json").read_text(encoding="utf-8"))
+    subject = f"[Insight Weekly] {article['title']}"
+
+    def split(v):
+        return [x.strip() for x in v.split(",") if x.strip()]
+
+    web_url = article_web_url(args.slug)
+    if not web_url:
+        print("경고: settings.yaml web_base_url이 비어 있어 '웹에서 보기' 링크가 빠집니다.")
+    if args.mode == "teaser":
+        eml = build_teaser_eml(subject, article, out_dir, split(args.to), split(args.cc), web_url=web_url)
+    else:
+        server.write_email_pages(article, out_dir)
+        eml = build_image_eml(subject, out_dir.as_uri() + "/", out_dir, split(args.to),
+                              split(args.cc), web_url=web_url)
+    dest = Path(args.out) if args.out else out_dir / (
+        "newsletter-teaser.eml" if args.mode == "teaser" else "newsletter.eml")
+    dest.write_bytes(eml)
+    print(dest)
+
+
+if __name__ == "__main__":
+    main()
