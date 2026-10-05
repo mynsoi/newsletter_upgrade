@@ -229,3 +229,51 @@ def test_teaser_note_fine_line_is_smaller(tmp_path):
     fine = [ln for ln in text.split("<p ") if "※ 담당자" in ln]
     assert fine and "font-size:9.5pt" in fine[0]
     assert "font-size:11pt" in text          # 나머지 문단은 그대로
+
+
+# ── 푸터 3행 (2026-10-05: 웹·메일 전문·teaser 공용) ──
+
+def test_footer_lines_are_three_and_shared():
+    """푸터는 branding.FOOTER_LINES 한 곳에서 관리한다 — 3행 구성과 문구를 고정한다."""
+    import branding
+    assert len(branding.FOOTER_LINES) == 3
+    assert branding.FOOTER_LINES[0] == "Insight Weekly · 기업문화AX팀 발행 · 매주 금요일"
+    assert "자료 수집과 정리는 AI가, 검증과 편집은 사람이 했습니다." == branding.FOOTER_LINES[1]
+    assert branding.FOOTER_LINES[2].startswith("문의: 기업문화AX팀")
+    # 1행에 주기가 들어갔으므로 "매주 금요일 발행합니다" 단독 줄은 없다
+    assert not any(x == "매주 금요일 발행합니다." for x in branding.FOOTER_LINES)
+
+
+def test_web_footer_renders_all_three_lines():
+    import branding
+    art = server.parse_article_md(LAYERED)
+    html = server.render_article_html(art, {})
+    for line in branding.FOOTER_LINES:
+        assert line in html, f"웹 푸터에 빠진 줄: {line}"
+    assert "{{ footer_html }}" not in html          # 자리표시자가 남지 않는다
+    assert "매주 금요일 발행합니다" not in html      # 구 문구 제거
+
+
+def test_full_mail_and_teaser_footers_match_web(tmp_path):
+    """메일 전문·teaser 푸터가 웹과 같은 3행을 쓴다 — 세 곳이 어긋나지 않게."""
+    import branding
+    art = server.parse_article_md(LAYERED)
+    full_html, _ = email_renderer.render_email_html(art, {}, tmp_path)
+    eml = email_renderer.build_teaser_eml("제목", art, tmp_path, ["a@example.com"],
+                                          web_url="https://ex.vercel.app/t/s/")
+    teaser = next(p for p in email.message_from_bytes(eml).walk()
+                  if p.get_content_type() == "text/html").get_payload(decode=True).decode()
+    for line in branding.FOOTER_LINES:
+        assert line in full_html, f"전문 메일 푸터에 빠진 줄: {line}"
+        assert line in teaser, f"teaser 푸터에 빠진 줄: {line}"
+    assert "매주 금요일 발행합니다" not in full_html
+    assert "매주 금요일 발행합니다" not in teaser
+
+
+def test_footer_text_not_duplicated_in_source():
+    """푸터 문구가 소스에 하드코딩으로 남아 있지 않다 — branding.py 한 곳만."""
+    web = Path(__file__).resolve().parent.parent / "web"
+    needle = "기업문화AX팀 발행"
+    holders = [p.name for p in (*web.glob("*.py"), *(web / "templates").glob("*.html"))
+               if needle in p.read_text(encoding="utf-8")]
+    assert holders == ["branding.py"], f"푸터 문구가 여러 곳에 있다: {holders}"

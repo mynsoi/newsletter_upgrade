@@ -18,6 +18,7 @@ from flask import Flask, request, jsonify, send_from_directory, send_file
 import markdown as md_lib
 import openai
 
+from branding import footer_html
 from segments import (
     SEGMENT_COMMENT_RE, SEGMENT_LABELS, SEGMENT_MARK_PREFIX,
     split_segment_blocks, strip_segment_marks,
@@ -364,6 +365,7 @@ def render_article_html(article: dict, image_paths: dict, body_class: str = "") 
         "{{ pub_date }}": article["pub_date"],
         "{% for point in tldr_points %}\n      <li>{{ point }}</li>\n      {% endfor %}": tldr_items,
         "{{ body_html }}": body_html,
+        "{{ footer_html }}": footer_html(indent="  "),
         "{{ body_class }}": body_class,
         "{{ note_html }}": _render_note(article.get("note", ""), md_converter),
         "{% for ref in references %}\n      <li>{{ ref }}</li>\n      {% endfor %}": ref_items,

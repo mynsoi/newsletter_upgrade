@@ -18,6 +18,7 @@ from email.utils import formataddr, parseaddr
 from PIL import Image, ImageDraw, ImageFont
 import markdown as md_lib
 
+from branding import footer_html
 from segments import SEGMENT_LABELS, split_segment_blocks
 
 # ── 디자인 토큰 ──
@@ -355,8 +356,7 @@ def render_email_html(article: dict, image_paths: dict, output_dir: Path) -> tup
 
   <!-- 푸터 -->
   <tr><td style="padding:32px {PAD}px 40px {PAD}px;text-align:center;font-size:9pt;line-height:1.7;color:{INK_MUTED};border-top:1px solid {LINE};font-family:{FONT};">
-    Insight Weekly &middot; 기업문화AX팀 발행<br>
-    매주 금요일 발행합니다.
+    {footer_html()}
   </td></tr>
 
 </table>
@@ -648,8 +648,7 @@ def build_teaser_eml(subject: str, article: dict, output_dir: Path,
         f'</td></tr>'
     )
     rows.append(f'<tr><td style="padding:24px 16px 32px;text-align:center;font-family:{FONT};font-size:9pt;'
-                f'line-height:1.7;color:{INK_MUTED};">Insight Weekly &middot; 기업문화AX팀 발행<br>'
-                f'매주 금요일 발행합니다.</td></tr>')
+                f'line-height:1.7;color:{INK_MUTED};">{footer_html()}</td></tr>')
     return build_eml(subject, _wrap_mail("\n".join(rows)), parts, recipients, cc, sender)
 
 
