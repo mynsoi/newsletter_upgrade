@@ -1,5 +1,7 @@
 """web/ 렌더러 — 레이어 박스 · 발행일 머리말 · teaser 메일."""
 import email
+import email.header
+import email.utils
 import sys
 from pathlib import Path
 
@@ -129,3 +131,14 @@ def test_teaser_includes_note(tmp_path):
     msg = email.message_from_bytes(eml)
     text = next(p for p in msg.walk() if p.get_content_type() == "text/html").get_payload(decode=True).decode()
     assert "개편 안내 첫 줄." in text and "둘째 문단 안내." in text
+
+
+def test_korean_sender_name_encodes_name_only(tmp_path):
+    art = server.parse_article_md(LAYERED)
+    eml = email_renderer.build_teaser_eml("제목", art, tmp_path, ["a@example.com"],
+                                          sender="이소민/기업문화AX팀 <noreply@example.com>",
+                                          web_url="https://ex.vercel.app/t/s/")
+    msg = email.message_from_bytes(eml)
+    assert msg["From"].endswith("<noreply@example.com>")
+    name, addr = email.utils.parseaddr(str(email.header.make_header(email.header.decode_header(msg["From"]))))
+    assert name == "이소민/기업문화AX팀" and addr == "noreply@example.com"

@@ -3,7 +3,7 @@
 대상: `content/drafts/ai-yearend-what-counts-layers-final5.md` · 증거: `content/evidence/ai-yearend-what-counts.json`
 작성 모델: claude-opus-5 (정본은 `config/settings.yaml`의 `write_model`)
 판정: **통과** (실패 0건 · 경고 0건)
-분량(공백 제외 · 제목·참고자료·편집자 노트 제외): 코어 1800자 / 레이어 leader 311자 · member 324자 / 독자 열람 최대 2124자
+분량(공백 제외 · 제목·참고자료·편집자 노트 제외): 코어 1811자 / 레이어 leader 311자 · member 324자 / 독자 열람 최대 2135자
 
 > 이 리포트는 evidence 파일 전체가 아니라 **본문이 실제 인용한 claim**만으로 계산한다.
 

@@ -13,6 +13,7 @@ from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+from email.utils import formataddr, parseaddr
 
 from PIL import Image, ImageDraw, ImageFont
 import markdown as md_lib
@@ -355,7 +356,7 @@ def render_email_html(article: dict, image_paths: dict, output_dir: Path) -> tup
   <!-- 푸터 -->
   <tr><td style="padding:32px {PAD}px 40px {PAD}px;text-align:center;font-size:9pt;line-height:1.7;color:{INK_MUTED};border-top:1px solid {LINE};font-family:{FONT};">
     Insight Weekly &middot; 기업문화AX팀 발행<br>
-    매주 목요일 발행합니다.
+    매주 금요일 발행합니다.
   </td></tr>
 
 </table>
@@ -422,7 +423,8 @@ def build_eml(subject: str, html_body: str, embedded_images: list[MIMEImage],
               sender: str = "Insight Weekly <noreply@example.com>") -> bytes:
     msg = MIMEMultipart("related")
     msg["Subject"] = subject
-    msg["From"] = sender
+    # 표시명만 인코딩하고 주소는 그대로 둔다 — 한글 표시명이 주소까지 감싸면 From이 깨진다
+    msg["From"] = formataddr(parseaddr(sender), charset="utf-8")
     msg["To"] = ", ".join(recipients)
     if cc:
         msg["Cc"] = ", ".join(cc)
@@ -639,7 +641,7 @@ def build_teaser_eml(subject: str, article: dict, output_dir: Path,
     )
     rows.append(f'<tr><td style="padding:24px 16px 32px;text-align:center;font-family:{FONT};font-size:9pt;'
                 f'line-height:1.7;color:{INK_MUTED};">Insight Weekly &middot; 기업문화AX팀 발행<br>'
-                f'매주 목요일 발행합니다.</td></tr>')
+                f'매주 금요일 발행합니다.</td></tr>')
     return build_eml(subject, _wrap_mail("\n".join(rows)), parts, recipients, cc, sender)
 
 
