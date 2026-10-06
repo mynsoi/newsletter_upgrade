@@ -1,1 +1,2 @@
-Codex(GPT-6) 수집·사전 점검 기록 — 2026-10-01 Opus 5 재수집으로 대체. 비교 데이터로 보존. 초안·앵글은 브랜치 codex/yearend-inaugural-layers 참조.
+Codex(GPT-6) 수집·사전 점검 기록 — 2026-10-01 Opus 5 재수집으로 대체. 비교 데이터로 보존.
+초안·앵글·채점표가 있던 로컬 브랜치 codex/yearend-inaugural-layers는 2026-10-07 산출물 포함 폐기(칼럼 포맷 전환으로 재사용 가능성 없음 — 사용자 결정).
