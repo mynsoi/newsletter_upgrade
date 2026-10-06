@@ -71,3 +71,32 @@ def test_web_link_row():
     row = email_renderer._web_link_row('https://ex.vercel.app/t/s/?a="b"')
     assert "웹에서 보기" in row
     assert 'href="https://ex.vercel.app/t/s/?a=&quot;b&quot;"' in row
+
+
+# ── 실제 배포 설정 (2026-10-06: Vercel 주소 확정) ──
+
+def test_real_settings_has_web_base_url_without_trailing_slash():
+    """config/settings.yaml의 web_base_url이 채워져 있고 끝 슬래시가 없다.
+
+    비면 메일의 "웹에서 보기" 링크가 빠지고, 끝 슬래시가 있으면 주소에 //가 생긴다.
+    이미 보낸 메일의 링크가 끊기므로 web_path_token도 함께 고정한다.
+    """
+    import yaml
+    root = Path(__file__).resolve().parent.parent
+    cfg = yaml.safe_load((root / "config/settings.yaml").read_text(encoding="utf-8"))
+    base = (cfg.get("web_base_url") or "").strip()
+    assert base, "web_base_url이 비어 있다"
+    assert base.startswith("https://"), base
+    assert not base.endswith("/"), f"끝 슬래시를 빼야 한다: {base}"
+    assert cfg.get("web_path_token"), "web_path_token이 비어 있다"
+
+
+def test_real_article_url_follows_deploy_path_rule():
+    """실제 설정으로 조합한 주소가 배포 경로 규칙(site/ 루트 → /<token>/<slug>/)을 따른다."""
+    import yaml
+    root = Path(__file__).resolve().parent.parent
+    cfg = yaml.safe_load((root / "config/settings.yaml").read_text(encoding="utf-8"))
+    base, token = cfg["web_base_url"].rstrip("/"), cfg["web_path_token"]
+    expected = f"{base}/{token}/ai-yearend-what-counts/"
+    assert expected.count("//") == 1          # https:// 뿐
+    assert expected.endswith("/")             # vercel.json trailingSlash: true

@@ -47,5 +47,5 @@ embed_arxiv_retention_months: 6
 # X-Robots-Tag: noindex를 붙인다. 토큰은 추측 불가 경로용 — 바꾸면 이미 보낸 메일의 링크가 끊긴다.
 # web_base_url은 Vercel 배포 주소가 확정되면 채운다(끝 슬래시 없이, 예: https://xxx.vercel.app).
 # 비어 있으면 메일의 "웹에서 보기" 링크가 빠진다.
-web_base_url: ""
+web_base_url: "https://newsletter-upgrade-three.vercel.app"
 web_path_token: qvauxq7a4vlgiaey
