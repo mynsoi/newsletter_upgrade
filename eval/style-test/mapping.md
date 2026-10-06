@@ -15,7 +15,7 @@
 
 ## 블라인드의 한계
 
-`content/drafts/style-test-1.md` ~ `-5.md`에 모델명이 그대로 남아 있다. 원본은 측정
+`content/rejected/style-test-2026-09/style-test-1.md` ~ `-5.md`에 모델명이 그대로 남아 있다. 원본은 측정
 데이터라 지우지 않았다. **채점 전에 그 파일들과 `git log`를 보지 않는 것으로만
 블라인드가 유지된다.**
 
