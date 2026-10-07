@@ -23,6 +23,14 @@ evidence 파일 전체가 아니라 **본문이 실제로 인용한 claim**만�
   8. 작성 모델 — 초안 머리말의 모델 표기를 읽어 리포트 머리에 남긴다 (검사가 아니라 기록.
      config/settings.yaml의 write_model과 대조할 수 있도록)
 
+포맷 프로파일 (2026-10-07 — docs/column-format-design.md)
+  초안 머리말의 `format: column`(또는 `<!-- format: column -->`)이나 --format으로 고른다.
+  표기가 없으면 article — 기존 초안·발행본은 그대로 검증된다.
+  · article: 위 1~8 그대로 (독립 출처 3곳+ · 상반 stance · 단일 출처 40% 이하)
+  · column : 독립 출처 2곳+ · 통념→반전 구조 또는 상반 stance · 단일 출처 50% 이하 ·
+             분량 상한 · 명시 인용 상한 · 수치 상한. 문단 수·문단 길이·소제목·세 줄 요약·
+             레이어·어미는 경고로만 알린다. 1·5~7(미등록·수치 대조·내부 인용·참고자료)은 공통.
+
 사용:
   python src/verify_article.py content/drafts/{slug}.md [--evidence ...] [--out ...] [--stdout]
 """
@@ -61,6 +69,35 @@ EVIDENTIAL_RE = re.compile(
 
 MIN_INDEPENDENT_SOURCES = 3
 MAX_SINGLE_SOURCE_RATIO = 0.40
+
+# 칼럼 프로파일 (docs/column-format-design.md — 레퍼런스 20편 실측 eval/column-reference-analysis.md)
+COLUMN_MIN_SOURCES = 2
+COLUMN_MAX_SINGLE_SOURCE_RATIO = 0.50
+COLUMN_LENGTH = (1000, 1400)          # 공백 제외 — 20편 중앙값 1,185자 기준 (2026-10-07 확정)
+COLUMN_MAX_NAMED_CITATIONS = 2        # 연구자·기관 이름을 밝힌 출처
+COLUMN_MAX_NUMBERS = 2                # 근거 수치 (연도·처방 값 제외)
+COLUMN_PARAGRAPHS = (12, 16)
+COLUMN_PARAGRAPH_LEN = (80, 150)
+FORMATS = ("article", "column")
+FORMAT_RE = re.compile(r"^\s*(?:-\s*)?(?:format|포맷)\s*[:：]\s*([A-Za-z]+)\s*$", re.M | re.I)
+# 칼럼의 조언 어미("~해 보세요")도 처방 문단으로 본다. article 판정에는 쓰지 않는다(불변).
+COLUMN_ACTION_RE = re.compile(r"(?:해|어|아|여)\s*보세요|보면\s*어떨까요")
+# 통념→반전 구조 — 통념을 세우는 말과 그것을 꺾는 말. 같은 문단이나 바로 다음 문단에 있으면
+# 구조가 있다고 본다(글 앞 절반 안에서만). 결정적 휴리스틱이라 미검출은 사람이 다시 본다.
+CONVENTION_RE = re.compile(
+    r"흔히|대개|대부분|으레|당연히|통념|많은\s*(?:사람|리더|팀장|기업|조직|분)"
+    r"|믿(?:습니다|는|고|어|죠)|여깁니다|여기(?:는|죠|고)|생각합니다|기대합니다|알려져")
+TURN_RE = re.compile(r"(?:^|[\s.?!])(?:하지만|그러나|그런데|오히려|반대로|정작|사실은|실제로는)"
+                     r"|(?:이|가)\s*아니라")
+# 명시 인용 판정 — 고유명사는 원어로 쓴다(article_style 2절). 괄호 밖 로마자 고유명사가
+# 있는 근거 문단을 "이름을 밝힌 인용"으로 본다. 괄호 안은 개념 영문 병기라 제외한다.
+LATIN_NAME_RE = re.compile(r"\b[A-Z][A-Za-z&.\-]+")
+LATIN_NAME_STOP = {"AI", "HR", "IT", "CEO", "KPI", "LLM", "GPT", "ChatGPT", "OKR", "SK", "SKMS",
+                   "AX", "DX", "PM", "ERP", "Q", "B", "A", "C"}
+# 칼럼 톤 — 지시·당위 어미 금지("~해 보세요"류 조언형만), 구어체 종결 혼용
+COLUMN_BANNED_ENDING_RE = re.compile(
+    r"(?:해야|어야|아야|여야)\s*합니다|명심|바랍니다|하십시오|하시기\s*바랍니다")
+COLUMN_COLLOQUIAL_RE = re.compile(r"죠[.?!]|[는은인]데요|거든요|네요[.?!]")
 # 수치 대조·출처 검사를 면제하는 섹션 (처방 값·서지 정보)
 EXEMPT_HEADING_HINTS = ("시도할 것", "참고자료", "액션", "리더용", "실무자용",
                         "적용해본다면", "적용한다면", "제언")
@@ -341,6 +378,44 @@ def parse_write_model(md: str, head_lines: int = 15) -> str:
     return m.group(1).strip().strip("\"'")
 
 
+def parse_format(md: str, head_lines: int = 15) -> str:
+    """초안 머리말의 포맷 표기(`format: column`). 없거나 모르는 값이면 article.
+
+    기본값을 article로 두는 것은 머리말에 포맷이 없는 기존 초안·발행본이 예전 기준 그대로
+    검증되게 하려는 것이다. 새 초안의 기본 포맷(column)은 draft.md가 머리말에 적는다.
+    """
+    head = "\n".join(md.splitlines()[:head_lines])
+    flat = re.sub(r"\s+·\s+", "\n", re.sub(r"<!--|-->", "\n", head))
+    m = FORMAT_RE.search(flat)
+    fmt = m.group(1).lower() if m else "article"
+    return fmt if fmt in FORMATS else "article"
+
+
+def _body_paragraphs(segments: list["Segment"]) -> list["Segment"]:
+    """칼럼 형식 검사 대상 문단 — 참고자료·제목 줄을 뺀 본문 문단."""
+    return [s for s in segments
+            if "참고자료" not in s.heading and not s.text.lstrip().startswith("# ")]
+
+
+def find_reversal(paras: list["Segment"]) -> "Segment | None":
+    """통념→반전 구조가 시작되는 문단. 글 앞 절반에서 통념 표지 뒤(같은·다음 문단)에
+    반전 표지가 오면 그 통념 문단을 돌려준다. 없으면 None."""
+    half = paras[:max(2, (len(paras) + 1) // 2)]
+    for i, seg in enumerate(half):
+        if not CONVENTION_RE.search(seg.text):
+            continue
+        nxt = paras[i + 1].text if i + 1 < len(paras) else ""
+        if TURN_RE.search(seg.text) or TURN_RE.search(nxt):
+            return seg
+    return None
+
+
+def named_entities(text: str) -> list[str]:
+    """괄호 밖 로마자 고유명사(기관·인물·매체). 개념 영문 병기(괄호 안)와 흔한 약어는 뺀다."""
+    outside = re.sub(r"[(（][^)）]*[)）]", " ", text)
+    return [w for w in LATIN_NAME_RE.findall(outside) if w.rstrip(".-") not in LATIN_NAME_STOP]
+
+
 def _title_tokens(title: str) -> list[str]:
     """내부 문서를 특정하는 제목 낱말 — 간접 서술(인용부호 없는 언급)을 잡기 위한 것.
 
@@ -508,18 +583,121 @@ def _first_sentence(text: str, limit: int = 70) -> str:
     return (s[:limit] + "…") if len(s) > limit else s
 
 
+def _column_checks(md: str, segments: list[Segment], body: list[Segment],
+                   used_segments: list[Segment], evidence: dict, numbers: list,
+                   length: dict[str, int], aliases: dict[str, str],
+                   reversal: Segment | None, issues: list[Issue]) -> dict:
+    """칼럼 프로파일 형식 검사. 상한(분량·명시 인용·수치)은 실패, 형태·어미는 경고.
+
+    명시 인용은 출처 단위로 센다 — 근거 문단에 괄호 밖 로마자 고유명사나 sources.yaml의
+    출처 이름이 있으면 그 문단이 인용한 출처를 "이름을 밝힌 인용"으로 본다. 이름 없이
+    근거를 쓴 문단의 출처는 익명 요약으로 센다(claims 주석은 둘 다 똑같이 단다).
+    """
+    def where(seg: Segment) -> str:
+        return f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"
+
+    # 분량 — 코어(레이어 없음) 기준
+    core = length.get("core", 0)
+    lo, hi = COLUMN_LENGTH
+    if core > hi:
+        issues.append(Issue("fail", "분량 초과", f"공백 제외 {core}자 — 칼럼 상한 {hi}자"))
+    elif core < lo:
+        issues.append(Issue("warn", "분량 미달", f"공백 제외 {core}자 — 칼럼 하한 {lo}자"))
+
+    # 명시 인용
+    named: dict[str, list[str]] = {}          # source_id → 문단에서 찾은 이름
+    anonymous: set[str] = set()
+    for seg in used_segments:
+        srcs = {evidence[c].get("source") for c in seg.claim_ids if c in evidence}
+        low = seg.text.lower()
+        names = named_entities(seg.text) + [a for a in aliases if len(a) >= 3 and a in low]
+        for sid in srcs:
+            if names:
+                named.setdefault(sid, [])
+                named[sid] += [n for n in names if n not in named[sid]]
+            else:
+                anonymous.add(sid)
+    anonymous -= set(named)
+    if len(named) > COLUMN_MAX_NAMED_CITATIONS:
+        issues.append(Issue("fail", "명시 인용 초과",
+                            f"이름을 밝힌 출처 {len(named)}곳({', '.join(sorted(named))}) — "
+                            f"칼럼은 {COLUMN_MAX_NAMED_CITATIONS}곳까지. 나머지는 익명 요약으로 푼다"))
+    elif not named:
+        issues.append(Issue("warn", "명시 인용 없음",
+                            "연구자·기관 이름을 밝힌 인용이 없다 — 칼럼은 1~2곳을 이름으로 밝힌다"))
+
+    # 수치 — 근거 수치만 센다(연도·처방 값은 numbers에 없거나 prescriptive)
+    evid_numbers = list(dict.fromkeys(tok for _, tok, st in numbers if st != "prescriptive"))
+    if len(evid_numbers) > COLUMN_MAX_NUMBERS:
+        issues.append(Issue("fail", "수치 초과",
+                            f"근거 수치 {len(evid_numbers)}개({', '.join(evid_numbers)}) — "
+                            f"칼럼은 {COLUMN_MAX_NUMBERS}개까지"))
+
+    # 형태 — 경고
+    # 제목(# 한 줄)은 소제목이 아니다 — ## 이하만 센다
+    headings = [m.group(1).strip() for m in re.finditer(r"^#{2,6}\s+(.*)$", md, re.M)
+                if "참고자료" not in m.group(1)]
+    summary = any("세 줄 요약" in h for h in headings) or any(
+        s.text.lstrip("*# ").startswith("세 줄 요약") for s in body)
+    layered = bool(SEGMENT_RE.search(md))
+    if summary:
+        issues.append(Issue("warn", "세 줄 요약 있음", "칼럼은 세 줄 요약을 두지 않는다"))
+    if headings:
+        issues.append(Issue("warn", "소제목 있음",
+                            f"칼럼은 소제목 0개 — {', '.join(h[:20] for h in headings)}"))
+    if layered:
+        issues.append(Issue("warn", "레이어 있음", "칼럼은 세그먼트 레이어를 쓰지 않는다"))
+    p_lo, p_hi = COLUMN_PARAGRAPHS
+    if not p_lo <= len(body) <= p_hi:
+        issues.append(Issue("warn", "문단 수", f"본문 {len(body)}문단 — 칼럼 기준 {p_lo}~{p_hi}"))
+    l_lo, l_hi = COLUMN_PARAGRAPH_LEN
+    off = [(s, len(re.sub(r"\s", "", s.text))) for s in body]
+    off = [(s, n) for s, n in off if not l_lo <= n <= l_hi]
+    for seg, n in off:
+        issues.append(Issue("warn", "문단 길이", f"{n}자 — 칼럼 기준 {l_lo}~{l_hi}자", where(seg)))
+
+    # 톤 — 지시·당위 어미 금지, 구어체 종결 혼용
+    text = "\n".join(s.text for s in body)
+    banned = COLUMN_BANNED_ENDING_RE.findall(text)
+    for seg in body:
+        m = COLUMN_BANNED_ENDING_RE.search(seg.text)
+        if m:
+            issues.append(Issue("warn", "지시·당위 어미",
+                                f"“{m.group(0)}” — 칼럼 조언은 “~해 보세요”류로 쓴다", where(seg)))
+    colloquial = len(COLUMN_COLLOQUIAL_RE.findall(text))
+    if not colloquial:
+        issues.append(Issue("warn", "구어체 종결 없음",
+                            "~죠·~인데요·~거든요가 한 번도 없다 — 칼럼 톤은 혼용이다"))
+
+    return {
+        "core": core, "named": named, "anonymous": sorted(anonymous),
+        "numbers": evid_numbers, "paragraphs": len(body), "paragraph_off": len(off),
+        "headings": headings, "summary": summary, "layered": layered,
+        "banned": len(banned), "colloquial": colloquial,
+        "reversal_line": reversal.line if reversal else None,
+    }
+
+
 def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
            doc_dates: dict[tuple[str, str], str] | None = None,
-           doc_meta: dict[tuple[str, str], dict] | None = None) -> dict:
+           doc_meta: dict[tuple[str, str], dict] | None = None,
+           fmt: str | None = None) -> dict:
     """실사용 기준 검증 결과를 dict로 반환.
 
     internal_docs를 주면 본문의 직접 인용을 내부 자료 원문과 대조한다(문구 일치까지만 —
     발언 맥락 왜곡 여부는 사람 확인 항목이다, CLAUDE.md 문체 규칙).
+    fmt는 포맷 프로파일(article|column). None이면 초안 머리말에서 읽는다(parse_format).
     """
+    fmt = fmt if fmt in FORMATS else parse_format(md)
+    column = fmt == "column"
     md = strip_note(md)          # 편집자 노트는 근거 영역이 아니다
     segments, references = parse_article(md)
     used_segments = [s for s in segments if s.claim_ids]
     issues: list[Issue] = []
+
+    def is_action(seg: Segment) -> bool:
+        # 칼럼은 조언 어미("~해 보세요")도 처방 문단으로 본다. article 판정은 그대로다.
+        return seg.is_action or (column and bool(COLUMN_ACTION_RE.search(seg.text)))
 
     # 1) 미등록 claim ID — 본문이 evidence에 없는 근거를 인용한 경우
     used_ids: list[str] = []
@@ -567,17 +745,32 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
     top_source, top_n = (max(counts.items(), key=lambda kv: kv[1]) if counts else ("-", 0))
     ratio = (top_n / len(used)) if used else 0.0
 
-    if len(counts) < MIN_INDEPENDENT_SOURCES:
+    min_sources = COLUMN_MIN_SOURCES if column else MIN_INDEPENDENT_SOURCES
+    max_ratio = COLUMN_MAX_SINGLE_SOURCE_RATIO if column else MAX_SINGLE_SOURCE_RATIO
+    opposed = {"optimistic", "cautious"} <= stances
+    body = _body_paragraphs(segments)
+    reversal = find_reversal(body) if column else None
+
+    if len(counts) < min_sources:
         issues.append(Issue("fail", "독립 출처 부족",
-                            f"사용 claim의 독립 출처 {len(counts)}곳 — {MIN_INDEPENDENT_SOURCES}곳 이상 필요"))
-    if not ({"optimistic", "cautious"} <= stances):
+                            f"사용 claim의 독립 출처 {len(counts)}곳 — {min_sources}곳 이상 필요"))
+    if column:
+        # 칼럼은 통념→반전 구조가 상반 관점의 역할을 한다. 둘 중 하나면 통과.
+        if not (opposed or reversal):
+            issues.append(Issue("fail", "통념→반전 구조 없음",
+                                "글 앞 절반에서 통념→반전 구조를 찾지 못했고 사용 claim에 상반 "
+                                f"stance도 없음 ({sorted(s for s in stances if s)}) — 둘 중 하나 필요"))
+        elif not reversal:
+            issues.append(Issue("warn", "통념→반전 구조 미검출",
+                                "상반 stance로 대체 통과 — 칼럼 골격(통념→반전)이 본문에 있는지 사람 확인"))
+    elif not opposed:
         issues.append(Issue("fail", "상반 stance 없음",
                             f"사용 claim의 stance {sorted(s for s in stances if s)} — "
                             "optimistic·cautious 각 1건 이상 필요"))
-    if ratio > MAX_SINGLE_SOURCE_RATIO:
+    if ratio > max_ratio:
         issues.append(Issue("fail", "단일 출처 편중",
                             f"`{top_source}` {top_n}/{len(used)}건 = {ratio:.0%} "
-                            f"— {MAX_SINGLE_SOURCE_RATIO:.0%} 초과"))
+                            f"— {max_ratio:.0%} 초과"))
 
     # 6) 수치 대조 — 사용 claim의 metric/text에 근거가 있는지
     haystack = " ".join((c.get("metric") or "") + " " + (c.get("text") or "") for c in used)
@@ -593,7 +786,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
                 continue
             # 액션 문단의 기간·횟수는 실행 처방으로 제안한 값이다. 근거 대조를 하면
             # 한 자리 숫자가 claim의 큰 수에 부분 일치해 "근거 있음"으로 잘못 통과한다.
-            if seg.is_action and PRESCRIPTIVE_UNIT_RE.match(tok):
+            if is_action(seg) and PRESCRIPTIVE_UNIT_RE.match(tok):
                 numbers.append((seg, tok, "prescriptive"))
                 continue
             digits = re.findall(r"\d[\d,.]*", tok)
@@ -638,7 +831,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
         # 섹션 이름이 아니라 문단의 액션 마커로 판정하므로 소제목이 메시지 문장이어도 걸린다.
         nums = [t.strip() for t in NUMBER_RE.findall(seg.text)
                 if not CALENDAR_YEAR_RE.match(t.strip())
-                and not (seg.is_action and PRESCRIPTIVE_UNIT_RE.match(t.strip()))]
+                and not (is_action(seg) and PRESCRIPTIVE_UNIT_RE.match(t.strip()))]
         if nums:
             reasons.append(f"수치({', '.join(nums[:3])})")
         if reasons:
@@ -654,7 +847,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
     for seg in segments:
         # 액션 문단의 따옴표는 인용이 아니라 확인지표에 이름을 붙인 표현이다
         # ("재배치한 시간으로 새로 시작한 일"). 대조 대상으로 잡으면 오탐만 쌓인다.
-        if "참고자료" in seg.heading or seg.is_action:
+        if "참고자료" in seg.heading or is_action(seg):
             continue
         for q in QUOTE_RE.findall(seg.text):
             hit = next((d for d in docs if _squash(q) in _squash(d["body"])), None)
@@ -702,7 +895,13 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
                 + (f" — 자료 시점은 {year}년이다" if year else ""),
                 f"{seg.heading or '(제목 없음)'} / {seg.line}행: “{_first_sentence(seg.text)}”"))
 
+    length = measure_length(md)
+    column_checks = (_column_checks(md, segments, body, used_segments, evidence, numbers,
+                                    length, aliases, reversal, issues) if column else None)
+
     return {
+        "format": fmt, "column": column_checks,
+        "min_sources": min_sources, "max_ratio": max_ratio, "reversal": reversal,
         "segments": segments, "used_segments": used_segments, "used": used, "unused": unused,
         "missing_marks": missing_marks,
         "counts": counts, "ratio": ratio, "top_source": top_source, "stances": stances,
@@ -711,7 +910,7 @@ def verify(md: str, evidence: dict, internal_docs: list[dict] | None = None,
         "doc_dates": doc_dates or {},
         "doc_meta": doc_meta or {},
         "write_model": parse_write_model(md),
-        "length": measure_length(md),
+        "length": length,
         "issues": issues,
         "passed": not any(i.level == "fail" for i in issues),
     }
@@ -736,13 +935,60 @@ def _length_line(length: dict[str, int]) -> str:
     return line
 
 
+def _column_rows(r: dict) -> list[str]:
+    """리포트 2장 아래 칼럼 형식 표. article이면 빈 목록(기존 리포트 불변)."""
+    c = r.get("column")
+    if not c:
+        return []
+    lo, hi = COLUMN_LENGTH
+    named = "; ".join(f"{sid}({', '.join(n[:3])})" for sid, n in sorted(c["named"].items())) or "없음"
+    ok = lambda b: "✅" if b else "❌"          # noqa: E731
+    warn = lambda b: "✅" if b else "⚠️"        # noqa: E731
+    return [
+        "**칼럼 형식** (format: column — `docs/column-format-design.md`)", "",
+        "| 항목 | 기준 | 실측 | 판정 |", "|---|---|---|---|",
+        f"| 분량(공백 제외) | {lo:,}~{hi:,}자 | {c['core']:,}자 | "
+        f"{ok(c['core'] <= hi) if c['core'] > hi else warn(c['core'] >= lo)} |",
+        f"| 명시 인용 | 1~{COLUMN_MAX_NAMED_CITATIONS}곳 | {len(c['named'])}곳 — {named} · "
+        f"익명 요약 {len(c['anonymous'])}곳 | "
+        f"{ok(len(c['named']) <= COLUMN_MAX_NAMED_CITATIONS) if c['named'] else '⚠️'} |",
+        f"| 근거 수치 | 0~{COLUMN_MAX_NUMBERS}개 | {len(c['numbers'])}개"
+        f"{' (' + ', '.join(c['numbers']) + ')' if c['numbers'] else ''} | "
+        f"{ok(len(c['numbers']) <= COLUMN_MAX_NUMBERS)} |",
+        f"| 문단 | {COLUMN_PARAGRAPHS[0]}~{COLUMN_PARAGRAPHS[1]}개 · 문단당 "
+        f"{COLUMN_PARAGRAPH_LEN[0]}~{COLUMN_PARAGRAPH_LEN[1]}자 | {c['paragraphs']}개 · 범위 밖 "
+        f"{c['paragraph_off']}개 | {warn(COLUMN_PARAGRAPHS[0] <= c['paragraphs'] <= COLUMN_PARAGRAPHS[1] and not c['paragraph_off'])} |",
+        f"| 소제목·세 줄 요약·레이어 | 모두 없음 | 소제목 {len(c['headings'])} · 요약 "
+        f"{'있음' if c['summary'] else '없음'} · 레이어 {'있음' if c['layered'] else '없음'} | "
+        f"{warn(not (c['headings'] or c['summary'] or c['layered']))} |",
+        f"| 어미 | 지시·당위 0 · 구어체 1+ | 지시·당위 {c['banned']} · 구어체 {c['colloquial']} | "
+        f"{warn(not c['banned'] and c['colloquial'])} |",
+        "",
+        "명시 인용은 근거 문단의 괄호 밖 로마자 고유명사·출처 이름으로 판정한다 — 국문 고유명사는 "
+        "못 잡으니 사람이 한 번 더 본다.", "",
+    ]
+
+
 def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -> str:
     used, counts = r["used"], r["counts"]
+    min_src = r.get("min_sources", MIN_INDEPENDENT_SOURCES)
+    max_ratio = r.get("max_ratio", MAX_SINGLE_SOURCE_RATIO)
+    stances_txt = ", ".join(sorted(s for s in r["stances"] if s)) or "없음"
+    opposed = {"optimistic", "cautious"} <= r["stances"]
+    if r.get("format") == "column":
+        rev = r.get("reversal")
+        stance_row = (f"| 통념→반전 또는 상반 stance | 둘 중 하나 | "
+                      f"반전 {f'{rev.line}행' if rev else '미검출'} · stance {stances_txt} | "
+                      f"{'✅' if (rev or opposed) else '❌'} |")
+    else:
+        stance_row = (f"| 상반 stance | optimistic·cautious 각 1건+ | {stances_txt} | "
+                      f"{'✅' if opposed else '❌'} |")
     lines = [
         f"# 검증 리포트 (실사용 기준) — {slug}", "",
         f"대상: `{_rel(article_path)}` · 증거: `{_rel(evidence_path)}`",
         f"작성 모델: {r.get('write_model') or '**머리말 미기재**'} "
         f"(정본은 `config/settings.yaml`의 `write_model`)",
+    ] + ([f"포맷: **column** (칼럼 프로파일)"] if r.get("format") == "column" else []) + [
         f"판정: **{'통과' if r['passed'] else '실패'}** "
         f"(실패 {sum(1 for i in r['issues'] if i.level == 'fail')}건 · "
         f"경고 {sum(1 for i in r['issues'] if i.level == 'warn')}건)",
@@ -770,16 +1016,15 @@ def render_report(slug: str, article_path: Path, evidence_path: Path, r: dict) -
         f"(미사용 {len(r['unused'])}건)", "",
         "## 2. 강제 조건 재계산 (사용 claim 기준)", "",
         "| 조건 | 기준 | 실측 | 판정 |", "|---|---|---|---|",
-        f"| 독립 출처 | {MIN_INDEPENDENT_SOURCES}곳 이상 | {len(counts)}곳 "
+        f"| 독립 출처 | {min_src}곳 이상 | {len(counts)}곳 "
         f"({', '.join(f'{k} {v}' for k, v in sorted(counts.items(), key=lambda kv: -kv[1]))}) | "
-        f"{'✅' if len(counts) >= MIN_INDEPENDENT_SOURCES else '❌'} |",
-        f"| 상반 stance | optimistic·cautious 각 1건+ | "
-        f"{', '.join(sorted(s for s in r['stances'] if s)) or '없음'} | "
-        f"{'✅' if {'optimistic', 'cautious'} <= r['stances'] else '❌'} |",
-        f"| 단일 출처 비중 | {MAX_SINGLE_SOURCE_RATIO:.0%} 이하 | "
+        f"{'✅' if len(counts) >= min_src else '❌'} |",
+        stance_row,
+        f"| 단일 출처 비중 | {max_ratio:.0%} 이하 | "
         f"{r['top_source']} {r['ratio']:.0%} | "
-        f"{'✅' if r['ratio'] <= MAX_SINGLE_SOURCE_RATIO else '❌'} |",
+        f"{'✅' if r['ratio'] <= max_ratio else '❌'} |",
         "",
+    ] + _column_rows(r) + [
         "## 3. 수치 대조 (절대 규칙 3)", "",
     ]
     if r["numbers"]:
@@ -871,6 +1116,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--evidence", help="evidence json 경로 (기본: content/evidence/{slug}.json)")
     p.add_argument("--out", help="리포트 저장 경로 (기본: content/drafts/{slug}-verification.md)")
     p.add_argument("--stdout", action="store_true", help="파일로 쓰지 않고 리포트를 출력만 한다")
+    p.add_argument("--format", choices=FORMATS,
+                   help="포맷 프로파일 (기본: 초안 머리말의 format 표기, 없으면 article)")
     args = p.parse_args(argv)
 
     article_path = Path(args.article)
@@ -884,7 +1131,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     result = verify(md, load_evidence(evidence_path), load_internal_docs(),
-                    load_document_dates(), load_document_meta())
+                    load_document_dates(), load_document_meta(), fmt=args.format)
     report = render_report(slug, article_path, evidence_path, result)
 
     if args.stdout:

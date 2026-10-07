@@ -634,3 +634,144 @@ def test_note_numbers_do_not_trigger_numeric_checks():
     )
     r = va.verify(NOTE_MD, ev)
     assert not any("37" in (i.where + i.message) or "금요일" in i.where for i in r["issues"])
+
+
+# ── 칼럼 프로파일 (format: column, 2026-10-07) ─────────────────────────────
+
+COL_EVIDENCE = evidence(
+    claim("C1", "ms-worklab", "cautious"),
+    claim("C2", "hbr", "cautious"),
+    claim("C3", "mckinsey-insights", "optimistic"),
+)
+
+# 12문단·문단당 81~115자·공백 제외 1,148자. 명시 인용 1(Microsoft)·익명 요약 1·통념→반전 2~3문단.
+COLUMN_BODY = (
+    '월요일 아침 주간회의, 팀장이 화면에 AI가 정리한 지난주 실적 요약을 띄웁니다. 표도 깔끔하고 문장도 매끄럽습니다. 그런데 회의가 끝나고 나면 누가 무엇을 결정했는지 기억하는 사람이 별로 없죠. 다들 고개를 끄덕였는데도 말이에요.\n'
+    '\n'
+    '여러분 팀의 회의는 어떤가요? 요약이 좋아질수록 회의가 짧아지고, 회의가 짧아질수록 일이 빨라진다고 생각합니다. 대부분의 팀이 AI 회의록을 들일 때 기대하는 그림도 이것이고요. 요약을 띄우는 순간 회의가 끝난 기분이 들기도 합니다.\n'
+    '\n'
+    '하지만 요약이 매끄러울수록 결정은 오히려 흐려지기 쉽습니다. 기록은 남는데 판단한 사람의 이름이 빠지거든요. 문장이 완결돼 보이면 누구도 그 다음 질문을 던지지 않습니다. 매끄러운 문장이 생각을 대신 마무리해 버리는 셈입니다.\n'
+    '\n'
+    'Microsoft가 사내 회의 데이터를 분석한 리포트도 같은 지점을 짚습니다. 회의록 자동화 뒤에 회의 시간은 줄었지만 후속 조치를 맡은 담당자가 비어 있는 비율은 줄지 않았다는 것이죠. 기록이 좋아져도 책임은 저절로 생기지 않았던 겁니다.\n'
+    '<!-- claims: C1 -->\n'
+    '\n'
+    '이 현상에는 이름이 하나 붙어 있습니다. 책임 확산(diffusion of responsibility), 여럿이 함께 본 일은 각자가 맡았다고 느끼지 않는다는 뜻인데요. 요약문은 이 확산을 더 매끄럽게 감춥니다. 함께 봤다는 사실이 오히려 각자의 몫을 지웁니다.\n'
+    '\n'
+    '문서가 깔끔하면 이미 누군가 챙겼으리라 믿게 됩니다. 실제로 확인해 보면 회의에 들어온 모든 사람이 같은 생각을 하고 있었던 경우가 많습니다. 결국 아무도 챙기지 않은 셈이죠. 회의록이 좋을수록 이 착각도 단단해집니다.\n'
+    '\n'
+    '반대로 볼 근거도 있습니다. 한 해외 설문에서는 AI 요약을 쓰는 팀이 회의 뒤 확인 메일을 덜 보내고도 일정 지연이 늘지 않았다고 답했습니다. 요약이 늘 독이 되지는 않는다는 이야기입니다. 같은 도구를 쓰고도 결과가 엇갈린 셈입니다.\n'
+    '<!-- claims: C2 -->\n'
+    '\n'
+    '두 결과가 갈리는 지점은 요약의 마지막 줄입니다. 결정과 담당자를 사람이 직접 적어 넣은 팀에서는 요약이 일을 줄였고, 그 줄까지 AI에게 맡긴 팀에서는 일이 흩어졌습니다. 기계가 쓴 줄과 사람이 쓴 줄의 차이였던 거죠.\n'
+    '\n'
+    '그래서 우리 팀이 바꿀 것은 도구가 아니라 회의의 마지막 2분입니다. AI 요약은 그대로 쓰되 결정 사항과 담당자 이름만은 회의실을 나서기 전에 사람이 소리 내어 확인하는 거죠. 도구를 바꾸는 것보다 훨씬 가볍습니다.\n'
+    '\n'
+    '이번 주 회의 한 번만 이렇게 해 보세요. 요약이 화면에 뜨면 맨 아래에 결정 하나와 그 일을 맡은 사람 이름 하나를 직접 적고 회의를 닫는 겁니다. 2분이면 충분합니다. 처음엔 어색해도 두세 번이면 습관이 됩니다.\n'
+    '\n'
+    '다음 주 같은 회의에서 지난주 결정이 누구 일이었는지 바로 답이 나오면 효과가 있는 겁니다. 답이 머뭇거려진다면 마지막 줄을 AI에게 다시 넘긴 건 아닌지 살펴볼 차례인데요. 그 머뭇거림이 바로 확인 신호입니다.\n'
+    '\n'
+    '요약은 기계가 하고 결정은 사람이 적습니다. 회의록의 마지막 줄 하나가 그 경계선입니다. 회의를 닫는 손이 사람의 손이어야 그 경계가 지켜집니다. 이번 주 회의에서 그 한 줄을 먼저 적어 보세요.\n'
+    '\n'
+)
+COLUMN_ARTICLE = "<!-- slug: t -->\n<!-- format: column -->\n# 회의록의 마지막 줄\n\n" + COLUMN_BODY
+
+
+def _kinds(r, level=None):
+    return {i.kind for i in r["issues"] if level is None or i.level == level}
+
+
+def test_parse_format_reads_header_and_defaults_to_article():
+    assert va.parse_format(COLUMN_ARTICLE) == "column"
+    assert va.parse_format("---\nformat: column\nmodel: x\n---\n# t") == "column"
+    assert va.parse_format("<!-- 모델: x · format: column -->\n# t") == "column"
+    assert va.parse_format(GOOD_ARTICLE) == "article"
+    assert va.parse_format("<!-- format: magazine -->") == "article"
+
+
+def test_column_passes_with_two_sources_and_reversal():
+    r = va.verify(COLUMN_ARTICLE, COL_EVIDENCE)
+    assert r["format"] == "column"
+    assert r["passed"] is True, [(i.kind, i.message) for i in r["issues"]]
+    assert r["issues"] == []                         # 형식·톤 경고도 없다
+    c = r["column"]
+    assert set(c["named"]) == {"ms-worklab"} and c["anonymous"] == ["hbr"]
+    assert c["paragraphs"] == 12 and 1000 <= c["core"] <= 1400
+    assert r["reversal"] is not None and c["colloquial"] > 0
+
+
+def test_column_same_draft_fails_article_profile():
+    # 기존 article 프로파일은 그대로 — 출처 2곳·stance 한쪽이면 실패한다
+    r = va.verify(COLUMN_ARTICLE, COL_EVIDENCE, fmt="article")
+    assert r["format"] == "article" and r["column"] is None
+    assert {"독립 출처 부족", "상반 stance 없음"} <= _kinds(r, "fail")
+
+
+def test_column_without_reversal_needs_opposed_stance():
+    flat = COLUMN_ARTICLE
+    for a, b in (("하지만 ", ""), ("오히려 ", ""), ("반대로 ", ""), ("아니라", "말고"),
+                 ("생각합니다", "봅니다"), ("대부분의", "여러"), ("믿게", "보게")):
+        flat = flat.replace(a, b)
+    r = va.verify(flat, COL_EVIDENCE)
+    assert "통념→반전 구조 없음" in _kinds(r, "fail")
+    # 상반 stance claim을 쓰면 대체 통과 — 대신 미검출 경고를 남긴다
+    r2 = va.verify(flat.replace("C2 -->", "C3 -->"), COL_EVIDENCE)
+    assert r2["passed"] is True
+    assert "통념→반전 구조 미검출" in _kinds(r2, "warn")
+
+
+def test_column_single_source_over_half_fails():
+    md = COLUMN_ARTICLE.replace("<!-- claims: C1 -->", "<!-- claims: C1, C1b, C1c -->")
+    ev = dict(COL_EVIDENCE)
+    ev["C1b"] = claim("C1b", "ms-worklab", "cautious")
+    ev["C1c"] = claim("C1c", "ms-worklab", "cautious")
+    r = va.verify(md, ev)
+    assert "단일 출처 편중" in _kinds(r, "fail")           # 3/4 = 75%
+    assert r["max_ratio"] == va.COLUMN_MAX_SINGLE_SOURCE_RATIO
+
+
+def test_column_named_citation_and_number_caps():
+    md = COLUMN_ARTICLE.replace("한 해외 설문에서는", "Harvard Business Review가 소개한 설문에서는")
+    md = md.replace("<!-- claims: C2 -->", "<!-- claims: C2 -->\n\nMcKinsey 설문도 비슷합니다. "
+                    "응답 팀의 31%와 45%, 그리고 12%가 같은 답을 했다는 것인데요.\n<!-- claims: C3 -->")
+    ev = dict(COL_EVIDENCE)
+    ev["C3"] = claim("C3", "mckinsey-insights", "optimistic", text="31% 45% 12%")
+    r = va.verify(md, ev)
+    fails = _kinds(r, "fail")
+    assert "명시 인용 초과" in fails                       # Microsoft·HBR·McKinsey = 3곳
+    assert "수치 초과" in fails                            # 31%·45%·12% = 3개
+    assert "수치 근거 없음" not in fails                   # 수치 대조(공통 검사)는 통과
+
+
+def test_column_length_cap_and_form_warnings():
+    extra = "덧붙이는 문단입니다. 회의록을 보는 방식은 팀마다 다르고 그 차이가 결정의 속도를 가르죠. " * 3
+    md = COLUMN_ARTICLE + "\n## 세 줄 요약\n\n" + "\n\n".join([extra] * 5) + "\n"
+    r = va.verify(md, COL_EVIDENCE)
+    assert "분량 초과" in _kinds(r, "fail")
+    assert {"세 줄 요약 있음", "소제목 있음", "문단 수"} <= _kinds(r, "warn")
+
+
+def test_column_tone_warnings():
+    md = COLUMN_ARTICLE.replace("이번 주 회의 한 번만 이렇게 해 보세요.",
+                                "이번 주 회의부터 반드시 이렇게 해야 합니다.")
+    r = va.verify(md, COL_EVIDENCE)
+    assert "지시·당위 어미" in _kinds(r, "warn")
+    assert r["passed"] is True                             # 톤은 경고까지만
+
+
+def test_column_action_paragraph_values_are_prescriptive():
+    # "~해 보세요" 문단의 기간·횟수는 칼럼에서 처방 값으로 분류한다
+    md = COLUMN_ARTICLE.replace("이번 주 회의 한 번만 이렇게 해 보세요.",
+                                "앞으로 2주 동안 이렇게 해 보세요.")
+    r = va.verify(md, COL_EVIDENCE)
+    assert any(tok == "2주" and st == "prescriptive" for _, tok, st in r["numbers"])
+    assert r["column"]["numbers"] == []
+
+
+def test_column_report_has_profile_rows():
+    r = va.verify(COLUMN_ARTICLE, COL_EVIDENCE)
+    rep = va.render_report("t", REPO / "x.md", REPO / "y.json", r)
+    assert "포맷: **column**" in rep and "**칼럼 형식**" in rep
+    assert "| 독립 출처 | 2곳 이상 |" in rep and "| 단일 출처 비중 | 50% 이하 |" in rep
+    assert "통념→반전 또는 상반 stance" in rep
+    art = va.render_report("t", REPO / "x.md", REPO / "y.json", va.verify(GOOD_ARTICLE, BASE))
+    assert "칼럼 형식" not in art and "| 독립 출처 | 3곳 이상 |" in art
