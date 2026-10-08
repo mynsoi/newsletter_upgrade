@@ -22,6 +22,7 @@ PATS = {
 }
 
 GROUPS = [
+    ("F", "확정본"),
     ("draft", "공통 초안"),
     ("A", "1단계 · 처음부터 쓰기 (워크트리별 스킬)"),
     ("B", "2단계 · 같은 초안 다듬기 (스킬 효과만)"),
@@ -100,6 +101,8 @@ for key, label, desc in [
 ]:
     model = key.rsplit("-", 1)[1]; stem = key.rsplit("-", 1)[0]
     add(key, "S", label, desc, sd / f"{model}-{stem}" / "output.md")
+for f in sorted((ROOT / "columns").glob("2*.md")):
+    add("F-" + f.stem, "F", "확정 · " + f.stem, "멘토 확정본 (columns/" + f.name + ")", f)
 items.sort(key=lambda i: [g for g, _ in GROUPS].index(i["group"]))
 data = json.dumps({"items": items, "groups": GROUPS}, ensure_ascii=False)
 
