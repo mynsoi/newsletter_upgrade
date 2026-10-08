@@ -1,0 +1,17 @@
+Bash {"command": "ls -la && ls _workspace 2>/dev/null | head; cat .gitignore 2>/dev/null", "description": "List worktree root and check for workspace folder"}
+Bash {"command": "mkdir -p /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/_w", "description": "Write column draft to workspace and count characters"}
+Bash {"command": "cd /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/_workspa", "description": "Fix one sentence about human-in-the-loop in the draft"}
+Skill {"skill": "humanize-korean:humanize-korean", "args": "_workspace/column/draft.md"}
+Bash {"command": "cd /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai && SKILL", "description": "Resolve skill root path and generate session tag"}
+Glob {"pattern": "_workspace/2026-10-08-*/01_input.txt", "path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai"}
+Bash {"command": "SKILL_ROOT=/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/", "description": "Save input and run metrics shim for route hint"}
+Agent {"description": "Light-path monolith rewrite", "subagent_type": "humanize-korean:humanize-monolith", "prompt": "humanize-korean 스킬 light 경로 윤문 콜입니다.\n\n- input_path: /home/hwjoo/01-projects/2026", "run_in_background": "False"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/_workspace/"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/.claude/plu"}
+Write {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/_workspace/", "content": "# 왜 AI를 쓰는데 더 퇴근 시간이 빨라지지 않을까요?\n\n직원이 원하기만 하면 AI 사용료를 회사가 전부 대 주는 곳이 있습니다. 도구도 마음"}
+Bash {"command": "SKILL_ROOT=/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/", "description": "Run modality restore, comma strip, and structure gates"}
+Bash {"command": "cd /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai/_workspa", "description": "Diff draft against polished version and print final body"}
+Bash {"command": "cd /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/im-not-ai && RUN=_", "description": "Apply two small post-edits and re-run the gate"}
+Bash {"command": "RUN=_workspace/2026-10-08-001-a4c9 && S=.claude/plugins/im-not-ai/scripts && cp ", "description": "Rewrite LinkedIn paragraphs and closing line, then re-run skill checks"}
+Bash {"command": "sed '/<!-- HUMANIZE-SUMMARY/,$d' _workspace/2026-10-08-001-a4c9/final.md", "description": "Print final body without summary block"}
+Bash {"command": "RUN=_workspace/2026-10-08-001-a4c9 && python3 - \"$RUN/final.md\" <<'EOF'\nimport s", "description": "Fix two word repetitions and re-check gate"}

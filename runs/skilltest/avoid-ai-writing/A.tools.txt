@@ -1,0 +1,4 @@
+Skill {"skill": "avoid-ai-writing", "args": "아래 한국어 사내 뉴스레터 칼럼 초안을 audit 후 rewrite해 주세요. 조건: (1) 한국어 글이며, 원문에 없는 사실·수치·경험을 새로"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla"}
+Glob {"pattern": "**/*", "path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla", "offset": "432", "limit": "320"}

@@ -1,0 +1,2 @@
+Skill {"skill": "yoonmoon:polish-all", "args": "사내 뉴스레터(SK E&S 전 직원 대상) 칼럼 초안. 내용·사실·수치·주장 보존, 최종본(제목+본문)만 출력."}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/yoonmoon/.claude/plug"}

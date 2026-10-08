@@ -1,0 +1,5 @@
+Skill {"skill": "avoid-ai-writing"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla"}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla", "offset": "432", "limit": "320"}
+Glob {"pattern": "**/*", "path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing/.cla"}
+Glob {"pattern": "*", "path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/avoid-ai-writing"}

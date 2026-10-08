@@ -1,0 +1,2 @@
+Skill {"skill": "yoonmoon:polish-all", "args": "사내 뉴스레터 칼럼 초안(유정식 경영일기 문체 참고, 합니다체+~죠 혼용). 제목은 사용자 지정이라 유지. 내용 보존, 최종본만 출력."}
+Read {"file_path": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/yoonmoon/.claude/plug"}
