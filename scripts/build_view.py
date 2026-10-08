@@ -23,6 +23,10 @@ PATS = {
 
 GROUPS = [
     ("F", "확정본"),
+    ("C1", "주제1 · 자료를 안 보여 줘서 (확정본 방식)"),
+    ("C2", "주제2 · AI를 잘 쓰면 실력이 는 걸까 (확정본 방식)"),
+    ("C3", "주제3 · 도구를 늘린다고 일이 줄지 않는다 (확정본 방식)"),
+    ("D", "astra 직행 · 원문 통째 + 경영일기 + 기준 미리 (Claude 초안 없이)"),
     ("draft", "공통 초안"),
     ("A", "1단계 · 처음부터 쓰기 (워크트리별 스킬)"),
     ("B", "2단계 · 같은 초안 다듬기 (스킬 효과만)"),
@@ -103,6 +107,22 @@ for key, label, desc in [
     add(key, "S", label, desc, sd / f"{model}-{stem}" / "output.md")
 for f in sorted((ROOT / "columns").glob("2*.md")):
     add("F-" + f.stem, "F", "확정 · " + f.stem, "멘토 확정본 (columns/" + f.name + ")", f)
+for d in sorted((RUNS / "direct").glob("astra-*")):
+    add("D-" + d.name, "D", "직행 · " + d.name.replace("astra-", ""), "astra가 원문에서 바로 씀 — 원문 통째 + 경영일기 2편 + 멘토 기준을 처음부터 줌", d / "output.md")
+cr = RUNS / "columns"
+VNAME = {"A": "A 확정본 절차", "B": "B 문체 참고 바꿈", "C": "C 다른 각도"}
+for d in sorted(cr.glob("t?-?")):
+    bj = d / "brief.json"
+    b = json.loads(bj.read_text(encoding="utf-8")) if bj.exists() else json.loads((ROOT / "briefs" / f"{d.name}.json").read_text(encoding="utf-8"))
+    g = "C" + b["topic"][1]; v = b["variant"]
+    th = b.get("thesis") or json.loads((ROOT / "briefs" / f"{b.get('draft_from','')}.json").read_text(encoding="utf-8")).get("thesis", "") if b.get("draft_from") else b.get("thesis", "")
+    src = b.get("sources") or (json.loads((ROOT / "briefs" / f"{b['draft_from']}.json").read_text(encoding="utf-8")).get("sources") if b.get("draft_from") else [])
+    s = " / ".join(x[1] for x in (src or []))
+    refs = "·".join(b.get("r4_refs", []))
+    add(f"{d.name}-final", g, f"{d.name} · {VNAME[v]} · 최종", f"한 줄: {th} | 원문: {s} | 재작성 참고: {refs}", d / "final.md")
+    add(f"{d.name}-r4", g, f"{d.name} · {VNAME[v]} · (중간) astra 재작성", "기준 반영 전 단계", d / "r4.md")
+    if not b.get("draft_from"):
+        add(f"{d.name}-draft", g, f"{d.name} · (중간) Claude 초안" + (" — B도 이 초안 사용" if v == "A" else ""), f"한 줄: {th} | 원문: {s}", d / "draft.md")
 items.sort(key=lambda i: [g for g, _ in GROUPS].index(i["group"]))
 data = json.dumps({"items": items, "groups": GROUPS}, ensure_ascii=False)
 
