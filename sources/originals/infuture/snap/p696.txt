@@ -1,0 +1,102 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI가 관료주의를 부추긴다? (https://infuture.stibee.com/p/696)
+- title: "AI가 관료주의를 부추긴다?" [url=https://infuture.stibee.com/p/696]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI가 관료주의를 부추긴다?2026. 6. 15."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 6월 15일  (No. 674)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI가 관료주의를 부추긴다?"
+  - table:
+    - table:
+      - table: "AI를 도입하면 업무 생산성이 폭발적으로 늘어나고 의사결정 속도도 빛의 속도로 빨라질 것이라 믿을 텐데요, 하지만 항상 그런 것은 아닙니다. AI 도입이 오히려 조직의 '관료주의'를 부추기고 의사결정 속도를 늦추는 경우가 많으니까요?\n\n보고서를 읽을 때 팀리더는 사실관계를 확인하느라 구글링을 거듭합니다. 'AI 보안 및 윤리 가이드라인'에 따라 이 보고서가 외부 데이터 유출이나 저작권 침해 소지가 없는지 해당 위원회의 확인받아야 하죠. AI를 활용해서 보고서를 작성함으로써 굉장히 많은 시간을 벌었지만, 이 단계에서 다 까먹고 말죠. \n\n왜 AI 도입이 관료주의를 오히려 강화할까요?\n\n첫째, '콘텐츠의 폭발과 인지적 병목' 때문입니다. AI 덕에 문서를 작성하고 아이디어를 생성하는 비용과 시간이 '0'에 가깝게 줄어들었습니다. 그 결과, 이전과 비교할 수 없을 만큼 방대한 양의 보고서, 제안서, 이메일이 쏟아지죠. 하지만 이를 읽고 판단해야 하는 인간(결재권자)의 인지 능력과 물리적 시간은 변함이 없습니다. 그렇기에 관리자 본인이 병목의 원인이 되고 말죠.\n\n둘째, '신뢰의 결핍과 검증의 늪'입니다. AI의 '환각(Hallucination)' 현상 때문에, 관리자들은 텍스트의 표면적인 완성도와 상관없이 모든 문장을 의심해야만 합니다. 직원이 며칠 밤을 새워 직접 쓴 글이라면 작성자를 믿고 넘어갈 부분도, AI가 썼다고 하면 단어 하나하나의 출처를 따져 묻게 됩니다. 글을 쓰는 시간은 혁신적으로 줄었지만, 검증하고 의심하는 시간은 몇 배로 늘어납니다.\n\n셋째, 조직의 '방어적 통제와 규제의 심화'입니다. 기업들은 AI가 가져올 잠재적 리스크(보안 유출, 법적 분쟁, 편향성 등)에 겁을 먹고 전에 없던 새로운 절차와 위원회를 만드는데요, '생성형 AI 산출물 검토 위원회' 심사, 'AI 사용 윤리 준수 서약' 등 겹겹의 결재선이 추가되면서 조직은 더욱 무겁고 관료적으로 변해갑니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "이는 이미 현장에서 여러 양상으로 벌어지고 있습니다.\n\n코드 분석 기관인 깃클리어(GitClear)가 2024년에 발표한 연구에 따르면, AI 도구 도입 후 개발자들의 코드 작성(타이핑) 속도는 놀랍게 빨라졌지만, '코드 이탈률(Code Churn, 작성된 지 2주 이내에 수정되거나 폐기되는 코드의 비율)'이 크게 증가했습니다. 게다가 쏟아지는 AI 생성 코드를 시니어 개발자들이 일일이 리뷰하고 버그를 잡아내야 하는 부담이 가중되면서, 최종 소프트웨어의 배포 속도는 오히려 둔화되는 기현상이 발생했다고 하네요.\n\n이런 사례도 있습니다. 2023년 미국에서 있었던 '마타 대 아비앙카 항공(Mata v. Avianca Airlines)' 사건에서, 한 변호사가 챗GPT로 작성한 변론서를 법원에 제출했습니다. 하지만 그 안에는 완전히 가짜인 유령 판례들이 수두룩하게 포함되어 있었죠. 이 황당한 사건 이후, 수많은 미국 연방법원과 대형 로펌들은 \"제출되는 모든 문서에 AI 사용 여부를 명시하고, 모든 인용문을 인간이 직접 교차 검증했음을 선서하라\"는 새로운 의무 규정을 만들었습니다. AI라는 혁신 기술이 법조계에 가장 고루한 관료적 절차를 하나 더 얹어줬던 것이죠.\n\n여러분의 조직이 이런 관료주의의 늪에 빠지지 않으려면 어떻게 해야 할까요? 이렇게 선언해 보기 바랍니다.\n\n\"AI 산출물 작성의 그라운드 룰(Ground Rule)을 정합시다.\"\n\n그라운드 룰에는 \"AI를 활용해 기획서를 작성할 경우, 핵심 결론 3가지와 인간이 직접 팩트체크를 완료한 출처 목록을 반드시 문서의 맨 앞장에 요약할 것\" 등의 내용을 담아야 합니다. 팩트 검증의 책임과 수고를 관리자에게 떠넘기지 않고 작성자 스스로가 책임지도록 명확한 기준을 세워야 하죠. 이런 규칙이 관리자의 인지적 과부하를 막고, 불필요한 위원회나 통제 절차가 생겨나는 것을 사전에 예방할 겁니다. (끝)\n\n*참고문헌 GitClear. (2024). Coding on Copilot: 2024 Data Suggests Downward Pressure on Code Quality.\n\nWeiser, B., & Schweber, N. (2023, June 8). The ChatGPT Lawyer Explains Himself. The New York Times."
+        - link "https://www.nytimes.com/2023/06/08/nyregion/lawyer-chatgpt-sanctions.html" [ref=e9]
+        - text: "HR Executive. (2026). The innovation-bureaucracy paradox: How corporate AI adoption fuels bureaucracy."
+        - link "https://hrexecutive.com/the-innovation-bureaucracy-paradox-how-corporate-ai-adoption-fuels-bureaucra" [ref=e10]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 자기 농담에 자기가 박장대소하는 사람은?2026. 6. 12." [ref=e31]
+- link "다음 뉴스레터 월드컵은 왜 JTBC와 KBS에서만 볼 수 있나?2026. 6. 16." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1239ms][0m

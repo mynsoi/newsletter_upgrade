@@ -1,0 +1,438 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) [제대로 알려주는 AI 프롬프트 엔지니어링(2편)] 왜 AI를 쓸때 앞에 중요한 내용을쓰는 ChatGPT나 제미나이 프롬프트를 공부하다 보면 항상 반복해서 등장하는 조언이 있습니다. 1. 중요한 건 앞에 써라 2. 결론부터 말해라 3. 역할 정의는 맨 처음에 넣어라 사실 이런팁은 많지만 이를 제대로 분석한 글은 별로없고 “이렇게 하면 잘 된다더라” 같은 정도로 마무리 됩니다. 사실 이건 우리가 사용하는 현행 LLM의 구조상, 앞에 있는 정보가 더 중요해질 수밖에 없는데요 이걸 풀어주는 사람이 별로 없어 오늘은 LLM과 트렌스포머 이론 이야기를 해보려 합니다. (https://www.threads.com/@specal1849/post/DTENAj-kzQQ)
+URL: https://www.threads.com/@specal1849/post/DTENAj-kzQQ
+- title: "(2) [제대로 알려주는 AI 프롬프트 엔지니어링(2편)] 왜 AI를 쓸때 앞에 중요한 내용을쓰는 ChatGPT나 제미나이 프롬프트를 공부하다 보면 항상 반복해서 등장하는 조언이 있습니다. 1. 중요한 건 앞에 써라 2. 결론부터 말해라 3. 역할 정의는 맨 처음에 넣어라 사실 이런팁은 많지만 이를 제대로 분석한 글은 별로없고 “이렇게 하면 잘 된다더라” 같은 정도로 마무리 됩니다. 사실 이건 우리가 사용하는 현행 LLM의 구조상, 앞에 있는 정보가 더 중요해질 수밖에 없는데요 이걸 풀어주는 사람이 별로 없어 오늘은 LLM과 트렌스포머 이론 이야기를 해보려 합니다." [url=https://www.threads.com/@specal1849/post/DTENAj-kzQQ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2.5만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e22]
+    - link [ref=e23]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:41" [ref=e24]: "2026-01-04"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "[제대로 알려주는 AI 프롬프트 엔지니어링(2편)]\n왜 AI를 쓸때 앞에 중요한 내용을쓰는 ChatGPT나 제미나이 프롬프트를 공부하다 보면\n항상 반복해서 등장하는 조언이 있습니다.1. 중요한 건 앞에 써라\n2. 결론부터 말해라\n3. 역할 정의는 맨 처음에 넣어라 사실 이런팁은 많지만 이를 제대로 분석한 글은 별로없고\n“이렇게 하면 잘 된다더라” 같은 정도로 마무리 됩니다.사실 이건 우리가 사용하는 현행 LLM의 구조상,\n앞에 있는 정보가 더 중요해질 수밖에 없는데요\n이걸 풀어주는 사람이 별로 없어 오늘은 LLM과 트렌스포머 이론 이야기를 해보려 합니다. 1/12"
+    - link [ref=e26]
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "168"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "33"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "61"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "75"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e39]
+    - link [ref=e40]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:41" [ref=e41]: "2026-01-04"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "미리 말씀드립니다 오늘 내용은 조금 어렵습니다.그래도 그만큼 중요하니 한번은 봐주세요 우선 사람들이 많이하는 오해부터 짚고가죠 AI는 문장을 의미로 그대로 읽지 않습니다.\n이해한다는 표현 자체를 어떻게 정의할꺼냐의 문제겠지만\n제 생각에는 현행기준 의미를 이해하는것은아닙니다.그러니 가장 기본적인 이야기부터 짚고 가죠.우리가 사용하는 모든 LLM의 원천기술 논문인 \nAttention Is All You Need로 이야기를 시작해봅시다.\nLLM은 트랜스포머 아키텍처 기반의 문장을 토큰시퀀스로 처리합니다.말이 어렵죠? 이걸 이해하기 공학적인 내용뺴고 쉬운말로 바꾸면 문장을 읽거나 이해하는게 아니라 \n문장을 잘게 쪼개 숫자로 바꾸고 \n그 숫자들의 관계를 계산하는것이죠 토큰 임베딩 QKV 메트릭스계산 이런 고루한 이론이 있지만 \n그걸 굳이 이해하실 필요는 없습니다.AI는 단어를 쪼개서 의미단위로 해석한다.\n이정도만 이해하셔고 넘어가 보자구요  2/12"
+    - button [ref=e43]
+    - button "미디어를 파노라마로 결합" [ref=e44]
+    - button [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "25"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "3"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e52]
+    - link [ref=e53]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e54]: "2026-01-04"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "그럼 이런질문이 나올법하죠 토큰을 해석 단어를 분해하는 거니까\n위치는 중요하지 않은 거 아닌가요?”합리적인 질문입니다.하지만 결론부터 말하면 \n소위말하는 Attention 자체에는 위치 개념이 없습니다.이를 조금 어렵게 설명하면 Self-Attention은 Query, Key, Value 간의 벡터 유사도 만 계산합니다.어렵죠? 직관적으로 말하면 벡터들의 집합과 계산 즉, 복잡한 수학계산으로 처리하는 것이죠 다만 여기 Position Encoding이란 말이 나오는데요 딱 한수식으로 정리해 보면 입력 벡터 = 토큰 임베딩 + 위치 정보\n이렇게 정의할수 있습니다.그러니까 소위 우리가 말하는 제미나이나 GPT는 \n“이미 위치 정보가 섞인 벡터를 받아 계산할 뿐이다”\n이거한문장만 기억하셔도 됩니다.결국 여기서 발생하는 이야기가\n문장 입력시 반드시 앞과 뒤가 생긴다는 점이죠  3/12"
+    - generic [ref=e56] [scrollable]:
+      - button [ref=e57]
+      - button "미디어를 파노라마로 결합" [ref=e58]
+      - button [ref=e59]
+    - button [ref=e60]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e61]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e62]:
+      - img "리포스트"
+    - button [ref=e63]:
+      - img "공유하기"
+  - generic [ref=e64]:
+    - link [ref=e65]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e66]
+    - link [ref=e67]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e68]: "2026-01-04"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "그럼 AI사용시 왜 앞에 중요한 정보를 둬야할까요?위치정보를 두는 시점에서\n모든 계산이 앞을 기준으로 순차적으로 수행된다 이렇게 생각하시면 이해가 되실법 합니다.On the Emergence of Position Bias in Transformers \n라는 연구에서 이를 수학적으로 풀었는데 핵심 만정리하면 \n“앞쪽 토큰은 먼저 계산되고 그 계산 결과는 뒤쪽 토큰 해석의 기준이 된다”그러니까 앞쪽이 뒤에 영향을 끼친다는 겁니다.초기에 목적을 던져주거나\n당신은 XX전문가 입니다 이런녀석들 기반으로\n뒤에 문장을 해석하기에 결국 어제 작성해뒀던 내용들과 연결이 되는겁니다.\n앵커링 베이시스 같은 평향성들이 초기프롬프트에 의해 결정되고\n그중에서도 선행문장에 조금더 가중치를 둔다 이것이 현행 GPT나 제미나이 같은 \nLLM이 가지는 한계라고 설명드릴수있겠죠  4/12"
+    - link [ref=e70]
+    - link [ref=e71]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e72]
+    - link [ref=e73]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 3일 토요일 오전 6:42" [ref=e74]: "2026-01-03"
+    - link "[제대로 알려주는 AI 프롬프트 테크닉(1편)] AI는 왜 내말을 까먹을까?쳇GPT, 제미나이를 강의를 하다보면 자주 듣게되는 말이 AI를 어르고 달래고 욕을하고 아무리 말해줘도 " [ref=e75]
+    - link [ref=e76]
+    - button [ref=e77]:
+      - img "좋아요"
+      - text: "88"
+    - button [ref=e78]:
+      - img "답글"
+      - text: "16"
+    - button [ref=e79]:
+      - img "리포스트"
+      - text: "32"
+    - button [ref=e80]:
+      - img "공유하기"
+      - text: "43"
+    - button [ref=e81]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e82]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e83]:
+      - img "리포스트"
+    - button [ref=e84]:
+      - img "공유하기"
+  - generic [ref=e85]:
+    - link [ref=e86]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e87]
+    - link [ref=e88]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e89]: "2026-01-04"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "물롭 비단 이론만의 이야기는 아닙니다 핵심은 이거죠\n그래서 이게 실제 성능에도 영향을주냐?Attention Basin: Why Contextual Position Matters in Large Language Models 라는 연구에따르면 같은 지시문을 앞에 둘 때, 중간에 둘 때, 뒤에 둘 때\n모델의 성능이 일관되게 달라진다는 것을 확인할수있으며 여기에 Train Short, Test Long논문에 따르면 LLM 학습시  비교적 짧은 문맥을 중심으로, 앞부분 토큰에 더 자주 노출되며 학습된다는 사실도 확인할수 있어요 그러니까 결과, 앞쪽 정보는 안정적으로 처리되고, \n뒤쪽 정보는 상대적으로 불안정해 진다 그렇기에 앞문장을 잘쓰는게 중요하다는거에요  5/12"
+    - button [ref=e91]
+    - button "미디어를 파노라마로 결합" [ref=e92]
+    - button [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e95]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e100]
+    - link [ref=e101]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e102]: "2026-01-04"
+    - button [ref=e103]:
+      - img "더 보기"
+    - text: "아래와 같은 기초이론을 이해하시는게 우선이긴한데 \n먼저 원칙을 잡아볼까요?규칙 1. 가장 중요한건 무조건 맨 앞에 규칙 2. 역할 정의는 ‘분위기’가 아니라 기준 프레임이다 규칙 3. 중요한 정보는 흩어놓지 않는다 규칙 4. 앞에 썼는데도 안 먹힐 때는? \n정확한문장을쓰지말고 단어를뺴자 이정도로 정리할수있겠습니다. 하나하나 봐보자구요  6/12"
+    - link [ref=e104]
+    - link [ref=e105]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e106]
+    - link [ref=e107]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 11월 2일 일요일 오후 2:51" [ref=e108]: "2025-11-02"
+    - link "돈에 미친사람이 직접 알려주는 프롬프트 기초 AI 수업을 하다 보면“아니, 이렇게까지 배워야 해요?” “진짜 너무 어려운데요?”이런 말은 종종 듣는 이야기이고, 내 수업이 어려운 " [ref=e109]
+    - link [ref=e110]
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "86"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "24"
+    - button [ref=e113]:
+      - img "리포스트"
+      - text: "34"
+    - button [ref=e114]:
+      - img "공유하기"
+      - text: "32"
+    - button [ref=e115]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e116]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e117]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e118]:
+      - img "공유하기"
+  - generic [ref=e119]:
+    - link [ref=e120]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e121]
+    - link [ref=e122]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e123]: "2026-01-04"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "규칙 1. 가장 중요한 제약은 무조건 맨 앞에 아래는 제가 요즘 자주쓰는 프롬프트 입니다.\n일반적으로 사람들이 많이쓰는 형태를 볼까요?강의를 나가보면 가장 흔하게 보이는 패턴입니다.아래 내용을 참고해서 글을 써줘.\n단, 너무 길면 안 되고 초보자도 이해할 수 있어야 하고\n마케팅 용도로 써야 해.보기에는 나쁘지 않아 보이지만\n이 경우 AI는  글을 써달라는 요청을 먼저 처리하고 \n제약 조건은 사후 조건으로 취급합니다.가장큰 문제는 구조에 따라 달라지는데 용도와 제약조건이 섞여있죠\n결국 배치의 구조화 자체가 덜 된것이죠 그럼 제대로 쓰려면요? 좋은 예 마케팅 용도의 글작성\n1.초보자를 대상\n2.간결하게 작성\n3.참고 자료는 문서확인 적절한 제약조건과 아래의 번호를 통해\n프레임을 두는 방식이라이해 하셔도 좋습니다. 7/12"
+    - link [ref=e125]
+    - link [ref=e126]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e127]
+    - link "2025년 12월 6일 토요일 오전 8:09" [ref=e128]: "2025-12-06"
+    - link "실무적 프롬프트는 어떤식으로 작성하는가?저는 글의 초안을 AI로 많이 뽑습니다. 클로드가 글을 잘쓰는것은 사실이나 사실 만족스러운 수준은 아니라 GPT 5.1에 많이 위임하는데요 " [ref=e129]
+    - link [ref=e130]
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "70"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e133]:
+      - img "리포스트"
+      - text: "27"
+    - button [ref=e134]:
+      - img "공유하기"
+      - text: "27"
+    - button [ref=e135]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e136]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e137]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e138]:
+      - img "공유하기"
+  - generic [ref=e139]:
+    - link [ref=e140]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e141]
+    - link [ref=e142]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e143]: "2026-01-04"
+    - button [ref=e144]:
+      - img "더 보기"
+    - text: "규칙 2. ROLE은 ‘분위기’가 아니라 기준 프레임이다 유명한 프롬프트 있죠?\n당신은 10년차 마케터입니다.사실 여기서 당신은 10년차 라는단어는 거의 효과가 없습니다.왜냐하면 역할이 계산 기준으로 \n충분히 구체적이지 않기 때문인데요 2025년 실험 연구\nWhy Contextual Position Matters in Large Language Models에서도\n초기 컨텍스트가 해석 방향을 고정하는데\n초기에 전혀 의미없는 단어가 2개나 들어가버렸죠?저라면 이렇게 쓸꺼에요\n“마케팅 분야의 전문가가 판매 증진을 목적으로 글작성\"10년차 전문가 이런 문장은 사실 크게의미\n없는 이유는 어떤식으로 해석할지 모르기 떄문입니다.이는 과거에는 효과가 있었다는 연구도 있지만\n최신모델인 5.2나 제미나이 3기준이기준으로는 효율이 떨어진다는이야가 주를 이루죠\n결국 핵심은 목적과 역할을 명백히 정의한 ROLE을 만들라는겁니다. 8/12"
+    - link [ref=e145]
+    - button [ref=e146]:
+      - img "좋아요"
+      - text: "15"
+    - button [ref=e147]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e148]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e149]:
+      - img "공유하기"
+      - text: "4"
+  - generic [ref=e150]:
+    - link [ref=e151]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e152]
+    - link [ref=e153]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:42" [ref=e154]: "2026-01-04"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "규칙 3. 중요한 정보는 흩어놓지 않는다 많은 분들이 하시는 실수중 하나가 구조화를 안한다는겁니다 너는 10년차 마케터야\n마케팅 관련한 글을쓰는데 잘쓰고 적당히 정리된글을써\n지금팔려는건 AI관련한 팁이야\n200자 정도로 글을 작성해줘 뭐가 문제인지 아시겠나요?이건 모델 입장에서 정보 간 거리(distance) 문제를 만듭니다.앞에서 다뤘듯, LLM은 앞쪽 정보를 기준으로 계산하고\n뒤쪽 정보는 불안정해집니다.그런데 제약조건과 세부사항들을 나눠서 배치하면\n성능이 떨어질 확률 이 높아진 다는것이죠 그렇기에 저같은경우\n- 역할및 목적\n- 핵심 제약 조건\n- 출력 형식 이런식으로 각정보를 한 블록으로 묶고 \n가장 중요하다 생각하는걸 앞부분에 배치하는 게 가장 안전합니다.물론 순서에 따라  성능이 달라지니 감각도 중요하구요  9/12"
+    - link [ref=e156]
+    - link [ref=e157]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e158]
+    - link "2025년 11월 27일 목요일 오전 6:53" [ref=e159]: "2025-11-27"
+    - link "프롬프트 프레임워크는 뭐가 중요한걸까?오늘의 이야기는 프롬프트 이야기를 조금더 해보려합니다.사실 일반인분들은 잘모를수 있지만 프롬프트에는 기본적인 방법론이 있습니다.Role-Tas" [ref=e160]
+    - link [ref=e161]
+    - button [ref=e162]:
+      - img "좋아요"
+      - text: "35"
+    - button [ref=e163]:
+      - img "답글"
+      - text: "5"
+    - button [ref=e164]:
+      - img "리포스트"
+      - text: "22"
+    - button [ref=e165]:
+      - img "공유하기"
+      - text: "11"
+    - button [ref=e166]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e167]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e168]:
+      - img "리포스트"
+    - button [ref=e169]:
+      - img "공유하기"
+  - generic [ref=e170]:
+    - link [ref=e171]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e172]
+    - link [ref=e173]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:43" [ref=e174]: "2026-01-04"
+    - button [ref=e175]:
+      - img "더 보기"
+    - text: "규칙 4. 앞에 썼는데도 안 먹힐 때는? 정확한문장을쓰지말고 단어를뺴자 이거이외에도 발생하는 문제가 \n- 프롬프트가 너무 길 때\n- 앞부분이 설명으로 희석될 때\n- 기준 문장이 묻힐 때 특히 이미지에서 이런 문제가 자주발생하는데\n이럴 때 가장 안정적인 구조는 이겁니다[한 줄 기준 요약]\n- 반드시 지켜야 할 조건A,B, C\n[상세 설명]\n- 배경 설명\n- 참고 정보 모델은 한 줄 요약을 기준으로 계산을 고정하고 \n그 뒤 설명을 보조 정보로 처리하는 방식이죠 예를들면 \n~~~~~한 사과그림을 그려보다는\n사과그림 ~~~~한 조건에 따라 이게 훨씬더 좋다는 겁니다.\n결국 계산 안정성 확보 전략을 써야하는것이죠  10/12"
+    - link [ref=e176]
+    - button [ref=e177]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e178]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e179]:
+      - img "리포스트"
+    - button [ref=e180]:
+      - img "공유하기"
+  - generic [ref=e181]:
+    - link [ref=e182]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e183]
+    - link [ref=e184]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:43" [ref=e185]: "2026-01-04"
+    - button [ref=e186]:
+      - img "더 보기"
+    - text: "프롬프트를 잘 쓴다는 말의 의미 뭐 솔직히 질문을 잘해야한다는 말이 많긴하지만 위에서 설명드린 지루하고 현학적인 기본적인 어텐션이나 트렌스포머 아키텍쳐에대한\n이해없이는 AI를 사용하는데 왜 이런문제가 발생하냐\n말할수 밖에 없습니다.물론 이거몰라도 알아서 잘 해야하는거 아니냐?이렇게 말씀하시면, 그걸 부정할수는 없죠\n다만 같은 엑셀이라도 어떻게 중요하잔아요 그렇기에 이런고려사항+금액문제가 들어가는 시점에서\n프롬프트 엔지니어링 이란 이름이 붙는것이죠 잘 쓴다는 말을 예쁘게, AI를 설득하는게아니라\n결국 모델이 어떤 기준으로 계산을 시작하게 할지를 \n정확히 설계하는 것이다 이런이야기를 하며 오늘의 글을 마칩니다  11/12"
+    - link [ref=e187]
+    - button [ref=e188]:
+      - img "좋아요"
+      - text: "12"
+    - button [ref=e189]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e190]:
+      - img "리포스트"
+    - button [ref=e191]:
+      - img "공유하기"
+  - generic [ref=e192]:
+    - link [ref=e193]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e194]
+    - link [ref=e195]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 1월 4일 일요일 오전 7:43" [ref=e196]: "2026-01-04"
+    - button [ref=e197]:
+      - img "더 보기"
+    - text: "참고문헌- Vaswani et al., Attention Is All You Need, 2017\n- Press et al., Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation, 2021\n- Wu et al., On the Emergence of Position Bias in Transformers, ICML 2025\n- Yi et al., Why Contextual Position Matters in Large Language Models, 2025"
+    - button "번역하기" [ref=e198]
+    - text: "12/12"
+    - link [ref=e199]
+    - button [ref=e200]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e201]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e202]:
+      - img "리포스트"
+    - button [ref=e203]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e204]
+    - listitem:
+      - link "개인정보처리방침" [ref=e205]
+    - listitem:
+      - link "쿠키 정책" [ref=e206]
+- button "만들기" [ref=e207]:
+  - img "만들기"
+[2m[ok | 6140ms][0m

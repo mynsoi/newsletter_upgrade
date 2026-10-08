@@ -1,0 +1,101 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI시대에는 직원을 무엇으로 평가할까? (https://infuture.stibee.com/p/714)
+- title: "AI시대에는 직원을 무엇으로 평가할까?" [url=https://infuture.stibee.com/p/714]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI시대에는 직원을 무엇으로 평가할까?2026. 7. 9."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 7월 9일  (No. 692)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI시대에는 직원을 무엇으로 평가할까?"
+  - table:
+    - table:
+      - table: "\"팀원이 생성형 AI를 써서 예전에는 일주일이나 걸리던 시장 조사 보고서 초안 10개를 단 하루 만에 만들어냈습니다. 개인 생산성이 10배나 뛰었죠! 앞으로는 인사평가를 할 때 직원들의 AI 툴 활용도와 산출물(Output)의 양을 핵심 지표로 삼으려고 합니다.\"\n\n많은 리더들이 비슷한 의견을 가질 것 같습니다. 'AI가 도입되었으니 직원이 얼마나 더 빠르고 많이 일하는지 측정해야 한다'거나 'AI 툴을 얼마나 자주, 잘 쓰는지가 곧 실력이다'라고 말하면 말이죠.\n\n그러나 AI 시대에는 산출물의 양과 속도, 혹은 ‘단순 툴 사용 빈도’로 직원을 평가했다가는 오히려 조직의 성과를 갉아먹습니다. AI가 10분 만에 일주일 치 업무량을 쏟아내는 지금, 단순 산출물의 양을 측정하는 것은 무의미합니다. 오히려 쏟아지는 AI의 결과물을 기계적으로 검토하고 감독하느라 직원들의 인지적 부하가 급증하는 소위 ‘AI 브레인 프라이(AI Brain Fry, 인공지능으로 인한 뇌 과부하)’ 현상만 가중될 뿐이죠.\n\n그렇다면 AI 시대에는 직원의 성과를 어떻게 측정하고 평가해야 할까요? 대부분의 전문가들은 ‘산출물(Output)에서 비즈니스 결과(Outcome)로’, 그리고 ‘기계적 효율에서 인간의 비판적 판단력으로’ 평가의 무게 중심을 완전히 옮겨야 한다고 조언합니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "좀더 구체적으로 말하면 이렇습니다.\n첫째, 단순 작업량이 아닌 실질적인 비즈니스 임팩트를 평가해야 합니다. 컨설팅업체 맥킨지는 AI의 진정한 가치를 측정하기 위해서는 기술적 성능이나 직원의 AI 도입률 자체보다 전략적 결과(Strategic outcomes)와 운영 핵심성과지표(Operational KPIs)에 집중해야 한다고 강조하는데요, 예를 들어 소프트웨어 개발자의 성과를 ‘작성한 코드 라인 수’나 ‘AI 코딩 어시스턴트 사용 시간’으로 평가해서는 안 됩니다. \n\n그 대신, ‘그가 다듬은 코드가 고객의 서비스 이탈률을 얼마나 낮추었는가’ 혹은 ‘시스템 장애 복구 시간을 얼마나 단축했는가’와 같은 최종 결과(Outcome)를 지표로 삼아야 합니다. AI가 아무리 많은 코드를 짜내도 그것이 고객 만족도 향상이나 비용 절감으로 이어지지 않는다면 그저 클라우드 컴퓨팅 비용을 낭비한 것에 불과하기 때문이죠.\n\n둘째, 'AI 활용 스킬' 자체가 아니라 'AI와 협업하며 발휘하는 인간 고유의 가치'를 평가해야 합니다. 글로벌 리서치 기업 가트너(Gartner)는 성과와 잠재력을 명확히 구분하지 않고 ‘AI 툴을 능숙하게 다루는 능력’ 그 자체에만 금전적 보상을 하면 정작 중요한 성과와 보상 간의 연결고리가 무너질 위험이 있다고 경고합니다.\n\n예를 들어, 고객 서비스(CS) 부서에서 AI 챗봇이 단순 문의를 모두 처리하게 되었다고 가정해 봅시다. 이때 상담원의 성과 지표는 '콜 처리 건수(속도와 양)'가 되어서는 안 됩니다. AI가 해결하지 못해 사람에게 넘어온 복잡하고 감정적인 문제에 대해 상담원이 얼마나 깊은 공감 능력을 발휘하여 고객의 마음을 돌려놓았는지가 평가의 핵심이 되어야 하죠. 기계가 만들어낸 초안에서 논리적 오류와 윤리적 리스크를 짚어내고, 조직의 맥락에 맞게 수정하는 ‘비판적 사고와 감독 능력’이 새로운 성과의 기준이 되어야 합니다.\n\nAI 시대의 성과 관리는 인간이 기계와 나란히 달려서 누가 더 빠르고 많은 것을 생산해 내는지 시합하는 방식으로 이루어져서는 안 됩니다. 직원들이 AI를 활용해 올바른 목적지에 도착했냐를 평가해야 하는 것이죠.\n\n혹시 여러분이 적용 받는 평가지표 가운데 작업량이나 속도에 해당되는 것이 있는지 살펴 보세요. 과연 그 지표가 여러분 비즈니스의 최종 목적(Outcome)과 직접적으로 맞닿아 있는지 질문해 보세요. AI시대에 과거에나 맞을 법한 지표로 평가하고 평가받고 보상이 결정되는 일은 없어야 함을 명심하기 바랍니다. (끝)\n\n*참고기사"
+        - link "https://www.mckinsey.com/capabilities/quantumblack/our-insights/from-promise-to-impact-how-companies" [ref=e9]
+        - link "https://www.gartner.com/en/newsroom/press-releases/2026-4-22-hr-leaders-must-evolve-pay-for-performa" [ref=e10]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 잘못된 지도라도 있는 게 나을까요?2026. 7. 8." [ref=e31]
+- link "다음 뉴스레터 장마철에 들으면 좋은 재즈 다섯곡 2026. 7. 10." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1211ms][0m

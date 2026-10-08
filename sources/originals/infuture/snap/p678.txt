@@ -1,0 +1,97 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI는 '창의력의 적' (https://infuture.stibee.com/p/678)
+- title: "AI는 '창의력의 적'" [url=https://infuture.stibee.com/p/678]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI는 '창의력의 적'2026. 5. 18."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 5월 18일  (No. 656)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI는 '창의력의 적'"
+  - table:
+    - table:
+      - table: "요즘 AI를 쓰지 않는 분은 거의 없을 겁니다. 최소한 제 주변인들은 \"AI에게 물어봐!\"라는 말을 상투적으로 내뱉을 정도로 AI에 친숙한데요, 알다시피 기획서 초안부터 이메일 작성, 심지어 아이디어 브레인스토밍까지 AI에게 맡기면 눈 깜짝할 사이에 훌륭한 결과물이 모니터에 나타나기 때문이겠죠. 예전 같으면 며칠 밤을 새웠을 일을 단 몇 분 만에 끝내고 나니 엄청난 쾌감이 드는 게 당연합니다.\n\n그러나 '얻는 게 있으면 잃는 게 있다'란 말은 AI에 대해서도 통하는 진리입니다. 생산성을 무한히 확대해주는 대신 우리의 창의성과 사고력을 은밀하게 퇴화시킬 수도 있으니까요.\n\nMIT 슬론 경영대학원의 시난 아랄(Sinan Aral) 교수 연구팀은 약 2,000개의 팀(인간-AI 혼합 팀과 인간으로만 구성된 팀)을 구성하여 마케팅 광고를 제작하게 하는 실험을 진행했습니다. 결과는 우리의 예상대로였습니다. 인간-AI 팀은 기존 방식보다 직원당 50%나 더 많은 광고를 만들어냈고, 텍스트의 품질도 더 높았으니까요. 전통적인 생산성 지표로만 보면 AI와의 협업팀의 완벽한 승리입니다."
+      - table
+  - table:
+    - table:
+      - table: "그러나 아랄 교수는 이런 승리에 뒷면에 숨겨진 위험을 경고합니다.\n\n첫째는 다양성의 붕괴(Diversity collapse)입니다. 실험에서 AI에 더 많이 의존할수록 사람들의 결과물은 놀라울 정도로 비슷해지는 경향을 보였습니다. AI는 인터넷에 공개된 방대한, 그러나 동일한'데이터를 학습했기 때문에 창의적인 작업에서 독창적인 '엣지'를 둥글게 만들어 안전하고 평준화된 결과만 뱉어내는 경향이 있습니다.\n\n이보다 더 치명적인 문제는 AI 증강의 함정(AI Augmentation Trap)입니다. 사람들은 내가 직접 할 수 있는 인지적 작업을 AI에게 아웃소싱하는 과정에서 자신이 그 일을 수행하는 데 필요한 본인의 기술을 잃어버리고 있습니다. 글쓰기를 AI에 전적으로 의존하는 직장인은 스스로 문장을 구성하는 유창성을 상실하고 마니까요. \n\n이런 현상은 이미 역량이 쌓인 시니어들보다 한창 '업무 근육'을 키워야 할 주니어 직원들에게서 훨씬 두드러지게 나타납니다. 스스로 생각하고 만드는 과정을 생략하면 장기적으로는 \"AI를 아예 도입하지 않았을 때보다 개인의 역량이 더 퇴보하는\" 끔찍한 역설에 직면하고 맙니다.\n\n그렇다면 여러분은 이 딜레마에 어떻게 대처해야 할까요? 두 가지 상황을 상상해 보십시오. 아랄 교수의 후속 연구에 따르면, 사용자의 성향을 그대로 모방하는 AI가 아니라 사용자와 '상호 보완적인' 성향을 갖도록 맞춤화된 AI와 짝을 이루었을 때 다양성 붕괴가 줄어들고 창의적 성과가 크게 개선되었습니다.\n\n다시 말해, 여러분이 먼저 거칠더라도 뼈대가 되는 아이디어를 스스로 치열하게 고민해 낸 다음, AI에게 \"내 아이디어의 논리적 허점을 찾아줘\"라거나 \"나와 완전히 반대되는 관점에서 내 기획을 비판해 줘\"라고 요청하는 것이 훨씬 좋다는 의미죠. AI를 '까다로운 스파링 파트너'로 활용해야 합니다.\n\nAI 창을 열기 전, 단 5분 만이라도 온전히 여러분의 머리와 손만으로 초안을 직접 만들어 보세요. 그런 다음 AI에게 피드백을 구하세요. 이 짧은 시간이 여러분의 사고력이 AI에게 잠식하는 걸 막아주는 강력한 방패가 될 겁니다. (끝)\n\n*참고논문 Ju, H., & Aral, S. (2025). Collaborating with ai agents: Field experiments on teamwork, productivity, and performance. arXiv preprint arXiv:2503.18238.\n\n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 AI는 '차별화의 적'2026. 5. 15." [ref=e29]
+- link "다음 뉴스레터 자아는 '머리'에 있을까요, '가슴'에 있을까요?2026. 5. 19." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1117ms][0m

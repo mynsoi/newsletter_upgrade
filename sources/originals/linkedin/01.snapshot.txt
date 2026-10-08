@@ -1,0 +1,135 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/hongsoo-kim-2bb23512_toss-ainative-ontology-share-7506149649385197569-AFHM/)
+URL: https://www.linkedin.com/posts/hongsoo-kim-2bb23512_toss-ainative-ontology-activity-7506149650547068928-kekB
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/hongsoo-kim-2bb23512_toss-ainative-ontology-share-7506149649385197569-AFHM/]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 5" [ref=e11]:
+        - link "알림, 새 알림 5" [ref=e12]: "5 알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "차별화를 통해 평균 2배 더 많은 기회 확보₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 27" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "HongSoo Kim님의 프로필 보기"
+      - link "HongSoo Kim• 2촌" [ref=e26]
+      - text: "CDAO @ Viva Republica (Toss) | Ph.D. in Distributed System | ex-Kakao, SK, Samsung"
+      - paragraph:
+        - text: "9월 17일 •"
+        - img "공개범위: 전 세계"
+      - link "HongSoo Kim 님 인증됨 프로필 2촌" [ref=e27]
+      - button "HongSoo Kim님 팔로우" [ref=e28]: "팔로우"
+      - button "HongSoo Kim 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "#2. 온톨로지는 검색이 아니라 실행이어야 합니다 AI-Native 금융을 향한 두 개의 축! 고객데이터 온톨로지와 사내지식 온톨로지 첫번째 축. 고객데이터 온톨로지, 숫자를 검증된 채로 말하게 하기 첫 번째 축은 마이데이터에서 시작했습니다. 고객의 자산, 소비, 대출 데이터를 다루고, 지난달 카드 지출이 얼마였지? 와 같은 질문에 정확한 숫자로 답해야 하는 영역입니다. 틀린 숫자는 틀린 답이 아니라 사고입니다.우리가 택한 구조는 시맨틱 레이어 온톨로지입니다. 테이블과 컬럼 위에 지표라는 노드를 올리고, 각 지표에 SQL 표현식, 계산 규칙, 동의어를 붙였습니다. 이 정의는 코드 저장소에서 YAML 스펙으로 관리되고, PR이 머지되면 다음 배치에서 자동으로 지식베이스에 반영됩니다. 별도 배포가 없습니다. 지표를 문서가 아니라 코드로 다루는 것, 이것이 첫 번째 원칙입니다.그 위에서 에이전트는 자연어 질문을 받아 온톨로지를 탐색하고, Text-to-SQL로 실제 데이터 웨어하우스(실제로는 표준마트로 처리하고 있고 StarRocks와 같은 서빙 레이어를 고민중)에 쿼리를 날려 검증된 값으로 답합니다. 결과는 숫자로 증명됩니다. 마이데이터 Text-to-SQL 정답률은 24.7%에서 시작해 74%, 87%, 그리고 지금은 95%까지 올라왔습니다. 학습에 쓰지 않은 사용자 75문항 골든셋에서도 85.9%가 나와, 특정 유저에 과적합된 것이 아니라 일반화된다는 것을 확인했습니다.더 중요한 발견은 그 다음이었습니다. 마이데이터에서 만든 하네스(프롬프트 골격, 도메인 컨텍스트, 도구 및 모델 전략, 골든셋 스켈레톤)를 결제 도메인에 그대로 포팅했더니, 기본 템플릿만으로 74% 수준의 정확도가 나왔습니다. 채팅 워크벤치, 골든셋 모니터링, 채점 로직이 모두 플랫폼에 공통으로 있기 때문에, 한 도메인에서 채점기가 개선되면 다른 도메인도 자동으로 함께 좋아집니다. 온톨로지가 도메인의 자산이 아니라 플랫폼의 자산이 되는 순간입니다. 팔란티어(?)가 부럽지 않은 매우 뿌듯한 순간이 아닐 수 없습니다 ㅎㅎㅎ 앞으로의 전략 방향은 세 가지입니다.첫째, 시맨틱 레이어의 표준화와 확장입니다. 마이데이터 및 결제에 이어 커머스, 광고 등 정형 파이프라인이 잘 갖춰진 도메인을 같은 스펙으로 올립니다. 지표로 분해되지 않는 리포트성 쿼리는 검증된 쿼리 노드로 분리해 함께 관리합니다. 목적별 하네스 템플릿(개인 단건 조회형, 지표 기반 진단형, 코호트 분석형)을 표준으로 두고, 코호트형에서는 금액 합계 및 평균을 금지하는 등 경계 정책을 템플릿 수준에서 강제하려고 합니다.둘째, 권한과 개인정보를 온톨로지 실행 경로에 내장하는 것입니다. 쿼리는 호출자의 계정 권한으로 실행되고, 도메인 시스템 계정으로 위임되며, 결정하지 못하면 거부합니다. 폴백은 없습니다. 자연어로 묻는다고 해서 원래 볼 수 없던 데이터가 보여서는 안 됩니다. 개인정보 가드레일은 에이전트의 선택 사항이 아니라 플랫폼의 기본값이어야 합니다.셋째, 사내 분석 도구에서 고객 대면 서비스로의 확장입니다. 지금 에이전트 그룹 구조는 질문 한 건에 1분 후반에서 2분이 걸립니다. B2C로 가려면 두 가지가 바뀌어야 합니다. 정해진 시나리오의 결과를 프리빌트해서 인메모리 캐시에서 100ms 이하로 꺼내는 것, 그리고 의사결정 트리 기반의 고정 질문 셋과 결정적 탐색을 바탕으로 깔고 그 위에 경량 모델을 얹는 것입니다. 자유 입력을 100% 수용하는 것은 불가능하다는 것을 인정하고, 들어오는 질문을 계속 수집해 의도 분류와 룰 및 패스를 고도화하며 커버리지를 넓혀가는 방식입니다. 금융소비자보호법상 직접 추천이 불가한 영역은 중개형으로 한정하고, 추천은 동의 유저에 한합니다. 데이터 최신성의 한계(정기수집 미동의 유저, 최대 1주일의 지연)는 모델이 아니라 UX로 커버해야합니다. 다음으로, 두번째 축인 사내지식 온톨로지는 다시 공유드리겠습니다. 토스는 전반적으로 AI-Native를 향해서 순항 중이라고 자신있게 말씀드리고 싶어요. 감사합니다."
+        - link "해시태그 보기: #toss" [ref=e30]: "#Toss"
+        - link "해시태그 보기: #ainative" [ref=e31]: "#AINative"
+        - link "해시태그 보기: #ontology" [ref=e32]: "#Ontology"
+        - link "해시태그 보기: #knowledgegraph" [ref=e33]: "#KnowledgeGraph"
+        - link "해시태그 보기: #semanticlayer" [ref=e34]: "#SemanticLayer"
+        - link "해시태그 보기: #aiagent" [ref=e35]: "#AIAgent"
+        - link "해시태그 보기: #dataplatform" [ref=e36]: "#DataPlatform"
+      - link [ref=e37]:
+        - image "이미지 보기"
+      - button "반응 버튼 상태: 반응 없음" [ref=e38]: "145"
+      - button "댓글" [ref=e39]
+      - button "퍼가기" [ref=e40]: "28"
+      - link "보내기" [ref=e41]
+      - link "반응 145" [ref=e42]:
+        - list:
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e43]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e44]
+      - button "GIF 선택 도구 열기" [ref=e45]
+      - button "사진 공유" [ref=e46]
+    - link [ref=e47]:
+      - link "성열 양 님의 반응: 추천" [ref=e48]
+      - link "Sungjin Kim 님의 반응: 추천" [ref=e49]
+      - link "Yongdam Kim 님의 반응: 추천" [ref=e50]
+      - link "Pilgoo Kang 님의 반응: 추천" [ref=e51]
+      - link "Hyeonmin Kang 님의 반응: 추천" [ref=e52]
+      - link "Donghee Kim 님의 반응: 추천" [ref=e53]
+      - link "Amy Li 님의 반응: 추천" [ref=e54]
+      - link "JiHeon Song 님의 반응: 추천" [ref=e55]
+      - link "반응 모두 보기" [ref=e56]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e57]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e58]
+      - link "웹접근성" [ref=e59]
+      - link "고객센터" [ref=e60]
+      - button "개인정보와 약관" [ref=e61]
+      - link "광고 선택" [ref=e62]
+      - link "광고" [ref=e63]
+      - button "비즈니스서비스" [ref=e64]
+      - link "LinkedIn 앱 다운로드" [ref=e65]
+      - link "더보기" [ref=e66]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[2m[ok | 4056ms][0m

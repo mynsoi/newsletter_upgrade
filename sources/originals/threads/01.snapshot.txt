@@ -1,0 +1,192 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) [덕테이프 테스트 노션공유] 덱테이프 테스트한거 대충 60건정도 프롬프트 공유입니다. 지인이 오늘 아침에 출근하자마자 GPT 덕테이프글 복사하고 있다는 슬픈 신고를 받았습니다.. 지인왈 슬렉에 제글올라왔고 팀장님이 그거보고 회사에서 프롬프트 정리해서 올리라는 소리듣고 맨탈이 나가버렸습니다 이러네요 걍 노션달라그래요 정리된 데이터 달라하면 되잔아... 어차피 정출아니라 테스트니까 걍 전자책느낌으로 보십셔 프롬프트 다정리해서 아래쪽에 달아뒀습니다. 허락했으니가 당당하게 쓰세요 (https://www.threads.com/@specal1849/post/DXLFMvmkpUW)
+URL: https://www.threads.com/@specal1849/post/DXLFMvmkpUW
+- title: "(2) [덕테이프 테스트 노션공유] 덱테이프 테스트한거 대충 60건정도 프롬프트 공유입니다. 지인이 오늘 아침에 출근하자마자 GPT 덕테이프글 복사하고 있다는 슬픈 신고를 받았습니다.. 지인왈 슬렉에 제글올라왔고 팀장님이 그거보고 회사에서 프롬프트 정리해서 올리라는 소리듣고 맨탈이 나가버렸습니다 이러네요 걍 노션달라그래요 정리된 데이터 달라하면 되잔아... 어차피 정출아니라 테스트니까 걍 전자책느낌으로 보십셔 프롬프트 다정리해서 아래쪽에 달아뒀습니다. 허락했으니가 당당하게 쓰세요" [url=https://www.threads.com/@specal1849/post/DXLFMvmkpUW]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.8만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e22]
+    - link [ref=e23]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 4월 16일 목요일 오전 9:53" [ref=e24]: "2026-04-16"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "[덕테이프 테스트 노션공유]덱테이프 테스트한거 대충 60건정도 프롬프트 공유입니다.지인이 오늘 아침에 출근하자마자 GPT 덕테이프글 복사하고 있다는 \n슬픈 신고를 받았습니다..지인왈 슬렉에 제글올라왔고 팀장님이 그거보고\n회사에서 프롬프트 정리해서 올리라는 소리듣고\n맨탈이 나가버렸습니다 이러네요 걍 노션달라그래요 정리된 데이터 달라하면 되잔아...어차피 정출아니라 테스트니까 걍 전자책느낌으로 보십셔\n프롬프트 다정리해서 아래쪽에 달아뒀습니다.허락했으니가 당당하게 쓰세요  1/2"
+    - generic [ref=e26] [scrollable]:
+      - button [ref=e27]
+      - button "미디어를 파노라마로 결합" [ref=e28]
+      - button [ref=e29]
+    - button [ref=e30]:
+      - img "좋아요"
+      - text: "262"
+    - button [ref=e31]:
+      - img "답글"
+      - text: "35"
+    - button [ref=e32]:
+      - img "리포스트"
+      - text: "87"
+    - button [ref=e33]:
+      - img "공유하기"
+      - text: "70"
+    - button "정렬더 보기" [ref=e34]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e35]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e36] [focused]
+    - button "미디어 첨부" [ref=e37]
+    - button "GIF 추가" [ref=e38]
+    - button "작성 도구 확장" [ref=e39]
+  - generic [ref=e40]:
+    - link [ref=e41]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e42]
+    - link [ref=e43]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 4월 16일 목요일 오전 9:53" [ref=e44]: "2026-04-16"
+    - button [ref=e45]:
+      - img "더 보기"
+    - link "fascinated-alley-b43.notion.site/34386…" [ref=e46]
+    - text: "2/2"
+    - link "fascinated-alley-b43.notion.site 덕테이프 테스트문서 | Notion" [ref=e47]
+    - button [ref=e48]:
+      - img "좋아요"
+      - text: "48"
+    - button [ref=e49]:
+      - img "답글"
+    - button [ref=e50]:
+      - img "리포스트"
+      - text: "22"
+    - button [ref=e51]:
+      - img "공유하기"
+      - text: "25"
+  - generic [ref=e52]:
+    - link [ref=e53]:
+      - image "darkest_alex님의 프로필 사진"
+    - link "darkest_alex" [ref=e54]
+    - link "2026년 4월 17일 금요일 오전 1:12" [ref=e55]: "2026-04-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e56]:
+      - img "더 보기"
+    - text: "나도.... 나도 줘 나도!!!"
+    - link [ref=e57]:
+      - image "darkest_alex님의 프로필 사진"
+    - link "darkest_alex" [ref=e58]
+    - link [ref=e59]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 4월 17일 금요일 오전 12:46" [ref=e60]: "2026-04-17"
+    - link "일어나!! 나 덕테이프도 줘야지! 이게뭐야!! Opus 4.7 도 나왔대!! 뭐하는거야!! 일어나!!!" [ref=e61]
+    - link [ref=e62]
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e65]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e66]:
+      - img "공유하기"
+    - button [ref=e67]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e68]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e69]:
+      - img "리포스트"
+    - button [ref=e70]:
+      - img "공유하기"
+  - generic [ref=e71]:
+    - link [ref=e72]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e73]
+    - link "2026년 4월 17일 금요일 오전 1:36" [ref=e74]: "2026-04-17"
+    - text: "작성자"
+    - button [ref=e75]:
+      - img "더 보기"
+    - text: "자다일어낫는데 뭔일이야"
+    - button [ref=e76]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e77]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e78]:
+      - img "리포스트"
+    - button [ref=e79]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e80]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e81]
+    - listitem:
+      - link "개인정보처리방침" [ref=e82]
+    - listitem:
+      - link "쿠키 정책" [ref=e83]
+- button "만들기" [ref=e84]:
+  - img "만들기"
+[2m[ok | 4235ms][0m

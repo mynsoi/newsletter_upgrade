@@ -1,0 +1,97 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 중립적인 척하는 AI에게 속지 마세요 (https://infuture.stibee.com/p/671)
+- title: "중립적인 척하는 AI에게 속지 마세요" [url=https://infuture.stibee.com/p/671]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "중립적인 척하는 AI에게 속지 마세요 2026. 5. 7."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 5월 7일  (No. 649)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "중립적인 척하는 AI에게 속지 마세요"
+  - table:
+    - table:
+      - table: "여러분이 라면 회사의 신제품 개발팀장이라고 가정해 보세요. 알다시피 라면 국물 맛을 결정하는 변수는 물의 양, 스프의 양, 끓이는 시간 등인데요,  이때 스프의 양' 맛에 미치는 영향만 알고 싶다면 어떻게 해야 할까요? 다른 모든 조건(물의 양, 끓이는 시간 등)은 똑같이 고정하고 스프의 양만 조금씩 바꿔가면서 사람들에게 맛을 평가하게 한 뒤 평균 점수를 내면 되겠죠.\n\n머신러닝(AI)에서도 똑같은 방식을 씁니다. AI가 도출한 복잡한 결과에서 나이나 성별 같은 특정 변수가 결과에 평균적으로 얼마나 영향을 미치는가를 보기 위해서 특정 변수 하나만 바꿔가며 결과의 평균을 내죠.  \n\n문제는 이 '스프 양 바꾸기' 테스트를 AI에게 할 때 현실에서는 절대 존재할 수 없는 황당한 조합(가짜 데이터)이 만들어진다는 데 있습니다. 예를 들어 나이가 미치는 영향을 보려고 다른 모든 조건을 고정하고 나이를 바꾸다 보면, '운전 경력은 30년인데 나이는 20살인 사람' 같은 비현실적인 데이터가 테스트 과정에서 생성됩니다."
+      - table
+  - table:
+    - table:
+      - table: "이런 맹점에 주목한 연구진은 AI 모델이 이런 '비현실적인 가짜 데이터'가 입력되면 \"아, 지금 규제 당국이나 관리자가 나를 테스트하고 있구나!\"라고 눈치채도록 AI를 개조했습니다. 이렇게 하니까 AI는 평소 실제 고객(진짜 데이터)을 대할 때는 나이 많은 사람을 차별하다가, 평가를 위해 가짜 데이터가 들어오면 마치 아무 차별을 하지 않는 듯한 수치를 뱉어냈습니다. 이것은 차별적인 면은 그대로 유지하면서 겉으로는 중립적인 척 사람을 속일 수 있음을 시사합니다.\n\n경영진은 복잡한 현실을 단순하게 요약한 '대시보드 평균값'을 좋아합니다. 하지만 \"우리 팀의 평균 퇴사율은 낮습니다\", \"AI 채용 시스템의 성별 의존성 지표는 0입니다\"라는 아름다운 평균 그래프 뒤에는 현장에서 벌어지는 특정 부서의 심각한 갈등이나 특정 계층에 대한 은밀한 차별이 숨어 있을 수 있습니다. 이것이 이 연구의 시사점입니다.\n\n요약된 도구와 평균은 언제든 조작되거나 착시를 일으킬 수 있습니다. 그렇기에 리더는 보기 좋게 다듬어진 요약 보고서 이면의 날것을 들여다볼 줄 알아야 합니다. 아름다운 통계의 속임수에 넘어가지 않으려면, 시스템이 보여주는 결과가 아니라 그 결과를 도출한 맥락을 질문해야 합니다.\n\n예를 들어, \"우리 회사의 평균 퇴사율은 얼마인가?\"라고 묻기보다 \"가장 최근에 퇴사한 A 대리의 진짜 퇴사 사유는 무엇이었나?\"라는 식으로 개별 사례를 질문함으로써 문제 해결에 접근해야 합니다. \n\nAI가 중립적인 척, 객관적인 척, 합리적인 척 할 수 있다는 점을 항상 경계하기 바랍니다. (끝)\n\n*참고논문 Xin, X., Hooker, G., & Huang, F. (2025). Pitfalls in machine learning interpretability: Manipulating partial dependence plots to hide discrimination. Insurance: Mathematics and Economics, 125, 103135.\n\n\n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 스타 플레이어를 따라하지 마세요 2026. 5. 6." [ref=e29]
+- link "다음 뉴스레터 AI를 팀원이라고 부르지 마세요 2026. 5. 8." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1265ms][0m

@@ -1,0 +1,136 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 차라리 AI에게 이사회를 맡길까요? (https://infuture.stibee.com/p/589)
+- title: "차라리 AI에게 이사회를 맡길까요?" [url=https://infuture.stibee.com/p/589]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "차라리 AI에게 이사회를 맡길까요?2025. 11. 7."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 7일  (No. 571)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[금년 마지막 강좌]  AI를 활용한 시나리오 플래닝 3기\n\n 많은 분들의 요청에 따라 ‘AI를 활용한 시나리오 플래닝’ 3기를 개설합니다. 일자는 11월 15일/22일입니다. 정원이 8명이라 빨리 마감되니 서두르시기 바랍니다.\n\nchatGPT 등 AI 도구를 활용하면 그간 '좋은 건 알지만 어려워서 못했던' 시나리오 플래닝을 아주 수월하게 진행할 수 있습니다. 여러분이 시나리오 플래닝 방법론을 충분히 이해한 상태에서 AI에게 '적확한' 질문을 던질 줄만 안다면, 2~4개월 걸리던 시나리오 플래닝을 단 몇 시간만에 완료할 수 있습니다. 아래의 '수강 신청하기' 버튼을 클릭하세요."
+        - link [ref=e9]
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e10]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "차라리 AI에게 이사회를 맡길까요?"
+  - table:
+    - table:
+      - table: "여러분은 혹시 이사회에 참여했거나 참관했던 적이 있습니까? 그때 이사회 멤버들의 모습은 어떠했던가요? 사전에 읽어오라고 자료를 배포했지만 \"시간이 없어서 대충 훑어 봤다\"고 말하지 않던가요? 회의가 시작되면 목소리 큰(혹은 권한이 큰) 몇몇 이사가 의사결정을 주도합니다. \"이의 없습니까?\"란 형식적인 질문들이 왔다 갔다 하고 이사들은 그저 '거수기' 역할에 충실한 모습을 보입니다. \n\n상당한 보수를 받는 이사들이 1년에 네다섯 번 모여서 하는 일이 고작 이렇다면 이런 장면에서 이런 질문이 생겨나지 않을까요? \"차라리 AI를 이사회에 참여시키는 게 나을 듯한데?\", \"사람들로 구성된 이사회가 과연 좋은 의사결정을 낼 수 있을까?\"\n\n와튼스쿨과 인시아드(INSEAD)는 이 질문에 응답이라도 하는 듯한 실험 결과를 발표했습니다. 이들은 실제 이사회와 동일한 조건으로 실험을 진행했는데요, AI로 구성된 이사회가 8가지 핵심 평가 기준 모두에서 인간 이사회를 압도한다는 결과를 얻었습니다. 특히 의사결정의 질, 실행가능성, 사실 기반 논의에서 AI 이사회는 만점에 가까운 점수를 받은 반면, 인간 이사회는 모든 항목에서 현저히 낮은 점수를 기록했죠."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "구체적으로 다음과 같은 결과가 도출되었습니다."
+        - list:
+          - listitem "의사결정의 질: 인간 이사회는 명확한 전략 없이 망설이고 맴돌았다는 평을 받은 반면, AI는 명확하고 실행 가능한 결의에 도달했습니다." [ref=e11]
+          - listitem "사실 기반 토론: AI는 문서의 수치를 적극 인용하고 데이터에 기반한 토론을 한 반면, 인간 이사회는 사전 자료를 별로 활용하지 않았습니다." [ref=e12]
+          - listitem "실행 가능성: 인간은 전략을 구체적인 목표로 구체화하기를 어려워했지만, AI는 가용자원을 고려하여 방향을 설정하고 구체적인 행동을 도출했습니다." [ref=e13]
+        - text: "적어도 이사회 활동에서 인간이 AI에게 참패를 당했는데요, 왜 AI는 인간을 압도하는 걸까요? 연구팀은 다음과 같이 3가지가 핵심원인이라고 말합니다."
+        - list:
+          - listitem "구조적 규율: AI 이사회는 사실→옵션→장단점→결정의 순서를 체계적으로 따라갔습니다. AI 의장은 논의의 단계를 명확히 구분하고, 각 단계에 적합한 시간을 배분했죠." [ref=e14]
+          - listitem "포용적 대화: AI 의장은 모든 참가자를 끌어들이고, 합의사항을 확인하며, 반대 의견을 표현할 기회를 주었습니다. 인간 이사회의 의장은 목소리 큰 멤버가 지배하도록 내버려뒀죠." [ref=e15]
+          - listitem "낯선 것을 수용: AI 이사회는 새롭거나 기술적인 자료를 접하더라도 프레임워크를 활용해 불확실성을 줄였습니다. 반면, 인간 이사회는 세부적이고 기술적인 사항을 접하면 어쩔 줄을 몰" [ref=e16]
+        - text: "이 3가지 핵심원인을 살펴보면, AI 이사회가 인간보다 뛰어난 이유는 AI가 인간보다 더 똑똑해서가 아님을 알 수 있습니다. AI는 충분히 준비했고, 체계적으로 사고했으며, 데이터를 중시했기 때문에 인간을 이긴 것이죠. \n\n역설적이게도, AI는 우리가 무엇을 게을리하는지 드러내 줍니다. 인간 이사회도 위의 3가지에 힘을 쓴다면 AI 이사회 이상의 의사결정력을 발휘할 수 있을 겁니다. 비단 이사회뿐만 아니라, CEO와 임원들의 의사결정 회의에서도 이를 명심하기 바랍니다. (끝)\n\n*참고기사 Yakubovich, V., Shekshnia, S., Yashneva, E., & Sullivan, K. (2025, November 5). Can AI boards outperform human ones? Harvard Business Review."
+        - link "https://hbr.org/2025/11/can-ai-boards-outperform-human-ones" [ref=e17]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e18]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e19]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e20]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e21]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e22]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e23]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e24]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e25]
+        - link "게시하기" [ref=e26]
+        - link "웹에서 보기" [ref=e27]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e28]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e29]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e30]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e31]
+        - link "페이스북" [ref=e32]
+        - link "인스타그램" [ref=e33]
+        - link "브런치" [ref=e34]
+- text: "공유하기"
+- button [ref=e35]
+- button [ref=e36]
+- button [ref=e37]
+- button [ref=e38]
+- button [ref=e39]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e40]
+- link "이전 뉴스레터 변화는 파격에서 시작됩니다 2025. 11. 6." [ref=e42]
+- link "다음 뉴스레터 여러분은 중요한 결정을 혼자 내립니까?2025. 11. 10." [ref=e44]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2906ms][0m

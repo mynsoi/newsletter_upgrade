@@ -1,0 +1,175 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) "AI 티 좀 안 나게 해줘" 이렇게 시켜도 안 바뀝니다. AI는 티가 뭔지 모르거든요. 그래서 AI slop의 통계치를 11개 카테고리 X 62개 유형으로 분석하고, 다시 이걸로 스킬을 만들었습니다. 근데 스킬을 쓰기 전에 꼭 아셔야 할 게 있어요. 👇 (https://www.threads.com/@dddesign.io/post/DbS3lzBlnSO)
+URL: https://www.threads.com/@dddesign.io/post/DbS3lzBlnSO
+- title: "(2) "AI 티 좀 안 나게 해줘" 이렇게 시켜도 안 바뀝니다. AI는 티가 뭔지 모르거든요. 그래서 AI slop의 통계치를 11개 카테고리 X 62개 유형으로 분석하고, 다시 이걸로 스킬을 만들었습니다. 근데 스킬을 쓰기 전에 꼭 아셔야 할 게 있어요. 👇" [url=https://www.threads.com/@dddesign.io/post/DbS3lzBlnSO]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2.2천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "dddesign.io님의 프로필 사진"
+    - link "dddesign.io" [ref=e22]
+    - img "인증된 계정"
+    - button "게시물이 페디버스에 공유되었습니다" [ref=e23]:
+      - img "게시물이 페디버스에 공유되었습니다"
+    - link "2026년 7월 27일 월요일 오후 8:34" [ref=e24]: "2026-07-27"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "\"AI 티 좀 안 나게 해줘\"이렇게 시켜도 안 바뀝니다.\nAI는 티가 뭔지 모르거든요.그래서 AI slop의 통계치를\n11개 카테고리 X 62개 유형으로 분석하고,\n다시 이걸로 스킬을 만들었습니다.근데 스킬을 쓰기 전에 꼭 아셔야 할 게 있어요.\n👇 1/4"
+    - generic [ref=e26] [scrollable]:
+      - button [ref=e27]
+      - button "미디어를 파노라마로 결합" [ref=e28]
+      - button [ref=e29]
+    - button [ref=e30]:
+      - img "좋아요"
+      - text: "34"
+    - button [ref=e31]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e32]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e33]:
+      - img "공유하기"
+      - text: "9"
+    - button "정렬더 보기" [ref=e34]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e35]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e36] [focused]
+    - button "미디어 첨부" [ref=e37]
+    - button "GIF 추가" [ref=e38]
+    - button "작성 도구 확장" [ref=e39]
+  - generic [ref=e40]:
+    - link [ref=e41]:
+      - image "dddesign.io님의 프로필 사진"
+    - link "dddesign.io" [ref=e42]
+    - img "인증된 계정"
+    - link "2026년 7월 27일 월요일 오후 8:34" [ref=e43]: "2026-07-27"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e44]:
+      - img "더 보기"
+    - text: "[금지어를 늘린다고 해결될 문제가 아닙니다]보라 그라디언트 쓰지 말라고 하면 에메랄드 그린이 옵니다. 인디고까지 막으면 그다음은 크림 배경에 세리프 제목, 세이지 그린 액센트고요.요즘 \"AI 안 같아 보이는\" 조합으로 도는 그 팔레트가 정확히 그 자리입니다. 보라를 피한 선택이 또 하나의 기본값이 된 겁니다.금지어를 하나 늘렸을 뿐, 색을 왜 그걸로 정했는지는 여전히 없습니다.*먼저 해볼 것\n지금 화면의 액센트 색을 왜 골랐는지 한 줄로 적어보세요. \"브랜드가 초록이라서\"면 통과입니다. 안 써지면 그 색은 제가 아니라 모델이 고른 겁니다.증상을 하나씩 지우는 방식이 왜 안 끝나는지, 여기서 갈립니다.\n👇 2/4"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "5"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e49]:
+      - img "공유하기"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "dddesign.io님의 프로필 사진"
+    - link "dddesign.io" [ref=e52]
+    - img "인증된 계정"
+    - link "2026년 7월 27일 월요일 오후 8:34" [ref=e53]: "2026-07-27"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "[62개에 원인을 붙여보니 네 갈래로 모였습니다]- 디자인 대상을 충분히 설명 못할 때: AI가 빈칸을 평균으로 채웁니다\n- 해석의 여지가 높은 언어 습관: \"모던하게\"는 아무것도 정해준 게 아니에요\n- 명확한 기준이 없는 경우: 색과 간격을 어디에 맞출지가 없습니다\n- 확인하지 않고 무지성 수락: 글씨가 배경에 묻혀도 그대로 나갑니다 가장 많은 건 첫 번째였습니다. 설명하지 못한 자리를 평균이 채운 경우요.넷은 고치는 법이 서로 다릅니다. 대상 설명이 빠진 거면 대상부터 다시 써야 하고, 안 보고 수락한 거면 한 번 보면 끝납니다. 원인을 모르면 남의 처방을 내 화면에 갖다 씁니다.체크리스트가 안 듣는 게 아니라, 원인을 안 고르고 체크리스트부터 돌린 겁니다.\n👇 3/4"
+    - link [ref=e55]
+    - button [ref=e56]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e57]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "dddesign.io님의 프로필 사진"
+    - link "dddesign.io" [ref=e62]
+    - img "인증된 계정"
+    - link "2026년 7월 27일 월요일 오후 8:35" [ref=e63]: "2026-07-27"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "[슬롭은 지우는 게 아니라 원인을 없애는 겁니다]보라를 지우면 에메랄드가 오는 이유가 이겁니다. 결과물만 손보면 자리만 옮겨다녀요.원점으로 돌아가야 합니다. 이 색을 왜 골랐는지, 이 레이아웃이 왜 이 콘텐츠에 맞는지. 그 자리가 비어 있으면 몇 번을 고쳐도 결국 평균으로 돌아옵니다.바이브 디자인 랩은 늘 이 원론 쪽을 연구합니다. 유행하는 처방보다 원인 분류가 먼저라고 보거든요.62개 유형과 원인, 대신 쓸 패턴을 사전에 정리해뒀습니다."
+    - link "vibedesignlab.net/dicti…" [ref=e65]
+    - text: "점검 스킬은 여기서 바로 쓰실 수 있습니다."
+    - link "github.com/vibed…" [ref=e66]
+    - text: "4/4"
+    - link [ref=e67]
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e69]:
+      - img "답글"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "4"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e72]
+    - listitem:
+      - link "개인정보처리방침" [ref=e73]
+    - listitem:
+      - link "쿠키 정책" [ref=e74]
+- button "만들기" [ref=e75]:
+  - img "만들기"
+[2m[ok | 3659ms][0m

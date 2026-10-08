@@ -1,0 +1,124 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%E…)
+URL: https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%93%A4%EC%9D%84-ai%EC%99%80-%ED%95%A8%EA%BB%98-%ED%9A%8C%EA%B3%A0-%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7503753615577198593-SHL-
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%E…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 5" [ref=e11]:
+        - link "알림, 새 알림 5" [ref=e12]: "5 알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "차별화를 통해 평균 2배 더 많은 기회 확보₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 27" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "임삼열님의 프로필 보기"
+      - link "임삼열• 2촌" [ref=e26]
+      - text: "Product Guy"
+      - paragraph:
+        - text: "9월 10일 • 수정함 •"
+        - img "공개범위: 전 세계"
+      - link "임삼열 님 인증됨 프로필 2촌" [ref=e27]
+      - button "임삼열님 팔로우" [ref=e28]: "팔로우"
+      - button "임삼열 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "지난 5개월간 진행해 온 프로젝트들을  AI와 함께 회고 해보고 있습니다.1. 개인 프로젝트로는  • 올초 만든 '커리어-Knowledge-OS'를 버전업 하는 것과• 개인 'Trading-Knowledge-OS'를 새롭게 만드는 일 협업 프로젝트로는 • 증권 서비스, 팬덤 플랫폼 프로덕트 작업을 함께했습니다.이 과정을 통해서, (AI로 얼마나 많이 빠르게 만들 수 있는가? 보다는)AI로 일하는 구조를 시스템화 하고, 지속 가능하게 진화 시키는 실험을 해보고 싶었습니다.• 과거의 커리어 경험을 지식 DB로 정리하고, • AI 기반의 실행 시스템(OS)으로 만들어 • 새로운 가치와 프로덕트를 만드는데 지속 활용 가능한가?2.프로젝트의 설계부터 AI-OS로 진행 하면서 생각의 흐름과 대화들, 맥락과 결과물들이 기록으로 쌓이고 연결 됐습니다. (예전 같으면 이걸 정리하는 것부터 과부하가 생겨 더 진행해볼 엄두가 안났을거 같더군요.)그리고, 지금 이 과정들을 AI와 회고 하면서 각 단계마다 • 어떤 맥락에서 왜 그런 판단을 했고 결과는 어땠는지• 다시 선명하게 복기할 수 있다는 것,• 그 복기 결과를 재활용 가능한 지식으로 다시 쌓는 경험이  가장 새롭고 가치있게 느껴졌습니다.회고 과정에서 AI에게 냉철한 리뷰어 관점으로 신랄한 피드백도 받아 봤는데, 저에 대한 자기객관화에도 매우 큰 도움(+약간의 상처)이 됐습니다....;3.회고를 하며 다시 한번 느낀 점은 어떤 AI 모델과 엔지니어링 기법을 선택하느냐에 앞서,나 스스로가 문제를 풀고 가치를 만드는 일에 대한  구조와 판단 기준이 명확해야 한다는 것입니다.• 어떤 문제를 풀려는지• 무엇을 기준으로 판단할지• 왜 그런 관점으로 생각 하는지• 그래서, 기대하는 결과의 모습이 무엇인지 자신의 관점과 기준이 명확해야,AI에게 무엇을 어디까지 맡길지 정할 수 있고,내가 진짜 기대한 결과인지도 제대로 판단할 수 있었습니다. 그렇지 않으면 일단 만들고, AI의 결과물을 받아보고 나서야“이게 아니네?! 다시!”를 반복하게 되더군요.새로운 모델과 스킬, 하네스나 루프 엔지니어링 같은 기법에 몰두하다가, 어느새 AI 최적화의 반복 작업에서 헤어나오지 못하는 시행착오도 있었습니다.4.회사와 조직도 비슷하다고 생각 합니다.• 리더십 스스로가 회사의 중요 아젠다에 대한 관점과 판단 기준이 명확한가?• 구성원들이 그 이유와 맥락을 이해하고, 실행에 빠르게 활용할 수 있는 구조와 시스템이 갖춰져 있는가?AI를 어떤 관점으로 보느냐에 따라  다루는 질문의 범위도 달라진다고 생각합니다.• 실무의 생산성 도구로 본다면, 토큰 비용을 효율적으로 쓰면서 업무의 처리 속도와 품질을 높이는 것이 중요한 아젠다가 됩니다.• 반면, 조직의 기반 구조와 시스템으로 본다면, 중요 아젠다와 업무 맥락을 어떻게 효율적으로 연결하고, 조직 전체의 성과로 이어갈지까지로 질문이 넓어집니다.5. 상상 해보는건• 리더와 멤버들 각자의 업무 Agent가 매일 진행하는 일의 과정과 결과를 정리+리뷰 해주고• 각 Agent들이 서로 연결돼서 언제든지 필요한 맥락을 쉽고 정확하게 파악할 수 있다면,• 더 나아가서는, 그 연결 안에서 회고와 피드백까지도 가능하다면 어떤게 가능해질까? 입니다.그렇게 되면,• 리더는 현황을 파악하고, 보고 받는 시간을 줄이고• 멤버들은 리더의 의중과 맥락을 알아내느라 애쓰는 노력을 줄일 수 있지 않을까? 항상 병목이 되는 많은 회의도• 일의 현황 파악과 싱크를 위한 시간은 줄이고,• 이미 Agent를 통해 각자가 중요 맥락을 충분히 이해하고• 가장 중요한 아젠다의 TOBE 중심으로 전략을 토론하고 실행을 준비하는 과정에 집중할 수 있을거라는 기대도 해보게 됩니다."
+      - button "반응 버튼 상태: 반응 없음" [ref=e30]: "21"
+      - button "댓글" [ref=e31]
+      - button "퍼가기" [ref=e32]: "2"
+      - link "보내기" [ref=e33]
+      - link "반응 21" [ref=e34]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e35]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e36]
+      - button "GIF 선택 도구 열기" [ref=e37]
+      - button "사진 공유" [ref=e38]
+    - link [ref=e39]:
+      - link "성열 양 님의 반응: 추천" [ref=e40]
+      - link "HeeSeob Jeong 님의 반응: 추천" [ref=e41]
+      - link "Juseok Kim 님의 반응: 추천" [ref=e42]
+      - link "헌철 하 님의 반응: 응원" [ref=e43]
+      - link "준노 주 님의 반응: 통찰력" [ref=e44]
+      - link "Seungli Lim 님의 반응: 추천" [ref=e45]
+      - link "Dayoung K. 님의 반응: 추천" [ref=e46]
+      - link "Eunji Han 님의 반응: 추천" [ref=e47]
+      - link "반응 모두 보기" [ref=e48]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e49]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e50]
+      - link "웹접근성" [ref=e51]
+      - link "고객센터" [ref=e52]
+      - button "개인정보와 약관" [ref=e53]
+      - link "광고 선택" [ref=e54]
+      - link "광고" [ref=e55]
+      - button "비즈니스서비스" [ref=e56]
+      - link "LinkedIn 앱 다운로드" [ref=e57]
+      - link "더보기" [ref=e58]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]: "새로운 알림 5\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         알림"
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[2m[ok | 5499ms][0m

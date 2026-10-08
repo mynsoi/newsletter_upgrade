@@ -1,0 +1,161 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/pastorsara_aiinmarketing-productivity-smallbusiness-share-7501177203934629888-rGjS/)
+URL: https://www.linkedin.com/posts/pastorsara_aiinmarketing-productivity-smallbusiness-activity-7513118400613765120-rUad
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/pastorsara_aiinmarketing-productivity-smallbusiness-share-7501177203934629888-rGjS/]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 5" [ref=e11]:
+        - link "알림, 새 알림 5" [ref=e12]: "5 알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "차별화를 통해 평균 2배 더 많은 기회 확보₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 27" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Sara Pastor Ruprichova님의 프로필 보기"
+      - link "Sara Pastor Ruprichova• 3+촌" [ref=e26]
+      - text: "Fractional CMO | Brand, Marketing & Growth Strategy | I help founders and SMEs turn marketing investment into measurable growth | Clarity. Strategy. Impact."
+      - paragraph:
+        - text: "1일 •"
+        - img "공개범위: 전 세계"
+      - link "Sara Pastor Ruprichova 님 인증됨 프로필 3촌 이상" [ref=e27]
+      - button "Sara Pastor Ruprichova님 팔로우" [ref=e28]: "팔로우"
+      - button "Sara Pastor Ruprichova 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "The most useful thing I've done with AI this year has nothing to do with writing content. That part still takes me literally hours, and I'm trying to find ways to streamline it so I can balance it with client work. What I have done is automate the small, repetitive work that takes quite a bit of time each week. ☁️ Enquiry triage. New emails from three different inboxes get read, sorted, summarised, and replies are drafted. ☁️ Leads search and capture. Real enquiries land in HubSpot as draft records, and each morning a short list of companies that fit the businesses I work with is found, checked and added too.  ☁️ Review replies. New Google reviews get a drafted reply. Nothing goes live until I've approved the wording. ☁️ Content ideas. Multiple sources of information feed into Notion, summarised as ideas which I can work with. ☁️ Client invoicing. My tracked hours in Clockify turn into draft invoices, ready to check and send. ☁️ Weekly focus. Every week my calendars and Notion to-do list arrive as one summary of the week ahead. ☁️ Client calls prep. Before a call, past emails, Notion notes, CRM records and"
+        - link "http://Monday.com 열기" [ref=e30]: "Monday.com"
+        - text: "updates come together as one summary page. After it, Read AI's transcript and my notes become a summary in Notion: decisions, next steps, who owns what. With client consent to record.Client information runs through several of these, so I checked the data agreements on each tool and updated my privacy policy. Not legal advice, but"
+        - link "회사 보기: Legally She Can" [ref=e31]: "Legally She Can"
+        - text: "is where I'd start if you want to check your own setup. It has taken a bit of time to set this up, but I have loved the process of learning how to do it, and I'm experimenting with more things I can do, like family admin and household logistics. And no, this hasn't transformed my life (I'm not sitting on the beach working 2 hours a day unfortunately :D) but it has given me time back which I can use in other areas of my business."
+        - link "해시태그 보기: #aiinmarketing" [ref=e32]: "#aiinmarketing"
+        - link "해시태그 보기: #productivity" [ref=e33]: "#productivity"
+        - link "해시태그 보기: #smallbusiness" [ref=e34]: "#smallbusiness"
+        - link "해시태그 보기: #automation" [ref=e35]: "#automation"
+        - link "해시태그 보기: #whitecloudcommunications" [ref=e36]: "#whitecloudcommunications"
+        - link "회사 보기: White Cloud Communications" [ref=e37]: "White Cloud Communications"
+      - button "번역 표시" [ref=e38]
+      - link [ref=e39]:
+        - image "이미지 보기"
+      - button "반응 버튼 상태: 반응 없음" [ref=e40]: "29"
+      - button "댓글" [ref=e41]: "2"
+      - button "퍼가기" [ref=e42]
+      - link "보내기" [ref=e43]
+      - link "반응 29" [ref=e44]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e45]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e46]
+      - button "GIF 선택 도구 열기" [ref=e47]
+      - button "사진 공유" [ref=e48]
+    - link [ref=e49]:
+      - link "Paula Pérez Cardeñoso 님의 반응: 추천" [ref=e50]
+      - link "Ondřej Pecival 님의 반응: 추천" [ref=e51]
+      - link "Fernando Davila 님의 반응: 추천" [ref=e52]
+      - link "Liz Reed 님의 반응: 추천" [ref=e53]
+      - link "Lora Ruseva 님의 반응: 추천" [ref=e54]
+      - link "Anderson Luu 님의 반응: 추천" [ref=e55]
+      - link "Duane Jarrett 님의 반응: 추천" [ref=e56]
+      - link "Maria Albert 님의 반응: 추천" [ref=e57]
+      - link "반응 모두 보기" [ref=e58]
+    - button "관련순" [ref=e59]
+    - link [ref=e60]:
+      - image "Ashley Morris - Add LɨnkedIn to Notion님의 프로필 보기"
+    - link "Ashley Morris - Add LɨnkedIn to Notion 님 3촌 이상 inNotion co-founder: open Notion in the side panel an" [ref=e61]
+    - text: "1일"
+    - button "Ashley Morris - Add LɨnkedIn to Notion님 팔로우" [ref=e62]: "팔로우"
+    - button "Ashley Morris - Add LɨnkedIn to Notion 님의 댓글에 대한 옵션 더 보기" [ref=e63]
+    - text: "Automating tasks is smart, but the real magic happens when you use that saved time to innovate. Most people stop at efficiency, but creativity in how you engage clients is where the game shifts."
+    - button "번역 표시" [ref=e64]
+    - button [ref=e65]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e66]
+    - link [ref=e67]:
+      - image "Pavlina Eneva, PCC님의 프로필 보기"
+    - link "Pavlina Eneva, PCC 님 프리미엄 프로필 3촌 이상 Leadership Coach I Team Coach I Facilitator I Strategic HR Leade" [ref=e68]
+    - text: "1일"
+    - button "Pavlina Eneva, PCC님 팔로우" [ref=e69]: "팔로우"
+    - button "Pavlina Eneva, PCC 님의 댓글에 대한 옵션 더 보기" [ref=e70]
+    - text: "Thank you for sharing Sara!"
+    - button "번역 표시" [ref=e71]
+    - button [ref=e72]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e73]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e74]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e75]
+      - link "웹접근성" [ref=e76]
+      - link "고객센터" [ref=e77]
+      - button "개인정보와 약관" [ref=e78]
+      - link "광고 선택" [ref=e79]
+      - link "광고" [ref=e80]
+      - button "비즈니스서비스" [ref=e81]
+      - link "LinkedIn 앱 다운로드" [ref=e82]
+      - link "더보기" [ref=e83]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[2m[ok | 5542ms][0m

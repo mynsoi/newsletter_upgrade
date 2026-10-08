@@ -1,0 +1,363 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) 알아두면 재밋는사실 그거아세요 AI의 결과는 의외로 프롬프트 단어 하나에의해 크게 바뀝니다. 예를 들어 제작해 만들어 두가지는 다르고 요약해 분석해 나열해 작성해는 전혀 다른데요 이는 AI 이미지생성, 바이브코딩, 글쓰기 등등 모든부분에 적용되는 규칙입니다. 특히 특정단어에 의거해 결과가 크게바뀌다는 연구결과는 넘쳐나고 어떤식으로 작성해야 하는지 오늘은 이에대해 논해봅시다. (https://www.threads.com/@specal1849/post/DSB_BGTkt1M)
+URL: https://www.threads.com/@specal1849/post/DSB_BGTkt1M
+- title: "(2) 알아두면 재밋는사실 그거아세요 AI의 결과는 의외로 프롬프트 단어 하나에의해 크게 바뀝니다. 예를 들어 제작해 만들어 두가지는 다르고 요약해 분석해 나열해 작성해는 전혀 다른데요 이는 AI 이미지생성, 바이브코딩, 글쓰기 등등 모든부분에 적용되는 규칙입니다. 특히 특정단어에 의거해 결과가 크게바뀌다는 연구결과는 넘쳐나고 어떤식으로 작성해야 하는지 오늘은 이에대해 논해봅시다." [url=https://www.threads.com/@specal1849/post/DSB_BGTkt1M]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 9.3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e22]
+    - link [ref=e23]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 12월 9일 화요일 오후 2:29" [ref=e24]: "2025-12-09"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "알아두면 재밋는사실 그거아세요 AI의 결과는 의외로 \n프롬프트 단어 하나에의해 크게 바뀝니다.예를 들어\n제작해 만들어 두가지는 다르고\n요약해 분석해 나열해 작성해는 전혀 다른데요 이는 AI 이미지생성, 바이브코딩, 글쓰기\n등등 모든부분에 적용되는 규칙입니다.특히 특정단어에 의거해 결과가 크게바뀌다는 연구결과는\n넘쳐나고 어떤식으로 작성해야 하는지 오늘은 이에대해 논해봅시다. 1/5"
+    - link [ref=e26]
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "140"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "12"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "45"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "45"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e39]
+    - link [ref=e40]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 12월 9일 화요일 오후 2:29" [ref=e41]: "2025-12-09"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "아래는 매우간단한 형식으로 차이를 비교해 봤습니다.우선 제가 생각한건 우측인데요 사실상 굉장히큰 차이가 발생하죠?구조화된 프롬이 기본이란 사실은 뭐 더설명하면 입아픕니다.여기에 중요한 지점은 만들꺼야와 제작에서 끊어지는 해석이다르고 세부적으로 스펙을 제시한 부분이 다르기에\n전체 큰틀은 동일할 지언정 완전히 다른결과를 출력합니다. 2/5"
+    - link [ref=e43]
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+  - generic [ref=e48]:
+    - link [ref=e49]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e50]
+    - link [ref=e51]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 12월 9일 화요일 오후 2:29" [ref=e52]: "2025-12-09"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "프롬프트 배치순서의 중요성이 이제는 설명하기도 입이아픕니다.트렌스포머 아키텍쳐의 특성상 앞쪽에 가중치를 부여해서\n해석하는 부분이 달라지고 우선 중요하게 표현하고 싶은건\n앞으로 빼야한다 이건 여러번 명드렸죠?문제는 작성할때 고려해야할 사항이 여기서 끝이아닙니다. 3/5"
+    - link [ref=e54]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e55]
+    - link "2025년 11월 27일 목요일 오전 6:53" [ref=e56]: "2025-11-27"
+    - link "프롬프트 프레임워크는 뭐가 중요한걸까?오늘의 이야기는 프롬프트 이야기를 조금더 해보려합니다.사실 일반인분들은 잘모를수 있지만 프롬프트에는 기본적인 방법론이 있습니다.Role-Tas" [ref=e57]
+    - link [ref=e58]
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "35"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "5"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "22"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "11"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e69]
+    - link [ref=e70]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 12월 9일 화요일 오후 2:29" [ref=e71]: "2025-12-09"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "The Butterfly Effect of Altering Prompts\n라는 논문이 있습니다.프롬프트 끝의 공백 하나, 문장 부호 하나, 표현의 미세한 뉘앙스 차이만으로도 결과가 달라지는 현상, 이른바 나비효과라 불리는 녀석이죠 이 논문에서는, 거의 동일한 프롬프트에 극소한 변화를 줬을 뿐인데 출력 분포가 완전히 달라지는 현상이 반복적으로 관측된다는건데 여러번 설명드렸듯 AI가 본질적으로 확률 기반 토큰 생성 시스템이기 때문에 발생하는 결과로 작은 입력 변화가 다음 단어 선택 확률을 바꾸고, 그 누적이 전혀 다른 결과로 이어지는 구조죠. 4/5"
+    - link [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "5"
+    - button [ref=e75]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e80]
+    - link [ref=e81]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 12월 9일 화요일 오후 2:30" [ref=e82]: "2025-12-09"
+    - button [ref=e83]:
+      - img "더 보기"
+    - text: "하고 싶은 말은 단순해요 프롬프트를 잘 쓴다는 건, 말을 예쁘게 한다? 감성적이다 \n이런 뜻이 아니라 출력을 통제할 수 있는 구조를 설계한다는 의미입니다.무조건 메타프롬프트를 쓰지말라는 소리가 여기서 나오는겁니다.어떤 원칙을 고수하냐고요?\n저는 아래와 같은대원칙을 고수합니다.동사를 선택 — 요약인지, 분석인지, 생성인지\n목적 한문장 고정 — 무엇을 얻고 싶은가\n조건은 반드시 분리한다 — 제한, 금지, 포함 요소\n출력 형식을 끝에 붙인다 — 표, 글, 리스트, 코드 등 아마 아래구성을 보시면 아 이사람이 이렇게쓰는구나가 보이실겁니다. 5/5"
+    - link [ref=e84]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e85]
+    - link "2025년 12월 6일 토요일 오전 8:09" [ref=e86]: "2025-12-06"
+    - link "실무적 프롬프트는 어떤식으로 작성하는가?저는 글의 초안을 AI로 많이 뽑습니다. 클로드가 글을 잘쓰는것은 사실이나 사실 만족스러운 수준은 아니라 GPT 5.1에 많이 위임하는데요 " [ref=e87]
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "70"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e91]:
+      - img "리포스트"
+      - text: "27"
+    - button [ref=e92]:
+      - img "공유하기"
+      - text: "27"
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+      - text: "3"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e97]:
+    - link [ref=e98]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e99]
+    - link "2025년 12월 9일 화요일 오후 8:56" [ref=e100]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - text: "이게 사실 꽤 당연한 이야기거든요.\n사람에게도 밥 먹어 vs 밥 해먹어 vs 밥 사먹어 다 엄청 큰 차이가 있는데 말이죠."
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e103]:
+      - img "답글"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+  - generic [ref=e106]:
+    - link [ref=e107]:
+      - image "yeoamlog님의 프로필 사진"
+    - link "yeoamlog" [ref=e108]
+    - link "2025년 12월 9일 화요일 오후 7:59" [ref=e109]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "거기다 화용론적 접근까지 고려하면 🤓한글처럼 고맥락 언어를 사용할 때\ncode switching도 종종 써야되는 이유!"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e115]:
+    - link [ref=e116]:
+      - image "focusrefresh님의 프로필 사진"
+    - link "focusrefresh" [ref=e117]
+    - link "2025년 12월 9일 화요일 오후 3:31" [ref=e118]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e119]:
+      - img "더 보기"
+    - text: "공감합니다. Eval, analyze, generate, restructure, reorganize 이런 액션 단어들을 정확하게 쓰는 습관이 돼 있으면 (평소 사전 정의 잘 찾는 성격) 이런 도구 사용에 능숙해질 수 있습니다."
+    - button [ref=e120]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e121]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e122]:
+      - img "리포스트"
+    - button [ref=e123]:
+      - img "공유하기"
+  - generic [ref=e124]:
+    - link [ref=e125]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e126]
+    - link "2025년 12월 9일 화요일 오후 3:32" [ref=e127]: "2025-12-09"
+    - text: "작성자"
+    - button [ref=e128]:
+      - img "더 보기"
+    - text: "꽤 차이가 심한데 사람들이 모르더라구요\n특히 영어로 적을수록 차이진짜 심한데말이죠..."
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e133]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e134]:
+    - link [ref=e135]:
+      - image "dddesign.io님의 프로필 사진"
+    - link "dddesign.io" [ref=e136]
+    - img "인증된 계정"
+    - link "2025년 12월 9일 화요일 오후 4:37" [ref=e137]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e138]:
+      - img "더 보기"
+    - text: "오호..."
+    - button [ref=e139]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e140]:
+      - img "답글"
+    - button [ref=e141]:
+      - img "리포스트"
+    - button [ref=e142]:
+      - img "공유하기"
+  - generic [ref=e143]:
+    - link [ref=e144]:
+      - image "areungyeol님의 프로필 사진"
+    - link "areungyeol" [ref=e145]
+    - link "2025년 12월 9일 화요일 오후 8:52" [ref=e146]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e147]:
+      - img "더 보기"
+    - text: "자연어라매....!!"
+    - button [ref=e148]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e149]:
+      - img "답글"
+    - button [ref=e150]:
+      - img "리포스트"
+    - button [ref=e151]:
+      - img "공유하기"
+  - generic [ref=e152]:
+    - link [ref=e153]:
+      - image "hongppo_favorites님의 프로필 사진"
+    - link "hongppo_favorites" [ref=e154]
+    - link "2025년 12월 9일 화요일 오후 9:59" [ref=e155]: "2025-12-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e156]:
+      - img "더 보기"
+    - text: "오 신기합니다!"
+    - button [ref=e157]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e158]:
+      - img "답글"
+    - button [ref=e159]:
+      - img "리포스트"
+    - button [ref=e160]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e161]
+    - listitem:
+      - link "개인정보처리방침" [ref=e162]
+    - listitem:
+      - link "쿠키 정책" [ref=e163]
+- button "만들기" [ref=e164]:
+  - img "만들기"
+[2m[ok | 4717ms][0m

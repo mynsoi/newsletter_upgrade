@@ -1,0 +1,160 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jayyoungjunkim_ai-%EC%8B%9C%EB%8C%80%EC%97%90-%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8-%EB%94%94%EC%9…)
+URL: https://www.linkedin.com/posts/jayyoungjunkim_ai-%EC%8B%9C%EB%8C%80%EC%97%90-%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8-%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EB%8A%94-specialist%EC%9D%BC%EA%B9%8C-generalist%EC%9D%BC%EA%B9%8C-activity-7504411914492452864-GAgy
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jayyoungjunkim_ai-%EC%8B%9C%EB%8C%80%EC%97%90-%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8-%EB%94%94%EC%9…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 5" [ref=e11]:
+        - link "알림, 새 알림 5" [ref=e12]: "5 알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "차별화를 통해 평균 2배 더 많은 기회 확보₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 27" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Jay Youngjun Kim님의 프로필 보기"
+      - link "Jay Youngjun Kim• 2촌" [ref=e26]
+      - text: "Design Director · Educator | Product, AI and Brand Design"
+      - paragraph:
+        - text: "9월 12일 •"
+        - img "공개범위: 전 세계"
+      - link "Jay Youngjun Kim 님 2촌" [ref=e27]
+      - button "Jay Youngjun Kim님 팔로우" [ref=e28]: "팔로우"
+      - button "Jay Youngjun Kim 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "AI 시대에 프로덕트 디자이너는 specialist일까 generalist일까 AI 시대에 프로덕트 디자이너는 specialist가 되어야 할까, generalist가 되어야 할까. 요즘 이 질문을 자주 생각한다. 주니어 때는 내가 잘하는 걸 더 깊게 파는 게 중요하다고 생각했다. 화면을 잘 만들고, 사용자의 문제를 해결하고, 복잡한 서비스를 잘 정리하는 것만 해도 꽤 오랜 시간과 경험이 필요했다.시니어가 되고 나서는 생각이 조금 달라졌다. 디자인만 잘한다고 일이 잘 풀리는 건 아니었다. 비즈니스가 어떻게 돌아가는지도 알아야 했고, 데이터를 보기도 하고, 개발자와 어디까지 만들 수 있을지 이야기해야 했다. 브랜드나 콘텐츠까지 같이 고민해야 하는 일도 점점 많아졌다.그리고 사업을 시작하고 AI를 본격적으로 쓰면서 할 수 있는 일의 범위가 또 한 번 크게 넓어졌다. 예전에는 아이디어가 있어도 “이건 개발이 필요하니까” 하고 넘어갔던 것들을 이제는 내가 직접 만들어볼 수 있다. 리서치하고, 구조를 잡고, 글도 쓰고, 이미지도 만들고, 코드를 써서 실제로 돌아가는 것까지 만들어본다. 처음에는 이러다 결국 디자이너도 다 generalist가 되는 건가 싶었다.그런데 계속 써보니 오히려 반대에 가깝다는 생각이 든다. 할 수 있는 게 많아질수록 내가 뭘 잘하는지가 더 중요해진다. AI를 쓰면 이것저것 정말 많이 만들 수 있다. 문제는 뭘 만들어야 하는지, 지금 나온 게 좋은 건지, 어디까지 하고 뭘 버려야 하는지는 결국 내가 판단해야 한다는 거다.요즘 AI를 더 적극적으로 쓰면서 이걸 더 많이 느낀다. 내가 코드를 쓸 수 있게 됐다는 사실 자체는 사실 그렇게 중요하지 않은 것 같다. 프로덕트 디자이너로 오래 일하면서 쌓아온 감각이나 판단을 이제는 화면 디자인에서 끝내지 않고, 실제로 돌아가는 결과물까지 가져갈 수 있게 됐다는 게 더 크다. AI 때문에 내가 다른 사람이 됐다기보다, 원래 하던 일을 훨씬 멀리까지 해볼 수 있게 된 느낌에 가깝다.그래서 지금은 specialist냐 generalist냐 둘 중 하나를 고를 필요는 없다고 생각한다. 내가 잘하는 건 더 깊게 가져가고, 할 수 있는 범위는 계속 넓혀가면 된다. 프로덕트 디자인이 내 중심이라면 그 기준은 계속 단단하게 가져가되, 필요하면 개발도 하고 데이터를 보고 비즈니스나 브랜드까지 넘어갈 수 있어야 한다.모든 걸 잘하는 사람이 되어야 한다는 얘기는 아니다. 오히려 내가 확실히 잘하는 게 하나 있고, AI를 이용해서 그걸 다른 영역까지 가져갈 수 있는 사람이 더 강해질 것 같다. AI가 전문성을 없애는 게 아니라, 내가 가진 전문성을 예전보다 훨씬 넓게 써먹을 수 있게 해주는 쪽에 가깝다.결국 앞으로 프로덕트 디자이너의 차이는 AI 툴을 몇 개 쓰느냐보다, 자기만의 기준이 얼마나 단단한지, 그리고 그걸 어디까지 직접 해낼 수 있는지에서 나지 않을까."
+      - link [ref=e30]:
+        - image "이미지 보기"
+      - button "반응 버튼 상태: 반응 없음" [ref=e31]: "54"
+      - button "댓글" [ref=e32]: "2"
+      - button "퍼가기" [ref=e33]: "2"
+      - link "보내기" [ref=e34]
+      - link "반응 54" [ref=e35]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e36]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e37]
+      - button "GIF 선택 도구 열기" [ref=e38]
+      - button "사진 공유" [ref=e39]
+    - link [ref=e40]:
+      - link "종민 박 님의 반응: 추천" [ref=e41]
+      - link "형운 최 님의 반응: 추천" [ref=e42]
+      - link "Seyeon P. 님의 반응: 추천" [ref=e43]
+      - link "Jane Ryu 님의 반응: 추천" [ref=e44]
+      - link "Se-hyeon Jin 님의 반응: 추천" [ref=e45]
+      - link "Subin Ha 님의 반응: 추천" [ref=e46]
+      - link "TaeHyeong Kim 님의 반응: 추천" [ref=e47]
+      - link "경 주 님의 반응: 추천" [ref=e48]
+      - link "반응 모두 보기" [ref=e49]
+    - button "관련순" [ref=e50]
+    - link [ref=e51]:
+      - image "Minhee Yoon님의 프로필 보기"
+    - link "Minhee Yoon 님 인증됨 프로필 3촌 이상 Principal Design Systems Architect @ Liner · Design Systems · Design Tok" [ref=e52]
+    - text: "3주"
+    - button "Minhee Yoon님 팔로우" [ref=e53]: "팔로우"
+    - button "Minhee Yoon 님의 댓글에 대한 옵션 더 보기" [ref=e54]
+    - text: "공감합니다:) 영준님 잘 지내시죠?!"
+    - button [ref=e55]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 2"
+    - button "답장" [ref=e56]
+    - text: "1"
+    - link "반응 보기" [ref=e57]:
+      - list:
+        - listitem
+    - link "글쓴이가 반응한 횟수" [ref=e58]
+    - link [ref=e59]:
+      - image "Jay Youngjun Kim님의 프로필 보기"
+    - link "Jay Youngjun Kim 글쓴이 Design Director · Educator | Product, AI and Brand Design" [ref=e60]
+    - text: "3주"
+    - button "Jay Youngjun Kim 님의 댓글에 대한 옵션 더 보기" [ref=e61]
+    - paragraph:
+      - link "Minhee Yoon님의 프로필 보기" [ref=e62]: "Minhee Yoon"
+      - text: "민희님 저는 잘 지내고 있어요! 민희님도 잘 지내시죠?"
+    - button [ref=e63]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e64]
+    - link [ref=e65]:
+      - list:
+        - listitem
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e66]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e67]
+      - link "웹접근성" [ref=e68]
+      - link "고객센터" [ref=e69]
+      - button "개인정보와 약관" [ref=e70]
+      - link "광고 선택" [ref=e71]
+      - link "광고" [ref=e72]
+      - button "비즈니스서비스" [ref=e73]
+      - link "LinkedIn 앱 다운로드" [ref=e74]
+      - link "더보기" [ref=e75]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]: "새로운 알림 5\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         알림"
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[2m[ok | 4763ms][0m

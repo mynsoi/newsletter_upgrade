@@ -1,0 +1,115 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI는 '일잘러'가 아니라 '일못러'를 키운다 (https://infuture.stibee.com/p/569)
+- title: "AI는 '일잘러'가 아니라 '일못러'를 키운다" [url=https://infuture.stibee.com/p/569]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI는 '일잘러'가 아니라 '일못러'를 키운다 2025. 10. 13."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 10월 13일  (No. 553)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI는 '일잘러'가 아니라 '일못러'를 키운다"
+  - table:
+    - table:
+      - table: "혹시 \"AI 같은 첨단 도구는 이미 능력 있는 사람들이 더 잘 활용한다\"는 생각을 가지고 있나요? 마치 고성능 스포츠카가 프로 레이서의 손에서 진가를 발휘하듯, 생성형 AI도 베테랑 직원들의 생산성을 극대화하는 도구라고 믿을지 모르겠는데요, 과연 진짜 그럴까요?\n\n최근 《Quarterly Journal of Economics》에 실린 MIT와 스탠퍼드 공동 연구팀의 논문을 본다면 여러분은 '그렇지 않다'라고 답해야 합니다. 연구진은 고객지원 직원 5,172명의 실제 업무 데이터를 분석했습니다. AI 어시스턴트를 도입한 결과, 시간당 처리 건수가 평균 15% 상승했는데요, 이 효과의 대부분이 '경험이 적거나 성과가 낮았던 직원'에게서 나타났습니다.\n\n구체적으로 신입 직원의 경우 'AI 활용 2개월'이 'AI 없는 환경의 6개월 경험'과 동일한 수준에 도달했습니다. 처리 속도뿐 아니라 업무 품질까지 동반 개선되었죠. 반면 최고숙련자들에게는 속도는 소폭 개선되었지만 품질은 오히려 약간 하락하는 역효과가 관찰되었습니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "OECD가 2025년 발표한 실험연구 종합 리뷰에서도 \"경험이 적거나 기술 수준이 낮은 구성원은 경계가 명확한 업무에서 AI의 도움을 더 크게 받는다\"고 정리합니다. AI가 조직 내 생산성 격차를 줄이는 효과를 보인다고 강조했는데요, 흥미롭게도 고객의 톤이 더 공손해지고 \"매니저를 바꿔달라\"는 요청도 줄었으며, 직원 이직률까지 낮아졌다는 부가적인 효과도 발견되었습니다.\n\n왜 이런 결과가 나온 걸까요? 핵심 메커니즘은 '지식의 캡처와 전파'에 있습니다. AI가 우수 성과자의 언어 패턴과 질문 순서를 학습해 \"모범 대응\"을 즉시 제안하니까 초보자도 우수 성과자처럼 말하고 대응할 수 있게 된 것이죠. 리더나 상급자의 하향식 코칭 없이도 자연스럽게 좋은 업무방식이 AI를 통해 자동으로 퍼진 겁니다.\n\n특히 '적당히 드문 문제'에서 효과가 크게 나타났는데요, 흔한 이슈는 누구나 할 줄 알지만 가끔 발생하는 이슈에는 경험이 부족할 수밖에 없습니다. 이때 AI가 쌓은 충분한 학습데이터가 도움을 주기에 효과가 큰 겁니다. \n\nAI 도입의 핵심은 '에이스를 더 강하게'가 아니라 '직원들의 스킬 혹은 역량을 끌어올려 평균을 높이는 것'입니다. 특히 신입사원들을 보다 빠르게 업무에 돌입하도록 하는 데에 AI가 상당한 역할을 담당할 수 있습니다. 신입사원 교육의 방향과 내용이 크게 바뀌어야 하지 않을까요? AI는 이미 크게 자란 나무를 더 높이 키우는 비료가 아니라, 숲 전체의 토양을 비옥하게 만드는 양분이라는 관점이 보다 적절합니다. 여러분의 의견은 어떤가요?\n*참고논문 Brynjolfsson, E., Li, D., & Raymond, L. (2025). *Generative AI at Work*. **The Quarterly Journal of Economics, 140**(2), 889–942."
+        - link "https://doi.org/10.1093/qje/qjae044" [ref=e9]
+        - text: "OUP Academic\n\n Calvino, F., Reijerink, J., & Samek, L. (2025). *The effects of generative AI on productivity, innovation and entrepreneurship* (OECD Artificial Intelligence Papers No. 39). OECD"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "이번에 추가 개설한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e11]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e12]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e13]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e17]
+        - link "게시하기" [ref=e18]
+        - link "웹에서 보기" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e20]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e21]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e22]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e23]
+        - link "페이스북" [ref=e24]
+        - link "인스타그램" [ref=e25]
+        - link "브런치" [ref=e26]
+- text: "공유하기"
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e32]
+- link "이전 뉴스레터 그릿(Grit)은 마케팅의 산물 2025. 10. 2." [ref=e34]
+- link "다음 뉴스레터 면접에서 '떠는 사람'을 뽑아야 하는 이유 2025. 10. 14." [ref=e36]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1437ms][0m

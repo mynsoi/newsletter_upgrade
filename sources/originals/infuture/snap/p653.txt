@@ -1,0 +1,100 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI 시대에는 '합의'하지 마세요 (https://infuture.stibee.com/p/653)
+- title: "AI 시대에는 '합의'하지 마세요" [url=https://infuture.stibee.com/p/653]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI 시대에는 '합의'하지 마세요 2026. 4. 8."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 4월 8일  (No. 631)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI 시대에는 '합의'하지 마세요"
+  - table:
+    - table:
+      - table: "여러분은 아마도 만장일치나 합의(Consensus)를 가장 민주적이고 이상적인 의사결정 방식으로 여길 겁니다. 여러 의견을 골고루 청취하면 리스크를 줄일 수 있고, 실행 단계에서 발생할 수 있는 내부의 반발도 최소화할 수 있다고 믿기 때문이겠죠. 하지만 AI 시대에도 이런 '합의식 의사결정'이 최선일까요?\n\n<하버드 비즈니스 리뷰(HBR)> 2026년 4월호에는 \"AI 시대에 합의에 의한 의사결정은 작동하지 않는다(Decision-Making by Consensus Doesn’t Work in the AI Era)\"라는 제목의 글이 실렸는데요, 다소 논란을 일으킬 만한 주장을 담고 있습니다. 저자의 주장을 한 문장으로 요약하면 \"모두의 동의를 구하는 합의 방식이 AI 시대에는 오히려 치명적인 약점과 병목으로 작용한다\"는 것입니다.\n\n저자의 주장이 극단적으로 들릴 수 있지만, 저는 지금 시대에 시사하는 바가 크고 상당히 일리 있는 지적이라고 봅니다. 기존에는 정보의 비대칭성을 해소하고 다양한 리스크를 검토하기 위해서 여러 부서의 사람들이 회의를 하는 것이 필수적이었습니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "그러나 AI가 방대한 데이터를 순식간에 분석하여 최적의 대안과 예측 시나리오를 제시하는 지금은 상황이 완전히 달라졌습니다. 정보를 수집해 분석한 결과를 놓고 '합의'를 하는 것이 과연 어떤 의미가 있을까요? 모두가 만족할 만한 타협점을 찾으려는 것은 가장 평범하고 안전한 결정으로 귀결되어 파괴적인 혁신은 애초에 불가능할 겁니다.\n\n저자는 합의 대신에 명확한 책임자가 결단을 내리는 단독 의사결정 모델이나 'Consent(반대 없음)' 모델로 전환할 것을 강하게 권고합니다. 의견 충돌이 있더라도 리더가 결정을 내리면 반대했던 사람조차 그 결정이 성공할 수 있도록 100% 매진하는 프로세스가 그 예가 될 수 있죠. \n\n또한 애플이 DRI(Directly Responsible Individual, 직접 책임자) 제도를 운영하듯이 어떤 프로젝트나 회의 안건이든 최종 결정을 내리고 책임을 지는 한 명의 사람을 명확히 지정하는 것도 AI 시대에 어울리는 의사결정 방식일 겁니다. 사공이 많아 배가 산으로 가거나, \"모두의 책임은 누구의 책임도 아니다\"라는 방관자 효과를 시스템적으로 차단함으로써 의사결정의 속도를 극대화할 수 있으니까요.\n\n물론 합의에 의한 의사결정 방식을 모두 버릴 필요는 없습니다. 중대한 투자 건처럼 합의와 숙고가 반드시 필요한 영역도 분명 존재하니까요. 하지만 핵심은 이것입니다. AI가 비즈니스의 속도를 가속시키는 지금, 기존의 느리고 무거운 의사결정 방식을 맹목적으로 고수해서는 안 된다는 점입니다. \n\n\"어떻게 하면 모두를 만족시킬 의사결정을 내릴 수 있을까\"가 아니라 \"어떻게 하면 가장 날카로운 결정을 가장 민첩하게 내릴 수 있을까\"에 초점을 맞춰야 합니다. AI 시대의 리스크는 잘못된 결정을 내리는 것이 아니라, 모두의 동의를 기다리다 골든 타임을 놓쳐버리는 상황이기 때문입니다. (끝)\n\n\n*참고기사"
+        - link "https://hbr.org/2026/04/decision-making-by-consensus-doesnt-work-in-the-ai-era" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "이번에 추가 개설한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 좋은 리더는 반드시 이렇게 한다 2026. 4. 7." [ref=e30]
+- link "다음 뉴스레터 연봉이 높다고 월요일 출근이 즐거울까요?2026. 4. 9." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1203ms][0m

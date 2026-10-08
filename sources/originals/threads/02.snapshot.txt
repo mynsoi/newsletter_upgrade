@@ -1,0 +1,500 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 진짜 AI로 쓴 글, 단번에 집어낼 수 있다고 자신하시나요? 솔직히 말씀드리죠. 저는 매일같이 AI와 씨름하며 수천 줄의 텍스트를 뜯어고칩니다. 그 과정에서 발견한 건, ‘기계 냄새’를 지우는 일이 인간에게도 쉽지 않다는 사실입니다. 그래서 오늘은 AI 글에서 특히 눈에 띄는 세 가지 패턴만 간추렸습니다. (https://www.threads.com/@specal1849/post/DJbqz5sSss4)
+URL: https://www.threads.com/@specal1849/post/DJbqz5sSss4
+- title: "진짜 AI로 쓴 글, 단번에 집어낼 수 있다고 자신하시나요? 솔직히 말씀드리죠. 저는 매일같이 AI와 씨름하며 수천 줄의 텍스트를 뜯어고칩니다. 그 과정에서 발견한 건, ‘기계 냄새’를 지우는 일이 인간에게도 쉽지 않다는 사실입니다. 그래서 오늘은 AI 글에서 특히 눈에 띄는 세 가지 패턴만 간추렸습니다." [url=https://www.threads.com/@specal1849/post/DJbqz5sSss4]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19] [scrollable]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e22]
+    - link [ref=e23]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 5월 9일 금요일 오후 9:10" [ref=e24]: "2025-05-09"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "진짜 AI로 쓴 글, 단번에 집어낼 수 있다고 자신하시나요?솔직히 말씀드리죠.저는 매일같이 AI와 씨름하며 수천 줄의 텍스트를 뜯어고칩니다.그 과정에서 발견한 건, ‘기계 냄새’를 지우는 일이 인간에게도 쉽지 않다는 사실입니다.그래서 오늘은 AI 글에서 특히 눈에 띄는 세 가지 패턴만 간추렸습니다. 1/3"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "202"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "46"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "30"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "17"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e32] [focused]
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e38]
+    - link [ref=e39]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 5월 9일 금요일 오후 9:10" [ref=e40]: "2025-05-09"
+    - button [ref=e41]:
+      - img "더 보기"
+    - text: "맥락보다 패턴 – 문장 순서를 뒤집어도 무너지지 않을 만큼 구조에 집착하며 반복되는 어휘 – “혁신·최적화·효율” 같은 단어가 폭포수처럼 쏟아져 몰개성적이고 지나친 균형감각 – 찬·반을 1:1로 맞추려다 보니 끝내 아무 말도 않은 듯 흐릿해집니다.저도 처음엔 “그럼 사람은 뭘로 승부하나?”라는 고민에 밤잠을 설쳤습니다. 결론은 의외로 단순했습니다. 개인 서사와 불완전함 이 두 가지가 인간 특유의 매운맛이더군요.내가 겪은 시행착오, 삐끗한 문장, 흔들리는 감정선. AI는 아직 이 불규칙한 호흡을 완벽히 따라오지 못합니다. 2/3"
+    - button [ref=e42]:
+      - img "좋아요"
+      - text: "61"
+    - button [ref=e43]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e44]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e45]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e46]:
+    - link [ref=e47]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e48]
+    - link [ref=e49]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 5월 9일 금요일 오후 9:11" [ref=e50]: "2025-05-09"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "그런데… 그거 아세요?방금 읽으신 이 글, 사실 ‘AI도 인간처럼 비틀어 써라’는 고도화된 AI 프롬프트로 탄생했습니다 어때요 이런거 궁금해요?? 3/3"
+    - link [ref=e52]
+    - button [ref=e53]:
+      - img "좋아요"
+      - text: "36"
+    - button [ref=e54]:
+      - img "답글"
+    - button [ref=e55]:
+      - img "리포스트"
+    - button [ref=e56]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e57]:
+    - text: "고정됨"
+    - link [ref=e58]:
+      - image "dongle2blog님의 프로필 사진"
+    - link "dongle2blog" [ref=e59]
+    - link "2025년 5월 9일 금요일 오후 11:09" [ref=e60]: "2025-05-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e61]:
+      - img "더 보기"
+    - text: "여러분 여기예요!!! 공냥이님이 올리심"
+    - link [ref=e62]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e63]
+    - link [ref=e64]:
+      - img
+      - text: "AI Threads"
+    - link "2025년 5월 9일 금요일 오후 9:48" [ref=e65]: "2025-05-09"
+    - link "외국의 인기 글쓰기 프롬프트는 어느정도 수준일까?shumerprompt라는 사이트에 당신의 스타일대로 글쓰기 O3버전을 보자마자 바로 실험해봤어요 사실 저도 GPT로 초안을 뽑고 " [ref=e66]
+    - link [ref=e67]
+    - img
+    - text: "specal1849:"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "38"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "22"
+    - button [ref=e70]:
+      - img "리포스트"
+      - text: "13"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "19"
+    - button [ref=e72]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e73]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e74]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e75]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e76]:
+    - link [ref=e77]:
+      - image "bocchi.ai님의 프로필 사진"
+    - link "bocchi.ai" [ref=e78]
+    - link "2025년 5월 9일 금요일 오후 11:37" [ref=e79]: "2025-05-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e80]:
+      - img "더 보기"
+    - text: "커뮤에서 비슷한 취지의 글 봤어 ㅋㅋ"
+    - link "m.fmkorea.com/best…" [ref=e81]
+    - link [ref=e82]:
+      - image "웹소 작가인데 이번에 a.i 진짜 무서움."
+      - text: "m.fmkorea.com 웹소 작가인데 이번에 a.i 진짜 무서움."
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e85]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e89]
+    - link "2025년 5월 9일 금요일 오후 11:38" [ref=e90]: "2025-05-09"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "수정됨"
+    - button [ref=e92]:
+      - img "더 보기"
+    - text: "참고로 저거 원문은 DC고\n거기서 아이디어 받아서 쓴게 맞아\n이걸 알아봐 주는구나 흑흑\n오마주를 알아봐 주는 사람이있다는건 감사한 일이야 심지어 저글 내브런치에서 다뤘어 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "5"
+    - button [ref=e94]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e95]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e96]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e97]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "scientist_lim님의 프로필 사진"
+    - link "scientist_lim" [ref=e100]
+    - link "2025년 5월 10일 토요일 오전 2:29" [ref=e101]: "2025-05-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "이젠 개조식으로 나눠쓴거 보면 의심갑니다…"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e109]
+    - link "2025년 5월 10일 토요일 오전 4:02" [ref=e110]: "2025-05-10"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "선생님 개조식도 못쓰게할수 있어요 소곤소곤"
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e113]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e116]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e117]:
+    - link [ref=e118]:
+      - image "3iwoo_님의 프로필 사진"
+    - link "3iwoo_" [ref=e119]
+    - link "2025년 5월 9일 금요일 오후 9:52" [ref=e120]: "2025-05-09"
+    - button [ref=e121]:
+      - img "더 보기"
+    - text: "저 개인적으로 하고 싶은 미니 프로젝트가\nAI or Human 사이트입니다 글을 보고 맞추도록 해서 점수 내는 사이트..\n제가 게으르지 않았다면 이미 만들었을 것"
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e123]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e126]:
+    - image "Threads 사용자의 프로필 사진"
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e127]:
+    - link [ref=e128]:
+      - image "dongle2blog님의 프로필 사진"
+    - link "dongle2blog" [ref=e129]
+    - link "2025년 5월 9일 금요일 오후 11:03" [ref=e130]: "2025-05-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e131]:
+      - img "더 보기"
+    - text: "오 이거...??! 공냥이님이 ai 많이 써서 ai말투 옮은 줄 알았어요 \n본문은 아예 티 안나고 댓글만 약간 긴가민가해요\n어떻게 하신거예요???"
+    - button [ref=e132]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e133]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e134]:
+      - img "리포스트"
+    - button [ref=e135]:
+      - img "공유하기"
+  - generic [ref=e136]:
+    - link [ref=e137]:
+      - image "dongle2blog님의 프로필 사진"
+    - link "dongle2blog" [ref=e138]
+    - link "2025년 5월 9일 금요일 오후 11:04" [ref=e139]: "2025-05-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e140]:
+      - img "더 보기"
+    - text: "블로거로서 너무 궁금하고\n유료정보면 돈주고 사고 싶을 정도!!!"
+    - button [ref=e141]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e142]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e143]:
+      - img "리포스트"
+    - button [ref=e144]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e145]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e146]:
+    - link [ref=e147]:
+      - image "c.reator_c님의 프로필 사진"
+    - link "c.reator_c" [ref=e148]
+    - img "인증된 계정"
+    - link "2025년 5월 9일 금요일 오후 9:51" [ref=e149]: "2025-05-09"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e150]:
+      - img "더 보기"
+    - text: "😱 으어어~ 소오르음!\n이젠 진짜로 구분 못하겠네요."
+    - button [ref=e151]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e152]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e153]:
+      - img "리포스트"
+    - button [ref=e154]:
+      - img "공유하기"
+  - generic [ref=e155]:
+    - link [ref=e156]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e157]
+    - link "2025년 5월 9일 금요일 오후 9:54" [ref=e158]: "2025-05-09"
+    - text: "작성자"
+    - button [ref=e159]:
+      - img "더 보기"
+    - text: "ㅋㅋㅋㅋㅋ 바로윗글에 분석 해둔거 써뒀습니다.사실 제 1000줄짜리 글들 학습시켜둔거긴 하서\nAi헤비사용 자들은 특유의 문체가 거슬리는데 많이안써보면 못잡을것 같습니다.솔직히 스레드 사이에 껴있으면 글 이상하네 바뻣나?하고 넘길 퀄리티에요 그래서 더무서움..."
+    - button [ref=e160]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e161]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e162]:
+      - img "리포스트"
+    - button [ref=e163]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e164]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "dexaart님의 프로필 사진"
+    - link "dexaart" [ref=e167]
+    - link "2025년 5월 10일 토요일 오전 9:06" [ref=e168]: "2025-05-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "실장님, 글이 너무 AI돌린 티나요 < 내가 쓴건데???그래서 내 글을 사람처럼 보이게 하기위해 AI에 다시 돌린 사람 🤣"
+    - button [ref=e170]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e171]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e176]
+    - link "2025년 5월 10일 토요일 오전 9:07" [ref=e177]: "2025-05-10"
+    - text: "작성자"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ\n저도 옛날에 유사도 90%찍은적 있어서....\n내가쓴거야!!!!그때 gpt한테 물어보니 ai가 쓴것같습니다 이러길래 뒷목잡았죠"
+    - button [ref=e179]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e180]:
+      - img "답글"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - generic [ref=e183]:
+    - link [ref=e184]:
+      - image "sosohage_jeju님의 프로필 사진"
+    - link "sosohage_jeju" [ref=e185]
+    - link "2025년 5월 10일 토요일 오전 9:14" [ref=e186]: "2025-05-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e187]:
+      - img "더 보기"
+    - text: "ai가 ‘-한 거임’ 혹은 ‘-인 줄’ 혹은 ‘하..’ 이런 표현도 쓰던데. 문어체 뿐만 아니라 구어체 구현도 기가 막힘."
+    - button [ref=e188]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e189]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e190]:
+      - img "리포스트"
+    - button [ref=e191]:
+      - img "공유하기"
+  - generic [ref=e192]:
+    - link [ref=e193]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e194]
+    - link "2025년 5월 10일 토요일 오전 9:24" [ref=e195]: "2025-05-10"
+    - text: "작성자"
+    - button [ref=e196]:
+      - img "더 보기"
+    - text: "참고로 가장잘다루는게 DC체죠(국문크롤링이 공짜라 학습데이터 많음...)"
+    - button [ref=e197]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e198]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e199]:
+      - img "리포스트"
+    - button [ref=e200]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e201]:
+    - image "Threads 사용자의 프로필 사진"
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e202]:
+    - link [ref=e203]:
+      - image "oh.locy.design님의 프로필 사진"
+    - link "oh.locy.design" [ref=e204]
+    - link "2025년 5월 10일 토요일 오전 8:14" [ref=e205]: "2025-05-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e206]:
+      - img "더 보기"
+    - text: "시간가는 줄 모르고 글을 타고 타고 타고 보고 왔어요. \n공냥님 팔로우 안 할 수가 없네요!!"
+    - button [ref=e207]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e208]:
+      - img "답글"
+    - button [ref=e209]:
+      - img "리포스트"
+    - button [ref=e210]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e211]
+    - listitem:
+      - link "개인정보처리방침" [ref=e212]
+    - listitem:
+      - link "쿠키 정책" [ref=e213]
+- button "만들기" [ref=e214]:
+  - img "만들기"
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[2m[ok | 5320ms][0m

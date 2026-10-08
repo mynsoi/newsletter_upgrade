@@ -1,0 +1,122 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93…)
+URL: https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%84%9C%EB%B2%84-ci-%EA%B0%9C%EC%84%A0%EA%B8%B0-activity-7451781703150477312-1tA0
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button [ref=e1]
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 5" [ref=e11]:
+        - link "알림, 새 알림 5" [ref=e12]: "5 알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "차별화를 통해 평균 2배 더 많은 기회 확보₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 27" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Byeongchan Park님의 프로필 보기"
+      - link "Byeongchan Park• 2촌" [ref=e26]
+      - text: "AI Native Software Engineer @Channel Corp.4월 20일 • 수정함 •"
+      - link "Byeongchan Park 님 인증됨 프로필 2촌" [ref=e27]
+      - button "Byeongchan Park님 팔로우" [ref=e28]: "팔로우"
+      - button "Byeongchan Park 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "AI native 시대에도 필요한 엔지니어의 역량은 무엇일까요?37분짜리 CI를 15분으로 줄였습니다. 채널톡 메인 백엔드 서버의 CI를 7단계에 걸쳐 개선했습니다. 9,800개 테스트, 15개 노드 분산 실행, PostgreSQL부터 Redis, OpenSearch, DynamoDB까지 — 규모가 작지 않은 시스템이었습니다.AI 에이전트는 워크플로우 수정안을 빠르게 만들고, 반복 실험을 대신 돌려주는 데는 탁월했습니다. 하지만 이번 작업에서 가장 중요했던 것들은 전부 사람의 몫이었습니다.- \"50노드로 늘렸더니 오히려 느려졌다\" — 병목이 CPU에서 네트워크로 이동한 걸 읽고, 다시 20노드로 줄이는 판단- \"더 병렬화하자\"가 아니라 \"마지막 하나가 오래 남는 꼬리 시간을 줄이자\"로 문제를 재정의한 것- 작은 서비스에서 먼저 패턴을 검증하고, 메인 서버에 옮기자는 순서를 정한 것 이번 경험을 통해 더 확신하게 된 세 가지가 있습니다.첫째, AI 시대에도 의지는 사람의 영역입니다. \"CI를 고치자\"고 결정한 것도, 작은 서비스에서 먼저 검증하고 메인 서버로 확장하자는 전략을 세운 것도, 20.9분까지 줄인 뒤에도 멈추지 않고 전환 시간, 캐시, 노드 불균형까지 계속 병목으로 읽어낸 것도 사람이었습니다.둘째, AI 시대에도 엔지니어링은 여전히 중요합니다. 공유 상태 제거, 의존 관계 정리, 측정 기반 분배 — 화려한 비법이 아니라 기본기가 결과를 만들었습니다.셋째, 복잡한 문제는 여전히 사람을 필요로 합니다. 하위 문제가 정의되면 AI가 반복 실험 속도를 올려주지만, 문제를 정의하고 쪼개고 순서를 정하는 일은 여전히 엔지니어의 역할입니다.기술적 디테일이 궁금하시다면 아래 글에서 확인해주세요."
+        - link "https://lnkd.in/gkwSrjKj 열기" [ref=e30]: "https://lnkd.in/gkwSrjKj"
+        - text: "이런 엔지니어링을 함께할 사람을 찾고 있습니다. 채널톡은 현재 4월 한정으로 전 직군 정규직 연봉 30% 인상 채용 이벤트를 진행하고 있습니다. 퇴근 후 인터뷰가 가능하고, 72시간 내 결과 전달이 이뤄집니다. 이벤트와 함께 전사 Claude Code 토큰도 무제한 제공 중입니다."
+        - link "https://lnkd.in/gg-ZQNFW 열기" [ref=e31]: "https://lnkd.in/gg-ZQNFW"
+        - text: "AI Native한 엔지니어로 성장하고 싶으신 분, 채널톡이 어떤 곳인지 궁금하신 분은 편하게 티타임 요청 주세요. 부담 없이 DM 주시면 됩니다."
+        - link "해시태그 보기: #ainative" [ref=e32]: "#AINative"
+        - link "해시태그 보기: #ci" [ref=e33]: "#CI"
+        - link "해시태그 보기: #claudecode" [ref=e34]: "#ClaudeCode"
+        - link "해시태그 보기: #채널톡" [ref=e35]: "#채널톡"
+        - link "해시태그 보기: #channeltalk" [ref=e36]: "#ChannelTalk"
+        - link "해시태그 보기: #softwareengineering" [ref=e37]: "#SoftwareEngineering"
+        - link "해시태그 보기: #devproductivity" [ref=e38]: "#DevProductivity"
+        - link "해시태그 보기: #backendengineering" [ref=e39]: "#BackendEngineering"
+        - link "해시태그 보기: #개발생산성" [ref=e40]: "#개발생산성"
+      - link "채널톡 메인 백엔드 서버 CI 개선기 channel.io" [ref=e41]
+      - button "반응 버튼 상태: 반응 없음" [ref=e42]: "93"
+      - button "댓글" [ref=e43]: "2"
+      - button "퍼가기" [ref=e44]: "5"
+      - link "보내기" [ref=e45]
+      - link "반응 93" [ref=e46]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - button "이모티콘 선택창 표시" [ref=e47]
+      - button "GIF 선택 도구 열기" [ref=e48]
+      - button "사진 공유" [ref=e49]
+    - link [ref=e50]:
+      - link "Muhammad Usman Subhani 님의 반응: 추천" [ref=e51]
+      - link "hyein jeong 님의 반응: 추천" [ref=e52]
+      - link "Seungmin Yeo 님의 반응: 추천" [ref=e53]
+      - link "현준 문 님의 반응: 추천" [ref=e54]
+      - link "윤규 이 님의 반응: 마음에 쏙듬" [ref=e55]
+      - link "Geon Kim 님의 반응: 추천" [ref=e56]
+      - link "수찬 이 님의 반응: 추천" [ref=e57]
+      - link "hyeonjun park 님의 반응: 추천" [ref=e58]
+      - link "반응 모두 보기" [ref=e59]
+    - button "관련순" [ref=e60]
+    - link [ref=e61]:
+      - image "Rayna Na님의 프로필 보기"
+    - link "Rayna Na 님 2촌 CTO @ Daedal Games | Toss ML Challenge 1st place | DACON Top 0.0001% Competition Chall" [ref=e62]
+    - text: "6개월"
+    - button "Rayna Na님 팔로우" [ref=e63]: "팔로우"
+    - button "Rayna Na 님의 댓글에 대한 옵션 더 보기" [ref=e64]
+    - text: "대개는 longtail task하나가 ci 병목 대부분을 차지합니다. 이걸 빠르게 찾아내고 개선하는 게 엔지니어의 역량으로 생각됩니다."
+    - button [ref=e65]
+    - button "답장" [ref=e66]
+    - link [ref=e67]:
+      - image "이영준 님의 프로필 보기, 구직중"
+    - link "이영준 님, 구직중 인증됨 프로필 2촌 iOS with AI | Swift, SwiftUI, UIKit | Indie | ex EdTech, Micromobility & Telec" [ref=e68]
+    - text: "6개월"
+    - button "이영준님 팔로우" [ref=e69]: "팔로우"
+    - button "이영준 님의 댓글에 대한 옵션 더 보기" [ref=e70]
+    - text: "무조건 늘린다고 속도가 더 빨라지진 않더라 구요 예전에 Jest 속도 올려보려고 하니 동시처리에 적정 수준이 있더라구요. 이젠 그것도 AI 시켜서 적정 수준 찾아내라고 하면 되겠지만 ㅋㅋ"
+    - button [ref=e71]
+    - button "답장" [ref=e72]
+  - complementary "보조 영역":
+    - contentinfo:
+      - link "소개" [ref=e73]
+      - link "웹접근성" [ref=e74]
+      - link "고객센터" [ref=e75]
+      - button "개인정보와 약관" [ref=e76]
+      - link "광고 선택" [ref=e77]
+      - link "광고" [ref=e78]
+      - button "비즈니스서비스" [ref=e79]
+      - link "LinkedIn 앱 다운로드" [ref=e80]
+      - link "더보기" [ref=e81]
+    - text: "LinkedIn Corporation © 2026년"
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[2m[ok | 3414ms][0m

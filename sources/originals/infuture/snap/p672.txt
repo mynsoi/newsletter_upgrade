@@ -1,0 +1,97 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI를 팀원이라고 부르지 마세요 (https://infuture.stibee.com/p/672)
+- title: "AI를 팀원이라고 부르지 마세요" [url=https://infuture.stibee.com/p/672]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI를 팀원이라고 부르지 마세요 2026. 5. 8."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 5월 8일  (No. 650)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI를 팀원이라고 부르지 마세요"
+  - table:
+    - table:
+      - table: "상상해 보세요. 회사 조직도에 김 과장과 이 대리 옆에 '알렉스-3(ALEX-3)'라는 이름이 적혀 있습니다. 이 직원은 놀랍게도 사람이 아니라 생성형 AI입니다. 직무 기술서도 있고 평가 지표(KPI)도 부여받은 어엿한 팀원으로서 말입니다. SF 영화에나 나올 법한 이야기 같지만 앞서가는 몇몇 기업들이 실제로 도입하는 조직 구성입니다.\n\nAI에게 공식적인 직함을 주고 팀원으로 대우하면 직원들의 수용성이 높아지고 생산성도 크게 오를까요? 조직문화 차원에서 최신 기술을 유연하게 받아들이는 조직이라는 분위기가 형성될까요? 물론 그럴 수 있겠으나, AI를 도구가 아니라 직원으로 대우하면 잘못된 판단을 보다 자주 할 수 있다는 점에 주위해야 합니다.\n\n보스턴 대학교와 BCG 연구진은 1,200명이 넘는 인사(HR) 및 재무 관리자들에게 일부러 오류를 섞은 문서를 검토하게 했습니다. 이때 문서 초안의 작성자를 'AI 도구', 'AI 직원', '인간 직원', 이렇게 세 가지로 다르게 소개했습니다."
+      - table
+  - table:
+    - table:
+      - table: "결과는 어땠을까요? 놀랍게도 문서를 'AI 직원'이 썼다고 소개받았을 때 관리자들의 오류 발견율은 'AI 도구'가 썼다고 했을 때보다 약 16%나 떨어졌습니다. 예를 들어, 신입 사원 채용 공고에 '10년 경력'을 요구하는 황당한 오류를 발견하지 못했죠. 가장 깐깐하게 오류를 찾아낸 경우는 '인간 직원'이 썼다고 했을 때였습니다. \n\n실험에 참가한 관리자들은 인간에게 일을 맡기든 AI에게 시키든 동일한 강도의 주의력을 기울여 감독할 거라고 말했지만 전혀 그렇지 않았습니다. 관리자들은 인간 직원이 '농땡이'를 피우거나 대충 일할 거라고 의심하면서 꼼꼼히 모니터링하지만, AI에게는 경계심을 풀고 검토를 소홀히 했으니까요. 심지어 문제에 대한 책임을 AI 시스템에게 떠넘기는 경향이 뚜렷하게 나타났습니다.\n\n그밖에 AI를 직원으로 인식할 때의 문제는 여러가지였습니다.\n\n- 본인이 꼼꼼히 확인하기보다 \"다른 사람이 한 번 더 봐주겠지\"라며 상사나 타인에게 추가 검토를 요청하는 비율이 44%나 높았습니다.\n\n- 관리자들은 직무 정체성에 관한 불안감이 13% 높았고, 고용 불안은 7% 높았으며, 조직에 대한 신뢰도는 10% 낮았습니다.\n\n- AI를 의인화하면 직원들이 AI를 친근하게 여기고 더 자주 사용할 거라 기대하지만, 사용률에는 별다른 영향을 미치지 못했습니다.\n\nAI는 분명 우리의 생산성을 비약적으로 올려주는 도구이지만, 그렇다고 해서 조직도에 함께 이름을 올릴 구성원은 아닙니다. 뭔가 조직문화가 '힙'하게 보이는 효과는 있지만, 그보다 더 많은 것을 잃어야 한다면 그저 도구에 불과한 '알렉스-3'의 이름표를 김대리 옆에 붙여줄 필요는 없습니다. 아직은요.  (끝)\n\n*참고논문 Wiles, E., Hsu, M., Bedard, J., & Kropp, M. (2026). Putting AI on the Org Chart: Evidence on Delegation and Oversight.\n\n\n\n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 중립적인 척하는 AI에게 속지 마세요 2026. 5. 7." [ref=e29]
+- link "다음 뉴스레터 늘 웃으며 일하는 직원을 주의깊게 봐야 하는 이유 2026. 5. 11." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1188ms][0m

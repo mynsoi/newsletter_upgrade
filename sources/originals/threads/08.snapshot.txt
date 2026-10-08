@@ -1,0 +1,532 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) 클로드 Opus 5.5 모션그래픽 만들수록 계속 놀라요 자기소개 영상 만들어 달라는 한마디에 첫 생성 만으로 깜짝 놀랄 퀄리티를 만들어서 육성으로 감탄했어요🙊 그래서 작은 수정 몇번으로 바로 완성할 수 있었어요✨️✨️ 특히 맘에 들었던 건 분위기에 딱 맞는 음악과 효과음을 진짜 센스있게 찾아서 넣어주더라고요 고정 댓글에서 레퍼런스 하나 없이 만든 영상과 고퀄 영상 뽑는 마법의 한 줄을 확인해 보세요💙 (https://www.threads.com/@ssaengcho/post/Ddq-RBfk3uQ)
+URL: https://www.threads.com/@ssaengcho/post/Ddq-RBfk3uQ
+- title: "(2) 클로드 Opus 5.5 모션그래픽 만들수록 계속 놀라요 자기소개 영상 만들어 달라는 한마디에 첫 생성 만으로 깜짝 놀랄 퀄리티를 만들어서 육성으로 감탄했어요🙊 그래서 작은 수정 몇번으로 바로 완성할 수 있었어요✨️✨️ 특히 맘에 들었던 건 분위기에 딱 맞는 음악과 효과음을 진짜 센스있게 찾아서 넣어주더라고요 고정 댓글에서 레퍼런스 하나 없이 만든 영상과 고퀄 영상 뽑는 마법의 한 줄을 확인해 보세요💙" [url=https://www.threads.com/@ssaengcho/post/Ddq-RBfk3uQ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.3만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e22]
+    - img "인증된 계정"
+    - link "2026년 9월 24일 목요일 오후 10:56" [ref=e23]: "2026-09-24"
+    - button [ref=e24]:
+      - img "더 보기"
+    - text: "클로드 Opus 5.5 모션그래픽\n만들수록 계속 놀라요 자기소개 영상 만들어 달라는 한마디에\n첫 생성 만으로 깜짝 놀랄 퀄리티를 만들어서\n육성으로 감탄했어요🙊그래서 작은 수정 몇번으로\n바로 완성할 수 있었어요✨️✨️특히 맘에 들었던 건\n분위기에 딱 맞는 음악과 효과음을\n진짜 센스있게 찾아서 넣어주더라고요 고정 댓글에서 레퍼런스 하나 없이 만든 영상과\n고퀄 영상 뽑는 마법의 한 줄을 확인해 보세요💙 1/2"
+    - group "Video player":
+      - button [ref=e25]:
+        - img "오디오 소리 꺼짐"
+    - button "AI 콘텐츠" [ref=e26]
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "333"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "75"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "121"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "204"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - text: "고정됨"
+    - link [ref=e38]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e39]
+    - img "인증된 계정"
+    - link "2026년 9월 24일 목요일 오후 10:56" [ref=e40]: "2026-09-24"
+    - button [ref=e41]:
+      - img "수정됨"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "니가 아는 나에 대한 내용을 넣어서 키네틱타이포+도형으로 이뤄진 내 소개 모션그래픽 만들어줘. 블랙+화이트+형광 핑크 포인트, 경쾌한 리듬감의 상업적 무료 음악 찾아서 넣어줘. 모션을 비트에 맞춰줘. 16:9 15초,"
+    - button [ref=e43]
+    - canvas [ref=e44] [size=552x84]
+    - text: "원하는 분위기와 컬러를 적어서 만들어보세요  2/2"
+    - group "Video player":
+      - button [ref=e45]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "88"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "3"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "42"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "lowkeyniji님의 프로필 사진"
+    - link "lowkeyniji" [ref=e52]
+    - link "2026년 9월 25일 금요일 오전 5:27" [ref=e53]: "2026-09-25"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "실제로 모션그래픽 툴을 사용한것처럼 보이네요. 에니매이션도 다이네믹하게 잘 flow가 되어 있네요. 멋져요!"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e61]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오전 6:33" [ref=e62]: "2026-09-25"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "하라는대로 척척 만들어서 너무 편해요😃"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e68]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "kalsentic님의 프로필 사진"
+    - link "kalsentic" [ref=e71]
+    - link "2026년 9월 24일 목요일 오후 11:05" [ref=e72]: "2026-09-24"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "모션그래픽까지...ㅜㅜ"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e75]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e80]
+    - img "인증된 계정"
+    - link "2026년 9월 24일 목요일 오후 11:07" [ref=e81]: "2026-09-24"
+    - text: "작성자"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "감격의 눈물인가요😢"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e87]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e88]:
+    - link [ref=e89]:
+      - image "cuttyloss님의 프로필 사진"
+    - link "cuttyloss" [ref=e90]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오전 8:16" [ref=e91]: "2026-09-25"
+    - button [ref=e92]:
+      - img "더 보기"
+    - text: "전문가님 탁월한 프롬프트로\n1.GEMINI\n2.GROK\n3.GPT로 만들어 보았습니다.\n영감을 주셔서 감사드립니다"
+    - generic [ref=e93] [scrollable]:
+      - button [ref=e94]
+      - button "미디어를 파노라마로 결합" [ref=e95]
+      - button [ref=e96]
+      - button "미디어를 파노라마로 결합" [ref=e97]
+      - button [ref=e98]
+    - button [ref=e99]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e100]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e101]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e102]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e103]:
+    - link [ref=e104]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e105]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오전 10:01" [ref=e106]: "2026-09-25"
+    - text: "작성자"
+    - button [ref=e107]:
+      - img "더 보기"
+    - text: "셋다 잘 하네요!! 다양한 결과 보여주셔서 재밌어요😁"
+    - button [ref=e108]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e109]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e110]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e111]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e112]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e113]:
+    - link [ref=e114]:
+      - image "jjin1463님의 프로필 사진"
+    - link "jjin1463" [ref=e115]
+    - link "2026년 9월 25일 금요일 오전 10:45" [ref=e116]: "2026-09-25"
+    - button [ref=e117]:
+      - img "더 보기"
+    - text: "힉스필드나 기타 mcp, 플러그인이 아닌 자체적으로 영상을 만든다는건가요?\n그렇다면 대박이네요!"
+    - button [ref=e118]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e119]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e120]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e121]:
+      - img "공유하기"
+  - generic [ref=e122]:
+    - link [ref=e123]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e124]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오후 1:43" [ref=e125]: "2026-09-25"
+    - text: "작성자"
+    - button [ref=e126]:
+      - img "더 보기"
+    - text: "이미 포함되어있는 리모션이나 하이퍼프레임으로 만들어줘요😊"
+    - button [ref=e127]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e128]:
+      - img "답글"
+    - button [ref=e129]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e130]:
+      - img "공유하기"
+  - generic [ref=e131]:
+    - link [ref=e132]:
+      - image "wannnabill님의 프로필 사진"
+    - link "wannnabill" [ref=e133]
+    - link "2026년 9월 28일 월요일 오전 12:06" [ref=e134]: "2026-09-28"
+    - button [ref=e135]:
+      - img "더 보기"
+    - text: "너무 재밌고 신기해요!! 감사합니다"
+    - group "Video player":
+      - button [ref=e136]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e137]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e138]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e139]:
+      - img "리포스트"
+    - button [ref=e140]:
+      - img "공유하기"
+  - generic [ref=e141]:
+    - link [ref=e142]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e143]
+    - img "인증된 계정"
+    - link "2026년 9월 28일 월요일 오전 12:07" [ref=e144]: "2026-09-28"
+    - text: "작성자"
+    - button [ref=e145]:
+      - img "더 보기"
+    - text: "금색 포인트 고~급져요✨️ 잘 하셨는걸용!?"
+    - button [ref=e146]:
+      - img "좋아요"
+    - button [ref=e147]:
+      - img "답글"
+    - button [ref=e148]:
+      - img "리포스트"
+    - button [ref=e149]:
+      - img "공유하기"
+  - generic [ref=e150]:
+    - link [ref=e151]:
+      - image "busan_gil_chi님의 프로필 사진"
+    - link "busan_gil_chi" [ref=e152]
+    - img "인증된 계정"
+    - link "2026년 9월 28일 월요일 오후 5:05" [ref=e153]: "2026-09-28"
+    - button [ref=e154]:
+      - img "더 보기"
+    - text: "저도 모션 그래픽으로 포트폴리오 움직이게 만들어봤어요!!"
+    - link "threads.com/share…" [ref=e155]
+    - group "Video player":
+      - button [ref=e156]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e157]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e158]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e159]:
+      - img "리포스트"
+    - button [ref=e160]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e161]:
+    - link [ref=e162]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e163]
+    - img "인증된 계정"
+    - link "2026년 9월 28일 월요일 오후 10:29" [ref=e164]: "2026-09-28"
+    - text: "작성자"
+    - button [ref=e165]:
+      - img "더 보기"
+    - text: "귀여운데요!? 흰배경인데도 전혀 허전하지 않아요😃"
+    - button [ref=e166]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e167]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e168]:
+      - img "리포스트"
+    - button [ref=e169]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e170]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e171]:
+    - link [ref=e172]:
+      - image "foodibear_님의 프로필 사진"
+    - link "foodibear_" [ref=e173]
+    - img "인증된 계정"
+    - link "2026년 9월 26일 토요일 오후 12:31" [ref=e174]: "2026-09-26"
+    - button [ref=e175]:
+      - img "더 보기"
+    - text: "클로드 Opus 5.5에 놀라고\n쌩초님 실력에 한번 더 놀라고… 🙌"
+    - button [ref=e176]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e177]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e178]:
+      - img "리포스트"
+    - button [ref=e179]:
+      - img "공유하기"
+  - generic [ref=e180]:
+    - link [ref=e181]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e182]
+    - img "인증된 계정"
+    - link "2026년 9월 26일 토요일 오후 12:41" [ref=e183]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e184]:
+      - img "더 보기"
+    - text: "다들 이렇게까지 좋아하실 줄 몰랐어요🫢 감사해요🫶🏻"
+    - button [ref=e185]:
+      - img "좋아요"
+    - button [ref=e186]:
+      - img "답글"
+    - button [ref=e187]:
+      - img "리포스트"
+    - button [ref=e188]:
+      - img "공유하기"
+  - generic [ref=e189]:
+    - link [ref=e190]:
+      - image "mc2hosun님의 프로필 사진"
+    - link "mc2hosun" [ref=e191]
+    - link "2026년 10월 1일 목요일 오후 2:36" [ref=e192]: "6일"
+    - button [ref=e193]:
+      - img "더 보기"
+    - text: "생초님 프롬포트 그대로 붙여넣고 컬러만 지정했더니.... 짠~~~\n고맙습니다. 항상 많이 배워요."
+    - group "Video player":
+      - button [ref=e194]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e195]:
+      - img "좋아요"
+    - button [ref=e196]:
+      - img "답글"
+    - button [ref=e197]:
+      - img "리포스트"
+    - button [ref=e198]:
+      - img "공유하기"
+  - generic [ref=e199]:
+    - link [ref=e200]:
+      - image "shellang_k_official님의 프로필 사진"
+    - link "shellang_k_official" [ref=e201]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오후 8:47" [ref=e202]: "2026-09-25"
+    - button [ref=e203]:
+      - img "더 보기"
+    - text: "클로드가 너무 잘 만들어서 감격의 눈물이...🥲"
+    - group "Video player":
+      - button [ref=e204]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e205]:
+      - img "좋아요"
+    - button [ref=e206]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e207]:
+      - img "리포스트"
+    - button [ref=e208]:
+      - img "공유하기"
+  - generic [ref=e209]:
+    - link [ref=e210]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e211]
+    - img "인증된 계정"
+    - link "2026년 9월 25일 금요일 오후 8:59" [ref=e212]: "2026-09-25"
+    - text: "작성자"
+    - button [ref=e213]:
+      - img "더 보기"
+    - text: "완전 신나는데요?!🕺💃 잘 만드셨네요👏👏"
+    - button [ref=e214]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e215]:
+      - img "답글"
+    - button [ref=e216]:
+      - img "리포스트"
+    - button [ref=e217]:
+      - img "공유하기"
+  - generic [ref=e218]:
+    - link [ref=e219]:
+      - image "doomaniination_2ai님의 프로필 사진"
+    - link "doomaniination_2ai" [ref=e220]
+    - link "2026년 9월 24일 목요일 오후 11:52" [ref=e221]: "2026-09-24"
+    - button [ref=e222]:
+      - img "더 보기"
+    - text: "오퍼스 5.5로 설계하고 아스트라로 영상 만드신건가요?"
+    - button [ref=e223]:
+      - img "좋아요"
+    - button [ref=e224]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e225]:
+      - img "리포스트"
+    - button [ref=e226]:
+      - img "공유하기"
+  - generic [ref=e227]:
+    - link [ref=e228]:
+      - image "ssaengcho님의 프로필 사진"
+    - link "ssaengcho" [ref=e229]
+    - img "인증된 계정"
+    - link "2026년 9월 24일 목요일 오후 11:53" [ref=e230]: "2026-09-24"
+    - text: "작성자"
+    - button [ref=e231]:
+      - img "더 보기"
+    - text: "오퍼스로 전부 다 한거에요😊"
+    - button [ref=e232]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e233]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e234]:
+      - img "리포스트"
+    - button [ref=e235]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e236]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e237]
+    - listitem:
+      - link "개인정보처리방침" [ref=e238]
+    - listitem:
+      - link "쿠키 정책" [ref=e239]
+- button "만들기" [ref=e240]:
+  - img "만들기"
+[2m[ok | 4316ms][0m

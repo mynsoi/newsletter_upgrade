@@ -1,0 +1,589 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → (2) 법령정보센터 API 발급 받아서 클로드 커넥터로 연결했더니 답변 퀄리티가 차원이 달라졌다... 이거 나만 이제 한건가😇 (https://www.threads.com/@mk_taxx/post/Dd_k36hmeqJ)
+URL: https://www.threads.com/@mk_taxx/post/Dd_k36hmeqJ
+- title: "(2) 법령정보센터 API 발급 받아서 클로드 커넥터로 연결했더니 답변 퀄리티가 차원이 달라졌다... 이거 나만 이제 한건가😇" [url=https://www.threads.com/@mk_taxx/post/Dd_k36hmeqJ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 9.7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "mk_taxx님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "mk_taxx" [ref=e23]
+    - img "인증된 계정"
+    - link "ClaudeAI" [ref=e24]
+    - link "2026년 10월 2일 금요일 오후 10:19" [ref=e25]: "4일"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "법령정보센터 API 발급 받아서\n클로드 커넥터로 연결했더니 \n답변 퀄리티가 차원이 달라졌다...이거 나만 이제 한건가😇 1/2"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "471"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "38"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "108"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "191"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e39]
+    - link "2026년 10월 3일 토요일 오전 5:43" [ref=e40]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e41]:
+      - img "더 보기"
+    - text: "이제라도 안게 어디여"
+    - link [ref=e42]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e43]
+    - link [ref=e44]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 6월 28일 일요일 오후 11:48" [ref=e45]: "2026-06-28"
+    - link "AI에게 한국형 도구 7개를 꽂으면?MCP는 쉽게 말해, AI가 “기억으로 대답”하는 게 아니라 실제 법령, 공시, 통계, 학교 정보, 문서를 직접 확인하게 만드는 연결 규칙입니다" [ref=e46]
+    - link [ref=e47]
+    - button [ref=e48]:
+      - img "좋아요"
+      - text: "405"
+    - button [ref=e49]:
+      - img "답글"
+      - text: "34"
+    - button [ref=e50]:
+      - img "리포스트"
+      - text: "182"
+    - button [ref=e51]:
+      - img "공유하기"
+      - text: "547"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "135"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+      - text: "28"
+    - button [ref=e55]:
+      - img "공유하기"
+      - text: "35"
+  - generic [ref=e56]:
+    - link [ref=e57]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e58]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 7:17" [ref=e59]: "4일"
+    - text: "작성자"
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "이런 게 있었다니ㅋㅋㅋㅋ 지금까지 왜 내 알고리즘에 나타나지 않은거여"
+    - button [ref=e61]:
+      - img "좋아요"
+      - text: "5"
+    - button [ref=e62]:
+      - img "답글"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "j_.captain님의 프로필 사진"
+    - link "j_.captain" [ref=e67]
+    - link "2026년 10월 2일 금요일 오후 11:04" [ref=e68]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "세무사시면 공공데이터 세무분야 재결례 api도 받아서 연결하세요~~"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "32"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e73]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e76]
+    - img "인증된 계정"
+    - link "2026년 10월 2일 금요일 오후 11:07" [ref=e77]: "4일"
+    - text: "작성자"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "오홍 이것도 찾아봐야겠네요! 감사합니다~~"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - button "답글 보기" [ref=e83]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e84]:
+    - link [ref=e85]:
+      - image "vibewriter_hand님의 프로필 사진"
+    - link "vibewriter_hand" [ref=e86]
+    - link "2026년 10월 3일 토요일 오전 1:47" [ref=e87]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e88]:
+      - img "더 보기"
+    - text: "korean law mcp 깃허브에서 검색해서 MCP 연결해줘라고 부탁해 보실래요?"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "21"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e91]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e92]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e95]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 7:18" [ref=e96]: "4일"
+    - text: "작성자"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "이건 또 다른건가요?? 갈 길이 머네요ㅠ"
+    - button [ref=e98]:
+      - img "좋아요"
+    - button [ref=e99]:
+      - img "답글"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "seoryudotcom님의 프로필 사진"
+    - link "seoryudotcom" [ref=e104]
+    - link "2026년 10월 3일 토요일 오전 9:56" [ref=e105]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "커뮤니티에 있으면\n이거 나만 몰랐나?\n싶어서 뽀모 지대로 오지만\n강의 해보면 체감상\nMCP 연결해서 쓸 정도의 레벨은\n상위 1% 안짝이라고 느낌"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e113]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 11:12" [ref=e114]: "4일"
+    - text: "작성자"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "오예 상위 1%에 가까워졌습니다!"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "ryusw007님의 프로필 사진"
+    - link "ryusw007" [ref=e122]
+    - link "2026년 10월 2일 금요일 오후 10:46" [ref=e123]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "네 ^^ 하지만 이제라도 사용해 보시면 \n그것만도 늦은게 아닙니다."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "5"
+    - button [ref=e126]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e131]
+    - img "인증된 계정"
+    - link "2026년 10월 2일 금요일 오후 10:48" [ref=e132]: "4일"
+    - text: "작성자"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "저만 구석기 시대에 살고 있었나봐요^^;;\n신세계가 펼쳐졌어요!"
+    - button [ref=e134]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "justindoitnow님의 프로필 사진"
+    - link "justindoitnow" [ref=e140]
+    - link "2026년 10월 3일 토요일 오전 12:43" [ref=e141]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "전 아직 안했는데 ㅎㅎ 다양한 방식이 있군요~"
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e144]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e149]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 7:15" [ref=e150]: "4일"
+    - text: "작성자"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "Ai의 세계는 무궁무진하네요🤓"
+    - button [ref=e152]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+    - button [ref=e155]:
+      - img "공유하기"
+  - generic [ref=e156]:
+    - link [ref=e157]:
+      - image "gimjian9님의 프로필 사진"
+    - link "gimjian9" [ref=e158]
+    - link "2026년 10월 4일 일요일 오전 1:54" [ref=e159]: "3일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e160]:
+      - img "더 보기"
+    - text: "저는 업무때문에 공시자료랑 법령정보매치할 일이 잦은데 지가 알아서api달라고 한게 시작이라 ㅎ 진즉에 했네요"
+    - button [ref=e161]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e162]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e163]:
+      - img "리포스트"
+    - button [ref=e164]:
+      - img "공유하기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e167]
+    - img "인증된 계정"
+    - link "2026년 10월 4일 일요일 오전 7:36" [ref=e168]: "3일"
+    - text: "작성자"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "오 처음부터 제대로 쓰고 계셨군요!"
+    - button [ref=e170]:
+      - img "좋아요"
+    - button [ref=e171]:
+      - img "답글"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "justincslee2235님의 프로필 사진"
+    - link "justincslee2235" [ref=e176]
+    - link "2026년 10월 3일 토요일 오전 5:04" [ref=e177]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "APi?"
+    - button [ref=e179]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e180]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - generic [ref=e183]:
+    - link [ref=e184]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e185]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 7:11" [ref=e186]: "4일"
+    - text: "작성자"
+    - button [ref=e187]:
+      - img "더 보기"
+    - text: "저도 처음들어보는 개념이라 생소했는데 이분이 쉽게 설명해주셨네요!"
+    - link [ref=e188]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e189]
+    - link [ref=e190]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 6월 28일 일요일 오후 11:48" [ref=e191]: "2026-06-28"
+    - link "AI에게 한국형 도구 7개를 꽂으면?MCP는 쉽게 말해, AI가 “기억으로 대답”하는 게 아니라 실제 법령, 공시, 통계, 학교 정보, 문서를 직접 확인하게 만드는 연결 규칙입니다" [ref=e192]
+    - link [ref=e193]
+    - button [ref=e194]:
+      - img "좋아요"
+      - text: "405"
+    - button [ref=e195]:
+      - img "답글"
+      - text: "34"
+    - button [ref=e196]:
+      - img "리포스트"
+      - text: "182"
+    - button [ref=e197]:
+      - img "공유하기"
+      - text: "547"
+    - button [ref=e198]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e199]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e200]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e201]:
+      - img "공유하기"
+      - text: "1"
+  - button "답글 보기" [ref=e202]:
+    - image "Threads 사용자의 프로필 사진"
+    - img
+    - text: "답글 보기"
+  - generic [ref=e203]:
+    - link [ref=e204]:
+      - image "xomoonoui님의 프로필 사진"
+    - link "xomoonoui" [ref=e205]
+    - link "2026년 10월 3일 토요일 오전 9:28" [ref=e206]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e207]:
+      - img "더 보기"
+    - text: "답이 기억이 아니라 직접 확인한 데이터에서 나오면 결과가 달라지는 건 맞음. 난 마케팅 데이터를 MCP로 물려 쓰는데 틀린 걸 잡아내기가 훨씬 쉬워졌음."
+    - button [ref=e208]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e209]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e210]:
+      - img "리포스트"
+    - button [ref=e211]:
+      - img "공유하기"
+  - generic [ref=e212]:
+    - link [ref=e213]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e214]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 9:31" [ref=e215]: "4일"
+    - text: "작성자"
+    - button [ref=e216]:
+      - img "더 보기"
+    - text: "클로드 멍청하다고 무시했는데 내가 잘못쓰고 있었더라"
+    - button [ref=e217]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e218]:
+      - img "답글"
+    - button [ref=e219]:
+      - img "리포스트"
+    - button [ref=e220]:
+      - img "공유하기"
+  - generic [ref=e221]:
+    - link [ref=e222]:
+      - image "cpla_jin__님의 프로필 사진"
+    - link "cpla_jin__" [ref=e223]
+    - link "2026년 10월 3일 토요일 오전 8:25" [ref=e224]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e225]:
+      - img "더 보기"
+    - text: "저도 최근에 korea law mcp 했어요 !  퀄리티가 ㅎㅎㅎ"
+    - button [ref=e226]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e227]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e228]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e229]:
+      - img "공유하기"
+  - generic [ref=e230]:
+    - link [ref=e231]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e232]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오전 8:29" [ref=e233]: "4일"
+    - text: "작성자"
+    - button [ref=e234]:
+      - img "더 보기"
+    - text: "맨날 혼내다가 이젠 혼나게 생겼어요😂"
+    - button [ref=e235]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e236]:
+      - img "답글"
+    - button [ref=e237]:
+      - img "리포스트"
+    - button [ref=e238]:
+      - img "공유하기"
+  - generic [ref=e239]:
+    - link [ref=e240]:
+      - image "this_is_not_for_me_massive님의 프로필 사진"
+    - link "this_is_not_for_me_massive" [ref=e241]
+    - link "2026년 10월 3일 토요일 오후 5:39" [ref=e242]: "4일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e243]:
+      - img "더 보기"
+    - text: "지금이라도 했음 상위 10퍼"
+    - button [ref=e244]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e245]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e246]:
+      - img "리포스트"
+    - button [ref=e247]:
+      - img "공유하기"
+  - generic [ref=e248]:
+    - link [ref=e249]:
+      - image "mk_taxx님의 프로필 사진"
+    - link "mk_taxx" [ref=e250]
+    - img "인증된 계정"
+    - link "2026년 10월 3일 토요일 오후 7:16" [ref=e251]: "4일"
+    - text: "작성자"
+    - button [ref=e252]:
+      - img "더 보기"
+    - text: "야르!"
+    - button [ref=e253]:
+      - img "좋아요"
+    - button [ref=e254]:
+      - img "답글"
+    - button [ref=e255]:
+      - img "리포스트"
+    - button [ref=e256]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e257]
+    - listitem:
+      - link "개인정보처리방침" [ref=e258]
+    - listitem:
+      - link "쿠키 정책" [ref=e259]
+- button "만들기" [ref=e260]:
+  - img "만들기"
+[2m[ok | 4719ms][0m

@@ -1,0 +1,116 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI가 만든 보고서, 바로 믿지 마세요 (https://infuture.stibee.com/p/561)
+- title: "AI가 만든 보고서, 바로 믿지 마세요" [url=https://infuture.stibee.com/p/561]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI가 만든 보고서, 바로 믿지 마세요 2025. 9. 24."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 9월 24일  (No. 546)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI가 만든 보고서, 바로 믿지 마세요"
+  - table:
+    - table:
+      - table: "어떤 팀원이 회의하기 전에 “AI로 보고서를 만들었습니다”라며 문서 링크를 메신저로 보내왔는데 겉모습은 그럴듯하지만 읽다 보면 근거 출처가 모호하고 핵심 메시지가 모호한 경우가 있지 않았나요? 그래서 팀장이나 팀원들이 팩트 체크를 하고 용어를 일관되게 고치느라 오히려 회의를 못하거나 회의 시간이 길어지기도 하지 않았나요? 현장의 목소리를 들어보면 AI 덕에 일이 빨라지기는커녕 산출물의 품질을 끌어올리느라 시간이 더 걸리고 이 때문에 ‘납기’까지 어기는 경우가 많다고 합니다.\n\n이런 현상을 ‘워크슬롭(workslop)’이라고 합니다. AI로 쉽게 뽑아낸 ‘저노력, 저품질’ 산출물이 협업을 저해하고 검토와 재작업에 드는 노력을 폭증시켜 결국 동료들 간의 신뢰까지 깎아먹는다는 게 바로 워크슬롭입니다.\n\n왜 이런 현상이 발생할까요? HBR 기사에 따르면, 그 근본적인 이유는 “최대한 AI를 활용하자”란 말만 있지, 무엇이 ‘좋은’ 산출물인지 명시적인 기준과 검증 절차가 없기 때문입니다. AI를 많이 쓰면 생산성이 높아질 거라고 단순히 가정하는 것은 심각한 문제라고 이 기사는 지적합니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "그렇기에 직원들이 들고 오는 산출물을 관리자가 잘 검토하고 꼼꼼하게 피드백해야 합니다. AI로 만들어낸 문서가 품질 기준을 충족하는가를 체크해야 하죠. AI가 만들었다니까 바로 수용하는 오류를 범해서는 안 됩니다. 예를 들어, 시장 조사 자료라면 이런 기준을 적용할 수 있을 겁니다.\n\n① 주장의 근거 명시\n ② 수치·그래프의 팩트 여부\n ③ 내부에서 사용하는 용어와의 일관성\n ④ 시사점 또는 제안사항(의사결정 포인트 등) 명시\n\n 경영진 역시 해야 할 역할이 있습니다. “AI를 많이 쓰라”고 강조만 하지 말고 관련부서와 함께 산출물의 품질 기준(bar)을 설계하고 전파해야 합니다. 가능하면 문서 유형이나 난이도, 리스크 등급에 따라 품질 기준을 다르게 규정할 수 있겠죠. 예를 들어, 외부에 공개할 문서는 출처, 법적 표현, 브랜드 톤 기준을 최상위 품질 기준으로 놓고, 내부에서 유통되는 문서는 근거, 핵심 메시지, 의사결정 포인트 명료함 등을 품질 기준으로 설정해야 합니다. 여기에 덧붙여, 좋든 사례/나쁜 사례를 함께 묶어 배포하면 현장 적용이 빨라지겠죠.\n\n당연한 말이지만, AI 도구의 역할은 자료 검색과 근거 명시, 빠른 초안 작성에 국한해야 합니다. 최종적인 정확성 추구, 맥락 구성, 의사결정은 여전히 사람의 책임임을 강조하는, 바람직한 ‘AI 활용 문화’를 형성해야겠죠. AI로 만든 문서를 제출할 때 AI를 어떻게 사용했는지 알 수 있도록 프롬프트와 그에 따른 AI의 답변 내용을 첨부케 하는 것도 이런 문화 형성의 작은 실천입니다.\n\nAI를 많이 쓰는 조직이 아니라, AI 산출물의 품질을 준수하는 조직이 생산성과 성과를 높일 수 가 있습니다. 팀에서 많이 사용하는 문서 종류가 있다면 그 문서에 대한 품질 기준을 체크리스트로 만들어 보세요. 워크슬롭이 줄어드는 걸 바로 체감할 수 있을 겁니다.\n\n*참고기사"
+        - paragraph:
+          - text: "Niederhoffer, K., Kellerman, G. R., Lee, A., Liebscher, A., Rapuano, K., & Hancock, J. T. (2025, September 22). AI-Generated “Workslop” Is Destroying Productivity. Harvard Business Review."
+          - link "https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity" [ref=e9]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "이번에 공개 강좌로 모집한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e11]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e12]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e13]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e17]
+        - link "게시하기" [ref=e18]
+        - link "웹에서 보기" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e20]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e21]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e22]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e23]
+        - link "페이스북" [ref=e24]
+        - link "인스타그램" [ref=e25]
+        - link "브런치" [ref=e26]
+- text: "공유하기"
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e32]
+- link "이전 뉴스레터 갈등이 있어야 좋은 팀입니다 2025. 9. 23." [ref=e34]
+- link "다음 뉴스레터 열정은 찾는 게 아니라 '기르는 것'입니다 2025. 9. 25." [ref=e36]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1404ms][0m

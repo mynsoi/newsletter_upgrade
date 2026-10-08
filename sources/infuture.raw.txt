@@ -1,0 +1,693 @@
+[2mcreated new session: sqfcxO9zS78ciKIq[0m
+제가 아카이브에서 최신순으로 6편을 확인하겠습니다. 다만 저작권이 있는 글의 본문 전체를 그대로 제공할 수는 없어, 제목·날짜·URL과 본문 요약, 핵심 인사이트로 정리하겠습니다. 구독·로그인·댓글은 하지 않겠습니다.[0m
+
+[32mwrite_todos[0m(todos: [
+       { id: [32m'identify'[39m, content: [32m'아카이브와 후보 글에서 AI·일·조직 관련 최신 6편 선정'[39m, status: [32m'in_progress'[39m },
+       { id: [32m'read'[39m, content: [32m'선정한 6편의 본문·날짜·참고자료 읽기'[39m, status: [32m'pending'[39m },
+       { id: [32m'report'[39m, content: [32m'최신순 제목·날짜·URL·요약·인사이트 보고'[39m, status: [32m'pending'[39m }
+     ],
+     merge: [33mfalse[39m)
+
+[2m > Todo list updated:
+- [in_progress] identify: 아카이브와 후보 글에서 AI·일·조직 관련 최신 6편 선정
+- [pending] read: 선정한 6편의 본문·날짜·참고자료 읽기
+- [pending] report: 최신순 제목·날짜·URL·요약·인사이트 보고[0m
+
+[32mrepl[0m(title: [32m'열린 탭 확인 및 뉴스레터 아카이브 열기'[39m, code: [32m'const bt1 = await listBrowserTabs(); console.log(bt1);'[39m)[2m [call_5b8cc64c3500406283568a078f6eba25|fc_0bb1011bda00092d016ac61f5d2fb4819196f2e879ab83461d]
+
+[2m > [
+  {
+    active: true,
+    faviconUrl: 'https://auth-cdn.oaistatic.com/assets/favicon-hQZ_bs-n.svg',
+    id: 'tab:21F6B9B71F7AB0725428D678FE418F81',
+    targetId: '21F6B9B71F7AB0725428D678FE418F81',
+    title: '세션이 끝났습니다 - OpenAI',
+    url: 'https://auth.openai.com/log-in',
+    windowId: 561221361,
+    focusedWindow: false
+  },
+  {
+    active: true,
+    faviconUrl: 'http://127.0.0.1:7317/favicon.ico?v=ram1',
+    id: 'tab:7301D58640F08C0925B28794C7778252',
+    targetId: '7301D58640F08C0925B28794C7778252',
+    title: 'herdr web ui',
+    url: 'http://127.0.0.1:7317/',
+    windowId: 561221593,
+    focusedWindow: true
+  },
+  {
+    active: false,
+    faviconUrl: 'https://www.tubeten.co.kr/favicon.png',
+    id: 'tab:D846D4F4E2C04ECE743874AF512C1D96',
+    targetId: 'D846D4F4E2C04ECE743874AF512C1D96',
+    title: '한국 유튜브 인기 영상 순위 - 실시간 급상승 Top 10 | 튜브텐',
+    url: 'https://www.tubeten.co.kr/youtube-top10',
+    windowId: 561221361,
+    focusedWindow: false
+  },
+  {
+    active: false,
+    faviconUrl: 'https://ssl.pstatic.net/static.news/image/news/m/2023/08/21/favicon.ico',
+    id: 'tab:8FEEE0788B3CF245E8064552699F566C',
+    targetId: '8FEEE0788B3CF245E8064552699F566C',
+    title: '정치 : 네이버 뉴스',
+    url: 'https://news.naver.com/section/100',
+    windowId: 561221361,
+    focusedWindow: false
+  },
+  {
+    active: false,
+    faviconUrl: 'https://t1.daumcdn.net/top/favicon/20260220/daum.ico',
+    id: 'tab:ACAFB65CDDEAAB3FFE0B6E3FFC5AEC3B',
+    targetId: 'ACAFB65CDDEAAB3FFE0B6E3FFC5AEC3B',
+    title: '다음뉴스 | 홈',
+    url: 'https://news.daum.net/',
+    windowId: 561221361,
+    focusedWindow: false
+  },
+  {
+    active: false,
+    faviconUrl: 'https://ludyte.com/favicon.ico?1353fdf93b89d226',
+    id: 'tab:4BA0D1C470651D7B2627A076D6A2FA94',
+    targetId: '4BA0D1C470651D7B2627A076D6A2FA94',
+    title: '내 작업공간 | 러다이트',
+    url: 'https://ludyte.com/tasks/0944c4ff-9770-5ce5-ab95-ae2178b76bd1',
+    windowId: 561221361,
+    focusedWindow: false
+  },
+  {
+    active: false,
+    faviconUrl: 'https://www.gstatic.com/youtube/img/creator/favicon/favicon_32_v2.png',
+    id: 'tab:1D86CE35C860B16E9632AE66F2A7DAD5',
+    targetId: '1D86CE35C860B16E9632AE66F2A7DAD5',
+    title: '죄송합니다.',
+    url: 'https://studio.youtube.com/channel/UCHgaejJW12hqaWzbEjh4CdQ',
+    windowId: 561221361,
+    focusedWindow: false
+  }
+][0m
+
+[32mrepl[0m(title: [32m'뉴스레터 아카이브 최신 목록 확인'[39m,
+     code: [32m"const archive1 = await openTab('https://infuture.stibee.com/'); const s1 = await snapshot(archive1,{interactive:true}); console.log(s1.tree);"[39m)[2m [call_3c2d9db7329445e0b7701f66c3de7fcf|fc_0bb1011bda00092d016ac61f609f68819187831380ef3f775c]
+
+[2m > ✔︎ Opened a new tab and set it active: tabs[0], page → 유정식의 경영일기 (https://infuture.stibee.com/)
+# note: interactive (clickable / focusable) elements only.
+- title: "유정식의 경영일기" [url=https://infuture.stibee.com/]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "유정식의 경영일기 경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- link [ref=e4]
+- link [ref=e5]
+- link [ref=e6]
+- link [ref=e7]
+- text: "- 경영과 리더십에 관한 '유정식의 생각'을 매일 공유합니다. \n- '유정식의 경영일기' 구독은 무료입니다.\n- 2023년 1월 2일부터 매일 오전 8시에 여러분을 찾아 갑니다."
+- button "구독하기" [ref=e8]
+- button "이미 구독자이신가요?" [ref=e10]
+- text: "지난 뉴스레터"
+- link "연봉을 많이 줘도 직원들이 퇴사하는 이유 2026. 10. 7." [ref=e12]
+- link "경쟁시키면 성과가 올라갈까요?2026. 10. 6." [ref=e13]
+- link "질문으로 상대방의 행동에 개입하는 법 2026. 10. 2." [ref=e14]
+- link "동료에게 부탁할 때 꼭 지켜야 할 룰은?2026. 10. 1." [ref=e15]
+- link "직원들에게 AI를 적극 활용하라고 하기 전에 2026. 9. 30." [ref=e16]
+- link "일 잘하는 직원에겐 교육이 필요없을까요?2026. 9. 29." [ref=e17]
+- link "'우리와 잘 맞는 사람'이라는 평가는 온당할까?2026. 9. 28." [ref=e18]
+- link "조직의 문제는 없는 게 아니라 '리더만 모를 뿐'2026. 9. 22." [ref=e19]
+- link "지친 직원에게 업무를 줄여주지 마세요 2026. 9. 21." [ref=e20]
+- link "AI 결과물은 너무 훌륭해서 문제!2026. 9. 18." [ref=e21]
+- link "남을 웃기려면 머리를 쓰게 하지 마세요 2026. 9. 17." [ref=e22]
+- link "인앤아웃이 맥도날드보다 잘 나가는 이유는?2026. 9. 16." [ref=e23]
+- link "모두를 동등하게 대하는 것은 나쁜 리더십 2026. 9. 15." [ref=e24]
+- link "지원자의 성격을 보고 채용하나요?2026. 9. 14." [ref=e25]
+- link "여러분의 직원들은 '팀플레이어'인가요?2026. 9. 11." [ref=e26]
+- link "'원료비 급등으로 가격 인상합니다'란 말은 하지 마세요 2026. 9. 10." [ref=e27]
+- link "AI가 팀워크에 기여하도록 하려면?2026. 9. 9." [ref=e28]
+- link "AI가 만든 광고는 과연 효과적일까요?2026. 9. 8." [ref=e29]
+- link "성공 스토리의 함정에 빠지지 마세요 2026. 9. 7." [ref=e30]
+- link "'관리자 하기 싫다'는 직원들을 나무라기 전에 2026. 9. 4." [ref=e31]
+- generic "더보기" [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+[2mThinking: **Selecting relevant AI ads**
+
+I see we have four relevant AI ads for marketing, which is good news! I need to select six recent ones, specifically looking for titles that barely mention AI. The user wants titles related to AI, but I should be careful not to exceed six. I might need to explore older titles if needed. I’ll gather URLs from references using the locator to get the most recent snapshots.
+
+[0m
+
+[32mrepl[0m(title: [32m'AI 후보 링크와 이전 아카이브 확인'[39m,
+     code: [32m"console.log(await archive1.locator('e16').getAttribute('href')); console.log(await archive1.locator('e21').getAttribute('href')); console.log(await archive1.locator('e28').getAttribute('href')); console.log(await archive1.locator('e29').getAttribute('href')); await archive1.locator('e32').click(); const s2 = await snapshot(archive1,{interactive:true}); console.log(s2.diff);"[39m)[2m [call_d4a879a132c9496a84620b40e0b939ca|fc_0bb1011bda00092d016ac61f698bac8191bcc9eef9bf98f17b]
+
+[2m > /p/752
+/p/747
+/p/740
+/p/739
+@@ -2 +2,0 @@
+-  - generic "profile_image 유정식의 경영일기" [ref=e1]
+@@ -14,13 +13,13 @@
+-- link "연봉을 많이 줘도 직원들이 퇴사하는 이유 2026. 10. 7." [ref=e12]
+-- link "경쟁시키면 성과가 올라갈까요?2026. 10. 6." [ref=e13]
+-- link "질문으로 상대방의 행동에 개입하는 법 2026. 10. 2." [ref=e14]
+-- link "동료에게 부탁할 때 꼭 지켜야 할 룰은?2026. 10. 1." [ref=e15]
+-- link "직원들에게 AI를 적극 활용하라고 하기 전에 2026. 9. 30." [ref=e16]
+-- link "일 잘하는 직원에겐 교육이 필요없을까요?2026. 9. 29." [ref=e17]
+-- link "'우리와 잘 맞는 사람'이라는 평가는 온당할까?2026. 9. 28." [ref=e18]
+-- link "조직의 문제는 없는 게 아니라 '리더만 모를 뿐'2026. 9. 22." [ref=e19]
+-- link "지친 직원에게 업무를 줄여주지 마세요 2026. 9. 21." [ref=e20]
+-- link "AI 결과물은 너무 훌륭해서 문제!2026. 9. 18." [ref=e21]
+-- link "남을 웃기려면 머리를 쓰게 하지 마세요 2026. 9. 17." [ref=e22]
+-- link "인앤아웃이 맥도날드보다 잘 나가는 이유는?2026. 9. 16." [ref=e23]
+-- link "모두를 동등하게 대하는 것은 나쁜 리더십 2026. 9. 15." [ref=e24]
++- link "2026. 10. 7." [ref=e12]
++- link "2026. 10. 6." [ref=e13]
++- link "2026. 10. 2." [ref=e14]
++- link "2026. 10. 1." [ref=e15]
++- link "2026. 9. 30." [ref=e16]
++- link "2026. 9. 29." [ref=e17]
++- link "2026. 9. 28." [ref=e18]
++- link "2026. 9. 22." [ref=e19]
++- link "2026. 9. 21." [ref=e20]
++- link "2026. 9. 18." [ref=e21]
++- link "2026. 9. 17." [ref=e22]
++- link "2026. 9. 16." [ref=e23]
++- link "2026. 9. 15." [ref=e24]
+@@ -34,0 +33,10 @@
++- link "완벽한 확신을 기다리는 리더는 바보!2026. 9. 3." [ref=e33]
++- link "9월은 '두번째 새해'입니다 2026. 9. 2." [ref=e34]
++- link "대화가 적으면 소통이 안 된다는 뜻일까요? 2026. 9. 1." [ref=e35]
++- link "제로 콜라를 마시면 머리가 나빠집니다 2026. 8. 31." [ref=e36]
++- link "가입을 쉽게 허용하면 안 되는 이유 2026. 8. 28." [ref=e37]
++- link "\"대안없는 문제 제기는 하지 말라\"고 말하지 마세요 2026. 8. 27." [ref=e38]
++- link "투수의 '투구 수' 관리가 과연 합리적일까?2026. 8. 26." [ref=e39]
++- link "직원들에게 모두 밝히는 것이 투명성일까요?2026. 8. 25." [ref=e40]
++- link "AI 시대, 리더에게 새롭게 요구되는 역량은?2026. 8. 24." [ref=e41]
++- link "훌륭한 리더는 '마무리'를 잘 합니다 2026. 8. 21." [ref=e42][0m
+
+[32mrepl[0m(title: [32m'여섯 번째 최신 AI 글 찾기'[39m,
+     code: [32m"console.log(await archive1.locator('e41').getAttribute('href')); await archive1.locator('e32').click(); const s3 = await snapshot(archive1,{interactive:true}); console.log(s3.diff);"[39m)[2m [call_a9d7ce9d113746d18043ef9977726b99|fc_0bb1011bda00092d016ac61f6e1ce481918e7bddb8c80ee1fa]
+
+[2m > /p/728
+@@ -26,10 +26,10 @@
+-- link "지원자의 성격을 보고 채용하나요?2026. 9. 14." [ref=e25]
+-- link "여러분의 직원들은 '팀플레이어'인가요?2026. 9. 11." [ref=e26]
+-- link "'원료비 급등으로 가격 인상합니다'란 말은 하지 마세요 2026. 9. 10." [ref=e27]
+-- link "AI가 팀워크에 기여하도록 하려면?2026. 9. 9." [ref=e28]
+-- link "AI가 만든 광고는 과연 효과적일까요?2026. 9. 8." [ref=e29]
+-- link "성공 스토리의 함정에 빠지지 마세요 2026. 9. 7." [ref=e30]
+-- link "'관리자 하기 싫다'는 직원들을 나무라기 전에 2026. 9. 4." [ref=e31]
+-- link "완벽한 확신을 기다리는 리더는 바보!2026. 9. 3." [ref=e33]
+-- link "9월은 '두번째 새해'입니다 2026. 9. 2." [ref=e34]
+-- link "대화가 적으면 소통이 안 된다는 뜻일까요? 2026. 9. 1." [ref=e35]
++- link "2026. 9. 14." [ref=e25]
++- link "2026. 9. 11." [ref=e26]
++- link "2026. 9. 10." [ref=e27]
++- link "2026. 9. 9." [ref=e28]
++- link "2026. 9. 8." [ref=e29]
++- link "2026. 9. 7." [ref=e30]
++- link "2026. 9. 4." [ref=e31]
++- link "2026. 9. 3." [ref=e33]
++- link "2026. 9. 2." [ref=e34]
++- link "2026. 9. 1." [ref=e35]
+@@ -43,0 +43,10 @@
++- link "AI 전략을 인사팀이 주도해야 하는 이유 2026. 8. 20." [ref=e43]
++- link "이직이 잦은 사람을 뽑아야 하는 이유 2026. 8. 19." [ref=e44]
++- link "AI의 판단에 안도하지는 않나요?2026. 8. 18." [ref=e45]
++- link "[공지] '경영일기'의 Summer Break 2026. 7. 29." [ref=e46]
++- link "'철저한 준비'가 변화를 일으키지 않습니다 2026. 7. 28." [ref=e47]
++- link "바쁨을 성과라고 착각하지 마세요 2026. 7. 27." [ref=e48]
++- link "KPMG가 신입사원 평가를 뜯어고친 까닭은?2026. 7. 24." [ref=e49]
++- link "팀워크가 나쁜 것은 리더 탓이 아닙니다 2026. 7. 23." [ref=e50]
++- link "일 시킬 때 이것만은 꼭 지키세요 2026. 7. 22." [ref=e51]
++- link "일 미루는 직원을 추궁하기 전에 2026. 7. 21." [ref=e52][0m
+
+[32mrepl[0m(title: [32m'최신 AI 글 본문 읽기'[39m,
+     code: [32m"console.log(await archive1.locator('e43').getAttribute('href')); const a752 = await openTab('https://infuture.stibee.com/p/752'); const s4 = await snapshot(a752,{interactive:true}); console.log(s4.tree);"[39m)[2m [call_35393ddfb2d44efc94bf08e872265927|fc_0bb1011bda00092d016ac61f76ec508191a6854b5ecfa93111]
+
+[2m > /p/726
+✔︎ Opened a new tab and set it active: tabs[1], page → 직원들에게 AI를 적극 활용하라고 하기 전에 (https://infuture.stibee.com/p/752)
+# note: interactive (clickable / focusable) elements only.
+- title: "직원들에게 AI를 적극 활용하라고 하기 전에" [url=https://infuture.stibee.com/p/752]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "직원들에게 AI를 적극 활용하라고 하기 전에 2026. 9. 30."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 9월 30일  (No. 729)직원들에게 AI를 적극 활용하라고 하기 전에\n\n\n\n 회의가 끝날 무렵, 팀장인 여러분이 A직원에게 묻습니다. “이번 보고서에는 AI를 얼마나 활용했어?” 그 직원은 잠깐 머뭇거리다가 답합니다. “자료 분석부터 초안 작성까지 두루 활용했습니다.” 여러분은 이 말을 어디까지 믿어야 할까요?\n\n인력 분석 기업 비지어(Visier)가 미국의 정규직 근로자 1,000명을 대상으로 실시한 조사는 흥미로운 결과를 전합니다. 응답자의 48퍼센트가 동료나 경영진에게 자신의 AI 사용 정도나 전문성을 과장한 적이 있다고 답했다고 하네요. 비지어는 이를 ‘보여주기식 AI 활용(Performative AI)’이라고 부릅니다. 또한 응답자의 45퍼센트는 AI를 효과적으로 사용할 자신이 없는데도 사용해야 한다는 압박을 느낀다고 응답했습니다.\n\n직원들이 정직하지 못하기 때문에 이런 대답을 한 걸까요? 이 질문에 '예'라고 답하기 전에 \"우리 조직에서는 AI를 잘 모른다고 말해도 괜찮을까?\", \"사용해 봤지만 별 도움이 되지 않았다고 솔직히 말할 수 있을까?\"라는 질문에 먼저 답해야 합니다. AI 활용을 강조하고 독려하는 리더 앞에서 직원들은 활용도를 꾸며서 말하기 마련이죠. 리더가 듣고 싶어 하는 말이 무엇인지 직원들은 금방 알아차리니까요.\n\n\n\n\n\n\n\n\n\n리더들은 \"그거 그냥 AI 시키면 금방 뚝딱 나오는 거 아니야?\"라며 무작정 빠른 결과물만 요구합니다. 이런 상황에서 압박을 받은 직원들은 새로운 도구를 탐색하고 시행착오를 겪으며 학습할 여유를 빼앗기죠. 그래서 직원들은 아직 배우는 중이라고 솔직히 인정하기보다는, AI를 쓰는 척 연기하는 것이 스스로에게 더 안전하다고 느낍니다. 자연스러운 심리죠.\n\n이 조사는 또 하나의 중요한 결과를 내놓았는데요, 바로 \"회사가 AI로 인한 직무와 고용의 변화에 명확한 계획을 갖고 있지 않다\", \"그런 계획이 있는지 모르겠다\"고 답한 비율이 59퍼센트에 달했다는 것입니다. 회사의 교육과 자원, 지원이 충분하다는 데 강하게 동의한 사람은 21퍼센트에 그쳤죠. 이것은 AI와 관련해서 '회사가 직원들에게 요구하는 것'과 '직원의 AI 활용을 위해 회사가 제공하는 것' 사이에 제법 큰 간극이 있음을 시사합니다.\n\n기업들은 직원들의 AI 활용을 적극적으로 요구하고 있는데요, 대표적으로 쇼피파이(Shopify)가 그렇습니다. 이 회사는 2025년 공개된 CEO의 메모에서 AI 활용을 직원의 기본 기대사항으로 제시하고, 성과평가와 동료평가에도 반영하겠다고 밝혔는데요, 과연 어떻게 평가에 반영해야 할까요?\n\n가령 두 직원이 고객 제안서를 작성했다고 해보세요. 한 사람은 AI로 수십 장을 작성했지만 사실관계를 바로잡으려고 반나절을 더 썼습니다. 다른 사람은 고객의 요구사항에서 빠진 항목을 찾는 데만 AI를 썼죠. 활용 횟수나 생성한 문서의 양을 따지면 전자가 앞설 텐데요, 하지만 고객에게 더 나은 제안서를 전달하는 데 누가 기여했는지는 별도로 따져야 하겠죠.\n\n그렇기에 리더는 질문을 바꿔야 합니다. “AI를 얼마나 썼습니까?”에서 “어느 단계가 나아졌고, 어디에 추가 작업이 생겼습니까?”로 말입니다. 초안 작성 시간이 줄었더라도 검증과 수정 시간이 늘었다면 그것까지 계산해야 합니다. AI를 쓰지 않기로 한 판단도 타당한 이유가 있다면 학습 자료로 다뤄야 합니다. 그래야 직원들이 AI 사용 실적보다 업무 개선에 집중할 수 있겠죠.\n\n리더의 맹목적인 'AI 사용 압박과 장려'는 생산성을 높이기는커녕 'AI를 쓰는 척하는 문화'로 변질되고 맙니다. AI와 관련하여 직원들에게 무엇을 어떻게 지원할지를 먼저 충분히 고민하기 바랍니다. (끝)\n\n\n*참고기사"
+- link "https://www.theverge.com/news/644943/shopify-ceo-memo-ai-hires-job" [ref=e9]
+- text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e10]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e11]
+- link "경영일기 구독 신청" [ref=e12]
+- link "공유하기" [ref=e13]
+- link "게시하기" [ref=e14]
+- link "웹에서 보기" [ref=e15]
+- link "인퓨처컨설팅" [ref=e16]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e17]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e18]
+- link "홈페이지" [ref=e19]
+- link "페이스북" [ref=e20]
+- link "인스타그램" [ref=e21]
+- link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 일 잘하는 직원에겐 교육이 필요없을까요?2026. 9. 29." [ref=e30]
+- link "다음 뉴스레터 동료에게 부탁할 때 꼭 지켜야 할 룰은?2026. 10. 1." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+
+[32mrepl[0m(title: [32m'AI 사용 압박과 결과물 품질 글 확인'[39m,
+     code: [32m"const s5 = await snapshot(a752); console.log(s5.diff); const a747 = await openTab('https://infuture.stibee.com/p/747'); const s6 = await snapshot(a747,{interactive:true}); console.log(s6.tree);"[39m)[2m [call_370aa70719e841ce80576f5f50751df0|fc_0bb1011bda00092d016ac61f7db15881919932c54d3349443c]
+
+[2m > - title: "직원들에게 AI를 적극 활용하라고 하기 전에" [url=https://infuture.stibee.com/p/752]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "직원들에게 AI를 적극 활용하라고 하기 전에 2026. 9. 30."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 9월 30일  (No. 729)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "직원들에게 AI를 적극 활용하라고 하기 전에"
+  - table:
+    - table:
+      - table: "회의가 끝날 무렵, 팀장인 여러분이 A직원에게 묻습니다. “이번 보고서에는 AI를 얼마나 활용했어?” 그 직원은 잠깐 머뭇거리다가 답합니다. “자료 분석부터 초안 작성까지 두루 활용했습니다.” 여러분은 이 말을 어디까지 믿어야 할까요?\n\n인력 분석 기업 비지어(Visier)가 미국의 정규직 근로자 1,000명을 대상으로 실시한 조사는 흥미로운 결과를 전합니다. 응답자의 48퍼센트가 동료나 경영진에게 자신의 AI 사용 정도나 전문성을 과장한 적이 있다고 답했다고 하네요. 비지어는 이를 ‘보여주기식 AI 활용(Performative AI)’이라고 부릅니다. 또한 응답자의 45퍼센트는 AI를 효과적으로 사용할 자신이 없는데도 사용해야 한다는 압박을 느낀다고 응답했습니다.\n\n직원들이 정직하지 못하기 때문에 이런 대답을 한 걸까요? 이 질문에 '예'라고 답하기 전에 \"우리 조직에서는 AI를 잘 모른다고 말해도 괜찮을까?\", \"사용해 봤지만 별 도움이 되지 않았다고 솔직히 말할 수 있을까?\"라는 질문에 먼저 답해야 합니다. AI 활용을 강조하고 독려하는 리더 앞에서 직원들은 활용도를 꾸며서 말하기 마련이죠. 리더가 듣고 싶어 하는 말이 무엇인지 직원들은 금방 알아차리니까요."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "리더들은 \"그거 그냥 AI 시키면 금방 뚝딱 나오는 거 아니야?\"라며 무작정 빠른 결과물만 요구합니다. 이런 상황에서 압박을 받은 직원들은 새로운 도구를 탐색하고 시행착오를 겪으며 학습할 여유를 빼앗기죠. 그래서 직원들은 아직 배우는 중이라고 솔직히 인정하기보다는, AI를 쓰는 척 연기하는 것이 스스로에게 더 안전하다고 느낍니다. 자연스러운 심리죠.\n\n이 조사는 또 하나의 중요한 결과를 내놓았는데요, 바로 \"회사가 AI로 인한 직무와 고용의 변화에 명확한 계획을 갖고 있지 않다\", \"그런 계획이 있는지 모르겠다\"고 답한 비율이 59퍼센트에 달했다는 것입니다. 회사의 교육과 자원, 지원이 충분하다는 데 강하게 동의한 사람은 21퍼센트에 그쳤죠. 이것은 AI와 관련해서 '회사가 직원들에게 요구하는 것'과 '직원의 AI 활용을 위해 회사가 제공하는 것' 사이에 제법 큰 간극이 있음을 시사합니다.\n\n기업들은 직원들의 AI 활용을 적극적으로 요구하고 있는데요, 대표적으로 쇼피파이(Shopify)가 그렇습니다. 이 회사는 2025년 공개된 CEO의 메모에서 AI 활용을 직원의 기본 기대사항으로 제시하고, 성과평가와 동료평가에도 반영하겠다고 밝혔는데요, 과연 어떻게 평가에 반영해야 할까요?\n\n가령 두 직원이 고객 제안서를 작성했다고 해보세요. 한 사람은 AI로 수십 장을 작성했지만 사실관계를 바로잡으려고 반나절을 더 썼습니다. 다른 사람은 고객의 요구사항에서 빠진 항목을 찾는 데만 AI를 썼죠. 활용 횟수나 생성한 문서의 양을 따지면 전자가 앞설 텐데요, 하지만 고객에게 더 나은 제안서를 전달하는 데 누가 기여했는지는 별도로 따져야 하겠죠.\n\n그렇기에 리더는 질문을 바꿔야 합니다. “AI를 얼마나 썼습니까?”에서 “어느 단계가 나아졌고, 어디에 추가 작업이 생겼습니까?”로 말입니다. 초안 작성 시간이 줄었더라도 검증과 수정 시간이 늘었다면 그것까지 계산해야 합니다. AI를 쓰지 않기로 한 판단도 타당한 이유가 있다면 학습 자료로 다뤄야 합니다. 그래야 직원들이 AI 사용 실적보다 업무 개선에 집중할 수 있겠죠.\n\n리더의 맹목적인 'AI 사용 압박과 장려'는 생산성을 높이기는커녕 'AI를 쓰는 척하는 문화'로 변질되고 맙니다. AI와 관련하여 직원들에게 무엇을 어떻게 지원할지를 먼저 충분히 고민하기 바랍니다. (끝)\n\n\n*참고기사"
+        - link "https://www.theverge.com/news/644943/shopify-ceo-memo-ai-hires-job" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 일 잘하는 직원에겐 교육이 필요없을까요?2026. 9. 29." [ref=e30]
+- link "다음 뉴스레터 동료에게 부탁할 때 꼭 지켜야 할 룰은?2026. 10. 1." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+✔︎ Opened a new tab and set it active: tabs[2], page → AI 결과물은 너무 훌륭해서 문제! (https://infuture.stibee.com/p/747)
+# note: interactive (clickable / focusable) elements only.
+- title: "AI 결과물은 너무 훌륭해서 문제!" [url=https://infuture.stibee.com/p/747]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI 결과물은 너무 훌륭해서 문제!2026. 9. 18."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 9월 18일  (No. 724)AI 결과물은 너무 훌륭해서 문제!\n\n\n광고 촬영을 앞둔 사진작가에게 고객이 콘셉트 이미지를 제시합니다. 그는 그 이미지에서 이상한 점을 발견했죠. 야구모자를 쓴 사람의 얼굴은 그늘에 가려져 있는데, 이상하게도 눈동자만은 선명하게 빛났거든요. 사진작가는 실제 조명으로는 만들어낼 수 없는 장면임을 바로 알아챘습니다. AI가 만든 이미지였기 때문이죠.\n\n문제는 고객이 이 이미지대로 촬영을 해달라고 고집을 부린다는 것이었습니다. 사진작가는 현실에서 존재할 수 없는 장면을 재현해야 하는 딜레마에 빠지고 말았죠. \n\n자, 이 상황이 우리에게 무엇을 말하고 있을까요? AI가 인간의 창의성을 저해한다는 경고는 이미 여러번 나와서 잘 알고 있을 겁니다. 그런데 그 이유가 뭘까요? 인간보다 AI가 더 창의적인 결과물을 내서가 결코 아닙니다. 아이디어가 충분히 성장하기 전인데도 AI가 사람들에게 완성된 아이디어처럼 보이게 만들기 때문입니다. 다시 말해, AI의 진짜 위험은 인간의 사고를 대신하는 데 있지 않고 '사고가 끝나기도 전에 완성된 것처럼 만들어버리는 데' 있습니다.\n\n연구자들은 광고 분야에서 미드저니를 사용하는 크리에이터들을 1년간 관찰했습니다. 생성형 AI는 사용자의 명령에 반응하지만 동시에 사용자가 예상하지 못한 결과도 내놓습니다. 크리에이터는 AI가 뜻밖의 아이디어를 내놓으면 그것을 더 밀어붙이고, 너무 엉뚱한 방향으로 가면 고삐를 당겨 통제하죠. 그러다 보니, 창작은 인간의 머릿속에서 AI로 일방향으로 전달되는 것이 아니라 '인간과 AI 사이의 반복적인 협상' 양상으로 변합니다.\n\n\n\n\n\n\n\n\n이것만 보면 AI가 창의성에 도움이 되는 것 같습니다. 실제로 그렇다고 연구자들은 인정을 하는데요, 한 크리에이터가 패션 프로그램 광고를 위해 ‘catwalk’를 요청하자 AI는 예상과 달리 레드카펫이 깔린 보드워크와 번쩍이는 플래시를 만들어냈다고 합니다. 이런 엉뚱한 결과가 파파라치 콘셉트라는 새로운 아이디어로 발전했죠.\n\n그런데 바로 여기서 역설이 발생합니다. 과거에는 아이디어 생성, 동료와의 브레인스토밍, 디자이너의 시각화, 검토와 수정, 제작이 여러 사람과 여러 단계에 걸쳐 진행됐습니다. 생성형 AI를 사용하면 한 명의 숙련된 크리에이터가 AI와 대화를 반복하면서 이런 여러 활동들을 한꺼번에 수행할 수 있죠. 연구자들은 이것을 ‘process collapse(창의적 과정의 압축)'이라고 부릅니다. 속도는 빨라지지만, 사람 사이의 인수인계, 토론, 해석과 비판의 기회가 사라지는 문제가 발생합니다.\n\n그리고 더 중요한 문제가 있습니다. AI가 만들어낸 이미지는 초안인데도 초안처럼 보이지 않습니다. 색깔도, 조명도, 배경도, 인물도 너무나 구체적이죠. 그러면 사람들은 아이디어를 더 탐색하기보다 “충분히 좋다. 이걸로 하자”고 생각하기 시작합니다. 연구자들은 이를 ‘early aesthetic closure’, 즉 ‘미학적 조기 종결’이라고 명명했습니다. 완성품처럼 보이는 AI 결과물이 고객의 기대를 붙잡아버리고, 이후의 아이디어가 움직일 수 있는 범위를 좁혀 버리고 만다는 것이죠.\n\n창의성의 적은 '느림'이 아닙니다. '너무 이른 확신'이 창의성의 진짜 적입니다. 인간이 낸 초기의 거친 아이디어에는 빈틈이 많아서 다른 사람이 질문하고, 반대하고, 다른 방향을 제안할 수 있습니다. 반면 너무 멋진 AI 이미지는 빈틈을 감춰 버리죠. 그렇기에 결과물이 완성됐다고 착각하고 거기에서 일을 마칩니다. 이것이 AI가 인간들의 창의성을 억압하는 메커니즘입니다.\n\nAI 시대에는 ‘좋은 결과물을 빨리 만드는 능력’이 아닙니다. AI에 의해 완성된 것처럼 보이는 것을 미완성이라고 간파할 수 있는 능력이 더 중요합니다. AI가 만든 결과물이 있다면 누군가에게 보여주기 전에 'AI가 완벽하게 수행한 것들은 무엇인가?'라고 자문해 보세요. 그 헛점을 파고드는 것이 우리 인간이 해야 할 일입니다. 좋은 아이디어는 처음부터 완벽한 것이 아니라 오랫동안 수정될 수 있도록 빈틈을 가진 것임을 염두에 두기 바랍니다. (끝)\n\n*참고논문 Retkowsky, J., Hafermalz, E., & Huysman, M. (2026). Harnessing a\" Spirited Technology\": How Working with Generative AI Collapses the Creative Process. Academy of Management Discoveries, (ja).\n\n \n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e9]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e10]
+- link "경영일기 구독 신청" [ref=e11]
+- link "공유하기" [ref=e12]
+- link "게시하기" [ref=e13]
+- link "웹에서 보기" [ref=e14]
+- link "인퓨처컨설팅" [ref=e15]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e16]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e17]
+- link "홈페이지" [ref=e18]
+- link "페이스북" [ref=e19]
+- link "인스타그램" [ref=e20]
+- link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 남을 웃기려면 머리를 쓰게 하지 마세요 2026. 9. 17." [ref=e29]
+- link "다음 뉴스레터 지친 직원에게 업무를 줄여주지 마세요 2026. 9. 21." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+아카이브 제목과 날짜 기준으로 최신 AI 관련 글 6편을 골랐습니다. 2026년 9월 30일부터 8월 20일까지이며, 광고 제작·팀워크·리더십·인사 전략을 다룹니다. 지금 본문과 참고자료를 읽고 있습니다.[0m
+
+[32mwrite_todos[0m(todos: [
+       { id: [32m'identify'[39m, content: [32m'아카이브와 후보 글에서 AI·일·조직 관련 최신 6편 선정'[39m, status: [32m'completed'[39m },
+       { id: [32m'read'[39m, content: [32m'선정한 6편의 본문·날짜·참고자료 읽기'[39m, status: [32m'in_progress'[39m }
+     ],
+     merge: [33mtrue[39m)[2m [call_0a11cb37b22946199268371c7eb249bf|fc_0bb1011bda00092d016ac61f86d99c81919171a4f204575075]
+
+[2m > Todo list updated:
+- [completed] identify: 아카이브와 후보 글에서 AI·일·조직 관련 최신 6편 선정
+- [in_progress] read: 선정한 6편의 본문·날짜·참고자료 읽기
+- [pending] report: 최신순 제목·날짜·URL·요약·인사이트 보고[0m
+
+[32mrepl[0m(title: [32m'팀워크와 광고 제작 AI 글 읽기'[39m,
+     code: [32m"const a740 = await openTab('https://infuture.stibee.com/p/740'); const s7 = await snapshot(a740,{interactive:true}); console.log(s7.tree); const a739 = await openTab('https://infuture.stibee.com/p/739'); const s8 = await snapshot(a739,{interactive:true}); console.log(s8.tree);"[39m)[2m [call_bc06f397844347e19b61c796b2f266a7|fc_0bb1011bda00092d016ac61f8a107481918a68a70d5c8c6fbd]
+
+[2m > ✔︎ Opened a new tab and set it active: tabs[3], page → AI가 팀워크에 기여하도록 하려면? (https://infuture.stibee.com/p/740)
+# note: interactive (clickable / focusable) elements only.
+- title: "AI가 팀워크에 기여하도록 하려면?" [url=https://infuture.stibee.com/p/740]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI가 팀워크에 기여하도록 하려면?2026. 9. 9."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 9월 9일  (No. 717)AI가 팀워크에 기여하도록 하려면?\n\n\n보고서를 요약하고, 메일을 대신 써주며, 자료 조사를 빠르게 끝내주는 등 우리는 AI ‘개인의 생산성을 높여주는 도구’로 간주합니다. 일종의 개인 비서처럼 말입니다.\n\n하지만 AI가 팀워크를 높이는 데에 활용할 수 있다는 것을 아십니까? AI를 ‘팀 전체의 사고와 의사결정의 질을 높이는 가상 팀원’으로 활용할 때 팀워크 향상 효과가 나타납니다. 어느 정도 AI가 익숙해진 시기인 지금, 여러분은 \"AI를 직원들 개개인이 얼마나 많이 쓰느냐\"가 아니라, \"우리 팀이 AI를 회의와 토론 과정에서 어떻게 함께 활용해야 하는가\"로 질문 방향을 전환해야 합니다.\n\nAI를 팀플레이어로 전환하는 가장 효과적인 방법은 회의 전, 회의 중, 회의 후 단계에 AI를 의도적으로 배치하는 것입니다.\n\n첫째, 회의 전 단계에서 AI를 '심층 분석'의 도구로 사용하세요. AI에게 \"이 사업 계획의 숨은 가정과 위험요소를 제시하라\"거나 \"이 회의에서 우리가 반드시 답해야 할 핵심 질문 3가지를 도출하라\"고 요구하는 것이죠. 직원들은 사전에 AI가 도출한 반론과 시나리오를 들고 회의에 참석하기 때문에 회의를 시작하면서 곧바로 본질적 판단과 쟁점 토론에 돌입할 수 있죠. 정보 공유의 과정이 불필요하니까요.\n\n\n\n\n\n\n\n둘째, 회의 중 단계에서 AI는 가상의 팀원이자 진행 보조자 역할을 맡을 수 있습니다. 특정 의견으로 쏠리는 집단사고(Groupthink)를 막기 위해 AI에게 '악마의 변호인(Red Team)' 역할을 부여하거나, 소외된 논점을 찾아내는 역할을 맡기는 것이죠. 또한 직원 각자가 자신의 AI와 대화하며 생각을 다듬은 후 발언하도록 하면, 영향력이 크거나 직급 높은 사람이 대화를 독점하는 현상을 막고 과묵한 팀원에게서도 참신한 아이디어를 끌어낼 수 있습니다.\n\n셋째, 회의 후 단계에서 AI는 결정과 실행을 결합할 수 있습니다. 단순히 말소리를 텍스트로 바꾸는 회의록 작성만을 AI에게 맡기지 마세요. \"오늘 회의에서 발생한 의견 불일치의 핵심 요인은 무엇인가?\", \"다음 회의 전까지 검증해야 할 추가 조사사항은 무엇인가?\"를 분석하게 하세요. 그래야 회의에서 얻은 통찰이 조직의 학습과 실행으로 즉시 이어질 수 있습니다.\n\n예를 들어, 제품 개발 팀이라면 회의 때마다 AI를 '가상의 까다로운 고객'으로 설정해 토론에 참여시킬 수 있습니다. 팀원들이 아이디어를 내면 AI가 고객 관점에서 허점을 비판하게 하고, 이를 다시 팀원들이 반박하는 방식으로 제품의 완결성을 높일 수 있을 겁니다. 이 과정이 팀워크를 돈독하게 만드는 유도제가 됩니다.\n\nAI가 팀워크와 의사결정의 질을 높이는 핵심 이유는 AI가 사람 대신 정답을 내놓기 때문이 아닙니다. 팀이 더 날카롭게 준비할 수 있게 하고, 더 깊게 토론하게 하며, 더 명확하게 실행하도록 프레임워크를 제공하기 때문입니다.\n\n앞으로 회의에 참석하기 전에는 AI에게 관련 자료를 입력하고 \"이 계획이 실패할 수 있는 가장 큰 이유 2가지를 경쟁사의 시각에서 찾아줘\"라고 질문해 보세요. AI의 답을 들고 회의실에 들어가면 AI는 단순 업무 대행자가 아니라 여러분의 사고를 확장하는 똑똑한 파트너가 될 겁니다. 이렇게 만들어진 각자의 기여가 돈독한 팀워크의 밑거름이 됩니다.  (끝)\n\n*참고기사"
+- link "https://hbr.org/2026/09/ai-can-enhance-every-stage-of-teamwork-under-two-conditions" [ref=e9]
+- text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e10]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e11]
+- link "경영일기 구독 신청" [ref=e12]
+- link "공유하기" [ref=e13]
+- link "게시하기" [ref=e14]
+- link "웹에서 보기" [ref=e15]
+- link "인퓨처컨설팅" [ref=e16]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e17]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e18]
+- link "홈페이지" [ref=e19]
+- link "페이스북" [ref=e20]
+- link "인스타그램" [ref=e21]
+- link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 AI가 만든 광고는 과연 효과적일까요?2026. 9. 8." [ref=e30]
+- link "다음 뉴스레터'원료비 급등으로 가격 인상합니다'란 말은 하지 마세요 2026. 9. 10." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+✔︎ Opened a new tab and set it active: tabs[4], page → AI가 만든 광고는 과연 효과적일까요? (https://infuture.stibee.com/p/739)
+[warning] 5 tabs are open. Close tabs you do not need as you work.
+# note: interactive (clickable / focusable) elements only.
+- title: "AI가 만든 광고는 과연 효과적일까요?" [url=https://infuture.stibee.com/p/739]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI가 만든 광고는 과연 효과적일까요?2026. 9. 8."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 9월 8일  (No. 716)AI가 만든 광고는 과연 효과적일까요?\n\n\n혹시 어떤 광고를 보고 난 후에 별로 감흥이 남지 않고 뒤돌아서면 어떤 브랜드였는지 짐작되지 않는 경우가 있나요? 분명 광고를 볼 때는 꽤 괜찮다고 느꼈는데도 말입니다. 만일 그렇다면 아마 그 광고는 십중팔구 AI가 만든 광고일지 모릅니다.\n\n글로벌 리서치 기업 입소스(Ipsos)와 시라큐스 대학교는 동일한 기획안을 바탕으로 인간이 만든 광고 10편과 AI(Sora 2 등 영상 생성형 AI 활용)가 전적으로 만든 광고 10편을 제작한 다음에 3,000명의 소비자를 대상으로 실험을 진행했습니다.\n\n그랬더니 소비자들 중 겨우 25%만이 AI가 만든 광고를 눈치챘을 정도로 AI의 기술이 뛰어났습니다. 사람들은 의식적으로 AI가 만든 광고와 인간이 만든 것을 별로 구별하지 못한다는 의미의 결과입니다.\n\n그러나 무의식적으로는 어떨까요? 사람들은 자신이 본 것이 AI 광고인지 몰랐음에도 불구하고 인간이 만든 광고가 ‘상상력이 풍부하다’, ‘눈길을 사로잡는다’, ‘독특하고 재미있다’고 평가했습니다. 당연하게도 단기적 구매 의향이나 장기적인 브랜드 충성도 지표 역시 인간의 광고가 훨씬 높았죠.\n\n\n\n\n\n\n\n\n\n왜 이런 현상이 발생할까요? AI는 기본적으로 기존의 방대한 데이터를 합성(Synthesize)할 뿐, 무에서 유를 발명(Invent)하지 못합니다. AI의 결과물은 과거 성공 공식들의 평균치이기에 흠잡을 데는 없지만, 사람들의 예상을 깨는 파격이나 깊은 공감을 끌어내지는 못하죠.\n\n시라큐스 대학교의 수업에서 한 교수가 학생들에게 \"AI를 이용해 자기 자신을 홍보하는 광고를 만들어보라\"는 숙제를 냈습니다. 학생들은 능숙하게 프롬프트를 만들어 그럴싸한 결과물을 냈는데도, 자신이 만든 AI 결과물에 애정을 느끼거나 \"내 방 냉장고에 자랑스럽게 붙여두고 싶다\"고 말한 학생은 단 한 명도 없었다고 합니다. 스스로에게도 아무런 감흥이 없었던 것이죠.\n\n다시 말하지만, AI는 ‘완벽하게 평균적인 결과물’을 던져 줍니다. 사람의 마음을 움직이는‘비합리적이고 엉뚱한 창의성’을 절대 창출하지 못하죠. AI에게 일을 맡기되 마지막 한 끗은 반드시 여러분의 손끝에서 완성되어야 합니다.\n\n혹시 AI를 써서 만든 이메일이나 보고서가 있다면, 딱 한 문장이라도 ‘나만의 경험담’이나 ‘나의 진짜 감정’이 담긴 문장을 추가해 보세요. 그 문장 하나가 상대방의 마음을 여는 결정적인 '휴먼 터치'가 될 겁니다.  (끝)\n\n*참고문헌 Ipsos & Syracuse University. (2026). AI Ads Are Good Enough — And That's the Problem.\n\nURL:"
+- link "https://www.ipsos.com/sites/default/files/ct/publication/documents/2026-05/Ipsos_SU_POV-AI_Ads_Just_" [ref=e9]
+- text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e10]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e11]
+- link "경영일기 구독 신청" [ref=e12]
+- link "공유하기" [ref=e13]
+- link "게시하기" [ref=e14]
+- link "웹에서 보기" [ref=e15]
+- link "인퓨처컨설팅" [ref=e16]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e17]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e18]
+- link "홈페이지" [ref=e19]
+- link "페이스북" [ref=e20]
+- link "인스타그램" [ref=e21]
+- link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 성공 스토리의 함정에 빠지지 마세요 2026. 9. 7." [ref=e30]
+- link "다음 뉴스레터 AI가 팀워크에 기여하도록 하려면?2026. 9. 9." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+
+[32mrepl[0m(title: [32m'광고 참고자료 링크와 AI 리더십 글 확인'[39m,
+     code: [32m"console.log('739 참고 URL:', await a739.locator('e9').getAttribute('href')); await closeTab(a752); await closeTab(a747); const a728 = await openTab('https://infuture.stibee.com/p/728'); const s9 = await snapshot(a728,{interactive:true}); console.log(s9.tree);"[39m)[2m [call_c43764592c9447a98a1691e3ae91f2b8|fc_0bb1011bda00092d016ac61f9c28588191a33ab2632a9bba68]
+
+[2m > 739 참고 URL: https://www.ipsos.com/sites/default/files/ct/publication/documents/2026-05/Ipsos_SU_POV-AI_Ads_Just_Good_Enough.pdf
+✔︎ Opened a new tab and set it active: tabs[3], page → AI 시대, 리더에게 새롭게 요구되는 역량은? (https://infuture.stibee.com/p/728)
+# note: interactive (clickable / focusable) elements only.
+- title: "AI 시대, 리더에게 새롭게 요구되는 역량은?" [url=https://infuture.stibee.com/p/728]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI 시대, 리더에게 새롭게 요구되는 역량은?2026. 8. 24."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 8월 24일  (No. 705)AI 시대, 리더에게 새롭게 요구되는 역량은?\n\n\n훌륭한 리더란 '가장 똑똑하고, 모든 답을 알고 있으며, 흔들림 없는 확신으로 조직을 이끄는 사람'이라고 믿고 있나요? 리더는 무조건 답을 주는 사람이어야 할까요? 그러나 AI가 순식간에 정답을 탐색하고, 경영 환경이 예측을 허락하지 않을 정도로 불확실한 상황에서 이런 리더십은 조직을 위험에 빠뜨릴 수 있다는 점을 이제 자각해야 합니다. 이제 리더는 '답을 주는 사람'에서 질문을 던지고 맥락을 읽어내는 '탐구하는 사람'으로 진화해야 하죠.\n\n최근에 이루어진 여러 연구에 따르면 AI 시대에 리더가 갖춰야 할 진짜 역량은 기존과는 꽤나 다릅니다.\n\n첫째, 리더는 '개인의 마음'을 넘어 '조직의 감정적 날씨'를 읽어야 한다는 것입니다. 리더에게 공감 능력이 중요하긴 하지만 이것은 대개 1대1 상황에 국한됩니다. 미시간대학교의 제프리 산체스버크스(Jeffrey Sanchez-Burks)는 이를 넘어선 '감정적 조망력(emotional aperture)'을 강조합니다. \n\n\n\n\n\n\n\n\n\n\n숲 전체의 모양을 보듯이 회의실과 사무실 전체에 흐르는 미세한 긴장감, 특정인의 의견이 묵살될 때 번지는 냉기, 겉보기엔 동의하지만 속으로는 반발하고 있는 집단적 침묵을 읽어내는 능력이 바로 감정적 조망력인데요, 리더는 \"업무가 어디까지 진행됐나?\"를 묻기보다는 \"사람들이 이 업무를 어떻게 느끼고 있는가?\"를 감지할 수 있어야 합니다.\n\n둘째, 리더는 모든 직원을 '일관되게' 대해야 한다는 착각을 버려야 한다는 것입니다. 모두를 똑같이 대하는 것이 공평함이 아닙니다. 리더십은 사람과 과업, 상황에 따라 카멜레온처럼 변해야 한다는 점이죠. \n\n예를 들어 10년 차 에이스 직원에게 평소처럼 '알아서 하라'며 자율성을 주는 것은 좋은 리더십입니다. 하지만 그 직원에게 한 번도 해본 적 없는 새로운 AI 프로젝트를 맡긴다면 어떨까요? 이때도 \"김 과장, 늘 잘했으니까 믿고 맡길게\"라고 방치한다면 그는 극도로 스트레스와 좌절감을 겪을 것입니다. 새로운 과업 앞에서는 베테랑에게도 명확한 지시와 코칭이라는 다른 종류의 리더십을 발휘해야 합니다.\n\n셋째, 리더는 '모른다'는 상태를 견딜 줄 알아야 합니다. 불확실성이 커지면 사람들은 본능적으로 과거의 성공 방정식이나 익숙한 답으로 도피하려 합니다. 하지만 UNC의 시물 멜와니(Shimul Melwani) 교수는 AI 시대의 리더라면 '주관적 양가성(subjective ambivalence)', 즉 모호함을 견디며 상충하는 생각들을 동시에 품을 수 있어야 한다고 조언합니다. \n\nAI 시대의 경쟁력은 내 머릿속에 정답을 쥐고 있는 것이 아닙니다. \"내가 옳다\"는 확신을 내려놓고 \"내가 놓치고 있는 것은 무엇일까?\", \"우리 팀에서 가장 조용한 직원의 생각은 무엇일까?\"라고 묻는 호기심이 리더의 진짜 실력이죠.\n\n미래의 리더십은 안개 속에서 팀원들과 함께 길을 찾는 '나침반'이 되어야 합니다. AI가 정보와 답을 무한대로 쏟아낼수록, 사람의 감정을 읽고, 타인의 관점을 수용하며, 모호함을 포용하는 '가장 인간적인 능력'이 리더의 대체 불가능한 경쟁력이 될 겁니다. 비전 제시, 결단력, 실행 관리력 등은 리더십에서 이제 후순위입니다.  (끝)\n\n*참고기사"
+- link "https://www.inc.com/marcel-schwantes/3-leadership-skills-that-matter-more-than-ever-according-to-res" [ref=e9]
+- text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e10]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e11]
+- link "경영일기 구독 신청" [ref=e12]
+- link "공유하기" [ref=e13]
+- link "게시하기" [ref=e14]
+- link "웹에서 보기" [ref=e15]
+- link "인퓨처컨설팅" [ref=e16]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e17]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e18]
+- link "홈페이지" [ref=e19]
+- link "페이스북" [ref=e20]
+- link "인스타그램" [ref=e21]
+- link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 훌륭한 리더는 '마무리'를 잘 합니다 2026. 8. 21." [ref=e30]
+- link "다음 뉴스레터 직원들에게 모두 밝히는 것이 투명성일까요?2026. 8. 25." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+
+[32mrepl[0m(title: [32m'여섯 번째 AI 인사 전략 글 읽기'[39m,
+     code: [32m"console.log('728 참고 URL:', await a728.locator('e9').getAttribute('href')); const a726 = await openTab('https://infuture.stibee.com/p/726'); const s10 = await snapshot(a726,{interactive:true}); console.log(s10.tree);"[39m)[2m [call_02713e20a6424fcda2d92918eac8d76c|fc_0bb1011bda00092d016ac61fa1383c8191bb1e209424efb600]
+
+[2m > 728 참고 URL: https://www.inc.com/marcel-schwantes/3-leadership-skills-that-matter-more-than-ever-according-to-research-aperture-adaptability-uncertainty/91393580
+✔︎ Opened a new tab and set it active: tabs[4], page → AI 전략을 인사팀이 주도해야 하는 이유 (https://infuture.stibee.com/p/726)
+[warning] 5 tabs are open. Close tabs you do not need as you work.
+# note: interactive (clickable / focusable) elements only.
+- title: "AI 전략을 인사팀이 주도해야 하는 이유" [url=https://infuture.stibee.com/p/726]
+- banner:
+  - generic "profile_image 유정식의 경영일기" [ref=e1]
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI 전략을 인사팀이 주도해야 하는 이유 2026. 8. 20."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- text: "2026년 8월 20일  (No. 703)AI 전략을 인사팀이 주도해야 하는 이유\n\n\n 어느날 CEO가 여러분에게 이렇게 선언합니다. \"우리 회사는 오늘부터 AI 중심 기업으로 거듭납니다! 최첨단 AI 솔루션을 전사에 도입했으니, IT팀의 안내에 따라 즉시 업무에 적용하시기 바랍니다.\" \n\n이렇듯 우리는 AI 도입을 순수하게 기술의 문제하고 간주하고 IT부서나 디지털 전담팀이 모든 것을 주도해야 한다고 믿습니다. 하지만 정말 그래야 할까요? AI 혁신의 성공은 시스템에 있지 않습니다. 그것을 수용하는 사람과 조직문화에 성공의 열쇠가 있죠.\n\n미국의 기업생산성연구소(i4cp)이 진행한 설문조사에 따르면, AI 도입 및 확산 과정을 IT 부서가 단독으로 진행할 때보다 인사부서(HR팀)가 적극적으로 개입하여 이끌거나 핵심 파트너로 주도할 때 조직의 AI 활용 성과가 훨씬 높게 나타났습니다. \n\n결과를 요약하면 이렇습니다. 인사팀이 여러 부서로 구성된 팀과 함께 AI 구현을 주도할 경우, 응답자의 58%가 AI가 인사팀의 전략적 영향력을 의미 있게 향상시켰다고 답했습니다. 하지만 IT 부서가 단독으로 AI 구현을 주도할 경우, 이 수치는 39%로 떨어지고, 인사팀을 제외한 여러 부서로 구성된 팀이 AI 구현을 주도할 경우에는 20%에 그쳤죠.\n\n\n\n\n\n\n\n\n\n이러한 패턴은 인력 준비도에서도 나타났는데요, 인사 부서가 AI 구현을 주도하는 조직은 인사 부서의 참여 없이 여러 부서가 협력하여 AI를 관리하는 조직보다 직원이 AI에 대부분 또는 완전히 준비되어 있다고 응답할 가능성이 약 4배 더 높았습니다(56% 대 14%). 또한 IT 부서 단독으로 AI를 주도하는 조직보다도 AI 준비도가 높다고 응답할 가능성이 약 3배 더 높았죠(56% 대 18%).\n\n왜 AI를 인사팀이 주도할 때 긍정적인 효과가 나타나는 걸까요?\n\n첫째, AI 도입의 본질은 단순한 소프트웨어 설치가 아니라 '행동과 문화의 변화'이기 때문입니다. 직원들이 기계에 대해 느끼는 막연한 거부감과 불안감을 해소하고, 심리적 안전감을 부여하며 재교육(Reskilling)을 기획하는 것은 IT가 아닌 HR의 고유한 전문 영역이죠.\n\n둘째, 조직 내 'AI 격차'를 공정하게 줄일 수 있습니다. 기술 중심 부서가 주도하면 자칫 일부 기술 친화적 부서에만 교육 혜택이 집중되기 쉽습니다. 반면 인사팀은 일선 현장 근로자부터 최고위 임원까지 조직 전체를 포괄하며 균형 잡힌 학습 기회를 제공할 수 있죠.\n\n그렇다면 인사팀은 구체적으로 어떻게 AI를 주도해야 할까요? 여기서 매우 중요한 주의사항이 있는데요, 인사팀이 독불장군처럼 모든 권한을 쥐고 통제하려 해서는 안 된다는 점입니다. 설문조사에 따르면, 인사팀이 리더십을 발휘하되, IT, 법무, 현업 부서들과 공고한 파트너십을 맺어야 합니다. \n\n인사팀은 전체를 지휘하는 위치에 서서,  IT팀이 AI 툴과 보안 인프라를 구축하고, 법무/컴플라이언스팀이 데이터 유출이나 저작권 리스크를 방어하고, 일선 부서장들이 직무별 실제 활용처를 발굴하는 방식으로 AI 도입이 이루어져야 합니다.\n\nAI 도입과 확산의 성공 여부는 서로 다른 부서가 얼마나 조화롭게 손을 잡느냐에 달렸습니다. 그렇기에 AI 주도는 인사팀에게 주어지는 추가 업무가 아니라, AI 시대에 반드시 짊어져야 할 '인사팀의 새로운 역할 모델'이 되어야 합니다. 부서 간의 지혜를 모아 사람의 가능성을 극대화하는 다리를 놓는 '최고 연결 관리자(Chief Connection Officer)'. 이것이 바로 AI 시대에 인사팀이 가야 할 미래입니다. 평가나 보상 같은 업무는 이제 잊으세요.\n\n*참고기사"
+- link "https://hrexecutive.com/ai-divide-works-better-when-hr-helps-lead-it-new-research-finds/" [ref=e9]
+- text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*\n\n\n\n\n[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+- link "교육계획서 다운로드" [ref=e10]
+- text: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다.\n\n\n'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+- link "https://infuture.stibee.com/" [ref=e11]
+- link "경영일기 구독 신청" [ref=e12]
+- link "공유하기" [ref=e13]
+- link "게시하기" [ref=e14]
+- link "웹에서 보기" [ref=e15]
+- link "인퓨처컨설팅" [ref=e16]
+- text: "|"
+- link "jsyu@infuture.co.kr" [ref=e17]
+- text: "|"
+- link "수신거부 Unsubscribe" [ref=e18]
+- link "홈페이지" [ref=e19]
+- link "페이스북" [ref=e20]
+- link "인스타그램" [ref=e21]
+- link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 이직이 잦은 사람을 뽑아야 하는 이유 2026. 8. 19." [ref=e30]
+- link "다음 뉴스레터 훌륭한 리더는 '마무리'를 잘 합니다 2026. 8. 21." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"[0m
+[2mThinking: **Assessing proof options**
+
+I need to consider proof options because the developer must attach something if it's a simple search task. This research involves six pages read, and I may need a screenshot from the last article's title, cropped with the specific label from the top title using getByText. However, I'm thinking I only require a read-only screenshot without transforming the entire content, which might complicate things. Let's ensure we keep it simple!
+
+[0m
+
+[32mwrite_todos[0m(todos: [
+       { id: [32m'read'[39m, content: [32m'선정한 6편의 본문·날짜·참고자료 읽기'[39m, status: [32m'completed'[39m },
+       { id: [32m'report'[39m, content: [32m'최신순 제목·날짜·URL·요약·인사이트 보고. 본문 전체 전재는 저작권 제한으로 제공 불가'[39m, status: [32m'completed'[39m }
+     ],
+     merge: [33mtrue[39m)[2m [call_609ca184dba14f70b2745fad17c5d6b0|fc_0bb1011bda00092d016ac61fb8cdd881919f119fd32829b353]
+
+[2m > Todo list updated:
+- [completed] identify: 아카이브와 후보 글에서 AI·일·조직 관련 최신 6편 선정
+- [completed] read: 선정한 6편의 본문·날짜·참고자료 읽기
+- [completed] report: 최신순 제목·날짜·URL·요약·인사이트 보고. 본문 전체 전재는 저작권 제한으로 제공 불가[0m
+아카이브에서 AI를 명시한 글 **6편을 최신순으로 읽고 멈췄습니다.** 구독·로그인·댓글은 하지 않았습니다.
+
+저작권이 있는 본문 전체를 그대로 제공할 수는 없어 **요약으로 대체합니다.** 아래 참고자료는 각 글에 실린 것이며, 별도로 검증하지 않았습니다.
+
+## 1. 직원들에게 AI를 적극 활용하라고 하기 전에
+**날짜:** 2026년 9월 30일  
+**URL:** https://infuture.stibee.com/p/752
+
+- **본문 요약:** 직원들에게 AI 사용을 압박하면 실제 업무 개선보다 사용 정도를 과장하는 행동이 늘어날 수 있다고 지적합니다. 교육과 학습 시간을 제공하고, 생성량이나 사용 횟수 대신 검증·수정 비용까지 포함한 업무 개선 효과를 평가해야 한다는 주장입니다.
+- **핵심 인사이트:** AI 사용 실적을 요구하기 전에, 솔직하게 배우고 실패할 수 있는 환경부터 만들어야 합니다.
+- **참고자료:** [The Verge의 Shopify CEO 메모 관련 기사](https://www.theverge.com/news/644943/shopify-ceo-memo-ai-hires-job)
+
+## 2. AI 결과물은 너무 훌륭해서 문제!
+**날짜:** 2026년 9월 18일  
+**URL:** https://infuture.stibee.com/p/747
+
+- **본문 요약:** AI는 창작 속도를 높이고 예상 밖의 아이디어도 제공하지만, 여러 사람의 토론과 비판을 거치는 과정을 압축합니다. 특히 시각적으로 완성도 높은 초안은 탐색을 너무 일찍 끝내게 하고, 현실적으로 구현하기 어려운 결과물에 고객의 기대를 고정할 수 있다고 설명합니다.
+- **핵심 인사이트:** AI 초안의 매끈함을 완성의 증거로 받아들이지 말고, 수정과 반론의 여지를 남겨야 합니다.
+- **참고자료:** Retkowsky, J., Hafermalz, E., & Huysman, M. (2026). *Harnessing a “Spirited Technology”: How Working with Generative AI Collapses the Creative Process*. Academy of Management Discoveries, (ja).
+
+## 3. AI가 팀워크에 기여하도록 하려면?
+**날짜:** 2026년 9월 9일  
+**URL:** https://infuture.stibee.com/p/740
+
+- **본문 요약:** AI를 개인 비서가 아니라 팀의 사고를 확장하는 구성원으로 활용하자고 제안합니다. 회의 전에는 숨은 가정과 위험을 분석하고, 회의 중에는 반론과 소외된 관점을 제시하며, 회의 후에는 의견 불일치와 추가 검증 과제를 정리하도록 배치합니다.
+- **핵심 인사이트:** AI의 팀 기여는 정답을 대신 내는 데보다, 구성원들이 더 깊이 토론하도록 돕는 데 있습니다.
+- **참고자료:** [Harvard Business Review의 팀워크와 AI 관련 기사](https://hbr.org/2026/09/ai-can-enhance-every-stage-of-teamwork-under-two-conditions)
+
+## 4. AI가 만든 광고는 과연 효과적일까요?
+**날짜:** 2026년 9월 8일  
+**URL:** https://infuture.stibee.com/p/739
+
+- **본문 요약:** 인간과 AI가 제작한 광고를 비교한 실험을 소개하며, AI 광고를 식별하기 어렵다는 사실과 광고의 설득력이 높다는 사실은 다르다고 주장합니다. 저자는 AI 결과물에 개인의 경험과 감정을 더해야 차별성과 공감을 확보할 수 있다고 조언합니다.
+- **핵심 인사이트:** 그럴듯한 결과물과 사람의 마음을 움직이는 결과물은 다르므로, 효율 외에 반응과 기억도 평가해야 합니다.
+- **참고자료:** [Ipsos·Syracuse University의 AI 광고 보고서(2026, PDF)](https://www.ipsos.com/sites/default/files/ct/publication/documents/2026-05/Ipsos_SU_POV-AI_Ads_Just_Good_Enough.pdf)
+
+## 5. AI 시대, 리더에게 새롭게 요구되는 역량은?
+**날짜:** 2026년 8월 24일  
+**URL:** https://infuture.stibee.com/p/728
+
+- **본문 요약:** 모든 답을 아는 리더보다 질문하고 맥락을 탐색하는 리더가 필요하다고 설명합니다. 조직 전체의 감정 상태를 읽고, 사람과 과업에 따라 지원 방식을 조정하며, 불확실성과 상충하는 생각을 견디는 역량을 강조합니다.
+- **핵심 인사이트:** AI가 답을 쉽게 제공할수록, 리더는 사람의 상태를 읽고 성급한 확신을 늦추는 역할에 집중해야 합니다.
+- **참고자료:** [Inc.의 리더십 역량 관련 기사](https://www.inc.com/marcel-schwantes/3-leadership-skills-that-matter-more-than-ever-according-to-research-aperture-adaptability-uncertainty/91393580)
+
+## 6. AI 전략을 인사팀이 주도해야 하는 이유
+**날짜:** 2026년 8월 20일  
+**URL:** https://infuture.stibee.com/p/726
+
+- **본문 요약:** AI 도입은 소프트웨어 설치보다 직원의 행동과 조직문화를 바꾸는 문제라고 주장합니다. 인사팀이 학습·불안 해소·교육 격차를 담당하면서 IT, 법무, 현업과 협력해야 하며, 인사팀의 주도가 권한 독점으로 변해서는 안 된다고 강조합니다.
+- **핵심 인사이트:** AI 전환의 책임은 기술 부서에만 맡기지 말고, 사람의 변화와 부서 간 협력을 함께 설계해야 합니다.
+- **참고자료:** [HR Executive의 인사팀과 AI 도입 관련 기사](https://hrexecutive.com/ai-divide-works-better-when-hr-helps-lead-it-new-research-finds/)[0m
+exit=0

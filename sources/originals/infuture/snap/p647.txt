@@ -1,0 +1,101 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → AI 도입 전에 반드시 해야 할 것들 (https://infuture.stibee.com/p/647)
+- title: "AI 도입 전에 반드시 해야 할 것들" [url=https://infuture.stibee.com/p/647]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "AI 도입 전에 반드시 해야 할 것들 2026. 3. 31."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 3월 31일  (No. 625)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "AI 도입 전에 반드시 해야 할 것들"
+  - table:
+    - table:
+      - table: "20년 된 낡은 경운기를 빨리 달리게 하겠다고 엄청난 돈을 들여 최신 스포츠카 엔진을 장착한다면 시속 300km로 달릴 수 있을까요? 십중팔구, 엔진의 출력을 견디지 못하고 산산조각이 나지 않을까요? 폭발하지 않으면 다행일 겁니다.\n\n모든 기업의 화두인 AI. ChatGPT, 제미나이, 코파일럿 같은 AI 도구를 도입하기만 하면 고질적인 비효율이 곧바로 사라지고 생산성이 비약적으로 높아질 것이라 믿는 분들이 많은데요, 하지만 단언컨대 AI는 여러분의 회사를 고쳐주지 못합니다. 지금껏 유행한 여러 가지 경영혁신 기법들이 그러했듯이, 기초 체력을 갖추지 못한 조직에 AI가 도입되면 오히려 기존의 엉망진창인 프로세스를 '더 빠른 속도'로 가속화하고 맙니다.\n\nAI가 보고서 초안을 1시간 만에 완벽하게 써준다고 하죠. 그런데 이 보고서를 결재 받으려면 5명의 상사에게 승인을 받아야 하고, 내용 수정을 위해 1~2시간의 지루한 회의를 두세 번 거쳐야 한다면 어떨까요? AI가 높여준 생산성은 낡은 관료주의 시스템 내에서 흔적없이 휘발돼 버리죠. AI라는 도구보다 AI를 담아내는 시스템이 먼저라는 걸 간과했기 때문입니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "그렇다면 AI를 도입하기 전에 여러분의 조직은 무엇을 먼저 해야 할까요?\n\n첫째, 조직을 재설계해야 합니다. 수직적이고 경직된 결재 라인은 단순화하고 작은 팀 단위로 권한을 위임해 AI 기술이 원활하게 돌아갈 수 있는 조직 구조를 먼저 구축해야 합니다.\n\n둘째, 심리적 안전감을 기반으로 한 조직문화를 형성해야 합니다. 직원들이 AI를 내 일자리를 위협하는 적으로 간주한다면 어떤 혁신도 실패합니다. AI를 활용해서 실패하더라도 용인하는 분위기, 보다 가치 있는 일을 할 수 있다는 확신이 조직문화로 자리 잡아야 합니다.\n\n셋째, AI 도입의 목적을 명확히 해야 합니다. \"남들이 하니까 우리도 하자\"가 아니라, 우리 회사가 해결할 고객의 문제가 무엇인지, 이를 위해 AI가 어떤 역할을 해야 하는지를 분명히 해야 합니다.\n\n이케아는 고객 지원 센터에 AI 챗봇 '빌리(Billie)'를 도입했습니다. 많은 기업이 AI를 도입할 때 인건비 절감만을 기대하지만 이케아는 달랐습니다. 그들은 AI가 배송조회나 반품 같은 단순 문의를 처리하게 두고, 기존 8,500명의 콜센터 직원들을 해고하는 대신 '원격 인테리어 조언자'로 역할을 완전히 재정의했습니다.\n\n즉, \"AI가 내 일자리를 빼앗을 것\"이라는 공포심을 갖지 못하게 함으로써 심리적 안전감을 형성했고, 인간만이 할 수 있는 고부가가치 프로세스로 업무의 목적을 바꾼 것입니다. 그 결과, AI는 단순 문의의 47%를 처리했고, 직원들은 인테리어 상담을 통해 신규 수익을 창출해 냈습니다.\n\n여러분의 팀에서 고질적으로 시간이 오래 걸리는 업무 하나를 떠올려 보세요. \"이 업무에 AI를 어떻게 쓸까?\"라고 묻지 말고, \"만약 이 프로세스에서 딱 하나만 없앤다면 어떤 것을 뺄 수 있을까?\"를 질문하세요. AI는 그 다음에 적용해도 늦지 않습니다.  (끝)\n*참고기사"
+        - link "https://www.fastcompany.com/91511489/ai-wont-fix-your-company-heres-what-will" [ref=e9]
+        - link "https://www.reuters.com/technology/ikea-bets-remote-interior-design-ai-changes-sales-strategy-2023-0" [ref=e10]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "이번에 추가 개설한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 혹시 '에이스 직원'에게 일을 몰아주나요?2026. 3. 30." [ref=e31]
+- link "다음 뉴스레터 일 안하고 딴짓하는 직원을 칭찬하는 회사 2026. 4. 1." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1225ms][0m
