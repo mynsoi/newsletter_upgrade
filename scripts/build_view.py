@@ -26,6 +26,7 @@ GROUPS = [
     ("A", "1단계 · 처음부터 쓰기 (워크트리별 스킬)"),
     ("B", "2단계 · 같은 초안 다듬기 (스킬 효과만)"),
     ("R", "재작성 · \"영어로 쓰면 좋은데 한국어로 쓰니 이상한 글\" 고치기"),
+    ("S", "기준안 · R4·astra + 멘토 피드백(출처 소개 빼기)"),
 ]
 
 DESC = {
@@ -91,6 +92,15 @@ for r, d in RDESC.items():
     for model in ("claude", "astra"):
         add(f"{r}-{model}", "R", f"{r} · {model}", f"{d} — {'Claude Opus (claude -p)' if model == 'claude' else 'GPT-6 astra (codex exec)'}", rw / f"{model}-{r}" / "output.md")
 
+sd = RUNS / "standard"
+for key, label, desc in [
+    ("S1-revise-astra", "기준안 수정 · astra", "기준 글(R4·astra)에 멘토 피드백만 반영해 고침 — astra", ),
+    ("S2-rerun-astra", "기준 절차 재실행 · astra", "공통 초안 + 경영일기 2편 + 멘토 피드백으로 R4 절차를 처음부터 다시 — astra"),
+    ("S1-revise-claude", "기준안 수정 · claude", "기준 글(R4·astra)에 멘토 피드백만 반영해 고침 — Claude (비교용)"),
+]:
+    model = key.rsplit("-", 1)[1]; stem = key.rsplit("-", 1)[0]
+    add(key, "S", label, desc, sd / f"{model}-{stem}" / "output.md")
+items.sort(key=lambda i: [g for g, _ in GROUPS].index(i["group"]))
 data = json.dumps({"items": items, "groups": GROUPS}, ensure_ascii=False)
 
 PAGE = r"""<!doctype html>
