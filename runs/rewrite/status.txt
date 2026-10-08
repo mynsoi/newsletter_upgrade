@@ -1,0 +1,10 @@
+astra-R1 exit=0 98s 2543
+astra-R4 exit=0 99s 2847
+astra-R2 exit=0 121s 2369
+astra-R3 exit=0 150s 2542
+claude-R3 exit=0 204s 2503
+claude-R1 exit=0 247s 2534
+claude-R4 exit=0 275s 2541
+claude-R2 exit=0 295s 2331
+claude-R5 462s 2434
+ALLDONE
