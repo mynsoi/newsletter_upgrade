@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>주제 위키 시험</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  /* Sparta 디자인 시스템(.herdr-web-ui/design-20261009-192345-8f64450b.md)을 따름 — 흰 바탕, 잉크 #222, 강조색은 Rausch 하나 */
+  :root {
+    --canvas:#ffffff; --surface-soft:#f7f7f7; --surface-strong:#f2f2f2;
+    --hairline:#dddddd; --hairline-soft:#ebebeb; --border-strong:#c1c1c1;
+    --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292;
+    --primary:#ff385c; --primary-active:#e00b41; --on-primary:#ffffff;
+    --shadow: rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0;
+    --r-sm:8px; --r-md:14px; --r-xl:32px; --r-full:9999px;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; font-size:16px; line-height:1.5; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+  /* top-nav */
+  .top-nav { height:80px; border-bottom:1px solid var(--hairline); background:var(--canvas); position:sticky; top:0; z-index:5; }
+  .top-nav .wrap { height:100%; display:flex; align-items:center; justify-content:space-between; max-width:1280px; }
+  .wordmark { font-weight:700; font-size:18px; color:var(--primary); letter-spacing:-.01em; text-decoration:none; }
+  .tabs { display:flex; gap:28px; }
+  .tabs a { text-decoration:none; color:var(--muted); font-weight:600; font-size:16px; padding:28px 0 26px; border-bottom:2px solid transparent; }
+  .tabs a:hover { color:var(--ink); }
+  .tabs a.active { color:var(--ink); border-bottom-color:var(--ink); }
+  .date { color:var(--muted); font-size:14px; }
+
+  section { padding:64px 0; border-bottom:1px solid var(--hairline-soft); }
+  h1 { font-size:28px; font-weight:700; line-height:1.43; margin:0; }
+  h2 { font-size:21px; font-weight:700; line-height:1.43; margin:0 0 8px; }
+  h3 { font-size:16px; font-weight:600; line-height:1.25; margin:0; }
+  p { margin:0 0 12px; color:var(--body); }
+  .lead { color:var(--muted); font-size:16px; margin-top:8px; }
+  .muted { color:var(--muted); }
+  .small { font-size:14px; line-height:1.43; }
+
+  /* rating-display-card — 리포트에서 가장 큰 활자는 이 숫자 하나 */
+  .verdict { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:40px; }
+  .rating { text-align:center; }
+  .rating .row { display:flex; align-items:center; justify-content:center; gap:12px; }
+  .rating .num { font-size:64px; font-weight:700; line-height:1.1; letter-spacing:-1px; }
+  .rating .tag { font-weight:600; margin-top:8px; }
+  .rating .sub { color:var(--muted); font-size:14px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--hairline); margin-top:24px; }
+  .stats div { padding:16px 8px; text-align:center; border-right:1px solid var(--hairline); }
+  .stats div:last-child { border-right:0; }
+  .stats b { display:block; font-size:21px; font-weight:700; }
+  .stats span { color:var(--muted); font-size:14px; }
+  .quote { background:var(--surface-soft); border-radius:var(--r-md); padding:24px; }
+  .quote q { display:block; font-size:22px; font-weight:500; line-height:1.4; letter-spacing:-.44px; quotes:"“" "”"; }
+  .quote .who { color:var(--muted); font-size:14px; margin-top:12px; }
+
+  /* pill */
+  .pill { display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-full); padding:6px 14px; font-size:14px; font-weight:500; background:var(--surface-strong); color:var(--ink); }
+  .pill.primary { background:var(--primary); color:var(--on-primary); }
+  .new-tag { display:inline-block; border-radius:var(--r-full); background:var(--primary); color:#fff; font-size:8px; font-weight:700; letter-spacing:.32px; text-transform:uppercase; padding:2px 6px; vertical-align:top; margin-left:4px; }
+
+  /* tables */
+  table { width:100%; border-collapse:collapse; font-size:14px; line-height:1.43; }
+  th, td { text-align:left; padding:12px 12px; border-bottom:1px solid var(--hairline); vertical-align:top; }
+  thead th { font-weight:600; color:var(--muted); font-size:14px; }
+  td.pick, th.pick { color:var(--ink); font-weight:600; }
+  th.pick .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--primary); margin-right:6px; }
+  tbody th { font-weight:500; color:var(--ink); width:28%; }
+
+  /* arm cards (property-card 모양) */
+  .arms { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .arm { border-radius:var(--r-md); overflow:hidden; border:1px solid var(--hairline); background:var(--canvas); transition:box-shadow .2s; }
+  .arm:hover { box-shadow:var(--shadow); }
+  .plate { aspect-ratio:4/3; background:var(--surface-soft); display:flex; align-items:center; justify-content:center; position:relative; }
+  .plate .letter { font-size:64px; font-weight:700; letter-spacing:-1px; color:var(--ink); }
+  .plate.win .letter { color:var(--primary); }
+  .plate .badge { position:absolute; top:12px; left:12px; background:#fff; border-radius:var(--r-full); padding:4px 10px; font-size:11px; font-weight:600; box-shadow:var(--shadow); }
+  .arm .meta { padding:16px; }
+  .arm .meta p { font-size:14px; margin:6px 0 0; color:var(--muted); }
+
+  /* topic lists */
+  .lists { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .col h3 { margin-bottom:12px; display:flex; justify-content:space-between; }
+  .topic { border:1px solid var(--hairline); border-radius:var(--r-md); padding:14px 16px; margin-bottom:8px; }
+  .topic b { display:block; font-size:15px; font-weight:600; }
+  .topic span { display:block; color:var(--muted); font-size:13px; line-height:1.4; margin-top:4px; }
+  .topic .src { color:var(--muted-soft); font-size:12px; margin-top:6px; }
+
+  /* amenity-row */
+  .rows { margin-top:16px; border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+  .rows div { display:flex; gap:16px; padding:12px 0; }
+  .rows .ic { width:24px; flex:none; text-align:center; }
+
+  .btn { display:inline-block; background:var(--primary); color:var(--on-primary); border-radius:var(--r-sm); padding:14px 24px; font-weight:500; text-decoration:none; min-height:48px; }
+  .btn:active { background:var(--primary-active); }
+  .btn.secondary { background:#fff; color:var(--ink); border:1px solid var(--ink); }
+
+  footer { padding:48px 0 80px; }
+  footer .cols { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  footer h3 { font-weight:500; margin-bottom:12px; }
+  footer li { list-style:none; font-size:14px; line-height:1.9; }
+  footer ul { padding:0; margin:0; }
+  .legal { border-top:1px solid var(--hairline); margin-top:32px; padding-top:16px; color:var(--muted); font-size:13px; }
+
+  @media (max-width:744px) {
+    .tabs { display:none; }
+    .verdict, .arms, .lists, footer .cols { grid-template-columns:1fr; }
+    section { padding:48px 0; }
+    .wrap { padding:0 16px; }
+    table { font-size:13px; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top">mentor-lab</a>
+    <div class="tabs">
+      <a href="#top" class="active">결론</a>
+      <a href="#why">문제</a>
+      <a href="#test">시험</a>
+      <a href="#result">결과</a>
+      <a href="#work">작업 방식</a>
+      <a href="#next">다음</a>
+    </div>
+    <span class="date">2026-10-10</span>
+  </div>
+</nav>
+
+<section id="top">
+  <div class="wrap">
+    <h1>주제는 위키로 쌓는다</h1>
+    <p class="lead">원문을 주제 지도(LLM 위키)에 쌓아 가는 방식과 지금 방식·땜질 방식을, 같은 원문 40편으로 블라인드 비교했다.</p>
+    <div class="verdict">
+      <div class="rating">
+        <div class="row">
+          <svg width="28" height="56" viewBox="0 0 28 56" aria-hidden="true"><path d="M24 4C10 12 6 30 14 52M14 14c-6-1-8-5-8-9 5 1 8 4 8 9zm-2 12c-6 0-9-4-9-8 5 0 9 3 9 8zm1 12c-6 1-9-3-10-7 5-1 9 2 10 7z" fill="none" stroke="#222" stroke-width="1.6"/></svg>
+          <div class="num">__BIG__</div>
+          <svg width="28" height="56" viewBox="0 0 28 56" aria-hidden="true" style="transform:scaleX(-1)"><path d="M24 4C10 12 6 30 14 52M14 14c-6-1-8-5-8-9 5 1 8 4 8 9zm-2 12c-6 0-9-4-9-8 5 0 9 3 9 8zm1 12c-6 1-9-3-10-7 5-1 9 2 10 7z" fill="none" stroke="#222" stroke-width="1.6"/></svg>
+        </div>
+        <div class="tag">원문 40편 중 위키 후보에 쓰인 원문</div>
+        <div class="sub">지금 방식 __A_USED__편 · 땜질 방식 __B_USED__편</div>
+        <div class="stats">
+          <div><b>__C_MULTI__</b><span>작성자 2명 이상 주제</span></div>
+          <div><b>__C_MERGE__ / 18</b><span>새 원문이 기존 주제에 합쳐짐</span></div>
+          <div><b>1</b><span>논지 하나에 카드 하나</span></div>
+        </div>
+      </div>
+      <div class="quote">
+        <q>오 위키 방식이 훨씬 낫네? 이걸로 가자.</q>
+        <div class="who">멘토 · 세 방식의 최종 후보를 1·2·3 블라인드로 본 뒤</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <h2>문제</h2>
+    <p>지금 방식은 서재의 원문 전부를 astra에게 한 번에 주고 주제 후보를 받는다. 지난 회차도, 이미 쓴 글도 모른다.</p>
+    <div class="rows">
+      <div><span class="ic">↻</span><span>같은 원문 22편으로 세 번 뽑으니 "내 전문성의 활동 반경"이 세 번 다 나오고, 인수인계·왜 더 바쁜가·요약과 분석·분석을 멈출 때가 되풀이됐다.</span></div>
+      <div><span class="ic">⇡</span><span>원문이 늘면 한 번에 읽는 양이 계속 커진다. 40편에서 프롬프트가 명령줄 한도(128KB)를 넘어 주제 뽑기가 멈췄다(표준입력으로 고침). 수백 편이면 흐려지고 결국 다 읽지 못한다.</span></div>
+    </div>
+    <h2 style="margin-top:40px">검토한 길</h2>
+    <table>
+      <thead><tr><th>길</th><th>판단</th></tr></thead>
+      <tbody>
+        <tr><th>Supabase 벡터 DB</th><td>버림 — 원문 대부분이 "AI·자동화"라 벡터상 다 가깝게 붙어 묶음이 쓸모없고, 인프라만 는다</td></tr>
+        <tr><th>Karpathy LLM Wiki</th><td><span class="pill primary">채택</span> 원문(불변) · 위키(LLM이 쓰고 고침) · 규칙 파일, 넣기·묻기·점검</td></tr>
+        <tr><th>OKF v0.1 (Google)</th><td>형식으로 채택 — YAML 머리말 <code>type</code> 필수, 예약 파일 index.md·log.md, 표준 Markdown 링크</td></tr>
+        <tr><th>Hermes Agent</th><td>안 씀 — 이 PC에 없고, 위키만을 위해 실행 환경·기억을 하나 더 둘 이유가 약하다. llm-wiki 스킬의 규칙만 참고</td></tr>
+        <tr><th>오픈소스 8개 (aside 조사)</th><td>Astro-Han/karpathy-llm-wiki(MIT)를 바탕으로 — "같은 핵심 논지면 기존 페이지에 합친다"가 되풀이를 정면으로 다룬다. llm-wiki-compiler는 임베딩이 필요하고 중복 판정이 제목 일치 수준</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:16px">원문 보호는 지침이 아니라 실행 환경으로 강제했다 — astra를 wiki/ 안에서만 쓰기 가능한 샌드박스로 돌려, 원문 폴더에 쓰면 "읽기 전용 파일 시스템"으로 막힌다(시험으로 확인).</p>
+  </div>
+</section>
+
+<section id="test">
+  <div class="wrap">
+    <h2>시험</h2>
+    <p>같은 원문, 같은 순서(10-07에 모은 22편 → 10-10 자동 수집 18편)로 세 방식을 돌려 원문 40편 시점의 최종 후보를 비교했다. 별도 워크트리에서 하고 쓰던 작업실은 건드리지 않았다. 미리 정한 규칙: <b>B가 C만큼 좋으면 B.</b> 주제의 질은 멘토가 블라인드로 판단하고, 기계 지표는 보조 근거로만 쓴다.</p>
+    <div class="arms">
+      <div class="arm"><div class="plate"><span class="letter">A</span></div><div class="meta"><h3>지금 방식</h3><p>원문 전부를 한 번에. 22편으로 3회, 40편으로 1회 — 기존 회차 그대로</p></div></div>
+      <div class="arm"><div class="plate"><span class="letter">B</span></div><div class="meta"><h3>지금 방식 + 기억</h3><p>같은 지시에 "이미 낸 주제·쓴 글과 겹치지 않게"만 더함 — 값싼 땜질</p></div></div>
+      <div class="arm"><div class="plate win"><span class="badge">멘토 선택</span><span class="letter">C</span></div><div class="meta"><h3>위키</h3><p>22편을 한 편씩 넣기 → 정리 → 18편 넣기 → 후보 내기</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="result">
+  <div class="wrap">
+    <h2>결과</h2>
+    <table>
+      <thead><tr><th></th><th>A 지금</th><th>B 지금 + 기억</th><th class="pick"><span class="dot"></span>C 위키</th></tr></thead>
+      <tbody>__ROWS__</tbody>
+    </table>
+    <div class="rows" style="margin-top:32px">
+      <div><span class="ic">A</span><span>되풀이가 그대로다. 회차마다 같은 주제를 새 카드로 다시 쌓고 쓴 글을 잊는다.</span></div>
+      <div><span class="ic">B</span><span>되풀이는 없앴지만 얇아졌다. 굵은 주제를 피하느라 원문 하나짜리 곁가지로 밀려나 40편 중 __B_USED__편만 썼다 — 회차를 거듭할수록 더 얇아질 방식.</span></div>
+      <div><span class="ic" style="color:var(--primary);font-weight:700">C</span><span>예전 주제가 다시 나오되 논지 하나에 카드 하나로 남고, 새 원문 절반이 기존 주제에 합쳐져 두꺼워졌다. 쓴 글 두 개는 위키가 스스로 표시해 후보에서 뺐다. 남은 약점은 원문 1편짜리 주제 __C_SINGLE__개 — 재료를 더 모으거나 정리에서 묶을 대상.</span></div>
+    </div>
+    <h2 style="margin-top:48px">세 방식의 최종 후보</h2>
+    <div class="lists">
+      <div class="col"><h3>A 지금 <span class="muted">__A_N__</span></h3>__A_LIST__</div>
+      <div class="col"><h3>B 지금 + 기억 <span class="muted">__B_N__</span></h3>__B_LIST__</div>
+      <div class="col"><h3 style="color:var(--primary)">C 위키 <span class="muted">__C_N__</span></h3>__C_LIST__</div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>작업 방식이 어떻게 바뀌나</h2>
+    <table>
+      <thead><tr><th></th><th>전</th><th class="pick"><span class="dot"></span>후 (위키)</th></tr></thead>
+      <tbody>
+        <tr><th>멘토가 하는 일</th><td>수집 → 주제 뽑기 → 회차별 목록에서 고르기</td><td>수집만 하면 새 원문이 위키에 들어감 → 주제 지도에서 고르기 · 가끔 정리 결과 확인</td></tr>
+        <tr><th>AI가 도는 때</th><td>주제 뽑기를 누를 때마다 원문 전체를 처음부터</td><td>수집이 끝날 때 새 원문만(1편에 1분 안팎) · 고를 때 그 주제 원문만 깊게</td></tr>
+        <tr><th>주제 화면</th><td>회차별 카드 목록 — 되풀이가 쌓임</td><td>분야별 주제 지도 — 카드마다 원문 수·새 재료·쓴 글</td></tr>
+        <tr><th>서재가 커지면</th><td>한 번에 읽는 양이 계속 는다</td><td>한 번에 읽는 양은 새 원문 + 관련 주제 페이지뿐</td></tr>
+        <tr><th>사람이 쥐는 것</th><td>카드 고르기</td><td>카드 고르기 + 정리(합치기) 확인. 위키가 바뀐 내용은 git 기록으로 보인다</td></tr>
+        <tr><th>그대로인 것</th><td colspan="2">제목 후보(astra) · 과정 1·2·3 · 피드백 · 분량 · 그림 · 확정. 글은 언제나 원문 전체로 쓴다</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:16px">걸린 시간 — A 101초 · B 116 + 175초 · C 처음 40편 약 37분(22편 20분 · 정리 2분 · 18편 14분 · 후보 1분), 이후 원문 1편에 1분 안팎.</p>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <h2>시험하지 못한 것과 다음</h2>
+    <div class="rows">
+      <div><span class="ic">○</span><span>원문 40편, 넣는 순서 한 가지로만 시험했다. 수백 편은 아직이다 — Karpathy 원문이 상정한 규모는 약 100편, 그 뒤로는 검색 도구(qmd)를 붙이라고 한다.</span></div>
+      <div><span class="ic">○</span><span>고를 때 그 주제 원문만 깊게 읽는 단계, 수집 뒤 자동 넣기, 주제 지도 화면은 이 시험 뒤에 만든다.</span></div>
+      <div><span class="ic">●</span><span>위키 이력에 넣기 줄이 45개(원문 40편 중 5편은 두 번 적힘) — 처리 분포는 원문마다 마지막 줄 기준.</span></div>
+    </div>
+    <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="../wiki-eval/report/index.html">블라인드 비교 페이지</a>
+      <a class="btn secondary" href="2026-10-10-주제-위키-시험.md">글로 된 리포트(.md)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h3>위키</h3><ul><li>wiki/AGENTS.md — 규칙</li><li>wiki/index.md — 주제 목록</li><li>wiki/log.md — 이력</li></ul></div>
+      <div><h3>시험</h3><ul><li>wiki-eval/run_b.py · run_c.py</li><li>wiki-eval/B2·B3·C.json</li><li>wiki-eval/metrics.json · mapping.json</li></ul></div>
+      <div><h3>조사</h3><ul><li>runs/studio/llm-wiki-oss-조사-20261010.md</li><li>Astro-Han/karpathy-llm-wiki (MIT)</li><li>OKF v0.1 SPEC</li></ul></div>
+    </div>
+    <div class="legal">mentor-lab · 2026-10-10 · 디자인: Sparta 디자인 시스템 문서를 따름</div>
+  </div>
+</footer>
+<script>
+  const links = [...document.querySelectorAll(".tabs a")];
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+  }), { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("section").forEach((s) => io.observe(s));
+</script>
+</body>
+</html>

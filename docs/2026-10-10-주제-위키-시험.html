@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>주제 위키 시험</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  /* Sparta 디자인 시스템(.herdr-web-ui/design-20261009-192345-8f64450b.md)을 따름 — 흰 바탕, 잉크 #222, 강조색은 Rausch 하나 */
+  :root {
+    --canvas:#ffffff; --surface-soft:#f7f7f7; --surface-strong:#f2f2f2;
+    --hairline:#dddddd; --hairline-soft:#ebebeb; --border-strong:#c1c1c1;
+    --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292;
+    --primary:#ff385c; --primary-active:#e00b41; --on-primary:#ffffff;
+    --shadow: rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0;
+    --r-sm:8px; --r-md:14px; --r-xl:32px; --r-full:9999px;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; font-size:16px; line-height:1.5; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+  /* top-nav */
+  .top-nav { height:80px; border-bottom:1px solid var(--hairline); background:var(--canvas); position:sticky; top:0; z-index:5; }
+  .top-nav .wrap { height:100%; display:flex; align-items:center; justify-content:space-between; max-width:1280px; }
+  .wordmark { font-weight:700; font-size:18px; color:var(--primary); letter-spacing:-.01em; text-decoration:none; }
+  .tabs { display:flex; gap:28px; }
+  .tabs a { text-decoration:none; color:var(--muted); font-weight:600; font-size:16px; padding:28px 0 26px; border-bottom:2px solid transparent; }
+  .tabs a:hover { color:var(--ink); }
+  .tabs a.active { color:var(--ink); border-bottom-color:var(--ink); }
+  .date { color:var(--muted); font-size:14px; }
+
+  section { padding:64px 0; border-bottom:1px solid var(--hairline-soft); }
+  h1 { font-size:28px; font-weight:700; line-height:1.43; margin:0; }
+  h2 { font-size:21px; font-weight:700; line-height:1.43; margin:0 0 8px; }
+  h3 { font-size:16px; font-weight:600; line-height:1.25; margin:0; }
+  p { margin:0 0 12px; color:var(--body); }
+  .lead { color:var(--muted); font-size:16px; margin-top:8px; }
+  .muted { color:var(--muted); }
+  .small { font-size:14px; line-height:1.43; }
+
+  /* rating-display-card — 리포트에서 가장 큰 활자는 이 숫자 하나 */
+  .verdict { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:40px; }
+  .rating { text-align:center; }
+  .rating .row { display:flex; align-items:center; justify-content:center; gap:12px; }
+  .rating .num { font-size:64px; font-weight:700; line-height:1.1; letter-spacing:-1px; }
+  .rating .tag { font-weight:600; margin-top:8px; }
+  .rating .sub { color:var(--muted); font-size:14px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--hairline); margin-top:24px; }
+  .stats div { padding:16px 8px; text-align:center; border-right:1px solid var(--hairline); }
+  .stats div:last-child { border-right:0; }
+  .stats b { display:block; font-size:21px; font-weight:700; }
+  .stats span { color:var(--muted); font-size:14px; }
+  .quote { background:var(--surface-soft); border-radius:var(--r-md); padding:24px; }
+  .quote q { display:block; font-size:22px; font-weight:500; line-height:1.4; letter-spacing:-.44px; quotes:"“" "”"; }
+  .quote .who { color:var(--muted); font-size:14px; margin-top:12px; }
+
+  /* pill */
+  .pill { display:inline-flex; align-items:center; gap:6px; border-radius:var(--r-full); padding:6px 14px; font-size:14px; font-weight:500; background:var(--surface-strong); color:var(--ink); }
+  .pill.primary { background:var(--primary); color:var(--on-primary); }
+  .new-tag { display:inline-block; border-radius:var(--r-full); background:var(--primary); color:#fff; font-size:8px; font-weight:700; letter-spacing:.32px; text-transform:uppercase; padding:2px 6px; vertical-align:top; margin-left:4px; }
+
+  /* tables */
+  table { width:100%; border-collapse:collapse; font-size:14px; line-height:1.43; }
+  th, td { text-align:left; padding:12px 12px; border-bottom:1px solid var(--hairline); vertical-align:top; }
+  thead th { font-weight:600; color:var(--muted); font-size:14px; }
+  td.pick, th.pick { color:var(--ink); font-weight:600; }
+  th.pick .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--primary); margin-right:6px; }
+  tbody th { font-weight:500; color:var(--ink); width:28%; }
+
+  /* arm cards (property-card 모양) */
+  .arms { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .arm { border-radius:var(--r-md); overflow:hidden; border:1px solid var(--hairline); background:var(--canvas); transition:box-shadow .2s; }
+  .arm:hover { box-shadow:var(--shadow); }
+  .plate { aspect-ratio:4/3; background:var(--surface-soft); display:flex; align-items:center; justify-content:center; position:relative; }
+  .plate .letter { font-size:64px; font-weight:700; letter-spacing:-1px; color:var(--ink); }
+  .plate.win .letter { color:var(--primary); }
+  .plate .badge { position:absolute; top:12px; left:12px; background:#fff; border-radius:var(--r-full); padding:4px 10px; font-size:11px; font-weight:600; box-shadow:var(--shadow); }
+  .arm .meta { padding:16px; }
+  .arm .meta p { font-size:14px; margin:6px 0 0; color:var(--muted); }
+
+  /* topic lists */
+  .lists { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .col h3 { margin-bottom:12px; display:flex; justify-content:space-between; }
+  .topic { border:1px solid var(--hairline); border-radius:var(--r-md); padding:14px 16px; margin-bottom:8px; }
+  .topic b { display:block; font-size:15px; font-weight:600; }
+  .topic span { display:block; color:var(--muted); font-size:13px; line-height:1.4; margin-top:4px; }
+  .topic .src { color:var(--muted-soft); font-size:12px; margin-top:6px; }
+
+  /* amenity-row */
+  .rows { margin-top:16px; border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+  .rows div { display:flex; gap:16px; padding:12px 0; }
+  .rows .ic { width:24px; flex:none; text-align:center; }
+
+  .btn { display:inline-block; background:var(--primary); color:var(--on-primary); border-radius:var(--r-sm); padding:14px 24px; font-weight:500; text-decoration:none; min-height:48px; }
+  .btn:active { background:var(--primary-active); }
+  .btn.secondary { background:#fff; color:var(--ink); border:1px solid var(--ink); }
+
+  footer { padding:48px 0 80px; }
+  footer .cols { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  footer h3 { font-weight:500; margin-bottom:12px; }
+  footer li { list-style:none; font-size:14px; line-height:1.9; }
+  footer ul { padding:0; margin:0; }
+  .legal { border-top:1px solid var(--hairline); margin-top:32px; padding-top:16px; color:var(--muted); font-size:13px; }
+
+  @media (max-width:744px) {
+    .tabs { display:none; }
+    .verdict, .arms, .lists, footer .cols { grid-template-columns:1fr; }
+    section { padding:48px 0; }
+    .wrap { padding:0 16px; }
+    table { font-size:13px; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top">mentor-lab</a>
+    <div class="tabs">
+      <a href="#top" class="active">결론</a>
+      <a href="#why">문제</a>
+      <a href="#test">시험</a>
+      <a href="#result">결과</a>
+      <a href="#work">작업 방식</a>
+      <a href="#next">다음</a>
+    </div>
+    <span class="date">2026-10-10</span>
+  </div>
+</nav>
+
+<section id="top">
+  <div class="wrap">
+    <h1>주제는 위키로 쌓는다</h1>
+    <p class="lead">원문을 주제 지도(LLM 위키)에 쌓아 가는 방식과 지금 방식·땜질 방식을, 같은 원문 40편으로 블라인드 비교했다.</p>
+    <div class="verdict">
+      <div class="rating">
+        <div class="row">
+          <svg width="28" height="56" viewBox="0 0 28 56" aria-hidden="true"><path d="M24 4C10 12 6 30 14 52M14 14c-6-1-8-5-8-9 5 1 8 4 8 9zm-2 12c-6 0-9-4-9-8 5 0 9 3 9 8zm1 12c-6 1-9-3-10-7 5-1 9 2 10 7z" fill="none" stroke="#222" stroke-width="1.6"/></svg>
+          <div class="num">35</div>
+          <svg width="28" height="56" viewBox="0 0 28 56" aria-hidden="true" style="transform:scaleX(-1)"><path d="M24 4C10 12 6 30 14 52M14 14c-6-1-8-5-8-9 5 1 8 4 8 9zm-2 12c-6 0-9-4-9-8 5 0 9 3 9 8zm1 12c-6 1-9-3-10-7 5-1 9 2 10 7z" fill="none" stroke="#222" stroke-width="1.6"/></svg>
+        </div>
+        <div class="tag">원문 40편 중 위키 후보에 쓰인 원문</div>
+        <div class="sub">지금 방식 30편 · 땜질 방식 15편</div>
+        <div class="stats">
+          <div><b>11</b><span>작성자 2명 이상 주제</span></div>
+          <div><b>9 / 18</b><span>새 원문이 기존 주제에 합쳐짐</span></div>
+          <div><b>1</b><span>논지 하나에 카드 하나</span></div>
+        </div>
+      </div>
+      <div class="quote">
+        <q>오 위키 방식이 훨씬 낫네? 이걸로 가자.</q>
+        <div class="who">멘토 · 세 방식의 최종 후보를 1·2·3 블라인드로 본 뒤</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <h2>문제</h2>
+    <p>지금 방식은 서재의 원문 전부를 astra에게 한 번에 주고 주제 후보를 받는다. 지난 회차도, 이미 쓴 글도 모른다.</p>
+    <div class="rows">
+      <div><span class="ic">↻</span><span>같은 원문 22편으로 세 번 뽑으니 "내 전문성의 활동 반경"이 세 번 다 나오고, 인수인계·왜 더 바쁜가·요약과 분석·분석을 멈출 때가 되풀이됐다.</span></div>
+      <div><span class="ic">⇡</span><span>원문이 늘면 한 번에 읽는 양이 계속 커진다. 40편에서 프롬프트가 명령줄 한도(128KB)를 넘어 주제 뽑기가 멈췄다(표준입력으로 고침). 수백 편이면 흐려지고 결국 다 읽지 못한다.</span></div>
+    </div>
+    <h2 style="margin-top:40px">검토한 길</h2>
+    <table>
+      <thead><tr><th>길</th><th>판단</th></tr></thead>
+      <tbody>
+        <tr><th>Supabase 벡터 DB</th><td>버림 — 원문 대부분이 "AI·자동화"라 벡터상 다 가깝게 붙어 묶음이 쓸모없고, 인프라만 는다</td></tr>
+        <tr><th>Karpathy LLM Wiki</th><td><span class="pill primary">채택</span> 원문(불변) · 위키(LLM이 쓰고 고침) · 규칙 파일, 넣기·묻기·점검</td></tr>
+        <tr><th>OKF v0.1 (Google)</th><td>형식으로 채택 — YAML 머리말 <code>type</code> 필수, 예약 파일 index.md·log.md, 표준 Markdown 링크</td></tr>
+        <tr><th>Hermes Agent</th><td>안 씀 — 이 PC에 없고, 위키만을 위해 실행 환경·기억을 하나 더 둘 이유가 약하다. llm-wiki 스킬의 규칙만 참고</td></tr>
+        <tr><th>오픈소스 8개 (aside 조사)</th><td>Astro-Han/karpathy-llm-wiki(MIT)를 바탕으로 — "같은 핵심 논지면 기존 페이지에 합친다"가 되풀이를 정면으로 다룬다. llm-wiki-compiler는 임베딩이 필요하고 중복 판정이 제목 일치 수준</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:16px">원문 보호는 지침이 아니라 실행 환경으로 강제했다 — astra를 wiki/ 안에서만 쓰기 가능한 샌드박스로 돌려, 원문 폴더에 쓰면 "읽기 전용 파일 시스템"으로 막힌다(시험으로 확인).</p>
+  </div>
+</section>
+
+<section id="test">
+  <div class="wrap">
+    <h2>시험</h2>
+    <p>같은 원문, 같은 순서(10-07에 모은 22편 → 10-10 자동 수집 18편)로 세 방식을 돌려 원문 40편 시점의 최종 후보를 비교했다. 별도 워크트리에서 하고 쓰던 작업실은 건드리지 않았다. 미리 정한 규칙: <b>B가 C만큼 좋으면 B.</b> 주제의 질은 멘토가 블라인드로 판단하고, 기계 지표는 보조 근거로만 쓴다.</p>
+    <div class="arms">
+      <div class="arm"><div class="plate"><span class="letter">A</span></div><div class="meta"><h3>지금 방식</h3><p>원문 전부를 한 번에. 22편으로 3회, 40편으로 1회 — 기존 회차 그대로</p></div></div>
+      <div class="arm"><div class="plate"><span class="letter">B</span></div><div class="meta"><h3>지금 방식 + 기억</h3><p>같은 지시에 "이미 낸 주제·쓴 글과 겹치지 않게"만 더함 — 값싼 땜질</p></div></div>
+      <div class="arm"><div class="plate win"><span class="badge">멘토 선택</span><span class="letter">C</span></div><div class="meta"><h3>위키</h3><p>22편을 한 편씩 넣기 → 정리 → 18편 넣기 → 후보 내기</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="result">
+  <div class="wrap">
+    <h2>결과</h2>
+    <table>
+      <thead><tr><th></th><th>A 지금</th><th>B 지금 + 기억</th><th class="pick"><span class="dot"></span>C 위키</th></tr></thead>
+      <tbody><tr><th>주제 수</th><td>15</td><td>11</td><td class="pick">20</td></tr><tr><th>앞 회차와 겹치는 주제</th><td>10</td><td>0</td><td class="pick">10 (A 1~3회차와 견줌 — 단, 회차마다 새 카드가 아니라 한 페이지에 쌓임)</td></tr><tr><th>작성자 2명 이상인 주제</th><td>15</td><td>2</td><td class="pick">11</td></tr><tr><th>원문 1편짜리 주제</th><td>0</td><td>8</td><td class="pick">9</td></tr><tr><th>쓴 원문(40편 중)</th><td>30</td><td>15</td><td class="pick">35</td></tr><tr><th>새로 모은 18편 중 쓴 것</th><td>12</td><td>14</td><td class="pick">14</td></tr><tr><th>같은 주제로 보이는 쌍(목록 안)</th><td>2</td><td>0</td><td class="pick">1</td></tr><tr><th>이미 쓴 글과 겹치는 주제</th><td>1</td><td>0</td><td class="pick">1</td></tr><tr><th>새 18편 처리</th><td>—</td><td>—</td><td class="pick">합침 9 · 새 주제 7 · 보탬 없음 2</td></tr><tr><th>걸린 시간 (astra)</th><td>101초</td><td>116 + 175초</td><td class="pick">처음 40편 약 37분 · 이후 1편당 ~1분</td></tr></tbody>
+    </table>
+    <div class="rows" style="margin-top:32px">
+      <div><span class="ic">A</span><span>되풀이가 그대로다. 회차마다 같은 주제를 새 카드로 다시 쌓고 쓴 글을 잊는다.</span></div>
+      <div><span class="ic">B</span><span>되풀이는 없앴지만 얇아졌다. 굵은 주제를 피하느라 원문 하나짜리 곁가지로 밀려나 40편 중 15편만 썼다 — 회차를 거듭할수록 더 얇아질 방식.</span></div>
+      <div><span class="ic" style="color:var(--primary);font-weight:700">C</span><span>예전 주제가 다시 나오되 논지 하나에 카드 하나로 남고, 새 원문 절반이 기존 주제에 합쳐져 두꺼워졌다. 쓴 글 두 개는 위키가 스스로 표시해 후보에서 뺐다. 남은 약점은 원문 1편짜리 주제 9개 — 재료를 더 모으거나 정리에서 묶을 대상.</span></div>
+    </div>
+    <h2 style="margin-top:48px">세 방식의 최종 후보</h2>
+    <div class="lists">
+      <div class="col"><h3>A 지금 <span class="muted">15</span></h3><div class="topic"><b>같은 질문, 다른 숫자</b><span>AI에게 같은 실적을 물어도 집계 기간과 대상, 계산 방식에 따라 답이 달라질 수 있다. 사용량·비용·실적을 정확하게 다루려면 우리 조직이 쓰는 숫자의 정의부터 맞춰야 한다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>출처를 확인하는 습관</b><span>AI 답변에 출처가 붙어 있어도 원문이 실제로 그 주장을 뒷받침하는지 확인해야 한다. AI 활용의 다음 단계는 질문하는 능력과 함께 근거를 찾아 대조하는 습관을 익히는 것이다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>회의록 다음의 일</b><span>회의록이 빨리 완성되어도 담당자와 완료 기준이 없으면 일은 움직이지 않는다. AI가 정리한 기록에서 미결정 사항을 찾아내고, 누가 무엇을 언제까지 할지 확정하는 과정이 회의의 성과를 만든다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>AI도 헷갈리는 최종본</b><span>자료가 여러 곳에 흩어지고 최신본이 불분명하면 AI에게 일을 맡길 때마다 설명과 확인을 반복하게 된다. 자료별 기준 저장 위치와 파일 이름 규칙을 정하는 작은 정리가 자동화의 출발점이다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>AI에게 필요한 회사 지도</b><span>회사 일을 돕는 AI에는 문서 내용뿐 아니라 담당자, 관련 업무, 이전 결정 사이의 연결도 필요하다. 필요한 자료를 업무 관계와 함께 찾을 수 있도록 정리하면 매번 배경을 설명하는 수고를 줄일 수 있다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>인수인계는 평소 기록에서</b><span>AI가 정리하는 인수인계서의 품질은 평소 남겨둔 기록에 달려 있다. 업무 절차와 함께 결정 이유, 예외 상황, 미완료 과제를 기록해야 후임자가 업무의 맥락까지 이어받을 수 있다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>AI에게 주는 세 줄 요청서</b><span>현재 상황, 꼭 지킬 조건, 원하는 결과를 구체적으로 전달하면 AI가 임의로 판단해야 할 빈칸이 줄어든다. 엑셀 취합이나 보고서 작성처럼 익숙한 업무부터 동료에게 부탁하듯 요청을 정리해볼 수 있다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>경험을 넓혀 쓰는 AI</b><span>AI로 할 수 있는 일이 늘어날수록 좋은 결과를 판별하는 자기 분야의 기준이 중요해진다. 오래 쌓은 업무 경험은 AI를 통해 분석과 문서, 새로운 업무 도구까지 더 넓게 활용할 수 있는 자산이다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>분석을 멈출 줄 아는 판단</b><span>AI의 장애 진단 실험은 원인을 분석하는 능력과 조치 시점을 정하는 판단이 다를 수 있음을 보여준다. 사무·현장 업무에서도 영향 범위와 허용된 조치, 되돌릴 수 있는지를 아는 담당자의 경험이 중요하다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>반복 업무의 작은 절약</b><span>메일 분류, 일정 취합, 회의 전 자료 모으기처럼 자주 반복하는 준비 업무에도 AI를 활용할 여지가 크다. 사람이 확인할 초안과 요약을 받는 방식부터 시작하면 실제로 줄어든 수고를 확인하기 쉽다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>만든 자동화, 얼마나 쓰나요</b><span>만들어 둔 AI 도구와 업무 매뉴얼이 많아도 실제로 쓰이지 않으면 관리할 일만 늘어난다. 반복해서 사용하는지, 다른 업무와 연결되는지, 유지할 가치가 있는지를 기준으로 자동화를 골라야 한다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>교육 뒤에 남을 한 가지</b><span>AI 교육은 각자가 자기 업무 하나에 적용한 결과물을 남길 때 실무와 연결된다. 직접 만든 결과를 확인하고 동료와 적용 경험을 나누는 과정이 다음 활용으로 이어진다.</span><div class="src">원문 3편 · 작성자 2명</div></div><div class="topic"><b>AI를 쓰는데 더 바쁜 이유</b><span>AI로 산출물이 늘면 검토와 수정 부담도 늘고, 능숙한 사람에게 일이 몰릴 수 있다. 생산성을 평가할 때는 만든 양뿐 아니라 확인에 드는 시간과 팀의 업무 배분까지 함께 살펴야 한다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>우리 업무로 보는 AI 시험</b><span>공개 성능 순위가 높아도 우리 회사의 용어와 업무 조건에서 좋은 결과를 낸다는 보장은 없다. 자주 하는 업무로 평가 사례를 만들고 정확성, 반복 실행의 일관성, 처리 시간과 비용을 함께 비교해야 한다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>AI 티를 지우는 기준</b><span>보고서나 안내문을 고칠 때 ‘AI 티를 없애 달라’는 주문만으로는 원하는 결과를 얻기 어렵다. 누가 읽고 무엇을 이해하거나 결정해야 하는지, 왜 이 표현과 형식이 필요한지를 정해야 결과물에 업무의 특성이 담긴다.</span><div class="src">원문 3편 · 작성자 3명</div></div></div>
+      <div class="col"><h3>B 지금 + 기억 <span class="muted">11</span></h3><div class="topic"><b>AI 교육에 내 일을 가져가자</b><span>AI 교육은 수강생이 실제로 막히는 업무를 가져와 쓸 수 있는 결과물을 직접 만들어보는 과정으로 설계할 수 있다. 사전에 각자의 어려움을 파악하고, 배운 것을 자기 업무에 어떻게 적용했는지 나누면 교육과 실무 사이의 거리를 좁힐 수 있다.</span><div class="src">원문 3편 · 작성자 1명</div></div><div class="topic"><b>타이핑 대신 말로 부탁하기</b><span>업무 상황과 조건을 길게 타이핑하기 부담스럽다면 말로 설명하고 AI에게 요청서로 정리하게 할 수 있다. 말로 풀어낸 내용을 확인하는 방식은 글쓰기에 익숙하지 않은 직원도 자신의 업무 지식을 AI에게 전달할 수 있는 출발점이다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>진짜 최종본은 어디에</b><span>같은 자료가 메일과 공유폴더에서 따로 수정되면 사람도 AI도 무엇을 기준으로 삼아야 할지 혼란스러워진다. 자료 종류별로 기준이 되는 보관 위치와 파일명 규칙을 정하고, 함께 일하는 사람들이 같은 원본을 참조하도록 하자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI 스킬도 프로그램처럼</b><span>AI용 업무 절차 파일인 &#x27;스킬&#x27;에는 프로그램 실행을 유도하는 지시가 담길 수 있다. 외부 스킬을 가져올 때는 출처와 관리 상태, 실제로 수행할 동작을 살피고 사내 프로그램 도입 기준에 맞게 검토할 필요가 있다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>탐색용 답과 확정할 답</b><span>아이디어의 가능성을 살피는 분석과 정산·경영 보고에 쓰는 수치는 오류가 미치는 영향이 다르다. 탐색 단계에서는 가정과 미확인 부분을 드러내고, 공식 판단에 사용할 때는 검증된 자료로 확정하는 등 결과의 용도에 맞춰 검증 수준을 정하자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>고객 명단을 절반 지운 이유</b><span>AI로 제휴 후보와 제안서를 빠르게 만들 수 있어도 모든 후보에게 제안할 이유가 생기는 것은 아니다. 수집한 기업의 절반 이상을 제외한 사례를 통해, 상대의 필요를 살피고 지금 함께 시작할 한 가지를 고르는 영업·협업의 판단을 이야기한다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>회의록에 적혔다고 합의된 걸까</b><span>AI가 담당자와 할 일을 표로 정리해도 회의에서 정하지 않은 책임과 완료 기준까지 확정되지는 않는다. 회의록에 드러난 미결정 사항을 구성원들이 조율하고 실제 업무로 등록하는 절차가 있어야 기록이 실행으로 이어진다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI끼리 넘겨줄 일도 정하자</b><span>여러 AI에게 일을 나눠 맡길 때는 각자의 역할과 함께 결과를 누가 모아 다음 단계로 넘길지도 정해야 한다. AI들이 메신저에서 업무를 주고받는 사례를 통해, 사람이 진행 상황과 인계 과정을 확인할 수 있는 협업 방식을 살펴본다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>불편을 알려주는 것도 AI 활용</b><span>현업 직원은 AI가 잘못 알아듣는 사내 용어, 빠뜨리는 업무 항목, 사용하기 불편한 지점을 구체적으로 알려 사내 도구 개선에 참여할 수 있다. 현업의 요구와 개발·지원 조직의 구현이 오가는 통로를 만드는 것도 전사 AI 활용의 중요한 조건이다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>추천 글의 할인코드</b><span>AI 도구 소개에는 실제 사용 경험과 앰배서더 활동, 가입 할인이나 추천 보상이 함께 담기기도 한다. 이런 관계를 확인하고 소개된 성과의 업무 환경과 적용 조건을 살펴, 혜택의 크기와 업무에서의 쓸모를 각각 판단하는 읽기 습관을 제안한다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>읽을 권한과 전달할 범위</b><span>AI로 인수인계서를 만들 때는 작성자가 열람할 수 있는 자료 중에서도 후임자에게 필요한 내용과 전달할 수 있는 범위를 따로 정해야 한다. 여러 해의 대화를 한 문서로 모으면 개인에 대한 평가나 인증정보까지 본래 맥락을 벗어나 전달될 수 있기 때문이다.</span><div class="src">원문 1편 · 작성자 1명</div></div></div>
+      <div class="col"><h3 style="color:var(--primary)">C 위키 <span class="muted">20</span></h3><div class="topic"><b>AI가 다시 찾을 업무 기록을 남기자</b><span>AI가 업무 맥락을 이어 가도록 결정사항과 진행 기록을 연결해 남기고, 답하기 전에 관련 기록을 찾아보게 하자. 담당 업무에 필요한 기록을 골라 갱신하는 관리가 함께 필요하다.</span><div class="src">원문 5편 · 작성자 5명</div></div><div class="topic"><b>AI에게 목적과 조건부터</b><span>AI에 업무를 맡길 때는 목적과 필수 조건, 원하는 결과 형식을 묶어 전달하자. 담당자에게 당연한 조건도 요청에 명시해야 의도와 다른 결과를 줄일 수 있다.</span><div class="src">원문 5편 · 작성자 4명</div></div><div class="topic"><b>AI에게 숫자를 맡기려면 계산 기준부터</b><span>AI가 업무 수치를 정확히 답하게 하려면 지표의 뜻과 계산 규칙을 정하고, 그 기준에 따라 실제 데이터를 조회하게 해야 한다. 계산 기준을 갱신하고 결과를 점검하는 절차도 함께 마련하자.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>AI는 우리 업무로 평가하자</b><span>업무에 맞는 AI를 고르려면 실제 업무 예시와 채점 기준으로 여러 번 시험하고 품질·비용·시간을 함께 비교하자. 현업에서 허용할 수 없는 오류와 반드시 지켜야 할 조건은 우리가 정해야 한다.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>팀의 판단 기준부터 공유하자</b><span>AI를 팀 업무에 적용하려면 각자의 업무 요령과 좋은 결과를 가르는 판단 기준을 공유해야 한다. 역할과 업무 흐름, 우선순위와 허용된 조치를 팀과 AI가 참고할 수 있게 정리하자.</span><div class="src">원문 3편 · 작성자 3명</div></div><div class="topic"><b>직접 쓰고 고치며 AI를 익히자</b><span>AI 활용 능력은 쓰임새가 분명한 결과물을 실제 업무에 거듭 적용하고 고치는 과정에서 기를 수 있다. 사용하면서 발견한 문제를 다음 학습과 실험의 출발점으로 삼자.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI가 참고할 자료부터 연결하자</b><span>AI 답변이 아쉽다면 업무에 필요한 근거 자료를 참고할 수 있게 연결했는지 살펴보자. 공식 자료를 조회할 경로를 마련하고, 연결한 뒤에도 답변의 근거를 확인해야 한다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI 회의록에는 다음 할 일이 보여야 한다</b><span>AI 회의록에는 담당자별 할 일과 기한, 미결 안건이 드러나야 한다. 사람이 책임과 완료 기준을 확정하고 후속 업무로 등록해야 기록이 실행으로 이어진다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI가 실행해도 문제 정의는 사람의 몫</b><span>AI가 실행과 반복 실험을 빠르게 해도 풀 문제와 기대 결과, 개선 순서를 정하는 일은 사람이 맡아야 한다. 업무 지식으로 결과를 해석하고 다음 시도를 골라야 실행 속도가 실제 개선으로 이어진다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI 디자인을 고칠 때는 원인부터</b><span>AI 디자인이 뻔해 보인다면 대상 설명과 요청이 모호한지, 선택 기준이나 검토가 빠졌는지부터 살펴보자. 색상과 배치를 고른 이유를 확인해야 원인에 맞는 수정을 할 수 있다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>자동화할 업무의 데이터부터 모으자</b><span>업무 자동화를 시작하려면 필요한 정보를 모으고 AI가 읽고 기록할 곳부터 마련하자. 정보 종류별 저장 위치와 파일 이름 규칙, 자료에 접근하는 경로가 자동화의 토대가 된다.</span><div class="src">원문 2편 · 작성자 2명</div></div><div class="topic"><b>AI 답변은 근거 원문까지 확인하자</b><span>AI에게 질문하는 법을 익힐 때는 출처를 요청하고 원문이 실제로 답변을 뒷받침하는지 확인하는 과정까지 함께 연습하자. 사내 교육도 구성원이 평소 답을 어떻게 확인하는지 살펴 설계할 필요가 있다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>여러 AI를 쓰려면 일의 연결까지</b><span>여러 AI에 일을 맡겨도 결과 취합과 다음 단계로의 전달은 사람에게 남을 수 있다. 역할 분담에 더해 작업 배분과 결과 전달 과정까지 설계하고 담당을 확인할 수 있게 하자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI로 제안서를 만들어도 설득은 사람의 몫</b><span>AI로 제안 자료를 빠르게 준비해도 상대에게 필요한 제안을 고르고 그 이유를 설명하는 책임은 사람에게 남는다. 고객의 상황을 살펴 지금 함께 시작할 수 있는 일로 제안을 좁히자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI 지원을 현업의 활용으로 잇자</b><span>회사의 AI 지원은 여러 직군의 실제 사용과 구체적인 업무 요구로 이어져야 한다. 도구를 쓸 여건을 마련하고 현업에서 필요한 쓰임새를 찾아 요구하는 일을 함께 살펴보자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI 스킬은 쓸 기준으로 고르자</b><span>AI가 참고하는 업무 절차인 스킬을 모을 때는 어느 업무에 쓸지부터 정하자. 실제 사용 이력과 업무 적합성, 관리 상태와 이용 조건을 살펴 필요한 것을 고르는 기준이 있어야 한다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI로 내 전문성을 더 넓게 쓰자</b><span>자기 분야의 전문성과 판단 기준을 다지면서 AI로 그 전문성을 적용할 업무 범위를 넓히자. 직접 만들 수 있는 것이 많아질수록 무엇을 만들고 어느 수준까지 완성할지 고르는 판단이 중요해진다.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>AI와 공부할 때는 내 일에 연결하자</b><span>AI와 함께 자료를 정리하고 학습 모임을 준비했다면, 모인 시간에는 배운 개념을 자기 업무에 어떻게 쓸지 직접 설명해 보자. 학습 내용을 자신의 상황에 연결하는 과정을 모임의 중심에 두자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>다시 정리하기 전에 원자료부터</b><span>AI 활용 자료를 모으라는 요청도 불필요한 반복 업무가 될 수 있다. 새로 복사하고 정리하기 전에 작성자가 이미 정리한 자료를 공유받을 수 있는지 확인하자.</span><div class="src">원문 1편 · 작성자 1명</div></div><div class="topic"><b>문체만으로 AI 글을 단정하지 말자</b><span>반복되는 표현이나 반듯한 구성만으로 AI가 쓴 글이라고 단정하기는 어렵다. 경험담과 감정이 담긴 말투도 AI가 흉내 낼 수 있으므로 자연스러운 문체 역시 작성 주체를 판단하는 충분한 근거가 되지 않는다.</span><div class="src">원문 1편 · 작성자 1명</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>작업 방식이 어떻게 바뀌나</h2>
+    <table>
+      <thead><tr><th></th><th>전</th><th class="pick"><span class="dot"></span>후 (위키)</th></tr></thead>
+      <tbody>
+        <tr><th>멘토가 하는 일</th><td>수집 → 주제 뽑기 → 회차별 목록에서 고르기</td><td>수집만 하면 새 원문이 위키에 들어감 → 주제 지도에서 고르기 · 가끔 정리 결과 확인</td></tr>
+        <tr><th>AI가 도는 때</th><td>주제 뽑기를 누를 때마다 원문 전체를 처음부터</td><td>수집이 끝날 때 새 원문만(1편에 1분 안팎) · 고를 때 그 주제 원문만 깊게</td></tr>
+        <tr><th>주제 화면</th><td>회차별 카드 목록 — 되풀이가 쌓임</td><td>분야별 주제 지도 — 카드마다 원문 수·새 재료·쓴 글</td></tr>
+        <tr><th>서재가 커지면</th><td>한 번에 읽는 양이 계속 는다</td><td>한 번에 읽는 양은 새 원문 + 관련 주제 페이지뿐</td></tr>
+        <tr><th>사람이 쥐는 것</th><td>카드 고르기</td><td>카드 고르기 + 정리(합치기) 확인. 위키가 바뀐 내용은 git 기록으로 보인다</td></tr>
+        <tr><th>그대로인 것</th><td colspan="2">제목 후보(astra) · 과정 1·2·3 · 피드백 · 분량 · 그림 · 확정. 글은 언제나 원문 전체로 쓴다</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:16px">걸린 시간 — A 101초 · B 116 + 175초 · C 처음 40편 약 37분(22편 20분 · 정리 2분 · 18편 14분 · 후보 1분), 이후 원문 1편에 1분 안팎.</p>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <h2>시험하지 못한 것과 다음</h2>
+    <div class="rows">
+      <div><span class="ic">○</span><span>원문 40편, 넣는 순서 한 가지로만 시험했다. 수백 편은 아직이다 — Karpathy 원문이 상정한 규모는 약 100편, 그 뒤로는 검색 도구(qmd)를 붙이라고 한다.</span></div>
+      <div><span class="ic">○</span><span>고를 때 그 주제 원문만 깊게 읽는 단계, 수집 뒤 자동 넣기, 주제 지도 화면은 이 시험 뒤에 만든다.</span></div>
+      <div><span class="ic">●</span><span>위키 이력에 넣기 줄이 45개(원문 40편 중 5편은 두 번 적힘) — 처리 분포는 원문마다 마지막 줄 기준.</span></div>
+    </div>
+    <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="../wiki-eval/report/index.html">블라인드 비교 페이지</a>
+      <a class="btn secondary" href="2026-10-10-주제-위키-시험.md">글로 된 리포트(.md)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h3>위키</h3><ul><li>wiki/AGENTS.md — 규칙</li><li>wiki/index.md — 주제 목록</li><li>wiki/log.md — 이력</li></ul></div>
+      <div><h3>시험</h3><ul><li>wiki-eval/run_b.py · run_c.py</li><li>wiki-eval/B2·B3·C.json</li><li>wiki-eval/metrics.json · mapping.json</li></ul></div>
+      <div><h3>조사</h3><ul><li>runs/studio/llm-wiki-oss-조사-20261010.md</li><li>Astro-Han/karpathy-llm-wiki (MIT)</li><li>OKF v0.1 SPEC</li></ul></div>
+    </div>
+    <div class="legal">mentor-lab · 2026-10-10 · 디자인: Sparta 디자인 시스템 문서를 따름</div>
+  </div>
+</footer>
+<script>
+  const links = [...document.querySelectorAll(".tabs a")];
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+  }), { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("section").forEach((s) => io.observe(s));
+</script>
+</body>
+</html>
