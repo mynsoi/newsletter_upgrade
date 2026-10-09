@@ -45,7 +45,7 @@ def run(name):
     for it in items:
         it["sources"] = [s for s in it.get("sources", []) if s in known]
     (EVAL / f"{name}.json").write_text(json.dumps([i for i in items if i["sources"]], ensure_ascii=False, indent=1))
-    f = EVAL / "timing.json"
+    f = EVAL / "timing-b.json"
     rows = json.loads(f.read_text()) if f.exists() else []
     rows.append({"step": name, "sec": sec, "note": f"{len(items)}개"})
     f.write_text(json.dumps(rows, ensure_ascii=False, indent=1))

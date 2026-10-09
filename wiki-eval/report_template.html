@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>주제 뽑기 비교</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap" />
+<style>
+  :root { --page:#f6f6f8; --ink:#141418; --ink2:#55555f; --ink3:#8b8b95; --panel:#fff; --line:rgb(0 0 0 / .08); --acc:#7c3aed; --good:#059669; --bad:#e11d48; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page:#0b0b0e; --ink:#f2f2f4; --ink2:#b4b4bd; --ink3:#73737c; --panel:#16161b; --line:rgb(255 255 255 / .08); } }
+  :root[data-theme="dark"] { --page:#0b0b0e; --ink:#f2f2f4; --ink2:#b4b4bd; --ink3:#73737c; --panel:#16161b; --line:rgb(255 255 255 / .08); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--page); color:var(--ink); font-family:"Noto Sans KR", system-ui, sans-serif; }
+  header { padding:40px 32px 16px; max-width:1500px; margin:0 auto; display:flex; align-items:end; justify-content:space-between; gap:16px; }
+  h1 { font-size:34px; margin:0; letter-spacing:-.02em; }
+  .bar { display:flex; gap:8px; }
+  button { font:inherit; cursor:pointer; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:8px 16px; }
+  button.primary { background:var(--ink); color:var(--page); border-color:var(--ink); }
+  main { max-width:1500px; margin:0 auto; padding:0 32px 60px; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; }
+  section h2 { font-size:56px; margin:8px 0 12px; color:var(--ink3); }
+  section h2 small { display:block; font-size:15px; color:var(--acc); margin-top:4px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px 18px; margin-bottom:12px; }
+  .card .n { font-size:12px; color:var(--ink3); }
+  .card h3 { margin:4px 0 6px; font-size:17px; }
+  .card p { margin:0 0 8px; color:var(--ink2); font-size:14px; line-height:1.65; word-break:keep-all; }
+  .card ul { margin:0; padding:0; list-style:none; font-size:12.5px; color:var(--ink3); }
+  .card li a { color:var(--ink2); text-decoration:none; }
+  .card li a:hover { text-decoration:underline; }
+  .vote { margin-top:10px; display:flex; gap:6px; }
+  .vote button { padding:4px 12px; font-size:12.5px; }
+  .vote button.on[data-v="1"] { background:var(--good); color:#fff; border-color:var(--good); }
+  .vote button.on[data-v="0"] { background:var(--bad); color:#fff; border-color:var(--bad); }
+  .score { font-size:14px; color:var(--ink2); margin-bottom:10px; }
+  #reveal { display:none; max-width:1500px; margin:0 auto; padding:0 32px 80px; }
+  #reveal.show { display:block; }
+  table { width:100%; border-collapse:collapse; background:var(--panel); border-radius:14px; overflow:hidden; font-size:14px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top; }
+  thead th { background:color-mix(in oklab, var(--acc) 10%, var(--panel)); }
+  h4 { font-size:20px; margin:32px 0 10px; }
+  li { line-height:1.7; }
+  @media (max-width: 900px) { main { grid-template-columns:1fr; padding:0 16px 40px; } header, #reveal { padding-left:16px; padding-right:16px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>주제 후보 비교 — 원문 40편</h1>
+  <div class="bar">
+    <button id="theme">밝게/어둡게</button>
+    <button class="primary" id="open">공개</button>
+  </div>
+</header>
+<main>__COLS__</main>
+<div id="reveal">
+  <h4>정체</h4>
+  <div id="map"></div>
+  <h4>기계 지표 (보조 근거)</h4>
+  <table><thead><tr><th></th>__HEAD__</tr></thead><tbody>__ROWS__</tbody></table>
+  <h4>걸린 시간 (astra)</h4>
+  <ul>__TIMING__</ul>
+  <h4>작업 방식은 어떻게 바뀌나</h4>
+  <table>
+    <thead><tr><th></th><th>지금 (A)</th><th>지금 + 기억 (B)</th><th>위키 (C)</th></tr></thead>
+    <tbody>
+      <tr><th>멘토가 누르는 것</th><td>수집 → 주제 뽑기 → 회차 목록에서 카드 고르기</td><td>같음</td><td>수집만 누르면 새 원문이 저절로 위키에 들어감 → 주제 지도에서 카드 고르기. 가끔 '정리'</td></tr>
+      <tr><th>AI가 도는 때</th><td>주제 뽑기를 누를 때마다 원문 전체를 처음부터</td><td>같음 + 지난 주제 목록을 함께 읽음</td><td>수집이 끝날 때 새 원문만 넣음. 카드를 고를 때는 그 주제의 원문만 깊게</td></tr>
+      <tr><th>주제 화면</th><td>회차별 카드 목록(되풀이가 쌓임)</td><td>회차별 목록, 되풀이는 줄어듦</td><td>분야별 주제 지도 — 카드마다 원문 수·새 재료·쓴 글 표시</td></tr>
+      <tr><th>서재가 커지면</th><td>한 번에 읽는 양이 계속 늘어남</td><td>같음 + 기억 목록도 늘어남</td><td>한 번에 읽는 양은 새 원문 + 관련 주제 페이지뿐</td></tr>
+      <tr><th>사람이 쥐는 것</th><td>카드 고르기</td><td>카드 고르기</td><td>카드 고르기 + 정리(합치기) 결과 확인. 위키가 바뀐 내용은 git 기록으로 보임</td></tr>
+      <tr><th>그대로인 것</th><td colspan="3">제목 후보(astra) · 과정 1·2·3 · 피드백 · 분량 · 그림 · 확정. 글은 언제나 원문 전체로 쓴다</td></tr>
+    </tbody>
+  </table>
+</div>
+<script>
+  const MAP = __MAP__;
+  const key = (a, k) => `wiki-eval:${a}:${k}`;
+  const get = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const set = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  function score() {
+    document.querySelectorAll("section").forEach((s) => {
+      const a = s.dataset.arm, cards = s.querySelectorAll(".card");
+      let g = 0, b = 0;
+      cards.forEach((c) => { const v = get(key(a, c.dataset.k)); if (v === "1") g++; if (v === "0") b++; });
+      let el = s.querySelector(".score");
+      if (!el) { el = document.createElement("div"); el.className = "score"; s.querySelector("h2").after(el); }
+      el.textContent = `${cards.length}개 · 좋음 ${g} · 별로 ${b}`;
+    });
+  }
+  document.querySelectorAll("section").forEach((s) => {
+    const a = s.dataset.arm;
+    s.querySelectorAll(".card").forEach((c) => {
+      const v = get(key(a, c.dataset.k));
+      c.querySelectorAll(".vote button").forEach((btn) => {
+        if (btn.dataset.v === v) btn.classList.add("on");
+        btn.onclick = () => {
+          const on = btn.classList.contains("on");
+          c.querySelectorAll(".vote button").forEach((x) => x.classList.remove("on"));
+          if (!on) { btn.classList.add("on"); set(key(a, c.dataset.k), btn.dataset.v); } else set(key(a, c.dataset.k), "");
+          score();
+        };
+      });
+    });
+  });
+  score();
+  document.getElementById("open").onclick = () => {
+    document.getElementById("reveal").classList.add("show");
+    document.getElementById("map").innerHTML = Object.entries(MAP).map(([k, v]) => `<b>${k}</b> = ${v}`).join(" &nbsp;·&nbsp; ");
+    document.querySelectorAll("section").forEach((s) => { const h = s.querySelector("h2"); if (!h.querySelector("small")) h.insertAdjacentHTML("beforeend", `<small>${MAP[s.dataset.arm]}</small>`); });
+    document.getElementById("reveal").scrollIntoView({ behavior: "smooth" });
+  };
+  document.getElementById("theme").onclick = () => {
+    const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    r.dataset.theme = dark ? "light" : "dark";
+  };
+</script>
+</body>
+</html>

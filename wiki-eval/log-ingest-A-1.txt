@@ -1,0 +1,56 @@
+- threads/01 — 새 주제: [다시 정리하기 전에 원자료부터](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무방식/다시-정리하기-전에-원자료부터.md)
+- threads/02 — 새 주제: [문체만으로 AI 글을 단정하지 말자](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/AI리터러시/문체만으로-AI-글을-단정하지-말자.md)
+- threads/03 — 새 주제: [AI에게 목적과 조건부터](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/프롬프트/AI에게-목적과-조건부터.md)
+- threads/04 — 합침: [AI에게 목적과 조건부터](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/프롬프트/AI에게-목적과-조건부터.md)
+- threads/05 — 새 주제: [AI로 빨라져도 일이 줄지는 않는다](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무방식/AI로-빨라져도-일이-줄지는-않는다.md)(씀), [팀의 판단 기준부터 공유하자](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무방식/팀의-판단-기준부터-공유하자.md), [작은 반복부터 덜어내기](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무자동화/작은-반복부터-덜어내기.md)(진행 중)
+- threads/06 — 합침: [작은 반복부터 덜어내기](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무자동화/작은-반복부터-덜어내기.md); 새 주제: [직접 쓰고 고치며 AI를 익히자](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/AI리터러시/직접-쓰고-고치며-AI를-익히자.md)
+ 담당 업무에서 반복되는 부분을 돌아보고, AI에 맡길 수 있는 작은 범위를 고르는 데서 시작한다.
++- 기존 업무를 하면서 자동화까지 준비해야 하는 부담을 고려해, 적용 범위를 좁히는 이유를 설명한다.
++- 작은 업무를 맡겨 본 뒤 결과를 확인하고 안정적으로 쓸 수 있는지 살펴보는 과정을 다룬다.
++- 만든 자동화를 일상 업무에 거듭 사용하며 문제를 찾고, 원래 덜어내려던 일에 도움이 되는지 점검한다.
++
++## 함께 볼 주제
++- [AI로 빨라져도 일이 줄지는 않는다](../업무방식/AI로-빨라져도-일이-줄지는-않는다.md)
++- [팀의 판단 기준부터 공유하자](../업무방식/팀의-판단-기준부터-공유하자.md)
++- [직접 쓰고 고치며 AI를 익히자](../AI리터러시/직접-쓰고-고치며-AI를-익히자.md)
+diff --git a/wiki/프롬프트/AI에게-목적과-조건부터.md b/wiki/프롬프트/AI에게-목적과-조건부터.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..671fe0d6a48a1f3b0e10f53f8966e484bc24eafd
+--- /dev/null
++++ b/wiki/프롬프트/AI에게-목적과-조건부터.md
+@@ -0,0 +1,32 @@
++---
++type: topic
++title: AI에게 목적과 조건부터
++description: AI에 업무를 맡길 때 목적과 필수 조건, 원하는 결과 형식을 먼저 묶어 제시하자.
++tags: [프롬프트]
++timestamp: 2026-10-10
++status: 쓸 수 있음
++used_in: []
++---
++
++# AI에게 목적과 조건부터
++
++## 이 글이 말할 것
++AI에 업무를 맡길 때는 목적과 필수 조건을 먼저 정리하고, 어떤 작업을 어떤 형식으로 해 달라는 것인지 분명히 제시하자. 배경 설명 속에 요구 사항이 묻히지 않도록 요청의 구조를 잡는 것이 핵심이다.
++
++## 원문
++| 원문 | 작성자 · 날짜 | 이 원문이 보태는 것 |
++|---|---|---|
++| [threads/03](../../sources/originals/threads/03.md) · https://www.threads.com/@specal1849/post/DTENAj-kzQQ | @specal1849 · 2026-01-04 | 글쓰기 요청에서 용도·독자·분량을 정리하고 역할·조건·출력 형태를 묶는 방법을 제안한다. 작성자는 답글에서 앞쪽 배치가 모든 상황에 적용되는 것은 아니며 끝에 다시 정리하기도 한다고 덧붙인다. |
++| [threads/04](../../sources/originals/threads/04.md) · https://www.threads.com/@specal1849/post/DSB_BGTkt1M | @specal1849 · 2025-12-09 | 요약·분석처럼 맡길 작업을 동사로 구체화하고, 목적을 밝힌 뒤 제한 사항과 결과 형태를 구분해 적는 작성 방법을 보탠다. |
++
++## 쓸 수 있는 각도
++- 대상 독자와 글의 용도, 길이 제한이 뒤섞인 요청을 항목별로 정리하는 원문의 예시를 따라가 본다.
++- 역할을 지정할 때 막연한 경력 수식어보다 어떤 목적의 업무를 맡기는지 분명히 하는 데 초점을 둔다.
++- 긴 요청에서 반드시 지킬 조건과 참고 배경을 분리하고, 필요한 경우 끝에도 조건을 정리하는 방법을 살펴본다.
++- 같은 자료라도 요약을 원하는지 분석을 원하는지 먼저 정하고, 그 차이가 요청 문장에 드러나도록 동사를 고르는 데서 시작한다.
++
++## 함께 볼 주제
++- [다시 정리하기 전에 원자료부터](../업무방식/다시-정리하기-전에-원자료부터.md)
++- [문체만으로 AI 글을 단정하지 말자](../AI리터러시/문체만으로-AI-글을-단정하지-말자.md)
++- [팀의 판단 기준부터 공유하자](../업무방식/팀의-판단-기준부터-공유하자.md)
++- [직접 쓰고 고치며 AI를 익히자](../AI리터러시/직접-쓰고-고치며-AI를-익히자.md)
+
+tokens used
+71,322
