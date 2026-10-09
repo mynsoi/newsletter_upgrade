@@ -1,6 +1,22 @@
 # 위키 이력
 
 ## 2026-10-10
+- lint 점검 범위 | 주제 15개, 재료 원문 40개 중 연결된 원문 22개. 문체 참고용 `infuture/`와 보조 스냅숏 `*.snapshot.txt`는 원문 집계에서 제외.
+- lint 합침 | 없음. 주제 전체의 논지·원문 기여·각도를 비교했으며 같은 핵심 논지인 페이지는 찾지 못함.
+- lint 유사 주제 검토 | 근거 자료 연결·업무 맥락을 잇는 기록 관리·자동화용 데이터 준비는 목적이 다름. 사람이 풀 문제를 정하는 일·팀의 판단 기준 공유·요청의 목적과 조건 전달도 서로 다른 주장으로 유지함.
+- lint 유사 주제 검토 | 작은 반복 업무에서 성과를 내자는 주장과 실제 사용·개선으로 AI를 배우자는 주장은 구별됨. 숫자의 계산 기준을 관리하는 일과 실제 업무로 AI를 평가하는 일도 별도 논지로 유지함.
+- lint 너무 넓은 주제 | 없음. 현재 페이지는 각각 칼럼 한 편의 주장으로 묶을 수 있으며, 여러 각도도 해당 논지 안에 있음.
+- lint 원문 1개 주제 | [다시 정리하기 전에 원자료부터](업무방식/다시-정리하기-전에-원자료부터.md) ← [threads/01](../sources/originals/threads/01.md).
+- lint 원문 1개 주제 | [문체만으로 AI 글을 단정하지 말자](AI리터러시/문체만으로-AI-글을-단정하지-말자.md) ← [threads/02](../sources/originals/threads/02.md).
+- lint 원문 1개 주제 | [직접 쓰고 고치며 AI를 익히자](AI리터러시/직접-쓰고-고치며-AI를-익히자.md) ← [threads/06](../sources/originals/threads/06.md).
+- lint 원문 1개 주제 | [자동화할 업무의 데이터부터 모으자](업무자동화/자동화할-업무의-데이터부터-모으자.md) ← [threads/10](../sources/originals/threads/10.md).
+- lint 원문 1개 주제 | [AI 디자인을 고칠 때는 원인부터](AI리터러시/AI-디자인을-고칠-때는-원인부터.md) ← [threads/12](../sources/originals/threads/12.md).
+- lint 원문 1개 주제 | [AI로 내 전문성을 더 넓게 쓰자](업무방식/AI로-내-전문성을-더-넓게-쓰자.md) ← [linkedin/04](../sources/originals/linkedin/04.md).
+- lint 미연결 원문 | 18개. 모두 현재 log.md에 ingest 이력이 없음.
+- lint 미연결 원문 threads | [13](../sources/originals/threads/13.md), [14](../sources/originals/threads/14.md), [15](../sources/originals/threads/15.md), [16](../sources/originals/threads/16.md), [17](../sources/originals/threads/17.md), [18](../sources/originals/threads/18.md), [19](../sources/originals/threads/19.md).
+- lint 미연결 원문 linkedin | [11](../sources/originals/linkedin/11.md), [12](../sources/originals/linkedin/12.md), [13](../sources/originals/linkedin/13.md), [14](../sources/originals/linkedin/14.md), [15](../sources/originals/linkedin/15.md), [16](../sources/originals/linkedin/16.md), [17](../sources/originals/linkedin/17.md), [18](../sources/originals/linkedin/18.md), [19](../sources/originals/linkedin/19.md), [20](../sources/originals/linkedin/20.md), [21](../sources/originals/linkedin/21.md).
+- lint 깨진 링크 | 없음. index.md·주제 페이지·log.md의 상대경로 Markdown 링크 대상 파일이 모두 존재함.
+- lint 목차·메타데이터 | index.md의 15개 항목과 주제별 설명·원문 수·상태·갱신일이 일치함. 필수 YAML 항목이 모두 있고, 이미 쓴 글과 진행 중인 글의 status·used_in도 AGENTS.md와 일치함.
 - ingest ../sources/originals/linkedin/10.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md, 업무방식/AI로-빨라져도-일이-줄지는-않는다.md
 - ingest ../sources/originals/linkedin/09.md | 합침 | AI리터러시/AI는-우리-업무로-평가하자.md
 - ingest ../sources/originals/linkedin/08.md | 합침 | 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md, 업무방식/팀의-판단-기준부터-공유하자.md, 업무방식/AI가-다시-찾을-업무-기록을-남기자.md

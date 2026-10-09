@@ -18,5 +18,10 @@
   "step": "ingest A-4",
   "sec": 206,
   "note": "4편"
+ },
+ {
+  "step": "lint",
+  "sec": 106,
+  "note": ""
  }
 ]
