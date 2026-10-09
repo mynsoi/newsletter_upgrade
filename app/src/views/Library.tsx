@@ -20,7 +20,6 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
   const [req, setReq] = useState("");
   const collecting = state.jobs.filter((j) => j.kind === "collect" && j.status === "running");
   const box = useRef<HTMLDivElement>(null);
-  const topicsRunning = !!runningJob(state.jobs, "topics");
   const collect = () => {
     if (!req.trim()) return act("collect", { request: "" }).then(refresh); // 비우면 자동 — Threads·LinkedIn에서 알아서
     box.current?.querySelector("form")?.requestSubmit();
@@ -82,10 +81,10 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
               <IconWorldSearch className="size-4" /> aside 수집
             </HoverBorderGradient>
             <button
-              onClick={() => (topicsRunning ? Promise.resolve() : act("topics")).then(refresh).then(() => go("#/topics"))}
+              onClick={() => go("#/topics")}
               className="flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
             >
-              <IconSparkles className="size-4" /> 주제 뽑기 <IconArrowRight className="size-4" />
+              <IconSparkles className="size-4" /> 주제 지도 <IconArrowRight className="size-4" />
             </button>
           </div>
           {state.collects.length > 0 && (

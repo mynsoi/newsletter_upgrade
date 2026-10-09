@@ -18,6 +18,9 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
+
 DIST = ROOT / "app" / "dist"
 SRC = ROOT / "sources"
 STUDIO = ROOT / "runs" / "studio"
@@ -235,6 +238,49 @@ def topic_rounds():
     return out
 
 
+def sections(body):
+    out, cur = {}, None
+    for line in body.splitlines():
+        if line.startswith("## "):
+            cur = line[3:].strip()
+            out[cur] = []
+        elif cur:
+            out[cur].append(line)
+    return {k: "\n".join(v).strip() for k, v in out.items()}
+
+
+def wiki_state(fresh):
+    """주제 위키를 화면용으로 읽는다 — 페이지 머리말·논지·원문 표·각도·함께 볼 주제."""
+    if not (W.WIKI / "index.md").exists():
+        return None
+    topics = []
+    for f in sorted(W.WIKI.glob("*/*.md")):
+        head, body = W.front(read(f))
+        meta = dict(re.findall(r"^(\w+):\s*(.*)$", head, re.M))
+        sec = sections(body)
+        srcs = []
+        for row in sec.get("원문", "").splitlines():
+            m = re.search(r"\]\(\.\./\.\./sources/(originals/[^)]+?\.md)\)", row)
+            if not m:
+                continue
+            cols = [c.strip() for c in row.strip().strip("|").split("|")]
+            srcs.append({"path": m.group(1), "who": cols[1] if len(cols) > 1 else "", "note": cols[2] if len(cols) > 2 else "",
+                         "new": m.group(1) in fresh})
+        related = re.findall(r"\[([^\]]+)\]\(\.\./([^)]+\.md)\)", sec.get("함께 볼 주제", ""))
+        topics.append({
+            "page": str(f.relative_to(ROOT)), "field": f.parent.name, "title": meta.get("title", f.stem).strip("'\""),
+            "thesis": sec.get("이 글이 말할 것", meta.get("description", "")).strip(),
+            "status": meta.get("status", "쓸 수 있음").split("#")[0].strip(),
+            "usedIn": W.used_in(f), "sources": srcs,
+            "angles": [re.sub(r"^[-*]\s*", "", x).strip() for x in sec.get("쓸 수 있는 각도", "").splitlines() if x.strip()],
+            "related": [{"title": t, "page": "wiki/" + pth} for t, pth in related],
+            "at": meta.get("timestamp", "").strip(),
+        })
+    log = read(W.WIKI / "log.md")
+    return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(),
+            "log": [l for l in log.splitlines() if l.startswith(("## ", "- "))][:40]}
+
+
 def chat_log(k):
     f = STUDIO / "chat" / f"{safe_id(k)}.jsonl"
     return [json.loads(l) for l in read(f).splitlines() if l.strip()]
@@ -243,8 +289,10 @@ def chat_log(k):
 def state():
     with LOCK:
         jobs = sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60]
+    collects = collect_rounds()
+    fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
-            "collects": collect_rounds()}
+            "collects": collects, "wiki": wiki_state(fresh)}
 
 
 def collect_rounds():
@@ -428,12 +476,42 @@ def act_confirm(a):
         shutil.copyfile(ROOT / image_src(art["hero"]), img)
         conf["hero"] = str(img.relative_to(ROOT))
     meta_update(k, confirmed=conf)
+    if not process_path(k):
+        src_page = json.loads(read(brief_path(k))).get("from_wiki", "")
+        if src_page:
+            subprocess.run(PY + ["scripts/wiki.py", "--written", src_page, conf["file"]], cwd=ROOT, capture_output=True)
     return conf
 
 
 def act_collect(a):
     req = str(a.get("request", "")).strip()
-    return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req])
+
+    def after(j):  # 새 원문은 바로 위키에 넣는다 (2026-10-10 위키 채택)
+        if W.backlog():
+            act_wiki_ingest({})
+    return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req], after)
+
+
+def act_wiki_ingest(_):
+    return start("wiki", "넣기", PY + ["scripts/wiki.py", "--ingest"])
+
+
+def act_wiki_lint(_):
+    return start("wiki-lint", "정리", PY + ["scripts/wiki.py", "--lint"])
+
+
+def act_wiki_pick(a):
+    """주제 카드를 고르면 그 주제 원문만 깊게 읽어 설정(briefs/w-*.json)을 만들고, 이어서 제목 후보를 뽑는다."""
+    page = str(a.get("page", ""))
+    f = (ROOT / page).resolve()
+    if not re.match(r"^wiki/[^/]+/[^/]+\.md$", page) or not inside(f, ROOT / "wiki") or not f.is_file():
+        raise ValueError("잘못된 주제 페이지")
+
+    def after(j):
+        k = read(ROOT / j["log"]).strip().splitlines()[-1].strip()
+        if re.match(r"^w-\d{8}-\d{6}$", k):
+            act_titles({"article": k})
+    return start("wiki-pick", page, PY + ["scripts/wiki.py", "--brief", str(f.relative_to(ROOT / "wiki"))], after)
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
@@ -469,7 +547,8 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length}
+           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length,
+           "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
 
 
 # ---------- 그림 축소본 ----------

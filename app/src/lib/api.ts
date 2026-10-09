@@ -63,7 +63,23 @@ export type Job = {
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };
 
+export type WikiSource = { path: string; who: string; note: string; new: boolean };
+export type WikiTopic = {
+  page: string;
+  field: string;
+  title: string;
+  thesis: string;
+  status: string;
+  usedIn: string[];
+  sources: WikiSource[];
+  angles: string[];
+  related: { title: string; page: string }[];
+  at: string;
+};
+export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; log: string[] };
+
 export type State = {
+  wiki: Wiki | null;
   library: Source[];
   topics: TopicRound[];
   articles: Article[];
@@ -128,4 +144,7 @@ export const JOB_NAMES: Record<string, string> = {
   images: "그림",
   collect: "수집",
   chat: "진행자",
+  wiki: "위키 넣기",
+  "wiki-lint": "위키 정리",
+  "wiki-pick": "깊게 읽기",
 };
