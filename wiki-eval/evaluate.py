@@ -93,14 +93,17 @@ def main():
     mapping = {str(i + 1): n for i, n in enumerate(names)}
     (EVAL / "mapping.json").write_text(json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
     ms = {n: metrics(arms[n][0], arms[n][1], phases) for n in names}
-    ms["C · 위키"]["새 18편 처리(합침/새 주제/보탬 없음)"] = wiki_dispositions()
+    d = wiki_dispositions()
+    ms["C · 위키"]["새 18편 처리"] = f"합침 {d['합침']} · 새 주제 {d['새 주제']} · 보탬 없음 {d['보탬 없음']}"
+    for n in names:
+        ms[n]["원문 1편짜리 주제"] = sum(1 for t in arms[n][0] if len(t["sources"]) == 1)
     (EVAL / "metrics.json").write_text(json.dumps(ms, ensure_ascii=False, indent=1), encoding="utf-8")
 
     cols = "".join(f'<section data-arm="{k}"><h2>{k}</h2>' + "".join(card(t, i) for i, t in enumerate(arms[n][0])) + "</section>"
                    for k, n in mapping.items())
     keys = sorted({k for m in ms.values() for k in m})
     rows = "".join(f"<tr><th>{html.escape(k)}</th>" + "".join(f"<td>{html.escape(str(ms[n].get(k, '')))}</td>" for n in names) + "</tr>" for k in keys)
-    tsum = {}
+    tsum = {"A · 지금 방식": ["40편 회차 101초 (원문 전체를 한 번에)"]}
     for r in times():
         arm = "C · 위키" if r["step"].startswith(("ingest", "lint", "query")) else "B · 지금 방식 + 기억"
         tsum.setdefault(arm, []).append(f'{r["step"]} {r["sec"]}초')
