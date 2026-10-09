@@ -4,8 +4,8 @@ title: AI가 실행해도 문제 정의는 사람의 몫
 description: AI가 실행과 반복 실험을 빠르게 해도 무엇을 고칠지 정하고 결과를 읽어 다음 순서를 결정하는 일은 사람이 맡아야 한다.
 tags: [업무방식]
 timestamp: 2026-10-10
-status: 쓸 수 있음
-used_in: []
+status: 진행 중
+used_in: [briefs/w-20261010-043840.json]
 ---
 
 # AI가 실행해도 문제 정의는 사람의 몫
