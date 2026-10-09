@@ -1,6 +1,14 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/27.md | 합침 | 업무자동화/여러-AI를-쓰려면-일의-연결까지.md
+- ingest ../sources/originals/linkedin/26.md | 합침 | 업무방식/AI-사용량보다-해결한-일을-보자.md
+- ingest 주제명 정리 | linkedin/22·26의 공통 논지인 AI 사용과 실제 문제 해결의 구분을 드러내도록 「AI 구독을 늘리기 전에 쓸모를 확인하자」를 「AI 사용량보다 해결한 일을 보자」로 바꿈. 목차·함께 볼 주제·기존 ingest 기록의 경로도 갱신함.
+- ingest ../sources/originals/linkedin/25.md | 합침 | AI리터러시/AI는-우리-업무로-평가하자.md, 프롬프트/AI에게-목적과-조건부터.md
+- ingest ../sources/originals/linkedin/24.md | 합침 | 업무방식/AI로-제안서를-만들어도-설득은-사람의-몫.md, AI리터러시/AI-디자인을-고칠-때는-원인부터.md
+- ingest ../sources/originals/linkedin/23.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
+- ingest ../sources/originals/linkedin/22.md | 새 주제 | 업무방식/AI-사용량보다-해결한-일을-보자.md
+- ingest 목차 상태 동기화 | 함께 볼 주제로 연결한 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md의 기존 status·used_in을 유지하고, index.md의 상태를 해당 페이지에 맞춰 `진행 중`으로 갱신함.
 - lint 재점검 범위 | AGENTS.md를 먼저 읽고 주제 22개 전체의 논지·원문 기여·각도를 다시 비교함. 재료 원문 40개 중 38개가 연결되어 있으며 원문 표는 중복 연결을 포함해 50행임. 문체 참고용 `infuture/`와 보조 스냅숏은 집계에서 제외.
 - lint 합침 | 없음. 같은 핵심 논지로 중복된 페이지를 찾지 못함.
 - lint 유사 주제 검토 | 자료 연결은 AI의 근거 조회 경로, 업무 기록은 결정·진행 맥락의 보존과 재사용, 자동화용 데이터는 업무 정보를 모을 저장 위치와 접근 경로, 근거 원문 확인은 답변과 원문을 대조하는 습관이 중심이므로 별도로 유지함.
