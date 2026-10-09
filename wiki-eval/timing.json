@@ -38,5 +38,10 @@
   "step": "ingest B-3",
   "sec": 257,
   "note": "6편"
+ },
+ {
+  "step": "query",
+  "sec": 81,
+  "note": "20개"
  }
 ]

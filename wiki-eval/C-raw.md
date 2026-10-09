@@ -1,0 +1,162 @@
+[
+  {
+    "name": "AI가 다시 찾을 업무 기록을 남기자",
+    "thesis": "AI가 업무 맥락을 이어 가도록 결정사항과 진행 기록을 연결해 남기고, 답하기 전에 관련 기록을 찾아보게 하자. 담당 업무에 필요한 기록을 골라 갱신하는 관리가 함께 필요하다.",
+    "sources": [
+      "originals/linkedin/02.md",
+      "originals/threads/11.md",
+      "originals/linkedin/07.md",
+      "originals/linkedin/08.md",
+      "originals/threads/18.md"
+    ]
+  },
+  {
+    "name": "AI에게 목적과 조건부터",
+    "thesis": "AI에 업무를 맡길 때는 목적과 필수 조건, 원하는 결과 형식을 묶어 전달하자. 담당자에게 당연한 조건도 요청에 명시해야 의도와 다른 결과를 줄일 수 있다.",
+    "sources": [
+      "originals/linkedin/19.md",
+      "originals/threads/03.md",
+      "originals/threads/04.md",
+      "originals/threads/17.md",
+      "originals/threads/08.md"
+    ]
+  },
+  {
+    "name": "AI에게 숫자를 맡기려면 계산 기준부터",
+    "thesis": "AI가 업무 수치를 정확히 답하게 하려면 지표의 뜻과 계산 규칙을 정하고, 그 기준에 따라 실제 데이터를 조회하게 해야 한다. 계산 기준을 갱신하고 결과를 점검하는 절차도 함께 마련하자.",
+    "sources": [
+      "originals/linkedin/01.md",
+      "originals/linkedin/15.md",
+      "originals/linkedin/05.md"
+    ]
+  },
+  {
+    "name": "AI는 우리 업무로 평가하자",
+    "thesis": "업무에 맞는 AI를 고르려면 실제 업무 예시와 채점 기준으로 여러 번 시험하고 품질·비용·시간을 함께 비교하자. 현업에서 허용할 수 없는 오류와 반드시 지켜야 할 조건은 우리가 정해야 한다.",
+    "sources": [
+      "originals/linkedin/05.md",
+      "originals/linkedin/15.md",
+      "originals/linkedin/09.md"
+    ]
+  },
+  {
+    "name": "팀의 판단 기준부터 공유하자",
+    "thesis": "AI를 팀 업무에 적용하려면 각자의 업무 요령과 좋은 결과를 가르는 판단 기준을 공유해야 한다. 역할과 업무 흐름, 우선순위와 허용된 조치를 팀과 AI가 참고할 수 있게 정리하자.",
+    "sources": [
+      "originals/threads/05.md",
+      "originals/linkedin/06.md",
+      "originals/linkedin/08.md"
+    ]
+  },
+  {
+    "name": "직접 쓰고 고치며 AI를 익히자",
+    "thesis": "AI 활용 능력은 쓰임새가 분명한 결과물을 실제 업무에 거듭 적용하고 고치는 과정에서 기를 수 있다. 사용하면서 발견한 문제를 다음 학습과 실험의 출발점으로 삼자.",
+    "sources": [
+      "originals/threads/06.md",
+      "originals/linkedin/16.md"
+    ]
+  },
+  {
+    "name": "AI가 참고할 자료부터 연결하자",
+    "thesis": "AI 답변이 아쉽다면 업무에 필요한 근거 자료를 참고할 수 있게 연결했는지 살펴보자. 공식 자료를 조회할 경로를 마련하고, 연결한 뒤에도 답변의 근거를 확인해야 한다.",
+    "sources": [
+      "originals/threads/07.md",
+      "originals/threads/09.md"
+    ]
+  },
+  {
+    "name": "AI 회의록에는 다음 할 일이 보여야 한다",
+    "thesis": "AI 회의록에는 담당자별 할 일과 기한, 미결 안건이 드러나야 한다. 사람이 책임과 완료 기준을 확정하고 후속 업무로 등록해야 기록이 실행으로 이어진다.",
+    "sources": [
+      "originals/linkedin/21.md",
+      "originals/threads/17.md"
+    ]
+  },
+  {
+    "name": "AI가 실행해도 문제 정의는 사람의 몫",
+    "thesis": "AI가 실행과 반복 실험을 빠르게 해도 풀 문제와 기대 결과, 개선 순서를 정하는 일은 사람이 맡아야 한다. 업무 지식으로 결과를 해석하고 다음 시도를 골라야 실행 속도가 실제 개선으로 이어진다.",
+    "sources": [
+      "originals/linkedin/03.md",
+      "originals/linkedin/08.md"
+    ]
+  },
+  {
+    "name": "AI 디자인을 고칠 때는 원인부터",
+    "thesis": "AI 디자인이 뻔해 보인다면 대상 설명과 요청이 모호한지, 선택 기준이나 검토가 빠졌는지부터 살펴보자. 색상과 배치를 고른 이유를 확인해야 원인에 맞는 수정을 할 수 있다.",
+    "sources": [
+      "originals/threads/12.md",
+      "originals/threads/16.md"
+    ]
+  },
+  {
+    "name": "자동화할 업무의 데이터부터 모으자",
+    "thesis": "업무 자동화를 시작하려면 필요한 정보를 모으고 AI가 읽고 기록할 곳부터 마련하자. 정보 종류별 저장 위치와 파일 이름 규칙, 자료에 접근하는 경로가 자동화의 토대가 된다.",
+    "sources": [
+      "originals/threads/10.md",
+      "originals/linkedin/14.md"
+    ]
+  },
+  {
+    "name": "AI 답변은 근거 원문까지 확인하자",
+    "thesis": "AI에게 질문하는 법을 익힐 때는 출처를 요청하고 원문이 실제로 답변을 뒷받침하는지 확인하는 과정까지 함께 연습하자. 사내 교육도 구성원이 평소 답을 어떻게 확인하는지 살펴 설계할 필요가 있다.",
+    "sources": [
+      "originals/linkedin/20.md"
+    ]
+  },
+  {
+    "name": "여러 AI를 쓰려면 일의 연결까지",
+    "thesis": "여러 AI에 일을 맡겨도 결과 취합과 다음 단계로의 전달은 사람에게 남을 수 있다. 역할 분담에 더해 작업 배분과 결과 전달 과정까지 설계하고 담당을 확인할 수 있게 하자.",
+    "sources": [
+      "originals/threads/19.md"
+    ]
+  },
+  {
+    "name": "AI로 제안서를 만들어도 설득은 사람의 몫",
+    "thesis": "AI로 제안 자료를 빠르게 준비해도 상대에게 필요한 제안을 고르고 그 이유를 설명하는 책임은 사람에게 남는다. 고객의 상황을 살펴 지금 함께 시작할 수 있는 일로 제안을 좁히자.",
+    "sources": [
+      "originals/linkedin/17.md"
+    ]
+  },
+  {
+    "name": "AI 지원을 현업의 활용으로 잇자",
+    "thesis": "회사의 AI 지원은 여러 직군의 실제 사용과 구체적인 업무 요구로 이어져야 한다. 도구를 쓸 여건을 마련하고 현업에서 필요한 쓰임새를 찾아 요구하는 일을 함께 살펴보자.",
+    "sources": [
+      "originals/linkedin/11.md"
+    ]
+  },
+  {
+    "name": "AI 스킬은 쓸 기준으로 고르자",
+    "thesis": "AI가 참고하는 업무 절차인 스킬을 모을 때는 어느 업무에 쓸지부터 정하자. 실제 사용 이력과 업무 적합성, 관리 상태와 이용 조건을 살펴 필요한 것을 고르는 기준이 있어야 한다.",
+    "sources": [
+      "originals/linkedin/12.md"
+    ]
+  },
+  {
+    "name": "AI로 내 전문성을 더 넓게 쓰자",
+    "thesis": "자기 분야의 전문성과 판단 기준을 다지면서 AI로 그 전문성을 적용할 업무 범위를 넓히자. 직접 만들 수 있는 것이 많아질수록 무엇을 만들고 어느 수준까지 완성할지 고르는 판단이 중요해진다.",
+    "sources": [
+      "originals/linkedin/04.md"
+    ]
+  },
+  {
+    "name": "AI와 공부할 때는 내 일에 연결하자",
+    "thesis": "AI와 함께 자료를 정리하고 학습 모임을 준비했다면, 모인 시간에는 배운 개념을 자기 업무에 어떻게 쓸지 직접 설명해 보자. 학습 내용을 자신의 상황에 연결하는 과정을 모임의 중심에 두자.",
+    "sources": [
+      "originals/linkedin/13.md"
+    ]
+  },
+  {
+    "name": "다시 정리하기 전에 원자료부터",
+    "thesis": "AI 활용 자료를 모으라는 요청도 불필요한 반복 업무가 될 수 있다. 새로 복사하고 정리하기 전에 작성자가 이미 정리한 자료를 공유받을 수 있는지 확인하자.",
+    "sources": [
+      "originals/threads/01.md"
+    ]
+  },
+  {
+    "name": "문체만으로 AI 글을 단정하지 말자",
+    "thesis": "반복되는 표현이나 반듯한 구성만으로 AI가 쓴 글이라고 단정하기는 어렵다. 경험담과 감정이 담긴 말투도 AI가 흉내 낼 수 있으므로 자연스러운 문체 역시 작성 주체를 판단하는 충분한 근거가 되지 않는다.",
+    "sources": [
+      "originals/threads/02.md"
+    ]
+  }
+]
