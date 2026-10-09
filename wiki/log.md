@@ -1,6 +1,13 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/threads/16.md | 합침 | AI리터러시/AI-디자인을-고칠-때는-원인부터.md
+- ingest ../sources/originals/threads/15.md | 보탬 없음 | 없음 (4대보험 업무 자동화의 진행 소식과 로컬 작동 언급만 있어, 칼럼에 보탤 구체적인 과정·결과를 찾을 수 없음. 목차 변경 없음.)
+- ingest ../sources/originals/linkedin/12.md | 새 주제 | AI리터러시/AI-스킬은-쓸-기준으로-고르자.md
+- ingest ../sources/originals/threads/14.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
+- ingest ../sources/originals/linkedin/11.md | 새 주제 | 업무방식/AI-지원을-현업의-활용으로-잇자.md
+- ingest ../sources/originals/linkedin/11.md | 합침 | 업무방식/AI로-빨라져도-일이-줄지는-않는다.md
+- ingest ../sources/originals/threads/13.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - lint 점검 범위 | 주제 15개, 재료 원문 40개 중 연결된 원문 22개. 문체 참고용 `infuture/`와 보조 스냅숏 `*.snapshot.txt`는 원문 집계에서 제외.
 - lint 합침 | 없음. 주제 전체의 논지·원문 기여·각도를 비교했으며 같은 핵심 논지인 페이지는 찾지 못함.
 - lint 유사 주제 검토 | 근거 자료 연결·업무 맥락을 잇는 기록 관리·자동화용 데이터 준비는 목적이 다름. 사람이 풀 문제를 정하는 일·팀의 판단 기준 공유·요청의 목적과 조건 전달도 서로 다른 주장으로 유지함.

@@ -23,5 +23,10 @@
   "step": "lint",
   "sec": 106,
   "note": ""
+ },
+ {
+  "step": "ingest B-1",
+  "sec": 240,
+  "note": "6편"
  }
 ]
