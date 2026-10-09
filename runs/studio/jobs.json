@@ -97,5 +97,41 @@
   "started": 1791561026.695945,
   "log": "runs/studio/logs/1010-005026-a17c.log",
   "ended": 1791561301.823386
+ },
+ {
+  "id": "1010-011141-261d",
+  "kind": "topics",
+  "target": "",
+  "status": "failed",
+  "started": 1791562301.866246,
+  "log": "runs/studio/logs/1010-011141-261d.log",
+  "ended": 1791562301.9242542
+ },
+ {
+  "id": "1010-011148-cae8",
+  "kind": "topics",
+  "target": "",
+  "status": "failed",
+  "started": 1791562308.216956,
+  "log": "runs/studio/logs/1010-011148-cae8.log",
+  "ended": 1791562308.268403
+ },
+ {
+  "id": "1010-011307-eaa2",
+  "kind": "titles",
+  "target": "20261010-004359-1",
+  "status": "done",
+  "started": 1791562387.1237764,
+  "log": "runs/studio/logs/1010-011307-eaa2.log",
+  "ended": 1791562415.006842
+ },
+ {
+  "id": "1010-011350-6f1a",
+  "kind": "topics",
+  "target": "",
+  "status": "done",
+  "started": 1791562430.108555,
+  "log": "runs/studio/logs/1010-011350-6f1a.log",
+  "ended": 1791562531.249695
  }
 ]

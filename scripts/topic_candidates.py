@@ -70,10 +70,11 @@ def run():
     p = prompt(files)
     (d / "prompt.md").write_text(p, encoding="utf-8")
     out = d / "astra.md"
+    # 프롬프트는 표준입력으로 — 인자로 넘기면 원문이 40편을 넘을 때 리눅스 인자 한도(128KB)에 걸려 바로 실패했다(2026-10-10)
     with open(d / "run.log", "w", encoding="utf-8") as log:
         subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), p],
-                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []

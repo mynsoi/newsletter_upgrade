@@ -226,6 +226,8 @@ def topic_rounds():
             picked[b["topic"]] = bp.stem
     for d in sorted((ROOT / "runs" / "topics").glob("*/"), reverse=True):
         items = json.loads(read(d / "astra.json") or "[]")
+        if not items:  # 실패한 회차는 보이지 않게
+            continue
         for i, it in enumerate(items, 1):
             it["n"] = i
             it["brief"] = picked.get(f"{d.name}-{i}", "")

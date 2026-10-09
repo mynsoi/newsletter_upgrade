@@ -91,14 +91,14 @@ def astra(d, p):
     out = d / "astra.md"
     with open(d / "astra.log", "w", encoding="utf-8") as log:
         subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), p],
-                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
 
 
 def claude(d, p):
     d.mkdir(parents=True, exist_ok=True)
-    r = subprocess.run(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence", p],
-                       cwd=d, stdin=subprocess.DEVNULL, capture_output=True, text=True)
+    r = subprocess.run(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence"],
+                       cwd=d, input=p, capture_output=True, text=True)
     (d / "claude.md").write_text(r.stdout.strip(), encoding="utf-8")
 
 

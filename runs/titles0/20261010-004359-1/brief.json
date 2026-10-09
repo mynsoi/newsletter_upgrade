@@ -1,0 +1,20 @@
+{
+ "topic": "20261010-004359-1",
+ "label": "AI에게도 인수인계가 필요하다",
+ "thesis": "담당자, 결정 배경, 관련 문서가 흩어져 있으면 AI도 매번 신입처럼 일을 시작한다. 업무 기록을 서로 연결해 두는 일이 AI가 우리 일을 이해하게 만드는 출발점이다.",
+ "sources": [
+  [
+   "originals/linkedin/02.md",
+   "LinkedIn, AI Lead/AI PO, 1일 • 수정됨"
+  ],
+  [
+   "originals/threads/11.md",
+   "Threads, @unit.withai, 2026-09-15"
+  ],
+  [
+   "originals/linkedin/07.md",
+   "LinkedIn, Marketing Communications Manager at Kia | Bringing people closer to art, fashion & culture through brand, community and AI, 9월 17일 • 수정함"
+  ]
+ ],
+ "from_topics": "runs/topics/20261010-004359"
+}

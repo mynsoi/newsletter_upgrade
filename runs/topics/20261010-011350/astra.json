@@ -1,0 +1,134 @@
+[
+ {
+  "name": "같은 질문, 다른 숫자",
+  "thesis": "AI에게 같은 실적을 물어도 집계 기간과 대상, 계산 방식에 따라 답이 달라질 수 있다. 사용량·비용·실적을 정확하게 다루려면 우리 조직이 쓰는 숫자의 정의부터 맞춰야 한다.",
+  "sources": [
+   "originals/linkedin/15.md",
+   "originals/linkedin/01.md",
+   "originals/linkedin/05.md"
+  ]
+ },
+ {
+  "name": "출처를 확인하는 습관",
+  "thesis": "AI 답변에 출처가 붙어 있어도 원문이 실제로 그 주장을 뒷받침하는지 확인해야 한다. AI 활용의 다음 단계는 질문하는 능력과 함께 근거를 찾아 대조하는 습관을 익히는 것이다.",
+  "sources": [
+   "originals/linkedin/20.md",
+   "originals/threads/09.md"
+  ]
+ },
+ {
+  "name": "회의록 다음의 일",
+  "thesis": "회의록이 빨리 완성되어도 담당자와 완료 기준이 없으면 일은 움직이지 않는다. AI가 정리한 기록에서 미결정 사항을 찾아내고, 누가 무엇을 언제까지 할지 확정하는 과정이 회의의 성과를 만든다.",
+  "sources": [
+   "originals/linkedin/21.md",
+   "originals/threads/17.md",
+   "originals/linkedin/11.md"
+  ]
+ },
+ {
+  "name": "AI도 헷갈리는 최종본",
+  "thesis": "자료가 여러 곳에 흩어지고 최신본이 불분명하면 AI에게 일을 맡길 때마다 설명과 확인을 반복하게 된다. 자료별 기준 저장 위치와 파일 이름 규칙을 정하는 작은 정리가 자동화의 출발점이다.",
+  "sources": [
+   "originals/linkedin/14.md",
+   "originals/threads/10.md",
+   "originals/linkedin/07.md"
+  ]
+ },
+ {
+  "name": "AI에게 필요한 회사 지도",
+  "thesis": "회사 일을 돕는 AI에는 문서 내용뿐 아니라 담당자, 관련 업무, 이전 결정 사이의 연결도 필요하다. 필요한 자료를 업무 관계와 함께 찾을 수 있도록 정리하면 매번 배경을 설명하는 수고를 줄일 수 있다.",
+  "sources": [
+   "originals/linkedin/02.md",
+   "originals/threads/11.md",
+   "originals/linkedin/08.md"
+  ]
+ },
+ {
+  "name": "인수인계는 평소 기록에서",
+  "thesis": "AI가 정리하는 인수인계서의 품질은 평소 남겨둔 기록에 달려 있다. 업무 절차와 함께 결정 이유, 예외 상황, 미완료 과제를 기록해야 후임자가 업무의 맥락까지 이어받을 수 있다.",
+  "sources": [
+   "originals/threads/18.md",
+   "originals/linkedin/08.md",
+   "originals/threads/11.md"
+  ]
+ },
+ {
+  "name": "AI에게 주는 세 줄 요청서",
+  "thesis": "현재 상황, 꼭 지킬 조건, 원하는 결과를 구체적으로 전달하면 AI가 임의로 판단해야 할 빈칸이 줄어든다. 엑셀 취합이나 보고서 작성처럼 익숙한 업무부터 동료에게 부탁하듯 요청을 정리해볼 수 있다.",
+  "sources": [
+   "originals/linkedin/19.md",
+   "originals/threads/04.md",
+   "originals/linkedin/08.md"
+  ]
+ },
+ {
+  "name": "경험을 넓혀 쓰는 AI",
+  "thesis": "AI로 할 수 있는 일이 늘어날수록 좋은 결과를 판별하는 자기 분야의 기준이 중요해진다. 오래 쌓은 업무 경험은 AI를 통해 분석과 문서, 새로운 업무 도구까지 더 넓게 활용할 수 있는 자산이다.",
+  "sources": [
+   "originals/linkedin/04.md",
+   "originals/linkedin/03.md",
+   "originals/linkedin/17.md"
+  ]
+ },
+ {
+  "name": "분석을 멈출 줄 아는 판단",
+  "thesis": "AI의 장애 진단 실험은 원인을 분석하는 능력과 조치 시점을 정하는 판단이 다를 수 있음을 보여준다. 사무·현장 업무에서도 영향 범위와 허용된 조치, 되돌릴 수 있는지를 아는 담당자의 경험이 중요하다.",
+  "sources": [
+   "originals/linkedin/06.md",
+   "originals/linkedin/03.md"
+  ]
+ },
+ {
+  "name": "반복 업무의 작은 절약",
+  "thesis": "메일 분류, 일정 취합, 회의 전 자료 모으기처럼 자주 반복하는 준비 업무에도 AI를 활용할 여지가 크다. 사람이 확인할 초안과 요약을 받는 방식부터 시작하면 실제로 줄어든 수고를 확인하기 쉽다.",
+  "sources": [
+   "originals/linkedin/10.md",
+   "originals/linkedin/07.md"
+  ]
+ },
+ {
+  "name": "만든 자동화, 얼마나 쓰나요",
+  "thesis": "만들어 둔 AI 도구와 업무 매뉴얼이 많아도 실제로 쓰이지 않으면 관리할 일만 늘어난다. 반복해서 사용하는지, 다른 업무와 연결되는지, 유지할 가치가 있는지를 기준으로 자동화를 골라야 한다.",
+  "sources": [
+   "originals/linkedin/12.md",
+   "originals/linkedin/02.md",
+   "originals/threads/06.md"
+  ]
+ },
+ {
+  "name": "교육 뒤에 남을 한 가지",
+  "thesis": "AI 교육은 각자가 자기 업무 하나에 적용한 결과물을 남길 때 실무와 연결된다. 직접 만든 결과를 확인하고 동료와 적용 경험을 나누는 과정이 다음 활용으로 이어진다.",
+  "sources": [
+   "originals/linkedin/16.md",
+   "originals/linkedin/13.md",
+   "originals/threads/06.md"
+  ]
+ },
+ {
+  "name": "AI를 쓰는데 더 바쁜 이유",
+  "thesis": "AI로 산출물이 늘면 검토와 수정 부담도 늘고, 능숙한 사람에게 일이 몰릴 수 있다. 생산성을 평가할 때는 만든 양뿐 아니라 확인에 드는 시간과 팀의 업무 배분까지 함께 살펴야 한다.",
+  "sources": [
+   "originals/threads/05.md",
+   "originals/linkedin/11.md",
+   "originals/linkedin/20.md"
+  ]
+ },
+ {
+  "name": "우리 업무로 보는 AI 시험",
+  "thesis": "공개 성능 순위가 높아도 우리 회사의 용어와 업무 조건에서 좋은 결과를 낸다는 보장은 없다. 자주 하는 업무로 평가 사례를 만들고 정확성, 반복 실행의 일관성, 처리 시간과 비용을 함께 비교해야 한다.",
+  "sources": [
+   "originals/linkedin/05.md",
+   "originals/linkedin/09.md",
+   "originals/linkedin/01.md"
+  ]
+ },
+ {
+  "name": "AI 티를 지우는 기준",
+  "thesis": "보고서나 안내문을 고칠 때 ‘AI 티를 없애 달라’는 주문만으로는 원하는 결과를 얻기 어렵다. 누가 읽고 무엇을 이해하거나 결정해야 하는지, 왜 이 표현과 형식이 필요한지를 정해야 결과물에 업무의 특성이 담긴다.",
+  "sources": [
+   "originals/threads/12.md",
+   "originals/threads/02.md",
+   "originals/linkedin/04.md"
+  ]
+ }
+]

@@ -89,7 +89,7 @@ def run_claude(d, prompt):
     d.mkdir(parents=True, exist_ok=True)
     (d / "prompt.md").write_text(prompt, encoding="utf-8")
     r = subprocess.run(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config",
-                        "--no-session-persistence", prompt], cwd=d, stdin=subprocess.DEVNULL,
+                        "--no-session-persistence"], cwd=d, input=prompt,
                        capture_output=True, text=True)
     (d / "run.log").write_text(r.stderr, encoding="utf-8")
     return r.stdout.strip()
@@ -101,8 +101,8 @@ def run_astra(d, prompt):
     out = d / "output.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
         subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), prompt],
-                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                       cwd=d, input=prompt, text=True, stdout=log, stderr=subprocess.STDOUT)
     return out.read_text(encoding="utf-8").strip() if out.exists() else ""
 
 

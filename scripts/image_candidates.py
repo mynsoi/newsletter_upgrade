@@ -83,8 +83,8 @@ def run_inline(target):
     out = d / "astra.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
         subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), p],
-                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []
@@ -118,8 +118,8 @@ def run(target):
     out = d / "astra.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
         subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), p],
-                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []

@@ -29,9 +29,25 @@ export default function App() {
   const [state, setState] = useState<State | null>(null);
   const [hash, go] = useHash();
   const sig = useRef("");
+  const seen = useRef<Record<string, string>>({});
+  const [toasts, setToasts] = useState<{ id: string; title: string; text: string }[]>([]);
+  // 작업이 실패하면 화면에 알린다 — 조용히 실패해 "멈춘 것처럼" 보이던 문제(2026-10-10)
+  const watch = useCallback(async (jobs: Job[]) => {
+    const first = Object.keys(seen.current).length === 0;
+    for (const j of jobs) {
+      const before = seen.current[j.id];
+      seen.current[j.id] = j.status;
+      if (first || j.status !== "failed" || before === "failed") continue;
+      const r = await fetch("/api/log?id=" + encodeURIComponent(j.id)).then((x) => x.json()).catch(() => ({ text: "" }));
+      const last = (r.text as string).trim().split("\n").filter(Boolean).pop() ?? "";
+      setToasts((t) => [...t, { id: j.id, title: `${JOB_NAMES[j.kind] ?? j.kind} 실패`, text: last }]);
+      setTimeout(() => setToasts((t) => t.filter((x) => x.id !== j.id)), 15000);
+    }
+  }, []);
   const refresh = useCallback(async () => {
     const s = await getState();
     setState(s);
+    watch(s.jobs);
     sig.current = s.jobs.map((j) => j.id + j.status).join();
   }, []);
 
@@ -42,12 +58,13 @@ export default function App() {
       n++;
       const jobs = await getJobs().catch(() => null);
       if (!jobs) return;
+      watch(jobs);
       const s = jobs.map((j) => j.id + j.status).join();
       const running = jobs.some((j) => j.status === "running");
       if (s !== sig.current || (running && n % 4 === 0)) refresh();
     }, 2500);
     return () => clearInterval(t);
-  }, [refresh]);
+  }, [refresh, watch]);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -71,6 +88,20 @@ export default function App() {
             <Articles state={state} go={go} />
           ))}
       </main>
+      <div className="fixed top-5 right-5 z-[90] flex w-[380px] flex-col gap-2">
+        {toasts.map((t) => (
+          <motion.button
+            key={t.id}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            onClick={() => setToasts((x) => x.filter((y) => y.id !== t.id))}
+            className="rounded-2xl border border-rose-400/40 bg-panel-solid p-4 text-left shadow-2xl"
+          >
+            <div className="text-sm font-semibold text-rose-600 dark:text-rose-300">{t.title}</div>
+            <div className="mt-1 line-clamp-3 break-all font-mono text-xs text-ink-2">{t.text}</div>
+          </motion.button>
+        ))}
+      </div>
     </div>
   );
 }
