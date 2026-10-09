@@ -3,5 +3,10 @@
   "step": "ingest A-1",
   "sec": 383,
   "note": "6편"
+ },
+ {
+  "step": "ingest A-2",
+  "sec": 271,
+  "note": "6편"
  }
 ]
