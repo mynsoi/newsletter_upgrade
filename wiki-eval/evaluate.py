@@ -93,6 +93,8 @@ def main():
     mapping = {str(i + 1): n for i, n in enumerate(names)}
     (EVAL / "mapping.json").write_text(json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
     ms = {n: metrics(arms[n][0], arms[n][1], phases) for n in names}
+    c_vs_a = sum(1 for t in arms["C · 위키"][0] if any(same(t, u) for r in a_rounds for u in r))
+    ms["C · 위키"]["앞 회차와 겹치는 주제"] = f"{c_vs_a} (A 1~3회차와 견줌 — 단, 회차마다 새 카드가 아니라 한 페이지에 쌓임)"
     d = wiki_dispositions()
     ms["C · 위키"]["새 18편 처리"] = f"합침 {d['합침']} · 새 주제 {d['새 주제']} · 보탬 없음 {d['보탬 없음']}"
     for n in names:
