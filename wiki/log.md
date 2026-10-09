@@ -1,6 +1,10 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/10.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md, 업무방식/AI로-빨라져도-일이-줄지는-않는다.md
+- ingest ../sources/originals/linkedin/09.md | 합침 | AI리터러시/AI는-우리-업무로-평가하자.md
+- ingest ../sources/originals/linkedin/08.md | 합침 | 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md, 업무방식/팀의-판단-기준부터-공유하자.md, 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
+- ingest ../sources/originals/linkedin/07.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md, 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
 - ingest ../sources/originals/linkedin/06.md | 합침 | 업무방식/팀의-판단-기준부터-공유하자.md
 - ingest ../sources/originals/linkedin/05.md | 새 주제 | AI리터러시/AI는-우리-업무로-평가하자.md
 - ingest ../sources/originals/linkedin/05.md | 합침 | 업무방식/AI에게-숫자를-맡기려면-계산-기준부터.md
