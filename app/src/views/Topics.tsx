@@ -5,7 +5,7 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, SiteIcon, SourceDrawer } from "@/components/studio/bits";
-import { LiveLog } from "@/components/studio/live-log";
+import { Working } from "@/components/studio/working";
 import { act, runningJob, type State, type WikiTopic } from "@/lib/api";
 import { hue, roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -103,7 +103,13 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       </AuroraBackground>
 
       <div className="mx-auto max-w-6xl space-y-16 px-12 py-12">
-        {(ingesting || linting) && <LiveLog jobId={(ingesting || linting)!.id} compact />}
+        {(ingesting || linting) && (
+          <Working
+            job={(ingesting || linting)!}
+            title={ingesting ? "위키 넣기" : "위키 정리"}
+            status={ingesting ? `astra가 새 원문을 주제에 넣는 중 · 남은 ${backlog}편` : "astra가 같은 논지를 합치고 점검하는 중"}
+          />
+        )}
         {fields.map(([field, ts]) => (
           <section key={field}>
             <div className="mb-5 flex items-center gap-3 text-sm text-ink-3">

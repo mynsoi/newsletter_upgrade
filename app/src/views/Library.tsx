@@ -9,7 +9,7 @@ import { Spotlight } from "@/components/ui/spotlight-new";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, Reactions, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
 import { act, runningJob, type Source, type State } from "@/lib/api";
-import { LiveLog } from "@/components/studio/live-log";
+import { Working } from "@/components/studio/working";
 import { roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -122,9 +122,8 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
 
         <BentoGrid className="mt-8 max-w-none md:auto-rows-[15.5rem] md:grid-cols-4 grid-flow-dense">
           {collecting.map((j) => (
-            <div key={j.id} className="relative col-span-4 row-span-2 flex flex-col gap-3 rounded-2xl border border-violet-400/30 bg-violet-500/[0.06] p-4">
-              <AITextLoading texts={[j.target, "aside", "UltraBrowse"]} className="text-xl" wrapperClassName="p-2" />
-              <LiveLog jobId={j.id} compact />
+            <div key={j.id} className="col-span-4 row-span-2">
+              <Working job={j} title="수집" status={`aside UltraBrowse · ${j.target}`} />
             </div>
           ))}
           {rows.map((s) => (

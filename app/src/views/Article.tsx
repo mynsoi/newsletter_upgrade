@@ -11,9 +11,11 @@ import ParticleButton from "@/components/kokonutui/particle-button";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { LiveLog } from "@/components/studio/live-log";
+import { Working } from "@/components/studio/working";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ByChip, Chip, ClaudeMark, MiniMd, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
 import { Cover, StageChip } from "@/views/Articles";
-import { act, articleTitle, getChat, img, runningJob, type Article as A, type ChatMsg, type State, type Step } from "@/lib/api";
+import { act, articleTitle, getChat, img, runningJob, type Article as A, type ChatMsg, type Job, type State, type Step } from "@/lib/api";
 import { keptSentences, paragraphs, sentences, when } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -168,17 +170,17 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
           spin={["astra", "제목 짓는 중"]}
         />}
       </div>
-      {(reading || (running && !rounds.length)) && (
-        <div className="mt-8 flex h-72 flex-col items-center justify-center gap-6 rounded-3xl border border-violet-400/30 bg-violet-500/[0.05]">
-          <AITextLoading texts={reading ? ["astra", "이 주제 원문 깊게 읽는 중", "이 글이 말할 것 다듬는 중"] : ["astra", "제목 짓는 중"]} />
-          <div className="flex items-center gap-3 text-sm text-ink-3">
-            <span className={cn(reading ? "text-violet-600 dark:text-violet-300" : "text-ink-3")}>① 깊게 읽기</span>
-            <span>→</span>
-            <span className={cn(!reading && running ? "text-violet-600 dark:text-violet-300" : "text-ink-3")}>② 제목 후보</span>
-          </div>
+      {(readJob || titleJob) && (
+        <div className="mt-8">
+          <Working
+            job={(readJob || titleJob)!}
+            title={readJob ? "깊게 읽기" : "제목 후보"}
+            status={readJob ? "astra가 이 주제 원문을 읽는 중" : "astra 제목 짓는 중"}
+            steps={readJob ? [{ label: "깊게 읽기", by: "astra" }, { label: "제목 후보", by: "astra" }] : undefined}
+            stepIndex={readJob ? 0 : 1}
+          />
         </div>
       )}
-      {(readJob || titleJob) && <LiveLog key={(readJob || titleJob)!.id} jobId={(readJob || titleJob)!.id} compact className="mt-3" />}
       {rounds.map((r, ri) => (
         <section key={r.at} className={cn("mt-8", ri > 0 && "opacity-60 transition hover:opacity-100")}>
           {rounds.length > 1 && <div className="px-2 text-sm tabular-nums text-ink-3">{when(r.at)}</div>}
@@ -252,61 +254,54 @@ function StepCard({ s, prev, diff, articleTitle: at }: { s: Step; prev?: Step; d
   );
 }
 
+function StepMeta({ s }: { s: Step }) {
+  return (
+    <span className="flex items-center gap-2 text-sm text-ink-3">
+      <ByChip by={s.by} />
+      {s.mode && <Chip className="border-sky-400/40 bg-sky-500/10 text-sky-700 dark:text-sky-200">{s.mode}</Chip>}
+      <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
+      <span className="tabular-nums">{when(s.at)}</span>
+    </span>
+  );
+}
+
+/**
+ * 과정 — 맨 위에는 '지금 과정' 하나(진행 중이면 진행 카드, 아니면 최신 과정 본문), 그 아래 지난 과정을 최신순으로 접어 둔다
+ * (멘토 2026-10-10: "역순으로, 지금 진행되는 과정만 보여 주고 과정 1·2는 접을 수 있게").
+ */
 function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () => void; go: (h: string) => void }) {
   const [diff, setDiff] = useState(false);
   const write = runningJob(state.jobs, "write", a.id);
-  const revise = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "shorten", a.id);
+  const other = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "shorten", a.id);
+  const job = write || other;
   const at = articleTitle(a);
-  const data = a.steps.map((s, i) => ({
-    title: `과정 ${s.n}`,
-    aside: (
-      <div className="mt-5 flex flex-col items-start gap-2 text-sm text-ink-3">
-        <span className="flex gap-1.5">
-          <ByChip by={s.by} />
-          {s.mode && <Chip className="border-sky-400/40 bg-sky-500/10 text-sky-700 dark:text-sky-200">{s.mode}</Chip>}
-        </span>
-        <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
-        <span className="tabular-nums text-ink-3">{when(s.at)}</span>
-      </div>
-    ),
-    content: <StepCard s={s} prev={a.steps[i - 1]} diff={diff} articleTitle={at} />,
-  }));
+  const past = [...a.steps].reverse();
+  const current = job ? undefined : past[0];
+  const rest = job ? past : past.slice(1);
+
+  let working: React.ReactNode = null;
   if (write) {
-    const started = write.started;
-    const by = (n: number) => a.steps.find((s) => s.n === n);
-    let v = 0;
-    if (by(1)) v = 1;
-    if (by(2) && by(2)!.at > started) v = 2;
-    if (by(3) && by(3)!.at > started) v = 3;
-    data.push({
-      title: `과정 ${Math.min(v + 1, 3)}`,
-      aside: <div className="mt-5"><ByChip by={v === 0 ? "Claude" : "astra"} /></div>,
-      content: (
-        <div className="max-w-[720px] space-y-3">
-          <MultiStepPanel
-            className="rounded-3xl border border-line bg-panel"
-            value={Math.min(v, 2)}
-            loadingStates={[{ text: "과정 1 · Claude" }, { text: "과정 2 · astra" }, { text: "과정 3 · astra" }]}
-          />
-          <LiveLog jobId={write.id} compact />
-        </div>
-      ),
-    });
+    const st = (write as Job & { stage?: { index: number; half: boolean } }).stage;
+    const steps = [
+      { label: "과정 1", by: "Claude" },
+      { label: "과정 2", by: "astra" },
+      { label: "과정 3", by: "astra" },
+      ...(st?.half || a.length === "half" ? [{ label: "과정 4 · 절반", by: "astra" }] : []),
+    ];
+    const i = st?.index ?? 0;
+    const status = ["Claude 초안 쓰는 중", "astra 재작성 중", "astra 기준 반영 중", "astra 절반으로 줄이는 중"][i] ?? "쓰는 중";
+    working = <Working job={write} title={`과정 ${i + 1}`} status={status} steps={steps} stepIndex={i} />;
+  } else if (other) {
+    working = (
+      <Working
+        job={other}
+        title={`과정 ${a.steps.length + 1}`}
+        status={other.kind === "shorten" ? "astra 절반으로 줄이는 중" : "astra 피드백 반영 중"}
+      />
+    );
   }
-  if (revise)
-    data.push({
-      title: `과정 ${a.steps.length + 1}`,
-      aside: <div className="mt-5"><ByChip by="astra" /></div>,
-      content: (
-        <div className="max-w-[720px] space-y-3">
-          <div className="flex h-44 items-center justify-center rounded-3xl border border-line bg-panel">
-            <AITextLoading texts={revise.kind === "shorten" ? ["astra", "절반"] : ["astra"]} />
-          </div>
-          <LiveLog jobId={revise.id} compact />
-        </div>
-      ),
-    });
-  if (!data.length)
+
+  if (!job && !a.steps.length)
     return (
       <div className="flex justify-center py-32">
         {a.title ? (
@@ -323,23 +318,54 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
         )}
       </div>
     );
+
   return (
-    <div className="relative">
-      {a.steps.length > 1 && (
-        <div className="sticky top-[68px] z-20 flex justify-end pt-6">
-          <button
-            onClick={() => setDiff(!diff)}
-            className={cn(
-              "flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm transition",
-              diff ? "border-violet-400/60 bg-violet-500/20 text-violet-800 dark:text-violet-100" : "border-line bg-panel text-ink-2 hover:text-ink"
+    <div className="space-y-6 py-10">
+      {working}
+
+      {current && (
+        <section>
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div className="flex items-end gap-4">
+              <h2 className="text-5xl font-bold text-ink">과정 {current.n}</h2>
+              <span className="pb-1.5">
+                <StepMeta s={current} />
+              </span>
+            </div>
+            {a.steps.length > 1 && (
+              <button
+                onClick={() => setDiff(!diff)}
+                className={cn(
+                  "flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm transition",
+                  diff ? "border-violet-400/60 bg-violet-500/20 text-violet-800 dark:text-violet-100" : "border-line bg-panel text-ink-2 hover:text-ink"
+                )}
+              >
+                <span className={cn("size-2 rounded-full", diff ? "bg-violet-300" : "bg-ink-3")} />
+                비교
+              </button>
             )}
-          >
-            <span className={cn("size-2 rounded-full", diff ? "bg-violet-300" : "bg-ink-3")} />
-            비교
-          </button>
-        </div>
+          </div>
+          <StepCard s={current} prev={a.steps[current.n - 2]} diff={diff} articleTitle={at} />
+        </section>
       )}
-      <Timeline data={data} />
+
+      {rest.length > 0 && (
+        <Accordion type="multiple" className="rounded-3xl border border-line bg-panel px-6">
+          {rest.map((s) => (
+            <AccordionItem key={s.n} value={`s${s.n}`} className="border-line">
+              <AccordionTrigger className="py-4 hover:no-underline">
+                <span className="flex items-center gap-4">
+                  <span className="text-xl font-bold text-ink">과정 {s.n}</span>
+                  <StepMeta s={s} />
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-6">
+                <StepCard s={s} prev={a.steps[s.n - 2]} diff={diff} articleTitle={at} />
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      )}
     </div>
   );
 }
@@ -457,12 +483,11 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
             />
           )}
         </div>
-        {running && (
-          <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
-            <AITextLoading texts={["astra · 그림 설명", "gti · 그리는 중"]} />
+        {heroJob && (
+          <div className="mt-8">
+            <Working job={heroJob} title="머리 그림" status="astra 그림 설명 → gti 그리는 중" />
           </div>
         )}
-        {heroJob && <LiveLog jobId={heroJob.id} compact className="mt-3" />}
         {[...a.images].reverse().map((r) => (
           <div key={r.id} className="mt-8">
             <FocusCards
@@ -496,12 +521,11 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
             />
           )}
         </div>
-        {runningInline && (
-          <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
-            <AITextLoading texts={["astra · 들어갈 자리", "gti · 그리는 중"]} />
+        {inlineJob && (
+          <div className="mt-8">
+            <Working job={inlineJob} title="본문 그림" status="astra 들어갈 자리 고르기 → gti 그리는 중" />
           </div>
         )}
-        {inlineJob && <LiveLog jobId={inlineJob.id} compact className="mt-3" />}
         {[...a.inline].reverse().map((r) => (
           <div key={r.id} className="mt-8">
             <FocusCards

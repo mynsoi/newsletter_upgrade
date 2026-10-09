@@ -286,9 +286,25 @@ def chat_log(k):
     return [json.loads(l) for l in read(f).splitlines() if l.strip()]
 
 
+def job_stage(j):
+    """돌고 있는 쓰기 작업이 지금 몇 번째 과정인지 — 단계 폴더의 prompt.md가 작업 시작 뒤에 생겼는지로 본다."""
+    if j["kind"] != "write" or j["status"] != "running":
+        return None
+    d = ROOT / "runs" / "columns" / j["target"]
+    fresh = lambda pat: any(f.stat().st_mtime >= j["started"] - 2 for f in d.glob(pat))
+    half = json.loads(read(ROOT / "briefs" / f"{j['target']}.json") or "{}").get("length") == "half"
+    i = 3 if half and fresh("_shorten-r*/prompt.md") else 2 if fresh("_final/prompt.md") else 1 if fresh("_r4/prompt.md") else 0
+    return {"index": i, "half": half}
+
+
+def with_stage(jobs):
+    return [{**j, "stage": job_stage(j)} if j["kind"] == "write" and j["status"] == "running" else j for j in jobs]
+
+
 def state():
     with LOCK:
         jobs = sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60]
+    jobs = with_stage(jobs)
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
@@ -682,7 +698,8 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json(state())
         if u.path == "/api/jobs":
             with LOCK:
-                return self.send_json(sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60])
+                jobs = sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60]
+            return self.send_json(with_stage(jobs))
         if u.path == "/api/source":
             p = q.get("path", [""])[0]
             row = next((r for r in library(full=True) if r["path"] == p), None)
