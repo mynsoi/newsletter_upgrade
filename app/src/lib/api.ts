@@ -109,15 +109,33 @@ export async function getChat(article: string): Promise<ChatMsg[]> {
   return r.json();
 }
 
+// 버튼을 누른 순간부터 끝날 때까지 화면이 알 수 있게 — 시작·끝·실패를 App이 듣는다(멘토 2026-10-10: "작업이 진행되는 동안 넘어가는 UI가 없음")
+export type ActEvent = { phase: "start" | "end"; name: string; job?: Job; error?: string };
+const actListeners = new Set<(e: ActEvent) => void>();
+export function subscribeAct(l: (e: ActEvent) => void) {
+  actListeners.add(l);
+  return () => {
+    actListeners.delete(l);
+  };
+}
+const emit = (e: ActEvent) => actListeners.forEach((l) => l(e));
+
 export async function act<T = unknown>(name: string, body: Record<string, unknown> = {}): Promise<T> {
-  const r = await fetch("/api/" + name, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  const j = await r.json();
-  if (!r.ok) throw new Error(j.error || r.statusText);
-  return j as T;
+  emit({ phase: "start", name });
+  try {
+    const r = await fetch("/api/" + name, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const j = await r.json().catch(() => ({ error: r.statusText }));
+    if (!r.ok) throw new Error(j.error || r.statusText);
+    emit({ phase: "end", name, job: j && j.id && j.kind && j.status ? (j as Job) : undefined });
+    return j as T;
+  } catch (e) {
+    emit({ phase: "end", name, error: e instanceof Error ? e.message : String(e) });
+    throw e;
+  }
 }
 
 export const img = (src: string, w = 0) => "/img/" + src.split("/").map(encodeURIComponent).join("/") + (w ? `?w=${w}` : "");
@@ -148,3 +166,12 @@ export const JOB_NAMES: Record<string, string> = {
   "wiki-lint": "위키 정리",
   "wiki-pick": "깊게 읽기",
 };
+
+export type JobLog = { text: string; live: { name: string; text: string }[]; status?: string; elapsed?: number };
+export async function getLog(id: string): Promise<JobLog> {
+  const r = await fetch("/api/log?id=" + encodeURIComponent(id));
+  return r.json();
+}
+
+/** 어디서든 전체 로그 창을 연다 — App이 듣는다 */
+export const openLog = (id = "") => window.dispatchEvent(new CustomEvent("studio:open-log", { detail: id }));

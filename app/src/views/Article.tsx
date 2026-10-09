@@ -10,6 +10,7 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import ParticleButton from "@/components/kokonutui/particle-button";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
+import { LiveLog } from "@/components/studio/live-log";
 import { ByChip, Chip, ClaudeMark, MiniMd, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
 import { Cover, StageChip } from "@/views/Articles";
 import { act, articleTitle, getChat, img, runningJob, type Article as A, type ChatMsg, type State, type Step } from "@/lib/api";
@@ -73,6 +74,8 @@ export default function Article({
       <div className="sticky top-0 z-30 border-b border-line bg-page/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-12 py-3">
           <PillTabs tabs={TABS} value={t} onChange={(v) => go(`#/a/${a.id}/${v}`)} />
+          <span className="flex items-center gap-3">
+          <Retry a={a} go={go} refresh={refresh} />
           <PillTabs
             id="lengthtab"
             tabs={[
@@ -82,6 +85,7 @@ export default function Article({
             value={a.length}
             onChange={(v) => act("length", { article: a.id, mode: v }).then(refresh)}
           />
+          </span>
         </div>
       </div>
 
@@ -134,7 +138,10 @@ function RunButton({ running, onClick, icon, label, spin }: { running: boolean; 
 /* ---------- 제목 ---------- */
 
 function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => void; go: (h: string) => void }) {
-  const running = !!runningJob(state.jobs, "titles", a.id);
+  const titleJob = runningJob(state.jobs, "titles", a.id);
+  const readJob = runningJob(state.jobs, "wiki-pick", a.id);
+  const running = !!titleJob;
+  const reading = !!readJob;
   const writing = !!runningJob(state.jobs, "write", a.id);
   const rounds = [...a.titles].reverse();
   if (a.kind === "process")
@@ -153,19 +160,25 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
         ) : (
           <span />
         )}
-        <RunButton
+        {!reading && <RunButton
           running={running}
           onClick={() => act("titles", { article: a.id }).then(refresh)}
           icon={<IconRefresh className="size-4" />}
           label="다시 뽑기"
           spin={["astra", "제목 짓는 중"]}
-        />
+        />}
       </div>
-      {running && !rounds.length && (
-        <div className="py-24">
-          <AITextLoading texts={["astra", "원문 읽는 중", "제목 짓는 중"]} />
+      {(reading || (running && !rounds.length)) && (
+        <div className="mt-8 flex h-72 flex-col items-center justify-center gap-6 rounded-3xl border border-violet-400/30 bg-violet-500/[0.05]">
+          <AITextLoading texts={reading ? ["astra", "이 주제 원문 깊게 읽는 중", "이 글이 말할 것 다듬는 중"] : ["astra", "제목 짓는 중"]} />
+          <div className="flex items-center gap-3 text-sm text-ink-3">
+            <span className={cn(reading ? "text-violet-600 dark:text-violet-300" : "text-ink-3")}>① 깊게 읽기</span>
+            <span>→</span>
+            <span className={cn(!reading && running ? "text-violet-600 dark:text-violet-300" : "text-ink-3")}>② 제목 후보</span>
+          </div>
         </div>
       )}
+      {(readJob || titleJob) && <LiveLog key={(readJob || titleJob)!.id} jobId={(readJob || titleJob)!.id} compact className="mt-3" />}
       {rounds.map((r, ri) => (
         <section key={r.at} className={cn("mt-8", ri > 0 && "opacity-60 transition hover:opacity-100")}>
           {rounds.length > 1 && <div className="px-2 text-sm tabular-nums text-ink-3">{when(r.at)}</div>}
@@ -269,11 +282,14 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       title: `과정 ${Math.min(v + 1, 3)}`,
       aside: <div className="mt-5"><ByChip by={v === 0 ? "Claude" : "astra"} /></div>,
       content: (
-        <MultiStepPanel
-          className="max-w-[720px] rounded-3xl border border-line bg-panel"
-          value={Math.min(v, 2)}
-          loadingStates={[{ text: "과정 1 · Claude" }, { text: "과정 2 · astra" }, { text: "과정 3 · astra" }]}
-        />
+        <div className="max-w-[720px] space-y-3">
+          <MultiStepPanel
+            className="rounded-3xl border border-line bg-panel"
+            value={Math.min(v, 2)}
+            loadingStates={[{ text: "과정 1 · Claude" }, { text: "과정 2 · astra" }, { text: "과정 3 · astra" }]}
+          />
+          <LiveLog jobId={write.id} compact />
+        </div>
       ),
     });
   }
@@ -282,8 +298,11 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       title: `과정 ${a.steps.length + 1}`,
       aside: <div className="mt-5"><ByChip by="astra" /></div>,
       content: (
-        <div className="flex h-60 max-w-[720px] items-center justify-center rounded-3xl border border-line bg-panel">
-          <AITextLoading texts={revise.kind === "shorten" ? ["astra", "절반"] : ["astra"]} />
+        <div className="max-w-[720px] space-y-3">
+          <div className="flex h-44 items-center justify-center rounded-3xl border border-line bg-panel">
+            <AITextLoading texts={revise.kind === "shorten" ? ["astra", "절반"] : ["astra"]} />
+          </div>
+          <LiveLog jobId={revise.id} compact />
         </div>
       ),
     });
@@ -417,8 +436,10 @@ function Director({ a, state, open, onClose, refresh }: { a: A; state: State; op
 /* ---------- 그림 ---------- */
 
 function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void }) {
-  const running = !!runningJob(state.jobs, "images", a.id);
-  const runningInline = !!runningJob(state.jobs, "inline", a.id);
+  const heroJob = runningJob(state.jobs, "images", a.id);
+  const inlineJob = runningJob(state.jobs, "inline", a.id);
+  const running = !!heroJob;
+  const runningInline = !!inlineJob;
   const canDraw = a.steps.length > 0;
   const picked = new Set(a.inlinePicked.map((x) => x.src));
   return (
@@ -441,6 +462,7 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
             <AITextLoading texts={["astra · 그림 설명", "gti · 그리는 중"]} />
           </div>
         )}
+        {heroJob && <LiveLog jobId={heroJob.id} compact className="mt-3" />}
         {[...a.images].reverse().map((r) => (
           <div key={r.id} className="mt-8">
             <FocusCards
@@ -479,6 +501,7 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
             <AITextLoading texts={["astra · 들어갈 자리", "gti · 그리는 중"]} />
           </div>
         )}
+        {inlineJob && <LiveLog jobId={inlineJob.id} compact className="mt-3" />}
         {[...a.inline].reverse().map((r) => (
           <div key={r.id} className="mt-8">
             <FocusCards
@@ -572,4 +595,34 @@ function inlineAt(a: A, paras: string[], n: number) {
     const hit = it.anchor ? paras.findIndex((p) => p.startsWith(it.anchor.slice(0, 20))) + 1 : 0;
     return (hit || Math.min(it.after, paras.length)) === n;
   });
+}
+
+/** 다시 쓰기 — 같은 설정으로 새 글을 만들어 과정 1부터. 한 번 누르면 '한 번 더'로 바뀌고 두 번째에 실행(10분 넘게 도는 일이라) */
+function Retry({ a, go, refresh }: { a: A; go: (h: string) => void; refresh: () => void }) {
+  const [arm, setArm] = useState(false);
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    if (!arm) return;
+    const t = setTimeout(() => setArm(false), 3000);
+    return () => clearTimeout(t);
+  }, [arm]);
+  if (!a.title || !a.steps.length) return null;
+  return (
+    <button
+      onClick={async () => {
+        if (!arm) return setArm(true);
+        setBusy(true);
+        const r = await act<{ article: string }>("retry", { article: a.id });
+        await refresh();
+        go(`#/a/${r.article}/process`);
+      }}
+      className={cn(
+        "flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm transition",
+        arm ? "border-violet-400/60 bg-violet-500/15 text-violet-800 dark:text-violet-100" : "border-line text-ink-2 hover:bg-soft hover:text-ink"
+      )}
+    >
+      <IconRefresh className="size-4" />
+      {busy ? "…" : arm ? "한 번 더" : "다시 쓰기"}
+    </button>
+  );
 }

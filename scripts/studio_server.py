@@ -24,7 +24,7 @@ import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 �
 DIST = ROOT / "app" / "dist"
 SRC = ROOT / "sources"
 STUDIO = ROOT / "runs" / "studio"
-PY = [sys.executable, "-I"]
+PY = [sys.executable, "-I", "-u"]  # -u: 출력을 바로 작업 로그로(화면에서 진행이 보이게)
 PIPE = PY + ["scripts/column_pipeline.py"]
 for d in ("logs", "chat", "thumbs"):
     (STUDIO / d).mkdir(parents=True, exist_ok=True)
@@ -347,6 +347,31 @@ def meta_update(k, **kv):
     p.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+def tail(f, n=4000):
+    try:
+        b = Path(f).read_bytes()[-n:]
+        return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", b.decode("utf-8", "ignore"))
+    except OSError:
+        return ""
+
+
+def live_of(j):
+    """작업마다 지금 쓰이고 있는 파일 — 초안 글자(live.md)·astra 출력(run.log·astra.log)·그림 로그."""
+    k, kind = j.get("target", ""), j["kind"]
+    cands = []
+    if kind in ("write", "revise", "shorten"):
+        cands = list((ROOT / "runs" / "columns" / k).glob("_*/live.md")) + list((ROOT / "runs" / "columns" / k).glob("_*/run.log"))
+    elif kind == "titles":
+        cands = [ROOT / "runs" / "titles0" / k / "astra.log"]
+    elif kind in ("images", "inline"):
+        rounds = sorted((ROOT / "runs" / "images" / k).glob("*/"), key=lambda d: d.stat().st_mtime)
+        if rounds:
+            cands = [rounds[-1] / "run.log", *rounds[-1].glob("[0-9][0-9].log")]
+    cands = [c for c in cands if c.is_file() and c.stat().st_mtime >= j["started"] - 5]
+    cands.sort(key=lambda c: c.stat().st_mtime, reverse=True)
+    return [{"name": str(c.relative_to(ROOT)), "text": tail(c)} for c in cands[:2]]
+
+
 def act_topics(_):
     return start("topics", "", PY + ["scripts/topic_candidates.py"])
 
@@ -379,6 +404,36 @@ def act_title(a):
     b["title"] = t
     brief_path(k).write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     return {"title": t}
+
+
+def act_retry(a):
+    """다시 쓰기 — 같은 제목·논지·원문·분량으로 새 글(<글>-rN)을 만들어 과정 1부터 다시 돌린다. 앞 글은 그대로 둔다(멘토 2026-10-10: "다시 실행해서 다시 쓸 수도")."""
+    k = safe_id(a["article"])
+    pp = process_path(k)
+    if pp:  # 확정 칼럼 — 과정 기록에서 설정을 만든다. 논지는 이 칼럼을 '씀'으로 가진 위키 주제에서
+        d = json.loads(read(pp))
+        thesis, page = d.get("thesis", ""), ""
+        for f in W.WIKI.glob("*/*.md"):
+            if f"columns/{k}.md" in W.used_in(f):
+                head, body = W.front(read(f))
+                thesis = thesis or sections(body).get("이 글이 말할 것", "")
+                page = str(f.relative_to(ROOT))
+        b = {"label": d["title"], "title": d["title"], "thesis": thesis or d["title"], "sources": d.get("sources", []),
+             **({"from_wiki": page} if page else {})}
+    else:
+        b = {x: y for x, y in json.loads(read(brief_path(k))).items()
+             if x not in ("confirmed", "hero", "inline", "experiment", "topic")}
+    if not b.get("title"):
+        raise ValueError("제목이 아직 없음 — 제목부터 고르세요")
+    base = re.sub(r"-r\d+$", "", k)
+    n = 2
+    while (ROOT / "briefs" / f"{base}-r{n}.json").exists():
+        n += 1
+    nk = safe_id(f"{base}-r{n}")
+    b.update({"topic": nk, "retry_of": k})
+    (ROOT / "briefs" / f"{nk}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    act_write({"article": nk})
+    return {"article": nk}
 
 
 def act_write(a):
@@ -507,11 +562,12 @@ def act_wiki_pick(a):
     if not re.match(r"^wiki/[^/]+/[^/]+\.md$", page) or not inside(f, ROOT / "wiki") or not f.is_file():
         raise ValueError("잘못된 주제 페이지")
 
-    def after(j):
-        k = read(ROOT / j["log"]).strip().splitlines()[-1].strip()
-        if re.match(r"^w-\d{8}-\d{6}$", k):
-            act_titles({"article": k})
-    return start("wiki-pick", page, PY + ["scripts/wiki.py", "--brief", str(f.relative_to(ROOT / "wiki"))], after)
+    k = W.claim(page)  # 누르자마자 글을 만든다 — 화면은 바로 그 글로 넘어간다(멘토 2026-10-10: "바로 안 넘어가네")
+
+    def after(j):  # 깊게 읽기가 끝나면 제목 후보로 — 실패해도 페이지 논지로 만든 글은 남는다
+        act_titles({"article": k})
+    start("wiki-pick", k, PY + ["scripts/wiki.py", "--brief", str(f.relative_to(ROOT / "wiki")), k], after)
+    return {"article": k}
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
@@ -548,7 +604,7 @@ def act_chat(a):
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length,
-           "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
+           "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
 
 
 # ---------- 그림 축소본 ----------
@@ -633,7 +689,18 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json(chat_log(q.get("article", [""])[0]))
         if u.path == "/api/log":
             j = JOBS.get(q.get("id", [""])[0])
-            return self.send_json({"text": read(ROOT / j["log"])[-6000:] if j else ""})
+            if not j:
+                return self.send_json({"text": "", "live": []})
+            return self.send_json({"text": tail(ROOT / j["log"], 6000), "live": live_of(j), "status": j["status"],
+                                   "elapsed": round((j.get("ended") or time.time()) - j["started"])})
+        if u.path.startswith(("/docs/", "/wiki-eval/report/")):
+            rel = unquote(u.path.lstrip("/"))
+            f = (ROOT / rel).resolve()
+            if not any(inside(f, ROOT / d) for d in ("docs", "wiki-eval/report")) or not f.is_file():
+                return self.send_error(404)
+            ctype = {".html": "text/html; charset=utf-8", ".md": "text/markdown; charset=utf-8",
+                     ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg"}.get(f.suffix, "application/octet-stream")
+            return self.send_file(f, ctype)
         if u.path.startswith("/img/"):
             rel = unquote(u.path[5:])
             if not rel.startswith(ALLOWED) or ".." in rel or not rel.lower().endswith((".png", ".jpg")):

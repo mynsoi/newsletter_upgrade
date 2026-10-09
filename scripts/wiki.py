@@ -2,7 +2,8 @@
 
 사용: python3 scripts/wiki.py --ingest [원문 경로...]   — 경로가 없으면 아직 안 넣은 원문 전부(경영일기 제외)
       python3 scripts/wiki.py --lint                   — 정리: 같은 논지 합치기·점검 보고
-      python3 scripts/wiki.py --brief <주제 페이지>      — 고를 때 깊게 읽기 → briefs/w-<시각>.json, 페이지에 '진행 중'
+      python3 scripts/wiki.py --claim <주제 페이지>      — 고르자마자: 페이지의 논지·원문으로 briefs/w-<시각>.json을 바로 만든다(LLM 없음)
+      python3 scripts/wiki.py --brief <주제 페이지> [글]  — 고를 때 깊게 읽기: 그 주제 원문만 읽고 설정의 논지·원문 순서를 다듬는다
       python3 scripts/wiki.py --status                 — 넣은 원문 수·남은 원문
 - astra는 wiki/ 안에서만 쓰기 가능한 샌드박스로 돈다(원문 폴더는 읽기만 — 실행 환경이 막는다).
 - 넣은 원문은 wiki/log.md의 "- ingest <경로>" 줄로 센다. 따로 상태 파일을 두지 않는다.
@@ -28,7 +29,8 @@ def astra(prompt, write=True, out=None):
            "-s", "workspace-write" if write else "read-only", "--ephemeral", "--color", "never"]
     if out:
         cmd += ["-o", str(out)]
-    r = subprocess.run(cmd + ["-"], input=prompt, text=True, capture_output=True, cwd=WIKI)
+    sys.stdout.flush()
+    r = subprocess.run(cmd + ["-"], input=prompt, text=True, cwd=WIKI)  # 출력은 작업 로그로 그대로 — 화면에서 진행이 보이게
     return r.returncode
 
 
@@ -103,11 +105,48 @@ def label(rel):
     return ", ".join(x for x in [site, who, m.get("date", "").strip("'\"")] if x)
 
 
-def brief(page_rel):
-    page = (WIKI / page_rel).resolve()
+def sections(body):
+    out, cur = {}, None
+    for line in body.splitlines():
+        if line.startswith("## "):
+            cur = line[3:].strip()
+            out[cur] = []
+        elif cur:
+            out[cur].append(line)
+    return {k: "\n".join(v).strip() for k, v in out.items()}
+
+
+def page_of(page_rel):
+    rel = page_rel[5:] if page_rel.startswith("wiki/") else page_rel
+    page = (WIKI / rel).resolve()
     if WIKI.resolve() not in page.parents or not page.is_file():
         sys.exit("주제 페이지 없음: " + page_rel)
+    return page
+
+
+def claim(page_rel):
+    """고르자마자 — 페이지의 이름·논지·원문 목록으로 설정을 바로 만들고 페이지에 표시한다(LLM 없이, 1초 안)."""
+    page = page_of(page_rel)
+    head, body = front(page.read_text(encoding="utf-8"))
+    title = (re.search(r"^title:\s*(.+)$", head, re.M) or [None, page.stem])[1].strip().strip("'\"")
+    sec = sections(body)
+    srcs = list(dict.fromkeys(re.findall(r"\]\(\.\./\.\./sources/(originals/[^)]+?\.md)\)", sec.get("원문", ""))))
+    srcs = [x for x in srcs if (SRC / x).is_file()]
     k = "w-" + time.strftime("%Y%m%d-%H%M%S")
+    b = {"topic": k, "label": title, "thesis": sec.get("이 글이 말할 것", ""), "sources": [[x, label(x)] for x in srcs],
+         "from_wiki": str(page.relative_to(ROOT))}
+    (ROOT / "briefs" / f"{k}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    ui = used_in(page) + [f"briefs/{k}.json"]
+    was = re.search(r"^status:\s*(\S+)", head, re.M)
+    # 이미 쓴 주제를 다시 고르면(다시 쓰기) '씀'은 그대로 둔다 — 칼럼이 이미 있으니까
+    set_front(page, status="씀" if was and was.group(1) == "씀" else "진행 중", used_in="[" + ", ".join(ui) + "]")
+    commit(f"wiki: '{title}' 고름 → briefs/{k}.json")
+    return k
+
+
+def brief(page_rel, k=None):
+    page = page_of(page_rel)
+    k = k or claim(page_rel)
     d = ROOT / "runs" / "wiki" / k
     d.mkdir(parents=True, exist_ok=True)
     p = (f"AGENTS.md를 먼저 읽고 그 규칙의 '고를 때 깊게 읽기'를 해 주세요. 고른 주제 페이지: {page.relative_to(WIKI)}\n"
@@ -124,12 +163,13 @@ def brief(page_rel):
     srcs = [s for s in it.get("sources", []) if (SRC / s).is_file() and s.split("/")[1] not in STYLE_ONLY]
     if not srcs:
         sys.exit("원문 경로가 하나도 맞지 않음")
-    b = {"topic": k, "label": it["name"], "thesis": it["thesis"], "sources": [[s, label(s)] for s in srcs],
-         "from_wiki": str(page.relative_to(ROOT))}
-    (ROOT / "briefs" / f"{k}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    ui = used_in(page) + [f"briefs/{k}.json"]
-    set_front(page, status="진행 중", used_in="[" + ", ".join(ui) + "]")
-    commit(f"wiki: '{it['name']}' 고름 → briefs/{k}.json")
+    bp = ROOT / "briefs" / f"{k}.json"
+    b = json.loads(bp.read_text(encoding="utf-8"))
+    if b.get("title"):  # 그새 제목을 골랐으면 설정을 건드리지 않는다
+        print(k)
+        return
+    b.update({"label": it["name"], "thesis": it["thesis"], "sources": [[s, label(s)] for s in srcs], "deep_read": True})
+    bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     print(k)
 
 
@@ -148,8 +188,10 @@ if __name__ == "__main__":
         ingest(a[1:])
     elif a[:1] == ["--lint"]:
         lint()
+    elif a[:1] == ["--claim"]:
+        print(claim(a[1]))
     elif a[:1] == ["--brief"]:
-        brief(a[1])
+        brief(a[1], a[2] if len(a) > 2 else None)
     elif a[:1] == ["--written"]:
         mark_written(a[1], a[2])
     else:

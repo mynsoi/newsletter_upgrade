@@ -86,13 +86,32 @@ def fb_prompt(text):
 
 
 def run_claude(d, prompt):
+    """Claude 초안 — 쓰는 동안 글자를 live.md로 흘려 작업실 화면에서 진행이 보이게 한다(멘토 2026-10-10: "실제로 진행되는지 확인이 안 됨")."""
     d.mkdir(parents=True, exist_ok=True)
     (d / "prompt.md").write_text(prompt, encoding="utf-8")
-    r = subprocess.run(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config",
-                        "--no-session-persistence"], cwd=d, input=prompt,
-                       capture_output=True, text=True)
-    (d / "run.log").write_text(r.stderr, encoding="utf-8")
-    return r.stdout.strip()
+    proc = subprocess.Popen(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence",
+                             "--output-format", "stream-json", "--verbose", "--include-partial-messages"],
+                            cwd=d, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    proc.stdin.write(prompt)
+    proc.stdin.close()
+    parts, result = [], ""
+    with open(d / "live.md", "w", encoding="utf-8") as live:
+        for line in proc.stdout:
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            if e.get("type") == "stream_event":
+                ev = e.get("event", {})
+                if ev.get("type") == "content_block_delta" and ev.get("delta", {}).get("type") == "text_delta":
+                    parts.append(ev["delta"]["text"])
+                    live.write(ev["delta"]["text"])
+                    live.flush()
+            elif e.get("type") == "result":
+                result = e.get("result", "")
+    (d / "run.log").write_text(proc.stderr.read(), encoding="utf-8")
+    proc.wait()
+    return (result or "".join(parts)).strip()
 
 
 def run_astra(d, prompt):

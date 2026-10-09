@@ -62,10 +62,17 @@ URLS:
 https://...
 https://..."""
     (d / "aside-prompt.md").write_text(prompt, encoding="utf-8")
-    r = subprocess.run(["aside-win", "exec", "--host", "local", "--effort", "ultrabrowse", prompt],
-                       stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=7200)
-    out = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", r.stdout)  # 터미널 색상 코드가 주소 끝에 붙어 중복 확인이 깨졌다(2026-10-09)
-    (d / "aside.md").write_text(out + "\n" + r.stderr, encoding="utf-8")
+    proc = subprocess.Popen(["aside-win", "exec", "--host", "local", "--effort", "ultrabrowse", prompt],
+                            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    lines = []
+    for line in proc.stdout:  # 들어오는 대로 작업 로그에 — 화면에서 aside가 무엇을 보는지 보이게
+        line = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", line)  # 터미널 색상 코드가 주소 끝에 붙어 중복 확인이 깨졌다(2026-10-09)
+        lines.append(line)
+        sys.stdout.write(line[:400] + ("\n" if len(line) > 400 else ""))
+        sys.stdout.flush()
+    proc.wait(timeout=7200)
+    out = "".join(lines)
+    (d / "aside.md").write_text(out, encoding="utf-8")
     tail = out.split("URLS:")[-1] if "URLS:" in out else out
     urls = []
     for u in re.findall(r"https?://[^\s<>\")\]\x1b]+", tail):

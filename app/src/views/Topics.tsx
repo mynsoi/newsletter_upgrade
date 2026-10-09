@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { IconArrowRight, IconChevronDown, IconStack2, IconWand } from "@tabler/icons-react";
+import { IconArrowRight, IconChevronDown, IconRefresh, IconStack2, IconWand } from "@tabler/icons-react";
 import ExpandableCards from "@/components/expandable-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, SiteIcon, SourceDrawer } from "@/components/studio/bits";
+import { LiveLog } from "@/components/studio/live-log";
 import { act, runningJob, type State, type WikiTopic } from "@/lib/api";
 import { hue, roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -34,17 +35,6 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   const linting = runningJob(state.jobs, "wiki-lint", "정리");
   const backlog = newSources(state);
 
-  // 고른 주제의 설정이 만들어지면 그 글의 제목 화면으로 간다
-  useEffect(() => {
-    if (!pending || !wiki) return;
-    const t = wiki.topics.find((x) => x.page === pending);
-    const id = t && articleOf(t, state);
-    if (id) {
-      setPending("");
-      go(`#/a/${id}/title`);
-    }
-  }, [state, pending]); // eslint-disable-line
-
   const fields = useMemo(() => {
     const m = new Map<string, WikiTopic[]>();
     for (const t of wiki?.topics ?? []) m.set(t.field, [...(m.get(t.field) ?? []), t]);
@@ -54,12 +44,17 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       .sort((a, b) => b[1].reduce((n, t) => n + t.sources.length, 0) - a[1].reduce((n, t) => n + t.sources.length, 0));
   }, [wiki]);
 
-  const pick = async (t: WikiTopic) => {
+  // 누르면 서버가 그 자리에서 글을 만들고 id를 돌려준다 → 바로 그 글의 제목 화면으로. 깊게 읽기는 거기서 이어서 돈다
+  const pick = async (t: WikiTopic, again = false) => {
     const id = articleOf(t, state);
-    if (id) return go(`#/a/${id}`);
+    if (id && !again) return go(`#/a/${id}`);
     setPending(t.page);
-    await act("wiki-pick", { page: t.page });
-    refresh();
+    try {
+      const r = await act<{ article: string }>("wiki-pick", { page: t.page });
+      go(`#/a/${r.article}/title`);
+    } finally {
+      setPending("");
+    }
   };
 
   return (
@@ -108,6 +103,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       </AuroraBackground>
 
       <div className="mx-auto max-w-6xl space-y-16 px-12 py-12">
+        {(ingesting || linting) && <LiveLog jobId={(ingesting || linting)!.id} compact />}
         {fields.map(([field, ts]) => (
           <section key={field}>
             <div className="mb-5 flex items-center gap-3 text-sm text-ink-3">
@@ -118,7 +114,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             <ExpandableCards
               items={ts.map((t) => {
                 const id = articleOf(t, state);
-                const picking = pending === t.page || !!runningJob(state.jobs, "wiki-pick", t.page);
+                const picking = pending === t.page;
                 const fresh = t.sources.filter((s) => s.new).length;
                 return {
                   key: t.page,
@@ -148,6 +144,15 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
                   ),
                   summary: <p className="line-clamp-3">{t.thesis}</p>,
                   action: (
+                    <span className="flex shrink-0 items-center gap-2">
+                    {id && !picking && (
+                      <button
+                        onClick={() => pick(t, true)}
+                        className="flex items-center gap-1.5 rounded-full border border-line px-4 py-2.5 text-sm text-ink transition hover:bg-soft"
+                      >
+                        <IconRefresh className="size-4" /> 다시
+                      </button>
+                    )}
                     <button
                       onClick={() => !picking && pick(t)}
                       className={cn(
@@ -164,6 +169,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
                         </>
                       )}
                     </button>
+                    </span>
                   ),
                   body: (
                     <div className="space-y-6">

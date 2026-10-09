@@ -36,6 +36,9 @@ export default function ExpandableCards({
   }, [active]);
 
   useOutsideClick(ref as React.RefObject<HTMLDivElement>, () => setActive(null));
+  useEffect(() => () => {
+    document.body.style.overflow = "auto"; // 카드를 연 채 다른 화면으로 넘어가도 스크롤이 잠기지 않게
+  }, []);
 
   return (
     <>

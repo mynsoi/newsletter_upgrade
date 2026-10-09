@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { IconBooks, IconBulb, IconFileText } from "@tabler/icons-react";
+import { IconBooks, IconBulb, IconFileText, IconTerminal2 } from "@tabler/icons-react";
+import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
+import { LiveLog } from "@/components/studio/live-log";
 import { motion } from "motion/react";
 import { Sidebar, SidebarBody, SidebarLink, useSidebar } from "@/components/ui/sidebar";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
@@ -8,7 +10,7 @@ import Topics, { newSources } from "@/views/Topics";
 import { ThemeToggle } from "@/components/application/theme/theme-toggle";
 import Articles from "@/views/Articles";
 import Article from "@/views/Article";
-import { articleTitle, getJobs, getState, img, JOB_NAMES, stage, type Job, type State } from "@/lib/api";
+import { articleTitle, getJobs, getState, img, JOB_NAMES, openLog, stage, subscribeAct, type Job, type State } from "@/lib/api";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +53,33 @@ export default function App() {
     sig.current = s.jobs.map((j) => j.id + j.status).join();
   }, []);
 
+  // 버튼 → 바로 진행 막대, 시작된 작업은 다음 새로고침을 기다리지 않고 화면에, 실패는 알림으로
+  const [inflight, setInflight] = useState(0);
+  const [logJob, setLogJob] = useState<string | null>(null);
+  useEffect(() => {
+    const f = (e: Event) => setLogJob((e as CustomEvent<string>).detail || "");
+    window.addEventListener("studio:open-log", f);
+    return () => window.removeEventListener("studio:open-log", f);
+  }, []);
+  useEffect(
+    () =>
+      subscribeAct((e) => {
+        if (e.phase === "start") return setInflight((n) => n + 1);
+        setInflight((n) => Math.max(0, n - 1));
+        if (e.job) {
+          const j = e.job;
+          setState((s) => (s ? { ...s, jobs: [j, ...s.jobs.filter((x) => x.id !== j.id)] } : s));
+        }
+        if (e.error) {
+          const id = "err-" + Date.now();
+          setToasts((t) => [...t, { id, title: `${JOB_NAMES[e.name] ?? e.name} 안 됨`, text: e.error! }]);
+          setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 10000);
+        }
+        refresh();
+      }),
+    [refresh]
+  );
+
   useEffect(() => {
     refresh();
     let n = 0;
@@ -75,7 +104,18 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full bg-page text-ink">
+      {inflight > 0 && (
+        <div className="fixed inset-x-0 top-0 z-[100] h-[3px] overflow-hidden">
+          <motion.div
+            className="h-full w-1/3 bg-gradient-to-r from-transparent via-violet-500 to-transparent"
+            initial={{ x: "-100%" }}
+            animate={{ x: "300%" }}
+            transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      )}
       <Nav state={state} view={view} current={parts[1]} go={go} />
+      <LogDrawer state={state} id={logJob} onClose={() => setLogJob(null)} onPick={setLogJob} />
       <main id="main" className="relative min-h-screen pl-[60px]">
         {state &&
           (view === "library" ? (
@@ -173,6 +213,9 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
           </div>
           <div>
             <Jobs jobs={running} names={Object.fromEntries((state?.articles ?? []).map((a) => [a.id, articleTitle(a)]))} />
+            <button onClick={() => openLog(running[0]?.id ?? "")} className="flex w-full items-center gap-3 rounded-lg px-2.5 py-1.5 text-ink-2 transition hover:bg-soft hover:text-ink">
+              <IconTerminal2 className="size-5 shrink-0" />
+            </button>
             <Theme />
           </div>
         </SidebarBody>
@@ -199,7 +242,7 @@ function Jobs({ jobs, names }: { jobs: Job[]; names: Record<string, string> }) {
   return (
     <div className="space-y-1 pb-2">
       {jobs.map((j) => (
-        <div key={j.id} className="flex items-center gap-3 rounded-lg px-2.5 py-1.5">
+        <button key={j.id} onClick={() => openLog(j.id)} className="flex w-full items-center gap-3 rounded-lg px-2.5 py-1.5 text-left transition hover:bg-soft">
           <span className="relative flex size-2.5 shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
             <span className="relative inline-flex size-2.5 rounded-full bg-violet-400" />
@@ -210,7 +253,7 @@ function Jobs({ jobs, names }: { jobs: Job[]; names: Record<string, string> }) {
               <span className="truncate text-ink-3">{names[j.target] ?? j.target}</span>
             </span>
           )}
-        </div>
+        </button>
       ))}
     </div>
   );
@@ -219,4 +262,36 @@ function Jobs({ jobs, names }: { jobs: Job[]; names: Record<string, string> }) {
 function Theme() {
   const { open } = useSidebar();
   return <div className="pb-2">{open ? <ThemeToggle appearance="sidebar-segmented" /> : <ThemeToggle collapsed />}</div>;
+}
+
+/** 전체 로그 창 — 왼쪽은 최근 작업(돌고 있는 것 먼저), 오른쪽은 고른 작업의 실시간 로그 */
+function LogDrawer({ state, id, onClose, onPick }: { state: State | null; id: string | null; onClose: () => void; onPick: (id: string) => void }) {
+  const jobs = [...(state?.jobs ?? [])].sort((a, b) => (a.status === "running" ? 0 : 1) - (b.status === "running" ? 0 : 1) || b.started - a.started).slice(0, 20);
+  const names = Object.fromEntries((state?.articles ?? []).map((a) => [a.id, articleTitle(a)]));
+  const cur = id || jobs[0]?.id || "";
+  return (
+    <Drawer direction="right" open={id !== null} onOpenChange={(o) => !o && onClose()}>
+      <DrawerContent className="z-[85] bg-page border-line data-[vaul-drawer-direction=right]:w-[960px] data-[vaul-drawer-direction=right]:sm:max-w-[960px]">
+        <div className="flex h-full">
+          <div className="w-72 shrink-0 overflow-y-auto border-r border-line p-3">
+            <DrawerTitle className="px-2 pb-3 pt-2 text-base font-semibold text-ink">작업 로그</DrawerTitle>
+            {jobs.map((j) => (
+              <button
+                key={j.id}
+                onClick={() => onPick(j.id)}
+                className={cn("mb-1 flex w-full flex-col rounded-xl px-3 py-2 text-left transition hover:bg-soft", cur === j.id && "bg-soft")}
+              >
+                <span className="flex items-center gap-2 text-sm text-ink">
+                  <span className={cn("size-2 rounded-full", j.status === "running" ? "animate-pulse bg-emerald-500" : j.status === "failed" ? "bg-rose-500" : "bg-ink-3")} />
+                  {JOB_NAMES[j.kind] ?? j.kind}
+                </span>
+                <span className="truncate pl-4 text-xs text-ink-3">{names[j.target] ?? j.target}</span>
+              </button>
+            ))}
+          </div>
+          <div className="min-w-0 flex-1 p-5">{cur && <LiveLog key={cur} jobId={cur} />}</div>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
 }
