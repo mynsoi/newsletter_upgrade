@@ -95,7 +95,7 @@ def run_claude(d, prompt):
     proc.stdin.write(prompt)
     proc.stdin.close()
     parts, result = [], ""
-    with open(d / "live.md", "w", encoding="utf-8") as live:
+    with open(d / "live.md", "w", encoding="utf-8") as live, open(d / "thinking.md", "w", encoding="utf-8") as think:
         for line in proc.stdout:
             try:
                 e = json.loads(line)
@@ -103,10 +103,14 @@ def run_claude(d, prompt):
                 continue
             if e.get("type") == "stream_event":
                 ev = e.get("event", {})
-                if ev.get("type") == "content_block_delta" and ev.get("delta", {}).get("type") == "text_delta":
-                    parts.append(ev["delta"]["text"])
-                    live.write(ev["delta"]["text"])
+                delta = ev.get("delta", {}) if ev.get("type") == "content_block_delta" else {}
+                if delta.get("type") == "text_delta":
+                    parts.append(delta["text"])
+                    live.write(delta["text"])
                     live.flush()
+                elif delta.get("type") == "thinking_delta":  # 쓰기 전 생각 — 본문이 나오기 전에도 진행이 보이게
+                    think.write(delta.get("thinking", ""))
+                    think.flush()
             elif e.get("type") == "result":
                 result = e.get("result", "")
     (d / "run.log").write_text(proc.stderr.read(), encoding="utf-8")
@@ -269,8 +273,13 @@ def shorten(brief_path):
 
 def shorten_file(src, out_dir):
     """--shorten-file <원고> <폴더> — 설정 없는 확정 칼럼용. 결과는 <폴더>/output.md"""
-    out = run_astra(Path(out_dir), shorten_prompt(Path(src).read_text(encoding="utf-8")))
+    d = Path(out_dir)
+    d = d if d.is_absolute() else (ROOT / d)  # 상대 경로를 그대로 넘기면 astra가 폴더를 못 찾아 빈 결과가 났다(2026-10-10)
+    src_f = Path(src) if Path(src).is_absolute() else ROOT / src
+    out = run_astra(d.resolve(), shorten_prompt(src_f.read_text(encoding="utf-8")))
     print(f"절반: {src} → {out_dir}/output.md · {len(out)}자")
+    if not out.strip():
+        sys.exit("절반 결과가 비었음 — 로그: " + str(d / "run.log"))
 
 
 def fetch_infuture(post_id):

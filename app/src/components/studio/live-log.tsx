@@ -25,8 +25,9 @@ export function LiveLog({ jobId, compact = false, className }: { jobId: string; 
     if (box.current) box.current.scrollTop = box.current.scrollHeight;
   }, [log]);
   const live = log?.live ?? [];
-  const writing = live.find((x) => x.name.endsWith("live.md"));
-  const others = live.filter((x) => x !== writing);
+  const writing = live.find((x) => x.name.endsWith("live.md") && x.text.trim());
+  const thinking = !writing ? live.find((x) => x.name.endsWith("thinking.md") && x.text.trim()) : undefined;
+  const others = live.filter((x) => x !== writing && !x.name.endsWith("live.md") && !x.name.endsWith("thinking.md"));
   const running = log?.status === "running";
   const lines = (t: string) => t.split("\n").filter((l) => l.trim()).slice(compact ? -6 : -200).join("\n");
   return (
@@ -41,6 +42,18 @@ export function LiveLog({ jobId, compact = false, className }: { jobId: string; 
           <p className={cn("whitespace-pre-wrap text-ink", compact ? "line-clamp-4 text-[13px] leading-relaxed" : "mb-4 text-[15px] leading-relaxed")}>
             {compact ? writing.text.slice(-400) : writing.text}
             {running && <span className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-violet-500 align-middle" />}
+          </p>
+        )}
+        {running && !writing && !thinking && live.some((x) => x.name.endsWith("live.md")) && (
+          <p className="mb-2 flex items-center gap-2 text-[13px] text-violet-600 dark:text-violet-300">
+            <span className="size-2 animate-pulse rounded-full bg-violet-500" />
+            Claude 생각 중
+          </p>
+        )}
+        {thinking && (
+          <p className={cn("whitespace-pre-wrap italic text-ink-3", compact ? "line-clamp-3 text-[12.5px]" : "mb-4 text-[13.5px]")}>
+            <span className="not-italic text-violet-600 dark:text-violet-300">생각 중 · </span>
+            {thinking.text.slice(compact ? -300 : -3000)}
           </p>
         )}
         {[...others.map((x) => x.text), log?.text ?? ""].filter((t) => t.trim()).map((t, i) => (

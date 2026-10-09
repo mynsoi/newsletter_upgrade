@@ -46,7 +46,7 @@ export default function Article({
   const hero = a.hero || a.confirmed?.hero || "";
 
   return (
-    <div className="min-h-full pb-56">
+    <div className="min-h-full pb-80">
       <div className="relative h-[380px] overflow-hidden">
         {hero ? (
           <img src={img(hero, 1600)} className="absolute inset-0 h-full w-full object-cover" />

@@ -79,6 +79,9 @@ export default function ParticleButton({
     setTimeout(() => {
       setShowParticles(false);
     }, successDuration);
+    // 원본 컴포넌트는 onClick을 받기만 하고 부르지 않았다 — '쓰기'·'확정'이 눌러도 아무 일이 없던 원인(2026-10-10)
+    onClick?.(e);
+    onSuccess?.();
   };
 
   return (

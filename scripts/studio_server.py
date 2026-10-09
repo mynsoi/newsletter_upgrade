@@ -360,7 +360,8 @@ def live_of(j):
     k, kind = j.get("target", ""), j["kind"]
     cands = []
     if kind in ("write", "revise", "shorten"):
-        cands = list((ROOT / "runs" / "columns" / k).glob("_*/live.md")) + list((ROOT / "runs" / "columns" / k).glob("_*/run.log"))
+        cands = [*(ROOT / "runs" / "columns" / k).glob("_*/live.md"), *(ROOT / "runs" / "columns" / k).glob("_*/thinking.md"),
+                 *(ROOT / "runs" / "columns" / k).glob("_*/run.log")]
     elif kind == "titles":
         cands = [ROOT / "runs" / "titles0" / k / "astra.log"]
     elif kind in ("images", "inline"):
@@ -369,7 +370,7 @@ def live_of(j):
             cands = [rounds[-1] / "run.log", *rounds[-1].glob("[0-9][0-9].log")]
     cands = [c for c in cands if c.is_file() and c.stat().st_mtime >= j["started"] - 5]
     cands.sort(key=lambda c: c.stat().st_mtime, reverse=True)
-    return [{"name": str(c.relative_to(ROOT)), "text": tail(c)} for c in cands[:2]]
+    return [{"name": str(c.relative_to(ROOT)), "text": tail(c)} for c in cands[:3]]
 
 
 def act_topics(_):
@@ -491,9 +492,12 @@ def act_length(a):
         return start("shorten", k, PIPE + ["--shorten", str(brief_path(k).relative_to(ROOT))])
     out_dir = ROOT / "runs" / "columns" / k / ("_shorten-" + time.strftime("%Y%m%d-%H%M%S"))
 
-    def after(j):  # 확정 칼럼: 결과를 과정 기록에 다음 과정으로 붙인다
+    def after(j):  # 확정 칼럼: 결과를 과정 기록에 다음 과정으로 붙인다 — 비었으면 붙이지 않고 실패로
+        text = read(out_dir / "output.md").strip()
+        if not text:
+            raise ValueError("절반 결과가 비었음")
         f = ROOT / "columns" / f"{k}-절반.md"
-        f.write_text(read(out_dir / "output.md"), encoding="utf-8")
+        f.write_text(text + "\n", encoding="utf-8")
         d = json.loads(read(pp))
         d["steps"].append({"file": str(f.relative_to(ROOT)), "by": "astra", "mode": "절반"})
         pp.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
