@@ -1,6 +1,13 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/06.md | 합침 | 업무방식/팀의-판단-기준부터-공유하자.md
+- ingest ../sources/originals/linkedin/05.md | 새 주제 | AI리터러시/AI는-우리-업무로-평가하자.md
+- ingest ../sources/originals/linkedin/05.md | 합침 | 업무방식/AI에게-숫자를-맡기려면-계산-기준부터.md
+- ingest ../sources/originals/linkedin/04.md | 새 주제 | 업무방식/AI로-내-전문성을-더-넓게-쓰자.md
+- ingest ../sources/originals/linkedin/03.md | 새 주제 | 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md
+- ingest ../sources/originals/linkedin/02.md | 합침 | 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
+- ingest ../sources/originals/linkedin/01.md | 새 주제 | 업무방식/AI에게-숫자를-맡기려면-계산-기준부터.md
 - ingest ../sources/originals/threads/12.md | 새 주제 | AI리터러시/AI-디자인을-고칠-때는-원인부터.md
 - ingest ../sources/originals/threads/11.md | 새 주제 | 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
 - ingest ../sources/originals/threads/10.md | 새 주제 | 업무자동화/자동화할-업무의-데이터부터-모으자.md
