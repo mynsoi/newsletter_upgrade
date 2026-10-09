@@ -1,0 +1,9 @@
+WARNING: This project calls an unsupported private Codex backend path. The contract may break without notice.
+{
+  "provider": "private-codex",
+  "savedPath": "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/images/zz-test/20261009-204415/02.png",
+  "responseId": "resp_0d33fe93c88ca9a4016ac8d3e299e887d0bd511e1c4d836a52",
+  "sessionId": "c50ef9ac-957e-426e-99b2-1a71ea1e2481",
+  "revisedPrompt": "Create a wide 2:1 documentary-style photograph in a clean energy facility, understated photorealism. An experienced middle-aged Korean employee wearing a plain unmarked hard hat and clear safety glasses stands beside realistic industrial steel pipework and a detailed valve assembly. Three-quarter close-medium composition: attentive eyes clearly visible through the glasses, looking away from a tablet toward a small physical detail on the valve, such as a flange connection and seal alignment, pausing thoughtfully before accepting a visual inspection draft. One steady hand supports the tablet, the other hovers deliberately near its edge, not tapping yet. Weathered but natural hands and face convey tangible years of working experience. Tablet screen visible at a plausible angle and displays several visual inspection drafts, exclusively equipment photographs and simple geometric line diagrams in an image-only grid, absolutely no interface text or symbols resembling writing. Arrange person, tablet, and valve so the visual comparison is immediately legible. Clean energy industrial setting, tidy functional piping, softly receding background, natural daylight, muted steel blue metal and warm realistic skin tones. Candid professional photography, subtle depth of field, real materials, no glamour or exaggerated cinematic treatment. Absolutely no text, letters, numbers, logos, branding, labels, signage, or watermarks anywhere in the entire image, including clothing, hard hat, equipment and tablet. Horizontal aspect ratio 2:1.",
+  "httpStatus": 200
+}

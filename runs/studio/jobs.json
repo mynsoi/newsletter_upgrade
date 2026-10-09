@@ -25,5 +25,32 @@
   "started": 1791545394.4801154,
   "log": "runs/studio/logs/1009-202954-4c60.log",
   "ended": 1791545407.3500352
+ },
+ {
+  "id": "1009-204415-4136",
+  "kind": "revise",
+  "target": "zz-test",
+  "status": "done",
+  "started": 1791546255.3995428,
+  "log": "runs/studio/logs/1009-204415-4136.log",
+  "ended": 1791546284.382488
+ },
+ {
+  "id": "1009-204415-4e84",
+  "kind": "images",
+  "target": "zz-test",
+  "status": "done",
+  "started": 1791546255.4051719,
+  "log": "runs/studio/logs/1009-204415-4e84.log",
+  "ended": 1791546404.6818995
+ },
+ {
+  "id": "1009-204415-1044",
+  "kind": "collect",
+  "target": "「유정식의 경영일기」(infuture.stibee.com) 아카이브에서 ",
+  "status": "done",
+  "started": 1791546255.4105139,
+  "log": "runs/studio/logs/1009-204415-1044.log",
+  "ended": 1791546282.3340707
  }
 ]

@@ -39,7 +39,7 @@ def known_urls():
 
 
 def ask_aside(req, d):
-    prompt = f"""{req}
+    prompt = f"""요청: {req}
 
 할 일: 위 요청에 맞는 글을 찾아 그 글의 주소(URL)만 모은다. 찾은 만큼 모두 적는다.
 - 글 하나마다 그 글 자체의 주소(목록·검색 결과 페이지가 아니라 개별 글 주소).
@@ -53,10 +53,11 @@ https://..."""
     (d / "aside-prompt.md").write_text(prompt, encoding="utf-8")
     r = subprocess.run(["aside-win", "exec", "--host", "local", "--effort", "ultrabrowse", prompt],
                        stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=7200)
-    (d / "aside.md").write_text(r.stdout + "\n" + r.stderr, encoding="utf-8")
-    tail = r.stdout.split("URLS:")[-1] if "URLS:" in r.stdout else r.stdout
+    out = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", r.stdout)  # 터미널 색상 코드가 주소 끝에 붙어 중복 확인이 깨졌다(2026-10-09)
+    (d / "aside.md").write_text(out + "\n" + r.stderr, encoding="utf-8")
+    tail = out.split("URLS:")[-1] if "URLS:" in out else out
     urls = []
-    for u in re.findall(r"https?://[^\s<>\")\]]+", tail):
+    for u in re.findall(r"https?://[^\s<>\")\]\x1b]+", tail):
         u = u.rstrip(".,;")
         if u not in urls:
             urls.append(u)

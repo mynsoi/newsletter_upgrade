@@ -23,7 +23,6 @@ const TABS = [
   { value: "image", title: "그림" },
   { value: "confirm", title: "확정" },
 ];
-const ROLE = ["초안", "재작성", "기준 반영"];
 
 export default function Article({
   state,
@@ -242,7 +241,6 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
     aside: (
       <div className="mt-5 flex flex-col items-start gap-2 text-sm text-neutral-500">
         <ByChip by={s.by} />
-        <span>{s.by === "멘토" ? "직접 수정" : s.n <= 3 ? ROLE[s.n - 1] : "피드백"}</span>
         <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
         <span className="tabular-nums text-neutral-600">{when(s.at)}</span>
       </div>
@@ -274,7 +272,7 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       aside: <div className="mt-5"><ByChip by="astra" /></div>,
       content: (
         <div className="flex h-60 max-w-[720px] items-center justify-center rounded-3xl border border-white/[0.07] bg-neutral-900/50">
-          <AITextLoading texts={["astra", "피드백 반영 중"]} />
+          <AITextLoading texts={["astra"]} />
         </div>
       ),
     });

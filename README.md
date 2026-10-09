@@ -36,8 +36,11 @@ drafts/            초안과 수정 이력
 
 ```
 cd app && npm run build                    # 화면 빌드 (app/dist)
-python3 -I scripts/studio_server.py 8771   # 서버 — http://<이 PC>:8771 , 비밀번호 없음
+python3 -I scripts/studio_server.py 8771   # 서버 — http://127.0.0.1:8771 · http://<Tailscale 주소>:8771, 비밀번호 없음
 ```
+
+- 같은 공유기(LAN)에는 열지 않는다: localhost와 Tailscale 주소(100.64.0.0/10)에만 붙는다.
+  진행자는 Bash를 쓰는 Claude라서, 다른 사이트가 몰래 보내는 요청도 막는다(Host·Origin 확인, JSON 요청만 받음).
 
 - 서버는 버튼을 기존 명령에 잇기만 한다: `column_pipeline.py`(제목·쓰기·피드백) · `topic_candidates.py`(주제) ·
   `image_candidates.py`(그림) · `collect.py`(aside 수집, 개수 상한 없음). 작업 기록은 `runs/studio/`.

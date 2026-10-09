@@ -226,7 +226,7 @@ def topic_rounds():
 
 
 def chat_log(k):
-    f = STUDIO / "chat" / f"{k}.jsonl"
+    f = STUDIO / "chat" / f"{safe_id(k)}.jsonl"
     return [json.loads(l) for l in read(f).splitlines() if l.strip()]
 
 
@@ -245,17 +245,41 @@ def collect_rounds():
 
 
 # ---------- 쓰기 ----------
+# 입력값은 모두 검사한다: 글 이름·회차·그림 경로가 폴더 밖을 가리키지 못하게 (2026-10-09 보안 점검)
+
+ID = re.compile(r"^[0-9A-Za-z가-힣][0-9A-Za-z가-힣_.-]{0,80}$")
+
+
+def safe_id(k):
+    if not isinstance(k, str) or not ID.match(k) or ".." in k:
+        raise ValueError("잘못된 글 이름")
+    return k
+
+
+def inside(p, base):
+    p, base = Path(p).resolve(), Path(base).resolve()
+    return p == base or base in p.parents
+
 
 def brief_path(k):
-    p = ROOT / "briefs" / f"{k}.json"
-    if not p.exists() or "/" in k:
+    p = ROOT / "briefs" / f"{safe_id(k)}.json"
+    if not p.exists():
         raise ValueError("설정 없음: " + k)
     return p
 
 
 def process_path(k):
-    p = ROOT / "columns" / f"{k}.process.json"
-    return p if p.exists() and "/" not in k else None
+    p = ROOT / "columns" / f"{safe_id(k)}.process.json"
+    return p if p.exists() else None
+
+
+def image_src(src):
+    """머리 그림은 runs/images/ 아래에서 만든 PNG만 받는다."""
+    if not isinstance(src, str) or not re.match(r"^runs/images/[^/]+/\d{8}-\d{6}/\d{2}\.png$", src):
+        raise ValueError("잘못된 그림 경로")
+    if not inside(ROOT / src, ROOT / "runs" / "images") or not (ROOT / src).is_file():
+        raise ValueError("그림 없음")
+    return src
 
 
 def meta_update(k, **kv):
@@ -270,7 +294,9 @@ def act_topics(_):
 
 
 def act_pick_topic(a):
-    rnd, n = a["round"], str(a["n"])
+    rnd, n = str(a["round"]), str(int(a["n"]))
+    if not re.match(r"^\d{8}-\d{6}$", rnd) or not (ROOT / "runs" / "topics" / rnd / "astra.json").exists():
+        raise ValueError("잘못된 주제 회차")
     r = subprocess.run(PY + ["scripts/topic_candidates.py", "--pick", rnd, n], cwd=ROOT, capture_output=True, text=True)
     if r.returncode:
         raise ValueError(r.stderr[-500:])
@@ -303,7 +329,8 @@ def act_write(a):
 
 
 def act_revise(a):
-    k, fb = a["article"], a["feedback"]
+    k, fb = a["article"], str(a["feedback"])
+    brief_path(k)
     inbox = ROOT / "runs" / "columns" / k / "inbox"
     inbox.mkdir(parents=True, exist_ok=True)
     f = inbox / (time.strftime("%Y%m%d-%H%M%S") + ".txt")
@@ -312,7 +339,7 @@ def act_revise(a):
 
 
 def act_images(a):
-    k = a["article"]
+    k = safe_id(a["article"])
     pp = process_path(k)
     target = json.loads(read(pp))["steps"][-1]["file"] if pp else k
     if pp:  # 확정 칼럼은 원고 파일 이름이 그림 폴더 이름이 된다
@@ -321,13 +348,16 @@ def act_images(a):
 
 
 def act_hero(a):
-    meta_update(a["article"], hero=a["src"])
-    return {"hero": a["src"]}
+    src = image_src(a["src"])
+    meta_update(a["article"], hero=src)
+    return {"hero": src}
 
 
 def act_confirm(a):
-    k, n = a["article"], int(a["step"])
+    k, n = safe_id(a["article"]), int(a["step"])
     art = next(x for x in articles() if x["id"] == k)
+    if not 1 <= n <= len(art["steps"]):
+        raise ValueError("잘못된 과정 번호")
     st = art["steps"][n - 1]
     out = ROOT / "columns" / f"{date.today().isoformat()}-{k}.md"
     title = art["title"] or st["title"]
@@ -336,14 +366,16 @@ def act_confirm(a):
     if art.get("hero"):
         img = ROOT / "columns" / "img" / f"{out.stem}.png"
         img.parent.mkdir(exist_ok=True)
-        shutil.copyfile(ROOT / art["hero"], img)
+        shutil.copyfile(ROOT / image_src(art["hero"]), img)
         conf["hero"] = str(img.relative_to(ROOT))
     meta_update(k, confirmed=conf)
     return conf
 
 
 def act_collect(a):
-    req = a["request"].strip()
+    req = str(a["request"]).strip()
+    if not req:
+        raise ValueError("요청이 비었음")
     return start("collect", req[:40], PY + ["scripts/collect.py", req])
 
 
@@ -351,7 +383,7 @@ DIRECTOR = ROOT / "scripts" / "director_system.md"
 
 
 def act_chat(a):
-    k, msg = a["article"], a["message"].strip()
+    k, msg = safe_id(a["article"]), str(a["message"]).strip()
     sess_f = STUDIO / "chat" / "sessions.json"
     sess = json.loads(read(sess_f) or "{}")
     first = k not in sess
@@ -387,7 +419,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
 
 def thumb(rel, w):
     src = (ROOT / rel).resolve()
-    if ROOT not in src.parents or not src.exists():
+    if not any(inside(src, ROOT / d) for d in ALLOWED) or not src.is_file():
         return None
     out = STUDIO / "thumbs" / f"{re.sub(r'[^0-9A-Za-z가-힣._-]', '_', rel)}.{w}.jpg"
     if not out.exists() or out.stat().st_mtime < src.stat().st_mtime:
@@ -401,9 +433,22 @@ def thumb(rel, w):
 ALLOWED = ("runs/images/", "columns/", "runs/studio/thumbs/")
 
 
+HOSTS = set()  # 실행 때 채운다 — 이 서버가 받는 주소
+
+
+def host_ok(h):
+    return (h or "").rsplit(":", 1)[0].strip("[]") in HOSTS
+
+
 class H(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=str(DIST), **kw)
+
+    def guard(self):
+        if not host_ok(self.headers.get("Host")):
+            self.send_error(403)
+            return False
+        return True
 
     def log_message(self, *a):
         pass
@@ -427,8 +472,16 @@ class H(SimpleHTTPRequestHandler):
         self.wfile.write(b)
 
     def do_GET(self):
+        if not self.guard():
+            return
         u = urlparse(self.path)
         q = parse_qs(u.query)
+        try:
+            return self.get(u, q)
+        except ValueError as e:
+            return self.send_json({"error": str(e)}, 400)
+
+    def get(self, u, q):
         if u.path == "/api/state":
             return self.send_json(state())
         if u.path == "/api/jobs":
@@ -437,7 +490,7 @@ class H(SimpleHTTPRequestHandler):
         if u.path == "/api/source":
             p = q.get("path", [""])[0]
             row = next((r for r in library(full=True) if r["path"] == p), None)
-            if not row and p.startswith("excerpts/") and (SRC / p).exists():
+            if not row and p.startswith("excerpts/") and inside(SRC / p, SRC / "excerpts") and (SRC / p).is_file():
                 row = {"path": p, "text": front(read(SRC / p))[1]}
             return self.send_json(row or {}, 200 if row else 404)
         if u.path == "/api/chat":
@@ -447,9 +500,11 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json({"text": read(ROOT / j["log"])[-6000:] if j else ""})
         if u.path.startswith("/img/"):
             rel = unquote(u.path[5:])
-            if not rel.startswith(ALLOWED) or ".." in rel:
+            if not rel.startswith(ALLOWED) or ".." in rel or not rel.lower().endswith((".png", ".jpg")):
                 return self.send_error(404)
-            w = int(q.get("w", ["0"])[0] or 0)
+            if not any(inside(ROOT / rel, ROOT / d) for d in ALLOWED):
+                return self.send_error(404)
+            w = min(int(q.get("w", ["0"])[0] or 0), 2400)
             p = thumb(rel, w) if w else ROOT / rel
             if not p or not Path(p).exists():
                 return self.send_error(404)
@@ -459,19 +514,40 @@ class H(SimpleHTTPRequestHandler):
         return super().do_GET()
 
     def do_POST(self):
+        if not self.guard():
+            return
+        origin = self.headers.get("Origin")
+        if origin and not host_ok(urlparse(origin).netloc):
+            return self.send_error(403)
+        if not (self.headers.get("Content-Type") or "").startswith("application/json"):
+            return self.send_error(415)  # JSON만 — 다른 사이트의 form/text 요청은 브라우저가 사전 확인 없이 못 보낸다
         u = urlparse(self.path)
         name = u.path.removeprefix("/api/")
         if name not in ACTIONS:
             return self.send_error(404)
         n = int(self.headers.get("Content-Length") or 0)
-        a = json.loads(self.rfile.read(n) or b"{}")
         try:
+            a = json.loads(self.rfile.read(n) or b"{}")
+            if not isinstance(a, dict):
+                raise ValueError("잘못된 요청")
             return self.send_json(ACTIONS[name](a))
         except Exception as e:
             return self.send_json({"error": str(e)}, 400)
 
 
+def tailnet_ips():
+    """Tailscale 주소(100.64.0.0/10)만 찾는다 — 같은 공유기(LAN)에는 열지 않는다."""
+    out = subprocess.run(["ip", "-4", "-o", "addr"], capture_output=True, text=True).stdout
+    ips = re.findall(r"inet (100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d+\.\d+)/", out)
+    return list(dict.fromkeys(ips))
+
+
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8771
-    print(f"칼럼 작업실 http://0.0.0.0:{port}", flush=True)
-    ThreadingHTTPServer(("0.0.0.0", port), H).serve_forever()
+    binds = ["127.0.0.1"] + tailnet_ips()
+    HOSTS.update(binds + ["localhost"])
+    servers = [ThreadingHTTPServer((h, port), H) for h in binds]
+    for srv in servers[1:]:
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+    print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
+    servers[0].serve_forever()

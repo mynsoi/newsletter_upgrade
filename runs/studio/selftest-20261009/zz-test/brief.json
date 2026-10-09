@@ -1,0 +1,24 @@
+{
+ "topic": "t2",
+ "variant": "C",
+ "label": "시뮬레이션 C",
+ "thesis": "AI로 할 수 있는 일이 늘수록, 무엇을 만들고 무엇을 버릴지 판단하는 내 기준이 실력이 된다. AI를 잘 쓰게 됐다는 것과 실력이 늘었다는 것은 같은 말이 아니다.",
+ "sources": [
+  [
+   "originals/linkedin/04.md",
+   "LinkedIn, 프로덕트 디자인 디렉터, 2026-09-12"
+  ],
+  [
+   "excerpts/threads05-5to9.md",
+   "Threads, 기업 AI 교육 강사, 2026-03-06 (18편 중 5~9편)"
+  ]
+ ],
+ "title": "AI가 만든 결과물에 ‘아니오’라고 할 수 있나요?",
+ "hero": "runs/images/zz-test/20261009-204415/01.png",
+ "confirmed": {
+  "date": "2026-10-09",
+  "step": 4,
+  "file": "columns/2026-10-09-zz-test.md",
+  "hero": "columns/img/2026-10-09-zz-test.png"
+ }
+}
