@@ -1,0 +1,16 @@
+{
+ "topic": "20261009-200958-1",
+ "label": "AI도 인수인계가 필요하다",
+ "thesis": "AI가 우리 일을 잘 돕게 하려면 담당자, 업무 간 관계, 과거의 결정 배경을 찾아볼 수 있어야 한다. 신입 동료에게 설명하듯 업무 맥락을 정리하는 일이 AI 활용의 출발점이다.",
+ "sources": [
+  [
+   "originals/linkedin/02.md",
+   "LinkedIn, AI Lead/AI PO, 1일 • 수정됨"
+  ],
+  [
+   "originals/threads/11.md",
+   "Threads, @unit.withai, 2026-09-15"
+  ]
+ ],
+ "from_topics": "runs/topics/20261009-200958"
+}

@@ -1,0 +1,87 @@
+"""그림 후보 — 마지막 과정의 원고를 astra가 읽고 머리 그림 설명을 쓰면 gti가 그린다.
+
+사용: python3 image_candidates.py <설정 이름|원고 파일>
+결과: runs/images/<이름>/<회차>/{prompt.md, astra.json, NN.png}
+- 설명은 astra만 쓴다(제목과 같은 이유 — Claude가 쓰면 AI slop). 회차를 다시 돌리면 후보가 쌓인다.
+- gti는 Codex ChatGPT 인증으로 도는 비공식 경로라 깨질 수 있다. 기본 모델(gpt-5.4)은 2026-10-09 기준 막혀 gpt-6-astra로 준다.
+- 다시 그리기: python3 image_candidates.py --redraw runs/images/<이름>/<회차>  (설명은 그대로, 그림 없는 것만)
+"""
+import json
+import re
+import subprocess
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "runs" / "images"
+GTI = "/home/hwjoo/.nvm/versions/node/v24.15.0/bin/gti"
+
+
+def latest(name):
+    d = ROOT / "runs" / "columns" / name
+    revs = sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1]))
+    for f in [*reversed(revs), d / "final.md", d / "r4.md", d / "draft.md"]:
+        if f.exists():
+            return f
+
+
+def prompt(text):
+    return f"""아래 칼럼은 사내 뉴스레터(SK E&S 전 직원 대상) 메일 맨 위에 그림 한 장과 함께 나갑니다.
+그 머리 그림의 후보를 그림 설명으로 써 주세요. 설명은 이미지 생성 모델에 그대로 넣습니다.
+
+- 후보끼리 서로 다른 결로
+- 글이 실제로 말하는 장면이나 생각에서 출발
+- 그림 안에 글자는 넣지 않음
+
+출력: JSON 배열만 주세요. [{{"name": "짧은 이름", "prompt": "이미지 생성 모델에 넣을 설명(영어)"}}]
+파일을 만들거나 명령을 실행하지 마세요.
+
+=== 칼럼 ===
+{text.replace("(끝)", "").strip()}"""
+
+
+def draw(d, i, it):
+    png = d / f"{i:02d}.png"
+    with open(d / f"{i:02d}.log", "w", encoding="utf-8") as log:
+        subprocess.run([GTI, "--prompt", it["prompt"], "--output", str(png), "--size", "1536x1024", "--model", "gpt-6-astra"],
+                       stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=900)
+    return png.exists()
+
+
+def run(target):
+    f = (ROOT / target).resolve() if target.endswith(".md") else latest(target)
+    name = Path(target).stem if target.endswith(".md") else target
+    d = OUT / name / time.strftime("%Y%m%d-%H%M%S")
+    d.mkdir(parents=True, exist_ok=True)
+    p = prompt(f.read_text(encoding="utf-8"))
+    (d / "prompt.md").write_text(p, encoding="utf-8")
+    (d / "source.txt").write_text(str(f.relative_to(ROOT)), encoding="utf-8")
+    out = d / "astra.md"
+    with open(d / "run.log", "w", encoding="utf-8") as log:
+        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+                        "--ephemeral", "--color", "never", "-o", str(out), p],
+                       cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+    raw = out.read_text(encoding="utf-8") if out.exists() else ""
+    m = re.search(r"\[.*\]", raw, re.S)
+    items = json.loads(m.group(0)) if m else []
+    (d / "astra.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
+    paint(d, items)
+
+
+def paint(d, items):
+    todo = [(i, it) for i, it in enumerate(items, 1) if not (d / f"{i:02d}.png").exists()]
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        list(ex.map(lambda a: draw(d, *a), todo))
+    ok = sum(1 for i in range(1, len(items) + 1) if (d / f"{i:02d}.png").exists())
+    print(f"그림 후보 {ok}/{len(items)} → {d.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    a = sys.argv[1:]
+    if a[:1] == ["--redraw"]:
+        d = (ROOT / a[1]).resolve()
+        paint(d, json.loads((d / "astra.json").read_text(encoding="utf-8")))
+    else:
+        run(a[0])
