@@ -5,6 +5,7 @@
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
   2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs, 없으면 p724·p669 — 2026-10-09 멘토 선택)
   3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
+  4. 제목   — astra: 본문은 두고 제목 후보 8개 (경영일기 제목 60개 참고, title_candidates.py)
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
 """
@@ -146,6 +147,20 @@ def main(paths):
         (b["dir"] / "brief.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
         return t
     stage("기준 반영·astra", [lambda k=k: mk_final(k) for k in briefs])
+
+    # 4. 제목 후보 (astra만)
+    import title_candidates as tc
+
+    def mk_title(k):
+        b = briefs[k]
+        p = tc.prompt((b["dir"] / "final.md").read_text(encoding="utf-8"))
+        d = tc.OUT / k
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "prompt.md").write_text(p, encoding="utf-8")
+        (d / "source.txt").write_text(str((b["dir"] / "final.md").relative_to(ROOT)), encoding="utf-8")
+        tc.astra(d, p)
+        return (d / "astra.md").read_text(encoding="utf-8") if (d / "astra.md").exists() else ""
+    stage("제목 후보·astra", [lambda k=k: mk_title(k) for k in briefs])
 
 
 if __name__ == "__main__":

@@ -130,7 +130,7 @@ for d in sorted((RUNS / "titles").glob("*")):
         continue
     srcp = (d / "source.txt").read_text(encoding="utf-8").strip() if (d / "source.txt").exists() else ""
     cur = split_title(clean((ROOT / srcp).read_text(encoding="utf-8")))[0] if srcp and (ROOT / srcp).exists() else ""
-    for model in ("astra", "claude"):
+    for model in ("astra",):  # 멘토: 제목은 astra만
         f = d / f"{model}.md"
         if not f.exists() or f.stat().st_size < 20:
             continue

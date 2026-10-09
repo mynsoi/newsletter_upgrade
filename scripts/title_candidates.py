@@ -1,7 +1,7 @@
 """칼럼 본문은 두고 제목 후보만 뽑는다 (멘토: "제목이 항상 좀 별로", 2026-10-09).
 
 사용: python3 title_candidates.py <이름>=<본문 파일> ...
-결과: runs/titles/<이름>/{astra,claude}.md — 번호 붙은 제목 8줄
+결과: runs/titles/<이름>/astra.md — 번호 붙은 제목 8줄 (astra만 — 멘토 2026-10-09: Claude가 지은 제목은 AI slop이 심하다)
 참고: 「유정식의 경영일기」 최근 제목 60개(공지·강좌 제외, AI 아닌 주제 포함) + 멘토가 직접 지은 제목 1개
 """
 import html
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         d.mkdir(parents=True, exist_ok=True)
         (d / "prompt.md").write_text(p, encoding="utf-8")
         (d / "source.txt").write_text(path, encoding="utf-8")
-        jobs += [lambda d=d, p=p: astra(d, p), lambda d=d, p=p: claude(d, p)]
+        jobs += [lambda d=d, p=p: astra(d, p)]
     with ThreadPoolExecutor(max_workers=8) as ex:
         list(ex.map(lambda j: j(), jobs))
     print("done", len(jobs))
