@@ -1,0 +1,467 @@
+URL: https://www.threads.com/@aimkt.insight/post/DcrqtRQEyeV
+✔︎ Opened a new tab and set it active: tabs[0], page → [Claude 활용 컨설팅 스타일 PPT슬라이드 작성] AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다. 작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다. (https://www.threads.com/@aimkt.insight/post/DcrqtRQEyeV)
+=== SNAPSHOT 1 ===
+- title: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성] AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다. 작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다." [url=https://www.threads.com/@aimkt.insight/post/DcrqtRQEyeV]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.4천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "aimkt.insight님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "aimkt.insight" [ref=e23]
+    - link "ppt" [ref=e24]
+    - link "2026년 8월 31일 월요일 오전 8:14" [ref=e25]: "2026-08-31"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성]AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다.작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다."
+    - button [ref=e27]
+    - button "미디어를 파노라마로 결합" [ref=e28]
+    - button [ref=e29]
+    - button [ref=e30]:
+      - img "좋아요"
+      - text: "35"
+    - button [ref=e31]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e32]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e33]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e34]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e35]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e36] [focused]
+    - button "미디어 첨부" [ref=e37]
+    - button "GIF 추가" [ref=e38]
+    - button "작성 도구 확장" [ref=e39]
+  - generic [ref=e40]:
+    - link [ref=e41]:
+      - image "goodtek.xyz님의 프로필 사진"
+    - link "goodtek.xyz" [ref=e42]
+    - link "2026년 8월 31일 월요일 오전 8:25" [ref=e43]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e44]:
+      - img "더 보기"
+    - text: "슬라이드 구조까지 잡아준다니 꽤 기대되네요. 컨설팅 자료 만들 때 바로 써보고 싶습니다~"
+    - button [ref=e45]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e46]:
+      - img "답글"
+    - button [ref=e47]:
+      - img "리포스트"
+    - button [ref=e48]:
+      - img "공유하기"
+  - generic [ref=e49]:
+    - link [ref=e50]:
+      - image "proverbsnapshots님의 프로필 사진"
+    - link "proverbsnapshots" [ref=e51]
+    - link "2026년 8월 31일 월요일 오전 9:19" [ref=e52]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "Wow, 그런데 요즘 어떻게 만들어도 AI로 만들었다고 의심부터 해 ^^"
+    - button [ref=e54]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]:
+      - image "khg1128님의 프로필 사진"
+    - link "khg1128" [ref=e60]
+    - link "2026년 8월 31일 월요일 오전 11:11" [ref=e61]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - text: "잘 만들었네요. PPT로 하니 잘 안되는데 팁좀 알려주세요"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e67]
+    - listitem:
+      - link "개인정보처리방침" [ref=e68]
+    - listitem:
+      - link "쿠키 정책" [ref=e69]
+- button "만들기" [ref=e70]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성] AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다. 작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다." [url=https://www.threads.com/@aimkt.insight/post/DcrqtRQEyeV]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.4천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성]AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다.작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다."
+    - button [ref=e27]
+    - button "미디어를 파노라마로 결합" [ref=e28]
+    - button [ref=e29]
+    - button [ref=e30]:
+      - img "좋아요"
+      - text: "35"
+    - button [ref=e31]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e32]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e33]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e34]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e35]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e36] [focused]
+    - button "미디어 첨부" [ref=e37]
+    - button "GIF 추가" [ref=e38]
+    - button "작성 도구 확장" [ref=e39]
+  - generic [ref=e40]:
+    - link [ref=e41]:
+      - image "goodtek.xyz님의 프로필 사진"
+    - link "goodtek.xyz" [ref=e42]
+    - link "2026년 8월 31일 월요일 오전 8:25" [ref=e43]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e44]:
+      - img "더 보기"
+    - text: "슬라이드 구조까지 잡아준다니 꽤 기대되네요. 컨설팅 자료 만들 때 바로 써보고 싶습니다~"
+    - button [ref=e45]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e46]:
+      - img "답글"
+    - button [ref=e47]:
+      - img "리포스트"
+    - button [ref=e48]:
+      - img "공유하기"
+  - generic [ref=e49]:
+    - link [ref=e50]:
+      - image "proverbsnapshots님의 프로필 사진"
+    - link "proverbsnapshots" [ref=e51]
+    - link "2026년 8월 31일 월요일 오전 9:19" [ref=e52]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "Wow, 그런데 요즘 어떻게 만들어도 AI로 만들었다고 의심부터 해 ^^"
+    - button [ref=e54]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]:
+      - image "khg1128님의 프로필 사진"
+    - link "khg1128" [ref=e60]
+    - link "2026년 8월 31일 월요일 오전 11:11" [ref=e61]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - text: "잘 만들었네요. PPT로 하니 잘 안되는데 팁좀 알려주세요"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e67]
+    - listitem:
+      - link "개인정보처리방침" [ref=e68]
+    - listitem:
+      - link "쿠키 정책" [ref=e69]
+- button "만들기" [ref=e70]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성] AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다. 작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다." [url=https://www.threads.com/@aimkt.insight/post/DcrqtRQEyeV]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.4천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "[Claude 활용 컨설팅 스타일 PPT슬라이드 작성]AI로 만든 PPT슬라이드들이 너무 AI티가 많이 나고 실제 컨설팅 및 사례 보고서 작성시 사용할 수 없어서 1주일간 유튜브 와 Github의 자료들을 참고해서 '컨설팅 PPT슬라이드' 스킬을 제작했다.작성하고자 하는 내용을 입력하면 내용을 분석해서 내용에 맞는 슬라이드 구조(표,단계,그래프 등)로 제작이 된다."
+    - button [ref=e27]
+    - button "미디어를 파노라마로 결합" [ref=e28]
+    - button [ref=e29]
+    - button [ref=e30]:
+      - img "좋아요"
+      - text: "35"
+    - button [ref=e31]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e32]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e33]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e34]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e35]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e36] [focused]
+    - button "미디어 첨부" [ref=e37]
+    - button "GIF 추가" [ref=e38]
+    - button "작성 도구 확장" [ref=e39]
+  - generic [ref=e40]:
+    - link [ref=e41]:
+      - image "goodtek.xyz님의 프로필 사진"
+    - link "goodtek.xyz" [ref=e42]
+    - link "2026년 8월 31일 월요일 오전 8:25" [ref=e43]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e44]:
+      - img "더 보기"
+    - text: "슬라이드 구조까지 잡아준다니 꽤 기대되네요. 컨설팅 자료 만들 때 바로 써보고 싶습니다~"
+    - button [ref=e45]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e46]:
+      - img "답글"
+    - button [ref=e47]:
+      - img "리포스트"
+    - button [ref=e48]:
+      - img "공유하기"
+  - generic [ref=e49]:
+    - link [ref=e50]:
+      - image "proverbsnapshots님의 프로필 사진"
+    - link "proverbsnapshots" [ref=e51]
+    - link "2026년 8월 31일 월요일 오전 9:19" [ref=e52]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "Wow, 그런데 요즘 어떻게 만들어도 AI로 만들었다고 의심부터 해 ^^"
+    - button [ref=e54]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]:
+      - image "khg1128님의 프로필 사진"
+    - link "khg1128" [ref=e60]
+    - link "2026년 8월 31일 월요일 오전 11:11" [ref=e61]: "2026-08-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - text: "잘 만들었네요. PPT로 하니 잘 안되는데 팁좀 알려주세요"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e67]
+    - listitem:
+      - link "개인정보처리방침" [ref=e68]
+    - listitem:
+      - link "쿠키 정책" [ref=e69]
+- button "만들기" [ref=e70]:
+  - img "만들기"
+=== DONE ===
+[ok | 11856ms]

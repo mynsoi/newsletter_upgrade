@@ -144,26 +144,29 @@ def title_rounds(k):
     return out
 
 
-def image_rounds(k):
+def image_rounds(k, inline=False):
     out = []
     for d in sorted((ROOT / "runs" / "images" / k).glob("*/")):
+        if d.name.startswith("inline-") != inline:
+            continue
         items = json.loads(read(d / "astra.json") or "[]")
         imgs = []
         for i, it in enumerate(items, 1):
             png = d / f"{i:02d}.png"
             imgs.append({"name": it.get("name", ""), "prompt": it.get("prompt", ""),
-                         "src": str(png.relative_to(ROOT)) if png.exists() else ""})
+                         "src": str(png.relative_to(ROOT)) if png.exists() else "",
+                         "after": it.get("after", 0), "anchor": it.get("anchor", "")})
         out.append({"id": d.name, "items": imgs})
     return out
 
 
-def step(n, f, by, feedback="", known=""):
+def step(n, f, by, feedback="", known="", mode=""):
     raw = clean(read(f))
     title, body = split_title(raw)
     first = body.split("\n", 1)
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()
-    return {"n": n, "file": str(Path(f).relative_to(ROOT)), "by": by, "title": title, "text": body,
+    return {"n": n, "file": str(Path(f).relative_to(ROOT)), "by": by, "title": title, "text": body, "mode": mode,
             "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime}
 
 
@@ -182,19 +185,22 @@ def article_from_brief(bp):
     for f in sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1])):
         n = f.stem.split("-r")[1]
         if f.stat().st_size > 50:
-            steps.append(step(len(steps) + 1, f, "astra", read(d / f"feedback-r{n}.txt"), b.get("title", "")))
+            steps.append(step(len(steps) + 1, f, "astra", read(d / f"feedback-r{n}.txt"), b.get("title", ""),
+                              read(d / f"mode-r{n}.txt").strip()))
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
-            "steps": steps, "images": image_rounds(k), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
+            "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
+            "length": b.get("length", "full"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
             "fromTopics": b.get("from_topics", ""), "at": bp.stat().st_mtime}
 
 
 def article_from_process(pp):
     k = pp.name.replace(".process.json", "")
     p = json.loads(read(pp))
-    steps = [step(i, ROOT / s["file"], s["by"], s.get("feedback", "")) for i, s in enumerate(p["steps"], 1)]
+    steps = [step(i, ROOT / s["file"], s["by"], s.get("feedback", ""), p["title"], s.get("mode", "")) for i, s in enumerate(p["steps"], 1)]
     return {"id": k, "kind": "process", "label": p["title"], "thesis": p.get("thesis", ""), "sources": p.get("sources", []),
-            "title": p["title"], "titles": [], "steps": steps, "images": image_rounds(k), "hero": p.get("hero", ""),
+            "title": p["title"], "titles": [], "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True),
+            "inlinePicked": p.get("inline", []), "length": p.get("length", "full"), "hero": p.get("hero", ""),
             "confirmed": p.get("confirmed"), "fromTopics": "", "at": pp.stat().st_mtime}
 
 
@@ -277,7 +283,7 @@ def process_path(k):
 
 def image_src(src):
     """머리 그림은 runs/images/ 아래에서 만든 PNG만 받는다."""
-    if not isinstance(src, str) or not re.match(r"^runs/images/[^/]+/\d{8}-\d{6}/\d{2}\.png$", src):
+    if not isinstance(src, str) or not re.match(r"^runs/images/[^/]+/(?:inline-)?\d{8}-\d{6}/\d{2}\.png$", src):
         raise ValueError("잘못된 그림 경로")
     if not inside(ROOT / src, ROOT / "runs" / "images") or not (ROOT / src).is_file():
         raise ValueError("그림 없음")
@@ -346,7 +352,47 @@ def act_images(a):
     target = json.loads(read(pp))["steps"][-1]["file"] if pp else k
     if pp:  # 확정 칼럼은 원고 파일 이름이 그림 폴더 이름이 된다
         target = str(Path(target))
+    if a.get("kind") == "inline":
+        return start("inline", k, PY + ["scripts/image_candidates.py", "--inline", target])
     return start("images", k, PY + ["scripts/image_candidates.py", target])
+
+
+def act_inline(a):
+    """본문 그림 고르기/빼기 — 고른 그림은 확정할 때 그 문단 뒤에 들어간다."""
+    k, src, on = safe_id(a["article"]), image_src(a["src"]), bool(a.get("on", True))
+    art = next(x for x in articles() if x["id"] == k)
+    item = next((it for r in art["inline"] for it in r["items"] if it["src"] == src), None)
+    if not item:
+        raise ValueError("본문 그림 아님")
+    picked = [x for x in art["inlinePicked"] if x["src"] != src]
+    if on:
+        picked.append({"src": src, "after": item["after"], "anchor": item["anchor"], "name": item["name"]})
+    picked.sort(key=lambda x: x["after"])
+    meta_update(k, inline=picked)
+    return {"inline": picked}
+
+
+def act_length(a):
+    """분량 두 가지: full(기본) / half(절반). 절반으로 바꾸면 마지막 과정을 줄여 다음 과정을 만든다."""
+    k, mode = safe_id(a["article"]), a.get("mode")
+    if mode not in ("full", "half"):
+        raise ValueError("잘못된 분량")
+    meta_update(k, length=mode)
+    art = next(x for x in articles() if x["id"] == k)
+    if mode != "half" or not art["steps"] or art["steps"][-1].get("mode") == "절반":
+        return {"length": mode}
+    pp = process_path(k)
+    if not pp:
+        return start("shorten", k, PIPE + ["--shorten", str(brief_path(k).relative_to(ROOT))])
+    out_dir = ROOT / "runs" / "columns" / k / ("_shorten-" + time.strftime("%Y%m%d-%H%M%S"))
+
+    def after(j):  # 확정 칼럼: 결과를 과정 기록에 다음 과정으로 붙인다
+        f = ROOT / "columns" / f"{k}-절반.md"
+        f.write_text(read(out_dir / "output.md"), encoding="utf-8")
+        d = json.loads(read(pp))
+        d["steps"].append({"file": str(f.relative_to(ROOT)), "by": "astra", "mode": "절반"})
+        pp.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    return start("shorten", k, PIPE + ["--shorten-file", art["steps"][-1]["file"], str(out_dir.relative_to(ROOT))], after)
 
 
 def act_hero(a):
@@ -363,8 +409,17 @@ def act_confirm(a):
     st = art["steps"][n - 1]
     out = ROOT / "columns" / f"{date.today().isoformat()}-{k}.md"
     title = art["title"] or st["title"]
-    out.write_text(f"# {title}\n\n{st['text']}\n", encoding="utf-8")
-    conf = {"date": date.today().isoformat(), "step": n, "file": str(out.relative_to(ROOT))}
+    paras = [x for x in re.split(r"\n\s*\n", st["text"]) if x.strip()]
+    imgs = {}
+    for i, it in enumerate(art.get("inlinePicked", []), 1):
+        at = next((j for j, x in enumerate(paras, 1) if it.get("anchor") and x.strip().startswith(it["anchor"][:20])), it["after"])
+        dst = ROOT / "columns" / "img" / f"{out.stem}-{i}.png"
+        dst.parent.mkdir(exist_ok=True)
+        shutil.copyfile(ROOT / image_src(it["src"]), dst)
+        imgs.setdefault(min(max(at, 1), len(paras)), []).append(f"![{it['name']}](img/{dst.name})")
+    body = "\n\n".join(x + "".join("\n\n" + m for m in imgs.get(j, [])) for j, x in enumerate(paras, 1))
+    out.write_text(f"# {title}\n\n{body}\n", encoding="utf-8")
+    conf = {"date": date.today().isoformat(), "step": n, "file": str(out.relative_to(ROOT)), "inline": sum(map(len, imgs.values()))}
     if art.get("hero"):
         img = ROOT / "columns" / "img" / f"{out.stem}.png"
         img.parent.mkdir(exist_ok=True)
@@ -375,10 +430,8 @@ def act_confirm(a):
 
 
 def act_collect(a):
-    req = str(a["request"]).strip()
-    if not req:
-        raise ValueError("요청이 비었음")
-    return start("collect", req[:40], PY + ["scripts/collect.py", req])
+    req = str(a.get("request", "")).strip()
+    return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req])
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
@@ -414,7 +467,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat}
+           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length}
 
 
 # ---------- 그림 축소본 ----------

@@ -1,0 +1,996 @@
+URL: https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6
+✔︎ Opened a new tab and set it active: tabs[0], page → 4대보험 업무 자동화 하는 중 새로운 시대가 열렸다 (https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6)
+=== SNAPSHOT 1 ===
+- title: "4대보험 업무 자동화 하는 중 새로운 시대가 열렸다" [url=https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "tax_pert_kim님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "tax_pert_kim" [ref=e23]
+    - link [ref=e24]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 9월 10일 목요일 오전 2:06" [ref=e25]: "2026-09-10"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "4대보험 업무 자동화 하는 중 새로운 시대가 열렸다"
+    - link [ref=e27]
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "36"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "11"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "8"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "jongnomusa님의 프로필 사진"
+    - link "jongnomusa" [ref=e40]
+    - link "2026년 9월 10일 목요일 오전 7:54" [ref=e41]: "2026-09-10"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "세상에.. 셀프로 만드신거에요?"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "tax_pert_kim님의 프로필 사진"
+    - link "tax_pert_kim" [ref=e49]
+    - link "2026년 9월 10일 목요일 오전 10:33" [ref=e50]: "2026-09-10"
+    - text: "작성자"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "넵 맞습니다!"
+    - button [ref=e52]:
+      - img "좋아요"
+    - button [ref=e53]:
+      - img "답글"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]:
+      - image "ace_developer_님의 프로필 사진"
+    - link "ace_developer_" [ref=e58]
+    - link "2026년 9월 10일 목요일 오전 7:57" [ref=e59]: "2026-09-10"
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "오..잘 동작하나요..?!"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "tax_pert_kim님의 프로필 사진"
+    - link "tax_pert_kim" [ref=e67]
+    - link "2026년 9월 10일 목요일 오전 10:33" [ref=e68]: "2026-09-10"
+    - text: "작성자"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "로컬에서는 잘 작동합니다!"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e76]
+    - link "2026년 9월 10일 목요일 오후 12:06" [ref=e77]: "2026-09-10"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "세상에!"
+    - button [ref=e79]:
+      - img "좋아요"
+    - button [ref=e80]:
+      - img "답글"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "too_yul_mom님의 프로필 사진"
+    - link "too_yul_mom" [ref=e85]
+    - link "2026년 9월 10일 목요일 오전 8:17" [ref=e86]: "2026-09-10"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "오...정말 필요합니다 ㅠ"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "daniel__10101010님의 프로필 사진"
+    - link "daniel__10101010" [ref=e94]
+    - link "2026년 9월 10일 목요일 오전 10:22" [ref=e95]: "2026-09-10"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "대 ..박 ㅎㅎㅎ"
+    - button [ref=e97]:
+      - img "좋아요"
+    - button [ref=e98]:
+      - img "답글"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "chulhoekim님의 프로필 사진"
+    - link "chulhoekim" [ref=e103]
+    - link "2026년 9월 13일 일요일 오전 8:35" [ref=e104]: "2026-09-13"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "4대보험 업무까지 자동화되는 시대네요. 어떤 부분이 제일 시간 절약되던가요?"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+    - button [ref=e109]:
+      - img "공유하기"
+  - generic [ref=e110]:
+    - link [ref=e111]:
+      - image "simdorei님의 프로필 사진"
+    - link "simdorei" [ref=e112]
+    - link "2026년 9월 10일 목요일 오후 4:52" [ref=e113]: "2026-09-10"
+    - button [ref=e114]:
+      - img "더 보기"
+    - text: "가자 아스트라 너도 하자"
+    - button [ref=e115]:
+      - img "좋아요"
+    - button [ref=e116]:
+      - img "답글"
+    - button [ref=e117]:
+      - img "리포스트"
+    - button [ref=e118]:
+      - img "공유하기"
+  - generic [ref=e119]:
+    - link [ref=e120]:
+      - image "islandolum님의 프로필 사진"
+    - link "islandolum" [ref=e121]
+    - link "2026년 9월 10일 목요일 오후 1:32" [ref=e122]: "2026-09-10"
+    - button [ref=e123]:
+      - img "더 보기"
+    - link [ref=e124]:
+      - image "Football Yes GIF by New England Patriots"
+    - button [ref=e125]:
+      - img "좋아요"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e129]
+    - listitem:
+      - link "개인정보처리방침" [ref=e130]
+    - listitem:
+      - link "쿠키 정책" [ref=e131]
+- button "만들기" [ref=e132]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "4대보험 업무 자동화 하는 중 새로운 시대가 열렸다" [url=https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "36"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "11"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "8"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "jongnomusa님의 프로필 사진"
+    - link "jongnomusa" [ref=e40]
+    - link "2026년 9월 10일 목요일 오전 7:54" [ref=e41]: "2026-09-10"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "세상에.. 셀프로 만드신거에요?"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "tax_pert_kim님의 프로필 사진"
+    - link "tax_pert_kim" [ref=e49]
+    - link "2026년 9월 10일 목요일 오전 10:33" [ref=e50]: "2026-09-10"
+    - text: "작성자"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "넵 맞습니다!"
+    - button [ref=e52]:
+      - img "좋아요"
+    - button [ref=e53]:
+      - img "답글"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]:
+      - image "ace_developer_님의 프로필 사진"
+    - link "ace_developer_" [ref=e58]
+    - link "2026년 9월 10일 목요일 오전 7:57" [ref=e59]: "2026-09-10"
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "오..잘 동작하나요..?!"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "tax_pert_kim님의 프로필 사진"
+    - link "tax_pert_kim" [ref=e67]
+    - link "2026년 9월 10일 목요일 오전 10:33" [ref=e68]: "2026-09-10"
+    - text: "작성자"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "로컬에서는 잘 작동합니다!"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e76]
+    - link "2026년 9월 10일 목요일 오후 12:06" [ref=e77]: "2026-09-10"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "세상에!"
+    - button [ref=e79]:
+      - img "좋아요"
+    - button [ref=e80]:
+      - img "답글"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "too_yul_mom님의 프로필 사진"
+    - link "too_yul_mom" [ref=e85]
+    - link "2026년 9월 10일 목요일 오전 8:17" [ref=e86]: "2026-09-10"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "오...정말 필요합니다 ㅠ"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "daniel__10101010님의 프로필 사진"
+    - link "daniel__10101010" [ref=e94]
+    - link "2026년 9월 10일 목요일 오전 10:22" [ref=e95]: "2026-09-10"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "대 ..박 ㅎㅎㅎ"
+    - button [ref=e97]:
+      - img "좋아요"
+    - button [ref=e98]:
+      - img "답글"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "chulhoekim님의 프로필 사진"
+    - link "chulhoekim" [ref=e103]
+    - link "2026년 9월 13일 일요일 오전 8:35" [ref=e104]: "2026-09-13"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "4대보험 업무까지 자동화되는 시대네요. 어떤 부분이 제일 시간 절약되던가요?"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+    - button [ref=e109]:
+      - img "공유하기"
+  - generic [ref=e110]:
+    - link [ref=e111]:
+      - image "simdorei님의 프로필 사진"
+    - link "simdorei" [ref=e112]
+    - link "2026년 9월 10일 목요일 오후 4:52" [ref=e113]: "2026-09-10"
+    - button [ref=e114]:
+      - img "더 보기"
+    - text: "가자 아스트라 너도 하자"
+    - button [ref=e115]:
+      - img "좋아요"
+    - button [ref=e116]:
+      - img "답글"
+    - button [ref=e117]:
+      - img "리포스트"
+    - button [ref=e118]:
+      - img "공유하기"
+  - generic [ref=e119]:
+    - link [ref=e120]:
+      - image "islandolum님의 프로필 사진"
+    - link "islandolum" [ref=e121]
+    - link "2026년 9월 10일 목요일 오후 1:32" [ref=e122]: "2026-09-10"
+    - button [ref=e123]:
+      - img "더 보기"
+    - link [ref=e124]:
+      - image "Football Yes GIF by New England Patriots"
+    - button [ref=e125]:
+      - img "좋아요"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e129]
+    - listitem:
+      - link "개인정보처리방침" [ref=e130]
+    - listitem:
+      - link "쿠키 정책" [ref=e131]
+- button "만들기" [ref=e132]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "4대보험 업무 자동화 하는 중 새로운 시대가 열렸다" [url=https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "36"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "11"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "8"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e52]:
+      - img "좋아요"
+    - button [ref=e53]:
+      - img "답글"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]
+    - button [ref=e60]:
+      - img "더 보기"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]
+    - button [ref=e69]:
+      - img "더 보기"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]
+    - button [ref=e78]:
+      - img "더 보기"
+    - button [ref=e79]:
+      - img "좋아요"
+    - button [ref=e80]:
+      - img "답글"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "too_yul_mom님의 프로필 사진"
+    - link "too_yul_mom" [ref=e85]
+    - link "2026년 9월 10일 목요일 오전 8:17" [ref=e86]: "2026-09-10"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "오...정말 필요합니다 ㅠ"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "daniel__10101010님의 프로필 사진"
+    - link "daniel__10101010" [ref=e94]
+    - link "2026년 9월 10일 목요일 오전 10:22" [ref=e95]: "2026-09-10"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "대 ..박 ㅎㅎㅎ"
+    - button [ref=e97]:
+      - img "좋아요"
+    - button [ref=e98]:
+      - img "답글"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "chulhoekim님의 프로필 사진"
+    - link "chulhoekim" [ref=e103]
+    - link "2026년 9월 13일 일요일 오전 8:35" [ref=e104]: "2026-09-13"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "4대보험 업무까지 자동화되는 시대네요. 어떤 부분이 제일 시간 절약되던가요?"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+    - button [ref=e109]:
+      - img "공유하기"
+  - generic [ref=e110]:
+    - link [ref=e111]:
+      - image "simdorei님의 프로필 사진"
+    - link "simdorei" [ref=e112]
+    - link "2026년 9월 10일 목요일 오후 4:52" [ref=e113]: "2026-09-10"
+    - button [ref=e114]:
+      - img "더 보기"
+    - text: "가자 아스트라 너도 하자"
+    - button [ref=e115]:
+      - img "좋아요"
+    - button [ref=e116]:
+      - img "답글"
+    - button [ref=e117]:
+      - img "리포스트"
+    - button [ref=e118]:
+      - img "공유하기"
+  - generic [ref=e119]:
+    - link [ref=e120]:
+      - image "islandolum님의 프로필 사진"
+    - link "islandolum" [ref=e121]
+    - link "2026년 9월 10일 목요일 오후 1:32" [ref=e122]: "2026-09-10"
+    - button [ref=e123]:
+      - img "더 보기"
+    - link [ref=e124]:
+      - image "Football Yes GIF by New England Patriots"
+    - button [ref=e125]:
+      - img "좋아요"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e129]
+    - listitem:
+      - link "개인정보처리방침" [ref=e130]
+    - listitem:
+      - link "쿠키 정책" [ref=e131]
+- button "만들기" [ref=e132]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "4대보험 업무 자동화 하는 중 새로운 시대가 열렸다" [url=https://www.threads.com/@tax_pert_kim/post/DdEwmjcH5J6]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 6.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "36"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "11"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "8"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "14"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e52]:
+      - img "좋아요"
+    - button [ref=e53]:
+      - img "답글"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]
+    - button [ref=e60]:
+      - img "더 보기"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]
+    - button [ref=e69]:
+      - img "더 보기"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]
+    - button [ref=e78]:
+      - img "더 보기"
+    - button [ref=e79]:
+      - img "좋아요"
+    - button [ref=e80]:
+      - img "답글"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "too_yul_mom님의 프로필 사진"
+    - link "too_yul_mom" [ref=e85]
+    - link "2026년 9월 10일 목요일 오전 8:17" [ref=e86]: "2026-09-10"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "오...정말 필요합니다 ㅠ"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "daniel__10101010님의 프로필 사진"
+    - link "daniel__10101010" [ref=e94]
+    - link "2026년 9월 10일 목요일 오전 10:22" [ref=e95]: "2026-09-10"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "대 ..박 ㅎㅎㅎ"
+    - button [ref=e97]:
+      - img "좋아요"
+    - button [ref=e98]:
+      - img "답글"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "chulhoekim님의 프로필 사진"
+    - link "chulhoekim" [ref=e103]
+    - link "2026년 9월 13일 일요일 오전 8:35" [ref=e104]: "2026-09-13"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "4대보험 업무까지 자동화되는 시대네요. 어떤 부분이 제일 시간 절약되던가요?"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+    - button [ref=e109]:
+      - img "공유하기"
+  - generic [ref=e110]:
+    - link [ref=e111]:
+      - image "simdorei님의 프로필 사진"
+    - link "simdorei" [ref=e112]
+    - link "2026년 9월 10일 목요일 오후 4:52" [ref=e113]: "2026-09-10"
+    - button [ref=e114]:
+      - img "더 보기"
+    - text: "가자 아스트라 너도 하자"
+    - button [ref=e115]:
+      - img "좋아요"
+    - button [ref=e116]:
+      - img "답글"
+    - button [ref=e117]:
+      - img "리포스트"
+    - button [ref=e118]:
+      - img "공유하기"
+  - generic [ref=e119]:
+    - link [ref=e120]:
+      - image "islandolum님의 프로필 사진"
+    - link "islandolum" [ref=e121]
+    - link "2026년 9월 10일 목요일 오후 1:32" [ref=e122]: "2026-09-10"
+    - button [ref=e123]:
+      - img "더 보기"
+    - link [ref=e124]:
+      - image "Football Yes GIF by New England Patriots"
+    - button [ref=e125]:
+      - img "좋아요"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e129]
+    - listitem:
+      - link "개인정보처리방침" [ref=e130]
+    - listitem:
+      - link "쿠키 정책" [ref=e131]
+- button "만들기" [ref=e132]:
+  - img "만들기"
+=== DONE ===
+[ok | 12784ms]

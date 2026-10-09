@@ -71,8 +71,17 @@ export default function Article({
       </div>
 
       <div className="sticky top-0 z-30 border-b border-line bg-page/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center px-12 py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-12 py-3">
           <PillTabs tabs={TABS} value={t} onChange={(v) => go(`#/a/${a.id}/${v}`)} />
+          <PillTabs
+            id="lengthtab"
+            tabs={[
+              { value: "full", title: "기본" },
+              { value: "half", title: "절반" },
+            ]}
+            value={a.length}
+            onChange={(v) => act("length", { article: a.id, mode: v }).then(refresh)}
+          />
         </div>
       </div>
 
@@ -233,13 +242,16 @@ function StepCard({ s, prev, diff, articleTitle: at }: { s: Step; prev?: Step; d
 function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () => void; go: (h: string) => void }) {
   const [diff, setDiff] = useState(false);
   const write = runningJob(state.jobs, "write", a.id);
-  const revise = runningJob(state.jobs, "revise", a.id);
+  const revise = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "shorten", a.id);
   const at = articleTitle(a);
   const data = a.steps.map((s, i) => ({
     title: `과정 ${s.n}`,
     aside: (
       <div className="mt-5 flex flex-col items-start gap-2 text-sm text-ink-3">
-        <ByChip by={s.by} />
+        <span className="flex gap-1.5">
+          <ByChip by={s.by} />
+          {s.mode && <Chip className="border-sky-400/40 bg-sky-500/10 text-sky-700 dark:text-sky-200">{s.mode}</Chip>}
+        </span>
         <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
         <span className="tabular-nums text-ink-3">{when(s.at)}</span>
       </div>
@@ -271,7 +283,7 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       aside: <div className="mt-5"><ByChip by="astra" /></div>,
       content: (
         <div className="flex h-60 max-w-[720px] items-center justify-center rounded-3xl border border-line bg-panel">
-          <AITextLoading texts={["astra"]} />
+          <AITextLoading texts={revise.kind === "shorten" ? ["astra", "절반"] : ["astra"]} />
         </div>
       ),
     });
@@ -406,42 +418,90 @@ function Director({ a, state, open, onClose, refresh }: { a: A; state: State; op
 
 function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void }) {
   const running = !!runningJob(state.jobs, "images", a.id);
-  const rounds = [...a.images].reverse();
+  const runningInline = !!runningJob(state.jobs, "inline", a.id);
   const canDraw = a.steps.length > 0;
+  const picked = new Set(a.inlinePicked.map((x) => x.src));
   return (
-    <div className="py-10">
-      <div className="flex justify-end">
-        {canDraw && (
-          <RunButton
-            running={running}
-            onClick={() => act("images", { article: a.id }).then(refresh)}
-            icon={<IconSparkles className="size-4" />}
-            label="그림 뽑기"
-            spin={["astra", "gti", "그리는 중"]}
-          />
-        )}
-      </div>
-      {running && (
-        <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
-          <AITextLoading texts={["astra · 그림 설명", "gti · 그리는 중"]} />
+    <div className="space-y-20 py-10">
+      <section>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-ink">머리 그림</h2>
+          {canDraw && (
+            <RunButton
+              running={running}
+              onClick={() => act("images", { article: a.id }).then(refresh)}
+              icon={<IconSparkles className="size-4" />}
+              label="머리 그림 뽑기"
+              spin={["astra", "gti", "그리는 중"]}
+            />
+          )}
         </div>
-      )}
-      {rounds.map((r) => (
-        <section key={r.id} className="mt-8">
-          <FocusCards
-            height="h-72"
-            cards={r.items.map((it, i) => ({
-              key: `${r.id}-${i}`,
-              title: it.name,
-              src: it.src ? img(it.src, 900) : undefined,
-              fallback: <div className="absolute inset-0 bg-panel-solid" />,
-              selected: !!it.src && a.hero === it.src,
-              onClick: () => it.src && act("hero", { article: a.id, src: it.src }).then(refresh),
-              overlay: <div className="text-lg font-medium">{it.name}</div>,
-            }))}
-          />
-        </section>
-      ))}
+        {running && (
+          <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
+            <AITextLoading texts={["astra · 그림 설명", "gti · 그리는 중"]} />
+          </div>
+        )}
+        {[...a.images].reverse().map((r) => (
+          <div key={r.id} className="mt-8">
+            <FocusCards
+              height="h-72"
+              cards={r.items.map((it, i) => ({
+                key: `${r.id}-${i}`,
+                title: it.name,
+                src: it.src ? img(it.src, 900) : undefined,
+                fallback: <div className="absolute inset-0 bg-panel-solid" />,
+                selected: !!it.src && a.hero === it.src,
+                onClick: () => it.src && act("hero", { article: a.id, src: it.src }).then(refresh),
+                overlay: <div className="text-lg font-medium">{it.name}</div>,
+              }))}
+            />
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-ink">
+            본문 그림 {a.inlinePicked.length > 0 && <span className="tabular-nums text-violet-500">{a.inlinePicked.length}</span>}
+          </h2>
+          {canDraw && (
+            <RunButton
+              running={runningInline}
+              onClick={() => act("images", { article: a.id, kind: "inline" }).then(refresh)}
+              icon={<IconSparkles className="size-4" />}
+              label="본문 그림 뽑기"
+              spin={["astra", "gti", "그리는 중"]}
+            />
+          )}
+        </div>
+        {runningInline && (
+          <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
+            <AITextLoading texts={["astra · 들어갈 자리", "gti · 그리는 중"]} />
+          </div>
+        )}
+        {[...a.inline].reverse().map((r) => (
+          <div key={r.id} className="mt-8">
+            <FocusCards
+              height="h-72"
+              cards={r.items.map((it, i) => ({
+                key: `${r.id}-${i}`,
+                title: it.name,
+                src: it.src ? img(it.src, 900) : undefined,
+                fallback: <div className="absolute inset-0 bg-panel-solid" />,
+                selected: picked.has(it.src),
+                badge: <Chip className="border-line bg-page/70 text-ink backdrop-blur">문단 {it.after}</Chip>,
+                onClick: () => it.src && act("inline", { article: a.id, src: it.src, on: !picked.has(it.src) }).then(refresh),
+                overlay: (
+                  <div>
+                    <div className="text-lg font-medium">{it.name}</div>
+                    <div className="mt-1 line-clamp-1 text-sm opacity-75">{it.anchor}…</div>
+                  </div>
+                ),
+              }))}
+            />
+          </div>
+        ))}
+      </section>
     </div>
   );
 }
@@ -460,8 +520,13 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
         <div className="px-14 py-12">
           <h2 className="text-[32px] font-bold leading-snug tracking-tight">{articleTitle(a)}</h2>
           <div className="prose-ko mt-8 text-[16.5px] text-neutral-800">
-            {paragraphs(s.text).map((p, i) => (
-              <p key={i}>{p}</p>
+            {paragraphs(s.text).map((p, i, all) => (
+              <div key={i}>
+                <p>{p}</p>
+                {inlineAt(a, all, i + 1).map((it) => (
+                  <img key={it.src} src={img(it.src, 1200)} className="my-8 w-full rounded-2xl" />
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -499,4 +564,12 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
       </aside>
     </div>
   );
+}
+
+/** 고른 본문 그림 중 n째 문단 뒤에 들어갈 것 — 문단 첫머리(anchor)로 찾고, 못 찾으면 문단 번호로 */
+function inlineAt(a: A, paras: string[], n: number) {
+  return a.inlinePicked.filter((it) => {
+    const hit = it.anchor ? paras.findIndex((p) => p.startsWith(it.anchor.slice(0, 20))) + 1 : 0;
+    return (hit || Math.min(it.after, paras.length)) === n;
+  });
 }

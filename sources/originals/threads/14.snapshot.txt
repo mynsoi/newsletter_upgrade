@@ -1,0 +1,1940 @@
+URL: https://www.threads.com/@specal1849/post/DamaL5MER6G
+✔︎ Opened a new tab and set it active: tabs[0], page →  (https://www.threads.com/@specal1849/post/DamaL5MER6G)
+=== SNAPSHOT 1 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e22]
+    - link [ref=e23]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e24]: "2026-07-10"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다\n가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다.물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며\n이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어\n처음 감을 잡을때 많이하는 작업입니다. 1/7"
+    - group "Video player":
+      - button [ref=e26]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e39]
+    - link [ref=e40]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e41]: "2026-07-10"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "우선 업데이트된 chat gpt를 키시고 work를 클릭해봅시다 클로드 cowrk와 사용법은 비슷하지만 모르는 분들이 많을테니 친절하게\n톺아보자구요 codex를 앱안에넣었다 일하는용도다 뭐 복잡한말은많지만\n간단히 설명하면 chat gpt에 공식적으로 파일을 읽고쓰는 능력을\n줬다는게 기본 내용입니다. 이걸 조금더 활용해봅시다. 2/7"
+    - link [ref=e43]
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e50]
+    - link [ref=e51]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e52]: "2026-07-10"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "맨처음은 플러그인을 눌러볼까요 저는 연결을 많이해둬서 저렇게뜨지만 우선 뇌를빼고 플러그인연결과\n모든 플러그인 보기를 클릭해봅시다. 3/7"
+    - button [ref=e54]
+    - button "미디어를 파노라마로 결합" [ref=e55]
+    - button [ref=e56]
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e63]
+    - link [ref=e64]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e65]: "2026-07-10"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "우측 플러그인 검색이 보이시나요?지메일과 노션을 한번 검색해봅시다 저는 다연결되어있으니까\n연결을 해제하고 한번 다시연결해볼게요 맨마지막 사진처럼 노션에 +버튼이 보이시죠? 4/7"
+    - generic [ref=e67] [scrollable]:
+      - button [ref=e68]
+      - button "미디어를 파노라마로 결합" [ref=e69]
+      - button [ref=e70]
+      - button "미디어를 파노라마로 결합" [ref=e71]
+      - button [ref=e72]
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e79]
+    - link [ref=e80]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e81]: "2026-07-10"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "클릭과 로그인 부분은 생략하겠습니다.다음과같이 순서대로 입력하시면 노션이 연결가능하며\n지메일도 비슷한 과정으로 연결하시면됩니다.심지어 슬렉이나 비슷한것들도연결할수있죠  5/7"
+    - generic [ref=e83] [scrollable]:
+      - button [ref=e84]
+      - button "미디어를 파노라마로 결합" [ref=e85]
+      - button [ref=e86]
+      - button "미디어를 파노라마로 결합" [ref=e87]
+      - button [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e95]
+    - link [ref=e96]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e97]: "2026-07-10"
+    - button [ref=e98]:
+      - img "더 보기"
+    - text: "연결이된상태에서 골뱅이를 눌러봅시다.\n다음과 같이 연결된 커넥터들이 떠오르는게 보이시나요?이번주에 온메일들  @Gmail 에서 싹다확인하고 핵심내용들 정리해서"
+    - link "@notion" [ref=e99]
+    - text: "에 새페이지 만들어서 문서화해줘 이렇게한번 입력해봅시다. 6/7"
+    - link [ref=e100]
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e107]
+    - link [ref=e108]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e109]: "2026-07-10"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "다음과 같이 이번주 요약이나온답니다.\n물론이걸 스킬화해서 아침마다 받아볼수있고\n슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e39]
+    - link [ref=e40]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e41]: "2026-07-10"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "우선 업데이트된 chat gpt를 키시고 work를 클릭해봅시다 클로드 cowrk와 사용법은 비슷하지만 모르는 분들이 많을테니 친절하게\n톺아보자구요 codex를 앱안에넣었다 일하는용도다 뭐 복잡한말은많지만\n간단히 설명하면 chat gpt에 공식적으로 파일을 읽고쓰는 능력을\n줬다는게 기본 내용입니다. 이걸 조금더 활용해봅시다. 2/7"
+    - link [ref=e43]
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e50]
+    - link [ref=e51]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e52]: "2026-07-10"
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "맨처음은 플러그인을 눌러볼까요 저는 연결을 많이해둬서 저렇게뜨지만 우선 뇌를빼고 플러그인연결과\n모든 플러그인 보기를 클릭해봅시다. 3/7"
+    - button [ref=e54]
+    - button "미디어를 파노라마로 결합" [ref=e55]
+    - button [ref=e56]
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e63]
+    - link [ref=e64]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e65]: "2026-07-10"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "우측 플러그인 검색이 보이시나요?지메일과 노션을 한번 검색해봅시다 저는 다연결되어있으니까\n연결을 해제하고 한번 다시연결해볼게요 맨마지막 사진처럼 노션에 +버튼이 보이시죠? 4/7"
+    - generic [ref=e67] [scrollable]:
+      - button [ref=e68]
+      - button "미디어를 파노라마로 결합" [ref=e69]
+      - button [ref=e70]
+      - button "미디어를 파노라마로 결합" [ref=e71]
+      - button [ref=e72]
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e79]
+    - link [ref=e80]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e81]: "2026-07-10"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "클릭과 로그인 부분은 생략하겠습니다.다음과같이 순서대로 입력하시면 노션이 연결가능하며\n지메일도 비슷한 과정으로 연결하시면됩니다.심지어 슬렉이나 비슷한것들도연결할수있죠  5/7"
+    - generic [ref=e83] [scrollable]:
+      - button [ref=e84]
+      - button "미디어를 파노라마로 결합" [ref=e85]
+      - button [ref=e86]
+      - button "미디어를 파노라마로 결합" [ref=e87]
+      - button [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e95]
+    - link [ref=e96]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e97]: "2026-07-10"
+    - button [ref=e98]:
+      - img "더 보기"
+    - text: "연결이된상태에서 골뱅이를 눌러봅시다.\n다음과 같이 연결된 커넥터들이 떠오르는게 보이시나요?이번주에 온메일들  @Gmail 에서 싹다확인하고 핵심내용들 정리해서"
+    - link "@notion" [ref=e99]
+    - text: "에 새페이지 만들어서 문서화해줘 이렇게한번 입력해봅시다. 6/7"
+    - link [ref=e100]
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e107]
+    - link [ref=e108]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e109]: "2026-07-10"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "다음과 같이 이번주 요약이나온답니다.\n물론이걸 스킬화해서 아침마다 받아볼수있고\n슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - text: "맨처음은 플러그인을 눌러볼까요 저는 연결을 많이해둬서 저렇게뜨지만 우선 뇌를빼고 플러그인연결과\n모든 플러그인 보기를 클릭해봅시다. 3/7"
+    - button [ref=e54]
+    - button "미디어를 파노라마로 결합" [ref=e55]
+    - button [ref=e56]
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e63]
+    - link [ref=e64]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:28" [ref=e65]: "2026-07-10"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "우측 플러그인 검색이 보이시나요?지메일과 노션을 한번 검색해봅시다 저는 다연결되어있으니까\n연결을 해제하고 한번 다시연결해볼게요 맨마지막 사진처럼 노션에 +버튼이 보이시죠? 4/7"
+    - generic [ref=e67] [scrollable]:
+      - button [ref=e68]
+      - button "미디어를 파노라마로 결합" [ref=e69]
+      - button [ref=e70]
+      - button "미디어를 파노라마로 결합" [ref=e71]
+      - button [ref=e72]
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e79]
+    - link [ref=e80]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e81]: "2026-07-10"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "클릭과 로그인 부분은 생략하겠습니다.다음과같이 순서대로 입력하시면 노션이 연결가능하며\n지메일도 비슷한 과정으로 연결하시면됩니다.심지어 슬렉이나 비슷한것들도연결할수있죠  5/7"
+    - generic [ref=e83] [scrollable]:
+      - button [ref=e84]
+      - button "미디어를 파노라마로 결합" [ref=e85]
+      - button [ref=e86]
+      - button "미디어를 파노라마로 결합" [ref=e87]
+      - button [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e95]
+    - link [ref=e96]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e97]: "2026-07-10"
+    - button [ref=e98]:
+      - img "더 보기"
+    - text: "연결이된상태에서 골뱅이를 눌러봅시다.\n다음과 같이 연결된 커넥터들이 떠오르는게 보이시나요?이번주에 온메일들  @Gmail 에서 싹다확인하고 핵심내용들 정리해서"
+    - link "@notion" [ref=e99]
+    - text: "에 새페이지 만들어서 문서화해줘 이렇게한번 입력해봅시다. 6/7"
+    - link [ref=e100]
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e107]
+    - link [ref=e108]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e109]: "2026-07-10"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "다음과 같이 이번주 요약이나온답니다.\n물론이걸 스킬화해서 아침마다 받아볼수있고\n슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]
+    - button [ref=e66]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e79]
+    - link [ref=e80]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e81]: "2026-07-10"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "클릭과 로그인 부분은 생략하겠습니다.다음과같이 순서대로 입력하시면 노션이 연결가능하며\n지메일도 비슷한 과정으로 연결하시면됩니다.심지어 슬렉이나 비슷한것들도연결할수있죠  5/7"
+    - generic [ref=e83] [scrollable]:
+      - button [ref=e84]
+      - button "미디어를 파노라마로 결합" [ref=e85]
+      - button [ref=e86]
+      - button "미디어를 파노라마로 결합" [ref=e87]
+      - button [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e95]
+    - link [ref=e96]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e97]: "2026-07-10"
+    - button [ref=e98]:
+      - img "더 보기"
+    - text: "연결이된상태에서 골뱅이를 눌러봅시다.\n다음과 같이 연결된 커넥터들이 떠오르는게 보이시나요?이번주에 온메일들  @Gmail 에서 싹다확인하고 핵심내용들 정리해서"
+    - link "@notion" [ref=e99]
+    - text: "에 새페이지 만들어서 문서화해줘 이렇게한번 입력해봅시다. 6/7"
+    - link [ref=e100]
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e107]
+    - link [ref=e108]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e109]: "2026-07-10"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "다음과 같이 이번주 요약이나온답니다.\n물론이걸 스킬화해서 아침마다 받아볼수있고\n슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "prod.franken님의 프로필 사진"
+    - link "prod.franken" [ref=e122]
+    - link "2026년 7월 11일 토요일 오후 9:55" [ref=e123]: "2026-07-11"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "토큰 한도나 이런정보가 없어서 쓰기 두려워여.."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "d.day.grows님의 프로필 사진"
+    - link "d.day.grows" [ref=e131]
+    - link "2026년 7월 11일 토요일 오후 1:09" [ref=e132]: "2026-07-11"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "클로드 코워크랑 차이가있을까요??? 똑같은거 아닌가 했더니 지피티가 차이가 좀있다는데..내용이.. 업뎃안된 할루시답같아서 😅"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]
+    - button [ref=e66]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e98]:
+      - img "더 보기"
+    - link [ref=e100]
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "specal1849님의 프로필 사진"
+    - link "specal1849" [ref=e107]
+    - link [ref=e108]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 7월 10일 금요일 오후 2:29" [ref=e109]: "2026-07-10"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "다음과 같이 이번주 요약이나온답니다.\n물론이걸 스킬화해서 아침마다 받아볼수있고\n슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "prod.franken님의 프로필 사진"
+    - link "prod.franken" [ref=e122]
+    - link "2026년 7월 11일 토요일 오후 9:55" [ref=e123]: "2026-07-11"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "토큰 한도나 이런정보가 없어서 쓰기 두려워여.."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "d.day.grows님의 프로필 사진"
+    - link "d.day.grows" [ref=e131]
+    - link "2026년 7월 11일 토요일 오후 1:09" [ref=e132]: "2026-07-11"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "클로드 코워크랑 차이가있을까요??? 똑같은거 아닌가 했더니 지피티가 차이가 좀있다는데..내용이.. 업뎃안된 할루시답같아서 😅"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "because.i.needed님의 프로필 사진"
+    - link "because.i.needed" [ref=e140]
+    - link "2026년 7월 29일 수요일 오후 4:26" [ref=e141]: "2026-07-29"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "메일→노션 보고서 흐름 좋네요. 저도 비슷한 걸 돌려보면서 느낀 건, 보고서 양식을 먼저 고정하는 게 제일 중요하더라고요. 양식이 흔들리면 자동화가 매번 다른 결과물을 내서 결국 사람이 다시 손대게 되던데, 강의에서 그 부분도 다루시는지 궁금하네요."
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "_aijuswanaseing_님의 프로필 사진"
+    - link "_aijuswanaseing_" [ref=e149]
+    - link "2026년 7월 10일 금요일 오후 5:08" [ref=e150]: "2026-07-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "챗이랑 코덱스도 서로 겹쳐서 할 수 있는 일이 있었는데\n중간에 워크가 끼니까 너무 애매한 거 같아요.\n쌩초보 입장에서 너무 헷갈림"
+    - button [ref=e152]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e155]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 6 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]
+    - button [ref=e66]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e98]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e110]:
+      - img "더 보기"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "prod.franken님의 프로필 사진"
+    - link "prod.franken" [ref=e122]
+    - link "2026년 7월 11일 토요일 오후 9:55" [ref=e123]: "2026-07-11"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "토큰 한도나 이런정보가 없어서 쓰기 두려워여.."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "d.day.grows님의 프로필 사진"
+    - link "d.day.grows" [ref=e131]
+    - link "2026년 7월 11일 토요일 오후 1:09" [ref=e132]: "2026-07-11"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "클로드 코워크랑 차이가있을까요??? 똑같은거 아닌가 했더니 지피티가 차이가 좀있다는데..내용이.. 업뎃안된 할루시답같아서 😅"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "because.i.needed님의 프로필 사진"
+    - link "because.i.needed" [ref=e140]
+    - link "2026년 7월 29일 수요일 오후 4:26" [ref=e141]: "2026-07-29"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "메일→노션 보고서 흐름 좋네요. 저도 비슷한 걸 돌려보면서 느낀 건, 보고서 양식을 먼저 고정하는 게 제일 중요하더라고요. 양식이 흔들리면 자동화가 매번 다른 결과물을 내서 결국 사람이 다시 손대게 되던데, 강의에서 그 부분도 다루시는지 궁금하네요."
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "_aijuswanaseing_님의 프로필 사진"
+    - link "_aijuswanaseing_" [ref=e149]
+    - link "2026년 7월 10일 금요일 오후 5:08" [ref=e150]: "2026-07-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "챗이랑 코덱스도 서로 겹쳐서 할 수 있는 일이 있었는데\n중간에 워크가 끼니까 너무 애매한 거 같아요.\n쌩초보 입장에서 너무 헷갈림"
+    - button [ref=e152]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e155]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 7 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]
+    - button [ref=e66]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e98]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e110]:
+      - img "더 보기"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "prod.franken님의 프로필 사진"
+    - link "prod.franken" [ref=e122]
+    - link "2026년 7월 11일 토요일 오후 9:55" [ref=e123]: "2026-07-11"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "토큰 한도나 이런정보가 없어서 쓰기 두려워여.."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "d.day.grows님의 프로필 사진"
+    - link "d.day.grows" [ref=e131]
+    - link "2026년 7월 11일 토요일 오후 1:09" [ref=e132]: "2026-07-11"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "클로드 코워크랑 차이가있을까요??? 똑같은거 아닌가 했더니 지피티가 차이가 좀있다는데..내용이.. 업뎃안된 할루시답같아서 😅"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "because.i.needed님의 프로필 사진"
+    - link "because.i.needed" [ref=e140]
+    - link "2026년 7월 29일 수요일 오후 4:26" [ref=e141]: "2026-07-29"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "메일→노션 보고서 흐름 좋네요. 저도 비슷한 걸 돌려보면서 느낀 건, 보고서 양식을 먼저 고정하는 게 제일 중요하더라고요. 양식이 흔들리면 자동화가 매번 다른 결과물을 내서 결국 사람이 다시 손대게 되던데, 강의에서 그 부분도 다루시는지 궁금하네요."
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "_aijuswanaseing_님의 프로필 사진"
+    - link "_aijuswanaseing_" [ref=e149]
+    - link "2026년 7월 10일 금요일 오후 5:08" [ref=e150]: "2026-07-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "챗이랑 코덱스도 서로 겹쳐서 할 수 있는 일이 있었는데\n중간에 워크가 끼니까 너무 애매한 거 같아요.\n쌩초보 입장에서 너무 헷갈림"
+    - button [ref=e152]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e155]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 8 ===
+- title: "신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다 가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다. 물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며 이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어 처음 감을 잡을때 많이하는 작업입니다." [url=https://www.threads.com/@specal1849/post/DamaL5MER6G]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 5.5천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - link [ref=e21]
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "58"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e29]:
+      - img "리포스트"
+      - text: "21"
+    - button [ref=e30]:
+      - img "공유하기"
+      - text: "16"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e44]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e45]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e46]:
+      - img "리포스트"
+    - button [ref=e47]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e48]:
+    - link [ref=e49]
+    - button [ref=e53]:
+      - img "더 보기"
+    - button [ref=e57]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e58]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e59]:
+      - img "리포스트"
+    - button [ref=e60]:
+      - img "공유하기"
+  - generic [ref=e61]:
+    - link [ref=e62]
+    - button [ref=e66]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e98]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e110]:
+      - img "더 보기"
+    - link [ref=e111]
+    - button [ref=e112]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e113]:
+      - img "답글"
+    - button [ref=e114]:
+      - img "리포스트"
+    - button [ref=e115]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "prod.franken님의 프로필 사진"
+    - link "prod.franken" [ref=e122]
+    - link "2026년 7월 11일 토요일 오후 9:55" [ref=e123]: "2026-07-11"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "토큰 한도나 이런정보가 없어서 쓰기 두려워여.."
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "d.day.grows님의 프로필 사진"
+    - link "d.day.grows" [ref=e131]
+    - link "2026년 7월 11일 토요일 오후 1:09" [ref=e132]: "2026-07-11"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "클로드 코워크랑 차이가있을까요??? 똑같은거 아닌가 했더니 지피티가 차이가 좀있다는데..내용이.. 업뎃안된 할루시답같아서 😅"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "because.i.needed님의 프로필 사진"
+    - link "because.i.needed" [ref=e140]
+    - link "2026년 7월 29일 수요일 오후 4:26" [ref=e141]: "2026-07-29"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "메일→노션 보고서 흐름 좋네요. 저도 비슷한 걸 돌려보면서 느낀 건, 보고서 양식을 먼저 고정하는 게 제일 중요하더라고요. 양식이 흔들리면 자동화가 매번 다른 결과물을 내서 결국 사람이 다시 손대게 되던데, 강의에서 그 부분도 다루시는지 궁금하네요."
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "_aijuswanaseing_님의 프로필 사진"
+    - link "_aijuswanaseing_" [ref=e149]
+    - link "2026년 7월 10일 금요일 오후 5:08" [ref=e150]: "2026-07-10"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "챗이랑 코덱스도 서로 겹쳐서 할 수 있는 일이 있었는데\n중간에 워크가 끼니까 너무 애매한 거 같아요.\n쌩초보 입장에서 너무 헷갈림"
+    - button [ref=e152]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e155]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== DONE ===
+[ok | 17770ms]

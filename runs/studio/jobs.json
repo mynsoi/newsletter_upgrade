@@ -70,5 +70,32 @@
   "started": 1791547831.9453323,
   "log": "runs/studio/logs/1009-211031-be72.log",
   "ended": 1791547914.9609892
+ },
+ {
+  "id": "1010-004359-a327",
+  "kind": "topics",
+  "target": "",
+  "status": "done",
+  "started": 1791560639.452503,
+  "log": "runs/studio/logs/1010-004359-a327.log",
+  "ended": 1791560747.9417648
+ },
+ {
+  "id": "1010-005019-3dd9",
+  "kind": "collect",
+  "target": "자동 · Threads·LinkedIn",
+  "status": "done",
+  "started": 1791561019.288852,
+  "log": "runs/studio/logs/1010-005019-3dd9.log",
+  "ended": 1791562058.6944842
+ },
+ {
+  "id": "1010-005026-a17c",
+  "kind": "shorten",
+  "target": "zz-half",
+  "status": "done",
+  "started": 1791561026.695945,
+  "log": "runs/studio/logs/1010-005026-a17c.log",
+  "ended": 1791561301.823386
  }
 ]

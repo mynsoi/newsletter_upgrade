@@ -1,0 +1,1317 @@
+URL: https://www.threads.com/@kook0526/post/DdryXznjvzT
+✔︎ Opened a new tab and set it active: tabs[0], page → 클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk (https://www.threads.com/@kook0526/post/DdryXznjvzT)
+=== SNAPSHOT 1 ===
+- title: "클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk" [url=https://www.threads.com/@kook0526/post/DdryXznjvzT]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 441회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "kook0526님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "kook0526" [ref=e23]
+    - link "2026년 9월 25일 금요일 오전 5:53" [ref=e24]: "2026-09-25"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "클로드랑 챗GPT가 알아서 일을 나눠요.\nAI 팀원 8명으로 마케팅팀을 만들었거든요.원래는 디스코드에 클로드 하나 연결해서 썼어요.\n근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요.그래서 버즈를 써 봤어요.\n잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요.① 팀장은 챗GPT, 팀원은 클로드\n② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요\n③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니\n4분 만에 노션 페이지 하나로 정리해서 보고하더라고요.혼자서도 팀처럼 일할 수 있어요.\n세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋전체 영상 링크 :"
+    - link "youtu.be/8bFSU…" [ref=e26]
+    - group "Video player":
+      - button [ref=e27]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "4"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "pororo_loves_friends님의 프로필 사진"
+    - link "pororo_loves_friends" [ref=e40]
+    - link "2026년 9월 25일 금요일 오후 9:16" [ref=e41]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e43]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e49]
+    - link "2026년 9월 26일 토요일 오전 5:40" [ref=e50]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e52]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e53]
+    - button [ref=e54]:
+      - img "좋아요"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]:
+      - image "peterpedro_님의 프로필 사진"
+    - link "peterpedro_" [ref=e60]
+    - link "2026년 9월 26일 토요일 오전 2:02" [ref=e61]: "2026-09-26"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e69]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e70]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e71]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e72]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "egon111e님의 프로필 사진"
+    - link "egon111e" [ref=e80]
+    - link "2026년 9월 25일 금요일 오후 2:55" [ref=e81]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e89]
+    - link "2026년 9월 26일 토요일 오전 5:40" [ref=e90]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e92]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+    - button [ref=e95]:
+      - img "답글"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "queen_m_p님의 프로필 사진"
+    - link "queen_m_p" [ref=e100]
+    - link "2026년 9월 25일 금요일 오후 12:16" [ref=e101]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e109]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e110]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e112]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e113]
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e118]
+    - listitem:
+      - link "개인정보처리방침" [ref=e119]
+    - listitem:
+      - link "쿠키 정책" [ref=e120]
+- button "만들기" [ref=e121]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk" [url=https://www.threads.com/@kook0526/post/DdryXznjvzT]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 441회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - group "Video player":
+      - button [ref=e27]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "4"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "pororo_loves_friends님의 프로필 사진"
+    - link "pororo_loves_friends" [ref=e40]
+    - link "2026년 9월 25일 금요일 오후 9:16" [ref=e41]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e43]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e49]
+    - link "2026년 9월 26일 토요일 오전 5:40" [ref=e50]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e52]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e53]
+    - button [ref=e54]:
+      - img "좋아요"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]:
+      - image "peterpedro_님의 프로필 사진"
+    - link "peterpedro_" [ref=e60]
+    - link "2026년 9월 26일 토요일 오전 2:02" [ref=e61]: "2026-09-26"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e69]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e70]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e71]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e72]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "egon111e님의 프로필 사진"
+    - link "egon111e" [ref=e80]
+    - link "2026년 9월 25일 금요일 오후 2:55" [ref=e81]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e89]
+    - link "2026년 9월 26일 토요일 오전 5:40" [ref=e90]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e92]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+    - button [ref=e95]:
+      - img "답글"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "queen_m_p님의 프로필 사진"
+    - link "queen_m_p" [ref=e100]
+    - link "2026년 9월 25일 금요일 오후 12:16" [ref=e101]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e109]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e110]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e112]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e113]
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e122]:
+    - link [ref=e123]:
+      - image "impact_marketing_obsessive님의 프로필 사진"
+    - link "impact_marketing_obsessive" [ref=e124]
+    - link "2026년 9월 25일 금요일 오전 11:34" [ref=e125]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e126]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e127]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e128]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e129]:
+      - img "리포스트"
+    - button [ref=e130]:
+      - img "공유하기"
+  - generic [ref=e131]:
+    - link [ref=e132]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e133]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e134]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e135]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e136]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e137]
+    - button [ref=e138]:
+      - img "좋아요"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e118]
+    - listitem:
+      - link "개인정보처리방침" [ref=e119]
+    - listitem:
+      - link "쿠키 정책" [ref=e120]
+- button "만들기" [ref=e121]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk" [url=https://www.threads.com/@kook0526/post/DdryXznjvzT]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 441회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "4"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - link [ref=e53]
+    - button [ref=e54]:
+      - img "좋아요"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]
+    - button [ref=e71]:
+      - img "더 보기"
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "egon111e님의 프로필 사진"
+    - link "egon111e" [ref=e80]
+    - link "2026년 9월 25일 금요일 오후 2:55" [ref=e81]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e89]
+    - link "2026년 9월 26일 토요일 오전 5:40" [ref=e90]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e92]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+    - button [ref=e95]:
+      - img "답글"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "queen_m_p님의 프로필 사진"
+    - link "queen_m_p" [ref=e100]
+    - link "2026년 9월 25일 금요일 오후 12:16" [ref=e101]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e109]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e110]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e112]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e113]
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e122]:
+    - link [ref=e123]:
+      - image "impact_marketing_obsessive님의 프로필 사진"
+    - link "impact_marketing_obsessive" [ref=e124]
+    - link "2026년 9월 25일 금요일 오전 11:34" [ref=e125]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e126]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e127]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e128]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e129]:
+      - img "리포스트"
+    - button [ref=e130]:
+      - img "공유하기"
+  - generic [ref=e131]:
+    - link [ref=e132]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e133]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e134]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e135]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e136]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e137]
+    - button [ref=e138]:
+      - img "좋아요"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e118]
+    - listitem:
+      - link "개인정보처리방침" [ref=e119]
+    - listitem:
+      - link "쿠키 정책" [ref=e120]
+- button "만들기" [ref=e121]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk" [url=https://www.threads.com/@kook0526/post/DdryXznjvzT]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 441회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "4"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - link [ref=e53]
+    - button [ref=e54]:
+      - img "좋아요"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]
+    - button [ref=e71]:
+      - img "더 보기"
+    - link [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]
+    - button [ref=e91]:
+      - img "더 보기"
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+    - button [ref=e95]:
+      - img "답글"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "queen_m_p님의 프로필 사진"
+    - link "queen_m_p" [ref=e100]
+    - link "2026년 9월 25일 금요일 오후 12:16" [ref=e101]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e109]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e110]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e112]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e113]
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e122]:
+    - link [ref=e123]:
+      - image "impact_marketing_obsessive님의 프로필 사진"
+    - link "impact_marketing_obsessive" [ref=e124]
+    - link "2026년 9월 25일 금요일 오전 11:34" [ref=e125]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e126]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e127]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e128]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e129]:
+      - img "리포스트"
+    - button [ref=e130]:
+      - img "공유하기"
+  - generic [ref=e131]:
+    - link [ref=e132]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e133]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e134]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e135]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e136]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e137]
+    - button [ref=e138]:
+      - img "좋아요"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e118]
+    - listitem:
+      - link "개인정보처리방침" [ref=e119]
+    - listitem:
+      - link "쿠키 정책" [ref=e120]
+- button "만들기" [ref=e121]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "클로드랑 챗GPT가 알아서 일을 나눠요. AI 팀원 8명으로 마케팅팀을 만들었거든요. 원래는 디스코드에 클로드 하나 연결해서 썼어요. 근데 결과 모아서 다음 단계로 넘기는 건 결국 제 일이더라고요. 그래서 버즈를 써 봤어요. 잭 도시 회사 블록이 무료로 공개한, 슬랙 같은 메신저예요. ① 팀장은 챗GPT, 팀원은 클로드 ② 팀장한테 한 줄만 지시하면 팀원을 멘션해서 일을 나눠요 ③ 누가 뭘 맡았는지 채팅창에 다 보여요 교육팀한테 운영 전략 정리를 맡겼더니 4분 만에 노션 페이지 하나로 정리해서 보고하더라고요. 혼자서도 팀처럼 일할 수 있어요. 세팅 가이드 필요하신 분, 댓글로 저요 남겨주세요 ✋ 전체 영상 링크 : https://youtu.be/8bFSUrbj2Qk" [url=https://www.threads.com/@kook0526/post/DdryXznjvzT]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 441회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "4"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - link [ref=e53]
+    - button [ref=e54]:
+      - img "좋아요"
+    - button [ref=e55]:
+      - img "답글"
+    - button [ref=e56]:
+      - img "리포스트"
+    - button [ref=e57]:
+      - img "공유하기"
+  - generic [ref=e58]:
+    - link [ref=e59]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e62]:
+      - img "더 보기"
+    - button [ref=e63]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e64]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e65]:
+      - img "리포스트"
+    - button [ref=e66]:
+      - img "공유하기"
+  - generic [ref=e67]:
+    - link [ref=e68]
+    - button [ref=e71]:
+      - img "더 보기"
+    - link [ref=e73]
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]
+    - button [ref=e91]:
+      - img "더 보기"
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e93]
+    - button [ref=e94]:
+      - img "좋아요"
+    - button [ref=e95]:
+      - img "답글"
+    - button [ref=e96]:
+      - img "리포스트"
+    - button [ref=e97]:
+      - img "공유하기"
+  - generic [ref=e98]:
+    - link [ref=e99]:
+      - image "queen_m_p님의 프로필 사진"
+    - link "queen_m_p" [ref=e100]
+    - link "2026년 9월 25일 금요일 오후 12:16" [ref=e101]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e102]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e103]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e104]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e105]:
+      - img "리포스트"
+    - button [ref=e106]:
+      - img "공유하기"
+  - generic [ref=e107]:
+    - link [ref=e108]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e109]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e110]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e111]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e112]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e113]
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e122]:
+    - link [ref=e123]:
+      - image "impact_marketing_obsessive님의 프로필 사진"
+    - link "impact_marketing_obsessive" [ref=e124]
+    - link "2026년 9월 25일 금요일 오전 11:34" [ref=e125]: "2026-09-25"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e126]:
+      - img "더 보기"
+    - text: "저요"
+    - button [ref=e127]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e128]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e129]:
+      - img "리포스트"
+    - button [ref=e130]:
+      - img "공유하기"
+  - generic [ref=e131]:
+    - link [ref=e132]:
+      - image "kook0526님의 프로필 사진"
+    - link "kook0526" [ref=e133]
+    - link "2026년 9월 26일 토요일 오전 5:41" [ref=e134]: "2026-09-26"
+    - text: "작성자"
+    - button [ref=e135]:
+      - img "더 보기"
+    - text: "버즈 에이전트 구축 가이드 다운받기 링크 전달드립니다 :)"
+    - link "page.stibee.com/subsc…" [ref=e136]
+    - link "page.stibee.com 버즈(Buzz)로 AI 마케팅팀 만들기" [ref=e137]
+    - button [ref=e138]:
+      - img "좋아요"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e118]
+    - listitem:
+      - link "개인정보처리방침" [ref=e119]
+    - listitem:
+      - link "쿠키 정책" [ref=e120]
+- button "만들기" [ref=e121]:
+  - img "만들기"
+=== DONE ===
+[ok | 16002ms]

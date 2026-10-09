@@ -1,0 +1,118 @@
+URL: https://www.linkedin.com/posts/%EA%B4%91%ED%98%B8-%EC%9D%B4-791a1a156_2%ED%8E%B8-%EC%9D%B4-%EA%B8%80%EC%9D%80-%EC%A0%9C%EA%B0%80-%EC%86%90%EC%9C%BC%EB%A1%9C-%EC%8D%BC%EC%8A%B5%EB%8B%88%EB%8B%A4-1%ED%8E%B8-%EC%9D%B4%EC%A0%9C-ai%EA%B0%80-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%84-activity-7508330848145022976-sady
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/%EA%B4%91%ED%98%B8-%EC%9D%B4-791a1a156_2%ED%8E%B8-%EC%9D%B4-%EA%B8%80%EC%9D%80-%EC%A0%9C%EA%B0%80…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/%EA%B4%91%ED%98%B8-%EC%9D%B4-791a1a156_2%ED%8E%B8-%EC%9D%B4-%EA%B8%80%EC%9D%80-%EC%A0%9C%EA%B0%80…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "이광호님의 프로필 보기"
+      - link "이광호• 3+촌" [ref=e26]
+      - text: "(주)KINX 사업기획 9월 23일 • 수정함"
+      - link "이광호 님 인증됨 프로필 3촌 이상" [ref=e27]
+      - button "이광호님 팔로우" [ref=e28]: "팔로우"
+      - button "이광호 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "2편 : 이 글은 제가 손으로 썼습니다.1편 : 이제 AI가 사람들을 제자리에 돌려놓고 있습니다"
+        - link "https://lnkd.in/grYHFxPM 열기" [ref=e30]: "https://lnkd.in/grYHFxPM"
+        - text: "어제 오랜만에 글을 쓴 뒤로,지난 1~2년간 저의 업무가 어떻게 바뀌었을까 생각해보았습니다.최근에 제가 추진중인 제휴 파트너십을 돌아보면 좋을 것 같습니다.Chatgpt Work가 엄청나게 발전해서 제휴 대상을 모아놓은 사이트를 발견했을 때 그것을 긁어모아 엑셀로 만드는 작업은 과거에는 2주~4주까지도 걸리는 일이었지만 이제는 Chatgpt에게 사이트 던져주고 엑셀 양식 지정한 다음 작성해달라고 하면 밀어넣어줍니다.뿐만 아니라 기업 정보-매출 규모, 임직원 수, 홈페이지 등  긁어모은 정보를 기반으로 다시 다른 정보와 결합해야 하는 일도  한번의 프롬프트로 가능합니다.제안서 작성도 젠스파크로 작성하면 뚝딱입니다.무엇을 하고 싶은지,각각의 역할은 무엇인지,어떤 시너지를 기대하는지,다음에 할 일은 무엇인지를 설득력 있는 슬라이드로 구성할 수 있습니다.슬라이드/ppt를 잘 만들지 못해서 LG헬로비전 전사 사업 아이디어 경진대회에서 슬라이드만 평가하는 예선에서 탈락했다가 아이디어가 좋다는 이유로 통과한 다음,크몽의 힘을 빌려서 기깔난 슬라이드로 바꾸고 본선 PT에서 발표로 경영진 최고득점을 받았던 에피소드는 이제 AI 없던 시대에 라떼는 말이야가 되었습니다.그 다음에,직접 고객사 메일로 메일을 쓸 때부터는 손으로 씁니다.물론 포맷은 어느정도 구성해놓지만 고객사 홈페이지를 방문하고, 홈페이지 서비스를 보면서 정말로 내가 제안하는 서비스가 고객사에 필요한지 고민합니다.이 제휴 메일을 통해 고객사 테이블에 앉았을 때,담당자 앞에서 우리 서비스가 필요한 이유,우리가 제휴를 하면 얻을 시너지가  정말 설득력이 있는지, 상대방의 표정을 상상합니다.IPCC, 보안, MSP 등 특정한 주제로  수백개의 기업 정보를 모아놓고도 이런 작업을 통해 크롤링한 DB의 절반 이상을 버립니다.제안할 내용도 버립니다.적합한 고객사가 나타나면  이것도 제안하고 싶고 저것도 함께하고 싶습니다.그렇지만 지금 바로 시작할 수 있는 하나에 집중합니다.버린 공간에, 고객사의 이야기를 채워넣습니다.고객사의 홈페이지, 브로셔, 언론기사를 보고,고객이 말한 것을 제안 메일에 담습니다.물론 누군가는 말할 겁니다.그렇게 하는 작업들 다 Skill.md로 수백개가 아니라 수천 수만개 DB 만들어서 제안 가능하다구요.그렇지만 고객을 만나는 건 여전히 사람입니다.그리고 그 순간에는, 당신과 고객만 대면하게 됩니다.사람을 설득할 책임은 여전히 당신에게 있습니다."
+      - button "반응 버튼 상태: 반응 없음" [ref=e31]: "3"
+      - button "댓글" [ref=e32]
+      - button "퍼가기" [ref=e33]
+      - link "보내기" [ref=e34]
+      - link "반응 3" [ref=e35]:
+        - list:
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e36]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e37]
+      - button "GIF 선택 도구 열기" [ref=e38]
+      - button "사진 공유" [ref=e39]
+    - link [ref=e40]:
+      - link "HyeongKweon Kim 님의 반응: 추천" [ref=e41]
+      - link "Brian Kim 님의 반응: 추천" [ref=e42]
+      - link "Dr. Vicki Wright Hamilton, MBA 님의 반응: 마음에 쏙듬" [ref=e43]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e44]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e45]
+      - link "웹접근성" [ref=e46]
+      - link "고객센터" [ref=e47]
+      - button "개인정보와 약관" [ref=e48]
+      - link "광고 선택" [ref=e49]
+      - link "광고" [ref=e50]
+      - button "비즈니스서비스" [ref=e51]
+      - link "LinkedIn 앱 다운로드" [ref=e52]
+      - link "더보기" [ref=e53]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[ok | 8684ms]

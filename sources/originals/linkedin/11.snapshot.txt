@@ -1,0 +1,202 @@
+URL: https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works%ED%8C%80%EC%9C%BC%EB%A1%9C-ai-%EC%99%80-%ED%95%A8%EA%BB%98-%EC%9D%B4%EA%B2%83%EC%A0%80%EA%B2%83-activity-7506359658182332416-3IVt
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "신주호님의 프로필 보기"
+      - link "신주호• 2촌" [ref=e26]
+      - text: "(현) AI...Something (=잡부) (구) Backend Developer 9월 17일"
+      - link "신주호 님 인증됨 프로필 2촌" [ref=e27]
+      - button "신주호님 팔로우" [ref=e28]: "팔로우"
+      - button "신주호 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "이직한 곳은"
+        - link "회사 보기: F&F" [ref=e30]: "F&F"
+        - text: "입니다 :)AI Works팀으로, AI 와 함께 이것저것 만들고 인프라를 함께 보는 역할을 맡게 되었습니다.너무 너무 재미있는 업무를 맡게 되었는데 아직 구체적으로 말할 수 없는 단계라 좋은 성과가 나오면 공유하는 기회가 오면 좋겠습니다 😃 이직을 결정하는데 가장 크게 영향을 끼친건 \"회사가 AI 에 대해 엄청나게 많이 지원한다\"는 부분이었습니다.사실 적당한 도구를 제공해주는 정도이지 않을까? 했지만 입사 후 목격한 장면들은 하나하나 큰 충격이었습니다.이직 전 IT팀을 '와칸다'라고 표현 하는걸 들었었는데, 저는 그 표현이 정말 찰떡이라고 생각합니다.회사나 브랜드는 알려져 있어도 '거기서 개발...뭐...뭘...해요?' 싶은데 막상 입사 후 살펴보니 뭔가 기술의 이상향(?)이 펼쳐져 있습니다.우선 입사 직후 제 손엔 GPT pro와 Claude max20이 주어졌고 그것도 부족하면 추가 계정을 구매하거나 그냥 API 사용 하는 방법까지 받았습니다. (진짜 토큰 이렇게 써도 되나요?)그리고 모든 직군 직원 분들이 AI를 활용하고, 사용하고, 응용하고, 더 많은 걸 내놓으라는(?) 요구가 매우 많고 의외로 정교 합니다.정말 단순히 '쓴다' 가 아니라 전사가 '열심히 쓰면' 이런 형태가 되겠구나. 라는 걸 느끼고 있습니다.가장 놀라웠던 건 회의록 앱 입니다. 회의록 앱이라고 하면 상용제품도 이미 많고 굳이 내부 개발까지 할 필요가 있나 싶은데...퀄리티가 미쳤습니다. 회의가 끝나면 수분내에 메일로 회의록이 도착하는데 도메인 용어나 주요 내용 요약이나 이후 액션 아이템까지 너무 정확하고 깔끔한 회의록이 도착해서 '사람이 손으로 후속 정리하는 거 아니냐?'고 물어볼 정도 였습니다. 소수의 인원이 엄청 빠르게 만들었지만 정말 정교한 서비스였습니다. 돈 받고 팔아도 될 정도 입니다.이러한 내부 도구가 하루가 멀다하고 계속 쏟아져 나오고 있습니다.  😦 오늘도 생각 한 건 '이걸 이만큼이나 이렇게 한다구요? 정말 해요?' 였습니다.개인적으로 AI 가 유행하면서 작은 조직, 작은 회사가 오히려 의사 결정과 소수 인원의 싱크로 더 효과적일 것이라고 생각했었는데 아닌 경우를 보게 되었습니다.이로 인해 정말 일이 너무 많습니다 😂 살려주세요"
+        - link "https://lnkd.in/gQS6BPzD 열기" [ref=e31]: "https://lnkd.in/gQS6BPzD"
+        - text: "(닫힌 채용공고라도 관심 있으시면 연락 주세요 ㅋㅋ)팀 동료분들도 너무 좋고, 회사의 지원도 파격적이라 일하기에 너무 만족스러운 환경이고 매일 즐겁게 출근하고 있습니다.어느 정도 자리 잡고 공개 가능한 프로젝트들이 끝나면 재밌는 소식 가져오겠습니다.와칸다가 아직 세상 밖으로 나오지 않았는데 묵혀두기엔 아까운 게 많네요 😅 퇴사글에 생각보다 많은 분들이 응원해주셔서 너무 감사합니다. 그 덕분에 좋은 곳으로 오게 된 것 같고 F&F에서 재밌게 많은 일들 해보겠습니다 🫡"
+      - link [ref=e32]:
+        - image "축하 이미지 보기"
+      - text: "이직/승진함"
+      - button "반응 버튼 상태: 반응 없음" [ref=e33]: "68"
+      - button "댓글" [ref=e34]: "11"
+      - button "퍼가기" [ref=e35]
+      - link "보내기" [ref=e36]
+      - link "반응 68" [ref=e37]:
+        - list:
+          - listitem
+          - listitem
+      - region:
+        - list:
+          - listitem:
+            - button [ref=e38]:
+              - checkbox "축하합니다! 🎉" [ref=e39] [hidden]
+              - label: "축하합니다! 🎉"
+          - listitem:
+            - button [ref=e40]:
+              - checkbox "건승하시길!" [ref=e41] [hidden]
+              - label: "건승하시길!"
+          - listitem:
+            - button [ref=e42]:
+              - checkbox "🎉🎉🎉" [ref=e43] [hidden]
+              - label: "🎉🎉🎉"
+          - listitem:
+            - button [ref=e44]:
+              - checkbox "👏 신주호 님, 당연한 결과입니다" [ref=e45] [hidden]
+              - label: "👏 신주호 님, 당연한 결과입니다"
+          - listitem:
+            - button [ref=e46]:
+              - checkbox "🎉 기대됩니다" [ref=e47] [hidden]
+              - label: "🎉 기대됩니다"
+      - button "다음" [ref=e48]
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e49]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e50]
+      - button "GIF 선택 도구 열기" [ref=e51]
+      - button "사진 공유" [ref=e52]
+    - link [ref=e53]:
+      - link "성열 양 님의 반응: 추천" [ref=e54]
+      - link "Youngsu Hong 님의 반응: 추천" [ref=e55]
+      - link "현진 황 님의 반응: 추천" [ref=e56]
+      - link "Dami K. 님의 반응: 추천" [ref=e57]
+      - link "Mintae JO 조민태 님의 반응: 추천" [ref=e58]
+      - link "Eden Kang 님의 반응: 추천" [ref=e59]
+      - link "Seeyeon Kim 님의 반응: 추천" [ref=e60]
+      - link "Wharang Koo 님의 반응: 추천" [ref=e61]
+      - link "반응 모두 보기" [ref=e62]
+    - button "관련순" [ref=e63]
+    - link [ref=e64]:
+      - image "YongSung Yoon님의 프로필 보기"
+    - link "YongSung Yoon 님 인증됨 프로필 3촌 이상 Head of Technology at Bucketplace (오늘의집)" [ref=e65]
+    - text: "3주"
+    - button "YongSung Yoon님 팔로우" [ref=e66]: "팔로우"
+    - button "YongSung Yoon 님의 댓글에 대한 옵션 더 보기" [ref=e67]
+    - text: "축하합니다! 🎉"
+    - button [ref=e68]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e69]
+    - link [ref=e70]:
+      - image "김현중님의 프로필 보기"
+    - link "김현중 님 인증됨 프로필 3촌 이상 상품서비스개발" [ref=e71]
+    - text: "3주"
+    - button "김현중님 팔로우" [ref=e72]: "팔로우"
+    - button "김현중 님의 댓글에 대한 옵션 더 보기" [ref=e73]
+    - text: "축하합니다! 🎉"
+    - button [ref=e74]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e75]
+    - link [ref=e76]:
+      - image "soochul park님의 프로필 보기"
+    - link "soochul park 님 3촌 이상 마켓컬리 출고프로덕트개발" [ref=e77]
+    - text: "2주"
+    - button "soochul park님 팔로우" [ref=e78]: "팔로우"
+    - button "soochul park 님의 댓글에 대한 옵션 더 보기" [ref=e79]
+    - text: "축하합니다! 🎉"
+    - button [ref=e80]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e81]
+    - link [ref=e82]:
+      - image "한동진님의 프로필 보기"
+    - link "한동진 님 인증됨 프로필 3촌 이상 Backend SW Engineer" [ref=e83]
+    - text: "2주"
+    - button "한동진님 팔로우" [ref=e84]: "팔로우"
+    - button "한동진 님의 댓글에 대한 옵션 더 보기" [ref=e85]
+    - text: "축하합니다! 🎉"
+    - button [ref=e86]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e87]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e88]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e89]
+      - link "웹접근성" [ref=e90]
+      - link "고객센터" [ref=e91]
+      - button "개인정보와 약관" [ref=e92]
+      - link "광고 선택" [ref=e93]
+      - link "광고" [ref=e94]
+      - button "비즈니스서비스" [ref=e95]
+      - link "LinkedIn 앱 다운로드" [ref=e96]
+      - link "더보기" [ref=e97]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - image "Hyunwoo Joo"
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e98]
+    - button "메시지 메뉴 열기" [ref=e100]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e101]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e102]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 6661ms]

@@ -1,0 +1,20 @@
+[
+ {
+  "after": 5,
+  "name": "빨라진 작성, 남아 있는 검증",
+  "prompt": "Create a wide 16:9 editorial illustration for an internal corporate newsletter. Use flat vector-like shapes, fine navy outlines, subtle paper grain, a warm ivory background, muted teal and coral accents, and approachable Korean adult office workers. Keep this visual style consistent across the series. Show a clear left-to-right workflow: a small teal AI robot rapidly produces many document cards; the cards accumulate before a human reviewer who carefully examines them with a magnifying glass; only a few reviewed cards reach a tidy finished tray on the right. Each card contains only a simple geometric diagram. Under the magnifying glass, reveal one misplaced shape among otherwise plausible diagrams. The reviewer looks focused but tired, with a slightly slumped posture. Make the human review stage the unmistakable bottleneck: fast generation still requires limited human attention. Use generous negative space and a few simple directional arrows. No text, letters, numbers, pseudo-writing, logos, or watermarks.",
+  "anchor": "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠. 직접 "
+ },
+ {
+  "after": 8,
+  "name": "일을 잘할수록 몰리는 일",
+  "prompt": "Create a wide 16:9 editorial illustration for an internal corporate newsletter. Use flat vector-like shapes, fine navy outlines, subtle paper grain, a warm ivory background, muted teal and coral accents, and approachable Korean adult office workers. Keep this visual style consistent across the series. Show three colleagues at adjacent desks, each using the same small teal AI robot. The two outer colleagues are calmly learning their tools, each working through a small number of task cards. The central colleague is proficient, with a neat tray of completed work, but a much larger stack of newly assigned coral task cards is building up beside them. Above the desks, a shared team task tray distributes work through three curved paths: a few cards travel toward the outer desks, while most cards flow toward the central desk. The central employee looks strained as incoming work consumes the space they just cleared. Emphasize unequal workload caused by repeatedly assigning tasks to the fastest worker. Depict all colleagues respectfully. No text, letters, numbers, pseudo-writing, logos, or watermarks.",
+  "anchor": "셋째는 직원마다 AI를 활용하는 속도가 다르다는 점입니다. 같은 팀에서도"
+ },
+ {
+  "after": 15,
+  "name": "아낀 시간의 용도를 함께 정하기",
+  "prompt": "Create a wide 16:9 editorial illustration for an internal corporate newsletter. Use flat vector-like shapes, fine navy outlines, subtle paper grain, a warm ivory background, muted teal and coral accents, and approachable Korean adult office workers. Keep this visual style consistent across the series. Build a clean two-panel comparison with equal visual weight and no captions. Each panel contains an identical oversized clock face with hands but no numbers, and a large teal sector representing time saved through AI. Include the same small teal AI robot beside a tidy completed-work tray in each panel. In the left panel, incoming coral task cards crowd into the teal clock sector, while an employee remains burdened at their desk. In the right panel, an employee and their team leader jointly arrange three simple pictorial tokens within the teal sector: a lightbulb for thinking through a problem, a safety helmet for visiting the worksite, and an open doorway with daylight for leaving work earlier. Their shared gesture should communicate an agreed plan for using the saved time. Keep the composition spacious and immediately readable. No text, letters, numbers, pseudo-writing, logos, or watermarks.",
+  "anchor": "팀을 이끄는 분이라면 직원이 AI로 일을 빨리 끝냈을 때 곧바로 다른 일"
+ }
+]

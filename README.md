@@ -31,8 +31,9 @@ drafts/            초안과 수정 이력
 
 ## 칼럼 작업실 (웹앱, 2026-10-09)
 
-데스크톱 전용. 수집 → 주제(astra) → 제목(astra) → 과정 1·2·3(Claude 초안 → astra 재작성 → astra 기준 반영)
-→ 과정 4~(멘토 피드백, astra) → 그림(astra 설명 + gti) → 확정. 화면 오른쪽 아래 버튼은 진행자(Claude, 글마다 `--resume` 세션).
+데스크톱 전용. 수집(aside, 입력 없으면 Threads·LinkedIn 자동) → 주제(astra) → 제목(astra)
+→ 과정 1·2·3(Claude 초안 → astra 재작성 → astra 기준 반영) → [절반 모드면 astra가 절반으로 줄인 과정]
+→ 과정 4~(멘토 피드백, astra) → 그림(머리 그림 + 본문 그림 3개, astra 설명 + gti) → 확정(고른 본문 그림을 그 문단 뒤에). 화면 오른쪽 아래 버튼은 진행자(Claude, 글마다 `--resume` 세션).
 
 ```
 cd app && npm run build                    # 화면 빌드 (app/dist)

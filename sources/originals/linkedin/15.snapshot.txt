@@ -1,0 +1,144 @@
+URL: https://www.linkedin.com/posts/louieha_ai%EC%97%90%EA%B2%8C-%EC%99%84%EC%A0%84%ED%9E%88-%EB%98%91%EA%B0%99%EC%9D%80-%EC%A7%88%EB%AC%B8%EC%9D%84-%EC%97%B4-%EB%B2%88-%EB%8D%98%EC%A1%8C%EB%8D%94%EB%8B%88-%EB%8B%B5%EC%9D%B4-%EC%97%AC%EC%84%AF-%EB%B2%88-%EB%B0%94%EB%80%8C%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7511662518533029888-ARKp
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/louieha_ai%EC%97%90%EA%B2%8C-%EC%99%84%EC%A0%84%ED%9E%88-%EB%98%91%EA%B0%99%EC%9D%80-%EC%A7%88%EB…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/louieha_ai%EC%97%90%EA%B2%8C-%EC%99%84%EC%A0%84%ED%9E%88-%EB%98%91%EA%B0%99%EC%9D%80-%EC%A7%88%EB…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "하길우님의 프로필 보기"
+      - link "하길우• 2촌" [ref=e26]
+      - text: "Product Strategy Lead at Class 101 | ex-Toss 10월 2일"
+      - link "하길우 님 인증됨 프로필 2촌" [ref=e27]
+      - button "하길우님 팔로우" [ref=e28]: "팔로우"
+      - button "하길우 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "🔥 AI에게 완전히 똑같은 질문을 열 번 던졌더니, 답이 여섯 번 바뀌었습니다.지난 글에서 \"AI 분석 정확도(앤트로픽의 95% / 65%)\"관련한 이야기를 했습니다. 그 글에서 강조했던 포인트는 결국 성능 좋은 모델을 써도 꽤 높은 확률로 틀린다는 점입니다. 그렇다면 AI는 왜 틀릴까요? 이 틀림은 영원히 구원될 수 없는 걸까요? 제가 실제로 했던 실험 하나를 보여드리겠습니다.1️⃣ 실험 AI에게 과거 기억을 못 보게 막고, 완전히 똑같은 질문을 열 번 던졌습니다. \"최근 30일 신규 가입 유저의 광고 수신 동의율 알려줘.\"결과입니다. (수치는 각색했습니다) 40% · 40% · 41% · 41% · 44.5% · 45.7% …혼란스러우실 겁니다. 어떻게 답이 매번 다르지?그런데 사실 이건 AI의 성능 문제가 아닙니다. AI가 임의로 선택한 디테일한 조건이 있었습니다. 탈퇴 대기 유저를 포함했느냐. 집계 시 '오늘'을 포함했느냐. 언제부터 시작했느냐. 이런 요소들은 1~2%p 차이를 만듭니다. 40~41%는 그래서 납득이 갑니다.그런데 44.5%, 45.7%는 납득이 안 가죠. 뜯어보니 40~41%는 지난 30일간 일별 동의율을 가중평균한 값이고, 44.5%, 45.7%는 단순 평균한 값이었습니다. 신규 가입자는 유니크하니 직관적으로는 가중평균이 맞습니다. 하지만 이걸 \"틀렸다\"고 할 수 있을까요? 애매합니다.2️⃣ 프롬프트를 더 넣으면 되지 않나 보통 이런 문제를 발견하면 프롬프트에 지침을 추가하면 되겠다고 생각하기 쉽습니다. 그런데 이런 식으로 발생하는 에러를 막으려고 지침과 맥락을 계속 부으면, 토큰이 늘어나고, 토큰이 늘어나면 이번엔 AI가 토큰 속에서 길을 잃습니다. 환각의 확률이 같이 올라가죠.적절한 대안은 시맨틱 레이어입니다. (자주 집계되는 지표를 미리 정의해두고 AI가 그걸 먼저 조회하게 하는 층이라고 생각하시면 쉽습니다) 그런데 시맨틱 레이어에 '모든 지표를 미리 정의'할 수도 없는 노릇이고요.그래서 저는 이 환경을 팀에 열면서 한 가지를 명시적으로 선언했습니다. 이것은 의도된 혼란(Intended Chaos)입니다.3️⃣ 통제의 세계 vs 확률의 세계 전통적인 데이터 웨어하우스의 세계는 통제를 원합니다. \"동일한 질문에는 동일한 답이 나와야 한다.\" LLM은 그 반대편, 확률의 세계에 있습니다.그런데 여기서 한 번 뒤집어 생각해볼 게 있습니다. 어차피 인간도 비슷하게 틀립니다. 같은 질문을 여러 명의 분석가에게 돌리면, 엄밀한 조건이 주어지지 않은 이상 필터 누락, 조인 실수, 집계 방식 선택, 시간대 처리 같은 이유로 다른 답을 내놓습니다.차이는 하나입니다. 인간의 다름은 현실에서 테스트된 적이 없어 조용히 묻히는 동안, AI의 오류는 열 번 돌려보면 드러난다는 것.그래서 결론은 다소 충격적입니다. AI는 이미 정의된 지표는 80% 확률로 맞히지만, 정의되지 않은 지표는 50~80% 사이를 왔다 갔다 할 겁니다. 그리고 이건 고쳐지는 게 아니라, 받아들이고 설계해야 하는 조건입니다.4️⃣ \"그걸 어떻게 업무에 써?\"이 질문에 답하려면 우리가 데이터를 보는 이유를 먼저 고민해야 합니다. 데이터는 '실행을 위해서' 쓰입니다. 그 자체로 가치가 되지 않습니다.냉정하게 보면, 어느 회사든 어떤 데이터들은 보나 안 보나 사람의 실행을 바꾸지 않습니다. 그럼에도 데이터를 봐서 좋은 이유는, 실행이 빨라진다는 것입니다. 데이터가 옳아서가 아니라, 데이터가 그 사람의 믿음을 강화해줬기 때문이에요. 사람은 맞히려고만 데이터를 보는 게 아닙니다. 불안해서 봅니다. 확신을 얻으려고 봅니다.문서화가 된 환경에서 AI는 '방향성' 정도는 거의 맞게 줍니다. 실제 동의율이 60%면, 얼추 50~70% 사이의 답을 줘요. \"우리 동의율이 절반은 넘는구나, 이 캠페인 해볼 만하겠다\"는 판단에는 이걸로 충분합니다.물론 절대 틀리면 안 되는 숫자들이 있습니다. 매출, 정산, 경영 보고 지표. 그건 시맨틱 레이어와 검증된 대시보드가 담당합니다. 틀리면 안 되는 문제와 틀려도 되는 문제를 구분한다. 모든 문제에 높은 정확도가 필요하지 않다. 이게 저희 설계 원칙입니다.덧붙이는 글:\"틀려도 된다\"는 말이 \"검증 안 해도 된다\"는 뜻은 아닙니다. 검증 책임을 누가 지느냐가 이 환경의 진짜 핵심인데, 그건 다음 글에서 씁니다.열 번 실험은 기억 차단 상태에서 했습니다. 대화 맥락이 남아 있으면 앞 답에 끌려가서 실험이 안 됩니다.(이 환경의 설계 원칙과 세팅 기록을 게시판에 쌓아두고 있습니다. 프로필 상단 '스페셜' 섹션에 안내가 있어요.)"
+      - button "반응 버튼 상태: 반응 없음" [ref=e30]: "15"
+      - button "댓글" [ref=e31]: "1"
+      - button "퍼가기" [ref=e32]: "2"
+      - link "보내기" [ref=e33]
+      - link "반응 15" [ref=e34]:
+        - list:
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e35]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e36]
+      - button "GIF 선택 도구 열기" [ref=e37]
+      - button "사진 공유" [ref=e38]
+    - link [ref=e39]:
+      - link "Hae Chang Cho 님의 반응: 추천" [ref=e40]
+      - link "Minwoo Jang 님의 반응: 추천" [ref=e41]
+      - link "유정 차 님의 반응: 추천" [ref=e42]
+      - link "예준 ­김 님의 반응: 추천" [ref=e43]
+      - link "Seunghwan An 님의 반응: 추천" [ref=e44]
+      - link "Ahyeon Cho 님의 반응: 추천" [ref=e45]
+      - link "Misu Kim 님의 반응: 추천" [ref=e46]
+      - link "kumud dhabhai 님의 반응: 응원" [ref=e47]
+      - link "반응 모두 보기" [ref=e48]
+    - link [ref=e49]:
+      - image "kumud dhabhai 님의 프로필 보기, 구직중"
+    - link "kumud dhabhai 님, 구직중 인증됨 프로필 2촌 On-Device AI Engineer | LLM, Machine Learning, Deep Learning & NLP |" [ref=e50]
+    - text: "1주"
+    - button "kumud dhabhai님 팔로우" [ref=e51]: "팔로우"
+    - button "kumud dhabhai 님의 댓글에 대한 옵션 더 보기" [ref=e52]
+    - paragraph:
+      - text: "정말 흥미로운 실험이네요! 특히 AI의 답변이 달라지는 원인이 단순한 모델 성능 문제가 아니라, 모호한 데이터 정의와 집계 방식에 있다는 점이 인상적입니다. 모든 상황에서 완벽한 정확도를 추구하기보다, 어떤 업무에 어느 정도의 정확도가 필요한지 구분하고 그에 맞게 시스템을 설계한다는 접근이 현실적이네요. AI를 실제 업무에 적용할 때 꼭 생각해 봐야 할 중요한 관점인 것 같습니다"
+      - link "하길우님의 프로필 보기" [ref=e53]: "Gilwoo Ha"
+    - button [ref=e54]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e55]
+    - link "글쓴이가 반응한 횟수" [ref=e56]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e57]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e58]
+      - link "웹접근성" [ref=e59]
+      - link "고객센터" [ref=e60]
+      - button "개인정보와 약관" [ref=e61]
+      - link "광고 선택" [ref=e62]
+      - link "광고" [ref=e63]
+      - button "비즈니스서비스" [ref=e64]
+      - link "LinkedIn 앱 다운로드" [ref=e65]
+      - link "더보기" [ref=e66]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - image "Hyunwoo Joo"
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e67]
+    - button "메시지 메뉴 열기" [ref=e69]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e70]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e71]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 6343ms]

@@ -1,6 +1,6 @@
 """aside 수집 — 멘토의 요청 한 줄로 aside(UltraBrowse)가 글을 찾고, 찾은 글마다 페이지 스냅샷에서 원문을 그대로 저장한다.
 
-사용: python3 collect.py "<요청>"
+사용: python3 collect.py "<요청>"   — 요청을 비우면 자동: Threads·LinkedIn에서 칼럼 재료를 aside가 알아서 찾는다(멘토 2026-10-10)
 결과: runs/collect/<시각>/{request.txt, aside.md, urls.json, saved.json} + sources/originals/<사이트>/NN.md(+ NN.snapshot.txt)
 - 개수 상한 없음. aside가 찾은 주소를 모두 가져온다(이미 있는 주소는 건너뛴다).
 - aside에게는 주소만 받는다. 본문은 REPL 스냅샷 → parse_*.py로 원문 그대로 뽑는다(요약·재구성 없음).
@@ -36,6 +36,17 @@ def known_urls():
         if m:
             s.add(m.group(1).strip())
     return s
+
+
+AUTO = ("Threads와 LinkedIn에서, 사내 뉴스레터 칼럼(독자: SK E&S 전 직원, 대부분 개발자가 아닌 사무·현장 직군)의 재료가 될 "
+        "'AI와 함께 일하는 방식'에 관한 실무자 글을 찾아 줘. 직접 겪은 장면·시행착오·구체적인 방법이 담긴 최근 몇 달 사이의 한국어 글, "
+        "반응이 많은 글을 먼저. Threads 검색(threads.com/search)과 LinkedIn 검색을 쓴다.")
+
+
+def auto_request():
+    """자동 수집 요청 — 이미 모은 Threads·LinkedIn 주소는 빼 달라고 함께 넘긴다."""
+    have = sorted(u for u in known_urls() if site_of(u) in ("threads", "linkedin"))
+    return AUTO + "\n이미 모은 글(빼고 찾기):\n" + "\n".join(have)
 
 
 def ask_aside(req, d):
@@ -166,8 +177,8 @@ def save(url):
 def run(req):
     d = ROOT / "runs" / "collect" / time.strftime("%Y%m%d-%H%M%S")
     d.mkdir(parents=True, exist_ok=True)
-    (d / "request.txt").write_text(req, encoding="utf-8")
-    urls = ask_aside(req, d)
+    (d / "request.txt").write_text(req or "자동 · Threads·LinkedIn", encoding="utf-8")
+    urls = ask_aside(req or auto_request(), d)
     (d / "urls.json").write_text(json.dumps(urls, ensure_ascii=False, indent=1), encoding="utf-8")
     have = known_urls()
     saved = []

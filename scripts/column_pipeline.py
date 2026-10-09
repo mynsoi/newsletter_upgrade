@@ -10,7 +10,11 @@
   3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
+분량 두 가지 (멘토 2026-10-10: "분량을 절반으로 … 모드를 두 가지로"): 설정 "length"가 "half"면 3단계 뒤에
+  4. 절반  — astra: 지금 원고를 절반 분량으로 줄인다 → final-rN.md + mode-rN.txt("절반"). 따로: --shorten <설정>
+  검증된 1~3단계는 그대로 두고 맨 끝에서만 줄인다. 절반 모드의 피드백 반영은 분량을 그대로 둔다.
 """
+import re
 import json
 import subprocess
 import sys
@@ -174,6 +178,11 @@ def main(paths):
         return t
     stage("기준 반영·astra", [lambda k=k: mk_final(k) for k in briefs])
 
+    # 4. 절반 모드만
+    half = [k for k, b in briefs.items() if b.get("length") == "half"]
+    if half:
+        stage("절반·astra", [lambda k=k: shorten(ROOT / "briefs" / f"{k}.json") for k in half])
+
 
 
 def set_title(brief_path, pick):
@@ -196,14 +205,14 @@ def revise(brief_path, feedback_path):
     """--revise <설정> <피드백 파일> — 최신 최종본에 멘토 피드백(파일 내용 그대로)을 반영해 final-rN.md를 만든다 (astra)."""
     k = Path(brief_path).stem
     d = RUNS / k
-    revs = sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1]))
-    cur = revs[-1] if revs else d / "final.md"
-    n = len(revs) + 1
+    cur, n = latest_final(d)
+    half = json.loads(Path(brief_path).read_text(encoding="utf-8")).get("length") == "half"
     fb_new = Path(feedback_path).read_text(encoding="utf-8").strip()
     standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     prompt = "\n\n".join([
         "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
-        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
+        + (" 분량은 지금 원고 정도로 둡니다." if half else ""),
         "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
@@ -211,6 +220,38 @@ def revise(brief_path, feedback_path):
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
     (d / f"feedback-r{n}.txt").write_text(fb_new, encoding="utf-8")
     print(f"피드백 반영 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
+
+
+def latest_final(d):
+    revs = sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1]))
+    return (revs[-1] if revs else d / "final.md"), len(revs) + 1
+
+
+def shorten_prompt(text):
+    title, *rest = text.strip().split("\n", 1)
+    n = round(len(re.sub(r"\s", "", rest[0] if rest else text)) / 2 / 10) * 10
+    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
+    return "\n\n".join([
+        f"아래 [원고]를 지금의 절반 분량(공백 제외 약 {n}자)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, "
+        "중심 장면과 주장 위주로 남깁니다. [기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        "[기준 피드백]\n" + standing, OUT_RULE, "=== [원고] ===\n" + text])
+
+
+def shorten(brief_path):
+    """--shorten <설정> — 최신 원고를 절반 분량으로 줄여 다음 과정(final-rN.md)을 만든다 (astra)."""
+    d = RUNS / Path(brief_path).stem
+    cur, n = latest_final(d)
+    t0 = time.time()
+    out = run_astra(d / f"_shorten-r{n}", shorten_prompt(cur.read_text(encoding="utf-8")))
+    (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
+    (d / f"mode-r{n}.txt").write_text("절반", encoding="utf-8")
+    print(f"절반 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
+
+
+def shorten_file(src, out_dir):
+    """--shorten-file <원고> <폴더> — 설정 없는 확정 칼럼용. 결과는 <폴더>/output.md"""
+    out = run_astra(Path(out_dir), shorten_prompt(Path(src).read_text(encoding="utf-8")))
+    print(f"절반: {src} → {out_dir}/output.md · {len(out)}자")
 
 
 def fetch_infuture(post_id):
@@ -239,6 +280,10 @@ if __name__ == "__main__":
         set_title(a[1], a[2])
     elif a[:1] == ["--revise"]:
         revise(a[1], a[2])
+    elif a[:1] == ["--shorten"]:
+        shorten(a[1])
+    elif a[:1] == ["--shorten-file"]:
+        shorten_file(a[1], a[2])
     elif a[:1] == ["--fetch-infuture"]:
         fetch_infuture(a[1])
     else:

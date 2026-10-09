@@ -1,0 +1,132 @@
+URL: https://www.linkedin.com/posts/jayjunglim_ai%EC%97%90%EA%B2%8C-%EC%9D%BC%EC%9D%84-%EB%A7%A1%EA%B8%B0%EB%A0%A4%EB%8A%94%EB%8D%B0-%EB%A7%A4%EB%B2%88-%EC%9E%90%EB%A3%8C%EA%B0%80-%EC%96%B4%EB%94%94-%EC%9E%88%EB%8A%94%EC%A7%80%EB%B6%80%ED%84%B0-%EC%84%A4%EB%AA%85%ED%95%98%EA%B3%A0-%EC%9E%88%EB%8B%A4%EB%A9%B4-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-activity-7488579418609606657-NwkP
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jayjunglim_ai%EC%97%90%EA%B2%8C-%EC%9D%BC%EC%9D%84-%EB%A7%A1%EA%B8%B0%EB%A0%A4%EB%8A%94%EB%8D%B0-…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jayjunglim_ai%EC%97%90%EA%B2%8C-%EC%9D%BC%EC%9D%84-%EB%A7%A1%EA%B8%B0%EB%A0%A4%EB%8A%94%EB%8D%B0-…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "임정님의 프로필 보기"
+      - link "임정• 2촌" [ref=e26]
+      - text: "기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자 7월 30일"
+      - link "임정 님 프리미엄 프로필 2촌" [ref=e27]
+      - button "임정님에게 1촌 신청" [ref=e28]: "1촌 맺기"
+      - button "임정 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "AI에게 일을 맡기려는데 매번 자료가 어디 있는지부터 설명하고 있다면, 프롬프트 문제가 아닙니다. 저는 도구를 늘리는 대신, 자료를 어디에 둘지부터 다시 정했습니다.제 사진은 Onedrive, 구글포토, iCloud에 나뉘어 있었고, 업무 자료는 구글드라이브,노션, 옵시디언에 흩어져 있었습니다. 각각은 잘 쓰고 있었습니다. 문제는 자동화를 붙이려는 순간 드러났습니다. 사람은 세 곳을 오가며 찾아낼 수 있지만, AI는 그 세 곳을 매번 지정해줘야 합니다.그래서 규칙을 세 개 세웠습니다.1️⃣ 단일한 장소에 모읍니다. - 한 종류의 정보는 하나의 대표 장소에만 둡니다. 사진은 한 곳으로, 업무 자료도 한 곳으로 통일했습니다. 단일 진실 공급원(Single Source of Truth) 원칙입니다.2️⃣ 연결가능한 곳에 저장합니다. - 모을 장소를 고를 때부터 API나 MCP를 지원하는 도구로 고릅니다. 사람이 접근할 수 있어도 AI가 닿지 못하면 자동화는 시작되지 않습니다.3️⃣ 네이밍 컨벤션을 정리합니다. - AI는 사람보다 이름과 구조에 훨씬 많이 의존합니다. \"최종_진짜최종(2).docx\"가 아니라 \"2026-07_거래처명_견적서.pdf\"로 씁니다.이 셋은 곧 작업 순서입니다. 모으고, 연결하고, 정리합니다. 한 단계라도 건너뛰면 그다음 자동화에서 되돌아오게 됩니다.규칙을 정하고 나면 AI가 일할 자리를 만들어야 합니다. 저는 네 자리로 정리했습니다.1️⃣ 상주할 자리. - 집에 있는 맥미니를 홈서버로 쓰고 DB도 여기에 통합했습니다. 제가 노트북을 닫아도 작업이 이어집니다.2️⃣ 바깥에서 닿는 경로. - Tailscale로 맥북과 맥미니를 하나의 IP로 묶었습니다. 외부에서 접근할 때의 보안이 여기서 해결됩니다.3️⃣ 지시와 보고가 오가는 채널. - 디스코드로 결과 보고를 받고, 이동 중에도 작업을 지시하거나 선택지를 확인해줍니다. AI가 혼자 판단하면 안 되는 지점을 사람에게 되돌리는 창구입니다.4️⃣ 결과가 쌓이는 저장소- 응답이나 신뢰성이 중요한 자동화는 Supabase에 넣습니다. 무료 티어 1프로젝트로 시작했습니다.이 네 자리 위에서 실제로 돌아가는 예를 하나 들면, 카드와 계좌 내역을 내보내 월별 지출을 분석하고 결과를 디스코드로 받습니다. 첫 리포트에서 \"이렇게 살면 2년 안에 런웨이가 바닥난다\"는 진단을 받고 뼈를 맞았습니다. 🤣시스템을 만든다는 건 도구를 늘리는 일이 아니었습니다. 자료가 있을 자리를 정하고, AI가 그 자리에 닿을 경로를 열어주는 일이었습니다.여러분들의 시스템은 어떻게 구성되어있나요?"
+      - button "반응 버튼 상태: 반응 없음" [ref=e30]: "16"
+      - button "댓글" [ref=e31]
+      - button "퍼가기" [ref=e32]
+      - link "보내기" [ref=e33]
+      - link "반응 16" [ref=e34]:
+        - list:
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e35]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e36]
+      - button "GIF 선택 도구 열기" [ref=e37]
+      - button "사진 공유" [ref=e38]
+    - link [ref=e39]:
+      - link "보경 김 님의 반응: 추천" [ref=e40]
+      - link "Euihwan Choi 님의 반응: 추천" [ref=e41]
+      - link "Jiwoo Choi 님의 반응: 추천" [ref=e42]
+      - link "Sujin Park 님의 반응: 추천" [ref=e43]
+      - link "소진 김 님의 반응: 추천" [ref=e44]
+      - link "요셉 안 님의 반응: 추천" [ref=e45]
+      - link "정민 금 님의 반응: 추천" [ref=e46]
+      - link "Yoo-Min Jung 님의 반응: 추천" [ref=e47]
+      - link "반응 모두 보기" [ref=e48]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e49]:
+      - text: "광고"
+      - link "LinkedIn Careers" [ref=f1e2]
+      - region:
+        - banner
+        - region:
+          - image "Hyunwoo"
+          - link "LinkedIn Careers" [ref=f1e3]:
+            - image "LinkedIn Careers"
+        - region:
+          - heading "See which companies are hiring." [level=2]
+        - region:
+          - link "Search openings" [ref=f1e4]
+    - contentinfo:
+      - link "소개" [ref=e50]
+      - link "웹접근성" [ref=e51]
+      - link "고객센터" [ref=e52]
+      - button "개인정보와 약관" [ref=e53]
+      - link "광고 선택" [ref=e54]
+      - link "광고" [ref=e55]
+      - button "비즈니스서비스" [ref=e56]
+      - link "LinkedIn 앱 다운로드" [ref=e57]
+      - link "더보기" [ref=e58]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 5856ms]

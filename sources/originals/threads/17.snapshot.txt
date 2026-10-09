@@ -1,0 +1,1144 @@
+URL: https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA
+✔︎ Opened a new tab and set it active: tabs[0], page → 회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇 (https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA)
+=== SNAPSHOT 1 ===
+- title: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇" [url=https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "yoonkwon_ai님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "yoonkwon_ai" [ref=e23]
+    - img "인증된 계정"
+    - button "게시물이 페디버스에 공유되었습니다" [ref=e24]:
+      - img "게시물이 페디버스에 공유되었습니다"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e25]: "2026-08-16"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다.나는 이제 GPT로 5분 컷 하거든요.녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨.\n진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요.바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇 1/9"
+    - link [ref=e27]
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "10"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e40]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e41]: "2026-08-16"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "1단계. 입력부터 정제하는 게 진짜 핵심이에요.대부분 녹음 파일이나 메모를 그냥 통째로 GPT에 던져요.\n그러면 결과가 산으로 갑니다.먼저 발언자 이름, 회의 목적, 안건 3개만 위에 적어주세요.\n이거 한 줄만 넣어도 GPT가 맥락을 완전히 다르게 이해해요. 2/9"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e49]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e50]: "2026-08-16"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "그리고 녹음은 클로바노트나 다글로 먼저 텍스트로 바꾸세요.GPT한테 오디오 통역까지 시키면 시간만 더 걸려요.\n텍스트로 뽑은 다음 넘기는 게 훨씬 빠릅니다.'어... 그러니까...' 같은 필러는 굳이 지울 필요 없어요.\nGPT가 알아서 걸러주니까 그냥 붙여넣기 하면 됩니다. 3/9"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e58]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e59]: "2026-08-16"
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "2단계. 요약 프롬프트에 '형식'을 반드시 정해주세요.그냥 '요약해줘' 하면 문단 하나로 뭉텅이 나와요.\n그거 상사한테 못 보냅니다.'결정사항 / 논의내용 / 보류된 안건' 이렇게 항목을 미리 짜주세요.\n그러면 회의록 형식 그대로 딱 맞춰서 뱉어냅니다. 4/9"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e67]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e68]: "2026-08-16"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "여기서 제가 진짜 자주 쓰는 팁 하나.'각 항목은 3줄 이내로, 존댓말로 정리해줘' 이 한 문장을 꼭 넣어요.안 그러면 GPT가 소설 씁니다.\n너무 길게 늘여놔서 다시 줄이느라 시간 더 써요.글자 수랑 말투까지 지정하는 게 진짜 5분 컷의 비결이에요. 5/9"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e76]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e77]: "2026-08-16"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "3단계. 이게 제일 중요한 액션 아이템 추출이에요.회의록의 진짜 목적은 '누가 뭘 언제까지' 하냐거든요.'담당자 / 할 일 / 마감일' 표로 뽑아줘 라고 시키세요.\n이거 하나 때문에 팀원들이 저한테 회의록 달라고 합니다.다음 회의 때 이거만 보면 진행 상황 체크 끝나요. 6/9"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e85]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e86]: "2026-08-16"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "여기서 한 단계 더 나가고 싶으면 이렇게 해보세요.'애매하게 결정 안 난 안건은 따로 빼서 알려줘'회의하다 보면 흐지부지 넘어가는 게 꼭 있잖아요.\nGPT가 그걸 콕 집어줘서 다음 회의 안건이 저절로 만들어져요.이거 알고 나서 회의 흐름 자체가 정리됐어요. 7/9"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e94]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e95]: "2026-08-16"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "자, 바로 복붙해서 쓸 수 있는 프롬프트 예시입니다.'아래는 [회의 목적] 회의 녹취록이야. 참석자는 OOO다.\n1) 결정사항, 2) 주요 논의, 3) 보류 안건으로 나눠 각 3줄 이내 존댓말로 정리해줘.\n마지막에 담당자/할 일/마감일을 표로 뽑아줘. [녹취록 붙여넣기]'이대로만 넣으면 진짜 5분 안에 끝납니다. 8/9"
+    - button [ref=e97]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e98]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e103]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e104]: "2026-08-16"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "정리하면 딱 3개예요.1. 목적·참석자 먼저 적고 텍스트로 넣기\n2. 항목·글자수·말투 형식 지정하기\n3. 담당자별 액션 아이템 표로 뽑기 이 순서만 지키면 회의록 야근은 진짜 끝입니다.\n저장해두고 다음 회의 끝나자마자 써보세요. 팀 전체가 좋아할걸요. 9/9"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e109]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e110]
+    - listitem:
+      - link "개인정보처리방침" [ref=e111]
+    - listitem:
+      - link "쿠키 정책" [ref=e112]
+- button "만들기" [ref=e113]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇" [url=https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "10"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e40]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e41]: "2026-08-16"
+    - button [ref=e42]:
+      - img "더 보기"
+    - text: "1단계. 입력부터 정제하는 게 진짜 핵심이에요.대부분 녹음 파일이나 메모를 그냥 통째로 GPT에 던져요.\n그러면 결과가 산으로 갑니다.먼저 발언자 이름, 회의 목적, 안건 3개만 위에 적어주세요.\n이거 한 줄만 넣어도 GPT가 맥락을 완전히 다르게 이해해요. 2/9"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e49]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e50]: "2026-08-16"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "그리고 녹음은 클로바노트나 다글로 먼저 텍스트로 바꾸세요.GPT한테 오디오 통역까지 시키면 시간만 더 걸려요.\n텍스트로 뽑은 다음 넘기는 게 훨씬 빠릅니다.'어... 그러니까...' 같은 필러는 굳이 지울 필요 없어요.\nGPT가 알아서 걸러주니까 그냥 붙여넣기 하면 됩니다. 3/9"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e58]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e59]: "2026-08-16"
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "2단계. 요약 프롬프트에 '형식'을 반드시 정해주세요.그냥 '요약해줘' 하면 문단 하나로 뭉텅이 나와요.\n그거 상사한테 못 보냅니다.'결정사항 / 논의내용 / 보류된 안건' 이렇게 항목을 미리 짜주세요.\n그러면 회의록 형식 그대로 딱 맞춰서 뱉어냅니다. 4/9"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e67]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e68]: "2026-08-16"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "여기서 제가 진짜 자주 쓰는 팁 하나.'각 항목은 3줄 이내로, 존댓말로 정리해줘' 이 한 문장을 꼭 넣어요.안 그러면 GPT가 소설 씁니다.\n너무 길게 늘여놔서 다시 줄이느라 시간 더 써요.글자 수랑 말투까지 지정하는 게 진짜 5분 컷의 비결이에요. 5/9"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e76]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e77]: "2026-08-16"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "3단계. 이게 제일 중요한 액션 아이템 추출이에요.회의록의 진짜 목적은 '누가 뭘 언제까지' 하냐거든요.'담당자 / 할 일 / 마감일' 표로 뽑아줘 라고 시키세요.\n이거 하나 때문에 팀원들이 저한테 회의록 달라고 합니다.다음 회의 때 이거만 보면 진행 상황 체크 끝나요. 6/9"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e85]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e86]: "2026-08-16"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "여기서 한 단계 더 나가고 싶으면 이렇게 해보세요.'애매하게 결정 안 난 안건은 따로 빼서 알려줘'회의하다 보면 흐지부지 넘어가는 게 꼭 있잖아요.\nGPT가 그걸 콕 집어줘서 다음 회의 안건이 저절로 만들어져요.이거 알고 나서 회의 흐름 자체가 정리됐어요. 7/9"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e94]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e95]: "2026-08-16"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "자, 바로 복붙해서 쓸 수 있는 프롬프트 예시입니다.'아래는 [회의 목적] 회의 녹취록이야. 참석자는 OOO다.\n1) 결정사항, 2) 주요 논의, 3) 보류 안건으로 나눠 각 3줄 이내 존댓말로 정리해줘.\n마지막에 담당자/할 일/마감일을 표로 뽑아줘. [녹취록 붙여넣기]'이대로만 넣으면 진짜 5분 안에 끝납니다. 8/9"
+    - button [ref=e97]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e98]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e103]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e104]: "2026-08-16"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "정리하면 딱 3개예요.1. 목적·참석자 먼저 적고 텍스트로 넣기\n2. 항목·글자수·말투 형식 지정하기\n3. 담당자별 액션 아이템 표로 뽑기 이 순서만 지키면 회의록 야근은 진짜 끝입니다.\n저장해두고 다음 회의 끝나자마자 써보세요. 팀 전체가 좋아할걸요. 9/9"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e109]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e110]
+    - listitem:
+      - link "개인정보처리방침" [ref=e111]
+    - listitem:
+      - link "쿠키 정책" [ref=e112]
+- button "만들기" [ref=e113]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇" [url=https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "10"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]
+    - button [ref=e60]:
+      - img "더 보기"
+    - text: "2단계. 요약 프롬프트에 '형식'을 반드시 정해주세요.그냥 '요약해줘' 하면 문단 하나로 뭉텅이 나와요.\n그거 상사한테 못 보냅니다.'결정사항 / 논의내용 / 보류된 안건' 이렇게 항목을 미리 짜주세요.\n그러면 회의록 형식 그대로 딱 맞춰서 뱉어냅니다. 4/9"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e67]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:30" [ref=e68]: "2026-08-16"
+    - button [ref=e69]:
+      - img "더 보기"
+    - text: "여기서 제가 진짜 자주 쓰는 팁 하나.'각 항목은 3줄 이내로, 존댓말로 정리해줘' 이 한 문장을 꼭 넣어요.안 그러면 GPT가 소설 씁니다.\n너무 길게 늘여놔서 다시 줄이느라 시간 더 써요.글자 수랑 말투까지 지정하는 게 진짜 5분 컷의 비결이에요. 5/9"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e76]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e77]: "2026-08-16"
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "3단계. 이게 제일 중요한 액션 아이템 추출이에요.회의록의 진짜 목적은 '누가 뭘 언제까지' 하냐거든요.'담당자 / 할 일 / 마감일' 표로 뽑아줘 라고 시키세요.\n이거 하나 때문에 팀원들이 저한테 회의록 달라고 합니다.다음 회의 때 이거만 보면 진행 상황 체크 끝나요. 6/9"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e85]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e86]: "2026-08-16"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "여기서 한 단계 더 나가고 싶으면 이렇게 해보세요.'애매하게 결정 안 난 안건은 따로 빼서 알려줘'회의하다 보면 흐지부지 넘어가는 게 꼭 있잖아요.\nGPT가 그걸 콕 집어줘서 다음 회의 안건이 저절로 만들어져요.이거 알고 나서 회의 흐름 자체가 정리됐어요. 7/9"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e94]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e95]: "2026-08-16"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "자, 바로 복붙해서 쓸 수 있는 프롬프트 예시입니다.'아래는 [회의 목적] 회의 녹취록이야. 참석자는 OOO다.\n1) 결정사항, 2) 주요 논의, 3) 보류 안건으로 나눠 각 3줄 이내 존댓말로 정리해줘.\n마지막에 담당자/할 일/마감일을 표로 뽑아줘. [녹취록 붙여넣기]'이대로만 넣으면 진짜 5분 안에 끝납니다. 8/9"
+    - button [ref=e97]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e98]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e103]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e104]: "2026-08-16"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "정리하면 딱 3개예요.1. 목적·참석자 먼저 적고 텍스트로 넣기\n2. 항목·글자수·말투 형식 지정하기\n3. 담당자별 액션 아이템 표로 뽑기 이 순서만 지키면 회의록 야근은 진짜 끝입니다.\n저장해두고 다음 회의 끝나자마자 써보세요. 팀 전체가 좋아할걸요. 9/9"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e109]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e110]
+    - listitem:
+      - link "개인정보처리방침" [ref=e111]
+    - listitem:
+      - link "쿠키 정책" [ref=e112]
+- button "만들기" [ref=e113]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇" [url=https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "10"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]
+    - button [ref=e60]:
+      - img "더 보기"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]
+    - button [ref=e69]:
+      - img "더 보기"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "3단계. 이게 제일 중요한 액션 아이템 추출이에요.회의록의 진짜 목적은 '누가 뭘 언제까지' 하냐거든요.'담당자 / 할 일 / 마감일' 표로 뽑아줘 라고 시키세요.\n이거 하나 때문에 팀원들이 저한테 회의록 달라고 합니다.다음 회의 때 이거만 보면 진행 상황 체크 끝나요. 6/9"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e85]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e86]: "2026-08-16"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "여기서 한 단계 더 나가고 싶으면 이렇게 해보세요.'애매하게 결정 안 난 안건은 따로 빼서 알려줘'회의하다 보면 흐지부지 넘어가는 게 꼭 있잖아요.\nGPT가 그걸 콕 집어줘서 다음 회의 안건이 저절로 만들어져요.이거 알고 나서 회의 흐름 자체가 정리됐어요. 7/9"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e94]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e95]: "2026-08-16"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "자, 바로 복붙해서 쓸 수 있는 프롬프트 예시입니다.'아래는 [회의 목적] 회의 녹취록이야. 참석자는 OOO다.\n1) 결정사항, 2) 주요 논의, 3) 보류 안건으로 나눠 각 3줄 이내 존댓말로 정리해줘.\n마지막에 담당자/할 일/마감일을 표로 뽑아줘. [녹취록 붙여넣기]'이대로만 넣으면 진짜 5분 안에 끝납니다. 8/9"
+    - button [ref=e97]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e98]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e103]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e104]: "2026-08-16"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "정리하면 딱 3개예요.1. 목적·참석자 먼저 적고 텍스트로 넣기\n2. 항목·글자수·말투 형식 지정하기\n3. 담당자별 액션 아이템 표로 뽑기 이 순서만 지키면 회의록 야근은 진짜 끝입니다.\n저장해두고 다음 회의 끝나자마자 써보세요. 팀 전체가 좋아할걸요. 9/9"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e109]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e110]
+    - listitem:
+      - link "개인정보처리방침" [ref=e111]
+    - listitem:
+      - link "쿠키 정책" [ref=e112]
+- button "만들기" [ref=e113]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "회의 끝나고 회의록 쓰느라 야근하는 사람, 솔직히 안타깝습니다. 나는 이제 GPT로 5분 컷 하거든요. 녹음이든 대충 갈겨쓴 메모든, 딱 3단계만 지키면 됨. 진짜 쉬워서 오늘 팀 전체에 공유하고 싶어질걸요. 바로 따라 할 수 있는 3단계 + 프롬프트 예시 👇" [url=https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "5"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "10"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e42]:
+      - img "더 보기"
+    - button [ref=e43]:
+      - img "좋아요"
+    - button [ref=e44]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e45]:
+      - img "리포스트"
+    - button [ref=e46]:
+      - img "공유하기"
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e52]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e53]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e54]:
+      - img "리포스트"
+    - button [ref=e55]:
+      - img "공유하기"
+  - generic [ref=e56]:
+    - link [ref=e57]
+    - button [ref=e60]:
+      - img "더 보기"
+    - button [ref=e61]:
+      - img "좋아요"
+    - button [ref=e62]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e63]:
+      - img "리포스트"
+    - button [ref=e64]:
+      - img "공유하기"
+  - generic [ref=e65]:
+    - link [ref=e66]
+    - button [ref=e69]:
+      - img "더 보기"
+    - button [ref=e70]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e71]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e72]:
+      - img "리포스트"
+    - button [ref=e73]:
+      - img "공유하기"
+  - generic [ref=e74]:
+    - link [ref=e75]
+    - button [ref=e78]:
+      - img "더 보기"
+    - text: "3단계. 이게 제일 중요한 액션 아이템 추출이에요.회의록의 진짜 목적은 '누가 뭘 언제까지' 하냐거든요.'담당자 / 할 일 / 마감일' 표로 뽑아줘 라고 시키세요.\n이거 하나 때문에 팀원들이 저한테 회의록 달라고 합니다.다음 회의 때 이거만 보면 진행 상황 체크 끝나요. 6/9"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e85]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e86]: "2026-08-16"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "여기서 한 단계 더 나가고 싶으면 이렇게 해보세요.'애매하게 결정 안 난 안건은 따로 빼서 알려줘'회의하다 보면 흐지부지 넘어가는 게 꼭 있잖아요.\nGPT가 그걸 콕 집어줘서 다음 회의 안건이 저절로 만들어져요.이거 알고 나서 회의 흐름 자체가 정리됐어요. 7/9"
+    - button [ref=e88]:
+      - img "좋아요"
+    - button [ref=e89]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e90]:
+      - img "리포스트"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e92]:
+    - link [ref=e93]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e94]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e95]: "2026-08-16"
+    - button [ref=e96]:
+      - img "더 보기"
+    - text: "자, 바로 복붙해서 쓸 수 있는 프롬프트 예시입니다.'아래는 [회의 목적] 회의 녹취록이야. 참석자는 OOO다.\n1) 결정사항, 2) 주요 논의, 3) 보류 안건으로 나눠 각 3줄 이내 존댓말로 정리해줘.\n마지막에 담당자/할 일/마감일을 표로 뽑아줘. [녹취록 붙여넣기]'이대로만 넣으면 진짜 5분 안에 끝납니다. 8/9"
+    - button [ref=e97]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e98]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e99]:
+      - img "리포스트"
+    - button [ref=e100]:
+      - img "공유하기"
+  - generic [ref=e101]:
+    - link [ref=e102]:
+      - image "yoonkwon_ai님의 프로필 사진"
+    - link "yoonkwon_ai" [ref=e103]
+    - img "인증된 계정"
+    - link "2026년 8월 16일 일요일 오후 6:31" [ref=e104]: "2026-08-16"
+    - button [ref=e105]:
+      - img "더 보기"
+    - text: "정리하면 딱 3개예요.1. 목적·참석자 먼저 적고 텍스트로 넣기\n2. 항목·글자수·말투 형식 지정하기\n3. 담당자별 액션 아이템 표로 뽑기 이 순서만 지키면 회의록 야근은 진짜 끝입니다.\n저장해두고 다음 회의 끝나자마자 써보세요. 팀 전체가 좋아할걸요. 9/9"
+    - button [ref=e106]:
+      - img "좋아요"
+    - button [ref=e107]:
+      - img "답글"
+    - button [ref=e108]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e109]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e110]
+    - listitem:
+      - link "개인정보처리방침" [ref=e111]
+    - listitem:
+      - link "쿠키 정책" [ref=e112]
+- button "만들기" [ref=e113]:
+  - img "만들기"
+=== DONE ===
+[ok | 15236ms]

@@ -22,7 +22,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
   const box = useRef<HTMLDivElement>(null);
   const topicsRunning = !!runningJob(state.jobs, "topics");
   const collect = () => {
-    if (!req.trim()) return box.current?.querySelector("input")?.focus();
+    if (!req.trim()) return act("collect", { request: "" }).then(refresh); // 비우면 자동 — Threads·LinkedIn에서 알아서
     box.current?.querySelector("form")?.requestSubmit();
   };
 

@@ -53,6 +53,9 @@ for l in src[start + 1:]:
         elif (m := re.match(r'\s*- link "해시태그[^"]*" \[ref=[^\]]+\]: "(.*)"', l)):
             body.append(unq(m.group(1)))
 
+# 일주일 넘은 글은 날짜가 따로 오지 않고 직함 끝에 붙어 온다("… 저자 9월 17일 • 수정함") — 떼어 날짜로 둔다 (2026-10-10)
+if not date and (m := re.match(r"^(.*?)\s+((?:(?:\d{4}년 )?\d{1,2}월 \d{1,2}일|\d+(?:분|시간|일|주|개월|년))(?:\s*•\s*수정(?:됨|함))?)\s*$", headline)):
+    headline, date = m.group(1), m.group(2)
 print(f"---\nurl: {url}\nauthor: {author}\nheadline: {headline!r}\ndate: {date}\n"
       f"reactions: '{reactions}'\nreposts: '{reposts}'\n---\n")
 print(" ".join(body).strip())

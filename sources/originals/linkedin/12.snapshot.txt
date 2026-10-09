@@ -1,0 +1,186 @@
+URL: https://www.linkedin.com/posts/jayjunglim_ai%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%89%AC%EC%9B%8C%EC%A7%84-%EC%8A%A4%ED%82%AC%EC%9D%B4-github%EC%97%90-4%EB%A7%8C-%EA%B1%B4-%EB%84%98%EA%B2%8C-%EC%8C%93%EC%98%80%EA%B3%A0-%EC%A0%80%EB%8A%94-activity-7506350245509849088-D20K
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jayjunglim_ai%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%89%AC%EC%9B%8C%EC%A7%84-%EC%8A%A4%ED%82%AC…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jayjunglim_ai%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%89%AC%EC%9B%8C%EC%A7%84-%EC%8A%A4%ED%82%AC…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "임정님의 프로필 보기"
+      - link "임정• 2촌" [ref=e26]
+      - text: "기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자 9월 17일 • 수정함"
+      - link "임정 님 프리미엄 프로필 2촌" [ref=e27]
+      - button "임정님에게 1촌 신청" [ref=e28]: "1촌 맺기"
+      - button "임정 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "[AI로 만들기 쉬워진 스킬이 GitHub에 4만 건 넘게 쌓였고, 저는 그중 29개만 골라 책에 실었습니다.]AI로 만드는 일은 쉬워졌지만, 이제 중요한 것은 무엇이 쓸 만한지 고르는 일입니다. Claude Code와 Codex의 스킬이 이 변화를 잘 보여 줍니다. 스킬은 에이전트가 필요할 때 꺼내 읽는 업무 매뉴얼입니다. 파일 하나에 절차를 적으면 되고, 에이전트에게 만들어 달라고 할 수도 있습니다.만들기가 쉬워지자 개수가 먼저 늘었습니다. 저도 편해 보이는 절차마다 스킬로 만들어 82개가 쌓였는데, 110일 동안 한 번이라도 쓴 것은 27개였습니다. 부족했던 것은 만드는 속도가 아니라 고르는 기준이었습니다.그래서 쓸 만한 스킬을 고르는 일을 해 왔고, 그 기준과 결과를 〈클로드 코덱스 스킬 가이드북〉으로 묶어 9월 17일 위키독스에 무료로 공개했습니다.1. 지금도 쓰이고 관리되는 스킬 GitHub에서 화제가 된 공개 스킬을 먼저 봤습니다. 스타는 개발과 데이터분석 분야 1만, 나머지 분야 2천을 기준선으로 두고, 최근 90일 안에 커밋이 없는 저장소는 뺐습니다.2. 회사에서 들여도 되는 스킬 스킬은 에이전트에게 지시를 넣고 스크립트를 실행하게 하므로, 설치는 프로그램을 설치하는 일과 같습니다. 그래서 외부 스킬은 MIT나 Apache-2.0 라이선스만 싣고, 라이선스가 없는 것은 화제가 되어도 뺐습니다.3. 어울리는 상황이 분명한 스킬 같은 스킬도 업무에 따라 쓸모가 갈립니다. 스킬마다 어울리는 상황과 어울리지 않는 상황을 표로 나누고 주의할 점을 적었습니다.이렇게 고른 외부 스킬 29개와 제가 자주 쓰는 스킬 21개를 사업, 마케팅, 데이터분석, 디자인, 개발, 운영자동화 분야로 나눠 담았습니다. 후보는 매주 다시 모아 새로 화제가 된 스킬을 한 페이지에 정리합니다.제가 직접 만들어 쓰며 겪은 시행착오를 다른 분들은 덜 겪으시면 좋겠습니다.🔗"
+        - link "https://lnkd.in/e_uYM2-Y 열기" [ref=e30]: "https://lnkd.in/e_uYM2-Y"
+      - link [ref=e31]:
+        - image "이미지 보기"
+      - button "반응 버튼 상태: 반응 없음" [ref=e32]: "42"
+      - button "댓글" [ref=e33]: "4"
+      - button "퍼가기" [ref=e34]: "3"
+      - link "보내기" [ref=e35]
+      - link "반응 42" [ref=e36]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e37]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e38]
+      - button "GIF 선택 도구 열기" [ref=e39]
+      - button "사진 공유" [ref=e40]
+    - link [ref=e41]:
+      - link "성열 양 님의 반응: 추천" [ref=e42]
+      - link "인영 이 님의 반응: 추천" [ref=e43]
+      - link "Juyeon IM 님의 반응: 추천" [ref=e44]
+      - link "ChanSeong Kim 님의 반응: 추천" [ref=e45]
+      - link "은빈 이 님의 반응: 추천" [ref=e46]
+      - link "승언 이 님의 반응: 추천" [ref=e47]
+      - link "민지 박 님의 반응: 추천" [ref=e48]
+      - link "의철 황 님의 반응: 추천" [ref=e49]
+      - link "반응 모두 보기" [ref=e50]
+    - button "관련순" [ref=e51]
+    - link [ref=e52]:
+      - image "신유경님의 프로필 보기"
+    - link "신유경 님 인증됨 프로필 2촌 지구인사이트 CEO | PPT·홈페이지·기획 중심 에이전시" [ref=e53]
+    - text: "3주"
+    - button "신유경님 팔로우" [ref=e54]: "팔로우"
+    - button "신유경 님의 댓글에 대한 옵션 더 보기" [ref=e55]
+    - text: "감사히 보겠습니다 : )"
+    - button [ref=e56]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e57]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e58]
+    - link [ref=e59]:
+      - image "임정님의 프로필 보기"
+    - link "임정 글쓴이 기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자" [ref=e60]
+    - text: "3주"
+    - button "임정 님의 댓글에 대한 옵션 더 보기" [ref=e61]
+    - text: "저도 잘보고있습니다 유경님 😁"
+    - button [ref=e62]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e63]
+    - link [ref=e64]:
+      - image "김태헌님의 프로필 보기"
+    - link "김태헌 님 2촌 AI 기술과 지식을 공유하는 AI에반젤리스트" [ref=e65]
+    - text: "3주"
+    - button "김태헌님 팔로우" [ref=e66]: "팔로우"
+    - button "김태헌 님의 댓글에 대한 옵션 더 보기" [ref=e67]
+    - text: "오 잘보겠습니다!!!"
+    - button [ref=e68]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e69]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e70]
+    - link [ref=e71]:
+      - image "임정님의 프로필 보기"
+    - link "임정 글쓴이 기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자" [ref=e72]
+    - text: "3주"
+    - button "임정 님의 댓글에 대한 옵션 더 보기" [ref=e73]
+    - paragraph:
+      - link "김태헌님의 프로필 보기" [ref=e74]: "김태헌"
+      - text: "감사합니다 :)"
+    - button [ref=e75]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e76]
+    - link [ref=e77]:
+      - list:
+        - listitem
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e78]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e79]
+      - link "웹접근성" [ref=e80]
+      - link "고객센터" [ref=e81]
+      - button "개인정보와 약관" [ref=e82]
+      - link "광고 선택" [ref=e83]
+      - link "광고" [ref=e84]
+      - button "비즈니스서비스" [ref=e85]
+      - link "LinkedIn 앱 다운로드" [ref=e86]
+      - link "더보기" [ref=e87]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - generic [ref=e88]:
+      - image "Hyunwoo Joo"
+      - text: "상태 - 온라인"
+      - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e89]
+    - button "메시지 메뉴 열기" [ref=e91]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e92]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e93]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[ok | 8747ms]

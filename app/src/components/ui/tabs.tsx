@@ -128,11 +128,13 @@ export const PillTabs = ({
   value,
   onChange,
   className,
+  id = "pilltab",
 }: {
   tabs: { title: React.ReactNode; value: string }[];
   value: string;
   onChange: (v: string) => void;
   className?: string;
+  id?: string;
 }) => {
   return (
     <div className={cn("flex flex-row items-center gap-1 relative", className)}>
@@ -144,7 +146,7 @@ export const PillTabs = ({
         >
           {value === tab.value && (
             <motion.div
-              layoutId="pilltab"
+              layoutId={id}
               transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
               className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 rounded-full"
             />

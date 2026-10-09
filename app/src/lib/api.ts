@@ -24,10 +24,12 @@ export type Step = {
   text: string;
   chars: number;
   feedback: string;
+  mode: string;
   at: number;
 };
 
-export type ImageItem = { name: string; prompt: string; src: string };
+export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string };
+export type InlinePick = { src: string; after: number; anchor: string; name: string };
 
 export type Article = {
   id: string;
@@ -39,6 +41,9 @@ export type Article = {
   titles: { at: number; items: string[] }[];
   steps: Step[];
   images: { id: string; items: ImageItem[] }[];
+  inline: { id: string; items: ImageItem[] }[];
+  inlinePicked: InlinePick[];
+  length: "full" | "half";
   hero: string;
   confirmed: { date: string; step?: number; file: string; hero?: string } | null;
   fromTopics?: string;
@@ -118,6 +123,8 @@ export const JOB_NAMES: Record<string, string> = {
   titles: "제목",
   write: "과정 1–3",
   revise: "과정 +1",
+  shorten: "절반",
+  inline: "본문 그림",
   images: "그림",
   collect: "수집",
   chat: "진행자",

@@ -1,0 +1,125 @@
+URL: https://www.linkedin.com/posts/jayjunglim_%EA%B8%B0%EC%97%85-ai-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%90%EC%9C%A1-n8n-%EC%9E%84%EC%A7%81%EC%9B%90-%EC%9B%8C%ED%81%AC%EC%83%B5-buildnwrite-activity-7511050208550539265-zndx
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jayjunglim_%EA%B8%B0%EC%97%85-ai-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%90%EC%9C%A1-n8n-%EC%9E%84%EC%…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jayjunglim_%EA%B8%B0%EC%97%85-ai-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%90%EC%9C%A1-n8n-%EC%9E%84%EC%…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "임정님의 프로필 보기"
+      - link "임정• 2촌" [ref=e26]
+      - text: "기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자 9월 30일"
+      - link "임정 님 프리미엄 프로필 2촌" [ref=e27]
+      - button "임정님에게 1촌 신청" [ref=e28]: "1촌 맺기"
+      - button "임정 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "기업 AI 교육으로 재구매를 두 번 받았습니다. 무엇이 달랐는지 돌아보니 답은 단순했습니다.교육이 끝났을 때 수강생마다 화면에 결과물이 하나씩 남아 있었습니다.다시 불린 이유를 꼽아 보면 네 가지입니다.1. 듣고 끝나지 않았습니다 수강생이 자기 업무 하나를 주제로 골라, AI로 어디까지 되는지 작은 결과물을 직접 만들었습니다.2. 결과를 그 자리에서 확인했습니다 직접 만든 결과물이 화면에서 돌아가는 것을 교육장 안에서 봤습니다.3. 수강생 만족도가 높았습니다 4. 신뢰가 생겼습니다 AI 교육이 끝나고 남는 것이 수료증뿐이라면 다시 부를 이유가 없다고 생각합니다. 교육을 기획하신다면 수강생이 가져올 업무 하나와 교육 뒤에 확인할 결과물 하나를 강사와 미리 정해 보시길 권합니다. 참석 인원과 함께 수강생이 만든 결과물을 정리해 두면 교육의 성과를 설명하기도 쉬워집니다.🔗"
+        - link "https://lnkd.in/euZzT-SU 열기" [ref=e30]: "https://lnkd.in/euZzT-SU"
+      - link "기업 AI 자동화 교육 · n8n 임직원 워크샵 | BuildnWrite buildnwrite.com" [ref=e31]
+      - button "반응 버튼 상태: 반응 없음" [ref=e32]: "12"
+      - button "댓글" [ref=e33]
+      - button "퍼가기" [ref=e34]
+      - link "보내기" [ref=e35]
+      - link "반응 12" [ref=e36]:
+        - list:
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e37]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e38]
+      - button "GIF 선택 도구 열기" [ref=e39]
+      - button "사진 공유" [ref=e40]
+    - link [ref=e41]:
+      - link "성열 양 님의 반응: 추천" [ref=e42]
+      - link "은주 신 님의 반응: 추천" [ref=e43]
+      - link "Sujin Park 님의 반응: 추천" [ref=e44]
+      - link "태헌 김 님의 반응: 추천" [ref=e45]
+      - link "재우 조 님의 반응: 추천" [ref=e46]
+      - link "서아 남 님의 반응: 추천" [ref=e47]
+      - link "Donghee Kim 님의 반응: 추천" [ref=e48]
+      - link "Seulki Kang 님의 반응: 추천" [ref=e49]
+      - link "반응 모두 보기" [ref=e50]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e51]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e52]
+      - link "웹접근성" [ref=e53]
+      - link "고객센터" [ref=e54]
+      - button "개인정보와 약관" [ref=e55]
+      - link "광고 선택" [ref=e56]
+      - link "광고" [ref=e57]
+      - button "비즈니스서비스" [ref=e58]
+      - link "LinkedIn 앱 다운로드" [ref=e59]
+      - link "더보기" [ref=e60]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 8421ms]
