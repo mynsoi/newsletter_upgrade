@@ -4,8 +4,8 @@ title: AI로 제안서를 만들어도 설득은 사람의 몫
 description: AI로 제안 자료를 빨리 만들수록 고객에게 필요한 제안을 고르고 그 이유를 설명하는 책임을 직접 맡자.
 tags: [업무방식]
 timestamp: 2026-10-10
-status: 쓸 수 있음
-used_in: []
+status: 진행 중
+used_in: [briefs/w-20261010-043541.json]
 ---
 
 # AI로 제안서를 만들어도 설득은 사람의 몫
