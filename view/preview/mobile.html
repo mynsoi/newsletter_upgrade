@@ -1,0 +1,20 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>칼럼 작업실 · 모바일 미리보기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#f4f4f5;--ink:#18181b}
+@media (prefers-color-scheme:dark){:root{--bg:#09090b;--ink:#e4e4e7}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,system-ui,sans-serif}
+h1{font-size:16px;font-weight:600;margin:20px 24px 4px}p{font-size:13px;opacity:.6;margin:0 24px 16px}
+.row{display:flex;gap:28px;padding:0 24px 32px;overflow-x:auto}
+figure{margin:0;flex:none}figcaption{font-size:12.5px;opacity:.7;margin:10px 4px 0;text-align:center}
+.phone{width:390px;height:844px;border-radius:44px;border:10px solid #18181b;overflow:hidden;background:#fff;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+iframe{width:100%;height:100%;border:0}
+</style></head><body>
+<h1>모바일 미리보기 (390 × 844)</h1><p>홈 화면에 추가하면 앱처럼 열리는 PWA 형태입니다. 각 화면은 실제로 눌러 볼 수 있습니다.</p>
+<div class="row">
+<figure><div class="phone"><iframe src="index.html?light#home"></iframe></div><figcaption>글 목록</figcaption></figure>
+<figure><div class="phone"><iframe src="index.html?light&step=2#ws"></iframe></div><figcaption>제목 후보 고르기</figcaption></figure>
+<figure><div class="phone"><iframe src="index.html?dark&step=3#ws"></iframe></div><figcaption>본문 읽기 · 비교</figcaption></figure>
+<figure><div class="phone"><iframe src="index.html?light&step=3&drawer#ws"></iframe></div><figcaption>진행자 (아래에서 올라오는 창)</figcaption></figure>
+</div></body></html>
