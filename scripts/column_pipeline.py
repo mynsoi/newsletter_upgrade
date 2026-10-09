@@ -176,8 +176,70 @@ def main(paths):
 
 
 
-if __name__ == "__main__":
-    if sys.argv[1:2] == ["--titles"]:
-        titles_first(sys.argv[2:])
+def set_title(brief_path, pick):
+    """--set-title <설정> <번호|제목> — 0단계 후보 중 번호로 고르거나 제목을 직접 넣는다."""
+    import re
+    bp = Path(brief_path)
+    b = json.loads(bp.read_text(encoding="utf-8"))
+    if pick.isdigit():
+        f = ROOT / "runs" / "titles0" / bp.stem / "astra.md"
+        lines = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
+        title = lines[int(pick) - 1]
     else:
-        main(sys.argv[1:])
+        title = pick
+    b["title"] = title
+    bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("제목:", title)
+
+
+def revise(brief_path, feedback_path):
+    """--revise <설정> <피드백 파일> — 최신 최종본에 멘토 피드백(파일 내용 그대로)을 반영해 final-rN.md를 만든다 (astra)."""
+    k = Path(brief_path).stem
+    d = RUNS / k
+    revs = sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1]))
+    cur = revs[-1] if revs else d / "final.md"
+    n = len(revs) + 1
+    fb_new = Path(feedback_path).read_text(encoding="utf-8").strip()
+    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
+    prompt = "\n\n".join([
+        "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
+        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, OUT_RULE,
+        "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
+    t0 = time.time()
+    out = run_astra(d / f"_revise-r{n}", prompt)
+    (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
+    (d / f"feedback-r{n}.txt").write_text(fb_new, encoding="utf-8")
+    print(f"피드백 반영 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
+
+
+def fetch_infuture(post_id):
+    """--fetch-infuture <번호> — 경영일기 글 한 편을 aside REPL 스냅샷으로 받아 원문 파일로 저장 (shadow DOM 본문)."""
+    inf = SRC / "originals" / "infuture"
+    snap = inf / "snap" / f"p{post_id}.txt"
+    js = (f"const tF{post_id} = await openTab('https://infuture.stibee.com/p/{post_id}'); "
+          f"const sF{post_id} = await snapshot(tF{post_id}); console.log(sF{post_id}.tree); await closeTab(tF{post_id});")
+    r = subprocess.run(["aside-win", "repl", "--host", "local", js], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=180)
+    snap.write_text(r.stdout, encoding="utf-8")
+    title = ""
+    import re
+    m = re.search(r'- text: "(.+?) (\d{4})\. \d{1,2}\. \d{1,2}\."', r.stdout)
+    if m:
+        title = m.group(1)
+    out = subprocess.run([sys.executable, "-I", str(ROOT / "scripts" / "parse_infuture.py"), str(snap), title], capture_output=True, text=True)
+    (inf / f"p{post_id}.md").write_text(out.stdout, encoding="utf-8")
+    print(f"p{post_id} 저장: {title} · {len(out.stdout)}자")
+
+
+if __name__ == "__main__":
+    a = sys.argv[1:]
+    if a[:1] == ["--titles"]:
+        titles_first(a[1:])
+    elif a[:1] == ["--set-title"]:
+        set_title(a[1], a[2])
+    elif a[:1] == ["--revise"]:
+        revise(a[1], a[2])
+    elif a[:1] == ["--fetch-infuture"]:
+        fetch_infuture(a[1])
+    else:
+        main(a)
