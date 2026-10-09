@@ -1,6 +1,12 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/21.md | 합침 | 업무방식/AI-회의록에는-다음-할-일이-보여야-한다.md
+- ingest ../sources/originals/linkedin/20.md | 새 주제 | AI리터러시/AI-답변은-근거-원문까지-확인하자.md
+- ingest ../sources/originals/linkedin/19.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
+- ingest ../sources/originals/linkedin/18.md | 보탬 없음 | 없음 (사이트 제작 시간·기능 소개와 방문 권유는 있으나, 전문성을 적용한 판단 과정이나 실제 업무에서 사용·개선한 내용이 없어 관련 주제에 보탤 구체적인 근거가 부족함. 목차 변경 없음.)
+- ingest ../sources/originals/linkedin/17.md | 새 주제 | 업무방식/AI로-제안서를-만들어도-설득은-사람의-몫.md
+- ingest ../sources/originals/threads/19.md | 새 주제 | 업무자동화/여러-AI를-쓰려면-일의-연결까지.md
 - ingest ../sources/originals/linkedin/16.md | 합침 | AI리터러시/직접-쓰고-고치며-AI를-익히자.md
 - ingest ../sources/originals/threads/18.md | 합침 | 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
 - ingest ../sources/originals/linkedin/15.md | 합침 | 업무방식/AI에게-숫자를-맡기려면-계산-기준부터.md, AI리터러시/AI는-우리-업무로-평가하자.md

@@ -1,0 +1,30 @@
+- threads/19.md — 새 주제: [여러 AI를 쓰려면 일의 연결까지](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무자동화/여러-AI를-쓰려면-일의-연결까지.md)
+- linkedin/17.md — 새 주제: [AI로 제안서를 만들어도 설득은 사람의 몫](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무방식/AI로-제안서를-만들어도-설득은-사람의-몫.md)
+- linkedin/18.md — 보탬 없음: 주제 페이지 없음. 업무 적용·판단 과정의 구체적 근거 부족.
+- linkedin/19.md — 합침: [AI에게 목적과 조건부터](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/프롬프트/AI에게-목적과-조건부터.md)
+- linkedin/20.md — 새 주제: [AI 답변은 근거 원문까지 확인하자](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/AI리터러시/AI-답변은-근거-원문까지-확인하자.md)
+- linkedin/21.md — 합침: [AI 회의록에는 다음 할 일이 보여야 한다](/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab-wt/wiki/wiki/업무방식/AI-회의록에는-다음-할-일이-보여야-한다.md)
+
+index bbea57da504bdebd3274e1e98c85b4b48f72baea..887a4101a211ad54e460fedb03e25ad0e870ddfe
+--- a/wiki/프롬프트/AI에게-목적과-조건부터.md
++++ b/wiki/프롬프트/AI에게-목적과-조건부터.md
+@@ -20,6 +20,7 @@
+ | [threads/04](../../sources/originals/threads/04.md) · https://www.threads.com/@specal1849/post/DSB_BGTkt1M | @specal1849 · 2025-12-09 | 요약·분석처럼 맡길 작업을 동사로 구체화하고, 목적을 밝힌 뒤 제한 사항과 결과 형태를 구분해 적는 작성 방법을 보탠다. |
+ | [threads/08](../../sources/originals/threads/08.md) · https://www.threads.com/@ssaengcho/post/Ddq-RBfk3uQ | @ssaengcho · 2026-09-24 | 자기소개 영상 요청에 글자·도형 표현, 색상, 음악의 분위기와 사용 조건, 박자에 맞춘 움직임, 16:9 화면비와 15초 길이를 함께 명시한 사례다. 작성자는 생성된 결과를 조금 수정해 완성했다고 전한다. |
+ | [threads/17](../../sources/originals/threads/17.md) · https://www.threads.com/@yoonkwon_ai/post/DcGJQVzGHCA | @yoonkwon_ai · 2026-08-16 | 회의 녹취를 텍스트로 준비하고 목적·발언자·안건을 덧붙인 뒤, 요약 항목과 분량·말투, 후속 업무 표를 지정하는 방법을 제안한다. 회의록이라는 구체적인 업무에서 입력 맥락과 출력 형식을 함께 정하는 사례를 보탠다. |
++| [linkedin/19](../../sources/originals/linkedin/19.md) · https://www.linkedin.com/posts/%EC%9A%A9%EC%8A%B9-%EC%9C%A4-66458a313_%EC%9A%94%EC%A6%98-ai%ED%95%9C%ED%85%8C-%EC%9D%BC%EC%9D%84-%EC%8B%9C%ED%82%AC-%EB%95%8C-%ED%83%80%EC%9D%B4%ED%95%91-%EB%8C%80%EC%8B%A0-%EB%A7%90%EB%A1%9C-%ED%95%A9%EB%8B%88%EB%8B%A4-typeless%EB%9D%BC%EB%8A%94-activity-7510156884461506561-o941 | 윤용승 · 9월 28일 | 엑셀 파일을 합치라는 짧은 요청에서 파일·시트 이름과 열 구성이 의도와 달라졌던 경험을 전한다. 상황·필수 조건·원하는 결과를 말로 설명하고 음성 입력 앱으로 요청서를 정리하자 원하는 파일을 얻었다는 사례로, 입력 부담을 덜며 조건을 빠짐없이 전달하는 방법을 보탠다. |
+ 
+ ## 쓸 수 있는 각도
+ - 대상 독자와 글의 용도, 길이 제한이 뒤섞인 요청을 항목별로 정리하는 원문의 예시를 따라가 본다.
+@@ -28,6 +29,8 @@
+ - 같은 자료라도 요약을 원하는지 분석을 원하는지 먼저 정하고, 그 차이가 요청 문장에 드러나도록 동사를 고르는 데서 시작한다.
+ - 자기소개 영상 사례를 통해, 짧은 요청에도 용도·화면 구성·색상·길이·음악 조건을 구체적으로 담을 수 있음을 보여 준다.
+ - 회의 녹취를 요약할 때 목적과 참석자를 먼저 알려 주고, 문서 항목·분량·말투와 후속 업무 표까지 요청에 담는 방법을 살펴본다.
++- 엑셀 파일 병합에서 파일명·시트명·열 추가 여부를 생략했던 사례로, 담당자에게 당연한 조건도 AI에게는 명시해야 함을 다룬다.
++- 조건을 길게 타이핑하는 부담 때문에 요청을 줄이는 상황에서, 상황·조건·결과 순으로 말하고 요청서로 정리하는 방법을 살펴본다.
+ 
+ ## 함께 볼 주제
+ - [AI 회의록에는 다음 할 일이 보여야 한다](../업무방식/AI-회의록에는-다음-할-일이-보여야-한다.md)
+
+tokens used
+104,003
