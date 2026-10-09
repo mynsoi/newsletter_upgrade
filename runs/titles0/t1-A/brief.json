@@ -1,0 +1,24 @@
+{
+ "topic": "t1",
+ "variant": "A",
+ "label": "주제1 자료 · A(확정본 절차)",
+ "thesis": "AI가 엉뚱한 답을 내놓는 건 AI가 모자라서라기보다 우리가 일할 때 쓰는 자료를 보여 주지 않았기 때문이다. 근거가 될 자료를 같이 주면 엉뚱한 답을 고치느라 쓰던 시간이 준다.",
+ "sources": [
+  [
+   "originals/linkedin/02.md",
+   "LinkedIn, AI 스타트업 AI 리드, 2026-10"
+  ],
+  [
+   "originals/threads/07.md",
+   "Threads, 세무사, 2026-10-02 (본문과 작성자 답글)"
+  ],
+  [
+   "originals/threads/09.md",
+   "Threads, 노무사, 2026-02-07"
+  ]
+ ],
+ "r4_refs": [
+  "p752",
+  "p716"
+ ]
+}

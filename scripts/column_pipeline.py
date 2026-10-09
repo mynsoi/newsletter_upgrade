@@ -1,11 +1,13 @@
 """확정본 방식 칼럼 파이프라인 — 설정 파일(briefs/*.json)대로 초안 → 재작성 → 기준 반영을 돌린다.
 
 사용: python3 column_pipeline.py briefs/t1-A.json briefs/t1-B.json ...
+0단계 — 제목 후보 (멘토 2026-10-09: "첫 단계로 해"):
+  python3 column_pipeline.py --titles briefs/t1-A.json ...  → runs/titles0/<설정>/astra.md (astra만, 쓰기 전 생각 한 줄+원문 기준)
+  멘토가 고른 제목을 설정 파일의 "title"에 넣은 뒤 아래 1~3단계를 돌린다. title이 없으면 멈춘다.
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
   2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs, 없으면 p724·p669 — 2026-10-09 멘토 선택)
   3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
-  4. 제목   — astra: 본문은 두고 제목 후보 8개 (경영일기 제목 60개 참고, title_candidates.py)
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
 """
@@ -15,6 +17,8 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python3 -I 실행에서도 title_candidates를 찾게
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
@@ -40,7 +44,8 @@ def ref(k):
 
 def draft_prompt(b):
     parts = [
-        "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요. 제목도 붙여 주세요.",
+        "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요.",
+        f"제목: {b['title']}\n제목은 이대로 씁니다.",
         f"독자: {READER}",
         f"이 글이 말할 것: {b['thesis']}",
         "아래 [원문 1]이 이 글의 중심 재료입니다. 끝까지 읽고, 그 안의 장면과 말을 재료로 삼아 깊게 풀어 주세요. "
@@ -61,7 +66,7 @@ def draft_prompt(b):
 def r4_prompt(b, draft):
     parts = [
         "아래 [원고]를 [참고] 글의 필자(경영 컨설턴트 유정식)가 자기 뉴스레터에 직접 썼다면 어떻게 썼을지 상상하며 다시 써 주세요.",
-        "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다.",
+        "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다. 제목은 바꾸지 마세요.",
     ]
     parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
     parts += [OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
@@ -72,7 +77,7 @@ def fb_prompt(text):
     fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
         "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [멘토 피드백]을 반영해 고쳐 주세요. "
-        "원고에 없는 사실·수치·경험은 더하지 마세요.",
+        "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
         fb, OUT_RULE, "=== [원고] ===\n" + text])
 
 
@@ -105,10 +110,31 @@ def stage(name, jobs):
     return res
 
 
+def titles_first(paths):
+    import title_candidates as tc
+    out = ROOT / "runs" / "titles0"
+    jobs = []
+    for pth in paths:
+        k = Path(pth).stem
+        b = json.loads(Path(pth).read_text(encoding="utf-8"))
+        if "thesis" not in b:
+            continue
+        d = out / k
+        d.mkdir(parents=True, exist_ok=True)
+        pr = tc.prompt_first(b["thesis"], b["sources"], SRC)
+        (d / "prompt.md").write_text(pr, encoding="utf-8")
+        (d / "brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+        jobs.append(lambda d=d, pr=pr: tc.astra(d, pr) or (d / "astra.md").exists())
+    stage("제목 후보·astra (쓰기 전)", jobs)
+
+
 def main(paths):
     briefs = {Path(p).stem: json.loads(Path(p).read_text(encoding="utf-8")) for p in paths}
     for k, b in briefs.items():
         b["dir"] = RUNS / k
+    missing = [k for k, b in briefs.items() if "thesis" in b and not b.get("title")]
+    if missing:
+        sys.exit(f"제목이 정해지지 않은 설정: {missing} — 먼저 --titles로 후보를 뽑고 멘토가 고른 제목을 \"title\"에 넣으세요.")
     # 1. 초안 (thesis가 있는 갈래만, 나머지는 draft_from을 공유)
     own = [k for k, b in briefs.items() if "thesis" in b]
 
@@ -148,20 +174,10 @@ def main(paths):
         return t
     stage("기준 반영·astra", [lambda k=k: mk_final(k) for k in briefs])
 
-    # 4. 제목 후보 (astra만)
-    import title_candidates as tc
-
-    def mk_title(k):
-        b = briefs[k]
-        p = tc.prompt((b["dir"] / "final.md").read_text(encoding="utf-8"))
-        d = tc.OUT / k
-        d.mkdir(parents=True, exist_ok=True)
-        (d / "prompt.md").write_text(p, encoding="utf-8")
-        (d / "source.txt").write_text(str((b["dir"] / "final.md").relative_to(ROOT)), encoding="utf-8")
-        tc.astra(d, p)
-        return (d / "astra.md").read_text(encoding="utf-8") if (d / "astra.md").exists() else ""
-    stage("제목 후보·astra", [lambda k=k: mk_title(k) for k in briefs])
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    if sys.argv[1:2] == ["--titles"]:
+        titles_first(sys.argv[2:])
+    else:
+        main(sys.argv[1:])

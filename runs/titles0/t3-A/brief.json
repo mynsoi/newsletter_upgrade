@@ -1,0 +1,20 @@
+{
+ "topic": "t3",
+ "variant": "A",
+ "label": "주제3 도구 · A(확정본 절차)",
+ "thesis": "AI 도구를 늘린다고 일이 줄지는 않는다. 일의 재료(데이터·기록·맥락)를 먼저 모아 두어야 도구가 일할 곳이 생긴다.",
+ "sources": [
+  [
+   "originals/linkedin/02.md",
+   "LinkedIn, AI 스타트업 AI 리드, 2026-10"
+  ],
+  [
+   "originals/threads/10.md",
+   "Threads, 중소 사업체 운영자, 2026-05-05"
+  ]
+ ],
+ "r4_refs": [
+  "p752",
+  "p716"
+ ]
+}

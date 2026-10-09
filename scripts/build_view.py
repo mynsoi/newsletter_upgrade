@@ -22,7 +22,8 @@ PATS = {
 }
 
 GROUPS = [
-    ("T", "제목 후보 (본문은 그대로, 제목만 8개씩)"),
+    ("T0", "제목 후보 · 첫 단계 (쓰기 전, 생각 한 줄 + 원문만 보고 · astra)"),
+    ("T", "제목 후보 · 이전 방식 (다 쓴 글을 보고 · astra)"),
     ("F", "확정본"),
     ("C1", "주제1 · 자료를 안 보여 줘서 (확정본 방식)"),
     ("C2", "주제2 · AI를 잘 쓰면 실력이 는 걸까 (확정본 방식)"),
@@ -139,6 +140,16 @@ for d in sorted((RUNS / "titles").glob("*")):
         items.append({"key": f"T-{d.name}-{model}", "group": "T", "label": f"제목 · {d.name} · {model}",
                       "desc": f"지금 제목: {cur} | 본문: {srcp}", "title": f"{d.name} 제목 후보 ({model})", "body": body,
                       "m": {"분량": 0, "대비": 0, "나열": 0, "선언": 0, "번역투": 0}})
+for d in sorted((RUNS / "titles0").glob("*")):
+    f = d / "astra.md"
+    if not f.exists() or f.stat().st_size < 20:
+        continue
+    b = json.loads((d / "brief.json").read_text(encoding="utf-8"))
+    lines = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip('*') for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
+    items.append({"key": f"T0-{d.name}", "group": "T0", "label": f"제목 첫 단계 · {d.name}",
+                  "desc": f"한 줄: {b['thesis']} | 원문: " + " / ".join(x[1] for x in b["sources"]),
+                  "title": f"{d.name} 제목 후보 (쓰기 전)", "body": "\n\n".join(f"{i}. {l}" for i, l in enumerate(lines, 1)),
+                  "m": {"분량": 0, "대비": 0, "나열": 0, "선언": 0, "번역투": 0}})
 items.sort(key=lambda i: [g for g, _ in GROUPS].index(i["group"]))
 data = json.dumps({"items": items, "groups": GROUPS}, ensure_ascii=False)
 
