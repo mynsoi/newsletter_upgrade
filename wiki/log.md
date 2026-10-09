@@ -1,6 +1,7 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/threads/23.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - ingest ../sources/originals/threads/22.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - ingest ../sources/originals/threads/21.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
 - ingest ../sources/originals/threads/20.md | 새 주제 | 업무방식/AI에게는-지금-유효한-결정이-필요하다.md
