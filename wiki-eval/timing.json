@@ -28,5 +28,10 @@
   "step": "ingest B-1",
   "sec": 240,
   "note": "6편"
+ },
+ {
+  "step": "ingest B-2",
+  "sec": 327,
+  "note": "6편"
  }
 ]

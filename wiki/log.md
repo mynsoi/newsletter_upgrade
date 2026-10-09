@@ -1,6 +1,14 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/16.md | 합침 | AI리터러시/직접-쓰고-고치며-AI를-익히자.md
+- ingest ../sources/originals/threads/18.md | 합침 | 업무방식/AI가-다시-찾을-업무-기록을-남기자.md
+- ingest ../sources/originals/linkedin/15.md | 합침 | 업무방식/AI에게-숫자를-맡기려면-계산-기준부터.md, AI리터러시/AI는-우리-업무로-평가하자.md
+- ingest ../sources/originals/threads/17.md | 새 주제 | 업무방식/AI-회의록에는-다음-할-일이-보여야-한다.md
+- ingest ../sources/originals/threads/17.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
+- ingest ../sources/originals/linkedin/14.md | 합침 | 업무자동화/자동화할-업무의-데이터부터-모으자.md
+- ingest ../sources/originals/linkedin/13.md | 새 주제 | AI리터러시/AI와-공부할-때는-내-일에-연결하자.md
+- ingest ../sources/originals/linkedin/13.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - ingest ../sources/originals/threads/16.md | 합침 | AI리터러시/AI-디자인을-고칠-때는-원인부터.md
 - ingest ../sources/originals/threads/15.md | 보탬 없음 | 없음 (4대보험 업무 자동화의 진행 소식과 로컬 작동 언급만 있어, 칼럼에 보탤 구체적인 과정·결과를 찾을 수 없음. 목차 변경 없음.)
 - ingest ../sources/originals/linkedin/12.md | 새 주제 | AI리터러시/AI-스킬은-쓸-기준으로-고르자.md
