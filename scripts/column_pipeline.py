@@ -3,7 +3,7 @@
 사용: python3 column_pipeline.py briefs/t1-A.json briefs/t1-B.json ...
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
-  2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs)
+  2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs, 없으면 p724·p669 — 2026-10-09 멘토 선택)
   3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
@@ -32,7 +32,9 @@ def body(path):
 
 
 def ref(k):
-    return f"=== 유정식의 경영일기 {k} ===\n" + body(SRC / "originals" / "infuture" / f"{k}.md")
+    # "(끝)"은 경영일기 필자의 맺음 표시 — 우리 글에 따라 붙지 않게 참고 글에서부터 뺀다 (2026-10-09 멘토)
+    t = body(SRC / "originals" / "infuture" / f"{k}.md").replace("(끝)", "").rstrip()
+    return f"=== 유정식의 경영일기 {k} ===\n" + t
 
 
 def draft_prompt(b):
@@ -60,7 +62,7 @@ def r4_prompt(b, draft):
         "아래 [원고]를 [참고] 글의 필자(경영 컨설턴트 유정식)가 자기 뉴스레터에 직접 썼다면 어떻게 썼을지 상상하며 다시 써 주세요.",
         "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다.",
     ]
-    parts += ["[참고] " + ref(k) for k in b["r4_refs"]]
+    parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
     parts += [OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
     return "\n\n".join(parts)
 
