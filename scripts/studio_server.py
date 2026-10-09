@@ -202,6 +202,8 @@ def articles():
     out = [article_from_process(p) for p in sorted((ROOT / "columns").glob("*.process.json"))]
     for bp in sorted((ROOT / "briefs").glob("*.json")):
         try:
+            if json.loads(read(bp)).get("experiment"):  # 실험판(t1-A…sim-C)은 글 목록에 섞지 않는다 (멘토 2026-10-09)
+                continue
             out.append(article_from_brief(bp))
         except Exception as e:
             out.append({"id": bp.stem, "kind": "brief", "label": bp.stem, "error": str(e), "steps": [], "titles": [],

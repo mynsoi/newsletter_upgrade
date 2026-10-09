@@ -1,1 +1,11 @@
-{"topic":"t3","variant":"B","label":"주제3 도구 · B(문체 참고 바꿈)","draft_from":"t3-A","r4_refs":["p724","p669"]}
+{
+ "topic": "t3",
+ "variant": "B",
+ "label": "주제3 도구 · B(문체 참고 바꿈)",
+ "draft_from": "t3-A",
+ "r4_refs": [
+  "p724",
+  "p669"
+ ],
+ "experiment": true
+}

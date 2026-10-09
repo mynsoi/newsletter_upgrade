@@ -1,6 +1,7 @@
-✔︎ Opened a new tab and set it active: tabs[0], page → (2) AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구? (https://www.threads.com/@unit.withai/post/DdTadpjkjUj)
 URL: https://www.threads.com/@unit.withai/post/DdTadpjkjUj
-- title: "(2) AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
+✔︎ Opened a new tab and set it active: tabs[0], page → AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구? (https://www.threads.com/@unit.withai/post/DdTadpjkjUj)
+=== SNAPSHOT 1 ===
+- title: "AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
 - navigation:
   - link [ref=e1]:
     - img "Threads"
@@ -172,52 +173,858 @@ URL: https://www.threads.com/@unit.withai/post/DdTadpjkjUj
     - button [ref=e79]:
       - img "공유하기"
       - text: "2"
-  - generic [ref=e80]:
-    - link [ref=e81]:
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e80]
+    - listitem:
+      - link "개인정보처리방침" [ref=e81]
+    - listitem:
+      - link "쿠키 정책" [ref=e82]
+- button "만들기" [ref=e83]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e23]:
+      - img "더 보기"
+    - link [ref=e24]
+    - button [ref=e25]:
+      - img "좋아요"
+      - text: "109"
+    - button [ref=e26]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e27]:
+      - img "리포스트"
+      - text: "47"
+    - button [ref=e28]:
+      - img "공유하기"
+      - text: "96"
+    - button "정렬더 보기" [ref=e29]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e30]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e31] [focused]
+    - button "미디어 첨부" [ref=e32]
+    - button "GIF 추가" [ref=e33]
+    - button "작성 도구 확장" [ref=e34]
+  - generic [ref=e35]:
+    - link [ref=e36]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e37]
+    - link "2026년 9월 15일 화요일 오후 6:42" [ref=e38]: "2026-09-15"
+    - button [ref=e39]:
+      - img "더 보기"
+    - text: "1. 옵시디언을 그냥 메모장으로 쓰는 게 아니라\n내 업무 Wiki로 만드는 거임.*Wiki = 내 업무 기록들을 서로 연결해서 쌓아두는 나만의 업무 백과사전.세팅 어렵게 생각하지 말고\n옵시디언 설치한 다음 Codex한테 아래 프롬프트 그대로 보내면 됨 ↓ 2/6"
+    - button [ref=e40]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e41]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e42]:
+      - img "리포스트"
+    - button [ref=e43]:
+      - img "공유하기"
+  - generic [ref=e44]:
+    - link [ref=e45]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e46]
+    - link "2026년 9월 15일 화요일 오후 6:43" [ref=e47]: "2026-09-15"
+    - button [ref=e48]:
+      - img "더 보기"
+    - text: "이 프로젝트를 옵시디언과 연결해서\n내 업무 Wiki처럼 사용하고 싶어.회의 내용, 업무 기록, 주요 데이터, 결정사항, 진행상황 등을\n나중에 쉽게 찾을 수 있도록 서로 연결해서 관리해줘.나는 비개발자니까 최대한 단순한 구조로 만들어주고,\n필요한 폴더와 파일은 직접 만들어줘.앞으로 업무하면서 중요한 내용이 생기면\n이 Wiki에 기록하고,\n과거 업무와 관련된 질문을 하면\n기존 기록을 먼저 찾아본 뒤 답변해줘.세팅에 필요한 내용이 있으면 나한테 하나씩 물어봐. 3/6"
+    - button [ref=e49]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e50]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e51]:
+      - img "리포스트"
+    - button [ref=e52]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e53]:
+    - link [ref=e54]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e55]
+    - link "2026년 9월 15일 화요일 오후 6:43" [ref=e56]: "2026-09-15"
+    - button [ref=e57]:
+      - img "더 보기"
+    - text: "2. 실제 회사에서는 이렇게 씀.회의 끝나면\n“오늘 결정된 내용 Wiki에 기록해줘”광고 성과 정리하면\n“이번달 성과랑 변경사항 기록해줘”업체 이슈 생기면\n“이 업체 관련 내용 기록해줘”그리고 몇 달 뒤 상사가\n“그때 왜 이렇게 했지?”\n“그때 매출 얼마였지?”물어보면“Wiki에서 찾아줘”하면 끝.여러 프로젝트 동시에 보는 직장인일수록 진짜 편함. 4/6"
+    - button [ref=e58]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e59]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e60]:
+      - img "리포스트"
+    - button [ref=e61]:
+      - img "공유하기"
+  - generic [ref=e62]:
+    - link [ref=e63]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e64]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e65]: "2026-09-15"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "3. 중요한 건 AI한테\n“기억해줘” 하는 게 아님.AI가 나중에 다시 찾아볼 수 있게\n내 업무 기록을 쌓아두는 거임.나는 내가 몇 달 전 업무까지 기억하려고 안 함.옵시디언에 기록해두고\n필요할 때 Codex한테 찾아보라고 함.이 습관 들이면 진짜 편해짐. 5/6"
+    - button [ref=e67]:
+      - img "좋아요"
+    - button [ref=e68]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e69]:
+      - img "리포스트"
+    - button [ref=e70]:
+      - img "공유하기"
+  - generic [ref=e71]:
+    - link [ref=e72]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e73]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e74]: "2026-09-15"
+    - button [ref=e75]:
+      - img "더 보기"
+    - text: "4. 그리고 이 기록도 자동화할 수 있음.내가 말 안 해도 알아서 업무 기록하게 만드는 방법이 있음.이건 4편에서 풀어볼게 👀 6/6"
+    - button [ref=e76]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e77]:
+      - img "답글"
+    - button [ref=e78]:
+      - img "리포스트"
+    - button [ref=e79]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e84]:
+    - link [ref=e85]:
       - image "onlysolo_ai님의 프로필 사진"
-    - link "onlysolo_ai" [ref=e82]
-    - link "2026년 9월 16일 수요일 오후 12:16" [ref=e83]: "2026-09-16"
+    - link "onlysolo_ai" [ref=e86]
+    - link "2026년 9월 16일 수요일 오후 12:16" [ref=e87]: "2026-09-16"
     - image "Threads 사용자의 프로필 사진"
     - img "원본 작성자가 좋아함"
-    - button [ref=e84]:
+    - button [ref=e88]:
       - img "더 보기"
     - text: "몇 달 전 업무를 바로 찾는다는 점이 특히 솔로 업무에 와닿네요. 기록할 때 파일명이나 폴더 규칙도 함께 정해두면 검색 정확도가 더 좋아질까요?"
-    - button [ref=e85]:
+    - button [ref=e89]:
       - img "좋아요"
       - text: "1"
-    - button [ref=e86]:
+    - button [ref=e90]:
       - img "답글"
       - text: "1"
-    - button [ref=e87]:
+    - button [ref=e91]:
       - img "리포스트"
-    - button [ref=e88]:
+    - button [ref=e92]:
       - img "공유하기"
-  - generic [ref=e89]:
-    - link [ref=e90]:
+  - generic [ref=e93]:
+    - link [ref=e94]:
       - image "unit.withai님의 프로필 사진"
-    - link "unit.withai" [ref=e91]
-    - link "2026년 9월 16일 수요일 오후 12:32" [ref=e92]: "2026-09-16"
+    - link "unit.withai" [ref=e95]
+    - link "2026년 9월 16일 수요일 오후 12:32" [ref=e96]: "2026-09-16"
     - text: "작성자"
-    - button [ref=e93]:
+    - button [ref=e97]:
       - img "더 보기"
     - text: "그건 알아서 세팅해줍니다 크게 신경쓸 건 없습니다"
-    - button [ref=e94]:
+    - button [ref=e98]:
       - img "좋아요"
-    - button [ref=e95]:
+    - button [ref=e99]:
       - img "답글"
-    - button [ref=e96]:
+    - button [ref=e100]:
       - img "리포스트"
-    - button [ref=e97]:
+    - button [ref=e101]:
       - img "공유하기"
 - contentinfo:
   - list:
     - listitem: "© 2026"
     - listitem:
-      - link "Threads 약관" [ref=e98]
+      - link "Threads 약관" [ref=e80]
     - listitem:
-      - link "개인정보처리방침" [ref=e99]
+      - link "개인정보처리방침" [ref=e81]
     - listitem:
-      - link "쿠키 정책" [ref=e100]
-- button "만들기" [ref=e101]:
+      - link "쿠키 정책" [ref=e82]
+- button "만들기" [ref=e83]:
   - img "만들기"
-[2m[ok | 3554ms][0m
+=== SNAPSHOT 3 ===
+- title: "AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e23]:
+      - img "더 보기"
+    - button [ref=e25]:
+      - img "좋아요"
+      - text: "109"
+    - button [ref=e26]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e27]:
+      - img "리포스트"
+      - text: "47"
+    - button [ref=e28]:
+      - img "공유하기"
+      - text: "96"
+    - button "정렬더 보기" [ref=e29]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e30]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e32]
+    - button "GIF 추가" [ref=e33]
+    - button "작성 도구 확장" [ref=e34]
+  - generic [ref=e35]:
+    - link [ref=e36]
+    - button [ref=e39]:
+      - img "더 보기"
+    - button [ref=e40]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e41]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e42]:
+      - img "리포스트"
+    - button [ref=e43]:
+      - img "공유하기"
+  - generic [ref=e44]:
+    - link [ref=e45]
+    - button [ref=e48]:
+      - img "더 보기"
+    - text: "이 프로젝트를 옵시디언과 연결해서\n내 업무 Wiki처럼 사용하고 싶어.회의 내용, 업무 기록, 주요 데이터, 결정사항, 진행상황 등을\n나중에 쉽게 찾을 수 있도록 서로 연결해서 관리해줘.나는 비개발자니까 최대한 단순한 구조로 만들어주고,\n필요한 폴더와 파일은 직접 만들어줘.앞으로 업무하면서 중요한 내용이 생기면\n이 Wiki에 기록하고,\n과거 업무와 관련된 질문을 하면\n기존 기록을 먼저 찾아본 뒤 답변해줘.세팅에 필요한 내용이 있으면 나한테 하나씩 물어봐. 3/6"
+    - button [ref=e49]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e50]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e51]:
+      - img "리포스트"
+    - button [ref=e52]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e53]:
+    - link [ref=e54]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e55]
+    - link "2026년 9월 15일 화요일 오후 6:43" [ref=e56]: "2026-09-15"
+    - button [ref=e57]:
+      - img "더 보기"
+    - text: "2. 실제 회사에서는 이렇게 씀.회의 끝나면\n“오늘 결정된 내용 Wiki에 기록해줘”광고 성과 정리하면\n“이번달 성과랑 변경사항 기록해줘”업체 이슈 생기면\n“이 업체 관련 내용 기록해줘”그리고 몇 달 뒤 상사가\n“그때 왜 이렇게 했지?”\n“그때 매출 얼마였지?”물어보면“Wiki에서 찾아줘”하면 끝.여러 프로젝트 동시에 보는 직장인일수록 진짜 편함. 4/6"
+    - button [ref=e58]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e59]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e60]:
+      - img "리포스트"
+    - button [ref=e61]:
+      - img "공유하기"
+  - generic [ref=e62]:
+    - link [ref=e63]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e64]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e65]: "2026-09-15"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "3. 중요한 건 AI한테\n“기억해줘” 하는 게 아님.AI가 나중에 다시 찾아볼 수 있게\n내 업무 기록을 쌓아두는 거임.나는 내가 몇 달 전 업무까지 기억하려고 안 함.옵시디언에 기록해두고\n필요할 때 Codex한테 찾아보라고 함.이 습관 들이면 진짜 편해짐. 5/6"
+    - button [ref=e67]:
+      - img "좋아요"
+    - button [ref=e68]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e69]:
+      - img "리포스트"
+    - button [ref=e70]:
+      - img "공유하기"
+  - generic [ref=e71]:
+    - link [ref=e72]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e73]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e74]: "2026-09-15"
+    - button [ref=e75]:
+      - img "더 보기"
+    - text: "4. 그리고 이 기록도 자동화할 수 있음.내가 말 안 해도 알아서 업무 기록하게 만드는 방법이 있음.이건 4편에서 풀어볼게 👀 6/6"
+    - button [ref=e76]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e77]:
+      - img "답글"
+    - button [ref=e78]:
+      - img "리포스트"
+    - button [ref=e79]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e84]:
+    - link [ref=e85]:
+      - image "onlysolo_ai님의 프로필 사진"
+    - link "onlysolo_ai" [ref=e86]
+    - link "2026년 9월 16일 수요일 오후 12:16" [ref=e87]: "2026-09-16"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e88]:
+      - img "더 보기"
+    - text: "몇 달 전 업무를 바로 찾는다는 점이 특히 솔로 업무에 와닿네요. 기록할 때 파일명이나 폴더 규칙도 함께 정해두면 검색 정확도가 더 좋아질까요?"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e95]
+    - link "2026년 9월 16일 수요일 오후 12:32" [ref=e96]: "2026-09-16"
+    - text: "작성자"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "그건 알아서 세팅해줍니다 크게 신경쓸 건 없습니다"
+    - button [ref=e98]:
+      - img "좋아요"
+    - button [ref=e99]:
+      - img "답글"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e80]
+    - listitem:
+      - link "개인정보처리방침" [ref=e81]
+    - listitem:
+      - link "쿠키 정책" [ref=e82]
+- button "만들기" [ref=e83]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e23]:
+      - img "더 보기"
+    - button [ref=e25]:
+      - img "좋아요"
+      - text: "109"
+    - button [ref=e26]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e27]:
+      - img "리포스트"
+      - text: "47"
+    - button [ref=e28]:
+      - img "공유하기"
+      - text: "96"
+    - button "정렬더 보기" [ref=e29]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e30]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e32]
+    - button "GIF 추가" [ref=e33]
+    - button "작성 도구 확장" [ref=e34]
+  - generic [ref=e35]:
+    - link [ref=e36]
+    - button [ref=e39]:
+      - img "더 보기"
+    - button [ref=e40]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e41]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e42]:
+      - img "리포스트"
+    - button [ref=e43]:
+      - img "공유하기"
+  - generic [ref=e44]:
+    - link [ref=e45]
+    - button [ref=e48]:
+      - img "더 보기"
+    - button [ref=e49]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e50]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e51]:
+      - img "리포스트"
+    - button [ref=e52]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e53]:
+    - link [ref=e54]
+    - button [ref=e57]:
+      - img "더 보기"
+    - text: "2. 실제 회사에서는 이렇게 씀.회의 끝나면\n“오늘 결정된 내용 Wiki에 기록해줘”광고 성과 정리하면\n“이번달 성과랑 변경사항 기록해줘”업체 이슈 생기면\n“이 업체 관련 내용 기록해줘”그리고 몇 달 뒤 상사가\n“그때 왜 이렇게 했지?”\n“그때 매출 얼마였지?”물어보면“Wiki에서 찾아줘”하면 끝.여러 프로젝트 동시에 보는 직장인일수록 진짜 편함. 4/6"
+    - button [ref=e58]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e59]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e60]:
+      - img "리포스트"
+    - button [ref=e61]:
+      - img "공유하기"
+  - generic [ref=e62]:
+    - link [ref=e63]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e64]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e65]: "2026-09-15"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "3. 중요한 건 AI한테\n“기억해줘” 하는 게 아님.AI가 나중에 다시 찾아볼 수 있게\n내 업무 기록을 쌓아두는 거임.나는 내가 몇 달 전 업무까지 기억하려고 안 함.옵시디언에 기록해두고\n필요할 때 Codex한테 찾아보라고 함.이 습관 들이면 진짜 편해짐. 5/6"
+    - button [ref=e67]:
+      - img "좋아요"
+    - button [ref=e68]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e69]:
+      - img "리포스트"
+    - button [ref=e70]:
+      - img "공유하기"
+  - generic [ref=e71]:
+    - link [ref=e72]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e73]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e74]: "2026-09-15"
+    - button [ref=e75]:
+      - img "더 보기"
+    - text: "4. 그리고 이 기록도 자동화할 수 있음.내가 말 안 해도 알아서 업무 기록하게 만드는 방법이 있음.이건 4편에서 풀어볼게 👀 6/6"
+    - button [ref=e76]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e77]:
+      - img "답글"
+    - button [ref=e78]:
+      - img "리포스트"
+    - button [ref=e79]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e84]:
+    - link [ref=e85]:
+      - image "onlysolo_ai님의 프로필 사진"
+    - link "onlysolo_ai" [ref=e86]
+    - link "2026년 9월 16일 수요일 오후 12:16" [ref=e87]: "2026-09-16"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e88]:
+      - img "더 보기"
+    - text: "몇 달 전 업무를 바로 찾는다는 점이 특히 솔로 업무에 와닿네요. 기록할 때 파일명이나 폴더 규칙도 함께 정해두면 검색 정확도가 더 좋아질까요?"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e95]
+    - link "2026년 9월 16일 수요일 오후 12:32" [ref=e96]: "2026-09-16"
+    - text: "작성자"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "그건 알아서 세팅해줍니다 크게 신경쓸 건 없습니다"
+    - button [ref=e98]:
+      - img "좋아요"
+    - button [ref=e99]:
+      - img "답글"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e80]
+    - listitem:
+      - link "개인정보처리방침" [ref=e81]
+    - listitem:
+      - link "쿠키 정책" [ref=e82]
+- button "만들기" [ref=e83]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "AI 때문에 FOMO 온 직장인들 3편. AI랑 일하다 보면 며칠 전에 얘기한 것도 까먹고 몇 달 전 업무는 아예 기억 못 할 때가 있음. 그래서 나는 옵시디언에서 AI에게 기록 찾아서 답변하라고 해. *옵시디언 = 내 업무 기록을 파일로 계속 쌓아두는 메모 프로그램이라고 생각하면 됨. 이렇게 세팅해두면 몇 달 전에 했던 업무도 잊어버리지 않고 찾아서 그대로 가져옴. 나도 여러 업무를 동시에 보는 경우가 많은데, 예전 데이터 물어봐도 바로 찾을 수 있어서 진짜 편함 비개발자 직장인들은 이거 하나면 업무 효율 200% 올라감. 그래서 어떻게 세팅하냐구?" [url=https://www.threads.com/@unit.withai/post/DdTadpjkjUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 2만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e23]:
+      - img "더 보기"
+    - button [ref=e25]:
+      - img "좋아요"
+      - text: "109"
+    - button [ref=e26]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e27]:
+      - img "리포스트"
+      - text: "47"
+    - button [ref=e28]:
+      - img "공유하기"
+      - text: "96"
+    - button "정렬더 보기" [ref=e29]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e30]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e32]
+    - button "GIF 추가" [ref=e33]
+    - button "작성 도구 확장" [ref=e34]
+  - generic [ref=e35]:
+    - link [ref=e36]
+    - button [ref=e39]:
+      - img "더 보기"
+    - button [ref=e40]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e41]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e42]:
+      - img "리포스트"
+    - button [ref=e43]:
+      - img "공유하기"
+  - generic [ref=e44]:
+    - link [ref=e45]
+    - button [ref=e48]:
+      - img "더 보기"
+    - button [ref=e49]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e50]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e51]:
+      - img "리포스트"
+    - button [ref=e52]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e53]:
+    - link [ref=e54]
+    - button [ref=e57]:
+      - img "더 보기"
+    - text: "2. 실제 회사에서는 이렇게 씀.회의 끝나면\n“오늘 결정된 내용 Wiki에 기록해줘”광고 성과 정리하면\n“이번달 성과랑 변경사항 기록해줘”업체 이슈 생기면\n“이 업체 관련 내용 기록해줘”그리고 몇 달 뒤 상사가\n“그때 왜 이렇게 했지?”\n“그때 매출 얼마였지?”물어보면“Wiki에서 찾아줘”하면 끝.여러 프로젝트 동시에 보는 직장인일수록 진짜 편함. 4/6"
+    - button [ref=e58]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e59]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e60]:
+      - img "리포스트"
+    - button [ref=e61]:
+      - img "공유하기"
+  - generic [ref=e62]:
+    - link [ref=e63]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e64]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e65]: "2026-09-15"
+    - button [ref=e66]:
+      - img "더 보기"
+    - text: "3. 중요한 건 AI한테\n“기억해줘” 하는 게 아님.AI가 나중에 다시 찾아볼 수 있게\n내 업무 기록을 쌓아두는 거임.나는 내가 몇 달 전 업무까지 기억하려고 안 함.옵시디언에 기록해두고\n필요할 때 Codex한테 찾아보라고 함.이 습관 들이면 진짜 편해짐. 5/6"
+    - button [ref=e67]:
+      - img "좋아요"
+    - button [ref=e68]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e69]:
+      - img "리포스트"
+    - button [ref=e70]:
+      - img "공유하기"
+  - generic [ref=e71]:
+    - link [ref=e72]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e73]
+    - link "2026년 9월 15일 화요일 오후 6:44" [ref=e74]: "2026-09-15"
+    - button [ref=e75]:
+      - img "더 보기"
+    - text: "4. 그리고 이 기록도 자동화할 수 있음.내가 말 안 해도 알아서 업무 기록하게 만드는 방법이 있음.이건 4편에서 풀어볼게 👀 6/6"
+    - button [ref=e76]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e77]:
+      - img "답글"
+    - button [ref=e78]:
+      - img "리포스트"
+    - button [ref=e79]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e84]:
+    - link [ref=e85]:
+      - image "onlysolo_ai님의 프로필 사진"
+    - link "onlysolo_ai" [ref=e86]
+    - link "2026년 9월 16일 수요일 오후 12:16" [ref=e87]: "2026-09-16"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e88]:
+      - img "더 보기"
+    - text: "몇 달 전 업무를 바로 찾는다는 점이 특히 솔로 업무에 와닿네요. 기록할 때 파일명이나 폴더 규칙도 함께 정해두면 검색 정확도가 더 좋아질까요?"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "unit.withai님의 프로필 사진"
+    - link "unit.withai" [ref=e95]
+    - link "2026년 9월 16일 수요일 오후 12:32" [ref=e96]: "2026-09-16"
+    - text: "작성자"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "그건 알아서 세팅해줍니다 크게 신경쓸 건 없습니다"
+    - button [ref=e98]:
+      - img "좋아요"
+    - button [ref=e99]:
+      - img "답글"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e80]
+    - listitem:
+      - link "개인정보처리방침" [ref=e81]
+    - listitem:
+      - link "쿠키 정책" [ref=e82]
+- button "만들기" [ref=e83]:
+  - img "만들기"
+=== DONE ===
+[ok | 14528ms]

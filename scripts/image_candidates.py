@@ -3,7 +3,8 @@
 사용: python3 image_candidates.py <설정 이름|원고 파일>
 결과: runs/images/<이름>/<회차>/{prompt.md, astra.json, NN.png}
 - 설명은 astra만 쓴다(제목과 같은 이유 — Claude가 쓰면 AI slop). 회차를 다시 돌리면 후보가 쌓인다.
-- gti는 Codex ChatGPT 인증으로 도는 비공식 경로라 깨질 수 있다. 기본 모델(gpt-5.4)은 2026-10-09 기준 막혀 gpt-6-astra로 준다.
+- gti는 무조건 gpt-6-astra(멘토 2026-10-09). god-tibo-imagen 스킬 스크립트로 불러 모델 고정·PNG 검증을 맡긴다.
+  Codex ChatGPT 인증으로 도는 비공식 경로라 깨질 수 있다.
 - 다시 그리기: python3 image_candidates.py --redraw runs/images/<이름>/<회차>  (설명은 그대로, 그림 없는 것만)
 """
 import json
@@ -16,7 +17,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "images"
-GTI = "/home/hwjoo/.nvm/versions/node/v24.15.0/bin/gti"
+# gti는 무조건 gpt-6-astra (멘토 2026-10-09). 전역 npm gti는 기본 gpt-5.4라 400이 나서,
+# 모델을 강제하고 PNG를 검증하는 god-tibo-imagen 스킬 스크립트로 부른다.
+GEN = str(Path.home() / ".codex" / "skills" / "god-tibo-imagen" / "scripts" / "generate-image.mjs")
 
 
 def latest(name):
@@ -45,7 +48,8 @@ def prompt(text):
 def draw(d, i, it):
     png = d / f"{i:02d}.png"
     with open(d / f"{i:02d}.log", "w", encoding="utf-8") as log:
-        subprocess.run([GTI, "--prompt", it["prompt"], "--output", str(png), "--size", "1536x1024", "--model", "gpt-6-astra"],
+        subprocess.run(["node", GEN, "--prompt", it["prompt"], "--output", str(png), "--size", "1536x1024", "--ratio", "3:2",
+                        "--model", "gpt-6-astra"],
                        stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=900)
     return png.exists()
 

@@ -1,6 +1,7 @@
-✔︎ Opened a new tab and set it active: tabs[0], page → (2) "이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용 (https://www.threads.com/@silrobag/post/DUdEDfBgR60)
 URL: https://www.threads.com/@silrobag/post/DUdEDfBgR60
-- title: "(2) "이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+✔︎ Opened a new tab and set it active: tabs[0], page → "이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용 (https://www.threads.com/@silrobag/post/DUdEDfBgR60)
+=== SNAPSHOT 1 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
 - navigation:
   - link [ref=e1]:
     - img "Threads"
@@ -151,84 +152,80 @@ URL: https://www.threads.com/@silrobag/post/DUdEDfBgR60
       - img "리포스트"
     - button [ref=e67]:
       - img "공유하기"
-  - button "답글 보기" [ref=e68]:
-    - image "Threads 사용자의 프로필 사진"
-    - img
-    - text: "답글 보기"
-  - generic [ref=e69]:
-    - link [ref=e70]:
-      - image "365safety_help_dream님의 프로필 사진"
-    - link "365safety_help_dream" [ref=e71]
-    - link "2026년 2월 7일 토요일 오후 9:40" [ref=e72]: "2026-02-07"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "lawyer_choe_pro님의 프로필 사진"
+    - link "lawyer_choe_pro" [ref=e70]
+    - link "2026년 2월 8일 일요일 오후 11:36" [ref=e71]: "2026-02-08"
     - image "Threads 사용자의 프로필 사진"
     - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "ㅋㅋ 감사합니다. 그것까지 해주나보네요. 익숙치 않아서요 한번 트라이해보고 답드리겠습니다. 편히 쉬세요"
     - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e79]
+    - link "2026년 2월 8일 일요일 오후 11:40" [ref=e80]: "2026-02-08"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "피의자라고 생각하시고 막 다그치세요... 해. 얼릉해. 몰라? 알아와!!! ㅎㅎㅎ"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "365safety_help_dream님의 프로필 사진"
+    - link "365safety_help_dream" [ref=e88]
+    - link "2026년 2월 7일 토요일 오후 9:40" [ref=e89]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
       - img "더 보기"
     - text: "저는 산업재해 산안법 위반 판례를 ai한테 찾아라 했는데 판결일, 재판번호까지 조작하더라구요. 한번 더 확인이 중요한거 같습니다."
-    - button [ref=e74]:
+    - button [ref=e91]:
       - img "좋아요"
       - text: "3"
-    - button [ref=e75]:
-      - img "답글"
-      - text: "1"
-    - button [ref=e76]:
-      - img "리포스트"
-    - button [ref=e77]:
-      - img "공유하기"
-  - generic [ref=e78]:
-    - link [ref=e79]:
-      - image "silrobag님의 프로필 사진"
-    - link "silrobag" [ref=e80]
-    - link "2026년 2월 7일 토요일 오후 10:14" [ref=e81]: "2026-02-07"
-    - text: "작성자"
-    - button [ref=e82]:
-      - img "더 보기"
-    - text: "무조건 또 또 확인해야 합니다."
-    - button [ref=e83]:
-      - img "좋아요"
-    - button [ref=e84]:
-      - img "답글"
-    - button [ref=e85]:
-      - img "리포스트"
-    - button [ref=e86]:
-      - img "공유하기"
-  - generic [ref=e87]:
-    - link [ref=e88]:
-      - image "sunnsonagi99님의 프로필 사진"
-    - link "sunnsonagi99" [ref=e89]
-    - link "2026년 2월 7일 토요일 오후 8:16" [ref=e90]: "2026-02-07"
-    - image "Threads 사용자의 프로필 사진"
-    - img "원본 작성자가 좋아함"
-    - button [ref=e91]:
-      - img "더 보기"
-    - text: "나의 핸드폰은 선택적이여 이미 국가 법제처고 다 전화했었음 온라인상 이용방식이나 올려놓고 얘기"
     - button [ref=e92]:
-      - img "좋아요"
+      - img "답글"
       - text: "1"
     - button [ref=e93]:
-      - img "답글"
-      - text: "1"
+      - img "리포스트"
     - button [ref=e94]:
-      - img "리포스트"
-    - button [ref=e95]:
       - img "공유하기"
-  - generic [ref=e96]:
-    - link [ref=e97]:
+  - generic [ref=e95]:
+    - link [ref=e96]:
       - image "silrobag님의 프로필 사진"
-    - link "silrobag" [ref=e98]
-    - link "2026년 2월 7일 토요일 오후 8:27" [ref=e99]: "2026-02-07"
+    - link "silrobag" [ref=e97]
+    - link "2026년 2월 7일 토요일 오후 10:14" [ref=e98]: "2026-02-07"
     - text: "작성자"
-    - button [ref=e100]:
+    - button [ref=e99]:
       - img "더 보기"
-    - text: "저도 전형적 문과라 컴터 몰라서 항상 포기했는데... 지금은 ai한테 물어봐서 하나씩 따라하고, 아니면 크롬에 옆에 클로드 확장프로그램 깔아서 거기다가 시키면 느리지만 ai 클릭까지 해서 결국은 뭔가를 해줍니다. 그거 보다가 이것저것 배우고 있어요."
-    - button [ref=e101]:
+    - text: "무조건 또 또 확인해야 합니다."
+    - button [ref=e100]:
       - img "좋아요"
-      - text: "1"
-    - button [ref=e102]:
+    - button [ref=e101]:
       - img "답글"
-    - button [ref=e103]:
+    - button [ref=e102]:
       - img "리포스트"
-    - button [ref=e104]:
+    - button [ref=e103]:
       - img "공유하기"
   - status "읽어들이는 중...":
     - img "읽어들이는 중..."
@@ -236,11 +233,2024 @@ URL: https://www.threads.com/@silrobag/post/DUdEDfBgR60
   - list:
     - listitem: "© 2026"
     - listitem:
-      - link "Threads 약관" [ref=e105]
+      - link "Threads 약관" [ref=e104]
     - listitem:
-      - link "개인정보처리방침" [ref=e106]
+      - link "개인정보처리방침" [ref=e105]
     - listitem:
-      - link "쿠키 정책" [ref=e107]
-- button "만들기" [ref=e108]:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
   - img "만들기"
-[2m[ok | 5335ms][0m
+=== SNAPSHOT 2 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.9만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "310"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "21"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "77"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "90"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e40]
+    - link "노무사" [ref=e41]
+    - link "2026년 2월 7일 토요일 오후 10:51" [ref=e42]: "2026-02-07"
+    - button [ref=e43]:
+      - img "더 보기"
+    - link "open.law.go.kr/LSO/m…" [ref=e44]
+    - text: "2/2"
+    - link [ref=e45]:
+      - image "국가법령정보 공동활용"
+      - text: "open.law.go.kr 국가법령정보 공동활용"
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "4"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "lawyer_choe_pro님의 프로필 사진"
+    - link "lawyer_choe_pro" [ref=e52]
+    - link "2026년 2월 8일 일요일 오후 11:27" [ref=e53]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "정보 감사합니다. 인증키 발급받은 다음 ai도구에 연결은 어떻게 하는건가요? 그것도 어떻게 하는지 잘 몰라서요ㅜㅜ"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e61]
+    - link "2026년 2월 8일 일요일 오후 11:33" [ref=e62]: "2026-02-08"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "사용하시는 ai에게 이런 api를 받았는데... 이걸 000식으로 사용하고 싶어. 방법 알려줘~~~안티그래비티나 클로드코드 사용법을 확인한 다음. 이런 api를 어디에서 어떤 목적으로 받았는데, 이런식으로 사용하고 싶은데, 그걸 구현할수 있는 프로그램 제작해줘.막~~~ 이런식으로 하고 ㅇㅋㅇㅋㅇㅋ 하다보면 만들어집니다. 진짜에요. 저도 그렇게 시작했습니다. ^^"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "lawyer_choe_pro님의 프로필 사진"
+    - link "lawyer_choe_pro" [ref=e70]
+    - link "2026년 2월 8일 일요일 오후 11:36" [ref=e71]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "ㅋㅋ 감사합니다. 그것까지 해주나보네요. 익숙치 않아서요 한번 트라이해보고 답드리겠습니다. 편히 쉬세요"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e79]
+    - link "2026년 2월 8일 일요일 오후 11:40" [ref=e80]: "2026-02-08"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "피의자라고 생각하시고 막 다그치세요... 해. 얼릉해. 몰라? 알아와!!! ㅎㅎㅎ"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "365safety_help_dream님의 프로필 사진"
+    - link "365safety_help_dream" [ref=e88]
+    - link "2026년 2월 7일 토요일 오후 9:40" [ref=e89]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "저는 산업재해 산안법 위반 판례를 ai한테 찾아라 했는데 판결일, 재판번호까지 조작하더라구요. 한번 더 확인이 중요한거 같습니다."
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e92]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e95]:
+    - link [ref=e96]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e97]
+    - link "2026년 2월 7일 토요일 오후 10:14" [ref=e98]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e99]:
+      - img "더 보기"
+    - text: "무조건 또 또 확인해야 합니다."
+    - button [ref=e100]:
+      - img "좋아요"
+    - button [ref=e101]:
+      - img "답글"
+    - button [ref=e102]:
+      - img "리포스트"
+    - button [ref=e103]:
+      - img "공유하기"
+  - generic [ref=e108]:
+    - link [ref=e109]:
+      - image "sunnsonagi99님의 프로필 사진"
+    - link "sunnsonagi99" [ref=e110]
+    - link "2026년 2월 7일 토요일 오후 8:16" [ref=e111]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e112]:
+      - img "더 보기"
+    - text: "나의 핸드폰은 선택적이여 이미 국가 법제처고 다 전화했었음 온라인상 이용방식이나 올려놓고 얘기"
+    - button [ref=e113]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e114]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e115]:
+      - img "리포스트"
+    - button [ref=e116]:
+      - img "공유하기"
+  - generic [ref=e117]:
+    - link [ref=e118]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e119]
+    - link "2026년 2월 7일 토요일 오후 8:27" [ref=e120]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e121]:
+      - img "더 보기"
+    - text: "저도 전형적 문과라 컴터 몰라서 항상 포기했는데... 지금은 ai한테 물어봐서 하나씩 따라하고, 아니면 크롬에 옆에 클로드 확장프로그램 깔아서 거기다가 시키면 느리지만 ai 클릭까지 해서 결국은 뭔가를 해줍니다. 그거 보다가 이것저것 배우고 있어요."
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e123]:
+      - img "답글"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - generic [ref=e126]:
+    - link [ref=e127]:
+      - image "redius2님의 프로필 사진"
+    - link "redius2" [ref=e128]
+    - link "2026년 2월 7일 토요일 오후 11:23" [ref=e129]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e130]:
+      - img "더 보기"
+    - text: "Ai라면 제미나이도 되나요?"
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e133]:
+      - img "리포스트"
+    - button [ref=e134]:
+      - img "공유하기"
+  - generic [ref=e135]:
+    - link [ref=e136]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e137]
+    - link "2026년 2월 7일 토요일 오후 11:37" [ref=e138]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e139]:
+      - img "더 보기"
+    - text: "약간의 코딩을 하거나,,, ai에 활용하는법을 물어보시면서 따라해보면서 익숙해져야 합니다."
+    - button [ref=e140]:
+      - img "좋아요"
+    - button [ref=e141]:
+      - img "답글"
+    - button [ref=e142]:
+      - img "리포스트"
+    - button [ref=e143]:
+      - img "공유하기"
+  - generic [ref=e144]:
+    - link [ref=e145]:
+      - image "people_choi님의 프로필 사진"
+    - link "people_choi" [ref=e146]
+    - link "2026년 2월 7일 토요일 오후 8:39" [ref=e147]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e148]:
+      - img "더 보기"
+    - text: "오굿인데요!"
+    - button [ref=e149]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e150]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e151]:
+      - img "리포스트"
+    - button [ref=e152]:
+      - img "공유하기"
+  - generic [ref=e153]:
+    - link [ref=e154]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e155]
+    - link "2026년 2월 7일 토요일 오후 8:44" [ref=e156]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e157]:
+      - img "더 보기"
+    - text: "클로드봇이랑 연결하면 이거찾아..저거찾아~~~ 좋습니다. ㅎㅎ"
+    - button [ref=e158]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e159]:
+      - img "답글"
+    - button [ref=e160]:
+      - img "리포스트"
+    - button [ref=e161]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e162]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e104]
+    - listitem:
+      - link "개인정보처리방침" [ref=e105]
+    - listitem:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.9만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "310"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "21"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "77"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "90"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e43]:
+      - img "더 보기"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "4"
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "사용하시는 ai에게 이런 api를 받았는데... 이걸 000식으로 사용하고 싶어. 방법 알려줘~~~안티그래비티나 클로드코드 사용법을 확인한 다음. 이런 api를 어디에서 어떤 목적으로 받았는데, 이런식으로 사용하고 싶은데, 그걸 구현할수 있는 프로그램 제작해줘.막~~~ 이런식으로 하고 ㅇㅋㅇㅋㅇㅋ 하다보면 만들어집니다. 진짜에요. 저도 그렇게 시작했습니다. ^^"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "lawyer_choe_pro님의 프로필 사진"
+    - link "lawyer_choe_pro" [ref=e70]
+    - link "2026년 2월 8일 일요일 오후 11:36" [ref=e71]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "ㅋㅋ 감사합니다. 그것까지 해주나보네요. 익숙치 않아서요 한번 트라이해보고 답드리겠습니다. 편히 쉬세요"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e79]
+    - link "2026년 2월 8일 일요일 오후 11:40" [ref=e80]: "2026-02-08"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "피의자라고 생각하시고 막 다그치세요... 해. 얼릉해. 몰라? 알아와!!! ㅎㅎㅎ"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "365safety_help_dream님의 프로필 사진"
+    - link "365safety_help_dream" [ref=e88]
+    - link "2026년 2월 7일 토요일 오후 9:40" [ref=e89]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "저는 산업재해 산안법 위반 판례를 ai한테 찾아라 했는데 판결일, 재판번호까지 조작하더라구요. 한번 더 확인이 중요한거 같습니다."
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e92]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e95]:
+    - link [ref=e96]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e97]
+    - link "2026년 2월 7일 토요일 오후 10:14" [ref=e98]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e99]:
+      - img "더 보기"
+    - text: "무조건 또 또 확인해야 합니다."
+    - button [ref=e100]:
+      - img "좋아요"
+    - button [ref=e101]:
+      - img "답글"
+    - button [ref=e102]:
+      - img "리포스트"
+    - button [ref=e103]:
+      - img "공유하기"
+  - generic [ref=e108]:
+    - link [ref=e109]:
+      - image "sunnsonagi99님의 프로필 사진"
+    - link "sunnsonagi99" [ref=e110]
+    - link "2026년 2월 7일 토요일 오후 8:16" [ref=e111]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e112]:
+      - img "더 보기"
+    - text: "나의 핸드폰은 선택적이여 이미 국가 법제처고 다 전화했었음 온라인상 이용방식이나 올려놓고 얘기"
+    - button [ref=e113]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e114]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e115]:
+      - img "리포스트"
+    - button [ref=e116]:
+      - img "공유하기"
+  - generic [ref=e117]:
+    - link [ref=e118]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e119]
+    - link "2026년 2월 7일 토요일 오후 8:27" [ref=e120]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e121]:
+      - img "더 보기"
+    - text: "저도 전형적 문과라 컴터 몰라서 항상 포기했는데... 지금은 ai한테 물어봐서 하나씩 따라하고, 아니면 크롬에 옆에 클로드 확장프로그램 깔아서 거기다가 시키면 느리지만 ai 클릭까지 해서 결국은 뭔가를 해줍니다. 그거 보다가 이것저것 배우고 있어요."
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e123]:
+      - img "답글"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - generic [ref=e126]:
+    - link [ref=e127]:
+      - image "redius2님의 프로필 사진"
+    - link "redius2" [ref=e128]
+    - link "2026년 2월 7일 토요일 오후 11:23" [ref=e129]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e130]:
+      - img "더 보기"
+    - text: "Ai라면 제미나이도 되나요?"
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e133]:
+      - img "리포스트"
+    - button [ref=e134]:
+      - img "공유하기"
+  - generic [ref=e135]:
+    - link [ref=e136]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e137]
+    - link "2026년 2월 7일 토요일 오후 11:37" [ref=e138]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e139]:
+      - img "더 보기"
+    - text: "약간의 코딩을 하거나,,, ai에 활용하는법을 물어보시면서 따라해보면서 익숙해져야 합니다."
+    - button [ref=e140]:
+      - img "좋아요"
+    - button [ref=e141]:
+      - img "답글"
+    - button [ref=e142]:
+      - img "리포스트"
+    - button [ref=e143]:
+      - img "공유하기"
+  - generic [ref=e144]:
+    - link [ref=e145]:
+      - image "people_choi님의 프로필 사진"
+    - link "people_choi" [ref=e146]
+    - link "2026년 2월 7일 토요일 오후 8:39" [ref=e147]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e148]:
+      - img "더 보기"
+    - text: "오굿인데요!"
+    - button [ref=e149]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e150]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e151]:
+      - img "리포스트"
+    - button [ref=e152]:
+      - img "공유하기"
+  - generic [ref=e153]:
+    - link [ref=e154]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e155]
+    - link "2026년 2월 7일 토요일 오후 8:44" [ref=e156]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e157]:
+      - img "더 보기"
+    - text: "클로드봇이랑 연결하면 이거찾아..저거찾아~~~ 좋습니다. ㅎㅎ"
+    - button [ref=e158]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e159]:
+      - img "답글"
+    - button [ref=e160]:
+      - img "리포스트"
+    - button [ref=e161]:
+      - img "공유하기"
+  - generic [ref=e163]:
+    - link [ref=e164]:
+      - image "lawyer.shining님의 프로필 사진"
+    - link "lawyer.shining" [ref=e165]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:17" [ref=e166]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e167]:
+      - img "더 보기"
+    - text: "넘 대단하십니다."
+    - button [ref=e168]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e169]:
+      - img "답글"
+    - button [ref=e170]:
+      - img "리포스트"
+    - button [ref=e171]:
+      - img "공유하기"
+  - generic [ref=e172]:
+    - link [ref=e173]:
+      - image "refined_mv3_cpa님의 프로필 사진"
+    - link "refined_mv3_cpa" [ref=e174]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:01" [ref=e175]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e176]:
+      - img "더 보기"
+    - text: "이거 아주좋다 천재다 천재"
+    - button [ref=e177]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e178]:
+      - img "답글"
+    - button [ref=e179]:
+      - img "리포스트"
+    - button [ref=e180]:
+      - img "공유하기"
+  - generic [ref=e181]:
+    - link [ref=e182]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e183]
+    - link "2026년 2월 7일 토요일 오후 10:33" [ref=e184]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e185]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e186]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e187]:
+      - img "답글"
+    - button [ref=e188]:
+      - img "리포스트"
+    - button [ref=e189]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e190]:
+    - link [ref=e191]:
+      - image "_ur_t_님의 프로필 사진"
+    - link "_ur_t_" [ref=e192]
+    - link "2026년 2월 8일 일요일 오후 2:44" [ref=e193]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e194]:
+      - img "더 보기"
+    - text: "배워갑니다"
+    - button [ref=e195]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e196]:
+      - img "답글"
+    - button [ref=e197]:
+      - img "리포스트"
+    - button [ref=e198]:
+      - img "공유하기"
+  - generic [ref=e199]:
+    - link [ref=e200]:
+      - image "namjk_b.i.l.l님의 프로필 사진"
+    - link "namjk_b.i.l.l" [ref=e201]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 10:34" [ref=e202]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e203]:
+      - img "더 보기"
+    - text: "귀하다"
+    - button [ref=e204]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e205]:
+      - img "답글"
+    - button [ref=e206]:
+      - img "리포스트"
+    - button [ref=e207]:
+      - img "공유하기"
+  - generic [ref=e208]:
+    - link [ref=e209]:
+      - image "fcuk_kimchiman님의 프로필 사진"
+    - link "fcuk_kimchiman" [ref=e210]
+    - link "2026년 2월 7일 토요일 오후 10:57" [ref=e211]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e212]:
+      - img "더 보기"
+    - text: "우와"
+    - button [ref=e213]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e214]:
+      - img "답글"
+    - button [ref=e215]:
+      - img "리포스트"
+    - button [ref=e216]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e162]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e104]
+    - listitem:
+      - link "개인정보처리방침" [ref=e105]
+    - listitem:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.9만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "310"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "21"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "77"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "90"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e43]:
+      - img "더 보기"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "10"
+    - button [ref=e47]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "4"
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e92]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e95]:
+    - link [ref=e96]
+    - button [ref=e99]:
+      - img "더 보기"
+    - button [ref=e100]:
+      - img "좋아요"
+    - button [ref=e101]:
+      - img "답글"
+    - button [ref=e102]:
+      - img "리포스트"
+    - button [ref=e103]:
+      - img "공유하기"
+  - generic [ref=e108]:
+    - link [ref=e109]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e112]:
+      - img "더 보기"
+    - button [ref=e113]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e114]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e115]:
+      - img "리포스트"
+    - button [ref=e116]:
+      - img "공유하기"
+  - generic [ref=e117]:
+    - link [ref=e118]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e119]
+    - link "2026년 2월 7일 토요일 오후 8:27" [ref=e120]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e121]:
+      - img "더 보기"
+    - text: "저도 전형적 문과라 컴터 몰라서 항상 포기했는데... 지금은 ai한테 물어봐서 하나씩 따라하고, 아니면 크롬에 옆에 클로드 확장프로그램 깔아서 거기다가 시키면 느리지만 ai 클릭까지 해서 결국은 뭔가를 해줍니다. 그거 보다가 이것저것 배우고 있어요."
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e123]:
+      - img "답글"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - generic [ref=e126]:
+    - link [ref=e127]:
+      - image "redius2님의 프로필 사진"
+    - link "redius2" [ref=e128]
+    - link "2026년 2월 7일 토요일 오후 11:23" [ref=e129]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e130]:
+      - img "더 보기"
+    - text: "Ai라면 제미나이도 되나요?"
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e133]:
+      - img "리포스트"
+    - button [ref=e134]:
+      - img "공유하기"
+  - generic [ref=e135]:
+    - link [ref=e136]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e137]
+    - link "2026년 2월 7일 토요일 오후 11:37" [ref=e138]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e139]:
+      - img "더 보기"
+    - text: "약간의 코딩을 하거나,,, ai에 활용하는법을 물어보시면서 따라해보면서 익숙해져야 합니다."
+    - button [ref=e140]:
+      - img "좋아요"
+    - button [ref=e141]:
+      - img "답글"
+    - button [ref=e142]:
+      - img "리포스트"
+    - button [ref=e143]:
+      - img "공유하기"
+  - generic [ref=e144]:
+    - link [ref=e145]:
+      - image "people_choi님의 프로필 사진"
+    - link "people_choi" [ref=e146]
+    - link "2026년 2월 7일 토요일 오후 8:39" [ref=e147]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e148]:
+      - img "더 보기"
+    - text: "오굿인데요!"
+    - button [ref=e149]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e150]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e151]:
+      - img "리포스트"
+    - button [ref=e152]:
+      - img "공유하기"
+  - generic [ref=e153]:
+    - link [ref=e154]:
+      - image "silrobag님의 프로필 사진"
+    - link "silrobag" [ref=e155]
+    - link "2026년 2월 7일 토요일 오후 8:44" [ref=e156]: "2026-02-07"
+    - text: "작성자"
+    - button [ref=e157]:
+      - img "더 보기"
+    - text: "클로드봇이랑 연결하면 이거찾아..저거찾아~~~ 좋습니다. ㅎㅎ"
+    - button [ref=e158]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e159]:
+      - img "답글"
+    - button [ref=e160]:
+      - img "리포스트"
+    - button [ref=e161]:
+      - img "공유하기"
+  - generic [ref=e163]:
+    - link [ref=e164]:
+      - image "lawyer.shining님의 프로필 사진"
+    - link "lawyer.shining" [ref=e165]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:17" [ref=e166]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e167]:
+      - img "더 보기"
+    - text: "넘 대단하십니다."
+    - button [ref=e168]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e169]:
+      - img "답글"
+    - button [ref=e170]:
+      - img "리포스트"
+    - button [ref=e171]:
+      - img "공유하기"
+  - generic [ref=e172]:
+    - link [ref=e173]:
+      - image "refined_mv3_cpa님의 프로필 사진"
+    - link "refined_mv3_cpa" [ref=e174]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:01" [ref=e175]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e176]:
+      - img "더 보기"
+    - text: "이거 아주좋다 천재다 천재"
+    - button [ref=e177]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e178]:
+      - img "답글"
+    - button [ref=e179]:
+      - img "리포스트"
+    - button [ref=e180]:
+      - img "공유하기"
+  - generic [ref=e181]:
+    - link [ref=e182]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e183]
+    - link "2026년 2월 7일 토요일 오후 10:33" [ref=e184]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e185]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e186]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e187]:
+      - img "답글"
+    - button [ref=e188]:
+      - img "리포스트"
+    - button [ref=e189]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e190]:
+    - link [ref=e191]:
+      - image "_ur_t_님의 프로필 사진"
+    - link "_ur_t_" [ref=e192]
+    - link "2026년 2월 8일 일요일 오후 2:44" [ref=e193]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e194]:
+      - img "더 보기"
+    - text: "배워갑니다"
+    - button [ref=e195]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e196]:
+      - img "답글"
+    - button [ref=e197]:
+      - img "리포스트"
+    - button [ref=e198]:
+      - img "공유하기"
+  - generic [ref=e199]:
+    - link [ref=e200]:
+      - image "namjk_b.i.l.l님의 프로필 사진"
+    - link "namjk_b.i.l.l" [ref=e201]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 10:34" [ref=e202]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e203]:
+      - img "더 보기"
+    - text: "귀하다"
+    - button [ref=e204]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e205]:
+      - img "답글"
+    - button [ref=e206]:
+      - img "리포스트"
+    - button [ref=e207]:
+      - img "공유하기"
+  - generic [ref=e208]:
+    - link [ref=e209]:
+      - image "fcuk_kimchiman님의 프로필 사진"
+    - link "fcuk_kimchiman" [ref=e210]
+    - link "2026년 2월 7일 토요일 오후 10:57" [ref=e211]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e212]:
+      - img "더 보기"
+    - text: "우와"
+    - button [ref=e213]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e214]:
+      - img "답글"
+    - button [ref=e215]:
+      - img "리포스트"
+    - button [ref=e216]:
+      - img "공유하기"
+  - generic [ref=e217]:
+    - link [ref=e218]:
+      - image "dr.jur.yang님의 프로필 사진"
+    - link "dr.jur.yang" [ref=e219]
+    - link "2026년 2월 8일 일요일 오후 4:11" [ref=e220]: "2026-02-08"
+    - button [ref=e221]:
+      - img "더 보기"
+    - text: "오!"
+    - button [ref=e222]:
+      - img "좋아요"
+    - button [ref=e223]:
+      - img "답글"
+    - button [ref=e224]:
+      - img "리포스트"
+    - button [ref=e225]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e162]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e104]
+    - listitem:
+      - link "개인정보처리방침" [ref=e105]
+    - listitem:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.9만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "310"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "21"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "77"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "90"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e92]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e95]:
+    - link [ref=e96]
+    - button [ref=e99]:
+      - img "더 보기"
+    - button [ref=e100]:
+      - img "좋아요"
+    - button [ref=e101]:
+      - img "답글"
+    - button [ref=e102]:
+      - img "리포스트"
+    - button [ref=e103]:
+      - img "공유하기"
+  - generic [ref=e108]:
+    - link [ref=e109]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e112]:
+      - img "더 보기"
+    - button [ref=e113]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e114]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e115]:
+      - img "리포스트"
+    - button [ref=e116]:
+      - img "공유하기"
+  - generic [ref=e117]:
+    - link [ref=e118]
+    - button [ref=e121]:
+      - img "더 보기"
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e123]:
+      - img "답글"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - generic [ref=e126]:
+    - link [ref=e127]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e130]:
+      - img "더 보기"
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e133]:
+      - img "리포스트"
+    - button [ref=e134]:
+      - img "공유하기"
+  - generic [ref=e135]:
+    - link [ref=e136]
+    - button [ref=e139]:
+      - img "더 보기"
+    - button [ref=e140]:
+      - img "좋아요"
+    - button [ref=e141]:
+      - img "답글"
+    - button [ref=e142]:
+      - img "리포스트"
+    - button [ref=e143]:
+      - img "공유하기"
+  - generic [ref=e144]:
+    - link [ref=e145]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e148]:
+      - img "더 보기"
+    - button [ref=e149]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e150]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e151]:
+      - img "리포스트"
+    - button [ref=e152]:
+      - img "공유하기"
+  - generic [ref=e153]:
+    - link [ref=e154]
+    - button [ref=e157]:
+      - img "더 보기"
+    - button [ref=e158]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e159]:
+      - img "답글"
+    - button [ref=e160]:
+      - img "리포스트"
+    - button [ref=e161]:
+      - img "공유하기"
+  - generic [ref=e163]:
+    - link [ref=e164]:
+      - image "lawyer.shining님의 프로필 사진"
+    - link "lawyer.shining" [ref=e165]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:17" [ref=e166]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e167]:
+      - img "더 보기"
+    - text: "넘 대단하십니다."
+    - button [ref=e168]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e169]:
+      - img "답글"
+    - button [ref=e170]:
+      - img "리포스트"
+    - button [ref=e171]:
+      - img "공유하기"
+  - generic [ref=e172]:
+    - link [ref=e173]:
+      - image "refined_mv3_cpa님의 프로필 사진"
+    - link "refined_mv3_cpa" [ref=e174]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:01" [ref=e175]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e176]:
+      - img "더 보기"
+    - text: "이거 아주좋다 천재다 천재"
+    - button [ref=e177]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e178]:
+      - img "답글"
+    - button [ref=e179]:
+      - img "리포스트"
+    - button [ref=e180]:
+      - img "공유하기"
+  - generic [ref=e181]:
+    - link [ref=e182]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e183]
+    - link "2026년 2월 7일 토요일 오후 10:33" [ref=e184]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e185]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e186]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e187]:
+      - img "답글"
+    - button [ref=e188]:
+      - img "리포스트"
+    - button [ref=e189]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e190]:
+    - link [ref=e191]:
+      - image "_ur_t_님의 프로필 사진"
+    - link "_ur_t_" [ref=e192]
+    - link "2026년 2월 8일 일요일 오후 2:44" [ref=e193]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e194]:
+      - img "더 보기"
+    - text: "배워갑니다"
+    - button [ref=e195]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e196]:
+      - img "답글"
+    - button [ref=e197]:
+      - img "리포스트"
+    - button [ref=e198]:
+      - img "공유하기"
+  - generic [ref=e199]:
+    - link [ref=e200]:
+      - image "namjk_b.i.l.l님의 프로필 사진"
+    - link "namjk_b.i.l.l" [ref=e201]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 10:34" [ref=e202]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e203]:
+      - img "더 보기"
+    - text: "귀하다"
+    - button [ref=e204]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e205]:
+      - img "답글"
+    - button [ref=e206]:
+      - img "리포스트"
+    - button [ref=e207]:
+      - img "공유하기"
+  - generic [ref=e208]:
+    - link [ref=e209]:
+      - image "fcuk_kimchiman님의 프로필 사진"
+    - link "fcuk_kimchiman" [ref=e210]
+    - link "2026년 2월 7일 토요일 오후 10:57" [ref=e211]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e212]:
+      - img "더 보기"
+    - text: "우와"
+    - button [ref=e213]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e214]:
+      - img "답글"
+    - button [ref=e215]:
+      - img "리포스트"
+    - button [ref=e216]:
+      - img "공유하기"
+  - generic [ref=e217]:
+    - link [ref=e218]:
+      - image "dr.jur.yang님의 프로필 사진"
+    - link "dr.jur.yang" [ref=e219]
+    - link "2026년 2월 8일 일요일 오후 4:11" [ref=e220]: "2026-02-08"
+    - button [ref=e221]:
+      - img "더 보기"
+    - text: "오!"
+    - button [ref=e222]:
+      - img "좋아요"
+    - button [ref=e223]:
+      - img "답글"
+    - button [ref=e224]:
+      - img "리포스트"
+    - button [ref=e225]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e162]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e104]
+    - listitem:
+      - link "개인정보처리방침" [ref=e105]
+    - listitem:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
+  - img "만들기"
+=== SNAPSHOT 6 ===
+- title: ""이 판례 진짜 있는 거 맞아?" 부당해고 상담할 때 의뢰인이 가져온 판례가 가짜인 적이 있었습니다. ChatGPT한테 물어봤대요. 그래서 저는 이렇게 합니다. 국가법령정보센터(law.go.kr)에 무료 공공 API가 있어요. 법제처가 직접 운영하는 겁니다. 여기서 본인 인증키 발급받고 제 AI 비서한테 그 키를 알려줬어요. 이제 상담 중에 "이 판례 있는지 확인해봐" 하면 바로 조회해줍니다. 선고일, 사건명, 법원 정보까지 30초면 끝. AI가 지어낸 가짜 판례 vs 법제처 DB에서 직접 조회한 판례. 신뢰도가 다를 수밖에 없죠. 순서는 이래요. 법령정보센터 → 개발자센터 → API 신청 → 인증키 발급 → 본인이 쓰는 AI 도구에 연결 → 판례번호로 검색 끝. 노무사가 코딩하면 AI한테 심부름을 시킵니다 ㅋㅋ #국가법령정보센터 #판례검색 #코딩하는노무사 #AI활용" [url=https://www.threads.com/@silrobag/post/DUdEDfBgR60]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.9만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "310"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "21"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "77"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "90"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e92]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e95]:
+    - link [ref=e96]
+    - button [ref=e99]:
+      - img "더 보기"
+    - button [ref=e100]:
+      - img "좋아요"
+    - button [ref=e101]:
+      - img "답글"
+    - button [ref=e102]:
+      - img "리포스트"
+    - button [ref=e103]:
+      - img "공유하기"
+  - generic [ref=e108]:
+    - link [ref=e109]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e112]:
+      - img "더 보기"
+    - button [ref=e113]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e114]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e115]:
+      - img "리포스트"
+    - button [ref=e116]:
+      - img "공유하기"
+  - generic [ref=e117]:
+    - link [ref=e118]
+    - button [ref=e121]:
+      - img "더 보기"
+    - button [ref=e122]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e123]:
+      - img "답글"
+    - button [ref=e124]:
+      - img "리포스트"
+    - button [ref=e125]:
+      - img "공유하기"
+  - generic [ref=e126]:
+    - link [ref=e127]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e130]:
+      - img "더 보기"
+    - button [ref=e131]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e132]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e133]:
+      - img "리포스트"
+    - button [ref=e134]:
+      - img "공유하기"
+  - generic [ref=e135]:
+    - link [ref=e136]
+    - button [ref=e139]:
+      - img "더 보기"
+    - button [ref=e140]:
+      - img "좋아요"
+    - button [ref=e141]:
+      - img "답글"
+    - button [ref=e142]:
+      - img "리포스트"
+    - button [ref=e143]:
+      - img "공유하기"
+  - generic [ref=e144]:
+    - link [ref=e145]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e148]:
+      - img "더 보기"
+    - button [ref=e149]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e150]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e151]:
+      - img "리포스트"
+    - button [ref=e152]:
+      - img "공유하기"
+  - generic [ref=e153]:
+    - link [ref=e154]
+    - button [ref=e157]:
+      - img "더 보기"
+    - button [ref=e158]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e159]:
+      - img "답글"
+    - button [ref=e160]:
+      - img "리포스트"
+    - button [ref=e161]:
+      - img "공유하기"
+  - generic [ref=e163]:
+    - link [ref=e164]:
+      - image "lawyer.shining님의 프로필 사진"
+    - link "lawyer.shining" [ref=e165]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:17" [ref=e166]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e167]:
+      - img "더 보기"
+    - text: "넘 대단하십니다."
+    - button [ref=e168]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e169]:
+      - img "답글"
+    - button [ref=e170]:
+      - img "리포스트"
+    - button [ref=e171]:
+      - img "공유하기"
+  - generic [ref=e172]:
+    - link [ref=e173]:
+      - image "refined_mv3_cpa님의 프로필 사진"
+    - link "refined_mv3_cpa" [ref=e174]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 11:01" [ref=e175]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e176]:
+      - img "더 보기"
+    - text: "이거 아주좋다 천재다 천재"
+    - button [ref=e177]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e178]:
+      - img "답글"
+    - button [ref=e179]:
+      - img "리포스트"
+    - button [ref=e180]:
+      - img "공유하기"
+  - generic [ref=e181]:
+    - link [ref=e182]:
+      - image "art_invest_grit님의 프로필 사진"
+    - link "art_invest_grit" [ref=e183]
+    - link "2026년 2월 7일 토요일 오후 10:33" [ref=e184]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e185]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e186]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e187]:
+      - img "답글"
+    - button [ref=e188]:
+      - img "리포스트"
+    - button [ref=e189]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e190]:
+    - link [ref=e191]:
+      - image "_ur_t_님의 프로필 사진"
+    - link "_ur_t_" [ref=e192]
+    - link "2026년 2월 8일 일요일 오후 2:44" [ref=e193]: "2026-02-08"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e194]:
+      - img "더 보기"
+    - text: "배워갑니다"
+    - button [ref=e195]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e196]:
+      - img "답글"
+    - button [ref=e197]:
+      - img "리포스트"
+    - button [ref=e198]:
+      - img "공유하기"
+  - generic [ref=e199]:
+    - link [ref=e200]:
+      - image "namjk_b.i.l.l님의 프로필 사진"
+    - link "namjk_b.i.l.l" [ref=e201]
+    - img "인증된 계정"
+    - link "2026년 2월 7일 토요일 오후 10:34" [ref=e202]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e203]:
+      - img "더 보기"
+    - text: "귀하다"
+    - button [ref=e204]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e205]:
+      - img "답글"
+    - button [ref=e206]:
+      - img "리포스트"
+    - button [ref=e207]:
+      - img "공유하기"
+  - generic [ref=e208]:
+    - link [ref=e209]:
+      - image "fcuk_kimchiman님의 프로필 사진"
+    - link "fcuk_kimchiman" [ref=e210]
+    - link "2026년 2월 7일 토요일 오후 10:57" [ref=e211]: "2026-02-07"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e212]:
+      - img "더 보기"
+    - text: "우와"
+    - button [ref=e213]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e214]:
+      - img "답글"
+    - button [ref=e215]:
+      - img "리포스트"
+    - button [ref=e216]:
+      - img "공유하기"
+  - generic [ref=e217]:
+    - link [ref=e218]:
+      - image "dr.jur.yang님의 프로필 사진"
+    - link "dr.jur.yang" [ref=e219]
+    - link "2026년 2월 8일 일요일 오후 4:11" [ref=e220]: "2026-02-08"
+    - button [ref=e221]:
+      - img "더 보기"
+    - text: "오!"
+    - button [ref=e222]:
+      - img "좋아요"
+    - button [ref=e223]:
+      - img "답글"
+    - button [ref=e224]:
+      - img "리포스트"
+    - button [ref=e225]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e162]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e104]
+    - listitem:
+      - link "개인정보처리방침" [ref=e105]
+    - listitem:
+      - link "쿠키 정책" [ref=e106]
+- button "만들기" [ref=e107]:
+  - img "만들기"
+=== DONE ===
+[ok | 20830ms]

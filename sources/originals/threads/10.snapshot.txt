@@ -1,6 +1,7 @@
-✔︎ Opened a new tab and set it active: tabs[0], page → (2) 업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다. (https://www.threads.com/@gasket_love/post/DX88rThgRJm)
 URL: https://www.threads.com/@gasket_love/post/DX88rThgRJm
-- title: "(2) 업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+✔︎ Opened a new tab and set it active: tabs[0], page → 업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다. (https://www.threads.com/@gasket_love/post/DX88rThgRJm)
+=== SNAPSHOT 1 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
 - navigation:
   - link [ref=e1]:
     - img "Threads"
@@ -46,7 +47,7 @@ URL: https://www.threads.com/@gasket_love/post/DX88rThgRJm
   - img "돌아가기"
 - link "열 제목" [ref=e17]:
   - heading [level=1]: "스레드"
-- text: "조회 3만회"
+- text: "조회 3.6만회"
 - button [ref=e18]:
   - img "더 보기"
 - region "칼럼 본문" [ref=e19]:
@@ -68,292 +69,1603 @@ URL: https://www.threads.com/@gasket_love/post/DX88rThgRJm
     - button [ref=e31]
     - text: "1/4"
     - canvas [ref=e32] [size=590x150]
-    - button [ref=e33]
-    - button "미디어를 파노라마로 결합" [ref=e34]
-    - button [ref=e35]
-    - button [ref=e36]:
+    - button [ref=e33]:
+      - group "Video player"
+    - button "미디어를 파노라마로 결합" [ref=e35]
+    - button [ref=e36]
+    - button [ref=e37]:
       - img "좋아요"
       - text: "154"
-    - button [ref=e37]:
+    - button [ref=e38]:
       - img "답글"
       - text: "13"
-    - button [ref=e38]:
+    - button [ref=e39]:
       - img "리포스트"
       - text: "31"
-    - button [ref=e39]:
+    - button [ref=e40]:
       - img "공유하기"
       - text: "51"
-    - button "정렬더 보기" [ref=e40]:
+    - button "정렬더 보기" [ref=e41]:
       - img "정렬"
       - text: "인기순"
       - img "더 보기"
-    - button [ref=e41]:
+    - button [ref=e42]:
       - text: "활동 보기"
       - img "활동 보기"
     - image "code_vivian님의 프로필 사진"
-    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e42] [focused]
-    - button "미디어 첨부" [ref=e43]
-    - button "GIF 추가" [ref=e44]
-    - button "작성 도구 확장" [ref=e45]
-  - generic [ref=e46]:
-    - link [ref=e47]:
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e43] [focused]
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]:
       - image "gasket_love님의 프로필 사진"
-    - link "gasket_love" [ref=e48]
-    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e49]: "2026-05-05"
-    - button [ref=e50]:
+    - link "gasket_love" [ref=e49]
+    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e50]: "2026-05-05"
+    - button [ref=e51]:
       - img "더 보기"
     - text: "저희는 웹앱에 거래처별 주문·단가·납기까지 전부 데이터로 들어가있습니다.\n그리고 그위에 텔레그램 봇을 얹는겁니다.\n발주서 사진 던짐 → 봇이 읽음 → \"등록할까요?\" → \"응\" → 끝.\n발주뿐 아니라 부동산 임차인 정보, 개인 일정 알림까지 같은 봇이 24시간 돕니다.맥미니? 그딴거 필요 없습니다.\nManus ai 클라우드 컴퓨터 월 10달러면 24시간 돌아가는 서버를 대여해줍니다."
-    - link "manus.im/invit…" [ref=e51]
+    - link "manus.im/invit…" [ref=e52]
     - text: "2/4"
-    - generic [ref=e52] [scrollable]:
-      - button [ref=e53]
-      - button "미디어를 파노라마로 결합" [ref=e54]
-      - button [ref=e55]
-      - button "미디어를 파노라마로 결합" [ref=e56]
-      - button [ref=e57]
-    - button [ref=e58]:
+    - generic [ref=e53] [scrollable]:
+      - button [ref=e54]
+      - button "미디어를 파노라마로 결합" [ref=e55]
+      - button [ref=e56]
+      - button "미디어를 파노라마로 결합" [ref=e57]
+      - button [ref=e58]
+    - button [ref=e59]:
       - img "좋아요"
       - text: "8"
-    - button [ref=e59]:
-      - img "답글"
-      - text: "1"
     - button [ref=e60]:
-      - img "리포스트"
+      - img "답글"
       - text: "1"
     - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
       - img "공유하기"
       - text: "1"
-  - generic [ref=e62]:
-    - link [ref=e63]:
+  - generic [ref=e63]:
+    - link [ref=e64]:
       - image "gasket_love님의 프로필 사진"
-    - link "gasket_love" [ref=e64]
-    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e65]: "2026-05-05"
-    - button [ref=e66]:
+    - link "gasket_love" [ref=e65]
+    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e66]: "2026-05-05"
+    - button [ref=e67]:
       - img "더 보기"
     - text: "순서가 중요합니다 업무를 웹앱으로 데이터화 (Manus AI든 뭐든)\nManus Cloud Computer 켜기 (월 $10)\n텔레그램 봇 깔고 웹앱 API에 연결 먼저 데이터부터 모아두세요. 그래야 봇이 갈 곳이 생깁니다. 반대로 하면 봇이 갈 곳이 없어요. 3/4"
-    - button [ref=e67]:
+    - button [ref=e68]:
       - img "좋아요"
       - text: "4"
-    - button [ref=e68]:
+    - button [ref=e69]:
       - img "답글"
       - text: "1"
-    - button [ref=e69]:
-      - img "리포스트"
     - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
       - img "공유하기"
       - text: "1"
-  - generic [ref=e71]:
-    - link [ref=e72]:
+  - generic [ref=e72]:
+    - link [ref=e73]:
       - image "gasket_love님의 프로필 사진"
-    - link "gasket_love" [ref=e73]
-    - link "2026년 5월 5일 화요일 오후 6:46" [ref=e74]: "2026-05-05"
+    - link "gasket_love" [ref=e74]
+    - link "2026년 5월 5일 화요일 오후 6:46" [ref=e75]: "2026-05-05"
     - text: "4/4"
-    - button [ref=e75]:
+    - button [ref=e76]:
       - img "더 보기"
-    - link [ref=e76]:
+    - link [ref=e77]:
       - image "manus_kr님의 프로필 사진"
-    - link "manus_kr" [ref=e77]
+    - link "manus_kr" [ref=e78]
     - img "인증된 계정"
-    - link [ref=e78]:
+    - link [ref=e79]:
       - img
       - text: "AI Threads"
-    - link "2026년 5월 5일 화요일 오후 4:19" [ref=e79]: "2026-05-05"
-    - button [ref=e80]:
+    - link "2026년 5월 5일 화요일 오후 4:19" [ref=e80]: "2026-05-05"
+    - button [ref=e81]:
       - img "수정됨"
-    - link "Cloud Computer 출시!서버 구축이나 복잡한 코드는 더 이상 필요 없습니다. Manus에 24시간 가동되는 전용 머신을 맡기기만 하면, 잠들지 않는 자동화 환경을 손에 넣" [ref=e81]
+    - link "Cloud Computer 출시!서버 구축이나 복잡한 코드는 더 이상 필요 없습니다. Manus에 24시간 가동되는 전용 머신을 맡기기만 하면, 잠들지 않는 자동화 환경을 손에 넣" [ref=e82]
     - group "Video player":
-      - button [ref=e82]:
+      - button [ref=e83]:
         - img "오디오 소리 꺼짐"
-    - button [ref=e83]:
+    - button [ref=e84]:
       - img "좋아요"
       - text: "12"
-    - button [ref=e84]:
+    - button [ref=e85]:
       - img "답글"
       - text: "7"
-    - button [ref=e85]:
+    - button [ref=e86]:
       - img "리포스트"
       - text: "4"
-    - button [ref=e86]:
+    - button [ref=e87]:
       - img "공유하기"
       - text: "6"
-    - button [ref=e87]:
-      - img "좋아요"
-      - text: "1"
     - button [ref=e88]:
-      - img "답글"
+      - img "좋아요"
+      - text: "1"
     - button [ref=e89]:
-      - img "리포스트"
-      - text: "1"
+      - img "답글"
     - button [ref=e90]:
-      - img "공유하기"
-  - generic [ref=e91]:
-    - link [ref=e92]:
-      - image "devscene_님의 프로필 사진"
-    - link "devscene_" [ref=e93]
-    - link "2026년 5월 5일 화요일 오후 10:04" [ref=e94]: "2026-05-05"
-    - image "Threads 사용자의 프로필 사진"
-    - img "원본 작성자가 좋아함"
-    - button [ref=e95]:
-      - img "더 보기"
-    - text: "인정하는 부분입니다. 초기 휴먼리소스가 가장 많이 들어가는 부분이기도하구요. 근데 개인정보 노출 괜찮나요..?"
-    - button [ref=e96]:
-      - img "좋아요"
+      - img "리포스트"
       - text: "1"
-    - button [ref=e97]:
-      - img "답글"
-      - text: "1"
-    - button [ref=e98]:
-      - img "리포스트"
-    - button [ref=e99]:
-      - img "공유하기"
-  - generic [ref=e100]:
-    - link [ref=e101]:
-      - image "gasket_love님의 프로필 사진"
-    - link "gasket_love" [ref=e102]
-    - link "2026년 5월 5일 화요일 오후 11:31" [ref=e103]: "2026-05-05"
-    - text: "작성자"
-    - button [ref=e104]:
-      - img "더 보기"
-    - text: "챗지피티로 변조된 정보 입니다"
-    - button [ref=e105]:
-      - img "좋아요"
-    - button [ref=e106]:
-      - img "답글"
-    - button [ref=e107]:
-      - img "리포스트"
-    - button [ref=e108]:
-      - img "공유하기"
-  - generic [ref=e109]:
-    - link [ref=e110]:
-      - image "woong_nya님의 프로필 사진"
-    - link "woong_nya" [ref=e111]
-    - link "2026년 5월 6일 수요일 오전 6:44" [ref=e112]: "2026-05-06"
-    - button [ref=e113]:
-      - img "더 보기"
-    - text: "Manus cloud computer는 사양이 어떻게 되나요? 컴피 클라우드처럼 고사양모델들 돌리기 적합한가요?"
-    - button [ref=e114]:
-      - img "좋아요"
-      - text: "1"
-    - button [ref=e115]:
-      - img "답글"
-      - text: "1"
-    - button [ref=e116]:
-      - img "리포스트"
-    - button [ref=e117]:
-      - img "공유하기"
-  - generic [ref=e118]:
-    - link [ref=e119]:
-      - image "gasket_love님의 프로필 사진"
-    - link "gasket_love" [ref=e120]
-    - link "2026년 5월 6일 수요일 오전 8:58" [ref=e121]: "2026-05-06"
-    - text: "작성자"
-    - button [ref=e122]:
-      - img "더 보기"
-    - text: "클라우드컴퓨터 사양별 가격표 입니다. 저 처럼 라이트 유저는 월 10달러로 충분하고도 남지만은 고사양 작업일 수록 서버를 직접 운영하는게 나을지 클라우드컴퓨터를 사용하는게 나을지 비용적으로 고려해보셔야 할거에요."
-    - link [ref=e123]
-    - button [ref=e124]:
-      - img "좋아요"
-      - text: "1"
-    - button [ref=e125]:
-      - img "답글"
-      - text: "1"
-    - button [ref=e126]:
-      - img "리포스트"
-    - button [ref=e127]:
-      - img "공유하기"
-  - button "답글 보기" [ref=e128]:
-    - image "Threads 사용자의 프로필 사진"
-    - img
-    - text: "답글 보기"
-  - generic [ref=e129]:
-    - link [ref=e130]:
-      - image "ambition_monkey님의 프로필 사진"
-    - link "ambition_monkey" [ref=e131]
-    - link "2026년 5월 6일 수요일 오전 9:09" [ref=e132]: "2026-05-06"
-    - button [ref=e133]:
-      - img "더 보기"
-    - text: "이거 ㄹㅇ. 비개발자분들 자동화 알려줄 때도 업무 데이터부터 정리시킴. 도구 까는 건 그 다음임"
-    - button [ref=e134]:
-      - img "좋아요"
-    - button [ref=e135]:
-      - img "답글"
-    - button [ref=e136]:
-      - img "리포스트"
-    - button [ref=e137]:
-      - img "공유하기"
-  - generic [ref=e138]:
-    - link [ref=e139]:
-      - image "choi.director님의 프로필 사진"
-    - link "choi.director" [ref=e140]
-    - link "2026년 5월 6일 수요일 오후 3:33" [ref=e141]: "2026-05-06"
-    - button [ref=e142]:
-      - img "더 보기"
-    - text: "핵심"
-    - button [ref=e143]:
-      - img "좋아요"
-    - button [ref=e144]:
-      - img "답글"
-    - button [ref=e145]:
-      - img "리포스트"
-    - button [ref=e146]:
-      - img "공유하기"
-  - generic [ref=e147]:
-    - link [ref=e148]:
-      - image "media01shot님의 프로필 사진"
-    - link "media01shot" [ref=e149]
-    - link "2026년 5월 6일 수요일 오후 12:27" [ref=e150]: "2026-05-06"
-    - button [ref=e151]:
-      - img "더 보기"
-    - text: "이게맞다.\nAi로 딸깍하면 다된다는 이야기는 다 구라.\nAi가 소활 수 있게 정보를 데이터로 쪼개서 떠먹여줘야지"
-    - button [ref=e152]:
-      - img "좋아요"
-    - button [ref=e153]:
-      - img "답글"
-    - button [ref=e154]:
-      - img "리포스트"
-    - button [ref=e155]:
-      - img "공유하기"
-  - generic [ref=e156]:
-    - link [ref=e157]:
-      - image "aimaster3658님의 프로필 사진"
-    - link "aimaster3658" [ref=e158]
-    - link "2026년 5월 5일 화요일 오후 9:11" [ref=e159]: "2026-05-05"
-    - button [ref=e160]:
-      - img "더 보기"
-    - text: "귀엽긴하네요"
-    - button [ref=e161]:
-      - img "좋아요"
-    - button [ref=e162]:
-      - img "답글"
-    - button [ref=e163]:
-      - img "리포스트"
-    - button [ref=e164]:
-      - img "공유하기"
-  - generic [ref=e165]:
-    - link [ref=e166]:
-      - image "downwind_1님의 프로필 사진"
-    - link "downwind_1" [ref=e167]
-    - link "2026년 5월 6일 수요일 오전 9:40" [ref=e168]: "2026-05-06"
-    - button [ref=e169]:
-      - img "더 보기"
-    - text: "만번정도 맞는말씀"
-    - button [ref=e170]:
-      - img "좋아요"
-    - button [ref=e171]:
-      - img "답글"
-    - button [ref=e172]:
-      - img "리포스트"
-    - button [ref=e173]:
+    - button [ref=e91]:
       - img "공유하기"
 - contentinfo:
   - list:
     - listitem: "© 2026"
     - listitem:
-      - link "Threads 약관" [ref=e174]
+      - link "Threads 약관" [ref=e92]
     - listitem:
-      - link "개인정보처리방침" [ref=e175]
+      - link "개인정보처리방침" [ref=e93]
     - listitem:
-      - link "쿠키 정책" [ref=e176]
-- button "만들기" [ref=e177]:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
   - img "만들기"
-[2m[ok | 4263ms][0m
+=== SNAPSHOT 2 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e37]:
+      - img "좋아요"
+      - text: "154"
+    - button [ref=e38]:
+      - img "답글"
+      - text: "13"
+    - button [ref=e39]:
+      - img "리포스트"
+      - text: "31"
+    - button [ref=e40]:
+      - img "공유하기"
+      - text: "51"
+    - button "정렬더 보기" [ref=e41]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e42]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e43] [focused]
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e49]
+    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e50]: "2026-05-05"
+    - button [ref=e51]:
+      - img "더 보기"
+    - text: "저희는 웹앱에 거래처별 주문·단가·납기까지 전부 데이터로 들어가있습니다.\n그리고 그위에 텔레그램 봇을 얹는겁니다.\n발주서 사진 던짐 → 봇이 읽음 → \"등록할까요?\" → \"응\" → 끝.\n발주뿐 아니라 부동산 임차인 정보, 개인 일정 알림까지 같은 봇이 24시간 돕니다.맥미니? 그딴거 필요 없습니다.\nManus ai 클라우드 컴퓨터 월 10달러면 24시간 돌아가는 서버를 대여해줍니다."
+    - link "manus.im/invit…" [ref=e52]
+    - text: "2/4"
+    - generic [ref=e53] [scrollable]:
+      - button [ref=e54]
+      - button "미디어를 파노라마로 결합" [ref=e55]
+      - button [ref=e56]
+      - button "미디어를 파노라마로 결합" [ref=e57]
+      - button [ref=e58]
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e63]:
+    - link [ref=e64]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e65]
+    - link "2026년 5월 5일 화요일 오후 6:41" [ref=e66]: "2026-05-05"
+    - button [ref=e67]:
+      - img "더 보기"
+    - text: "순서가 중요합니다 업무를 웹앱으로 데이터화 (Manus AI든 뭐든)\nManus Cloud Computer 켜기 (월 $10)\n텔레그램 봇 깔고 웹앱 API에 연결 먼저 데이터부터 모아두세요. 그래야 봇이 갈 곳이 생깁니다. 반대로 하면 봇이 갈 곳이 없어요. 3/4"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e72]:
+    - link [ref=e73]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e74]
+    - link "2026년 5월 5일 화요일 오후 6:46" [ref=e75]: "2026-05-05"
+    - text: "4/4"
+    - button [ref=e76]:
+      - img "더 보기"
+    - link [ref=e77]:
+      - image "manus_kr님의 프로필 사진"
+    - link "manus_kr" [ref=e78]
+    - img "인증된 계정"
+    - link [ref=e79]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 5월 5일 화요일 오후 4:19" [ref=e80]: "2026-05-05"
+    - button [ref=e81]:
+      - img "수정됨"
+    - link "Cloud Computer 출시!서버 구축이나 복잡한 코드는 더 이상 필요 없습니다. Manus에 24시간 가동되는 전용 머신을 맡기기만 하면, 잠들지 않는 자동화 환경을 손에 넣" [ref=e82]
+    - group "Video player":
+      - button [ref=e83]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e84]:
+      - img "좋아요"
+      - text: "12"
+    - button [ref=e85]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e86]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e87]:
+      - img "공유하기"
+      - text: "6"
+    - button [ref=e88]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]:
+      - image "devscene_님의 프로필 사진"
+    - link "devscene_" [ref=e98]
+    - link "2026년 5월 5일 화요일 오후 10:04" [ref=e99]: "2026-05-05"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "인정하는 부분입니다. 초기 휴먼리소스가 가장 많이 들어가는 부분이기도하구요. 근데 개인정보 노출 괜찮나요..?"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e107]
+    - link "2026년 5월 5일 화요일 오후 11:31" [ref=e108]: "2026-05-05"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "챗지피티로 변조된 정보 입니다"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e116]
+    - link "2026년 5월 6일 수요일 오전 6:44" [ref=e117]: "2026-05-06"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "Manus cloud computer는 사양이 어떻게 되나요? 컴피 클라우드처럼 고사양모델들 돌리기 적합한가요?"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e125]
+    - link "2026년 5월 6일 수요일 오전 8:58" [ref=e126]: "2026-05-06"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "클라우드컴퓨터 사양별 가격표 입니다. 저 처럼 라이트 유저는 월 10달러로 충분하고도 남지만은 고사양 작업일 수록 서버를 직접 운영하는게 나을지 클라우드컴퓨터를 사용하는게 나을지 비용적으로 고려해보셔야 할거에요."
+    - link [ref=e128]
+    - button [ref=e129]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e135]
+    - link "2026년 5월 6일 수요일 오전 9:14" [ref=e136]: "2026-05-06"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "아, 감사합니디. 이쪽은 고사양 모델 돌리는  것보단 24시간 돌아갈 서버용으로 적합한 것 같네요"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e92]
+    - listitem:
+      - link "개인정보처리방침" [ref=e93]
+    - listitem:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e37]:
+      - img "좋아요"
+      - text: "154"
+    - button [ref=e38]:
+      - img "답글"
+      - text: "13"
+    - button [ref=e39]:
+      - img "리포스트"
+      - text: "31"
+    - button [ref=e40]:
+      - img "공유하기"
+      - text: "51"
+    - button "정렬더 보기" [ref=e41]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e42]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - text: "순서가 중요합니다 업무를 웹앱으로 데이터화 (Manus AI든 뭐든)\nManus Cloud Computer 켜기 (월 $10)\n텔레그램 봇 깔고 웹앱 API에 연결 먼저 데이터부터 모아두세요. 그래야 봇이 갈 곳이 생깁니다. 반대로 하면 봇이 갈 곳이 없어요. 3/4"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e72]:
+    - link [ref=e73]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e74]
+    - link "2026년 5월 5일 화요일 오후 6:46" [ref=e75]: "2026-05-05"
+    - text: "4/4"
+    - button [ref=e76]:
+      - img "더 보기"
+    - link [ref=e77]:
+      - image "manus_kr님의 프로필 사진"
+    - link "manus_kr" [ref=e78]
+    - img "인증된 계정"
+    - link [ref=e79]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 5월 5일 화요일 오후 4:19" [ref=e80]: "2026-05-05"
+    - button [ref=e81]:
+      - img "수정됨"
+    - link "Cloud Computer 출시!서버 구축이나 복잡한 코드는 더 이상 필요 없습니다. Manus에 24시간 가동되는 전용 머신을 맡기기만 하면, 잠들지 않는 자동화 환경을 손에 넣" [ref=e82]
+    - group "Video player":
+      - button [ref=e83]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e84]:
+      - img "좋아요"
+      - text: "12"
+    - button [ref=e85]:
+      - img "답글"
+      - text: "7"
+    - button [ref=e86]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e87]:
+      - img "공유하기"
+      - text: "6"
+    - button [ref=e88]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]:
+      - image "devscene_님의 프로필 사진"
+    - link "devscene_" [ref=e98]
+    - link "2026년 5월 5일 화요일 오후 10:04" [ref=e99]: "2026-05-05"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "인정하는 부분입니다. 초기 휴먼리소스가 가장 많이 들어가는 부분이기도하구요. 근데 개인정보 노출 괜찮나요..?"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e107]
+    - link "2026년 5월 5일 화요일 오후 11:31" [ref=e108]: "2026-05-05"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "챗지피티로 변조된 정보 입니다"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e116]
+    - link "2026년 5월 6일 수요일 오전 6:44" [ref=e117]: "2026-05-06"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "Manus cloud computer는 사양이 어떻게 되나요? 컴피 클라우드처럼 고사양모델들 돌리기 적합한가요?"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e125]
+    - link "2026년 5월 6일 수요일 오전 8:58" [ref=e126]: "2026-05-06"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "클라우드컴퓨터 사양별 가격표 입니다. 저 처럼 라이트 유저는 월 10달러로 충분하고도 남지만은 고사양 작업일 수록 서버를 직접 운영하는게 나을지 클라우드컴퓨터를 사용하는게 나을지 비용적으로 고려해보셔야 할거에요."
+    - link [ref=e128]
+    - button [ref=e129]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e135]
+    - link "2026년 5월 6일 수요일 오전 9:14" [ref=e136]: "2026-05-06"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "아, 감사합니디. 이쪽은 고사양 모델 돌리는  것보단 24시간 돌아갈 서버용으로 적합한 것 같네요"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "ambition_monkey님의 프로필 사진"
+    - link "ambition_monkey" [ref=e144]
+    - link "2026년 5월 6일 수요일 오전 9:09" [ref=e145]: "2026-05-06"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "이거 ㄹㅇ. 비개발자분들 자동화 알려줄 때도 업무 데이터부터 정리시킴. 도구 까는 건 그 다음임"
+    - button [ref=e147]:
+      - img "좋아요"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "choi.director님의 프로필 사진"
+    - link "choi.director" [ref=e153]
+    - link "2026년 5월 6일 수요일 오후 3:33" [ref=e154]: "2026-05-06"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "핵심"
+    - button [ref=e156]:
+      - img "좋아요"
+    - button [ref=e157]:
+      - img "답글"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "downwind_1님의 프로필 사진"
+    - link "downwind_1" [ref=e162]
+    - link "2026년 5월 6일 수요일 오전 9:40" [ref=e163]: "2026-05-06"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "만번정도 맞는말씀"
+    - button [ref=e165]:
+      - img "좋아요"
+    - button [ref=e166]:
+      - img "답글"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e92]
+    - listitem:
+      - link "개인정보처리방침" [ref=e93]
+    - listitem:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e37]:
+      - img "좋아요"
+      - text: "154"
+    - button [ref=e38]:
+      - img "답글"
+      - text: "13"
+    - button [ref=e39]:
+      - img "리포스트"
+      - text: "31"
+    - button [ref=e40]:
+      - img "공유하기"
+      - text: "51"
+    - button "정렬더 보기" [ref=e41]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e42]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e72]:
+    - link [ref=e73]
+    - button [ref=e76]:
+      - img "더 보기"
+    - button [ref=e88]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "인정하는 부분입니다. 초기 휴먼리소스가 가장 많이 들어가는 부분이기도하구요. 근데 개인정보 노출 괜찮나요..?"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e107]
+    - link "2026년 5월 5일 화요일 오후 11:31" [ref=e108]: "2026-05-05"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "챗지피티로 변조된 정보 입니다"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e116]
+    - link "2026년 5월 6일 수요일 오전 6:44" [ref=e117]: "2026-05-06"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "Manus cloud computer는 사양이 어떻게 되나요? 컴피 클라우드처럼 고사양모델들 돌리기 적합한가요?"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "gasket_love님의 프로필 사진"
+    - link "gasket_love" [ref=e125]
+    - link "2026년 5월 6일 수요일 오전 8:58" [ref=e126]: "2026-05-06"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "클라우드컴퓨터 사양별 가격표 입니다. 저 처럼 라이트 유저는 월 10달러로 충분하고도 남지만은 고사양 작업일 수록 서버를 직접 운영하는게 나을지 클라우드컴퓨터를 사용하는게 나을지 비용적으로 고려해보셔야 할거에요."
+    - link [ref=e128]
+    - button [ref=e129]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e135]
+    - link "2026년 5월 6일 수요일 오전 9:14" [ref=e136]: "2026-05-06"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "아, 감사합니디. 이쪽은 고사양 모델 돌리는  것보단 24시간 돌아갈 서버용으로 적합한 것 같네요"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "ambition_monkey님의 프로필 사진"
+    - link "ambition_monkey" [ref=e144]
+    - link "2026년 5월 6일 수요일 오전 9:09" [ref=e145]: "2026-05-06"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "이거 ㄹㅇ. 비개발자분들 자동화 알려줄 때도 업무 데이터부터 정리시킴. 도구 까는 건 그 다음임"
+    - button [ref=e147]:
+      - img "좋아요"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "choi.director님의 프로필 사진"
+    - link "choi.director" [ref=e153]
+    - link "2026년 5월 6일 수요일 오후 3:33" [ref=e154]: "2026-05-06"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "핵심"
+    - button [ref=e156]:
+      - img "좋아요"
+    - button [ref=e157]:
+      - img "답글"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "downwind_1님의 프로필 사진"
+    - link "downwind_1" [ref=e162]
+    - link "2026년 5월 6일 수요일 오전 9:40" [ref=e163]: "2026-05-06"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "만번정도 맞는말씀"
+    - button [ref=e165]:
+      - img "좋아요"
+    - button [ref=e166]:
+      - img "답글"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "media01shot님의 프로필 사진"
+    - link "media01shot" [ref=e171]
+    - link "2026년 5월 6일 수요일 오후 12:27" [ref=e172]: "2026-05-06"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "이게맞다.\nAi로 딸깍하면 다된다는 이야기는 다 구라.\nAi가 소활 수 있게 정보를 데이터로 쪼개서 떠먹여줘야지"
+    - button [ref=e174]:
+      - img "좋아요"
+    - button [ref=e175]:
+      - img "답글"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "aimaster3658님의 프로필 사진"
+    - link "aimaster3658" [ref=e180]
+    - link "2026년 5월 5일 화요일 오후 9:11" [ref=e181]: "2026-05-05"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "귀엽긴하네요"
+    - button [ref=e183]:
+      - img "좋아요"
+    - button [ref=e184]:
+      - img "답글"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e92]
+    - listitem:
+      - link "개인정보처리방침" [ref=e93]
+    - listitem:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e37]:
+      - img "좋아요"
+      - text: "154"
+    - button [ref=e38]:
+      - img "답글"
+      - text: "13"
+    - button [ref=e39]:
+      - img "리포스트"
+      - text: "31"
+    - button [ref=e40]:
+      - img "공유하기"
+      - text: "51"
+    - button "정렬더 보기" [ref=e41]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e42]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e72]:
+    - link [ref=e73]
+    - button [ref=e76]:
+      - img "더 보기"
+    - button [ref=e88]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e109]:
+      - img "더 보기"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]
+    - button [ref=e118]:
+      - img "더 보기"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]
+    - button [ref=e127]:
+      - img "더 보기"
+    - button [ref=e129]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e135]
+    - link "2026년 5월 6일 수요일 오전 9:14" [ref=e136]: "2026-05-06"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "아, 감사합니디. 이쪽은 고사양 모델 돌리는  것보단 24시간 돌아갈 서버용으로 적합한 것 같네요"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "ambition_monkey님의 프로필 사진"
+    - link "ambition_monkey" [ref=e144]
+    - link "2026년 5월 6일 수요일 오전 9:09" [ref=e145]: "2026-05-06"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "이거 ㄹㅇ. 비개발자분들 자동화 알려줄 때도 업무 데이터부터 정리시킴. 도구 까는 건 그 다음임"
+    - button [ref=e147]:
+      - img "좋아요"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "choi.director님의 프로필 사진"
+    - link "choi.director" [ref=e153]
+    - link "2026년 5월 6일 수요일 오후 3:33" [ref=e154]: "2026-05-06"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "핵심"
+    - button [ref=e156]:
+      - img "좋아요"
+    - button [ref=e157]:
+      - img "답글"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "downwind_1님의 프로필 사진"
+    - link "downwind_1" [ref=e162]
+    - link "2026년 5월 6일 수요일 오전 9:40" [ref=e163]: "2026-05-06"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "만번정도 맞는말씀"
+    - button [ref=e165]:
+      - img "좋아요"
+    - button [ref=e166]:
+      - img "답글"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "media01shot님의 프로필 사진"
+    - link "media01shot" [ref=e171]
+    - link "2026년 5월 6일 수요일 오후 12:27" [ref=e172]: "2026-05-06"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "이게맞다.\nAi로 딸깍하면 다된다는 이야기는 다 구라.\nAi가 소활 수 있게 정보를 데이터로 쪼개서 떠먹여줘야지"
+    - button [ref=e174]:
+      - img "좋아요"
+    - button [ref=e175]:
+      - img "답글"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "aimaster3658님의 프로필 사진"
+    - link "aimaster3658" [ref=e180]
+    - link "2026년 5월 5일 화요일 오후 9:11" [ref=e181]: "2026-05-05"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "귀엽긴하네요"
+    - button [ref=e183]:
+      - img "좋아요"
+    - button [ref=e184]:
+      - img "답글"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e92]
+    - listitem:
+      - link "개인정보처리방침" [ref=e93]
+    - listitem:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
+  - img "만들기"
+=== SNAPSHOT 6 ===
+- title: "업무 자동화 한답시고 맥미니 사서 오픈클로 설치 제발좀 하지마세요 요새 AI 자동화라면서 귀여운 캐릭터들이 어항 안에서 자기들끼리 일하는 영상 많이 돕니다. 자동으로 뭐가 되는거 같으니깐 혹하지 마세요 뜬구름 잡는 소리입니다. 자동화의 핵심은 봇이 아닙니다. 업무를 먼저 데이터로 만들어 두는 것이 핵심입니다. 봇이 똑똑한 게 아니라, 봇이 손댈 수 있는 데이터 구조가 똑똑한 겁니다." [url=https://www.threads.com/@gasket_love/post/DX88rThgRJm]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.6만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e37]:
+      - img "좋아요"
+      - text: "154"
+    - button [ref=e38]:
+      - img "답글"
+      - text: "13"
+    - button [ref=e39]:
+      - img "리포스트"
+      - text: "31"
+    - button [ref=e40]:
+      - img "공유하기"
+      - text: "51"
+    - button "정렬더 보기" [ref=e41]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e42]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e44]
+    - button "GIF 추가" [ref=e45]
+    - button "작성 도구 확장" [ref=e46]
+  - generic [ref=e47]:
+    - link [ref=e48]
+    - button [ref=e51]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e68]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e69]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e70]:
+      - img "리포스트"
+    - button [ref=e71]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e72]:
+    - link [ref=e73]
+    - button [ref=e76]:
+      - img "더 보기"
+    - button [ref=e88]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e89]:
+      - img "답글"
+    - button [ref=e90]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e91]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e109]:
+      - img "더 보기"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]
+    - button [ref=e118]:
+      - img "더 보기"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]
+    - button [ref=e127]:
+      - img "더 보기"
+    - button [ref=e129]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e130]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "woong_nya님의 프로필 사진"
+    - link "woong_nya" [ref=e135]
+    - link "2026년 5월 6일 수요일 오전 9:14" [ref=e136]: "2026-05-06"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "아, 감사합니디. 이쪽은 고사양 모델 돌리는  것보단 24시간 돌아갈 서버용으로 적합한 것 같네요"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e139]:
+      - img "답글"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "ambition_monkey님의 프로필 사진"
+    - link "ambition_monkey" [ref=e144]
+    - link "2026년 5월 6일 수요일 오전 9:09" [ref=e145]: "2026-05-06"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "이거 ㄹㅇ. 비개발자분들 자동화 알려줄 때도 업무 데이터부터 정리시킴. 도구 까는 건 그 다음임"
+    - button [ref=e147]:
+      - img "좋아요"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "choi.director님의 프로필 사진"
+    - link "choi.director" [ref=e153]
+    - link "2026년 5월 6일 수요일 오후 3:33" [ref=e154]: "2026-05-06"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "핵심"
+    - button [ref=e156]:
+      - img "좋아요"
+    - button [ref=e157]:
+      - img "답글"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "downwind_1님의 프로필 사진"
+    - link "downwind_1" [ref=e162]
+    - link "2026년 5월 6일 수요일 오전 9:40" [ref=e163]: "2026-05-06"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "만번정도 맞는말씀"
+    - button [ref=e165]:
+      - img "좋아요"
+    - button [ref=e166]:
+      - img "답글"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "media01shot님의 프로필 사진"
+    - link "media01shot" [ref=e171]
+    - link "2026년 5월 6일 수요일 오후 12:27" [ref=e172]: "2026-05-06"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "이게맞다.\nAi로 딸깍하면 다된다는 이야기는 다 구라.\nAi가 소활 수 있게 정보를 데이터로 쪼개서 떠먹여줘야지"
+    - button [ref=e174]:
+      - img "좋아요"
+    - button [ref=e175]:
+      - img "답글"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "aimaster3658님의 프로필 사진"
+    - link "aimaster3658" [ref=e180]
+    - link "2026년 5월 5일 화요일 오후 9:11" [ref=e181]: "2026-05-05"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "귀엽긴하네요"
+    - button [ref=e183]:
+      - img "좋아요"
+    - button [ref=e184]:
+      - img "답글"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e92]
+    - listitem:
+      - link "개인정보처리방침" [ref=e93]
+    - listitem:
+      - link "쿠키 정책" [ref=e94]
+- button "만들기" [ref=e95]:
+  - img "만들기"
+=== DONE ===
+[ok | 19971ms]

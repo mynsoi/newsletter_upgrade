@@ -65,17 +65,57 @@ https://..."""
 
 
 def snapshot(url):
-    tag = "c" + re.sub(r"\W", "", str(time.time_ns()))[-8:]
-    # 스크롤하면 Threads가 위쪽 본문을 화면에서 내려 스냅샷에서 빠진다(2026-10-09 시험) — 첫 화면 그대로 뜬다.
-    # 그래서 Threads 작성자 답글은 첫 화면에 보이는 것까지만 들어온다.
-    js = (f"const t{tag} = await openTab({json.dumps(url)}); await new Promise(r => setTimeout(r, 4000)); "
-          f"const s{tag} = await snapshot(t{tag}); console.log(s{tag}.tree); await closeTab(t{tag});")
+    """한 장 스냅샷. Threads는 화면 밖 글 블록을 문서에서 내려서, 끝까지 내려가며 여러 장을 찍는다(scroll_snapshots)."""
+    if site_of(url) == "threads":
+        return scroll_snapshots(url)
+    js = ("await (async () => { const sleep = ms => new Promise(r => setTimeout(r, ms));"
+          f" const p = await openTab({json.dumps(url)}); await sleep(4000);"
+          " const s = await snapshot(p); console.log(s.tree); await closeTab(p); })();")
+    return with_url(run_repl(js), url)
+
+
+def run_repl(js, timeout=170):
     r = subprocess.run(["aside-win", "repl", "--host", "local", js], stdin=subprocess.DEVNULL,
-                       capture_output=True, text=True, timeout=180)
-    out = r.stdout
-    if "URL: " not in out[:2000]:
-        out = f"URL: {url}\n" + out
-    return out
+                       capture_output=True, text=True, timeout=timeout)
+    return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", r.stdout)
+
+
+def with_url(out, url):
+    return out if "URL: " in out[:2000] else f"URL: {url}\n" + out
+
+
+def scroll_snapshots(url):
+    """맨 위에서 한 장, 화면의 80%씩 내려가며 한 장씩 — 바닥에서 더 늘지 않을 때까지. 개수 상한 없음.
+    찍기 전에 화면에 보이는 "답글 보기"를 모두 눌러 접힌 답글을 펼친다(그 자리에서 펼쳐짐, 2026-10-09 확인).
+    REPL 한 번은 120초 제한이라 90초마다 끊고, 탭을 닫지 않은 채 다음 호출에서 이어서 내려간다."""
+    name = "collectTab_" + re.sub(r"\W", "", str(time.time_ns()))[-10:]
+    pages, k, done = [], 0, False
+    first = True
+    while not done:
+        js = ("await (async () => { const sleep = ms => new Promise(r => setTimeout(r, ms));"
+              + (f" globalThis.{name} = await openTab({json.dumps(url)}); await sleep(4000);" if first else "")
+              + f" const p = globalThis.{name}; const t0 = Date.now(); let k = {k}, lastH = -1, still = 0;"
+              " while (true) {"
+              "  for (let j = 0; j < 5; j++) { const c = await p.evaluate(() => { const b = [...document.querySelectorAll('[role=button], button')].filter(e => e.textContent.trim() === '답글 보기'); b.forEach(e => e.click()); return b.length; }); if (!c) break; await sleep(2000); }"
+              "  const s = await snapshot(p); k++; console.log('=== SNAPSHOT ' + k + ' ==='); console.log(s.tree);"
+              "  const st = await p.evaluate(() => ({ y: scrollY, ih: innerHeight, h: document.body.scrollHeight }));"
+              "  if (st.y + st.ih >= st.h - 5) { if (st.h === lastH) { still++; if (still >= 2) { console.log('=== DONE ==='); break; } } else still = 0; }"
+              "  lastH = st.h;"
+              "  if (Date.now() - t0 > 90000) { console.log('=== CONTINUE ' + k + ' ==='); break; }"
+              "  await p.evaluate(() => scrollBy(0, Math.floor(innerHeight * 0.8))); await sleep(1500);"
+              " }"
+              f" if (!globalThis.{name}) return;"
+              " })();")
+        out = run_repl(js)
+        pages.append(out)
+        first = False
+        m = re.search(r"=== CONTINUE (\d+) ===", out)
+        if m:
+            k = int(m.group(1))
+        else:
+            done = True
+    run_repl(f"await (async () => {{ if (globalThis.{name}) {{ await closeTab(globalThis.{name}); delete globalThis.{name}; }} }})();", 60)
+    return with_url("\n".join(pages), url)
 
 
 def generic(snap, url):
