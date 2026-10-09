@@ -9,9 +9,8 @@ import { MultiStepPanel } from "@/components/ui/multi-step-loader";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import ParticleButton from "@/components/kokonutui/particle-button";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
-import AnthropicDark from "@/components/kokonutui/anthropic-dark";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
-import { ByChip, Chip, MiniMd, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
+import { ByChip, Chip, ClaudeMark, MiniMd, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
 import { Cover, StageChip } from "@/views/Articles";
 import { act, articleTitle, getChat, img, runningJob, type Article as A, type ChatMsg, type State, type Step } from "@/lib/api";
 import { keptSentences, paragraphs, sentences, when } from "@/lib/text";
@@ -53,25 +52,25 @@ export default function Article({
         ) : (
           <Cover a={a} />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-page via-page/70 to-page/10" />
         <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-12 pb-10">
           <div className="flex items-center gap-2">
             <StageChip a={a} />
             {a.sources.map(([p, d]) => (
               <button key={p} onClick={() => setSrc(p)} className="transition hover:opacity-80">
-                <Chip className="bg-black/40 backdrop-blur">
+                <Chip className="bg-page/60 backdrop-blur">
                   <SiteIcon site={lib[p]?.site ?? ""} className="size-3.5" />
                   <span className="max-w-56 truncate">{lib[p] ? sourceName(lib[p]) : d}</span>
                 </Chip>
               </button>
             ))}
           </div>
-          <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-tight tracking-tight text-white">{articleTitle(a)}</h1>
-          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-neutral-300">{a.thesis}</p>
+          <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-tight tracking-tight text-ink">{articleTitle(a)}</h1>
+          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-ink-2">{a.thesis}</p>
         </div>
       </div>
 
-      <div className="sticky top-0 z-30 border-b border-white/[0.06] bg-neutral-950/80 backdrop-blur-xl">
+      <div className="sticky top-0 z-30 border-b border-line bg-page/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center px-12 py-3">
           <PillTabs tabs={TABS} value={t} onChange={(v) => go(`#/a/${a.id}/${v}`)} />
         </div>
@@ -89,9 +88,9 @@ export default function Article({
       )}
       <button
         onClick={() => setChatOpen(true)}
-        className="fixed right-8 bottom-8 z-40 grid size-14 place-items-center rounded-full border border-white/10 bg-neutral-900 shadow-2xl shadow-orange-500/10 transition hover:scale-105 hover:border-orange-300/40"
+        className="fixed right-8 bottom-8 z-40 grid size-14 place-items-center rounded-full border border-line bg-panel-solid shadow-2xl shadow-orange-500/10 transition hover:scale-105 hover:border-orange-300/40"
       >
-        <AnthropicDark className="size-5" />
+        <ClaudeMark className="size-5" />
         {runningJob(state.jobs, "chat", a.id) && <span className="absolute top-1 right-1 size-3 animate-ping rounded-full bg-orange-400" />}
       </button>
       <Director a={a} state={state} open={chatOpen} onClose={() => setChatOpen(false)} refresh={refresh} />
@@ -108,7 +107,7 @@ function RunButton({ running, onClick, icon, label, spin }: { running: boolean; 
   return (
     <HoverBorderGradient
       containerClassName="rounded-full"
-      className="flex items-center gap-2 bg-neutral-950 px-5 py-2.5 text-sm text-white"
+      className="flex items-center gap-2 bg-page px-5 py-2.5 text-sm text-ink"
       onClick={() => !running && onClick()}
     >
       {running ? (
@@ -130,13 +129,13 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
   const writing = !!runningJob(state.jobs, "write", a.id);
   const rounds = [...a.titles].reverse();
   if (a.kind === "process")
-    return <div className="py-24 text-center text-4xl font-semibold text-white">{a.title}</div>;
+    return <div className="py-24 text-center text-4xl font-semibold text-ink">{a.title}</div>;
   return (
     <div className="py-10">
       <div className="flex items-center justify-between">
         {a.title && !a.steps.length ? (
           <ParticleButton
-            className="h-12 rounded-full bg-white px-8 text-base font-semibold text-black hover:bg-violet-200"
+            className="h-12 rounded-full bg-ink px-8 text-base font-semibold text-page hover:bg-violet-500 hover:text-ink"
             disabled={writing}
             onClick={() => act("write", { article: a.id }).then(refresh).then(() => go(`#/a/${a.id}/process`))}
           >
@@ -160,7 +159,7 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
       )}
       {rounds.map((r, ri) => (
         <section key={r.at} className={cn("mt-8", ri > 0 && "opacity-60 transition hover:opacity-100")}>
-          {rounds.length > 1 && <div className="px-2 text-sm tabular-nums text-neutral-500">{when(r.at)}</div>}
+          {rounds.length > 1 && <div className="px-2 text-sm tabular-nums text-ink-3">{when(r.at)}</div>}
           <HoverEffect
             items={r.items}
             getKey={(x) => x}
@@ -168,8 +167,8 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
             onSelect={(x) => act("title", { article: a.id, title: x }).then(refresh)}
             render={(x, i) => (
               <div className="flex min-h-36 flex-col justify-between">
-                <span className="text-sm tabular-nums text-neutral-500">{String(i + 1).padStart(2, "0")}</span>
-                <span className="mt-6 text-lg font-semibold leading-snug text-neutral-100 [word-break:keep-all]">{x}</span>
+                <span className="text-sm tabular-nums text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mt-6 text-lg font-semibold leading-snug text-ink [word-break:keep-all]">{x}</span>
               </div>
             )}
           />
@@ -185,16 +184,16 @@ function Prose({ text, prev }: { text: string; prev?: string }) {
   const kept = useMemo(() => (prev !== undefined ? keptSentences(prev, text) : null), [prev, text]);
   let idx = 0;
   return (
-    <div className="prose-ko text-neutral-200">
+    <div className="prose-ko text-ink">
       {paragraphs(text).map((p, i) => {
-        if (/^#{1,3}\s/.test(p)) return <h4 key={i} className="mt-8 mb-3 text-lg font-semibold text-white">{p.replace(/^#+\s*/, "")}</h4>;
+        if (/^#{1,3}\s/.test(p)) return <h4 key={i} className="mt-8 mb-3 text-lg font-semibold text-ink">{p.replace(/^#+\s*/, "")}</h4>;
         return (
           <p key={i}>
             {sentences(p.replace(/^[>*\-\s]+/, "")).map((s, j) => {
               const k = idx++;
               const fresh = kept && !kept.has(k);
               return (
-                <span key={j} className={cn(fresh && "s-add text-white")}>
+                <span key={j} className={cn(fresh && "s-add text-ink")}>
                   {s}{" "}
                 </span>
               );
@@ -213,8 +212,8 @@ function Feedback({ text }: { text: string }) {
       onClick={() => setOpen(!open)}
       className="mb-6 flex w-full gap-3 rounded-2xl border border-violet-400/20 bg-violet-500/[0.07] p-5 text-left"
     >
-      <IconQuote className="size-5 shrink-0 text-violet-300" />
-      <span className={cn("whitespace-pre-line text-[14.5px] leading-relaxed text-violet-100/90", !open && "line-clamp-3")}>{text}</span>
+      <IconQuote className="size-5 shrink-0 text-violet-500 dark:text-violet-300" />
+      <span className={cn("whitespace-pre-line text-[14.5px] leading-relaxed text-violet-900 dark:text-violet-100/90", !open && "line-clamp-3")}>{text}</span>
     </button>
   );
 }
@@ -223,8 +222,8 @@ function StepCard({ s, prev, diff, articleTitle: at }: { s: Step; prev?: Step; d
   return (
     <div className="max-w-[720px]">
       {s.feedback && <Feedback text={s.feedback} />}
-      <div className="rounded-3xl border border-white/[0.07] bg-neutral-900/50 px-10 py-9">
-        {s.title && s.title !== at && <h3 className="mb-6 text-2xl font-semibold leading-snug text-white">{s.title}</h3>}
+      <div className="rounded-3xl border border-line bg-panel px-10 py-9">
+        {s.title && s.title !== at && <h3 className="mb-6 text-2xl font-semibold leading-snug text-ink">{s.title}</h3>}
         <Prose text={s.text} prev={diff && prev ? prev.text : undefined} />
       </div>
     </div>
@@ -239,10 +238,10 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
   const data = a.steps.map((s, i) => ({
     title: `과정 ${s.n}`,
     aside: (
-      <div className="mt-5 flex flex-col items-start gap-2 text-sm text-neutral-500">
+      <div className="mt-5 flex flex-col items-start gap-2 text-sm text-ink-3">
         <ByChip by={s.by} />
         <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
-        <span className="tabular-nums text-neutral-600">{when(s.at)}</span>
+        <span className="tabular-nums text-ink-3">{when(s.at)}</span>
       </div>
     ),
     content: <StepCard s={s} prev={a.steps[i - 1]} diff={diff} articleTitle={at} />,
@@ -259,7 +258,7 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       aside: <div className="mt-5"><ByChip by={v === 0 ? "Claude" : "astra"} /></div>,
       content: (
         <MultiStepPanel
-          className="max-w-[720px] rounded-3xl border border-white/[0.07] bg-neutral-900/50"
+          className="max-w-[720px] rounded-3xl border border-line bg-panel"
           value={Math.min(v, 2)}
           loadingStates={[{ text: "과정 1 · Claude" }, { text: "과정 2 · astra" }, { text: "과정 3 · astra" }]}
         />
@@ -271,7 +270,7 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       title: `과정 ${a.steps.length + 1}`,
       aside: <div className="mt-5"><ByChip by="astra" /></div>,
       content: (
-        <div className="flex h-60 max-w-[720px] items-center justify-center rounded-3xl border border-white/[0.07] bg-neutral-900/50">
+        <div className="flex h-60 max-w-[720px] items-center justify-center rounded-3xl border border-line bg-panel">
           <AITextLoading texts={["astra"]} />
         </div>
       ),
@@ -281,13 +280,13 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
       <div className="flex justify-center py-32">
         {a.title ? (
           <ParticleButton
-            className="h-12 rounded-full bg-white px-10 text-base font-semibold text-black hover:bg-violet-200"
+            className="h-12 rounded-full bg-ink px-10 text-base font-semibold text-page hover:bg-violet-500 hover:text-ink"
             onClick={() => act("write", { article: a.id }).then(refresh)}
           >
             쓰기
           </ParticleButton>
         ) : (
-          <button onClick={() => go(`#/a/${a.id}/title`)} className="rounded-full border border-white/15 px-8 py-3 text-white hover:bg-white/5">
+          <button onClick={() => go(`#/a/${a.id}/title`)} className="rounded-full border border-line px-8 py-3 text-ink hover:bg-soft">
             제목
           </button>
         )}
@@ -301,10 +300,10 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
             onClick={() => setDiff(!diff)}
             className={cn(
               "flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm transition",
-              diff ? "border-violet-400/60 bg-violet-500/20 text-violet-100" : "border-white/10 bg-neutral-900/80 text-neutral-400 hover:text-white"
+              diff ? "border-violet-400/60 bg-violet-500/20 text-violet-800 dark:text-violet-100" : "border-line bg-panel text-ink-2 hover:text-ink"
             )}
           >
-            <span className={cn("size-2 rounded-full", diff ? "bg-violet-300" : "bg-neutral-600")} />
+            <span className={cn("size-2 rounded-full", diff ? "bg-violet-300" : "bg-ink-3")} />
             비교
           </button>
         </div>
@@ -320,7 +319,7 @@ function Composer({ a, state, refresh, onDirector }: { a: A; state: State; refre
   const canRevise = a.kind === "brief" && a.steps.length >= 3;
   const modes = [
     ...(canRevise ? [{ id: "feedback", label: "피드백", icon: <IconPencil className="size-3.5 text-emerald-300" /> }] : []),
-    { id: "director", label: "진행자", icon: <AnthropicDark className="size-3.5" /> },
+    { id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> },
   ];
   const [mode, setMode] = useState(modes[0].id);
   useEffect(() => {
@@ -328,7 +327,7 @@ function Composer({ a, state, refresh, onDirector }: { a: A; state: State; refre
   }, [canRevise]); // eslint-disable-line
   const busy = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "chat", a.id);
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-t from-neutral-950 via-neutral-950/90 to-transparent pt-16 pl-[60px]">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-t from-page via-page/90 to-transparent pt-16 pl-[60px]">
       <AI_Prompt
         className="pointer-events-auto w-[680px] pb-5"
         modes={modes}
@@ -367,11 +366,11 @@ function Director({ a, state, open, onClose, refresh }: { a: A; state: State; op
   useEffect(() => end.current?.scrollIntoView({ behavior: "smooth" }), [log.length, !!running]);
   return (
     <Drawer direction="right" open={open} onOpenChange={(o) => !o && onClose()}>
-      <DrawerContent className="z-[70] bg-neutral-950 border-white/10 data-[vaul-drawer-direction=right]:w-[560px] data-[vaul-drawer-direction=right]:sm:max-w-[560px]">
+      <DrawerContent className="z-[70] bg-page border-line data-[vaul-drawer-direction=right]:w-[560px] data-[vaul-drawer-direction=right]:sm:max-w-[560px]">
         <div className="flex h-full flex-col">
-          <div className="flex items-center gap-3 border-b border-white/[0.06] px-7 py-5">
-            <AnthropicDark className="size-4" />
-            <DrawerTitle className="text-base font-semibold text-white">진행자</DrawerTitle>
+          <div className="flex items-center gap-3 border-b border-line px-7 py-5">
+            <ClaudeMark className="size-4" />
+            <DrawerTitle className="text-base font-semibold text-ink">진행자</DrawerTitle>
           </div>
           <div className="flex-1 space-y-5 overflow-y-auto px-7 py-6">
             {log.map((m, i) => (
@@ -380,7 +379,7 @@ function Director({ a, state, open, onClose, refresh }: { a: A; state: State; op
                   className={cn(
                     "max-w-[88%] rounded-2xl px-4 py-3 text-[14.5px] leading-relaxed",
                     m.role === "mentor" && "whitespace-pre-line",
-                    m.role === "mentor" ? "bg-violet-500/20 text-violet-50" : "border border-white/[0.07] bg-neutral-900 text-neutral-200"
+                    m.role === "mentor" ? "bg-violet-500/20 text-violet-950 dark:text-violet-50" : "border border-line bg-panel-solid text-ink"
                   )}
                 >
                   {m.role === "claude" ? <MiniMd text={m.text} /> : m.text}
@@ -392,7 +391,7 @@ function Director({ a, state, open, onClose, refresh }: { a: A; state: State; op
           </div>
           <AI_Prompt
             className="w-full px-5 pb-5"
-            modes={[{ id: "director", label: "진행자", icon: <AnthropicDark className="size-3.5" /> }]}
+            modes={[{ id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> }]}
             mode={mode}
             onModeChange={setMode}
             onSubmit={(v) => act("chat", { article: a.id, message: v }).then(refresh)}
@@ -423,7 +422,7 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
         )}
       </div>
       {running && (
-        <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-white/[0.07] bg-neutral-900/40">
+        <div className="mt-8 flex h-72 items-center justify-center rounded-3xl border border-line bg-panel">
           <AITextLoading texts={["astra · 그림 설명", "gti · 그리는 중"]} />
         </div>
       )}
@@ -435,10 +434,10 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
               key: `${r.id}-${i}`,
               title: it.name,
               src: it.src ? img(it.src, 900) : undefined,
-              fallback: <div className="absolute inset-0 bg-neutral-900" />,
+              fallback: <div className="absolute inset-0 bg-panel-solid" />,
               selected: !!it.src && a.hero === it.src,
               onClick: () => it.src && act("hero", { article: a.id, src: it.src }).then(refresh),
-              overlay: <div className="text-lg font-medium text-white">{it.name}</div>,
+              overlay: <div className="text-lg font-medium">{it.name}</div>,
             }))}
           />
         </section>
@@ -456,7 +455,7 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
   if (!s) return null;
   return (
     <div className="grid grid-cols-[1fr_260px] gap-12 py-10">
-      <article className="overflow-hidden rounded-3xl border border-white/[0.07] bg-[#fbfaf7] text-neutral-900 shadow-2xl">
+      <article className="overflow-hidden rounded-3xl border border-line bg-[#fbfaf7] text-neutral-900 shadow-2xl">
         {hero && <img src={img(hero, 1400)} className="aspect-[3/2] w-full object-cover" />}
         <div className="px-14 py-12">
           <h2 className="text-[32px] font-bold leading-snug tracking-tight">{articleTitle(a)}</h2>
@@ -475,23 +474,23 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
               onClick={() => setN(x.n)}
               className={cn(
                 "rounded-full border px-4 py-1.5 text-sm transition",
-                x.n === n ? "border-white bg-white text-black" : "border-white/10 text-neutral-400 hover:text-white"
+                x.n === n ? "border-ink bg-ink text-page" : "border-line text-ink-2 hover:text-ink"
               )}
             >
               과정 {x.n}
             </button>
           ))}
         </div>
-        <div className="text-sm tabular-nums text-neutral-500">{s.chars.toLocaleString()}자</div>
+        <div className="text-sm tabular-nums text-ink-3">{s.chars.toLocaleString()}자</div>
         {a.confirmed ? (
-          <Chip className="border-emerald-300/40 bg-emerald-500/15 px-4 py-1.5 text-sm text-emerald-100">
+          <Chip className="border-emerald-300/40 bg-emerald-500/15 px-4 py-1.5 text-sm text-emerald-800 dark:text-emerald-100">
             확정 {a.confirmed.date}
             {a.confirmed.step ? ` · 과정 ${a.confirmed.step}` : ""}
           </Chip>
         ) : null}
         {a.kind === "brief" && (
           <ParticleButton
-            className="h-12 w-full rounded-full bg-white text-base font-semibold text-black hover:bg-emerald-200"
+            className="h-12 w-full rounded-full bg-ink text-base font-semibold text-page hover:bg-emerald-500 hover:text-ink"
             onClick={() => act("confirm", { article: a.id, step: n }).then(refresh)}
           >
             확정

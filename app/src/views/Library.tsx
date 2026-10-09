@@ -1,4 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { IconArrowRight, IconSparkles, IconWorldSearch } from "@tabler/icons-react";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
@@ -6,16 +8,23 @@ import { PillTabs } from "@/components/ui/tabs";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, Reactions, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
-import { act, type Source, type State } from "@/lib/api";
+import { act, runningJob, type Source, type State } from "@/lib/api";
+import { roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 const ORDER = ["threads", "linkedin", "infuture"];
 
-export default function Library({ state, refresh }: { state: State; refresh: () => void }) {
+export default function Library({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [site, setSite] = useState("all");
   const [open, setOpen] = useState<string | null>(null);
   const [req, setReq] = useState("");
   const collecting = state.jobs.filter((j) => j.kind === "collect" && j.status === "running");
+  const box = useRef<HTMLDivElement>(null);
+  const topicsRunning = !!runningJob(state.jobs, "topics");
+  const collect = () => {
+    if (!req.trim()) return box.current?.querySelector("input")?.focus();
+    box.current?.querySelector("form")?.requestSubmit();
+  };
 
   const sites = useMemo(() => {
     const m = new Map<string, { name: string; n: number }>();
@@ -45,11 +54,12 @@ export default function Library({ state, refresh }: { state: State; refresh: () 
 
   return (
     <div className="relative min-h-full">
-      <div className="relative h-[340px] overflow-hidden border-b border-white/[0.06]">
+      <div className="relative h-[380px] overflow-hidden border-b border-line">
         <Spotlight />
         <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-12 pb-12">
-          <h1 className="text-6xl font-bold tracking-tight text-white">서재</h1>
-          <div className="mt-8 w-full max-w-2xl [&_form]:mx-0 [&_form]:max-w-2xl">
+          <h1 className="text-6xl font-bold tracking-tight text-ink">서재</h1>
+          <div className="mt-8 flex items-center gap-3">
+          <div ref={box} className="w-full max-w-2xl [&_form]:mx-0 [&_form]:max-w-2xl">
             <PlaceholdersAndVanishInput
               placeholders={[
                 "Threads에서 AI로 일하는 방식을 바꾼 실무자 글",
@@ -64,6 +74,31 @@ export default function Library({ state, refresh }: { state: State; refresh: () 
               }}
             />
           </div>
+            <HoverBorderGradient
+              containerClassName="shrink-0 rounded-full"
+              className="flex items-center gap-2 bg-page px-5 py-2.5 text-sm font-medium text-ink"
+              onClick={collect}
+            >
+              <IconWorldSearch className="size-4" /> aside 수집
+            </HoverBorderGradient>
+            <button
+              onClick={() => (topicsRunning ? Promise.resolve() : act("topics")).then(refresh).then(() => go("#/topics"))}
+              className="flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
+            >
+              <IconSparkles className="size-4" /> 주제 뽑기 <IconArrowRight className="size-4" />
+            </button>
+          </div>
+          {state.collects.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {state.collects.slice(0, 6).map((c) => (
+                <Chip key={c.id} className="bg-page/60 backdrop-blur">
+                  <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
+                  <span className="max-w-64 truncate">{c.request}</span>
+                  <span className="tabular-nums text-violet-700 dark:text-violet-300">+{c.saved.filter((x) => x.path).length}</span>
+                </Chip>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -105,22 +140,22 @@ function SourceCard({ s, wide, fresh, onOpen }: { s: Source; wide: boolean; fres
   return (
     <div className={cn("relative rounded-2xl", wide && "md:col-span-2")} onClick={onOpen}>
       <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-      <div className="group/bento relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.08] bg-neutral-900/70 p-5 transition duration-200 hover:bg-neutral-900">
-        <div className="flex items-center gap-2 text-xs text-neutral-400">
+      <div className="group/bento relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-line bg-panel p-5 transition duration-200 hover:bg-panel-solid">
+        <div className="flex items-center gap-2 text-xs text-ink-2">
           <SiteIcon site={s.site} />
           <span className="truncate">{s.date}</span>
           <span className="ml-auto flex items-center gap-2">
-            {fresh && <Chip className="border-violet-400/40 text-violet-200">new</Chip>}
+            {fresh && <Chip className="border-violet-400/40 text-violet-700 dark:text-violet-200">new</Chip>}
             <Reactions n={s.reactions} />
           </span>
         </div>
         <div className="mt-4 flex-1 overflow-hidden transition duration-200 group-hover/bento:translate-x-1">
-          <div className={cn("font-semibold text-neutral-100 leading-snug", wide ? "text-xl" : "text-base", "line-clamp-2")}>
+          <div className={cn("font-semibold text-ink leading-snug", wide ? "text-xl" : "text-base", "line-clamp-2")}>
             {sourceName(s)}
           </div>
-          <p className={cn("mt-3 text-sm leading-relaxed text-neutral-400", wide ? "line-clamp-4" : "line-clamp-3")}>{s.excerpt}</p>
+          <p className={cn("mt-3 text-sm leading-relaxed text-ink-2", wide ? "line-clamp-4" : "line-clamp-3")}>{s.excerpt}</p>
         </div>
-        <div className="mt-3 text-xs tabular-nums text-neutral-600">{s.chars.toLocaleString()}자</div>
+        <div className="mt-3 text-xs tabular-nums text-ink-3">{s.chars.toLocaleString()}자</div>
       </div>
     </div>
   );

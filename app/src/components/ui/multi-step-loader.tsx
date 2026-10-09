@@ -159,7 +159,7 @@ export const MultiStepPanel = ({
       <div className="-mt-28">
         <LoaderCore value={value} loadingStates={loadingStates} />
       </div>
-      <div className="pointer-events-none absolute inset-0 [background:radial-gradient(600px_at_center,transparent_30%,rgb(10_10_10))]" />
+      <div className="pointer-events-none absolute inset-0 [background:radial-gradient(600px_at_center,transparent_30%,var(--page))]" />
     </div>
   );
 };

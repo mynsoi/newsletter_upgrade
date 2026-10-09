@@ -146,13 +146,13 @@ export const PillTabs = ({
             <motion.div
               layoutId="pilltab"
               transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-              className="absolute inset-0 bg-zinc-800 rounded-full"
+              className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 rounded-full"
             />
           )}
           <span
             className={cn(
               "relative block text-sm transition-colors",
-              value === tab.value ? "text-white" : "text-neutral-500 hover:text-neutral-300"
+              value === tab.value ? "text-ink" : "text-ink-3 hover:text-ink-2"
             )}
           >
             {tab.title}

@@ -1,0 +1,111 @@
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 전 직원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 8개 지어 주세요.
+
+이 글이 말할 것: AI 활용의 첫 성과는 매주 반복하는 자료 취합, 일정 확인, 회의 준비에서도 만들 수 있다. 자주 하는 작업 하나를 골라 초안과 정리를 맡기고, 사람이 확인하는 시간까지 포함해 얼마나 일이 줄었는지 살펴보자.
+
+- [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.
+- [멘토가 직접 지은 제목]도 참고하세요.
+- 원문이 실제로 보여 주는 것을 과장하지 않습니다.
+- 후보끼리는 서로 다른 결로 지어 주세요.
+
+출력: 번호를 붙인 제목 8줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
+
+[멘토가 직접 지은 제목]
+- 왜 AI를 쓰는데 더 퇴근 시간이 빨라지지 않을까요?
+
+[제목 참고]
+- 연봉을 많이 줘도 직원들이 퇴사하는 이유
+- 경쟁시키면 성과가 올라갈까요?
+- 질문으로 상대방의 행동에 개입하는 법
+- 동료에게 부탁할 때 꼭 지켜야 할 룰은?
+- 직원들에게 AI를 적극 활용하라고 하기 전에
+- 일 잘하는 직원에겐 교육이 필요없을까요?
+- '우리와 잘 맞는 사람'이라는 평가는 온당할까?
+- 조직의 문제는 없는 게 아니라 '리더만 모를 뿐'
+- 지친 직원에게 업무를 줄여주지 마세요
+- AI 결과물은 너무 훌륭해서 문제!
+- 남을 웃기려면 머리를 쓰게 하지 마세요
+- 인앤아웃이 맥도날드보다 잘 나가는 이유는?
+- 모두를 동등하게 대하는 것은 나쁜 리더십
+- 지원자의 성격을 보고 채용하나요?
+- 여러분의 직원들은 '팀플레이어'인가요?
+- '원료비 급등으로 가격 인상합니다'란 말은 하지 마세요
+- AI가 팀워크에 기여하도록 하려면?
+- AI가 만든 광고는 과연 효과적일까요?
+- 성공 스토리의 함정에 빠지지 마세요
+- '관리자 하기 싫다'는 직원들을 나무라기 전에
+- 완벽한 확신을 기다리는 리더는 바보!
+- 9월은 '두번째 새해'입니다
+- 대화가 적으면 소통이 안 된다는 뜻일까요?
+- 제로 콜라를 마시면 머리가 나빠집니다
+- 가입을 쉽게 허용하면 안 되는 이유
+- "대안없는 문제 제기는 하지 말라"고 말하지 마세요
+- 투수의 '투구 수' 관리가 과연 합리적일까?
+- 직원들에게 모두 밝히는 것이 투명성일까요?
+- AI 시대, 리더에게 새롭게 요구되는 역량은?
+- 훌륭한 리더는 '마무리'를 잘 합니다
+- AI 전략을 인사팀이 주도해야 하는 이유
+- 이직이 잦은 사람을 뽑아야 하는 이유
+- AI의 판단에 안도하지는 않나요?
+- '철저한 준비'가 변화를 일으키지 않습니다
+- 바쁨을 성과라고 착각하지 마세요
+- KPMG가 신입사원 평가를 뜯어고친 까닭은?
+- 팀워크가 나쁜 것은 리더 탓이 아닙니다
+- 일 시킬 때 이것만은 꼭 지키세요
+- 일 미루는 직원을 추궁하기 전에
+- AI에게 매번 패배하고 있나요?
+- 장마철에 들으면 좋은 재즈 다섯곡
+- AI시대에는 직원을 무엇으로 평가할까?
+- 잘못된 지도라도 있는 게 나을까요?
+- 회의를 줄이기보다 회의의 '밀도'를 높이세요
+- AI 전략이 지지부진한 것은 "기대치가 달라서"
+- 직원들이 열심히 '일하는 척'을 하는 이유
+- 배재고 감독은 왜 선수들을 제지하지 않았나?
+- '환대'란 무엇인가?
+- 채용할 때 AI를 사용하나요?
+- HR팀을 없애야 하는 이유
+- 일부러 모른 척 하지는 않나요?
+- 전문가의 종말!
+- 인생의 갈림길에서 꼭 던져야 할 5가지 질문
+- '미라클 모닝'을 하면 절제력이 높은 걸까요?
+- 스트레스 받아도 오히려 건강해지는 방법은?
+- '사람 손절'은 두려움 때문
+- 출판기념회에서 "아무말 말라"고 요구한 저자
+- 메시지를 '읽씹'하는 직원이 핵심인재일지도
+- 월드컵은 왜 JTBC와 KBS에서만 볼 수 있나?
+- AI가 관료주의를 부추긴다?
+
+=== [원문 1] LinkedIn, Fractional CMO | Brand, Marketing & Growth Strategy | I help founders and SMEs turn marketing investment into measurable growth | Clarity. Strategy. Impact., 1일 ===
+The most useful thing I've done with AI this year has nothing to do with writing content. That part still takes me literally hours, and I'm trying to find ways to streamline it so I can balance it with client work. What I have done is automate the small, repetitive work that takes quite a bit of time each week. ☁️ Enquiry triage. New emails from three different inboxes get read, sorted, summarised, and replies are drafted. ☁️ Leads search and capture. Real enquiries land in HubSpot as draft records, and each morning a short list of companies that fit the businesses I work with is found, checked and added too.  ☁️ Review replies. New Google reviews get a drafted reply. Nothing goes live until I've approved the wording. ☁️ Content ideas. Multiple sources of information feed into Notion, summarised as ideas which I can work with. ☁️ Client invoicing. My tracked hours in Clockify turn into draft invoices, ready to check and send. ☁️ Weekly focus. Every week my calendars and Notion to-do list arrive as one summary of the week ahead. ☁️ Client calls prep. Before a call, past emails, Notion notes, CRM records and updates come together as one summary page. After it, Read AI's transcript and my notes become a summary in Notion: decisions, next steps, who owns what. With client consent to record.Client information runs through several of these, so I checked the data agreements on each tool and updated my privacy policy. Not legal advice, but is where I'd start if you want to check your own setup. It has taken a bit of time to set this up, but I have loved the process of learning how to do it, and I'm experimenting with more things I can do, like family admin and household logistics. And no, this hasn't transformed my life (I'm not sitting on the beach working 2 hours a day unfortunately :D) but it has given me time back which I can use in other areas of my business. #aiinmarketing #productivity #smallbusiness #automation #whitecloudcommunications
+
+=== [원문 2] LinkedIn, Marketing Communications Manager at Kia | Bringing people closer to art, fashion & culture through brand, community and AI, 9월 17일 • 수정함 ===
+💡다능인(multi-hyphenate)인 제게 필요한 건 새로운 능력이 아니라, 새로운 비서 (AI Agent)였습니다.잠시 쉬는중이지만 PR, 마케팅을 해오며, 아트테크 랩을 운영하고,프라이빗 커뮤니티 행사를 기획하고, 대학원을 다니며 공부하면서 AI 커뮤니티 공식앰버서더 '가드너'로도 활동하고 있습니다.그런데 정작 "앰버서더가 AI를 이 정도밖에 모르나" 싶었습니다.행사 기획서, 강연 일정, 회의록, 무드보드, 그날 공부한 내용 등이 서로 다른 폴더와 메모장, 카톡방에 흩어져 있었고, 매번 그것들을 찾아 헤매고 있었거든요.🥲그래서 지인의 프라이빗 클래스에서 원데이로 10시간, '클로드 코드'를 제대로 배웠습니다.🧐전형적인 비개발자이지만 AI에 대한 이야기를 나눠야하는데, 정작 나는 얼마나 제대로 쓰고 있을까?"라는 질문에  떳떳하고 싶어서 더는 대충 넘기지 않기로 한 거죠.그렇게 하루를 갈아넣고, 며칠을 세팅해 일하는 방식을 바꿨습니다.수업에서 가장 인상 깊었던 관점은 🪔"클로드는 백설공주 거울이 아니라, 지니 램프"라는 메타포였어요 비추는 대로 반응하는 도구가 아니라, 의도를 담아 부탁하면 스스로 실행까지 해내는 파트너라는 뜻이죠.배운 걸 바로 제 일에 옮겨봤습니다.🌤 일정 및 투두 관리 —  Skills 기능을 이용해 아침마다 Daily Note를 열면 어제 정리해둔 "내일 우선순위"와 할 일 목록이 자동으로 올라와 있고, 구글 캘린더 일정까지 브리핑되어 있습니다. 오늘 뭘 해야 하는지 다시 찾아 헤맬 필요가 없어졌어요.🗂 Johnny Decimal 구조로 업무·커뮤니티·학습 기록을 한 폴더 체계에 정리 — 뭘 어디에 뒀는지 찾느라 헤매는 시간이 사라졌습니다. 더 효율적이고 체계적으로 관리할 수 있어졌어요!🗓 행사 기획 및 운영 — Plan 모드와 User ask question을 통해 상상만 하던 살롱을 기획하고, 참가자 명단부터 타임테이블, 리스크까지 빠르게 정리했어요. 웹캠으로 두 사람의손을 인식해 하트를 만들었다가 터뜨리는 속도로 어울리는 위스키를 추천해주는 인터랙티브 게임까지, 코드 한 줄 몰라도 직접 만들어 현장에 띄웠습니다. 그 이후 정산부터 후기 수집 및 회고 분석까지 한번에 끝.💬 커뮤니티 관리 — MCP, Playwright 연동으로 프로젝트 카톡방, 자료를 일일이 다시 읽는 대신, 놓친 대화만 골라 요약하고 할 일을 뽑아내게 시켜서 확인 시간을 크게 줄였습니다.📚 여러 분야를 동시에 디깅하고, 공부하다 보니 흩어지기 쉬웠던 인사이트와 메모를, CLAUDE.md와 Memory 구조 덕분에 하나의 워크스페이스에서 계속 쌓이고 연결되게 만들었습니다. 다양한 자아와 관심사를 가진 나에 대해서도 학습시켰고요.여러 곳을 오가고, 계속 새로움을 접하는 것을 좋아하는 사람일수록'모든 걸 기억하고 정리해주는 비서'가 있고 없고의 차이가 큽니다.이제는 최소 7인분의 생산성을 가지고, 많은 일을 해나가는 덕분에 주변인들에게 더 여유있는 따수운 사람이 되어줄 수 있을 것  같아요.AI 기술을 제대로 쓰는 것도 결국, '사람에게 더 집중하기 위한 선택'이라는 걸 블룸의 가드너로 활동하며 다시 한번 느낍니다 🌸
+
+=== [원문 3] Threads, @specal1849, 2026-10-04 ===
+## 1/4
+
+에이전트사용 실력을 가장빨리올리는 방법 제가 수업을하며 늘상 사용하는 말이 여러가지있지만
+꼭 다루는 개념들이 몇가지 있습니다 1.GiGo
+쓰레기 입력에는 쓰레기 응답이나온다 2.Dogfooding
+소프트웨어나 제품을 만든 조직이나 개발자가 자사의 제품을 실제 업무나 일상생활에 직접 사용해 보는 관행을 의미하죠 저는 제가만든스킬을 매일이용하며 
+어떤식으로 공부해야하고 유스케이스는 어케만들어야하는지
+실케이스에서 문제가 뭐고 어떤걸 보면좋은지 매번테스트 합니다.코딩에이전트를 쓰든 LLM을쓰던 코덱스 chat gpt 클로드코드에 모두적용되는 이야기죠  1/4
+
+## 2/4
+
+뭐 일반적으로 쓰는게 아니라 몇몇가지 규칙이있는데 1.반드시 각기능이 뭔지 알고있을것
+2.공식문서와 용례는 인지하고 작업에 들어갈것
+3.스킬이 적용되는 범위와 컨텍스트를 제어할것
+4.멀티 에이전트를 쓰거나 서브에이전트 각각의요각에이전트의 역할 잡라이프 사이클을 제어할것 이런 복잡한 규칙들이있지만 일단이건 넘어가자구요 뭐가 어디서 터졌고 어딜추적해야하고 기술적인 이야기에
+전체 구조도 시각화는 당연 중요하지만 이건 그전의 이야기입니다. 2/4
+
+## 3/4
+
+일반론적으로 이야기하면 결국은 내가원하는 뾰족한 방향성이 있어야합니다 뭐 단순하게 이쁘다가아니라 이걸 어디에 쓰겠다
+그리고 뭘할것이냐 단순하게 영상이 나온다는 현상론에 집중하는것이아니라
+이영상가지고 뭘해서 어떤 가치를 창출하겠다 이러한 생각과 목표가 없으면 붕뜰수밖에 없죠
+북포지를 만들고 나서 꾸준하게 전자책을 공유하며
+외부와 엣지케이스를 찾고 다른녀석을 만든다 이런게 기본적인 방향성입니다. 3/4
+
+## 4/4
+
+다만 물론 개밥먹기는 좋은 방법론이지만 때때로는 모든걸 다 파괴하는 해체주의도 필요한데 이건 나중에 이야기해보죠 다시일하러 총총... 흑흑  4/4

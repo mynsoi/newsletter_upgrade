@@ -45,7 +45,7 @@ export default function ExpandableCards({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm h-full w-full z-40"
+            className="fixed inset-0 bg-black/25 dark:bg-black/60 backdrop-blur-sm h-full w-full z-40"
           />
         )}
       </AnimatePresence>
@@ -55,13 +55,13 @@ export default function ExpandableCards({
             <motion.div
               layoutId={`card-${active.key}-${id}`}
               ref={ref}
-              className="w-full max-w-[760px] max-h-[88vh] flex flex-col bg-neutral-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              className="w-full max-w-[760px] max-h-[88vh] flex flex-col bg-panel-solid border border-line rounded-3xl overflow-hidden shadow-2xl"
             >
               <motion.div layoutId={`head-${active.key}-${id}`}>{active.head}</motion.div>
               <div className="flex justify-between items-start gap-6 px-8 pt-6">
                 <motion.h3
                   layoutId={`title-${active.key}-${id}`}
-                  className="font-semibold text-neutral-100 text-2xl leading-snug"
+                  className="font-semibold text-ink text-2xl leading-snug"
                 >
                   {active.title}
                 </motion.h3>
@@ -76,7 +76,7 @@ export default function ExpandableCards({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="px-8 pt-4 pb-8 overflow-auto [scrollbar-width:thin] text-neutral-300"
+                className="px-8 pt-4 pb-8 overflow-auto [scrollbar-width:thin] text-ink-2"
               >
                 {active.body}
               </motion.div>
@@ -91,7 +91,7 @@ export default function ExpandableCards({
             key={card.key}
             onClick={() => setActive(card)}
             className={cn(
-              "group flex flex-col rounded-3xl cursor-pointer overflow-hidden bg-neutral-900/60 border border-white/[0.08] hover:border-white/20 hover:bg-neutral-900 transition-colors",
+              "group flex flex-col rounded-3xl cursor-pointer overflow-hidden bg-panel border border-line hover:border-ink-3/40 hover:bg-panel-solid transition-colors",
               card.dim && "opacity-60"
             )}
           >
@@ -99,11 +99,11 @@ export default function ExpandableCards({
             <div className="flex flex-col gap-3 p-6">
               <motion.h3
                 layoutId={`title-${card.key}-${id}`}
-                className="font-semibold text-neutral-100 text-lg leading-snug"
+                className="font-semibold text-ink text-lg leading-snug"
               >
                 {card.title}
               </motion.h3>
-              <div className="text-neutral-400 text-sm leading-relaxed">{card.summary}</div>
+              <div className="text-ink-2 text-sm leading-relaxed">{card.summary}</div>
             </div>
           </motion.div>
         ))}

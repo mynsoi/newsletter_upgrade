@@ -9,6 +9,26 @@
     --font-heading: var(--font-sans);
     --font-sans: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
     --animate-aurora: aurora 60s linear infinite;
+    /* 작업실 색 — 라이트/다크가 같은 이름을 쓴다 */
+    --color-page: var(--page);
+    --color-ink: var(--ink);
+    --color-ink-2: var(--ink-2);
+    --color-ink-3: var(--ink-3);
+    --color-panel: var(--panel);
+    --color-panel-solid: var(--panel-solid);
+    --color-soft: var(--soft);
+    --color-line: var(--line);
+    --color-paper: var(--paper);
+    /* BoardUI ThemeToggle이 쓰는 토큰을 작업실 색에 잇는다 */
+    --color-background-secondary-default: var(--soft);
+    --color-background-secondary-hover: var(--soft);
+    --color-background-primary-default: var(--panel-solid);
+    --color-theme-toggle-sidebar-background: var(--soft);
+    --color-theme-toggle-sidebar-selected-background: var(--panel-solid);
+    --color-foreground-icon-primary: var(--ink);
+    --color-foreground-icon-secondary: var(--ink-3);
+    --color-border-focus-ring: var(--color-violet-400);
+    --radius-2lg: 0.625rem;
     @keyframes aurora {
       from { background-position: 50% 50%, 50% 50%; }
       to { background-position: 350% 50%, 350% 50%; }
@@ -54,6 +74,15 @@
 }
 
 :root {
+    --page: #f6f6f8;
+    --ink: #121216;
+    --ink-2: #4b4b57;
+    --ink-3: #8b8b97;
+    --panel: rgb(255 255 255 / 0.85);
+    --panel-solid: #ffffff;
+    --soft: rgb(18 18 22 / 0.045);
+    --line: rgb(18 18 22 / 0.09);
+    --paper: #ffffff;
     --white: white;
     --black: black;
     --transparent: transparent;
@@ -97,6 +126,15 @@
 }
 
 .dark {
+    --page: #0a0a0c;
+    --ink: #f4f4f5;
+    --ink-2: #b4b4bd;
+    --ink-3: #71717a;
+    --panel: rgb(23 23 23 / 0.6);
+    --panel-solid: #2a2a30;
+    --soft: rgb(255 255 255 / 0.045);
+    --line: rgb(255 255 255 / 0.08);
+    --paper: #fbfaf7;
     --background: oklch(0.13 0.005 285);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
@@ -130,6 +168,16 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* BoardUI ThemeToggle — 누른 자리에서 다음 테마가 원으로 퍼진다 */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+.theme-transitioning, .theme-transitioning * { transition: none !important; }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -142,10 +190,10 @@
     }
 }
 html, body, #root { height: 100%; }
-body { min-width: 1280px; -webkit-font-smoothing: antialiased; }
+body { min-width: 1280px; -webkit-font-smoothing: antialiased; background: var(--page); color: var(--ink); }
 .prose-ko p { margin: 0 0 1.15em; word-break: keep-all; }
 .prose-ko { font-size: 17px; line-height: 1.95; letter-spacing: -0.003em; }
 .s-add { background: linear-gradient(transparent 62%, rgb(139 92 246 / 0.35) 62%); }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.08); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }

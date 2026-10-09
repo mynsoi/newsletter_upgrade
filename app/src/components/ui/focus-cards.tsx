@@ -36,7 +36,7 @@ export const Card = React.memo(
         "rounded-2xl relative bg-gray-100 dark:bg-neutral-900 overflow-hidden w-full transition-all duration-300 ease-out cursor-pointer",
         height,
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]",
-        card.selected && "ring-2 ring-violet-400 ring-offset-4 ring-offset-neutral-950"
+        card.selected && "ring-2 ring-violet-400 ring-offset-4 ring-offset-page"
       )}
     >
       {card.src ? (
@@ -52,7 +52,8 @@ export const Card = React.memo(
       {card.badge && <div className="absolute top-4 left-4 z-10">{card.badge}</div>}
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end py-6 px-5 transition-opacity duration-300",
+          "absolute inset-0 bg-gradient-to-t to-transparent flex items-end py-6 px-5 transition-opacity duration-300",
+          card.src ? "from-black/85 via-black/30 text-white" : "from-page/90 via-page/40 text-ink",
           hovered === index || !card.src ? "opacity-100" : "opacity-80"
         )}
       >

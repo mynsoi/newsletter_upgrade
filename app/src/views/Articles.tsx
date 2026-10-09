@@ -11,7 +11,7 @@ export function StageChip({ a, className }: { a: Article; className?: string }) 
     <Chip
       className={cn(
         "backdrop-blur",
-        s === "확정" ? "border-emerald-300/40 bg-emerald-500/20 text-emerald-100" : "border-white/20 bg-black/40 text-white",
+        s === "확정" ? "border-emerald-300/40 bg-emerald-500/20 text-emerald-800 dark:text-emerald-100" : "border-line bg-page/60 text-ink",
         className
       )}
     >
@@ -26,7 +26,7 @@ export function Cover({ a, className }: { a: Article; className?: string }) {
     <div
       className={cn("absolute inset-0", className)}
       style={{
-        background: `radial-gradient(90% 120% at 15% 10%, hsl(${h} 65% 45% / .55), transparent 60%), radial-gradient(80% 120% at 90% 90%, hsl(${(h + 60) % 360} 70% 45% / .4), transparent 60%), #0b0b0e`,
+        background: `radial-gradient(90% 120% at 15% 10%, hsl(${h} 65% 45% / .55), transparent 60%), radial-gradient(80% 120% at 90% 90%, hsl(${(h + 60) % 360} 70% 45% / .4), transparent 60%), var(--page)`,
       }}
     />
   );
@@ -40,11 +40,11 @@ export default function Articles({ state, go }: { state: State; go: (h: string) 
   });
   return (
     <div className="min-h-full">
-      <div className="relative h-[300px] overflow-hidden border-b border-white/[0.06]">
+      <div className="relative h-[300px] overflow-hidden border-b border-line">
         <BackgroundBeams />
         <div className="relative z-10 mx-auto flex h-full max-w-6xl items-end px-12 pb-12">
-          <h1 className="text-6xl font-bold tracking-tight text-white">
-            글 <span className="text-neutral-600 tabular-nums">{list.length}</span>
+          <h1 className="text-6xl font-bold tracking-tight text-ink">
+            글 <span className="text-ink-3 tabular-nums">{list.length}</span>
           </h1>
         </div>
       </div>
@@ -60,8 +60,8 @@ export default function Articles({ state, go }: { state: State; go: (h: string) 
             onClick: () => go(`#/a/${a.id}`),
             overlay: (
               <div>
-                <div className="text-xl font-semibold leading-snug text-white">{articleTitle(a)}</div>
-                <div className="mt-2 line-clamp-2 text-sm text-neutral-300/80">{a.thesis}</div>
+                <div className="text-xl font-semibold leading-snug">{articleTitle(a)}</div>
+                <div className="mt-2 line-clamp-2 text-sm opacity-75">{a.thesis}</div>
               </div>
             ),
           }))}
