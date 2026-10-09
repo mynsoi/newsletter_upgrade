@@ -223,7 +223,7 @@ def fetch_infuture(post_id):
     snap.write_text(r.stdout, encoding="utf-8")
     title = ""
     import re
-    m = re.search(r'- text: "(.+?) (\d{4})\. \d{1,2}\. \d{1,2}\."', r.stdout)
+    m = re.search(r'- text: "(.+?) ?(\d{4})\. \d{1,2}\. \d{1,2}\."', r.stdout)  # 제목 끝 ?·! 뒤에 날짜가 붙는 경우도
     if m:
         title = m.group(1)
     out = subprocess.run([sys.executable, "-I", str(ROOT / "scripts" / "parse_infuture.py"), str(snap), title], capture_output=True, text=True)

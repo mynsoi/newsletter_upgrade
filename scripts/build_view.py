@@ -22,6 +22,7 @@ PATS = {
 }
 
 GROUPS = [
+    ("SIM", "시뮬레이션 · Claude 중앙 진행(C) vs 고정 스크립트(N)"),
     ("T0", "제목 후보 · 첫 단계 (쓰기 전, 생각 한 줄 + 원문만 보고 · astra)"),
     ("T", "제목 후보 · 이전 방식 (다 쓴 글을 보고 · astra)"),
     ("F", "확정본"),
@@ -150,6 +151,31 @@ for d in sorted((RUNS / "titles0").glob("*")):
                   "desc": f"한 줄: {b['thesis']} | 원문: " + " / ".join(x[1] for x in b["sources"]),
                   "title": f"{d.name} 제목 후보 (쓰기 전)", "body": "\n\n".join(f"{i}. {l}" for i, l in enumerate(lines, 1)),
                   "m": {"분량": 0, "대비": 0, "나열": 0, "선언": 0, "번역투": 0}})
+sim = RUNS / "sim"
+def _simlog(m):
+    f = sim / m / "log.json"
+    if not f.exists():
+        return None
+    d = json.loads(f.read_text(encoding="utf-8"))
+    out = [f"총 {d['total_sec']}초 · 사람 개입 {len(d['interventions'])}회"] + [f"개입: {x}" for x in d["interventions"]]
+    if m == "N":
+        for s in d["steps"]:
+            out.append(f"[{s.get('step')}] exit {s.get('exit')} · {s.get('sec')}초 — " + (s.get('out') or s.get('note') or '').strip().replace(chr(10), ' ')[-220:])
+    else:
+        cost = sum((x.get('total_cost_usd') or 0) for x in d["turns"])
+        out[0] += f" · 진행 비용 ${cost:.2f}"
+        for i, x in enumerate(d["turns"], 1):
+            out.append(f"[턴 {i}] {x['sec']}초 · ${(x.get('total_cost_usd') or 0):.2f} — 요청: {x['msg']}")
+            out += [f"  · 실행: {y['cmd'][:160]}" + (" (백그라운드)" if y.get('background') else "") for y in x["tools"] if y["tool"] == "Bash"]
+            out.append("  · 답: " + (x.get('result') or '').replace(chr(10), ' ')[:600])
+    return "\n\n".join(out)
+for m, name in (("C", "C · Claude가 진행"), ("N", "N · 고정 스크립트")):
+    body = _simlog(m)
+    if body:
+        items.append({"key": f"SIM-{m}-log", "group": "SIM", "label": f"{name} · 진행 기록", "desc": "시나리오: 제목 후보(틀린 경로 주입) → 3번 제목으로 글 쓰기 → 피드백 파일 반영 → 질문 → 경영일기 '팀플레이어' 글 가져오기",
+                      "title": f"{name} — 진행 기록", "body": body, "m": {"분량": 0, "대비": 0, "나열": 0, "선언": 0, "번역투": 0}})
+    for f, nm in (("final.md", "최종"), ("final-r1.md", "피드백 반영")):
+        add(f"SIM-{m}-{f}", "SIM", f"{name} · {nm}", "같은 글쓰기 스크립트 — 글 차이는 우연(비교 대상 아님)", RUNS / "columns" / f"sim-{m}" / f)
 items.sort(key=lambda i: [g for g, _ in GROUPS].index(i["group"]))
 data = json.dumps({"items": items, "groups": GROUPS}, ensure_ascii=False)
 
