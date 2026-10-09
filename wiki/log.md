@@ -1,6 +1,14 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/threads/22.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
+- ingest ../sources/originals/threads/21.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
+- ingest ../sources/originals/threads/20.md | 새 주제 | 업무방식/AI에게는-지금-유효한-결정이-필요하다.md
+- ingest ../sources/originals/linkedin/30.md | 합침 | AI리터러시/AI-디자인을-고칠-때는-원인부터.md
+- ingest ../sources/originals/linkedin/29.md | 합침 | 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md, 업무방식/AI로-내-전문성을-더-넓게-쓰자.md
+- ingest ../sources/originals/linkedin/29.md | 새 주제 | 업무방식/AI로-만든-도구는-검증까지.md
+- ingest ../sources/originals/linkedin/28.md | 합침 | AI리터러시/AI는-우리-업무로-평가하자.md
+- ingest ../sources/originals/linkedin/28.md | 새 주제 | 업무방식/AI-비용을-줄이려면-일부터-나누자.md
 - ingest ../sources/originals/linkedin/27.md | 합침 | 업무자동화/여러-AI를-쓰려면-일의-연결까지.md
 - ingest ../sources/originals/linkedin/26.md | 합침 | 업무방식/AI-사용량보다-해결한-일을-보자.md
 - ingest 주제명 정리 | linkedin/22·26의 공통 논지인 AI 사용과 실제 문제 해결의 구분을 드러내도록 「AI 구독을 늘리기 전에 쓸모를 확인하자」를 「AI 사용량보다 해결한 일을 보자」로 바꿈. 목차·함께 볼 주제·기존 ingest 기록의 경로도 갱신함.
