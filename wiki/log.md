@@ -1,6 +1,13 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest 목차 상태 동기화 | [AI 사용량보다 해결한 일을 보자](업무방식/AI-사용량보다-해결한-일을-보자.md)의 기존 status·used_in을 유지하고, 목차의 상태를 해당 페이지와 같은 `진행 중`으로 맞춤.
+- ingest ../sources/originals/threads/27.md | 합침 | 회사 | 업무방식/팀의-판단-기준부터-공유하자.md
+- ingest ../sources/originals/threads/26.md | 보탬 없음 | 개인 | 없음 (회의 중 요약 기능을 발견한 개인 사용 소감과 보유 도구 비교가 중심임. 회사·팀의 업무 맥락, 실제 요약 내용, 확인 과정이나 후속 업무로 이어진 사례가 없어 회의록 관련 주제의 근거로 쓰기에는 부족함. 목차 변경 없음.)
+- ingest ../sources/originals/threads/25.md | 보탬 없음 | 개인 | 없음 (개인용 AI 작업 환경을 발표자료로 정리한 소식이며, 파일 구조·실제 업무 흐름·문제 해결 과정은 저장된 원문에 드러나지 않음. AI 디자인에 대한 불만도 원인 분석이나 수정 과정 없이 언급되어 기존 주제에 보탤 구체적인 근거가 부족함. 목차 변경 없음.)
+- ingest ../sources/originals/threads/24.md | 새 주제 | 회사 | 업무방식/업무-도구는-팀이-쓰는-기능부터.md
+- ingest ../sources/originals/linkedin/32.md | 합침 | 개인 | 업무자동화/작은-반복부터-덜어내기.md
+- ingest ../sources/originals/linkedin/31.md | 합침 | 개인 | 업무방식/AI가-실행해도-문제-정의는-사람의-몫.md, AI리터러시/직접-쓰고-고치며-AI를-익히자.md
 - ingest ../sources/originals/threads/23.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - ingest ../sources/originals/threads/22.md | 합침 | 업무자동화/작은-반복부터-덜어내기.md
 - ingest ../sources/originals/threads/21.md | 합침 | 프롬프트/AI에게-목적과-조건부터.md
