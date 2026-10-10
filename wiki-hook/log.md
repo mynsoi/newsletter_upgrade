@@ -1,6 +1,12 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/30.md | 새 주제 | 직무역량/첫-시안의-선택과-제작-순서를-바꾸는-피드백.md
+- ingest ../sources/originals/linkedin/29.md | 새 주제 | 직무역량/ai의-오류-판정과-실무의-설계-의도.md; 업무설계/자료-복사-차단과-업무용-붙여넣기.md
+- ingest ../sources/originals/linkedin/28.md | 새 주제 | 도구선택/글자-수-세기와-글-채점의-분담.md
+- ingest ../sources/originals/linkedin/27.md | 새 주제 | 업무설계/여러-ai의-결과와-다음-작업으로의-전달.md
+- ingest ../sources/originals/linkedin/26.md | 합침 | 업무설계/불만족한-답과-무작정-재생성.md
+- ingest ../sources/originals/linkedin/25.md | 새 주제 | 도구선택/영상-화질의-비용과-요청의-어려움.md
 - ingest ../sources/originals/linkedin/24.md | 새 주제 | 직무역량/부분-수정과-전체-정보의-위계.md; 직무역량/채택한-안과-버린-안의-판단-설명.md
 - ingest ../sources/originals/linkedin/23.md | 합침 | 직무역량/화면-밖으로-이어지는-전문성.md
 - ingest ../sources/originals/linkedin/22.md | 새 주제 | 업무설계/불만족한-답과-무작정-재생성.md
