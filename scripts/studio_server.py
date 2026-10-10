@@ -20,6 +20,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
+from wiki import TARGETS  # 대상 독자 이름 — 팀장급·사수급·신입사원·전 직원
 
 DIST = ROOT / "app" / "dist"
 SRC = ROOT / "sources"
@@ -195,7 +196,7 @@ def article_from_brief(bp):
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
-            "length": b.get("length", "full"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
+            "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
             "fromTopics": b.get("from_topics", ""), "at": bp.stat().st_mtime}
 
 
@@ -205,7 +206,7 @@ def article_from_process(pp):
     steps = [step(i, ROOT / s["file"], s["by"], s.get("feedback", ""), p["title"], s.get("mode", "")) for i, s in enumerate(p["steps"], 1)]
     return {"id": k, "kind": "process", "label": p["title"], "thesis": p.get("thesis", ""), "sources": p.get("sources", []),
             "title": p["title"], "titles": [], "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True),
-            "inlinePicked": p.get("inline", []), "length": p.get("length", "full"), "hero": p.get("hero", ""),
+            "inlinePicked": p.get("inline", []), "length": p.get("length", "full"), "target": p.get("target", "전 직원"), "hero": p.get("hero", ""),
             "confirmed": p.get("confirmed"), "fromTopics": "", "at": pp.stat().st_mtime}
 
 
@@ -549,6 +550,16 @@ def act_length(a):
     return start("shorten", k, PIPE + ["--shorten-file", art["steps"][-1]["file"], out_dir.relative_to(ROOT).as_posix()], after)
 
 
+def act_target(a):
+    """대상 독자 고르기 (멘토 2026-10-10: "팀장급이거나 신입사원이거나 사수급이거나") — 설정만 바꾼다.
+    다음 제목 후보·쓰기·다시 쓰기부터 이 독자로 쓴다(이미 쓴 과정은 그대로)."""
+    k, t = safe_id(a["article"]), a.get("target")
+    if t not in TARGETS:
+        raise ValueError("잘못된 대상 독자")
+    meta_update(k, target=t)
+    return {"target": t}
+
+
 EDIT_MAX = 40000  # 공백 포함 글자 — 칼럼 한 편의 열 배쯤
 
 
@@ -710,7 +721,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "edit": act_edit,
+           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
 
 

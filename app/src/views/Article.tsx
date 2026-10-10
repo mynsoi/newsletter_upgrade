@@ -82,6 +82,14 @@ export default function Article({
           <PillTabs tabs={TABS} value={t} onChange={(v) => go(`#/a/${a.id}/${v}`)} />
           <span className="flex items-center gap-3">
           <Retry a={a} go={go} refresh={refresh} />
+          {a.kind === "brief" && (
+            <PillTabs
+              id="targettab"
+              tabs={["전 직원", "팀장급", "사수급", "신입사원"].map((v) => ({ value: v, title: v }))}
+              value={a.target}
+              onChange={(v) => act("target", { article: a.id, target: v }).then(refresh)}
+            />
+          )}
           <PillTabs
             id="lengthtab"
             tabs={[

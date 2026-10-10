@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
 SRC = ROOT / "sources"
 STYLE_ONLY = {"infuture"}
+TARGETS = ("팀장급", "사수급", "신입사원", "전 직원")  # column_pipeline.TARGETS와 같은 이름 — 깊게 읽기에서 astra가 하나를 고른다
 BATCH = 6
 # Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
 CODEX = shutil.which("codex") or "codex"
@@ -155,7 +156,8 @@ def brief(page_rel, k=None):
     p = (f"AGENTS.md를 먼저 읽고 그 규칙의 '고를 때 깊게 읽기'를 해 주세요. 고른 주제 페이지: {page.relative_to(WIKI).as_posix()}\n"
          "파일은 만들거나 고치지 마세요.\n"
          "출력: JSON 하나만. {\"name\": \"짧은 이름\", \"thesis\": \"이 글이 말할 것 한두 문장\", "
-         "\"sources\": [\"originals/<사이트>/NN.md\", ...]} — sources는 중심 원문을 맨 앞에, 경로는 sources/ 아래 기준(originals/로 시작).")
+         "\"sources\": [\"originals/<사이트>/NN.md\", ...], \"target\": \"대상 독자\"} — sources는 중심 원문을 맨 앞에, 경로는 sources/ 아래 기준(originals/로 시작). "
+         "target은 이 글을 가장 먼저 읽어야 할 회사 안의 자리 하나: " + "·".join(TARGETS) + " 중에서.")
     (d / "prompt.md").write_text(p, encoding="utf-8")
     astra(p, write=False, out=d / "astra.md")
     raw = (d / "astra.md").read_text(encoding="utf-8") if (d / "astra.md").exists() else ""
@@ -172,6 +174,8 @@ def brief(page_rel, k=None):
         print(k)
         return
     b.update({"label": it["name"], "thesis": it["thesis"], "sources": [[s, label(s)] for s in srcs], "deep_read": True})
+    if it.get("target") in TARGETS and "target" not in b:  # 멘토가 이미 고른 대상 독자는 그대로
+        b["target"] = it["target"]
     bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     print(k)
 

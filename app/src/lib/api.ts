@@ -44,6 +44,7 @@ export type Article = {
   inline: { id: string; items: ImageItem[] }[];
   inlinePicked: InlinePick[];
   length: "full" | "half";
+  target: string;
   hero: string;
   confirmed: { date: string; step?: number; file: string; hero?: string } | null;
   fromTopics?: string;
