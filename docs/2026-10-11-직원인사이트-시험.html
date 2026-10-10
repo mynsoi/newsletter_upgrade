@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>직원 인사이트 시험</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  :root { --canvas:#ffffff; --surface-soft:#f7f7f7; --hairline:#dddddd; --hairline-soft:#ebebeb;
+          --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292; --primary:#ff385c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; }
+  header { max-width:1100px; margin:0 auto; padding:48px 32px 24px; border-bottom:1px solid var(--hairline-soft); }
+  h1 { font-size:28px; font-weight:700; margin:0 0 8px; letter-spacing:-.01em; }
+  header p { margin:0; color:var(--muted); font-size:15px; line-height:1.7; }
+  main { max-width:1100px; margin:0 auto; padding:24px 32px 72px; display:grid; gap:20px; }
+  .card { border:1px solid var(--hairline); border-radius:14px; padding:24px 28px; }
+  .who { display:flex; gap:12px; align-items:center; font-size:13px; color:var(--muted-soft); margin-bottom:12px; }
+  .who a { color:var(--muted); text-decoration:none; font-weight:500; }
+  .use { margin-left:auto; font-weight:600; color:var(--primary); }
+  .label { font-size:12px; font-weight:600; color:var(--muted-soft); margin-bottom:4px; }
+  .insight { font-size:19px; font-weight:600; color:var(--ink); line-height:1.65; margin:0 0 18px; word-break:keep-all; }
+  .titles { margin:6px 0 18px; padding-left:26px; display:grid; gap:4px; }
+  .titles li { font-size:16px; font-weight:500; line-height:1.5; word-break:keep-all; }
+  .titles li::marker { color:var(--muted-soft); }
+  p { margin:0 0 10px; font-size:15px; line-height:1.8; color:var(--body); word-break:keep-all; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; border-top:1px solid var(--hairline-soft); padding-top:14px; }
+  details { border-top:1px solid var(--hairline-soft); padding-top:10px; margin-top:4px; }
+  summary { cursor:pointer; font-size:13px; color:var(--muted); margin-bottom:8px; }
+  .check { border-top:1px solid var(--hairline-soft); margin-top:10px; padding-top:10px; font-size:13px; color:var(--muted); line-height:1.7; }
+  @media (max-width: 800px) { header, main { padding-left:16px; padding-right:16px; } .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>직원 인사이트 — 개인 사례도 빌려 오기</h1>
+  <p>원문 6편(개인·크리에이터 사례 3편 포함) · 원문 카드에서 직원의 AI 업무에 통하는 점을 빌려 와 인사이트로, 그 인사이트로 제목 후보 8개.<br>
+  직원 장면은 가정이고, 원문 속 사례는 그 사람의 일로 사실대로 둡니다.</p>
+</header>
+<main><article class="card">
+  <div class="who"><a href="https://www.linkedin.com/posts/junhoe-kim-41b137201_ax-%EC%9E%90%EB%8F%99%ED%99%94%EC%97%90-%EB%AA%A9%EB%A7%A4%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-%ED%9A%8C%EC%9D%98%EB%A1%9D-%EC%9A%94%EC%95%BD-%EB%B4%87-%EB%A9%94%EC%9D%BC-%EC%B4%88%EC%95%88-%EB%B4%87-%EB%AC%B8%EC%84%9C-q-activity-7513015586206105601-DAF8" target="_blank" rel="noopener">linkedin · Junhoe Kim</a><span>1일 • 수정됨</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">글쓴이가 최근 문서 400개에서 자신의 업무에 맞는 12개를 추렸다는 점은 자료의 양보다 선별 기준을 먼저 보게 한다. AI에 요약을 요청하기 전에 현재 맡은 일과 이번에 판단할 문제를 설명하고, 어떤 자료가 필요한지와 그 이유부터 확인해 볼 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>AI에게 &#x27;요약해 줘&#x27;라고 말하기 전에</li><li>문서 400개 중 12개를 고른 기준은?</li><li>AI는 지금 여러분이 무슨 일을 하는지 아나요?</li><li>같은 키워드가 나온다고 내 업무 자료일까요?</li><li>자료를 찾기 전에 판단할 문제부터 정하세요</li><li>잘 요약된 남의 회의록도 필요한가요?</li><li>AI에게 자료를 고른 이유까지 물어보세요</li><li>필요한 자료의 기준은 내가 맡은 일에 있습니다</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>글쓴이는 채널명에 포함된 ‘브랜드·광고’를 기준으로 자료를 골랐다가 자기 일과 무관한 회의록과 단가표까지 끌어왔다. AI에 줄 자료는 같은 단어가 등장하는지보다 현재 맡은 일과 어떤 관련이 있는지로 골라야 한다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>사업 진행 보고를 준비할 때, 사업명이 들어간 문서를 모두 건네기보다 이번에 보고할 결정 사항과 진행 상황이 담긴 자료를 추려 AI에 줄 수 있다. 인수인계 자료를 정리할 때도 업무 이름만 나열하기보다 담당자와 결정 경위가 연결되도록 구성해 볼 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 글쓴이는 여러 AI 기능을 연결해 배포·관리하는 기반을 직접 구축하고, AI가 업무 자료를 미리 읽어 사람·서비스·업무의 관계를 ‘회사 지도’로 정리하게 했다. 이 지도에는 자신이 볼 수 있는 자료 중 실제 업무와 관련된 정보를 골라 넣고, 오래 쓰이지 않는 정보는 정리하도록 했다. 직접 쓴 문서 없이 만들어진 지도를 활용해 매일 아침 자신이 하는 일에 맞는 소식을 받아 보고 있다.</p><p><b>글쓴이가 하는 말</b> 개별 자동화 봇을 늘리는 데 매달리기보다, AI가 각자의 업무 맥락을 지속적으로 쌓고 활용할 기반을 만들어야 한다. AI를 회사 일을 아는 동료로 만드는 차이는 모델이 아니라, 그 AI에게 쥐여준 ‘회사 지도’에서 나온다.</p></details>
+  <div class="check"><span class="label">점검</span> 원문 그대로: 노션 최근 페이지 400개 중 12개, &#x27;브랜드&#x27;·&#x27;광고&#x27; 키워드로 골랐다가 남의 주간회의록·단가표가 올라온 실패 · 쓸모 이유: 직원이 보고나 인수인계를 위해 AI에 자료를 건네는 단계부터 적용할 수 있는 구체적인 기준을 제공한다.</div>
+</article><article class="card">
+  <div class="who"><a href="https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan" target="_blank" rel="noopener">threads · @f_bgrowlap</a><span>2026-10-06</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">이 사례에서 살펴볼 점은 1%라는 계산식뿐 아니라 매출 자료를 가져와 명세서를 만들고 공지와 맞추는 작업의 연결이다. 반복 업무를 AI와 개선할 때도 계산 하나만 요청하기보다 입력 자료, 계산 규칙, 결과 문서, 대조 기준을 함께 설명해 볼 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>AI에게 계산만 맡기고 있나요?</li><li>1%를 계산하는 데 왜 세 시간이 걸렸을까?</li><li>반복 업무를 줄이려면 일의 앞뒤를 설명하세요</li><li>계산이 맞아도 업무는 끝나지 않습니다</li><li>AI에게 일을 부탁할 때 대조할 기준도 알려주세요</li><li>매달 여는 엑셀이 AI 활용의 출발점이라면?</li><li>‘명세서 만들어 줘’라는 부탁에 빠진 것</li><li>시시한 반복 업무를 그냥 넘기지 마세요</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>프랜차이즈 본사의 글쓴이는 매달 5일 매출의 1%를 계산하고 명세서를 작성해 공지와 대조하던 과정을 웹 화면에 모아, 처리 시간을 3시간에서 5분으로 줄였다. 규칙이 일정하고 주기적으로 돌아오는 업무를 개선하면 절약한 시간이 매달 쌓인다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>월별 사용량과 단가로 비용을 집계하거나 협력사 정산 자료를 만들 때, 매번 같은 파일을 열고 계산·문서 작성·대조를 반복하는 구간을 찾아볼 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 프랜차이즈 본사에서 일하는 글쓴이는 매달 5일 포스 매출의 1%를 계산하고 명세서를 작성해 공지와 대조하던 로열티 업무를 웹 화면 하나로 옮겨, 소요 시간을 3시간에서 5분으로 줄였다. 매출 보고는 매일 아침 8시와 11시에 자동으로 올라오며, 품목을 말하면 점주용과 내부용 견적서가 각각 엑셀로 나온다.</p><p><b>글쓴이가 하는 말</b> AI 에이전트보다 매달 똑같은 엑셀을 열어 처리하던 반복 업무가 줄어든 변화가 훨씬 크게 와닿는다. 한 번 만들어두면 매달 돌아오는 업무에서 계속 시간을 아낄 수 있기 때문이다.</p></details>
+  <div class="check"><span class="label">점검</span> 원문 그대로: 매달 5일, 매출의 1%, 3시간 → 5분 · 쓸모 이유: 매달 되풀이되는 업무에서 개선 대상을 고르고, AI에 설명할 범위를 잡는 데 빌려 쓸 수 있는 구체적인 사례다.</div>
+</article><article class="card">
+  <div class="who"><a href="https://www.linkedin.com/posts/jehokim_%EC%95%84%EC%B9%A8%EC%97%90-%EC%9E%90%EB%A6%AC%EC%97%90-%EC%95%89%EC%9C%BC%EB%A9%B4-%EC%8B%9C%EB%8F%99-%EA%B1%B0%EB%8A%94-%EA%B2%83%EC%9D%B4-%EC%9D%BC%EC%9D%B4%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%97%90%EA%B2%8C-%EC%8B%9C%EB%8F%99%EC%9D%84-%EA%B1%B4%EB%8B%A4%EB%8A%94-activity-7508011767336251393-2WiH" target="_blank" rel="noopener">linkedin · Jaeho Kim</a><span>9월 22일</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">글쓴이가 경계한 것은 짧은 지시 뒤 꽤 만족스러운 결과가 나오는 재미에 빠져, 정작 문제를 깊이 생각하지 않게 될 가능성이다. 직원도 AI 초안을 받았다면 다음 결과를 요청하기 전에, 이 초안으로 답이 나온 업무 질문과 아직 판단이 필요한 질문을 나눠 적어볼 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>AI로 일이 쉬워졌는데 왜 불안할까요?</li><li>초안이 마음에 들면 문제도 풀린 걸까요?</li><li>AI에게 다음 지시를 내리기 전에</li><li>AI 결과를 기다리는 재미에 놓칠 수 있는 것</li><li>AI가 답한 질문과 내가 판단할 질문</li><li>혹시 AI를 슬롯머신처럼 쓰고 있나요?</li><li>AI 초안 옆에 ‘아직 풀지 못한 질문’을 적어보세요</li><li>AI가 줄여준 것은 고생일까요, 고민일까요?</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>뉴스와 일정을 확인하며 코드 편집기 열기를 미루던 글쓴이는 클로드나 코덱스에 짧게 지시하면서 곧바로 일을 시작하게 됐다. AI로 시작의 부담을 줄이는 효과는 누리되, 결과를 쉽게 얻는 것과 어려운 문제를 해결하는 것은 구분할 필요가 있다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>보고서의 첫 문장을 쓰기 막막할 때 AI로 초안을 만들어 검토를 시작할 수 있다. 현장 점검 기록을 정리할 때도 AI에 기록 분류를 맡기고, 어떤 문제부터 조치해야 하는지 판단하는 데 집중할 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 글쓴이는 아침마다 코드 편집기를 열기 싫어 뉴스와 일정을 확인하거나 덜 중요한 일을 처리하며 업무 시작을 미뤘다. 최근에는 클로드나 코덱스에 짧은 지시를 입력하면 꽤 만족스러운 결과가 나오니, 자리에 앉아 할 일을 확인하고 곧바로 시작하게 됐다. 이 변화가 반갑지만, 어려운 문제를 풀고 있다는 착각에 빠진 것은 아닌지 불안해졌다.</p><p><b>글쓴이가 하는 말</b> AI가 없애 준 것이 불필요한 수고인지, 자신이 감당해야 할 어려운 문제까지 피하게 된 것인지 분간하기 어렵다는 것이다. AI 이전으로 돌아갈 수 없다는 것을 알면서도, 프로그래밍을 결과를 뽑는 게임이나 도박처럼 대하지 않고 문제에 깊이 집중하려는 태도를 지키고 싶다는 말이다.</p></details>
+  <div class="check"><span class="label">점검</span> 원문과 어긋난 것 없음 · 쓸모 이유: 코드 편집기를 열기조차 미루던 부담이 사라진 사례를 통해, 직원도 AI로 착수를 앞당기면서 자신이 맡아야 할 판단을 돌아볼 수 있다.</div>
+</article><article class="card">
+  <div class="who"><a href="https://www.linkedin.com/posts/simplifier_carvit-%EB%A1%9C%EA%B3%A0%EB%A5%BC-%EC%A0%95%ED%95%9C-%EA%B3%BC%EC%A0%95-activity-7512329269935796224-Hu00" target="_blank" rel="noopener">linkedin · Sunghee Han (한성희)</a><span>10월 4일 • 수정함</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">로고 후보가 네 개나 나왔어도 다음 단계가 반드시 하나를 고르는 일은 아니었다. AI 결과가 아쉬울 때는 후보를 더 달라고 하기 전에, 이 사례처럼 전문가의 작업 방식을 조사하게 하고 그에 맞춰 제작 순서를 다시 잡아 볼 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>로고가 네 개 나왔는데, 꼭 하나를 골라야 할까요?</li><li>AI에게 &#x27;후보를 더 달라&#x27;고 하기 전에</li><li>로고 제작의 순서를 바꾼 한마디</li><li>AI 결과가 아쉽다면 작업 순서를 점검해 보세요</li><li>AI에게 전문가의 일하는 법을 조사시킨 이유</li><li>AI에게 결과만 주문하고 있지는 않나요?</li><li>AI가 내놓은 선택지에 갇히지 마세요</li><li>AI와 일할 때도 코칭이 필요한 순간이 있습니다</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>Cavit.ai 로고 작업에서는 후보 네 개가 나온 뒤, 대표가 전문가의 제작 절차를 먼저 알아보게 하면서 작업 순서가 달라졌다. AI와 일하는 사람은 결과를 고르는 역할뿐 아니라 만드는 순서를 바로잡는 역할도 할 수 있다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>현장 안내문을 만들 때, AI에게 문구 여러 개를 바로 요청하기보다 기존의 좋은 안내문이 독자와 전달 내용을 어떻게 고려했는지 먼저 살펴보게 할 수 있다. 보고자료를 작성할 때도 초안부터 받기 전에 참고할 만한 보고서의 구성 방식을 검토하게 할 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 글쓴이는 어제 클로드코드에서 제품 책임자 역할을 하는 지투와 새 서비스 Cavit.ai의 로고를 만들었다. 처음에는 후보 4개를 바로 그렸지만, 대표가 전문가들의 로고 제작 방식을 먼저 살펴보라고 하면서 이후 작업 순서가 달라졌다.</p><p><b>글쓴이가 하는 말</b> 지투에게 로고를 만들어 달라고 지시하는 데서 그치지 않고 제작 방향을 짚어 준 말 한마디가 결과물을 크게 바꿨다는 주장이다.</p></details>
+  <div class="check"><span class="label">점검</span> 원문 그대로: 후보 4개, 전문가들이 로고를 어떻게 만드는지 확인하라는 개입 · 쓸모 이유: 로고 제작에서 작업 순서를 바꾼 개입을 직원의 문서·자료 작성에도 구체적으로 적용해 볼 수 있다.</div>
+</article><article class="card">
+  <div class="who"><a href="https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj" target="_blank" rel="noopener">threads · @ai_visual101</a><span>2026-08-14</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">글쓴이가 움직임을 다듬기 위해 물리법칙까지 명시했듯, 직원도 “이해하기 쉽게 만들어 달라”는 요청에 설비의 이동 방향이나 반드시 지켜야 할 작업 순서를 더해 볼 수 있다. 이렇게 적은 조건은 생성된 자료가 실제 업무와 맞는지 확인하는 검토 기준으로도 쓸 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>AI에게 &#x27;이해하기 쉽게&#x27;만 주문하고 있나요?</li><li>보기 좋은 자료가 현장에서도 맞을까요?</li><li>AI에게 일을 맡기기 전에, 꼭 지켜야 할 순서부터</li><li>애니메이션을 만들다 물리법칙까지 적은 까닭은?</li><li>우리에겐 당연한 작업 순서, AI도 알고 있을까?</li><li>AI에게 적어 준 조건이 검토 기준이 됩니다</li><li>프롬프트에 현장 경험을 보태는 법</li><li>AI에게 맡겨도 업무 기준은 사람이 정합니다</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>모션그래픽 디자이너인 글쓴이는 GPT로 만든 이미지 한 장을 애니메이션으로 발전시키면서, 여러 시행착오 끝에 물리법칙과 세부 움직임을 생성 조건에 담았다. 직원도 자신의 업무에서 자연스럽고 정확한 결과를 판단하는 기준을 AI에 줄 구체적인 조건으로 바꿔 볼 수 있다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>설비 작동 원리를 설명하는 교육 영상을 만들거나, 현장 작업 절차를 안내하는 자료를 AI로 작성할 때 적용할 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 글쓴이는 GPT로 이미지 1장을 만들고, GPT 또는 Claude로 프롬프트를 기획·구성해 seedance 2.5용 프롬프트를 만들었다. 비용을 들이며 여러 시행착오를 거친 끝에 물리법칙과 세밀한 움직임을 프롬프트에 반영했고, 편집 도구로 음악을 넣고 세부 편집을 했다.</p><p><b>글쓴이가 하는 말</b> AI로 움직임을 더 세밀하게 다듬어, 모션그래픽 디자이너인 자신도 그동안 만들어보지 못한 수준의 2D 일러스트 애니메이션을 구현했다는 것이다.</p></details>
+  <div class="check"><span class="label">점검</span> 원문 그대로: 물리법칙·디테일 모션감을 프롬프트에 적용 · 쓸모 이유: 이미지 한 장의 움직임을 구체화한 과정에서, 직원의 업무 지식을 AI의 생성 조건과 결과 검토 기준으로 옮기는 방법을 빌려 올 수 있다.</div>
+</article><article class="card">
+  <div class="who"><a href="https://www.linkedin.com/posts/%EC%84%A0%EC%98%81-%EC%A1%B0-02b84522a_%EB%AA%A8%EB%93%A0-%EC%98%81%EC%83%81%EC%9D%84-seedance%EB%A1%9C-%EB%A7%8C%EB%93%A4%EC%A7%80-%EC%95%8A%EC%95%84%EB%8F%84-%EB%90%A9%EB%8B%88%EB%8B%A4-%EC%B2%AB-%EB%8F%84%EC%A0%84-minimax3%EB%A1%9C-activity-7511587556933877760-s2g3" target="_blank" rel="noopener">linkedin · 조선영</a><span>10월 2일 • 수정함</span><span class="use">쓸모 높음</span></div>
+  <div class="label">직원 인사이트</div>
+  <p class="insight">이 사례에서 Minimax3의 장점은 낮은 2K 이용 비용이었고, 어려움은 지시문 작성이었다. 후보 도구로 같은 짧은 장면을 만들어 보고, 요금과 수정에 들인 시간을 함께 기록하면 우리 업무에서 감당할 만한 선택인지 판단할 수 있다.</p>
+  <div class="label">제목 후보 (astra, 작업실 제목 단계 그대로)</div>
+  <ol class="titles"><li>저렴한 AI를 쓰면 업무 비용도 줄어들까요?</li><li>AI 요금표에는 ‘수정 시간’이 빠져 있습니다</li><li>AI 도구를 비교하려면 같은 장면부터 만들어 보세요</li><li>Minimax3, 이용료는 낮았지만 지시문은 어려웠다</li><li>익숙한 AI 하나로 모든 일을 해야 할까요?</li><li>90초 애니메이션에서 생각해 볼 AI 선택의 기준</li><li>AI에게 일을 설명하는 데 얼마나 걸리나요?</li><li>AI 사용료 옆에 우리가 쓴 시간도 적어보세요</li></ol>
+  <div class="grid">
+    <div><div class="label">빌려 올 점</div><p>글쓴이는 Minimax3로 90초 애니메이션을 만들면서 Seedance보다 지시문 작성에 어려움을 겪었지만, 2K 화질을 더 저렴하게 이용했다. AI 도구를 고를 때는 이용 요금과 원하는 결과를 얻기까지 드는 수고를 함께 따져야 한다.</p></div>
+    <div><div class="label">직원 장면 (가정)</div><p>사내 교육용 애니메이션이나 현장 절차 안내 영상을 만들 때, 필요한 화질과 예산에 더해 제작 지시를 다듬을 시간까지 고려해 도구를 선택하는 데 적용할 수 있다.</p></div>
+  </div>
+  <details><summary>원문 카드 — 있었던 일 · 글쓴이가 하는 말</summary>
+    <p><b>있었던 일</b> 글쓴이는 Minimax3로 애니메이션 제작에 처음 도전해 1분 30초짜리 영상을 만들었다. Seedance보다 제작 지시문을 작성하는 데 어려움이 많았지만, 2K 화질을 훨씬 저렴하게 이용했다.</p><p><b>글쓴이가 하는 말</b> 모든 영상을 Seedance로 만들 필요는 없다는 것이다. 애니메이션을 만들 때는 제작 지시문을 짜기가 좀 더 어렵더라도 2K 화질을 훨씬 저렴하게 이용할 수 있는 Minimax3도 좋은 선택이라는 생각이다.</p></details>
+  <div class="check"><span class="label">점검</span> &#x27;90초&#x27;는 원문에서 &#x27;1분 30초&#x27; — 단위를 바꿔 씀 · 쓸모 이유: 저렴한 요금과 사용 편의성이 엇갈린 구체적인 경험을 통해, 직원도 AI 도구를 실제 작업 부담까지 포함해 비교해 볼 수 있다.</div>
+</article></main>
+</body>
+</html>
