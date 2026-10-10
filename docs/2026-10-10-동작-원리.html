@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>칼럼 작업실 동작 원리</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  /* Sparta 디자인 시스템(.herdr-web-ui/design-20261009-192345-8f64450b.md)을 따름 — 흰 바탕, 잉크 #222, 강조색은 Rausch 하나 */
+  :root {
+    --canvas:#ffffff; --surface-soft:#f7f7f7; --surface-strong:#f2f2f2;
+    --hairline:#dddddd; --hairline-soft:#ebebeb; --border-strong:#c1c1c1;
+    --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292;
+    --primary:#ff385c; --primary-soft:#fff1f3; --on-primary:#ffffff;
+    --shadow: rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0;
+    --r-sm:8px; --r-md:14px; --r-full:9999px;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; font-size:16px; line-height:1.5; }
+  .wrap { max-width:1280px; margin:0 auto; padding:0 24px; }
+
+  .top-nav { height:80px; border-bottom:1px solid var(--hairline); background:var(--canvas); position:sticky; top:0; z-index:5; }
+  .top-nav .wrap { height:100%; display:flex; align-items:center; justify-content:space-between; }
+  .wordmark { font-weight:700; font-size:18px; color:var(--primary); letter-spacing:-.01em; }
+  .tabs { display:flex; gap:28px; }
+  .tabs button { all:unset; cursor:pointer; color:var(--muted); font-weight:600; font-size:16px; padding:28px 0 26px; border-bottom:2px solid transparent; }
+  .tabs button:hover { color:var(--ink); }
+  .tabs button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--ink); }
+  .date { color:var(--muted); font-size:14px; }
+
+  .hero { padding:40px 0 24px; }
+  h1 { font-size:28px; font-weight:700; line-height:1.43; margin:0; }
+  .lead { color:var(--muted); margin:6px 0 0; }
+
+  .stage { border:1px solid var(--hairline); border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow); }
+  .stage iframe { display:block; width:100%; height:1040px; border:0; background:#fff; }
+  .stage iframe[hidden] { display:none; }
+
+  .run { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:48px 0 64px; }
+  .run h2 { font-size:20px; font-weight:600; letter-spacing:-.18px; margin:0 0 12px; }
+  .run ul { margin:0; padding-left:18px; color:var(--body); }
+  .run li { margin:4px 0; }
+  .run pre { margin:0; background:var(--surface-soft); border-radius:var(--r-md); padding:20px 24px; font:14px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; color:var(--ink); overflow:auto; }
+  .run .muted { color:var(--muted); font-size:14px; margin-top:12px; }
+  code { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.92em; }
+</style>
+</head>
+<body>
+<nav class="top-nav"><div class="wrap">
+  <span class="wordmark">mentor-lab</span>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-for="flow">흐름</button>
+    <button role="tab" aria-selected="false" data-for="arch">구성</button>
+  </div>
+  <span class="date">2026-10-10</span>
+</div></nav>
+
+<main class="wrap">
+  <header class="hero">
+    <h1>칼럼 작업실은 이렇게 돌아갑니다</h1>
+    <p class="lead">버튼은 스크립트를 부르고, 스크립트는 AI를 부르고, 단계와 단계 사이는 전부 파일로 이어집니다.</p>
+  </header>
+
+  <div class="stage">
+    <iframe id="frame-flow" data-tab="flow" src="how-it-works/flow.html" title="칼럼 한 편이 나오기까지"></iframe>
+    <iframe id="frame-arch" data-tab="arch" src="how-it-works/architecture.html" title="누가 무엇을 부르나" hidden></iframe>
+  </div>
+
+  <section class="run">
+    <div>
+      <h2>내 컴퓨터에서 돌리려면</h2>
+      <pre>cd mentor-lab/app && npm install && npm run build
+cd .. && python3 -I scripts/studio_server.py 8771
+# → http://localhost:8771</pre>
+      <p class="muted">서버는 이 컴퓨터(localhost)에서만 열립니다. 화면 코드만 고쳤으면 다시 빌드만 하면 되고, 서버 코드를 고쳤으면 돌고 있는 작업이 없을 때 재시작합니다.</p>
+    </div>
+    <div>
+      <h2>필요한 것</h2>
+      <ul>
+        <li>Python 3 · Node.js — 서버와 화면</li>
+        <li><code>claude</code> (Claude Code) — 과정 1 초안, 진행자 대화</li>
+        <li><code>codex</code> + gpt-6-astra — 주제 지도, 제목, 과정 2부터, 그림 설명</li>
+        <li>gti (god-tibo-imagen, gpt-6-astra) — 그림</li>
+        <li>aside — 브라우저로 Threads · LinkedIn 원문 수집</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<script>
+  // archify 그림에 Sparta 색·글꼴을 입힌다 — 같은 서버에서 열 때만 적용되고, 파일로 직접 열면 archify 기본 모양 그대로다.
+  const SPARTA = `
+    :root:root[data-theme] {
+      --bg:#ffffff; --grid:#f4f4f4; --text:#222222; --text-muted:#6a6a6a; --text-dim:#929292; --text-faint:#6a6a6a;
+      --panel:#ffffff; --panel-border:#dddddd; --lane-fill:#f7f7f7; --lane-stroke:#ebebeb;
+      --arrow:#929292; --arrow-emphasis:#222222; --mask:#ffffff; --guide-accent:#ff385c;
+      --frontend-fill:#fff1f3; --frontend-stroke:#ff385c;
+      --cloud-fill:#ffffff;    --cloud-stroke:#222222;
+      --backend-fill:#f7f7f7;  --backend-stroke:#6a6a6a;
+      --database-fill:#f2f2f2; --database-stroke:#929292;
+      --external-fill:#f2f2f2; --external-stroke:#929292;
+      --security-fill:#fff1f3; --security-stroke:#c13515;
+      --messagebus-fill:#f7f7f7; --messagebus-stroke:#6a6a6a;
+      --toolbar-bg:#ffffff; --toolbar-border:#dddddd; --toolbar-text:#222222; --toolbar-hover:#f7f7f7; --toolbar-menu-bg:#ffffff;
+    }
+    html, body, button, input, select, svg text, svg tspan { font-family: Inter, "Noto Sans KR", system-ui, sans-serif !important; }
+  `;
+  function dress(frame) {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc || doc.getElementById('sparta-theme')) return;
+      doc.documentElement.setAttribute('data-theme', 'light');
+      const font = doc.createElement('link');
+      font.rel = 'stylesheet';
+      font.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap';
+      const style = doc.createElement('style');
+      style.id = 'sparta-theme';
+      style.textContent = SPARTA;
+      doc.head.append(font, style);
+    } catch (e) { /* file:// 등 다른 출처 — 기본 모양 유지 */ }
+  }
+  document.querySelectorAll('.stage iframe').forEach(f => {
+    f.addEventListener('load', () => dress(f));
+    if (f.contentDocument && f.contentDocument.readyState === 'complete') dress(f);
+  });
+  function show(id) {
+    document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.for === id)));
+    document.querySelectorAll('.stage iframe').forEach(f => { f.hidden = f.dataset.tab !== id; });
+    history.replaceState(null, '', '#' + id);
+  }
+  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => show(b.dataset.for)));
+  if (location.hash === '#arch') show('arch');
+</script>
+</body>
+</html>

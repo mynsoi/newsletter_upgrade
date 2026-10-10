@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "칼럼 작업실 — 누가 무엇을 부르나",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "click-path",
+        "label": "버튼 한 번",
+        "focus": [
+          "mentor",
+          "ui",
+          "server"
+        ],
+        "note": "화면 버튼은 서버를 거쳐 명령 하나를 실행할 뿐이다."
+      },
+      {
+        "id": "writing",
+        "label": "글을 쓰는 쪽",
+        "focus": [
+          "server",
+          "pipeline",
+          "claude",
+          "astra"
+        ],
+        "note": "초안은 Claude, 제목과 재작성·피드백 반영은 astra."
+      },
+      {
+        "id": "material",
+        "label": "재료와 그림",
+        "focus": [
+          "server",
+          "collect",
+          "aside",
+          "wiki",
+          "images",
+          "gti"
+        ],
+        "note": "원문 수집, 주제 지도, 그림 후보."
+      }
+    ],
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "화면"
+        },
+        "backend": {
+          "label": "서버 · 스크립트"
+        },
+        "cloud": {
+          "label": "AI"
+        },
+        "external": {
+          "label": "사람 · 수집 도구"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "mentor",
+      "type": "external",
+      "label": "멘토",
+      "sublabel": "브라우저",
+      "pos": [
+        40,
+        290
+      ],
+      "size": [
+        130,
+        64
+      ]
+    },
+    {
+      "id": "ui",
+      "type": "frontend",
+      "label": "작업실 화면",
+      "sublabel": "React · app/",
+      "pos": [
+        240,
+        290
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "server",
+      "type": "backend",
+      "label": "작업실 서버",
+      "sublabel": "studio_server.py",
+      "tag": "버튼 → 명령",
+      "pos": [
+        460,
+        290
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "pipeline",
+      "type": "backend",
+      "label": "column_pipeline.py",
+      "sublabel": "제목 · 과정 1~",
+      "pos": [
+        720,
+        90
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "wiki",
+      "type": "backend",
+      "label": "wiki.py",
+      "sublabel": "주제 지도",
+      "pos": [
+        720,
+        220
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "images",
+      "type": "backend",
+      "label": "image_candidates.py",
+      "sublabel": "그림 후보",
+      "pos": [
+        720,
+        350
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "collect",
+      "type": "backend",
+      "label": "collect.py",
+      "sublabel": "원문 수집",
+      "pos": [
+        720,
+        610
+      ],
+      "size": [
+        190,
+        64
+      ]
+    },
+    {
+      "id": "claude",
+      "type": "cloud",
+      "label": "Claude",
+      "sublabel": "claude -p opus",
+      "pos": [
+        1070,
+        90
+      ],
+      "size": [
+        180,
+        64
+      ]
+    },
+    {
+      "id": "astra",
+      "type": "cloud",
+      "label": "astra",
+      "sublabel": "codex exec gpt-6-astra",
+      "pos": [
+        1070,
+        220
+      ],
+      "size": [
+        180,
+        194
+      ]
+    },
+    {
+      "id": "gti",
+      "type": "cloud",
+      "label": "gti",
+      "sublabel": "그림 생성 gpt-6-astra",
+      "pos": [
+        1070,
+        480
+      ],
+      "size": [
+        180,
+        64
+      ]
+    },
+    {
+      "id": "aside",
+      "type": "external",
+      "label": "aside",
+      "sublabel": "브라우저 수집",
+      "pos": [
+        1070,
+        610
+      ],
+      "size": [
+        180,
+        64
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "mentor-ui",
+      "from": "mentor",
+      "to": "ui",
+      "label": "누름",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ui-server",
+      "from": "ui",
+      "to": "server",
+      "label": "JSON 요청",
+      "variant": "emphasis"
+    },
+    {
+      "id": "server-pipeline",
+      "from": "server",
+      "to": "pipeline"
+    },
+    {
+      "id": "server-wiki",
+      "from": "server",
+      "to": "wiki"
+    },
+    {
+      "id": "server-images",
+      "from": "server",
+      "to": "images"
+    },
+    {
+      "id": "server-collect",
+      "from": "server",
+      "to": "collect"
+    },
+    {
+      "id": "server-claude",
+      "from": "server",
+      "to": "claude",
+      "label": "진행자 대화",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "top"
+    },
+    {
+      "id": "pipeline-claude",
+      "from": "pipeline",
+      "to": "claude",
+      "label": "과정 1 초안"
+    },
+    {
+      "id": "pipeline-astra",
+      "from": "pipeline",
+      "to": "astra",
+      "label": "제목 · 과정 2~",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "wiki-astra",
+      "from": "wiki",
+      "to": "astra",
+      "label": "주제 페이지"
+    },
+    {
+      "id": "images-astra",
+      "from": "images",
+      "to": "astra",
+      "label": "그림 설명"
+    },
+    {
+      "id": "images-gti",
+      "from": "images",
+      "to": "gti",
+      "label": "그리기"
+    },
+    {
+      "id": "collect-aside",
+      "from": "collect",
+      "to": "aside",
+      "label": "원문 그대로"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "화면과 서버",
+      "items": [
+        "버튼은 서버를 거쳐 스크립트 하나를 실행할 뿐",
+        "작업마다 진행 로그가 runs/studio/에 남음"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "AI 분담",
+      "items": [
+        "Claude: 과정 1 초안, 진행자 대화",
+        "astra: 주제 지도, 제목, 과정 2부터 끝까지, 그림 설명",
+        "gti: 그림"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "파일로 이어짐",
+      "items": [
+        "sources/originals → wiki/ → briefs/ → runs/ → columns/",
+        "단계 사이는 전부 파일, 위키는 바뀔 때마다 git 커밋"
+      ]
+    }
+  ]
+}

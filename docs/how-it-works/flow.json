@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "칼럼 한 편이 나오기까지",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "멘토가 고르는 것"
+        },
+        "cloud": {
+          "label": "AI가 하는 것"
+        },
+        "database": {
+          "label": "남는 파일"
+        },
+        "external": {
+          "label": "수집"
+        }
+      }
+    },
+    "views": [
+      {
+        "id": "material",
+        "label": "재료가 쌓이는 길",
+        "focus": [
+          "collect",
+          "ingest"
+        ],
+        "note": "원문은 그대로 저장되고, 위키 주제 페이지에 논지별로 쌓인다."
+      },
+      {
+        "id": "writing",
+        "label": "글이 되는 길",
+        "focus": [
+          "pick",
+          "brief",
+          "title",
+          "write",
+          "feedback"
+        ],
+        "note": "주제를 고르면 설정과 제목 후보가 나오고, 과정 1·2·3 뒤 피드백으로 다듬는다."
+      },
+      {
+        "id": "finish",
+        "label": "마무리",
+        "focus": [
+          "write",
+          "images",
+          "confirm",
+          "column",
+          "ingest"
+        ],
+        "note": "그림을 고르고 확정하면 칼럼이 저장되고 위키 주제에 씀이 표시된다."
+      }
+    ],
+    "viewBox": [
+      1340,
+      700
+    ]
+  },
+  "components": [
+    {
+      "id": "collect",
+      "type": "external",
+      "label": "원문 수집",
+      "sublabel": "aside → sources/",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "ingest",
+      "type": "cloud",
+      "label": "위키 넣기",
+      "sublabel": "astra → wiki/",
+      "pos": [
+        260,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "pick",
+      "type": "frontend",
+      "label": "주제 고르기",
+      "sublabel": "주제 지도에서",
+      "pos": [
+        370,
+        110
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "brief",
+      "type": "cloud",
+      "label": "깊게 읽기 · 제목 후보",
+      "sublabel": "astra → briefs/",
+      "pos": [
+        480,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "title",
+      "type": "frontend",
+      "label": "제목 고르기",
+      "sublabel": "astra 후보 중",
+      "pos": [
+        590,
+        110
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "write",
+      "type": "cloud",
+      "label": "과정 1 · 2 · 3",
+      "sublabel": "Claude → astra ×2",
+      "pos": [
+        700,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "feedback",
+      "type": "frontend",
+      "label": "피드백",
+      "sublabel": "받은 그대로 astra에",
+      "pos": [
+        700,
+        490
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "images",
+      "type": "cloud",
+      "label": "그림 후보",
+      "sublabel": "astra 설명 → gti",
+      "pos": [
+        920,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "confirm",
+      "type": "frontend",
+      "label": "그림 골라 확정",
+      "sublabel": "머리 1 · 본문 3",
+      "pos": [
+        1030,
+        110
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "column",
+      "type": "database",
+      "label": "확정 칼럼",
+      "sublabel": "columns/",
+      "pos": [
+        1140,
+        300
+      ],
+      "size": [
+        160,
+        64
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "auto-ingest",
+      "from": "collect",
+      "to": "ingest",
+      "label": "자동으로",
+      "variant": "emphasis"
+    },
+    {
+      "id": "show-map",
+      "from": "ingest",
+      "to": "pick",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "claim",
+      "from": "pick",
+      "to": "brief",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "emphasis"
+    },
+    {
+      "id": "offer-titles",
+      "from": "brief",
+      "to": "title",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "start-writing",
+      "from": "title",
+      "to": "write",
+      "label": "쓰기",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "emphasis"
+    },
+    {
+      "id": "read-draft",
+      "from": "write",
+      "to": "feedback",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "revise",
+      "from": "feedback",
+      "to": "write",
+      "label": "과정 4~",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "variant": "dashed",
+      "labelDx": 36
+    },
+    {
+      "id": "to-images",
+      "from": "write",
+      "to": "images",
+      "label": "다 되면",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pick-images",
+      "from": "images",
+      "to": "confirm",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "save-column",
+      "from": "confirm",
+      "to": "column",
+      "label": "저장",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "variant": "emphasis"
+    },
+    {
+      "id": "mark-used",
+      "from": "column",
+      "to": "ingest",
+      "label": "위키 주제에 씀 표시",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "variant": "dashed",
+      "via": [
+        [
+          1220,
+          580
+        ],
+        [
+          340,
+          580
+        ]
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "모으기",
+      "items": [
+        "원문은 요약하지 않고 전체를 저장",
+        "새 원문은 기존 주제 페이지에 쌓이고, 논지가 새로우면 새 페이지"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "쓰기",
+      "items": [
+        "과정 1 Claude 초안, 과정 2 astra가 경영일기 필자 문체로 재작성, 과정 3 멘토 기준 반영",
+        "절반 모드면 과정 3 뒤 절반 분량으로 한 번 더"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "확정",
+      "items": [
+        "머리 그림 하나와 본문 그림 셋을 골라 확정",
+        "확정 칼럼은 위키 주제에 씀으로 남아 다음 주제 고르기에 반영"
+      ]
+    }
+  ]
+}
