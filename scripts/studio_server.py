@@ -812,7 +812,11 @@ if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8771
     binds = ["127.0.0.1"] + tailnet_ips()
     HOSTS.update(binds + ["localhost"])
-    servers = [ThreadingHTTPServer((h, port), H) for h in binds]
+    try:
+        servers = [ThreadingHTTPServer((h, port), H) for h in binds]
+    except OSError as e:  # 이미 작업실이 떠 있거나 다른 프로그램이 그 포트를 쓴다
+        sys.exit(f"포트 {port}을 열 수 없습니다({e}). 이미 작업실이 떠 있지 않은지 확인하거나 다른 포트로 띄우세요"
+                 f" (예: start-windows.cmd {port + 10} / python3 -I scripts/studio_server.py {port + 10}).")
     for srv in servers[1:]:
         threading.Thread(target=srv.serve_forever, daemon=True).start()
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)

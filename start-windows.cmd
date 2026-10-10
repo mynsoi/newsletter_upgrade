@@ -10,3 +10,5 @@ if %errorlevel%==0 (
 ) else (
   python -X utf8 -I scripts\studio_server.py %PORT%
 )
+rem keep the window open when it stops with an error (double-click would close it at once)
+if errorlevel 1 pause
