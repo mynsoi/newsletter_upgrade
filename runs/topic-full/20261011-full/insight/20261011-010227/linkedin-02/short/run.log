@@ -1,0 +1,43 @@
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/insight/20261011-010227/linkedin-02/short
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a12690-de87-7d50-b583-88eb14704bd8
+--------
+user
+아래 [인사이트]와 [빌려 올 점]을 짧게 줄여 주세요. 새 내용을 더하지 말고, 있는 내용만 줄입니다. 말끝은 '~다'나 명사로 끝내도 됩니다.
+
+출력 형식(이 두 줄만):
+사례 한 줄: <원문 속 사람이 한 일, 30자 안팎>
+인사이트 한 줄: <직원에게 주는 인사이트, 40자 안팎>
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+[빌려 올 점]
+글쓴이는 채널명에 포함된 ‘브랜드·광고’를 기준으로 자료를 골랐다가 자기 일과 무관한 회의록과 단가표까지 끌어왔다. AI에 줄 자료는 같은 단어가 등장하는지보다 현재 맡은 일과 어떤 관련이 있는지로 골라야 한다.
+
+[인사이트]
+글쓴이가 최근 문서 400개에서 자신의 업무에 맞는 12개를 추렸다는 점은 자료의 양보다 선별 기준을 먼저 보게 한다. AI에 요약을 요청하기 전에 현재 맡은 일과 이번에 판단할 문제를 설명하고, 어떤 자료가 필요한지와 그 이유부터 확인해 볼 수 있다.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+2026-10-10T16:06:31.337463Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+사례 한 줄: 최근 문서 400개에서 자기 업무에 맞는 12개를 추렸다
+인사이트 한 줄: AI 요약 전 맡은 일과 판단할 문제를 설명하고 필요한 자료와 이유를 확인한다
+tokens used
+6,641
+사례 한 줄: 최근 문서 400개에서 자기 업무에 맞는 12개를 추렸다
+인사이트 한 줄: AI 요약 전 맡은 일과 판단할 문제를 설명하고 필요한 자료와 이유를 확인한다

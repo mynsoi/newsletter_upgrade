@@ -1,0 +1,43 @@
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/insight/20261011-010227/linkedin-25/short
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a12690-ddb0-71b1-ac6d-32340ed74e7d
+--------
+user
+아래 [인사이트]와 [빌려 올 점]을 짧게 줄여 주세요. 새 내용을 더하지 말고, 있는 내용만 줄입니다. 말끝은 '~다'나 명사로 끝내도 됩니다.
+
+출력 형식(이 두 줄만):
+사례 한 줄: <원문 속 사람이 한 일, 30자 안팎>
+인사이트 한 줄: <직원에게 주는 인사이트, 40자 안팎>
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+[빌려 올 점]
+글쓴이는 Minimax3로 90초 애니메이션을 만들면서 Seedance보다 지시문 작성에 어려움을 겪었지만, 2K 화질을 더 저렴하게 이용했다. AI 도구를 고를 때는 이용 요금과 원하는 결과를 얻기까지 드는 수고를 함께 따져야 한다.
+
+[인사이트]
+이 사례에서 Minimax3의 장점은 낮은 2K 이용 비용이었고, 어려움은 지시문 작성이었다. 후보 도구로 같은 짧은 장면을 만들어 보고, 요금과 수정에 들인 시간을 함께 기록하면 우리 업무에서 감당할 만한 선택인지 판단할 수 있다.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+2026-10-10T16:06:31.065642Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+사례 한 줄: Minimax3로 저렴한 2K 90초 애니메이션을 만들었다
+인사이트 한 줄: 후보 도구로 같은 장면을 만들고 요금과 수정 시간을 함께 기록해 선택한다
+tokens used
+6,758
+사례 한 줄: Minimax3로 저렴한 2K 90초 애니메이션을 만들었다
+인사이트 한 줄: 후보 도구로 같은 장면을 만들고 요금과 수정 시간을 함께 기록해 선택한다

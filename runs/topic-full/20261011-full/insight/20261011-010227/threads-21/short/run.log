@@ -1,0 +1,43 @@
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/insight/20261011-010227/threads-21/short
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a12690-dd96-7cd0-8542-5dfb17fdfff6
+--------
+user
+아래 [인사이트]와 [빌려 올 점]을 짧게 줄여 주세요. 새 내용을 더하지 말고, 있는 내용만 줄입니다. 말끝은 '~다'나 명사로 끝내도 됩니다.
+
+출력 형식(이 두 줄만):
+사례 한 줄: <원문 속 사람이 한 일, 30자 안팎>
+인사이트 한 줄: <직원에게 주는 인사이트, 40자 안팎>
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+[빌려 올 점]
+모션그래픽 디자이너인 글쓴이는 GPT로 만든 이미지 한 장을 애니메이션으로 발전시키면서, 여러 시행착오 끝에 물리법칙과 세부 움직임을 생성 조건에 담았다. 직원도 자신의 업무에서 자연스럽고 정확한 결과를 판단하는 기준을 AI에 줄 구체적인 조건으로 바꿔 볼 수 있다.
+
+[인사이트]
+글쓴이가 움직임을 다듬기 위해 물리법칙까지 명시했듯, 직원도 “이해하기 쉽게 만들어 달라”는 요청에 설비의 이동 방향이나 반드시 지켜야 할 작업 순서를 더해 볼 수 있다. 이렇게 적은 조건은 생성된 자료가 실제 업무와 맞는지 확인하는 검토 기준으로도 쓸 수 있다.
+2026-10-10T16:06:31.016306Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+사례 한 줄: 물리법칙과 세부 움직임을 생성 조건에 담아 애니메이션 제작
+인사이트 한 줄: 설비 이동 방향과 작업 순서를 AI 생성 조건과 검토 기준으로 활용
+tokens used
+1,004
+사례 한 줄: 물리법칙과 세부 움직임을 생성 조건에 담아 애니메이션 제작
+인사이트 한 줄: 설비 이동 방향과 작업 순서를 AI 생성 조건과 검토 기준으로 활용
