@@ -4,7 +4,8 @@ rem -X utf8: Korean prompts and logs break under the default Windows encoding (c
 cd /d "%~dp0"
 set PORT=%~1
 if "%PORT%"=="" set PORT=8771
-where py >nul 2>nul
+rem same choice as setup-windows.ps1: py -3 only when it is 3.10+, otherwise python (Pillow was installed there)
+py -3 -c "import sys; sys.exit(sys.version_info < (3, 10))" >nul 2>nul
 if %errorlevel%==0 (
   py -3 -X utf8 -I scripts\studio_server.py %PORT%
 ) else (
