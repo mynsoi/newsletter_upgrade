@@ -1,0 +1,1850 @@
+URL: https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7
+✔︎ Opened a new tab and set it active: tabs[0], page → (1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다 (https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7)
+=== SNAPSHOT 1 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "rin_ceo님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "rin_ceo" [ref=e23]
+    - link "2026년 7월 22일 수요일 오후 3:49" [ref=e24]: "2026-07-22"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "클로드코드 진짜 개미쳤다...\n딱 2일만에 업무 관리 툴을 만들었어\nASANA라는 업무 협업 툴을 사용하고 있었는데\n매달 나가던 월 구독료 약 6만원..\n클로드코드로 개발해서 뽕뽑음...\n소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아...ㄴ> 클로드 초보자 분들에게 전하는 꿀팁"
+    - button [ref=e26]
+    - canvas [ref=e27] [size=590x42]
+    - link [ref=e28]
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e35] [focused]
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]:
+      - image "daon_k님의 프로필 사진"
+    - link "daon_k" [ref=e41]
+    - link "2026년 7월 23일 목요일 오전 11:03" [ref=e42]: "2026-07-23"
+    - button [ref=e43]:
+      - img "더 보기"
+    - text: "토스 디자인 문서를 DESIGN[.]md로 넣어보시는 건 어떠신가요 🍀"
+    - link "threads.com/@daon…" [ref=e44]
+    - link [ref=e45]:
+      - image "daon_k님의 프로필 사진"
+    - link "daon_k" [ref=e46]
+    - link "2026년 4월 14일 화요일 오전 2:19" [ref=e47]: "2026-04-14"
+    - link [ref=e48]:
+      - link "DESIGN.md" [ref=e49]
+      - text: "한 번 제대로 만들려고 붙잡으면 하루가 그냥 사라지더라고요.\n색상 정하고, 토큰 정리하고, 컴포넌트 맞추다 보면 어느새 저녁.그래서 만들었어요. OMD(oh-my-design), 드디어 공개해요.대기업 디자인 시스템 58개 중에 마음에 드는 거 하나 고르고,\nA/B로 버튼·테이블·헤더·카드 취향 맞추고,\n색상이랑 radius, 다크모드까지 세팅하면\nDESIGN.md가 바로 export돼요.shadcn CSS 변수도 같이 나와서 그대로 프로젝트에 붙이면 끝이고,\n설정값은 해시로 인코딩돼서 npx 한 줄이면 어디서든 동일하게 재생성돼요.AI 호출 0번, 비용 0원, MIT 오픈소스예요."
+      - link "DESIGN.md" [ref=e50]
+      - text: "루틴 가지신 분들 한 번 써보시고 피드백 주시면 정말 감사하겠습니다 🙏 1/3"
+    - group "Video player"
+    - button [ref=e51]:
+      - img "좋아요"
+      - text: "308"
+    - button [ref=e52]:
+      - img "답글"
+      - text: "28"
+    - button [ref=e53]:
+      - img "리포스트"
+      - text: "156"
+    - button [ref=e54]:
+      - img "공유하기"
+      - text: "225"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e61]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e62]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "저는 토스 공식 홈페이지에서 뒤져서 만들었는데 이런 좋은 정보가...... 감사합니다 ㅎㅎ"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e70]
+    - link "2026년 7월 23일 목요일 오후 12:30" [ref=e71]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "plane이라고 오픈소스있는데 저희팀은 그거 사용합니다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e79]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e80]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "오 그것도 업무 협업툴인가봐요?"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e88]
+    - link "2026년 7월 23일 목요일 오후 9:29" [ref=e89]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "지라 축소판이라고 보시면됩니다\n카페 24같은데 호스팅 싼거 하나 해서 셀프로 올려도 되고 무료티어도 10명까지인가 무료일거에요"
+    - link "plane.so/prici…" [ref=e91]
+    - link [ref=e92]:
+      - image "Plane Pricing | Simple per-seat plans for teams that ship"
+      - text: "plane.so Plane Pricing | Simple per-seat plans for teams that ship"
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]:
+      - image "im_jinsang님의 프로필 사진"
+    - link "im_jinsang" [ref=e99]
+    - link "2026년 7월 23일 목요일 오후 1:41" [ref=e100]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - text: "난 그냥 클로드와 아사나 묶어두고 물어봐 오늘 할일 뭐냐고 그러면 밀린것까지 다 알려주더라"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e108]
+    - link "2026년 7월 23일 목요일 오후 1:43" [ref=e109]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "오.... 클로드랑 묶을 수 있구나 고건 몰랏네\n아사나는 죄가 없지 내가 반쪽짜리로 쓰고 잇는...ㅋㅋㅋ"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e35] [focused]
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]:
+      - image "daon_k님의 프로필 사진"
+    - link "daon_k" [ref=e41]
+    - link "2026년 7월 23일 목요일 오전 11:03" [ref=e42]: "2026-07-23"
+    - button [ref=e43]:
+      - img "더 보기"
+    - text: "토스 디자인 문서를 DESIGN[.]md로 넣어보시는 건 어떠신가요 🍀"
+    - link "threads.com/@daon…" [ref=e44]
+    - link [ref=e45]:
+      - image "daon_k님의 프로필 사진"
+    - link "daon_k" [ref=e46]
+    - link "2026년 4월 14일 화요일 오전 2:19" [ref=e47]: "2026-04-14"
+    - link [ref=e48]:
+      - link "DESIGN.md" [ref=e49]
+      - text: "한 번 제대로 만들려고 붙잡으면 하루가 그냥 사라지더라고요.\n색상 정하고, 토큰 정리하고, 컴포넌트 맞추다 보면 어느새 저녁.그래서 만들었어요. OMD(oh-my-design), 드디어 공개해요.대기업 디자인 시스템 58개 중에 마음에 드는 거 하나 고르고,\nA/B로 버튼·테이블·헤더·카드 취향 맞추고,\n색상이랑 radius, 다크모드까지 세팅하면\nDESIGN.md가 바로 export돼요.shadcn CSS 변수도 같이 나와서 그대로 프로젝트에 붙이면 끝이고,\n설정값은 해시로 인코딩돼서 npx 한 줄이면 어디서든 동일하게 재생성돼요.AI 호출 0번, 비용 0원, MIT 오픈소스예요."
+      - link "DESIGN.md" [ref=e50]
+      - text: "루틴 가지신 분들 한 번 써보시고 피드백 주시면 정말 감사하겠습니다 🙏 1/3"
+    - group "Video player"
+    - button [ref=e51]:
+      - img "좋아요"
+      - text: "308"
+    - button [ref=e52]:
+      - img "답글"
+      - text: "28"
+    - button [ref=e53]:
+      - img "리포스트"
+      - text: "156"
+    - button [ref=e54]:
+      - img "공유하기"
+      - text: "225"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e61]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e62]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "저는 토스 공식 홈페이지에서 뒤져서 만들었는데 이런 좋은 정보가...... 감사합니다 ㅎㅎ"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e70]
+    - link "2026년 7월 23일 목요일 오후 12:30" [ref=e71]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "plane이라고 오픈소스있는데 저희팀은 그거 사용합니다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e79]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e80]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "오 그것도 업무 협업툴인가봐요?"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e88]
+    - link "2026년 7월 23일 목요일 오후 9:29" [ref=e89]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "지라 축소판이라고 보시면됩니다\n카페 24같은데 호스팅 싼거 하나 해서 셀프로 올려도 되고 무료티어도 10명까지인가 무료일거에요"
+    - link "plane.so/prici…" [ref=e91]
+    - link [ref=e92]:
+      - image "Plane Pricing | Simple per-seat plans for teams that ship"
+      - text: "plane.so Plane Pricing | Simple per-seat plans for teams that ship"
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]:
+      - image "im_jinsang님의 프로필 사진"
+    - link "im_jinsang" [ref=e99]
+    - link "2026년 7월 23일 목요일 오후 1:41" [ref=e100]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - text: "난 그냥 클로드와 아사나 묶어두고 물어봐 오늘 할일 뭐냐고 그러면 밀린것까지 다 알려주더라"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e108]
+    - link "2026년 7월 23일 목요일 오후 1:43" [ref=e109]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "오.... 클로드랑 묶을 수 있구나 고건 몰랏네\n아사나는 죄가 없지 내가 반쪽짜리로 쓰고 잇는...ㅋㅋㅋ"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e122]
+    - link "2026년 7월 24일 금요일 오전 8:37" [ref=e123]: "2026-07-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "우리도 걍 노션 우리가 쓰는 기능 빼서 어드민 따로 만들었죠~ 노션+아사나+리니어 다 섞어서 ㅋㅋ 실용성 경험측면에서 낫더라고요"
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e128]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]
+    - button [ref=e43]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e61]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e62]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "저는 토스 공식 홈페이지에서 뒤져서 만들었는데 이런 좋은 정보가...... 감사합니다 ㅎㅎ"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e70]
+    - link "2026년 7월 23일 목요일 오후 12:30" [ref=e71]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "plane이라고 오픈소스있는데 저희팀은 그거 사용합니다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e79]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e80]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "오 그것도 업무 협업툴인가봐요?"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "wjda.lswjdals님의 프로필 사진"
+    - link "wjda.lswjdals" [ref=e88]
+    - link "2026년 7월 23일 목요일 오후 9:29" [ref=e89]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "지라 축소판이라고 보시면됩니다\n카페 24같은데 호스팅 싼거 하나 해서 셀프로 올려도 되고 무료티어도 10명까지인가 무료일거에요"
+    - link "plane.so/prici…" [ref=e91]
+    - link [ref=e92]:
+      - image "Plane Pricing | Simple per-seat plans for teams that ship"
+      - text: "plane.so Plane Pricing | Simple per-seat plans for teams that ship"
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]:
+      - image "im_jinsang님의 프로필 사진"
+    - link "im_jinsang" [ref=e99]
+    - link "2026년 7월 23일 목요일 오후 1:41" [ref=e100]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - text: "난 그냥 클로드와 아사나 묶어두고 물어봐 오늘 할일 뭐냐고 그러면 밀린것까지 다 알려주더라"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e108]
+    - link "2026년 7월 23일 목요일 오후 1:43" [ref=e109]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "오.... 클로드랑 묶을 수 있구나 고건 몰랏네\n아사나는 죄가 없지 내가 반쪽짜리로 쓰고 잇는...ㅋㅋㅋ"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e122]
+    - link "2026년 7월 24일 금요일 오전 8:37" [ref=e123]: "2026-07-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "우리도 걍 노션 우리가 쓰는 기능 빼서 어드민 따로 만들었죠~ 노션+아사나+리니어 다 섞어서 ㅋㅋ 실용성 경험측면에서 낫더라고요"
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "sclee0817님의 프로필 사진"
+    - link "sclee0817" [ref=e131]
+    - link "2026년 7월 23일 목요일 오전 7:30" [ref=e132]: "2026-07-23"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "아사나는 정말쑤레기"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e140]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e141]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "아사나... 기능에 비해 너무 비싸요..ㅜㅜㅜ 잘 쓰시는 분들 있겠지만"
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "saleinfo.ait님의 프로필 사진"
+    - link "saleinfo.ait" [ref=e149]
+    - link "2026년 7월 23일 목요일 오전 10:35" [ref=e150]: "2026-07-23"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "tds 좋죠"
+    - button [ref=e152]:
+      - img "좋아요"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+    - button [ref=e155]:
+      - img "공유하기"
+  - generic [ref=e156]:
+    - link [ref=e157]:
+      - image "gpt_minje님의 프로필 사진"
+    - link "gpt_minje" [ref=e158]
+    - link "2026년 9월 15일 화요일 오후 8:48" [ref=e159]: "2026-09-15"
+    - button [ref=e160]:
+      - img "더 보기"
+    - text: "이틀 만에 칸반 툴을 만들어 구독료 부담까지 덜어낸 실행력이 인상적이에요."
+    - button [ref=e161]:
+      - img "좋아요"
+    - button [ref=e162]:
+      - img "답글"
+    - button [ref=e163]:
+      - img "리포스트"
+    - button [ref=e164]:
+      - img "공유하기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "kim.nam.tem님의 프로필 사진"
+    - link "kim.nam.tem" [ref=e167]
+    - link "2026년 7월 25일 토요일 오전 2:55" [ref=e168]: "2026-07-25"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "우와! 내가 딱 원하는거야! 클로드 초보이고 투두리스트 부터 간단히 만들어봤어.그런데 들어갈 때마다 초기화 되고 저장이 안돼ㅜㅜ 어디 올려야 저장이 가능해지는걸까?"
+    - button [ref=e170]:
+      - img "좋아요"
+    - button [ref=e171]:
+      - img "답글"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "gloglow_1님의 프로필 사진"
+    - link "gloglow_1" [ref=e176]
+    - img "인증된 계정"
+    - link "2026년 7월 23일 목요일 오후 6:59" [ref=e177]: "2026-07-23"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "너무 잘구현했네요 ㅎㅎ"
+    - button [ref=e179]:
+      - img "좋아요"
+    - button [ref=e180]:
+      - img "답글"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]
+    - button [ref=e43]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - link "plane.so Plane Pricing | Simple per-seat plans for teams that ship" [ref=e92]
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]:
+      - image "im_jinsang님의 프로필 사진"
+    - link "im_jinsang" [ref=e99]
+    - link "2026년 7월 23일 목요일 오후 1:41" [ref=e100]: "2026-07-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - text: "난 그냥 클로드와 아사나 묶어두고 물어봐 오늘 할일 뭐냐고 그러면 밀린것까지 다 알려주더라"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e108]
+    - link "2026년 7월 23일 목요일 오후 1:43" [ref=e109]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e110]:
+      - img "더 보기"
+    - text: "오.... 클로드랑 묶을 수 있구나 고건 몰랏네\n아사나는 죄가 없지 내가 반쪽짜리로 쓰고 잇는...ㅋㅋㅋ"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e122]
+    - link "2026년 7월 24일 금요일 오전 8:37" [ref=e123]: "2026-07-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - text: "우리도 걍 노션 우리가 쓰는 기능 빼서 어드민 따로 만들었죠~ 노션+아사나+리니어 다 섞어서 ㅋㅋ 실용성 경험측면에서 낫더라고요"
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "sclee0817님의 프로필 사진"
+    - link "sclee0817" [ref=e131]
+    - link "2026년 7월 23일 목요일 오전 7:30" [ref=e132]: "2026-07-23"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "아사나는 정말쑤레기"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e140]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e141]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "아사나... 기능에 비해 너무 비싸요..ㅜㅜㅜ 잘 쓰시는 분들 있겠지만"
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "saleinfo.ait님의 프로필 사진"
+    - link "saleinfo.ait" [ref=e149]
+    - link "2026년 7월 23일 목요일 오전 10:35" [ref=e150]: "2026-07-23"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "tds 좋죠"
+    - button [ref=e152]:
+      - img "좋아요"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+    - button [ref=e155]:
+      - img "공유하기"
+  - generic [ref=e156]:
+    - link [ref=e157]:
+      - image "gpt_minje님의 프로필 사진"
+    - link "gpt_minje" [ref=e158]
+    - link "2026년 9월 15일 화요일 오후 8:48" [ref=e159]: "2026-09-15"
+    - button [ref=e160]:
+      - img "더 보기"
+    - text: "이틀 만에 칸반 툴을 만들어 구독료 부담까지 덜어낸 실행력이 인상적이에요."
+    - button [ref=e161]:
+      - img "좋아요"
+    - button [ref=e162]:
+      - img "답글"
+    - button [ref=e163]:
+      - img "리포스트"
+    - button [ref=e164]:
+      - img "공유하기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "kim.nam.tem님의 프로필 사진"
+    - link "kim.nam.tem" [ref=e167]
+    - link "2026년 7월 25일 토요일 오전 2:55" [ref=e168]: "2026-07-25"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "우와! 내가 딱 원하는거야! 클로드 초보이고 투두리스트 부터 간단히 만들어봤어.그런데 들어갈 때마다 초기화 되고 저장이 안돼ㅜㅜ 어디 올려야 저장이 가능해지는걸까?"
+    - button [ref=e170]:
+      - img "좋아요"
+    - button [ref=e171]:
+      - img "답글"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "gloglow_1님의 프로필 사진"
+    - link "gloglow_1" [ref=e176]
+    - img "인증된 계정"
+    - link "2026년 7월 23일 목요일 오후 6:59" [ref=e177]: "2026-07-23"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "너무 잘구현했네요 ㅎㅎ"
+    - button [ref=e179]:
+      - img "좋아요"
+    - button [ref=e180]:
+      - img "답글"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]
+    - button [ref=e43]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - link [ref=e92]
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]
+    - button [ref=e110]:
+      - img "더 보기"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "sclee0817님의 프로필 사진"
+    - link "sclee0817" [ref=e131]
+    - link "2026년 7월 23일 목요일 오전 7:30" [ref=e132]: "2026-07-23"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "아사나는 정말쑤레기"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e140]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e141]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "아사나... 기능에 비해 너무 비싸요..ㅜㅜㅜ 잘 쓰시는 분들 있겠지만"
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "saleinfo.ait님의 프로필 사진"
+    - link "saleinfo.ait" [ref=e149]
+    - link "2026년 7월 23일 목요일 오전 10:35" [ref=e150]: "2026-07-23"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "tds 좋죠"
+    - button [ref=e152]:
+      - img "좋아요"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+    - button [ref=e155]:
+      - img "공유하기"
+  - generic [ref=e156]:
+    - link [ref=e157]:
+      - image "gpt_minje님의 프로필 사진"
+    - link "gpt_minje" [ref=e158]
+    - link "2026년 9월 15일 화요일 오후 8:48" [ref=e159]: "2026-09-15"
+    - button [ref=e160]:
+      - img "더 보기"
+    - text: "이틀 만에 칸반 툴을 만들어 구독료 부담까지 덜어낸 실행력이 인상적이에요."
+    - button [ref=e161]:
+      - img "좋아요"
+    - button [ref=e162]:
+      - img "답글"
+    - button [ref=e163]:
+      - img "리포스트"
+    - button [ref=e164]:
+      - img "공유하기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "kim.nam.tem님의 프로필 사진"
+    - link "kim.nam.tem" [ref=e167]
+    - link "2026년 7월 25일 토요일 오전 2:55" [ref=e168]: "2026-07-25"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "우와! 내가 딱 원하는거야! 클로드 초보이고 투두리스트 부터 간단히 만들어봤어.그런데 들어갈 때마다 초기화 되고 저장이 안돼ㅜㅜ 어디 올려야 저장이 가능해지는걸까?"
+    - button [ref=e170]:
+      - img "좋아요"
+    - button [ref=e171]:
+      - img "답글"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "gloglow_1님의 프로필 사진"
+    - link "gloglow_1" [ref=e176]
+    - img "인증된 계정"
+    - link "2026년 7월 23일 목요일 오후 6:59" [ref=e177]: "2026-07-23"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "너무 잘구현했네요 ㅎㅎ"
+    - button [ref=e179]:
+      - img "좋아요"
+    - button [ref=e180]:
+      - img "답글"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== SNAPSHOT 6 ===
+- title: "(1) 클로드코드 진짜 개미쳤다... 딱 2일만에 업무 관리 툴을 만들었어 ASANA라는 업무 협업 툴을 사용하고 있었는데 매달 나가던 월 구독료 약 6만원.. 클로드코드로 개발해서 뽕뽑음... 소규모 기업이라 복잡한 기능은 안 쓰고 딱 칸반보드 정도만 활용 중이었는데 너무 좋은 거 같아... ㄴ> 클로드 초보자 분들에게 전하는 꿀팁 토스 디자인 문서 넣으니까 디자인도 클로드 스럽지 않고 깔끔하게 잘 나온다" [url=https://www.threads.com/@rin_ceo/post/DbFfAVhAXN7]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 3.4만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e29]:
+      - img "좋아요"
+      - text: "247"
+    - button [ref=e30]:
+      - img "답글"
+      - text: "23"
+    - button [ref=e31]:
+      - img "리포스트"
+      - text: "69"
+    - button [ref=e32]:
+      - img "공유하기"
+      - text: "73"
+    - button "정렬더 보기" [ref=e33]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e34]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e36]
+    - button "GIF 추가" [ref=e37]
+    - button "작성 도구 확장" [ref=e38]
+  - generic [ref=e39]:
+    - link [ref=e40]
+    - button [ref=e43]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "23"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+      - text: "6"
+    - button [ref=e58]:
+      - img "공유하기"
+      - text: "14"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e65]:
+      - img "답글"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e74]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e77]:
+    - link [ref=e78]
+    - button [ref=e81]:
+      - img "더 보기"
+    - button [ref=e82]:
+      - img "좋아요"
+    - button [ref=e83]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e84]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - link [ref=e92]
+    - button [ref=e93]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e94]:
+      - img "답글"
+    - button [ref=e95]:
+      - img "리포스트"
+    - button [ref=e96]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e97]:
+    - link [ref=e98]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e101]:
+      - img "더 보기"
+    - button [ref=e102]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e103]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e104]:
+      - img "리포스트"
+    - button [ref=e105]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e106]:
+    - link [ref=e107]
+    - button [ref=e110]:
+      - img "더 보기"
+    - button [ref=e111]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e112]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e113]:
+      - img "리포스트"
+    - button [ref=e114]:
+      - img "공유하기"
+  - generic [ref=e120]:
+    - link [ref=e121]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e124]:
+      - img "더 보기"
+    - button [ref=e125]:
+      - img "좋아요"
+      - text: "9"
+    - button [ref=e126]:
+      - img "답글"
+    - button [ref=e127]:
+      - img "리포스트"
+      - text: "1"
+    - button [ref=e128]:
+      - img "공유하기"
+  - generic [ref=e129]:
+    - link [ref=e130]:
+      - image "sclee0817님의 프로필 사진"
+    - link "sclee0817" [ref=e131]
+    - link "2026년 7월 23일 목요일 오전 7:30" [ref=e132]: "2026-07-23"
+    - button [ref=e133]:
+      - img "더 보기"
+    - text: "아사나는 정말쑤레기"
+    - button [ref=e134]:
+      - img "좋아요"
+    - button [ref=e135]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e136]:
+      - img "리포스트"
+    - button [ref=e137]:
+      - img "공유하기"
+  - generic [ref=e138]:
+    - link [ref=e139]:
+      - image "rin_ceo님의 프로필 사진"
+    - link "rin_ceo" [ref=e140]
+    - link "2026년 7월 23일 목요일 오후 1:42" [ref=e141]: "2026-07-23"
+    - text: "작성자"
+    - button [ref=e142]:
+      - img "더 보기"
+    - text: "아사나... 기능에 비해 너무 비싸요..ㅜㅜㅜ 잘 쓰시는 분들 있겠지만"
+    - button [ref=e143]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e144]:
+      - img "답글"
+    - button [ref=e145]:
+      - img "리포스트"
+    - button [ref=e146]:
+      - img "공유하기"
+  - generic [ref=e147]:
+    - link [ref=e148]:
+      - image "saleinfo.ait님의 프로필 사진"
+    - link "saleinfo.ait" [ref=e149]
+    - link "2026년 7월 23일 목요일 오전 10:35" [ref=e150]: "2026-07-23"
+    - button [ref=e151]:
+      - img "더 보기"
+    - text: "tds 좋죠"
+    - button [ref=e152]:
+      - img "좋아요"
+    - button [ref=e153]:
+      - img "답글"
+    - button [ref=e154]:
+      - img "리포스트"
+    - button [ref=e155]:
+      - img "공유하기"
+  - generic [ref=e156]:
+    - link [ref=e157]:
+      - image "gpt_minje님의 프로필 사진"
+    - link "gpt_minje" [ref=e158]
+    - link "2026년 9월 15일 화요일 오후 8:48" [ref=e159]: "2026-09-15"
+    - button [ref=e160]:
+      - img "더 보기"
+    - text: "이틀 만에 칸반 툴을 만들어 구독료 부담까지 덜어낸 실행력이 인상적이에요."
+    - button [ref=e161]:
+      - img "좋아요"
+    - button [ref=e162]:
+      - img "답글"
+    - button [ref=e163]:
+      - img "리포스트"
+    - button [ref=e164]:
+      - img "공유하기"
+  - generic [ref=e165]:
+    - link [ref=e166]:
+      - image "kim.nam.tem님의 프로필 사진"
+    - link "kim.nam.tem" [ref=e167]
+    - link "2026년 7월 25일 토요일 오전 2:55" [ref=e168]: "2026-07-25"
+    - button [ref=e169]:
+      - img "더 보기"
+    - text: "우와! 내가 딱 원하는거야! 클로드 초보이고 투두리스트 부터 간단히 만들어봤어.그런데 들어갈 때마다 초기화 되고 저장이 안돼ㅜㅜ 어디 올려야 저장이 가능해지는걸까?"
+    - button [ref=e170]:
+      - img "좋아요"
+    - button [ref=e171]:
+      - img "답글"
+    - button [ref=e172]:
+      - img "리포스트"
+    - button [ref=e173]:
+      - img "공유하기"
+  - generic [ref=e174]:
+    - link [ref=e175]:
+      - image "gloglow_1님의 프로필 사진"
+    - link "gloglow_1" [ref=e176]
+    - img "인증된 계정"
+    - link "2026년 7월 23일 목요일 오후 6:59" [ref=e177]: "2026-07-23"
+    - button [ref=e178]:
+      - img "더 보기"
+    - text: "너무 잘구현했네요 ㅎㅎ"
+    - button [ref=e179]:
+      - img "좋아요"
+    - button [ref=e180]:
+      - img "답글"
+    - button [ref=e181]:
+      - img "리포스트"
+    - button [ref=e182]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e115]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e116]
+    - listitem:
+      - link "개인정보처리방침" [ref=e117]
+    - listitem:
+      - link "쿠키 정책" [ref=e118]
+- button "만들기" [ref=e119]:
+  - img "만들기"
+=== DONE ===
+[ok | 20244ms]

@@ -1,0 +1,668 @@
+URL: https://www.threads.com/@homebodify/post/DeMGDNsDpmo
+✔︎ Opened a new tab and set it active: tabs[0], page → (1) UX/UI 디자이너를 위한 AI 워크플로우 정리. 하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.) 원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪) 이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ @focusrefresh 님의 조언 두 개가 큰 영향을 줬다. 🙏 (https://www.threads.com/@homebodify/post/DeMGDNsDpmo)
+=== SNAPSHOT 1 ===
+- title: "(1) UX/UI 디자이너를 위한 AI 워크플로우 정리. 하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.) 원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪) 이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ @focusrefresh 님의 조언 두 개가 큰 영향을 줬다. 🙏" [url=https://www.threads.com/@homebodify/post/DeMGDNsDpmo]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 541회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "homebodify님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "homebodify" [ref=e23]
+    - button "게시물이 페디버스에 공유되었습니다" [ref=e24]:
+      - img "게시물이 페디버스에 공유되었습니다"
+    - link [ref=e25]:
+      - img
+      - text: "AI Threads"
+    - link "2026년 10월 7일 수요일 오후 7:00" [ref=e26]: "2일"
+    - button [ref=e27]:
+      - img "더 보기"
+    - text: "UX/UI 디자이너를 위한 AI 워크플로우 정리.하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.)원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪)이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ"
+    - link "@focusrefresh" [ref=e28]
+    - text: "님의 조언 두 개가 큰 영향을 줬다. 🙏"
+    - button [ref=e29]
+    - button "미디어를 파노라마로 결합" [ref=e30]
+    - button [ref=e31]
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "2"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e38] [focused]
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "syscall.rs님의 프로필 사진"
+    - link "syscall.rs" [ref=e44]
+    - link "2026년 10월 7일 수요일 오후 7:02" [ref=e45]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "👍"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e53]
+    - link "2026년 10월 7일 수요일 오후 7:16" [ref=e54]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "이런것도 까주시는군요~"
+    - button [ref=e56]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e57]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "homebodify님의 프로필 사진"
+    - link "homebodify" [ref=e62]
+    - link "2026년 10월 7일 수요일 오후 8:13" [ref=e63]: "2일"
+    - text: "작성자"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "이건 단순 구조 파트긴 합니다. ㅎㅎㅎ 아시는 분만 아시겠죠. 학습, 실행하고 문제를 해결했던 히스토리는 다른 페이지에 있습니다.다들 AI소식이나 초보자분들을 위한 글에나 반응이 오지 이건 아무도 안볼거라. ㅋㅋㅋ 제 기록용으로 올려봤어요 ㅎㅎㅎ 직접 해보거나 간접이라도 전체 워크플로우를 경험하고 질의응답이 되어야 이해가 빠르긴 하죠.석호님은 잘하시니까 이해 금방하시겠지만요.저도 예전에는 디자이너로서 이렇게 보면 분명 중요한데 이해 못해서 넘어간 것이 한 두개가 아닐거라 생각합니다. ㅋㅋ 그리고 실제로 중급 이상 글 올리면 조회수도 올라가지 않아서요. ㅎㅎㅎ 맘 편히 그냥 올리고 있습니다."
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e66]:
+      - img "답글"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "focusrefresh님의 프로필 사진"
+    - link "focusrefresh" [ref=e71]
+    - link "2026년 10월 8일 목요일 오전 12:28" [ref=e72]: "2일"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "조직에서 이렇게 하나씩 뭐하고 있는 거 보여주기 시작하면 관심 있는 사람들이 찾아오죠. Tribe leader 는 그렇게 생겨나는 거라고 Seth Godin 이 한 말이 생각납니다. 멋져부러요 글고 저기 mini PC 에다가 얼마짜리 컴퓨터인지 brother printer label 처럼 붙여놓으면 ‘이렇게 싸다고?!’ 하는 wow factor 까지 가능하지 않을까요? ㅋ"
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e78]
+    - listitem:
+      - link "개인정보처리방침" [ref=e79]
+    - listitem:
+      - link "쿠키 정책" [ref=e80]
+- button "만들기" [ref=e81]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "(1) UX/UI 디자이너를 위한 AI 워크플로우 정리. 하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.) 원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪) 이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ @focusrefresh 님의 조언 두 개가 큰 영향을 줬다. 🙏" [url=https://www.threads.com/@homebodify/post/DeMGDNsDpmo]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 541회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e27]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "2"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e38] [focused]
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "syscall.rs님의 프로필 사진"
+    - link "syscall.rs" [ref=e44]
+    - link "2026년 10월 7일 수요일 오후 7:02" [ref=e45]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "👍"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e53]
+    - link "2026년 10월 7일 수요일 오후 7:16" [ref=e54]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "이런것도 까주시는군요~"
+    - button [ref=e56]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e57]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "homebodify님의 프로필 사진"
+    - link "homebodify" [ref=e62]
+    - link "2026년 10월 7일 수요일 오후 8:13" [ref=e63]: "2일"
+    - text: "작성자"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "이건 단순 구조 파트긴 합니다. ㅎㅎㅎ 아시는 분만 아시겠죠. 학습, 실행하고 문제를 해결했던 히스토리는 다른 페이지에 있습니다.다들 AI소식이나 초보자분들을 위한 글에나 반응이 오지 이건 아무도 안볼거라. ㅋㅋㅋ 제 기록용으로 올려봤어요 ㅎㅎㅎ 직접 해보거나 간접이라도 전체 워크플로우를 경험하고 질의응답이 되어야 이해가 빠르긴 하죠.석호님은 잘하시니까 이해 금방하시겠지만요.저도 예전에는 디자이너로서 이렇게 보면 분명 중요한데 이해 못해서 넘어간 것이 한 두개가 아닐거라 생각합니다. ㅋㅋ 그리고 실제로 중급 이상 글 올리면 조회수도 올라가지 않아서요. ㅎㅎㅎ 맘 편히 그냥 올리고 있습니다."
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e66]:
+      - img "답글"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "focusrefresh님의 프로필 사진"
+    - link "focusrefresh" [ref=e71]
+    - link "2026년 10월 8일 목요일 오전 12:28" [ref=e72]: "2일"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "조직에서 이렇게 하나씩 뭐하고 있는 거 보여주기 시작하면 관심 있는 사람들이 찾아오죠. Tribe leader 는 그렇게 생겨나는 거라고 Seth Godin 이 한 말이 생각납니다. 멋져부러요 글고 저기 mini PC 에다가 얼마짜리 컴퓨터인지 brother printer label 처럼 붙여놓으면 ‘이렇게 싸다고?!’ 하는 wow factor 까지 가능하지 않을까요? ㅋ"
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e78]
+    - listitem:
+      - link "개인정보처리방침" [ref=e79]
+    - listitem:
+      - link "쿠키 정책" [ref=e80]
+- button "만들기" [ref=e81]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "(1) UX/UI 디자이너를 위한 AI 워크플로우 정리. 하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.) 원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪) 이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ @focusrefresh 님의 조언 두 개가 큰 영향을 줬다. 🙏" [url=https://www.threads.com/@homebodify/post/DeMGDNsDpmo]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 541회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e27]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "2"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "syscall.rs님의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "👍"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e53]
+    - link "2026년 10월 7일 수요일 오후 7:16" [ref=e54]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "이런것도 까주시는군요~"
+    - button [ref=e56]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e57]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "homebodify님의 프로필 사진"
+    - link "homebodify" [ref=e62]
+    - link "2026년 10월 7일 수요일 오후 8:13" [ref=e63]: "2일"
+    - text: "작성자"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "이건 단순 구조 파트긴 합니다. ㅎㅎㅎ 아시는 분만 아시겠죠. 학습, 실행하고 문제를 해결했던 히스토리는 다른 페이지에 있습니다.다들 AI소식이나 초보자분들을 위한 글에나 반응이 오지 이건 아무도 안볼거라. ㅋㅋㅋ 제 기록용으로 올려봤어요 ㅎㅎㅎ 직접 해보거나 간접이라도 전체 워크플로우를 경험하고 질의응답이 되어야 이해가 빠르긴 하죠.석호님은 잘하시니까 이해 금방하시겠지만요.저도 예전에는 디자이너로서 이렇게 보면 분명 중요한데 이해 못해서 넘어간 것이 한 두개가 아닐거라 생각합니다. ㅋㅋ 그리고 실제로 중급 이상 글 올리면 조회수도 올라가지 않아서요. ㅎㅎㅎ 맘 편히 그냥 올리고 있습니다."
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e66]:
+      - img "답글"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "focusrefresh님의 프로필 사진"
+    - link "focusrefresh" [ref=e71]
+    - link "2026년 10월 8일 목요일 오전 12:28" [ref=e72]: "2일"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "조직에서 이렇게 하나씩 뭐하고 있는 거 보여주기 시작하면 관심 있는 사람들이 찾아오죠. Tribe leader 는 그렇게 생겨나는 거라고 Seth Godin 이 한 말이 생각납니다. 멋져부러요 글고 저기 mini PC 에다가 얼마짜리 컴퓨터인지 brother printer label 처럼 붙여놓으면 ‘이렇게 싸다고?!’ 하는 wow factor 까지 가능하지 않을까요? ㅋ"
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e78]
+    - listitem:
+      - link "개인정보처리방침" [ref=e79]
+    - listitem:
+      - link "쿠키 정책" [ref=e80]
+- button "만들기" [ref=e81]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "(1) UX/UI 디자이너를 위한 AI 워크플로우 정리. 하드웨어 및 전반적 파일 구조 편을 장표 20장짜리로 정리했다. (소프트웨어 편은 디자인과 프로토타입으로 나뉘어 정리중.) 원래는 나를 위한 정리였는데, 어찌하다 보니 소수의 인원 앞에서 스치듯 발표하게 됐다. 영어를 못하고 발음도 그지같아서 스크립트 보고 읽는 발표. ㅋㅋㅋ 디자인은 신경 쓸 겨를이 없어서, 내 대화 내용을 Claude에게 시킴. 목숨 걸 만큼 중요한 작업은 아니니까. 결과에 만족하지는 않지만, 내 시간은 소중하니까. (근데 참 예상을 하나도 안 벗어난 AI slop 🫪) 이 두 장이 사실 큰 구조다. 구체적이고 전문적인 이야기는 모두 후반부에 Appendix로 정리했다. AI 초보자나 여전히 Figma에 락인된 디자이너들에게, 이렇게도 할 수 있다는 걸 알려주기 위함이고, 실제 구성 비용도 많이 안 든 사례인데... 어떤 반응일지. ㅋㅋ @focusrefresh 님의 조언 두 개가 큰 영향을 줬다. 🙏" [url=https://www.threads.com/@homebodify/post/DeMGDNsDpmo]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 541회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e27]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "4"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "2"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "2"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "syscall.rs님의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "👍"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "half.nomad님의 프로필 사진"
+    - link "half.nomad" [ref=e53]
+    - link "2026년 10월 7일 수요일 오후 7:16" [ref=e54]: "2일"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "이런것도 까주시는군요~"
+    - button [ref=e56]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e57]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "homebodify님의 프로필 사진"
+    - link "homebodify" [ref=e62]
+    - link "2026년 10월 7일 수요일 오후 8:13" [ref=e63]: "2일"
+    - text: "작성자"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "이건 단순 구조 파트긴 합니다. ㅎㅎㅎ 아시는 분만 아시겠죠. 학습, 실행하고 문제를 해결했던 히스토리는 다른 페이지에 있습니다.다들 AI소식이나 초보자분들을 위한 글에나 반응이 오지 이건 아무도 안볼거라. ㅋㅋㅋ 제 기록용으로 올려봤어요 ㅎㅎㅎ 직접 해보거나 간접이라도 전체 워크플로우를 경험하고 질의응답이 되어야 이해가 빠르긴 하죠.석호님은 잘하시니까 이해 금방하시겠지만요.저도 예전에는 디자이너로서 이렇게 보면 분명 중요한데 이해 못해서 넘어간 것이 한 두개가 아닐거라 생각합니다. ㅋㅋ 그리고 실제로 중급 이상 글 올리면 조회수도 올라가지 않아서요. ㅎㅎㅎ 맘 편히 그냥 올리고 있습니다."
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e66]:
+      - img "답글"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "focusrefresh님의 프로필 사진"
+    - link "focusrefresh" [ref=e71]
+    - link "2026년 10월 8일 목요일 오전 12:28" [ref=e72]: "2일"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "조직에서 이렇게 하나씩 뭐하고 있는 거 보여주기 시작하면 관심 있는 사람들이 찾아오죠. Tribe leader 는 그렇게 생겨나는 거라고 Seth Godin 이 한 말이 생각납니다. 멋져부러요 글고 저기 mini PC 에다가 얼마짜리 컴퓨터인지 brother printer label 처럼 붙여놓으면 ‘이렇게 싸다고?!’ 하는 wow factor 까지 가능하지 않을까요? ㅋ"
+    - button [ref=e74]:
+      - img "좋아요"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e78]
+    - listitem:
+      - link "개인정보처리방침" [ref=e79]
+    - listitem:
+      - link "쿠키 정책" [ref=e80]
+- button "만들기" [ref=e81]:
+  - img "만들기"
+=== DONE ===
+[ok | 12611ms]

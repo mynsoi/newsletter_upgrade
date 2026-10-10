@@ -5168,7 +5168,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <path data-edge-from="server" data-edge-to="claude" data-edge-label="진행자 대화" data-edge-key="6" data-edge-id="server-claude" data-composition-points="540,290;540,66;1160,66;1160,90" d="M 540 290 L 540 74 Q 540 66 548 66 L 1152 66 Q 1160 66 1160 74 L 1160 90" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         <path data-edge-from="pipeline" data-edge-to="claude" data-edge-label="과정 1 초안" data-edge-key="7" data-edge-id="pipeline-claude" data-composition-points="910,122;1070,122" d="M 910 122 L 1070 122" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         <path data-edge-from="pipeline" data-edge-to="astra" data-edge-label="제목 · 과정 2~" data-edge-key="8" data-edge-id="pipeline-astra" data-composition-points="815,154;815,187;1160,187;1160,220" d="M 815 154 L 815 179 Q 815 187 823 187 L 1152 187 Q 1160 187 1160 195 L 1160 220" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="wiki" data-edge-to="astra" data-edge-label="주제 페이지" data-edge-key="9" data-edge-id="wiki-astra" data-composition-points="910,252;990,252;990,310;1070,310" d="M 910 252 L 982 252 Q 990 252 990 260 L 990 302 Q 990 310 998 310 L 1070 310" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="wiki" data-edge-to="astra" data-edge-label="카드 · 묶기 · 제목" data-edge-key="9" data-edge-id="wiki-astra" data-composition-points="910,252;990,252;990,310;1070,310" d="M 910 252 L 982 252 Q 990 252 990 260 L 990 302 Q 990 310 998 310 L 1070 310" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         <path data-edge-from="images" data-edge-to="astra" data-edge-label="그림 설명" data-edge-key="10" data-edge-id="images-astra" data-composition-points="910,375;990,375;990,324;1070,324" d="M 910 375 L 982 375 Q 990 375 990 367 L 990 332 Q 990 324 998 324 L 1070 324" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         <path data-edge-from="images" data-edge-to="gti" data-edge-label="그리기" data-edge-key="11" data-edge-id="images-gti" data-composition-points="910,389;990,389;990,512;1070,512" d="M 910 389 L 982 389 Q 990 389 990 397 L 990 504 Q 990 512 998 512 L 1070 512" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
         <path data-edge-from="collect" data-edge-to="aside" data-edge-label="원문 그대로" data-edge-key="12" data-edge-id="collect-aside" data-composition-points="910,642;1070,642" d="M 910 642 L 1070 642" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
@@ -5223,15 +5223,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="context" x="815" y="136" class="t-muted" font-size="9" text-anchor="middle">제목 · 과정 1~</text>
         </g>
 
-        <g id="node-wiki" data-node-id="wiki" data-node-label="wiki.py" tabindex="0" role="button" aria-label="Focus wiki.py, 주제 지도, Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="주제 지도" data-node-context="Architecture component">
-          <title>wiki.py · 주제 지도 · Architecture component</title>
+        <g id="node-wiki" data-node-id="wiki" data-node-label="wiki.py" tabindex="0" role="button" aria-label="Focus wiki.py, 주제 지도 · 거르기 Claude, Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="주제 지도 · 거르기 Claude" data-node-context="Architecture component">
+          <title>wiki.py · 주제 지도 · 거르기 Claude · Architecture component</title>
           <rect x="720" y="220" width="190" height="64" rx="6" class="c-mask"/>
           <rect x="720" y="220" width="190" height="64" rx="6" class="c-backend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(726 226) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
           <text data-node-label="" data-detail-anchor="" x="815" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">wiki.py</text>
-        <text data-detail="context" x="815" y="266" class="t-muted" font-size="9" text-anchor="middle">주제 지도</text>
+        <text data-detail="context" x="815" y="266" class="t-muted" font-size="9" text-anchor="middle">주제 지도 · 거르기 Claude</text>
         </g>
 
         <g id="node-images" data-node-id="images" data-node-label="image_candidates.py" tabindex="0" role="button" aria-label="Focus image_candidates.py, 그림 후보, Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="그림 후보" data-node-context="Architecture component">
@@ -5326,9 +5326,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <rect x="948.9" y="167" width="77.2" height="14" rx="3" class="c-mask"/>
           <text x="987.5" y="177" class="t-muted" font-size="8" text-anchor="middle">제목 · 과정 2~</text>
         </g>
-        <g data-detail="context" data-edge-from="wiki" data-edge-to="astra" data-edge-label="주제 페이지" data-edge-key="9" data-edge-id="wiki-astra">
-          <rect x="958.6" y="261" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="990" y="271" class="t-muted" font-size="8" text-anchor="middle">주제 페이지</text>
+        <g data-detail="context" data-edge-from="wiki" data-edge-to="astra" data-edge-label="카드 · 묶기 · 제목" data-edge-key="9" data-edge-id="wiki-astra">
+          <rect x="941.8" y="261" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="990" y="271" class="t-muted" font-size="8" text-anchor="middle">카드 · 묶기 · 제목</text>
         </g>
         <g data-detail="context" data-edge-from="images" data-edge-to="astra" data-edge-label="그림 설명" data-edge-key="10" data-edge-id="images-astra">
           <rect x="963.4" y="329.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
@@ -5569,8 +5569,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <h3>AI 분담</h3>
         </div>
         <ul>
-          <li>&bull; Claude: 과정 1 초안, 진행자 대화</li>
-          <li>&bull; astra: 주제 지도, 제목, 과정 2부터 끝까지, 그림 설명</li>
+          <li>&bull; Claude: 과정 1 초안, 주제 거르기, 진행자 대화</li>
+          <li>&bull; astra: 원문 카드 · 묶기 · 제목, 과정 2부터 끝까지, 그림 설명</li>
           <li>&bull; gti: 그림</li>
         </ul>
       </div>
@@ -5582,7 +5582,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         </div>
         <ul>
           <li>&bull; sources/originals → wiki/ → briefs/ → runs/ → columns/</li>
-          <li>&bull; 단계 사이는 전부 파일, 위키는 바뀔 때마다 git 커밋</li>
+          <li>&bull; 단계 사이는 전부 파일, 주제 지도는 바뀔 때마다 git 커밋</li>
         </ul>
       </div>
     </div>
