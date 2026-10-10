@@ -27,7 +27,10 @@ import wiki as W  # noqa: E402
 CODEX = shutil.which("codex") or "codex"
 WORKERS = 8
 # 원문은 인터넷 글이라 지시문이 숨어 있을 수 있다 — 결과에 비밀값·로컬 경로처럼 보이는 게 있으면 버린다(2026-10-11 보안 점검)
-LEAK = re.compile(r"sk-[A-Za-z0-9]{10,}|api[_-]?key|access_token|refresh_token|BEGIN [A-Z ]*PRIVATE|auth\.json|/home/|\.codex/|ANTHROPIC_|OPENAI_API", re.I)
+# 이름 목록은 보조일 뿐(표현을 바꾸면 피해 간다 — 보안 점검 지적). 이름과 상관없이 긴 토큰처럼 생긴 문자열도 잡는다.
+# 실제 방어는 astra 읽기 전용 샌드박스 · HTML escape · Tailscale 안에서만 열리는 페이지.
+LEAK = re.compile(r"sk-[A-Za-z0-9]{10,}|api[_-]?key|access_token|refresh_token|BEGIN [A-Z ]*PRIVATE|auth\.json|/home/|\.codex/|ANTHROPIC_|OPENAI_API"
+                  r"|[A-Za-z0-9+/_=-]{32,}", re.I)
 
 
 def clean(text, where):
