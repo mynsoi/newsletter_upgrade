@@ -1,6 +1,12 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/18.md | 보탬 없음 | — (사이트 제작 시간·기능 소개와 전망 중심으로, 회사 업무로 옮길 구체적인 판단·절차가 부족함)
+- ingest ../sources/originals/linkedin/17.md | 새 주제 | 업무설계/제안의-가짓수와-상대의-사정.md
+- ingest ../sources/originals/linkedin/16.md | 새 주제 | 직무역량/교육장에서-확인하는-업무-결과물.md
+- ingest ../sources/originals/linkedin/15.md | 합침·새 주제 | 합침: 데이터활용/ai-숫자와-지표-계산식.md; 새 주제: 데이터활용/탐색용-숫자와-공식-보고-숫자.md
+- ingest ../sources/originals/linkedin/14.md | 새 주제 | 지식관리/자료의-대표-위치와-ai-접근.md
+- ingest ../sources/originals/linkedin/13.md | 새 주제 | 직무역량/스터디-발표의-중복과-업무-적용.md
 - ingest ../sources/originals/linkedin/12.md | 새 주제 | 도구선택/82개-스킬과-110일간-쓴-27개.md
 - ingest ../sources/originals/linkedin/11.md | 새 주제 | 지식관리/회사-용어를-알아듣는-회의록.md
 - ingest ../sources/originals/linkedin/10.md | 합침·새 주제 | 합침: 업무설계/어제의-우선순위와-아침-브리핑.md; 새 주제: 업무설계/회의-전-맥락과-회의-후-담당자.md
