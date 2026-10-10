@@ -58,18 +58,18 @@ export default function ExpandableCards({
             <motion.div
               layoutId={`card-${active.key}-${id}`}
               ref={ref}
-              className="w-full max-w-[760px] max-h-[88vh] flex flex-col bg-panel-solid border border-line rounded-3xl overflow-hidden shadow-2xl"
+              className="w-full max-w-[860px] max-h-[88vh] flex flex-col bg-panel-solid border border-line rounded-3xl overflow-hidden shadow-2xl"
             >
               <motion.div layoutId={`head-${active.key}-${id}`}>{active.head}</motion.div>
               <div className="flex justify-between items-start gap-6 px-8 pt-6">
                 <motion.h3
                   layoutId={`title-${active.key}-${id}`}
-                  className="font-semibold text-ink text-2xl leading-snug"
+                  className="min-w-0 font-semibold text-ink text-2xl leading-snug"
                 >
                   {active.title}
                 </motion.h3>
                 {active.action && (
-                  <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="shrink-0">
                     {active.action}
                   </motion.div>
                 )}
