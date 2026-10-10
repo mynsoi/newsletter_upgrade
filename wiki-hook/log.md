@@ -1,6 +1,12 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/12.md | 새 주제 | 도구선택/82개-스킬과-110일간-쓴-27개.md
+- ingest ../sources/originals/linkedin/11.md | 새 주제 | 지식관리/회사-용어를-알아듣는-회의록.md
+- ingest ../sources/originals/linkedin/10.md | 합침·새 주제 | 합침: 업무설계/어제의-우선순위와-아침-브리핑.md; 새 주제: 업무설계/회의-전-맥락과-회의-후-담당자.md
+- ingest ../sources/originals/linkedin/09.md | 새 주제 | AI평가/자동-채점-합격과-담당자-거절.md
+- ingest ../sources/originals/linkedin/08.md | 새 주제 | 지식관리/대화-기록으로-되짚는-판단.md
+- ingest ../sources/originals/linkedin/07.md | 새 주제 | 업무설계/어제의-우선순위와-아침-브리핑.md
 - ingest ../sources/originals/linkedin/06.md | 새 주제 | 업무설계/원인을-찾고도-계속한-분석.md
 - ingest ../sources/originals/linkedin/05.md | 합침·새 주제 | 합침: 데이터활용/ai-숫자와-지표-계산식.md; 새 주제: AI평가/매일-바뀌는-답의-채점표.md
 - ingest ../sources/originals/linkedin/04.md | 새 주제 | 직무역량/화면-밖으로-이어지는-전문성.md
