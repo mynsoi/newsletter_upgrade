@@ -3,7 +3,7 @@
 # 실행: setup-windows.cmd 를 더블클릭 (또는 PowerShell에서 .\setup-windows.cmd)
 # 여러 번 돌려도 된다 — 이미 있는 것은 건너뛴다.
 #
-# 설치하는 것: Git · Python · Node.js (winget) / Claude Code / codex · opencodex (npm) /
+# 설치하는 것: Git · Python · Node.js (winget) / Claude Code / codex (npm) /
 #             Pillow (pip) / 작업실 화면 패키지·빌드 (app/)
 # 로그인·연결은 계정이 필요해 자동으로 하지 않는다 — 끝에 남은 일을 보여 준다.
 
@@ -82,13 +82,10 @@ if (-not (Has "claude")) {
 }
 if (Has "claude") { Ok "claude $(claude --version)" } else { throw "Claude Code 설치를 확인하지 못했습니다. 새 창에서 다시 실행하세요." }
 
-Step "codex (astra) · opencodex"
+Step "codex (astra · 그림)"
 # npm.cmd로 부른다 — npm.ps1은 실행 정책에 막힐 수 있다
 if (-not (Has "codex")) { & npm.cmd install -g "@openai/codex"; if ($LASTEXITCODE) { throw "codex 설치 실패" }; Refresh-Path }
 Ok "$(codex --version)"
-# 설치만 한다. 프록시 시작·허브 연결(ocx connect)은 허브에서 받은 한 줄이 있어야 해서 남은 일로 둔다.
-if (-not (Has "ocx")) { & npm.cmd install -g "@bitkyc08/opencodex"; if ($LASTEXITCODE) { throw "opencodex 설치 실패" }; Refresh-Path }
-Ok "$(ocx --version)"
 
 # ---------- 3. 작업실 ----------
 Step "Pillow (그림 축소본)"
@@ -115,8 +112,7 @@ try {
 # ---------- 4. 남은 일 (계정·연결) ----------
 Step "확인"
 if (-not (Test-Path "$env:USERPROFILE\.claude.json")) { $Todo.Add("Claude 로그인: 새 창에서 claude 실행 → 브라우저 로그인") }  # 로그인 흔적이 없을 때만
-if (-not (Test-Path "$env:USERPROFILE\.codex\auth.json")) { $Todo.Add("Codex 로그인(그림 gti가 씀): codex login → ChatGPT 계정") }
-$Todo.Add("astra 연결(opencodex 허브를 쓰는 경우): 허브 PC에서 ocx hub invite → 나온 한 줄을 이 PC PowerShell에 붙여 넣기 → ocx sync")
+if (-not (Test-Path "$env:USERPROFILE\.codex\auth.json")) { $Todo.Add("Codex 로그인(astra·그림이 씀): codex login → ChatGPT 계정") }
 if (-not (Has "aside")) { $Todo.Add("Aside(원문 수집): https://aside.com/download 에서 설치 → 로그인 (aside 명령이 잡히는지 새 창에서 확인)") }
 if (-not (git config --global user.name) -or -not (git config --global user.email)) {
     $Todo.Add("git 이름·메일(위키 자동 커밋): git config --global user.name ""이름"" / git config --global user.email ""메일""")

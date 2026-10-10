@@ -136,10 +136,10 @@ cd .. && python3 -I scripts/studio_server.py 8771
    ```powershell
    git clone -b mentor-lab https://github.com/mynsoi/newsletter_upgrade.git mentor-lab
    ```
-2. 받은 폴더의 **`setup-windows.cmd`를 더블클릭**합니다. Python·Node.js·Claude Code·codex·opencodex·Pillow·화면 패키지를
+2. 받은 폴더의 **`setup-windows.cmd`를 더블클릭**합니다. Python·Node.js·Claude Code·codex·Pillow·화면 패키지를
    설치하고 화면까지 빌드합니다. 이미 있는 것은 건너뛰므로 여러 번 돌려도 됩니다.
 3. 끝에 나오는 **남은 일**을 합니다. 계정이 필요한 일이라 스크립트가 대신하지 않습니다.
-   Claude 로그인(`claude`), Codex 로그인(`codex login` — 그림이 씀), astra 허브 연결(허브 PC에서 `ocx hub invite`로 받은 한 줄),
+   Claude 로그인(`claude`), Codex 로그인(`codex login` — astra·그림이 씀),
    [Aside](https://aside.com/download) 설치·로그인, git 이름·메일.
 4. **`start-windows.cmd`를 더블클릭**하면 작업실이 뜹니다 → http://localhost:8771
 
