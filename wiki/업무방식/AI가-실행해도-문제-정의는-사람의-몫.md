@@ -16,16 +16,16 @@ AI가 실행과 반복 실험을 빠르게 해도, 팀이 풀 문제와 기대 �
 ## 원문
 | 원문 | 작성자 · 날짜 | 이 원문이 보태는 것 |
 |---|---|---|
-| [linkedin/03](../../sources/originals/linkedin/03.md) · https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%84%9C%EB%B2%84-ci-%EA%B0%9C%EC%84%A0%EA%B8%B0-activity-7451781703150477312-1tA0 | Byeongchan Park · 4월 20일 • 수정함 (원문 headline 표기, date는 비어 있음) · 개인 | 채널톡의 코드 변경 자동 검증 과정(CI)을 37분에서 15분으로 줄였다는 사례다. AI는 수정과 반복 실험을 도왔고, 사람은 처리 장치를 늘려도 느려진 원인을 해석하고 마지막 작업의 지연에 집중하도록 문제와 적용 순서를 다시 정했다고 설명한다. |
-| [linkedin/08](../../sources/originals/linkedin/08.md) · https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%93%A4%EC%9D%84-ai%EC%99%80-%ED%95%A8%EA%BB%98-%ED%9A%8C%EA%B3%A0-%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7503753615577198593-SHL- | 임삼열 · 9월 10일 • 수정함 · 개인 | 풀 문제와 판단 기준, 기대 결과를 정하지 않은 채 AI 결과물을 받아 보고 수정을 되풀이했던 시행착오를 전한다. 무엇을 어디까지 맡길지와 결과의 적합성을 사람이 먼저 판단해야 한다는 근거를 보탠다. |
-| [linkedin/29](../../sources/originals/linkedin/29.md) · https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk | Jason Song · 9월 18일 • 수정함 · 회사 | AI가 제안한 조직 이동의 예외 처리를 채용 담당자가 실무 기준으로 바로잡고, 원래 의도한 동작을 오류로 보고 수정하려던 AI를 멈춘 경험을 전한다. 구현을 맡겨도 업무 규칙과 수정 필요성은 사람이 판단해야 한다는 사례를 보탠다. |
-| [linkedin/31](../../sources/originals/linkedin/31.md) · https://www.linkedin.com/posts/%EC%9A%A9%EC%8A%B9-%EC%9C%A4-66458a313_%EC%9C%A0%ED%8A%9C%EB%B8%8C-%ED%8E%B8%EC%A7%91%EC%9D%84-ai%EC%97%90%EA%B2%8C-%EB%A7%A1%EA%B8%B4-%EB%91%90-%EB%8B%AC-activity-7510504130793148416-SNey | 윤용승 · 9월 29일 · 개인 | 개인 유튜브 편집을 AI에 맡기면서 기획안을 먼저 고치고, 의도와 달라진 편집본에는 수정할 시점을 짚어 다시 요청했다고 전한다. 방향과 제외할 내용을 정하고 결과를 검수하는 책임을 사람이 맡는다는 보조 사례다. |
+| [linkedin/03](../../sources/originals/linkedin/03.md) · https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%84%9C%EB%B2%84-ci-%EA%B0%9C%EC%84%A0%EA%B8%B0-activity-7451781703150477312-1tA0 | Byeongchan Park · 4월 20일 • 수정함 (원문 headline 표기, date는 비어 있음) | 채널톡의 코드 변경 자동 검증 과정(CI)을 37분에서 15분으로 줄였다는 사례다. AI는 수정과 반복 실험을 도왔고, 사람은 처리 장치를 늘려도 느려진 원인을 해석하고 마지막 작업의 지연에 집중하도록 문제와 적용 순서를 다시 정했다고 설명한다. |
+| [linkedin/08](../../sources/originals/linkedin/08.md) · https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%93%A4%EC%9D%84-ai%EC%99%80-%ED%95%A8%EA%BB%98-%ED%9A%8C%EA%B3%A0-%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7503753615577198593-SHL- | 임삼열 · 9월 10일 • 수정함 | 풀 문제와 판단 기준, 기대 결과를 정하지 않은 채 AI 결과물을 받아 보고 수정을 되풀이했던 시행착오를 전한다. 무엇을 어디까지 맡길지와 결과의 적합성을 사람이 먼저 판단해야 한다는 근거를 보탠다. |
+| [linkedin/29](../../sources/originals/linkedin/29.md) · https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk | Jason Song · 9월 18일 • 수정함 | AI가 제안한 조직 이동의 예외 처리를 채용 담당자가 실무 기준으로 바로잡고, 원래 의도한 동작을 오류로 보고 수정하려던 AI를 멈춘 경험을 전한다. 구현을 맡겨도 업무 규칙과 수정 필요성은 사람이 판단해야 한다는 사례를 보탠다. |
+| [linkedin/31](../../sources/originals/linkedin/31.md) · https://www.linkedin.com/posts/%EC%9A%A9%EC%8A%B9-%EC%9C%A4-66458a313_%EC%9C%A0%ED%8A%9C%EB%B8%8C-%ED%8E%B8%EC%A7%91%EC%9D%84-ai%EC%97%90%EA%B2%8C-%EB%A7%A1%EA%B8%B4-%EB%91%90-%EB%8B%AC-activity-7510504130793148416-SNey | 윤용승 · 9월 29일 | 개인 유튜브 편집을 AI에 맡기면서 기획안을 먼저 고치고, 의도와 달라진 편집본에는 수정할 시점을 짚어 다시 요청했다고 전한다. 방향과 제외할 내용을 정하고 결과를 검수하는 책임을 사람이 맡는다는 보조 사례다. |
 
 ## 쓸 수 있는 각도
-- 팀 보고자료를 AI에 맡기기 전에 풀 문제와 기대 결과를 정하는 장면에서 출발할 수 있다. 초안을 받아 본 뒤에야 요구를 고치는 일을 어떻게 줄일지 살펴본다.
-- AI가 제안한 인사 처리 방식이 실제 조직 이동 규칙과 맞는지 담당자가 확인한 사례로, 실행을 맡겨도 업무 판단은 직접 해야 하는 이유를 다룬다.
-- 회의에 올릴 자료의 구성안을 먼저 검토하고, 초안에서는 수정할 부분을 구체적으로 짚는 장면을 제안한다. 개인 영상 편집 사례는 기획·수정·검수의 역할을 설명하는 보조로 쓴다.
-- 업무가 지연될 때 처리량부터 늘리기보다 어느 단계가 늦어지는지 팀이 확인하는 장면에서 출발할 수 있다. 개발 사례는 문제와 개선 순서를 정하는 교훈만 보조로 활용한다.
+- [팀장급] 팀 보고자료를 AI에 맡기기 전에 풀 문제와 기대 결과를 정하는 장면에서 출발할 수 있다. 초안을 받아 본 뒤에야 요구를 고치는 일을 어떻게 줄일지 살펴본다.
+- [사수급] AI가 제안한 인사 처리 방식이 실제 조직 이동 규칙과 맞는지 담당자가 확인한 사례로, 실행을 맡겨도 업무 판단은 직접 해야 하는 이유를 다룬다.
+- [사수급] 회의에 올릴 자료의 구성안을 먼저 검토하고, 초안에서는 수정할 부분을 구체적으로 짚는 장면을 제안한다.
+- [팀장급] 업무가 지연될 때 처리량부터 늘리기보다 어느 단계가 늦어지는지 팀이 확인하는 장면에서 출발할 수 있다. 개발 사례는 문제와 개선 순서를 정하는 교훈만 보조로 활용한다.
 
 ## 함께 볼 주제
 - [직접 쓰고 고치며 AI를 익히자](../AI리터러시/직접-쓰고-고치며-AI를-익히자.md)

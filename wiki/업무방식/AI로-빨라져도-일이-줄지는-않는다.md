@@ -16,16 +16,16 @@ AI로 산출물을 빨리 만들어도 검토 부담과 기대치가 커지고 �
 ## 원문
 | 원문 | 작성자 · 날짜 | 이 원문이 보태는 것 |
 |---|---|---|
-| [threads/05](../../sources/originals/threads/05.md) · https://www.threads.com/@specal1849/post/DVhRR7LEmwh | @specal1849 · 2026-03-06 · 회사 | 기업 교육 현장에서 AI 결과를 확인하는 부담, 숙련자에게 높아지는 기대, 구성원 사이의 작업 속도 차이를 관찰하며 개인의 속도 향상이 조직 성과로 바로 이어지는지 묻는다. |
-| [linkedin/10](../../sources/originals/linkedin/10.md) · https://www.linkedin.com/posts/pastorsara_aiinmarketing-productivity-smallbusiness-activity-7513118400613765120-rUad | Sara Pastor Ruprichova · 1일 · 개인 | 반복 업무 자동화로 시간을 확보했지만 콘텐츠 작성에는 여전히 오래 걸리고, 아낀 시간은 사업의 다른 일에 쓴다고 전한다. 자동화의 효과를 인정하면서도 곧바로 근무시간 단축이나 생활의 큰 변화로 이어진 것은 아니라는 경험을 보탠다. |
-| [linkedin/11](../../sources/originals/linkedin/11.md) · https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works%ED%8C%80%EC%9C%BC%EB%A1%9C-ai-%EC%99%80-%ED%95%A8%EA%BB%98-%EC%9D%B4%EA%B2%83%EC%A0%80%EA%B2%83-activity-7506359658182332416-3IVt | 신주호 · 9월 17일 · 회사 | AI 지원과 내부 도구의 빠른 개발에 만족하면서도, 여러 직군의 추가 요구가 많고 본인의 일도 많다고 전한다. 적극적인 AI 활용과 늘어나는 일이 함께 나타나는 사례이며, 근무시간 변화가 측정된 것은 아니다. |
+| [threads/05](../../sources/originals/threads/05.md) · https://www.threads.com/@specal1849/post/DVhRR7LEmwh | @specal1849 · 2026-03-06 | 기업 교육 현장에서 AI 결과를 확인하는 부담, 숙련자에게 높아지는 기대, 구성원 사이의 작업 속도 차이를 관찰하며 개인의 속도 향상이 조직 성과로 바로 이어지는지 묻는다. |
+| [linkedin/10](../../sources/originals/linkedin/10.md) · https://www.linkedin.com/posts/pastorsara_aiinmarketing-productivity-smallbusiness-activity-7513118400613765120-rUad | Sara Pastor Ruprichova · 1일 | 반복 업무 자동화로 시간을 확보했지만 콘텐츠 작성에는 여전히 오래 걸리고, 아낀 시간은 사업의 다른 일에 쓴다고 전한다. 자동화의 효과를 인정하면서도 곧바로 근무시간 단축이나 생활의 큰 변화로 이어진 것은 아니라는 경험을 보탠다. |
+| [linkedin/11](../../sources/originals/linkedin/11.md) · https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works%ED%8C%80%EC%9C%BC%EB%A1%9C-ai-%EC%99%80-%ED%95%A8%EA%BB%98-%EC%9D%B4%EA%B2%83%EC%A0%80%EA%B2%83-activity-7506359658182332416-3IVt | 신주호 · 9월 17일 | AI 지원과 내부 도구의 빠른 개발에 만족하면서도, 여러 직군의 추가 요구가 많고 본인의 일도 많다고 전한다. 적극적인 AI 활용과 늘어나는 일이 함께 나타나는 사례이며, 근무시간 변화가 측정된 것은 아니다. |
 
 ## 쓸 수 있는 각도
-- AI를 능숙하게 쓰는 직원에게 기대와 일이 더 몰리는 장면을 통해, 빠른 작업이 여유로 이어지지 않는 이유를 살펴본다.
-- 초안을 만드는 시간에 더해 결과를 검토하고 동료와 맞추는 부담까지 포함해 업무의 변화를 돌아본다.
-- 산출물의 양이나 작성 속도와 조직의 실제 성과를 같은 것으로 보고 있지는 않은지 묻는다.
-- AI로 아낀 시간을 팀의 어떤 업무에 쓸지 상사·동료와 의논하는 장면을 제안한다. 개인 사업자의 시간 활용 경험은 작업 단축과 여유가 같은 결과는 아니라는 보조 근거로 쓴다.
-- AI 활용 환경에 만족하면서도 처리할 요구와 일이 많다는 경험을 통해, 도구의 쓸모와 업무량을 함께 살펴본다.
+- [팀장급] AI를 능숙하게 쓰는 직원에게 기대와 일이 더 몰리는 장면을 통해, 빠른 작업이 여유로 이어지지 않는 이유를 살펴본다.
+- [전 직원] 초안을 만드는 시간에 더해 결과를 검토하고 동료와 맞추는 부담까지 포함해 업무의 변화를 돌아본다.
+- [팀장급] 팀의 업무 성과를 보고하면서 산출물의 양·작성 속도와 실제로 끝낸 일을 나란히 살펴보는 장면을 제안한다. 개인의 속도 향상이 팀의 업무 부담을 줄였는지 확인하는 방법을 다룬다.
+- [팀장급] AI로 아낀 시간을 팀의 어떤 업무에 쓸지 상사·동료와 의논하는 장면을 제안한다.
+- [전 직원] AI 활용 환경에 만족하면서도 처리할 요구와 일이 많다는 경험을 통해, 도구의 쓸모와 업무량을 함께 살펴본다.
 
 ## 함께 볼 주제
 - [AI 지원을 현업의 활용으로 잇자](../업무방식/AI-지원을-현업의-활용으로-잇자.md)
