@@ -7,6 +7,7 @@
 """
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -15,6 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
 OUT = ROOT / "runs" / "topics"
+# Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
+CODEX = shutil.which("codex") or "codex"
 STYLE_ONLY = {"infuture"}
 
 
@@ -48,7 +51,7 @@ def label(f):
 
 
 def prompt(files):
-    srcs = "\n\n".join(f"=== {f.relative_to(SRC)} ({label(f)}) ===\n{meta(f)[1]}" for f in files)
+    srcs = "\n\n".join(f"=== {f.relative_to(SRC).as_posix()} ({label(f)}) ===\n{meta(f)[1]}" for f in files)
     return f"""아래 원문들은 사내 뉴스레터(SK E&S 전 직원 대상, 대부분 비개발 사무·현장 직군) 칼럼의 재료로 모은 글입니다.
 이 재료로 쓸 수 있는 칼럼 주제를 내 주세요.
 
@@ -72,13 +75,13 @@ def run():
     out = d / "astra.md"
     # 프롬프트는 표준입력으로 — 인자로 넘기면 원문이 40편을 넘을 때 리눅스 인자 한도(128KB)에 걸려 바로 실패했다(2026-10-10)
     with open(d / "run.log", "w", encoding="utf-8") as log:
-        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
+                       cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []
-    known = {str(f.relative_to(SRC)) for f in files}
+    known = {f.relative_to(SRC).as_posix() for f in files}
     for it in items:
         it["sources"] = [s for s in it.get("sources", []) if s in known]  # 없는 경로는 버린다 (시뮬레이션에서 틀린 경로가 단계를 멈춤)
     items = [it for it in items if it["sources"]]

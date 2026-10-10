@@ -127,8 +127,23 @@ cd .. && python3 -I scripts/studio_server.py 8771
 - 서버는 이 컴퓨터(localhost)에서만 열립니다. Tailscale을 쓰면 그 주소에도 열려 내 다른 기기에서 접속할 수 있습니다.
 - 화면 코드만 고쳤으면 `npm run build`만 다시 하면 됩니다. 서버 코드를 고쳤으면 진행 중인 작업이 없을 때 재시작하세요.
   재시작하면 진행 중인 작업의 후처리(수집 뒤 위키 넣기 등)가 끊깁니다.
-- 지금은 수집이 `aside-win` 명령을, 그림이 `~/.codex/skills/god-tibo-imagen` 스크립트를 전제로 합니다.
-  다른 컴퓨터에서는 이 두 곳을 자기 환경에 맞게 바꿔야 합니다.
+- 수집은 `aside-win`(WSL) 또는 `aside`(Windows) 명령을 씁니다. 그림은 `~/.codex/skills/god-tibo-imagen`이 있으면 그것을,
+  없으면 저장소 사본 `tools/god-tibo-imagen`을 씁니다.
+
+### Windows에서 처음 설치
+
+1. Git으로 저장소를 받습니다. Git이 없으면 PowerShell에서 `winget install Git.Git`부터 합니다.
+   ```powershell
+   git clone -b mentor-lab https://github.com/mynsoi/newsletter_upgrade.git mentor-lab
+   ```
+2. 받은 폴더의 **`setup-windows.cmd`를 더블클릭**합니다. Python·Node.js·Claude Code·codex·opencodex·Pillow·화면 패키지를
+   설치하고 화면까지 빌드합니다. 이미 있는 것은 건너뛰므로 여러 번 돌려도 됩니다.
+3. 끝에 나오는 **남은 일**을 합니다. 계정이 필요한 일이라 스크립트가 대신하지 않습니다.
+   Claude 로그인(`claude`), Codex 로그인(`codex login` — 그림이 씀), astra 허브 연결(허브 PC에서 `ocx hub invite`로 받은 한 줄),
+   [Aside](https://aside.com/download) 설치·로그인, git 이름·메일.
+4. **`start-windows.cmd`를 더블클릭**하면 작업실이 뜹니다 → http://localhost:8771
+
+Windows에서 명령으로 돌릴 때는 `python3 -I` 대신 `py -3 -X utf8 -I`를 씁니다(`-X utf8`이 없으면 한글이 깨집니다).
 
 화면 없이 명령으로도 돌릴 수 있습니다.
 

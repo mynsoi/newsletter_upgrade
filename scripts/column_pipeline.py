@@ -17,6 +17,7 @@
 """
 import re
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -28,6 +29,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # python3 -I 실행에
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
 RUNS = ROOT / "runs" / "columns"
+# Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
+CODEX = shutil.which("codex") or "codex"
+ASIDE = shutil.which("aside-win") or shutil.which("aside") or "aside-win"  # WSL은 aside-win 래퍼, Windows는 aside.exe
 DRAFT_REFS = ["p747", "p724", "p740"]
 READER = ("SK E&S 전 직원에게 메일로 가는 사내 뉴스레터입니다. 대부분 개발자가 아닌 사무·현장 직군이고, "
           "AI를 써 봤지만 효과가 애매하다고 느끼는 사람이 많습니다.")
@@ -92,7 +96,7 @@ def run_claude(d, prompt):
     (d / "prompt.md").write_text(prompt, encoding="utf-8")
     proc = subprocess.Popen(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence",
                              "--output-format", "stream-json", "--verbose", "--include-partial-messages"],
-                            cwd=d, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                            cwd=d, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
     proc.stdin.write(prompt)
     proc.stdin.close()
     parts, result = [], ""
@@ -124,9 +128,9 @@ def run_astra(d, prompt):
     (d / "prompt.md").write_text(prompt, encoding="utf-8")
     out = d / "output.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
-        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=prompt, text=True, stdout=log, stderr=subprocess.STDOUT)
+                       cwd=d, input=prompt, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     return out.read_text(encoding="utf-8").strip() if out.exists() else ""
 
 
@@ -307,14 +311,14 @@ def fetch_infuture(post_id):
     snap = inf / "snap" / f"p{post_id}.txt"
     js = (f"const tF{post_id} = await openTab('https://infuture.stibee.com/p/{post_id}'); "
           f"const sF{post_id} = await snapshot(tF{post_id}); console.log(sF{post_id}.tree); await closeTab(tF{post_id});")
-    r = subprocess.run(["aside-win", "repl", "--host", "local", js], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=180)
+    r = subprocess.run([ASIDE, "repl", "--host", "local", js], stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=180)
     snap.write_text(r.stdout, encoding="utf-8")
     title = ""
     import re
     m = re.search(r'- text: "(.+?) ?(\d{4})\. \d{1,2}\. \d{1,2}\."', r.stdout)  # 제목 끝 ?·! 뒤에 날짜가 붙는 경우도
     if m:
         title = m.group(1)
-    out = subprocess.run([sys.executable, "-I", str(ROOT / "scripts" / "parse_infuture.py"), str(snap), title], capture_output=True, text=True)
+    out = subprocess.run([sys.executable, "-X", "utf8", "-I", str(ROOT / "scripts" / "parse_infuture.py"), str(snap), title], capture_output=True, text=True, encoding="utf-8")
     (inf / f"p{post_id}.md").write_text(out.stdout, encoding="utf-8")
     print(f"p{post_id} 저장: {title} · {len(out.stdout)}자")
 

@@ -7,6 +7,7 @@
 """
 import html
 import re
+import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -15,6 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 INF = ROOT / "sources" / "originals" / "infuture"
 OUT = ROOT / "runs" / "titles"
+# Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
+CODEX = shutil.which("codex") or "codex"
 MENTOR_TITLE = "왜 AI를 쓰는데 더 퇴근 시간이 빨라지지 않을까요?"
 RECENT = [  # 아카이브 첫 화면(737~756) — _titles.tsv에 없는 구간
     "연봉을 많이 줘도 직원들이 퇴사하는 이유", "경쟁시키면 성과가 올라갈까요?", "질문으로 상대방의 행동에 개입하는 법",
@@ -105,15 +108,15 @@ def astra(d, p):
     d.mkdir(parents=True, exist_ok=True)
     out = d / "astra.md"
     with open(d / "astra.log", "w", encoding="utf-8") as log:
-        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
+                       cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
 
 
 def claude(d, p):
     d.mkdir(parents=True, exist_ok=True)
     r = subprocess.run(["claude", "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence"],
-                       cwd=d, input=p, capture_output=True, text=True)
+                       cwd=d, input=p, capture_output=True, text=True, encoding="utf-8", errors="replace")
     (d / "claude.md").write_text(r.stdout.strip(), encoding="utf-8")
 
 

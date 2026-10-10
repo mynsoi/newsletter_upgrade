@@ -24,7 +24,8 @@ import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 �
 DIST = ROOT / "app" / "dist"
 SRC = ROOT / "sources"
 STUDIO = ROOT / "runs" / "studio"
-PY = [sys.executable, "-I", "-u"]  # -u: 출력을 바로 작업 로그로(화면에서 진행이 보이게)
+PY = [sys.executable, "-X", "utf8", "-I", "-u"]  # -u: 출력을 바로 작업 로그로(화면에서 진행이 보이게)
+# -X utf8: Windows 기본 인코딩(cp949)으로는 한글 지시문·로그가 깨지거나 이모지에서 멈춘다 — 리눅스는 그대로
 PIPE = PY + ["scripts/column_pipeline.py"]
 for d in ("logs", "chat", "thumbs"):
     (STUDIO / d).mkdir(parents=True, exist_ok=True)
@@ -53,7 +54,7 @@ def start(kind, target, cmd, after=None):
         jid = time.strftime("%m%d-%H%M%S-") + uuid.uuid4().hex[:4]
         log = STUDIO / "logs" / f"{jid}.log"
         j = {"id": jid, "kind": kind, "target": target, "status": "running", "started": time.time(),
-             "log": str(log.relative_to(ROOT))}
+             "log": log.relative_to(ROOT).as_posix()}
         JOBS[jid] = j
 
     def run():
@@ -124,7 +125,7 @@ def library(full=False):
         m, body = front(read(f))
         body = body.split("*주변 동료에게")[0].strip()
         text = re.sub(r"^## \d+/\d+\s*$", "", body, flags=re.M).strip()
-        rel = str(f.relative_to(SRC))
+        rel = f.relative_to(SRC).as_posix()
         rows.append({
             "path": rel, "site": f.parent.name, "siteName": SITES.get(f.parent.name, f.parent.name),
             "url": m.get("url", ""), "author": m.get("author", ""), "headline": m.get("headline", ""),
@@ -158,7 +159,7 @@ def image_rounds(k, inline=False):
         for i, it in enumerate(items, 1):
             png = d / f"{i:02d}.png"
             imgs.append({"name": it.get("name", ""), "prompt": it.get("prompt", ""),
-                         "src": str(png.relative_to(ROOT)) if png.exists() else "",
+                         "src": png.relative_to(ROOT).as_posix() if png.exists() else "",
                          "after": it.get("after", 0), "anchor": it.get("anchor", "")})
         out.append({"id": d.name, "items": imgs})
     return out
@@ -170,7 +171,7 @@ def step(n, f, by, feedback="", known="", mode=""):
     first = body.split("\n", 1)
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()
-    return {"n": n, "file": str(Path(f).relative_to(ROOT)), "by": by, "title": title, "text": body, "mode": mode,
+    return {"n": n, "file": Path(f).relative_to(ROOT).as_posix(), "by": by, "title": title, "text": body, "mode": mode,
             "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime}
 
 
@@ -269,7 +270,7 @@ def wiki_state(fresh):
                          "new": m.group(1) in fresh})
         related = re.findall(r"\[([^\]]+)\]\(\.\./([^)]+\.md)\)", sec.get("함께 볼 주제", ""))
         topics.append({
-            "page": str(f.relative_to(ROOT)), "field": f.parent.name, "title": meta.get("title", f.stem).strip("'\""),
+            "page": f.relative_to(ROOT).as_posix(), "field": f.parent.name, "title": meta.get("title", f.stem).strip("'\""),
             "thesis": sec.get("이 글이 말할 것", meta.get("description", "")).strip(),
             "status": meta.get("status", "쓸 수 있음").split("#")[0].strip(),
             "usedIn": W.used_in(f), "sources": srcs,
@@ -387,7 +388,7 @@ def live_of(j):
             cands = [rounds[-1] / "run.log", *rounds[-1].glob("[0-9][0-9].log")]
     cands = [c for c in cands if c.is_file() and c.stat().st_mtime >= j["started"] - 5]
     cands.sort(key=lambda c: c.stat().st_mtime, reverse=True)
-    return [{"name": str(c.relative_to(ROOT)), "text": tail(c)} for c in cands[:3]]
+    return [{"name": c.relative_to(ROOT).as_posix(), "text": tail(c)} for c in cands[:3]]
 
 
 def act_topics(_):
@@ -398,7 +399,7 @@ def act_pick_topic(a):
     rnd, n = str(a["round"]), str(int(a["n"]))
     if not re.match(r"^\d{8}-\d{6}$", rnd) or not (ROOT / "runs" / "topics" / rnd / "astra.json").exists():
         raise ValueError("잘못된 주제 회차")
-    r = subprocess.run(PY + ["scripts/topic_candidates.py", "--pick", rnd, n], cwd=ROOT, capture_output=True, text=True)
+    r = subprocess.run(PY + ["scripts/topic_candidates.py", "--pick", rnd, n], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     if r.returncode:
         raise ValueError(r.stderr[-500:])
     k = f"{rnd}-{n}"
@@ -420,13 +421,13 @@ def act_titles(a):
         (d / "astra.md").rename(d / f"astra-{n}.md")
         if (d / "message.txt").exists():
             (d / "message.txt").rename(d / f"message-{n}.txt")
-    cmd = PIPE + ["--titles", str(bp.relative_to(ROOT))]
+    cmd = PIPE + ["--titles", bp.relative_to(ROOT).as_posix()]
     if msg:
         inbox = d / "inbox"
         inbox.mkdir(parents=True, exist_ok=True)
         f = inbox / (time.strftime("%Y%m%d-%H%M%S") + ".txt")
         f.write_text(msg, encoding="utf-8")
-        cmd += ["--message", str(f.relative_to(ROOT))]
+        cmd += ["--message", f.relative_to(ROOT).as_posix()]
     j = start("titles", k, cmd)
     if msg:
         j["message"] = msg  # 도는 동안에도 화면이 보낸 말을 보여 주게
@@ -462,7 +463,7 @@ def act_retry(a):
             if f"columns/{k}.md" in W.used_in(f):
                 head, body = W.front(read(f))
                 thesis = thesis or sections(body).get("이 글이 말할 것", "")
-                page = str(f.relative_to(ROOT))
+                page = f.relative_to(ROOT).as_posix()
         b = {"label": d["title"], "title": d["title"], "thesis": thesis or d["title"], "sources": d.get("sources", []),
              **({"from_wiki": page} if page else {})}
     else:
@@ -483,7 +484,7 @@ def act_retry(a):
 
 def act_write(a):
     k = a["article"]
-    return start("write", k, PIPE + [str(brief_path(k).relative_to(ROOT))])
+    return start("write", k, PIPE + [brief_path(k).relative_to(ROOT).as_posix()])
 
 
 def act_revise(a):
@@ -493,7 +494,7 @@ def act_revise(a):
     inbox.mkdir(parents=True, exist_ok=True)
     f = inbox / (time.strftime("%Y%m%d-%H%M%S") + ".txt")
     f.write_text(fb, encoding="utf-8")  # 멘토 피드백은 받은 그대로 파일로만 넘긴다
-    return start("revise", k, PIPE + ["--revise", str(brief_path(k).relative_to(ROOT)), str(f.relative_to(ROOT))])
+    return start("revise", k, PIPE + ["--revise", brief_path(k).relative_to(ROOT).as_posix(), f.relative_to(ROOT).as_posix()])
 
 
 def act_images(a):
@@ -501,7 +502,7 @@ def act_images(a):
     pp = process_path(k)
     target = json.loads(read(pp))["steps"][-1]["file"] if pp else k
     if pp:  # 확정 칼럼은 원고 파일 이름이 그림 폴더 이름이 된다
-        target = str(Path(target))
+        target = Path(target).as_posix()
     if a.get("kind") == "inline":
         return start("inline", k, PY + ["scripts/image_candidates.py", "--inline", target])
     return start("images", k, PY + ["scripts/image_candidates.py", target])
@@ -533,7 +534,7 @@ def act_length(a):
         return {"length": mode}
     pp = process_path(k)
     if not pp:
-        return start("shorten", k, PIPE + ["--shorten", str(brief_path(k).relative_to(ROOT))])
+        return start("shorten", k, PIPE + ["--shorten", brief_path(k).relative_to(ROOT).as_posix()])
     out_dir = ROOT / "runs" / "columns" / k / ("_shorten-" + time.strftime("%Y%m%d-%H%M%S"))
 
     def after(j):  # 확정 칼럼: 결과를 과정 기록에 다음 과정으로 붙인다 — 비었으면 붙이지 않고 실패로
@@ -543,9 +544,9 @@ def act_length(a):
         f = ROOT / "columns" / f"{k}-절반.md"
         f.write_text(text + "\n", encoding="utf-8")
         d = json.loads(read(pp))
-        d["steps"].append({"file": str(f.relative_to(ROOT)), "by": "astra", "mode": "절반"})
+        d["steps"].append({"file": f.relative_to(ROOT).as_posix(), "by": "astra", "mode": "절반"})
         pp.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
-    return start("shorten", k, PIPE + ["--shorten-file", art["steps"][-1]["file"], str(out_dir.relative_to(ROOT))], after)
+    return start("shorten", k, PIPE + ["--shorten-file", art["steps"][-1]["file"], out_dir.relative_to(ROOT).as_posix()], after)
 
 
 def act_hero(a):
@@ -572,12 +573,12 @@ def act_confirm(a):
         imgs.setdefault(min(max(at, 1), len(paras)), []).append(f"![{it['name']}](img/{dst.name})")
     body = "\n\n".join(x + "".join("\n\n" + m for m in imgs.get(j, [])) for j, x in enumerate(paras, 1))
     out.write_text(f"# {title}\n\n{body}\n", encoding="utf-8")
-    conf = {"date": date.today().isoformat(), "step": n, "file": str(out.relative_to(ROOT)), "inline": sum(map(len, imgs.values()))}
+    conf = {"date": date.today().isoformat(), "step": n, "file": out.relative_to(ROOT).as_posix(), "inline": sum(map(len, imgs.values()))}
     if art.get("hero"):
         img = ROOT / "columns" / "img" / f"{out.stem}.png"
         img.parent.mkdir(exist_ok=True)
         shutil.copyfile(ROOT / image_src(art["hero"]), img)
-        conf["hero"] = str(img.relative_to(ROOT))
+        conf["hero"] = img.relative_to(ROOT).as_posix()
     meta_update(k, confirmed=conf)
     if not process_path(k):
         src_page = json.loads(read(brief_path(k))).get("from_wiki", "")
@@ -614,11 +615,19 @@ def act_wiki_pick(a):
 
     def after(j):  # 깊게 읽기가 끝나면 제목 후보로 — 실패해도 페이지 논지로 만든 글은 남는다
         act_titles({"article": k})
-    start("wiki-pick", k, PY + ["scripts/wiki.py", "--brief", str(f.relative_to(ROOT / "wiki")), k], after)
+    start("wiki-pick", k, PY + ["scripts/wiki.py", "--brief", f.relative_to(ROOT / "wiki").as_posix(), k], after)
     return {"article": k}
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
+
+
+def director_prompt():
+    """진행자 지시문 — Windows 셸(Git Bash)에는 python3가 없을 수 있어 작업실을 띄운 파이썬을 그대로 쓰게 한다."""
+    t = read(DIRECTOR)
+    if sys.platform == "win32":
+        t = t.replace("python3 -I", f'"{Path(sys.executable).as_posix()}" -X utf8 -I').replace("aside-win", "aside")
+    return t
 
 
 def act_chat(a):
@@ -635,7 +644,7 @@ def act_chat(a):
     ctx = f"[지금 보고 있는 글: {k} — 설정 briefs/{k}.json, 결과 runs/columns/{k}/]\n" if not process_path(k) else \
         f"[지금 보고 있는 글: 확정 칼럼 columns/{k}.md — 과정 기록 columns/{k}.process.json]\n"
     cmd = ["claude", "-p", "--model", "opus", "--output-format", "json", "--tools", "Bash,Read,Write,Glob,Grep",
-           "--permission-mode", "bypassPermissions", "--append-system-prompt", read(DIRECTOR)]
+           "--permission-mode", "bypassPermissions", "--append-system-prompt", director_prompt()]
     cmd += ["--session-id", sid] if first else ["--resume", sid]
     cmd += [ctx + msg]
 
@@ -788,9 +797,14 @@ class H(SimpleHTTPRequestHandler):
 
 
 def tailnet_ips():
-    """Tailscale 주소(100.64.0.0/10)만 찾는다 — 같은 공유기(LAN)에는 열지 않는다."""
-    out = subprocess.run(["ip", "-4", "-o", "addr"], capture_output=True, text=True).stdout
-    ips = re.findall(r"inet (100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d+\.\d+)/", out)
+    """Tailscale 주소(100.64.0.0/10)만 찾는다 — 같은 공유기(LAN)에는 열지 않는다.
+    Windows에는 ip 명령이 없어 tailscale CLI로 묻는다. 둘 다 없으면 localhost에만 붙는다."""
+    cmd = ["tailscale", "ip", "-4"] if sys.platform == "win32" else ["ip", "-4", "-o", "addr"]
+    try:
+        out = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+    except OSError:
+        return []
+    ips = re.findall(r"(?<![\d.])(100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d+\.\d+)(?![\d.])", out)
     return list(dict.fromkeys(ips))
 
 

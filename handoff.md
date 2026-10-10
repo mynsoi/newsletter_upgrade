@@ -50,7 +50,7 @@
 
 ## 5. 작업실 웹앱
 
-- **실행:** `cd mentor-lab/app && npm run build` → `cd .. && python3 -I scripts/studio_server.py 8771`. 서버가 버튼을 기존 명령(`column_pipeline.py`·`wiki.py`·`image_candidates.py`·`collect.py`)에 잇기만 한다. 작업 기록 `runs/studio/`(jobs.json·logs·chat).
+- **실행:** `cd mentor-lab/app && npm run build` → `cd .. && python3 -I scripts/studio_server.py 8771`. Windows: `setup-windows.cmd`(설치·빌드, 다시 돌려도 됨) → `start-windows.cmd`(README 'Windows에서 처음 설치'). 서버가 버튼을 기존 명령(`column_pipeline.py`·`wiki.py`·`image_candidates.py`·`collect.py`)에 잇기만 한다. 작업 기록 `runs/studio/`(jobs.json·logs·chat).
 - **화면:**
   - 서재 — 원문 카드(Threads·LinkedIn·경영일기), 입력창 + "aside 수집"(비우면 Threads·LinkedIn 자동), 수집 기록 줄.
   - 주제 — 위키 주제 지도(분야별, 카드마다 원문 수·new·상태). "이 주제로" → 즉시 글 생성 후 그 글로 이동, 깊게 읽기 → 제목 후보가 이어서 돈다. 쓴 주제는 "다시". "넣기 N"·"정리". 예전 회차는 맨 아래 접힘.
@@ -76,6 +76,7 @@
 - astra 터널: opencodex 프록시 127.0.0.1:10100 · 허브 터널 127.0.0.1:37369 — 끊기면 503 "link tunnel unavailable".
 - 설치한 외부 컴포넌트는 데모용이라 손을 봐야 한다 — Kokonut Particle Button은 `onClick`을 부르지 않아 '쓰기'·'확정'이 화면에서 안 됐었다(고침). **버튼은 서버 직접 호출만 말고 화면에서 눌러 시험할 것**(aside로 Windows 브라우저 조작 가능).
 - 그림 비율: 머리 그림 3:2(허용 0.2), 본문 그림 16:9 — astra가 설명에 비율을 쓰면 gti가 그 비율로 그린다.
+- **Windows:** 파이썬은 `-X utf8`로 돌린다(기본 cp949면 한글 지시문이 깨짐 — 작업실은 하위 실행에 붙여 줌). 화면·설정에 저장하는 경로는 `/`로(`as_posix()`), npm으로 깐 `codex`는 `codex.cmd`라 `shutil.which`로 찾는다. codex 샌드박스(`-s read-only`·위키의 `workspace-write` 원문 보호)는 리눅스에서만 확인됨.
 - `pgrep -f`로 기다릴 때 자기 명령줄까지 잡혀 끝나지 않는 일이 있었다 — PID로 기다릴 것.
 
 ## 8. 알려진 문제·아직 확인 못 한 것

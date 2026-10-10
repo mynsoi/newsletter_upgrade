@@ -8,6 +8,7 @@
 """
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -15,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 ROOT = Path(__file__).resolve().parent.parent
+ASIDE = shutil.which("aside-win") or shutil.which("aside") or "aside-win"  # WSL은 aside-win 래퍼, Windows는 aside.exe
 ORIG = ROOT / "sources" / "originals"
 PARSERS = {"threads": "parse_threads.py", "linkedin": "parse_linkedin.py"}
 
@@ -62,8 +64,8 @@ URLS:
 https://...
 https://..."""
     (d / "aside-prompt.md").write_text(prompt, encoding="utf-8")
-    proc = subprocess.Popen(["aside-win", "exec", "--host", "local", "--effort", "ultrabrowse", prompt],
-                            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    proc = subprocess.Popen([ASIDE, "exec", "--host", "local", "--effort", "ultrabrowse", prompt],
+                            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace")
     lines = []
     for line in proc.stdout:  # 들어오는 대로 작업 로그에 — 화면에서 aside가 무엇을 보는지 보이게
         line = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", line)  # 터미널 색상 코드가 주소 끝에 붙어 중복 확인이 깨졌다(2026-10-09)
@@ -93,8 +95,8 @@ def snapshot(url):
 
 
 def run_repl(js, timeout=170):
-    r = subprocess.run(["aside-win", "repl", "--host", "local", js], stdin=subprocess.DEVNULL,
-                       capture_output=True, text=True, timeout=timeout)
+    r = subprocess.run([ASIDE, "repl", "--host", "local", js], stdin=subprocess.DEVNULL,
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout)
     return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", r.stdout)
 
 
@@ -172,8 +174,8 @@ def save(url):
     d = ORIG / site
     (d / f"{no}.snapshot.txt").write_text(snap, encoding="utf-8")
     if site in PARSERS:
-        r = subprocess.run([sys.executable, "-I", str(ROOT / "scripts" / PARSERS[site]), str(d / f"{no}.snapshot.txt")],
-                           capture_output=True, text=True)
+        r = subprocess.run([sys.executable, "-X", "utf8", "-I", str(ROOT / "scripts" / PARSERS[site]), str(d / f"{no}.snapshot.txt")],
+                           capture_output=True, text=True, encoding="utf-8")
         text = r.stdout
     else:
         text = generic(snap, url)

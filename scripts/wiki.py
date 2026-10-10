@@ -11,6 +11,7 @@
 """
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -22,15 +23,17 @@ WIKI = ROOT / "wiki"
 SRC = ROOT / "sources"
 STYLE_ONLY = {"infuture"}
 BATCH = 6
+# Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
+CODEX = shutil.which("codex") or "codex"
 
 
 def astra(prompt, write=True, out=None):
-    cmd = ["codex", "exec", "-m", "gpt-6-astra", "-C", str(WIKI), "--skip-git-repo-check",
+    cmd = [CODEX, "exec", "-m", "gpt-6-astra", "-C", str(WIKI), "--skip-git-repo-check",
            "-s", "workspace-write" if write else "read-only", "--ephemeral", "--color", "never"]
     if out:
         cmd += ["-o", str(out)]
     sys.stdout.flush()
-    r = subprocess.run(cmd + ["-"], input=prompt, text=True, cwd=WIKI)  # 출력은 작업 로그로 그대로 — 화면에서 진행이 보이게
+    r = subprocess.run(cmd + ["-"], input=prompt, text=True, encoding="utf-8", cwd=WIKI)  # 출력은 작업 로그로 그대로 — 화면에서 진행이 보이게
     return r.returncode
 
 
@@ -48,7 +51,7 @@ def backlog():
     done = processed()
     rows = []
     for f in sorted((SRC / "originals").glob("*/[0-9]*.md")):
-        rel = str(f.relative_to(SRC))
+        rel = f.relative_to(SRC).as_posix()
         if f.parent.name not in STYLE_ONLY and rel not in done:
             rows.append(rel)
     return rows
@@ -134,7 +137,7 @@ def claim(page_rel):
     srcs = [x for x in srcs if (SRC / x).is_file()]
     k = "w-" + time.strftime("%Y%m%d-%H%M%S")
     b = {"topic": k, "label": title, "thesis": sec.get("이 글이 말할 것", ""), "sources": [[x, label(x)] for x in srcs],
-         "from_wiki": str(page.relative_to(ROOT))}
+         "from_wiki": page.relative_to(ROOT).as_posix()}
     (ROOT / "briefs" / f"{k}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     ui = used_in(page) + [f"briefs/{k}.json"]
     was = re.search(r"^status:\s*(\S+)", head, re.M)
@@ -149,7 +152,7 @@ def brief(page_rel, k=None):
     k = k or claim(page_rel)
     d = ROOT / "runs" / "wiki" / k
     d.mkdir(parents=True, exist_ok=True)
-    p = (f"AGENTS.md를 먼저 읽고 그 규칙의 '고를 때 깊게 읽기'를 해 주세요. 고른 주제 페이지: {page.relative_to(WIKI)}\n"
+    p = (f"AGENTS.md를 먼저 읽고 그 규칙의 '고를 때 깊게 읽기'를 해 주세요. 고른 주제 페이지: {page.relative_to(WIKI).as_posix()}\n"
          "파일은 만들거나 고치지 마세요.\n"
          "출력: JSON 하나만. {\"name\": \"짧은 이름\", \"thesis\": \"이 글이 말할 것 한두 문장\", "
          "\"sources\": [\"originals/<사이트>/NN.md\", ...]} — sources는 중심 원문을 맨 앞에, 경로는 sources/ 아래 기준(originals/로 시작).")

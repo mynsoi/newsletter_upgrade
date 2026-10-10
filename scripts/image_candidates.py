@@ -11,6 +11,7 @@
 """
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -21,7 +22,11 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "images"
 # gti는 무조건 gpt-6-astra (멘토 2026-10-09). 전역 npm gti는 기본 gpt-5.4라 400이 나서,
 # 모델을 강제하고 PNG를 검증하는 god-tibo-imagen 스킬 스크립트로 부른다.
-GEN = str(Path.home() / ".codex" / "skills" / "god-tibo-imagen" / "scripts" / "generate-image.mjs")
+# 이 PC의 스킬(모델 고정 수정본)을 먼저 쓰고, 없으면 저장소 사본(tools/god-tibo-imagen — 새 PC·Windows용)
+GEN = next((str(p) for p in (Path.home() / ".codex" / "skills" / "god-tibo-imagen" / "scripts" / "generate-image.mjs",
+                             ROOT / "tools" / "god-tibo-imagen" / "scripts" / "generate-image.mjs") if p.exists()), "")
+# Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
+CODEX = shutil.which("codex") or "codex"
 
 
 def latest(name):
@@ -79,12 +84,12 @@ def run_inline(target):
     paras = paragraphs(f.read_text(encoding="utf-8"))
     p = inline_prompt(paras)
     (d / "prompt.md").write_text(p, encoding="utf-8")
-    (d / "source.txt").write_text(str(f.relative_to(ROOT)), encoding="utf-8")
+    (d / "source.txt").write_text(f.relative_to(ROOT).as_posix(), encoding="utf-8")
     out = d / "astra.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
-        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
+                       cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []
@@ -114,12 +119,12 @@ def run(target):
     d.mkdir(parents=True, exist_ok=True)
     p = prompt(f.read_text(encoding="utf-8"))
     (d / "prompt.md").write_text(p, encoding="utf-8")
-    (d / "source.txt").write_text(str(f.relative_to(ROOT)), encoding="utf-8")
+    (d / "source.txt").write_text(f.relative_to(ROOT).as_posix(), encoding="utf-8")
     out = d / "astra.md"
     with open(d / "run.log", "w", encoding="utf-8") as log:
-        subprocess.run(["codex", "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=p, text=True, stdout=log, stderr=subprocess.STDOUT)
+                       cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = json.loads(m.group(0)) if m else []
