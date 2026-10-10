@@ -4,8 +4,8 @@ title: 같은 질문(최근 30일 신규 가입자 동의율)을 AI에게 열 �
 verdict: 쓸 만함
 audience: 전 직원·팀장급
 center: linkedin/15
-status: 진행 중
-used_in: [briefs/w-20261011-013917.json]
+status: 씀
+used_in: [briefs/w-20261011-013917.json, columns/2026-10-11-w-20261011-013917.md]
 timestamp: 2026-10-11
 ---
 
