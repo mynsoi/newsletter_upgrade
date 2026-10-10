@@ -32,9 +32,10 @@
   h1 { font-size:28px; font-weight:700; line-height:1.43; margin:0; }
   .lead { color:var(--muted); margin:6px 0 0; }
 
-  .stage { border:1px solid var(--hairline); border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow); }
-  .stage iframe { display:block; width:100%; height:1040px; border:0; background:#fff; }
-  .stage iframe[hidden] { display:none; }
+  .stage { position:relative; height:1040px; border:1px solid var(--hairline); border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow); }
+  /* 안 보이는 탭도 제 크기로 미리 그려 두어야 archify가 크기를 제대로 잡는다 — display:none 대신 visibility */
+  .stage iframe { position:absolute; inset:0; width:100%; height:100%; border:0; background:#fff; }
+  .stage iframe.off { visibility:hidden; pointer-events:none; }
 
   .run { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:48px 0 64px; }
   .run h2 { font-size:20px; font-weight:600; letter-spacing:-.18px; margin:0 0 12px; }
@@ -63,13 +64,13 @@
 
   <div class="stage">
     <iframe id="frame-flow" data-tab="flow" src="how-it-works/flow.html" title="칼럼 한 편이 나오기까지"></iframe>
-    <iframe id="frame-arch" data-tab="arch" src="how-it-works/architecture.html" title="누가 무엇을 부르나" hidden></iframe>
+    <iframe id="frame-arch" data-tab="arch" src="how-it-works/architecture.html" title="누가 무엇을 부르나" class="off"></iframe>
   </div>
 
   <section class="run">
     <div>
       <h2>내 컴퓨터에서 돌리려면</h2>
-      <pre>cd mentor-lab/app && npm install && npm run build
+      <pre>cd app && npm install && npm run build
 cd .. && python3 -I scripts/studio_server.py 8771
 # → http://localhost:8771</pre>
       <p class="muted">서버는 이 컴퓨터(localhost)에서만 열립니다. 화면 코드만 고쳤으면 다시 빌드만 하면 되고, 서버 코드를 고쳤으면 돌고 있는 작업이 없을 때 재시작합니다.</p>
@@ -125,7 +126,7 @@ cd .. && python3 -I scripts/studio_server.py 8771
   });
   function show(id) {
     document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', String(x.dataset.for === id)));
-    document.querySelectorAll('.stage iframe').forEach(f => { f.hidden = f.dataset.tab !== id; });
+    document.querySelectorAll('.stage iframe').forEach(f => { f.classList.toggle('off', f.dataset.tab !== id); });
     history.replaceState(null, '', '#' + id);
   }
   document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => show(b.dataset.for)));
