@@ -1,0 +1,158 @@
+URL: https://www.linkedin.com/posts/simplifier_%ED%86%A0%ED%81%B0%EC%9D%84-%EC%95%84%EB%81%BC%EB%A0%A4%EB%8B%A4-%EA%B8%B0%EC%88%A0%EC%9D%B4-%EB%8A%98%EC%97%88%EB%8B%A4-ai%EB%A5%BC-%EC%97%B4%EC%8B%AC%ED%9E%88-%EC%93%B0%EB%8B%A4-%EB%B3%B4%EB%A9%B4-%EC%96%B4%EB%8A%90%EC%83%88-%EC%A7%80%EC%B6%9C%EC%9D%B4-%EB%8A%98%EC%96%B4-activity-7509038983339773953-_8oj
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/simplifier_%ED%86%A0%ED%81%B0%EC%9D%84-%EC%95%84%EB%81%BC%EB%A0%A4%EB%8B%A4-%EA%B8%B0%EC%88%A0%EC…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/simplifier_%ED%86%A0%ED%81%B0%EC%9D%84-%EC%95%84%EB%81%BC%EB%A0%A4%EB%8B%A4-%EA%B8%B0%EC%88%A0%EC…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Sunghee Han (한성희)님의 프로필 보기"
+      - link "Sunghee Han (한성희)• 2촌" [ref=e26]
+      - text: "CEO at Simplifier | Startup Playing Coach & Author 9월 25일"
+      - link "Sunghee Han (한성희) 님 인증됨 프로필 2촌" [ref=e27]
+      - button "Sunghee Han (한성희)님에게 1촌 신청" [ref=e28]: "1촌 맺기"
+      - button "Sunghee Han (한성희) 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "토큰을 아끼려다 기술이 늘었다 AI를 열심히 쓰다 보면 어느새 지출이 늘어 있습니다. 통장 잔고보다 사용량 게이지가 먼저 비명을 지른다는 점이 다를 뿐입니다. 저도 오늘은 하루가 채 지나기 전에 일주일 치 사용량 중 이틀 치를 써버렸습니다. 분명 오늘은 하루밖에 안 지났는데 말입니다. 이쯤 되면 AI 지출 다이어트를 시작해야 하는 날입니다.AI 구독료와 사용료는 하나하나 보면 참 착합니다. 커피 한 잔 값 같습니다. 그런데 이 착한 것들이 모여 있으면 어느새 월세 비슷한 얼굴로 나타납니다. 토큰이라는 이름도 얄밉습니다. 게임 머니처럼 귀여운 이름을 하고 진짜 돈을 가져갑니다. 요즘 AI 비용이 부담이라는 이야기가 여기저기서 들리는 이유가 있었습니다. 저만 그런 게 아니라는 사실은 위안이 되지만, 위안이 사용량을 채워 주지는 않습니다.다이어트의 첫 단계는 어디로 새는지 보는 일이었습니다. 살펴보니 작은 일까지 비싼 AI에게 하나하나 맡기고 있었습니다. 회사로 치면 제일 비싼 직원에게 복사를 시키고 있었던 셈입니다. 그것도 한 장씩 나눠서요. 복사는 아주 잘 됐습니다. 잘 되니까 더 무서웠습니다.PM이 기능마다 비용 대비 효과를 따지듯, AI에게 맡기는 일에도 단가를 붙여 봐야 했습니다. 이 일에 이 비용이 맞는가를 묻는 순간, 그동안 얼마나 후하게 쓰고 있었는지가 보입니다. 사람 직원에게라면 첫 주에 했을 질문을 AI에게는 깜빡하고 있었던 겁니다. AI가 월급을 달라고 조르지 않으니 계산도 잊고 지냈습니다.얼마 전 이 분야를 잘 아는 분에게 이런 말을 들었습니다. 토큰을 아끼는 건 돈을 아끼는 문제가 아니라 기술이 늘어나는 문제라고 했습니다. 오늘 제가 딱 그랬습니다. 돈을 아끼려고 했을 뿐인데 기술이 늘어야 했으니까요. 계획에 없던 자기계발입니다.그래서 지출 구조를 바꿨습니다. 자료 모으기와 초안은 다른 헤르메스에게 먼저 시키고, 글자 수 세기 같은 단순한 일은 작은 프로그램에 넘기고, 3년간 잠들어 있던 GPU를 돌려 로컬모델도 써 봤습니다. 무료 모델에게 글 채점까지 시켜 봤는데 그건 영 못하더군요. 그래서 중요한 판단이 필요한 작업은 클로드에게 넘겼습니다.3년 만에 출근한 GPU 입장에서는 복귀 첫 업무가 채점 시험인 셈입니다. 이력서에 쓰기에는 민망한 성적이지만 놀고 있던 것보다는 낫습니다. 게다가 월급이 없습니다. 이 부분이 이번 지출 다이어트에서 가장 마음에 드는 대목입니다. 3년 동안 무슨 꿈을 꿨는지는 모르겠지만 깨어나 보니 세상이 꽤 바뀌어 있었을 겁니다. 글을 써 주는 AI가 신기한 뉴스이던 시절에 잠들었다가, 이제는 그 AI의 일을 덜어 주는 조수로 복귀한 셈이니까요.무료 모델의 채점 실력은 이랬습니다. 전혀 다른 두 글에 똑같은 점수를 준 모델도 있었습니다. 공정하기는 합니다. 다만 채점이라기보다 도장 찍기에 가까웠습니다. 그래서 채점만큼은 월급을 받는 쪽에 남겼습니다.정리해 보니 AI 팀을 꾸리는 일도 회사를 꾸리는 일과 다르지 않았습니다. 판단은 비싼 직원이 하고, 정리와 요약은 성실한 인턴에게 맡겨 볼 만하고, 세는 일은 복사기가 하면 됩니다. 복사기에게 월급을 주는 회사는 없으니까요. 이 당연한 구분을, 한도가 넉넉할 때는 굳이 하지 않았습니다. 한도가 넉넉했다면 지금도 제일 비싼 직원에게 복사를 시키고 있었을지도 모릅니다.그렇다면 무엇을 맡기지 않을까요. PM이라면 회의 끝나고 일정을 다시 계산하는 일, 표의 합계를 내는 일, 문서 이름을 규칙대로 바꾸는 일이 후보일 것 같습니다. 이런 일은 똑똑함이 아니라 성실함이 필요합니다. 반대로 고객 이야기를 어떻게 해석할지, 이번 기획서의 방향이 맞는지 같은 일은 비싼 직원의 자리입니다. 이 구분만 해 두어도 사용량 게이지가 눈에 띄게 느려지지 않을까 짐작해 봅니다.지출 다이어트를 하려면 구독 목록부터 펼치기 쉽습니다. 그런데 이번에 알게 된 건 목록보다 일의 배분이 먼저라는 점이었습니다. 어떤 일에 똑똑한 AI가 필요한지 알고 나면, 어떤 구독이 필요 없는지는 저절로 보이기 시작합니다. 반대로 이 글의 제목을 두고 고민하는 일은 스크립트가 대신해 주지 않습니다. 그건 아직 사람의 몫이라 다행입니다.비용을 줄이려다 알게 된 건, 일을 나누는 눈이 생긴다는 것이었습니다. 불편한 한도가 공짜 수업을 해 준 셈입니다. 수업료는 이틀 치 사용량으로 이미 냈습니다.다음에 사용량 경고를 만나면, 비용을 더 쓰는 쉬운 길보다 아끼는 방법을 찾아 고수의 길로 들어가보면 어떨까요?from"
+        - link "https://lnkd.in/greB2TdP 열기" [ref=e30]: "https://lnkd.in/greB2TdP"
+      - button "반응 버튼 상태: 반응 없음" [ref=e31]: "29"
+      - button "댓글" [ref=e32]: "2"
+      - button "퍼가기" [ref=e33]: "1"
+      - link "보내기" [ref=e34]
+      - link "반응 29" [ref=e35]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e36]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e37]
+      - button "GIF 선택 도구 열기" [ref=e38]
+      - button "사진 공유" [ref=e39]
+    - link [ref=e40]:
+      - link "Yeonje Soh 님의 반응: 추천" [ref=e41]
+      - link "종표 박 님의 반응: 추천" [ref=e42]
+      - link "Yoojin Lee 님의 반응: 추천" [ref=e43]
+      - link "Yoon-Sang Nam 님의 반응: 추천" [ref=e44]
+      - link "태화 이 님의 반응: 추천" [ref=e45]
+      - link "Jiyoung Huh 님의 반응: 추천" [ref=e46]
+      - link "Yeojin J. 님의 반응: 추천" [ref=e47]
+      - link "NAM KEUN KIM 님의 반응: 추천" [ref=e48]
+      - link "반응 모두 보기" [ref=e49]
+    - button "관련순" [ref=e50]
+    - link [ref=e51]:
+      - image "김재승 金載昇 Jaeseung Kim님의 프로필 보기"
+    - link "김재승 金載昇 Jaeseung Kim 님 프리미엄 프로필 2촌 Senior Technical Program Manager | Infrastructure Delivery & Netw" [ref=e52]
+    - text: "2주"
+    - button "김재승 金載昇 Jaeseung Kim님 팔로우" [ref=e53]: "팔로우"
+    - button "김재승 金載昇 Jaeseung Kim 님의 댓글에 대한 옵션 더 보기" [ref=e54]
+    - text: "상위 모델 하위 노력이나 하위 모델 상위 노력의 결과가 다르지 않다는 다른 AI의 말에 하위 모델 높음으로 돌려 봅니다.마음 같아서는 환경은 모르겠고 토큰을 태워서라도 좋은 결과를 만들고 싶지만 아직은 초보입니다."
+    - button [ref=e55]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e56]
+    - link "글쓴이가 반응한 횟수" [ref=e57]
+    - link [ref=e58]:
+      - image "SONG -E님의 프로필 보기"
+    - link "SONG -E 님 2촌 AI Music Producer & Tech Builder | Custom Soundtracks & Agent Systems | Blending Machin" [ref=e59]
+    - text: "2주"
+    - button "SONG -E님 팔로우" [ref=e60]: "팔로우"
+    - button "SONG -E 님의 댓글에 대한 옵션 더 보기" [ref=e61]
+    - text: "토큰을 아끼려다 일의 배분과 효율을 고민하게 되었다는 말씀에 깊이 공감합니다. 3년 만에 깨어난 GPU의 활약상처럼 적재적소에 알맞은 도구를 쓰는 지혜를 배우고 갑니다 👏"
+    - button [ref=e62]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e63]
+    - link "글쓴이가 반응한 횟수" [ref=e64]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e65]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e66]
+      - link "웹접근성" [ref=e67]
+      - link "고객센터" [ref=e68]
+      - button "개인정보와 약관" [ref=e69]
+      - link "광고 선택" [ref=e70]
+      - link "광고" [ref=e71]
+      - button "비즈니스서비스" [ref=e72]
+      - link "LinkedIn 앱 다운로드" [ref=e73]
+      - link "더보기" [ref=e74]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - generic [ref=e75]:
+      - image "Hyunwoo Joo"
+      - text: "상태 - 온라인"
+      - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e76]
+    - button "메시지 메뉴 열기" [ref=e78]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e79]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e80]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[ok | 8890ms]

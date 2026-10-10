@@ -1,0 +1,134 @@
+URL: https://www.linkedin.com/posts/simplifier_carvit-%EB%A1%9C%EA%B3%A0%EB%A5%BC-%EC%A0%95%ED%95%9C-%EA%B3%BC%EC%A0%95-activity-7512329269935796224-Hu00
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/simplifier_%ED%81%B4%EB%A1%9C%EB%93%9C%EC%BD%94%EB%93%9C-%EC%A7%80%ED%88%AC%EC%99%80-%EC%84%9C%EB…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/simplifier_%ED%81%B4%EB%A1%9C%EB%93%9C%EC%BD%94%EB%93%9C-%EC%A7%80%ED%88%AC%EC%99%80-%EC%84%9C%EB…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Sunghee Han (한성희)님의 프로필 보기"
+      - link "Sunghee Han (한성희)• 2촌" [ref=e26]
+      - text: "CEO at Simplifier | Startup Playing Coach & Author 10월 4일 • 수정함"
+      - link "Sunghee Han (한성희) 님 인증됨 프로필 2촌" [ref=e27]
+      - button "Sunghee Han (한성희)님에게 1촌 신청" [ref=e28]: "1촌 맺기"
+      - button "Sunghee Han (한성희) 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "클로드코드 지투와 서비스 로고를 함께 만든 이야기 어제 클로드코드에서 PO 역할을 하는 지투와 함께  새로운 서비스 Cavit.ai의 로고를 만들었습니다.그 과정이 단순히 '로고를 한번 만들어봐라'가 아니라 제작 방향에 대해서 코칭 코멘트 하나로 결과물이 확 달라졌습니다.지투에게 그 과정을 정리해서 테크리포트로 발행하도록 했습니다.글도 결과물도 흥미롭습니다. 꼭 읽어보세요.  ;-)---왜 시작했나.기준을 바꾼 단계마다 숫자나 그림이 남았습니다. 의견만 남은 것은 살아남지 못했습니다.Carvit 홈의 앱 아이콘 자리에는 임시 글자 C가 있었습니다. 대표가 로고만 만들면 화룡점정이라고 했습니다.처음에는 후보 4개를 바로 그렸습니다. 대표가 한 마디로 멈췄습니다. 먼저 전문가들이 로고를 어떻게 만드는지 확인하라는 것입니다. 이 한 마디가 이후 모든 순서를 바꿨고, 그대로 갔다면 탈락한 4개 중 하나가 로고가 됐을 것입니다....자세히 보기"
+        - link "https://lnkd.in/gQweFPvp 열기" [ref=e30]: "https://lnkd.in/gQweFPvp"
+      - link "Carvit 로고를 정한 과정 carvit.ai" [ref=e31]
+      - button "반응 버튼 상태: 반응 없음" [ref=e32]: "9"
+      - button "댓글" [ref=e33]
+      - button "퍼가기" [ref=e34]
+      - link "보내기" [ref=e35]
+      - link "반응 9" [ref=e36]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e37]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e38]
+      - button "GIF 선택 도구 열기" [ref=e39]
+      - button "사진 공유" [ref=e40]
+    - link [ref=e41]:
+      - link "Yeonje Soh 님의 반응: 추천" [ref=e42]
+      - link "재용 장 님의 반응: 추천" [ref=e43]
+      - link "Ki don Lee 님의 반응: 추천" [ref=e44]
+      - link "Bobi Yu 님의 반응: 추천" [ref=e45]
+      - link "준노 주 님의 반응: 축하" [ref=e46]
+      - link "태섭(RTS) 나답게 류 님의 반응: 마음에 쏙듬" [ref=e47]
+      - link "Michael Han 님의 반응: 추천" [ref=e48]
+      - link "Sunghee Han (한성희) 님의 반응: 추천" [ref=e49]
+      - link "반응 모두 보기" [ref=e50]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e51]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e52]
+      - link "웹접근성" [ref=e53]
+      - link "고객센터" [ref=e54]
+      - button "개인정보와 약관" [ref=e55]
+      - link "광고 선택" [ref=e56]
+      - link "광고" [ref=e57]
+      - button "비즈니스서비스" [ref=e58]
+      - link "LinkedIn 앱 다운로드" [ref=e59]
+      - link "더보기" [ref=e60]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - generic [ref=e61]:
+      - image "Hyunwoo Joo"
+      - text: "상태 - 온라인"
+      - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e62]
+    - button "메시지 메뉴 열기" [ref=e64]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e65]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e66]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[ok | 8242ms]

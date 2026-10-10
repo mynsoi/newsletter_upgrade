@@ -1,0 +1,1317 @@
+URL: https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE
+✔︎ Opened a new tab and set it active: tabs[0], page → 공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦. (https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE)
+=== SNAPSHOT 1 ===
+- title: "공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦." [url=https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7.9천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "chris_gomdori님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "chris_gomdori" [ref=e23]
+    - link "공공AX" [ref=e24]
+    - link "2026년 7월 30일 목요일 오후 3:30" [ref=e25]: "2026-07-30"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "공문 열고 \"그래서 나보고 뭘 하라는 거야\"까지 10초.전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, \n다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다.문서 화면에서 버튼 하나 누르면\n✅ 뭘·언제까지·어떻게 → 카드 한 장으로\n✅ 기한은 D-day로 박아주고\n✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. \n로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심.대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이\n\"업무 중\"에 만듦. 1/2"
+    - group "Video player":
+      - button [ref=e27]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "114"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "25"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e40]
+    - link "공공AX" [ref=e41]
+    - link "2026년 7월 30일 목요일 오후 3:30" [ref=e42]: "2026-07-30"
+    - button [ref=e43]:
+      - img "더 보기"
+    - text: "깃허브:"
+    - link "github.com/chris…" [ref=e44]
+    - text: "압축 풀어서 로드하면 끝. Ollama 자동 설치 스크립트도 들어있어요. \n다른 기관 그룹웨어는 옵션에서 주소만 추가하면 됩니다. \n다 떠먹여드림. 2/2"
+    - link [ref=e45]:
+      - image "GitHub - chrisryugj/edoc-summarizer: 전자문서 AI 요약 Edge 확장 — 서울시 전자문서 본문 추출 + LLM 요약 위젯 (KRDS UI)"
+      - text: "github.com GitHub - chrisryugj/edoc-summarizer: 전자문서 AI 요약 Edge 확장 — 서울시 전자문서 본문 추출 + LLM 요약 위젯 (KRDS UI)"
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "28"
+    - button [ref=e47]:
+      - img "답글"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "23"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e52]
+    - link "2026년 7월 30일 목요일 오후 5:47" [ref=e53]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "류주임님 위상이 어디까지올라가는거에요?"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e61]
+    - link "2026년 7월 30일 목요일 오후 5:49" [ref=e62]: "2026-07-30"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "그래봐야 아직도 8급"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e70]
+    - link "2026년 7월 30일 목요일 오후 6:00" [ref=e71]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "AI계의 충주맨처럼 고속으로 조만간 올라가셔야 맞다고 생각합네다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "uumpengsu님의 프로필 사진"
+    - link "uumpengsu" [ref=e79]
+    - link "2026년 7월 30일 목요일 오후 6:20" [ref=e80]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "류주임님은 진짜.. 어디까지 가려고허시는거에요~~"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "seonseok님의 프로필 사진"
+    - link "seonseok" [ref=e88]
+    - link "2026년 7월 31일 금요일 오후 4:50" [ref=e89]: "2026-07-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "휴 저희기관은 ocx기반 기안기라 안되네요ㅠ"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e92]:
+      - img "답글"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e95]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e96]
+    - listitem:
+      - link "개인정보처리방침" [ref=e97]
+    - listitem:
+      - link "쿠키 정책" [ref=e98]
+- button "만들기" [ref=e99]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦." [url=https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7.9천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - group "Video player":
+      - button [ref=e27]:
+        - img "오디오 소리 꺼짐"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "114"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "25"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e34] [focused]
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e40]
+    - link "공공AX" [ref=e41]
+    - link "2026년 7월 30일 목요일 오후 3:30" [ref=e42]: "2026-07-30"
+    - button [ref=e43]:
+      - img "더 보기"
+    - text: "깃허브:"
+    - link "github.com/chris…" [ref=e44]
+    - text: "압축 풀어서 로드하면 끝. Ollama 자동 설치 스크립트도 들어있어요. \n다른 기관 그룹웨어는 옵션에서 주소만 추가하면 됩니다. \n다 떠먹여드림. 2/2"
+    - link [ref=e45]:
+      - image "GitHub - chrisryugj/edoc-summarizer: 전자문서 AI 요약 Edge 확장 — 서울시 전자문서 본문 추출 + LLM 요약 위젯 (KRDS UI)"
+      - text: "github.com GitHub - chrisryugj/edoc-summarizer: 전자문서 AI 요약 Edge 확장 — 서울시 전자문서 본문 추출 + LLM 요약 위젯 (KRDS UI)"
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "28"
+    - button [ref=e47]:
+      - img "답글"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "23"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e52]
+    - link "2026년 7월 30일 목요일 오후 5:47" [ref=e53]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "류주임님 위상이 어디까지올라가는거에요?"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e61]
+    - link "2026년 7월 30일 목요일 오후 5:49" [ref=e62]: "2026-07-30"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "그래봐야 아직도 8급"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e70]
+    - link "2026년 7월 30일 목요일 오후 6:00" [ref=e71]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "AI계의 충주맨처럼 고속으로 조만간 올라가셔야 맞다고 생각합네다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "uumpengsu님의 프로필 사진"
+    - link "uumpengsu" [ref=e79]
+    - link "2026년 7월 30일 목요일 오후 6:20" [ref=e80]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "류주임님은 진짜.. 어디까지 가려고허시는거에요~~"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "seonseok님의 프로필 사진"
+    - link "seonseok" [ref=e88]
+    - link "2026년 7월 31일 금요일 오후 4:50" [ref=e89]: "2026-07-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "휴 저희기관은 ocx기반 기안기라 안되네요ㅠ"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e92]:
+      - img "답글"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e100]:
+    - link [ref=e101]:
+      - image "ykh_07_19님의 프로필 사진"
+    - link "ykh_07_19" [ref=e102]
+    - link "2026년 7월 30일 목요일 오후 3:47" [ref=e103]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e104]:
+      - img "더 보기"
+    - text: "오오 ㅋㅋㅋㅋ 감사합니다"
+    - button [ref=e105]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e106]:
+      - img "답글"
+    - button [ref=e107]:
+      - img "리포스트"
+    - button [ref=e108]:
+      - img "공유하기"
+  - generic [ref=e109]:
+    - link [ref=e110]:
+      - image "bosongkim.kr님의 프로필 사진"
+    - link "bosongkim.kr" [ref=e111]
+    - link "2026년 7월 30일 목요일 오후 7:22" [ref=e112]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e113]:
+      - img "더 보기"
+    - text: "Wa…..😮👍🏼"
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e118]:
+    - link [ref=e119]:
+      - image "_seeynnn_님의 프로필 사진"
+    - link "_seeynnn_" [ref=e120]
+    - link "2026년 10월 1일 목요일 오후 5:33" [ref=e121]: "2026-10-01"
+    - button [ref=e122]:
+      - img "더 보기"
+    - text: "주소와 네트워크망을 확인하라는데ㅠㅠ 어케하나요...?"
+    - button [ref=e123]:
+      - img "좋아요"
+    - button [ref=e124]:
+      - img "답글"
+    - button [ref=e125]:
+      - img "리포스트"
+    - button [ref=e126]:
+      - img "공유하기"
+  - generic [ref=e127]:
+    - link [ref=e128]:
+      - image "k_moonseob님의 프로필 사진"
+    - link "k_moonseob" [ref=e129]
+    - link "2026년 7월 30일 목요일 오후 6:48" [ref=e130]: "2026-07-30"
+    - button [ref=e131]:
+      - img "더 보기"
+    - text: "와......"
+    - button [ref=e132]:
+      - img "좋아요"
+    - button [ref=e133]:
+      - img "답글"
+    - button [ref=e134]:
+      - img "리포스트"
+    - button [ref=e135]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e95]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e96]
+    - listitem:
+      - link "개인정보처리방침" [ref=e97]
+    - listitem:
+      - link "쿠키 정책" [ref=e98]
+- button "만들기" [ref=e99]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦." [url=https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7.9천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "114"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "25"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e43]:
+      - img "더 보기"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "28"
+    - button [ref=e47]:
+      - img "답글"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "23"
+  - generic [ref=e50]:
+    - link [ref=e51]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e52]
+    - link "2026년 7월 30일 목요일 오후 5:47" [ref=e53]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - text: "류주임님 위상이 어디까지올라가는거에요?"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]:
+      - image "chris_gomdori님의 프로필 사진"
+    - link "chris_gomdori" [ref=e61]
+    - link "2026년 7월 30일 목요일 오후 5:49" [ref=e62]: "2026-07-30"
+    - text: "작성자"
+    - button [ref=e63]:
+      - img "더 보기"
+    - text: "그래봐야 아직도 8급"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e70]
+    - link "2026년 7월 30일 목요일 오후 6:00" [ref=e71]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "AI계의 충주맨처럼 고속으로 조만간 올라가셔야 맞다고 생각합네다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "uumpengsu님의 프로필 사진"
+    - link "uumpengsu" [ref=e79]
+    - link "2026년 7월 30일 목요일 오후 6:20" [ref=e80]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "류주임님은 진짜.. 어디까지 가려고허시는거에요~~"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "seonseok님의 프로필 사진"
+    - link "seonseok" [ref=e88]
+    - link "2026년 7월 31일 금요일 오후 4:50" [ref=e89]: "2026-07-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "휴 저희기관은 ocx기반 기안기라 안되네요ㅠ"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e92]:
+      - img "답글"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e100]:
+    - link [ref=e101]:
+      - image "ykh_07_19님의 프로필 사진"
+    - link "ykh_07_19" [ref=e102]
+    - link "2026년 7월 30일 목요일 오후 3:47" [ref=e103]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e104]:
+      - img "더 보기"
+    - text: "오오 ㅋㅋㅋㅋ 감사합니다"
+    - button [ref=e105]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e106]:
+      - img "답글"
+    - button [ref=e107]:
+      - img "리포스트"
+    - button [ref=e108]:
+      - img "공유하기"
+  - generic [ref=e109]:
+    - link [ref=e110]:
+      - image "bosongkim.kr님의 프로필 사진"
+    - link "bosongkim.kr" [ref=e111]
+    - link "2026년 7월 30일 목요일 오후 7:22" [ref=e112]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e113]:
+      - img "더 보기"
+    - text: "Wa…..😮👍🏼"
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e118]:
+    - link [ref=e119]:
+      - image "_seeynnn_님의 프로필 사진"
+    - link "_seeynnn_" [ref=e120]
+    - link "2026년 10월 1일 목요일 오후 5:33" [ref=e121]: "2026-10-01"
+    - button [ref=e122]:
+      - img "더 보기"
+    - text: "주소와 네트워크망을 확인하라는데ㅠㅠ 어케하나요...?"
+    - button [ref=e123]:
+      - img "좋아요"
+    - button [ref=e124]:
+      - img "답글"
+    - button [ref=e125]:
+      - img "리포스트"
+    - button [ref=e126]:
+      - img "공유하기"
+  - generic [ref=e127]:
+    - link [ref=e128]:
+      - image "k_moonseob님의 프로필 사진"
+    - link "k_moonseob" [ref=e129]
+    - link "2026년 7월 30일 목요일 오후 6:48" [ref=e130]: "2026-07-30"
+    - button [ref=e131]:
+      - img "더 보기"
+    - text: "와......"
+    - button [ref=e132]:
+      - img "좋아요"
+    - button [ref=e133]:
+      - img "답글"
+    - button [ref=e134]:
+      - img "리포스트"
+    - button [ref=e135]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e95]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e96]
+    - listitem:
+      - link "개인정보처리방침" [ref=e97]
+    - listitem:
+      - link "쿠키 정책" [ref=e98]
+- button "만들기" [ref=e99]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦." [url=https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7.9천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "114"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "25"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e43]:
+      - img "더 보기"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "28"
+    - button [ref=e47]:
+      - img "답글"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "23"
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e70]
+    - link "2026년 7월 30일 목요일 오후 6:00" [ref=e71]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "AI계의 충주맨처럼 고속으로 조만간 올라가셔야 맞다고 생각합네다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "uumpengsu님의 프로필 사진"
+    - link "uumpengsu" [ref=e79]
+    - link "2026년 7월 30일 목요일 오후 6:20" [ref=e80]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "류주임님은 진짜.. 어디까지 가려고허시는거에요~~"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "seonseok님의 프로필 사진"
+    - link "seonseok" [ref=e88]
+    - link "2026년 7월 31일 금요일 오후 4:50" [ref=e89]: "2026-07-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "휴 저희기관은 ocx기반 기안기라 안되네요ㅠ"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e92]:
+      - img "답글"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e100]:
+    - link [ref=e101]:
+      - image "ykh_07_19님의 프로필 사진"
+    - link "ykh_07_19" [ref=e102]
+    - link "2026년 7월 30일 목요일 오후 3:47" [ref=e103]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e104]:
+      - img "더 보기"
+    - text: "오오 ㅋㅋㅋㅋ 감사합니다"
+    - button [ref=e105]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e106]:
+      - img "답글"
+    - button [ref=e107]:
+      - img "리포스트"
+    - button [ref=e108]:
+      - img "공유하기"
+  - generic [ref=e109]:
+    - link [ref=e110]:
+      - image "bosongkim.kr님의 프로필 사진"
+    - link "bosongkim.kr" [ref=e111]
+    - link "2026년 7월 30일 목요일 오후 7:22" [ref=e112]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e113]:
+      - img "더 보기"
+    - text: "Wa…..😮👍🏼"
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e118]:
+    - link [ref=e119]:
+      - image "_seeynnn_님의 프로필 사진"
+    - link "_seeynnn_" [ref=e120]
+    - link "2026년 10월 1일 목요일 오후 5:33" [ref=e121]: "2026-10-01"
+    - button [ref=e122]:
+      - img "더 보기"
+    - text: "주소와 네트워크망을 확인하라는데ㅠㅠ 어케하나요...?"
+    - button [ref=e123]:
+      - img "좋아요"
+    - button [ref=e124]:
+      - img "답글"
+    - button [ref=e125]:
+      - img "리포스트"
+    - button [ref=e126]:
+      - img "공유하기"
+  - generic [ref=e127]:
+    - link [ref=e128]:
+      - image "k_moonseob님의 프로필 사진"
+    - link "k_moonseob" [ref=e129]
+    - link "2026년 7월 30일 목요일 오후 6:48" [ref=e130]: "2026-07-30"
+    - button [ref=e131]:
+      - img "더 보기"
+    - text: "와......"
+    - button [ref=e132]:
+      - img "좋아요"
+    - button [ref=e133]:
+      - img "답글"
+    - button [ref=e134]:
+      - img "리포스트"
+    - button [ref=e135]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e95]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e96]
+    - listitem:
+      - link "개인정보처리방침" [ref=e97]
+    - listitem:
+      - link "쿠키 정책" [ref=e98]
+- button "만들기" [ref=e99]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "공문 열고 "그래서 나보고 뭘 하라는 거야"까지 10초. 전자문서 접수하면 스크롤 내리면서 기한 찾고, 붙임 열어보고, 다시 위로 올라가고… 하루 수십 번 반복하다 빡쳐서 만들었습니다. 문서 화면에서 버튼 하나 누르면 ✅ 뭘·언제까지·어떻게 → 카드 한 장으로 ✅ 기한은 D-day로 박아주고 ✅ 결재 올리기 전 AI 검토까지 한컴 웹한글 공식 API로 뽑아냅니다. 로컬 LLM 붙이면 문서가 PC 밖으로 한 글자도 안 나갑니다. 보안 문서 안심. 대한민국에서 둘째가라면 서러울 문서지옥에서, 7년차 지방공무원이 "업무 중"에 만듦." [url=https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7.9천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e28]:
+      - img "좋아요"
+      - text: "114"
+    - button [ref=e29]:
+      - img "답글"
+      - text: "10"
+    - button [ref=e30]:
+      - img "리포스트"
+      - text: "26"
+    - button [ref=e31]:
+      - img "공유하기"
+      - text: "25"
+    - button "정렬더 보기" [ref=e32]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e33]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e35]
+    - button "GIF 추가" [ref=e36]
+    - button "작성 도구 확장" [ref=e37]
+  - generic [ref=e38]:
+    - link [ref=e39]
+    - button [ref=e43]:
+      - img "더 보기"
+    - link [ref=e45]
+    - button [ref=e46]:
+      - img "좋아요"
+      - text: "28"
+    - button [ref=e47]:
+      - img "답글"
+    - button [ref=e48]:
+      - img "리포스트"
+      - text: "4"
+    - button [ref=e49]:
+      - img "공유하기"
+      - text: "23"
+  - generic [ref=e50]:
+    - link [ref=e51]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e54]:
+      - img "더 보기"
+    - button [ref=e55]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e56]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e57]:
+      - img "리포스트"
+    - button [ref=e58]:
+      - img "공유하기"
+  - generic [ref=e59]:
+    - link [ref=e60]
+    - button [ref=e63]:
+      - img "더 보기"
+    - button [ref=e64]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e65]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e66]:
+      - img "리포스트"
+    - button [ref=e67]:
+      - img "공유하기"
+  - generic [ref=e68]:
+    - link [ref=e69]:
+      - image "tofukyung님의 프로필 사진"
+    - link "tofukyung" [ref=e70]
+    - link "2026년 7월 30일 목요일 오후 6:00" [ref=e71]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e72]:
+      - img "더 보기"
+    - text: "AI계의 충주맨처럼 고속으로 조만간 올라가셔야 맞다고 생각합네다"
+    - button [ref=e73]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e74]:
+      - img "답글"
+    - button [ref=e75]:
+      - img "리포스트"
+    - button [ref=e76]:
+      - img "공유하기"
+  - generic [ref=e77]:
+    - link [ref=e78]:
+      - image "uumpengsu님의 프로필 사진"
+    - link "uumpengsu" [ref=e79]
+    - link "2026년 7월 30일 목요일 오후 6:20" [ref=e80]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e81]:
+      - img "더 보기"
+    - text: "류주임님은 진짜.. 어디까지 가려고허시는거에요~~"
+    - button [ref=e82]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e83]:
+      - img "답글"
+    - button [ref=e84]:
+      - img "리포스트"
+    - button [ref=e85]:
+      - img "공유하기"
+  - generic [ref=e86]:
+    - link [ref=e87]:
+      - image "seonseok님의 프로필 사진"
+    - link "seonseok" [ref=e88]
+    - link "2026년 7월 31일 금요일 오후 4:50" [ref=e89]: "2026-07-31"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e90]:
+      - img "더 보기"
+    - text: "휴 저희기관은 ocx기반 기안기라 안되네요ㅠ"
+    - button [ref=e91]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e92]:
+      - img "답글"
+    - button [ref=e93]:
+      - img "리포스트"
+    - button [ref=e94]:
+      - img "공유하기"
+  - generic [ref=e100]:
+    - link [ref=e101]:
+      - image "ykh_07_19님의 프로필 사진"
+    - link "ykh_07_19" [ref=e102]
+    - link "2026년 7월 30일 목요일 오후 3:47" [ref=e103]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e104]:
+      - img "더 보기"
+    - text: "오오 ㅋㅋㅋㅋ 감사합니다"
+    - button [ref=e105]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e106]:
+      - img "답글"
+    - button [ref=e107]:
+      - img "리포스트"
+    - button [ref=e108]:
+      - img "공유하기"
+  - generic [ref=e109]:
+    - link [ref=e110]:
+      - image "bosongkim.kr님의 프로필 사진"
+    - link "bosongkim.kr" [ref=e111]
+    - link "2026년 7월 30일 목요일 오후 7:22" [ref=e112]: "2026-07-30"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e113]:
+      - img "더 보기"
+    - text: "Wa…..😮👍🏼"
+    - button [ref=e114]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e115]:
+      - img "답글"
+    - button [ref=e116]:
+      - img "리포스트"
+    - button [ref=e117]:
+      - img "공유하기"
+  - generic [ref=e118]:
+    - link [ref=e119]:
+      - image "_seeynnn_님의 프로필 사진"
+    - link "_seeynnn_" [ref=e120]
+    - link "2026년 10월 1일 목요일 오후 5:33" [ref=e121]: "2026-10-01"
+    - button [ref=e122]:
+      - img "더 보기"
+    - text: "주소와 네트워크망을 확인하라는데ㅠㅠ 어케하나요...?"
+    - button [ref=e123]:
+      - img "좋아요"
+    - button [ref=e124]:
+      - img "답글"
+    - button [ref=e125]:
+      - img "리포스트"
+    - button [ref=e126]:
+      - img "공유하기"
+  - generic [ref=e127]:
+    - link [ref=e128]:
+      - image "k_moonseob님의 프로필 사진"
+    - link "k_moonseob" [ref=e129]
+    - link "2026년 7월 30일 목요일 오후 6:48" [ref=e130]: "2026-07-30"
+    - button [ref=e131]:
+      - img "더 보기"
+    - text: "와......"
+    - button [ref=e132]:
+      - img "좋아요"
+    - button [ref=e133]:
+      - img "답글"
+    - button [ref=e134]:
+      - img "리포스트"
+    - button [ref=e135]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e95]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e96]
+    - listitem:
+      - link "개인정보처리방침" [ref=e97]
+    - listitem:
+      - link "쿠키 정책" [ref=e98]
+- button "만들기" [ref=e99]:
+  - img "만들기"
+=== DONE ===
+[ok | 17358ms]

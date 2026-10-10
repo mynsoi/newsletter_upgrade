@@ -1,0 +1,187 @@
+URL: https://www.linkedin.com/posts/steve0530_ai-%ED%8C%80%EC%9B%90-8%EB%AA%85%EC%9C%BC%EB%A1%9C-%EB%A7%88%EC%BC%80%ED%8C%85%ED%8C%80%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4-ai-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%ED%8C%80-%EB%A7%8C%EB%93%A4%EA%B8%B0-%ED%81%B4%EB%A1%9C%EB%93%9C%EC%99%80-activity-7508991411959091200-Omak
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/steve0530_ai-%ED%8C%80%EC%9B%90-8%EB%AA%85%EC%9C%BC%EB%A1%9C-%EB%A7%88%EC%BC%80%ED%8C%85%ED%8C%80…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/steve0530_ai-%ED%8C%80%EC%9B%90-8%EB%AA%85%EC%9C%BC%EB%A1%9C-%EB%A7%88%EC%BC%80%ED%8C%85%ED%8C%80…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "한성국님의 프로필 보기"
+      - link "한성국• 2촌" [ref=e26]
+      - text: "AI 에이전트로 혼자서도 팀처럼 일할 수 있습니다 9월 25일"
+      - link "한성국 님 인증됨 프로필 2촌" [ref=e27]
+      - button "한성국님 팔로우" [ref=e28]: "팔로우"
+      - button "한성국 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "AI 팀원 8명으로 마케팅팀을 만들었습니다.AI 에이전트 팀 만들기, 클로드와 챗GPT가 알아서 일을 나눕니다.저는 디스코드에 클로드를 연결해 쓰고 있었습니다.그런데 결과를 모아 다음 단계로 넘기는 일은 결국 제 몫이었습니다.❶ 버즈가 뭔가요?트위터 창업자 잭 도시의 회사 블록이 무료로 공개한 메신저입니다.슬랙처럼 생겼는데, AI도 팀원으로 채널에 들어옵니다.❷ 디스코드 클로드 채널과 뭐가 다른가요?디스코드: 클로드 하나가 에이전트를 차례로 불러 처리 버즈: 에이전트마다 계정이 있고, 팀장이 팀원을 멘션해 일을 나눔 일이 넘어가는 과정이 채팅창에 그대로 보입니다.❸ 팀장은 챗GPT, 팀원은 클로드로 두세요 챗GPT 팀장이 컴퓨터 사용 기능으로 제 유튜브와 파일을 직접 봅니다.그리고 클로드 팀원에게 분석·기획·카피를 나눠 맡깁니다.❹ 한 줄 지시로 결과까지 받습니다 교육팀에 운영 전략 정리를 맡겼습니다.팀원들이 나눠 쓴 결과를 4분 만에 노션 페이지 하나로 정리해 보고했습니다.❺ 세팅할 때 이 두 가지만 지키세요 ① 기본 에이전트의 지시문은 내 업무에 맞게 고치기 ② 팀마다 다른 에이전트로 구성하기 혼자서도 팀처럼 일할 수 있습니다.설치 과정과 두 팀의 설명·지시문을 정리한 세팅 가이드,받아보고 싶은 분들 아래 가이드를 다운 받아주세요!👇"
+        - link "https://lnkd.in/gsWtuD_e 열기" [ref=e30]: "https://lnkd.in/gsWtuD_e"
+        - text: "사용 방법 영상을 보고 싶은 분들은 저요 남겨주세요!✋"
+      - region "Video Player" [ref=e32]:
+        - application
+      - button "동영상 재생" [ref=e34]
+      - button "반응 버튼 상태: 반응 없음" [ref=e35]: "36"
+      - button "댓글" [ref=e36]: "21"
+      - button "퍼가기" [ref=e37]: "4"
+      - link "보내기" [ref=e38]
+      - link "반응 36" [ref=e39]:
+        - list:
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e40]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e41]
+      - button "GIF 선택 도구 열기" [ref=e42]
+      - button "사진 공유" [ref=e43]
+    - link [ref=e44]:
+      - link "Ye Hwan Lim 님의 반응: 추천" [ref=e45]
+      - link "Yongseok Lee 님의 반응: 추천" [ref=e46]
+      - link "수연 박 님의 반응: 추천" [ref=e47]
+      - link "효은 최 님의 반응: 추천" [ref=e48]
+      - link "Bolam (보람) YI 님의 반응: 추천" [ref=e49]
+      - link "Young-sik Sohn 님의 반응: 추천" [ref=e50]
+      - link "Hyelim (Michelle) Jung 님의 반응: 추천" [ref=e51]
+      - link "hyeon Im 님의 반응: 추천" [ref=e52]
+      - link "반응 모두 보기" [ref=e53]
+    - button "관련순" [ref=e54]
+    - link [ref=e55]:
+      - image "박성원님의 프로필 보기"
+    - link "박성원 님 인증됨 프로필 2촌 Strategy Analyst, CEO Office @ NOL UNIVERSE | ex-Founder" [ref=e56]
+    - text: "2주"
+    - button "박성원님 팔로우" [ref=e57]: "팔로우"
+    - button "박성원 님의 댓글에 대한 옵션 더 보기" [ref=e58]
+    - text: "저요! 배우고 싶습니다!"
+    - button [ref=e59]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e60]
+    - text: "1 관련순 에 표시되지 않는 답변도 있습니다. 답변을 모두 보려면  최근순 을 선택하세요."
+    - link [ref=e61]:
+      - img "DongHwan (진동환) Jin님의 프로필 보기"
+    - link "DongHwan (진동환) Jin 님 인증됨 프로필 2촌 CEO @ MyMeta | Prevent Downtime & Upskill Workers with AI + XR" [ref=e62]
+    - text: "2주"
+    - button "DongHwan (진동환) Jin님 팔로우" [ref=e63]: "팔로우"
+    - button "DongHwan (진동환) Jin 님의 댓글에 대한 옵션 더 보기" [ref=e64]
+    - text: "저요!! 배우고 싶습니다"
+    - button [ref=e65]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e66]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e67]
+    - text: "관련순 에 표시되지 않는 답변도 있습니다. 답변을 모두 보려면  최근순 을 선택하세요."
+    - link [ref=e68]:
+      - image "BYONGUG SON님의 프로필 보기"
+    - link "BYONGUG SON 님 프리미엄 프로필 3촌 이상 Strategic Thinker | Globally Minded Business Professional" [ref=e69]
+    - text: "2주"
+    - button "BYONGUG SON님 팔로우" [ref=e70]: "팔로우"
+    - button "BYONGUG SON 님의 댓글에 대한 옵션 더 보기" [ref=e71]
+    - text: "저두요."
+    - button [ref=e72]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e73]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e74]
+    - text: "관련순 에 표시되지 않는 답변도 있습니다. 답변을 모두 보려면  최근순 을 선택하세요."
+    - link [ref=e75]:
+      - image "SaeYoon OH님의 프로필 보기"
+    - link "SaeYoon OH 님 인증됨 프로필 2촌 FP&A | Financial Strategy | Financial Analyst | Business Analyst" [ref=e76]
+    - text: "2주"
+    - button "SaeYoon OH님 팔로우" [ref=e77]: "팔로우"
+    - button "SaeYoon OH 님의 댓글에 대한 옵션 더 보기" [ref=e78]
+    - text: "저도 배우고 싶습니다"
+    - button [ref=e79]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e80]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e81]
+    - text: "관련순 에 표시되지 않는 답변도 있습니다. 답변을 모두 보려면  최근순 을 선택하세요."
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e82]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e83]
+      - link "웹접근성" [ref=e84]
+      - link "고객센터" [ref=e85]
+      - button "개인정보와 약관" [ref=e86]
+      - link "광고 선택" [ref=e87]
+      - link "광고" [ref=e88]
+      - button "비즈니스서비스" [ref=e89]
+      - link "LinkedIn 앱 다운로드" [ref=e90]
+      - link "더보기" [ref=e91]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - image "Hyunwoo Joo"
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e92]
+    - button "메시지 메뉴 열기" [ref=e94]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e95]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e96]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[ok | 6687ms]

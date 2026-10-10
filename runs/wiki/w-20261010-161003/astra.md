@@ -1,0 +1,1 @@
+{"name":"AI로 끝낸 일","thesis":"AI 활용의 성과는 구독 수나 요청 횟수보다 실제로 해결한 문제와 끝낸 일로 살펴야 한다. 일을 시작하기 쉬워진 이점을 누리면서도, 답을 거듭 생성하고 기다리는 재미가 업무의 진전으로 이어지는지 돌아보자.","sources":["originals/linkedin/22.md","originals/linkedin/26.md"]}

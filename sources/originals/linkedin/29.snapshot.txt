@@ -1,0 +1,140 @@
+URL: https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-ugcPost-7506527931255394304-FAx6/]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Jason Song님의 프로필 보기"
+      - link "Jason Song• 2촌" [ref=e26]
+      - text: "Rsupport Recruitment Lead, Sr. Tech Recruiter 9월 18일 • 수정함"
+      - link "Jason Song 님 인증됨 프로필 2촌" [ref=e27]
+      - button "Jason Song님 팔로우" [ref=e28]: "팔로우"
+      - button "Jason Song 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - paragraph:
+        - text: "easy IT, easy LIFE   Rsupport 🌐안녕하세요, 알서포트 채용대장 제이쓴입니다. 👋와… 4개월 만입니다 😅그동안 피드가 조용했죠? 이유는 하나입니다. 글 쓸 시간에 그냥 만들고 있었습니다 🔨숫자 보고 저도 놀랐는데요. Bridge Now가 2월에 시작해서 지금까지 커밋이  3,989개 인데, 그중  1,988개가 지난 4개월에 찍혔더라고요. 딱 절반입니다. 조용했던 4개월이 제일 바빴던 셈이죠 ㅎㅎ[그동안 뭘 했냐면요] 🏗️채용이 입사로 끝나는 게 아니더라고요.• 조직개편·인사발령·겸직·전배 — \"이 사람 어느 조직 소속이지?\"가 흔들리면 앞단의 채용 기록까지 같이 흔들립니다 😵 • HC/TO 관리 — 현원이랑 정원을 월별로. 이게 은근 지옥이었어요 • 사내 서버로 이전 — 개발은 Vercel, 운영은 사내 온프레미스 2단으로 • 제품 매뉴얼 221장 — 화면마다 캡처 뜨고 번호 붙여서 설명 달았습니다. 이거 진짜 오래 걸렸어요[이건 좀 자랑하고 싶은데요] 🤭비대면 면접을 붙이면서  저희 회사 제품인 RemoteMeeting API를 받아서 직접 연동했습니다.일정 확정 버튼 누르면 → 회의방이 알아서 생성되고 → 면접관한테는 호스트 링크, 후보자한테는 참가 링크가 각각 나갑니다. 사람이 회의방 만들고 링크 복사해서 붙여넣던 걸 통째로 들어냈어요.생각해보면 좀 웃긴데요 ㅋㅋ  우리 회사가 만드는 제품을, 우리 회사 채용팀이, 우리가 만든 시스템에 붙여서 씁니다. 사내 API 문서 받아서 인증 붙이고 에러 케이스 뚫는 거… 비개발자가 이걸 하고 있더라고요 😂[클라라랑 일하는 방식] 🤝제 AI 파트너 이름은 '클라라'입니다. 예전 글에도 몇 번 등장했죠.일하는 방식은 단순합니다. 저는 채용을 알고, 클라라는 코드를 압니다.제가 \"이런 게 필요한데\" 하면 클라라가 경우의 수를 되묻습니다. \"이 경우엔 어떻게 할까요?\" 저는 실무 기준으로 자릅니다. 그렇게 만들어진 걸 제가 직접 써보고 틀린 걸 짚습니다.재밌는 건  서로 잡아준다 는 거예요.조직 이동 기능 만들 때 클라라가 \"일부 구성원은 예외로 두는 게 안전하다\"고 제안했는데, 제가 막았습니다. 실무에선 조직이 움직이면  전원이 따라가야  하거든요. 예외를 두는 순간 소속 없는 사람이 생깁니다. 반대 경우도 많았고요. 오늘만 해도 클라라가 \"이건 버그 같다\"며 고치려던 걸 제가 멈췄습니다. 알고 보니 제가 예전에 그렇게 설계한 거였어요 😅결정은 사람이, 구현은 AI가. 이 경계가 흐려지면 둘 다 망가집니다.[그러다 갑자기…] 😨회사에서 'AI Native SDLC 기준' 이라는 게 내려왔습니다. AI로 개발할 때 지켜야 할 기준이요. 그리고 저희 제품이  점검 대상 이 됐습니다.솔직히요? 등에 땀 났습니다 💦 비개발자가 만든 건데 개발 기준으로 뜯어본다니까요.[근데 결과가 재밌었습니다] 👀세 갈래로 갈리더라고요.① 이미 되어 있던 것 — 변경 이력을 지우지 않고 전부 쌓는 구조, 관리자가 뭘 했는지 남기는 기록, 권한 분리. 채용하면서 \"나중에 누가 물어보면 답할 수 있어야지\" 하는 생각으로 만든 것들이 그대로 기준과 맞아떨어졌습니다.② 오히려 앞서 있던 것 — 몇 개는 기준이 요구하는 것보다 더 촘촘했어요. 실무에서 아쉬웠던 걸 그대로 넣었더니 그렇게 됐더라고요 😎③ 부족했던 것 — 당연히 있었죠. 지적받은 대로 다 채웠습니다.[채운 것들] 🔒• 관리자 화면  인쇄·복사 차단 — 근데  붙여넣기는 열어뒀습니다. 이력서 링크, 과제 링크는 계속 붙여넣어야 하잖아요. 나가는 길만 막고 들어오는 길은 그대로 😉 • 같은 계정은 한 곳에서만 — 다른 데서 로그인하면 이전 창이 끊기고, 왜 끊겼는지도 알려줍니다 • 30일 미접속 계정 잠금, 매달 본인에게 이용내역 발송 (본인한테만 갑니다. 남의 접속기록 모아두면 그게 또 새로운 개인정보 보관처가 되니까요) • 기록 위·변조 확인 — 하루치 로그를 지문으로 굳혀놓고 매일 다시 검사합니다 • 성능 목표를 숫자로 박고 실제로 측정 — 감으로 \"빠른데요?\" 말고요 📊지금 테스트가  3,646건  돌아갑니다. 기능 하나 붙일 때마다 \"이거 깨지면 내가 어떻게 알지?\" 부터 정하고 시작했어요.[다시 한번 이해하게 된 부분] 💡AI로 만드는 게 어려운 게 아니었습니다.만드는 건 빨라요. 미친듯이 빠릅니다 🚀 진짜 어려운 건  만든 게 제대로 도는지 확인하는 일, 그리고  왜 그렇게 만들었는지 남기는 일 이더라고요. 이 둘을 건너뛰면 빨리 만든 만큼 빨리 무너집니다.5개월 전 회고에 제가 이렇게 썼더라고요.\"기능이 있다는 것보다 믿고 맡길 수 있는가가 중요하다\"이번 4개월은 그 문장에 답하는 시간이었던 것 같습니다 😌[다음은요] 🎯9월 22일, AI Native SDLC 첫 회의 참여가 있습니다. 실사용 여부를 검토받는 자리예요.7개월을 만들었는데 이제야 \"써도 되겠다\"를 확인받으러 갑니다. 결과가 어떻든 다녀와서 전하겠습니다!"
+        - link "해시태그 보기: #알서포트" [ref=e30]: "#알서포트"
+        - link "해시태그 보기: #ainativehr" [ref=e31]: "#AInativeHR"
+        - link "해시태그 보기: #hrtech" [ref=e32]: "#HRTech"
+        - link "해시태그 보기: #ai협업" [ref=e33]: "#AI협업"
+        - link "해시태그 보기: #채용운영" [ref=e34]: "#채용운영"
+        - link "해시태그 보기: #비개발자개발" [ref=e35]: "#비개발자개발"
+        - link "해시태그 보기: #remotemeeting" [ref=e36]: "#RemoteMeeting"
+      - link [ref=e37]:
+        - image "이미지 보기"
+      - link [ref=e38]:
+        - image "이미지 보기"
+      - link [ref=e39]:
+        - image "이미지 보기"
+      - link [ref=e40]:
+        - image "이미지 보기"
+      - link "더 많은 이미지 2개" [ref=e41]: "+2"
+      - button "반응 버튼 상태: 반응 없음" [ref=e42]: "11"
+      - button "댓글" [ref=e43]
+      - button "퍼가기" [ref=e44]
+      - link "보내기" [ref=e45]
+      - link "반응 11" [ref=e46]:
+        - list:
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e47]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e48]
+      - button "GIF 선택 도구 열기" [ref=e49]
+      - button "사진 공유" [ref=e50]
+    - link [ref=e51]:
+      - link "Ho Lee 님의 반응: 추천" [ref=e52]
+      - link "Chae Hyeon Kim 님의 반응: 추천" [ref=e53]
+      - link "Sehui Jeong 님의 반응: 추천" [ref=e54]
+      - link "성철 홍 님의 반응: 추천" [ref=e55]
+      - link "성현 윤 님의 반응: 추천" [ref=e56]
+      - link "Seungmin Kim 님의 반응: 추천" [ref=e57]
+      - link "혜지 김 님의 반응: 추천" [ref=e58]
+      - link "Donghee Kim 님의 반응: 추천" [ref=e59]
+      - link "반응 모두 보기" [ref=e60]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e61]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e62]
+      - link "웹접근성" [ref=e63]
+      - link "고객센터" [ref=e64]
+      - button "개인정보와 약관" [ref=e65]
+      - link "광고 선택" [ref=e66]
+      - link "광고" [ref=e67]
+      - button "비즈니스서비스" [ref=e68]
+      - link "LinkedIn 앱 다운로드" [ref=e69]
+      - link "더보기" [ref=e70]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 5705ms]

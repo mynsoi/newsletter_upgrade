@@ -1,0 +1,7099 @@
+URL: https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ
+✔︎ Opened a new tab and set it active: tabs[0], page → 300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요. (https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ)
+=== SNAPSHOT 1 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "overtime.sam님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "overtime.sam" [ref=e23]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e24]: "2026-09-17"
+    - button [ref=e25]:
+      - img "더 보기"
+    - text: "300명이 참여한 사내 AI 경연대회에서\n직원 투표 1등으로 특별상을 받았어요.만든 건 지식 관리 플랫폼이에요.\n조직에 흩어져 있는 지식을\n한곳으로 모아 정리해주는 서비스예요.왜 이걸 만들게 되었고,\n동료들이 왜 선택해주었는지 이야기해볼게요. 1/10"
+    - group "Video player"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e32] [focused]
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e38]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e39]: "2026-09-17"
+    - button [ref=e40]:
+      - img "더 보기"
+    - text: "1) \"지난번에 그거 어떻게 하기로 했었죠?\"회사에서 정말 자주 듣는 말이에요.예를 들면 취소 기준이\n위키에는 24시간, 슬랙에는 12시간.\n어느 게 지금도 유효한 건지 문서만 봐서는 몰라요.결국 담당자한테 물어봐요.\n근데 담당자도 바로 답을 못 해요.\n결정 하나하나를 어떻게 다 기억하겠어요.\n그 사람도 다시 찾아봐야 해요.이 시간이 매일 반복돼요. 2/10"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e47]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e48]: "2026-09-17"
+    - button [ref=e49]:
+      - img "더 보기"
+    - text: "2) AI한테도 물어봤어요. 똑같더라고요.AI는 문서를 잘 찾아요.\n근데 24시간이랑 12시간 중에\n뭐가 지금도 유효한 결정인지는 몰라요.\n둘 중 하나를 골라서 답하는데\n그게 이미 폐기된 쪽일 때가 있어요.담당자가 다시 찾아보는 것도,\nAI가 폐기된 결정으로 답하는 것도 이유는 같아요.\n유효한 결정만 모아둔, 모두가 믿을 수 있는 기준 문서가 없어서요.\n그게 있으면 사람도 AI도 그 문서 하나만 보면 돼요. 3/10"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e56]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e57]: "2026-09-17"
+    - button [ref=e58]:
+      - img "더 보기"
+    - text: "3) 제 업무에 먼저 적용해봤어요.\n유효한 결정만 기준 문서 하나로 모아두고, AI한테는 그것만 보고 일하게 했어요.\n결과물을 믿을 수 있으니까 AI한테 맡기는 일이 늘었고, 일도 꽤 빨라졌어요.\n이게 세컨드브레인이에요.여기서 욕심이 났어요. 이걸 조직 전체에 퍼뜨리면 어떨까.근데 다들 안 하더라고요.\n사내 강연도 하고, 만드는 법도 쉽게 풀어서 알려줬는데도요.\n세컨드브레인을 갖추려면 클로드 코드, 스킬, MCP 같은 도구부터 직접 배워야 하거든요.\n당장 좋아지는 것보다 배우는 비용이 더 커 보이는 거예요. 4/10"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e65]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e66]: "2026-09-17"
+    - button [ref=e67]:
+      - img "더 보기"
+    - text: "4) 그래서 만든 게 지식 관리 플랫폼이에요.\n클로드 코드니 MCP니 몰라도 돼요. 그냥 쓰면 돼요.슬랙이든 위키든 회의든 코드든, 여기저기 흩어진 결정을 알아서 모아 와요.\n그중에 어떤 걸 기준 문서에 남길지만 고르면 되고요.\n문서 쓸 일이 생기면 안에 있는 AI한테 시켜요.\n조사도 해 오고, 그 내용으로 문서도 바로 고쳐 줘요.이렇게 한 사람이 먼저 기준 문서를 정리해두면\n팀 전체는 따로 정리할 것 없이 AI를 쓰기만 하면 돼요.\n믿을 수 있는 문서 위에서 답하니까요.근데 그 첫 정리를 해줄 사람이 필요했어요. 5/10"
+    - link [ref=e68]
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e75]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e76]: "2026-09-17"
+    - button [ref=e77]:
+      - img "더 보기"
+    - text: "5) 그 사람은 이미 있었어요. 제품 PM이요.\n\"어떻게 됐죠?\"를 늘 받는 사람이니까요.PM이 쓰고 싶은 도구로 만들자. 이 제품이 되고 안 되고의 핵심이라고 봤어요.\n첫 정리를 해줄 사람이 있어야 그다음이 있으니까요.그래서 회의록 정리 기능을 제공했어요.\n회사 결정은 대부분 회의에서 나와요.\n녹음 하나로 그 맥락이 플랫폼에 들어오고,\n회의 끝날 때마다 PM이 30분씩 하던 일도 사라져요.\n쌓인 조직 지식을 아는 AI가 회의록을 정리하니까 용어도 맥락도 제대로 잡히고요.회의록이 정리되면, 그 안의 결정 사항을 기준 문서에 반영할지 PM한테 물어봐요.\n\"취소 기준 12시간으로 확정\" 같은 거요.\nPM은 확인하고 저장만 누르면 돼요.\n그 순간 기준 문서의 조항이 바뀌고, 왜 바뀌었는지 이력까지 남아요.\n회의를 했을 뿐인데 기준 문서까지 갱신되는 거예요. 6/10"
+    - link [ref=e78]
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e85]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e86]: "2026-09-17"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "6) 이제 \"어떻게 됐죠?\"를 담당자한테 안 물어봐요.\n플랫폼에 연결된 AI한테 물으면 그 기준 문서를 근거로 답하거든요.담당자는 확인해주느라 쓰던 시간이 줄고,\n나머지는 답을 기다리던 시간이 줄었어요.근데 진짜 달라진 건 AI를 쓰는 양이에요.\n정리된 지식 위에서는 누구나 AI를 믿고 쓸 수 있으니까\n기획서든 다른 문서든 AI한테 맡기는 일이 많이 늘었어요.\n써본 동료들이 이걸 제일 크게 느꼈던 것 같고,\n저를 선택해준 이유도 여기 있다고 봐요. 7/10"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e32] [focused]
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e38]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e39]: "2026-09-17"
+    - button [ref=e40]:
+      - img "더 보기"
+    - text: "1) \"지난번에 그거 어떻게 하기로 했었죠?\"회사에서 정말 자주 듣는 말이에요.예를 들면 취소 기준이\n위키에는 24시간, 슬랙에는 12시간.\n어느 게 지금도 유효한 건지 문서만 봐서는 몰라요.결국 담당자한테 물어봐요.\n근데 담당자도 바로 답을 못 해요.\n결정 하나하나를 어떻게 다 기억하겠어요.\n그 사람도 다시 찾아봐야 해요.이 시간이 매일 반복돼요. 2/10"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e47]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e48]: "2026-09-17"
+    - button [ref=e49]:
+      - img "더 보기"
+    - text: "2) AI한테도 물어봤어요. 똑같더라고요.AI는 문서를 잘 찾아요.\n근데 24시간이랑 12시간 중에\n뭐가 지금도 유효한 결정인지는 몰라요.\n둘 중 하나를 골라서 답하는데\n그게 이미 폐기된 쪽일 때가 있어요.담당자가 다시 찾아보는 것도,\nAI가 폐기된 결정으로 답하는 것도 이유는 같아요.\n유효한 결정만 모아둔, 모두가 믿을 수 있는 기준 문서가 없어서요.\n그게 있으면 사람도 AI도 그 문서 하나만 보면 돼요. 3/10"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e56]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e57]: "2026-09-17"
+    - button [ref=e58]:
+      - img "더 보기"
+    - text: "3) 제 업무에 먼저 적용해봤어요.\n유효한 결정만 기준 문서 하나로 모아두고, AI한테는 그것만 보고 일하게 했어요.\n결과물을 믿을 수 있으니까 AI한테 맡기는 일이 늘었고, 일도 꽤 빨라졌어요.\n이게 세컨드브레인이에요.여기서 욕심이 났어요. 이걸 조직 전체에 퍼뜨리면 어떨까.근데 다들 안 하더라고요.\n사내 강연도 하고, 만드는 법도 쉽게 풀어서 알려줬는데도요.\n세컨드브레인을 갖추려면 클로드 코드, 스킬, MCP 같은 도구부터 직접 배워야 하거든요.\n당장 좋아지는 것보다 배우는 비용이 더 커 보이는 거예요. 4/10"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e65]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e66]: "2026-09-17"
+    - button [ref=e67]:
+      - img "더 보기"
+    - text: "4) 그래서 만든 게 지식 관리 플랫폼이에요.\n클로드 코드니 MCP니 몰라도 돼요. 그냥 쓰면 돼요.슬랙이든 위키든 회의든 코드든, 여기저기 흩어진 결정을 알아서 모아 와요.\n그중에 어떤 걸 기준 문서에 남길지만 고르면 되고요.\n문서 쓸 일이 생기면 안에 있는 AI한테 시켜요.\n조사도 해 오고, 그 내용으로 문서도 바로 고쳐 줘요.이렇게 한 사람이 먼저 기준 문서를 정리해두면\n팀 전체는 따로 정리할 것 없이 AI를 쓰기만 하면 돼요.\n믿을 수 있는 문서 위에서 답하니까요.근데 그 첫 정리를 해줄 사람이 필요했어요. 5/10"
+    - link [ref=e68]
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e75]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e76]: "2026-09-17"
+    - button [ref=e77]:
+      - img "더 보기"
+    - text: "5) 그 사람은 이미 있었어요. 제품 PM이요.\n\"어떻게 됐죠?\"를 늘 받는 사람이니까요.PM이 쓰고 싶은 도구로 만들자. 이 제품이 되고 안 되고의 핵심이라고 봤어요.\n첫 정리를 해줄 사람이 있어야 그다음이 있으니까요.그래서 회의록 정리 기능을 제공했어요.\n회사 결정은 대부분 회의에서 나와요.\n녹음 하나로 그 맥락이 플랫폼에 들어오고,\n회의 끝날 때마다 PM이 30분씩 하던 일도 사라져요.\n쌓인 조직 지식을 아는 AI가 회의록을 정리하니까 용어도 맥락도 제대로 잡히고요.회의록이 정리되면, 그 안의 결정 사항을 기준 문서에 반영할지 PM한테 물어봐요.\n\"취소 기준 12시간으로 확정\" 같은 거요.\nPM은 확인하고 저장만 누르면 돼요.\n그 순간 기준 문서의 조항이 바뀌고, 왜 바뀌었는지 이력까지 남아요.\n회의를 했을 뿐인데 기준 문서까지 갱신되는 거예요. 6/10"
+    - link [ref=e78]
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e85]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e86]: "2026-09-17"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "6) 이제 \"어떻게 됐죠?\"를 담당자한테 안 물어봐요.\n플랫폼에 연결된 AI한테 물으면 그 기준 문서를 근거로 답하거든요.담당자는 확인해주느라 쓰던 시간이 줄고,\n나머지는 답을 기다리던 시간이 줄었어요.근데 진짜 달라진 건 AI를 쓰는 양이에요.\n정리된 지식 위에서는 누구나 AI를 믿고 쓸 수 있으니까\n기획서든 다른 문서든 AI한테 맡기는 일이 많이 늘었어요.\n써본 동료들이 이걸 제일 크게 느꼈던 것 같고,\n저를 선택해준 이유도 여기 있다고 봐요. 7/10"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - text: "2) AI한테도 물어봤어요. 똑같더라고요.AI는 문서를 잘 찾아요.\n근데 24시간이랑 12시간 중에\n뭐가 지금도 유효한 결정인지는 몰라요.\n둘 중 하나를 골라서 답하는데\n그게 이미 폐기된 쪽일 때가 있어요.담당자가 다시 찾아보는 것도,\nAI가 폐기된 결정으로 답하는 것도 이유는 같아요.\n유효한 결정만 모아둔, 모두가 믿을 수 있는 기준 문서가 없어서요.\n그게 있으면 사람도 AI도 그 문서 하나만 보면 돼요. 3/10"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e56]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e57]: "2026-09-17"
+    - button [ref=e58]:
+      - img "더 보기"
+    - text: "3) 제 업무에 먼저 적용해봤어요.\n유효한 결정만 기준 문서 하나로 모아두고, AI한테는 그것만 보고 일하게 했어요.\n결과물을 믿을 수 있으니까 AI한테 맡기는 일이 늘었고, 일도 꽤 빨라졌어요.\n이게 세컨드브레인이에요.여기서 욕심이 났어요. 이걸 조직 전체에 퍼뜨리면 어떨까.근데 다들 안 하더라고요.\n사내 강연도 하고, 만드는 법도 쉽게 풀어서 알려줬는데도요.\n세컨드브레인을 갖추려면 클로드 코드, 스킬, MCP 같은 도구부터 직접 배워야 하거든요.\n당장 좋아지는 것보다 배우는 비용이 더 커 보이는 거예요. 4/10"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e65]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e66]: "2026-09-17"
+    - button [ref=e67]:
+      - img "더 보기"
+    - text: "4) 그래서 만든 게 지식 관리 플랫폼이에요.\n클로드 코드니 MCP니 몰라도 돼요. 그냥 쓰면 돼요.슬랙이든 위키든 회의든 코드든, 여기저기 흩어진 결정을 알아서 모아 와요.\n그중에 어떤 걸 기준 문서에 남길지만 고르면 되고요.\n문서 쓸 일이 생기면 안에 있는 AI한테 시켜요.\n조사도 해 오고, 그 내용으로 문서도 바로 고쳐 줘요.이렇게 한 사람이 먼저 기준 문서를 정리해두면\n팀 전체는 따로 정리할 것 없이 AI를 쓰기만 하면 돼요.\n믿을 수 있는 문서 위에서 답하니까요.근데 그 첫 정리를 해줄 사람이 필요했어요. 5/10"
+    - link [ref=e68]
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e75]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e76]: "2026-09-17"
+    - button [ref=e77]:
+      - img "더 보기"
+    - text: "5) 그 사람은 이미 있었어요. 제품 PM이요.\n\"어떻게 됐죠?\"를 늘 받는 사람이니까요.PM이 쓰고 싶은 도구로 만들자. 이 제품이 되고 안 되고의 핵심이라고 봤어요.\n첫 정리를 해줄 사람이 있어야 그다음이 있으니까요.그래서 회의록 정리 기능을 제공했어요.\n회사 결정은 대부분 회의에서 나와요.\n녹음 하나로 그 맥락이 플랫폼에 들어오고,\n회의 끝날 때마다 PM이 30분씩 하던 일도 사라져요.\n쌓인 조직 지식을 아는 AI가 회의록을 정리하니까 용어도 맥락도 제대로 잡히고요.회의록이 정리되면, 그 안의 결정 사항을 기준 문서에 반영할지 PM한테 물어봐요.\n\"취소 기준 12시간으로 확정\" 같은 거요.\nPM은 확인하고 저장만 누르면 돼요.\n그 순간 기준 문서의 조항이 바뀌고, 왜 바뀌었는지 이력까지 남아요.\n회의를 했을 뿐인데 기준 문서까지 갱신되는 거예요. 6/10"
+    - link [ref=e78]
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e85]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e86]: "2026-09-17"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "6) 이제 \"어떻게 됐죠?\"를 담당자한테 안 물어봐요.\n플랫폼에 연결된 AI한테 물으면 그 기준 문서를 근거로 답하거든요.담당자는 확인해주느라 쓰던 시간이 줄고,\n나머지는 답을 기다리던 시간이 줄었어요.근데 진짜 달라진 건 AI를 쓰는 양이에요.\n정리된 지식 위에서는 누구나 AI를 믿고 쓸 수 있으니까\n기획서든 다른 문서든 AI한테 맡기는 일이 많이 늘었어요.\n써본 동료들이 이걸 제일 크게 느꼈던 것 같고,\n저를 선택해준 이유도 여기 있다고 봐요. 7/10"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]
+    - button [ref=e58]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - link [ref=e68]
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e75]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e76]: "2026-09-17"
+    - button [ref=e77]:
+      - img "더 보기"
+    - text: "5) 그 사람은 이미 있었어요. 제품 PM이요.\n\"어떻게 됐죠?\"를 늘 받는 사람이니까요.PM이 쓰고 싶은 도구로 만들자. 이 제품이 되고 안 되고의 핵심이라고 봤어요.\n첫 정리를 해줄 사람이 있어야 그다음이 있으니까요.그래서 회의록 정리 기능을 제공했어요.\n회사 결정은 대부분 회의에서 나와요.\n녹음 하나로 그 맥락이 플랫폼에 들어오고,\n회의 끝날 때마다 PM이 30분씩 하던 일도 사라져요.\n쌓인 조직 지식을 아는 AI가 회의록을 정리하니까 용어도 맥락도 제대로 잡히고요.회의록이 정리되면, 그 안의 결정 사항을 기준 문서에 반영할지 PM한테 물어봐요.\n\"취소 기준 12시간으로 확정\" 같은 거요.\nPM은 확인하고 저장만 누르면 돼요.\n그 순간 기준 문서의 조항이 바뀌고, 왜 바뀌었는지 이력까지 남아요.\n회의를 했을 뿐인데 기준 문서까지 갱신되는 거예요. 6/10"
+    - link [ref=e78]
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e85]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e86]: "2026-09-17"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "6) 이제 \"어떻게 됐죠?\"를 담당자한테 안 물어봐요.\n플랫폼에 연결된 AI한테 물으면 그 기준 문서를 근거로 답하거든요.담당자는 확인해주느라 쓰던 시간이 줄고,\n나머지는 답을 기다리던 시간이 줄었어요.근데 진짜 달라진 건 AI를 쓰는 양이에요.\n정리된 지식 위에서는 누구나 AI를 믿고 쓸 수 있으니까\n기획서든 다른 문서든 AI한테 맡기는 일이 많이 늘었어요.\n써본 동료들이 이걸 제일 크게 느꼈던 것 같고,\n저를 선택해준 이유도 여기 있다고 봐요. 7/10"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]
+    - button [ref=e58]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]
+    - button [ref=e77]:
+      - img "더 보기"
+    - link [ref=e78]
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e85]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e86]: "2026-09-17"
+    - button [ref=e87]:
+      - img "더 보기"
+    - text: "6) 이제 \"어떻게 됐죠?\"를 담당자한테 안 물어봐요.\n플랫폼에 연결된 AI한테 물으면 그 기준 문서를 근거로 답하거든요.담당자는 확인해주느라 쓰던 시간이 줄고,\n나머지는 답을 기다리던 시간이 줄었어요.근데 진짜 달라진 건 AI를 쓰는 양이에요.\n정리된 지식 위에서는 누구나 AI를 믿고 쓸 수 있으니까\n기획서든 다른 문서든 AI한테 맡기는 일이 많이 늘었어요.\n써본 동료들이 이걸 제일 크게 느꼈던 것 같고,\n저를 선택해준 이유도 여기 있다고 봐요. 7/10"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e124]:
+    - text: "고정됨"
+    - link [ref=e125]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e126]
+    - link "2026년 9월 18일 금요일 오후 1:35" [ref=e127]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e128]:
+      - img "더 보기"
+    - text: "(추가) 댓글 4의 \"첫 정리\"가 헷갈린다는 분이 계셔서 보충해요.플랫폼은 기준 문서 한 벌을 두고, 결정이 생길 때마다 그 문서에 반영하는 방식이에요.기준 문서 없이 새 결정만 쌓아도 새 결정에는 답할 수 있어요.문제는 그 전에 쌓인 지식이에요.기준 문서로 정리된 적이 없으니, 예전 결정은 여전히 사람이 찾아다녀야 해요. 그래서 기준 문서를 처음 한 번은 만들어야 해요. 문서가 얼마 없는 조직은 처음부터 기준 문서에 쌓으면 돼요.문제는 위키, 슬랙에 지식이 수백 개 흩어진 조직이에요. 그래서 문서를 한꺼번에 올려 기준 문서로 만드는 기능을 넣었어요. 문서를 전부 올리면 AI가 주제별로 묶고, 충돌하는 결정을 하나씩 보여줘요.\"취소 기준이 24시간과 12시간, 둘 다 있어요. 어느 쪽을 채택할까요?\"사람은 채택만 하면 되고, 끝까지 채택하면 기준 문서 한 벌이 완성돼요."
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 6 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]
+    - button [ref=e58]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]
+    - button [ref=e77]:
+      - img "더 보기"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]
+    - button [ref=e87]:
+      - img "더 보기"
+    - link [ref=e88]
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e95]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e96]: "2026-09-17"
+    - button [ref=e97]:
+      - img "더 보기"
+    - text: "7) 이 플랫폼이 하루 업무에 녹아들면 회사 안에 제 비서가 생겨요.제가 어떤 문서를 자주 쓰는지, 뭘 어떻게 써달라고 하는지,\n이번 주 일정은 뭐고, 팀이 지금 어떤 프로젝트에 집중하는지.\n전부 이 플랫폼 안에서 일어나는 일이라 AI가 다 알고 있거든요.\"이건 이렇게 써줘\" 한 번 말해주면 다음부터 그렇게 쓰고,\n보고서 틀도, 문장도, 말투도 제 것에 맞춰져요.\n출근하면 오늘 할 일 브리핑이 와 있고,\n회의가 끝나면 회의록으로 기획서를 보완해 둬요. 8/10"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e104]
+    - link "2026년 9월 17일 목요일 오후 12:40" [ref=e105]: "2026-09-17"
+    - button [ref=e106]:
+      - img "더 보기"
+    - text: "8) 이 비서한테 다음으로 맡길 건 실행이에요.앞으로 사람은 지시하고 판단하는 일만 하게 될 거예요.\n그 지시도 매번 하나하나가 아니라\n\"이런 일이 생기면 이렇게 해\" 하는 기준을 세우는 일이 되고요.\n예를 들면 결정이 저장되면 AI가 기획서 초안까지 쓰는 식이에요. 9/10"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e124]:
+    - text: "고정됨"
+    - link [ref=e125]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e126]
+    - link "2026년 9월 18일 금요일 오후 1:35" [ref=e127]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e128]:
+      - img "더 보기"
+    - text: "(추가) 댓글 4의 \"첫 정리\"가 헷갈린다는 분이 계셔서 보충해요.플랫폼은 기준 문서 한 벌을 두고, 결정이 생길 때마다 그 문서에 반영하는 방식이에요.기준 문서 없이 새 결정만 쌓아도 새 결정에는 답할 수 있어요.문제는 그 전에 쌓인 지식이에요.기준 문서로 정리된 적이 없으니, 예전 결정은 여전히 사람이 찾아다녀야 해요. 그래서 기준 문서를 처음 한 번은 만들어야 해요. 문서가 얼마 없는 조직은 처음부터 기준 문서에 쌓으면 돼요.문제는 위키, 슬랙에 지식이 수백 개 흩어진 조직이에요. 그래서 문서를 한꺼번에 올려 기준 문서로 만드는 기능을 넣었어요. 문서를 전부 올리면 AI가 주제별로 묶고, 충돌하는 결정을 하나씩 보여줘요.\"취소 기준이 24시간과 12시간, 둘 다 있어요. 어느 쪽을 채택할까요?\"사람은 채택만 하면 되고, 끝까지 채택하면 기준 문서 한 벌이 완성돼요."
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "in.seng08님의 프로필 사진"
+    - link "in.seng08" [ref=e135]
+    - link "2026년 9월 23일 수요일 오전 8:13" [ref=e136]: "2026-09-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "이거 제가 비슷한걸 만들어서 써봤는데. 구성원들이 ’모두 주인의식 책임감을 가지고 문서관리할 때‘ 유효합니다.. 기술이 중요한 영역이 아니었어요.. ㅎ 좋은 팀은 물론 모두 잘 해줄거라 생각합니다 잘못하면 문서정리 , 관리가 병목이 되기도 하구요 ㅠ"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "20"
+    - button [ref=e139]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e144]
+    - link "2026년 9월 23일 수요일 오전 8:16" [ref=e145]: "2026-09-23"
+    - text: "작성자"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "AI 시대에 해야만 하는 일이죠. 이 방식이 옳을지는 모르겠지만요 ㅎㅎ"
+    - button [ref=e147]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e153]
+    - link "2026년 9월 17일 목요일 오후 6:11" [ref=e154]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "근데 결국 DX가 되어 있어야 모든 지식을 알고있는 AI가 정리를 해줄텐데 그 DX가 안되어있어서 데이터를 쌓고 정리하려고 하면 쓸수가 없는 것 아니에요!?"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e162]
+    - link "2026년 9월 17일 목요일 오후 7:04" [ref=e163]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "말씀하신 DX가 결국 회사의 지식이 데이터로 남아 있냐는 얘기시죠?회사의 지식이 데이터로 존재하지 않으면 데이터로 남게하는게 우선이죠.회사의 지식이 지금 부터 생기는 시작점이라면 지금부터라도 데이터로 쌓이게 하면 되구요.오히려 아직 쌓인 데이터가 없는 쪽이 시작은 쉬워요. 뭐가 지금 유효한지 골라낼 게 없거든요. 처음부터 이 플랫폼 위에 쌓는 구조를 만들면 되니까요."
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e171]
+    - link "2026년 9월 17일 목요일 오후 7:07" [ref=e172]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "우리 조직의 지식을 아는 AI라서 데이터를 잘 정리해준다고 하셔서 지식 데이터화가 안되어 있는 조직인데 데이터가 없는건 아니라 파편화되어있으면 또 다른 구조로  파편화되는게 아닌가 해서요. \n범용적으로 적용하려면 어느정도 가이드가 필요하겠네요"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e180]
+    - link "2026년 9월 17일 목요일 오후 7:19" [ref=e181]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "제가 말한 정리는 흩어진 자료를 모아서 분류하는 게 아니에요. 충분히 잘못 해석 될 수 있겠네요.회의록, 슬랙 대화, 위키 글은 각자 쓰임이 달라서 저장소에 같이 넣을지 말지는 사용자가 선택하는거에요.정리는 그중에서 조직의 정책을 말하는 부분만 뽑아서 문서 하나로 관리하는 걸 뜻해요. SSOT 쇼핑몰을 예로 들면 주문 취소 정책 같은거죠.\n위키엔 24시간, 슬랙엔 12시간이라고 흩어져 있으면 지금 유효한 12시간만 취소 정책 문서에 적어두는 거예요.자료는 그대로 두고, 결정만 한 문서에 모으는 일이에요."
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e189]
+    - link "2026년 9월 17일 목요일 오후 10:08" [ref=e190]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - text: "아 평소 휘발되기 쉬운 데이터들을 모아서 분류한다는 것이군요. 회의록이나 슬랙 대화들은 휘발되어 최신 데이터로 갱신되기 힘드니까.. 이해했습니다!"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 7 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]
+    - button [ref=e58]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]
+    - button [ref=e77]:
+      - img "더 보기"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]
+    - button [ref=e87]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e97]:
+      - img "더 보기"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]
+    - button [ref=e106]:
+      - img "더 보기"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e113]
+    - link "2026년 9월 17일 목요일 오후 12:41" [ref=e114]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - text: "9) AI로 조직이 빨라지려면 조직 지식부터 정리된 구조로 있어야 한다고 봤고,\n이번 대회에서 그 문제를 풀어보고 싶었어요.근데 심사위원 채점으로 뽑는 정식 입상은 못 했어요.\n심사가 당장 낸 정량 효과에 점수를 많이 줬거든요.\n앞으로 조직을 얼마나 바꿀 수 있는지도 평가에 들어갔다면 어땠을까,\n개인적인 아쉬움은 남아요.여러분은 저희 회사 직원이었다면\n저한테 투표하셨을까요? 10/10"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e124]:
+    - text: "고정됨"
+    - link [ref=e125]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e126]
+    - link "2026년 9월 18일 금요일 오후 1:35" [ref=e127]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e128]:
+      - img "더 보기"
+    - text: "(추가) 댓글 4의 \"첫 정리\"가 헷갈린다는 분이 계셔서 보충해요.플랫폼은 기준 문서 한 벌을 두고, 결정이 생길 때마다 그 문서에 반영하는 방식이에요.기준 문서 없이 새 결정만 쌓아도 새 결정에는 답할 수 있어요.문제는 그 전에 쌓인 지식이에요.기준 문서로 정리된 적이 없으니, 예전 결정은 여전히 사람이 찾아다녀야 해요. 그래서 기준 문서를 처음 한 번은 만들어야 해요. 문서가 얼마 없는 조직은 처음부터 기준 문서에 쌓으면 돼요.문제는 위키, 슬랙에 지식이 수백 개 흩어진 조직이에요. 그래서 문서를 한꺼번에 올려 기준 문서로 만드는 기능을 넣었어요. 문서를 전부 올리면 AI가 주제별로 묶고, 충돌하는 결정을 하나씩 보여줘요.\"취소 기준이 24시간과 12시간, 둘 다 있어요. 어느 쪽을 채택할까요?\"사람은 채택만 하면 되고, 끝까지 채택하면 기준 문서 한 벌이 완성돼요."
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "in.seng08님의 프로필 사진"
+    - link "in.seng08" [ref=e135]
+    - link "2026년 9월 23일 수요일 오전 8:13" [ref=e136]: "2026-09-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "이거 제가 비슷한걸 만들어서 써봤는데. 구성원들이 ’모두 주인의식 책임감을 가지고 문서관리할 때‘ 유효합니다.. 기술이 중요한 영역이 아니었어요.. ㅎ 좋은 팀은 물론 모두 잘 해줄거라 생각합니다 잘못하면 문서정리 , 관리가 병목이 되기도 하구요 ㅠ"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "20"
+    - button [ref=e139]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e144]
+    - link "2026년 9월 23일 수요일 오전 8:16" [ref=e145]: "2026-09-23"
+    - text: "작성자"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "AI 시대에 해야만 하는 일이죠. 이 방식이 옳을지는 모르겠지만요 ㅎㅎ"
+    - button [ref=e147]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e153]
+    - link "2026년 9월 17일 목요일 오후 6:11" [ref=e154]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "근데 결국 DX가 되어 있어야 모든 지식을 알고있는 AI가 정리를 해줄텐데 그 DX가 안되어있어서 데이터를 쌓고 정리하려고 하면 쓸수가 없는 것 아니에요!?"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e162]
+    - link "2026년 9월 17일 목요일 오후 7:04" [ref=e163]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "말씀하신 DX가 결국 회사의 지식이 데이터로 남아 있냐는 얘기시죠?회사의 지식이 데이터로 존재하지 않으면 데이터로 남게하는게 우선이죠.회사의 지식이 지금 부터 생기는 시작점이라면 지금부터라도 데이터로 쌓이게 하면 되구요.오히려 아직 쌓인 데이터가 없는 쪽이 시작은 쉬워요. 뭐가 지금 유효한지 골라낼 게 없거든요. 처음부터 이 플랫폼 위에 쌓는 구조를 만들면 되니까요."
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e171]
+    - link "2026년 9월 17일 목요일 오후 7:07" [ref=e172]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "우리 조직의 지식을 아는 AI라서 데이터를 잘 정리해준다고 하셔서 지식 데이터화가 안되어 있는 조직인데 데이터가 없는건 아니라 파편화되어있으면 또 다른 구조로  파편화되는게 아닌가 해서요. \n범용적으로 적용하려면 어느정도 가이드가 필요하겠네요"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e180]
+    - link "2026년 9월 17일 목요일 오후 7:19" [ref=e181]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "제가 말한 정리는 흩어진 자료를 모아서 분류하는 게 아니에요. 충분히 잘못 해석 될 수 있겠네요.회의록, 슬랙 대화, 위키 글은 각자 쓰임이 달라서 저장소에 같이 넣을지 말지는 사용자가 선택하는거에요.정리는 그중에서 조직의 정책을 말하는 부분만 뽑아서 문서 하나로 관리하는 걸 뜻해요. SSOT 쇼핑몰을 예로 들면 주문 취소 정책 같은거죠.\n위키엔 24시간, 슬랙엔 12시간이라고 흩어져 있으면 지금 유효한 12시간만 취소 정책 문서에 적어두는 거예요.자료는 그대로 두고, 결정만 한 문서에 모으는 일이에요."
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e189]
+    - link "2026년 9월 17일 목요일 오후 10:08" [ref=e190]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - text: "아 평소 휘발되기 쉬운 데이터들을 모아서 분류한다는 것이군요. 회의록이나 슬랙 대화들은 휘발되어 최신 데이터로 갱신되기 힘드니까.. 이해했습니다!"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 8 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e36]:
+    - link [ref=e37]
+    - button [ref=e40]:
+      - img "더 보기"
+    - button [ref=e41]:
+      - img "좋아요"
+      - text: "16"
+    - button [ref=e42]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e43]:
+      - img "리포스트"
+    - button [ref=e44]:
+      - img "공유하기"
+      - text: "5"
+  - generic [ref=e45]:
+    - link [ref=e46]
+    - button [ref=e49]:
+      - img "더 보기"
+    - button [ref=e50]:
+      - img "좋아요"
+      - text: "13"
+    - button [ref=e51]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e52]:
+      - img "리포스트"
+    - button [ref=e53]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e54]:
+    - link [ref=e55]
+    - button [ref=e58]:
+      - img "더 보기"
+    - button [ref=e59]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e60]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e61]:
+      - img "리포스트"
+    - button [ref=e62]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e63]:
+    - link [ref=e64]
+    - button [ref=e67]:
+      - img "더 보기"
+    - button [ref=e69]:
+      - img "좋아요"
+      - text: "17"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+      - text: "2"
+  - generic [ref=e73]:
+    - link [ref=e74]
+    - button [ref=e77]:
+      - img "더 보기"
+    - button [ref=e79]:
+      - img "좋아요"
+      - text: "11"
+    - button [ref=e80]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e81]:
+      - img "리포스트"
+    - button [ref=e82]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e83]:
+    - link [ref=e84]
+    - button [ref=e87]:
+      - img "더 보기"
+    - button [ref=e89]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e90]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e91]:
+      - img "리포스트"
+    - button [ref=e92]:
+      - img "공유하기"
+  - generic [ref=e93]:
+    - link [ref=e94]
+    - button [ref=e97]:
+      - img "더 보기"
+    - button [ref=e98]:
+      - img "좋아요"
+      - text: "7"
+    - button [ref=e99]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e100]:
+      - img "리포스트"
+    - button [ref=e101]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e102]:
+    - link [ref=e103]
+    - button [ref=e106]:
+      - img "더 보기"
+    - button [ref=e107]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e108]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e109]:
+      - img "리포스트"
+    - button [ref=e110]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e111]:
+    - link [ref=e112]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e115]:
+      - img "더 보기"
+    - button [ref=e116]:
+      - img "좋아요"
+      - text: "14"
+    - button [ref=e117]:
+      - img "답글"
+    - button [ref=e118]:
+      - img "리포스트"
+    - button [ref=e119]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e124]:
+    - text: "고정됨"
+    - link [ref=e125]
+    - button [ref=e128]:
+      - img "더 보기"
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]:
+      - image "in.seng08님의 프로필 사진"
+    - link "in.seng08" [ref=e135]
+    - link "2026년 9월 23일 수요일 오전 8:13" [ref=e136]: "2026-09-23"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - text: "이거 제가 비슷한걸 만들어서 써봤는데. 구성원들이 ’모두 주인의식 책임감을 가지고 문서관리할 때‘ 유효합니다.. 기술이 중요한 영역이 아니었어요.. ㅎ 좋은 팀은 물론 모두 잘 해줄거라 생각합니다 잘못하면 문서정리 , 관리가 병목이 되기도 하구요 ㅠ"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "20"
+    - button [ref=e139]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e144]
+    - link "2026년 9월 23일 수요일 오전 8:16" [ref=e145]: "2026-09-23"
+    - text: "작성자"
+    - button [ref=e146]:
+      - img "더 보기"
+    - text: "AI 시대에 해야만 하는 일이죠. 이 방식이 옳을지는 모르겠지만요 ㅎㅎ"
+    - button [ref=e147]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e153]
+    - link "2026년 9월 17일 목요일 오후 6:11" [ref=e154]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - text: "근데 결국 DX가 되어 있어야 모든 지식을 알고있는 AI가 정리를 해줄텐데 그 DX가 안되어있어서 데이터를 쌓고 정리하려고 하면 쓸수가 없는 것 아니에요!?"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e162]
+    - link "2026년 9월 17일 목요일 오후 7:04" [ref=e163]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e164]:
+      - img "더 보기"
+    - text: "말씀하신 DX가 결국 회사의 지식이 데이터로 남아 있냐는 얘기시죠?회사의 지식이 데이터로 존재하지 않으면 데이터로 남게하는게 우선이죠.회사의 지식이 지금 부터 생기는 시작점이라면 지금부터라도 데이터로 쌓이게 하면 되구요.오히려 아직 쌓인 데이터가 없는 쪽이 시작은 쉬워요. 뭐가 지금 유효한지 골라낼 게 없거든요. 처음부터 이 플랫폼 위에 쌓는 구조를 만들면 되니까요."
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e171]
+    - link "2026년 9월 17일 목요일 오후 7:07" [ref=e172]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "우리 조직의 지식을 아는 AI라서 데이터를 잘 정리해준다고 하셔서 지식 데이터화가 안되어 있는 조직인데 데이터가 없는건 아니라 파편화되어있으면 또 다른 구조로  파편화되는게 아닌가 해서요. \n범용적으로 적용하려면 어느정도 가이드가 필요하겠네요"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e180]
+    - link "2026년 9월 17일 목요일 오후 7:19" [ref=e181]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "제가 말한 정리는 흩어진 자료를 모아서 분류하는 게 아니에요. 충분히 잘못 해석 될 수 있겠네요.회의록, 슬랙 대화, 위키 글은 각자 쓰임이 달라서 저장소에 같이 넣을지 말지는 사용자가 선택하는거에요.정리는 그중에서 조직의 정책을 말하는 부분만 뽑아서 문서 하나로 관리하는 걸 뜻해요. SSOT 쇼핑몰을 예로 들면 주문 취소 정책 같은거죠.\n위키엔 24시간, 슬랙엔 12시간이라고 흩어져 있으면 지금 유효한 12시간만 취소 정책 문서에 적어두는 거예요.자료는 그대로 두고, 결정만 한 문서에 모으는 일이에요."
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e189]
+    - link "2026년 9월 17일 목요일 오후 10:08" [ref=e190]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - text: "아 평소 휘발되기 쉬운 데이터들을 모아서 분류한다는 것이군요. 회의록이나 슬랙 대화들은 휘발되어 최신 데이터로 갱신되기 힘드니까.. 이해했습니다!"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e196]:
+    - link [ref=e197]:
+      - image "sebsonthebeach님의 프로필 사진"
+    - link "sebsonthebeach" [ref=e198]
+    - link "2026년 9월 28일 월요일 오전 10:35" [ref=e199]: "2026-09-28"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e200]:
+      - img "더 보기"
+    - text: "기준문서가 회의 끝나고 방치되는 문제를 pm의 save 버튼으로 푼 거네. 히스토리도 남으니 나중에 \"왜 12시간으로?\" 물어봤을 때 근거가 있고"
+    - button [ref=e201]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e202]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e203]:
+      - img "리포스트"
+    - button [ref=e204]:
+      - img "공유하기"
+  - generic [ref=e205]:
+    - link [ref=e206]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e207]
+    - link "2026년 9월 28일 월요일 오후 1:18" [ref=e208]: "2026-09-28"
+    - text: "작성자"
+    - button [ref=e209]:
+      - img "더 보기"
+    - text: "그렇죠. 단순히 작성여부 만으로는 쓸모여부를 알 수 없으니까요."
+    - button [ref=e210]:
+      - img "좋아요"
+    - button [ref=e211]:
+      - img "답글"
+    - button [ref=e212]:
+      - img "리포스트"
+    - button [ref=e213]:
+      - img "공유하기"
+  - generic [ref=e214]:
+    - link [ref=e215]:
+      - image "sootist.b님의 프로필 사진"
+    - link "sootist.b" [ref=e216]
+    - link "2026년 9월 17일 목요일 오후 2:51" [ref=e217]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e218]:
+      - img "더 보기"
+    - text: "혹 화면녹화? 영상은 어떻게 만들었을까요"
+    - button [ref=e219]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e220]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e221]:
+      - img "리포스트"
+    - button [ref=e222]:
+      - img "공유하기"
+  - generic [ref=e223]:
+    - link [ref=e224]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e225]
+    - link "2026년 9월 17일 목요일 오후 3:09" [ref=e226]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e227]:
+      - img "더 보기"
+    - text: "클로드가 서비스의 코드를 갖고 있다 보니 실제 화면에 가상의 목업 데이터를 추가해서 가이드 영상 만들어 달르고 하면 다됩니다."
+    - button [ref=e228]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e229]:
+      - img "답글"
+    - button [ref=e230]:
+      - img "리포스트"
+    - button [ref=e231]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e232]:
+    - link [ref=e233]:
+      - image "cheongchunangman님의 프로필 사진"
+    - link "cheongchunangman" [ref=e234]
+    - link "2026년 9월 17일 목요일 오후 1:20" [ref=e235]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e236]:
+      - img "더 보기"
+    - text: "와우.. 문제를 정의하고 풀어나가시는 방식이 멋지십니다 한 수 배우고 갑니다"
+    - button [ref=e237]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e238]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e239]:
+      - img "리포스트"
+    - button [ref=e240]:
+      - img "공유하기"
+  - generic [ref=e241]:
+    - link [ref=e242]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e243]
+    - link "2026년 9월 17일 목요일 오후 1:22" [ref=e244]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e245]:
+      - img "더 보기"
+    - text: "감사합니다^^"
+    - button [ref=e246]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e247]:
+      - img "답글"
+    - button [ref=e248]:
+      - img "리포스트"
+    - button [ref=e249]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 9 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e124]:
+    - text: "고정됨"
+    - link [ref=e125]
+    - button [ref=e128]:
+      - img "더 보기"
+    - button [ref=e129]:
+      - img "좋아요"
+    - button [ref=e130]:
+      - img "답글"
+    - button [ref=e131]:
+      - img "리포스트"
+    - button [ref=e132]:
+      - img "공유하기"
+  - generic [ref=e133]:
+    - link [ref=e134]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e137]:
+      - img "더 보기"
+    - button [ref=e138]:
+      - img "좋아요"
+      - text: "20"
+    - button [ref=e139]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e140]:
+      - img "리포스트"
+    - button [ref=e141]:
+      - img "공유하기"
+  - generic [ref=e142]:
+    - link [ref=e143]
+    - button [ref=e146]:
+      - img "더 보기"
+    - button [ref=e147]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e148]:
+      - img "답글"
+    - button [ref=e149]:
+      - img "리포스트"
+    - button [ref=e150]:
+      - img "공유하기"
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - text: "우리 조직의 지식을 아는 AI라서 데이터를 잘 정리해준다고 하셔서 지식 데이터화가 안되어 있는 조직인데 데이터가 없는건 아니라 파편화되어있으면 또 다른 구조로  파편화되는게 아닌가 해서요. \n범용적으로 적용하려면 어느정도 가이드가 필요하겠네요"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e180]
+    - link "2026년 9월 17일 목요일 오후 7:19" [ref=e181]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e182]:
+      - img "더 보기"
+    - text: "제가 말한 정리는 흩어진 자료를 모아서 분류하는 게 아니에요. 충분히 잘못 해석 될 수 있겠네요.회의록, 슬랙 대화, 위키 글은 각자 쓰임이 달라서 저장소에 같이 넣을지 말지는 사용자가 선택하는거에요.정리는 그중에서 조직의 정책을 말하는 부분만 뽑아서 문서 하나로 관리하는 걸 뜻해요. SSOT 쇼핑몰을 예로 들면 주문 취소 정책 같은거죠.\n위키엔 24시간, 슬랙엔 12시간이라고 흩어져 있으면 지금 유효한 12시간만 취소 정책 문서에 적어두는 거예요.자료는 그대로 두고, 결정만 한 문서에 모으는 일이에요."
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]:
+      - image "spacewjkim님의 프로필 사진"
+    - link "spacewjkim" [ref=e189]
+    - link "2026년 9월 17일 목요일 오후 10:08" [ref=e190]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - text: "아 평소 휘발되기 쉬운 데이터들을 모아서 분류한다는 것이군요. 회의록이나 슬랙 대화들은 휘발되어 최신 데이터로 갱신되기 힘드니까.. 이해했습니다!"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e196]:
+    - link [ref=e197]:
+      - image "sebsonthebeach님의 프로필 사진"
+    - link "sebsonthebeach" [ref=e198]
+    - link "2026년 9월 28일 월요일 오전 10:35" [ref=e199]: "2026-09-28"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e200]:
+      - img "더 보기"
+    - text: "기준문서가 회의 끝나고 방치되는 문제를 pm의 save 버튼으로 푼 거네. 히스토리도 남으니 나중에 \"왜 12시간으로?\" 물어봤을 때 근거가 있고"
+    - button [ref=e201]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e202]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e203]:
+      - img "리포스트"
+    - button [ref=e204]:
+      - img "공유하기"
+  - generic [ref=e205]:
+    - link [ref=e206]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e207]
+    - link "2026년 9월 28일 월요일 오후 1:18" [ref=e208]: "2026-09-28"
+    - text: "작성자"
+    - button [ref=e209]:
+      - img "더 보기"
+    - text: "그렇죠. 단순히 작성여부 만으로는 쓸모여부를 알 수 없으니까요."
+    - button [ref=e210]:
+      - img "좋아요"
+    - button [ref=e211]:
+      - img "답글"
+    - button [ref=e212]:
+      - img "리포스트"
+    - button [ref=e213]:
+      - img "공유하기"
+  - generic [ref=e214]:
+    - link [ref=e215]:
+      - image "sootist.b님의 프로필 사진"
+    - link "sootist.b" [ref=e216]
+    - link "2026년 9월 17일 목요일 오후 2:51" [ref=e217]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e218]:
+      - img "더 보기"
+    - text: "혹 화면녹화? 영상은 어떻게 만들었을까요"
+    - button [ref=e219]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e220]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e221]:
+      - img "리포스트"
+    - button [ref=e222]:
+      - img "공유하기"
+  - generic [ref=e223]:
+    - link [ref=e224]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e225]
+    - link "2026년 9월 17일 목요일 오후 3:09" [ref=e226]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e227]:
+      - img "더 보기"
+    - text: "클로드가 서비스의 코드를 갖고 있다 보니 실제 화면에 가상의 목업 데이터를 추가해서 가이드 영상 만들어 달르고 하면 다됩니다."
+    - button [ref=e228]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e229]:
+      - img "답글"
+    - button [ref=e230]:
+      - img "리포스트"
+    - button [ref=e231]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e232]:
+    - link [ref=e233]:
+      - image "cheongchunangman님의 프로필 사진"
+    - link "cheongchunangman" [ref=e234]
+    - link "2026년 9월 17일 목요일 오후 1:20" [ref=e235]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e236]:
+      - img "더 보기"
+    - text: "와우.. 문제를 정의하고 풀어나가시는 방식이 멋지십니다 한 수 배우고 갑니다"
+    - button [ref=e237]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e238]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e239]:
+      - img "리포스트"
+    - button [ref=e240]:
+      - img "공유하기"
+  - generic [ref=e241]:
+    - link [ref=e242]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e243]
+    - link "2026년 9월 17일 목요일 오후 1:22" [ref=e244]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e245]:
+      - img "더 보기"
+    - text: "감사합니다^^"
+    - button [ref=e246]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e247]:
+      - img "답글"
+    - button [ref=e248]:
+      - img "리포스트"
+    - button [ref=e249]:
+      - img "공유하기"
+  - generic [ref=e250]:
+    - link [ref=e251]:
+      - image "sebsonthebeach님의 프로필 사진"
+    - link "sebsonthebeach" [ref=e252]
+    - link "2026년 9월 22일 화요일 오전 10:02" [ref=e253]: "2026-09-22"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e254]:
+      - img "더 보기"
+    - text: "저장 한 번이 기준 문서 갱신도 하고 이력까지 남는다? 나중에 '이거 언제 정했는데?' 물어올 때 회의 기록이 바로 정답이 되네."
+    - button [ref=e255]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e256]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e257]:
+      - img "리포스트"
+    - button [ref=e258]:
+      - img "공유하기"
+  - generic [ref=e259]:
+    - link [ref=e260]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e261]
+    - link "2026년 9월 22일 화요일 오전 10:14" [ref=e262]: "2026-09-22"
+    - text: "작성자"
+    - button [ref=e263]:
+      - img "더 보기"
+    - text: "네, AI가 조직 의사결정의 맥락을 알고 있는게 핵심"
+    - button [ref=e264]:
+      - img "좋아요"
+    - button [ref=e265]:
+      - img "답글"
+    - button [ref=e266]:
+      - img "리포스트"
+    - button [ref=e267]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e270]
+    - link "2026년 9월 17일 목요일 오후 12:58" [ref=e271]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - text: "rag를 이용하신건가요? 기술이 궁금합니다"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e279]
+    - link "2026년 9월 17일 목요일 오후 12:59" [ref=e280]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e281]:
+      - img "더 보기"
+    - text: "어떤 부분에서요? rag는 기본적으로 들어갑니다."
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e288]
+    - link "2026년 9월 17일 목요일 오후 1:30" [ref=e289]: "2026-09-17"
+    - button [ref=e290]:
+      - img "더 보기"
+    - text: "문서에 있는 내용을 찾아서 제대로 답변하는게 저는 잘 안되더라구요ㅠ 해봤자 20장짜리 모집요강같은건데 계속 잘못된 정보를 뱉더라구요\n이 부분 어떻게 구현하셨는지 궁금합니다"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e297]
+    - link "2026년 9월 17일 목요일 오후 1:32" [ref=e298]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e299]:
+      - img "더 보기"
+    - text: "이 방법은 사실 AI가 제일 잘 알아요. 정답지를 만들어두고요. 다양한 케이스를 부여하고 정답지가 걸릴 때 까지 무한 백테스팅을 하는 방식으로 해보세요. AI가 정답을 찾아낼겁니다."
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e306]
+    - link "2026년 9월 17일 목요일 오후 12:52" [ref=e307]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - text: "와 멋진 지식 공유 플랫폼이네요! 함께하는 사람이 많아질수록 온보딩에 이슈도 많고 함께 하는일의 공유가 편하고 싱크가 중요한데, 아틀레시안의 충분한 대체재겠네요! 파일럿으로 내부에서만 활용하시는건가요? :)"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e315]
+    - link "2026년 9월 17일 목요일 오후 12:54" [ref=e316]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e317]:
+      - img "더 보기"
+    - text: "네, 파일럿으로 사용하고 있어요.\n개인적으로 공부하고 만들던 과제를 회사에 적용시킨거라고 이해하시면 됩니다."
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e324]
+    - link "2026년 9월 17일 목요일 오후 12:55" [ref=e325]: "2026-09-17"
+    - button [ref=e326]:
+      - img "더 보기"
+    - text: "탐나네요...! 저희팀에서도 사용해보고싶다...! 라는 느낌을 바로받았습니다 :)"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e333]
+    - link "2026년 9월 17일 목요일 오후 12:57" [ref=e334]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e335]:
+      - img "더 보기"
+    - text: "이제 만드는건 어렵지 않으니까요.(잘만드는 건 다른 리야기지만요) 한번 컨셉을 차용해보시는 것 부터 시작해보시죠!"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 10 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e196]:
+    - link [ref=e197]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e200]:
+      - img "더 보기"
+    - button [ref=e201]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e202]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e203]:
+      - img "리포스트"
+    - button [ref=e204]:
+      - img "공유하기"
+  - generic [ref=e205]:
+    - link [ref=e206]
+    - button [ref=e209]:
+      - img "더 보기"
+    - button [ref=e210]:
+      - img "좋아요"
+    - button [ref=e211]:
+      - img "답글"
+    - button [ref=e212]:
+      - img "리포스트"
+    - button [ref=e213]:
+      - img "공유하기"
+  - generic [ref=e214]:
+    - link [ref=e215]:
+      - image "sootist.b님의 프로필 사진"
+    - link "sootist.b" [ref=e216]
+    - link "2026년 9월 17일 목요일 오후 2:51" [ref=e217]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e218]:
+      - img "더 보기"
+    - text: "혹 화면녹화? 영상은 어떻게 만들었을까요"
+    - button [ref=e219]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e220]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e221]:
+      - img "리포스트"
+    - button [ref=e222]:
+      - img "공유하기"
+  - generic [ref=e223]:
+    - link [ref=e224]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e225]
+    - link "2026년 9월 17일 목요일 오후 3:09" [ref=e226]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e227]:
+      - img "더 보기"
+    - text: "클로드가 서비스의 코드를 갖고 있다 보니 실제 화면에 가상의 목업 데이터를 추가해서 가이드 영상 만들어 달르고 하면 다됩니다."
+    - button [ref=e228]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e229]:
+      - img "답글"
+    - button [ref=e230]:
+      - img "리포스트"
+    - button [ref=e231]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e232]:
+    - link [ref=e233]:
+      - image "cheongchunangman님의 프로필 사진"
+    - link "cheongchunangman" [ref=e234]
+    - link "2026년 9월 17일 목요일 오후 1:20" [ref=e235]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e236]:
+      - img "더 보기"
+    - text: "와우.. 문제를 정의하고 풀어나가시는 방식이 멋지십니다 한 수 배우고 갑니다"
+    - button [ref=e237]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e238]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e239]:
+      - img "리포스트"
+    - button [ref=e240]:
+      - img "공유하기"
+  - generic [ref=e241]:
+    - link [ref=e242]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e243]
+    - link "2026년 9월 17일 목요일 오후 1:22" [ref=e244]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e245]:
+      - img "더 보기"
+    - text: "감사합니다^^"
+    - button [ref=e246]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e247]:
+      - img "답글"
+    - button [ref=e248]:
+      - img "리포스트"
+    - button [ref=e249]:
+      - img "공유하기"
+  - generic [ref=e250]:
+    - link [ref=e251]:
+      - image "sebsonthebeach님의 프로필 사진"
+    - link "sebsonthebeach" [ref=e252]
+    - link "2026년 9월 22일 화요일 오전 10:02" [ref=e253]: "2026-09-22"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e254]:
+      - img "더 보기"
+    - text: "저장 한 번이 기준 문서 갱신도 하고 이력까지 남는다? 나중에 '이거 언제 정했는데?' 물어올 때 회의 기록이 바로 정답이 되네."
+    - button [ref=e255]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e256]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e257]:
+      - img "리포스트"
+    - button [ref=e258]:
+      - img "공유하기"
+  - generic [ref=e259]:
+    - link [ref=e260]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e261]
+    - link "2026년 9월 22일 화요일 오전 10:14" [ref=e262]: "2026-09-22"
+    - text: "작성자"
+    - button [ref=e263]:
+      - img "더 보기"
+    - text: "네, AI가 조직 의사결정의 맥락을 알고 있는게 핵심"
+    - button [ref=e264]:
+      - img "좋아요"
+    - button [ref=e265]:
+      - img "답글"
+    - button [ref=e266]:
+      - img "리포스트"
+    - button [ref=e267]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e270]
+    - link "2026년 9월 17일 목요일 오후 12:58" [ref=e271]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - text: "rag를 이용하신건가요? 기술이 궁금합니다"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e279]
+    - link "2026년 9월 17일 목요일 오후 12:59" [ref=e280]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e281]:
+      - img "더 보기"
+    - text: "어떤 부분에서요? rag는 기본적으로 들어갑니다."
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e288]
+    - link "2026년 9월 17일 목요일 오후 1:30" [ref=e289]: "2026-09-17"
+    - button [ref=e290]:
+      - img "더 보기"
+    - text: "문서에 있는 내용을 찾아서 제대로 답변하는게 저는 잘 안되더라구요ㅠ 해봤자 20장짜리 모집요강같은건데 계속 잘못된 정보를 뱉더라구요\n이 부분 어떻게 구현하셨는지 궁금합니다"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e297]
+    - link "2026년 9월 17일 목요일 오후 1:32" [ref=e298]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e299]:
+      - img "더 보기"
+    - text: "이 방법은 사실 AI가 제일 잘 알아요. 정답지를 만들어두고요. 다양한 케이스를 부여하고 정답지가 걸릴 때 까지 무한 백테스팅을 하는 방식으로 해보세요. AI가 정답을 찾아낼겁니다."
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e340]:
+    - link [ref=e341]:
+      - image "moon.psd님의 프로필 사진"
+    - link "moon.psd" [ref=e342]
+    - link "2026년 9월 17일 목요일 오후 1:17" [ref=e343]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e344]:
+      - img "더 보기"
+    - text: "그래프RAG 이용하신 건가요? 정보량이 많을수록 전처리, 파싱, 임베딩 등이 복잡해지는데\n노트북LM의 정보처리 및 대화형 UI 대비해서 별도 지식관리플랫폼을 구축하는 거의 이점이 있을까요?"
+    - button [ref=e345]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e346]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e347]:
+      - img "리포스트"
+    - button [ref=e348]:
+      - img "공유하기"
+  - generic [ref=e349]:
+    - link [ref=e350]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e351]
+    - link "2026년 9월 17일 목요일 오후 1:22" [ref=e352]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e353]:
+      - img "더 보기"
+    - text: "그래프RAG도 임베딩도 안 썼어요. 마크다운 git 저장소에 색인 문서랑 키워드 검색이 전부예요.정보량은 검색 기술 대신 검색할 양을 줄여서 풀었어요. 유효한 결정만 기준 문서에 남기니까 AI가 볼 문서가 많지 않아요.노트북LM은 문서를 잘 읽는 도구인데, 제 문제는 문서끼리 충돌하는 거였어요. 위키 24시간, 슬랙 12시간이면 아무리 잘 읽어도 답이 안 나와요. 그래서 핵심은 검색이 아니라 결정이 기준 문서에 반영되고 이력이 남는 흐름이고, 노트북LM엔 그 쓰기 흐름이 없어요.규모가 수천 문서로 커지면 그때 검색층을 붙이면 되고, 지금은 그게 병목이 아니었어요."
+    - button [ref=e354]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e355]:
+      - img "답글"
+    - button [ref=e356]:
+      - img "리포스트"
+    - button [ref=e357]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e358]:
+    - link [ref=e359]:
+      - image "yol_pak님의 프로필 사진"
+    - link "yol_pak" [ref=e360]
+    - link "2026년 9월 17일 목요일 오후 3:33" [ref=e361]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e362]:
+      - img "더 보기"
+    - text: "호스팅을 하신 건가요? 저장소가 클라우드에 있는 건가요? 그리고 전사 후 어느 카테고리로 보낼지 분류 로직은 어떤 식으로 구성하셨을지도 궁금합니다!"
+    - button [ref=e363]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e364]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e365]:
+      - img "리포스트"
+    - button [ref=e366]:
+      - img "공유하기"
+  - generic [ref=e367]:
+    - link [ref=e368]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e369]
+    - link "2026년 9월 17일 목요일 오후 3:40" [ref=e370]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e371]:
+      - img "더 보기"
+    - text: "저장소는 로컬과 원격에 둘다 존재합니다. 분류 로직은 오랜 시간 고민의 결과물이라 알려드릴수 없을 것 같아요."
+    - button [ref=e372]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e373]:
+      - img "답글"
+    - button [ref=e374]:
+      - img "리포스트"
+    - button [ref=e375]:
+      - img "공유하기"
+  - generic [ref=e376]:
+    - link [ref=e377]:
+      - image "jejel.92님의 프로필 사진"
+    - link "jejel.92" [ref=e378]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e379]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e380]:
+      - img "더 보기"
+    - text: "Ai는 유료버전으로 연결하신건가요?"
+    - button [ref=e381]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e382]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e383]:
+      - img "리포스트"
+    - button [ref=e384]:
+      - img "공유하기"
+  - generic [ref=e385]:
+    - link [ref=e386]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e387]
+    - link "2026년 9월 17일 목요일 오후 4:51" [ref=e388]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e389]:
+      - img "더 보기"
+    - text: "클로드에요~"
+    - button [ref=e390]:
+      - img "좋아요"
+    - button [ref=e391]:
+      - img "답글"
+    - button [ref=e392]:
+      - img "리포스트"
+    - button [ref=e393]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e306]
+    - link "2026년 9월 17일 목요일 오후 12:52" [ref=e307]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - text: "와 멋진 지식 공유 플랫폼이네요! 함께하는 사람이 많아질수록 온보딩에 이슈도 많고 함께 하는일의 공유가 편하고 싱크가 중요한데, 아틀레시안의 충분한 대체재겠네요! 파일럿으로 내부에서만 활용하시는건가요? :)"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e315]
+    - link "2026년 9월 17일 목요일 오후 12:54" [ref=e316]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e317]:
+      - img "더 보기"
+    - text: "네, 파일럿으로 사용하고 있어요.\n개인적으로 공부하고 만들던 과제를 회사에 적용시킨거라고 이해하시면 됩니다."
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e324]
+    - link "2026년 9월 17일 목요일 오후 12:55" [ref=e325]: "2026-09-17"
+    - button [ref=e326]:
+      - img "더 보기"
+    - text: "탐나네요...! 저희팀에서도 사용해보고싶다...! 라는 느낌을 바로받았습니다 :)"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e333]
+    - link "2026년 9월 17일 목요일 오후 12:57" [ref=e334]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e335]:
+      - img "더 보기"
+    - text: "이제 만드는건 어렵지 않으니까요.(잘만드는 건 다른 리야기지만요) 한번 컨셉을 차용해보시는 것 부터 시작해보시죠!"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 11 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e196]:
+    - link [ref=e197]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e200]:
+      - img "더 보기"
+    - button [ref=e201]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e202]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e203]:
+      - img "리포스트"
+    - button [ref=e204]:
+      - img "공유하기"
+  - generic [ref=e205]:
+    - link [ref=e206]
+    - button [ref=e209]:
+      - img "더 보기"
+    - button [ref=e210]:
+      - img "좋아요"
+    - button [ref=e211]:
+      - img "답글"
+    - button [ref=e212]:
+      - img "리포스트"
+    - button [ref=e213]:
+      - img "공유하기"
+  - generic [ref=e214]:
+    - link [ref=e215]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e218]:
+      - img "더 보기"
+    - button [ref=e219]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e220]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e221]:
+      - img "리포스트"
+    - button [ref=e222]:
+      - img "공유하기"
+  - generic [ref=e223]:
+    - link [ref=e224]
+    - button [ref=e227]:
+      - img "더 보기"
+    - button [ref=e228]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e229]:
+      - img "답글"
+    - button [ref=e230]:
+      - img "리포스트"
+    - button [ref=e231]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e232]:
+    - link [ref=e233]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e236]:
+      - img "더 보기"
+    - button [ref=e237]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e238]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e239]:
+      - img "리포스트"
+    - button [ref=e240]:
+      - img "공유하기"
+  - generic [ref=e241]:
+    - link [ref=e242]
+    - button [ref=e245]:
+      - img "더 보기"
+    - button [ref=e246]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e247]:
+      - img "답글"
+    - button [ref=e248]:
+      - img "리포스트"
+    - button [ref=e249]:
+      - img "공유하기"
+  - generic [ref=e250]:
+    - link [ref=e251]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e254]:
+      - img "더 보기"
+    - button [ref=e255]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e256]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e257]:
+      - img "리포스트"
+    - button [ref=e258]:
+      - img "공유하기"
+  - generic [ref=e259]:
+    - link [ref=e260]
+    - button [ref=e263]:
+      - img "더 보기"
+    - button [ref=e264]:
+      - img "좋아요"
+    - button [ref=e265]:
+      - img "답글"
+    - button [ref=e266]:
+      - img "리포스트"
+    - button [ref=e267]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e270]
+    - link "2026년 9월 17일 목요일 오후 12:58" [ref=e271]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - text: "rag를 이용하신건가요? 기술이 궁금합니다"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e279]
+    - link "2026년 9월 17일 목요일 오후 12:59" [ref=e280]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e281]:
+      - img "더 보기"
+    - text: "어떤 부분에서요? rag는 기본적으로 들어갑니다."
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]:
+      - image "growingpain89님의 프로필 사진"
+    - link "growingpain89" [ref=e288]
+    - link "2026년 9월 17일 목요일 오후 1:30" [ref=e289]: "2026-09-17"
+    - button [ref=e290]:
+      - img "더 보기"
+    - text: "문서에 있는 내용을 찾아서 제대로 답변하는게 저는 잘 안되더라구요ㅠ 해봤자 20장짜리 모집요강같은건데 계속 잘못된 정보를 뱉더라구요\n이 부분 어떻게 구현하셨는지 궁금합니다"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e297]
+    - link "2026년 9월 17일 목요일 오후 1:32" [ref=e298]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e299]:
+      - img "더 보기"
+    - text: "이 방법은 사실 AI가 제일 잘 알아요. 정답지를 만들어두고요. 다양한 케이스를 부여하고 정답지가 걸릴 때 까지 무한 백테스팅을 하는 방식으로 해보세요. AI가 정답을 찾아낼겁니다."
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e340]:
+    - link [ref=e341]:
+      - image "moon.psd님의 프로필 사진"
+    - link "moon.psd" [ref=e342]
+    - link "2026년 9월 17일 목요일 오후 1:17" [ref=e343]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e344]:
+      - img "더 보기"
+    - text: "그래프RAG 이용하신 건가요? 정보량이 많을수록 전처리, 파싱, 임베딩 등이 복잡해지는데\n노트북LM의 정보처리 및 대화형 UI 대비해서 별도 지식관리플랫폼을 구축하는 거의 이점이 있을까요?"
+    - button [ref=e345]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e346]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e347]:
+      - img "리포스트"
+    - button [ref=e348]:
+      - img "공유하기"
+  - generic [ref=e349]:
+    - link [ref=e350]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e351]
+    - link "2026년 9월 17일 목요일 오후 1:22" [ref=e352]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e353]:
+      - img "더 보기"
+    - text: "그래프RAG도 임베딩도 안 썼어요. 마크다운 git 저장소에 색인 문서랑 키워드 검색이 전부예요.정보량은 검색 기술 대신 검색할 양을 줄여서 풀었어요. 유효한 결정만 기준 문서에 남기니까 AI가 볼 문서가 많지 않아요.노트북LM은 문서를 잘 읽는 도구인데, 제 문제는 문서끼리 충돌하는 거였어요. 위키 24시간, 슬랙 12시간이면 아무리 잘 읽어도 답이 안 나와요. 그래서 핵심은 검색이 아니라 결정이 기준 문서에 반영되고 이력이 남는 흐름이고, 노트북LM엔 그 쓰기 흐름이 없어요.규모가 수천 문서로 커지면 그때 검색층을 붙이면 되고, 지금은 그게 병목이 아니었어요."
+    - button [ref=e354]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e355]:
+      - img "답글"
+    - button [ref=e356]:
+      - img "리포스트"
+    - button [ref=e357]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e358]:
+    - link [ref=e359]:
+      - image "yol_pak님의 프로필 사진"
+    - link "yol_pak" [ref=e360]
+    - link "2026년 9월 17일 목요일 오후 3:33" [ref=e361]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e362]:
+      - img "더 보기"
+    - text: "호스팅을 하신 건가요? 저장소가 클라우드에 있는 건가요? 그리고 전사 후 어느 카테고리로 보낼지 분류 로직은 어떤 식으로 구성하셨을지도 궁금합니다!"
+    - button [ref=e363]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e364]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e365]:
+      - img "리포스트"
+    - button [ref=e366]:
+      - img "공유하기"
+  - generic [ref=e367]:
+    - link [ref=e368]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e369]
+    - link "2026년 9월 17일 목요일 오후 3:40" [ref=e370]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e371]:
+      - img "더 보기"
+    - text: "저장소는 로컬과 원격에 둘다 존재합니다. 분류 로직은 오랜 시간 고민의 결과물이라 알려드릴수 없을 것 같아요."
+    - button [ref=e372]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e373]:
+      - img "답글"
+    - button [ref=e374]:
+      - img "리포스트"
+    - button [ref=e375]:
+      - img "공유하기"
+  - generic [ref=e376]:
+    - link [ref=e377]:
+      - image "jejel.92님의 프로필 사진"
+    - link "jejel.92" [ref=e378]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e379]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e380]:
+      - img "더 보기"
+    - text: "Ai는 유료버전으로 연결하신건가요?"
+    - button [ref=e381]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e382]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e383]:
+      - img "리포스트"
+    - button [ref=e384]:
+      - img "공유하기"
+  - generic [ref=e385]:
+    - link [ref=e386]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e387]
+    - link "2026년 9월 17일 목요일 오후 4:51" [ref=e388]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e389]:
+      - img "더 보기"
+    - text: "클로드에요~"
+    - button [ref=e390]:
+      - img "좋아요"
+    - button [ref=e391]:
+      - img "답글"
+    - button [ref=e392]:
+      - img "리포스트"
+    - button [ref=e393]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e306]
+    - link "2026년 9월 17일 목요일 오후 12:52" [ref=e307]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - text: "와 멋진 지식 공유 플랫폼이네요! 함께하는 사람이 많아질수록 온보딩에 이슈도 많고 함께 하는일의 공유가 편하고 싱크가 중요한데, 아틀레시안의 충분한 대체재겠네요! 파일럿으로 내부에서만 활용하시는건가요? :)"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e315]
+    - link "2026년 9월 17일 목요일 오후 12:54" [ref=e316]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e317]:
+      - img "더 보기"
+    - text: "네, 파일럿으로 사용하고 있어요.\n개인적으로 공부하고 만들던 과제를 회사에 적용시킨거라고 이해하시면 됩니다."
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e324]
+    - link "2026년 9월 17일 목요일 오후 12:55" [ref=e325]: "2026-09-17"
+    - button [ref=e326]:
+      - img "더 보기"
+    - text: "탐나네요...! 저희팀에서도 사용해보고싶다...! 라는 느낌을 바로받았습니다 :)"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e333]
+    - link "2026년 9월 17일 목요일 오후 12:57" [ref=e334]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e335]:
+      - img "더 보기"
+    - text: "이제 만드는건 어렵지 않으니까요.(잘만드는 건 다른 리야기지만요) 한번 컨셉을 차용해보시는 것 부터 시작해보시죠!"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]:
+      - image "aabbey_road님의 프로필 사진"
+    - link "aabbey_road" [ref=e396]
+    - link "2026년 9월 17일 목요일 오후 1:13" [ref=e397]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - text: "좋네요..llm은 외부 llm으로 연결하신건가요 로컬인가요?"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e405]
+    - link "2026년 9월 17일 목요일 오후 1:14" [ref=e406]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e407]:
+      - img "더 보기"
+    - text: "로컬 LLM은 다양하게 테스트를 해봤으나 성능이 안나와서 클로드를 사용하고 있어요."
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e412]:
+    - link [ref=e413]:
+      - image "null_pionter님의 프로필 사진"
+    - link "null_pionter" [ref=e414]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e415]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e416]:
+      - img "더 보기"
+    - text: "RAG. 이거하나도입하려고 솔루션을 사기도하죠"
+    - button [ref=e417]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e418]:
+      - img "답글"
+    - button [ref=e419]:
+      - img "리포스트"
+    - button [ref=e420]:
+      - img "공유하기"
+  - generic [ref=e421]:
+    - link [ref=e422]:
+      - image "happytony74님의 프로필 사진"
+    - link "happytony74" [ref=e423]
+    - link "2026년 9월 17일 목요일 오후 5:02" [ref=e424]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e425]:
+      - img "더 보기"
+    - text: "멋지다 화이팅 스하리완료"
+    - button [ref=e426]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e427]:
+      - img "답글"
+    - button [ref=e428]:
+      - img "리포스트"
+    - button [ref=e429]:
+      - img "공유하기"
+  - generic [ref=e430]:
+    - link [ref=e431]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e432]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e433]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e434]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e435]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e436]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e437]:
+      - img "리포스트"
+    - button [ref=e438]:
+      - img "공유하기"
+  - generic [ref=e439]:
+    - link [ref=e440]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e441]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e442]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e443]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e444]:
+      - img "좋아요"
+    - button [ref=e445]:
+      - img "답글"
+    - button [ref=e446]:
+      - img "리포스트"
+    - button [ref=e447]:
+      - img "공유하기"
+  - generic [ref=e448]:
+    - link [ref=e449]:
+      - image "eiasscm님의 프로필 사진"
+    - link "eiasscm" [ref=e450]
+    - link "2026년 9월 17일 목요일 오후 4:35" [ref=e451]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e452]:
+      - img "더 보기"
+    - text: "비공개 소스군요"
+    - button [ref=e453]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e454]:
+      - img "답글"
+    - button [ref=e455]:
+      - img "리포스트"
+    - button [ref=e456]:
+      - img "공유하기"
+  - status "읽어들이는 중...":
+    - img "읽어들이는 중..."
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 12 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e232]:
+    - link [ref=e233]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e236]:
+      - img "더 보기"
+    - button [ref=e237]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e238]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e239]:
+      - img "리포스트"
+    - button [ref=e240]:
+      - img "공유하기"
+  - generic [ref=e241]:
+    - link [ref=e242]
+    - button [ref=e245]:
+      - img "더 보기"
+    - button [ref=e246]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e247]:
+      - img "답글"
+    - button [ref=e248]:
+      - img "리포스트"
+    - button [ref=e249]:
+      - img "공유하기"
+  - generic [ref=e250]:
+    - link [ref=e251]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e254]:
+      - img "더 보기"
+    - button [ref=e255]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e256]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e257]:
+      - img "리포스트"
+    - button [ref=e258]:
+      - img "공유하기"
+  - generic [ref=e259]:
+    - link [ref=e260]
+    - button [ref=e263]:
+      - img "더 보기"
+    - button [ref=e264]:
+      - img "좋아요"
+    - button [ref=e265]:
+      - img "답글"
+    - button [ref=e266]:
+      - img "리포스트"
+    - button [ref=e267]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]
+    - button [ref=e281]:
+      - img "더 보기"
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]
+    - button [ref=e290]:
+      - img "더 보기"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]
+    - button [ref=e299]:
+      - img "더 보기"
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e340]:
+    - link [ref=e341]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e344]:
+      - img "더 보기"
+    - button [ref=e345]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e346]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e347]:
+      - img "리포스트"
+    - button [ref=e348]:
+      - img "공유하기"
+  - generic [ref=e349]:
+    - link [ref=e350]
+    - button [ref=e353]:
+      - img "더 보기"
+    - text: "그래프RAG도 임베딩도 안 썼어요. 마크다운 git 저장소에 색인 문서랑 키워드 검색이 전부예요.정보량은 검색 기술 대신 검색할 양을 줄여서 풀었어요. 유효한 결정만 기준 문서에 남기니까 AI가 볼 문서가 많지 않아요.노트북LM은 문서를 잘 읽는 도구인데, 제 문제는 문서끼리 충돌하는 거였어요. 위키 24시간, 슬랙 12시간이면 아무리 잘 읽어도 답이 안 나와요. 그래서 핵심은 검색이 아니라 결정이 기준 문서에 반영되고 이력이 남는 흐름이고, 노트북LM엔 그 쓰기 흐름이 없어요.규모가 수천 문서로 커지면 그때 검색층을 붙이면 되고, 지금은 그게 병목이 아니었어요."
+    - button [ref=e354]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e355]:
+      - img "답글"
+    - button [ref=e356]:
+      - img "리포스트"
+    - button [ref=e357]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e358]:
+    - link [ref=e359]:
+      - image "yol_pak님의 프로필 사진"
+    - link "yol_pak" [ref=e360]
+    - link "2026년 9월 17일 목요일 오후 3:33" [ref=e361]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e362]:
+      - img "더 보기"
+    - text: "호스팅을 하신 건가요? 저장소가 클라우드에 있는 건가요? 그리고 전사 후 어느 카테고리로 보낼지 분류 로직은 어떤 식으로 구성하셨을지도 궁금합니다!"
+    - button [ref=e363]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e364]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e365]:
+      - img "리포스트"
+    - button [ref=e366]:
+      - img "공유하기"
+  - generic [ref=e367]:
+    - link [ref=e368]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e369]
+    - link "2026년 9월 17일 목요일 오후 3:40" [ref=e370]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e371]:
+      - img "더 보기"
+    - text: "저장소는 로컬과 원격에 둘다 존재합니다. 분류 로직은 오랜 시간 고민의 결과물이라 알려드릴수 없을 것 같아요."
+    - button [ref=e372]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e373]:
+      - img "답글"
+    - button [ref=e374]:
+      - img "리포스트"
+    - button [ref=e375]:
+      - img "공유하기"
+  - generic [ref=e376]:
+    - link [ref=e377]:
+      - image "jejel.92님의 프로필 사진"
+    - link "jejel.92" [ref=e378]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e379]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e380]:
+      - img "더 보기"
+    - text: "Ai는 유료버전으로 연결하신건가요?"
+    - button [ref=e381]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e382]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e383]:
+      - img "리포스트"
+    - button [ref=e384]:
+      - img "공유하기"
+  - generic [ref=e385]:
+    - link [ref=e386]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e387]
+    - link "2026년 9월 17일 목요일 오후 4:51" [ref=e388]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e389]:
+      - img "더 보기"
+    - text: "클로드에요~"
+    - button [ref=e390]:
+      - img "좋아요"
+    - button [ref=e391]:
+      - img "답글"
+    - button [ref=e392]:
+      - img "리포스트"
+    - button [ref=e393]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e306]
+    - link "2026년 9월 17일 목요일 오후 12:52" [ref=e307]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - text: "와 멋진 지식 공유 플랫폼이네요! 함께하는 사람이 많아질수록 온보딩에 이슈도 많고 함께 하는일의 공유가 편하고 싱크가 중요한데, 아틀레시안의 충분한 대체재겠네요! 파일럿으로 내부에서만 활용하시는건가요? :)"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e315]
+    - link "2026년 9월 17일 목요일 오후 12:54" [ref=e316]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e317]:
+      - img "더 보기"
+    - text: "네, 파일럿으로 사용하고 있어요.\n개인적으로 공부하고 만들던 과제를 회사에 적용시킨거라고 이해하시면 됩니다."
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e324]
+    - link "2026년 9월 17일 목요일 오후 12:55" [ref=e325]: "2026-09-17"
+    - button [ref=e326]:
+      - img "더 보기"
+    - text: "탐나네요...! 저희팀에서도 사용해보고싶다...! 라는 느낌을 바로받았습니다 :)"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e333]
+    - link "2026년 9월 17일 목요일 오후 12:57" [ref=e334]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e335]:
+      - img "더 보기"
+    - text: "이제 만드는건 어렵지 않으니까요.(잘만드는 건 다른 리야기지만요) 한번 컨셉을 차용해보시는 것 부터 시작해보시죠!"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]:
+      - image "aabbey_road님의 프로필 사진"
+    - link "aabbey_road" [ref=e396]
+    - link "2026년 9월 17일 목요일 오후 1:13" [ref=e397]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - text: "좋네요..llm은 외부 llm으로 연결하신건가요 로컬인가요?"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e405]
+    - link "2026년 9월 17일 목요일 오후 1:14" [ref=e406]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e407]:
+      - img "더 보기"
+    - text: "로컬 LLM은 다양하게 테스트를 해봤으나 성능이 안나와서 클로드를 사용하고 있어요."
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e457]:
+    - link [ref=e458]:
+      - image "kellygo129님의 프로필 사진"
+    - link "kellygo129" [ref=e459]
+    - link "2026년 9월 17일 목요일 오후 2:17" [ref=e460]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e461]:
+      - img "더 보기"
+    - text: "회사에 이런 직원이 있다면 너무 칭찬해 주고 싶은데요👍"
+    - button [ref=e462]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e463]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e464]:
+      - img "리포스트"
+    - button [ref=e465]:
+      - img "공유하기"
+  - generic [ref=e466]:
+    - link [ref=e467]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e468]
+    - link "2026년 9월 17일 목요일 오후 2:18" [ref=e469]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e470]:
+      - img "더 보기"
+    - text: "감사합니다."
+    - button [ref=e471]:
+      - img "좋아요"
+    - button [ref=e472]:
+      - img "답글"
+    - button [ref=e473]:
+      - img "리포스트"
+    - button [ref=e474]:
+      - img "공유하기"
+  - generic [ref=e475]:
+    - link [ref=e476]:
+      - image "null_pionter님의 프로필 사진"
+    - link "null_pionter" [ref=e477]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e478]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e479]:
+      - img "더 보기"
+    - text: "RAG. 이거하나도입하려고 솔루션을 사기도하죠"
+    - button [ref=e480]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e481]:
+      - img "답글"
+    - button [ref=e482]:
+      - img "리포스트"
+    - button [ref=e483]:
+      - img "공유하기"
+  - generic [ref=e484]:
+    - link [ref=e485]:
+      - image "happytony74님의 프로필 사진"
+    - link "happytony74" [ref=e486]
+    - link "2026년 9월 17일 목요일 오후 5:02" [ref=e487]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e488]:
+      - img "더 보기"
+    - text: "멋지다 화이팅 스하리완료"
+    - button [ref=e489]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e490]:
+      - img "답글"
+    - button [ref=e491]:
+      - img "리포스트"
+    - button [ref=e492]:
+      - img "공유하기"
+  - generic [ref=e493]:
+    - link [ref=e494]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e495]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e496]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e497]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e498]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e499]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e500]:
+      - img "리포스트"
+    - button [ref=e501]:
+      - img "공유하기"
+  - generic [ref=e502]:
+    - link [ref=e503]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e504]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e505]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e506]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e507]:
+      - img "좋아요"
+    - button [ref=e508]:
+      - img "답글"
+    - button [ref=e509]:
+      - img "리포스트"
+    - button [ref=e510]:
+      - img "공유하기"
+  - generic [ref=e511]:
+    - link [ref=e512]:
+      - image "allismaka님의 프로필 사진"
+    - link "allismaka" [ref=e513]
+    - link "2026년 9월 24일 목요일 오전 7:02" [ref=e514]: "2026-09-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e515]:
+      - img "더 보기"
+    - text: "글 공유 너무 감사합니다 댓글도 너무 도움되네요"
+    - button [ref=e516]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e517]:
+      - img "답글"
+    - button [ref=e518]:
+      - img "리포스트"
+    - button [ref=e519]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 13 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]
+    - button [ref=e281]:
+      - img "더 보기"
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]
+    - button [ref=e290]:
+      - img "더 보기"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]
+    - button [ref=e299]:
+      - img "더 보기"
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e340]:
+    - link [ref=e341]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e344]:
+      - img "더 보기"
+    - button [ref=e345]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e346]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e347]:
+      - img "리포스트"
+    - button [ref=e348]:
+      - img "공유하기"
+  - generic [ref=e349]:
+    - link [ref=e350]
+    - button [ref=e353]:
+      - img "더 보기"
+    - button [ref=e354]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e355]:
+      - img "답글"
+    - button [ref=e356]:
+      - img "리포스트"
+    - button [ref=e357]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e358]:
+    - link [ref=e359]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e362]:
+      - img "더 보기"
+    - button [ref=e363]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e364]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e365]:
+      - img "리포스트"
+    - button [ref=e366]:
+      - img "공유하기"
+  - generic [ref=e367]:
+    - link [ref=e368]
+    - button [ref=e371]:
+      - img "더 보기"
+    - button [ref=e372]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e373]:
+      - img "답글"
+    - button [ref=e374]:
+      - img "리포스트"
+    - button [ref=e375]:
+      - img "공유하기"
+  - generic [ref=e376]:
+    - link [ref=e377]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e380]:
+      - img "더 보기"
+    - button [ref=e381]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e382]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e383]:
+      - img "리포스트"
+    - button [ref=e384]:
+      - img "공유하기"
+  - generic [ref=e385]:
+    - link [ref=e386]
+    - button [ref=e389]:
+      - img "더 보기"
+    - button [ref=e390]:
+      - img "좋아요"
+    - button [ref=e391]:
+      - img "답글"
+    - button [ref=e392]:
+      - img "리포스트"
+    - button [ref=e393]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - text: "와 멋진 지식 공유 플랫폼이네요! 함께하는 사람이 많아질수록 온보딩에 이슈도 많고 함께 하는일의 공유가 편하고 싱크가 중요한데, 아틀레시안의 충분한 대체재겠네요! 파일럿으로 내부에서만 활용하시는건가요? :)"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e315]
+    - link "2026년 9월 17일 목요일 오후 12:54" [ref=e316]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e317]:
+      - img "더 보기"
+    - text: "네, 파일럿으로 사용하고 있어요.\n개인적으로 공부하고 만들던 과제를 회사에 적용시킨거라고 이해하시면 됩니다."
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]:
+      - image "supasub님의 프로필 사진"
+    - link "supasub" [ref=e324]
+    - link "2026년 9월 17일 목요일 오후 12:55" [ref=e325]: "2026-09-17"
+    - button [ref=e326]:
+      - img "더 보기"
+    - text: "탐나네요...! 저희팀에서도 사용해보고싶다...! 라는 느낌을 바로받았습니다 :)"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e333]
+    - link "2026년 9월 17일 목요일 오후 12:57" [ref=e334]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e335]:
+      - img "더 보기"
+    - text: "이제 만드는건 어렵지 않으니까요.(잘만드는 건 다른 리야기지만요) 한번 컨셉을 차용해보시는 것 부터 시작해보시죠!"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]:
+      - image "aabbey_road님의 프로필 사진"
+    - link "aabbey_road" [ref=e396]
+    - link "2026년 9월 17일 목요일 오후 1:13" [ref=e397]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - text: "좋네요..llm은 외부 llm으로 연결하신건가요 로컬인가요?"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e405]
+    - link "2026년 9월 17일 목요일 오후 1:14" [ref=e406]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e407]:
+      - img "더 보기"
+    - text: "로컬 LLM은 다양하게 테스트를 해봤으나 성능이 안나와서 클로드를 사용하고 있어요."
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e457]:
+    - link [ref=e458]:
+      - image "kellygo129님의 프로필 사진"
+    - link "kellygo129" [ref=e459]
+    - link "2026년 9월 17일 목요일 오후 2:17" [ref=e460]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e461]:
+      - img "더 보기"
+    - text: "회사에 이런 직원이 있다면 너무 칭찬해 주고 싶은데요👍"
+    - button [ref=e462]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e463]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e464]:
+      - img "리포스트"
+    - button [ref=e465]:
+      - img "공유하기"
+  - generic [ref=e466]:
+    - link [ref=e467]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e468]
+    - link "2026년 9월 17일 목요일 오후 2:18" [ref=e469]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e470]:
+      - img "더 보기"
+    - text: "감사합니다."
+    - button [ref=e471]:
+      - img "좋아요"
+    - button [ref=e472]:
+      - img "답글"
+    - button [ref=e473]:
+      - img "리포스트"
+    - button [ref=e474]:
+      - img "공유하기"
+  - generic [ref=e475]:
+    - link [ref=e476]:
+      - image "null_pionter님의 프로필 사진"
+    - link "null_pionter" [ref=e477]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e478]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e479]:
+      - img "더 보기"
+    - text: "RAG. 이거하나도입하려고 솔루션을 사기도하죠"
+    - button [ref=e480]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e481]:
+      - img "답글"
+    - button [ref=e482]:
+      - img "리포스트"
+    - button [ref=e483]:
+      - img "공유하기"
+  - generic [ref=e484]:
+    - link [ref=e485]:
+      - image "happytony74님의 프로필 사진"
+    - link "happytony74" [ref=e486]
+    - link "2026년 9월 17일 목요일 오후 5:02" [ref=e487]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e488]:
+      - img "더 보기"
+    - text: "멋지다 화이팅 스하리완료"
+    - button [ref=e489]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e490]:
+      - img "답글"
+    - button [ref=e491]:
+      - img "리포스트"
+    - button [ref=e492]:
+      - img "공유하기"
+  - generic [ref=e493]:
+    - link [ref=e494]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e495]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e496]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e497]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e498]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e499]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e500]:
+      - img "리포스트"
+    - button [ref=e501]:
+      - img "공유하기"
+  - generic [ref=e502]:
+    - link [ref=e503]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e504]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e505]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e506]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e507]:
+      - img "좋아요"
+    - button [ref=e508]:
+      - img "답글"
+    - button [ref=e509]:
+      - img "리포스트"
+    - button [ref=e510]:
+      - img "공유하기"
+  - generic [ref=e520]:
+    - link [ref=e521]:
+      - image "eiasscm님의 프로필 사진"
+    - link "eiasscm" [ref=e522]
+    - link "2026년 9월 17일 목요일 오후 4:35" [ref=e523]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e524]:
+      - img "더 보기"
+    - text: "비공개 소스군요"
+    - button [ref=e525]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e526]:
+      - img "답글"
+    - button [ref=e527]:
+      - img "리포스트"
+    - button [ref=e528]:
+      - img "공유하기"
+  - generic [ref=e529]:
+    - link [ref=e530]:
+      - image "now_using_님의 프로필 사진"
+    - link "now_using_" [ref=e531]
+    - link "2026년 9월 18일 금요일 오전 8:55" [ref=e532]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e533]:
+      - img "더 보기"
+    - text: "300명 경연에서 직원 투표 1등이라니 축하드립니다! 흩어진 지식을 모으는 문제를 동료들도 크게 느꼈나 봅니다."
+    - button [ref=e534]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e535]:
+      - img "답글"
+    - button [ref=e536]:
+      - img "리포스트"
+    - button [ref=e537]:
+      - img "공유하기"
+  - generic [ref=e538]:
+    - link [ref=e539]:
+      - image "h_a_ron7788님의 프로필 사진"
+    - link "h_a_ron7788" [ref=e540]
+    - link "2026년 9월 17일 목요일 오후 11:33" [ref=e541]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e542]:
+      - img "더 보기"
+    - text: "좋은글 감사합니다. 이게 결국 외부 llm을 쓰면 조직내 정보가 유출되는거 아닌가요?? 이부분이 정말 어렵던데 어떻게 해결하셨는지 궁금합니다aa"
+    - button [ref=e543]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e544]:
+      - img "답글"
+    - button [ref=e545]:
+      - img "리포스트"
+    - button [ref=e546]:
+      - img "공유하기"
+  - generic [ref=e547]:
+    - link [ref=e548]:
+      - image "jiying8282님의 프로필 사진"
+    - link "jiying8282" [ref=e549]
+    - link "2026년 9월 17일 목요일 오후 10:38" [ref=e550]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e551]:
+      - img "더 보기"
+    - text: "우와 대단하다"
+    - button [ref=e552]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e553]:
+      - img "답글"
+    - button [ref=e554]:
+      - img "리포스트"
+    - button [ref=e555]:
+      - img "공유하기"
+  - generic [ref=e556]:
+    - link [ref=e557]:
+      - image "allismaka님의 프로필 사진"
+    - link "allismaka" [ref=e558]
+    - link "2026년 9월 24일 목요일 오전 7:02" [ref=e559]: "2026-09-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e560]:
+      - img "더 보기"
+    - text: "글 공유 너무 감사합니다 댓글도 너무 도움되네요"
+    - button [ref=e561]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e562]:
+      - img "답글"
+    - button [ref=e563]:
+      - img "리포스트"
+    - button [ref=e564]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 14 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]
+    - button [ref=e281]:
+      - img "더 보기"
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]
+    - button [ref=e290]:
+      - img "더 보기"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]
+    - button [ref=e299]:
+      - img "더 보기"
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e358]:
+    - link [ref=e359]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e362]:
+      - img "더 보기"
+    - button [ref=e363]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e364]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e365]:
+      - img "리포스트"
+    - button [ref=e366]:
+      - img "공유하기"
+  - generic [ref=e367]:
+    - link [ref=e368]
+    - button [ref=e371]:
+      - img "더 보기"
+    - button [ref=e372]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e373]:
+      - img "답글"
+    - button [ref=e374]:
+      - img "리포스트"
+    - button [ref=e375]:
+      - img "공유하기"
+  - generic [ref=e376]:
+    - link [ref=e377]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e380]:
+      - img "더 보기"
+    - button [ref=e381]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e382]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e383]:
+      - img "리포스트"
+    - button [ref=e384]:
+      - img "공유하기"
+  - generic [ref=e385]:
+    - link [ref=e386]
+    - button [ref=e389]:
+      - img "더 보기"
+    - button [ref=e390]:
+      - img "좋아요"
+    - button [ref=e391]:
+      - img "답글"
+    - button [ref=e392]:
+      - img "리포스트"
+    - button [ref=e393]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]
+    - button [ref=e317]:
+      - img "더 보기"
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]
+    - button [ref=e326]:
+      - img "더 보기"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]
+    - button [ref=e335]:
+      - img "더 보기"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]
+    - button [ref=e407]:
+      - img "더 보기"
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e457]:
+    - link [ref=e458]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e461]:
+      - img "더 보기"
+    - text: "회사에 이런 직원이 있다면 너무 칭찬해 주고 싶은데요👍"
+    - button [ref=e462]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e463]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e464]:
+      - img "리포스트"
+    - button [ref=e465]:
+      - img "공유하기"
+  - generic [ref=e466]:
+    - link [ref=e467]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e468]
+    - link "2026년 9월 17일 목요일 오후 2:18" [ref=e469]: "2026-09-17"
+    - text: "작성자"
+    - button [ref=e470]:
+      - img "더 보기"
+    - text: "감사합니다."
+    - button [ref=e471]:
+      - img "좋아요"
+    - button [ref=e472]:
+      - img "답글"
+    - button [ref=e473]:
+      - img "리포스트"
+    - button [ref=e474]:
+      - img "공유하기"
+  - generic [ref=e475]:
+    - link [ref=e476]:
+      - image "null_pionter님의 프로필 사진"
+    - link "null_pionter" [ref=e477]
+    - link "2026년 9월 17일 목요일 오후 4:41" [ref=e478]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e479]:
+      - img "더 보기"
+    - text: "RAG. 이거하나도입하려고 솔루션을 사기도하죠"
+    - button [ref=e480]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e481]:
+      - img "답글"
+    - button [ref=e482]:
+      - img "리포스트"
+    - button [ref=e483]:
+      - img "공유하기"
+  - generic [ref=e484]:
+    - link [ref=e485]:
+      - image "happytony74님의 프로필 사진"
+    - link "happytony74" [ref=e486]
+    - link "2026년 9월 17일 목요일 오후 5:02" [ref=e487]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e488]:
+      - img "더 보기"
+    - text: "멋지다 화이팅 스하리완료"
+    - button [ref=e489]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e490]:
+      - img "답글"
+    - button [ref=e491]:
+      - img "리포스트"
+    - button [ref=e492]:
+      - img "공유하기"
+  - generic [ref=e493]:
+    - link [ref=e494]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e495]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e496]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e497]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e498]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e499]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e500]:
+      - img "리포스트"
+    - button [ref=e501]:
+      - img "공유하기"
+  - generic [ref=e502]:
+    - link [ref=e503]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e504]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e505]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e506]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e507]:
+      - img "좋아요"
+    - button [ref=e508]:
+      - img "답글"
+    - button [ref=e509]:
+      - img "리포스트"
+    - button [ref=e510]:
+      - img "공유하기"
+  - generic [ref=e520]:
+    - link [ref=e521]:
+      - image "eiasscm님의 프로필 사진"
+    - link "eiasscm" [ref=e522]
+    - link "2026년 9월 17일 목요일 오후 4:35" [ref=e523]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e524]:
+      - img "더 보기"
+    - text: "비공개 소스군요"
+    - button [ref=e525]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e526]:
+      - img "답글"
+    - button [ref=e527]:
+      - img "리포스트"
+    - button [ref=e528]:
+      - img "공유하기"
+  - generic [ref=e529]:
+    - link [ref=e530]:
+      - image "now_using_님의 프로필 사진"
+    - link "now_using_" [ref=e531]
+    - link "2026년 9월 18일 금요일 오전 8:55" [ref=e532]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e533]:
+      - img "더 보기"
+    - text: "300명 경연에서 직원 투표 1등이라니 축하드립니다! 흩어진 지식을 모으는 문제를 동료들도 크게 느꼈나 봅니다."
+    - button [ref=e534]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e535]:
+      - img "답글"
+    - button [ref=e536]:
+      - img "리포스트"
+    - button [ref=e537]:
+      - img "공유하기"
+  - generic [ref=e538]:
+    - link [ref=e539]:
+      - image "h_a_ron7788님의 프로필 사진"
+    - link "h_a_ron7788" [ref=e540]
+    - link "2026년 9월 17일 목요일 오후 11:33" [ref=e541]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e542]:
+      - img "더 보기"
+    - text: "좋은글 감사합니다. 이게 결국 외부 llm을 쓰면 조직내 정보가 유출되는거 아닌가요?? 이부분이 정말 어렵던데 어떻게 해결하셨는지 궁금합니다aa"
+    - button [ref=e543]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e544]:
+      - img "답글"
+    - button [ref=e545]:
+      - img "리포스트"
+    - button [ref=e546]:
+      - img "공유하기"
+  - generic [ref=e547]:
+    - link [ref=e548]:
+      - image "jiying8282님의 프로필 사진"
+    - link "jiying8282" [ref=e549]
+    - link "2026년 9월 17일 목요일 오후 10:38" [ref=e550]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e551]:
+      - img "더 보기"
+    - text: "우와 대단하다"
+    - button [ref=e552]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e553]:
+      - img "답글"
+    - button [ref=e554]:
+      - img "리포스트"
+    - button [ref=e555]:
+      - img "공유하기"
+  - generic [ref=e556]:
+    - link [ref=e557]:
+      - image "allismaka님의 프로필 사진"
+    - link "allismaka" [ref=e558]
+    - link "2026년 9월 24일 목요일 오전 7:02" [ref=e559]: "2026-09-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e560]:
+      - img "더 보기"
+    - text: "글 공유 너무 감사합니다 댓글도 너무 도움되네요"
+    - button [ref=e561]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e562]:
+      - img "답글"
+    - button [ref=e563]:
+      - img "리포스트"
+    - button [ref=e564]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 15 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]
+    - button [ref=e281]:
+      - img "더 보기"
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]
+    - button [ref=e290]:
+      - img "더 보기"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]
+    - button [ref=e299]:
+      - img "더 보기"
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]
+    - button [ref=e317]:
+      - img "더 보기"
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]
+    - button [ref=e326]:
+      - img "더 보기"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]
+    - button [ref=e335]:
+      - img "더 보기"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]
+    - button [ref=e407]:
+      - img "더 보기"
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e457]:
+    - link [ref=e458]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e461]:
+      - img "더 보기"
+    - button [ref=e462]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e463]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e464]:
+      - img "리포스트"
+    - button [ref=e465]:
+      - img "공유하기"
+  - generic [ref=e466]:
+    - link [ref=e467]
+    - button [ref=e470]:
+      - img "더 보기"
+    - button [ref=e471]:
+      - img "좋아요"
+    - button [ref=e472]:
+      - img "답글"
+    - button [ref=e473]:
+      - img "리포스트"
+    - button [ref=e474]:
+      - img "공유하기"
+  - generic [ref=e475]:
+    - link [ref=e476]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e479]:
+      - img "더 보기"
+    - button [ref=e480]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e481]:
+      - img "답글"
+    - button [ref=e482]:
+      - img "리포스트"
+    - button [ref=e483]:
+      - img "공유하기"
+  - generic [ref=e484]:
+    - link [ref=e485]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e488]:
+      - img "더 보기"
+    - button [ref=e489]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e490]:
+      - img "답글"
+    - button [ref=e491]:
+      - img "리포스트"
+    - button [ref=e492]:
+      - img "공유하기"
+  - generic [ref=e493]:
+    - link [ref=e494]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e495]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e496]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e497]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e498]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e499]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e500]:
+      - img "리포스트"
+    - button [ref=e501]:
+      - img "공유하기"
+  - generic [ref=e502]:
+    - link [ref=e503]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e504]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e505]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e506]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e507]:
+      - img "좋아요"
+    - button [ref=e508]:
+      - img "답글"
+    - button [ref=e509]:
+      - img "리포스트"
+    - button [ref=e510]:
+      - img "공유하기"
+  - generic [ref=e520]:
+    - link [ref=e521]:
+      - image "eiasscm님의 프로필 사진"
+    - link "eiasscm" [ref=e522]
+    - link "2026년 9월 17일 목요일 오후 4:35" [ref=e523]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e524]:
+      - img "더 보기"
+    - text: "비공개 소스군요"
+    - button [ref=e525]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e526]:
+      - img "답글"
+    - button [ref=e527]:
+      - img "리포스트"
+    - button [ref=e528]:
+      - img "공유하기"
+  - generic [ref=e529]:
+    - link [ref=e530]:
+      - image "now_using_님의 프로필 사진"
+    - link "now_using_" [ref=e531]
+    - link "2026년 9월 18일 금요일 오전 8:55" [ref=e532]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e533]:
+      - img "더 보기"
+    - text: "300명 경연에서 직원 투표 1등이라니 축하드립니다! 흩어진 지식을 모으는 문제를 동료들도 크게 느꼈나 봅니다."
+    - button [ref=e534]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e535]:
+      - img "답글"
+    - button [ref=e536]:
+      - img "리포스트"
+    - button [ref=e537]:
+      - img "공유하기"
+  - generic [ref=e538]:
+    - link [ref=e539]:
+      - image "h_a_ron7788님의 프로필 사진"
+    - link "h_a_ron7788" [ref=e540]
+    - link "2026년 9월 17일 목요일 오후 11:33" [ref=e541]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e542]:
+      - img "더 보기"
+    - text: "좋은글 감사합니다. 이게 결국 외부 llm을 쓰면 조직내 정보가 유출되는거 아닌가요?? 이부분이 정말 어렵던데 어떻게 해결하셨는지 궁금합니다aa"
+    - button [ref=e543]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e544]:
+      - img "답글"
+    - button [ref=e545]:
+      - img "리포스트"
+    - button [ref=e546]:
+      - img "공유하기"
+  - generic [ref=e547]:
+    - link [ref=e548]:
+      - image "jiying8282님의 프로필 사진"
+    - link "jiying8282" [ref=e549]
+    - link "2026년 9월 17일 목요일 오후 10:38" [ref=e550]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e551]:
+      - img "더 보기"
+    - text: "우와 대단하다"
+    - button [ref=e552]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e553]:
+      - img "답글"
+    - button [ref=e554]:
+      - img "리포스트"
+    - button [ref=e555]:
+      - img "공유하기"
+  - generic [ref=e556]:
+    - link [ref=e557]:
+      - image "allismaka님의 프로필 사진"
+    - link "allismaka" [ref=e558]
+    - link "2026년 9월 24일 목요일 오전 7:02" [ref=e559]: "2026-09-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e560]:
+      - img "더 보기"
+    - text: "글 공유 너무 감사합니다 댓글도 너무 도움되네요"
+    - button [ref=e561]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e562]:
+      - img "답글"
+    - button [ref=e563]:
+      - img "리포스트"
+    - button [ref=e564]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== SNAPSHOT 16 ===
+- title: "300명이 참여한 사내 AI 경연대회에서 직원 투표 1등으로 특별상을 받았어요. 만든 건 지식 관리 플랫폼이에요. 조직에 흩어져 있는 지식을 한곳으로 모아 정리해주는 서비스예요. 왜 이걸 만들게 되었고, 동료들이 왜 선택해주었는지 이야기해볼게요." [url=https://www.threads.com/@overtime.sam/post/DdX6gAJAnIZ]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 7만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e25]:
+      - img "더 보기"
+    - button [ref=e26]:
+      - img "좋아요"
+      - text: "521"
+    - button [ref=e27]:
+      - img "답글"
+      - text: "62"
+    - button [ref=e28]:
+      - img "리포스트"
+      - text: "122"
+    - button [ref=e29]:
+      - img "공유하기"
+      - text: "330"
+    - button "정렬더 보기" [ref=e30]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e31]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e33]
+    - button "GIF 추가" [ref=e34]
+    - button "작성 도구 확장" [ref=e35]
+  - generic [ref=e151]:
+    - link [ref=e152]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e155]:
+      - img "더 보기"
+    - button [ref=e156]:
+      - img "좋아요"
+      - text: "6"
+    - button [ref=e157]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e158]:
+      - img "리포스트"
+    - button [ref=e159]:
+      - img "공유하기"
+  - generic [ref=e160]:
+    - link [ref=e161]
+    - button [ref=e164]:
+      - img "더 보기"
+    - button [ref=e165]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e166]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e167]:
+      - img "리포스트"
+    - button [ref=e168]:
+      - img "공유하기"
+  - generic [ref=e169]:
+    - link [ref=e170]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e173]:
+      - img "더 보기"
+    - button [ref=e174]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e175]:
+      - img "답글"
+      - text: "2"
+    - button [ref=e176]:
+      - img "리포스트"
+    - button [ref=e177]:
+      - img "공유하기"
+  - generic [ref=e178]:
+    - link [ref=e179]
+    - button [ref=e182]:
+      - img "더 보기"
+    - button [ref=e183]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e184]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e185]:
+      - img "리포스트"
+    - button [ref=e186]:
+      - img "공유하기"
+  - generic [ref=e187]:
+    - link [ref=e188]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e191]:
+      - img "더 보기"
+    - button [ref=e192]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e193]:
+      - img "답글"
+    - button [ref=e194]:
+      - img "리포스트"
+    - button [ref=e195]:
+      - img "공유하기"
+  - generic [ref=e268]:
+    - link [ref=e269]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e272]:
+      - img "더 보기"
+    - button [ref=e273]:
+      - img "좋아요"
+      - text: "4"
+    - button [ref=e274]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e275]:
+      - img "리포스트"
+    - button [ref=e276]:
+      - img "공유하기"
+  - generic [ref=e277]:
+    - link [ref=e278]
+    - button [ref=e281]:
+      - img "더 보기"
+    - button [ref=e282]:
+      - img "좋아요"
+    - button [ref=e283]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e284]:
+      - img "리포스트"
+    - button [ref=e285]:
+      - img "공유하기"
+  - generic [ref=e286]:
+    - link [ref=e287]
+    - button [ref=e290]:
+      - img "더 보기"
+    - button [ref=e291]:
+      - img "좋아요"
+    - button [ref=e292]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e293]:
+      - img "리포스트"
+    - button [ref=e294]:
+      - img "공유하기"
+  - generic [ref=e295]:
+    - link [ref=e296]
+    - button [ref=e299]:
+      - img "더 보기"
+    - button [ref=e300]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e301]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e302]:
+      - img "리포스트"
+    - button [ref=e303]:
+      - img "공유하기"
+  - generic [ref=e304]:
+    - link [ref=e305]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e308]:
+      - img "더 보기"
+    - button [ref=e309]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e310]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e311]:
+      - img "리포스트"
+    - button [ref=e312]:
+      - img "공유하기"
+  - generic [ref=e313]:
+    - link [ref=e314]
+    - button [ref=e317]:
+      - img "더 보기"
+    - button [ref=e318]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e319]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e320]:
+      - img "리포스트"
+    - button [ref=e321]:
+      - img "공유하기"
+  - generic [ref=e322]:
+    - link [ref=e323]
+    - button [ref=e326]:
+      - img "더 보기"
+    - button [ref=e327]:
+      - img "좋아요"
+    - button [ref=e328]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e329]:
+      - img "리포스트"
+    - button [ref=e330]:
+      - img "공유하기"
+  - generic [ref=e331]:
+    - link [ref=e332]
+    - button [ref=e335]:
+      - img "더 보기"
+    - button [ref=e336]:
+      - img "좋아요"
+    - button [ref=e337]:
+      - img "답글"
+    - button [ref=e338]:
+      - img "리포스트"
+    - button [ref=e339]:
+      - img "공유하기"
+  - generic [ref=e394]:
+    - link [ref=e395]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e398]:
+      - img "더 보기"
+    - button [ref=e399]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e400]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e401]:
+      - img "리포스트"
+    - button [ref=e402]:
+      - img "공유하기"
+  - generic [ref=e403]:
+    - link [ref=e404]
+    - button [ref=e407]:
+      - img "더 보기"
+    - button [ref=e408]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e409]:
+      - img "답글"
+    - button [ref=e410]:
+      - img "리포스트"
+    - button [ref=e411]:
+      - img "공유하기"
+      - text: "1"
+  - generic [ref=e457]:
+    - link [ref=e458]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e461]:
+      - img "더 보기"
+    - button [ref=e462]:
+      - img "좋아요"
+      - text: "3"
+    - button [ref=e463]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e464]:
+      - img "리포스트"
+    - button [ref=e465]:
+      - img "공유하기"
+  - generic [ref=e466]:
+    - link [ref=e467]
+    - button [ref=e470]:
+      - img "더 보기"
+    - button [ref=e471]:
+      - img "좋아요"
+    - button [ref=e472]:
+      - img "답글"
+    - button [ref=e473]:
+      - img "리포스트"
+    - button [ref=e474]:
+      - img "공유하기"
+  - generic [ref=e475]:
+    - link [ref=e476]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e479]:
+      - img "더 보기"
+    - button [ref=e480]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e481]:
+      - img "답글"
+    - button [ref=e482]:
+      - img "리포스트"
+    - button [ref=e483]:
+      - img "공유하기"
+  - generic [ref=e484]:
+    - link [ref=e485]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e488]:
+      - img "더 보기"
+    - button [ref=e489]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e490]:
+      - img "답글"
+    - button [ref=e491]:
+      - img "리포스트"
+    - button [ref=e492]:
+      - img "공유하기"
+  - generic [ref=e493]:
+    - link [ref=e494]:
+      - image "gk8233170님의 프로필 사진"
+    - link "gk8233170" [ref=e495]
+    - link "2026년 9월 18일 금요일 오후 12:00" [ref=e496]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e497]:
+      - img "더 보기"
+    - text: "진짜 도움 되는 실용서 읽은것 같아요~ 감사합니다"
+    - button [ref=e498]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e499]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e500]:
+      - img "리포스트"
+    - button [ref=e501]:
+      - img "공유하기"
+  - generic [ref=e502]:
+    - link [ref=e503]:
+      - image "overtime.sam님의 프로필 사진"
+    - link "overtime.sam" [ref=e504]
+    - link "2026년 9월 18일 금요일 오후 12:04" [ref=e505]: "2026-09-18"
+    - text: "작성자"
+    - button [ref=e506]:
+      - img "더 보기"
+    - text: "감사합니다"
+    - button [ref=e507]:
+      - img "좋아요"
+    - button [ref=e508]:
+      - img "답글"
+    - button [ref=e509]:
+      - img "리포스트"
+    - button [ref=e510]:
+      - img "공유하기"
+  - generic [ref=e520]:
+    - link [ref=e521]:
+      - image "eiasscm님의 프로필 사진"
+    - link "eiasscm" [ref=e522]
+    - link "2026년 9월 17일 목요일 오후 4:35" [ref=e523]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e524]:
+      - img "더 보기"
+    - text: "비공개 소스군요"
+    - button [ref=e525]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e526]:
+      - img "답글"
+    - button [ref=e527]:
+      - img "리포스트"
+    - button [ref=e528]:
+      - img "공유하기"
+  - generic [ref=e529]:
+    - link [ref=e530]:
+      - image "now_using_님의 프로필 사진"
+    - link "now_using_" [ref=e531]
+    - link "2026년 9월 18일 금요일 오전 8:55" [ref=e532]: "2026-09-18"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e533]:
+      - img "더 보기"
+    - text: "300명 경연에서 직원 투표 1등이라니 축하드립니다! 흩어진 지식을 모으는 문제를 동료들도 크게 느꼈나 봅니다."
+    - button [ref=e534]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e535]:
+      - img "답글"
+    - button [ref=e536]:
+      - img "리포스트"
+    - button [ref=e537]:
+      - img "공유하기"
+  - generic [ref=e538]:
+    - link [ref=e539]:
+      - image "h_a_ron7788님의 프로필 사진"
+    - link "h_a_ron7788" [ref=e540]
+    - link "2026년 9월 17일 목요일 오후 11:33" [ref=e541]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e542]:
+      - img "더 보기"
+    - text: "좋은글 감사합니다. 이게 결국 외부 llm을 쓰면 조직내 정보가 유출되는거 아닌가요?? 이부분이 정말 어렵던데 어떻게 해결하셨는지 궁금합니다aa"
+    - button [ref=e543]:
+      - img "좋아요"
+      - text: "2"
+    - button [ref=e544]:
+      - img "답글"
+    - button [ref=e545]:
+      - img "리포스트"
+    - button [ref=e546]:
+      - img "공유하기"
+  - generic [ref=e547]:
+    - link [ref=e548]:
+      - image "jiying8282님의 프로필 사진"
+    - link "jiying8282" [ref=e549]
+    - link "2026년 9월 17일 목요일 오후 10:38" [ref=e550]: "2026-09-17"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e551]:
+      - img "더 보기"
+    - text: "우와 대단하다"
+    - button [ref=e552]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e553]:
+      - img "답글"
+    - button [ref=e554]:
+      - img "리포스트"
+    - button [ref=e555]:
+      - img "공유하기"
+  - generic [ref=e556]:
+    - link [ref=e557]:
+      - image "allismaka님의 프로필 사진"
+    - link "allismaka" [ref=e558]
+    - link "2026년 9월 24일 목요일 오전 7:02" [ref=e559]: "2026-09-24"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e560]:
+      - img "더 보기"
+    - text: "글 공유 너무 감사합니다 댓글도 너무 도움되네요"
+    - button [ref=e561]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e562]:
+      - img "답글"
+    - button [ref=e563]:
+      - img "리포스트"
+    - button [ref=e564]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e120]
+    - listitem:
+      - link "개인정보처리방침" [ref=e121]
+    - listitem:
+      - link "쿠키 정책" [ref=e122]
+- button "만들기" [ref=e123]:
+  - img "만들기"
+=== DONE ===
+[ok | 48996ms]

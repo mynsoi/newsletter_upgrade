@@ -1,0 +1,1867 @@
+URL: https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj
+✔︎ Opened a new tab and set it active: tabs[0], page →  (https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj)
+=== SNAPSHOT 1 ===
+- title: "Ai로 다이내믹 2D 일러스트 애니메이션😼 저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ 💌제작과정💌 -GPT로 1장의 이미지를 만든다 -GPT or Claude로 프롬프트 기획&구성한다 -seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹) -최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다. -편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation" [url=https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 8.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "ai_visual101님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "ai_visual101" [ref=e23]
+    - link "motionGraphics" [ref=e24]
+    - link "2026년 8월 14일 금요일 오후 7:18" [ref=e25]: "2026-08-14"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "Ai로 다이내믹 2D 일러스트 애니메이션😼저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ💌제작과정💌\n-GPT로 1장의 이미지를 만든다\n-GPT or Claude로 프롬프트 기획&구성한다\n-seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹)\n-최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다.\n-편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 \n이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation"
+    - button [ref=e27]:
+      - group "Video player":
+        - button [ref=e28]:
+          - img "오디오 소리 꺼짐"
+    - button "미디어를 파노라마로 결합" [ref=e30]
+    - button [ref=e31]
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "146"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "19"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "19"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "48"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e38] [focused]
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "sweethyoung님의 프로필 사진"
+    - link "sweethyoung" [ref=e44]
+    - link "2026년 8월 14일 금요일 오후 8:36" [ref=e45]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "와 너무 잘만들었다,,, 시행착오가 호달달 했겠는데...?"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e53]
+    - link "2026년 8월 14일 금요일 오후 10:33" [ref=e54]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "10번정도? ㅋ"
+    - button [ref=e56]:
+      - img "좋아요"
+    - button [ref=e57]:
+      - img "답글"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "iamfreemom님의 프로필 사진"
+    - link "iamfreemom" [ref=e62]
+    - link "2026년 8월 14일 금요일 오후 8:36" [ref=e63]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "좋디"
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e66]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e71]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e72]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "히힛 🐱🙀"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "wonder_allie님의 프로필 사진"
+    - link "wonder_allie" [ref=e80]
+    - link "2026년 8월 14일 금요일 오후 7:21" [ref=e81]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "와~ 다이나믹한 영상미 좋네요!"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e89]
+    - link "2026년 8월 14일 금요일 오후 7:34" [ref=e90]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "감사~ 😸"
+    - button [ref=e92]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e93]:
+      - img "답글"
+    - button [ref=e94]:
+      - img "리포스트"
+    - button [ref=e95]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]:
+      - image "junicatz님의 프로필 사진"
+    - link "junicatz" [ref=e98]
+    - link "2026년 8월 14일 금요일 오후 10:23" [ref=e99]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "와 이제는 정말..."
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e107]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e108]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "그르게.."
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "nyunnineh님의 프로필 사진"
+    - link "nyunnineh" [ref=e116]
+    - link "2026년 8월 15일 토요일 오전 7:23" [ref=e117]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "엄청나게 정성을 들이셨네요. 멋있어요"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e125]
+    - link "2026년 8월 17일 월요일 오후 10:01" [ref=e126]: "2026-08-17"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "😁👍"
+    - button [ref=e128]:
+      - img "좋아요"
+    - button [ref=e129]:
+      - img "답글"
+    - button [ref=e130]:
+      - img "리포스트"
+    - button [ref=e131]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e132]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e133]
+    - listitem:
+      - link "개인정보처리방침" [ref=e134]
+    - listitem:
+      - link "쿠키 정책" [ref=e135]
+- button "만들기" [ref=e136]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "Ai로 다이내믹 2D 일러스트 애니메이션😼 저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ 💌제작과정💌 -GPT로 1장의 이미지를 만든다 -GPT or Claude로 프롬프트 기획&구성한다 -seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹) -최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다. -편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation" [url=https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 8.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "146"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "19"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "19"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "48"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e38] [focused]
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]:
+      - image "sweethyoung님의 프로필 사진"
+    - link "sweethyoung" [ref=e44]
+    - link "2026년 8월 14일 금요일 오후 8:36" [ref=e45]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - text: "와 너무 잘만들었다,,, 시행착오가 호달달 했겠는데...?"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e53]
+    - link "2026년 8월 14일 금요일 오후 10:33" [ref=e54]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e55]:
+      - img "더 보기"
+    - text: "10번정도? ㅋ"
+    - button [ref=e56]:
+      - img "좋아요"
+    - button [ref=e57]:
+      - img "답글"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]:
+      - image "iamfreemom님의 프로필 사진"
+    - link "iamfreemom" [ref=e62]
+    - link "2026년 8월 14일 금요일 오후 8:36" [ref=e63]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - text: "좋디"
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e66]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e71]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e72]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e73]:
+      - img "더 보기"
+    - text: "히힛 🐱🙀"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]:
+      - image "wonder_allie님의 프로필 사진"
+    - link "wonder_allie" [ref=e80]
+    - link "2026년 8월 14일 금요일 오후 7:21" [ref=e81]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - text: "와~ 다이나믹한 영상미 좋네요!"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e89]
+    - link "2026년 8월 14일 금요일 오후 7:34" [ref=e90]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "감사~ 😸"
+    - button [ref=e92]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e93]:
+      - img "답글"
+    - button [ref=e94]:
+      - img "리포스트"
+    - button [ref=e95]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]:
+      - image "junicatz님의 프로필 사진"
+    - link "junicatz" [ref=e98]
+    - link "2026년 8월 14일 금요일 오후 10:23" [ref=e99]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "와 이제는 정말..."
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e107]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e108]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "그르게.."
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "nyunnineh님의 프로필 사진"
+    - link "nyunnineh" [ref=e116]
+    - link "2026년 8월 15일 토요일 오전 7:23" [ref=e117]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "엄청나게 정성을 들이셨네요. 멋있어요"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e125]
+    - link "2026년 8월 17일 월요일 오후 10:01" [ref=e126]: "2026-08-17"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "😁👍"
+    - button [ref=e128]:
+      - img "좋아요"
+    - button [ref=e129]:
+      - img "답글"
+    - button [ref=e130]:
+      - img "리포스트"
+    - button [ref=e131]:
+      - img "공유하기"
+  - generic [ref=e137]:
+    - link [ref=e138]:
+      - image "fine_tuned_v님의 프로필 사진"
+    - link "fine_tuned_v" [ref=e139]
+    - link "2026년 8월 15일 토요일 오전 12:31" [ref=e140]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e141]:
+      - img "더 보기"
+    - text: "너무 잘 만드셨네요...금손"
+    - button [ref=e142]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e143]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e144]:
+      - img "리포스트"
+    - button [ref=e145]:
+      - img "공유하기"
+  - generic [ref=e146]:
+    - link [ref=e147]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e148]
+    - link "2026년 8월 17일 월요일 오후 10:01" [ref=e149]: "2026-08-17"
+    - text: "작성자"
+    - button [ref=e150]:
+      - img "더 보기"
+    - text: "🙏"
+    - button [ref=e151]:
+      - img "좋아요"
+    - button [ref=e152]:
+      - img "답글"
+    - button [ref=e153]:
+      - img "리포스트"
+    - button [ref=e154]:
+      - img "공유하기"
+  - generic [ref=e155]:
+    - link [ref=e156]:
+      - image "developer_intheocean님의 프로필 사진"
+    - link "developer_intheocean" [ref=e157]
+    - link "2026년 8월 15일 토요일 오후 4:53" [ref=e158]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e159]:
+      - img "더 보기"
+    - text: "이야 진짜 좋네요.."
+    - button [ref=e160]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e161]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e162]:
+      - img "리포스트"
+    - button [ref=e163]:
+      - img "공유하기"
+  - generic [ref=e164]:
+    - link [ref=e165]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e166]
+    - link "2026년 8월 15일 토요일 오후 9:34" [ref=e167]: "2026-08-15"
+    - text: "작성자"
+    - button [ref=e168]:
+      - img "더 보기"
+    - text: "😼"
+    - button [ref=e169]:
+      - img "좋아요"
+    - button [ref=e170]:
+      - img "답글"
+    - button [ref=e171]:
+      - img "리포스트"
+    - button [ref=e172]:
+      - img "공유하기"
+  - generic [ref=e173]:
+    - link [ref=e174]:
+      - image "doworld님의 프로필 사진"
+    - link "doworld" [ref=e175]
+    - link "2026년 8월 14일 금요일 오후 8:34" [ref=e176]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e177]:
+      - img "더 보기"
+    - text: "오오오 머싯따"
+    - button [ref=e178]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e179]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e180]:
+      - img "리포스트"
+    - button [ref=e181]:
+      - img "공유하기"
+  - generic [ref=e182]:
+    - link [ref=e183]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e184]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e185]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e186]:
+      - img "더 보기"
+    - text: "어숴와"
+    - button [ref=e187]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e188]:
+      - img "답글"
+    - button [ref=e189]:
+      - img "리포스트"
+    - button [ref=e190]:
+      - img "공유하기"
+  - generic [ref=e191]:
+    - link [ref=e192]:
+      - image "purplechicagoproject님의 프로필 사진"
+    - link "purplechicagoproject" [ref=e193]
+    - link "2026년 8월 14일 금요일 오후 10:10" [ref=e194]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e195]:
+      - img "더 보기"
+    - text: "우와!!! 대단하세요!!!!!!!"
+    - button [ref=e196]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e197]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e198]:
+      - img "리포스트"
+    - button [ref=e199]:
+      - img "공유하기"
+  - generic [ref=e200]:
+    - link [ref=e201]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e202]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e203]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e204]:
+      - img "더 보기"
+    - text: "고마워요 😄 🐱🐱"
+    - button [ref=e205]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e206]:
+      - img "답글"
+    - button [ref=e207]:
+      - img "리포스트"
+    - button [ref=e208]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e132]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e133]
+    - listitem:
+      - link "개인정보처리방침" [ref=e134]
+    - listitem:
+      - link "쿠키 정책" [ref=e135]
+- button "만들기" [ref=e136]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "Ai로 다이내믹 2D 일러스트 애니메이션😼 저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ 💌제작과정💌 -GPT로 1장의 이미지를 만든다 -GPT or Claude로 프롬프트 기획&구성한다 -seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹) -최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다. -편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation" [url=https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 8.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "146"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "19"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "19"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "48"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]
+    - button [ref=e55]:
+      - img "더 보기"
+    - button [ref=e56]:
+      - img "좋아요"
+    - button [ref=e57]:
+      - img "답글"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e66]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]
+    - button [ref=e73]:
+      - img "더 보기"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]
+    - button [ref=e91]:
+      - img "더 보기"
+    - text: "감사~ 😸"
+    - button [ref=e92]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e93]:
+      - img "답글"
+    - button [ref=e94]:
+      - img "리포스트"
+    - button [ref=e95]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]:
+      - image "junicatz님의 프로필 사진"
+    - link "junicatz" [ref=e98]
+    - link "2026년 8월 14일 금요일 오후 10:23" [ref=e99]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - text: "와 이제는 정말..."
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e107]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e108]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e109]:
+      - img "더 보기"
+    - text: "그르게.."
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]:
+      - image "nyunnineh님의 프로필 사진"
+    - link "nyunnineh" [ref=e116]
+    - link "2026년 8월 15일 토요일 오전 7:23" [ref=e117]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e118]:
+      - img "더 보기"
+    - text: "엄청나게 정성을 들이셨네요. 멋있어요"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e125]
+    - link "2026년 8월 17일 월요일 오후 10:01" [ref=e126]: "2026-08-17"
+    - text: "작성자"
+    - button [ref=e127]:
+      - img "더 보기"
+    - text: "😁👍"
+    - button [ref=e128]:
+      - img "좋아요"
+    - button [ref=e129]:
+      - img "답글"
+    - button [ref=e130]:
+      - img "리포스트"
+    - button [ref=e131]:
+      - img "공유하기"
+  - generic [ref=e137]:
+    - link [ref=e138]:
+      - image "fine_tuned_v님의 프로필 사진"
+    - link "fine_tuned_v" [ref=e139]
+    - link "2026년 8월 15일 토요일 오전 12:31" [ref=e140]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e141]:
+      - img "더 보기"
+    - text: "너무 잘 만드셨네요...금손"
+    - button [ref=e142]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e143]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e144]:
+      - img "리포스트"
+    - button [ref=e145]:
+      - img "공유하기"
+  - generic [ref=e146]:
+    - link [ref=e147]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e148]
+    - link "2026년 8월 17일 월요일 오후 10:01" [ref=e149]: "2026-08-17"
+    - text: "작성자"
+    - button [ref=e150]:
+      - img "더 보기"
+    - text: "🙏"
+    - button [ref=e151]:
+      - img "좋아요"
+    - button [ref=e152]:
+      - img "답글"
+    - button [ref=e153]:
+      - img "리포스트"
+    - button [ref=e154]:
+      - img "공유하기"
+  - generic [ref=e155]:
+    - link [ref=e156]:
+      - image "developer_intheocean님의 프로필 사진"
+    - link "developer_intheocean" [ref=e157]
+    - link "2026년 8월 15일 토요일 오후 4:53" [ref=e158]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e159]:
+      - img "더 보기"
+    - text: "이야 진짜 좋네요.."
+    - button [ref=e160]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e161]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e162]:
+      - img "리포스트"
+    - button [ref=e163]:
+      - img "공유하기"
+  - generic [ref=e164]:
+    - link [ref=e165]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e166]
+    - link "2026년 8월 15일 토요일 오후 9:34" [ref=e167]: "2026-08-15"
+    - text: "작성자"
+    - button [ref=e168]:
+      - img "더 보기"
+    - text: "😼"
+    - button [ref=e169]:
+      - img "좋아요"
+    - button [ref=e170]:
+      - img "답글"
+    - button [ref=e171]:
+      - img "리포스트"
+    - button [ref=e172]:
+      - img "공유하기"
+  - generic [ref=e173]:
+    - link [ref=e174]:
+      - image "doworld님의 프로필 사진"
+    - link "doworld" [ref=e175]
+    - link "2026년 8월 14일 금요일 오후 8:34" [ref=e176]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e177]:
+      - img "더 보기"
+    - text: "오오오 머싯따"
+    - button [ref=e178]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e179]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e180]:
+      - img "리포스트"
+    - button [ref=e181]:
+      - img "공유하기"
+  - generic [ref=e182]:
+    - link [ref=e183]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e184]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e185]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e186]:
+      - img "더 보기"
+    - text: "어숴와"
+    - button [ref=e187]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e188]:
+      - img "답글"
+    - button [ref=e189]:
+      - img "리포스트"
+    - button [ref=e190]:
+      - img "공유하기"
+  - generic [ref=e191]:
+    - link [ref=e192]:
+      - image "purplechicagoproject님의 프로필 사진"
+    - link "purplechicagoproject" [ref=e193]
+    - link "2026년 8월 14일 금요일 오후 10:10" [ref=e194]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e195]:
+      - img "더 보기"
+    - text: "우와!!! 대단하세요!!!!!!!"
+    - button [ref=e196]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e197]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e198]:
+      - img "리포스트"
+    - button [ref=e199]:
+      - img "공유하기"
+  - generic [ref=e200]:
+    - link [ref=e201]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e202]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e203]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e204]:
+      - img "더 보기"
+    - text: "고마워요 😄 🐱🐱"
+    - button [ref=e205]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e206]:
+      - img "답글"
+    - button [ref=e207]:
+      - img "리포스트"
+    - button [ref=e208]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e132]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e133]
+    - listitem:
+      - link "개인정보처리방침" [ref=e134]
+    - listitem:
+      - link "쿠키 정책" [ref=e135]
+- button "만들기" [ref=e136]:
+  - img "만들기"
+=== SNAPSHOT 4 ===
+- title: "Ai로 다이내믹 2D 일러스트 애니메이션😼 저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ 💌제작과정💌 -GPT로 1장의 이미지를 만든다 -GPT or Claude로 프롬프트 기획&구성한다 -seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹) -최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다. -편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation" [url=https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 8.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "146"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "19"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "19"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "48"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]
+    - button [ref=e55]:
+      - img "더 보기"
+    - button [ref=e56]:
+      - img "좋아요"
+    - button [ref=e57]:
+      - img "답글"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e66]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]
+    - button [ref=e73]:
+      - img "더 보기"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]
+    - button [ref=e91]:
+      - img "더 보기"
+    - button [ref=e92]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e93]:
+      - img "답글"
+    - button [ref=e94]:
+      - img "리포스트"
+    - button [ref=e95]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e109]:
+      - img "더 보기"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e118]:
+      - img "더 보기"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]
+    - button [ref=e127]:
+      - img "더 보기"
+    - button [ref=e128]:
+      - img "좋아요"
+    - button [ref=e129]:
+      - img "답글"
+    - button [ref=e130]:
+      - img "리포스트"
+    - button [ref=e131]:
+      - img "공유하기"
+  - generic [ref=e137]:
+    - link [ref=e138]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e141]:
+      - img "더 보기"
+    - button [ref=e142]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e143]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e144]:
+      - img "리포스트"
+    - button [ref=e145]:
+      - img "공유하기"
+  - generic [ref=e146]:
+    - link [ref=e147]
+    - button [ref=e150]:
+      - img "더 보기"
+    - text: "🙏"
+    - button [ref=e151]:
+      - img "좋아요"
+    - button [ref=e152]:
+      - img "답글"
+    - button [ref=e153]:
+      - img "리포스트"
+    - button [ref=e154]:
+      - img "공유하기"
+  - generic [ref=e155]:
+    - link [ref=e156]:
+      - image "developer_intheocean님의 프로필 사진"
+    - link "developer_intheocean" [ref=e157]
+    - link "2026년 8월 15일 토요일 오후 4:53" [ref=e158]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e159]:
+      - img "더 보기"
+    - text: "이야 진짜 좋네요.."
+    - button [ref=e160]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e161]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e162]:
+      - img "리포스트"
+    - button [ref=e163]:
+      - img "공유하기"
+  - generic [ref=e164]:
+    - link [ref=e165]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e166]
+    - link "2026년 8월 15일 토요일 오후 9:34" [ref=e167]: "2026-08-15"
+    - text: "작성자"
+    - button [ref=e168]:
+      - img "더 보기"
+    - text: "😼"
+    - button [ref=e169]:
+      - img "좋아요"
+    - button [ref=e170]:
+      - img "답글"
+    - button [ref=e171]:
+      - img "리포스트"
+    - button [ref=e172]:
+      - img "공유하기"
+  - generic [ref=e173]:
+    - link [ref=e174]:
+      - image "doworld님의 프로필 사진"
+    - link "doworld" [ref=e175]
+    - link "2026년 8월 14일 금요일 오후 8:34" [ref=e176]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e177]:
+      - img "더 보기"
+    - text: "오오오 머싯따"
+    - button [ref=e178]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e179]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e180]:
+      - img "리포스트"
+    - button [ref=e181]:
+      - img "공유하기"
+  - generic [ref=e182]:
+    - link [ref=e183]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e184]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e185]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e186]:
+      - img "더 보기"
+    - text: "어숴와"
+    - button [ref=e187]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e188]:
+      - img "답글"
+    - button [ref=e189]:
+      - img "리포스트"
+    - button [ref=e190]:
+      - img "공유하기"
+  - generic [ref=e191]:
+    - link [ref=e192]:
+      - image "purplechicagoproject님의 프로필 사진"
+    - link "purplechicagoproject" [ref=e193]
+    - link "2026년 8월 14일 금요일 오후 10:10" [ref=e194]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e195]:
+      - img "더 보기"
+    - text: "우와!!! 대단하세요!!!!!!!"
+    - button [ref=e196]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e197]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e198]:
+      - img "리포스트"
+    - button [ref=e199]:
+      - img "공유하기"
+  - generic [ref=e200]:
+    - link [ref=e201]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e202]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e203]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e204]:
+      - img "더 보기"
+    - text: "고마워요 😄 🐱🐱"
+    - button [ref=e205]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e206]:
+      - img "답글"
+    - button [ref=e207]:
+      - img "리포스트"
+    - button [ref=e208]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e132]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e133]
+    - listitem:
+      - link "개인정보처리방침" [ref=e134]
+    - listitem:
+      - link "쿠키 정책" [ref=e135]
+- button "만들기" [ref=e136]:
+  - img "만들기"
+=== SNAPSHOT 5 ===
+- title: "Ai로 다이내믹 2D 일러스트 애니메이션😼 저번편에 이어서 디테일한 모션감을 높여 봤어~ ㅎ 💌제작과정💌 -GPT로 1장의 이미지를 만든다 -GPT or Claude로 프롬프트 기획&구성한다 -seedance 2.5 프롬프트 만든다(시행착오 겁나 많았음... 내 돈😹) -최종적으로 물리법칙, 디테일 모션감을 프롬프트에 적용한다. -편집툴에서 음악과 디테일 편집한다 모션그래픽 디자이너로 이 정도까진 못 만들어봤는데... ㅎㅎ 2D Illustration Animation" [url=https://www.threads.com/@ai_visual101/post/DcBFNPfEzUj]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 8.8천회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - button [ref=e32]:
+      - img "좋아요"
+      - text: "146"
+    - button [ref=e33]:
+      - img "답글"
+      - text: "19"
+    - button [ref=e34]:
+      - img "리포스트"
+      - text: "19"
+    - button [ref=e35]:
+      - img "공유하기"
+      - text: "48"
+    - button "정렬더 보기" [ref=e36]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e37]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - button "미디어 첨부" [ref=e39]
+    - button "GIF 추가" [ref=e40]
+    - button "작성 도구 확장" [ref=e41]
+  - generic [ref=e42]:
+    - link [ref=e43]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e46]:
+      - img "더 보기"
+    - button [ref=e47]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e48]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e49]:
+      - img "리포스트"
+    - button [ref=e50]:
+      - img "공유하기"
+  - generic [ref=e51]:
+    - link [ref=e52]
+    - button [ref=e55]:
+      - img "더 보기"
+    - button [ref=e56]:
+      - img "좋아요"
+    - button [ref=e57]:
+      - img "답글"
+    - button [ref=e58]:
+      - img "리포스트"
+    - button [ref=e59]:
+      - img "공유하기"
+  - generic [ref=e60]:
+    - link [ref=e61]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e64]:
+      - img "더 보기"
+    - button [ref=e65]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e66]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e67]:
+      - img "리포스트"
+    - button [ref=e68]:
+      - img "공유하기"
+  - generic [ref=e69]:
+    - link [ref=e70]
+    - button [ref=e73]:
+      - img "더 보기"
+    - button [ref=e74]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e75]:
+      - img "답글"
+    - button [ref=e76]:
+      - img "리포스트"
+    - button [ref=e77]:
+      - img "공유하기"
+  - generic [ref=e78]:
+    - link [ref=e79]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e82]:
+      - img "더 보기"
+    - button [ref=e83]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e84]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e85]:
+      - img "리포스트"
+    - button [ref=e86]:
+      - img "공유하기"
+  - generic [ref=e87]:
+    - link [ref=e88]
+    - button [ref=e91]:
+      - img "더 보기"
+    - button [ref=e92]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e93]:
+      - img "답글"
+    - button [ref=e94]:
+      - img "리포스트"
+    - button [ref=e95]:
+      - img "공유하기"
+  - generic [ref=e96]:
+    - link [ref=e97]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e100]:
+      - img "더 보기"
+    - button [ref=e101]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e102]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e103]:
+      - img "리포스트"
+    - button [ref=e104]:
+      - img "공유하기"
+  - generic [ref=e105]:
+    - link [ref=e106]
+    - button [ref=e109]:
+      - img "더 보기"
+    - button [ref=e110]:
+      - img "좋아요"
+    - button [ref=e111]:
+      - img "답글"
+    - button [ref=e112]:
+      - img "리포스트"
+    - button [ref=e113]:
+      - img "공유하기"
+  - generic [ref=e114]:
+    - link [ref=e115]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e118]:
+      - img "더 보기"
+    - button [ref=e119]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e120]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e121]:
+      - img "리포스트"
+    - button [ref=e122]:
+      - img "공유하기"
+  - generic [ref=e123]:
+    - link [ref=e124]
+    - button [ref=e127]:
+      - img "더 보기"
+    - button [ref=e128]:
+      - img "좋아요"
+    - button [ref=e129]:
+      - img "답글"
+    - button [ref=e130]:
+      - img "리포스트"
+    - button [ref=e131]:
+      - img "공유하기"
+  - generic [ref=e137]:
+    - link [ref=e138]
+    - img "원본 작성자가 좋아함"
+    - button [ref=e141]:
+      - img "더 보기"
+    - button [ref=e142]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e143]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e144]:
+      - img "리포스트"
+    - button [ref=e145]:
+      - img "공유하기"
+  - generic [ref=e146]:
+    - link [ref=e147]
+    - button [ref=e150]:
+      - img "더 보기"
+    - text: "🙏"
+    - button [ref=e151]:
+      - img "좋아요"
+    - button [ref=e152]:
+      - img "답글"
+    - button [ref=e153]:
+      - img "리포스트"
+    - button [ref=e154]:
+      - img "공유하기"
+  - generic [ref=e155]:
+    - link [ref=e156]:
+      - image "developer_intheocean님의 프로필 사진"
+    - link "developer_intheocean" [ref=e157]
+    - link "2026년 8월 15일 토요일 오후 4:53" [ref=e158]: "2026-08-15"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e159]:
+      - img "더 보기"
+    - text: "이야 진짜 좋네요.."
+    - button [ref=e160]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e161]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e162]:
+      - img "리포스트"
+    - button [ref=e163]:
+      - img "공유하기"
+  - generic [ref=e164]:
+    - link [ref=e165]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e166]
+    - link "2026년 8월 15일 토요일 오후 9:34" [ref=e167]: "2026-08-15"
+    - text: "작성자"
+    - button [ref=e168]:
+      - img "더 보기"
+    - text: "😼"
+    - button [ref=e169]:
+      - img "좋아요"
+    - button [ref=e170]:
+      - img "답글"
+    - button [ref=e171]:
+      - img "리포스트"
+    - button [ref=e172]:
+      - img "공유하기"
+  - generic [ref=e173]:
+    - link [ref=e174]:
+      - image "doworld님의 프로필 사진"
+    - link "doworld" [ref=e175]
+    - link "2026년 8월 14일 금요일 오후 8:34" [ref=e176]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e177]:
+      - img "더 보기"
+    - text: "오오오 머싯따"
+    - button [ref=e178]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e179]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e180]:
+      - img "리포스트"
+    - button [ref=e181]:
+      - img "공유하기"
+  - generic [ref=e182]:
+    - link [ref=e183]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e184]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e185]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e186]:
+      - img "더 보기"
+    - text: "어숴와"
+    - button [ref=e187]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e188]:
+      - img "답글"
+    - button [ref=e189]:
+      - img "리포스트"
+    - button [ref=e190]:
+      - img "공유하기"
+  - generic [ref=e191]:
+    - link [ref=e192]:
+      - image "purplechicagoproject님의 프로필 사진"
+    - link "purplechicagoproject" [ref=e193]
+    - link "2026년 8월 14일 금요일 오후 10:10" [ref=e194]: "2026-08-14"
+    - image "Threads 사용자의 프로필 사진"
+    - img "원본 작성자가 좋아함"
+    - button [ref=e195]:
+      - img "더 보기"
+    - text: "우와!!! 대단하세요!!!!!!!"
+    - button [ref=e196]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e197]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e198]:
+      - img "리포스트"
+    - button [ref=e199]:
+      - img "공유하기"
+  - generic [ref=e200]:
+    - link [ref=e201]:
+      - image "ai_visual101님의 프로필 사진"
+    - link "ai_visual101" [ref=e202]
+    - link "2026년 8월 14일 금요일 오후 10:34" [ref=e203]: "2026-08-14"
+    - text: "작성자"
+    - button [ref=e204]:
+      - img "더 보기"
+    - text: "고마워요 😄 🐱🐱"
+    - button [ref=e205]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e206]:
+      - img "답글"
+    - button [ref=e207]:
+      - img "리포스트"
+    - button [ref=e208]:
+      - img "공유하기"
+  - text: "일부 추가 답글은 확인할 수 없습니다."
+  - link "더 알아보기" [ref=e132]
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e133]
+    - listitem:
+      - link "개인정보처리방침" [ref=e134]
+    - listitem:
+      - link "쿠키 정책" [ref=e135]
+- button "만들기" [ref=e136]:
+  - img "만들기"
+=== DONE ===
+[ok | 13587ms]

@@ -133,5 +133,191 @@
   "started": 1791562430.108555,
   "log": "runs/studio/logs/1010-011350-6f1a.log",
   "ended": 1791562531.249695
+ },
+ {
+  "id": "1010-043250-0e50",
+  "kind": "wiki-lint",
+  "target": "정리",
+  "status": "done",
+  "started": 1791574370.2478218,
+  "log": "runs/studio/logs/1010-043250-0e50.log",
+  "ended": 1791574509.8691387
+ },
+ {
+  "id": "1010-043454-5cdd",
+  "kind": "collect",
+  "target": "자동 · Threads·LinkedIn",
+  "status": "lost",
+  "started": 1791574494.623622,
+  "log": "runs/studio/logs/1010-043454-5cdd.log"
+ },
+ {
+  "id": "1010-043510-fab4",
+  "kind": "wiki-lint",
+  "target": "정리",
+  "status": "done",
+  "started": 1791574510.152993,
+  "log": "runs/studio/logs/1010-043510-fab4.log",
+  "ended": 1791574645.1538615
+ },
+ {
+  "id": "1010-043541-68df",
+  "kind": "wiki-pick",
+  "target": "wiki/업무방식/AI로-제안서를-만들어도-설득은-사람의-몫.md",
+  "status": "done",
+  "started": 1791574541.8135462,
+  "log": "runs/studio/logs/1010-043541-68df.log",
+  "ended": 1791574562.8238502
+ },
+ {
+  "id": "1010-043602-cc80",
+  "kind": "titles",
+  "target": "w-20261010-043541",
+  "status": "done",
+  "started": 1791574562.8233562,
+  "log": "runs/studio/logs/1010-043602-cc80.log",
+  "ended": 1791574590.3875985
+ },
+ {
+  "id": "1010-043653-e5bf",
+  "kind": "shorten",
+  "target": "2026-10-08-ai-퇴근시간",
+  "status": "done",
+  "started": 1791574613.8662293,
+  "log": "runs/studio/logs/1010-043653-e5bf.log",
+  "ended": 1791574614.3592339
+ },
+ {
+  "id": "1010-043840-16e5",
+  "kind": "wiki-pick",
+  "target": "wiki/업무방식/AI가-실행해도-문제-정의는-사람의-몫.md",
+  "status": "done",
+  "started": 1791574720.7860122,
+  "log": "runs/studio/logs/1010-043840-16e5.log",
+  "ended": 1791574744.8911479
+ },
+ {
+  "id": "1010-043904-165b",
+  "kind": "titles",
+  "target": "w-20261010-043840",
+  "status": "lost",
+  "started": 1791574744.8906898,
+  "log": "runs/studio/logs/1010-043904-165b.log"
+ },
+ {
+  "id": "1010-044722-22f3",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791575242.5163488,
+  "log": "runs/studio/logs/1010-044722-22f3.log",
+  "ended": 1791575826.5046017
+ },
+ {
+  "id": "1010-050330-97a5",
+  "kind": "write",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791576210.3974438,
+  "log": "runs/studio/logs/1010-050330-97a5.log",
+  "ended": 1791576761.351763
+ },
+ {
+  "id": "1010-050633-297a",
+  "kind": "shorten",
+  "target": "2026-10-08-ai-퇴근시간",
+  "status": "done",
+  "started": 1791576393.4834158,
+  "log": "runs/studio/logs/1010-050633-297a.log",
+  "ended": 1791576477.9797854
+ },
+ {
+  "id": "1010-051540-1e8f",
+  "kind": "titles",
+  "target": "w-20261010-043541",
+  "status": "done",
+  "started": 1791576940.3248148,
+  "log": "runs/studio/logs/1010-051540-1e8f.log",
+  "ended": 1791576971.9750507
+ },
+ {
+  "id": "1010-051648-8e60",
+  "kind": "titles",
+  "target": "w-20261010-043541",
+  "status": "done",
+  "started": 1791577008.5140014,
+  "log": "runs/studio/logs/1010-051648-8e60.log",
+  "ended": 1791577060.5978847
+ },
+ {
+  "id": "1010-052003-d41a",
+  "kind": "revise",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791577203.0749712,
+  "log": "runs/studio/logs/1010-052003-d41a.log",
+  "ended": 1791577282.1119869
+ },
+ {
+  "id": "1010-052251-e354",
+  "kind": "revise",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791577371.4759693,
+  "log": "runs/studio/logs/1010-052251-e354.log",
+  "ended": 1791577408.7147472
+ },
+ {
+  "id": "1010-052520-e0bf",
+  "kind": "chat",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791577520.0798168,
+  "log": "runs/studio/logs/1010-052520-e0bf.log",
+  "ended": 1791577658.954355
+ },
+ {
+  "id": "1010-132751-1dac",
+  "kind": "revise",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791606471.9851313,
+  "log": "runs/studio/logs/1010-132751-1dac.log",
+  "ended": 1791606527.2338457
+ },
+ {
+  "id": "1010-160946-80c1",
+  "kind": "revise",
+  "target": "w-20261010-043840",
+  "status": "done",
+  "started": 1791616186.7028782,
+  "log": "runs/studio/logs/1010-160946-80c1.log",
+  "ended": 1791616257.997413
+ },
+ {
+  "id": "1010-161003-9cbd",
+  "kind": "wiki-pick",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791616203.7322972,
+  "log": "runs/studio/logs/1010-161003-9cbd.log",
+  "ended": 1791616231.1951935
+ },
+ {
+  "id": "1010-161031-d474",
+  "kind": "titles",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791616231.1945853,
+  "log": "runs/studio/logs/1010-161031-d474.log",
+  "ended": 1791616274.0686438
+ },
+ {
+  "id": "1010-161255-8d63",
+  "kind": "titles",
+  "target": "w-20261010-161003",
+  "status": "running",
+  "started": 1791616375.4342122,
+  "log": "runs/studio/logs/1010-161255-8d63.log"
  }
 ]

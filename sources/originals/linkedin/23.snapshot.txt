@@ -1,0 +1,240 @@
+URL: https://www.linkedin.com/posts/%EC%84%A0%EC%98%81-%EC%A1%B0-02b84522a_%ED%81%B4%EB%A1%9C%EB%93%9C-opus-55%EB%A1%9C-vidence-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-1%EC%B0%A8%EB%A1%9C-%EB%A7%8C%EB%93%A4%EB%B4%A4%EC%8A%B5%EB%8B%88%EB%8B%A4-%EA%B3%A7-activity-7511963328634634241-7jTu
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/%EC%84%A0%EC%98%81-%EC%A1%B0-02b84522a_%ED%81%B4%EB%A1%9C%EB%93%9C-opus-55%EB%A1%9C-vidence-%ED%9…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/%EC%84%A0%EC%98%81-%EC%A1%B0-02b84522a_%ED%81%B4%EB%A1%9C%EB%93%9C-opus-55%EB%A1%9C-vidence-%ED%9…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "조선영님의 프로필 보기"
+      - link "조선영• 2촌" [ref=e26]
+      - text: "AI Creative Director | 숭실대 영화예술/계원예술대 디지털미디어디자인 교수 | ex-뤼튼 네이버 10월 3일 • 수정함"
+      - link "조선영 님 2촌" [ref=e27]
+      - button "조선영님 팔로우" [ref=e28]: "팔로우"
+      - button "조선영 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "클로드 OPUS 5.5로 VIDENCE 홈페이지를 1차로 만들봤습니다. 곧 오픈 예정 ^^비쥬얼은 미드저니, 영상은 Kling3.0 조합으로 먼저 재료를 만들고 아래와 같이 요청했습니다.\"홈페이지에 사용할 영상이야. 스크롤 할때마다 자연스럽게 화면이 넘어갈거야. VIDENCE 라는 회사를 알리는 브랜드 홈페이지야. 섹션별로 헤드타이틀은 네가 알아서 샘플로 넣어줘. 최종파일은 1차로 html로 받았으면해. 이 악물고 전력을 다해 모든 자원 가용해서 만드세요.\"(이 악물고 다들 쓰시길래 저도 써봤습니다.ㅋㅋ) 참고로 VIDENCE 홈페이지 주요 오브젝트는 무화과입니다. 무화과는 꽃이 없는 과일처럼 보이지만 사실 꽃이 열매 안에 숨어 피어나요 겉으로는 안 보여도, 안에는 분명히 있는 거지요  VIDENCE 는 이렇게 보이지 않는 것을 찾아 눈에 보이게 만드는 일을 하는 스튜디오라는 컨셉입니다. Find the essence. Shape the unseen"
+      - region "Video Player" [ref=e31]:
+        - application
+      - button "반응 버튼 상태: 반응 없음" [ref=e32]: "101"
+      - button "댓글" [ref=e33]: "14"
+      - button "퍼가기" [ref=e34]: "1"
+      - link "보내기" [ref=e35]
+      - link "반응 101" [ref=e36]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e37]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e38]
+      - button "GIF 선택 도구 열기" [ref=e39]
+      - button "사진 공유" [ref=e40]
+    - link [ref=e41]:
+      - link "Junhyeok Jang 님의 반응: 추천" [ref=e42]
+      - link "Eunseo Choi 님의 반응: 추천" [ref=e43]
+      - link "Younghoon Kim 님의 반응: 추천" [ref=e44]
+      - link "경한 배 님의 반응: 추천" [ref=e45]
+      - link "상욱 이 님의 반응: 추천" [ref=e46]
+      - link "AInspire bokun sim 님의 반응: 추천" [ref=e47]
+      - link "세진 한 님의 반응: 마음에 쏙듬" [ref=e48]
+      - link "Hayoung Jang 님의 반응: 추천" [ref=e49]
+      - link "반응 모두 보기" [ref=e50]
+    - button "관련순" [ref=e51]
+    - link [ref=e52]:
+      - image "Bohemian Salt님의 프로필 보기"
+    - link "Bohemian Salt 님 3촌 이상 UX Designer who focuses on analyzing usage patterns intensively" [ref=e53]
+    - text: "3일"
+    - button "Bohemian Salt님 팔로우" [ref=e54]: "팔로우"
+    - button "Bohemian Salt 님의 댓글에 대한 옵션 더 보기" [ref=e55]
+    - text: "비슷한 느낌이 나지만 모션에서 확실히 티가 나네요. 그래픽은 조아요"
+    - button [ref=e56]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e57]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e58]
+    - link [ref=e59]:
+      - image "조선영님의 프로필 보기"
+    - link "조선영 글쓴이 AI Creative Director | 숭실대 영화예술/계원예술대 디지털미디어디자인 교수 | ex-뤼튼 네이버" [ref=e60]
+    - text: "5시간"
+    - button "조선영 님의 댓글에 대한 옵션 더 보기" [ref=e61]
+    - paragraph:
+      - link "Bohemian Salt님의 프로필 보기" [ref=e62]: "Bohemian Salt"
+      - text: "감사합니다~"
+    - button [ref=e63]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e64]
+    - link [ref=e65]:
+      - image "SUPER8 STUDIO님의 프로필 보기"
+    - link "SUPER8 STUDIO 님 2촌 본능은 아티스트. 정체성은 기업가. 필요할 땐 발명가. 때로는 모험가. 약간의 지혜와 약간의 장난기. 계속해서 성장 중." [ref=e66]
+    - text: "6일"
+    - button "SUPER8 STUDIO님 팔로우" [ref=e67]: "팔로우"
+    - button "SUPER8 STUDIO 님의 댓글에 대한 옵션 더 보기" [ref=e68]
+    - text: "저도 아스트라로 사이트 만들고 있는데, 쉽지 않은데 너무 잘 만드셨네요."
+    - button [ref=e69]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e70]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e71]
+    - link [ref=e72]:
+      - image "조선영님의 프로필 보기"
+    - link "조선영 글쓴이 AI Creative Director | 숭실대 영화예술/계원예술대 디지털미디어디자인 교수 | ex-뤼튼 네이버" [ref=e73]
+    - text: "5일"
+    - button "조선영 님의 댓글에 대한 옵션 더 보기" [ref=e74]
+    - paragraph:
+      - link "SUPER8 STUDIO님의 프로필 보기" [ref=e75]: "SUPER8 STUDIO"
+      - text: "섹션별 영상을 먼저 잘 만들고(재료) 그다음에 요청해보세요~"
+    - button [ref=e76]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e77]
+    - link [ref=e78]:
+      - list:
+        - listitem
+    - link [ref=e79]:
+      - image "김주희님의 프로필 보기"
+    - link "김주희 님 2촌 UI/UX · Product Designer | Complex UX · Admin/B2B Workflow · Design Systems · AI Product" [ref=e80]
+    - text: "6일"
+    - button "김주희님 팔로우" [ref=e81]: "팔로우"
+    - button "김주희 님의 댓글에 대한 옵션 더 보기" [ref=e82]
+    - text: "자연스럽고 스토리가 연결되어 작품같아요!"
+    - button [ref=e83]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e84]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e85]
+    - link [ref=e86]:
+      - image "조선영님의 프로필 보기"
+    - link "조선영 글쓴이 AI Creative Director | 숭실대 영화예술/계원예술대 디지털미디어디자인 교수 | ex-뤼튼 네이버" [ref=e87]
+    - text: "5일"
+    - button "조선영 님의 댓글에 대한 옵션 더 보기" [ref=e88]
+    - paragraph:
+      - link "김주희님의 프로필 보기" [ref=e89]: "김주희"
+      - text: "좋은 피드백 감사드립니다💕"
+    - button [ref=e90]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e91]
+    - link [ref=e92]:
+      - list:
+        - listitem
+    - link [ref=e93]:
+      - image "David Lee님의 프로필 보기"
+    - link "David Lee 님 인증됨 프로필 2촌 Principal FDE PM (Ex-UX)" [ref=e94]
+    - text: "6일"
+    - button "David Lee님 팔로우" [ref=e95]: "팔로우"
+    - button "David Lee 님의 댓글에 대한 옵션 더 보기" [ref=e96]
+    - text: "oh my 너무 멋있는데요"
+    - button [ref=e97]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e98]
+    - text: "1"
+    - link "글쓴이가 반응한 횟수" [ref=e99]
+    - link [ref=e100]:
+      - image "조선영님의 프로필 보기"
+    - link "조선영 글쓴이 AI Creative Director | 숭실대 영화예술/계원예술대 디지털미디어디자인 교수 | ex-뤼튼 네이버" [ref=e101]
+    - text: "5일"
+    - button "조선영 님의 댓글에 대한 옵션 더 보기" [ref=e102]
+    - paragraph:
+      - link "David Lee님의 프로필 보기" [ref=e103]: "David Lee"
+      - text: "감사합니다!! 😀"
+    - button [ref=e104]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e105]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e106]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e107]
+      - link "웹접근성" [ref=e108]
+      - link "고객센터" [ref=e109]
+      - button "개인정보와 약관" [ref=e110]
+      - link "광고 선택" [ref=e111]
+      - link "광고" [ref=e112]
+      - button "비즈니스서비스" [ref=e113]
+      - link "LinkedIn 앱 다운로드" [ref=e114]
+      - link "더보기" [ref=e115]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - generic [ref=e116]:
+      - image "Hyunwoo Joo"
+      - text: "상태 - 온라인"
+      - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e117]
+    - button "메시지 메뉴 열기" [ref=e119]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e120]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e121]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 9824ms]

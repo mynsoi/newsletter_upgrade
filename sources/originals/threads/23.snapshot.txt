@@ -1,0 +1,488 @@
+URL: https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan
+✔︎ Opened a new tab and set it active: tabs[0], page → 회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음 (https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan)
+=== SNAPSHOT 1 ===
+- title: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음" [url=https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.1만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - image "f_bgrowlap님의 프로필 사진"
+      - button [ref=e22]:
+        - img "팔로우"
+    - link "f_bgrowlap" [ref=e23]
+    - link "업무자동화" [ref=e24]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e25]: "3일"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음  1/5"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "6"
+    - button [ref=e29]:
+      - img "리포스트"
+    - button [ref=e30]:
+      - img "공유하기"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e39]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e40]: "3일"
+    - button [ref=e41]:
+      - img "더 보기"
+    - text: "매달 똑같은 엑셀 여는 일이었음. 프랜차이즈 본사 일 하면서 제일 먼저 손댄게 로열티 계산인데 매달 5일에 포스 매출 뽑아서 1% 계산하고 명세서 만들고 공지랑 맞춰보는데 3시간 걸리던걸 웹 화면 하나로 옮겼더니 5분이면 끝남  2/5"
+    - button [ref=e42]:
+      - img "좋아요"
+    - button [ref=e43]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e44]:
+      - img "리포스트"
+    - button [ref=e45]:
+      - img "공유하기"
+  - generic [ref=e46]:
+    - link [ref=e47]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e48]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e49]: "3일"
+    - button [ref=e50]:
+      - img "더 보기"
+    - text: "매출 보고는 지금 매일 아침 8시랑 11시에 알아서 올라오고 견적서는 품목 말로 하면 점주용이랑 내부용 엑셀 두장이 나옴  3/5"
+    - button [ref=e51]:
+      - img "좋아요"
+    - button [ref=e52]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e53]:
+      - img "리포스트"
+    - button [ref=e54]:
+      - img "공유하기"
+  - generic [ref=e55]:
+    - link [ref=e56]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e57]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e58]: "3일"
+    - button [ref=e59]:
+      - img "더 보기"
+    - text: "AI 에이전트 이런거보다 이게 체감이 훨씬 크더라고. 매달 하는 일이니까 한번 만들어두면 계속 시간이 빠짐  4/5"
+    - button [ref=e60]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e61]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e62]:
+      - img "리포스트"
+    - button [ref=e63]:
+      - img "공유하기"
+  - generic [ref=e64]:
+    - link [ref=e65]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e66]
+    - link "2026년 10월 6일 화요일 오후 2:01" [ref=e67]: "3일"
+    - button [ref=e68]:
+      - img "더 보기"
+    - text: "다들 회사에서 제일 지겨운 반복업무 뭐임? 5/5"
+    - button [ref=e69]:
+      - img "좋아요"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e73]
+    - listitem:
+      - link "개인정보처리방침" [ref=e74]
+    - listitem:
+      - link "쿠키 정책" [ref=e75]
+- button "만들기" [ref=e76]:
+  - img "만들기"
+=== SNAPSHOT 2 ===
+- title: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음" [url=https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.1만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음  1/5"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "6"
+    - button [ref=e29]:
+      - img "리포스트"
+    - button [ref=e30]:
+      - img "공유하기"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e39]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e40]: "3일"
+    - button [ref=e41]:
+      - img "더 보기"
+    - text: "매달 똑같은 엑셀 여는 일이었음. 프랜차이즈 본사 일 하면서 제일 먼저 손댄게 로열티 계산인데 매달 5일에 포스 매출 뽑아서 1% 계산하고 명세서 만들고 공지랑 맞춰보는데 3시간 걸리던걸 웹 화면 하나로 옮겼더니 5분이면 끝남  2/5"
+    - button [ref=e42]:
+      - img "좋아요"
+    - button [ref=e43]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e44]:
+      - img "리포스트"
+    - button [ref=e45]:
+      - img "공유하기"
+  - generic [ref=e46]:
+    - link [ref=e47]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e48]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e49]: "3일"
+    - button [ref=e50]:
+      - img "더 보기"
+    - text: "매출 보고는 지금 매일 아침 8시랑 11시에 알아서 올라오고 견적서는 품목 말로 하면 점주용이랑 내부용 엑셀 두장이 나옴  3/5"
+    - button [ref=e51]:
+      - img "좋아요"
+    - button [ref=e52]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e53]:
+      - img "리포스트"
+    - button [ref=e54]:
+      - img "공유하기"
+  - generic [ref=e55]:
+    - link [ref=e56]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e57]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e58]: "3일"
+    - button [ref=e59]:
+      - img "더 보기"
+    - text: "AI 에이전트 이런거보다 이게 체감이 훨씬 크더라고. 매달 하는 일이니까 한번 만들어두면 계속 시간이 빠짐  4/5"
+    - button [ref=e60]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e61]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e62]:
+      - img "리포스트"
+    - button [ref=e63]:
+      - img "공유하기"
+  - generic [ref=e64]:
+    - link [ref=e65]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e66]
+    - link "2026년 10월 6일 화요일 오후 2:01" [ref=e67]: "3일"
+    - button [ref=e68]:
+      - img "더 보기"
+    - text: "다들 회사에서 제일 지겨운 반복업무 뭐임? 5/5"
+    - button [ref=e69]:
+      - img "좋아요"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e73]
+    - listitem:
+      - link "개인정보처리방침" [ref=e74]
+    - listitem:
+      - link "쿠키 정책" [ref=e75]
+- button "만들기" [ref=e76]:
+  - img "만들기"
+=== SNAPSHOT 3 ===
+- title: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음" [url=https://www.threads.com/@f_bgrowlap/post/DeI-5XpGZan]
+- navigation:
+  - link [ref=e1]:
+    - img "Threads"
+  - button [ref=e2]:
+    - img "더 보기"
+  - link [ref=e3]:
+    - img
+    - text: "추천"
+  - button [ref=e4]:
+    - img
+    - text: "새로운 스레드"
+  - link [ref=e5]:
+    - img "검색"
+    - text: "검색"
+  - link [ref=e6]:
+    - img "메시지"
+    - text: "메시지"
+  - link [ref=e7]:
+    - img "알림"
+    - text: "활동"
+  - link [ref=e8]:
+    - img "프로필"
+    - text: "프로필"
+  - link [ref=e9]:
+    - img "인사이트"
+    - text: "인사이트"
+  - text: "기타 피드"
+  - button "피드 수정" [ref=e10]: "수정"
+  - link "팔로잉" [ref=e11]
+  - link [ref=e12]:
+    - img "저장됨"
+    - text: "저장됨"
+  - link [ref=e13]:
+    - img "좋아요"
+    - text: "좋아요"
+  - link [ref=e14]:
+    - text: "유령 게시물"
+    - img
+  - link [ref=e15]:
+    - img "보관함"
+    - text: "보관함"
+- button [ref=e16]:
+  - img "돌아가기"
+- link "열 제목" [ref=e17]:
+  - heading [level=1]: "스레드"
+- text: "조회 1.1만회"
+- button [ref=e18]:
+  - img "더 보기"
+- region "칼럼 본문" [ref=e19]:
+  - generic [ref=e20]:
+    - button [ref=e21]:
+      - button [ref=e22]:
+        - img "팔로우"
+    - button [ref=e26]:
+      - img "더 보기"
+    - text: "회사에 AI 들이면 뭐부터 없어질까 했는데 막상 해보니까 제일 먼저 없어진게 너무 시시한거라 좀 웃겼음  1/5"
+    - button [ref=e27]:
+      - img "좋아요"
+      - text: "8"
+    - button [ref=e28]:
+      - img "답글"
+      - text: "6"
+    - button [ref=e29]:
+      - img "리포스트"
+    - button [ref=e30]:
+      - img "공유하기"
+    - button "정렬더 보기" [ref=e31]:
+      - img "정렬"
+      - text: "인기순"
+      - img "더 보기"
+    - button [ref=e32]:
+      - text: "활동 보기"
+      - img "활동 보기"
+    - image "code_vivian님의 프로필 사진"
+    - textbox "텍스트 필드가 비어 있습니다. 입력하여 새 게시물을 작성해보세요." [ref=e33] [focused]
+    - button "미디어 첨부" [ref=e34]
+    - button "GIF 추가" [ref=e35]
+    - button "작성 도구 확장" [ref=e36]
+  - generic [ref=e37]:
+    - link [ref=e38]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e39]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e40]: "3일"
+    - button [ref=e41]:
+      - img "더 보기"
+    - text: "매달 똑같은 엑셀 여는 일이었음. 프랜차이즈 본사 일 하면서 제일 먼저 손댄게 로열티 계산인데 매달 5일에 포스 매출 뽑아서 1% 계산하고 명세서 만들고 공지랑 맞춰보는데 3시간 걸리던걸 웹 화면 하나로 옮겼더니 5분이면 끝남  2/5"
+    - button [ref=e42]:
+      - img "좋아요"
+    - button [ref=e43]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e44]:
+      - img "리포스트"
+    - button [ref=e45]:
+      - img "공유하기"
+  - generic [ref=e46]:
+    - link [ref=e47]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e48]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e49]: "3일"
+    - button [ref=e50]:
+      - img "더 보기"
+    - text: "매출 보고는 지금 매일 아침 8시랑 11시에 알아서 올라오고 견적서는 품목 말로 하면 점주용이랑 내부용 엑셀 두장이 나옴  3/5"
+    - button [ref=e51]:
+      - img "좋아요"
+    - button [ref=e52]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e53]:
+      - img "리포스트"
+    - button [ref=e54]:
+      - img "공유하기"
+  - generic [ref=e55]:
+    - link [ref=e56]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e57]
+    - link "2026년 10월 6일 화요일 오후 2:00" [ref=e58]: "3일"
+    - button [ref=e59]:
+      - img "더 보기"
+    - text: "AI 에이전트 이런거보다 이게 체감이 훨씬 크더라고. 매달 하는 일이니까 한번 만들어두면 계속 시간이 빠짐  4/5"
+    - button [ref=e60]:
+      - img "좋아요"
+      - text: "1"
+    - button [ref=e61]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e62]:
+      - img "리포스트"
+    - button [ref=e63]:
+      - img "공유하기"
+  - generic [ref=e64]:
+    - link [ref=e65]:
+      - image "f_bgrowlap님의 프로필 사진"
+    - link "f_bgrowlap" [ref=e66]
+    - link "2026년 10월 6일 화요일 오후 2:01" [ref=e67]: "3일"
+    - button [ref=e68]:
+      - img "더 보기"
+    - text: "다들 회사에서 제일 지겨운 반복업무 뭐임? 5/5"
+    - button [ref=e69]:
+      - img "좋아요"
+    - button [ref=e70]:
+      - img "답글"
+      - text: "1"
+    - button [ref=e71]:
+      - img "리포스트"
+    - button [ref=e72]:
+      - img "공유하기"
+- contentinfo:
+  - list:
+    - listitem: "© 2026"
+    - listitem:
+      - link "Threads 약관" [ref=e73]
+    - listitem:
+      - link "개인정보처리방침" [ref=e74]
+    - listitem:
+      - link "쿠키 정책" [ref=e75]
+- button "만들기" [ref=e76]:
+  - img "만들기"
+=== DONE ===
+[ok | 10476ms]

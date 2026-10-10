@@ -1,0 +1,249 @@
+URL: https://www.linkedin.com/posts/jehokim_%ED%81%B4%EB%A1%9C%EB%93%9C-%EB%AA%87-%EA%B0%9C%EB%82%98-%EC%93%B0%EB%8B%88-%EC%A7%80%EC%9D%B8%EB%93%A4%EC%9D%84-%EB%A7%8C%EB%82%98%EB%A9%B4-%EB%AC%BC%EC%96%B4%EB%B4%85%EB%8B%88%EB%8B%A4-%EB%AC%BC%EB%A1%A0-2%EB%A7%8C-%EC%9B%90%EC%A7%9C%EB%A6%AC%EA%B0%80-activity-7505113798547021824-uXpM
+✔︎ Opened a new tab and set it active: tabs[0], page → 게시물 | LinkedIn (https://www.linkedin.com/posts/jehokim_%ED%81%B4%EB%A1%9C%EB%93%9C-%EB%AA%87-%EA%B0%9C%EB%82%98-%EC%93%B0%EB%8B%88-%EC%A7%80%EC%…)
+- title: "게시물 | LinkedIn" [url=https://www.linkedin.com/posts/jehokim_%ED%81%B4%EB%A1%9C%EB%93%9C-%EB%AA%87-%EA%B0%9C%EB%82%98-%EC%93%B0%EB%8B%88-%EC%A7%80%EC%…]
+- region:
+  - heading "알림 0" [level=2]
+- banner:
+  - button "LinkedIn" [ref=e1]:
+    - img "LinkedIn"
+  - status
+  - search:
+    - textbox "검색" [ref=e2] [placeholder="검색"]
+  - navigation:
+    - list:
+      - listitem "홈, 새 알림 1" [ref=e3]:
+        - button "홈, 새 알림 1" [ref=e4]: "홈"
+      - listitem "인맥, 새 알림 0" [ref=e5]:
+        - link "인맥, 새 알림 0" [ref=e6]: "인맥"
+      - listitem "채용공고, 새 알림 0" [ref=e7]:
+        - link "채용공고, 새 알림 0" [ref=e8]: "채용공고"
+      - listitem "메시지, 새 알림 0" [ref=e9]:
+        - link "메시지, 새 알림 0" [ref=e10]: "메시지"
+      - listitem "알림, 새 알림 0" [ref=e11]:
+        - link "알림, 새 알림 0" [ref=e12]: "알림"
+      - listitem:
+        - button "나" [ref=e13]
+  - navigation:
+    - list:
+      - listitem "비즈니스용" [ref=e14]:
+        - button "비즈니스용" [ref=e15]
+  - button "₩0에 프리미엄 시도" [ref=e16]
+- main [ref=e17] [scrollable]:
+  - complementary "사이드바":
+    - link [ref=e18]:
+      - image "Hyunwoo Joo"
+    - link "Hyunwoo Joo 팀스파르타 강사 서울 강남구" [ref=e19]
+    - link "경력" [ref=e20]
+    - link "커리어 목표 달성₩0에 프리미엄 시도" [ref=e21]
+    - menu:
+      - link "프로필 조회자 28" [ref=e22]
+      - link "분석 모두 보기 0" [ref=e23]: "분석 모두 보기"
+  - region "주요 콘텐츠" [ref=e24]:
+    - listitem:
+      - heading [level=2]: "피드 게시물"
+      - link [ref=e25]:
+        - image "Jaeho Kim님의 프로필 보기"
+      - link "Jaeho Kim• 2촌" [ref=e26]
+      - text: "Software Engineer 9월 14일"
+      - link "Jaeho Kim 님 인증됨 프로필 2촌" [ref=e27]
+      - button "Jaeho Kim님 팔로우" [ref=e28]: "팔로우"
+      - button "Jaeho Kim 님의 게시물에 대한 관리 메뉴 열기" [ref=e29]
+      - text: "클로드 몇 개나 쓰니?지인들을 만나면 물어봅니다.물론 2만 원짜리가 아니라 월 30만 원 하는 max 20x짜리를 물어보는 것입니다.클로드 6개, 코덱스 2개요.클로드 2개, 코덱스 1개요.클로드 1개, 코덱스 1개요.놀랍게도 1개 쓴다는 사람이 별로 없습니다.다들 토큰이 부족하다고 합니다.1개만 쓰는 사람이 오히려 저밖에 없는 것 같습니다.(저는 코덱스 20x 1개만 사용하고 있습니다)AI 서비스 제공자 입장에서는 운영 비용이 너무 많이 들기 때문에 가격을 더 올릴 수도 있겠다 생각했는데, 놀랍게도 사용자들이 먼저 계정을 늘려 더 많은 돈을 내고 있네요.도대체 무슨 일이 일어나고 있는 건지 어리둥절합니다.예전에는 제 카드값 명세서에 해외 결제가 거의 없었습니다.몇 년 전부터 온갖 OTT와, Google One, Apple, Cloudflare, GitHub, Slack 등 구독 서비스에 매달 돈을 내기 시작하더니…이제는 AI 서비스에 그보다 더 큰 돈을 가져다 바치며 살고 있네요.이걸로 열심히 코딩해서 투자한 돈 이상의 가치를 만들어 내야 할 텐데… 나는 과연 잘하고 있는 걸까?대충 프롬프트를 휘갈겨 입력하고 결과를 기다리는 내 모습이 슬롯머신 손잡이를 당긴 후 기다리는 사람처럼 느껴질 때도 있습니다.결과가 맘에 안 들면 버리고 다시 레버를 당기고.이렇게 하다가 토큰만 소진하고 결과를 못 만들어 내면 진짜 도박장에서 돈을 쓴 것과 다를 바 없겠는걸.이런 생각을 하다 보면 아찔해지네요.자리를 고쳐 앉고 정신을 집중하게 됩니다."
+      - button "반응 버튼 상태: 반응 없음" [ref=e30]: "232"
+      - button "댓글" [ref=e31]: "16"
+      - button "퍼가기" [ref=e32]: "2"
+      - link "보내기" [ref=e33]
+      - link "반응 232" [ref=e34]:
+        - list:
+          - listitem
+          - listitem
+          - listitem
+      - status
+      - textbox "댓글 쓰기용 텍스트 에디터" [ref=e35]: "댓글 달기"
+      - button "이모티콘 선택창 표시" [ref=e36]
+      - button "GIF 선택 도구 열기" [ref=e37]
+      - button "사진 공유" [ref=e38]
+    - link [ref=e39]:
+      - link "성열 양 님의 반응: 추천" [ref=e40]
+      - link "오균 안 님의 반응: 추천" [ref=e41]
+      - link "Hyuntaek Park 님의 반응: 추천" [ref=e42]
+      - link "Soyeon Lee 님의 반응: 추천" [ref=e43]
+      - link "갑열 김 님의 반응: 추천" [ref=e44]
+      - link "hojun kim 님의 반응: 추천" [ref=e45]
+      - link "Eunyoung Park 님의 반응: 추천" [ref=e46]
+      - link "Tony Il hyeong Cheong(정일형) 님의 반응: 추천" [ref=e47]
+      - link "반응 모두 보기" [ref=e48]
+    - button "관련순" [ref=e49]
+    - link [ref=e50]:
+      - image "Minsoo Jeong님의 프로필 보기"
+    - link "Minsoo Jeong 님 프리미엄 프로필 2촌 Backend Engineer | Java·Spring | AI Native | + TypeScript" [ref=e51]
+    - text: "3주"
+    - button "Minsoo Jeong님 팔로우" [ref=e52]: "팔로우"
+    - button "Minsoo Jeong 님의 댓글에 대한 옵션 더 보기" [ref=e53]
+    - text: "​저도 메인으로 코덱스 1개만 활용하고 있습니다.간단한 작업은 제미나이 무료 버전이나 로컬 에이전트, 무료 API 키를 조합해서 해결하는 편이에요.복잡하지 않은 작업은 여러 무료 AI API를 연달아 두고, 한도가 차거나 응답이 멈추면 다음 API로 넘어가며 릴레이 방식으로 활용하고 있습니다."
+    - button [ref=e54]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 2"
+    - button "답장" [ref=e55]
+    - text: "2"
+    - link [ref=e56]:
+      - list:
+        - listitem
+    - button "이전 답변 보기" [ref=e57]
+    - link [ref=e58]:
+      - image "Minsoo Jeong님의 프로필 보기"
+    - link "Minsoo Jeong 님 프리미엄 프로필 2촌 Backend Engineer | Java·Spring | AI Native | + TypeScript" [ref=e59]
+    - text: "3주"
+    - button "Minsoo Jeong님 팔로우" [ref=e60]: "팔로우"
+    - button "Minsoo Jeong 님의 댓글에 대한 옵션 더 보기" [ref=e61]
+    - paragraph:
+      - link "Hoon Jung님의 프로필 보기" [ref=e62]: "Hoon Jung"
+      - text: "좋게 봐주셔서 감사합니다 아무래도 취준생이고, 요새 AI Native 적인거에 관심이 많다보니, 여러 방법을 찾게 되더라구요. 잘 활용하면서 이번에 대회도 한번 출전하고 있습니다."
+    - button [ref=e63]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e64]
+    - link [ref=e65]:
+      - image "임근영님의 프로필 보기"
+    - link "임근영 님 인증됨 프로필 2촌 Performance & Growth Marketer at Wantedlab" [ref=e66]
+    - text: "3주"
+    - button "임근영님 팔로우" [ref=e67]: "팔로우"
+    - button "임근영 님의 댓글에 대한 옵션 더 보기" [ref=e68]
+    - text: "저렇게 많이 쓰는 분들은 플랫폼 수준을 운영하는 걸까요? 수익이 있다면 괜찮은데 없다면 난감..🥲"
+    - button [ref=e69]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 3"
+    - button "답장" [ref=e70]
+    - text: "1"
+    - link [ref=e71]:
+      - list:
+        - listitem
+    - link [ref=e72]:
+      - image "Jaeho Kim님의 프로필 보기"
+    - link "Jaeho Kim 글쓴이 Software Engineer" [ref=e73]
+    - text: "3주"
+    - button "Jaeho Kim 님의 댓글에 대한 옵션 더 보기" [ref=e74]
+    - paragraph:
+      - link "임근영님의 프로필 보기" [ref=e75]: "임근영"
+      - text: "수익이 있는 사람도 있고 없는 사람들도 있습니다. 난감하지만 지금 상황에서 멈춰 있을수도 없는 노릇이기 때문에 저나 그들이나 열심히 달리고 있는 것 같아요."
+    - button [ref=e76]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 5"
+    - button "답장" [ref=e77]
+    - link [ref=e78]:
+      - list:
+        - listitem
+        - listitem
+    - link [ref=e79]:
+      - image "Kyaa Studio님의 프로필 보기"
+    - link "Kyaa Studio 님 3촌 이상 1인 앱 스튜디오 · 막힌 하루를 푸는 앱 Moti! Triple! Keep! · kyaastudio.com" [ref=e80]
+    - text: "3주"
+    - button "Kyaa Studio님 팔로우" [ref=e81]: "팔로우"
+    - button "Kyaa Studio 님의 댓글에 대한 옵션 더 보기" [ref=e82]
+    - text: "코덱스 두 개, 클로드 두 개 뭐 이렇게 쓰신다는 분들 보고 스스로 반성해야 하는 건가 싶은 생각이 자주 듭니다. 저도 회사에서 코덱스 하나, 클로드 하나 쓰긴 하지만 클로드를 주로 쓰는데 헤르메스 연결이 안되서 코덱스를 쓸 뿐이지 클로드로 헤르메스까지 돌릴 수 있으면 아마 코덱스 안 썼을 거에요. 근데 토큰이 부족해서 계정을 여러 개 쓰신다는 분들 글을 보면 내가 너무 안일하게 쓰나 싶기도 하면서도 도대체 뭘 얼마나 어떻게 써야 토큰이 그 정도로 부족하지 궁금하기도 합니다;"
+    - button [ref=e83]:
+      - img "반응 버튼 상태: 반응 없음"
+    - button "답장" [ref=e84]
+    - text: "1"
+    - link [ref=e85]:
+      - image "Jaeho Kim님의 프로필 보기"
+    - link "Jaeho Kim 글쓴이 Software Engineer" [ref=e86]
+    - text: "3주"
+    - button "Jaeho Kim 님의 댓글에 대한 옵션 더 보기" [ref=e87]
+    - paragraph:
+      - link "Kyaa Studio님의 프로필 보기" [ref=e88]: "Kyaa Studio"
+      - text: "저도 거의 비슷한 감정입니다. 😁"
+    - button [ref=e89]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 2"
+    - button "답장" [ref=e90]
+    - link [ref=e91]:
+      - list:
+        - listitem
+    - link [ref=e92]:
+      - image "Sam(Sang eun) Kim님의 프로필 보기"
+    - link "Sam(Sang eun) Kim 님 인증됨 프로필 2촌 광주 큐룸 대표 | 삼성전자 출신 풀스택 엔지니어 | 웹·앱 외주 · 린 MVP · 바이브코딩 이슈 해결" [ref=e93]
+    - text: "3주"
+    - button "Sam(Sang eun) Kim님 팔로우" [ref=e94]: "팔로우"
+    - button "Sam(Sang eun) Kim 님의 댓글에 대한 옵션 더 보기" [ref=e95]
+    - text: "말씀하신것처럼 구독 많이 한다고 매출이 늘어난다는 보장이 없기에..ㅎㅎ;"
+    - button [ref=e96]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e97]
+    - text: "2"
+    - link [ref=e98]:
+      - list:
+        - listitem
+    - button "이전 답변 보기" [ref=e99]
+    - link [ref=e100]:
+      - image "Sam(Sang eun) Kim님의 프로필 보기"
+    - link "Sam(Sang eun) Kim 님 인증됨 프로필 2촌 광주 큐룸 대표 | 삼성전자 출신 풀스택 엔지니어 | 웹·앱 외주 · 린 MVP · 바이브코딩 이슈 해결" [ref=e101]
+    - text: "3주"
+    - button "Sam(Sang eun) Kim님 팔로우" [ref=e102]: "팔로우"
+    - button "Sam(Sang eun) Kim 님의 댓글에 대한 옵션 더 보기" [ref=e103]
+    - paragraph:
+      - link "Jaeho Kim님의 프로필 보기" [ref=e104]: "Jaeho Kim"
+      - text: "공감합니다. 특히나 온라인 시장이 더 그런거 같아요. 온라인에서 멀어질 수록 둔감하시고, 직감적으로 그 분들이 하는 사업은 망하지 않을거 같기도해요.. ex) 영업을 베이스로 사업하는분..ㅎㅎ 하지만 저도 온라인 시장에서 살아남으려 노력하는 사람으로서 구독을 아니할 수 없는 입장이긴해요.ㅎㅎ"
+    - button [ref=e105]:
+      - img "반응 버튼 상태: 반응 없음"
+      - text: "반응 1"
+    - button "답장" [ref=e106]
+    - link "글쓴이가 반응한 횟수" [ref=e107]
+  - complementary "보조 영역":
+    - iframe "광고" [ref=e108]:
+      - link "Advertise on LinkedIn" [ref=f1e1]:
+        - image "Advertise on LinkedIn"
+    - contentinfo:
+      - link "소개" [ref=e109]
+      - link "웹접근성" [ref=e110]
+      - link "고객센터" [ref=e111]
+      - button "개인정보와 약관" [ref=e112]
+      - link "광고 선택" [ref=e113]
+      - link "광고" [ref=e114]
+      - button "비즈니스서비스" [ref=e115]
+      - link "LinkedIn 앱 다운로드" [ref=e116]
+      - link "더보기" [ref=e117]
+    - text: "LinkedIn Corporation © 2026년"
+- complementary:
+  - banner:
+    - generic [ref=e118]:
+      - image "Hyunwoo Joo"
+      - text: "상태 - 온라인"
+      - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e119]
+    - button "메시지 메뉴 열기" [ref=e121]:
+      - img "메시지 메뉴 열기"
+    - button "메시지 쓰기" [ref=e122]
+    - button "메시지창에 있습니다. 메시지 목록을 열려면 엔터를 누르세요." [ref=e123]
+- complementary "커리어, 채용공고 등에 대한 도움을 받을 수 있는 AI 기반 지원"
+- iframe:
+  - region "축하 메시지" [ref=f2e1]:
+    - banner:
+      - heading "총 알림 0" [level=2]
+    - alert
+  - banner "글로벌 탐색":
+    - link [ref=f2e2]:
+      - img "LinkedIn"
+    - combobox "검색" [ref=f2e3] [placeholder="검색"]
+    - navigation "기본 탐색" [ref=f2e4]:
+      - list:
+        - listitem "홈" [ref=f2e5]:
+          - link "홈" [ref=f2e6]: "새로운 업데이트 알림\n  \n  \n        \n    \n        \n    \n\n        \n    \n  \n          \n  \n      \n\n  \n\n      \n         홈"
+        - listitem "인맥" [ref=f2e7]:
+          - link "인맥" [ref=f2e8]
+        - listitem "채용공고" [ref=f2e9]:
+          - link "채용공고" [ref=f2e10]
+        - listitem "메시지" [ref=f2e11]:
+          - link "메시지" [ref=f2e12]
+        - listitem "알림" [ref=f2e13]:
+          - link "알림" [ref=f2e14]
+        - listitem:
+          - button "Hyunwoo Joo" [ref=f2e15]:
+            - image "Hyunwoo Joo"
+            - text: "나"
+        - listitem:
+          - button "Business용" [ref=f2e16]
+        - listitem:
+          - link "₩0에 프리미엄 시도" [ref=f2e17]
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[ok | 9855ms]
