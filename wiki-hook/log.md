@@ -1,6 +1,12 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/linkedin/24.md | 새 주제 | 직무역량/부분-수정과-전체-정보의-위계.md; 직무역량/채택한-안과-버린-안의-판단-설명.md
+- ingest ../sources/originals/linkedin/23.md | 합침 | 직무역량/화면-밖으로-이어지는-전문성.md
+- ingest ../sources/originals/linkedin/22.md | 새 주제 | 업무설계/불만족한-답과-무작정-재생성.md
+- ingest ../sources/originals/linkedin/21.md | 새 주제 | 업무설계/회의록의-정리와-업무-착수의-공백.md
+- ingest ../sources/originals/linkedin/20.md | 새 주제 | 직무역량/사용-빈도와-답-확인의-교육.md
+- ingest ../sources/originals/linkedin/19.md | 새 주제 | 업무설계/타이핑의-부담과-음성-요청.md
 - ingest ../sources/originals/linkedin/18.md | 보탬 없음 | — (사이트 제작 시간·기능 소개와 전망 중심으로, 회사 업무로 옮길 구체적인 판단·절차가 부족함)
 - ingest ../sources/originals/linkedin/17.md | 새 주제 | 업무설계/제안의-가짓수와-상대의-사정.md
 - ingest ../sources/originals/linkedin/16.md | 새 주제 | 직무역량/교육장에서-확인하는-업무-결과물.md
