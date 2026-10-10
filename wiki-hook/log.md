@@ -1,6 +1,10 @@
 # 위키 이력
 
 ## 2026-10-10
+- ingest ../sources/originals/threads/02.md | 새 주제 | AI평가/사람다운-문체와-ai-작성-판별.md
+- ingest ../sources/originals/threads/01.md | 새 주제 | 지식관리/게시물-재수집과-작성자의-정리본.md
+- ingest ../sources/originals/linkedin/32.md | 새 주제 | 업무설계/노트북-종료와-ai-업무의-연속성.md
+- ingest ../sources/originals/linkedin/31.md | 새 주제 | 업무설계/전체-기획과-위치를-짚는-수정.md; 직무역량/제작-자동화와-신입의-배울-자리.md
 - ingest ../sources/originals/linkedin/30.md | 새 주제 | 직무역량/첫-시안의-선택과-제작-순서를-바꾸는-피드백.md
 - ingest ../sources/originals/linkedin/29.md | 새 주제 | 직무역량/ai의-오류-판정과-실무의-설계-의도.md; 업무설계/자료-복사-차단과-업무용-붙여넣기.md
 - ingest ../sources/originals/linkedin/28.md | 새 주제 | 도구선택/글자-수-세기와-글-채점의-분담.md
