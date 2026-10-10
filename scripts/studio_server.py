@@ -433,6 +433,16 @@ def act_titles(a):
     return j
 
 
+def act_titles_ui(a):
+    """화면에서 누른 제목 후보 — 깊게 읽기가 도는 동안은 거절한다. 읽기가 끝나면 제목 후보가 저절로 이어지므로,
+    그 사이에 보낸 메시지 회차가 밀려나거나 이어지는 회차가 막히지 않게 (내부 호출은 act_titles를 바로 부른다)."""
+    k = safe_id(a["article"])
+    with LOCK:
+        if any(j["kind"] == "wiki-pick" and j["target"] == k and j["status"] == "running" for j in JOBS.values()):
+            raise ValueError("깊게 읽는 중 — 끝나면 제목 후보가 이어서 나옵니다")
+    return act_titles(a)
+
+
 def act_title(a):
     k, t = a["article"], a["title"].strip()
     b = json.loads(read(brief_path(k)))
@@ -639,7 +649,7 @@ def act_chat(a):
     return start("chat", k, cmd, after)
 
 
-ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles, "title": act_title,
+ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
