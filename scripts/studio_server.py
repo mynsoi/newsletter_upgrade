@@ -190,8 +190,8 @@ def article_from_brief(bp):
     for f in sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1])):
         n = f.stem.split("-r")[1]
         if f.stat().st_size > 50:
-            steps.append(step(len(steps) + 1, f, "astra", read(d / f"feedback-r{n}.txt"), b.get("title", ""),
-                              read(d / f"mode-r{n}.txt").strip()))
+            steps.append(step(len(steps) + 1, f, read(d / f"by-r{n}.txt").strip() or "astra", read(d / f"feedback-r{n}.txt"),
+                              b.get("title", ""), read(d / f"mode-r{n}.txt").strip()))
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
@@ -549,6 +549,56 @@ def act_length(a):
     return start("shorten", k, PIPE + ["--shorten-file", art["steps"][-1]["file"], out_dir.relative_to(ROOT).as_posix()], after)
 
 
+EDIT_MAX = 40000  # 공백 포함 글자 — 칼럼 한 편의 열 배쯤
+
+
+def blocks(t):
+    return [x.strip() for x in re.split(r"\n\s*\n", t) if x.strip()]
+
+
+def act_edit(a):
+    """직접 편집 — 사람이 고친 원고를 덮어쓰지 않고 '멘토'가 쓴 다음 과정으로 쌓는다
+    (멘토 2026-10-10: "과정, 확정에서 뷰어를 에디터로 만들어서 직접 사람이 편집할 수도 있게").
+    설정 글은 final-rN.md로 남겨 다음 피드백 반영·절반 줄이기가 이 원고를 바탕으로 이어지게 한다."""
+    k = safe_id(a["article"])
+    text = str(a.get("text") or "").replace("\r\n", "\n").strip()
+    if not text:
+        raise ValueError("빈 원고")
+    if len(text) > EDIT_MAX:
+        raise ValueError("원고가 너무 김")
+    with LOCK:  # 같은 글을 AI가 쓰는 중이면 과정 번호가 부딪친다
+        if any(j["target"] == k and j["kind"] in ("write", "revise", "shorten") and j["status"] == "running" for j in JOBS.values()):
+            raise ValueError("이 글을 쓰는 중 — 끝난 뒤에 고치세요")
+    art = next((x for x in articles() if x["id"] == k), None)
+    if not art or not art["steps"]:
+        raise ValueError("고칠 과정이 없음")
+    n = len(art["steps"])
+    base = int(a.get("base") or n)
+    if not 1 <= base <= n:
+        raise ValueError("잘못된 과정 번호")
+    src = art["steps"][base - 1]
+    if blocks(text) == blocks(src["text"]):
+        raise ValueError("바뀐 곳이 없음")
+    mode = "직접 편집" if base == n else f"직접 편집 · 과정 {base}에서"
+    title = art["title"] or src["title"]  # 제목은 고치는 대상이 아니다(제목 탭에서 astra 후보로)
+    body = (f"# {title}\n\n" if title else "") + text + "\n"
+    d = ROOT / "runs" / "columns" / k
+    d.mkdir(parents=True, exist_ok=True)
+    pp = process_path(k)
+    if pp:  # 확정 칼럼 기록 — columns/(결과물 자리)에는 쓰지 않고 과정만 하나 늘린다
+        f = d / f"edit-{time.strftime('%Y%m%d-%H%M%S')}.md"
+        f.write_text(body, encoding="utf-8")
+        p = json.loads(read(pp))
+        p["steps"].append({"file": f.relative_to(ROOT).as_posix(), "by": "멘토", "mode": mode})
+        pp.write_text(json.dumps(p, ensure_ascii=False, indent=1), encoding="utf-8")
+    else:
+        r = len(list(d.glob("final-r*.md"))) + 1  # column_pipeline.revise()와 같은 번호 규칙
+        (d / f"final-r{r}.md").write_text(body, encoding="utf-8")
+        (d / f"by-r{r}.txt").write_text("멘토", encoding="utf-8")
+        (d / f"mode-r{r}.txt").write_text(mode, encoding="utf-8")
+    return {"n": n + 1}
+
+
 def act_hero(a):
     src = image_src(a["src"])
     meta_update(a["article"], hero=src)
@@ -660,7 +710,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length,
+           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
 
 

@@ -99,11 +99,13 @@ Ok "Pillow $(& $Py -X utf8 -I -c 'import PIL; print(PIL.__version__)')"
 Step "작업실 화면 (app/)"
 Push-Location "$Root\app"
 try {
-    if (-not (Test-Path "node_modules")) {
+    # 처음이거나 package-lock.json이 바뀌었으면(새 패키지가 든 버전을 받은 경우) 다시 받는다
+    $stamp = "node_modules\.package-lock.json"
+    if (-not (Test-Path $stamp) -or (Get-Item "package-lock.json").LastWriteTime -gt (Get-Item $stamp).LastWriteTime) {
         Write-Host "  패키지 받는 중 (npm ci, 몇 분 걸립니다)..."
         & npm.cmd ci --no-audit --no-fund
         if ($LASTEXITCODE) { throw "npm ci 실패 — 위 오류를 확인하세요" }
-    } else { Ok "node_modules 있음 (다시 받으려면 app\node_modules를 지우고 실행)" }
+    } else { Ok "패키지 그대로 (package-lock.json 바뀐 것 없음)" }
     & npm.cmd run build
     if ($LASTEXITCODE) { throw "화면 빌드 실패 — 위 오류를 확인하세요" }
     Ok "app\dist 빌드됨"

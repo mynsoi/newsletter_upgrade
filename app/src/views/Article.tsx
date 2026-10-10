@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { IconPencil, IconQuote, IconRefresh, IconSparkles } from "@tabler/icons-react";
 import { Timeline } from "@/components/ui/timeline";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
@@ -12,12 +12,16 @@ import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { LiveLog } from "@/components/studio/live-log";
 import { Working } from "@/components/studio/working";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ByChip, Chip, ClaudeMark, MiniMd, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
 import { Cover, StageChip } from "@/views/Articles";
 import { act, articleTitle, getChat, img, runningJob, type Article as A, type ChatMsg, type Job, type State, type Step } from "@/lib/api";
 import { keptSentences, paragraphs, sentences, when } from "@/lib/text";
 import { cn } from "@/lib/utils";
+
+// 에디터(Tiptap)는 '편집'을 누를 때만 받아 온다 — 처음 여는 화면을 가볍게
+const ProseEditor = lazy(() => import("@/components/studio/editor").then((m) => ({ default: m.ProseEditor })));
 
 const TABS = [
   { value: "title", title: "제목" },
@@ -95,7 +99,7 @@ export default function Article({
         {t === "title" && <Titles a={a} state={state} refresh={refresh} go={go} />}
         {t === "process" && <Process a={a} state={state} refresh={refresh} go={go} />}
         {t === "image" && <Images a={a} state={state} refresh={refresh} />}
-        {t === "confirm" && <Confirm a={a} refresh={refresh} />}
+        {t === "confirm" && <Confirm a={a} state={state} refresh={refresh} />}
       </div>
 
       {(t === "process" || t === "title") && (
@@ -244,15 +248,97 @@ function Feedback({ text }: { text: string }) {
   );
 }
 
-function StepCard({ s, prev, diff, articleTitle: at }: { s: Step; prev?: Step; diff: boolean; articleTitle: string }) {
+type Edit = { onChange: (t: string) => void; onSave: () => void };
+
+function StepCard({ s, prev, diff, articleTitle: at, edit }: { s: Step; prev?: Step; diff: boolean; articleTitle: string; edit?: Edit }) {
   return (
     <div className="max-w-[720px]">
       {s.feedback && <Feedback text={s.feedback} />}
-      <div className="rounded-3xl border border-line bg-panel px-10 py-9">
-        {s.title && s.title !== at && <h3 className="mb-6 text-2xl font-semibold leading-snug text-ink">{s.title}</h3>}
-        <Prose text={s.text} prev={diff && prev ? prev.text : undefined} />
+      <div className="relative rounded-3xl">
+        {edit && <GlowingEffect spread={60} glow disabled={false} proximity={160} inactiveZone={0.01} borderWidth={2} />}
+        <div className={cn("relative rounded-3xl border px-10 py-9", edit ? "border-violet-400/40 bg-panel-solid" : "border-line bg-panel")}>
+          {s.title && s.title !== at && <h3 className="mb-6 text-2xl font-semibold leading-snug text-ink">{s.title}</h3>}
+          {edit ? (
+            <Suspense fallback={<Prose text={s.text} />}>
+              <ProseEditor text={s.text} onChange={edit.onChange} onSave={edit.onSave} className="prose-ko text-ink" />
+            </Suspense>
+          ) : (
+            <Prose text={s.text} prev={diff && prev ? prev.text : undefined} />
+          )}
+        </div>
       </div>
     </div>
+  );
+}
+
+/** 공백 뺀 글자 수 — 서버 nospace()와 같은 셈 */
+const chars = (t: string) => t.replace(/\s/g, "").length;
+
+/**
+ * 직접 편집 — 사람이 고친 원고는 덮어쓰지 않고 '멘토'가 쓴 다음 과정으로 쌓는다.
+ * 다음 피드백 반영·절반 줄이기는 이 원고를 바탕으로 이어진다.
+ */
+function useEdit(a: A, refresh: () => void) {
+  const [base, setBase] = useState<Step | null>(null);
+  const [draft, setDraft] = useState("");
+  const [saving, setSaving] = useState(false);
+  const dirty = !!base && draft.trim() !== base.text.trim();
+  const save = async (): Promise<number | null> => {
+    if (!base || !dirty || saving) return null;
+    setSaving(true);
+    try {
+      const r = await act<{ n: number }>("edit", { article: a.id, base: base.n, text: draft });
+      await refresh();
+      setBase(null);
+      return r.n;
+    } catch {
+      return null; // 실패 알림은 act가 띄운다 — 쓰던 글은 그대로 둔다
+    } finally {
+      setSaving(false);
+    }
+  };
+  return {
+    base,
+    draft,
+    dirty,
+    saving,
+    start: (s: Step) => {
+      setDraft(s.text);
+      setBase(s);
+    },
+    cancel: () => setBase(null),
+    save,
+    setDraft,
+  };
+}
+
+function EditBar({ e, onSave }: { e: ReturnType<typeof useEdit>; onSave: () => void }) {
+  return (
+    <span className="flex items-center gap-2">
+      <span className="px-1 text-sm tabular-nums text-ink-3">{chars(e.draft).toLocaleString()}자</span>
+      <button onClick={e.cancel} className="rounded-full border border-line px-4 py-1.5 text-sm text-ink-2 transition hover:text-ink">
+        취소
+      </button>
+      <button
+        onClick={onSave}
+        disabled={!e.dirty || e.saving}
+        className="rounded-full bg-ink px-5 py-1.5 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-ink disabled:pointer-events-none disabled:opacity-30"
+      >
+        {e.saving ? "…" : "저장"}
+      </button>
+    </span>
+  );
+}
+
+function EditButton({ onClick, className }: { onClick: () => void; className?: string }) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn("flex items-center gap-2 rounded-full border border-line bg-panel px-4 py-1.5 text-sm text-ink-2 transition hover:text-ink", className)}
+    >
+      <IconPencil className="size-4" />
+      편집
+    </button>
   );
 }
 
@@ -273,6 +359,7 @@ function StepMeta({ s }: { s: Step }) {
  */
 function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () => void; go: (h: string) => void }) {
   const [diff, setDiff] = useState(false);
+  const edit = useEdit(a, refresh);
   const write = runningJob(state.jobs, "write", a.id);
   const other = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "shorten", a.id);
   const job = write || other;
@@ -280,6 +367,7 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
   const past = [...a.steps].reverse();
   const current = job ? undefined : past[0];
   const rest = job ? past : past.slice(1);
+  const editing = !!current && edit.base?.n === current.n;
 
   let working: React.ReactNode = null;
   if (write) {
@@ -334,6 +422,11 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
                 <StepMeta s={current} />
               </span>
             </div>
+            {editing ? (
+              <EditBar e={edit} onSave={edit.save} />
+            ) : (
+            <span className="flex items-center gap-2">
+            <EditButton onClick={() => edit.start(current)} />
             {a.steps.length > 1 && (
               <button
                 onClick={() => setDiff(!diff)}
@@ -346,8 +439,17 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
                 비교
               </button>
             )}
+            </span>
+            )}
           </div>
-          <StepCard s={current} prev={a.steps[current.n - 2]} diff={diff} articleTitle={at} />
+          <StepCard
+            key={editing ? "edit" : "view"}
+            s={current}
+            prev={a.steps[current.n - 2]}
+            diff={diff}
+            articleTitle={at}
+            edit={editing ? { onChange: edit.setDraft, onSave: edit.save } : undefined}
+          />
         </section>
       )}
 
@@ -564,17 +666,34 @@ function Images({ a, state, refresh }: { a: A; state: State; refresh: () => void
 
 /* ---------- 확정 ---------- */
 
-function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
+function Confirm({ a, state, refresh }: { a: A; state: State; refresh: () => void }) {
   const [n, setN] = useState(a.confirmed?.step ?? a.steps.length);
+  const edit = useEdit(a, refresh);
   const s = a.steps[n - 1];
   const hero = a.hero || a.confirmed?.hero || "";
+  const busy = ["write", "revise", "shorten"].some((k) => runningJob(state.jobs, k, a.id));
   if (!s) return null;
+  const editing = edit.base?.n === s.n && !busy;
+  const save = async () => {
+    const m = await edit.save();
+    if (m) setN(m); // 저장하면 새 과정(멘토)이 생긴다 — 그 과정을 보여 주고, 확정은 그걸로
+  };
   return (
     <div className="grid grid-cols-[1fr_260px] gap-12 py-10">
       <article className="overflow-hidden rounded-3xl border border-line bg-[#fbfaf7] text-neutral-900 shadow-2xl">
         {hero && <img src={img(hero, 1400)} className="aspect-[3/2] w-full object-cover" />}
         <div className="px-14 py-12">
           <h2 className="text-[32px] font-bold leading-snug tracking-tight">{articleTitle(a)}</h2>
+          {editing ? (
+            <div className="relative -mx-6 mt-6 rounded-2xl">
+              <GlowingEffect spread={60} glow disabled={false} proximity={160} inactiveZone={0.01} borderWidth={2} />
+              <div className="relative rounded-2xl px-6 py-2">
+                <Suspense fallback={null}>
+                  <ProseEditor text={s.text} onChange={edit.setDraft} onSave={save} className="prose-ko text-[16.5px] text-neutral-800" />
+                </Suspense>
+              </div>
+            </div>
+          ) : (
           <div className="prose-ko mt-8 text-[16.5px] text-neutral-800">
             {paragraphs(s.text).map((p, i, all) => (
               <div key={i}>
@@ -585,6 +704,7 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
               </div>
             ))}
           </div>
+          )}
         </div>
       </article>
       <aside className="sticky top-24 h-fit space-y-6">
@@ -592,7 +712,7 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
           {a.steps.map((x) => (
             <button
               key={x.n}
-              onClick={() => setN(x.n)}
+              onClick={() => !editing && setN(x.n)}
               className={cn(
                 "rounded-full border px-4 py-1.5 text-sm transition",
                 x.n === n ? "border-ink bg-ink text-page" : "border-line text-ink-2 hover:text-ink"
@@ -602,14 +722,21 @@ function Confirm({ a, refresh }: { a: A; refresh: () => void }) {
             </button>
           ))}
         </div>
-        <div className="text-sm tabular-nums text-ink-3">{s.chars.toLocaleString()}자</div>
+        {editing ? (
+          <EditBar e={edit} onSave={save} />
+        ) : (
+          <div className="flex items-center gap-3">
+            <span className="text-sm tabular-nums text-ink-3">{s.chars.toLocaleString()}자</span>
+            {!busy && <EditButton onClick={() => edit.start(s)} />}
+          </div>
+        )}
         {a.confirmed ? (
           <Chip className="border-emerald-300/40 bg-emerald-500/15 px-4 py-1.5 text-sm text-emerald-800 dark:text-emerald-100">
             확정 {a.confirmed.date}
             {a.confirmed.step ? ` · 과정 ${a.confirmed.step}` : ""}
           </Chip>
         ) : null}
-        {a.kind === "brief" && (
+        {a.kind === "brief" && !editing && (
           <ParticleButton
             className="h-12 w-full rounded-full bg-ink text-base font-semibold text-page hover:bg-emerald-500 hover:text-ink"
             onClick={() => act("confirm", { article: a.id, step: n }).then(refresh)}

@@ -194,6 +194,10 @@ body { min-width: 1280px; -webkit-font-smoothing: antialiased; background: var(-
 .prose-ko p { margin: 0 0 1.15em; word-break: keep-all; }
 .prose-ko { font-size: 17px; line-height: 1.95; letter-spacing: -0.003em; }
 .s-add { background: linear-gradient(transparent 62%, rgb(139 92 246 / 0.35) 62%); }
+/* 원고 에디터 — 보기 화면과 같은 글꼴·문단 간격, 제목 줄은 보기의 h4처럼 */
+.ed { caret-color: rgb(139 92 246); min-height: 12rem; }
+.ed h1, .ed h2, .ed h3 { margin: 2rem 0 0.75rem; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; }
+.ed > :last-child { margin-bottom: 0; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }

@@ -55,7 +55,7 @@
 - **화면:**
   - 서재 — 원문 카드(Threads·LinkedIn·경영일기), 입력창 + "aside 수집"(비우면 Threads·LinkedIn 자동), 수집 기록 줄.
   - 주제 — 위키 주제 지도(분야별, 카드마다 원문 수·new·상태). "이 주제로" → 즉시 글 생성 후 그 글로 이동, 깊게 읽기 → 제목 후보가 이어서 돈다. 쓴 주제는 "다시". "넣기 N"·"정리". 예전 회차는 맨 아래 접힘.
-  - 글 — 탭 제목/과정/그림/확정, 위쪽 줄 "다시 쓰기"(같은 설정으로 새 글 `<글>-rN`, 두 번 눌러 실행)·기본/절반. 과정 탭은 지금 과정 하나만 크게, 지난 과정은 최신순 접기. 아래 입력창 = 제목 탭에선 제목/진행자(제목: 다시 뽑을 때 astra에게 같이 보낼 말 — 원문 그대로 + 앞 회차 후보, 회차마다 `runs/titles0/<글>/message[-N].txt`), 과정 탭에선 피드백/진행자(Claude, 글마다 `--resume` 세션).
+  - 글 — 탭 제목/과정/그림/확정, 위쪽 줄 "다시 쓰기"(같은 설정으로 새 글 `<글>-rN`, 두 번 눌러 실행)·기본/절반. 과정 탭은 지금 과정 하나만 크게, 지난 과정은 최신순 접기. 과정·확정 탭 **편집**(Tiptap 에디터, 서식 없음) → 저장하면 덮어쓰지 않고 '멘토' 과정으로 쌓임: 설정 글은 `final-rN.md`+`by-rN.txt`(멘토)+`mode-rN.txt`(직접 편집[ · 과정 n에서]) — 다음 피드백·절반의 바탕, 확정 칼럼 기록은 `runs/columns/<글>/edit-*.md`를 process.json에 덧붙임(확정 파일은 그대로). 아래 입력창 = 제목 탭에선 제목/진행자(제목: 다시 뽑을 때 astra에게 같이 보낼 말 — 원문 그대로 + 앞 회차 후보, 회차마다 `runs/titles0/<글>/message[-N].txt`), 과정 탭에선 피드백/진행자(Claude, 글마다 `--resume` 세션).
   - 진행 중 카드(Working) — 단계·경과 시간·실시간 진행(Claude 초안은 쓰이는 글, 그 밖에는 AI Loading에 실제 로그 줄), 카드 아래 "로그". 왼쪽 메뉴 터미널 아이콘 = 전체 로그 창.
   - 모든 버튼: 누르는 즉시 맨 위 진행 막대, 실패는 오른쪽 위 알림. 라이트/다크(BoardUI ThemeToggle, 메뉴 맨 아래).
 - **컴포넌트 출처:** Aceternity UI(사이드바·벤토·Glowing·Vanish Input·Spotlight·Tabs·Expandable Card·Aurora·Focus Cards·Background Beams·Card Hover·Multi Step Loader·Hover Border Gradient) · Kokonut UI(AI Prompt·AI Text Loading·Particle Button·AI Loading) · BoardUI(ThemeToggle) · shadcn(Drawer·Accordion·Dropdown). 21st.dev 레지스트리는 로그인(API 키) 필요해 원저자 공개 레지스트리에서 받았다. 출처표 `README.md`.
