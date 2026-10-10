@@ -65,12 +65,16 @@ export type Job = {
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };
 
-export type WikiSource = { path: string; who: string; note: string; new: boolean };
+export type WikiSource = { path: string; who: string; note: string; claim?: string; new: boolean };
 export type WikiTopic = {
   page: string;
   field: string;
   title: string;
   thesis: string;
+  why?: string;
+  verdict?: string;
+  audience?: string;
+  titles?: string[];
   status: string;
   usedIn: string[];
   sources: WikiSource[];
@@ -165,8 +169,9 @@ export const JOB_NAMES: Record<string, string> = {
   collect: "수집",
   chat: "진행자",
   wiki: "위키 넣기",
-  "wiki-lint": "위키 정리",
-  "wiki-pick": "깊게 읽기",
+  "wiki-lint": "다시 거르기",
+  "wiki-pick": "주제 고르기",
+  "wiki-verdict": "판정",
 };
 
 export type JobLog = { text: string; live: { name: string; text: string }[]; status?: string; elapsed?: number };

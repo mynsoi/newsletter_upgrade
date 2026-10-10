@@ -380,15 +380,15 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
 
   let working: React.ReactNode = null;
   if (write) {
-    const st = (write as Job & { stage?: { index: number; half: boolean } }).stage;
+    const st = (write as Job & { stage?: { index: number; half: boolean; fit?: boolean } }).stage;
     const steps = [
       { label: "과정 1", by: "Claude" },
       { label: "과정 2", by: "astra" },
       { label: "과정 3", by: "astra" },
-      ...(st?.half || a.length === "half" ? [{ label: "과정 4 · 절반", by: "astra" }] : []),
+      ...(st?.half || a.length === "half" ? [{ label: "과정 4 · 절반", by: "astra" }] : st?.fit ? [{ label: "과정 4 · 1,500자", by: "astra" }] : []),
     ];
     const i = st?.index ?? 0;
-    const status = ["Claude 초안 쓰는 중", "astra 재작성 중", "astra 기준 반영 중", "astra 절반으로 줄이는 중"][i] ?? "쓰는 중";
+    const status = ["Claude 초안 쓰는 중", "astra 재작성 중", "astra 기준 반영 중", st?.fit ? "astra 1,500자로 줄이는 중" : "astra 절반으로 줄이는 중"][i] ?? "쓰는 중";
     working = <Working job={write} title={`과정 ${i + 1}`} status={status} steps={steps} stepIndex={i} />;
   } else if (other) {
     working = (

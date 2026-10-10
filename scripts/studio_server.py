@@ -253,31 +253,23 @@ def sections(body):
 
 
 def wiki_state(fresh):
-    """주제 위키를 화면용으로 읽는다 — 페이지 머리말·논지·원문 표·각도·함께 볼 주제."""
-    if not (W.WIKI / "index.md").exists():
+    """주제 지도를 화면용으로 읽는다 (2026-10-11 개편) — 주제마다 판정·대상 독자·왜 쓸모·제목 후보·원문 카드."""
+    if not W.TOPICS.exists():
         return None
+    cs = W.cards()
     topics = []
-    for f in sorted(W.WIKI.glob("*/*.md")):
-        head, body = W.front(read(f))
-        meta = dict(re.findall(r"^(\w+):\s*(.*)$", head, re.M))
-        sec = sections(body)
-        srcs = []
-        for row in sec.get("원문", "").splitlines():
-            m = re.search(r"\]\(\.\./\.\./sources/(originals/[^)]+?\.md)\)", row)
-            if not m:
-                continue
-            cols = [c.strip() for c in row.strip().strip("|").split("|")]
-            srcs.append({"path": m.group(1), "who": cols[1] if len(cols) > 1 else "", "note": cols[2] if len(cols) > 2 else "",
-                         "new": m.group(1) in fresh})
-        related = re.findall(r"\[([^\]]+)\]\(\.\./([^)]+\.md)\)", sec.get("함께 볼 주제", ""))
+    for tp in W.topics():
+        srcs = [tp["center"]] + [s for s in tp["sources"] if s != tp["center"]]
+        rows = []
+        for s in srcs:
+            a, d, _ = W.src_meta(s)
+            c = cs.get(s, {})
+            rows.append({"path": W.rel(s), "who": " · ".join(x for x in (a, d) if x), "note": c.get("있었던 일", ""),
+                         "claim": c.get("글쓴이가 하는 말", ""), "new": W.rel(s) in fresh})
         topics.append({
-            "page": f.relative_to(ROOT).as_posix(), "field": f.parent.name, "title": meta.get("title", f.stem).strip("'\""),
-            "thesis": sec.get("이 글이 말할 것", meta.get("description", "")).strip(),
-            "status": meta.get("status", "쓸 수 있음").split("#")[0].strip(),
-            "usedIn": W.used_in(f), "sources": srcs,
-            "angles": [re.sub(r"^[-*]\s*", "", x).strip() for x in sec.get("쓸 수 있는 각도", "").splitlines() if x.strip()],
-            "related": [{"title": t, "page": "wiki/" + pth} for t, pth in related],
-            "at": meta.get("timestamp", "").strip(),
+            "page": tp["page"], "field": "주제", "title": tp["title"], "thesis": tp["thesis"], "why": tp["why"],
+            "verdict": tp["verdict"], "audience": tp["audience"], "status": tp["status"].split("#")[0].strip(),
+            "usedIn": tp["used_in"], "titles": tp["titles"], "sources": rows, "angles": [], "related": [], "at": tp["timestamp"],
         })
     log = read(W.WIKI / "log.md")
     return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(),
@@ -296,8 +288,9 @@ def job_stage(j):
     d = ROOT / "runs" / "columns" / j["target"]
     fresh = lambda pat: any(f.stat().st_mtime >= j["started"] - 2 for f in d.glob(pat))
     half = json.loads(read(ROOT / "briefs" / f"{j['target']}.json") or "{}").get("length") == "half"
-    i = 3 if half and fresh("_shorten-r*/prompt.md") else 2 if fresh("_final/prompt.md") else 1 if fresh("_r4/prompt.md") else 0
-    return {"index": i, "half": half}
+    fit = fresh("_fit-r*/prompt.md")  # 과정 3 뒤 1,500자를 넘어 줄이는 중 (2026-10-11)
+    i = 3 if (half and fresh("_shorten-r*/prompt.md")) or fit else 2 if fresh("_final/prompt.md") else 1 if fresh("_r4/prompt.md") else 0
+    return {"index": i, "half": half, "fit": fit}
 
 
 def with_stage(jobs):
@@ -441,7 +434,7 @@ def act_titles_ui(a):
     k = safe_id(a["article"])
     with LOCK:
         if any(j["kind"] == "wiki-pick" and j["target"] == k and j["status"] == "running" for j in JOBS.values()):
-            raise ValueError("깊게 읽는 중 — 끝나면 제목 후보가 이어서 나옵니다")
+            raise ValueError("주제를 고르는 중 — 끝나면 제목 후보가 이어서 나옵니다")
     return act_titles(a)
 
 
@@ -662,22 +655,32 @@ def act_wiki_ingest(_):
 
 
 def act_wiki_lint(_):
-    return start("wiki-lint", "정리", PY + ["scripts/wiki.py", "--lint"])
+    """다시 거르기 — 판정 예시가 쌓였을 때 모든 주제를 다시 거른다(Claude)."""
+    return start("wiki-lint", "다시 거르기", PY + ["scripts/wiki.py", "--refilter"])
 
 
 def act_wiki_pick(a):
-    """주제 카드를 고르면 그 주제 원문만 깊게 읽어 설정(briefs/w-*.json)을 만들고, 이어서 제목 후보를 뽑는다."""
+    """주제 카드를 고르면 그 자리에서 글 설정을 만든다 — 주제의 주장·원문·대상 독자, 미리 뽑아 둔 제목 후보가 제목 탭에 바로 뜬다.
+    (2026-10-11 개편: 카드가 이미 원문을 읽었으므로 깊게 읽기는 없다. 제목 후보가 없는 주제만 제목 단계를 돌린다)"""
     page = str(a.get("page", ""))
     f = (ROOT / page).resolve()
-    if not re.match(r"^wiki/[^/]+/[^/]+\.md$", page) or not inside(f, ROOT / "wiki") or not f.is_file():
+    if not re.match(r"^wiki/주제/[^/]+\.md$", page) or not inside(f, W.TOPICS) or not f.is_file():
         raise ValueError("잘못된 주제 페이지")
-
-    k = W.claim(page)  # 누르자마자 글을 만든다 — 화면은 바로 그 글로 넘어간다(멘토 2026-10-10: "바로 안 넘어가네")
-
-    def after(j):  # 깊게 읽기가 끝나면 제목 후보로 — 실패해도 페이지 논지로 만든 글은 남는다
+    k = W.claim(page)
+    if not (ROOT / "runs" / "titles0" / k / "astra.md").exists():
         act_titles({"article": k})
-    start("wiki-pick", k, PY + ["scripts/wiki.py", "--brief", f.relative_to(ROOT / "wiki").as_posix(), k], after)
     return {"article": k}
+
+
+def act_wiki_verdict(a):
+    """멘토가 판정을 바꾼다 — 판정 예시에 쌓여 다음 거르기가 따른다. 쓸 만함으로 올리면 제목 후보를 뽑는다(astra)."""
+    page, verdict = str(a.get("page", "")), str(a.get("verdict", ""))
+    f = (ROOT / page).resolve()
+    if not re.match(r"^wiki/주제/[^/]+\.md$", page) or not inside(f, W.TOPICS) or not f.is_file():
+        raise ValueError("잘못된 주제 페이지")
+    if verdict not in W.VERDICTS:
+        raise ValueError("잘못된 판정")
+    return start("wiki-verdict", page, PY + ["scripts/wiki.py", "--verdict", page, verdict])
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
@@ -722,7 +725,8 @@ def act_chat(a):
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
-           "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick}
+           "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
+           "wiki-verdict": act_wiki_verdict}
 
 
 # ---------- 그림 축소본 ----------

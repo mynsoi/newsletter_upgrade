@@ -51,6 +51,9 @@ def target_line(b):
     return f"{t} — {TARGETS[t]} 글의 장면과 제안을 이 사람의 자리에 맞춥니다." if TARGETS.get(t) else ""
 
 
+# 분량 — 멘토 2026-10-11: "글은 가능하면 1500자 이하" (공백 제외 — 작업실 화면의 글자 수와 같은 셈)
+MAX_CHARS = 1500
+LEN_RULE = "분량은 공백을 빼고 1,500자 이하로 합니다. 더 길면 중심 장면과 주장 위주로 줄입니다."
 OUT_RULE = "출력: 제목과 본문만 주세요. 파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요."
 
 
@@ -77,7 +80,8 @@ def draft_prompt(b):
         "아래 [원문 1]이 이 글의 중심 재료입니다. 끝까지 읽고, 그 안의 이야기와 말을 재료로 삼아 깊게 풀어 주세요(장면은 아래 3번처럼 회사 장면으로 옮깁니다). "
         "[원문 2] 이후는 보조 재료입니다.",
         "쓰는 방식은 아래 [문체 참고]의 필자(경영 컨설턴트 유정식)가 쓰듯이 써 주세요. 장면이나 질문으로 열고, 재료 하나를 깊게 풀고, "
-        "필자의 생각을 분명하게 말하고 맺는 흐름입니다. 분량도 그 글들 정도면 됩니다. [문체 참고] 글들의 내용이나 사례는 가져오지 마세요.",
+        "필자의 생각을 분명하게 말하고 맺는 흐름입니다. [문체 참고] 글들의 내용이나 사례는 가져오지 마세요.",
+        LEN_RULE,
         "지킬 것은 세 가지입니다.\n1. 원문의 문장을 그대로 옮기지 않습니다. 이야기와 사실만 가져와 내 말로 씁니다.\n"
         "2. 원문에 없는 사실·수치·경험을 지어내지 않습니다.\n"
         # 2026-10-10 멘토: 프리랜서 기준이 아니라 회사에서 일하는 기준으로 — "일반인들은 전혀 그러지않잖아. 이런걸 왜 일반화해?"
@@ -101,7 +105,7 @@ def r4_prompt(b, draft):
         "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다. 제목은 바꾸지 마세요.",
     ]
     parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
-    parts += [OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
+    parts += [LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
     return "\n\n".join(parts)
 
 
@@ -110,7 +114,7 @@ def fb_prompt(text):
     return "\n\n".join([
         "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [멘토 피드백]을 반영해 고쳐 주세요. "
         "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        fb, OUT_RULE, "=== [원고] ===\n" + text])
+        fb, LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def run_claude(d, prompt):
@@ -247,7 +251,12 @@ def main(paths):
         return t
     stage("기준 반영·astra", [lambda k=k: mk_final(k) for k in briefs])
 
-    # 4. 절반 모드만
+    # 4. 1,500자를 넘으면 줄이기 (기본 모드만 — 절반 모드는 아래에서 절반으로 줄인다)
+    over = [k for k, b in briefs.items() if b.get("length") != "half" and chars(latest_final(b["dir"])[0]) > MAX_CHARS]
+    if over:
+        stage("1,500자·astra", [lambda k=k: fit(ROOT / "briefs" / f"{k}.json") for k in over])
+
+    # 5. 절반 모드만
     half = [k for k, b in briefs.items() if b.get("length") == "half"]
     if half:
         stage("절반·astra", [lambda k=k: shorten(ROOT / "briefs" / f"{k}.json") for k in half])
@@ -281,7 +290,7 @@ def revise(brief_path, feedback_path):
     prompt = "\n\n".join([
         "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
-        + (" 분량은 지금 원고 정도로 둡니다." if half else ""),
+        + (" 분량은 지금 원고 정도로 둡니다." if half else " " + LEN_RULE),
         "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
@@ -304,6 +313,32 @@ def shorten_prompt(text):
         f"아래 [원고]를 지금의 절반 분량(공백 제외 약 {n}자)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, "
         "중심 장면과 주장 위주로 남깁니다. [기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
         "[기준 피드백]\n" + standing, OUT_RULE, "=== [원고] ===\n" + text])
+
+
+def chars(f):
+    """제목(첫 줄)을 뺀 본문의 공백 제외 글자 수."""
+    t = Path(f).read_text(encoding="utf-8").strip() if Path(f).exists() else ""
+    rest = t.split("\n", 1)[1] if "\n" in t else t
+    return len(re.sub(r"\s", "", rest))
+
+
+def fit_prompt(text):
+    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
+    return "\n\n".join([
+        f"아래 [원고]를 공백을 빼고 {MAX_CHARS:,}자 이하로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
+        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        "[기준 피드백]\n" + standing, OUT_RULE, "=== [원고] ===\n" + text])
+
+
+def fit(brief_path):
+    """과정 3 뒤 1,500자를 넘으면 — 최신 원고를 1,500자 이하로 줄여 다음 과정(final-rN.md)을 만든다 (astra)."""
+    d = RUNS / Path(brief_path).stem
+    cur, n = latest_final(d)
+    t0 = time.time()
+    out = run_astra(d / f"_fit-r{n}", fit_prompt(cur.read_text(encoding="utf-8")))
+    (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
+    (d / f"mode-r{n}.txt").write_text("1,500자", encoding="utf-8")
+    print(f"1,500자 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · 본문 {chars(d / f'final-r{n}.md')}자")
 
 
 def shorten(brief_path):
