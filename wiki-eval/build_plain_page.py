@@ -9,16 +9,19 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+import title_candidates as tc  # noqa: E402
+RUN = None
 SRC = ROOT / "sources"
 OUT = ROOT / "docs" / "2026-10-11-주제카드-시험.html"
 ORDER = ["linkedin/02", "threads/23", "linkedin/09", "linkedin/26", "threads/05", "linkedin/08"]
-NOTE = {  # 보여 드리기 전 점검 — 원문과 대조해 본 것
-    "linkedin/02": ("살아남", "원문의 핵심(봇 10개 vs 회사 지도)이 그대로 남았다"),
-    "threads/23": ("살아남", "원문이 하고 싶은 말(제일 먼저 사라진 건 시시한 반복 업무)과 숫자가 그대로"),
-    "linkedin/09": ("살아남", "'통과'와 '실제 채택'의 차이가 그대로. 고유명사가 많아 글에서는 풀어야 한다"),
-    "linkedin/26": ("살아남", "편해졌는데 불안하다는 원문의 고민이 그대로. 말끝 '~것이다'가 두 번 겹친다"),
-    "threads/05": ("약함", "원문 자체가 일반론 쪽이라 카드도 교육 자료처럼 읽힌다"),
-    "linkedin/08": ("약함", "주장이 흐릿하고 말끝 '~리라는 기대다'가 어색하다"),
+NOTE = {  # 보여 드리기 전 점검 — 원문과 대조해 본 것(제목 후보는 고르지 않고 그대로)
+    "linkedin/02": ("", "제목 후보의 표현은 모두 원문에 있는 것(매일이 입사 첫날 → '매일 신입사원', 열어야 할 툴 → '열어야 할 창')"),
+    "threads/23": ("", "숫자(3시간 → 5분)와 '에이전트보다 체감이 크다'는 원문 그대로"),
+    "linkedin/09": ("", "원문과 어긋난 후보 없음"),
+    "linkedin/26": ("", "원문과 어긋난 후보 없음"),
+    "threads/05": ("", "원문과 어긋난 후보 없음. 원문 자체가 일반론 쪽"),
+    "linkedin/08": ("", "1번은 원문 내용(판단 기준·회고)과 거리가 있음"),
 }
 
 
@@ -56,12 +59,16 @@ def card(key, f):
     m = meta(key)
     kind, note = NOTE.get(key, ("", ""))
     olds = "".join(f"<li>{html.escape(t)}</li>" for t in wiki_titles(key)) or "<li>—</li>"
+    tf = RUN / "titles" / key / "astra.md"
+    titles = "".join(f"<li>{html.escape(x)}</li>" for x in (tc.round_items(tf) if tf.exists() else []))
     site = key.split("/")[0]
     return f"""
 <article class="card {'weak' if kind == '약함' else ''}">
   <div class="src"><a href="{html.escape(m['url'])}" target="_blank" rel="noopener">{html.escape(site)} · {html.escape(m['author'])}</a>
     <span>{html.escape(m['date'])}</span><span class="tag">{html.escape(kind)}</span></div>
-  <h2>{html.escape(f.get('글쓴이가 하는 말', ''))}</h2>
+  <ol class="titles">{titles}</ol>
+  <div class="label">글쓴이가 하는 말</div>
+  <p class="claim">{html.escape(f.get('글쓴이가 하는 말', ''))}</p>
   <div class="label">있었던 일</div>
   <p>{html.escape(f.get('있었던 일', ''))}</p>
   <div class="foot">
@@ -72,6 +79,8 @@ def card(key, f):
 
 
 def main(run_dir):
+    global RUN
+    RUN = ROOT / run_dir
     cards = parse((ROOT / run_dir / "all.md").read_text(encoding="utf-8"))
     body = "".join(card(k, cards[k]) for k in ORDER if k in cards)
     OUT.write_text(PAGE.replace("__CARDS__", body).replace("__RUN__", html.escape(run_dir)), encoding="utf-8")
@@ -101,7 +110,10 @@ PAGE = """<!doctype html>
   .src a:hover { text-decoration:underline; }
   .tag { margin-left:auto; font-weight:600; color:var(--primary); }
   .weak .tag { color:var(--muted); }
-  h2 { font-size:21px; font-weight:600; line-height:1.55; margin:12px 0 16px; word-break:keep-all; }
+  .titles { margin:14px 0 18px; padding-left:28px; display:grid; gap:6px; }
+  .titles li { font-size:19px; font-weight:600; line-height:1.5; word-break:keep-all; }
+  .titles li::marker { color:var(--muted-soft); font-weight:500; }
+  .claim { margin-bottom:12px; }
   .label { font-size:12px; font-weight:600; color:var(--muted-soft); margin-bottom:4px; }
   p { margin:0; font-size:15px; line-height:1.8; color:var(--body); word-break:keep-all; }
   .foot { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:18px; padding-top:16px; border-top:1px solid var(--hairline-soft); }
@@ -112,8 +124,8 @@ PAGE = """<!doctype html>
 </head>
 <body>
 <header>
-  <h1>주제 카드 — 제목 없이</h1>
-  <p>원문 6편 · astra · 카드 머리는 원문 글쓴이가 하는 말, 아래는 원문에서 있었던 일. 제목은 글을 고른 뒤 제목 단계에서 짓는다.</p>
+  <h1>주제별 글 제목 후보</h1>
+  <p>원문 6편 · 주제마다 astra 제목 후보 8개(작업실 제목 단계 그대로 — 경영일기 제목 60개 + 멘토 제목 참고). 후보는 고르지 않고 나온 순서 그대로입니다.</p>
 </header>
 <main>__CARDS__</main>
 </body>
