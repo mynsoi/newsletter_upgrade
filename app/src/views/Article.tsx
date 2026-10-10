@@ -90,6 +90,7 @@ export default function Article({
               onChange={(v) => act("target", { article: a.id, target: v }).then(refresh)}
             />
           )}
+          {a.kind === "brief" && <span className="h-5 w-px bg-line" />}
           <PillTabs
             id="lengthtab"
             tabs={[
