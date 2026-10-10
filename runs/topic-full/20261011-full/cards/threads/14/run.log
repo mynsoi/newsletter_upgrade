@@ -1,0 +1,82 @@
+2026-10-10T15:47:20.026033Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/cards/threads/14
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a1267f-4eec-7382-b3e7-6f1a00a8818a
+--------
+user
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 직원 대상, 대부분 개발자가 아닌 사무·현장 직군) 칼럼을 한 편 쓰려고 합니다. 제목은 나중에 따로 정합니다. 지금은 이 원문으로 무슨 이야기를 할 수 있는지만 정리해 주세요.
+
+출력 형식(이 두 줄 머리만 쓰고 다른 설명은 붙이지 마세요):
+있었던 일: <원문 속 사람이 실제로 겪거나 한 일. 사실과 숫자는 원문에 있는 그대로, 두세 문장>
+글쓴이가 하는 말: <원문 글쓴이가 가장 하고 싶은 주장을 우리말 한두 문장으로. 일반적인 교훈으로 바꾸지 않고 글쓴이의 주장 그대로>
+말끝은 모두 '~다'로 맞춥니다.
+
+지킬 것: 원문의 문장을 그대로 옮기지 않습니다. 원문에 없는 사실·수치·경험을 지어내지 않습니다. 원문이 가장 하고 싶은 말을 붙잡고, 사소한 세부에 매달리지 않습니다.
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+=== [원문] ===
+## 1/7
+
+신규업데이트된 Chat gpt works 사용법 1편 Prat 1.챗GPT work를 활용해 쌓인메일 노션보고서로 받아보기 요즘 직장인들을 위한 기초 자동화강의를 많이합니다
+가장 처음하는 실습하나를 스레드에서 공개해보죠 구글 GMAIL에서 데이터를 조회에 노션에 보고서를작성해봅시다.물론 지메일만이아니라 드라이브도 슬렉도 연결가능하며
+이걸 조금 발전시키면 정말 많은 자동화들을 처리할수있어
+처음 감을 잡을때 많이하는 작업입니다. 1/7
+
+## 2/7
+
+우선 업데이트된 chat gpt를 키시고 work를 클릭해봅시다 클로드 cowrk와 사용법은 비슷하지만 모르는 분들이 많을테니 친절하게
+톺아보자구요 codex를 앱안에넣었다 일하는용도다 뭐 복잡한말은많지만
+간단히 설명하면 chat gpt에 공식적으로 파일을 읽고쓰는 능력을
+줬다는게 기본 내용입니다. 이걸 조금더 활용해봅시다. 2/7
+
+## 3/7
+
+맨처음은 플러그인을 눌러볼까요 저는 연결을 많이해둬서 저렇게뜨지만 우선 뇌를빼고 플러그인연결과
+모든 플러그인 보기를 클릭해봅시다. 3/7
+
+## 4/7
+
+우측 플러그인 검색이 보이시나요?지메일과 노션을 한번 검색해봅시다 저는 다연결되어있으니까
+연결을 해제하고 한번 다시연결해볼게요 맨마지막 사진처럼 노션에 +버튼이 보이시죠? 4/7
+
+## 5/7
+
+클릭과 로그인 부분은 생략하겠습니다.다음과같이 순서대로 입력하시면 노션이 연결가능하며
+지메일도 비슷한 과정으로 연결하시면됩니다.심지어 슬렉이나 비슷한것들도연결할수있죠  5/7
+
+## 6/7
+
+연결이된상태에서 골뱅이를 눌러봅시다.
+다음과 같이 연결된 커넥터들이 떠오르는게 보이시나요?이번주에 온메일들  @Gmail 에서 싹다확인하고 핵심내용들 정리해서
+에 새페이지 만들어서 문서화해줘 이렇게한번 입력해봅시다. 6/7
+
+## 7/7
+
+다음과 같이 이번주 요약이나온답니다.
+물론이걸 스킬화해서 아침마다 받아볼수있고
+슬렉에연결해서 쏘게할수도 있어요 이런건 다음글에서 조금더 다뤄볼게요  7/7
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+있었던 일: 글쓴이는 직장인 대상 기초 자동화 강의에서 처음 하는 실습 중 하나로, 챗GPT Work에 지메일과 노션을 연결하는 과정을 소개했다. 이번 주에 온 메일을 확인해 핵심 내용을 노션의 새 페이지에 문서로 정리하도록 요청하고, 주간 요약이 나온 모습을 보여줬다.
+글쓴이가 하는 말: 메일을 읽어 노션 보고서로 만드는 작업은 챗GPT Work로 업무 자동화의 감을 잡는 출발점이다. 이를 발전시키면 매일 아침 요약을 받아보거나 슬랙으로 보내는 등 더 많은 일을 자동화할 수 있다.
+tokens used
+1,823
+있었던 일: 글쓴이는 직장인 대상 기초 자동화 강의에서 처음 하는 실습 중 하나로, 챗GPT Work에 지메일과 노션을 연결하는 과정을 소개했다. 이번 주에 온 메일을 확인해 핵심 내용을 노션의 새 페이지에 문서로 정리하도록 요청하고, 주간 요약이 나온 모습을 보여줬다.
+글쓴이가 하는 말: 메일을 읽어 노션 보고서로 만드는 작업은 챗GPT Work로 업무 자동화의 감을 잡는 출발점이다. 이를 발전시키면 매일 아침 요약을 받아보거나 슬랙으로 보내는 등 더 많은 일을 자동화할 수 있다.

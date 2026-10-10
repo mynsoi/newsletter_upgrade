@@ -1,0 +1,43 @@
+2026-10-10T15:45:34.250179Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/cards/linkedin/09
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a1267d-b1bc-72c1-955b-6e4d470ba6f2
+--------
+user
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 직원 대상, 대부분 개발자가 아닌 사무·현장 직군) 칼럼을 한 편 쓰려고 합니다. 제목은 나중에 따로 정합니다. 지금은 이 원문으로 무슨 이야기를 할 수 있는지만 정리해 주세요.
+
+출력 형식(이 두 줄 머리만 쓰고 다른 설명은 붙이지 마세요):
+있었던 일: <원문 속 사람이 실제로 겪거나 한 일. 사실과 숫자는 원문에 있는 그대로, 두세 문장>
+글쓴이가 하는 말: <원문 글쓴이가 가장 하고 싶은 주장을 우리말 한두 문장으로. 일반적인 교훈으로 바꾸지 않고 글쓴이의 주장 그대로>
+말끝은 모두 '~다'로 맞춥니다.
+
+지킬 것: 원문의 문장을 그대로 옮기지 않습니다. 원문에 없는 사실·수치·경험을 지어내지 않습니다. 원문이 가장 하고 싶은 말을 붙잡고, 사소한 세부에 매달리지 않습니다.
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+=== [원문] ===
+New research note from , Cheryl Wu, , and me. (Chiefly Parker!) We find that *half* of SWE-bench Verified solutions from Sonnet 3.5-to-4.5 generation AIs *which are graded as passing* are rejected by project maintainers.In our set-up, 4 maintainers from scikit-learn, Sphinx, and pytest (25% of SWE-bench repos) review 296 AI PRs (from 19% of SWE-bench Verified issues; solutions on these issues have pass rates representative of SWE-Bench verified) from 's benchmarking hub.Maintainers are blinded to human vs AI. They review PRs on github (but without CI + ignoring test requirements).We adjust for noise in merge decisions by using the proportion of original human solutions which these same maintainers would approve for merging into main.Repo maintainer feedback suggests that a meaningful chunk of rejections are due to core functionality failures, not merely code quality issues.Note that we think it's plausible that better elicitation could decrease the gap between pass rates from automated grader vs. repo maintainers, and that in our set-up AIs and humans aren't working under identical conditions (AIs can't iterate on maintainer feedback).The takeaway here is an AI classic: benchmarks don't tell the full story.Naive interpretation of SWE-bench Verified scores as ~"% of solutions solving issues to real-world standard" would overestimate AI agent capabilities (at least without more elicitation/feedback).
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+있었던 일: 연구진은 scikit-learn·Sphinx·pytest의 관리자 4명에게 AI가 만든 코드 수정안 296개를 검토하게 했다. Sonnet 3.5~4.5 세대 AI의 수정안 가운데 SWE-bench Verified의 자동 채점을 통과한 것의 절반이 관리자들에게 거절됐다. 관리자들의 피드백을 보면 단순히 코드 품질이 떨어져서가 아니라 핵심 기능이 제대로 작동하지 않아 거절된 경우도 적지 않았다.
+글쓴이가 하는 말: SWE-bench Verified 점수를 ‘실제 현장에서 요구하는 수준으로 문제를 해결한 비율’로 받아들이면 AI의 능력을 과대평가하게 된다. 더 나은 지시나 관리자 피드백으로 격차를 줄일 가능성은 있지만, 벤치마크 점수만으로 AI의 실력을 온전히 설명할 수는 없다는 주장이다.
+tokens used
+11,083
+있었던 일: 연구진은 scikit-learn·Sphinx·pytest의 관리자 4명에게 AI가 만든 코드 수정안 296개를 검토하게 했다. Sonnet 3.5~4.5 세대 AI의 수정안 가운데 SWE-bench Verified의 자동 채점을 통과한 것의 절반이 관리자들에게 거절됐다. 관리자들의 피드백을 보면 단순히 코드 품질이 떨어져서가 아니라 핵심 기능이 제대로 작동하지 않아 거절된 경우도 적지 않았다.
+글쓴이가 하는 말: SWE-bench Verified 점수를 ‘실제 현장에서 요구하는 수준으로 문제를 해결한 비율’로 받아들이면 AI의 능력을 과대평가하게 된다. 더 나은 지시나 관리자 피드백으로 격차를 줄일 가능성은 있지만, 벤치마크 점수만으로 AI의 실력을 온전히 설명할 수는 없다는 주장이다.

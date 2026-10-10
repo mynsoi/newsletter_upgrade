@@ -1,0 +1,43 @@
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/cards/linkedin/03
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a1267d-63b9-7ab3-bb90-a4e6bd641869
+--------
+user
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 직원 대상, 대부분 개발자가 아닌 사무·현장 직군) 칼럼을 한 편 쓰려고 합니다. 제목은 나중에 따로 정합니다. 지금은 이 원문으로 무슨 이야기를 할 수 있는지만 정리해 주세요.
+
+출력 형식(이 두 줄 머리만 쓰고 다른 설명은 붙이지 마세요):
+있었던 일: <원문 속 사람이 실제로 겪거나 한 일. 사실과 숫자는 원문에 있는 그대로, 두세 문장>
+글쓴이가 하는 말: <원문 글쓴이가 가장 하고 싶은 주장을 우리말 한두 문장으로. 일반적인 교훈으로 바꾸지 않고 글쓴이의 주장 그대로>
+말끝은 모두 '~다'로 맞춥니다.
+
+지킬 것: 원문의 문장을 그대로 옮기지 않습니다. 원문에 없는 사실·수치·경험을 지어내지 않습니다. 원문이 가장 하고 싶은 말을 붙잡고, 사소한 세부에 매달리지 않습니다.
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+=== [원문] ===
+AI native 시대에도 필요한 엔지니어의 역량은 무엇일까요?37분짜리 CI를 15분으로 줄였습니다. 채널톡 메인 백엔드 서버의 CI를 7단계에 걸쳐 개선했습니다. 9,800개 테스트, 15개 노드 분산 실행, PostgreSQL부터 Redis, OpenSearch, DynamoDB까지 — 규모가 작지 않은 시스템이었습니다.AI 에이전트는 워크플로우 수정안을 빠르게 만들고, 반복 실험을 대신 돌려주는 데는 탁월했습니다. 하지만 이번 작업에서 가장 중요했던 것들은 전부 사람의 몫이었습니다.- "50노드로 늘렸더니 오히려 느려졌다" — 병목이 CPU에서 네트워크로 이동한 걸 읽고, 다시 20노드로 줄이는 판단- "더 병렬화하자"가 아니라 "마지막 하나가 오래 남는 꼬리 시간을 줄이자"로 문제를 재정의한 것- 작은 서비스에서 먼저 패턴을 검증하고, 메인 서버에 옮기자는 순서를 정한 것 이번 경험을 통해 더 확신하게 된 세 가지가 있습니다.첫째, AI 시대에도 의지는 사람의 영역입니다. "CI를 고치자"고 결정한 것도, 작은 서비스에서 먼저 검증하고 메인 서버로 확장하자는 전략을 세운 것도, 20.9분까지 줄인 뒤에도 멈추지 않고 전환 시간, 캐시, 노드 불균형까지 계속 병목으로 읽어낸 것도 사람이었습니다.둘째, AI 시대에도 엔지니어링은 여전히 중요합니다. 공유 상태 제거, 의존 관계 정리, 측정 기반 분배 — 화려한 비법이 아니라 기본기가 결과를 만들었습니다.셋째, 복잡한 문제는 여전히 사람을 필요로 합니다. 하위 문제가 정의되면 AI가 반복 실험 속도를 올려주지만, 문제를 정의하고 쪼개고 순서를 정하는 일은 여전히 엔지니어의 역할입니다.기술적 디테일이 궁금하시다면 아래 글에서 확인해주세요. 이런 엔지니어링을 함께할 사람을 찾고 있습니다. 채널톡은 현재 4월 한정으로 전 직군 정규직 연봉 30% 인상 채용 이벤트를 진행하고 있습니다. 퇴근 후 인터뷰가 가능하고, 72시간 내 결과 전달이 이뤄집니다. 이벤트와 함께 전사 Claude Code 토큰도 무제한 제공 중입니다. AI Native한 엔지니어로 성장하고 싶으신 분, 채널톡이 어떤 곳인지 궁금하신 분은 편하게 티타임 요청 주세요. 부담 없이 DM 주시면 됩니다. #AINative #CI #ClaudeCode #채널톡 #ChannelTalk #SoftwareEngineering #DevProductivity #BackendEngineering #개발생산성
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+2026-10-10T15:45:14.632515Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+있었던 일: 글쓴이는 채널톡 메인 백엔드 서버의 CI를 7단계에 걸쳐 개선해 소요 시간을 37분에서 15분으로 단축했다. AI 에이전트는 수정안을 만들고 반복 실험을 수행했으며, 사람은 속도가 느려지는 원인을 판단하고 해결할 문제와 작업 순서를 정했다.
+글쓴이가 하는 말: AI 시대에도 개선을 시작하고 끝까지 밀고 나가는 의지와 엔지니어링의 기본기는 여전히 중요하다. AI가 세부 문제의 반복 실험을 빠르게 해주더라도, 복잡한 문제를 정의하고 나누며 해결 순서를 정하는 일은 엔지니어의 몫이다.
+tokens used
+7,612
+있었던 일: 글쓴이는 채널톡 메인 백엔드 서버의 CI를 7단계에 걸쳐 개선해 소요 시간을 37분에서 15분으로 단축했다. AI 에이전트는 수정안을 만들고 반복 실험을 수행했으며, 사람은 속도가 느려지는 원인을 판단하고 해결할 문제와 작업 순서를 정했다.
+글쓴이가 하는 말: AI 시대에도 개선을 시작하고 끝까지 밀고 나가는 의지와 엔지니어링의 기본기는 여전히 중요하다. AI가 세부 문제의 반복 실험을 빠르게 해주더라도, 복잡한 문제를 정의하고 나누며 해결 순서를 정하는 일은 엔지니어의 몫이다.

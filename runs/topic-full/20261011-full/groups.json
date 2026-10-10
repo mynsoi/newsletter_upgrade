@@ -1,0 +1,320 @@
+{
+ "groups": [
+  {
+   "center": "linkedin/01",
+   "sources": [
+    "linkedin/01"
+   ]
+  },
+  {
+   "center": "linkedin/02",
+   "sources": [
+    "linkedin/02"
+   ]
+  },
+  {
+   "center": "linkedin/03",
+   "sources": [
+    "linkedin/03"
+   ]
+  },
+  {
+   "center": "linkedin/04",
+   "sources": [
+    "linkedin/04"
+   ]
+  },
+  {
+   "center": "linkedin/09",
+   "sources": [
+    "linkedin/09",
+    "linkedin/05"
+   ]
+  },
+  {
+   "center": "linkedin/06",
+   "sources": [
+    "linkedin/06"
+   ]
+  },
+  {
+   "center": "linkedin/07",
+   "sources": [
+    "linkedin/07"
+   ]
+  },
+  {
+   "center": "linkedin/08",
+   "sources": [
+    "linkedin/08"
+   ]
+  },
+  {
+   "center": "threads/23",
+   "sources": [
+    "threads/23",
+    "linkedin/10"
+   ]
+  },
+  {
+   "center": "linkedin/11",
+   "sources": [
+    "linkedin/11"
+   ]
+  },
+  {
+   "center": "linkedin/12",
+   "sources": [
+    "linkedin/12"
+   ]
+  },
+  {
+   "center": "linkedin/13",
+   "sources": [
+    "linkedin/13"
+   ]
+  },
+  {
+   "center": "linkedin/14",
+   "sources": [
+    "linkedin/14",
+    "threads/10"
+   ]
+  },
+  {
+   "center": "linkedin/15",
+   "sources": [
+    "linkedin/15"
+   ]
+  },
+  {
+   "center": "linkedin/16",
+   "sources": [
+    "linkedin/16"
+   ]
+  },
+  {
+   "center": "linkedin/17",
+   "sources": [
+    "linkedin/17"
+   ]
+  },
+  {
+   "center": "linkedin/18",
+   "sources": [
+    "linkedin/18"
+   ]
+  },
+  {
+   "center": "linkedin/19",
+   "sources": [
+    "linkedin/19"
+   ]
+  },
+  {
+   "center": "linkedin/20",
+   "sources": [
+    "linkedin/20"
+   ]
+  },
+  {
+   "center": "linkedin/21",
+   "sources": [
+    "linkedin/21"
+   ]
+  },
+  {
+   "center": "linkedin/22",
+   "sources": [
+    "linkedin/22"
+   ]
+  },
+  {
+   "center": "linkedin/24",
+   "sources": [
+    "linkedin/24"
+   ]
+  },
+  {
+   "center": "linkedin/25",
+   "sources": [
+    "linkedin/25"
+   ]
+  },
+  {
+   "center": "linkedin/26",
+   "sources": [
+    "linkedin/26"
+   ]
+  },
+  {
+   "center": "linkedin/27",
+   "sources": [
+    "linkedin/27",
+    "threads/19"
+   ]
+  },
+  {
+   "center": "linkedin/28",
+   "sources": [
+    "linkedin/28"
+   ]
+  },
+  {
+   "center": "linkedin/29",
+   "sources": [
+    "linkedin/29"
+   ]
+  },
+  {
+   "center": "linkedin/30",
+   "sources": [
+    "linkedin/30"
+   ]
+  },
+  {
+   "center": "linkedin/31",
+   "sources": [
+    "linkedin/31"
+   ]
+  },
+  {
+   "center": "linkedin/32",
+   "sources": [
+    "linkedin/32"
+   ]
+  },
+  {
+   "center": "threads/02",
+   "sources": [
+    "threads/02"
+   ]
+  },
+  {
+   "center": "threads/04",
+   "sources": [
+    "threads/04",
+    "threads/03"
+   ]
+  },
+  {
+   "center": "threads/05",
+   "sources": [
+    "threads/05"
+   ]
+  },
+  {
+   "center": "threads/06",
+   "sources": [
+    "threads/06"
+   ]
+  },
+  {
+   "center": "threads/09",
+   "sources": [
+    "threads/09",
+    "threads/07"
+   ]
+  },
+  {
+   "center": "threads/08",
+   "sources": [
+    "threads/08"
+   ]
+  },
+  {
+   "center": "threads/11",
+   "sources": [
+    "threads/11"
+   ]
+  },
+  {
+   "center": "threads/12",
+   "sources": [
+    "threads/12"
+   ]
+  },
+  {
+   "center": "threads/14",
+   "sources": [
+    "threads/14"
+   ]
+  },
+  {
+   "center": "threads/16",
+   "sources": [
+    "threads/16"
+   ]
+  },
+  {
+   "center": "threads/17",
+   "sources": [
+    "threads/17"
+   ]
+  },
+  {
+   "center": "threads/18",
+   "sources": [
+    "threads/18"
+   ]
+  },
+  {
+   "center": "threads/20",
+   "sources": [
+    "threads/20"
+   ]
+  },
+  {
+   "center": "threads/21",
+   "sources": [
+    "threads/21"
+   ]
+  },
+  {
+   "center": "threads/22",
+   "sources": [
+    "threads/22"
+   ]
+  },
+  {
+   "center": "threads/24",
+   "sources": [
+    "threads/24"
+   ]
+  },
+  {
+   "center": "threads/25",
+   "sources": [
+    "threads/25"
+   ]
+  },
+  {
+   "center": "threads/27",
+   "sources": [
+    "threads/27"
+   ]
+  }
+ ],
+ "excluded": [
+  {
+   "source": "linkedin/23",
+   "reason": "스튜디오의 브랜드 정체성과 홈페이지 공개를 홍보하는 내용이 중심임."
+  },
+  {
+   "source": "threads/01",
+   "reason": "정리된 프롬프트 문서의 공유와 사용 허락을 알리는 공지임. — [점검] 원문에 팀장이 '회사용으로 정리해 올려'라고 한 장면이 있어, 빼는 게 맞는지 애매함"
+  },
+  {
+   "source": "threads/13",
+   "reason": "앰배서더 선정과 향후 활용 사례 소개를 알리는 홍보가 중심임."
+  },
+  {
+   "source": "threads/15",
+   "reason": "자동화 진행 사실과 짧은 감상뿐으로, 구체적인 업무 방식이나 시사점이 드러나지 않음."
+  },
+  {
+   "source": "threads/26",
+   "reason": "새 기능을 발견한 감상과 도구 선호 표현에 그침."
+  }
+ ]
+}

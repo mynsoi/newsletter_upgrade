@@ -1,0 +1,43 @@
+OpenAI Codex v0.160.1
+--------
+workdir: /home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/runs/topic-full/20261011-full/cards/linkedin/06
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a1267d-63bc-7ca1-843d-bbfa646af276
+--------
+user
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 직원 대상, 대부분 개발자가 아닌 사무·현장 직군) 칼럼을 한 편 쓰려고 합니다. 제목은 나중에 따로 정합니다. 지금은 이 원문으로 무슨 이야기를 할 수 있는지만 정리해 주세요.
+
+출력 형식(이 두 줄 머리만 쓰고 다른 설명은 붙이지 마세요):
+있었던 일: <원문 속 사람이 실제로 겪거나 한 일. 사실과 숫자는 원문에 있는 그대로, 두세 문장>
+글쓴이가 하는 말: <원문 글쓴이가 가장 하고 싶은 주장을 우리말 한두 문장으로. 일반적인 교훈으로 바꾸지 않고 글쓴이의 주장 그대로>
+말끝은 모두 '~다'로 맞춥니다.
+
+지킬 것: 원문의 문장을 그대로 옮기지 않습니다. 원문에 없는 사실·수치·경험을 지어내지 않습니다. 원문이 가장 하고 싶은 말을 붙잡고, 사소한 세부에 매달리지 않습니다.
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+=== [원문] ===
+운영 DBA 업무를 AI에게 맡기면 어디까지 가능할까?단순 질의응답이 아니라 Oracle에서 자주 볼 수 있는 장애 유형을 간단하게 재현하고, AI에게 운영 DBA 역할을 맡겨봤습니다.Oracle AI Database 26ai Free에서 간단한 네 가지 Case를 만들었습니다.1. 통계 문제로 Full Scan을 선택한 SQL 2. INACTIVE 세션이 잡고 있던 Row Lock 3. Tablespace Full로 인한 INSERT 실패 4. ORA-01555 Snapshot Too Old 주요 평가는 GPT-5.6 Sol High로 진행했고, 동일하거나 유사한 상황은 Gemini 3.6에도 맡겨봤습니다.원인은 처음부터 알려주지 않았고, 필요한 SQL도 AI가 직접 요청하도록 했습니다.기술적인 진단 능력은 상당했습니다.첫 번째 Case에서는 200만 건 테이블에서 ERROR가 실제로는 2천 건 뿐인데 통계상 100만 건으로 추정되고 있다는 것을 찾아냈습니다. 인덱스 경로도 직접 검증했고, 이후 SQL Patch를 만들어 실제 Plan까지 변경했습니다.문제는 그다음이었습니다.원인은 거의 확인됐는데도 Clustering Factor, Dynamic Statistics, Optimizer 환경 등을 계속 분석했습니다. 제가 정밀 분석은 이후에 하고 운영 정상화부터 하자고 하자 그때부터 바로 복구 절차로 전환했습니다.즉 복구 방법을 몰랐던 것은 아니었습니다.언제 분석을 멈추고 정상화로 전환할지 스스로 결정하는 부분 이 문제였습니다.Row Lock Case에서는 다른 문제가 보였습니다.AI는 INACTIVE라는 이유만으로 blocker를 바로 KILL하지 않고 열린 트랜잭션, 이전 SQL, Undo 사용량, 차단된 세션 등을 먼저 확인했습니다.이 자체는 안전한 접근이지만, 실제 운영에서는 장애 영향도에 따라 판단이 달라집니다.몇 개 세션만 대기 중이라면 추가 확인을 할 시간이 있을 수 있습니다. 반대로 하나의 blocker 때문에 주문 처리 전체가 멈추고 있다면, 종료가 허용된 업무인지 빠르게 확인한 뒤 즉시 조치하는 편이 더 중요할 수 있습니다.재처리 가능한 배치라면 KILL 후 재처리가 가능하지만, 결제나 정산처럼 임의 rollback이 허용되지 않는 트랜잭션이라면 같은 조치를 할 수 없습니다.결국 필요한 것은 단순히 신중하게 확인하는 것 이 아니라, 현재 장애 영향도와 업무 특성을 확인하고 어느 시점에 조치할지를 결정하는 능력이었습니다.Tablespace Case에서는 대응 흐름이 가장 좋았습니다.파일 크기, AUTOEXTEND, 실제 파일시스템 여유를 확인한 뒤 최소한의 공간만 먼저 확보했고, 서비스 정상화 후 실제 공간을 사용하던 객체까지 추적했습니다.ORA-01555 Case에서는 또 다른 문제가 보였습니다.Undo 관련 지표는 깊게 분석했지만 처음에는 CDB$ROOT 에서 조회하고 있었습니다. 실제 장애는 FREEPDB1의 Local Undo에서 발생하고 있었고, Trace를 확인한 뒤에야 컨테이너 차이를 알아차렸습니다.FREEPDB1에서 다시 확인하니 TUNED_UNDORETENTION 은 3초까지 떨어져 있었고, unexpired undo 재사용도 크게 증가한 상태였습니다.결국 이번 실험에서 가장 크게 느낀 것은 이것이었습니다.운영 DBA의 판단에는 DB 내부 정보만 들어가지 않습니다.같은 장애라도* 현재 영향도가 어느 정도인지* 어떤 업무인지* 어떤 조치가 허용되는지* 되돌릴 수 있는 조치인지* 지금 확보한 정보만으로 정상화가 가능한지   까지 함께 봐야 합니다.이번 실험은 네 가지 장애 유형을 단순화해 각각 한 번씩 재현한 관찰이라 일반화에는 한계가 있습니다.그래도 현재 수준의 AI라면 장애 분석, 진단 SQL 작성, 원인 후보 축소, 변경 위험 검토는 상당 부분 맡길 수 있다고 봤습니다.반면 실제 운영에서 최종 판단까지 맡기려면 아직 업무 컨텍스트와 운영 정책이 필요했습니다.그리고 이 부분은 비단 DBA 업무에만 해당하는 이야기는 아닐 것 같습니다.AI가 전문 지식을 다루는 능력은 빠르게 좋아지고 있지만, 그 지식을 지금 어떤 상황에서 어떻게 적용해야 하는지는 결국 업무의 맥락과 영향도를 함께 봐야 하는 문제이기 때문입니다. #Oracle #DBA #Database #AI #Oracle26ai #장애대응 #성능튜닝
+2026-10-10T15:45:14.585201Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10100/v1/responses
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+warning: Codex is ignoring 2 unrecognized configuration settings. Check for typos or deprecated settings.
+  user (/home/hwjoo/.codex/config.toml): `features.child_agents_md` is ignored.
+  user (/home/hwjoo/.codex/config.toml): `network_access` is ignored.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Completed
+hook: SessionStart Completed
+codex
+있었던 일: 글쓴이는 Oracle에서 네 가지 장애 유형을 단순화해 각각 한 번씩 재현하고, 원인을 알려주지 않은 채 AI에게 데이터베이스 운영 담당자 역할을 맡겼다. 한 사례에서 AI는 잘못된 통계를 원인으로 찾아내고도 분석을 계속했고, 글쓴이가 정밀 분석보다 운영 정상화를 먼저 하자고 요청하자 복구 절차로 전환했다.
+글쓴이가 하는 말: 이번 실험만으로 일반화하기는 어렵지만, 현재 AI에도 장애 분석과 원인 후보를 좁히는 일, 변경 위험 검토는 상당 부분 맡길 수 있다. 다만 언제 분석을 멈추고 어떤 조치를 할지 최종 판단까지 맡기려면, 장애가 업무에 미치는 영향과 허용되는 조치 등 업무 맥락과 운영 정책이 필요하다.
+tokens used
+2,665
+있었던 일: 글쓴이는 Oracle에서 네 가지 장애 유형을 단순화해 각각 한 번씩 재현하고, 원인을 알려주지 않은 채 AI에게 데이터베이스 운영 담당자 역할을 맡겼다. 한 사례에서 AI는 잘못된 통계를 원인으로 찾아내고도 분석을 계속했고, 글쓴이가 정밀 분석보다 운영 정상화를 먼저 하자고 요청하자 복구 절차로 전환했다.
+글쓴이가 하는 말: 이번 실험만으로 일반화하기는 어렵지만, 현재 AI에도 장애 분석과 원인 후보를 좁히는 일, 변경 위험 검토는 상당 부분 맡길 수 있다. 다만 언제 분석을 멈추고 어떤 조치를 할지 최종 판단까지 맡기려면, 장애가 업무에 미치는 영향과 허용되는 조치 등 업무 맥락과 운영 정책이 필요하다.

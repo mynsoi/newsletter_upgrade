@@ -1,0 +1,13 @@
+아래 [원문]을 재료로 사내 뉴스레터(SK E&S 직원 대상, 대부분 개발자가 아닌 사무·현장 직군) 칼럼을 한 편 쓰려고 합니다. 제목은 나중에 따로 정합니다. 지금은 이 원문으로 무슨 이야기를 할 수 있는지만 정리해 주세요.
+
+출력 형식(이 두 줄 머리만 쓰고 다른 설명은 붙이지 마세요):
+있었던 일: <원문 속 사람이 실제로 겪거나 한 일. 사실과 숫자는 원문에 있는 그대로, 두세 문장>
+글쓴이가 하는 말: <원문 글쓴이가 가장 하고 싶은 주장을 우리말 한두 문장으로. 일반적인 교훈으로 바꾸지 않고 글쓴이의 주장 그대로>
+말끝은 모두 '~다'로 맞춥니다.
+
+지킬 것: 원문의 문장을 그대로 옮기지 않습니다. 원문에 없는 사실·수치·경험을 지어내지 않습니다. 원문이 가장 하고 싶은 말을 붙잡고, 사소한 세부에 매달리지 않습니다.
+
+파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.
+
+=== [원문] ===
+The most useful thing I've done with AI this year has nothing to do with writing content. That part still takes me literally hours, and I'm trying to find ways to streamline it so I can balance it with client work. What I have done is automate the small, repetitive work that takes quite a bit of time each week. ☁️ Enquiry triage. New emails from three different inboxes get read, sorted, summarised, and replies are drafted. ☁️ Leads search and capture. Real enquiries land in HubSpot as draft records, and each morning a short list of companies that fit the businesses I work with is found, checked and added too.  ☁️ Review replies. New Google reviews get a drafted reply. Nothing goes live until I've approved the wording. ☁️ Content ideas. Multiple sources of information feed into Notion, summarised as ideas which I can work with. ☁️ Client invoicing. My tracked hours in Clockify turn into draft invoices, ready to check and send. ☁️ Weekly focus. Every week my calendars and Notion to-do list arrive as one summary of the week ahead. ☁️ Client calls prep. Before a call, past emails, Notion notes, CRM records and updates come together as one summary page. After it, Read AI's transcript and my notes become a summary in Notion: decisions, next steps, who owns what. With client consent to record.Client information runs through several of these, so I checked the data agreements on each tool and updated my privacy policy. Not legal advice, but is where I'd start if you want to check your own setup. It has taken a bit of time to set this up, but I have loved the process of learning how to do it, and I'm experimenting with more things I can do, like family admin and household logistics. And no, this hasn't transformed my life (I'm not sitting on the beach working 2 hours a day unfortunately :D) but it has given me time back which I can use in other areas of my business. #aiinmarketing #productivity #smallbusiness #automation #whitecloudcommunications
