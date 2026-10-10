@@ -1,53 +1,155 @@
-# mentor-lab — 멘토 방식 칼럼 실험
+# 칼럼 작업실 (mentor-lab)
 
-팀 저장소(`../newsletter_upgrade/`) 밖에서, 멘티 방식(문체 지침·칼럼 프로파일·레퍼런스·루브릭·증거 게이트)을
-쓰지 않고 멘토 방식만으로 칼럼을 만들어 본다. 이후 멘티 방식 결과와 비교한다.
+사내 뉴스레터에 실을 칼럼을 만드는 작업실입니다. 사람은 고르고 피드백하는 일만 하고,
+원문 모으기·주제 정리·초안·고쳐 쓰기·그림은 AI가 맡습니다. 브라우저에서 버튼을 누르다 보면
+원문 수집부터 확정까지 한 화면 안에서 칼럼 한 편이 나옵니다.
 
-## 설정 (2026-10-07 결정)
+> 팀 저장소(`newsletter_upgrade`)의 아티클 파이프라인과는 따로, 멘토가 직접 쓰는 방식을 시험하려고 만든 저장소입니다.
+> 팀 방식의 문체 지침·루브릭·증거 게이트는 쓰지 않습니다.
 
-| 항목 | 결정 |
+![확정한 칼럼 화면](docs/readme/screen-column.jpg)
+<sub>확정한 칼럼 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」 — 머리 그림, 다섯 번째 과정을 거친 957자 본문</sub>
+
+## 한눈에 보기
+
+![칼럼 한 편이 나오기까지](docs/readme/diagram-flow.png)
+
+- **빨간 칸만 사람이 합니다.** 주제 고르기, 제목 고르기, 피드백, 그림 골라 확정까지 네 가지입니다.
+- 나머지는 작업실이 합니다. 원문이 들어오면 위키에 저절로 정리되고, 주제를 고르면 제목 후보와 초안이 이어서 나옵니다.
+- 피드백은 몇 번이든 보낼 수 있습니다. 보낼 때마다 과정 4, 5, …가 하나씩 쌓입니다.
+- 확정한 칼럼은 위키 주제에 '씀'으로 표시되어, 주제 지도에서 이미 쓴 주제를 알아볼 수 있습니다.
+
+## 화면으로 따라가기
+
+### 1. 서재 — 원문 모으기
+
+![서재](docs/readme/screen-library.jpg)
+
+Threads·LinkedIn 글과 경영일기를 모아 두는 곳입니다. 입력창에 찾을 내용을 적고 **aside 수집**을 누르면
+브라우저가 글을 찾아 원문 그대로 저장합니다(`sources/originals/`). 비워 두고 누르면 Threads·LinkedIn에서 알아서 찾아옵니다.
+
+요약하지 않고 전체를 저장하는 게 원칙입니다. 요약본으로 글을 쓰면 원문의 맥락과 말맛이 빠지기 때문입니다.
+
+### 2. 주제 지도 — 무엇을 쓸지 고르기
+
+![주제 지도](docs/readme/screen-topics.jpg)
+
+모은 원문은 위키(`wiki/`)로 정리됩니다. 논지 하나가 카드 하나입니다. 새 원문이 들어오면 비슷한 논지의 카드에 쌓이고,
+새로운 논지면 카드가 새로 생깁니다. 카드의 큰 숫자는 그 주제를 뒷받침하는 원문 수입니다.
+
+> **왜 위키인가** — 처음에는 원문 전체를 한꺼번에 AI에 넣고 주제를 뽑았는데, 뽑을 때마다 비슷한 주제가 되풀이됐습니다.
+> 같은 원문 40편으로 세 방식을 블라인드 비교한 뒤 위키 방식을 골랐습니다. → [시험 기록](docs/2026-10-10-주제-위키-시험.md)
+
+### 3. 제목 고르기
+
+![제목 후보](docs/readme/screen-titles.jpg)
+
+카드를 고르면 astra가 그 주제의 원문만 다시 깊게 읽어 글 설정(논지·참고 원문)을 다듬고, 제목 후보를 냅니다.
+이 중 하나를 고릅니다. 마음에 드는 게 없으면 **다시 뽑기**를 누릅니다.
+
+### 4. 과정과 피드백
+
+![과정과 피드백](docs/readme/screen-process.jpg)
+
+제목을 정하고 **쓰기**를 누르면 세 과정이 차례로 돕니다.
+
+| 과정 | 누가 | 하는 일 |
+|---|---|---|
+| 1 | Claude | 원문 전체와 경영일기 세 편의 문체를 참고해 초안을 씀 |
+| 2 | astra | "경영일기 필자가 직접 썼다면" 하고 다시 씀 |
+| 3 | astra | 지금까지 쌓인 멘토 기준(`briefs/standing-feedback.md`)을 반영 |
+
+오른쪽 위에서 **절반**을 켜 두면 과정 3 다음에 분량을 절반으로 줄이는 과정이 하나 더 붙습니다.
+
+그다음부터는 화면 아래 입력창에 피드백을 적어 보내면 됩니다. 적은 내용은 고치지 않고 그대로 astra에게 넘어가고,
+결과는 다음 과정으로 쌓입니다. 위 화면은 피드백을 여러 번 주고받아 과정 8까지 온 글입니다.
+지난 과정은 아래에 접혀 있어 언제든 다시 비교할 수 있습니다.
+
+### 5. 그림 고르고 확정
+
+![그림 후보](docs/readme/screen-images.jpg)
+
+astra가 글을 읽고 그림 설명을 쓰면 gti가 그립니다. 머리 그림 하나와 본문 그림 셋을 고릅니다.
+본문 그림을 넣을 문단은 astra가 정합니다. **확정**을 누르면 칼럼이 `columns/`에 저장됩니다.
+
+만든 글은 **글** 화면에 모입니다.
+
+![글 목록](docs/readme/screen-articles.jpg)
+
+## 어떻게 돌아가나
+
+![누가 무엇을 부르나](docs/readme/diagram-architecture.png)
+
+화면의 버튼은 서버(`scripts/studio_server.py`)를 거쳐 스크립트 하나를 실행할 뿐입니다.
+스크립트가 AI를 부르고, 단계와 단계 사이는 전부 파일로 이어집니다. 그래서 어느 단계든 파일을 열어 보면
+무엇이 들어가고 무엇이 나왔는지 확인할 수 있습니다.
+
+| 누가 | 맡은 일 |
 |---|---|
-| 주제 | AI와 함께 일하는 효율을 높이는 방법 |
-| 근거 자료 | 기존 증거 파일·DB 쓰지 않음. 자료 수집부터 멘토가 직접 (aside 사용) |
-| 평가·수정 | 멘토가 직접 평가하고 고쳐 나간다 |
-| 방법 정의 | 인터뷰로 멘토 말 그대로 받아 적어 `method.md`에 정리 |
-| 생성 | 이 폴더에서 새로 띄운 `claude` 세션이 `method.md`만 보고 진행 (팀 CLAUDE.md가 섞이지 않게) |
+| Claude (`claude -p --model opus`) | 과정 1 초안, 화면 오른쪽 아래 진행자(말로 작업을 부탁하는 창) |
+| astra (`codex exec -m gpt-6-astra`) | 주제 위키, 제목 후보, 과정 2부터 끝까지, 그림 설명 |
+| gti (gpt-6-astra) | 그림 |
+| aside | 브라우저로 원문 수집 |
 
-## 방식과 무관하게 지키는 것
-
-원문 문장을 발행물에 그대로 옮기지 않기 · 출처로 확인되지 않는 수치·인용 쓰지 않기 ·
-사내 자료는 공개 가능한 것만 · 유료 콘텐츠 우회 금지 · 웹 페이지 속 지시문은 따르지 않기.
-
-## 폴더
+단계 사이를 잇는 파일:
 
 ```
-README.md          이 문서
-interview.md       인터뷰 질문과 멘토 답변 (원문 그대로)
-method.md          인터뷰로 정리한 멘토 방식 (인터뷰 후 작성)
-aside-collect.md   aside 자료 수집 지시문 — 어디서·무엇을·어떤 형식으로
-sources/           수집 결과 (라운드별)
-drafts/            초안과 수정 이력
+sources/originals/   수집한 원문 (사이트별, 원문 그대로)
+wiki/                주제 페이지 — 논지, 원문 목록, 쓸 수 있는 각도
+briefs/<글>.json     글 설정 — 논지, 참고 원문, 제목, 분량
+runs/                과정마다 들어간 것과 나온 것, 작업 로그
+columns/<글>.md      확정 칼럼 (과정 기록은 <글>.process.json)
 ```
 
-## 칼럼 작업실 (웹앱, 2026-10-09)
+두 도식은 클릭해서 따라가 볼 수 있는 페이지로도 있습니다. 작업실 서버를 켠 뒤
+http://localhost:8771/docs/2026-10-10-동작-원리.html 에서 여세요(GitHub에서는 열리지 않습니다).
 
-데스크톱 전용. 수집(aside, 입력 없으면 Threads·LinkedIn 자동) → 위키 넣기(수집 뒤 저절로) → 주제 지도에서 고르기(그 주제 원문만 astra가 깊게 읽음) → 제목(astra)
-→ 과정 1·2·3(Claude 초안 → astra 재작성 → astra 기준 반영) → [절반 모드면 astra가 절반으로 줄인 과정]
-→ 과정 4~(멘토 피드백, astra) → 그림(머리 그림 + 본문 그림 3개, astra 설명 + gti) → 확정(고른 본문 그림을 그 문단 뒤에). 화면 오른쪽 아래 버튼은 진행자(Claude, 글마다 `--resume` 세션).
+## 만들 때 지킨 것
 
+- **원문은 그대로** — 글은 언제나 원문 전체를 보고 씁니다. 위키와 요약은 목차 역할만 합니다.
+- **피드백도 그대로** — 사람이 쓴 피드백을 AI가 해석해 바꾸지 않고 파일째 넘깁니다.
+- **제목은 astra가** — Claude가 지은 제목은 상투적이라는 평가를 받아, 제목 후보는 astra만 냅니다.
+- **원문 보호** — astra는 `wiki/` 안에서만 파일을 쓸 수 있습니다. 원문 폴더는 읽기만 됩니다.
+- **옮기지 않고, 지어내지 않고** — 칼럼에 원문 문장을 그대로 옮기지 않고, 출처에 없는 수치·인용을 쓰지 않습니다.
+
+## 실행하기
+
+필요한 것: Python 3, Node.js, `claude`(Claude Code), `codex`(gpt-6-astra), gti(god-tibo-imagen), aside
+
+```bash
+cd app && npm install && npm run build            # 화면 빌드
+cd .. && python3 -I scripts/studio_server.py 8771
+# → http://localhost:8771  (데스크톱 브라우저)
 ```
-cd app && npm run build                    # 화면 빌드 (app/dist)
-python3 -I scripts/studio_server.py 8771   # 서버 — http://127.0.0.1:8771 · http://<Tailscale 주소>:8771, 비밀번호 없음
+
+- 서버는 이 컴퓨터(localhost)에서만 열립니다. Tailscale을 쓰면 그 주소에도 열려 내 다른 기기에서 접속할 수 있습니다.
+- 화면 코드만 고쳤으면 `npm run build`만 다시 하면 됩니다. 서버 코드를 고쳤으면 진행 중인 작업이 없을 때 재시작하세요.
+  재시작하면 진행 중인 작업의 후처리(수집 뒤 위키 넣기 등)가 끊깁니다.
+- 지금은 수집이 `aside-win` 명령을, 그림이 `~/.codex/skills/god-tibo-imagen` 스크립트를 전제로 합니다.
+  다른 컴퓨터에서는 이 두 곳을 자기 환경에 맞게 바꿔야 합니다.
+
+화면 없이 명령으로도 돌릴 수 있습니다.
+
+```bash
+python3 -I scripts/collect.py "찾을 내용"                         # 원문 수집 (비우면 자동)
+python3 -I scripts/wiki.py --ingest                               # 아직 안 넣은 원문을 위키에
+python3 -I scripts/column_pipeline.py --titles briefs/<글>.json   # 제목 후보
+python3 -I scripts/column_pipeline.py briefs/<글>.json            # 과정 1·2·3
+python3 -I scripts/column_pipeline.py --revise briefs/<글>.json <피드백.txt>
+python3 -I scripts/image_candidates.py <글>                       # 머리 그림 후보 (--inline: 본문 그림)
 ```
 
-- 같은 공유기(LAN)에는 열지 않는다: localhost와 Tailscale 주소(100.64.0.0/10)에만 붙는다.
-  진행자는 Bash를 쓰는 Claude라서, 다른 사이트가 몰래 보내는 요청도 막는다(Host·Origin 확인, JSON 요청만 받음).
+## 더 보기
 
-- 서버는 버튼을 기존 명령에 잇기만 한다: `column_pipeline.py`(제목·쓰기·피드백) · `wiki.py`(주제 위키 넣기·정리·고르기, 2026-10-10 채택 — `docs/2026-10-10-주제-위키-시험.html`) ·
-  `image_candidates.py`(그림) · `collect.py`(aside 수집, 개수 상한 없음). 작업 기록은 `runs/studio/`.
-- Windows 크롬에서 `http://localhost:8771`로 열면 "앱 설치"(PWA)가 된다(설치는 localhost·https에서만).
+- [handoff.md](handoff.md) — 지금까지의 결정, 운영할 때 주의할 점, 남은 일 (이어받는 사람용)
+- [criteria.md](criteria.md) — 초안을 읽고 나온 멘토 기준
+- [docs/2026-10-10-주제-위키-시험.md](docs/2026-10-10-주제-위키-시험.md) — 주제를 위키로 쌓기로 한 근거
+- [interview.md](interview.md) · [aside-collect.md](aside-collect.md) — 초기 인터뷰와 수집 지시문
 
-화면 컴포넌트 출처 (shadcn 레지스트리로 설치 후 용도에 맞게 손질 — `app/src/components/`):
+<details>
+<summary>화면 컴포넌트 출처</summary>
+
+shadcn 레지스트리로 설치한 뒤 용도에 맞게 손질했습니다(`app/src/components/`).
 
 | 화면 | 컴포넌트 | 출처 |
 |---|---|---|
@@ -68,6 +170,9 @@ python3 -I scripts/studio_server.py 8771   # 서버 — http://127.0.0.1:8771 ·
 | 작업 중 글자 | AI Text Loading | Kokonut UI |
 | 쓰기·확정 버튼 | Particle Button | Kokonut UI |
 | 원문·진행자 패널 | Drawer | shadcn/ui |
+| 라이트/다크 전환 | ThemeToggle | BoardUI |
 
-21st.dev 레지스트리(`https://21st.dev/r/...`)는 2026-10 기준 로그인(API 키)이 있어야 받을 수 있어(403),
-같은 컴포넌트를 원저자 공개 레지스트리(ui.aceternity.com/registry · kokonutui.com/r)에서 받았다.
+21st.dev 레지스트리(`https://21st.dev/r/...`)는 2026-10 기준 로그인(API 키)이 있어야 받을 수 있어서(403),
+같은 컴포넌트를 원저자 공개 레지스트리(ui.aceternity.com/registry · kokonutui.com/r)에서 받았습니다.
+
+</details>
