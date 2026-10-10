@@ -98,8 +98,8 @@ export default function Article({
         {t === "confirm" && <Confirm a={a} refresh={refresh} />}
       </div>
 
-      {t === "process" && (
-        <Composer a={a} state={state} refresh={refresh} onDirector={() => setChatOpen(true)} />
+      {(t === "process" || t === "title") && (
+        <Composer key={t} a={a} tab={t} state={state} refresh={refresh} onDirector={() => setChatOpen(true)} />
       )}
       <button
         onClick={() => setChatOpen(true)}
@@ -172,6 +172,7 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
       </div>
       {(readJob || titleJob) && (
         <div className="mt-8">
+          {titleJob?.message && <Feedback text={titleJob.message} />}
           <Working
             job={(readJob || titleJob)!}
             title={readJob ? "깊게 읽기" : "제목 후보"}
@@ -184,6 +185,7 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
       {rounds.map((r, ri) => (
         <section key={r.at} className={cn("mt-8", ri > 0 && "opacity-60 transition hover:opacity-100")}>
           {rounds.length > 1 && <div className="px-2 text-sm tabular-nums text-ink-3">{when(r.at)}</div>}
+          {r.message && <div className="mt-3 px-2"><Feedback text={r.message} /></div>}
           <HoverEffect
             items={r.items}
             getKey={(x) => x}
@@ -372,17 +374,23 @@ function Process({ a, state, refresh, go }: { a: A; state: State; refresh: () =>
 
 /* ---------- 피드백·진행자 입력 ---------- */
 
-function Composer({ a, state, refresh, onDirector }: { a: A; state: State; refresh: () => void; onDirector: () => void }) {
-  const canRevise = a.kind === "brief" && a.steps.length >= 3;
+function Composer({ a, tab, state, refresh, onDirector }: { a: A; tab: string; state: State; refresh: () => void; onDirector: () => void }) {
+  // 제목 탭: 다시 뽑을 때 astra에게 같이 보낼 말(멘토 2026-10-10)
+  const canTitle = tab === "title" && a.kind === "brief";
+  const canRevise = tab === "process" && a.kind === "brief" && a.steps.length >= 3;
   const modes = [
+    ...(canTitle ? [{ id: "titles", label: "제목", icon: <IconSparkles className="size-3.5 text-emerald-300" /> }] : []),
     ...(canRevise ? [{ id: "feedback", label: "피드백", icon: <IconPencil className="size-3.5 text-emerald-300" /> }] : []),
     { id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> },
   ];
   const [mode, setMode] = useState(modes[0].id);
   useEffect(() => {
     if (!modes.find((m) => m.id === mode)) setMode(modes[0].id);
-  }, [canRevise]); // eslint-disable-line
-  const busy = runningJob(state.jobs, "revise", a.id) || runningJob(state.jobs, "chat", a.id);
+  }, [canRevise, canTitle]); // eslint-disable-line
+  const busy =
+    (canTitle && (runningJob(state.jobs, "titles", a.id) || runningJob(state.jobs, "wiki-pick", a.id))) ||
+    runningJob(state.jobs, "revise", a.id) ||
+    runningJob(state.jobs, "chat", a.id);
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 flex justify-center bg-gradient-to-t from-page via-page/90 to-transparent pt-16 pl-[60px]">
       <AI_Prompt
@@ -393,7 +401,8 @@ function Composer({ a, state, refresh, onDirector }: { a: A; state: State; refre
         placeholder={mode === "feedback" ? `과정 ${a.steps.length + 1}` : ""}
         busy={busy ? <Spin texts={[busy.kind === "chat" ? "진행자" : "astra", "…"]} /> : undefined}
         onSubmit={(v, m) => {
-          if (m === "feedback") act("revise", { article: a.id, feedback: v }).then(refresh);
+          if (m === "titles") act("titles", { article: a.id, message: v }).then(refresh);
+          else if (m === "feedback") act("revise", { article: a.id, feedback: v }).then(refresh);
           else {
             act("chat", { article: a.id, message: v }).then(refresh);
             onDirector();

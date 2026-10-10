@@ -3,6 +3,7 @@
 사용: python3 column_pipeline.py briefs/t1-A.json briefs/t1-B.json ...
 0단계 — 제목 후보 (멘토 2026-10-09: "첫 단계로 해"):
   python3 column_pipeline.py --titles briefs/t1-A.json ...  → runs/titles0/<설정>/astra.md (astra만, 쓰기 전 생각 한 줄+원문 기준)
+  python3 column_pipeline.py --titles briefs/t1-A.json --message <파일>  → 멘토 메시지(파일 그대로)와 직전 회차 후보를 같이 보낸다
   멘토가 고른 제목을 설정 파일의 "title"에 넣은 뒤 아래 1~3단계를 돌린다. title이 없으면 멈춘다.
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
@@ -137,9 +138,15 @@ def stage(name, jobs):
     return res
 
 
-def titles_first(paths):
+def titles_first(args):
+    """--titles <설정> ... [--message <파일>] — 메시지는 파일 내용 그대로 astra에게 (멘토 2026-10-10)."""
     import title_candidates as tc
     out = ROOT / "runs" / "titles0"
+    paths, msg = list(args), ""
+    if "--message" in paths:
+        i = paths.index("--message")
+        msg = Path(paths[i + 1]).read_text(encoding="utf-8").strip()
+        del paths[i:i + 2]
     jobs = []
     for pth in paths:
         k = Path(pth).stem
@@ -148,11 +155,23 @@ def titles_first(paths):
             continue
         d = out / k
         d.mkdir(parents=True, exist_ok=True)
-        pr = tc.prompt_first(b["thesis"], b["sources"], SRC)
+        # 직전 회차 — 작업실은 astra.md를 astra-N.md로 밀어 두고 부른다. 바로 부르면 astra.md가 직전 회차
+        olds = sorted(d.glob("astra-*.md"), key=lambda p: int(p.stem.split("-")[1]))
+        last = d / "astra.md" if (d / "astra.md").exists() else (olds[-1] if olds else None)
+        prev = tc.round_items(last) if msg and last else None
+        (d / "message.txt").unlink(missing_ok=True)  # 덮어쓸 회차의 메시지
+        pr = tc.prompt_first(b["thesis"], b["sources"], SRC, msg, prev)
         (d / "prompt.md").write_text(pr, encoding="utf-8")
         (d / "brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-        jobs.append(lambda d=d, pr=pr: tc.astra(d, pr) or (d / "astra.md").exists())
-    stage("제목 후보·astra (쓰기 전)", jobs)
+
+        def job(d=d, pr=pr):
+            tc.astra(d, pr)
+            ok = (d / "astra.md").exists()
+            if ok and msg:  # 회차와 함께 남긴다 — 작업실이 후보 위에 보여 준다
+                (d / "message.txt").write_text(msg, encoding="utf-8")
+            return ok
+        jobs.append(job)
+    stage("제목 후보·astra (쓰기 전)" + (" · 멘토 메시지" if msg else ""), jobs)
 
 
 def main(paths):

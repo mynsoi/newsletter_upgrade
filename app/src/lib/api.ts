@@ -38,7 +38,7 @@ export type Article = {
   thesis: string;
   sources: [string, string][];
   title: string;
-  titles: { at: number; items: string[] }[];
+  titles: { at: number; items: string[]; message?: string }[];
   steps: Step[];
   images: { id: string; items: ImageItem[] }[];
   inline: { id: string; items: ImageItem[] }[];
@@ -59,6 +59,7 @@ export type Job = {
   started: number;
   ended?: number;
   log: string;
+  message?: string;
 };
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };

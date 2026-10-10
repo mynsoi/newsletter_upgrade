@@ -142,8 +142,9 @@ def title_rounds(k):
     for f in files:
         if f.exists():
             lines = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in read(f).splitlines() if l.strip()]
-            if lines:
-                out.append({"at": f.stat().st_mtime, "items": lines})
+            if lines:  # 회차와 같은 번호의 메시지(astra-2.md ↔ message-2.txt, astra.md ↔ message.txt)
+                msg = read(d / f.name.replace("astra", "message").replace(".md", ".txt")).strip()
+                out.append({"at": f.stat().st_mtime, "items": lines, "message": msg})
     return out
 
 
@@ -406,13 +407,30 @@ def act_pick_topic(a):
 
 
 def act_titles(a):
+    """제목 후보 — 멘토가 메시지를 같이 보내면 받은 그대로 파일로 넘긴다(멘토 2026-10-10: "원할 시 메시지를 같이")."""
     k = a["article"]
     bp = brief_path(k)
+    msg = str(a.get("message") or "").strip()
+    with LOCK:  # 돌고 있는 회차의 파일을 밀어내지 않게
+        if any(j["kind"] == "titles" and j["target"] == k and j["status"] == "running" for j in JOBS.values()):
+            raise ValueError("제목 후보를 짓는 중")
     d = ROOT / "runs" / "titles0" / k
     if (d / "astra.md").exists():  # 다시 뽑으면 앞 회차를 남긴다
         n = len(list(d.glob("astra-*.md"))) + 1
         (d / "astra.md").rename(d / f"astra-{n}.md")
-    return start("titles", k, PIPE + ["--titles", str(bp.relative_to(ROOT))])
+        if (d / "message.txt").exists():
+            (d / "message.txt").rename(d / f"message-{n}.txt")
+    cmd = PIPE + ["--titles", str(bp.relative_to(ROOT))]
+    if msg:
+        inbox = d / "inbox"
+        inbox.mkdir(parents=True, exist_ok=True)
+        f = inbox / (time.strftime("%Y%m%d-%H%M%S") + ".txt")
+        f.write_text(msg, encoding="utf-8")
+        cmd += ["--message", str(f.relative_to(ROOT))]
+    j = start("titles", k, cmd)
+    if msg:
+        j["message"] = msg  # 도는 동안에도 화면이 보낸 말을 보여 주게
+    return j
 
 
 def act_title(a):

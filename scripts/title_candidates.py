@@ -2,6 +2,7 @@
 
 사용: python3 title_candidates.py <이름>=<본문 파일> ...
 결과: runs/titles/<이름>/astra.md — 번호 붙은 제목 8줄 (astra만 — 멘토 2026-10-09: Claude가 지은 제목은 AI slop이 심하다)
+쓰기 전 제목(prompt_first)은 column_pipeline.py --titles가 부른다 — 멘토 메시지(--message)를 같이 보낼 수 있다.
 참고: 「유정식의 경영일기」 최근 제목 60개(공지·강좌 제외, AI 아닌 주제 포함) + 멘토가 직접 지은 제목 1개
 """
 import html
@@ -59,13 +60,27 @@ def prompt(text):
 {text}"""
 
 
-def prompt_first(thesis, sources, src_root):
-    """첫 단계 — 글을 쓰기 전에 생각 한 줄과 원문만 보고 제목 후보를 낸다 (멘토 2026-10-09: "첫 단계로 해")."""
+def round_items(f):
+    """회차 파일(astra.md·astra-N.md)에서 번호·머리표를 뗀 제목 줄만."""
+    return [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in Path(f).read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def prompt_first(thesis, sources, src_root, message="", prev=None):
+    """첫 단계 — 글을 쓰기 전에 생각 한 줄과 원문만 보고 제목 후보를 낸다 (멘토 2026-10-09: "첫 단계로 해").
+    message: 멘토가 다시 뽑을 때 같이 보낸 말(원문 그대로, 2026-10-10 "제목 지을 때도 astra한테 원할 시 메시지를 같이")
+    prev: 그 말이 가리킬 수 있게 직전 회차 후보 — 메시지가 있을 때만 넣는다."""
     def body(path):
         s = Path(path).read_text(encoding="utf-8")
         return (s.split("---", 2)[2] if s.startswith("---") else s).strip()
     titles = "\n".join(f"- {t}" for t in ref_titles())
     srcs = "\n\n".join(f"=== [원문 {i}] {d} ===\n" + body(Path(src_root) / p) for i, (p, d) in enumerate(sources, 1))
+    ask = ask_body = ""
+    if message:
+        ask = ("\n- [이번 멘토 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
+               + (" [앞 회차 후보]는 멘토가 이미 본 후보입니다." if prev else ""))
+        ask_body = "[이번 멘토 요청 — 원문 그대로]\n" + message.strip() + "\n\n"
+        if prev:
+            ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
     return f"""아래 [원문]을 재료로 사내 뉴스레터(SK E&S 전 직원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 8개 지어 주세요.
 
 이 글이 말할 것: {thesis}
@@ -73,11 +88,11 @@ def prompt_first(thesis, sources, src_root):
 - [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.
 - [멘토가 직접 지은 제목]도 참고하세요.
 - 원문이 실제로 보여 주는 것을 과장하지 않습니다.
-- 후보끼리는 서로 다른 결로 지어 주세요.
+- 후보끼리는 서로 다른 결로 지어 주세요.{ask}
 
 출력: 번호를 붙인 제목 8줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
 
-[멘토가 직접 지은 제목]
+{ask_body}[멘토가 직접 지은 제목]
 - {MENTOR_TITLE}
 
 [제목 참고]

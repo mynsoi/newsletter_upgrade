@@ -46,6 +46,8 @@ Threads·LinkedIn 글과 경영일기를 모아 두는 곳입니다. 입력창�
 
 카드를 고르면 astra가 그 주제의 원문만 다시 깊게 읽어 글 설정(논지·참고 원문)을 다듬고, 제목 후보를 냅니다.
 이 중 하나를 고릅니다. 마음에 드는 게 없으면 **다시 뽑기**를 누릅니다.
+바라는 게 있으면 화면 아래 입력창(제목)에 적어 보내면 됩니다. 적은 말은 고치지 않고 그대로, 앞 회차 후보와 함께 astra에게 넘어가고,
+회차마다 그때 보낸 말이 후보 위에 남습니다.
 
 ### 4. 과정과 피드백
 
@@ -133,7 +135,7 @@ cd .. && python3 -I scripts/studio_server.py 8771
 ```bash
 python3 -I scripts/collect.py "찾을 내용"                         # 원문 수집 (비우면 자동)
 python3 -I scripts/wiki.py --ingest                               # 아직 안 넣은 원문을 위키에
-python3 -I scripts/column_pipeline.py --titles briefs/<글>.json   # 제목 후보
+python3 -I scripts/column_pipeline.py --titles briefs/<글>.json   # 제목 후보 (--message <메시지.txt>: astra에게 같이 보낼 말)
 python3 -I scripts/column_pipeline.py briefs/<글>.json            # 과정 1·2·3
 python3 -I scripts/column_pipeline.py --revise briefs/<글>.json <피드백.txt>
 python3 -I scripts/image_candidates.py <글>                       # 머리 그림 후보 (--inline: 본문 그림)

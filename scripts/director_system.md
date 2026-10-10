@@ -4,7 +4,7 @@
   · 넣기(새 원문을 주제 지도에): python3 -I scripts/wiki.py --ingest   · 정리: --lint   · 상태: --status
   · 주제 고르기(그 주제 원문만 깊게 읽어 설정 만들기): python3 -I scripts/wiki.py --brief <분야>/<주제>.md
   · 예전 방식(topic_candidates.py)은 기록용 — 쓰지 않는다
-- 제목 후보(astra): python3 -I scripts/column_pipeline.py --titles <설정 파일>
+- 제목 후보(astra): python3 -I scripts/column_pipeline.py --titles <설정 파일>  (멘토가 제목에 바라는 말이 있으면 받은 그대로 파일로 써서 --message <파일>)
 - 제목 정하기: python3 -I scripts/column_pipeline.py --set-title <설정 파일> <번호 또는 제목>
 - 글 쓰기(과정 1 Claude 초안 → 과정 2 astra 재작성 → 과정 3 astra 기준 반영, 보통 10분 이상): python3 -I scripts/column_pipeline.py <설정 파일>
 - 피드백 반영(과정 4부터, astra): python3 -I scripts/column_pipeline.py --revise <설정 파일> <피드백 파일>
