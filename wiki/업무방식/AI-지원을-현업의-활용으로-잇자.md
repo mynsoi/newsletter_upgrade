@@ -16,7 +16,7 @@ used_in: []
 ## 원문
 | 원문 | 작성자 · 날짜 | 이 원문이 보태는 것 |
 |---|---|---|
-| [linkedin/11](../../sources/originals/linkedin/11.md) · https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works%ED%8C%80%EC%9C%BC%EB%A1%9C-ai-%EC%99%80-%ED%95%A8%EA%BB%98-%EC%9D%B4%EA%B2%83%EC%A0%80%EA%B2%83-activity-7506359658182332416-3IVt | 신주호 · 9월 17일 | F&F 입사 후 AI 구독·API 이용을 지원받고, 여러 직군이 AI를 적극적으로 쓰며 구체적인 요구를 내는 모습을 보았다고 전한다. 업무 용어·요약·후속 할 일을 담은 회의록을 메일로 받는 내부 도구에 만족한 경험을 보태며, 전사 활용에 대한 한 직원의 관찰로 다룬다. |
+| [linkedin/11](../../sources/originals/linkedin/11.md) · https://www.linkedin.com/posts/jooho-shin_%EC%9D%B4%EC%A7%81%ED%95%9C-%EA%B3%B3%EC%9D%80-ff-%EC%9E%85%EB%8B%88%EB%8B%A4-ai-works%ED%8C%80%EC%9C%BC%EB%A1%9C-ai-%EC%99%80-%ED%95%A8%EA%BB%98-%EC%9D%B4%EA%B2%83%EC%A0%80%EA%B2%83-activity-7506359658182332416-3IVt | 신주호 · 9월 17일 · 회사 | F&F 입사 후 AI 구독·API 이용을 지원받고, 여러 직군이 AI를 적극적으로 쓰며 구체적인 요구를 내는 모습을 보았다고 전한다. 업무 용어·요약·후속 할 일을 담은 회의록을 메일로 받는 내부 도구에 만족한 경험을 보태며, 전사 활용에 대한 한 직원의 관찰로 다룬다. |
 
 ## 쓸 수 있는 각도
 - 입사 직후 받은 AI 이용 지원과 현업 직원들의 구체적인 요구를 함께 살펴보며, 조직에서 AI가 실제로 쓰이게 하는 조건을 생각해 본다.
