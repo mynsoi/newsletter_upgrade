@@ -4,8 +4,8 @@ title: AI 사용량보다 해결한 일을 보자
 description: AI에 요청하고 결과를 받아 보는 활동이 실제 문제 해결로 이어지는지 확인하자.
 tags: [업무방식]
 timestamp: 2026-10-10
-status: 쓸 수 있음
-used_in: []
+status: 진행 중
+used_in: [briefs/w-20261010-161003.json]
 ---
 
 # AI 사용량보다 해결한 일을 보자
