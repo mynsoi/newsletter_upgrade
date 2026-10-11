@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { IconArrowRight, IconCheck, IconFileText, IconPhoto, IconSparkles, IconTrash } from "@tabler/icons-react";
+import { IconArrowBackUp, IconArrowRight, IconCheck, IconChevronDown, IconFileText, IconPencil, IconPhoto, IconRefresh, IconSparkles, IconTrash } from "@tabler/icons-react";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import ParticleButton from "@/components/kokonutui/particle-button";
@@ -11,6 +11,9 @@ import { StageChip } from "@/views/Articles";
 import { PicksCard, useAttach } from "@/views/MineChat";
 import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type State, type Step } from "@/lib/api";
 import { cn } from "@/lib/utils";
+
+// 편집기(Tiptap)는 '편집'을 누를 때만 받아 온다
+const ProseEditor = lazy(() => import("@/components/studio/editor").then((m) => ({ default: m.ProseEditor })));
 
 /**
  * 글 화면 = 대화 (멘토 2026-10-11: "그 글에 있는 채팅이 계속해서 글 작성까지 흐름을 끌고 간다 … 실제로 그렇게 되어야 한다")
@@ -54,6 +57,8 @@ export default function Flow({ state, id, refresh, go }: { state: State; id: str
   const run = state.mine?.find((r) => r.id === id);
   const job = jobOf(state.jobs, id);
   const [sel, setSel] = useState<number | null>(null);
+  const nSteps = a?.steps.length ?? 0;
+  useEffect(() => setSel(null), [nSteps]); // 새 과정이 생기면 오른쪽은 최신 과정으로
   const [src, setSrc] = useState<string | null>(null);
   const [director, setDirector] = useState(false);
   const box = useRef<HTMLDivElement>(null);
@@ -97,7 +102,7 @@ export default function Flow({ state, id, refresh, go }: { state: State; id: str
       </section>
 
       <aside className="h-screen overflow-y-auto bg-soft/30">
-        <Now a={a} run={run} sel={sel} onSource={setSrc} />
+        <Now a={a} run={run} job={job} sel={sel} setSel={setSel} refresh={refresh} onSource={setSrc} />
       </aside>
 
       {a && <Director a={a} state={state} open={director} onClose={() => setDirector(false)} refresh={refresh} />}
@@ -153,7 +158,7 @@ function Timeline({
   state: State;
   refresh: () => void;
   sel: number | null;
-  setSel: (n: number) => void;
+  setSel: (n: number | null) => void;
   onSource: (p: string) => void;
 }) {
   const out: React.ReactNode[] = [];
@@ -235,6 +240,18 @@ function Timeline({
           </span>
         </Me>
       );
+    a.tries?.forEach((tr) => {
+      out.push(
+        <Ai key={`try${tr.n}`} label={<>{tr.n}번째 글 · 과정 1–{tr.steps.length}</>}>
+          <TryCard title={tr.title} steps={tr.steps} />
+        </Ai>
+      );
+      out.push(
+        <Me key={`tryr${tr.n}`}>
+          <span className="flex items-center gap-2"><IconRefresh className="size-4" />처음부터 다시 쓰기</span>
+        </Me>
+      );
+    });
     if (a.title && !started && job?.kind !== "write") out.push(<Ai key="write"><WriteCard a={a} refresh={refresh} /></Ai>);
   }
   if (a && a.kind === "process" && a.title) out.push(<Me key="title">{a.title}</Me>);
@@ -254,6 +271,7 @@ function Timeline({
     out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
     out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} refresh={refresh} /></Ai>);
   }
+  if (a && a.kind === "brief" && started && !a.confirmed && !job) out.push(<Restart key="restart" a={a} refresh={refresh} />);
 
   // 돌고 있는 작업 — 보낸 말이 있으면 먼저(제목·피드백)
   if (job) {
@@ -506,21 +524,92 @@ function ChatInput({ a, run, job, refresh, onDirector }: { a?: A; run?: MineRun;
 
 /* ---------- 지금 글 ---------- */
 
-function Now({ a, run, sel, onSource }: { a?: A; run?: MineRun; sel: number | null; onSource: (p: string) => void }) {
+function Now({
+  a,
+  run,
+  job,
+  sel,
+  setSel,
+  refresh,
+  onSource,
+}: {
+  a?: A;
+  run?: MineRun;
+  job?: Job;
+  sel: number | null;
+  setSel: (n: number | null) => void;
+  refresh: () => void;
+  onSource: (p: string) => void;
+}) {
   const s = a?.steps.find((x) => x.n === (sel ?? a.steps.length));
+  const latest = a?.steps.length ?? 0;
+  const [edit, setEdit] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  useEffect(() => setEdit(null), [s?.n]);
+  const writing = !!job && ["write", "revise", "shorten"].includes(job.kind);
+  const save = async () => {
+    if (!a || !s || edit === null || saving) return;
+    setSaving(true);
+    try {
+      await act("edit", { article: a.id, base: s.n, text: edit }); // 덮어쓰지 않고 '멘토' 과정으로 쌓인다
+      setEdit(null);
+      setSel(null);
+      refresh();
+    } finally {
+      setSaving(false);
+    }
+  };
   return (
     <div className="space-y-6 px-8 py-8">
       {a?.hero && <img src={img(a.hero, 900)} className="aspect-[3/2] w-full rounded-2xl object-cover" />}
       {s ? (
         <div>
-          <div className="mb-4 flex items-center gap-2 text-xs text-ink-3">
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <span className="tabular-nums">과정 {s.n}</span>
             <ByChip by={s.by} />
-            <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
+            <span className="tabular-nums">{(edit === null ? s.chars : edit.replace(/\s/g, "").length).toLocaleString()}자</span>
+            <span className="ml-auto flex items-center gap-1.5">
+              {edit !== null ? (
+                <>
+                  <SmallBtn onClick={() => setEdit(null)}>취소</SmallBtn>
+                  <SmallBtn strong onClick={save}>{saving ? "…" : "저장"}</SmallBtn>
+                </>
+              ) : (
+                a?.kind === "brief" &&
+                !writing && (
+                  <>
+                    <SmallBtn onClick={() => setEdit(s.text)}>
+                      <IconPencil className="size-3.5" />
+                      편집
+                    </SmallBtn>
+                    {s.n < latest && (
+                      <SmallBtn onClick={() => act("base", { article: a.id, step: s.n }).then(() => (setSel(null), refresh()))}>
+                        <IconArrowBackUp className="size-3.5" />
+                        여기서 이어 쓰기
+                      </SmallBtn>
+                    )}
+                    {!a.confirmed && s.n < latest && (
+                      <SmallBtn onClick={() => act("confirm", { article: a.id, step: s.n }).then(refresh)}>
+                        <IconCheck className="size-3.5" />
+                        이 과정으로 확정
+                      </SmallBtn>
+                    )}
+                  </>
+                )
+              )}
+            </span>
           </div>
           <h2 className="mb-6 text-2xl font-bold leading-snug text-ink [word-break:keep-all]">{a!.title || s.title}</h2>
           <div className="text-[15px]">
-            <Prose text={s.text} />
+            {edit !== null ? (
+              <div className="rounded-2xl border border-violet-400/50 bg-panel-solid px-5 py-4">
+                <Suspense fallback={<Prose text={edit} />}>
+                  <ProseEditor text={edit} onChange={setEdit} onSave={save} className="prose-ko text-ink" />
+                </Suspense>
+              </div>
+            ) : (
+              <Prose text={s.text} />
+            )}
           </div>
         </div>
       ) : a?.title ? (
@@ -545,6 +634,77 @@ function Now({ a, run, sel, onSource }: { a?: A; run?: MineRun; sel: number | nu
             ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function SmallBtn({ children, onClick, strong }: { children: React.ReactNode; onClick: () => void; strong?: boolean }) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "flex items-center gap-1 rounded-full border px-3 py-1 text-xs transition",
+        strong ? "border-violet-400/60 bg-violet-500/20 text-ink" : "border-line text-ink-2 hover:bg-soft hover:text-ink"
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+/** 처음부터 다시 쓰기로 넘긴 앞 글 — 접어 두고, 펼치면 과정마다 본문 */
+function TryCard({ title, steps }: { title: string; steps: Step[] }) {
+  const [open, setOpen] = useState(false);
+  const last = steps[steps.length - 1];
+  return (
+    <div className="rounded-2xl border border-line px-5 py-4 opacity-70 transition hover:opacity-100">
+      <button onClick={() => setOpen(!open)} className="flex w-full items-start justify-between gap-3 text-left">
+        <span className="flex min-w-0 flex-col">
+          {title && <span className="text-[15px] font-semibold text-ink">{title}</span>}
+          {last && <span className="mt-1 line-clamp-2 text-[13.5px] leading-relaxed text-ink-3">{last.text}</span>}
+        </span>
+        <IconChevronDown className={cn("mt-1 size-4 shrink-0 text-ink-3 transition", open && "rotate-180")} />
+      </button>
+      {open && (
+        <div className="mt-4 space-y-5 border-t border-line pt-4">
+          {steps.map((s) => (
+            <div key={s.n}>
+              <div className="mb-2 flex items-center gap-2 text-xs text-ink-3">
+                <span className="tabular-nums">과정 {s.n}</span>
+                <ByChip by={s.by} />
+                <span className="tabular-nums">{s.chars.toLocaleString()}자</span>
+              </div>
+              <div className="text-[14px]">
+                <Prose text={s.text} />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** 처음부터 다시 쓰기 — 같은 대화 안에서. 두 번 눌러야(10분 넘게 다시 도는 일이라) */
+function Restart({ a, refresh }: { a: A; refresh: () => void }) {
+  const [arm, setArm] = useState(false);
+  useEffect(() => {
+    if (!arm) return;
+    const t = setTimeout(() => setArm(false), 3000);
+    return () => clearTimeout(t);
+  }, [arm]);
+  return (
+    <div className="flex justify-end">
+      <button
+        onClick={() => (arm ? act("restart", { article: a.id }).then(refresh) : setArm(true))}
+        className={cn(
+          "flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm transition",
+          arm ? "border-violet-400/60 bg-violet-500/15 text-violet-800 dark:text-violet-100" : "border-line text-ink-3 hover:bg-soft hover:text-ink"
+        )}
+      >
+        <IconRefresh className="size-4" />
+        {arm ? "한 번 더" : "처음부터 다시 쓰기"}
+      </button>
     </div>
   );
 }

@@ -178,10 +178,8 @@ def step(n, f, by, feedback="", known="", mode=""):
             "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime}
 
 
-def article_from_brief(bp):
-    k = bp.stem
-    b = json.loads(read(bp))
-    d = ROOT / "runs" / "columns" / k
+def steps_in(d, b):
+    """한 시도의 과정 1·2·3(+ 과정 4~) — 설정 글의 runs/columns/<글>/ 또는 앞 시도 폴더."""
     standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[멘토 피드백 — 원문 그대로]\n", "").strip()
     steps = []
     draft = d / "draft.md"
@@ -195,12 +193,23 @@ def article_from_brief(bp):
         if f.stat().st_size > 50:
             steps.append(step(len(steps) + 1, f, read(d / f"by-r{n}.txt").strip() or "astra", read(d / f"feedback-r{n}.txt"),
                               b.get("title", ""), read(d / f"mode-r{n}.txt").strip()))
+    return steps
+
+
+def article_from_brief(bp):
+    k = bp.stem
+    b = json.loads(read(bp))
+    d = ROOT / "runs" / "columns" / k
+    steps = steps_in(d, b)
+    # 처음부터 다시 쓰기로 넘긴 앞 시도들(runs/columns/<글>.try-N) — 대화에 접힌 채로 남긴다
+    tries = [{"n": int(x.name.rsplit("-", 1)[1]), "title": read(x / "title.txt").strip(), "steps": steps_in(x, b)}
+             for x in sorted(d.parent.glob(f"{k}.try-*"), key=lambda x: int(x.name.rsplit("-", 1)[1]))]
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
             "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
-            "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "at": bp.stat().st_mtime}
+            "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime}
 
 
 def article_from_process(pp):
@@ -461,7 +470,7 @@ def act_delete(a):
         raise ValueError("이 글에서 작업이 도는 중")
     b = json.loads(read(bp) or "{}")
     dst = TRASH / f"{k}-{time.strftime('%Y%m%d-%H%M%S')}"
-    moves = [bp, ROOT / "runs" / "columns" / k, ROOT / "runs" / "titles0" / k, ROOT / "runs" / "images" / k,
+    moves = [bp, ROOT / "runs" / "columns" / k, *(ROOT / "runs" / "columns").glob(f"{k}.try-*"), ROOT / "runs" / "titles0" / k, ROOT / "runs" / "images" / k,
              MINE / k, SRC / "mine" / k, STUDIO / "chat" / f"{k}.jsonl", *(ROOT / "columns").glob(f"*-{k}.md"),
              *(ROOT / "columns" / "img").glob(f"*-{k}.png"), *(ROOT / "columns" / "img").glob(f"*-{k}-*.png")]
     for src in moves:
@@ -792,6 +801,48 @@ def act_edit(a):
     return {"n": n + 1}
 
 
+def act_base(a):
+    """여기서 이어 쓰기 — 앞 과정 하나를 그대로 다음 과정으로 올린다. 이 뒤의 피드백·편집·절반은 이 원고에서 이어진다(내용은 안 바꾼다)."""
+    k = safe_id(a["article"])
+    if process_path(k):
+        raise ValueError("확정 기준 글에서는 안 됨")
+    if busy(k, ("write", "revise", "shorten")):
+        raise ValueError("이 글을 쓰는 중 — 끝난 뒤에")
+    art = next((x for x in articles() if x["id"] == k), None)
+    n = len(art["steps"]) if art else 0
+    base = int(a.get("step") or 0)
+    if not 1 <= base < n:
+        raise ValueError("잘못된 과정 번호")
+    src = art["steps"][base - 1]
+    title = art["title"] or src["title"]
+    d = ROOT / "runs" / "columns" / k
+    r = len(list(d.glob("final-r*.md"))) + 1
+    (d / f"final-r{r}.md").write_text((f"# {title}\n\n" if title else "") + src["text"].strip() + "\n", encoding="utf-8")
+    (d / f"by-r{r}.txt").write_text("멘토", encoding="utf-8")
+    (d / f"mode-r{r}.txt").write_text(f"과정 {base}에서 이어 감", encoding="utf-8")
+    return {"n": n + 1}
+
+
+def act_restart(a):
+    """처음부터 다시 쓰기 — 같은 대화 안에서. 지금까지의 과정은 runs/columns/<글>.try-N/로 옮겨 대화에 접어 두고,
+    쓰기 전 단계(제목 고르기·쓰기)로 돌아간다. 제목·원문은 그대로 — 바꾸고 싶으면 그 단계에서 바꾼다."""
+    k = safe_id(a["article"])
+    if process_path(k):
+        raise ValueError("확정 기준 글에서는 안 됨")
+    b = json.loads(read(brief_path(k)) or "{}")
+    if b.get("confirmed"):
+        raise ValueError("확정한 글 — 다시 쓰려면 확정을 풀어야 함")
+    if busy(k):
+        raise ValueError("이 글에서 작업이 도는 중")
+    d = ROOT / "runs" / "columns" / k
+    if not d.exists():
+        raise ValueError("다시 쓸 과정이 없음")
+    n = len(list(d.parent.glob(f"{k}.try-*"))) + 1
+    (d / "title.txt").write_text(b.get("title", ""), encoding="utf-8")
+    d.rename(d.parent / f"{k}.try-{n}")
+    return {"try": n}
+
+
 def act_hero(a):
     src = image_src(a["src"])
     meta_update(a["article"], hero=src)
@@ -916,7 +967,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
-           "mine-ok": act_mine_ok, "delete": act_delete}
+           "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart}
 
 
 # ---------- 그림 축소본 ----------

@@ -51,6 +51,7 @@ export type Article = {
   fromWiki?: string;
   fromMine?: boolean;
   sourcesOk?: boolean;
+  tries?: { n: number; title: string; steps: Step[] }[];
   why?: string;
   at: number;
   error?: string;
