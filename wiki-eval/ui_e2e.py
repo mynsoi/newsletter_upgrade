@@ -162,6 +162,38 @@ def test_copy(pg):
         cleanup(pg, k)
 
 
+def test_confirm(pg):
+    """확정은 고르는 것 — 과정 칩으로 고르고 확정, 다른 과정으로 바꿔 확정 (멘토 2026-10-11 "확정이 강요됨")"""
+    src = next((a for a in state()["articles"] if a["kind"] == "brief" and len(a["steps"]) >= 3
+                and (ROOT / "runs" / "columns" / a["id"] / "final.md").exists()), None)
+    if not src:
+        return check(False, "복사할 쓴 글이 없음")
+    k = "zz-cf-" + time.strftime("%H%M%S")
+    d = ROOT / "runs" / "columns" / k
+    d.mkdir(parents=True)
+    for f in ("draft.md", "r4.md", "final.md"):
+        shutil.copy(ROOT / "runs" / "columns" / src["id"] / f, d / f)
+    b = {"topic": k, "label": "[시험] 확정 시험", "thesis": "[시험]", "sources": src["sources"][:1], "title": "[시험] 확정 시험 글", "target": "전 직원"}
+    (ROOT / "briefs" / f"{k}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    try:
+        pg.goto(f"{BASE}/#/a/{k}", wait_until="networkidle")
+        time.sleep(1.5)
+        pg.get_by_role("button", name="과정 2", exact=True).click()
+        time.sleep(0.5)
+        pg.get_by_role("button", name="과정 2로 확정", exact=True).last.click()
+        time.sleep(2.5)
+        check((art(k)["confirmed"] or {}).get("step") == 2, "과정 2를 골라 확정")
+        pg.get_by_role("button", name="과정 3", exact=True).click()
+        time.sleep(0.5)
+        pg.get_by_role("button", name="과정 3으로 바꿔 확정", exact=True).click()
+        time.sleep(2.5)
+        c = art(k)["confirmed"] or {}
+        check(c.get("step") == 3 and (ROOT / c.get("file", "x")).exists(), "다른 과정(3)으로 바꿔 확정")
+        shot(pg, "7-확정")
+    finally:
+        cleanup(pg, k)
+
+
 def test_full(pg, request):
     """메인 채팅부터 끝까지 (모델 호출)"""
     pg.goto(f"{BASE}/#/articles", wait_until="networkidle")
@@ -202,6 +234,7 @@ with sync_playwright() as p:
     b = p.chromium.launch()
     pg = b.new_page(viewport={"width": 1600, "height": 1000})
     test_copy(pg)
+    test_confirm(pg)
     if FULL:
         test_full(pg, FULL)
     b.close()

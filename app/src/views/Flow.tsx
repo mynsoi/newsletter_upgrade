@@ -24,6 +24,9 @@ const ProseEditor = lazy(() => import("@/components/studio/editor").then((m) => 
  * 다음 단계는 카드의 버튼으로만 넘어간다(이 원문으로 · 제목 누르기 · 쓰기 · 그림 · 확정).
  */
 
+/** 숫자 뒤 '로/으로' — 1·2·4·5·7·8·9는 로, 3·6·0은 으로(삼·육·영·십) */
+const ro = (n: number) => ([3, 6, 0].includes(n % 10) ? "으로" : "로");
+
 const KINDS = ["mine", "titles", "write", "revise", "shorten", "images", "inline", "wiki-pick"];
 const jobOf = (jobs: Job[], id: string) => jobs.find((j) => j.status === "running" && j.target === id && KINDS.includes(j.kind));
 const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 제목: "제목 후보 짓는 중" };
@@ -263,7 +266,7 @@ function Timeline({
   // 4. 그림 · 확정 — 과정 3 뒤
   if (a && a.kind === "brief" && a.steps.length >= 3) {
     out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
-    out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} refresh={refresh} /></Ai>);
+    out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
   }
   if (a && a.kind === "brief" && started && !a.confirmed && !job) out.push(<Restart key="restart" a={a} refresh={refresh} />);
 
@@ -446,24 +449,40 @@ function Thumb({ src, on, ratio, name, chip, onClick }: { src: string; on: boole
   );
 }
 
-function ConfirmCard({ a, refresh }: { a: A; refresh: () => void }) {
-  const n = a.steps.length;
-  if (a.confirmed)
-    return (
-      <div className="flex items-center gap-3 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-4 text-[15px] text-ink">
-        <IconCheck className="size-5 text-emerald-500" />
-        과정 {a.confirmed.step} 확정
-        <span className="text-sm text-ink-3">{a.confirmed.file}</span>
-      </div>
-    );
+/** 확정 — 확정할 과정을 고른다(멘토 2026-10-11: "과정은 내가 원하는 과정을 선택할수있도록도 해줘야할듯. 확정이 강요됨").
+ *  과정 칩을 누르면 오른쪽 '지금 글'에 그 과정이 뜨고, 확정은 원할 때만. 확정한 뒤에도 다른 과정으로 바꿀 수 있다. */
+function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; setSel: (n: number | null) => void; refresh: () => void }) {
+  const n = sel ?? a.confirmed?.step ?? a.steps.length;
+  const same = a.confirmed?.step === n;
   return (
-    <button
-      onClick={() => act("confirm", { article: a.id, step: n }).then(refresh)}
-      className="flex w-full items-center justify-between rounded-2xl border border-line bg-panel-solid px-5 py-4 text-left text-[15px] text-ink transition hover:border-emerald-400/50"
-    >
-      과정 {n}으로 확정
-      <IconArrowRight className="size-4" />
-    </button>
+    <div className={cn("rounded-2xl border px-5 py-4", a.confirmed ? "border-emerald-400/40 bg-emerald-500/[0.06]" : "border-line bg-panel-solid")}>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {a.steps.map((s) => (
+          <button
+            key={s.n}
+            onClick={() => setSel(s.n)}
+            className={cn(
+              "flex items-center gap-1 rounded-full border px-3 py-1 text-sm tabular-nums transition",
+              s.n === n ? "border-ink bg-ink text-page" : "border-line text-ink-2 hover:text-ink"
+            )}
+          >
+            {a.confirmed?.step === s.n && <IconCheck className="size-3.5" />}
+            과정 {s.n}
+          </button>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <span className="min-w-0 truncate text-sm text-ink-3">{a.confirmed ? `과정 ${a.confirmed.step} 확정 · ${a.confirmed.file}` : ""}</span>
+        <button
+          disabled={same}
+          onClick={() => act("confirm", { article: a.id, step: n }).then(refresh)}
+          className="flex shrink-0 items-center gap-2 rounded-full border border-emerald-400/50 px-4 py-2 text-sm text-ink transition hover:bg-emerald-500/10 disabled:opacity-40"
+        >
+          {same ? "확정됨" : a.confirmed ? `과정 ${n}${ro(n)} 바꿔 확정` : `과정 ${n}${ro(n)} 확정`}
+          {!same && <IconArrowRight className="size-4" />}
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -552,7 +571,8 @@ function Now({
   const confirm = a && s && a.kind === "brief" && !a.confirmed && !writing && (
     <SmallBtn strong={v === "미리보기"} onClick={() => act("confirm", { article: a.id, step: s.n }).then(refresh)}>
       <IconCheck className="size-3.5" />
-      과정 {s.n}으로 확정
+      과정 {s.n}
+      {ro(s.n)} 확정
     </SmallBtn>
   );
   return (
