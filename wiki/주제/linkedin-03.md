@@ -4,8 +4,8 @@ title: CI 37분 → 15분
 verdict: 뺌
 audience: 전 직원
 center: linkedin/03
-status: 진행 중
-used_in: [briefs/w-20261010-043840.json]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-11
 ---
 
