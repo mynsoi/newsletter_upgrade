@@ -57,7 +57,7 @@ def doc_text(p):
         out = list(Path(td).glob("*.txt"))
         if not out:
             sys.exit(f"{p.name}: 글자로 못 바꿈 — pdf나 txt로 주세요")
-        return out[0].read_text(encoding="utf-8", errors="replace")
+        return out[0].read_text(encoding="utf-8", errors="replace").lstrip("\ufeff")  # LibreOffice txt는 BOM을 붙인다
 
 
 def save_docs(k, docs):
@@ -153,7 +153,7 @@ def make_brief(k, chosen=None):
          "from_mine": d.relative_to(ROOT).as_posix()}
     bp = ROOT / "briefs" / f"{k}.json"
     old = json.loads(bp.read_text(encoding="utf-8")) if bp.exists() else {}
-    b.update({x: old[x] for x in ("title",) if x in old})
+    b.update({x: old[x] for x in ("title", "target", "length") if x in old})  # 바꿔 끼워도 멘토가 고른 제목·대상 독자·분량은 그대로
     bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     print("글 설정:", bp.relative_to(ROOT).as_posix(), "· 원문", [p["source"] for p in picked], "· 대상", b["target"], flush=True)
     return bp
