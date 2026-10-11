@@ -4,6 +4,7 @@
 사용: python3 -I scripts/my_topic.py --new <주제 파일> [--target 팀장급] [--doc <파일> ...] [--id m-<이름>]
         → runs/mine/<글>/ (topic.txt · candidates · pick · picks.json) + sources/mine/<글>/NN.md(문서를 글자만 그대로)
         → briefs/<글>.json + 제목 후보(astra, column_pipeline --titles). 작업실 글 목록에 뜨고, 제목을 고르면 과정 1·2·3
+      python3 -I scripts/my_topic.py --more <글> <말 파일> [--doc <파일> ...]  — 같은 대화에서 이어서 한 말로 원문 다시 고르기(대화 전체를 넘김)
       python3 -I scripts/my_topic.py --brief <글> [원문 키 ...]  — 고른 원문을 바꿔 글 설정을 다시 만든다(첫째가 중심, 예: linkedin/03 threads/27)
       python3 -I scripts/my_topic.py --page <글> <이름> [점검 메모]  — 결과 페이지 docs/<오늘>-<이름>.html (작업실 /docs/)
 단계
@@ -60,10 +61,10 @@ def doc_text(p):
         return out[0].read_text(encoding="utf-8", errors="replace").lstrip("\ufeff")  # LibreOffice txt는 BOM을 붙인다
 
 
-def save_docs(k, docs):
-    """문서를 sources/mine/<글>/NN.md로 — 글 설정의 sources가 sources/ 아래만 읽는다."""
+def save_docs(k, docs, start=1):
+    """문서를 sources/mine/<글>/NN.md로 — 글 설정의 sources가 sources/ 아래만 읽는다. 이어서 말할 때 올린 문서는 번호를 이어 간다."""
     out = []
-    for i, p in enumerate(docs, 1):
+    for i, p in enumerate(docs, start):
         text = doc_text(p).strip()
         if not text:
             sys.exit(f"{Path(p).name}: 글자가 비었음(그림만 있는 pdf일 수 있음)")
@@ -81,9 +82,14 @@ def docs_block(docs):
 
 # ---------- 1. 후보 (카드 전부) ----------
 
-def cand_prompt(topic, docs, cs):
+FOLLOW = ("[멘토 주제]는 멘토와 주고받은 대화입니다. 처음 요청이 이 글의 주제이고, 이어서 한 말은 원문을 고르는 데 대한 요청입니다. "
+          "나중에 한 말을 먼저 따르고, [그때 고른 원문]은 멘토가 이미 본 결과입니다.")
+
+
+def cand_prompt(topic, docs, cs, follow=False):
     cards_txt = "\n\n".join(f"[{k}]\n있었던 일: {v['있었던 일']}\n글쓴이가 하는 말: {v['글쓴이가 하는 말']}" for k, v in cs.items())
     return "\n\n".join([
+        *([FOLLOW] if follow else []),
         f"멘토가 {W.READER} 칼럼의 주제를 정했습니다. [멘토 주제]는 멘토가 한 말 그대로입니다. "
         "[원문 카드]는 모아 둔 원문마다 있었던 일과 글쓴이가 하는 말을 정리한 것입니다. 이 주제로 쓸 글에 사례로 쓸 수 있는 원문 후보를 골라 주세요.",
         "고르는 기준: 키워드나 분야가 겹치는지가 아니라, 원문 속 사람이 실제로 한 일이 [멘토 주제]가 말하는 것을 보여 주는가입니다. "
@@ -100,10 +106,11 @@ def cand_prompt(topic, docs, cs):
 
 # ---------- 2. 고르기 (후보 원문 전체) ----------
 
-def pick_prompt(topic, docs, cands, ask_target):
+def pick_prompt(topic, docs, cands, ask_target, follow=False):
     blocks = "\n\n".join(f"=== [{c['source']}] {W.label(W.rel(c['source']))} — 1차 이유({c.get('side', '')}): {c.get('why', '')} ===\n"
                          + W.body(W.rel(c["source"])) for c in cands)
     return "\n\n".join([
+        *([FOLLOW] if follow else []),
         f"멘토가 정한 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,500자 이하)을 씁니다. 아래 [후보 원문]은 1차로 고른 후보입니다. "
         "원문을 끝까지 읽고 이 글에 쓸 원문을 정해 주세요.",
         "정할 것:\n"
@@ -160,6 +167,83 @@ def make_brief(k, chosen=None):
     return bp
 
 
+def stage(d, s):
+    """작업실 화면의 진행 막대 — 후보 · 고르기 · 제목 · 끝"""
+    (d / "stage.txt").write_text(s, encoding="utf-8")
+
+
+def turns(d):
+    f = d / "turns.jsonl"
+    if f.exists():
+        return [json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
+    # 대화 기록이 생기기 전의 첫 요청(2026-10-11 자기평가) — 요청과 고른 결과로 만든다
+    out = [{"role": "mentor", "text": (d / "topic.txt").read_text(encoding="utf-8").strip(), "docs": [], "at": 0}]
+    if (d / "picks.json").exists():
+        out.append({"role": "ai", **snapshot(json.loads((d / "picks.json").read_text(encoding="utf-8"))), "at": 0})
+    return out
+
+
+def add_turn(d, turn):
+    with open(d / "turns.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps({**turn, "at": time.time()}, ensure_ascii=False) + "\n")
+
+
+def snapshot(picks):
+    """그 차례에 고른 원문 — 화면이 지난 차례를 굳힌 채로 보여 준다."""
+    return {"center": {k: picks["center"].get(k, "") for k in ("source", "role")},
+            "support": [{k: p.get(k, "") for k in ("source", "role")} for p in picks.get("support", [])],
+            "n_candidates": len(picks.get("_candidates", []))}
+
+
+def convo_text(ts):
+    """대화 전체를 고르기에 넘기는 글 — 멘토 말은 받은 그대로, 그 사이에 그때 고른 원문."""
+    out, first = [], True
+    for x in ts:
+        if x["role"] == "mentor":
+            out.append(("[처음 요청]" if first else "[이어서 한 말]") + "\n" + x["text"])
+            first = False
+        else:
+            s = [x["center"]] + x.get("support", [])
+            out.append("[그때 고른 원문] " + " / ".join(f"{p['source']}({'중심' if i == 0 else '받침'}): {p.get('role', '')}" for i, p in enumerate(s)))
+    return "\n\n".join(out)
+
+
+def choose(d, topic, saved, ask_target, follow=False):
+    """1. 후보(카드 전부) → 2. 고르기(후보 원문 통째) → picks.json"""
+    t0 = time.time()
+    cs = W.cards()
+    n = len(list(d.glob("picks-*.json"))) + (2 if (d / "picks.json").exists() else 1)  # 이어서 말한 차례는 폴더를 따로
+    sfx = "" if n == 1 else f"-{n}"
+    stage(d, "후보")
+    cands = json_of(W.claude(d / f"candidates{sfx}", cand_prompt(topic, saved, cs, follow))).get("candidates", [])
+    cands = [c for c in cands if c.get("source") in cs]
+    print(f"후보 {len(cands)}편 · {time.time() - t0:.0f}s", flush=True)
+    if not cands:
+        sys.exit("후보가 없음 — 로그: " + str(d / f"candidates{sfx}"))
+    stage(d, "고르기")
+    picks = json_of(W.claude(d / f"pick{sfx}", pick_prompt(topic, saved, cands, ask_target, follow)))
+    if not picks.get("center", {}).get("source") in cs:
+        sys.exit("고르기 결과가 비었음 — 로그: " + str(d / f"pick{sfx}"))
+    picks["support"] = [p for p in picks.get("support", []) if p.get("source") in cs]
+    picks["_candidates"] = cands
+    if (d / "picks.json").exists():  # 앞 차례는 picks-N.json으로 남긴다
+        (d / "picks.json").rename(d / f"picks-{n - 1}.json")
+    (d / "picks.json").write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"고르기 · 중심 {picks['center']['source']} · 받침 {[p['source'] for p in picks['support']]} · {time.time() - t0:.0f}s", flush=True)
+    return picks
+
+
+def titles(bp, k):
+    """제목 후보(astra) — 다시 뽑으면 앞 회차는 astra-N.md로 남긴다(작업실 제목 탭과 같은 방식)."""
+    d = ROOT / "runs" / "titles0" / k
+    if (d / "astra.md").exists():
+        n = len(list(d.glob("astra-*.md"))) + 1
+        (d / "astra.md").rename(d / f"astra-{n}.md")
+        if (d / "message.txt").exists():
+            (d / "message.txt").rename(d / f"message-{n}.txt")
+    subprocess.run(PY + ["scripts/column_pipeline.py", "--titles", bp.relative_to(ROOT).as_posix()], cwd=ROOT)
+
+
 def new(topic_file, target="", docs=(), k=""):
     topic = Path(topic_file).read_text(encoding="utf-8").strip()
     if not topic:
@@ -171,27 +255,52 @@ def new(topic_file, target="", docs=(), k=""):
         sys.exit("잘못된 이름: " + k)
     d = MINE_RUNS / k
     d.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    stage(d, "문서")
     (d / "topic.txt").write_text(topic + "\n", encoding="utf-8")
     saved = save_docs(k, docs)
     (d / "meta.json").write_text(json.dumps({"target": target, "docs": saved}, ensure_ascii=False, indent=1), encoding="utf-8")
-    t0 = time.time()
-    cs = W.cards()
-    cands = json_of(W.claude(d / "candidates", cand_prompt(topic, saved, cs))).get("candidates", [])
-    cands = [c for c in cands if c.get("source") in cs]
-    print(f"후보 {len(cands)}편 · {time.time() - t0:.0f}s", flush=True)
-    if not cands:
-        sys.exit("후보가 없음 — 로그: " + str(d / "candidates"))
-    picks = json_of(W.claude(d / "pick", pick_prompt(topic, saved, cands, not target)))
-    if not picks.get("center", {}).get("source") in cs:
-        sys.exit("고르기 결과가 비었음 — 로그: " + str(d / "pick"))
-    picks["support"] = [p for p in picks.get("support", []) if p.get("source") in cs]
-    picks["_candidates"] = cands
-    (d / "picks.json").write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"고르기 · 중심 {picks['center']['source']} · 받침 {[p['source'] for p in picks['support']]} · {time.time() - t0:.0f}s", flush=True)
+    add_turn(d, {"role": "mentor", "text": topic, "docs": [x[1].removeprefix("회사 자료 — ") for x in saved]})
+    picks = choose(d, topic, saved, not target)
+    add_turn(d, {"role": "ai", **snapshot(picks)})
     bp = make_brief(k)
-    subprocess.run(PY + ["scripts/column_pipeline.py", "--titles", bp.relative_to(ROOT).as_posix()], cwd=ROOT)
+    stage(d, "제목")
+    titles(bp, k)
+    stage(d, "끝")
     print(f"끝 · {k} · {time.time() - t0:.0f}s")
     return k
+
+
+def more(k, msg_file, docs=()):
+    """--more <글> <말 파일> [--doc …] — 같은 대화에서 이어서 한 말로 원문을 다시 고른다(대화 전체를 넘김).
+    주제(thesis)는 처음 요청 그대로. 쓰기를 시작한 글은 다시 고르지 않는다. 제목을 아직 안 골랐으면 제목 후보도 다시."""
+    d = MINE_RUNS / k
+    msg = Path(msg_file).read_text(encoding="utf-8").strip()
+    if not msg or not (d / "meta.json").exists():
+        sys.exit("이어서 할 말이 비었거나 없는 대화: " + k)
+    if (ROOT / "runs" / "columns" / k / "draft.md").exists():
+        sys.exit("쓰기를 시작한 글은 원문을 다시 고르지 않습니다 — 새 대화로 시작하세요")
+    t0 = time.time()
+    stage(d, "문서")
+    meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+    saved = save_docs(k, docs, start=len(meta["docs"]) + 1)
+    meta["docs"] += saved
+    (d / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+    if not (d / "turns.jsonl").exists():  # 대화 기록 전의 첫 차례를 먼저 적어 둔다
+        for x in turns(d):
+            add_turn(d, {k_: v for k_, v in x.items() if k_ != "at"})
+    add_turn(d, {"role": "mentor", "text": msg, "docs": [x[1].removeprefix("회사 자료 — ") for x in saved]})
+    picks = choose(d, convo_text(turns(d)), meta["docs"], not meta.get("target"), follow=True)
+    add_turn(d, {"role": "ai", **snapshot(picks)})
+    bp = make_brief(k)
+    b = json.loads(bp.read_text(encoding="utf-8"))
+    b.pop("sources_ok", None)  # 새로 고른 원문은 다시 확인받는다
+    bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    if not b.get("title"):
+        stage(d, "제목")
+        titles(bp, k)
+    stage(d, "끝")
+    print(f"이어서 고르기 끝 · {k} · {time.time() - t0:.0f}s")
 
 
 # ---------- 결과 페이지 (작업실 /docs/) ----------
@@ -337,6 +446,14 @@ if __name__ == "__main__":
             else:
                 sys.exit("모르는 인자: " + rest[0])
         new(a[1], target, docs, k)
+    elif a[:1] == ["--more"]:
+        rest, docs = a[3:], []
+        while rest:
+            if rest[0] != "--doc":
+                sys.exit("모르는 인자: " + rest[0])
+            docs.append(rest[1])
+            rest = rest[2:]
+        more(a[1], a[2], docs)
     elif a[:1] == ["--brief"]:
         make_brief(a[1], a[2:] or None)
     elif a[:1] == ["--page"]:

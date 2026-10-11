@@ -48,6 +48,10 @@ export type Article = {
   hero: string;
   confirmed: { date: string; step?: number; file: string; hero?: string } | null;
   fromTopics?: string;
+  fromWiki?: string;
+  fromMine?: boolean;
+  sourcesOk?: boolean;
+  why?: string;
   at: number;
   error?: string;
 };
@@ -61,6 +65,7 @@ export type Job = {
   ended?: number;
   log: string;
   message?: string;
+  stage?: { index: number; half: boolean; fit: boolean } | null;
 };
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };
@@ -97,8 +102,13 @@ export type MineRow = {
   side: string;
   out: string;
 };
+export type MinePick = { source: string; role: string; who?: string; path?: string };
+export type MineTurn =
+  | { role: "mentor"; text: string; docs: string[]; at: number }
+  | { role: "ai"; center: MinePick; support: MinePick[]; n_candidates: number; at: number };
 export type MineRun = {
   id: string;
+  turns: MineTurn[];
   message: string;
   docs: string[];
   target: string;

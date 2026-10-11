@@ -2,7 +2,7 @@ import { FocusCards } from "@/components/ui/focus-cards";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Chip } from "@/components/studio/bits";
 import { articleTitle, img, stage, type Article, type State } from "@/lib/api";
-import MineChat from "@/views/MineChat";
+import NewChat from "@/views/MineChat";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -44,7 +44,7 @@ export default function Articles({ state, refresh, go }: { state: State; refresh
       <div className="relative overflow-hidden border-b border-line">
         <BackgroundBeams />
         <div className="relative z-10 mx-auto max-w-4xl px-12 pt-20 pb-12">
-          <MineChat state={state} refresh={refresh} go={go} />
+          <NewChat state={state} refresh={refresh} go={go} />
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-12 py-12">

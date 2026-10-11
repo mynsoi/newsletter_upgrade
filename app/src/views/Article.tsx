@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 const ProseEditor = lazy(() => import("@/components/studio/editor").then((m) => ({ default: m.ProseEditor })));
 
 const TABS = [
+  { value: "chat", title: "대화" },
   { value: "title", title: "제목" },
   { value: "process", title: "과정" },
   { value: "image", title: "그림" },
@@ -219,7 +220,7 @@ function Titles({ a, state, refresh, go }: { a: A; state: State; refresh: () => 
 
 /* ---------- 과정 ---------- */
 
-function Prose({ text, prev }: { text: string; prev?: string }) {
+export function Prose({ text, prev }: { text: string; prev?: string }) {
   const kept = useMemo(() => (prev !== undefined ? keptSentences(prev, text) : null), [prev, text]);
   let idx = 0;
   return (
@@ -244,7 +245,7 @@ function Prose({ text, prev }: { text: string; prev?: string }) {
   );
 }
 
-function Feedback({ text }: { text: string }) {
+export function Feedback({ text }: { text: string }) {
   const [open, setOpen] = useState(false);
   return (
     <button
@@ -524,7 +525,7 @@ function Composer({ a, tab, state, refresh, onDirector }: { a: A; tab: string; s
   );
 }
 
-function Director({ a, state, open, onClose, refresh }: { a: A; state: State; open: boolean; onClose: () => void; refresh: () => void }) {
+export function Director({ a, state, open, onClose, refresh }: { a: A; state: State; open: boolean; onClose: () => void; refresh: () => void }) {
   const [log, setLog] = useState<ChatMsg[]>([]);
   const [mode, setMode] = useState("director");
   const running = runningJob(state.jobs, "chat", a.id);

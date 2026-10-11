@@ -1,29 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
-import { IconArrowRight, IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconUsers, IconX } from "@tabler/icons-react";
+import { useRef, useState } from "react";
+import { IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconUsers, IconX } from "@tabler/icons-react";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
-import AITextLoading from "@/components/kokonutui/ai-text-loading";
-import { Chip, SiteIcon, SourceDrawer } from "@/components/studio/bits";
-import { act, openLog, type MineRow, type MineRun, type State } from "@/lib/api";
+import { Chip, SiteIcon } from "@/components/studio/bits";
+import { act, type Job, type MineRow, type MineRun, type State } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
-/** 내 주제로 쓰기 — 메인 화면 채팅 (멘토 2026-10-11: "메인페이지에 채팅 ui를 띄워줘. 거기에다가 내가 요청사항 입력해서 시작하도록")
- *  요청(받은 그대로) + 문서 → scripts/my_topic.py: 카드 전부에서 후보 → 원문 통째로 중심 1 + 받침 → 글 설정 + 제목 후보(astra) */
+/** 내 주제로 쓰기 — 메인 화면은 들어올 때마다 새 채팅(멘토 2026-10-11: "새 들어갈때마다 초기화", "채팅하던거는 왼쪽으로").
+ *  보내면 그 대화의 글 화면(views/Flow)으로 가고, 대화는 왼쪽 목록에 쌓인다. */
 
-const TARGET_MODES = [
+export const TARGET_MODES = [
   { id: "auto", label: "독자 자동", icon: <IconUsers className="size-3.5 text-violet-300" /> },
   ...["전 직원", "팀장급", "사수급", "신입사원"].map((t) => ({ id: t, label: t, icon: <IconUsers className="size-3.5 text-violet-300" /> })),
 ];
-const ACCEPT = ".pdf,.docx,.doc,.hwp,.hwpx,.odt,.rtf,.txt,.md";
-const STEPS = ["후보", "고르기", "제목"] as const;
-const STAGE_TEXT: Record<string, string[]> = {
-  문서: ["문서 읽는 중"],
-  후보: ["원문 카드 보는 중", "후보 고르는 중"],
-  고르기: ["원문 읽는 중", "중심 원문 고르는 중"],
-  제목: ["제목 후보 짓는 중"],
-};
+export const ACCEPT = ".pdf,.docx,.doc,.hwp,.hwpx,.odt,.rtf,.txt,.md";
 
-const toB64 = (f: File) =>
+export const toB64 = (f: File) =>
   new Promise<{ name: string; data: string }>((ok, no) => {
     const r = new FileReader();
     r.onload = () => ok({ name: f.name, data: String(r.result).split(",")[1] ?? "" });
@@ -31,49 +22,65 @@ const toB64 = (f: File) =>
     r.readAsDataURL(f);
   });
 
-export default function MineChat({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
-  const runs = state.mine ?? [];
+/** 첨부 — 클립 버튼 + 끌어 놓기 + 파일 칩 */
+export function useAttach() {
   const [files, setFiles] = useState<File[]>([]);
-  const [target, setTarget] = useState("auto");
   const [drag, setDrag] = useState(false);
-  const [src, setSrc] = useState<string | null>(null);
   const pick = useRef<HTMLInputElement>(null);
-  const box = useRef<HTMLDivElement>(null);
-  // 새 요청을 보냈을 때와 결과가 도착했을 때 맨 아래로 — 결과가 입력창 뒤에 가려지지 않게
-  const last = runs[runs.length - 1];
-  useEffect(() => {
-    if (box.current) box.current.scrollTop = box.current.scrollHeight;
-  }, [runs.length, last?.status, last?.stage, last?.picked.length]);
-
   const add = (l: FileList | null) => l && setFiles((f) => [...f, ...Array.from(l)]);
-  const send = async (v: string) => {
-    const enc = await Promise.all(files.map(toB64));
-    await act("mine", { message: v, target: target === "auto" ? "" : target, files: enc });
-    setFiles([]);
-    refresh();
+  const drop = {
+    onDragOver: (e: React.DragEvent) => {
+      e.preventDefault();
+      setDrag(true);
+    },
+    onDragLeave: () => setDrag(false),
+    onDrop: (e: React.DragEvent) => {
+      e.preventDefault();
+      setDrag(false);
+      add(e.dataTransfer.files);
+    },
   };
+  const tool = (
+    <>
+      <input ref={pick} type="file" multiple accept={ACCEPT} className="hidden" onChange={(e) => (add(e.target.files), (e.target.value = ""))} />
+      <button
+        type="button"
+        onClick={() => pick.current?.click()}
+        className="grid size-8 place-items-center rounded-md text-ink-2 transition hover:bg-black/10 dark:hover:bg-white/10"
+        aria-label="문서 첨부"
+      >
+        <IconPaperclip className="size-4" />
+      </button>
+    </>
+  );
+  const chips =
+    files.length > 0 ? (
+      <div className="flex flex-wrap gap-2">
+        {files.map((f, i) => (
+          <Chip key={i} className="bg-page/70 py-1 pr-1.5 text-ink">
+            <IconFileText className="size-3.5" />
+            {f.name}
+            <button onClick={() => setFiles((x) => x.filter((_, j) => j !== i))} className="rounded-full p-0.5 hover:bg-soft" aria-label="빼기">
+              <IconX className="size-3" />
+            </button>
+          </Chip>
+        ))}
+      </div>
+    ) : undefined;
+  return { files, clear: () => setFiles([]), drag, drop, tool, chips, encode: () => Promise.all(files.map(toB64)) };
+}
 
+export default function NewChat({ refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
+  const [target, setTarget] = useState("auto");
+  const at = useAttach();
+  const send = async (v: string) => {
+    const j = await act<Job>("mine", { message: v, target: target === "auto" ? "" : target, files: await at.encode() });
+    at.clear();
+    refresh();
+    if (j?.target) go(`#/a/${j.target}`);
+  };
   return (
-    <div
-      onDragOver={(e) => {
-        e.preventDefault();
-        setDrag(true);
-      }}
-      onDragLeave={() => setDrag(false)}
-      onDrop={(e) => {
-        e.preventDefault();
-        setDrag(false);
-        add(e.dataTransfer.files);
-      }}
-      className={cn("rounded-3xl transition", drag && "ring-2 ring-violet-400/70 ring-offset-8 ring-offset-transparent")}
-    >
-      {runs.length > 0 && (
-        <div ref={box} className="max-h-[62vh] space-y-8 overflow-y-auto px-1 pb-6 pt-2">
-          {runs.map((r) => (
-            <Turn key={r.id} r={r} state={state} refresh={refresh} go={go} onSource={setSrc} />
-          ))}
-        </div>
-      )}
+    <div {...at.drop} className={cn("rounded-3xl transition", at.drag && "ring-2 ring-violet-400/70 ring-offset-8 ring-offset-transparent")}>
       <AI_Prompt
         className="w-full py-2"
         modes={TARGET_MODES}
@@ -81,146 +88,80 @@ export default function MineChat({ state, refresh, go }: { state: State; refresh
         onModeChange={setTarget}
         placeholder="어떤 글을 쓸까요?"
         onSubmit={send}
-        tools={
-          <>
-            <input ref={pick} type="file" multiple accept={ACCEPT} className="hidden" onChange={(e) => (add(e.target.files), (e.target.value = ""))} />
-            <button
-              type="button"
-              onClick={() => pick.current?.click()}
-              className="grid size-8 place-items-center rounded-md text-ink-2 transition hover:bg-black/10 dark:hover:bg-white/10"
-              aria-label="문서 첨부"
-            >
-              <IconPaperclip className="size-4" />
-            </button>
-          </>
-        }
-        top={
-          files.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
-              {files.map((f, i) => (
-                <Chip key={i} className="bg-page/70 py-1 pr-1.5 text-ink">
-                  <IconFileText className="size-3.5" />
-                  {f.name}
-                  <button onClick={() => setFiles((x) => x.filter((_, j) => j !== i))} className="rounded-full p-0.5 hover:bg-soft" aria-label="빼기">
-                    <IconX className="size-3" />
-                  </button>
-                </Chip>
-              ))}
-            </div>
-          ) : undefined
-        }
+        tools={at.tool}
+        top={at.chips}
       />
-      <SourceDrawer path={src} onClose={() => setSrc(null)} />
     </div>
   );
 }
 
-function Turn({ r, state, refresh, go, onSource }: { r: MineRun; state: State; refresh: () => void; go: (h: string) => void; onSource: (p: string) => void }) {
+/** 고른 원문 카드 — 마지막 차례는 바꿔 끼우기(중심으로·넣기·빼기)가 되고, 지난 차례는 굳힌 채로 */
+export function PicksCard({
+  run,
+  canSwap,
+  footer,
+  onSource,
+  refresh,
+}: {
+  run: MineRun;
+  canSwap: boolean;
+  footer?: React.ReactNode;
+  onSource: (p: string) => void;
+  refresh: () => void;
+}) {
   const [more, setMore] = useState(false);
-  const art = state.articles.find((a) => a.id === r.article);
-  const canSwap = !!art && art.steps.length === 0; // 이미 쓰기 시작한 글은 원문을 바꾸지 않는다
-  const now = r.picked.map((p) => p.source);
-  const swap = (next: string[]) => act("mine-swap", { id: r.id, sources: next }).then(refresh);
-  const running = r.status === "running";
-  const stopped = r.status === "failed" || r.status === "lost";
-  const step = STEPS.indexOf(r.stage as (typeof STEPS)[number]);
-
+  const now = run.picked.map((p) => p.source);
+  const swap = (next: string[]) => act("mine-swap", { id: run.id, sources: next }).then(refresh);
   return (
-    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-      <div className="flex justify-end">
-        <div className="max-w-[80%] rounded-2xl bg-violet-500/20 px-4 py-3 text-[15px] leading-relaxed whitespace-pre-line text-violet-950 dark:text-violet-50">
-          {r.message}
-          {(r.docs.length > 0 || r.target) && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {r.target && <Chip className="border-violet-400/40 bg-page/50 text-ink">{r.target}</Chip>}
-              {r.docs.map((d) => (
-                <Chip key={d} className="border-violet-400/40 bg-page/50 text-ink">
-                  <IconFileText className="size-3.5" />
-                  {d}
-                </Chip>
-              ))}
-            </div>
+    <div className="overflow-hidden rounded-2xl border border-line bg-panel-solid">
+      {run.picked.map((p, i) => (
+        <Row key={p.source} p={p} first={i === 0} onSource={onSource}>
+          {canSwap && i > 0 && (
+            <>
+              <IconBtn label="중심으로" onClick={() => swap([p.source, ...now.filter((x) => x !== p.source)])}>
+                <IconCrown className="size-4" />
+              </IconBtn>
+              <IconBtn label="빼기" onClick={() => swap(now.filter((x) => x !== p.source))}>
+                <IconMinus className="size-4" />
+              </IconBtn>
+            </>
           )}
-        </div>
+        </Row>
+      ))}
+      <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-3.5">
+        {run.rest.length > 0 ? (
+          <button onClick={() => setMore((m) => !m)} className="flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink">
+            후보 {run.rest.length}
+            <IconChevronDown className={cn("size-4 transition", more && "rotate-180")} />
+          </button>
+        ) : (
+          <span />
+        )}
+        {footer}
       </div>
-
-      {running && (
-        <div className="flex items-center gap-4 pl-1">
-          <div className="flex items-center gap-1.5">
-            {STEPS.map((s, i) => (
-              <span key={s} className={cn("h-1.5 w-8 rounded-full", i < step ? "bg-violet-400" : i === step ? "animate-pulse bg-violet-400/70" : "bg-ink/10")} />
-            ))}
-          </div>
-          <AITextLoading texts={STAGE_TEXT[r.stage] ?? ["…"]} className="text-sm font-medium" wrapperClassName="p-0 justify-start" />
-        </div>
-      )}
-
-      {stopped && (
-        <button onClick={() => openLog(r.job)} className="pl-1 text-left text-sm text-rose-600 hover:underline dark:text-rose-300">
-          멈춤 · 로그
-        </button>
-      )}
-
-      {r.picked.length > 0 && !running && (
-        <div className="overflow-hidden rounded-2xl border border-line bg-panel-solid">
-          {r.picked.map((p, i) => (
-            <Row key={p.source} p={p} first={i === 0} onSource={onSource}>
-              {canSwap && i > 0 && (
+      {more && (
+        <div className="border-t border-line bg-soft/40">
+          {run.rest.map((p) => (
+            <Row key={p.source} p={p} onSource={onSource}>
+              {canSwap && (
                 <>
-                  <IconBtn label="중심으로" onClick={() => swap([p.source, ...now.filter((x) => x !== p.source)])}>
+                  <IconBtn label="중심으로" onClick={() => swap([p.source, ...now])}>
                     <IconCrown className="size-4" />
                   </IconBtn>
-                  <IconBtn label="빼기" onClick={() => swap(now.filter((x) => x !== p.source))}>
-                    <IconMinus className="size-4" />
+                  <IconBtn label="넣기" onClick={() => swap([...now, p.source])}>
+                    <IconPlus className="size-4" />
                   </IconBtn>
                 </>
               )}
             </Row>
           ))}
-          <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-3.5">
-            {r.rest.length > 0 ? (
-              <button onClick={() => setMore((m) => !m)} className="flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink">
-                후보 {r.rest.length}
-                <IconChevronDown className={cn("size-4 transition", more && "rotate-180")} />
-              </button>
-            ) : (
-              <span />
-            )}
-            {r.article && (
-              <button
-                onClick={() => go(`#/a/${r.article}/title`)}
-                className="flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
-              >
-                {art?.title || art?.steps.length ? "글" : "제목 고르기"}
-                <IconArrowRight className="size-4" />
-              </button>
-            )}
-          </div>
-          {more && (
-            <div className="border-t border-line bg-soft/40">
-              {r.rest.map((p) => (
-                <Row key={p.source} p={p} onSource={onSource}>
-                  {canSwap && (
-                    <>
-                      <IconBtn label="중심으로" onClick={() => swap([p.source, ...now])}>
-                        <IconCrown className="size-4" />
-                      </IconBtn>
-                      <IconBtn label="넣기" onClick={() => swap([...now, p.source])}>
-                        <IconPlus className="size-4" />
-                      </IconBtn>
-                    </>
-                  )}
-                </Row>
-              ))}
-            </div>
-          )}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
-function Row({ p, first, onSource, children }: { p: MineRow; first?: boolean; onSource: (p: string) => void; children?: React.ReactNode }) {
+export function Row({ p, first, onSource, children }: { p: MineRow; first?: boolean; onSource: (p: string) => void; children?: React.ReactNode }) {
   const site = p.source.split("/")[0];
   return (
     <div className="group flex gap-4 border-t border-line px-5 py-4 first:border-t-0">
@@ -247,7 +188,7 @@ function Row({ p, first, onSource, children }: { p: MineRow; first?: boolean; on
   );
 }
 
-function IconBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
+export function IconBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
   return (
     <button onClick={onClick} title={label} aria-label={label} className="grid size-8 place-items-center rounded-full border border-line text-ink-2 transition hover:bg-soft hover:text-ink">
       {children}

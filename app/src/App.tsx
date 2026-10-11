@@ -10,6 +10,7 @@ import Topics, { newSources } from "@/views/Topics";
 import { ThemeToggle } from "@/components/application/theme/theme-toggle";
 import Articles from "@/views/Articles";
 import Article from "@/views/Article";
+import Flow from "@/views/Flow";
 import { articleTitle, getJobs, getState, img, JOB_NAMES, openLog, stage, subscribeAct, type Job, type State } from "@/lib/api";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -122,8 +123,10 @@ export default function App() {
             <Library state={state} refresh={refresh} go={go} />
           ) : view === "topics" ? (
             <Topics state={state} refresh={refresh} go={go} />
-          ) : view === "a" && parts[1] ? (
+          ) : view === "a" && parts[1] && parts[2] && parts[2] !== "chat" ? (
             <Article key={parts[1]} state={state} id={decodeURIComponent(parts[1])} tab={parts[2]} refresh={refresh} go={go} />
+          ) : view === "a" && parts[1] ? (
+            <Flow key={parts[1]} state={state} id={decodeURIComponent(parts[1])} refresh={refresh} go={go} />
           ) : (
             <Articles state={state} refresh={refresh} go={go} />
           ))}
@@ -164,6 +167,8 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
     },
     { label: "글", href: "#/articles", key: "articles", icon: <IconFileText className="size-5 shrink-0 text-ink-2" /> },
   ];
+  // 대화 목록 = 글 + 아직 글 설정이 없는(원문을 고르는 중·멈춘) 대화
+  const pending = (state?.mine ?? []).filter((r) => !r.article).sort((a, b) => b.at - a.at);
   const arts = [...(state?.articles ?? [])].sort((a, b) => b.at - a.at);
   return (
     <div className="fixed inset-y-0 left-0 z-50 w-[60px]">
@@ -182,6 +187,24 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
               ))}
             </div>
             <div className="mt-6 min-h-0 flex-1 space-y-0.5 overflow-y-auto overflow-x-hidden pr-1">
+              {pending.map((r) => (
+                <a
+                  key={r.id}
+                  href={`#/a/${r.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    go(`#/a/${r.id}`);
+                  }}
+                  className={cn("flex items-center gap-3 rounded-lg px-2 py-1.5 transition hover:bg-soft", view === "a" && current === r.id && "bg-ink/[0.07]")}
+                >
+                  <span className="relative grid size-5 shrink-0 place-items-center rounded bg-violet-500/20">
+                    <span className={cn("size-2 rounded-full", r.status === "running" ? "animate-pulse bg-violet-400" : "bg-rose-400")} />
+                  </span>
+                  <motion.span animate={{ opacity: open ? 1 : 0 }} className="truncate whitespace-nowrap text-sm text-ink-2">
+                    {r.message}
+                  </motion.span>
+                </a>
+              ))}
               {arts.map((a) => (
                 <a
                   key={a.id}

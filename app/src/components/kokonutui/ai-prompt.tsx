@@ -37,6 +37,8 @@ interface AIPromptProps {
   tools?: React.ReactNode;
   /** 입력칸 위 — 첨부한 파일 칩 등 (작업실) */
   top?: React.ReactNode;
+  /** 지금은 보낼 수 없음(작업이 도는 중 등) — 쓰던 글은 지우지 않는다 (작업실) */
+  disabled?: boolean;
   className?: string;
 }
 
@@ -49,6 +51,7 @@ export default function AI_Prompt({
   busy,
   tools,
   top,
+  disabled,
   className,
 }: AIPromptProps) {
   const [value, setValue] = useState("");
@@ -59,7 +62,7 @@ export default function AI_Prompt({
   const current = modes.find((m) => m.id === mode) ?? modes[0];
 
   const submit = () => {
-    if (!value.trim()) return;
+    if (!value.trim() || disabled) return;
     onSubmit?.(value, current.id);
     setValue("");
     adjustHeight(true);
@@ -157,14 +160,14 @@ export default function AI_Prompt({
                     "rounded-lg bg-black/5 p-2 dark:bg-white/5",
                     "hover:bg-black/10 focus-visible:ring-1 focus-visible:ring-blue-500 focus-visible:ring-offset-0 dark:hover:bg-white/10"
                   )}
-                  disabled={!value.trim()}
+                  disabled={!value.trim() || disabled}
                   onClick={submit}
                   type="button"
                 >
                   <ArrowRight
                     className={cn(
                       "h-4 w-4 transition-opacity duration-200 dark:text-white",
-                      value.trim() ? "opacity-100" : "opacity-30"
+                      value.trim() && !disabled ? "opacity-100" : "opacity-30"
                     )}
                   />
                 </button>

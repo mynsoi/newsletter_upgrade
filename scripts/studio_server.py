@@ -21,6 +21,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
+import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
 from wiki import TARGETS  # 대상 독자 이름 — 팀장급·사수급·신입사원·전 직원
 
 DIST = ROOT / "app" / "dist"
@@ -198,7 +199,8 @@ def article_from_brief(bp):
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
             "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
-            "fromTopics": b.get("from_topics", ""), "at": bp.stat().st_mtime}
+            "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
+            "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "at": bp.stat().st_mtime}
 
 
 def article_from_process(pp):
@@ -328,16 +330,7 @@ def mine_state(jobs):
         meta = json.loads(read(d / "meta.json") or "{}")
         j = last.get(k)
         has_brief = (ROOT / "briefs" / f"{k}.json").exists()
-        if (ROOT / "runs" / "titles0" / k / "astra.md").exists():
-            st = "끝"
-        elif has_brief:
-            st = "제목"
-        elif (d / "pick" / "prompt.md").exists():
-            st = "고르기"
-        elif (d / "candidates" / "prompt.md").exists():
-            st = "후보"
-        else:
-            st = "문서"
+        st = read(d / "stage.txt").strip() or ("끝" if has_brief else "문서")
         docs = [x[1].removeprefix("회사 자료 — ") for x in meta.get("docs", [])] or \
                [re.sub(r"^\d{2}-", "", f.name) for f in sorted((d / "upload").glob("*")) if f.is_file()]
         b = json.loads(read(ROOT / "briefs" / f"{k}.json") or "{}")
@@ -356,7 +349,17 @@ def mine_state(jobs):
         picked = [row(s, "중심" if i == 0 else "받침") for i, s in enumerate(now)]
         rest = [row(c["source"], "후보") for c in picks.get("_candidates", []) if c["source"] not in now]
         status = j["status"] if j else ("done" if has_brief else "lost")
-        out.append({"id": k, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
+        try:
+            ts = MT.turns(d) if (d / "topic.txt").exists() else []
+        except (OSError, ValueError, KeyError):
+            ts = []
+        if not ts:  # 첫 요청을 받자마자(아직 topic.txt 전)
+            ts = [{"role": "mentor", "text": read(d / "request.txt").strip(), "docs": docs, "at": d.stat().st_mtime}]
+        for x in ts:  # 지난 차례의 원문에 누가 쓴 글인지 붙인다
+            for p_ in ([x["center"]] + x.get("support", [])) if x.get("role") == "ai" else []:
+                p_["who"] = W.src_meta(p_["source"])[0] if (SRC / W.rel(p_["source"])).is_file() else ""
+                p_["path"] = W.rel(p_["source"])
+        out.append({"id": k, "turns": ts, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
                     "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
                     "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime})
     return out
@@ -370,11 +373,33 @@ def act_mine(a):
     target = str(a.get("target") or "")
     if target and target not in TARGETS:
         raise ValueError("잘못된 대상 독자")
-    files = a.get("files") or []
+    k = safe_id("m-" + time.strftime("%Y%m%d-%H%M%S"))
+    d = MINE / k
+    if d.exists():
+        raise ValueError("방금 보낸 요청이 있음 — 잠시 뒤 다시")
+    tmp = MINE / f".{k}"
+    docs = save_uploads(tmp, a.get("files") or [], "")
+    tmp.rename(d) if tmp.exists() else d.mkdir(parents=True)
+    docs = [x.replace(f"/.{k}/", f"/{k}/") for x in docs]
+    (d / "request.txt").write_text(msg + "\n", encoding="utf-8")
+    cmd = PY + ["scripts/my_topic.py", "--new", (d / "request.txt").relative_to(ROOT).as_posix(), "--id", k]
+    if target:
+        cmd += ["--target", target]
+    cmd += docs
+    return start("mine", k, cmd)
+
+
+def busy(k, kinds=("mine", "write", "revise", "shorten", "titles", "images", "inline", "chat")):
+    with LOCK:
+        return next((j for j in JOBS.values() if j["target"] == k and j["status"] == "running" and j["kind"] in kinds), None)
+
+
+def save_uploads(d, files, tag):
+    """올린 문서를 확인하고 runs/mine/<글>/upload/에 둔다 — 하나라도 안 되면 아무것도 쓰지 않는다."""
+    got, total = [], 0
     if not isinstance(files, list):
         raise ValueError("잘못된 파일")
-    got, total = [], 0
-    for f in files:  # 쓰기 전에 모두 확인한다
+    for f in files:
         name = re.sub(r"[\\/:*?\"<>|\x00-\x1f]", "_", Path(str(f.get("name", ""))).name).strip() or "문서"
         if Path(name).suffix.lower() not in MINE_EXT:
             raise ValueError(f"{name}: pdf·docx·hwp·txt·md만 받습니다")
@@ -386,20 +411,72 @@ def act_mine(a):
         if total > 50 * 1024 * 1024:
             raise ValueError("파일이 너무 큼(합쳐 50MB까지)")
         got.append((name, data))
-    k = safe_id("m-" + time.strftime("%Y%m%d-%H%M%S"))
-    d = MINE / k
-    if d.exists():
-        raise ValueError("방금 보낸 요청이 있음 — 잠시 뒤 다시")
-    (d / "upload").mkdir(parents=True)
-    (d / "request.txt").write_text(msg + "\n", encoding="utf-8")
-    cmd = PY + ["scripts/my_topic.py", "--new", (d / "request.txt").relative_to(ROOT).as_posix(), "--id", k]
-    if target:
-        cmd += ["--target", target]
+    out = []
     for i, (name, data) in enumerate(got, 1):
-        f = d / "upload" / f"{i:02d}-{name}"
+        f = d / "upload" / f"{tag}{i:02d}-{name}"
+        f.parent.mkdir(parents=True, exist_ok=True)
         f.write_bytes(data)
-        cmd += ["--doc", f.relative_to(ROOT).as_posix()]
-    return start("mine", k, cmd)
+        out += ["--doc", f.relative_to(ROOT).as_posix()]
+    return out
+
+
+def act_mine_more(a):
+    """같은 대화에서 이어서 한 말 — 대화 전체로 원문을 다시 고른다(받은 그대로 넘김). 쓰기를 시작한 글은 안 된다."""
+    k = safe_id(a.get("id", ""))
+    msg = str(a.get("message") or "").strip()
+    d = MINE / k
+    if not msg or not (d / "meta.json").exists():
+        raise ValueError("이어서 할 말이 비었거나 없는 대화")
+    if busy(k):
+        raise ValueError("이 글에서 작업이 도는 중")
+    if (ROOT / "runs" / "columns" / k / "draft.md").exists():
+        raise ValueError("쓰기를 시작한 글은 원문을 다시 고르지 않습니다 — 새 대화로 시작하세요")
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    f = d / f"more-{stamp}.txt"
+    f.write_text(msg + "\n", encoding="utf-8")
+    docs = save_uploads(d, a.get("files") or [], stamp + "-")
+    return start("mine", k, PY + ["scripts/my_topic.py", "--more", k, f.relative_to(ROOT).as_posix(), *docs])
+
+
+def act_mine_ok(a):
+    """'이 원문으로' — 원문 단계를 마치고 제목 단계로. 이 뒤로 채팅에 보낸 말은 제목 회차로 간다."""
+    k = safe_id(a.get("article", ""))
+    if busy(k, ("mine",)):
+        raise ValueError("원문을 고르는 중")
+    meta_update(k, sources_ok=True)
+    return {"article": k}
+
+
+TRASH = ROOT / "trash"
+
+
+def act_delete(a):
+    """글 삭제 — 지우지 않고 trash/<글>-<시각>/으로 옮긴다(되살릴 수 있게). 확정 기준 글(과정 기록)은 안 된다.
+    주제 지도에서 고른 글이면 그 주제의 used_in에서 빼고, 비면 '쓸 수 있음'으로 되돌린다."""
+    k = safe_id(a.get("article", ""))
+    if process_path(k):
+        raise ValueError("확정 기준 글은 지우지 않습니다")
+    bp = brief_path(k)
+    if busy(k):
+        raise ValueError("이 글에서 작업이 도는 중")
+    b = json.loads(read(bp) or "{}")
+    dst = TRASH / f"{k}-{time.strftime('%Y%m%d-%H%M%S')}"
+    moves = [bp, ROOT / "runs" / "columns" / k, ROOT / "runs" / "titles0" / k, ROOT / "runs" / "images" / k,
+             MINE / k, SRC / "mine" / k, STUDIO / "chat" / f"{k}.jsonl", *(ROOT / "columns").glob(f"*-{k}.md"),
+             *(ROOT / "columns" / "img").glob(f"*-{k}.png"), *(ROOT / "columns" / "img").glob(f"*-{k}-*.png")]
+    for src in moves:
+        if src.exists():
+            to = dst / src.relative_to(ROOT)
+            to.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(src), str(to))
+    page = b.get("from_wiki", "")
+    if page and (ROOT / page).is_file():
+        f = ROOT / page
+        ui = [u for u in W.used_in(f) if k not in u]
+        W.set_front(f, used_in="[" + ", ".join(ui) + "]", **({"status": "쓸 수 있음"} if not ui else {}))
+        W.write_index(W.topics())
+        W.commit(f"주제 지도: 글 삭제 {k} → used_in에서 뺌")
+    return {"trash": dst.relative_to(ROOT).as_posix()}
 
 
 def act_mine_swap(a):
@@ -409,6 +486,8 @@ def act_mine_swap(a):
     cs = W.cards()
     if not (MINE / k / "picks.json").exists() or not isinstance(srcs, list) or not srcs or any(s not in cs for s in srcs):
         raise ValueError("잘못된 원문")
+    if busy(k, ("mine", "write")):
+        raise ValueError("이 글에서 작업이 도는 중")
     r = subprocess.run(PY + ["scripts/my_topic.py", "--brief", k, *dict.fromkeys(srcs)], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     if r.returncode:
         raise ValueError((r.stderr or r.stdout)[-500:])
@@ -596,7 +675,9 @@ def act_revise(a):
     inbox.mkdir(parents=True, exist_ok=True)
     f = inbox / (time.strftime("%Y%m%d-%H%M%S") + ".txt")
     f.write_text(fb, encoding="utf-8")  # 멘토 피드백은 받은 그대로 파일로만 넘긴다
-    return start("revise", k, PIPE + ["--revise", brief_path(k).relative_to(ROOT).as_posix(), f.relative_to(ROOT).as_posix()])
+    j = start("revise", k, PIPE + ["--revise", brief_path(k).relative_to(ROOT).as_posix(), f.relative_to(ROOT).as_posix()])
+    j["message"] = fb  # 도는 동안 대화에 보낸 말이 보이게
+    return j
 
 
 def act_images(a):
@@ -834,7 +915,8 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
-           "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap}
+           "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
+           "mine-ok": act_mine_ok, "delete": act_delete}
 
 
 # ---------- 그림 축소본 ----------
