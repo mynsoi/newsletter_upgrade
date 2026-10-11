@@ -316,8 +316,403 @@
   "id": "1010-161255-8d63",
   "kind": "titles",
   "target": "w-20261010-161003",
-  "status": "running",
+  "status": "done",
   "started": 1791616375.4342122,
-  "log": "runs/studio/logs/1010-161255-8d63.log"
+  "log": "runs/studio/logs/1010-161255-8d63.log",
+  "ended": 1791616411.9621723
+ },
+ {
+  "id": "1010-163945-2a3a",
+  "kind": "titles",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791617985.7155805,
+  "log": "runs/studio/logs/1010-163945-2a3a.log",
+  "ended": 1791618027.4776096
+ },
+ {
+  "id": "1010-170004-246b",
+  "kind": "titles",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791619204.9373534,
+  "log": "runs/studio/logs/1010-170004-246b.log",
+  "message": "ai 사용량이 성과 상승으로 이어졌나요? 이런느낌이 좋을듯",
+  "ended": 1791619241.795227
+ },
+ {
+  "id": "1010-171706-efce",
+  "kind": "titles",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791620226.2858384,
+  "log": "runs/studio/logs/1010-171706-efce.log",
+  "message": "AI 사용량이 성과로 이어졌나요?",
+  "ended": 1791620272.0574222
+ },
+ {
+  "id": "1010-175223-c1c7",
+  "kind": "write",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791622343.8235147,
+  "log": "runs/studio/logs/1010-175223-c1c7.log",
+  "ended": 1791622848.8525658
+ },
+ {
+  "id": "1010-180438-57a5",
+  "kind": "revise",
+  "target": "w-20261010-161003",
+  "status": "done",
+  "started": 1791623078.5781112,
+  "log": "runs/studio/logs/1010-180438-57a5.log",
+  "ended": 1791623130.1115217
+ },
+ {
+  "id": "1010-180852-2139",
+  "kind": "collect",
+  "target": "자동 · Threads·LinkedIn",
+  "status": "done",
+  "started": 1791623332.8219526,
+  "log": "runs/studio/logs/1010-180852-2139.log",
+  "ended": 1791624108.7633462
+ },
+ {
+  "id": "1010-182148-67be",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791624108.7624626,
+  "log": "runs/studio/logs/1010-182148-67be.log",
+  "ended": 1791624289.2072816
+ },
+ {
+  "id": "1010-201701-c970",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791631021.6886911,
+  "log": "runs/studio/logs/1010-201701-c970.log",
+  "ended": 1791631053.0377672
+ },
+ {
+  "id": "1010-202040-29cf",
+  "kind": "wiki-lint",
+  "target": "정리",
+  "status": "done",
+  "started": 1791631240.1907666,
+  "log": "runs/studio/logs/1010-202040-29cf.log",
+  "ended": 1791631271.0999718
+ },
+ {
+  "id": "1010-202041-0fae",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791631241.299899,
+  "log": "runs/studio/logs/1010-202041-0fae.log",
+  "ended": 1791631271.7147248
+ },
+ {
+  "id": "1010-202231-3898",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791631351.5499306,
+  "log": "runs/studio/logs/1010-202231-3898.log",
+  "ended": 1791631382.3837202
+ },
+ {
+  "id": "1010-202847-c157",
+  "kind": "wiki",
+  "target": "넣기",
+  "status": "done",
+  "started": 1791631727.7564,
+  "log": "runs/studio/logs/1010-202847-c157.log",
+  "ended": 1791632743.735906
+ },
+ {
+  "id": "1010-204559-9daa",
+  "kind": "wiki-lint",
+  "target": "정리",
+  "status": "done",
+  "started": 1791632759.8928914,
+  "log": "runs/studio/logs/1010-204559-9daa.log",
+  "ended": 1791633203.7184656
+ },
+ {
+  "id": "1010-205453-ef6c",
+  "kind": "wiki-lint",
+  "target": "정리",
+  "status": "done",
+  "started": 1791633293.913142,
+  "log": "runs/studio/logs/1010-205453-ef6c.log",
+  "ended": 1791633610.4895902
+ },
+ {
+  "id": "1011-013840-1b81",
+  "kind": "write",
+  "target": "w-20261011-013836",
+  "status": "done",
+  "started": 1791650320.7603967,
+  "log": "runs/studio/logs/1011-013840-1b81.log",
+  "ended": 1791650663.4175835
+ },
+ {
+  "id": "1011-013900-a1aa",
+  "kind": "write",
+  "target": "w-20261011-013856",
+  "status": "done",
+  "started": 1791650340.7930934,
+  "log": "runs/studio/logs/1011-013900-a1aa.log",
+  "ended": 1791650649.0631917
+ },
+ {
+  "id": "1011-013921-505a",
+  "kind": "write",
+  "target": "w-20261011-013917",
+  "status": "done",
+  "started": 1791650361.31226,
+  "log": "runs/studio/logs/1011-013921-505a.log",
+  "ended": 1791650842.0542612
+ },
+ {
+  "id": "1011-014420-d186",
+  "kind": "inline",
+  "target": "w-20261011-013856",
+  "status": "done",
+  "started": 1791650660.6622548,
+  "log": "runs/studio/logs/1011-014420-d186.log",
+  "ended": 1791650768.4312816
+ },
+ {
+  "id": "1011-014430-614b",
+  "kind": "inline",
+  "target": "w-20261011-013836",
+  "status": "done",
+  "started": 1791650670.6402867,
+  "log": "runs/studio/logs/1011-014430-614b.log",
+  "ended": 1791650776.1359804
+ },
+ {
+  "id": "1011-014731-87e1",
+  "kind": "inline",
+  "target": "w-20261011-013917",
+  "status": "done",
+  "started": 1791650851.2394059,
+  "log": "runs/studio/logs/1011-014731-87e1.log",
+  "ended": 1791650972.8601727
+ },
+ {
+  "id": "1011-160636-20fa",
+  "kind": "mine",
+  "target": "m-20261011-160636",
+  "status": "done",
+  "started": 1791702396.869567,
+  "log": "runs/studio/logs/1011-160636-20fa.log",
+  "ended": 1791702641.1759274
+ },
+ {
+  "id": "1011-162504-2fbe",
+  "kind": "mine",
+  "target": "m-20261011-162504",
+  "status": "done",
+  "started": 1791703504.8034635,
+  "log": "runs/studio/logs/1011-162504-2fbe.log",
+  "ended": 1791703801.8296778
+ },
+ {
+  "id": "1011-163044-c8f7",
+  "kind": "write",
+  "target": "m-20261011-143333",
+  "status": "done",
+  "started": 1791703844.795227,
+  "log": "runs/studio/logs/1011-163044-c8f7.log",
+  "ended": 1791704189.9103804
+ },
+ {
+  "id": "1011-164045-5cca",
+  "kind": "mine",
+  "target": "m-20261011-164045",
+  "status": "done",
+  "started": 1791704445.6812932,
+  "log": "runs/studio/logs/1011-164045-5cca.log",
+  "ended": 1791704648.9421246
+ },
+ {
+  "id": "1011-164420-bb71",
+  "kind": "mine",
+  "target": "m-20261011-164045",
+  "status": "done",
+  "started": 1791704660.3478615,
+  "log": "runs/studio/logs/1011-164420-bb71.log",
+  "ended": 1791704937.9772925
+ },
+ {
+  "id": "1011-164913-a441",
+  "kind": "titles",
+  "target": "m-20261011-164045",
+  "status": "done",
+  "started": 1791704953.2072167,
+  "log": "runs/studio/logs/1011-164913-a441.log",
+  "message": "[시험] 질문형 말고 단정하는 제목으로",
+  "ended": 1791704999.165646
+ },
+ {
+  "id": "1011-165010-7a87",
+  "kind": "write",
+  "target": "m-20261011-164045",
+  "status": "done",
+  "started": 1791705010.819607,
+  "log": "runs/studio/logs/1011-165010-7a87.log",
+  "ended": 1791705328.667941
+ },
+ {
+  "id": "1011-165533-57db",
+  "kind": "revise",
+  "target": "m-20261011-164045",
+  "status": "done",
+  "started": 1791705333.952445,
+  "log": "runs/studio/logs/1011-165533-57db.log",
+  "message": "[시험] 첫 문단을 한 문장 줄여 주세요",
+  "ended": 1791705361.4219894
+ },
+ {
+  "id": "1011-165832-26ed",
+  "kind": "images",
+  "target": "m-20261011-164045",
+  "status": "failed",
+  "started": 1791705512.2800634,
+  "log": "runs/studio/logs/1011-165832-26ed.log",
+  "ended": 1791705512.3330238
+ },
+ {
+  "id": "1011-165839-fab2",
+  "kind": "images",
+  "target": "m-20261011-143333",
+  "status": "done",
+  "started": 1791705519.8970165,
+  "log": "runs/studio/logs/1011-165839-fab2.log",
+  "ended": 1791705685.1577318
+ },
+ {
+  "id": "1011-165842-47d4",
+  "kind": "inline",
+  "target": "m-20261011-143333",
+  "status": "done",
+  "started": 1791705522.318787,
+  "log": "runs/studio/logs/1011-165842-47d4.log",
+  "ended": 1791705623.6003697
+ },
+ {
+  "id": "1011-172347-4944",
+  "kind": "shorten",
+  "target": "zz-ui-172332",
+  "status": "done",
+  "started": 1791707027.6378274,
+  "log": "runs/studio/logs/1011-172347-4944.log",
+  "ended": 1791707100.8717177
+ },
+ {
+  "id": "1011-172509-2c60",
+  "kind": "titles",
+  "target": "zz-ui-172332",
+  "status": "done",
+  "started": 1791707109.4217603,
+  "log": "runs/studio/logs/1011-172509-2c60.log",
+  "message": "[시험] 짧게",
+  "ended": 1791707134.0959022
+ },
+ {
+  "id": "1011-172539-0afc",
+  "kind": "titles",
+  "target": "zz-ui-172332",
+  "status": "done",
+  "started": 1791707139.8499546,
+  "log": "runs/studio/logs/1011-172539-0afc.log",
+  "ended": 1791707175.560652
+ },
+ {
+  "id": "1011-173414-2441",
+  "kind": "mine",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791707654.6669953,
+  "log": "runs/studio/logs/1011-173414-2441.log",
+  "ended": 1791707975.2751305
+ },
+ {
+  "id": "1011-174052-6c63",
+  "kind": "titles",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791708052.552463,
+  "log": "runs/studio/logs/1011-174052-6c63.log",
+  "message": "개인의 AI 활용 능력 향상이 팀의 성과 상승ㅇ에도 도움이 되었을까?  이런내용이면 좋을거같은데",
+  "ended": 1791708090.9201658
+ },
+ {
+  "id": "1011-174203-ccfb",
+  "kind": "write",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791708123.413126,
+  "log": "runs/studio/logs/1011-174203-ccfb.log",
+  "ended": 1791708632.847423
+ },
+ {
+  "id": "1011-175841-bd21",
+  "kind": "revise",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791709121.9002743,
+  "log": "runs/studio/logs/1011-175841-bd21.log",
+  "message": "진짜 별로고 말투도 ai 같음. 뭔소린지도 모르겠고 무슨 말을 하고 싶은건지 모르겠음. 경영일기 칼럼을 참고한게 맞는지 의심이됨. ",
+  "ended": 1791709205.63026
+ },
+ {
+  "id": "1011-214945-8063",
+  "kind": "write",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791722985.0486677,
+  "log": "runs/studio/logs/1011-214945-8063.log",
+  "ended": 1791723690.0326223
+ },
+ {
+  "id": "1011-215031-13ab",
+  "kind": "mine",
+  "target": "m-20261011-215031",
+  "status": "done",
+  "started": 1791723031.1904042,
+  "log": "runs/studio/logs/1011-215031-13ab.log",
+  "ended": 1791723326.5787718
+ },
+ {
+  "id": "1011-221633-94f7",
+  "kind": "images",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791724593.7923524,
+  "log": "runs/studio/logs/1011-221633-94f7.log",
+  "ended": 1791724779.249241
+ },
+ {
+  "id": "1011-221635-3c78",
+  "kind": "inline",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791724595.6020007,
+  "log": "runs/studio/logs/1011-221635-3c78.log",
+  "ended": 1791724722.4487693
+ },
+ {
+  "id": "1011-221955-9558",
+  "kind": "images",
+  "target": "m-20261011-173414",
+  "status": "done",
+  "started": 1791724795.183088,
+  "log": "runs/studio/logs/1011-221955-9558.log",
+  "ended": 1791725144.0421696
  }
 ]
