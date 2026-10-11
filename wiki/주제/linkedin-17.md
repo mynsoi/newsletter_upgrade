@@ -4,8 +4,8 @@ title: 제휴 제안 자동화, 설득은 사람
 verdict: 뺌
 audience: 전 직원
 center: linkedin/17
-status: 진행 중
-used_in: [briefs/w-20261010-043541.json]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-11
 ---
 
