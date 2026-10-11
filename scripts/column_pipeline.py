@@ -57,6 +57,10 @@ LEN_RULE = "분량은 공백을 빼고 1,500자 이하로 합니다. 더 길면 
 OUT_RULE = "출력: 제목과 본문만 주세요. 파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요."
 
 
+# 기준 피드백 속 따옴표 문장은 지난 글의 문장이다 — 새 글에 그대로 들어갔다(2026-10-11 "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠.")
+NO_COPY = "[기준 피드백] 속 따옴표 문장은 지난 글의 문장을 고친 예시입니다. 어떻게 고치라는 뜻만 따르고, 그 문장을 이 원고에 옮겨 쓰지 마세요."
+
+
 def body(path):
     t = Path(path).read_text(encoding="utf-8")
     if t.startswith("---"):
@@ -139,7 +143,7 @@ def fb_prompt(text):
     return "\n\n".join([
         "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [멘토 피드백]을 반영해 고쳐 주세요. "
         "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        fb, LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        fb, NO_COPY, LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def run_claude(d, prompt):
@@ -316,7 +320,7 @@ def revise(brief_path, feedback_path):
         "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
         + (" 분량은 지금 원고 정도로 둡니다." if half else " " + LEN_RULE),
-        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, OUT_RULE,
+        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
     out = run_astra(d / f"_revise-r{n}", prompt)
@@ -337,7 +341,7 @@ def shorten_prompt(text):
     return "\n\n".join([
         f"아래 [원고]를 지금의 절반 분량(공백 제외 약 {n}자)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, "
         "중심 장면과 주장 위주로 남깁니다. [기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, OUT_RULE, "=== [원고] ===\n" + text])
+        "[기준 피드백]\n" + standing, NO_COPY, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def chars(f):
@@ -352,7 +356,7 @@ def fit_prompt(text):
     return "\n\n".join([
         f"아래 [원고]를 공백을 빼고 {MAX_CHARS:,}자 이하로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, OUT_RULE, "=== [원고] ===\n" + text])
+        "[기준 피드백]\n" + standing, NO_COPY, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def fit(brief_path):
