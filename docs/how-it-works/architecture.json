@@ -65,7 +65,7 @@
    "sublabel": "브라우저",
    "pos": [
     40,
-    290
+    400
    ],
    "size": [
     130,
@@ -79,7 +79,7 @@
    "sublabel": "React · app/",
    "pos": [
     240,
-    290
+    400
    ],
    "size": [
     150,
@@ -94,7 +94,7 @@
    "tag": "버튼 → 명령",
    "pos": [
     460,
-    290
+    400
    ],
    "size": [
     160,
@@ -108,7 +108,7 @@
    "sublabel": "제목 · 과정 1~",
    "pos": [
     720,
-    90
+    220
    ],
    "size": [
     190,
@@ -119,10 +119,10 @@
    "id": "wiki",
    "type": "backend",
    "label": "wiki.py",
-   "sublabel": "주제 지도 · 거르기 Claude",
+   "sublabel": "카드 · 묶기 · 제목",
    "pos": [
     720,
-    220
+    350
    ],
    "size": [
     190,
@@ -136,7 +136,7 @@
    "sublabel": "그림 후보",
    "pos": [
     720,
-    350
+    480
    ],
    "size": [
     190,
@@ -150,7 +150,7 @@
    "sublabel": "원문 수집",
    "pos": [
     720,
-    610
+    740
    ],
    "size": [
     190,
@@ -168,7 +168,7 @@
    ],
    "size": [
     180,
-    64
+    194
    ]
   },
   {
@@ -178,7 +178,7 @@
    "sublabel": "codex exec gpt-6-astra",
    "pos": [
     1070,
-    220
+    350
    ],
    "size": [
     180,
@@ -192,7 +192,7 @@
    "sublabel": "그림 생성 gpt-6-astra",
    "pos": [
     1070,
-    480
+    610
    ],
    "size": [
     180,
@@ -206,10 +206,24 @@
    "sublabel": "브라우저 수집",
    "pos": [
     1070,
-    610
+    740
    ],
    "size": [
     180,
+    64
+   ]
+  },
+  {
+   "id": "mine",
+   "type": "backend",
+   "label": "my_topic.py",
+   "sublabel": "원문 고르기 · 말할 것",
+   "pos": [
+    720,
+    90
+   ],
+   "size": [
+    190,
     64
    ]
   }
@@ -250,15 +264,6 @@
    "to": "collect"
   },
   {
-   "id": "server-claude",
-   "from": "server",
-   "to": "claude",
-   "label": "진행자 대화",
-   "variant": "dashed",
-   "fromSide": "top",
-   "toSide": "top"
-  },
-  {
    "id": "pipeline-claude",
    "from": "pipeline",
    "to": "claude",
@@ -268,15 +273,12 @@
    "id": "pipeline-astra",
    "from": "pipeline",
    "to": "astra",
-   "label": "제목 · 과정 2~",
-   "fromSide": "bottom",
-   "toSide": "top"
+   "label": "제목 · 과정 2~"
   },
   {
    "id": "wiki-astra",
    "from": "wiki",
-   "to": "astra",
-   "label": "카드 · 묶기 · 제목"
+   "to": "astra"
   },
   {
    "id": "images-astra",
@@ -295,6 +297,17 @@
    "from": "collect",
    "to": "aside",
    "label": "원문 그대로"
+  },
+  {
+   "id": "server-mine",
+   "from": "server",
+   "to": "mine"
+  },
+  {
+   "id": "mine-claude",
+   "from": "mine",
+   "to": "claude",
+   "label": "고르기"
   }
  ],
  "cards": [
@@ -310,7 +323,7 @@
    "dot": "violet",
    "title": "AI 분담",
    "items": [
-    "Claude: 과정 1 초안, 주제 거르기, 진행자 대화",
+    "Claude: 원문 고르기·말할 것, 과정 1 초안, 주제 거르기, 진행자(입력창 드롭다운)",
     "astra: 원문 카드 · 묶기 · 제목, 과정 2부터 끝까지, 그림 설명",
     "gti: 그림"
    ]
@@ -319,8 +332,8 @@
    "dot": "amber",
    "title": "파일로 이어짐",
    "items": [
-    "sources/originals → wiki/ → briefs/ → runs/ → columns/",
-    "단계 사이는 전부 파일, 주제 지도는 바뀔 때마다 git 커밋"
+    "sources/originals → wiki/ · runs/mine/ → briefs/ → runs/ → columns/",
+    "단계 사이는 전부 파일, 지운 글은 trash/로"
    ]
   }
  ]
