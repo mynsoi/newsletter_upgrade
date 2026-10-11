@@ -35,6 +35,8 @@ def marks(t, own=False):
 
 
 PANES = [
+    ("C2 · 과정 2", "토스 원문 + 말할 것 한 문장 먼저 + 초안에 멘토 말 그대로 + 사례는 이름·숫자 그대로 짧게", CMP / "C2" / "r4.md"),
+    ("C · 과정 2", "같은 원문(이름 없는 익명 글) + 위와 같은 세 가지", CMP / "C" / "r4.md"),
     ("기준 글", "퇴근 시간 칼럼 · 멘토가 만족한 글(R4 방식, 확정본)", ROOT / "columns" / "2026-10-08-ai-퇴근시간.md"),
     ("지금 · 과정 2", "내 주제로 쓰기 · astra 재작성(과정 3 전)", NOW / "r4.md"),
     ("지금 · 과정 3", "멘토가 본 글 · 기준 반영", NOW / "final.md"),
@@ -51,6 +53,9 @@ def pane(name, sub, f):
     paras = "".join(f"<p>{e(p)}</p>" for p in re.split(r"\n\s*\n", text) if p.strip())
     mk = "".join(f"<span><b>{e(v)}</b>{e(k)}</span>" for k, v in marks(text, own=name == "기준 글"))  # 예문은 원래 기준 글의 문장
     note = NOTES.get(name, "")
+    th = Path(f).parent / "thesis.md"
+    if th.exists():  # C·C2 — 쓰기 전에 정한 말할 것
+        note = f"말할 것: {th.read_text(encoding='utf-8').strip()}" + (f" — {note}" if note else "")
     return f"""<section class="pane">
   <div class="head"><div class="name">{e(name)}</div><div class="sub">{e(sub)}</div></div>
   <div class="marks">{mk}</div>
@@ -97,6 +102,6 @@ PAGE = f"""<!doctype html>
 </header>
 {''.join(pane(*p) for p in PANES)}
 </div></body></html>"""
-out = ROOT / "docs" / "2026-10-11-글-비교.html"
+out = ROOT / "docs" / (sys.argv[1] if len(sys.argv) > 1 else "2026-10-11-글-비교.html")  # 내용을 바꾸면 새 이름으로(Mac 브라우저가 예전 판을 보여 줌)
 out.write_text(PAGE, encoding="utf-8")
 print(out.relative_to(ROOT))
