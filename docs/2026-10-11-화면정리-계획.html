@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>화면 정리 계획</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  :root { --canvas:#ffffff; --surface-soft:#f7f7f7; --hairline:#dddddd; --hairline-soft:#ebebeb;
+          --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292; --primary:#ff385c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; word-break:keep-all; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 32px 80px; }
+  header { padding:56px 0 8px; }
+  h1 { font-size:30px; font-weight:700; margin:0 0 18px; }
+  .lead { background:var(--surface-soft); border-radius:14px; padding:18px 22px; font-size:16px; line-height:1.75; }
+  .lead b { color:var(--primary); }
+  h2 { font-size:22px; font-weight:700; margin:44px 0 12px; }
+  h2 small { font-size:14px; font-weight:500; color:var(--muted); margin-left:8px; }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-size:13px; font-weight:600; color:var(--muted); padding:10px 10px; border-bottom:1px solid var(--hairline); }
+  td { border-top:1px solid var(--hairline-soft); padding:13px 10px; vertical-align:top; font-size:15px; line-height:1.65; }
+  td.k { font-weight:600; width:190px; }
+  td.from { color:var(--muted); width:150px; font-size:14px; }
+  ul { margin:0; padding-left:20px; font-size:15px; line-height:1.8; color:var(--body); }
+  li { margin-bottom:4px; }
+  code { font-size:13px; background:var(--surface-soft); border-radius:6px; padding:1px 6px; }
+  .ask { border:1px solid var(--hairline); border-radius:14px; padding:4px 22px 10px; }
+  .ask td.k { width:220px; }
+  ol { margin:0; padding-left:22px; font-size:15px; line-height:1.85; color:var(--body); }
+  .note { font-size:14px; color:var(--muted); margin-top:10px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>화면 정리 계획</h1>
+  <div class="lead">글 화면을 <b>대화 화면 하나</b>로 합칩니다. 예전 글 화면(제목·과정·그림·확정 탭, <code>Article.tsx</code> 797줄)에만 있던 기능 <b>6개</b>를 대화 화면으로 옮긴 뒤 예전 화면을 지웁니다. 서재·주제 지도·스크립트·데이터는 건드리지 않습니다.</div>
+</header>
+
+<h2>1. 대화 화면으로 옮길 기능 <small>예전 화면에만 있던 것</small></h2>
+<table>
+  <tr><th>기능</th><th>예전 자리</th><th>대화 화면에서</th></tr>
+  <tr><td class="k">비교</td><td class="from">과정 탭</td><td>오른쪽 '지금 글' 위에 보기 버튼 <b>본문 · 비교 · 미리보기</b>. 비교는 앞 과정에서 바뀐 문장에 형광 표시.</td></tr>
+  <tr><td class="k">확정 미리보기</td><td class="from">확정 탭</td><td>같은 보기 버튼의 <b>미리보기</b> — 머리 그림과 고른 본문 그림이 제자리에 들어간 완성본(종이 모양). 미리보기에서 <b>지금 보는 과정으로 확정</b>(예전 확정 탭처럼).</td></tr>
+  <tr><td class="k">분량 절반 (쓴 뒤에)</td><td class="from">글 위쪽 줄</td><td>지금은 쓰기 전에만 고를 수 있음 → 오른쪽 위에 <b>대상 독자 · 기본/절반</b>을 늘 두기. 쓴 뒤 절반을 누르면 최신 과정을 절반으로 줄인 과정이 대화에 붙음(예전과 같은 동작). <b>기본/절반은 기준 글에도</b>, 대상 독자는 설정 글만.</td></tr>
+  <tr><td class="k">제목 다시 뽑기 (말 없이)</td><td class="from">제목 탭</td><td>지금은 말을 보내야만 다시 뽑힘 → 대화의 마지막 제목 카드에 <b>다시 뽑기</b>.</td></tr>
+  <tr><td class="k">본문 그림 자리 · 지난 그림 회차</td><td class="from">그림 탭</td><td>그림 카드의 본문 그림마다 <b>문단 N</b> 칩과 이름, 지난 회차는 접어 두기.</td></tr>
+  <tr><td class="k">기준 글(퇴근 시간 칼럼) 편집</td><td class="from">과정 · 확정 탭</td><td>지금은 편집 버튼이 설정 글에만 → 기준 글에도(예전처럼 과정으로 쌓임).</td></tr>
+</table>
+
+<h2>2. 지울 것</h2>
+<ul>
+  <li><code>app/src/views/Article.tsx</code> 전체. 대화 화면이 같이 쓰던 조각(본문 그리기·진행자 창·본문 그림 자리 찾기)은 새 파일 <code>views/parts.tsx</code>로 옮김.</li>
+  <li>대화 화면 위쪽의 <b>제목 · 과정 · 그림 · 확정</b> 링크.</li>
+  <li>예전 주소 <code>#/a/&lt;글&gt;/&lt;탭&gt;</code>은 지우지 않고 <b>대화 화면으로</b> 열리게 — 주제 지도의 "이 주제로"나 북마크가 깨지지 않게.</li>
+  <li>서버 동작 <code>retry</code>(새 글로 다시 쓰기) — 같은 대화 안의 "처음부터 다시 쓰기"로 바뀌어 화면에서 안 씀.</li>
+  <li>예전 화면을 가리키는 설명 — handoff 5절의 "글 — 탭 제목/과정/그림/확정", README와 그 캡처(<code>docs/readme/screen-column.jpg</code>)를 대화 화면 기준으로 바꿈.</li>
+</ul>
+
+<h2>3. 같이 정리할지 정해 주실 것 <small>안 정하시면 그대로 둡니다</small></h2>
+<div class="ask">
+<table>
+  <tr><td class="k">A. 주제 지도 아래 "이전 방식 회차 4"</td><td>10/9~10에 쓰던 옛 주제 후보 방식(<code>runs/topics</code>)을 보여 주는 접힌 칸과, 그걸 돌리던 서버 동작 <code>topics</code>·<code>pick-topic</code>. 기록 파일은 남기고 화면·동작만 지움.</td></tr>
+  <tr><td class="k">B. 8770 예전 비교 화면</td><td><code>view/</code>를 띄운 서버. 작업실(8771)과 달리 같은 공유기(LAN)에도 열려 있음. 끄기만 함(파일은 남김).</td></tr>
+  <tr><td class="k">C. 안 쓰게 되는 컴포넌트 파일</td><td>예전 화면만 쓰던 Timeline · 카드 호버 · 단계 로더 · 아코디언 등. <b>제안: 지우지 않고 둠</b>(참고 사이트에서 설치한 것이라 다음에 다시 쓸 수 있음).</td></tr>
+</table>
+</div>
+
+<h2>4. 순서와 확인</h2>
+<ol>
+  <li>조각을 <code>parts.tsx</code>로 옮기기 (동작 변화 없음)</li>
+  <li>대화 화면에 기능 6개 넣기</li>
+  <li>주소를 대화 화면으로 돌리고 <code>Article.tsx</code> 지우기 → 빌드·타입 검사</li>
+  <li>헤드리스 브라우저로 직접 눌러 확인
+    <ul>
+      <li>자기평가 글(지금 과정 4)에서 비교 · 미리보기 · 오른쪽 위 독자/분량 표시 — 이 글은 보기만 하고 바꾸지 않음</li>
+      <li>퇴근 시간 기준 글 열기(과정·확정이 대화로 보이는지) · 주제 지도에서 "이 주제로" → 대화 화면 · 예전 주소 <code>#/a/…/process</code> → 대화 화면</li>
+      <li>절반 · 제목 다시 뽑기 · 편집은 <b>시험용 복사본</b>으로 (끝나면 휴지통까지 지움)</li>
+    </ul>
+  </li>
+  <li><b>화면 시험 스크립트 바꾸기</b> — 지금 handoff의 화면 시험 <code>wiki-eval/ui_e2e.py</code>는 예전 탭을 눌러서 예전 화면을 지우면 깨짐. 오늘 대화 흐름 시험(요청 → 이어서 말하기 → 제목 → 쓰기 → 피드백 → 편집·이어 쓰기·다시 쓰기 → 삭제)을 저장소 스크립트로 옮겨 대신하게 하고, 시험 글 이름·휴지통 비우기까지 스크립트가 하게. handoff 7절 안내도 바꿈.</li>
+  <li>작업실 서버 재시작 — 돌고 있는 작업이 없을 때만</li>
+  <li>커밋 하나로 묶어 푸시 — 문제가 생기면 그 커밋 하나만 되돌리면 예전 화면이 돌아옴</li>
+</ol>
+<p class="note">모델을 부르는 확인은 절반 줄이기·제목 다시 뽑기 두 번뿐입니다(astra, 합쳐 2분 안팎). 예상 시간은 1시간 안팎입니다.</p>
+</div>
+</body>
+</html>

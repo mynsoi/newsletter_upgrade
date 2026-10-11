@@ -6,10 +6,11 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import ParticleButton from "@/components/kokonutui/particle-button";
 import { PillTabs } from "@/components/ui/tabs";
 import { ByChip, Chip, ClaudeMark, SiteIcon, SourceDrawer } from "@/components/studio/bits";
-import { Director, Prose } from "@/views/Article";
-import { StageChip } from "@/views/Articles";
+import { Director, Prose, inlineAt } from "@/views/parts";
+import { DeleteButton, StageChip } from "@/views/Articles";
 import { PicksCard, useAttach } from "@/views/MineChat";
 import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type State, type Step } from "@/lib/api";
+import { paragraphs } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 // 편집기(Tiptap)는 '편집'을 누를 때만 받아 온다
@@ -75,21 +76,7 @@ export default function Flow({ state, id, refresh, go }: { state: State; id: str
         <header className="flex items-center gap-4 border-b border-line bg-page/80 px-10 py-4 backdrop-blur-xl">
           {a ? <StageChip a={a} /> : <Chip className="text-ink">원문</Chip>}
           <h1 className="line-clamp-1 min-w-0 flex-1 text-lg font-semibold text-ink">{title}</h1>
-          {a && (
-            <span className="flex shrink-0 items-center gap-1">
-              {[
-                ["title", "제목"],
-                ["process", "과정"],
-                ["image", "그림"],
-                ["confirm", "확정"],
-              ].map(([v, t]) => (
-                <button key={v} onClick={() => go(`#/a/${a.id}/${v}`)} className="rounded-full px-3 py-1.5 text-sm text-ink-3 transition hover:bg-soft hover:text-ink">
-                  {t}
-                </button>
-              ))}
-            </span>
-          )}
-          {a && a.kind === "brief" && <Delete a={a} go={go} refresh={refresh} />}
+          {a && a.kind === "brief" && <DeleteButton a={a} refresh={refresh} onDone={() => go("#/articles")} />}
         </header>
 
         <div ref={box} className="flex-1 overflow-y-auto">
@@ -227,7 +214,7 @@ function Timeline({
       if (r.message) out.push(<Me key={`tm${ri}`}>{r.message}</Me>);
       out.push(
         <Ai key={`t${ri}`} label={<>제목 후보 · astra{a.titles.length > 1 && ` · ${ri + 1}회차`}</>}>
-          <TitlesCard a={a} items={r.items} live={!started} refresh={refresh} />
+          <TitlesCard a={a} items={r.items} live={!started} last={ri === a.titles.length - 1 && !job} refresh={refresh} />
         </Ai>
       );
     });
@@ -315,8 +302,9 @@ function PastPicks({ center, support, onSource }: { center: MinePick; support: M
   );
 }
 
-function TitlesCard({ a, items, live, refresh }: { a: A; items: string[]; live: boolean; refresh: () => void }) {
+function TitlesCard({ a, items, live, last, refresh }: { a: A; items: string[]; live: boolean; last: boolean; refresh: () => void }) {
   return (
+    <div className="space-y-2">
     <div className="grid grid-cols-2 gap-2">
       {items.map((x, i) => {
         const on = a.title === x;
@@ -337,28 +325,24 @@ function TitlesCard({ a, items, live, refresh }: { a: A; items: string[]; live: 
         );
       })}
     </div>
+    {live && last && (
+      <div className="flex justify-end">
+        <SmallBtn onClick={() => act("titles", { article: a.id }).then(refresh)}>
+          <IconRefresh className="size-3.5" />
+          다시 뽑기
+        </SmallBtn>
+      </div>
+    )}
+    </div>
   );
 }
 
 function WriteCard({ a, refresh }: { a: A; refresh: () => void }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-2xl border border-line bg-panel-solid px-5 py-4">
-      <span className="flex flex-wrap items-center gap-3">
-        <PillTabs
-          id="flow-target"
-          tabs={["전 직원", "팀장급", "사수급", "신입사원"].map((v) => ({ value: v, title: v }))}
-          value={a.target}
-          onChange={(v) => act("target", { article: a.id, target: v }).then(refresh)}
-        />
-        <PillTabs
-          id="flow-length"
-          tabs={[
-            { value: "full", title: "기본" },
-            { value: "half", title: "절반" },
-          ]}
-          value={a.length}
-          onChange={(v) => act("length", { article: a.id, mode: v }).then(refresh)}
-        />
+      <span className="flex flex-wrap items-center gap-2">
+        <Chip className="text-ink">{a.target}</Chip>
+        <Chip className="text-ink">{a.length === "half" ? "절반" : "기본"}</Chip>
       </span>
       <ParticleButton
         className="h-11 shrink-0 rounded-full bg-ink px-7 text-base font-semibold text-page hover:bg-violet-500 hover:text-ink"
@@ -388,21 +372,35 @@ function StepCard({ s, active, onOpen, last }: { s: Step; active: boolean; onOpe
 }
 
 function ImagesCard({ a, state, refresh }: { a: A; state: State; refresh: () => void }) {
-  const hero = a.images[a.images.length - 1];
-  const inline = a.inline[a.inline.length - 1];
+  const [old, setOld] = useState(false);
   const picked = new Set(a.inlinePicked.map((x) => x.src));
   const busyHero = state.jobs.some((j) => j.status === "running" && j.target === a.id && j.kind === "images");
   const busyInline = state.jobs.some((j) => j.status === "running" && j.target === a.id && j.kind === "inline");
+  const pastN = Math.max(0, a.images.length - 1) + Math.max(0, a.inline.length - 1);
+  const heroRound = (r: A["images"][number]) => (
+    <div key={r.id} className="grid grid-cols-4 gap-2">
+      {r.items.filter((x) => x.src).map((x) => (
+        <Thumb key={x.src} src={x.src} on={a.hero === x.src} ratio="aspect-[3/2]" name={x.name} onClick={() => act("hero", { article: a.id, src: x.src }).then(refresh)} />
+      ))}
+    </div>
+  );
+  const inlineRound = (r: A["inline"][number]) => (
+    <div key={r.id} className="grid grid-cols-4 gap-2">
+      {r.items.filter((x) => x.src).map((x) => (
+        <Thumb key={x.src} src={x.src} on={picked.has(x.src)} ratio="aspect-video" name={x.name} chip={x.after ? `문단 ${x.after}` : ""} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} />
+      ))}
+    </div>
+  );
   return (
     <div className="space-y-4 rounded-2xl border border-line bg-panel-solid px-5 py-4">
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <button
           disabled={busyHero}
           onClick={() => act("images", { article: a.id }).then(refresh)}
           className="flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-ink transition hover:bg-soft disabled:opacity-50"
         >
           <IconPhoto className="size-4" />
-          머리 그림{hero && " 다시"}
+          머리 그림{a.images.length > 0 && " 다시"}
         </button>
         <button
           disabled={busyInline}
@@ -410,28 +408,34 @@ function ImagesCard({ a, state, refresh }: { a: A; state: State; refresh: () => 
           className="flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-ink transition hover:bg-soft disabled:opacity-50"
         >
           <IconSparkles className="size-4" />
-          본문 그림{inline && " 다시"}
+          본문 그림{a.inline.length > 0 && " 다시"}
         </button>
+        {pastN > 0 && (
+          <button onClick={() => setOld(!old)} className="ml-auto flex items-center gap-1 text-sm text-ink-3 hover:text-ink">
+            지난 회차 {pastN}
+            <IconChevronDown className={cn("size-4 transition", old && "rotate-180")} />
+          </button>
+        )}
       </div>
-      {hero && (
-        <div className="grid grid-cols-4 gap-2">
-          {hero.items.filter((x) => x.src).map((x) => (
-            <button key={x.src} onClick={() => act("hero", { article: a.id, src: x.src }).then(refresh)} className={cn("overflow-hidden rounded-xl ring-2 transition", a.hero === x.src ? "ring-violet-400" : "ring-transparent hover:ring-line")}>
-              <img src={img(x.src, 360)} className="aspect-[3/2] w-full object-cover" />
-            </button>
-          ))}
+      {old && (
+        <div className="space-y-2 opacity-70">
+          {a.images.slice(0, -1).map(heroRound)}
+          {a.inline.slice(0, -1).map(inlineRound)}
         </div>
       )}
-      {inline && (
-        <div className="grid grid-cols-4 gap-2">
-          {inline.items.filter((x) => x.src).map((x) => (
-            <button key={x.src} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} className={cn("overflow-hidden rounded-xl ring-2 transition", picked.has(x.src) ? "ring-violet-400" : "ring-transparent hover:ring-line")}>
-              <img src={img(x.src, 360)} className="aspect-video w-full object-cover" />
-            </button>
-          ))}
-        </div>
-      )}
+      {a.images.length > 0 && heroRound(a.images[a.images.length - 1])}
+      {a.inline.length > 0 && inlineRound(a.inline[a.inline.length - 1])}
     </div>
+  );
+}
+
+function Thumb({ src, on, ratio, name, chip, onClick }: { src: string; on: boolean; ratio: string; name: string; chip?: string; onClick: () => void }) {
+  return (
+    <button onClick={onClick} title={name} className={cn("group relative overflow-hidden rounded-xl ring-2 transition", on ? "ring-violet-400" : "ring-transparent hover:ring-line")}>
+      <img src={img(src, 360)} className={cn(ratio, "w-full object-cover")} />
+      {chip && <span className="absolute top-1.5 left-1.5 rounded-full bg-black/60 px-2 py-0.5 text-[11px] text-white">{chip}</span>}
+      <span className="absolute inset-x-0 bottom-0 line-clamp-1 bg-gradient-to-t from-black/70 to-transparent px-2 pt-4 pb-1.5 text-left text-[11px] text-white opacity-0 transition group-hover:opacity-100">{name}</span>
+    </button>
   );
 }
 
@@ -456,41 +460,16 @@ function ConfirmCard({ a, refresh }: { a: A; refresh: () => void }) {
   );
 }
 
-function Delete({ a, go, refresh }: { a: A; go: (h: string) => void; refresh: () => void }) {
-  const [arm, setArm] = useState(false);
-  useEffect(() => {
-    if (!arm) return;
-    const t = setTimeout(() => setArm(false), 3000);
-    return () => clearTimeout(t);
-  }, [arm]);
-  return (
-    <button
-      onClick={async () => {
-        if (!arm) return setArm(true);
-        await act("delete", { article: a.id });
-        go("#/articles");
-        refresh();
-      }}
-      title="삭제"
-      className={cn(
-        "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition",
-        arm ? "border-rose-400/60 bg-rose-500/15 text-rose-700 dark:text-rose-200" : "border-transparent text-ink-3 hover:border-line hover:text-ink"
-      )}
-    >
-      <IconTrash className="size-4" />
-      {arm && "한 번 더"}
-    </button>
-  );
-}
 
 /* ---------- 입력 ---------- */
 
 function ChatInput({ a, run, job, refresh, onDirector }: { a?: A; run?: MineRun; job?: Job; refresh: () => void; onDirector: () => void }) {
   const r = route(a, run, job);
-  const [mode, setMode] = useState("auto");
+  const fixed = a?.kind === "process"; // 확정 기준 글 — 원문·제목 단계가 없어 진행자만
+  const [mode, setMode] = useState(fixed ? "director" : "auto");
   const at = useAttach();
   const modes = [
-    { id: "auto", label: r.label || "—", icon: <IconSparkles className="size-3.5 text-violet-300" /> },
+    ...(fixed ? [] : [{ id: "auto", label: r.label || "—", icon: <IconSparkles className="size-3.5 text-violet-300" /> }]),
     ...(a ? [{ id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> }] : []),
   ];
   const off = mode === "auto" && !r.mode;
@@ -542,11 +521,15 @@ function Now({
   onSource: (p: string) => void;
 }) {
   const s = a?.steps.find((x) => x.n === (sel ?? a.steps.length));
+  const prev = a && s ? a.steps.find((x) => x.n === s.n - 1) : undefined;
   const latest = a?.steps.length ?? 0;
   const [edit, setEdit] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [view, setView] = useState<"본문" | "비교" | "미리보기">("본문");
   useEffect(() => setEdit(null), [s?.n]);
   const writing = !!job && ["write", "revise", "shorten"].includes(job.kind);
+  const hero = a?.hero || a?.confirmed?.hero || "";
+  const v = view === "비교" && !prev ? "본문" : view;
   const save = async () => {
     if (!a || !s || edit === null || saving) return;
     setSaving(true);
@@ -559,58 +542,115 @@ function Now({
       setSaving(false);
     }
   };
+  const confirm = a && s && a.kind === "brief" && !a.confirmed && !writing && (
+    <SmallBtn strong={v === "미리보기"} onClick={() => act("confirm", { article: a.id, step: s.n }).then(refresh)}>
+      <IconCheck className="size-3.5" />
+      과정 {s.n}으로 확정
+    </SmallBtn>
+  );
   return (
-    <div className="space-y-6 px-8 py-8">
-      {a?.hero && <img src={img(a.hero, 900)} className="aspect-[3/2] w-full rounded-2xl object-cover" />}
+    <div className="space-y-6 px-8 py-6">
+      {a && (
+        <div className="flex flex-wrap items-center gap-2 border-b border-line pb-4">
+          {a.kind === "brief" && (
+            <PillTabs
+              id="now-target"
+              tabs={["전 직원", "팀장급", "사수급", "신입사원"].map((x) => ({ value: x, title: x }))}
+              value={a.target}
+              onChange={(x) => act("target", { article: a.id, target: x }).then(refresh)}
+            />
+          )}
+          <PillTabs
+            id="now-length"
+            tabs={[
+              { value: "full", title: "기본" },
+              { value: "half", title: "절반" },
+            ]}
+            value={a.length}
+            onChange={(x) => !writing && act("length", { article: a.id, mode: x }).then(refresh)}
+          />
+        </div>
+      )}
+      {hero && v !== "미리보기" && <img src={img(hero, 900)} className="aspect-[3/2] w-full rounded-2xl object-cover" />}
       {s ? (
         <div>
           <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <span className="tabular-nums">과정 {s.n}</span>
             <ByChip by={s.by} />
             <span className="tabular-nums">{(edit === null ? s.chars : edit.replace(/\s/g, "").length).toLocaleString()}자</span>
-            <span className="ml-auto flex items-center gap-1.5">
-              {edit !== null ? (
-                <>
-                  <SmallBtn onClick={() => setEdit(null)}>취소</SmallBtn>
-                  <SmallBtn strong onClick={save}>{saving ? "…" : "저장"}</SmallBtn>
-                </>
-              ) : (
-                a?.kind === "brief" &&
-                !writing && (
-                  <>
-                    <SmallBtn onClick={() => setEdit(s.text)}>
-                      <IconPencil className="size-3.5" />
-                      편집
-                    </SmallBtn>
-                    {s.n < latest && (
-                      <SmallBtn onClick={() => act("base", { article: a.id, step: s.n }).then(() => (setSel(null), refresh()))}>
-                        <IconArrowBackUp className="size-3.5" />
-                        여기서 이어 쓰기
-                      </SmallBtn>
-                    )}
-                    {!a.confirmed && s.n < latest && (
-                      <SmallBtn onClick={() => act("confirm", { article: a.id, step: s.n }).then(refresh)}>
-                        <IconCheck className="size-3.5" />
-                        이 과정으로 확정
-                      </SmallBtn>
-                    )}
-                  </>
-                )
-              )}
-            </span>
-          </div>
-          <h2 className="mb-6 text-2xl font-bold leading-snug text-ink [word-break:keep-all]">{a!.title || s.title}</h2>
-          <div className="text-[15px]">
-            {edit !== null ? (
-              <div className="rounded-2xl border border-violet-400/50 bg-panel-solid px-5 py-4">
-                <Suspense fallback={<Prose text={edit} />}>
-                  <ProseEditor text={edit} onChange={setEdit} onSave={save} className="prose-ko text-ink" />
-                </Suspense>
-              </div>
-            ) : (
-              <Prose text={s.text} />
+            {edit === null && (
+              <span className="ml-auto flex rounded-full border border-line p-0.5">
+                {(["본문", "비교", "미리보기"] as const).map((x) => (
+                  <button
+                    key={x}
+                    disabled={x === "비교" && !prev}
+                    onClick={() => setView(x)}
+                    className={cn("rounded-full px-2.5 py-0.5 transition disabled:opacity-30", v === x ? "bg-ink text-page" : "hover:text-ink")}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </span>
             )}
           </div>
+          <div className="mb-4 flex flex-wrap items-center gap-1.5">
+            {edit !== null ? (
+              <>
+                <SmallBtn onClick={() => setEdit(null)}>취소</SmallBtn>
+                <SmallBtn strong onClick={save}>{saving ? "…" : "저장"}</SmallBtn>
+              </>
+            ) : (
+              a &&
+              !writing && (
+                <>
+                  <SmallBtn onClick={() => (setView("본문"), setEdit(s.text))}>
+                    <IconPencil className="size-3.5" />
+                    편집
+                  </SmallBtn>
+                  {a.kind === "brief" && s.n < latest && (
+                    <SmallBtn onClick={() => act("base", { article: a.id, step: s.n }).then(() => (setSel(null), refresh()))}>
+                      <IconArrowBackUp className="size-3.5" />
+                      여기서 이어 쓰기
+                    </SmallBtn>
+                  )}
+                  {(s.n < latest || v === "미리보기") && confirm}
+                </>
+              )
+            )}
+          </div>
+          {v === "미리보기" && edit === null ? (
+            <article className="overflow-hidden rounded-2xl border border-line bg-[#fbfaf7] text-neutral-900 shadow-xl">
+              {hero && <img src={img(hero, 900)} className="aspect-[3/2] w-full object-cover" />}
+              <div className="px-7 py-7">
+                <h2 className="text-[22px] font-bold leading-snug tracking-tight [word-break:keep-all]">{a!.title || s.title}</h2>
+                <div className="prose-ko mt-5 text-[14.5px] text-neutral-800">
+                  {paragraphs(s.text).map((p_, i, all) => (
+                    <div key={i}>
+                      <p>{p_}</p>
+                      {inlineAt(a!, all, i + 1).map((it) => (
+                        <img key={it.src} src={img(it.src, 900)} className="my-5 w-full rounded-xl" />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ) : (
+            <>
+              <h2 className="mb-6 text-2xl font-bold leading-snug text-ink [word-break:keep-all]">{a!.title || s.title}</h2>
+              <div className="text-[15px]">
+                {edit !== null ? (
+                  <div className="rounded-2xl border border-violet-400/50 bg-panel-solid px-5 py-4">
+                    <Suspense fallback={<Prose text={edit} />}>
+                      <ProseEditor text={edit} onChange={setEdit} onSave={save} className="prose-ko text-ink" />
+                    </Suspense>
+                  </div>
+                ) : (
+                  <Prose text={s.text} prev={v === "비교" ? prev?.text : undefined} />
+                )}
+              </div>
+            </>
+          )}
         </div>
       ) : a?.title ? (
         <h2 className="text-2xl font-bold leading-snug text-ink [word-break:keep-all]">{a.title}</h2>

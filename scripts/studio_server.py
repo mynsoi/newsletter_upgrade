@@ -642,36 +642,6 @@ def act_title(a):
     return {"title": t}
 
 
-def act_retry(a):
-    """다시 쓰기 — 같은 제목·논지·원문·분량으로 새 글(<글>-rN)을 만들어 과정 1부터 다시 돌린다. 앞 글은 그대로 둔다(멘토 2026-10-10: "다시 실행해서 다시 쓸 수도")."""
-    k = safe_id(a["article"])
-    pp = process_path(k)
-    if pp:  # 확정 칼럼 — 과정 기록에서 설정을 만든다. 논지는 이 칼럼을 '씀'으로 가진 위키 주제에서
-        d = json.loads(read(pp))
-        thesis, page = d.get("thesis", ""), ""
-        for f in W.WIKI.glob("*/*.md"):
-            if f"columns/{k}.md" in W.used_in(f):
-                head, body = W.front(read(f))
-                thesis = thesis or sections(body).get("이 글이 말할 것", "")
-                page = f.relative_to(ROOT).as_posix()
-        b = {"label": d["title"], "title": d["title"], "thesis": thesis or d["title"], "sources": d.get("sources", []),
-             **({"from_wiki": page} if page else {})}
-    else:
-        b = {x: y for x, y in json.loads(read(brief_path(k))).items()
-             if x not in ("confirmed", "hero", "inline", "experiment", "topic")}
-    if not b.get("title"):
-        raise ValueError("제목이 아직 없음 — 제목부터 고르세요")
-    base = re.sub(r"-r\d+$", "", k)
-    n = 2
-    while (ROOT / "briefs" / f"{base}-r{n}.json").exists():
-        n += 1
-    nk = safe_id(f"{base}-r{n}")
-    b.update({"topic": nk, "retry_of": k})
-    (ROOT / "briefs" / f"{nk}.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    act_write({"article": nk})
-    return {"article": nk}
-
-
 def act_write(a):
     k = a["article"]
     return start("write", k, PIPE + [brief_path(k).relative_to(ROOT).as_posix()])
@@ -965,7 +935,7 @@ def act_chat(a):
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
-           "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
+           "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart}
 

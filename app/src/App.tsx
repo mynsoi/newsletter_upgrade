@@ -9,7 +9,6 @@ import Library from "@/views/Library";
 import Topics, { newSources } from "@/views/Topics";
 import { ThemeToggle } from "@/components/application/theme/theme-toggle";
 import Articles from "@/views/Articles";
-import Article from "@/views/Article";
 import Flow from "@/views/Flow";
 import { articleTitle, getJobs, getState, img, JOB_NAMES, openLog, stage, subscribeAct, type Job, type State } from "@/lib/api";
 import { hue } from "@/lib/text";
@@ -123,9 +122,7 @@ export default function App() {
             <Library state={state} refresh={refresh} go={go} />
           ) : view === "topics" ? (
             <Topics state={state} refresh={refresh} go={go} />
-          ) : view === "a" && parts[1] && parts[2] && parts[2] !== "chat" ? (
-            <Article key={parts[1]} state={state} id={decodeURIComponent(parts[1])} tab={parts[2]} refresh={refresh} go={go} />
-          ) : view === "a" && parts[1] ? (
+          ) : view === "a" && parts[1] ? ( // 예전 주소 #/a/<글>/<탭>도 대화 화면으로
             <Flow key={parts[1]} state={state} id={decodeURIComponent(parts[1])} refresh={refresh} go={go} />
           ) : (
             <Articles state={state} refresh={refresh} go={go} />

@@ -1,0 +1,103 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import AI_Prompt from "@/components/kokonutui/ai-prompt";
+import AITextLoading from "@/components/kokonutui/ai-text-loading";
+import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
+import { ClaudeMark, MiniMd } from "@/components/studio/bits";
+import { act, getChat, runningJob, type Article as A, type ChatMsg, type State } from "@/lib/api";
+import { keptSentences, paragraphs, sentences } from "@/lib/text";
+import { cn } from "@/lib/utils";
+
+/** 글(대화) 화면이 쓰는 조각 — 예전 글 화면(Article.tsx, 2026-10-11 지움)에서 옮겨 왔다: 본문 그리기 · 진행자 창 · 본문 그림 자리 */
+
+function Spin({ texts }: { texts: string[] }) {
+  return <AITextLoading texts={texts} className="text-sm font-medium" wrapperClassName="p-0" />;
+}
+
+/** 본문 — prev를 주면 앞 과정에 없던 문장에 형광(비교) */
+export function Prose({ text, prev }: { text: string; prev?: string }) {
+  const kept = useMemo(() => (prev !== undefined ? keptSentences(prev, text) : null), [prev, text]);
+  let idx = 0;
+  return (
+    <div className="prose-ko text-ink">
+      {paragraphs(text).map((p, i) => {
+        if (/^#{1,3}\s/.test(p)) return <h4 key={i} className="mt-8 mb-3 text-lg font-semibold text-ink">{p.replace(/^#+\s*/, "")}</h4>;
+        return (
+          <p key={i}>
+            {sentences(p.replace(/^[>*\-\s]+/, "")).map((s, j) => {
+              const k = idx++;
+              const fresh = kept && !kept.has(k);
+              return (
+                <span key={j} className={cn(fresh && "s-add text-ink")}>
+                  {s}{" "}
+                </span>
+              );
+            })}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+export function Director({ a, state, open, onClose, refresh }: { a: A; state: State; open: boolean; onClose: () => void; refresh: () => void }) {
+  const [log, setLog] = useState<ChatMsg[]>([]);
+  const [mode, setMode] = useState("director");
+  const running = runningJob(state.jobs, "chat", a.id);
+  const end = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    let alive = true;
+    const pull = () => getChat(a.id).then((l) => alive && setLog(l));
+    pull();
+    const t = setInterval(pull, 2500);
+    return () => {
+      alive = false;
+      clearInterval(t);
+    };
+  }, [open, a.id, !!running]);
+  useEffect(() => end.current?.scrollIntoView({ behavior: "smooth" }), [log.length, !!running]);
+  return (
+    <Drawer direction="right" open={open} onOpenChange={(o) => !o && onClose()}>
+      <DrawerContent className="z-[70] bg-page border-line data-[vaul-drawer-direction=right]:w-[560px] data-[vaul-drawer-direction=right]:sm:max-w-[560px]">
+        <div className="flex h-full flex-col">
+          <div className="flex items-center gap-3 border-b border-line px-7 py-5">
+            <ClaudeMark className="size-4" />
+            <DrawerTitle className="text-base font-semibold text-ink">진행자</DrawerTitle>
+          </div>
+          <div className="flex-1 space-y-5 overflow-y-auto px-7 py-6">
+            {log.map((m, i) => (
+              <div key={i} className={cn("flex", m.role === "mentor" ? "justify-end" : "justify-start")}>
+                <div
+                  className={cn(
+                    "max-w-[88%] rounded-2xl px-4 py-3 text-[14.5px] leading-relaxed",
+                    m.role === "mentor" && "whitespace-pre-line",
+                    m.role === "mentor" ? "bg-violet-500/20 text-violet-950 dark:text-violet-50" : "border border-line bg-panel-solid text-ink"
+                  )}
+                >
+                  {m.role === "claude" ? <MiniMd text={m.text} /> : m.text}
+                </div>
+              </div>
+            ))}
+            {running && <Spin texts={["진행자", "명령 실행 중", "결과 확인 중"]} />}
+            <div ref={end} />
+          </div>
+          <AI_Prompt
+            className="w-full px-5 pb-5"
+            modes={[{ id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> }]}
+            mode={mode}
+            onModeChange={setMode}
+            onSubmit={(v) => act("chat", { article: a.id, message: v }).then(refresh)}
+          />
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+/** 고른 본문 그림 중 n째 문단 뒤에 들어갈 것 — 문단 첫머리(anchor)로 찾고, 못 찾으면 문단 번호로 */
+export function inlineAt(a: A, paras: string[], n: number) {
+  return a.inlinePicked.filter((it) => {
+    const hit = it.anchor ? paras.findIndex((p) => p.startsWith(it.anchor.slice(0, 20))) + 1 : 0;
+    return (hit || Math.min(it.after, paras.length)) === n;
+  });
+}

@@ -10,6 +10,8 @@ export type FocusCardData = {
   fallback?: React.ReactNode;
   overlay?: React.ReactNode;
   badge?: React.ReactNode;
+  /** 오른쪽 위 — 마우스를 올리면 보이는 버튼(작업실: 글 삭제) */
+  action?: React.ReactNode;
   selected?: boolean;
   onClick?: () => void;
 };
@@ -33,7 +35,7 @@ export const Card = React.memo(
       onMouseLeave={() => setHovered(null)}
       onClick={card.onClick}
       className={cn(
-        "rounded-2xl relative bg-gray-100 dark:bg-neutral-900 overflow-hidden w-full transition-all duration-300 ease-out cursor-pointer",
+        "group rounded-2xl relative bg-gray-100 dark:bg-neutral-900 overflow-hidden w-full transition-all duration-300 ease-out cursor-pointer",
         height,
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]",
         card.selected && "ring-2 ring-violet-400 ring-offset-4 ring-offset-page"
@@ -50,6 +52,7 @@ export const Card = React.memo(
         card.fallback
       )}
       {card.badge && <div className="absolute top-4 left-4 z-10">{card.badge}</div>}
+      {card.action && <div className="absolute top-3 right-3 z-20 opacity-0 transition group-hover:opacity-100">{card.action}</div>}
       <div
         className={cn(
           "absolute inset-0 bg-gradient-to-t to-transparent flex items-end py-6 px-5 transition-opacity duration-300",
