@@ -4,6 +4,7 @@
 - 비밀번호 없음(멘토 결정 2026-10-09). 파이프라인 로직은 여기서 다시 짜지 않고 명령을 백그라운드로 돌리기만 한다.
 - 작업 기록: runs/studio/jobs.json · logs/<작업>.log · chat/<글>.jsonl(진행자 대화) · thumbs/(그림 축소본)
 """
+import base64
 import json
 import re
 import shutil
@@ -304,7 +305,114 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "wiki": wiki_state(fresh)}
+            "collects": collects, "wiki": wiki_state(fresh), "mine": mine_state(jobs)}
+
+
+MINE = ROOT / "runs" / "mine"
+MINE_EXT = {".pdf", ".docx", ".doc", ".hwp", ".hwpx", ".odt", ".rtf", ".txt", ".md"}
+
+
+def mine_state(jobs):
+    """내 주제로 쓰기(scripts/my_topic.py) — 메인 화면 채팅이 읽는다. 요청 · 올린 문서 · 진행 단계 · 고른 원문 · 나머지 후보."""
+    if not MINE.exists():
+        return []
+    cs = W.cards()
+    last = {}
+    for j in sorted(jobs, key=lambda j: j["started"]):
+        if j["kind"] == "mine":
+            last[j["target"]] = j
+    out = []
+    for d in sorted(MINE.glob("m-*/")):
+        k = d.name
+        picks = json.loads(read(d / "picks.json") or "{}")
+        meta = json.loads(read(d / "meta.json") or "{}")
+        j = last.get(k)
+        has_brief = (ROOT / "briefs" / f"{k}.json").exists()
+        if (ROOT / "runs" / "titles0" / k / "astra.md").exists():
+            st = "끝"
+        elif has_brief:
+            st = "제목"
+        elif (d / "pick" / "prompt.md").exists():
+            st = "고르기"
+        elif (d / "candidates" / "prompt.md").exists():
+            st = "후보"
+        else:
+            st = "문서"
+        docs = [x[1].removeprefix("회사 자료 — ") for x in meta.get("docs", [])] or \
+               [re.sub(r"^\d{2}-", "", f.name) for f in sorted((d / "upload").glob("*")) if f.is_file()]
+        b = json.loads(read(ROOT / "briefs" / f"{k}.json") or "{}")
+        now = [W.key(s[0]) for s in b.get("sources", []) if s[0].startswith("originals/")]  # 바꿔 끼운 뒤의 지금 원문(첫째가 중심)
+        info = {c["source"]: {"role": c.get("why", ""), "use": "", "side": c.get("side", "")} for c in picks.get("_candidates", [])}
+        for p_ in [picks.get("center") or {}] + picks.get("support", []):
+            if p_.get("source"):
+                info[p_["source"]] = {**info.get(p_["source"], {}), "role": p_.get("role", ""), "use": p_.get("use", "")}
+        why_out = {x["source"]: x.get("why", "") for x in picks.get("rest", [])}
+
+        def row(s, kind):
+            a_, dt, u = W.src_meta(s) if (SRC / W.rel(s)).is_file() else ("", "", "")
+            return {"source": s, "path": W.rel(s), "who": a_, "url": u, "kind": kind, "note": cs.get(s, {}).get("있었던 일", ""),
+                    "role": info.get(s, {}).get("role", ""), "use": info.get(s, {}).get("use", ""), "side": info.get(s, {}).get("side", ""),
+                    "out": why_out.get(s, "")}
+        picked = [row(s, "중심" if i == 0 else "받침") for i, s in enumerate(now)]
+        rest = [row(c["source"], "후보") for c in picks.get("_candidates", []) if c["source"] not in now]
+        status = j["status"] if j else ("done" if has_brief else "lost")
+        out.append({"id": k, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
+                    "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
+                    "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime})
+    return out
+
+
+def act_mine(a):
+    """메인 화면 채팅 — 멘토가 적은 요청(받은 그대로)과 올린 문서로 my_topic.py --new를 돌린다 (멘토 2026-10-11: "메인페이지에 채팅 ui를 띄워줘")."""
+    msg = str(a.get("message") or "").strip()
+    if not msg:
+        raise ValueError("요청이 비었음")
+    target = str(a.get("target") or "")
+    if target and target not in TARGETS:
+        raise ValueError("잘못된 대상 독자")
+    files = a.get("files") or []
+    if not isinstance(files, list):
+        raise ValueError("잘못된 파일")
+    got, total = [], 0
+    for f in files:  # 쓰기 전에 모두 확인한다
+        name = re.sub(r"[\\/:*?\"<>|\x00-\x1f]", "_", Path(str(f.get("name", ""))).name).strip() or "문서"
+        if Path(name).suffix.lower() not in MINE_EXT:
+            raise ValueError(f"{name}: pdf·docx·hwp·txt·md만 받습니다")
+        try:
+            data = base64.b64decode(str(f.get("data", "")), validate=True)
+        except ValueError:
+            raise ValueError(f"{name}: 파일을 읽지 못함")
+        total += len(data)
+        if total > 50 * 1024 * 1024:
+            raise ValueError("파일이 너무 큼(합쳐 50MB까지)")
+        got.append((name, data))
+    k = safe_id("m-" + time.strftime("%Y%m%d-%H%M%S"))
+    d = MINE / k
+    if d.exists():
+        raise ValueError("방금 보낸 요청이 있음 — 잠시 뒤 다시")
+    (d / "upload").mkdir(parents=True)
+    (d / "request.txt").write_text(msg + "\n", encoding="utf-8")
+    cmd = PY + ["scripts/my_topic.py", "--new", (d / "request.txt").relative_to(ROOT).as_posix(), "--id", k]
+    if target:
+        cmd += ["--target", target]
+    for i, (name, data) in enumerate(got, 1):
+        f = d / "upload" / f"{i:02d}-{name}"
+        f.write_bytes(data)
+        cmd += ["--doc", f.relative_to(ROOT).as_posix()]
+    return start("mine", k, cmd)
+
+
+def act_mine_swap(a):
+    """고른 원문 바꿔 끼우기 — 첫째가 중심. 설정만 다시 쓴다(LLM 없음, 제목·대상 독자·분량은 그대로)."""
+    k = safe_id(a.get("id", ""))
+    srcs = a.get("sources") or []
+    cs = W.cards()
+    if not (MINE / k / "picks.json").exists() or not isinstance(srcs, list) or not srcs or any(s not in cs for s in srcs):
+        raise ValueError("잘못된 원문")
+    r = subprocess.run(PY + ["scripts/my_topic.py", "--brief", k, *dict.fromkeys(srcs)], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+    if r.returncode:
+        raise ValueError((r.stderr or r.stdout)[-500:])
+    return {"id": k}
 
 
 def collect_rounds():
@@ -726,7 +834,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "retry": act_retry, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
-           "wiki-verdict": act_wiki_verdict}
+           "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap}
 
 
 # ---------- 그림 축소본 ----------

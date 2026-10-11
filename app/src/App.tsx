@@ -125,7 +125,7 @@ export default function App() {
           ) : view === "a" && parts[1] ? (
             <Article key={parts[1]} state={state} id={decodeURIComponent(parts[1])} tab={parts[2]} refresh={refresh} go={go} />
           ) : (
-            <Articles state={state} go={go} />
+            <Articles state={state} refresh={refresh} go={go} />
           ))}
       </main>
       <div className="fixed top-5 right-5 z-[90] flex w-[380px] flex-col gap-2">

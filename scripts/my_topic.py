@@ -1,7 +1,7 @@
 """내 주제로 쓰기 — 멘토가 주제(하고 싶은 말)와 문서를 주면, 모아 둔 원문에서 그 주제를 보여 줄 원문을 골라 글 설정을 만든다.
 
 멘토 2026-10-11: "내가 직접 문서랑 주제를 주고, 인사이트를 골라서 글을 생성하게도 하고싶은데"
-사용: python3 -I scripts/my_topic.py --new <주제 파일> [--target 팀장급] [--doc <파일> ...]
+사용: python3 -I scripts/my_topic.py --new <주제 파일> [--target 팀장급] [--doc <파일> ...] [--id m-<이름>]
         → runs/mine/<글>/ (topic.txt · candidates · pick · picks.json) + sources/mine/<글>/NN.md(문서를 글자만 그대로)
         → briefs/<글>.json + 제목 후보(astra, column_pipeline --titles). 작업실 글 목록에 뜨고, 제목을 고르면 과정 1·2·3
       python3 -I scripts/my_topic.py --brief <글> [원문 키 ...]  — 고른 원문을 바꿔 글 설정을 다시 만든다(첫째가 중심, 예: linkedin/03 threads/27)
@@ -69,8 +69,9 @@ def save_docs(k, docs):
             sys.exit(f"{Path(p).name}: 글자가 비었음(그림만 있는 pdf일 수 있음)")
         f = MINE_SRC / k / f"{i:02d}.md"
         f.parent.mkdir(parents=True, exist_ok=True)
-        f.write_text(f"---\nkind: 회사 자료\nname: {Path(p).name}\nadded: {date.today().isoformat()}\n---\n\n{text}\n", encoding="utf-8")
-        out.append([f.relative_to(SRC).as_posix(), f"회사 자료 — {Path(p).name}"])
+        name = re.sub(r"^\d{2}-", "", Path(p).name)  # 작업실이 올린 파일은 NN-<원래 이름>
+        f.write_text(f"---\nkind: 회사 자료\nname: {name}\nadded: {date.today().isoformat()}\n---\n\n{text}\n", encoding="utf-8")
+        out.append([f.relative_to(SRC).as_posix(), f"회사 자료 — {name}"])
     return out
 
 
@@ -159,13 +160,15 @@ def make_brief(k, chosen=None):
     return bp
 
 
-def new(topic_file, target="", docs=()):
+def new(topic_file, target="", docs=(), k=""):
     topic = Path(topic_file).read_text(encoding="utf-8").strip()
     if not topic:
         sys.exit("주제가 비었음")
     if target and target not in W.TARGETS:
         sys.exit(f"대상 독자는 {W.TARGETS} 중 하나")
-    k = "m-" + time.strftime("%Y%m%d-%H%M%S")
+    k = k or "m-" + time.strftime("%Y%m%d-%H%M%S")  # 작업실은 요청을 받을 때 이름을 정해 넘긴다(--id)
+    if not re.match(r"^m-[\w-]+$", k):
+        sys.exit("잘못된 이름: " + k)
     d = MINE_RUNS / k
     d.mkdir(parents=True, exist_ok=True)
     (d / "topic.txt").write_text(topic + "\n", encoding="utf-8")
@@ -322,16 +325,18 @@ def page(k, name, note=""):
 if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["--new"]:
-        rest, target, docs = a[2:], "", []
+        rest, target, docs, k = a[2:], "", [], ""
         while rest:
-            if rest[0] == "--target":
+            if rest[0] == "--id":
+                k, rest = rest[1], rest[2:]
+            elif rest[0] == "--target":
                 target, rest = rest[1], rest[2:]
             elif rest[0] == "--doc":
                 docs.append(rest[1])
                 rest = rest[2:]
             else:
                 sys.exit("모르는 인자: " + rest[0])
-        new(a[1], target, docs)
+        new(a[1], target, docs, k)
     elif a[:1] == ["--brief"]:
         make_brief(a[1], a[2:] or None)
     elif a[:1] == ["--page"]:

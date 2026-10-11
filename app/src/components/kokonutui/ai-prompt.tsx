@@ -33,6 +33,10 @@ interface AIPromptProps {
   placeholder?: string;
   onSubmit?: (value: string, mode: string) => void;
   busy?: React.ReactNode;
+  /** 모드 고르기 옆 — 첨부 버튼 등 (작업실) */
+  tools?: React.ReactNode;
+  /** 입력칸 위 — 첨부한 파일 칩 등 (작업실) */
+  top?: React.ReactNode;
   className?: string;
 }
 
@@ -43,6 +47,8 @@ export default function AI_Prompt({
   placeholder,
   onSubmit,
   busy,
+  tools,
+  top,
   className,
 }: AIPromptProps) {
   const [value, setValue] = useState("");
@@ -71,11 +77,13 @@ export default function AI_Prompt({
       <div className="rounded-2xl bg-black/5 p-1.5 dark:bg-white/5 backdrop-blur-xl">
         <div className="relative">
           <div className="relative flex flex-col">
+            {top && <div className="rounded-t-xl bg-black/5 px-3 pt-3 dark:bg-white/5">{top}</div>}
             <div className="overflow-y-auto" style={{ maxHeight: "400px" }}>
               <Textarea
                 className={cn(
                   "w-full resize-none rounded-xl rounded-b-none border-none bg-black/5 px-4 py-3 placeholder:text-black/70 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-white/5 dark:text-white dark:placeholder:text-white/40 text-[15px] leading-relaxed",
-                  "min-h-[48px]"
+                  "min-h-[48px]",
+                  top && "rounded-t-none"
                 )}
                 onChange={(e) => {
                   setValue(e.target.value);
@@ -135,6 +143,7 @@ export default function AI_Prompt({
                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
+                  {tools}
                   {busy && (
                     <>
                       <div className="mx-0.5 h-4 w-px bg-black/10 dark:bg-white/10" />

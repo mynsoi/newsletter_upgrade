@@ -2,6 +2,7 @@ import { FocusCards } from "@/components/ui/focus-cards";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Chip } from "@/components/studio/bits";
 import { articleTitle, img, stage, type Article, type State } from "@/lib/api";
+import MineChat from "@/views/MineChat";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +33,7 @@ export function Cover({ a, className }: { a: Article; className?: string }) {
   );
 }
 
-export default function Articles({ state, go }: { state: State; go: (h: string) => void }) {
+export default function Articles({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const list = [...state.articles].sort((a, b) => {
     const ca = a.confirmed ? 0 : 1,
       cb = b.confirmed ? 0 : 1;
@@ -40,15 +41,16 @@ export default function Articles({ state, go }: { state: State; go: (h: string) 
   });
   return (
     <div className="min-h-full">
-      <div className="relative h-[300px] overflow-hidden border-b border-line">
+      <div className="relative overflow-hidden border-b border-line">
         <BackgroundBeams />
-        <div className="relative z-10 mx-auto flex h-full max-w-6xl items-end px-12 pb-12">
-          <h1 className="text-6xl font-bold tracking-tight text-ink">
-            글 <span className="text-ink-3 tabular-nums">{list.length}</span>
-          </h1>
+        <div className="relative z-10 mx-auto max-w-4xl px-12 pt-20 pb-12">
+          <MineChat state={state} refresh={refresh} go={go} />
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-12 py-12">
+        <h1 className="mb-10 text-5xl font-bold tracking-tight text-ink">
+          글 <span className="text-ink-3 tabular-nums">{list.length}</span>
+        </h1>
         <FocusCards
           height="h-[22rem]"
           cards={list.map((a) => ({

@@ -84,6 +84,33 @@ export type WikiTopic = {
 };
 export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; log: string[] };
 
+/** 내 주제로 쓰기 — 메인 화면 채팅 (scripts/my_topic.py) */
+export type MineRow = {
+  source: string;
+  path: string;
+  who: string;
+  url: string;
+  kind: "중심" | "받침" | "후보";
+  note: string;
+  role: string;
+  use: string;
+  side: string;
+  out: string;
+};
+export type MineRun = {
+  id: string;
+  message: string;
+  docs: string[];
+  target: string;
+  status: "running" | "done" | "failed" | "lost";
+  stage: "문서" | "후보" | "고르기" | "제목" | "끝";
+  job: string;
+  picked: MineRow[];
+  rest: MineRow[];
+  article: string;
+  at: number;
+};
+
 export type State = {
   wiki: Wiki | null;
   library: Source[];
@@ -91,6 +118,7 @@ export type State = {
   articles: Article[];
   jobs: Job[];
   collects: CollectRound[];
+  mine?: MineRun[];
 };
 
 export type ChatMsg = { role: "mentor" | "claude"; text: string; at: number; cost?: number };
@@ -172,6 +200,7 @@ export const JOB_NAMES: Record<string, string> = {
   "wiki-lint": "다시 거르기",
   "wiki-pick": "주제 고르기",
   "wiki-verdict": "판정",
+  mine: "원문 고르기",
 };
 
 export type JobLog = { text: string; live: { name: string; text: string }[]; status?: string; elapsed?: number };
