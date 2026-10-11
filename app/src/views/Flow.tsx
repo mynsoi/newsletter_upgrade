@@ -180,6 +180,13 @@ function Timeline({
         );
       else out.push(<Ai key={`a${i}`} label="그때 고른 원문"><PastPicks center={t.center} support={t.support} onSource={onSource} /></Ai>);
     });
+    // 이 글이 말할 것 — 원문을 고를 때 같이 정한 한 문장(멘토 2026-10-11 "무슨말을 하려고 하는지 너무 뜬구름") · 쓰기 전에 보고 고칠 수 있게
+    if (a?.fromMine && a.thesis && a.thesis !== run.message && run.status !== "running")
+      out.push(
+        <Ai key="point" label="이 글이 말할 것">
+          <div className="rounded-2xl border border-violet-400/40 bg-violet-500/[0.07] px-5 py-3.5 text-[15.5px] font-medium leading-relaxed text-ink">{a.thesis}</div>
+        </Ai>
+      );
     if ((run.status === "failed" || run.status === "lost") && !job)
       out.push(
         <button key="stop" onClick={() => openLog(run.job)} className="pl-1 text-left text-sm text-rose-600 hover:underline dark:text-rose-300">

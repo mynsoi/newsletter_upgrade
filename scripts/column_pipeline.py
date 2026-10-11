@@ -58,7 +58,19 @@ OUT_RULE = "출력: 제목과 본문만 주세요. 파일을 만들거나 명령
 
 
 # 기준 피드백 속 따옴표 문장은 지난 글의 문장이다 — 새 글에 그대로 들어갔다(2026-10-11 "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠.")
-NO_COPY = "[기준 피드백] 속 따옴표 문장은 지난 글의 문장을 고친 예시입니다. 어떻게 고치라는 뜻만 따르고, 그 문장을 이 원고에 옮겨 쓰지 마세요."
+NO_COPY = ("[기준 피드백] 속 따옴표 문장과 인용된 대목은 지난 글의 문장입니다(고친 예시이거나 멘토가 걸린다고 짚은 대목). "
+           "어떻게 쓰라는 뜻만 따르고, 그 문장을 이 원고에 옮겨 쓰지 마세요.")
+# 사례 설명 — 멘토 2026-10-11 "누구도 본적없는 사례를 … 좀더 단순하고 명확하게 설명하고 넘어가는게 좋을거같네" · "너무 말이 뭉뚱그려서만 얘기하니까"
+# (비교 C·C2에서 효과를 본 지시 그대로 — wiki-eval/run_compare_1011c.py)
+CASE_RULE = ("사례는 처음 듣는 독자도 바로 알아듣게 씁니다. 원문에 나오는 회사·행사·사람의 이름과 규모·결과 숫자는 그대로 밝히고(원문에 없는 이름은 지어내지 않습니다), "
+             "무슨 일이 있었고 무엇이 달라졌는지만 쉬운 말로 짧게 설명하고 넘어갑니다. 장치나 절차의 세부는 말할 것에 꼭 필요한 하나만 씁니다.")
+
+
+def standing_block():
+    """멘토가 지난 글들에 한 말(standing-feedback) — 받은 그대로. 2026-10-11부터 초안·재작성에도 넘긴다
+    (그 전엔 과정 3에만 들어가 글의 뼈대에 닿지 않았다 — 멘토가 짚은 대목이 초안에서 생겨 재작성에서 커졌다)."""
+    fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8").strip()
+    return "[멘토가 지난 글들을 읽고 한 말 — 원문 그대로] 이 글에도 지킵니다.\n" + fb.replace("[멘토 피드백 — 원문 그대로]\n", "") + "\n\n" + NO_COPY
 
 
 def body(path):
@@ -78,8 +90,9 @@ def mine_lines(b):
     """내 주제로 쓰기(scripts/my_topic.py) — 말할 것은 멘토가 정했고 원문은 그 말을 보여 주는 사례다. 원문 글쓴이의 주장이 글을 이끌지 않게."""
     docs = [p for p, _ in b["sources"] if p.startswith("mine/")]
     return [
-        f"이 글이 말할 것(멘토가 한 말 그대로): {b['thesis']}",
-        "이 글이 말할 것은 멘토가 정했습니다. 아래 원문들은 그 말을 보여 주는 사례이고, [원문 1]이 글을 이끄는 중심 사례입니다. "
+        f"주제(멘토 요청 — 받은 그대로): {b.get('request', b['thesis'])}",
+        f"이 글이 말할 것: {b['thesis']}\n이 문장을 글 앞쪽과 맺음에서 쉬운 말로 분명히 말합니다.",
+        "아래 원문들은 그 말을 보여 주는 사례이고, [원문 1]이 글을 이끄는 중심 사례입니다. "
         "원문마다 이 글에서 맡는 몫을 적어 두었습니다. 원문 글쓴이의 주장이 이 글의 주장을 대신하지 않게 하고, 중심 사례 하나를 끝까지 읽고 깊게 풀어 주세요"
         "(장면은 아래 3번처럼 회사 장면으로 옮깁니다). [원문 2] 이후는 맡은 몫만큼만 씁니다.",
         *(["[회사 자료]는 멘토가 넣은 회사 문서입니다. 적힌 사실만 쓰고, 문장을 그대로 옮기지 않고, 자료에 없는 회사 제도·일정·장면을 지어내지 않습니다."] if docs else []),
@@ -120,6 +133,8 @@ def draft_prompt(b):
         "구독료·계정 수, 고객 영업, 혼자 하는 작업)을 독자에게 일반화하지 말고, 거기서 얻은 교훈을 독자가 회사에서 겪는 장면"
         "(팀·상사·보고·결재·회의·동료와의 협업)으로 옮겨 보여 줍니다. 글을 이끄는 장면은 이 회사 장면이고, 원문의 이야기는 그 장면을 받쳐 주는 재료입니다. "
         "옮긴 장면은 '~한 상황을 떠올려 보세요'처럼 가정으로 쓰고, 원문 속 일을 어느 회사에서 실제로 있었던 일처럼 꾸미지는 않습니다.",
+        CASE_RULE,
+        standing_block(),
         OUT_RULE,
     ]
     parts += source_blocks(b) if mine else [f"=== [원문 {i}] {d} ===\n" + body(SRC / p) for i, (p, d) in enumerate(b["sources"], 1)]
@@ -134,7 +149,7 @@ def r4_prompt(b, draft):
         "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다. 제목은 바꾸지 마세요.",
     ]
     parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
-    parts += [LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
+    parts += [standing_block(), LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.", "=== 원고 ===\n" + draft]
     return "\n\n".join(parts)
 
 
@@ -198,6 +213,21 @@ def stage(name, jobs):
     return res
 
 
+def ensure_point(bp, b):
+    """내 주제로 쓰기 — 말할 것 한 문장이 없거나(예전 글) 바꿔 끼우기로 중심 원문이 바뀌었으면 쓰기 직전에 다시 정한다(Claude)."""
+    import my_topic as MT
+    center = next((p for p, _ in b["sources"] if p.startswith("originals/")), "")
+    if not center or (b.get("point") and b.get("point_for") == center):
+        return
+    request = b.get("request") or b["thesis"]
+    point = MT.make_point(request, center, b["dir"] / "_point")
+    if point:
+        b.update({"request": request, "point": point, "point_for": center, "thesis": point})
+        meta = {x: y for x, y in b.items() if x != "dir"}
+        Path(bp).write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+        print("말할 것:", point, flush=True)
+
+
 def titles_first(args):
     """--titles <설정> ... [--message <파일>] — 메시지는 파일 내용 그대로 astra에게 (멘토 2026-10-10)."""
     import title_candidates as tc
@@ -246,6 +276,8 @@ def main(paths):
 
     def mk_draft(k):
         b = briefs[k]
+        if b.get("from_mine"):
+            ensure_point(ROOT / "briefs" / f"{k}.json", b)
         f = b["dir"] / "draft.md"
         if f.exists() and f.stat().st_size > 200:
             return f.read_text(encoding="utf-8")

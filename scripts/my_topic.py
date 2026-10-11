@@ -114,22 +114,43 @@ def pick_prompt(topic, docs, cands, ask_target, follow=False):
         f"멘토가 정한 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,500자 이하)을 씁니다. 아래 [후보 원문]은 1차로 고른 후보입니다. "
         "원문을 끝까지 읽고 이 글에 쓸 원문을 정해 주세요.",
         "정할 것:\n"
-        "- center: 글을 이끌 중심 원문 하나 — [멘토 주제]가 말하는 것을 가장 구체적인 일로 보여 주는 원문\n"
+        "- center: 글을 이끌 중심 원문 하나 — [멘토 주제]가 말하는 것을 가장 구체적인 일로 보여 주는 원문. "
+        "비슷하면 회사·사람·행사 이름과 숫자가 원문에 있어 처음 듣는 독자도 바로 알아들을 수 있는 쪽을 먼저 고릅니다(이름이 없다는 이유로 빼지는 않습니다)\n"
         "- support: 중심을 받칠 원문. 없어도 되고 많아야 둘입니다. 중심과 다른 몫(반대편, 다른 자리의 사례)을 할 때만 넣습니다. "
         "한 편에 사례를 여럿 끼우면 무엇을 말하는지 흐려집니다.\n"
         "- 고른 원문마다 role(이 글에서 맡는 몫 한 줄)과 use(원문에서 가져올 사실 한두 줄 — 원문 문장을 옮기지 않고 사실만)\n"
-        "- rest: 고르지 않은 후보마다 왜 이번에 빼는지 한 줄"
+        "- rest: 고르지 않은 후보마다 왜 이번에 빼는지 한 줄\n"
+        "- point: 이 글이 말할 것 한 문장 — 독자가 한 번 듣고 그대로 따라 말할 수 있게, 중심 원문 글쓴이의 주장 안에서, [멘토 주제]에 답하게. "
+        "'기준·체계·구조·문화·역량' 같은 뭉뚱그린 말 대신 일하는 장면의 말로"
         + ("\n- audience: 이 글을 가장 먼저 읽어야 할 자리 — 팀장급·사수급·신입사원·전 직원 중 하나" if ask_target else ""),
         "판단은 원문에 실제로 있는 일로 합니다. 원문에 없는 일을 덧붙이지 않습니다. "
         "고른 이유를 'AI 시대에는 ~이 중요하다' 같은 일반론으로 쓰지 말고 원문 속 일로 씁니다.",
         "출력: JSON 하나만. {\"center\": {\"source\": \"...\", \"role\": \"...\", \"use\": \"...\"}, \"support\": [{\"source\": \"...\", \"role\": \"...\", \"use\": \"...\"}], "
-        "\"rest\": [{\"source\": \"...\", \"why\": \"...\"}]" + (", \"audience\": \"전 직원\"" if ask_target else "") + "}"
+        "\"rest\": [{\"source\": \"...\", \"why\": \"...\"}], \"point\": \"...\"" + (", \"audience\": \"전 직원\"" if ask_target else "") + "}"
         "  — source는 [후보 원문]의 [ ] 안 그대로.",
         W.ANSWER_ONLY, W.GUARD,
         "=== [멘토 주제] ===\n" + topic,
         *([docs_block(docs)] if docs else []),
         "=== [후보 원문] ===\n" + blocks,
     ])
+
+
+def point_prompt(request, center):
+    """말할 것 한 문장 — 쓰기 직전에 다시 정할 때(바꿔 끼우기로 중심이 바뀜 · 예전 글). 비교 C·C2에서 쓴 지시 그대로."""
+    card = W.cards().get(W.key(center), {})
+    return "\n\n".join([
+        f"사내 뉴스레터 칼럼을 쓰기 전에, 이 글이 말할 것을 한 문장으로 정해 주세요. 독자: {W.READER}",
+        f"주제(멘토 요청): {request}",
+        *([f"원문 글쓴이가 하는 말: {card['글쓴이가 하는 말']}"] if card else []),
+        "조건: 독자가 한 번 듣고 그대로 따라 말할 수 있는 쉬운 한 문장. 원문 글쓴이의 주장 안에서, 멘토 요청의 주제에 답하는 문장. "
+        "'기준·체계·구조·문화·역량' 같은 뭉뚱그린 말 대신 일하는 장면의 말로. 원문에 없는 사실을 더하지 않습니다.",
+        "출력: 그 한 문장만. 따옴표나 설명 없이. " + W.ANSWER_ONLY, W.GUARD,
+        "=== [원문] ===\n" + W.body(center),
+    ])
+
+
+def make_point(request, center, run_dir):
+    return W.claude(Path(run_dir), point_prompt(request, center)).strip().strip('"“”')
 
 
 def json_of(raw):
@@ -156,7 +177,10 @@ def make_brief(k, chosen=None):
         sys.exit(f"카드가 없는 원문: {bad}")
     sources = [[W.rel(p["source"]), W.label(W.rel(p["source"]))] for p in picked] + meta["docs"]
     roles = {W.rel(p["source"]): p.get("role", "") + (f" — 가져올 사실: {p['use']}" if p.get("use") else "") for p in picked}
-    b = {"topic": k, "label": topic.splitlines()[0][:80], "thesis": topic, "sources": sources, "roles": roles,
+    point = picks.get("point", "").strip()
+    b = {"topic": k, "label": topic.splitlines()[0][:80], "thesis": point or topic, "request": topic,
+         **({"point": point, "point_for": W.rel(picks["center"]["source"])} if point else {}),  # 바꿔 끼워 중심이 바뀌면 쓰기 직전에 다시 정함
+         "sources": sources, "roles": roles,
          "target": W.target_of(meta.get("target") or picks.get("audience", "")),
          "from_mine": d.relative_to(ROOT).as_posix()}
     bp = ROOT / "briefs" / f"{k}.json"
