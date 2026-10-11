@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>내 주제로 고르기</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" />
+<style>
+  :root { --canvas:#ffffff; --surface-soft:#f7f7f7; --hairline:#dddddd; --hairline-soft:#ebebeb;
+          --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a; --muted-soft:#929292; --primary:#ff385c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter, "Noto Sans KR", -apple-system, system-ui, sans-serif; word-break:keep-all; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 32px 80px; }
+  header { padding:56px 0 8px; }
+  h1 { font-size:30px; font-weight:700; margin:0 0 18px; }
+  table.sum { width:100%; border-collapse:collapse; background:var(--surface-soft); border-radius:14px; overflow:hidden; }
+  table.sum th { text-align:left; width:130px; font-size:13px; font-weight:600; color:var(--muted); padding:12px 18px; vertical-align:top; }
+  table.sum td { font-size:15px; line-height:1.7; padding:12px 18px 12px 0; }
+  table.sum tr + tr th, table.sum tr + tr td { border-top:1px solid var(--hairline-soft); }
+  .quote { font-size:16px; font-weight:600; }
+  table.sum a { color:var(--ink); text-decoration:none; font-weight:600; } table.sum a:hover { text-decoration:underline; }
+  h2 { font-size:22px; font-weight:700; margin:44px 0 6px; }
+  h2 small { font-size:14px; font-weight:500; color:var(--muted); margin-left:8px; }
+  .g { border-top:1px solid var(--hairline); padding:20px 0; }
+  .top { display:flex; gap:10px; align-items:baseline; }
+  .tag { font-size:12.5px; font-weight:700; color:var(--muted); background:var(--surface-soft); border-radius:6px; padding:2px 8px; }
+  .tag.hi { color:var(--primary); background:#fff1f3; }
+  .side { font-size:12.5px; color:var(--muted-soft); }
+  .src, .src a { font-size:12.5px; color:var(--muted-soft); text-decoration:none; }
+  .src a:hover { text-decoration:underline; }
+  .role { font-size:17.5px; font-weight:600; line-height:1.6; margin:8px 0 10px; }
+  dl { margin:0; display:grid; grid-template-columns:96px 1fr; gap:6px 12px; font-size:14.5px; line-height:1.7; }
+  dt { color:var(--muted); } dd { margin:0; color:var(--body); }
+  ol.titles { font-size:17px; line-height:2; padding-left:24px; margin:10px 0 0; }
+  details { margin-top:40px; border-top:1px solid var(--hairline); padding-top:16px; }
+  summary { font-size:18px; font-weight:700; cursor:pointer; }
+  table.rest { width:100%; border-collapse:collapse; margin-top:10px; }
+  table.rest td { border-top:1px solid var(--hairline-soft); padding:12px 8px; vertical-align:top; font-size:14.5px; line-height:1.65; }
+  table.rest td.src { width:200px; }
+  .why { color:var(--muted); }
+  .note { font-size:14.5px; line-height:1.8; color:var(--body); }
+  .check { border:1px solid var(--hairline); border-radius:14px; padding:14px 22px; margin:40px 0 0; font-size:14.5px; line-height:1.8; color:var(--body); }
+  .check b { color:var(--ink); } .check ul { margin:6px 0 0; padding-left:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>내 주제로 원문 고르기</h1>
+  <table class="sum">
+    <tr><th>멘토 주제</th><td class="quote">곧 우리회사에서 self 평가가 있는데 그거에 대한 인사이트를 주고 싶어. ai를 사용해서 보통 일을 하게되는데 직원들이 자기 평가를 한다면 결과물만 적을게 아니라 어떻게 문제를 해결했는지를 적어줘야한다는거지.</td></tr>
+    <tr><th>중심 원문</th><td><a href="https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk" target="_blank" rel="noopener">linkedin/29 · Jason Song</a> — 개발자가 아닌 채용 담당자가 AI와 인사 시스템을 만든 사례입니다. &#x27;시스템을 만들었다&#x27;는 결과 뒤에서 사람이 어떤 판단을 했는지, 그 이유를 남겨 둔 것이 점검 자리에서 어떻게 쓰였는지를 보여 줍니다.</td></tr>
+    <tr><th>받침</th><td><a href="https://www.threads.com/@snowy_ill/post/DdHKg1wG3m7" target="_blank" rel="noopener">threads/27 · @snowy_ill</a> — 반대편 사례입니다. 이직해 인수인계를 받는 실무자가 AI로 한 일을 드러내지 않고 숨기려 합니다.</td></tr>
+    <tr><th>회사 자료</th><td>없음</td></tr>
+    <tr><th>대상 독자</th><td>전 직원</td></tr>
+    <tr><th>후보 → 고름</th><td>카드 59편 → 후보 16편 → 2편</td></tr>
+  </table>
+</header>
+
+<h2>고른 원문 <small>이 글에서 맡는 몫 · 있었던 일 · 가져올 사실</small></h2>
+<article class="g">
+  <div class="top"><span class="tag hi">중심</span><span class="src"><a href="https://www.linkedin.com/posts/butcher86_sjqsokudqtxu-ainativehr-hrtech-activity-7506527932371271680-RaRk" target="_blank" rel="noopener">linkedin/29 · Jason Song</a></span><span class="side">보여 줌</span></div>
+  <p class="role">개발자가 아닌 채용 담당자가 AI와 인사 시스템을 만든 사례입니다. &#x27;시스템을 만들었다&#x27;는 결과 뒤에서 사람이 어떤 판단을 했는지, 그 이유를 남겨 둔 것이 점검 자리에서 어떻게 쓰였는지를 보여 줍니다.</p>
+  <dl>
+    <dt>있었던 일</dt><dd>알서포트의 비개발자 채용 담당자는 AI 파트너 ‘클라라’와 7개월 동안 채용·인사 운영 시스템 ‘Bridge Now’를 만들었다. 회사의 AI 개발 기준으로 점검하자, 실무상 필요해서 넣었던 기능 중에는 기준을 충족하거나 요구 수준을 넘어선 것도 있었다. 부족하다고 지적받은 사항은 모두 보완했으며, 현재 3,646건의 테스트를 돌리고 있다.</dd>
+    <dt>가져올 사실</dt><dd>AI는 조직 이동 기능에서 일부 구성원을 예외로 두자고 제안했습니다. 담당자는 조직이 움직이면 모두 따라가야 하고 예외를 두면 소속 없는 사람이 생긴다는 실무 기준으로 이 제안을 막았습니다. AI가 버그로 보고 고치려던 부분도 멈추게 했는데, 본인이 예전에 일부러 그렇게 설계한 것이었습니다. / 회사의 AI 개발 기준 점검에서는 나중에 질문을 받으면 답할 수 있도록 쌓아 둔 변경 이력과 관리자 기록이 이미 기준에 맞았습니다. 본인은 만드는 일보다 제대로 도는지 확인하고 왜 그렇게 만들었는지 남기는 일이 어려웠다고 말합니다.</dd>
+  </dl>
+</article><article class="g">
+  <div class="top"><span class="tag">받침</span><span class="src"><a href="https://www.threads.com/@snowy_ill/post/DdHKg1wG3m7" target="_blank" rel="noopener">threads/27 · @snowy_ill</a></span><span class="side">반대편</span></div>
+  <p class="role">반대편 사례입니다. 이직해 인수인계를 받는 실무자가 AI로 한 일을 드러내지 않고 숨기려 합니다.</p>
+  <dl>
+    <dt>있었던 일</dt><dd>평소 업무에 AI를 많이 쓰던 글쓴이는 이직 후 해당 업무를 5-6년 해 온 사수에게 인수인계를 받고 있다. 사수가 복사·붙여넣기 같은 수작업을 많이 하는 모습을 보며 AI로 자동화할 여지가 크다고 생각했지만, 기존 방식을 따라야 할지 자신이 AI에 너무 의존하는 것인지 고민했다.</dd>
+    <dt>가져올 사실</dt><dd>5~6년 이 업무를 해 온 사수는 복사·붙여넣기 같은 수작업을 많이 합니다. 글쓴이는 이를 AI로 자동화할 수 있다고 봤지만, 하라는 대로 하지 않는다는 잔소리를 들을까 걱정합니다. 결국 몰래 혼자 자동화하고 여유를 누리겠다고 합니다.</dd>
+  </dl>
+</article>
+
+<h2>제목 후보 <small>astra · 고르면 과정 1·2·3</small></h2>
+<ol class="titles"><li>AI로 일했는데, 내 성과는 어떻게 설명할까요?</li><li>자기평가를 결과물 목록으로 끝내지 마세요</li><li>&#x27;자동화했습니다&#x27; 다음에 써야 할 말</li><li>AI의 제안을 거절한 것도 내 기여일까요?</li><li>만들었다는 말에 가려진 검증의 수고</li><li>훌륭한 결과물이 내 역할까지 설명해 주지는 않습니다</li><li>문제를 푼 과정을 쓰면 내 실력이 보입니다</li><li>이번 자기평가에는 &#x27;왜 그렇게 했는지&#x27;를 적어 보세요</li></ol>
+
+<div class="check"><b>보여 드리기 전 점검</b><ul><li>고른 2편의 &#x27;가져올 사실&#x27;을 원문과 대조했습니다. 모두 원문에 있습니다. 예외 제안을 막은 일, &#x27;버그 같다&#x27;며 고치려던 걸 멈춘 일, 회사 기준 점검 때 쌓아 둔 변경 이력·관리자 기록, 몰래 자동화가 그 사실입니다.</li><li>1차 후보 16편은 원문 속 사람이 한 몫(문제 정의·검증·버린 판단·기록)으로 골랐습니다. &#x27;평가&#x27;라는 낱말로 끌린 원문(linkedin/05 모델 평가 기준 등)은 없습니다.</li><li>제목 후보 8개는 질문형 2(1·4), 권유형 2(2·8), 서술형 4로 한 모양에 쏠리지 않았습니다. 2·8번에는 &#x27;자기평가&#x27;라는 말이 들어 있습니다.</li><li>주제가 평가와 닿습니다. 창간호는 &#x27;평가 운영은 같은 실의 다른 팀 소관&#x27;이라는 이유로 반려됐습니다. 이 글은 평가 제도·기준이 아니라 &#x27;내가 한 일을 어떻게 보여 주나&#x27;에 머물러야 같은 걱정을 피합니다.</li><li>글쓰기(과정 1·2·3)는 아직 돌리지 않았습니다. 시험 칼럼 3편이 &#x27;아예 맘에 안 듬&#x27;이었고 원인을 아직 모릅니다. 같은 과정을 지나면 같은 문제가 나올 수 있습니다.</li><li>이번에는 회사 자료가 없습니다. 문서를 넣으면 그 글자가 Claude·astra로 나갑니다.</li></ul></div>
+
+<details>
+  <summary>나머지 후보 14편 — 1차 이유 · 이번에 뺀 이유</summary>
+  <table class="rest"><tr><td class="src"><a href="https://www.linkedin.com/posts/byeongchan-park-249472367_%EC%B1%84%EB%84%90%ED%86%A1-%EB%A9%94%EC%9D%B8-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%84%9C%EB%B2%84-ci-%EA%B0%9C%EC%84%A0%EA%B8%B0-activity-7451781703150477312-1tA0" target="_blank" rel="noopener">linkedin/03 · Byeongchan Park</a></td><td><span class="side">보여 줌</span> CI 시간을 37분에서 15분으로 줄였습니다. 수정안과 반복 실험은 AI가 했고, 사람은 느려지는 원인을 판단하고 풀 문제와 작업 순서를 정했습니다. 결과 숫자만 적으면 사람이 한 핵심인 문제 정의와 순서 결정이 사라집니다.<br><span class="why">이번에 뺀 이유 — 검사 시간을 37분에서 15분으로 줄였고, 50노드에서 20노드로 줄이자는 판단과 순서를 사람이 정했습니다. 다만 중심과 같은 &#x27;AI는 실험, 사람은 판단&#x27; 몫이고, CI·노드 같은 개발 현장 이야기라 사무·현장 독자에게 멉니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/%EA%B4%91%ED%98%B8-%EC%9D%B4-791a1a156_2%ED%8E%B8-%EC%9D%B4-%EA%B8%80%EC%9D%80-%EC%A0%9C%EA%B0%80-%EC%86%90%EC%9C%BC%EB%A1%9C-%EC%8D%BC%EC%8A%B5%EB%8B%88%EB%8B%A4-1%ED%8E%B8-%EC%9D%B4%EC%A0%9C-ai%EA%B0%80-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%84-activity-7508330848145022976-sady" target="_blank" rel="noopener">linkedin/17 · 이광호</a></td><td><span class="side">보여 줌</span> AI로 수백 개 기업 정보를 모은 뒤 직접 살펴 절반 이상을 버렸습니다. 남은 고객사에는 당장 시작할 수 있는 한 가지에 집중한 제안 메일을 직접 썼습니다. &#x27;제안서를 몇 건 보냈다&#x27;는 결과 뒤에 있는, 고르고 버린 판단이 곧 문제를 푼 방식입니다.<br><span class="why">이번에 뺀 이유 — AI로 모은 기업 목록의 절반 이상을 버리고 지금 시작할 수 있는 제안 하나에 집중했습니다. 사람이 고르고 버린 판단이라는 몫이 중심과 겹칩니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/ssam-www_%EC%A7%80%EB%82%9C-5%EA%B0%9C%EC%9B%94%EA%B0%84-%EC%A7%84%ED%96%89%ED%95%B4-%EC%98%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%93%A4%EC%9D%84-ai%EC%99%80-%ED%95%A8%EA%BB%98-%ED%9A%8C%EA%B3%A0-%ED%95%B4%EB%B3%B4%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7503753615577198593-SHL-" target="_blank" rel="noopener">linkedin/08 · 임삼열</a></td><td><span class="side">보여 줌</span> 5개월 동안 AI와 일하며 남긴 기록으로 당시 판단의 이유와 결과를 되짚고, 회고를 다시 쓸 수 있는 지식으로 쌓았습니다. 어떻게 풀었는지를 적으려면 판단 이유를 평소에 남겨 두어야 한다는 것을 보여 줍니다.<br><span class="why">이번에 뺀 이유 — 기록으로 판단 이유를 되짚었다는 내용은 있습니다. 그러나 개인 프로젝트 회고와 조직 Agent에 대한 상상으로 흘러, 글을 끌고 갈 구체적인 한 가지 일이 없습니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/yesleocan_%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EB%8A%94-%EC%9D%B4%EC%A0%9C-%ED%95%84%EC%9A%94-%EC%97%86%EB%8B%A4%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%93%B0%EB%8A%94-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%80-%EA%B0%99%EC%9D%80-%ED%99%94%EB%A9%B4%EC%9D%84-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%99%80-activity-7506502816438509568-XUZw" target="_blank" rel="noopener">linkedin/24 · Leo Heo</a></td><td><span class="side">보여 줌</span> 수백 개 프로젝트를 납품하면서 화면을 그리는 일보다 제안·조율, 지킬 것과 포기할 것 정하기, 설득에 더 많은 시간을 썼습니다. 그리고 그 판단을 성과의 언어로 설명하라고 말합니다. 눈에 보이는 결과물보다 그 뒤의 판단 과정을 적어야 한다는 말과 맞습니다.<br><span class="why">이번에 뺀 이유 — 목표·판단·지표 순으로 말하고 버린 안을 함께 두라는 조언은 적는 법으로 쓸모가 있습니다. 하지만 사례가 아니라 디자이너에게 주는 처방이라, 넣으면 글이 훈계로 기웁니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/%EC%9A%A9%EC%8A%B9-%EC%9C%A4-66458a313_%EC%9C%A0%ED%8A%9C%EB%B8%8C-%ED%8E%B8%EC%A7%91%EC%9D%84-ai%EC%97%90%EA%B2%8C-%EB%A7%A1%EA%B8%B4-%EB%91%90-%EB%8B%AC-activity-7510504130793148416-SNey" target="_blank" rel="noopener">linkedin/31 · 윤용승</a></td><td><span class="side">보여 줌</span> 유튜브 편집을 AI에 맡겼지만, 처음에는 보기 어려웠던 결과물을 두 달 동안 직접 챙겨 개선했습니다. 지금은 작업 방향과 금지 사항을 정하고 완성본을 검수합니다. &#x27;영상 15개, 비용 절감&#x27;이라는 결과 뒤에서 사람이 한 일은 방향 설정과 검수입니다.<br><span class="why">이번에 뺀 이유 — 방향과 금지할 일을 정하고 검수한 일은 있습니다. 하지만 글의 중심이 편집 비용 절감과 편집자 계약 종료, 신입이 필요 없어질까 하는 걱정이라 자기 평가 이야기와 결이 다릅니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/simplifier_carvit-%EB%A1%9C%EA%B3%A0%EB%A5%BC-%EC%A0%95%ED%95%9C-%EA%B3%BC%EC%A0%95-activity-7512329269935796224-Hu00" target="_blank" rel="noopener">linkedin/30 · Sunghee Han (한성희)</a></td><td><span class="side">보여 줌</span> AI가 로고 후보 4개를 바로 그렸지만, 대표가 &#x27;전문가의 제작 방식을 먼저 살펴보라&#x27;고 짚은 뒤 작업 순서가 바뀌고 결과물이 크게 달라졌습니다. 완성된 결과물에는 보이지 않는 접근 방식의 전환이 사람의 기여입니다.<br><span class="why">이번에 뺀 이유 — 본문이 &#x27;자세히 보기&#x27;에서 잘려 있습니다. 로고 후보 4개를 대표의 한마디로 멈췄다는 것 말고는 쓸 사실이 거의 없습니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/%EC%9A%A9%EC%8A%B9-%EC%9C%A4-66458a313_%EC%9A%94%EC%A6%98-ai%ED%95%9C%ED%85%8C-%EC%9D%BC%EC%9D%84-%EC%8B%9C%ED%82%AC-%EB%95%8C-%ED%83%80%EC%9D%B4%ED%95%91-%EB%8C%80%EC%8B%A0-%EB%A7%90%EB%A1%9C-%ED%95%A9%EB%8B%88%EB%8B%A4-typeless%EB%9D%BC%EB%8A%94-activity-7510156884461506561-o941" target="_blank" rel="noopener">linkedin/19 · 윤용승</a></td><td><span class="side">보여 줌</span> 엑셀 3개를 합쳐 달라고만 요청했다가 원하지 않은 열이 붙고 파일명과 시트명이 뒤바뀐 결과를 받았습니다. 상황·지킬 조건·원하는 결과를 정리해 다시 요청하자 맞는 파일이 나왔습니다. 같은 &#x27;엑셀 합치기&#x27;라도 조건을 어떻게 정했는지가 해결 과정입니다.<br><span class="why">이번에 뺀 이유 — 엑셀 3개 합치기를 조건을 적어 다시 요청한 일은 음성 입력 앱을 소개하며 든 요청 요령입니다. 어떻게 문제를 풀었는지를 평가에 적는 이야기로 잇기 어렵습니다.</span></td></tr><tr><td class="src"><a href="https://www.threads.com/@silrobag/post/DUdEDfBgR60" target="_blank" rel="noopener">threads/09 · @silrobag</a></td><td><span class="side">보여 줌</span> 노무사가 의뢰인이 ChatGPT에서 가져온 가짜 판례를 겪은 뒤, 국가법령정보센터 API를 AI 비서에 연결해 판례가 실제로 있는지 30초 만에 확인하게 했습니다. 문제를 겪고 확인 방법을 만든 과정 자체가 자기 평가에 적을 내용입니다.<br><span class="why">이번에 뺀 이유 — 가짜 판례를 겪은 뒤 법령정보센터 API로 확인하게 만든 일은 구체적입니다. 하지만 글의 대부분이 API 연결 순서 안내이고, &#x27;비개발자가 AI로 만든 도구&#x27;라는 몫이 중심과 겹칩니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/jehokim_%EC%95%84%EC%B9%A8%EC%97%90-%EC%9E%90%EB%A6%AC%EC%97%90-%EC%95%89%EC%9C%BC%EB%A9%B4-%EC%8B%9C%EB%8F%99-%EA%B1%B0%EB%8A%94-%EA%B2%83%EC%9D%B4-%EC%9D%BC%EC%9D%B4%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%97%90%EA%B2%8C-%EC%8B%9C%EB%8F%99%EC%9D%84-%EA%B1%B4%EB%8B%A4%EB%8A%94-activity-7508011767336251393-2WiH" target="_blank" rel="noopener">linkedin/26 · Jaeho Kim</a></td><td><span class="side">반대편</span> AI에 짧은 지시만 넣어도 만족스러운 결과가 나오자, 어려운 문제를 풀고 있다는 착각에 빠진 건 아닌지 불안해졌습니다. 결과가 쉽게 나올수록 내가 어떤 문제를 어떻게 풀었는지 따로 따져 봐야 한다는 것을 보여 줍니다.<br><span class="why">이번에 뺀 이유 — 일을 시작하기가 쉬워지면서 어려운 문제를 푼다는 착각에 빠지지 않을까 하는 개발자의 개인 소회라, 자기 평가로 잇기에는 거리가 있습니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/jehokim_%ED%81%B4%EB%A1%9C%EB%93%9C-%EB%AA%87-%EA%B0%9C%EB%82%98-%EC%93%B0%EB%8B%88-%EC%A7%80%EC%9D%B8%EB%93%A4%EC%9D%84-%EB%A7%8C%EB%82%98%EB%A9%B4-%EB%AC%BC%EC%96%B4%EB%B4%85%EB%8B%88%EB%8B%A4-%EB%AC%BC%EB%A1%A0-2%EB%A7%8C-%EC%9B%90%EC%A7%9C%EB%A6%AC%EA%B0%80-activity-7505113798547021824-uXpM" target="_blank" rel="noopener">linkedin/22 · Jaeho Kim</a></td><td><span class="side">반대편</span> AI에 큰돈을 쓰면서 그만한 가치를 만들고 있는지 의문이 들었습니다. 대충 요청하고 마음에 들지 않으면 다시 시도하는 반복은 슬롯머신에 돈을 쓰는 셈일 수 있다고 돌아봅니다. 문제를 정하지 않고 결과만 뽑으면 적을 과정도 남지 않는다는 반대편입니다.<br><span class="why">이번에 뺀 이유 — AI 구독료와 슬롯머신처럼 다시 돌리는 습관에 대한 소회입니다. 반대편 몫은 더 가까운 자리의 threads/27이 맡습니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/louieha_ai%EC%97%90%EA%B2%8C-%EC%99%84%EC%A0%84%ED%9E%88-%EB%98%91%EA%B0%99%EC%9D%80-%EC%A7%88%EB%AC%B8%EC%9D%84-%EC%97%B4-%EB%B2%88-%EB%8D%98%EC%A1%8C%EB%8D%94%EB%8B%88-%EB%8B%B5%EC%9D%B4-%EC%97%AC%EC%84%AF-%EB%B2%88-%EB%B0%94%EB%80%8C%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4-activity-7511662518533029888-ARKp" target="_blank" rel="noopener">linkedin/15 · 하길우</a></td><td><span class="side">보여 줌</span> 같은 질문을 열 번 해서 답이 여섯 번 달라지자, 답을 살펴 AI가 집계 대상·기간·평균 방식을 다르게 잡았다는 것을 찾아냈습니다. AI가 낸 숫자를 어떻게 확인했는지도 문제 해결 과정이라는 것을 보여 줍니다.<br><span class="why">이번에 뺀 이유 — 같은 질문에 답이 여섯 번 달라진 원인(가중평균과 단순평균 등)을 찾은 검증 사례입니다. 하지만 시맨틱 레이어 같은 데이터 환경 설계로 이어져 1,500자에 담기에는 설명이 깁니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/ilsun-chang-087325393_%EC%9A%B4%EC%98%81-dba-%EC%97%85%EB%AC%B4%EB%A5%BC-ai%EC%97%90%EA%B2%8C-%EB%A7%A1%EA%B2%A8%EB%B3%B4%EB%A9%B4-%EC%96%B4%EB%94%94%EA%B9%8C%EC%A7%80-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C-activity-7507932995752931328-deru" target="_blank" rel="noopener">linkedin/06 · IlSun Chang</a></td><td><span class="side">보여 줌</span> AI가 장애 원인을 찾고도 분석을 계속하자, 글쓴이가 운영 정상화를 먼저 하자고 요청해 복구 절차로 전환시켰습니다. &#x27;장애 복구&#x27;라는 결과 뒤에는 언제 멈추고 무엇을 할지 정한 사람의 판단이 있습니다.<br><span class="why">이번에 뺀 이유 — AI에게 분석을 멈추고 정상화부터 하자고 한 판단이 있습니다. 하지만 Oracle 장애를 재현한 실험이라 비개발 독자에게는 용어 부담이 큽니다.</span></td></tr><tr><td class="src"><a href="https://www.threads.com/@chris_gomdori/post/DbaDIR3DZWE" target="_blank" rel="noopener">threads/22 · @chris_gomdori</a></td><td><span class="side">보여 줌</span> 7년차 공무원이 하루 수십 번 공문에서 기한과 붙임을 찾는 반복을 문제로 짚고, 할 일·기한·처리 방법을 카드 한 장에 정리하는 도구를 만들었습니다. &#x27;도구를 만들었다&#x27;는 결과보다 어떤 불편을 문제로 정했는지가 적을 내용이라는 것을 보여 줍니다.<br><span class="why">이번에 뺀 이유 — 공문에서 기한과 붙임을 찾는 반복을 카드 한 장으로 줄인 도구는 사무직에 가깝습니다. 하지만 내용이 도구 소개와 배포 안내 위주라 판단 과정이 드러나지 않고, &#x27;만든 사람&#x27; 몫이 중심과 겹칩니다.</span></td></tr><tr><td class="src"><a href="https://www.linkedin.com/posts/activity-7437712739642503168-ccDB" target="_blank" rel="noopener">linkedin/09 · Joel B.</a></td><td><span class="side">반대편</span> 자동 채점을 통과한 AI 수정안의 절반이 실제 담당자 검토에서 거절됐고, 핵심 기능이 제대로 작동하지 않은 경우도 적지 않았습니다. &#x27;통과했다&#x27;는 결과만 보고 판단하면 실제로 문제를 해결한 수준을 과대평가하게 된다는 반대편입니다.<br><span class="why">이번에 뺀 이유 — 자동 채점을 통과한 AI 수정안의 절반이 담당자 검토에서 거절됐다는 연구입니다. 결과만 보면 과대평가된다는 점을 보여 주지만, 영어로 된 벤치마크 연구라 독자와 멉니다.</span></td></tr></table>
+</details>
+
+<details>
+  <summary>이렇게 골랐습니다</summary>
+  <div class="note">
+    <p>1. 후보 — Claude가 원문 카드 59편 전부(주제 지도 판정과 상관없이)를 멘토 주제와 맞춰 봅니다. 키워드가 겹치는지가 아니라, 원문 속 사람이 한 일이 주제가 말하는 것을 보여 주는지로 고릅니다. 그렇게 하지 않아 생긴 일(반대편)도 후보에 넣습니다.</p>
+    <p>2. 고르기 — 후보 원문을 통째로 읽고 중심 1편과 받침 0~2편을 정합니다. 한 편에 사례를 여럿 끼우면 무엇을 말하는지 흐려져서입니다(기준 4).</p>
+    <p>3. 글 설정 — 멘토 주제를 받은 그대로 "이 글이 말할 것"에 넣고, 초안에는 "말할 것은 멘토가 정했고 원문은 그 말을 보여 주는 사례"라고 알립니다. 주제 지도의 판정·상태는 바꾸지 않습니다.</p>
+  </div>
+</details>
+</div>
+</body>
+</html>

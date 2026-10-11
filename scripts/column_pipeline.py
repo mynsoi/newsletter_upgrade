@@ -70,15 +70,41 @@ def ref(k):
     return f"=== 유정식의 경영일기 {k} ===\n" + t
 
 
+def mine_lines(b):
+    """내 주제로 쓰기(scripts/my_topic.py) — 말할 것은 멘토가 정했고 원문은 그 말을 보여 주는 사례다. 원문 글쓴이의 주장이 글을 이끌지 않게."""
+    docs = [p for p, _ in b["sources"] if p.startswith("mine/")]
+    return [
+        f"이 글이 말할 것(멘토가 한 말 그대로): {b['thesis']}",
+        "이 글이 말할 것은 멘토가 정했습니다. 아래 원문들은 그 말을 보여 주는 사례이고, [원문 1]이 글을 이끄는 중심 사례입니다. "
+        "원문마다 이 글에서 맡는 몫을 적어 두었습니다. 원문 글쓴이의 주장이 이 글의 주장을 대신하지 않게 하고, 중심 사례 하나를 끝까지 읽고 깊게 풀어 주세요"
+        "(장면은 아래 3번처럼 회사 장면으로 옮깁니다). [원문 2] 이후는 맡은 몫만큼만 씁니다.",
+        *(["[회사 자료]는 멘토가 넣은 회사 문서입니다. 적힌 사실만 쓰고, 문장을 그대로 옮기지 않고, 자료에 없는 회사 제도·일정·장면을 지어내지 않습니다."] if docs else []),
+    ]
+
+
+def source_blocks(b):
+    roles, out, i = b.get("roles", {}), [], 0
+    for p, d in b["sources"]:
+        if p.startswith("mine/"):
+            out.append(f"=== [회사 자료] {d} ===\n" + body(SRC / p))
+            continue
+        i += 1
+        role = f"(이 글에서 맡는 몫: {roles[p]})\n" if roles.get(p) else ""
+        out.append(f"=== [원문 {i}] {d} ===\n" + role + body(SRC / p))
+    return out
+
+
 def draft_prompt(b):
+    mine = bool(b.get("from_mine"))
     parts = [
         "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요.",
         f"제목: {b['title']}\n제목은 이대로 씁니다.",
         f"독자: {READER}",
         *([f"이번 글의 대상 독자: {target_line(b)}"] if target_line(b) else []),
-        f"이 글이 말할 것: {b['thesis']}",
-        "아래 [원문 1]이 이 글의 중심 재료입니다. 끝까지 읽고, 그 안의 이야기와 말을 재료로 삼아 깊게 풀어 주세요(장면은 아래 3번처럼 회사 장면으로 옮깁니다). "
-        "[원문 2] 이후는 보조 재료입니다.",
+        *(mine_lines(b) if mine else [
+            f"이 글이 말할 것: {b['thesis']}",
+            "아래 [원문 1]이 이 글의 중심 재료입니다. 끝까지 읽고, 그 안의 이야기와 말을 재료로 삼아 깊게 풀어 주세요(장면은 아래 3번처럼 회사 장면으로 옮깁니다). "
+            "[원문 2] 이후는 보조 재료입니다."]),
         "쓰는 방식은 아래 [문체 참고]의 필자(경영 컨설턴트 유정식)가 쓰듯이 써 주세요. 장면이나 질문으로 열고, 재료 하나를 깊게 풀고, "
         "필자의 생각을 분명하게 말하고 맺는 흐름입니다. [문체 참고] 글들의 내용이나 사례는 가져오지 마세요.",
         LEN_RULE,
@@ -92,8 +118,7 @@ def draft_prompt(b):
         "옮긴 장면은 '~한 상황을 떠올려 보세요'처럼 가정으로 쓰고, 원문 속 일을 어느 회사에서 실제로 있었던 일처럼 꾸미지는 않습니다.",
         OUT_RULE,
     ]
-    for i, (p, d) in enumerate(b["sources"], 1):
-        parts.append(f"=== [원문 {i}] {d} ===\n" + body(SRC / p))
+    parts += source_blocks(b) if mine else [f"=== [원문 {i}] {d} ===\n" + body(SRC / p) for i, (p, d) in enumerate(b["sources"], 1)]
     for k in DRAFT_REFS:
         parts.append("[문체 참고] " + ref(k))
     return "\n\n".join(parts)
