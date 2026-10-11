@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
-import { IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconUsers, IconX } from "@tabler/icons-react";
+import { IconArrowRight, IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconRefresh, IconUsers, IconX } from "@tabler/icons-react";
+import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Chip, SiteIcon } from "@/components/studio/bits";
-import { act, type Job, type MineRow, type MineRun, type State } from "@/lib/api";
+import { act, type Job, type MineRow, type MineRun, type State, type WikiTopic } from "@/lib/api";
+import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 /** 내 주제로 쓰기 — 메인 화면은 들어올 때마다 새 채팅(멘토 2026-10-11: "새 들어갈때마다 초기화", "채팅하던거는 왼쪽으로").
@@ -70,7 +72,7 @@ export function useAttach() {
   return { files, clear: () => setFiles([]), drag, drop, tool, chips, encode: () => Promise.all(files.map(toB64)) };
 }
 
-export default function NewChat({ refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
+export default function NewChat({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [target, setTarget] = useState("auto");
   const at = useAttach();
   const send = async (v: string) => {
@@ -81,6 +83,7 @@ export default function NewChat({ refresh, go }: { state: State; refresh: () => 
   };
   return (
     <div {...at.drop} className={cn("rounded-3xl transition", at.drag && "ring-2 ring-violet-400/70 ring-offset-8 ring-offset-transparent")}>
+      <Suggest state={state} go={go} />
       <AI_Prompt
         className="w-full py-2"
         modes={TARGET_MODES}
@@ -91,6 +94,68 @@ export default function NewChat({ refresh, go }: { state: State; refresh: () => 
         tools={at.tool}
         top={at.chips}
       />
+    </div>
+  );
+}
+
+/** 추천 주제 — 채팅창 위 (멘토 2026-10-11: "글 작성할때 추천 주제를 먼저 채팅창위에 몇개 띄워주면 좋겠네").
+ *  주제 지도에서 Claude가 '쓸 만함'으로 거른 주제 중 아직 안 쓴 것. 4개씩, '다른 추천'으로 다음 4개(전부 돌아가며).
+ *  누르면 주제 지도의 '이 주제로'와 같다 — 글 설정을 만들고 대화 화면으로(미리 뽑아 둔 제목 후보가 바로 뜸). */
+const PER = 4;
+function Suggest({ state, go }: { state: State; go: (h: string) => void }) {
+  const list = (state.wiki?.topics ?? [])
+    .filter((x) => x.verdict === "쓸 만함" && x.status === "쓸 수 있음")
+    .sort((a, b) => b.sources.length - a.sources.length);
+  const [at, setAt] = useState(0);
+  const [pending, setPending] = useState("");
+  if (!list.length) return null;
+  const start = (at * PER) % list.length;
+  const shown = Array.from({ length: Math.min(PER, list.length) }, (_, i) => list[(start + i) % list.length]);
+  const pick = async (x: WikiTopic) => {
+    if (pending) return;
+    setPending(x.page);
+    try {
+      const r = await act<{ article: string }>("wiki-pick", { page: x.page });
+      go(`#/a/${r.article}`);
+    } finally {
+      setPending("");
+    }
+  };
+  return (
+    <div className="mb-3">
+      <div className="grid grid-cols-2 gap-2.5">
+        {shown.map((x) => (
+          <button
+            key={x.page}
+            onClick={() => pick(x)}
+            className="group relative overflow-hidden rounded-2xl border border-line bg-panel-solid/80 px-4 py-3.5 text-left backdrop-blur transition hover:-translate-y-0.5 hover:border-violet-400/50"
+          >
+            <span
+              className="pointer-events-none absolute inset-0 opacity-40 transition group-hover:opacity-70"
+              style={{ background: `radial-gradient(120% 140% at 0% 0%, hsl(${hue(x.title)} 70% 45% / .25), transparent 60%)` }}
+            />
+            <span className="relative flex items-center gap-1.5">
+              {(x.audience || "").split("·").filter(Boolean).map((a) => (
+                <Chip key={a} className="bg-page/60 px-2 py-0 text-[11px] text-ink-2">{a.trim()}</Chip>
+              ))}
+              {pending === x.page ? (
+                <AITextLoading texts={["여는 중"]} className="ml-auto text-xs" wrapperClassName="p-0 ml-auto" />
+              ) : (
+                <IconArrowRight className="ml-auto size-4 text-ink-3 opacity-0 transition group-hover:opacity-100" />
+              )}
+            </span>
+            <span className="relative mt-2 line-clamp-2 text-[14px] leading-snug text-ink [word-break:keep-all]">{x.title}</span>
+          </button>
+        ))}
+      </div>
+      {list.length > PER && (
+        <div className="mt-2 flex justify-end">
+          <button onClick={() => setAt((n) => n + 1)} className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs text-ink-3 transition hover:bg-soft hover:text-ink">
+            <IconRefresh className="size-3.5" />
+            다른 추천
+          </button>
+        </div>
+      )}
     </div>
   );
 }
