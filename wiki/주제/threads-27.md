@@ -4,8 +4,8 @@ title: 이직한 직원이 5~6년 해 온 사수의 복사·붙여넣기 수작�
 verdict: 쓸 만함
 audience: 사수급·신입사원·팀장급
 center: threads/27
-status: 씀
-used_in: [briefs/w-20261011-013856.json, columns/2026-10-11-w-20261011-013856.md]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-11
 ---
 

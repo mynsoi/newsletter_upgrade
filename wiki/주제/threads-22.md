@@ -4,8 +4,8 @@ title: 7년차 지방공무원이 공문에서 기한·할 일을 찾는 반복�
 verdict: 쓸 만함
 audience: 전 직원
 center: threads/22
-status: 씀
-used_in: [briefs/w-20261011-013836.json, columns/2026-10-11-w-20261011-013836.md]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-11
 ---
 
