@@ -227,12 +227,12 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
 function Logo() {
   const { open } = useSidebar();
   return (
-    <div className="flex items-center gap-3 px-1.5 py-1">
+    <a href="#/articles" aria-label="메인" className="flex items-center gap-3 rounded-lg px-1.5 py-1 transition hover:opacity-80">
       <div className="size-6 shrink-0 rounded-lg bg-gradient-to-br from-violet-400 via-fuchsia-400 to-cyan-300 shadow-lg shadow-violet-500/30" />
       <motion.span animate={{ opacity: open ? 1 : 0 }} className="whitespace-nowrap text-sm font-semibold text-ink">
-        칼럼 작업실
+        SK E&amp;S AX 칼럼
       </motion.span>
-    </div>
+    </a>
   );
 }
 
