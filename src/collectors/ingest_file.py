@@ -2,7 +2,9 @@
 
 파일 형식 ①: YAML frontmatter + 본문 (.md)
   ---
-  source_id: knowledge-wharton   # sources.yaml에 등재된 id
+  source_id: knowledge-wharton   # sources.yaml에 등재된 id. 비우면 url로 자동 판별
+                                 # (collectors.source_match — 판별 실패 시 manual)
+  tier: T3                       # 선택 — manual일 때 등급(기본 T5). 판별된 소스 tier와 다르면 오류
   url: https://...
   title: "..."
   published: 2026-08-24          # 선택
@@ -30,24 +32,21 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from db import ROOT, connect, migrate  # noqa: E402
+from db import connect, migrate  # noqa: E402
 from collectors.html_list import pdf_to_text  # noqa: E402
+from collectors.source_match import (  # noqa: E402
+    MANUAL_ID, SourceResolveError, find_source, resolve_source)
 from collectors.store import store_document  # noqa: E402
 from internal_sync import parse_frontmatter  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-SOURCES_PATH = ROOT / "config" / "sources.yaml"
-REQUIRED = ("source_id", "url", "title")
+REQUIRED = ("url", "title")
 
 
 def load_source(source_id: str) -> dict | None:
-    data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8"))
-    for s in data.get("sources", []):
-        if s["id"] == source_id:
-            return s
-    return None
+    return find_source(source_id)
 
 
 def ingest(path: Path, conn) -> str:
@@ -70,10 +69,23 @@ def ingest(path: Path, conn) -> str:
     if missing:
         print(f"  오류  {path.name} — frontmatter 필수 필드 누락: {', '.join(missing)}")
         return "error"
-    source = load_source(str(meta["source_id"]))
-    if source is None:
-        print(f"  오류  {path.name} — sources.yaml에 없는 source_id: {meta['source_id']}")
-        return "error"
+    tier = str(meta.get("tier") or "") or None
+    if not meta.get("source_id") or str(meta["source_id"]) == MANUAL_ID:
+        try:
+            source, note = resolve_source(str(meta["url"]), meta.get("source_id") or None, tier)
+        except SourceResolveError as e:
+            print(f"  오류  {path.name} — {e}")
+            return "error"
+        print(f"  소스  {path.name} — {note}")
+    else:
+        source = load_source(str(meta["source_id"]))
+        if source is None:
+            print(f"  오류  {path.name} — sources.yaml에 없는 source_id: {meta['source_id']}")
+            return "error"
+        if tier and tier != source["tier"]:
+            print(f"  오류  {path.name} — tier 불일치: {source['id']}의 tier는 "
+                  f"{source['tier']}인데 {tier}가 지정됨")
+            return "error"
     if source.get("status") == "excluded":
         print(f"  오류  {path.name} — 제외(excluded)된 소스: {meta['source_id']}")
         return "error"
