@@ -99,30 +99,6 @@ def load(k):
             "confirmed": conf, "pub_date": date.today().isoformat()}
 
 
-_TAG_KEYWORDS = {  # main web/server.py와 같은 목록
-    "AI 생산성": ["생산성", "productivity", "효율", "시간 절감"],
-    "AI 도구": ["도구", "tool", "코파일럿", "copilot", "챗봇", "chatbot"],
-    "조직 변화": ["조직 변화", "변화 관리", "change management", "전환"],
-    "리더십": ["리더", "leader", "경영", "management", "매니저"],
-    "협업": ["협업", "collaboration", "팀워크", "소통"],
-    "조직 문화": ["문화", "culture", "심리적 안전", "psychological safety"],
-    "인재 관리": ["인재", "talent", "채용", "hiring", "온보딩"],
-    "자동화": ["자동화", "automation", "워크플로", "workflow"],
-    "데이터·분석": ["데이터", "data", "분석", "analytics", "측정"],
-    "의사결정": ["의사결정", "decision", "판단", "거버넌스"],
-    "교육·성장": ["교육", "학습", "learning", "스킬", "skill", "역량"],
-    "디지털 전환": ["디지털 전환", "DX", "digital transformation"],
-    "보상·평가": ["보상", "평가", "성과", "KPI", "performance"],
-    "조직 역량": ["흡수역량", "역량", "capability", "absorptive"],
-}
-
-
-def tags(a):
-    text = " ".join([a["title"]] + [b.get("text", "") for b in a["blocks"]]).lower()
-    hit = [t for t, kws in _TAG_KEYWORDS.items() if any(kw.lower() in text for kw in kws)]
-    return hit[:5] or ["AI & 업무"]
-
-
 # ---------- HTML ----------
 
 def inline(s):
@@ -159,8 +135,7 @@ def render(a, files, body_class=""):
         refs = f'<section class="references">\n    <h3>참고자료</h3>\n    <ul>\n{items}\n    </ul>\n  </section>'
     rep = {
         "{{ title }}": e(a["title"]), "{{ kicker }}": e(cfg["kicker"]), "{{ issue_label }}": e(a["pub_date"]),
-        "{{ hero_html }}": hero, "{{ tags_html }}": "".join(f'<span class="tag">{e(t)}</span>' for t in tags(a)),
-        "{{ author }}": e(cfg["author"]), "{{ pub_date }}": e(a["pub_date"]), "{{ tldr_html }}": "",
+        "{{ hero_html }}": hero, "{{ tldr_html }}": "",
         "{{ body_html }}": "\n    ".join(body), "{{ references_html }}": refs, "{{ footer }}": cfg["footer"],
         "{{ body_class }}": body_class,
     }

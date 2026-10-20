@@ -372,6 +372,8 @@ body {
 }
 
 /* --- mentor-lab 칼럼 (scripts/publish.py) --- */
+/* 태그·발행인 줄(meta-bar)을 뺐으므로 머리 그림과 본문 사이 여백을 본문 위에 둔다 */
+.article-page > .article-body:first-child { padding-top: 40px; }
 /* 머리 그림이 없는 글 — 제목만 */
 .plain-title {
   font-size: 34px;

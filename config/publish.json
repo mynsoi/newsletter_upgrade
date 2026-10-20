@@ -1,9 +1,8 @@
 {
  "_설명": "발행 설정 (scripts/publish.py). web_base_url은 Vercel 배포 주소가 정해지면 채운다(끝 슬래시 없이, 예: https://xxx.vercel.app) — 비어 있으면 메일의 '웹에서 보기' 링크가 빠진다. web_path_token은 추측할 수 없는 경로용이라 바꾸면 이미 보낸 메일의 링크가 끊긴다(main 브랜치와 같은 값).",
- "web_base_url": "",
+ "web_base_url": "https://newsletter-upgrade-three.vercel.app",
  "web_path_token": "qvauxq7a4vlgiaey",
  "kicker": "Insight Weekly",
- "author": "기업문화AX팀",
  "footer": "Insight Weekly · 기업문화AX팀 발행<br>매주 목요일 발행합니다.",
  "subject_prefix": "[Insight Weekly] ",
  "sender": "Insight Weekly <noreply@example.com>",
