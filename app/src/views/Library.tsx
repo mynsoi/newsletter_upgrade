@@ -45,10 +45,12 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
     return [...m.entries()].sort((a, b) => (ORDER.indexOf(a[0]) + 99) % 99 - (ORDER.indexOf(b[0]) + 99) % 99);
   }, [state.library]);
 
-  // 고른 분류(등급) 안의 소스별 개수 — 많은 순. 소스가 하나뿐인 분류(경영일기)는 하위 탭을 안 띄운다
+  // 고른 분류(등급) 안의 소스별 개수 — 많은 순. 소스가 하나뿐인 분류(경영일기)는 하위 탭을 안 띄운다.
+  // 수기 등록(manual)은 발행처가 제각각이라 탭을 만들지 않는다(분류의 '전체'에는 보임)
   const srcs = useMemo(() => {
     const m = new Map<string, { name: string; n: number }>();
-    for (const s of state.library) if (group(s) === site) m.set(s.site, { name: s.siteName, n: (m.get(s.site)?.n ?? 0) + 1 });
+    for (const s of state.library)
+      if (group(s) === site && s.site !== "manual") m.set(s.site, { name: s.siteName, n: (m.get(s.site)?.n ?? 0) + 1 });
     return [...m.entries()].sort((a, b) => b[1].n - a[1].n);
   }, [state.library, site]);
 
@@ -154,7 +156,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
             value={src}
             onChange={setSrc}
             tabs={[
-              { value: "all", title: <span className="tabular-nums">전체 {srcs.reduce((n, [, v]) => n + v.n, 0)}</span> },
+              { value: "all", title: <span className="tabular-nums">전체 {state.library.filter((s) => group(s) === site).length}</span> },
               ...srcs.map(([k, v]) => ({ value: k, title: <span className="tabular-nums">{v.name} {v.n}</span> })),
             ]}
           />

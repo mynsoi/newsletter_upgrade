@@ -104,8 +104,10 @@ def sync(since=None, only=None, limit=None, prune=False):
     sql = f"SELECT id, source_id, tier, url, title, author, published_at, body FROM documents WHERE {w} ORDER BY published_at DESC NULLS LAST, id"
     if limit:
         sql += f" LIMIT {int(limit)}"
-    new = upd = 0
+    new = upd = moved = 0
     seen = set()
+    cards = ROOT / "wiki" / "cards.json"
+    carded = set(json.loads(cards.read_text(encoding="utf-8")).keys()) if cards.exists() else set()
     with connect() as c:
         for r in c.execute(sql, args):
             doc_id, site = r[0], r[1]
@@ -113,6 +115,12 @@ def sync(since=None, only=None, limit=None, prune=False):
                 continue
             seen.add(doc_id)
             rel = idx.get(doc_id)
+            if rel and rel.split("/")[1] != site and rel.removeprefix("originals/").removesuffix(".md") not in carded:
+                # DB에서 소스가 바뀐 문서(수기 등록 → 정식 소스, scripts/remap_manual.py) — 새 소스 폴더로 옮긴다.
+                # 주제 지도 카드가 이미 있는 원문은 카드가 옛 경로를 가리키니 그대로 둔다.
+                (SRC / rel).unlink(missing_ok=True)
+                rel = None
+                moved += 1
             if not rel:
                 rel = f"originals/{site}/{next_no(site, idx.values()):04d}.md"
                 idx[doc_id] = rel
@@ -127,7 +135,6 @@ def sync(since=None, only=None, limit=None, prune=False):
         if prune and not since and not only and not limit:
             w_all, a_all = where(sc)
             alive = {x[0] for x in c.execute(f"SELECT id FROM documents WHERE {w_all}", a_all)}
-            carded = set(json.loads((ROOT / "wiki" / "cards.json").read_text(encoding="utf-8")).keys()) if (ROOT / "wiki" / "cards.json").exists() else set()
             for doc_id, rel in list(idx.items()):
                 k = rel.removeprefix("originals/").removesuffix(".md")
                 if doc_id not in alive and k not in carded:
@@ -135,7 +142,7 @@ def sync(since=None, only=None, limit=None, prune=False):
                     del idx[doc_id]
                     gone.append(rel)
     INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
-    print(f"받음: 새 문서 {new} · 다시 씀 {upd} · 범위 안 {len(seen)}" + (f" · 지움 {len(gone)}" if prune else ""))
+    print(f"받음: 새 문서 {new} · 다시 씀 {upd} · 범위 안 {len(seen)}" + (f" · 소스 바뀜 {moved}" if moved else "") + (f" · 지움 {len(gone)}" if prune else ""))
 
 
 def status():
