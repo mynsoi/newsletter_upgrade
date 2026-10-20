@@ -2,3 +2,7 @@ _workspace/
 __pycache__/
 runs/studio/thumbs/
 trash/
+# Supabase에서 받아 온 원문(scripts/db_sources.py) — 저작권 있는 원문이라 저장소에 올리지 않는다. 경영일기(문체 참고)만 git에.
+sources/originals/*
+!sources/originals/infuture/
+sources/db_index.json

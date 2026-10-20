@@ -130,7 +130,7 @@ def library(full=False):
         text = re.sub(r"^## \d+/\d+\s*$", "", body, flags=re.M).strip()
         rel = f.relative_to(SRC).as_posix()
         rows.append({
-            "path": rel, "site": f.parent.name, "siteName": SITES.get(f.parent.name, f.parent.name),
+            "path": rel, "site": f.parent.name, "siteName": m.get("site_name") or SITES.get(f.parent.name, f.parent.name), "tier": m.get("tier", ""),
             "url": m.get("url", ""), "author": m.get("author", ""), "headline": m.get("headline", ""),
             "title": m.get("title", ""), "date": m.get("date", ""),
             "reactions": m.get("likes") or m.get("reactions") or "", "chars": nospace(text),

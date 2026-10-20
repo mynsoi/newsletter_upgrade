@@ -20,6 +20,7 @@
 - 넣기·거르기·판정이 끝날 때마다 wiki/만 git에 커밋한다.
 """
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -40,6 +41,7 @@ STYLE_ONLY = {"infuture"}
 TARGETS = ("팀장급", "사수급", "신입사원", "전 직원")  # column_pipeline.TARGETS와 같은 이름
 VERDICTS = ("쓸 만함", "보통", "뺌")
 WORKERS = 8
+BATCH = int(os.environ.get("WIKI_BATCH", "40"))  # 넣기 한 번에 넣을 원문 수 상한
 # Windows에선 npm이 깐 codex가 codex.cmd라 이름만으로는 못 찾는다 — 전체 경로로 (리눅스는 그대로)
 CODEX = shutil.which("codex") or "codex"
 CLAUDE = shutil.which("claude") or "claude"
@@ -161,7 +163,7 @@ def label(r):
     """원문 하나를 부르는 말 — 사이트, 작성자, 날짜 (글 설정의 sources 두 번째 칸)."""
     t = (SRC / r).read_text(encoding="utf-8")
     m = dict(re.findall(r"^(\w+): (.*)$", t.split("---", 2)[1], re.M)) if t.startswith("---") else {}
-    site = {"threads": "Threads", "linkedin": "LinkedIn"}.get(r.split("/")[1], r.split("/")[1])
+    site = m.get("site_name") or {"threads": "Threads", "linkedin": "LinkedIn"}.get(r.split("/")[1], r.split("/")[1])
     who = (m.get("headline") or m.get("author") or "").strip("'\"")
     return ", ".join(x for x in [site, who, m.get("date", "").strip("'\"")] if x)
 
@@ -364,8 +366,15 @@ def apply_filter(res, ts, cs):
 
 # ---------- 넣기 · 다시 거르기 ----------
 
+def date_of(rel):
+    t = (SRC / rel).read_text(encoding="utf-8")
+    m = re.search(r"^date: (.*)$", t.split("---", 2)[1], re.M) if t.startswith("---") else None
+    return m.group(1).strip() if m else ""
+
+
 def ingest(paths):
-    paths = paths or backlog()
+    # 한 번에 BATCH편까지만, 최근 글부터 — 묶기·거르기가 한 번에 보는 양을 지키려고 (DB 원문은 수백 편, scripts/db_sources.py)
+    paths = paths or sorted(backlog(), key=date_of, reverse=True)[:BATCH]
     if not paths:
         print("남은 원문 0편")
         return

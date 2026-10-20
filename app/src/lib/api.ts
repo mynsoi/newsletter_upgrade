@@ -2,6 +2,7 @@ export type Source = {
   path: string;
   site: string;
   siteName: string;
+  tier?: string;
   url: string;
   author: string;
   headline: string;

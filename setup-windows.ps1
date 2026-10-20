@@ -96,6 +96,11 @@ if ($LASTEXITCODE) { throw "Pillow 설치 실패" }
 if ($LASTEXITCODE) { throw "Pillow가 작업실 실행 방식(-I)에서 보이지 않습니다. Python을 '모든 사용자'가 아닌 '현재 사용자'로 설치했는지 확인하세요." }
 Ok "Pillow $(& $Py -X utf8 -I -c 'import PIL; print(PIL.__version__)')"
 
+Step "psycopg (Supabase 원문 받기 — scripts/db_sources.py)"
+& $Py -m pip install --disable-pip-version-check -q --upgrade "psycopg[binary]"
+if ($LASTEXITCODE) { throw "psycopg 설치 실패" }
+Ok "psycopg $(& $Py -X utf8 -I -c 'import psycopg; print(psycopg.__version__)')"
+
 Step "작업실 화면 (app/)"
 Push-Location "$Root\app"
 try {

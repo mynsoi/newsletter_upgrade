@@ -13,7 +13,11 @@ import { Working } from "@/components/studio/working";
 import { roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
-const ORDER = ["threads", "linkedin", "infuture"];
+const ORDER = ["T2", "T3", "T4", "T1", "infuture"];
+// Supabase에서 받은 원문(scripts/db_sources.py)은 사이트가 서른 곳 가까이라 등급으로 묶어 탭을 만든다
+const TIER: Record<string, string> = { T1: "연구기관", T2: "컨설팅", T3: "저널·매체", T4: "기업 자료" };
+const group = (s: Source) => (s.tier ? s.tier : s.site);
+const groupName = (s: Source) => (s.tier ? TIER[s.tier] ?? s.tier : s.siteName);
 
 export default function Library({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [site, setSite] = useState("all");
@@ -28,20 +32,20 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
 
   const sites = useMemo(() => {
     const m = new Map<string, { name: string; n: number }>();
-    for (const s of state.library) m.set(s.site, { name: s.siteName, n: (m.get(s.site)?.n ?? 0) + 1 });
+    for (const s of state.library) m.set(group(s), { name: groupName(s), n: (m.get(group(s))?.n ?? 0) + 1 });
     return [...m.entries()].sort((a, b) => (ORDER.indexOf(a[0]) + 99) % 99 - (ORDER.indexOf(b[0]) + 99) % 99);
   }, [state.library]);
 
   const fresh = useMemo(() => new Set(state.collects.flatMap((c) => c.saved.map((s) => s.path).filter(Boolean))), [state.collects]);
 
   const rows = useMemo(() => {
-    const r = state.library.filter((s) => site === "all" || s.site === site);
+    const r = state.library.filter((s) => site === "all" || group(s) === site);
     return r.sort((a, b) => {
       const fa = fresh.has(a.path) ? 0 : 1,
         fb = fresh.has(b.path) ? 0 : 1;
       if (fa !== fb) return fa - fb;
-      const oa = ORDER.indexOf(a.site),
-        ob = ORDER.indexOf(b.site);
+      const oa = ORDER.indexOf(group(a)),
+        ob = ORDER.indexOf(group(b));
       if (oa !== ob) return (oa + 99) % 99 - (ob + 99) % 99;
       return b.date.localeCompare(a.date);
     });
@@ -112,7 +116,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
               value: k,
               title: (
                 <span className="flex items-center gap-2 tabular-nums">
-                  <SiteIcon site={k} className="size-3.5" />
+                  {!k.startsWith("T") && <SiteIcon site={k} className="size-3.5" />}
                   {v.name} {v.n}
                 </span>
               ),
@@ -143,6 +147,7 @@ function SourceCard({ s, wide, fresh, onOpen }: { s: Source; wide: boolean; fres
       <div className="group/bento relative flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-line bg-panel p-5 transition duration-200 hover:bg-panel-solid">
         <div className="flex items-center gap-2 text-xs text-ink-2">
           <SiteIcon site={s.site} />
+          {s.tier && <span className="truncate">{s.siteName}</span>}
           <span className="truncate">{s.date}</span>
           <span className="ml-auto flex items-center gap-2">
             {fresh && <Chip className="border-violet-400/40 text-violet-700 dark:text-violet-200">new</Chip>}

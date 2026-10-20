@@ -25,6 +25,13 @@
 
 ### 1. 서재 — 원문 모으기
 
+> **2026-10-20 — 주제 재료를 Supabase로 바꿈.** Threads·LinkedIn 샘플 원문은 지웠고, 주제 재료는 팀 파이프라인(main)이
+> 매일 모으는 Supabase 문서에서 받아 옵니다. 범위는 `sources/db_scope.json`(소스 28곳 — 컨설팅·저널·기업 자료·연구기관,
+> 본문 800자 이상, 반려·요약문·초록·뉴스 제외)이고, `python3 -I scripts/db_sources.py --sync`가 원문 그대로
+> `sources/originals/<소스>/NNNN.md`로 내려 둡니다(git 밖 — 저작권 있는 원문이라 저장소에 올리지 않음, `DATABASE_URL` 필요).
+> 서재 탭은 등급별(컨설팅 · 저널·매체 · 기업 자료 · 연구기관)로 묶입니다. 경영일기는 주제 재료가 아니라 과정 1·2의 **문체 참고**라 그대로 둡니다.
+> 주제 지도 넣기는 한 번에 최근 글 40편까지(`WIKI_BATCH`)만 합니다.
+
 ![서재](docs/readme/screen-library.jpg)
 
 Threads·LinkedIn 글과 경영일기를 모아 두는 곳입니다. 입력창에 찾을 내용을 적고 **aside 수집**을 누르면
@@ -197,6 +204,7 @@ Windows에서 명령으로 돌릴 때는 `python3 -I` 대신 `py -3 -X utf8 -I`�
 화면 없이 명령으로도 돌릴 수 있습니다.
 
 ```bash
+python3 -I scripts/db_sources.py --sync                       # Supabase 원문 받기 (--status: 범위·받은 수)
 python3 -I scripts/collect.py "찾을 내용"                         # 원문 수집 (비우면 자동)
 python3 -I scripts/wiki.py --ingest                               # 아직 안 넣은 원문: 카드 → 묶기 → 거르기 → 제목 후보
 python3 -I scripts/wiki.py --refilter                             # 판정 예시로 전체 다시 거르기
