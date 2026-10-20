@@ -108,7 +108,10 @@ def draw(d, i, it):
         # 본문 그림은 16:9(astra가 설명에 와이드로 쓰고 그림 서버도 그 비율로 그린다 — 3:2 검사에 걸려 전부 버려졌다, 2026-10-10)
         size, ratio, tol = ("2048x1152", "16:9", "0.05") if d.name.startswith("inline-") else ("1536x1024", "3:2", "0.2")
         subprocess.run(["node", GEN, "--prompt", it["prompt"], "--output", str(png), "--size", size, "--ratio", ratio,
-                        "--tolerance", tol, "--model", "gpt-6-astra"],
+                        "--tolerance", tol, "--model", "gpt-6-astra",
+                        # 한 장 40초대지만 같은 계정의 요청은 서버가 차례로 처리한다 — 6장 동시면 90초(gti 기본)를 넘겨
+                        # 전부 시간 초과로 버려졌다(2026-10-20 Windows 시험: 1장 43초, 3장 동시 45·67·80초). 5분 × 2회까지 기다린다
+                        "--timeout-ms", "300000", "--retries", "1"],
                        stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=900)
     return png.exists()
 
@@ -135,7 +138,7 @@ def run(target):
 
 def paint(d, items):
     todo = [(i, it) for i, it in enumerate(items, 1) if not (d / f"{i:02d}.png").exists()]
-    with ThreadPoolExecutor(max_workers=4) as ex:
+    with ThreadPoolExecutor(max_workers=2) as ex:  # 머리·본문 그림 작업이 같이 돌면 4장 — 그 이상은 기다리는 줄만 길어진다
         list(ex.map(lambda a: draw(d, *a), todo))
     ok = sum(1 for i in range(1, len(items) + 1) if (d / f"{i:02d}.png").exists())
     print(f"그림 후보 {ok}/{len(items)} → {d.relative_to(ROOT)}")
