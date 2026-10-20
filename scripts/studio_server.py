@@ -853,12 +853,26 @@ def act_confirm(a):
 
 
 def act_collect(a):
+    """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장)
+    → 끝나면 Supabase 받기로 서재에 반영. 적으면 예전처럼 그 요청으로 aside가 글을 찾는다(scripts/collect.py, 작업실 로컬 저장).
+    주제 지도 넣기는 잇지 않는다(2026-10-20 — 원문이 수백 편이라 넣기는 '넣기' 버튼으로)."""
     req = str(a.get("request", "")).strip()
+    if not req:
+        return start("collect", "aside · 소스", PY + ["scripts/aside_collect.py", "--write"], lambda j: act_db_sync({}))
+    return start("collect", req[:40], PY + ["scripts/collect.py", req])
 
-    def after(j):  # 새 원문은 바로 위키에 넣는다 (2026-10-10 위키 채택)
-        if W.backlog():
-            act_wiki_ingest({})
-    return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req], after)
+
+ASIDE_EVERY = float(os.environ.get("ASIDE_COLLECT_HOURS", "6")) * 3600  # 소스 aside 수집 간격 — Aside Browser가 켜져 있을 때만
+
+
+def aside_loop():
+    time.sleep(120)  # 서버가 켜질 때의 Supabase 받기와 겹치지 않게
+    while True:
+        if os.environ.get("DATABASE_URL"):
+            ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True).returncode == 0
+            if ok:
+                act_collect({})
+        time.sleep(max(ASIDE_EVERY, 1800))
 
 
 DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 서버가 켜질 때 한 번, 그다음 이 간격마다
@@ -1114,6 +1128,7 @@ if __name__ == "__main__":
         threading.Thread(target=srv.serve_forever, daemon=True).start()
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
     threading.Thread(target=db_sync_loop, daemon=True).start()
+    threading.Thread(target=aside_loop, daemon=True).start()
     if not os.environ.get("DATABASE_URL"):
         print("DATABASE_URL이 없어 Supabase 자동 받기를 건너뜁니다(서재의 'Supabase 받기'도 실패합니다).", flush=True)
     servers[0].serve_forever()

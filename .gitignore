@@ -6,3 +6,5 @@ trash/
 sources/originals/*
 !sources/originals/infuture/
 sources/db_index.json
+# aside 수집 회차 기록(scripts/aside_collect.py) — 6시간마다 쌓이는 실행 기록이라 git 밖
+runs/aside/

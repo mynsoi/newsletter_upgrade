@@ -30,7 +30,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
   const lastSync = syncs.find((j) => j.status !== "running");
   const box = useRef<HTMLDivElement>(null);
   const collect = () => {
-    if (!req.trim()) return act("collect", { request: "" }).then(refresh); // 비우면 자동 — Threads·LinkedIn에서 알아서
+    if (!req.trim()) return act("collect", { request: "" }).then(refresh); // 비우면 소스 aside 수집(Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton → Supabase)
     box.current?.querySelector("form")?.requestSubmit();
   };
 
@@ -70,9 +70,8 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
           <div ref={box} className="w-full max-w-2xl [&_form]:mx-0 [&_form]:max-w-2xl">
             <PlaceholdersAndVanishInput
               placeholders={[
-                "Threads에서 AI로 일하는 방식을 바꾼 실무자 글",
-                "LinkedIn에서 사내 AI 도입 실패담",
-                "「유정식의 경영일기」에서 팀워크를 다룬 글",
+                "비워 두고 누르면 소스 수집 — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton",
+                "적으면 그 내용으로 aside가 글을 찾아요 — 예: 사내 AI 도입 실패담",
               ]}
               onChange={(e) => setReq(e.target.value)}
               onSubmit={(e) => {
@@ -139,7 +138,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
         <BentoGrid className="mt-8 max-w-none md:auto-rows-[15.5rem] md:grid-cols-4 grid-flow-dense">
           {collecting.map((j) => (
             <div key={j.id} className="col-span-4 row-span-2">
-              <Working job={j} title="수집" status={`aside UltraBrowse · ${j.target}`} />
+              <Working job={j} title="수집" status={`aside · ${j.target}`} />
             </div>
           ))}
           {rows.map((s) => (

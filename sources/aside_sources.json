@@ -1,0 +1,198 @@
+{
+ "_설명": "aside 수집(scripts/aside_collect.py) 대상. 소스 확정본은 main의 config/sources.yaml이고, 여기에는 aside가 목록을 돌고 본문을 뽑는 데 필요한 것만 옮겨 둔다(container·exclude는 main browse 실측값). mode: list = 목록에서 새 글을 찾아 저장, upgrade = DB의 요약뿐인 문서(summary_only=1)를 전문으로 교체. link = 글 주소 패턴, link_text = 링크 글자 조건(선택), canon = 저장 전 주소 정리 [[패턴, 바꿀 것]], key = 같은 글 판정용(주소가 달라도 같은 글 번호면 중복). mode off = 자동에서 빼고 --source로 부를 때만.",
+ "defaults": {
+  "gap_seconds": 6,
+  "max_per_run": 10,
+  "min_chars": 800
+ },
+ "sources": {
+  "deloitte-insights": {
+   "mode": "list",
+   "tier": "T2",
+   "lang": "en",
+   "list_urls": [
+    "https://www.deloitte.com/us/en/insights.html"
+   ],
+   "link": "^https://www\\.deloitte\\.com/us/en/insights/topics/(talent|leadership|technology-management|business-strategy-growth|operations)/.+\\.html$",
+   "container": "[role=\"main\"]",
+   "exclude": [
+    ".cmp-di-modal",
+    ".cmp-di-accordion",
+    ".cmp-di-copyright",
+    ".cmp-di-promo",
+    ".cmp-di-promo-container",
+    ".cmp-di-authors",
+    ".diauthors",
+    "[class*='infographic']",
+    ".cmp-di-share-bar",
+    ".cmp-di-social-share",
+    ".cmp-di-right-rail",
+    ".cmp-di-link-list",
+    ".cmp-di-breadcrumb",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ],
+   "link_text": "ARTICLE|REPORT"
+  },
+  "bcg-publications": {
+   "mode": "list",
+   "tier": "T2",
+   "lang": "en",
+   "list_urls": [
+    "https://www.bcg.com/publications"
+   ],
+   "link": "^https://www\\.bcg\\.com/publications/20\\d\\d/[a-z0-9-]+$",
+   "container": "main",
+   "exclude": [
+    "[class*='StickyToolbarWidget']",
+    "[class*='Subscribe']",
+    "[class*='related']",
+    "[class*='Related']",
+    "[class*='share']",
+    "[class*='author']",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ]
+  },
+  "pwc-global-insights": {
+   "mode": "off",
+   "tier": "T2",
+   "lang": "en",
+   "list_urls": [
+    "https://www.pwc.com/gx/en/research-insights.html"
+   ],
+   "link": "^https://www\\.pwc\\.com/gx/en/issues/[a-z0-9-]+/[a-z0-9-]+\\.html$",
+   "container": ".text-component",
+   "exclude": [
+    "nav",
+    "footer",
+    "aside",
+    "form",
+    "[class*='cookie']",
+    "[class*='vjs-']"
+   ],
+   "max_per_run": 5,
+   "note": "2026-10-20 시험 — 목록의 issues 페이지가 허브라 본문 108~677자(짧음). main 판단(2026-09-02 '연 단위 리포트, 목록 라운드 실효 없음')과 같아 자동에서 뺌. 연례 리포트는 --source pwc-global-insights --url <주소>로 건별"
+  },
+  "dbr": {
+   "mode": "list",
+   "tier": "T3",
+   "lang": "ko",
+   "paid": true,
+   "login_marker": "로그아웃",
+   "license_note": "구독 계정 세션 자동 수집(2026-10-20 규칙 6 개정) — 내부 분석 한정, 원문 외부 비공개",
+   "list_urls": [
+    "https://dbr.donga.com"
+   ],
+   "link": "^https://dbr\\.donga\\.com/article/view/[0-9a-z]+/article_no/\\d+",
+   "container": ".article-free-zone",
+   "exclude": [
+    ".relate_article",
+    ".fix-func-list",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ],
+   "canon": [
+    [
+     "/ac/[a-z_]+$",
+     ""
+    ]
+   ],
+   "key": "article_no/(\\d+)"
+  },
+  "hbr-korea": {
+   "mode": "list",
+   "tier": "T3",
+   "lang": "ko",
+   "paid": true,
+   "login_marker": "로그아웃",
+   "license_note": "구독 계정 세션 자동 수집(2026-10-20 규칙 6 개정) — 내부 분석 한정, 원문 외부 비공개",
+   "list_urls": [
+    "https://www.hbrkorea.com/article/latest",
+    "https://www.hbrkorea.com/article/topics/category_id/2_1",
+    "https://www.hbrkorea.com/article/topics/category_id/8_1",
+    "https://www.hbrkorea.com/magazine"
+   ],
+   "link": "^https://www\\.hbrkorea\\.com/article/view/atype/[a-z]+/category_id/[0-9_]+/article_no/\\d+",
+   "container": "#article_body",
+   "exclude": [
+    ".relate_article",
+    ".fix-func-list",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ],
+   "canon": [
+    [
+     "/page/\\d+$",
+     ""
+    ]
+   ],
+   "key": "atype/([a-z]+)/.*article_no/(\\d+)"
+  },
+  "mckinsey-insights": {
+   "mode": "upgrade",
+   "tier": "T2",
+   "lang": "en",
+   "max_per_run": 2,
+   "gap_seconds": 40,
+   "stop_marker": "Access Denied",
+   "skip_url": "podcast|author-talks|/videos?/",
+   "days": 30,
+   "container": "main",
+   "exclude": [
+    "[class*='Disclaimer']",
+    "[class*='disclaimer']",
+    "[class*='Byline']",
+    "[class*='byline']",
+    "[class*='related']",
+    "[class*='Related']",
+    "[class*='signup']",
+    "[class*='Signup']",
+    "[class*='Subscribe']",
+    "[class*='share']",
+    "[class*='author']",
+    "[class*='Author']",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ]
+  },
+  "knowledge-wharton": {
+   "mode": "upgrade",
+   "tier": "T2",
+   "lang": "en",
+   "max_per_run": 5,
+   "skip_url": "podcast|/videos?/",
+   "days": 60,
+   "container": "article",
+   "exclude": [
+    ".author",
+    ".author-bio",
+    ".related",
+    ".share",
+    ".newsletter",
+    ".subscribe",
+    ".tags",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption",
+    "form"
+   ]
+  }
+ }
+}

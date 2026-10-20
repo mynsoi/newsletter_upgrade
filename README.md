@@ -33,6 +33,13 @@
 > 주제 지도 넣기는 한 번에 최근 글 40편까지(`WIKI_BATCH`)만 합니다.
 > 받기는 저절로 됩니다 — 작업실 서버가 켜질 때 한 번, 그다음 6시간마다(`DB_SYNC_HOURS`) 새 원문을 받고 반려된 원문은 정리합니다(카드가 있는 원문은 남김).
 > 바로 받고 싶으면 서재의 **Supabase 받기** 버튼을 누릅니다(마우스를 올리면 마지막 받은 시각). 주제 지도 넣기는 저절로 잇지 않고 **넣기** 버튼으로 합니다(astra 사용).
+>
+> **aside 수집(2026-10-20)** — RSS·API가 못 받는 소스는 Aside Browser로 받아 **Supabase에 저장**합니다(`scripts/aside_collect.py`, 설정 `sources/aside_sources.json`).
+> Deloitte·BCG(목록의 새 글), DBR·HBR Korea(구독 로그인 세션으로 목록의 새 글), McKinsey·Wharton(DB의 요약뿐인 글을 전문으로 격상).
+> 작업실 서버가 6시간마다(`ASIDE_COLLECT_HOURS`) Aside Browser가 켜져 있을 때만 돌고, 서재의 **aside 수집**을 비워 두고 눌러도 됩니다.
+> 글은 AI가 고르지 않고 목록 페이지의 링크 패턴으로 고르며, 본문은 main 추출기(`scripts/aside/extract_article.js`)로 원문 그대로 뽑습니다.
+> 저장 규칙은 main `store_document`와 같고(`fetched_by='aside'`, `status='new'` → main Actions가 관련성 판별·claim 추출), 끝나면 Supabase 받기가 이어져 서재에 뜹니다.
+> 구독 소스는 로그인을 사람이 해 두고, 로그인이 풀려 있으면 그 소스는 멈춥니다. 입력창에 요청을 적으면 예전처럼 그 요청으로 aside가 글을 찾습니다(`scripts/collect.py`, 작업실 로컬 저장).
 
 ![서재](docs/readme/screen-library.jpg)
 
@@ -207,6 +214,7 @@ Windows에서 명령으로 돌릴 때는 `python3 -I` 대신 `py -3 -X utf8 -I`�
 
 ```bash
 python3 -I scripts/db_sources.py --sync                       # Supabase 원문 받기 (--status: 범위·받은 수)
+python3 -I scripts/aside_collect.py [--write] [--source dbr] [--limit 2]   # aside 수집 → Supabase (--write 없으면 미리보기)
 python3 -I scripts/collect.py "찾을 내용"                         # 원문 수집 (비우면 자동)
 python3 -I scripts/wiki.py --ingest                               # 아직 안 넣은 원문: 카드 → 묶기 → 거르기 → 제목 후보
 python3 -I scripts/wiki.py --refilter                             # 판정 예시로 전체 다시 거르기
