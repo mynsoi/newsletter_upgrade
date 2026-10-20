@@ -163,7 +163,7 @@ def image_rounds(k, inline=False):
             png = d / f"{i:02d}.png"
             imgs.append({"name": it.get("name", ""), "prompt": it.get("prompt", ""),
                          "src": png.relative_to(ROOT).as_posix() if png.exists() else "",
-                         "after": it.get("after", 0), "anchor": it.get("anchor", "")})
+                         "after": it.get("after", 0), "anchor": it.get("anchor", ""), "why": it.get("why", "")})
         out.append({"id": d.name, "items": imgs})
     return out
 

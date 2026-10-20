@@ -397,7 +397,7 @@ function ImagesCard({ a, state, refresh }: { a: A; state: State; refresh: () => 
   const inlineRound = (r: A["inline"][number]) => (
     <div key={r.id} className="grid grid-cols-4 gap-2">
       {r.items.filter((x) => x.src).map((x) => (
-        <Thumb key={x.src} src={x.src} on={picked.has(x.src)} ratio="aspect-video" name={x.name} chip={x.after ? `문단 ${x.after}` : ""} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} />
+        <Thumb key={x.src} src={x.src} on={picked.has(x.src)} ratio="aspect-video" name={x.why ? `${x.name} — ${x.why}` : x.name} chip={x.after ? `문단 ${x.after}` : ""} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} />
       ))}
     </div>
   );

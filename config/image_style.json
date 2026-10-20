@@ -1,0 +1,6 @@
+{
+ "_설명": "그림체 고정 (scripts/image_candidates.py) — astra는 장면·구도만 쓰고, 그림 서버에는 prefix + 장면 + suffix로 보낸다. main 브랜치 web/server.py의 '일러스트 B'(2026-10 main에서 최종 채택한 그림체)를 그대로 가져왔다. 바꾸려면 이 두 줄만 고치면 된다.",
+ "label": "일러스트 B",
+ "prefix": "Clean flat-style business illustration. Cool color palette — navy, teal, slate blue tones. Simple friendly figures, modern workplace setting.",
+ "suffix": "Do NOT include any text, words, letters, numbers, labels, or captions anywhere in the image."
+}

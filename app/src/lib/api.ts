@@ -28,7 +28,7 @@ export type Step = {
   at: number;
 };
 
-export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string };
+export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };
 export type InlinePick = { src: string; after: number; anchor: string; name: string };
 
 export type Article = {
