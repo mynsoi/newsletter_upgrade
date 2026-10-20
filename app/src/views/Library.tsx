@@ -20,7 +20,12 @@ const group = (s: Source) => (s.tier ? s.tier : s.site);
 const groupName = (s: Source) => (s.tier ? TIER[s.tier] ?? s.tier : s.siteName);
 
 export default function Library({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
-  const [site, setSite] = useState("all");
+  const [site, setSiteRaw] = useState("all");
+  const [src, setSrc] = useState("all"); // 분류 안의 소스 — 분류를 바꾸면 전체로
+  const setSite = (v: string) => {
+    setSiteRaw(v);
+    setSrc("all");
+  };
   const [open, setOpen] = useState<string | null>(null);
   const [req, setReq] = useState("");
   const collecting = state.jobs.filter((j) => j.kind === "collect" && j.status === "running");
@@ -40,10 +45,17 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
     return [...m.entries()].sort((a, b) => (ORDER.indexOf(a[0]) + 99) % 99 - (ORDER.indexOf(b[0]) + 99) % 99);
   }, [state.library]);
 
+  // 고른 분류(등급) 안의 소스별 개수 — 많은 순. 소스가 하나뿐인 분류(경영일기)는 하위 탭을 안 띄운다
+  const srcs = useMemo(() => {
+    const m = new Map<string, { name: string; n: number }>();
+    for (const s of state.library) if (group(s) === site) m.set(s.site, { name: s.siteName, n: (m.get(s.site)?.n ?? 0) + 1 });
+    return [...m.entries()].sort((a, b) => b[1].n - a[1].n);
+  }, [state.library, site]);
+
   const fresh = useMemo(() => new Set(state.collects.flatMap((c) => c.saved.map((s) => s.path).filter(Boolean))), [state.collects]);
 
   const rows = useMemo(() => {
-    const r = state.library.filter((s) => site === "all" || group(s) === site);
+    const r = state.library.filter((s) => (site === "all" || group(s) === site) && (src === "all" || s.site === src));
     return r.sort((a, b) => {
       const fa = fresh.has(a.path) ? 0 : 1,
         fb = fresh.has(b.path) ? 0 : 1;
@@ -53,7 +65,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
       if (oa !== ob) return (oa + 99) % 99 - (ob + 99) % 99;
       return b.date.localeCompare(a.date);
     });
-  }, [state.library, site, fresh]);
+  }, [state.library, site, src, fresh]);
 
   const wide = (s: Source) => {
     const n = parseInt(s.reactions.replace(/\D/g, "") || "0", 10);
@@ -134,6 +146,19 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
             })),
           ]}
         />
+
+        {site !== "all" && srcs.length > 1 && (
+          <PillTabs
+            id="pilltab-src"
+            className="mt-3 flex-wrap"
+            value={src}
+            onChange={setSrc}
+            tabs={[
+              { value: "all", title: <span className="tabular-nums">전체 {srcs.reduce((n, [, v]) => n + v.n, 0)}</span> },
+              ...srcs.map(([k, v]) => ({ value: k, title: <span className="tabular-nums">{v.name} {v.n}</span> })),
+            ]}
+          />
+        )}
 
         <BentoGrid className="mt-8 max-w-none md:auto-rows-[15.5rem] md:grid-cols-4 grid-flow-dense">
           {collecting.map((j) => (
