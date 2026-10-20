@@ -4,8 +4,8 @@ title: AI에게 매번 자료 위치부터 설명하고 있다면 손볼 것은 
 verdict: 쓸 만함
 audience: 전 직원
 center: linkedin/14
-status: 씀
-used_in: [briefs/w-20261020-171714.json, columns/2026-10-20-w-20261020-171714.md]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-11
 ---
 
