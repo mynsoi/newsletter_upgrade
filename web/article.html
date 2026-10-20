@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{{ title }}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="{{ body_class }}">
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-wordmark" href="../">{{ kicker }}</a>
+    <div class="site-header-meta">{{ issue_label }}</div>
+  </div>
+</header>
+
+{{ hero_html }}
+
+<main class="article-page">
+
+  <div class="meta-bar">
+    <div class="tags">{{ tags_html }}</div>
+    <div class="author-line">
+      <span class="author-name">{{ author }}</span>
+      <span class="author-sep">·</span>
+      <span>{{ pub_date }}</span>
+    </div>
+  </div>
+
+  {{ tldr_html }}
+
+  <article class="article-body">
+    {{ body_html }}
+  </article>
+
+  {{ references_html }}
+
+</main>
+
+<footer class="site-footer">
+  {{ footer }}
+</footer>
+
+</body>
+</html>

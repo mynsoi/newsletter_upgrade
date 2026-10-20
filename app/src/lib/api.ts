@@ -47,6 +47,7 @@ export type Article = {
   target: string;
   hero: string;
   confirmed: { date: string; step?: number; file: string; hero?: string } | null;
+  published?: { date: string; url: string; site: string; eml: string; to: string[]; cc: string[] } | null;
   fromTopics?: string;
   fromWiki?: string;
   fromMine?: boolean;
@@ -130,6 +131,7 @@ export type State = {
   jobs: Job[];
   collects: CollectRound[];
   mine?: MineRun[];
+  publish?: { to: string[]; cc: string[]; webBase: string };
 };
 
 export type ChatMsg = { role: "mentor" | "claude"; text: string; at: number; cost?: number };
@@ -212,6 +214,7 @@ export const JOB_NAMES: Record<string, string> = {
   "wiki-pick": "주제 고르기",
   "wiki-verdict": "판정",
   mine: "원문 고르기",
+  publish: "발행",
 };
 
 export type JobLog = { text: string; live: { name: string; text: string }[]; status?: string; elapsed?: number };

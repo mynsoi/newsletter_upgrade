@@ -16,7 +16,7 @@ import uuid
 from datetime import date
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -207,7 +207,7 @@ def article_from_brief(bp):
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
-            "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"),
+            "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": b.get("published"),
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
             "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime}
 
@@ -219,7 +219,7 @@ def article_from_process(pp):
     return {"id": k, "kind": "process", "label": p["title"], "thesis": p.get("thesis", ""), "sources": p.get("sources", []),
             "title": p["title"], "titles": [], "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True),
             "inlinePicked": p.get("inline", []), "length": p.get("length", "full"), "target": p.get("target", "전 직원"), "hero": p.get("hero", ""),
-            "confirmed": p.get("confirmed"), "fromTopics": "", "at": pp.stat().st_mtime}
+            "confirmed": p.get("confirmed"), "published": p.get("published"), "fromTopics": "", "at": pp.stat().st_mtime}
 
 
 def articles():
@@ -316,7 +316,7 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "wiki": wiki_state(fresh), "mine": mine_state(jobs)}
+            "collects": collects, "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings()}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -851,6 +851,46 @@ def act_confirm(a):
     return conf
 
 
+MAIL = re.compile(r"^[^@\s,<>\"]+@[^@\s,<>\"]+\.[^@\s,<>\"]+$")
+
+
+def confirmed_id(a):
+    k = safe_id(a["article"])
+    art = next((x for x in articles() if x["id"] == k), None)
+    if not art or not art.get("confirmed"):
+        raise ValueError("확정한 글만 발행할 수 있습니다")
+    return k
+
+
+def act_publish_build(a):
+    """발행 미리보기 — publish/<글>/에 웹 발행본과 메일 캡처용 변형을 만든다(모델 없음, 1초 안팎)."""
+    k = confirmed_id(a)
+    r = subprocess.run(PY + ["scripts/publish.py", "build", k], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode:
+        raise ValueError((r.stderr or r.stdout).strip().splitlines()[-1] if (r.stderr or r.stdout).strip() else "미리보기 실패")
+    return json.loads(r.stdout.strip().splitlines()[-1])
+
+
+def act_publish(a):
+    """발행 — 웹(site/ 커밋·푸시 → Vercel) + 이미지 메일(.eml). 메일은 보내지 않고 Outlook에서 열 파일을 만든다."""
+    k = confirmed_id(a)
+    to, cc = [[x.strip() for x in a.get(f, []) if str(x).strip()] for f in ("to", "cc")]
+    if not to:
+        raise ValueError("받는 사람을 적어 주세요")
+    bad = [x for x in to + cc if not MAIL.match(x)]
+    if bad:
+        raise ValueError("메일 주소가 아닙니다: " + ", ".join(bad))
+    return start("publish", k, PY + ["scripts/publish.py", "release", k, "--to", ",".join(to), "--cc", ",".join(cc)])
+
+
+def publish_settings():
+    try:
+        c = json.loads(read(ROOT / "config" / "publish.json"))
+        return {"to": c.get("to", []), "cc": c.get("cc", []), "webBase": c.get("web_base_url", "")}
+    except Exception:
+        return {"to": [], "cc": [], "webBase": ""}
+
+
 def act_collect(a):
     req = str(a.get("request", "")).strip()
 
@@ -937,7 +977,8 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
-           "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart}
+           "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart,
+           "publish-build": act_publish_build, "publish": act_publish}
 
 
 # ---------- 그림 축소본 ----------
@@ -1035,6 +1076,26 @@ class H(SimpleHTTPRequestHandler):
             ctype = {".html": "text/html; charset=utf-8", ".md": "text/markdown; charset=utf-8",
                      ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg"}.get(f.suffix, "application/octet-stream")
             return self.send_file(f, ctype)
+        if u.path.startswith("/publish/"):  # 발행 미리보기·결과물(scripts/publish.py) — publish/<글>/ 안의 파일만
+            rel = unquote(u.path[len("/publish/"):])
+            k, _, name = rel.partition("/")
+            f = (ROOT / "publish" / safe_id(k) / (name or "index.html")).resolve()
+            if not inside(f, ROOT / "publish" / k) or not f.is_file():
+                return self.send_error(404)
+            ctype = {".html": "text/html; charset=utf-8", ".css": "text/css", ".png": "image/png",
+                     ".json": "application/json", ".eml": "message/rfc822"}.get(f.suffix)
+            if not ctype:
+                return self.send_error(404)
+            b = f.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(len(b)))
+            self.send_header("Cache-Control", "no-store")
+            if f.suffix == ".eml":
+                self.send_header("Content-Disposition", "attachment; filename*=UTF-8''" + quote(f"{k}.eml"))
+            self.end_headers()
+            self.wfile.write(b)
+            return
         if u.path.startswith("/img/"):
             rel = unquote(u.path[5:])
             if not rel.startswith(ALLOWED) or ".." in rel or not rel.lower().endswith((".png", ".jpg")):
