@@ -111,6 +111,8 @@ def run_inline(target):
 
 def draw(d, i, it):
     png = d / f"{i:02d}.png"
+    if png.exists():  # 줄 서 있던 사이 다른 회차·다시 그리기로 이미 그려졌으면 덮어쓰지 않는다
+        return True
     with open(d / f"{i:02d}.log", "w", encoding="utf-8") as log:
         # 본문 그림은 16:9(astra가 설명에 와이드로 쓰고 그림 서버도 그 비율로 그린다 — 3:2 검사에 걸려 전부 버려졌다, 2026-10-10)
         size, ratio, tol = ("2048x1152", "16:9", "0.05") if d.name.startswith("inline-") else ("1536x1024", "3:2", "0.2")

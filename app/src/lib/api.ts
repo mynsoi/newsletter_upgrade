@@ -68,6 +68,8 @@ export type Job = {
   log: string;
   message?: string;
   stage?: { index: number; half: boolean; fit: boolean } | null;
+  /** 그림 작업(images·inline) — 설명 쓰는 중이면 phase "설명", 그리는 중이면 done/total장 */
+  istage?: { phase: "설명" | "그리기"; done: number; total: number; failed: number; since: number } | null;
 };
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };

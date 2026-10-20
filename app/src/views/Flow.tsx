@@ -41,8 +41,15 @@ function jobText(j: Job, a?: A, run?: MineRun): string[] {
   }
   if (j.kind === "revise") return [`과정 ${(a?.steps.length ?? 0) + 1} · 피드백 반영`];
   if (j.kind === "shorten") return ["절반으로 줄이는 중"];
-  if (j.kind === "images") return ["머리 그림 그리는 중"];
-  if (j.kind === "inline") return ["본문 그림 그리는 중"];
+  if (j.kind === "images" || j.kind === "inline") {
+    const what = j.kind === "images" ? "머리 그림" : "본문 그림";
+    const s = j.istage;
+    if (!s || s.phase === "설명") return [`${what} · astra가 그림 설명 쓰는 중`];
+    const min = Math.floor((Date.now() / 1000 - s.since) / 60);
+    const wait = min >= 1 ? ` · ${min}분째` : "";
+    const fail = s.failed ? ` · 실패 ${s.failed}` : "";
+    return [`${what} 그리는 중 ${s.done}/${s.total}장${fail}${wait}`];
+  }
   return ["…"];
 }
 

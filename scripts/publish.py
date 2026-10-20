@@ -9,6 +9,7 @@ HTML 구조·디자인과 메일 방식은 main 브랜치(web/server.py · web/e
 사용:
   python3 -I scripts/publish.py build <글>                         # 미리보기만 — publish/<글>/ (git 밖)
   python3 -I scripts/publish.py release <글> --to a@x,b@x [--cc …] [--no-push]
+  python3 -I scripts/publish.py unpublish <글…> [--no-push]          # 웹에서 내리기(아카이브 목록도 다시)
 설정: config/publish.json (web_base_url · web_path_token · 보내는 사람 · 기본 수신자)
 """
 import argparse
@@ -296,6 +297,13 @@ def export_site(k, out):
     for f in out.iterdir():
         if f.is_file() and f.name not in SKIP:
             shutil.copy2(f, dest / f.name)
+    build_index()
+    return dest
+
+
+def build_index():
+    token_dir = SITE / settings()["web_path_token"]
+    token_dir.mkdir(parents=True, exist_ok=True)
     SITE.mkdir(exist_ok=True)  # 사이트 루트는 빈 페이지 — 토큰 경로를 모르면 아무것도 찾을 수 없게
     (SITE / "index.html").write_text('<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">'
                                      '<meta name="robots" content="noindex, nofollow"><title></title></head><body></body></html>\n', encoding="utf-8")
@@ -312,7 +320,6 @@ def export_site(k, out):
         + f'<div class="card-body"><div class="card-meta">{e(x.get("pub_date", ""))}</div><h2>{e(x.get("title", s))}</h2>'
         f'<p>{e(x.get("teaser", ""))}</p></div></a>' for _, s, x in entries) or '<p class="empty">아직 발행된 글이 없습니다.</p>'
     (token_dir / "index.html").write_text(INDEX.replace("{{ kicker }}", e(settings()["kicker"])).replace("{{ cards }}", cards), encoding="utf-8")
-    return dest
 
 
 INDEX = """<!DOCTYPE html>
@@ -382,6 +389,31 @@ def release(k, to, cc, push=True):
     print(json.dumps(meta["published"], ensure_ascii=False), flush=True)
 
 
+def unpublish(ks, push=True):
+    """웹에서 내린다 — site/<토큰>/<글>/을 지우고 아카이브 목록을 다시 만들고, 글 설정의 published를 지운다.
+    이미 보낸 메일의 '웹에서 보기' 링크는 끊긴다."""
+    paths = ["site"]
+    for k in ks:
+        d = SITE / settings()["web_path_token"] / k
+        if d.exists():
+            shutil.rmtree(d)
+        try:
+            mp = meta_path(k)
+        except SystemExit:  # 글은 이미 지웠고 웹에만 남은 경우
+            continue
+        meta = json.loads(mp.read_text(encoding="utf-8"))
+        if meta.pop("published", None) is not None:
+            mp.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+            paths.append(mp.relative_to(ROOT).as_posix())
+        print("내림 —", k, flush=True)
+    build_index()
+    git("add", "-A", "--", *paths)
+    if git("diff", "--cached", "--name-only", "--", *paths):
+        git("commit", "-m", "웹에서 내림: " + ", ".join(ks), "--", *paths)
+    if push:
+        git("push", "origin", "HEAD")
+
+
 def main():
     ap = argparse.ArgumentParser(description="확정 칼럼 발행")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -392,8 +424,13 @@ def main():
     r.add_argument("--to", required=True, help="쉼표 구분")
     r.add_argument("--cc", default="")
     r.add_argument("--no-push", action="store_true")
+    u = sub.add_parser("unpublish")
+    u.add_argument("article", nargs="+")
+    u.add_argument("--no-push", action="store_true")
     args = ap.parse_args()
     split = lambda v: [x.strip() for x in v.split(",") if x.strip()]
+    if args.cmd == "unpublish":
+        return unpublish(args.article, not args.no_push)
     if args.cmd == "build":
         _, out, info = build(args.article)
         print(json.dumps({**info, "dir": out.relative_to(ROOT).as_posix()}, ensure_ascii=False))

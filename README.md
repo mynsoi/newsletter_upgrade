@@ -136,7 +136,13 @@ HTML 구조·디자인과 메일 방식은 팀 저장소 main 브랜치(`web/`)�
 ```bash
 python3 -I scripts/publish.py build <글>                     # 미리보기만 — publish/<글>/ (git 밖)
 python3 -I scripts/publish.py release <글> --to a@x,b@x [--cc …] [--no-push]
+python3 -I scripts/publish.py unpublish <글…>                # 웹에서 내리기(아카이브 목록도 다시) — 보낸 메일의 링크는 끊김
 ```
+
+메일 이미지는 800px 폭으로 찍습니다(main은 600px). 그림체는 `config/image_style.json`(main의 '일러스트 B')으로 고정 —
+astra는 장면·구도만 쓰고, 본문 그림은 그 문단을 고른 이유(why)를 남깁니다(그림에 마우스를 올리면 보임).
+그림 작업 중에는 대화에 "그리는 중 N/M장 · 몇 분째 · 실패 N"이 뜹니다. gti는 같은 계정 요청을 차례로 처리하므로
+한 장 5분 × 2회까지 기다리고 동시에 2장씩 보냅니다(2026-10-20 — 90초 기본값에서 전부 시간 초과).
 
 ## 어떻게 돌아가나
 

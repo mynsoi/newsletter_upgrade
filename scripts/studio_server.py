@@ -305,8 +305,32 @@ def job_stage(j):
     return {"index": i, "half": half, "fit": fit}
 
 
+def image_stage(j):
+    """돌고 있는 그림 작업의 진행 — 이번 회차 폴더에서 astra 설명이 나왔는지, 몇 장이 그려졌는지(2026-10-20:
+    "돌고 있음"만 보여 서버를 기다리는 중인지 실패인지 알 수 없었다). 다 된 그림은 image_rounds가 바로 화면에 올린다."""
+    rounds = [d for d in (ROOT / "runs" / "images" / j["target"]).glob("*/")
+              if d.name.startswith("inline-") == (j["kind"] == "inline") and d.stat().st_mtime >= j["started"] - 2]
+    if not rounds:
+        return {"phase": "설명", "done": 0, "total": 0, "failed": 0, "since": j["started"]}
+    d = max(rounds, key=lambda x: x.stat().st_mtime)
+    spec = d / "astra.json"
+    if not spec.exists():
+        return {"phase": "설명", "done": 0, "total": 0, "failed": 0, "since": j["started"]}
+    total = len(json.loads(read(spec) or "[]"))
+    done = sum(1 for i in range(1, total + 1) if (d / f"{i:02d}.png").exists())
+    failed = sum(1 for i in range(1, total + 1) if "failed" in read(d / f"{i:02d}.log"))
+    return {"phase": "그리기", "done": done, "total": total, "failed": failed, "since": spec.stat().st_mtime}
+
+
 def with_stage(jobs):
-    return [{**j, "stage": job_stage(j)} if j["kind"] == "write" and j["status"] == "running" else j for j in jobs]
+    out = []
+    for j in jobs:
+        if j["status"] == "running" and j["kind"] == "write":
+            j = {**j, "stage": job_stage(j)}
+        elif j["status"] == "running" and j["kind"] in ("images", "inline"):
+            j = {**j, "istage": image_stage(j)}
+        out.append(j)
+    return out
 
 
 def state():

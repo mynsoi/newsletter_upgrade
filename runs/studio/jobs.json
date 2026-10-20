@@ -714,5 +714,87 @@
   "started": 1791724795.183088,
   "log": "runs/studio/logs/1011-221955-9558.log",
   "ended": 1791725144.0421696
+ },
+ {
+  "id": "1020-170729-f455",
+  "kind": "publish",
+  "target": "2026-10-08-ai-퇴근시간",
+  "status": "done",
+  "started": 1792483649.0133252,
+  "log": "runs/studio/logs/1020-170729-f455.log",
+  "ended": 1792483672.5863113
+ },
+ {
+  "id": "1020-171327-d22e",
+  "kind": "publish",
+  "target": "2026-10-08-ai-퇴근시간",
+  "status": "done",
+  "started": 1792484007.594084,
+  "log": "runs/studio/logs/1020-171327-d22e.log",
+  "ended": 1792484028.1316903
+ },
+ {
+  "id": "1020-171739-ca0a",
+  "kind": "write",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792484259.0881932,
+  "log": "runs/studio/logs/1020-171739-ca0a.log",
+  "ended": 1792484383.018642
+ },
+ {
+  "id": "1020-172032-0212",
+  "kind": "revise",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792484432.2674768,
+  "log": "runs/studio/logs/1020-172032-0212.log",
+  "message": "규칙 세 가지를 '첫째, 둘째, 셋째'로 나열하니 교육 자료처럼 딱딱해. 문단 안에서 자연스럽게 풀어 써 줘. 마지막 질문형 맺음도 빼고 담백하게 끝내 줘.",
+  "ended": 1792484457.5616233
+ },
+ {
+  "id": "1020-172132-ce76",
+  "kind": "images",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792484492.884811,
+  "log": "runs/studio/logs/1020-172132-ce76.log",
+  "ended": 1792485081.3464544
+ },
+ {
+  "id": "1020-172134-09cd",
+  "kind": "inline",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792484494.9294949,
+  "log": "runs/studio/logs/1020-172134-09cd.log",
+  "ended": 1792484794.5550787
+ },
+ {
+  "id": "1020-173822-a647",
+  "kind": "images",
+  "target": "w-20261020-171714",
+  "status": "failed",
+  "started": 1792485502.5427613,
+  "log": "runs/studio/logs/1020-173822-a647.log",
+  "ended": 1792486359.6891127
+ },
+ {
+  "id": "1020-173824-a35d",
+  "kind": "inline",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792485504.88849,
+  "log": "runs/studio/logs/1020-173824-a35d.log",
+  "ended": 1792485966.562697
+ },
+ {
+  "id": "1020-174732-499e",
+  "kind": "publish",
+  "target": "w-20261020-171714",
+  "status": "done",
+  "started": 1792486052.742474,
+  "log": "runs/studio/logs/1020-174732-499e.log",
+  "ended": 1792486085.2633698
  }
 ]
