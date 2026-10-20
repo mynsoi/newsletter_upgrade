@@ -3,10 +3,15 @@
   python3 -I scripts/aside_collect.py                        모든 소스, 미리보기(--write 없으면 DB에 쓰지 않음)
   python3 -I scripts/aside_collect.py --write [--source dbr hbr-korea]
   python3 -I scripts/aside_collect.py --write --url <기사 주소> --source deloitte-insights   주소를 직접 줘서 한 건씩
+  python3 -I scripts/aside_collect.py --write --backfill 2026-01-01   평소 수집에 더해 과거분(이 날짜 이후)을 회차마다 조금씩
+                                                                    (날짜를 안 주면 설정 backfill_since, 빼려면 --no-backfill)
 
 대상과 설정: sources/aside_sources.json
 - list    : 목록 페이지(list_urls)를 열어 링크 패턴(link)에 맞는 글 중 DB에 없는 것만 받는다(최근 글부터, 한 번에 max_per_run편).
 - upgrade : DB의 요약뿐인 문서(summary_only=1, 최근 days일)를 원문 페이지에서 받아 전문으로 바꾼다(McKinsey·Wharton).
+- backfill: 소스별 과거 목록(사이트맵·호별 목차·쪽 넘기기, 설정 backfill)에서 기간 하한 이후 글을 회차마다 backfill_per_run편씩.
+            발행일이 하한보다 오래됐거나 짧은 글은 저장하지 않고 runs/aside/backfill_state.json에 적어 다시 열지 않는다.
+            구독 소스는 하루에 여는 글 수 상한(daily_cap)을 둔다. upgrade 소스는 격상 기간을 하한까지 넓힌다.
 - paid    : 구독 소스(DBR·HBR Korea)는 Aside Browser에 로그인된 세션을 쓴다. 로그인 표시(login_marker)가 없으면 그 소스를 멈춘다.
             로그인은 사람이 Aside Browser에서 직접 한다 — 이 스크립트는 로그인하지 않는다.
 
@@ -63,10 +68,13 @@ def running():
     return "@@JSON@@1" in r.stdout
 
 
-def page(url, expr, wait=8):
-    """탭을 열고 기다린 뒤 expr(문자열 JS)을 페이지에서 평가해 결과를 돌려준다. 페이지 글자 일부(표시 확인용)도 함께."""
+def page(url, expr, wait=8, via=None):
+    """탭을 열고 기다린 뒤 expr(문자열 JS)을 페이지에서 평가해 결과를 돌려준다. 페이지 글자 일부(표시 확인용)도 함께.
+    via: 먼저 그 페이지를 열고 같은 탭에서 url로 이동한다 — 새 탭으로 바로 열면 403을 내는 사이트(HBR Korea 목록 2쪽 이후)."""
+    go = (f" const p = await openTab({json.dumps(via)}); await sleep(5000); await p.evaluate({json.dumps('location.href = ' + json.dumps(url))});"
+          if via else f" const p = await openTab({json.dumps(url)});")
     js = ("await (async () => { const sleep = ms => new Promise(r => setTimeout(r, ms));"
-          f" const p = await openTab({json.dumps(url)}); await sleep({int(wait * 1000)}); let out;"
+          f"{go} await sleep({int(wait * 1000)}); let out;"
           f" try {{ out = {{ ok: true, value: await p.evaluate({json.dumps(expr)}) }}; }} catch (e) {{ out = {{ ok: false, err: String(e) }}; }}"
           " try { out.href = await p.evaluate('location.href'); out.head = await p.evaluate('(document.body && document.body.innerText || \"\").slice(0, 3000)'); } catch (e) {}"
           " await closeTab(p); console.log('@@JSON@@' + JSON.stringify(out)); })();")
@@ -91,7 +99,7 @@ def connect(write):
         sys.exit("DATABASE_URL이 없습니다.")
     import psycopg
     from psycopg.rows import dict_row
-    c = psycopg.connect(url, row_factory=dict_row)
+    c = psycopg.connect(url, row_factory=dict_row, prepare_threshold=None)  # Supabase 풀러(트랜잭션 모드)는 prepared statement를 못 씀
     c.read_only = not write
     return c
 
@@ -152,11 +160,12 @@ def store(c, sid, cfg, url, title, text, published):
 
 # ---------- 소스별 ----------
 
-def candidates(c, sid, cfg, log):
+def candidates(c, sid, cfg, log, since=None):
     if cfg["mode"] == "upgrade":
+        lower = "%s::date" if since else f"current_date - {int(cfg.get('days', 30))}"
         rows = c.execute(f"""SELECT url FROM documents WHERE source_id = %s AND summary_only = 1
-                             AND coalesce(published_at, collected_at::date) >= current_date - {int(cfg.get('days', 30))}
-                             ORDER BY published_at DESC NULLS LAST""", (sid,)).fetchall()
+                             AND coalesce(published_at, collected_at::date) >= {lower}
+                             ORDER BY published_at DESC NULLS LAST""", (sid, since) if since else (sid,)).fetchall()
         skip = re.compile(cfg["skip_url"]) if cfg.get("skip_url") else None
         return [r["url"] for r in rows if not (skip and skip.search(r["url"]))]
     have = known(c, sid, cfg)
@@ -181,17 +190,124 @@ def candidates(c, sid, cfg, log):
     return [u for u in found if key_of(cfg, u) not in have]
 
 
-def run_source(c, sid, cfg, write, log, urls=None):
-    res = {"source": sid, "new": 0, "upgraded": 0, "dup": 0, "short": 0, "failed": 0, "items": []}
+STATE = RUNS / "backfill_state.json"
+
+
+def load_state():
     try:
-        todo = urls or candidates(c, sid, cfg, log)
+        return json.loads(STATE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"seen": {}, "opens": {}}
+
+
+def save_state(st):
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    STATE.write_text(json.dumps(st, ensure_ascii=False, indent=0), encoding="utf-8")
+
+
+def backfill_candidates(c, sid, cfg, since, log):
+    """과거 목록에서 하한 이후 글 [(주소, 아는 발행일 또는 None)] — 최신 글부터."""
+    b = cfg["backfill"]
+    out = []
+    if b["kind"] == "sitemap":  # Deloitte·BCG — 사이트맵의 주소 목록. 주소에 연도가 있으면(BCG) 그것으로 거른다
+        r = page(b["url"], "document.body.innerText", wait=12)
+        for m in re.finditer(b["loc"], r.get("value") or ""):
+            y = m.groupdict().get("year")
+            if not y or y >= since[:4]:
+                out.append((m.group(0), None))
+        log(f"  사이트맵 · 맞는 주소 {len(out)}")
+        first = []  # 사이트맵은 최신순이 아니다 — 허브 페이지(분류별 첫 화면)에 걸린 글을 앞으로
+        for hub in b.get("priority_pages", []):
+            time.sleep(cfg["gap_seconds"])
+            r = page(hub, LINKS, wait=8)
+            first += [x["u"] for x in (r.get("value") or []) if re.fullmatch(b["loc"], x["u"])]
+        if first:
+            rank = {u: i for i, u in enumerate(dict.fromkeys(first))}
+            out.sort(key=lambda x: rank.get(x[0], len(rank)))
+            log(f"  허브에 걸린 글 {len(rank)}편을 앞으로")
+    elif b["kind"] == "issues":  # DBR — 최신 호부터 거꾸로, 목차의 발행일이 하한보다 오래되면 멈춤
+        r = page(b["index"], LINKS, wait=7)
+        nums = [int(m.group(1)) for x in (r.get("value") or []) if (m := re.search(b["issue_no"], x["u"]))]
+        n = max(nums or [0])
+        time.sleep(cfg["gap_seconds"])
+        while n > 0:
+            r = page(b["toc"].format(n=n), LINKS + ".concat([{u: '@@', t: document.body.innerText.slice(0, 1500)}])", wait=7)
+            L = r.get("value") or []
+            if not L:
+                break
+            m = re.search(r"발행일\s*:\s*(\d{4}-\d{2}-\d{2})", L[-1]["t"])
+            day = m.group(1) if m else None
+            if day and day < since:
+                break
+            links = [canon(cfg, x["u"]) for x in L[:-1] if re.search(cfg["link"], x["u"])]
+            out += [(u, day) for u in dict.fromkeys(links)]
+            log(f"  {n}호 {day or '날짜 모름'} · 글 {len(set(links))}")
+            n -= 1
+            time.sleep(cfg["gap_seconds"])
+    elif b["kind"] == "pages":  # HBR Korea — 최신 글 쪽 넘기기(Referer를 보므로 via), 글 번호가 하한 번호보다 작아지면 멈춤
+        got = set()
+        for k in range(1, b["max_pages"] + 1):
+            r = page(b["page"].format(n=k), LINKS, wait=7, via=b["via"])
+            links = [canon(cfg, x["u"]) for x in (r.get("value") or []) if re.search(cfg["link"], x["u"])]
+            if links and set(links) <= got:  # 10쪽을 넘기면 주소 형식이 바뀌어 앞쪽이 되풀이된다 — 새 글이 없으면 멈춤
+                log(f"  목록 {k}쪽 · 앞쪽과 같음 — 멈춤")
+                break
+            got |= set(links)
+            nums = [int(m.group(1)) for x in links if (m := re.search(b["number"], x))]
+            keep = [x for x in dict.fromkeys(links) if (m := re.search(b["number"], x)) and int(m.group(1)) >= b["min_number"]]
+            out += [(x, None) for x in keep]
+            log(f"  목록 {k}쪽 · 글 {len(set(links))} · 하한 이후 {len(keep)}")
+            time.sleep(cfg["gap_seconds"])
+            if not nums or min(nums) < b["min_number"]:
+                break
+        for u in b.get("issues", []):  # 하한 이후 매거진 호
+            r = page(u, LINKS, wait=7, via=b["via"])
+            links = [canon(cfg, x["u"]) for x in (r.get("value") or []) if re.search(cfg["link"], x["u"])]
+            out += [(x, None) for x in dict.fromkeys(links)]
+            log(f"  매거진 {u.split('/pub_year/')[-1]} · 글 {len(set(links))}")
+            time.sleep(cfg["gap_seconds"])
+    have = known(c, sid, cfg)
+    seen, res = set(), []
+    for u, day in out:
+        k = key_of(cfg, u)
+        if k not in have and k not in seen:
+            seen.add(k)
+            res.append((u, day))
+    return res
+
+
+def run_source(c, sid, cfg, write, log, urls=None, since=None, backfill=False):
+    res = {"source": sid, "new": 0, "upgraded": 0, "dup": 0, "short": 0, "old": 0, "failed": 0, "items": []}
+    st = load_state()
+    seen = st["seen"].setdefault(sid, {})
+    today = time.strftime("%Y-%m-%d")
+    opens = st["opens"].setdefault(sid, {})
+    try:
+        if backfill:
+            # 과거 목록은 잘 안 바뀐다 — 한 번 만들어 두고 refresh_days마다만 다시(HBR Korea는 목록 확인에 페이지 20여 개)
+            cache = st.setdefault("lists", {}).get(sid)
+            fresh = cache and cache["since"] == since and time.time() - cache["at"] < cfg["backfill"].get("refresh_days", 7) * 86400
+            if not fresh:
+                cache = {"since": since, "at": time.time(), "list": backfill_candidates(c, sid, cfg, since, log)}
+                st["lists"][sid] = cache
+                save_state(st)
+            have = known(c, sid, cfg)
+            todo = [(u, d) for u, d in cache["list"] if u not in seen and key_of(cfg, u) not in have]
+            if not todo:
+                log("  백필 끝 — 남은 과거 글 없음")
+        else:
+            todo = [(u, None) for u in (urls or candidates(c, sid, cfg, log, since if cfg["mode"] == "upgrade" else None))]
     except PermissionError as e:
         log(f"  멈춤: {e}")
         res["stopped"] = str(e)
         return res
-    log(f"  받을 글 {len(todo)}편" + (f" — 이번엔 {cfg['max_per_run']}편까지" if len(todo) > cfg["max_per_run"] else ""))
-    for u in todo[:cfg["max_per_run"]]:
+    cap = cfg["backfill_per_run"] if backfill else cfg["max_per_run"]
+    if cfg.get("daily_cap"):  # 구독 소스: 하루에 여는 글 수(평소+백필 합)
+        cap = max(0, min(cap, cfg["daily_cap"] - opens.get(today, 0)))
+    log(f"  {'백필 ' if backfill else ''}받을 글 {len(todo)}편" + (f" — 이번엔 {cap}편까지" if len(todo) > cap else ""))
+    for u, hint in todo[:cap]:
         r = page(u, extract_expr(cfg, sid))
+        opens[today] = opens.get(today, 0) + 1
         head = r.get("head", "")
         if cfg.get("stop_marker") and cfg["stop_marker"] in head:
             log(f"  멈춤: '{cfg['stop_marker']}' — 남은 글은 다음 회차로")
@@ -210,10 +326,21 @@ def run_source(c, sid, cfg, write, log, urls=None):
                 res["items"].append(item)
                 log(f"  멈춤: 로그인 표시가 사라짐 — {u}")
                 break
-            if v["chars"] < cfg["min_chars"]:
+            pub = v["published"] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v["published"] or "") else hint
+            if backfill and not pub and cfg["backfill"].get("require_date"):  # 날짜 없는 페이지는 허브(Deloitte 분류 페이지 등)
+                item["result"] = "날짜 없음"
+                res["short"] += 1
+                seen[u] = "nodate"
+            elif since and cfg["mode"] != "upgrade" and pub and pub < since:
+                item["result"] = "기간 밖"
+                res["old"] += 1
+                seen[u] = "old"
+            elif v["chars"] < cfg["min_chars"]:
                 item["result"] = "짧음"
                 res["short"] += 1
+                seen[u] = "short"
             elif write:
+                v["published"] = pub
                 item["result"] = store(c, sid, cfg, u, v["title"], v["text"], v["published"])
                 c.commit()
                 res[item["result"]] = res.get(item["result"], 0) + 1
@@ -221,7 +348,9 @@ def run_source(c, sid, cfg, write, log, urls=None):
                 item["result"] = "미리보기"
             res["items"].append(item)
             log(f"  {item['result']:6} {v['chars']:>6}자 {v['published'] or '날짜 없음':10} {v['title'][:60]}")
+        save_state(st)
         time.sleep(cfg["gap_seconds"])
+    save_state(st)
     return res
 
 
@@ -230,6 +359,8 @@ def main():
     ap.add_argument("--source", nargs="+")
     ap.add_argument("--url", nargs="+")
     ap.add_argument("--write", action="store_true", help="DB에 저장 (없으면 미리보기)")
+    ap.add_argument("--backfill", metavar="YYYY-MM-DD", help="평소 수집 뒤 이 날짜 이후 과거분을 회차마다 조금씩 (없으면 설정 backfill_since)")
+    ap.add_argument("--no-backfill", action="store_true", help="이번엔 과거분 없이 평소 수집만")
     ap.add_argument("--check", action="store_true", help="Aside Browser가 켜져 있으면 0, 아니면 3으로 끝냄")
     ap.add_argument("--limit", type=int, help="소스마다 이번에 받을 글 수 (설정 max_per_run보다 작게 시험할 때)")
     a = ap.parse_args()
@@ -237,9 +368,11 @@ def main():
         sys.exit(0 if running() else 3)
     conf = json.loads(CONF.read_text(encoding="utf-8"))
     srcs = {k: {**conf["defaults"], **v} for k, v in conf["sources"].items()}
+    a.backfill = None if a.no_backfill else (a.backfill or conf["defaults"].get("backfill_since"))
     if a.limit:
         for v in srcs.values():
             v["max_per_run"] = min(v["max_per_run"], a.limit)
+            v["backfill_per_run"] = min(v["backfill_per_run"], a.limit)
     names = a.source or [k for k, v in srcs.items() if v["mode"] != "off"]  # off: 이름으로 부를 때만
     if a.url and len(names) != 1:
         sys.exit("--url은 --source 하나와 함께 씁니다.")
@@ -253,11 +386,16 @@ def main():
         for sid in names:
             if sid not in srcs:
                 sys.exit(f"모르는 소스: {sid}")
+            cfg = srcs[sid]
             log(f"[{sid}] {'저장' if a.write else '미리보기'}")
-            out.append(run_source(c, sid, srcs[sid], a.write, log, a.url))
+            # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
+            out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
+            if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
+                log(f"[{sid}] 백필 {a.backfill} 이후")
+                out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
             (d / "report.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
-    tot = {k: sum(r.get(k, 0) for r in out) for k in ("new", "upgraded", "dup", "short", "failed")}
-    log(f"끝 · 신규 {tot['new']} · 격상 {tot['upgraded']} · 중복 {tot['dup']} · 짧음 {tot['short']} · 실패 {tot['failed']} → {d.relative_to(ROOT).as_posix()}/report.json")
+    tot = {k: sum(r.get(k, 0) for r in out) for k in ("new", "upgraded", "dup", "short", "old", "failed")}
+    log(f"끝 · 신규 {tot['new']} · 격상 {tot['upgraded']} · 중복 {tot['dup']} · 짧음 {tot['short']} · 기간 밖 {tot['old']} · 실패 {tot['failed']} → {d.relative_to(ROOT).as_posix()}/report.json")
 
 
 if __name__ == "__main__":

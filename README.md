@@ -39,6 +39,10 @@
 > 작업실 서버가 6시간마다(`ASIDE_COLLECT_HOURS`) Aside Browser가 켜져 있을 때만 돌고, 서재의 **aside 수집**을 비워 두고 눌러도 됩니다.
 > 글은 AI가 고르지 않고 목록 페이지의 링크 패턴으로 고르며, 본문은 main 추출기(`scripts/aside/extract_article.js`)로 원문 그대로 뽑습니다.
 > 저장 규칙은 main `store_document`와 같고(`fetched_by='aside'`, `status='new'` → main Actions가 관련성 판별·claim 추출), 끝나면 Supabase 받기가 이어져 서재에 뜹니다.
+> **과거분 백필** — 회차마다 평소 수집 뒤 2026-01-01(`backfill_since`) 이후 과거 글을 소스당 20편씩 더 받습니다. Deloitte·BCG는 사이트맵, DBR은 호별 목차(433~451호),
+> HBR Korea는 최신 글 쪽 넘기기(디지털 글 번호 1515번 이후 — 날짜가 없어 근사)와 2026년 매거진 호, McKinsey·Wharton은 격상 기간을 하한까지 넓힙니다.
+> 하한보다 오래된 글·짧은 글·날짜 없는 허브 페이지는 저장하지 않고 `runs/aside/backfill_state.json`에 적어 다시 열지 않으며, 과거 목록은 일주일마다만 새로 만듭니다.
+> 구독 소스는 하루에 여는 글 수가 40편(`daily_cap`)까지입니다. 다 받으면 로그에 '백필 끝'이 찍히고 평소 수집만 남습니다.
 > 구독 소스는 로그인을 사람이 해 두고, 로그인이 풀려 있으면 그 소스는 멈춥니다. 입력창에 요청을 적으면 예전처럼 그 요청으로 aside가 글을 찾습니다(`scripts/collect.py`, 작업실 로컬 저장).
 
 ![서재](docs/readme/screen-library.jpg)

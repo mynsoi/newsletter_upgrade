@@ -43,7 +43,7 @@ def connect():
         import psycopg
     except ImportError:
         sys.exit("psycopg가 없습니다 — pip install \"psycopg[binary]\"")
-    c = psycopg.connect(url)
+    c = psycopg.connect(url, prepare_threshold=None)  # Supabase 풀러(트랜잭션 모드)는 prepared statement를 못 씀
     c.read_only = True  # 첫 트랜잭션 전에 — 이 연결의 모든 트랜잭션이 읽기 전용
     return c
 

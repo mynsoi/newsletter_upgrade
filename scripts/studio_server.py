@@ -853,7 +853,8 @@ def act_confirm(a):
 
 
 def act_collect(a):
-    """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장)
+    """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장,
+    과거분 백필(설정 backfill_since 이후)도 회차마다 조금씩 — 다 받으면 저절로 '백필 끝')
     → 끝나면 Supabase 받기로 서재에 반영. 적으면 예전처럼 그 요청으로 aside가 글을 찾는다(scripts/collect.py, 작업실 로컬 저장).
     주제 지도 넣기는 잇지 않는다(2026-10-20 — 원문이 수백 편이라 넣기는 '넣기' 버튼으로)."""
     req = str(a.get("request", "")).strip()
