@@ -207,6 +207,7 @@ export const JOB_NAMES: Record<string, string> = {
   inline: "본문 그림",
   images: "그림",
   collect: "수집",
+  "db-sync": "Supabase 받기",
   chat: "진행자",
   wiki: "위키 넣기",
   "wiki-lint": "다시 거르기",

@@ -6,6 +6,7 @@
 """
 import base64
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -860,6 +861,22 @@ def act_collect(a):
     return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req], after)
 
 
+DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 서버가 켜질 때 한 번, 그다음 이 간격마다
+
+
+def act_db_sync(_):
+    """Supabase 받기 — main 파이프라인이 매일 쌓는 원문을 서재로(scripts/db_sources.py). 반려된 원문은 정리(--prune, 카드 있는 원문은 남김).
+    주제 지도 넣기는 이어 붙이지 않는다 — astra를 쓰고 주제 판정은 사람이 보는 일이라 '넣기' 버튼으로."""
+    return start("db-sync", "Supabase", PY + ["scripts/db_sources.py", "--sync", "--prune"])
+
+
+def db_sync_loop():
+    while True:
+        if os.environ.get("DATABASE_URL"):
+            act_db_sync({})
+        time.sleep(max(DB_EVERY, 600))
+
+
 def act_wiki_ingest(_):
     return start("wiki", "넣기", PY + ["scripts/wiki.py", "--ingest"])
 
@@ -934,7 +951,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
+           "confirm": act_confirm, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart}
@@ -1096,4 +1113,7 @@ if __name__ == "__main__":
     for srv in servers[1:]:
         threading.Thread(target=srv.serve_forever, daemon=True).start()
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
+    threading.Thread(target=db_sync_loop, daemon=True).start()
+    if not os.environ.get("DATABASE_URL"):
+        print("DATABASE_URL이 없어 Supabase 자동 받기를 건너뜁니다(서재의 'Supabase 받기'도 실패합니다).", flush=True)
     servers[0].serve_forever()

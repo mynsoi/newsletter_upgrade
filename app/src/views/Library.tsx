@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { IconArrowRight, IconSparkles, IconWorldSearch } from "@tabler/icons-react";
+import { IconArrowRight, IconDatabase, IconSparkles, IconWorldSearch } from "@tabler/icons-react";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
@@ -24,6 +24,10 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
   const [open, setOpen] = useState<string | null>(null);
   const [req, setReq] = useState("");
   const collecting = state.jobs.filter((j) => j.kind === "collect" && j.status === "running");
+  // Supabase 받기 — 서버가 켜질 때와 6시간마다 저절로 돌고(studio_server.db_sync_loop), 버튼으로 바로 받을 수도 있다
+  const syncs = state.jobs.filter((j) => j.kind === "db-sync");
+  const syncing = syncs.some((j) => j.status === "running");
+  const lastSync = syncs.find((j) => j.status !== "running");
   const box = useRef<HTMLDivElement>(null);
   const collect = () => {
     if (!req.trim()) return act("collect", { request: "" }).then(refresh); // 비우면 자동 — Threads·LinkedIn에서 알아서
@@ -85,6 +89,14 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
             >
               <IconWorldSearch className="size-4" /> aside 수집
             </HoverBorderGradient>
+            <button
+              onClick={() => !syncing && act("db-sync", {}).then(refresh)}
+              disabled={syncing}
+              title={lastSync ? `마지막 받기 ${new Date((lastSync.ended ?? lastSync.started) * 1000).toLocaleString("ko-KR")} · ${lastSync.status === "done" ? "완료" : "실패"}` : "아직 받은 적 없음"}
+              className="flex shrink-0 items-center gap-2 rounded-full border border-line bg-page px-5 py-2.5 text-sm font-medium text-ink transition hover:border-violet-400 disabled:opacity-60"
+            >
+              <IconDatabase className={cn("size-4", syncing && "animate-pulse")} /> {syncing ? "받는 중" : "Supabase 받기"}
+            </button>
             <button
               onClick={() => go("#/topics")}
               className="flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
