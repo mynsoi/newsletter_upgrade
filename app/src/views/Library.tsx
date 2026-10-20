@@ -54,6 +54,12 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
     return [...m.entries()].sort((a, b) => b[1].n - a[1].n);
   }, [state.library, site]);
 
+  // 수집 기록 칩 — 소스 aside 수집(Supabase)과 요청 수집(로컬)을 시각순으로 섞어 최근 6개
+  const rounds = useMemo(
+    () => [...(state.asideRounds ?? []), ...state.collects].sort((a, b) => b.id.localeCompare(a.id)).slice(0, 6),
+    [state.asideRounds, state.collects]
+  );
+
   const fresh = useMemo(() => new Set(state.collects.flatMap((c) => c.saved.map((s) => s.path).filter(Boolean))), [state.collects]);
 
   const rows = useMemo(() => {
@@ -117,15 +123,27 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
               <IconSparkles className="size-4" /> 주제 지도 <IconArrowRight className="size-4" />
             </button>
           </div>
-          {state.collects.length > 0 && (
+          {rounds.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2">
-              {state.collects.slice(0, 6).map((c) => (
-                <Chip key={c.id} className="bg-page/60 backdrop-blur">
-                  <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
-                  <span className="max-w-64 truncate">{c.request}</span>
-                  <span className="tabular-nums text-violet-700 dark:text-violet-300">+{c.saved.filter((x) => x.path).length}</span>
-                </Chip>
-              ))}
+              {rounds.map((c) =>
+                "new" in c ? (
+                  <Chip key={"a" + c.id} className="bg-page/60 backdrop-blur" title={c.stopped.length ? `멈춘 소스: ${c.stopped.join(", ")}` : undefined}>
+                    <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
+                    <span>aside · 소스</span>
+                    <span className="tabular-nums text-violet-700 dark:text-violet-300">
+                      신규 {c.new}
+                      {c.upgraded > 0 && ` · 격상 ${c.upgraded}`}
+                    </span>
+                    {(c.failed > 0 || c.stopped.length > 0) && <span className="tabular-nums text-amber-600 dark:text-amber-300">!</span>}
+                  </Chip>
+                ) : (
+                  <Chip key={c.id} className="bg-page/60 backdrop-blur">
+                    <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
+                    <span className="max-w-64 truncate">{c.request}</span>
+                    <span className="tabular-nums text-violet-700 dark:text-violet-300">+{c.saved.filter((x) => x.path).length}</span>
+                  </Chip>
+                )
+              )}
             </div>
           )}
         </div>

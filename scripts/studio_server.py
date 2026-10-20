@@ -317,7 +317,7 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "wiki": wiki_state(fresh), "mine": mine_state(jobs)}
+            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs)}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -505,9 +505,28 @@ def act_mine_swap(a):
 
 
 def collect_rounds():
+    """요청 수집(scripts/collect.py) 기록. 저장한 원문이 하나도 남지 않은 회차(2026-10-20 지운 Threads·LinkedIn 샘플)는 숨긴다."""
     out = []
     for d in sorted((ROOT / "runs" / "collect").glob("*/"), reverse=True):
-        out.append({"id": d.name, "request": read(d / "request.txt"), "saved": json.loads(read(d / "saved.json") or "[]")})
+        saved = json.loads(read(d / "saved.json") or "[]")
+        if not any((SRC / x["path"]).exists() for x in saved if x.get("path")):
+            continue
+        out.append({"id": d.name, "request": read(d / "request.txt"), "saved": saved})
+    return out
+
+
+def aside_rounds():
+    """소스 aside 수집(scripts/aside_collect.py) 회차 — runs/aside/<시각>/report.json. 미리보기 회차는 뺀다."""
+    out = []
+    for d in sorted((ROOT / "runs" / "aside").glob("2*/"), reverse=True):
+        rep = json.loads(read(d / "report.json") or "[]")
+        if not rep or any(i.get("result") == "미리보기" for r in rep for i in r.get("items", [])):
+            continue
+        n = lambda k: sum(r.get(k, 0) for r in rep)
+        out.append({"id": d.name, "new": n("new"), "upgraded": n("upgraded"), "failed": n("failed"),
+                    "stopped": sorted({r["source"] for r in rep if r.get("stopped")})})
+        if len(out) >= 12:
+            break
     return out
 
 
