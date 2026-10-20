@@ -1,0 +1,51 @@
+{
+ "topic": "w-20261020-171714",
+ "label": "AI에게 매번 자료 위치부터 설명하고 있다면 손볼 것은 프롬프트가 아니라 자료 보관 방식이다",
+ "thesis": "AI에게 매번 자료 위치부터 설명해야 한다면, 먼저 손볼 것은 프롬프트가 아니라 자료의 보관 방식이다. 자동화를 하려면 도구부터 늘리기보다 자료를 종류별로 한 곳에 모으고, AI가 접근하도록 연결하고, 이름과 구조를 정리하는 순서를 갖춰야 한다.",
+ "why": "문서가 흩어진 사무직에 바로 통하는 관점 전환",
+ "sources": [
+  [
+   "originals/linkedin/14.md",
+   "LinkedIn, 기업 AI 에이전트 도입 코치 | 『n8n이 다 해줌』 저자, 7월 30일"
+  ],
+  [
+   "originals/threads/10.md",
+   "Threads, @gasket_love, 2026-05-05"
+  ]
+ ],
+ "target": "전 직원",
+ "from_wiki": "wiki/주제/linkedin-14.md",
+ "title": "자동화 도구를 늘려도 손이 바쁜 이유",
+ "hero": "runs/images/w-20261020-171714/20261020-173822/03.png",
+ "inline": [
+  {
+   "src": "runs/images/w-20261020-171714/inline-20261020-173825/01.png",
+   "after": 6,
+   "anchor": "자료를 모으고, AI가 접근할 수 있도록 연결하고, 이름과 구조를 정리하",
+   "name": "자료에서 자동화까지"
+  },
+  {
+   "src": "runs/images/w-20261020-171714/inline-20261020-173825/02.png",
+   "after": 8,
+   "anchor": "새 도구를 설치하기 전에 팀 회의에서 삼십 분만 써 보기 바랍니다. 견적",
+   "name": "개인의 정리에서 팀의 약속으로"
+  }
+ ],
+ "confirmed": {
+  "date": "2026-10-20",
+  "step": 4,
+  "file": "columns/2026-10-20-w-20261020-171714.md",
+  "inline": 2,
+  "hero": "columns/img/2026-10-20-w-20261020-171714.png"
+ },
+ "published": {
+  "date": "2026-10-20",
+  "url": "https://newsletter-upgrade-three.vercel.app/qvauxq7a4vlgiaey/w-20261020-171714/",
+  "site": "site/qvauxq7a4vlgiaey/w-20261020-171714",
+  "eml": "publish/w-20261020-171714/newsletter.eml",
+  "to": [
+   "sominnlee@sk.com"
+  ],
+  "cc": []
+ }
+}
