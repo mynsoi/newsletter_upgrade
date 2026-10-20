@@ -2,7 +2,7 @@
 
 HTML 구조·디자인과 메일 방식은 main 브랜치(web/server.py · web/email_renderer.py · web/site_export.py)를 따른다.
 - 웹: web/article.html + web/article.css (Offpiste식 1컬럼, Pine Green)
-- 메일: 웹페이지의 메일 전용 변형(email-head.html · email-body.html)을 960px 폭으로 찍어 넣은 이미지 메일.
+- 메일: 웹페이지의 메일 전용 변형(email-head.html · email-body.html)을 800px 폭으로 찍어 넣은 이미지 메일.
   보내지는 않는다 — .eml을 Outlook에서 열어 확인한 뒤 사람이 보낸다.
 - 배포: site/<web_path_token>/<글>/ 로 복사하고 아카이브 목록을 다시 만든 뒤 커밋·푸시 → vercel.json이 site/를 배포.
 
@@ -38,7 +38,7 @@ SKIP = {"newsletter.eml", "email.html", "email-head.html", "email-body.html", "e
 # 디자인 토큰 — web/article.css와 같은 값
 ACCENT, CANVAS, INK_MUTED = "#0B6E4F", "#F7F8FA", "#6E7278"
 FONT = "Malgun Gothic, sans-serif"
-EMAIL_WIDTH = 960  # main은 600 — 데스크톱 Outlook에서 좁아 보여 1.6배로(2026-10-20). 캡처 CSS(article.css .email-capture)가 이 폭 기준
+EMAIL_WIDTH = 800  # main은 600 — 데스크톱 Outlook에서 좁아 보여 넓힘(2026-10-20, 960은 넓다고 해 800). 캡처 CSS(article.css .email-capture)가 이 폭 기준
 
 
 def settings():

@@ -109,7 +109,7 @@ function Detail({ a, state, refresh }: { a: Article; state: State; refresh: () =
           {err ? (
             <div className="rounded-2xl border border-rose-400/40 p-6 text-sm text-rose-600 dark:text-rose-300">{err}</div>
           ) : v ? (
-            <div className={cn("overflow-hidden rounded-2xl border border-line bg-white", view === "mail" && "mx-auto w-[960px] max-w-none")}>
+            <div className={cn("overflow-hidden rounded-2xl border border-line bg-white", view === "mail" && "mx-auto w-[800px] max-w-none")}>
               <iframe key={view + v} title="미리보기" src={pubUrl(a.id, view === "web" ? "index.html" : "email.html", v)} className="h-[calc(100vh-11rem)] w-full" />
             </div>
           ) : (
