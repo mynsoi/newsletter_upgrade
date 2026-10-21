@@ -1,0 +1,33 @@
+---
+type: topic
+kind: message
+title: 직원 의견 조사 점수가 오르지 않는 것은 결과를 인사팀 숙제로 넘기기 때문이다
+verdict: 쓸 만함
+audience: 팀장급
+center: fastcompany-worklife/0024
+status: 쓸 수 있음
+used_in: []
+timestamp: 2026-10-21
+---
+
+# 직원 의견 조사 점수가 오르지 않는 것은 결과를 인사팀 숙제로 넘기기 때문이다
+
+## 왜 쓸모
+몰입도를 좌우하는 업무량·리더십은 현업에 있다는 지적이 팀장에게 직접 닿는다. 사내 조사를 하는 회사라 더 통함
+
+## 이 글이 말할 것
+직원 의견 조사 점수가 오르지 않는 것은 결과를 인사팀 숙제로 넘기기 때문이다
+
+## 사례
+- [fastcompany-worklife/0024] (중심) 인사 리더 81%는 직원을 잘 대변한다고 믿지만, 인사팀을 온전히 신뢰하는 직원은 54%
+
+## 제목 후보
+
+
+## 원문
+| 원문 | 작성자 · 날짜 | 있었던 일 |
+|---|---|---|
+| [fastcompany-worklife/0024](../../sources/originals/fastcompany-worklife/0024.md) · https://www.fastcompany.com/91611952/hr-has-a-trust-problem-but-companies-not-hr-need-to-fix-it-leadership-workplace-well-being-human-resources?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss | Mark C. Crowley · 2026-10-10 | (1) Leapsome의 2026 인력 동향 보고서에 따르면 인사 리더의 81%는 경영 의사결정에서 직원을 잘 대변한다고 믿지만, 일반 직원 중 인사팀을 온전히 신뢰하는 비율은 54%에 그쳤다. 또 인사 리더의 72%는 위에서 내려오는 지시에 이의를 제기할 수 있다고 봤지만 일반 직원은 45%만 동의해 인식 차이가 드러났다. (2) 2022년 언스트앤영(EY)은 최고웰빙책임자(Chief Well-Being Officer) 직책을 가장 먼저 만든 기업 중 하나가 되었다. 이 직책을 맡은 프랭크 지암피에트로는 팟캐스트에서 직원의 신체적·정서적·재정적·사회적 웰빙을 프로그램을 넘어 문화와 근무 환경까지 포함해 다루는 것이 자신의 역할이라고 설명했다. (3) 그동안 기업들은 직원 몰입도 조사를 인사팀에 맡겨 왔지만, 몰입도를 좌우하는 업무량, 지지적인 리더십, 유연성, 고용 안정은 인사팀이 아닌 현업에 있었다. 그래서 리더들이 조사 결과를 인사팀이 해결할 문제로 여겼고 점수도 거의 오르지 않았다. |
+
+## 글쓴이가 하는 말
+- [fastcompany-worklife/0024] 직원 웰빙은 인사팀 혼자 맡을 수 없는 일이므로, 최고경영진 차원의 책임자를 두고 관리자와 그 상사가 직원 의견에 책임지고 대응하게 해야 한다. 인사팀은 직원의 목소리를 듣는 체계를 맡고, 결과에 대한 책임은 경영진이 져야 한다는 주장이다.
