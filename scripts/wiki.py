@@ -598,7 +598,32 @@ def claude_key(d, prompt):
 
 
 def bundle(api=False):
-    """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제를 만들거나 기존 주제에 사례로 붙인다."""
+    """주제 묶기 — 대상(최근 RECENT_MONTHS개월) 카드를 BUNDLE_LIMIT장씩 끝까지 이어서 묶는다(2026-10-21: 버튼 한 번에 끝까지).
+    한 번 보낼 때마다 저장·커밋하므로 중간에 멈춰도(계정 한도 등) 묶은 데까지는 남고, 다시 누르면 남은 카드부터 이어 간다.
+    한 번 보냈는데 주제에도 안 들고 빼지도 않은 카드는 이번 실행에서 다시 보내지 않는다(다음 실행에서 다시 본다)."""
+    t0, sent, n = time.time(), set(), 0
+    while True:
+        n += 1
+        print(f"── {n}번째 묶음", flush=True)
+        got = bundle_once(api, sent)
+        if not got:
+            break
+        sent |= got
+    if sent:
+        cs = all_cards()
+        try:
+            nt_ = fill_titles(topics(), cs, RUNS / ("bundle-titles-" + time.strftime("%Y%m%d-%H%M%S")))  # 쓸 만함 주제의 제목 후보(astra) — 한도에 걸리면 비고, '이 주제로'를 누를 때 제목 단계가 돈다
+        except Exception as e:
+            nt_ = 0
+            print(f"제목 후보 건너뜀: {e}", flush=True)
+        write_index(topics())
+        log([f"- 주제 묶기(이어 묶기) {n - 1}번 · 보낸 카드 {len(sent)} · 제목 후보 {nt_}개 · {time.time() - t0:.0f}s"])
+        commit(f"주제 묶기: 제목 후보 {nt_}개 ({time.time() - t0:.0f}s)")
+        print(f"이어 묶기 끝 · {n - 1}번 · 보낸 카드 {len(sent)} · {time.time() - t0:.0f}s")
+
+
+def bundle_once(api=False, skip=()):
+    """한 번(BUNDLE_LIMIT장까지) 보내 묶는다 → 이번에 보낸 카드 키(없으면 빈 집합)."""
     t0 = time.time()
     dc, cs, ts, ex = doc_cards(), all_cards(), topics(), excluded()
     used = {s for t in ts for s in t["sources"]}
@@ -606,14 +631,14 @@ def bundle(api=False):
     for k in [k for k in new if dc[k].get("material_type") == "재료 없음"]:
         ex[k] = "재료 없음(카드)"
     pool, n_old, n_undated = bundle_pool()  # 최근 RECENT_MONTHS개월 발행 카드만 — 오래된·날짜 없는 카드는 검색에만
-    new = sorted([k for k in new if k not in ex and k in set(pool)], key=lambda k: date_of(rel(k)), reverse=True)
+    new = sorted([k for k in new if k not in ex and k in set(pool) and k not in skip], key=lambda k: date_of(rel(k)), reverse=True)
     print(f"대상: 발행일 {recent_since()} 이후 {len(new)}장 · 묶지 않음(검색에만) 오래된 {n_old} · 발행일 없음 {n_undated}")
     left = max(0, len(new) - BUNDLE_LIMIT)
     new = new[:BUNDLE_LIMIT]
     if not new:
         EXCLUDED.write_text(json.dumps(ex, ensure_ascii=False, indent=1), encoding="utf-8")
         print("새 카드 없음")
-        return
+        return set()
     run = RUNS / ("bundle-" + time.strftime("%Y%m%d-%H%M%S"))
     print(f"새 카드 {len(new)}장 · 기존 주제 {len(ts)}개 → {'API Opus 5.5' if api else '계정 로그인 claude(opus)'}", flush=True)
     raw = (claude_key if api else claude_login)(run / "bundle", bundle_prompt(new, cs, ts))
@@ -649,16 +674,12 @@ def bundle(api=False):
         if x.get("key") in new and x["key"] not in placed:
             ex[x["key"]] = x.get("reason", "")
     EXCLUDED.write_text(json.dumps(ex, ensure_ascii=False, indent=1), encoding="utf-8")
-    try:
-        nt_ = fill_titles(topics(), cs, run)  # 쓸 만함 주제의 제목 후보(astra) — 한도에 걸리면 비고, '이 주제로'를 누를 때 제목 단계가 돈다
-    except Exception as e:
-        nt_ = 0
-        print(f"제목 후보 건너뜀: {e}", flush=True)
     write_index(topics())
     rest = len([k for k in new if k not in placed and k not in ex])
-    log(lines + [f"- 주제 묶기 새 카드 {len(new)} · 붙음/새 주제 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 남음 {rest + left} · 제목 후보 {nt_}개 · {time.time() - t0:.0f}s"])
+    log(lines + [f"- 주제 묶기 새 카드 {len(new)} · 붙음/새 주제 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 못 넣음 {rest} · 남음 {left} · {time.time() - t0:.0f}s"])
     commit(f"주제 묶기: 새 카드 {len(new)}장 ({time.time() - t0:.0f}s)")
-    print(f"주제 묶기 끝 · 주제에 들어감 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 다음에 {rest + left} · {time.time() - t0:.0f}s")
+    print(f"묶음 끝 · 주제에 들어감 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 못 넣음 {rest} · 남음 {left} · {time.time() - t0:.0f}s", flush=True)
+    return set(new)
 
 
 # ---------- 고르기 · 판정 · 확정 ----------
