@@ -122,6 +122,28 @@ Threads·LinkedIn 글과 경영일기를 모아 두는 곳입니다. 입력창�
 확정은 원할 때만 합니다. 확정 카드의 **과정 칩**으로 확정할 과정을 고르면(오른쪽에 그 과정이 뜸) **과정 N으로 확정** — 칼럼이 `columns/`에 저장됩니다.
 확정한 뒤에도 다른 과정을 골라 바꿔 확정할 수 있습니다.
 
+### 7. 발행 — 웹과 메일
+
+확정한 칼럼은 왼쪽 메뉴 **발행**에 모입니다. 글을 고르면 발행본을 만들어 **웹 · 메일** 모양을 미리 볼 수 있습니다.
+받는 사람을 적고 **발행**을 두 번 누르면 다음이 차례로 돕니다(`scripts/publish.py release`).
+
+1. 메일 — 웹페이지의 메일 전용 변형을 600px 폭으로 찍어 이미지 메일 `.eml`을 만듭니다. 보내지는 않습니다 — **메일 파일(.eml)**을 받아 Outlook에서 열어 보냅니다.
+2. 웹 — `site/<토큰>/<글>/`로 내보내고 아카이브 목록을 다시 만든 뒤 커밋·푸시합니다. `vercel.json`이 `site/`를 배포합니다.
+
+HTML 구조·디자인과 메일 방식은 팀 저장소 main 브랜치(`web/`)를 따릅니다(`web/article.html` · `web/article.css`).
+설정은 `config/publish.json` — Vercel 주소(`web_base_url`)를 채워야 메일에 '웹에서 보기' 링크가 붙습니다.
+
+```bash
+python3 -I scripts/publish.py build <글>                     # 미리보기만 — publish/<글>/ (git 밖)
+python3 -I scripts/publish.py release <글> --to a@x,b@x [--cc …] [--no-push]
+python3 -I scripts/publish.py unpublish <글…>                # 웹에서 내리기(아카이브 목록도 다시) — 보낸 메일의 링크는 끊김
+```
+
+메일 이미지는 800px 폭으로 찍습니다(main은 600px). 그림체는 `config/image_style.json`(main의 '일러스트 B')으로 고정 —
+astra는 장면·구도만 쓰고, 본문 그림은 그 문단을 고른 이유(why)를 남깁니다(그림에 마우스를 올리면 보임).
+그림 작업 중에는 대화에 "그리는 중 N/M장 · 몇 분째 · 실패 N"이 뜹니다. gti는 같은 계정 요청을 차례로 처리하므로
+한 장 5분 × 2회까지 기다리고 동시에 2장씩 보냅니다(2026-10-20 — 90초 기본값에서 전부 시간 초과).
+
 ## 어떻게 돌아가나
 
 ![누가 무엇을 부르나](docs/readme/diagram-architecture.png)

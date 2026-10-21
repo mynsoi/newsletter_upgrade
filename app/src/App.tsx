@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { IconBooks, IconBulb, IconFileText, IconTerminal2 } from "@tabler/icons-react";
+import { IconBooks, IconBulb, IconFileText, IconSend, IconTerminal2 } from "@tabler/icons-react";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { LiveLog } from "@/components/studio/live-log";
 import { motion } from "motion/react";
@@ -10,6 +10,7 @@ import Topics, { newSources } from "@/views/Topics";
 import { ThemeToggle } from "@/components/application/theme/theme-toggle";
 import Articles from "@/views/Articles";
 import Flow from "@/views/Flow";
+import Publish from "@/views/Publish";
 import { articleTitle, getJobs, getState, img, JOB_NAMES, openLog, stage, subscribeAct, type Job, type State } from "@/lib/api";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -122,6 +123,8 @@ export default function App() {
             <Library state={state} refresh={refresh} go={go} />
           ) : view === "topics" ? (
             <Topics state={state} refresh={refresh} go={go} />
+          ) : view === "publish" ? (
+            <Publish state={state} id={parts[1] ? decodeURIComponent(parts[1]) : undefined} refresh={refresh} go={go} />
           ) : view === "a" && parts[1] ? ( // 예전 주소 #/a/<글>/<탭>도 대화 화면으로
             <Flow key={parts[1]} state={state} id={decodeURIComponent(parts[1])} refresh={refresh} go={go} />
           ) : (
@@ -163,6 +166,7 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
       ),
     },
     { label: "글", href: "#/articles", key: "articles", icon: <IconFileText className="size-5 shrink-0 text-ink-2" /> },
+    { label: "발행", href: "#/publish", key: "publish", icon: <IconSend className="size-5 shrink-0 text-ink-2" /> },
   ];
   // 대화 목록 = 글 + 아직 글 설정이 없는(원문을 고르는 중·멈춘) 대화
   const pending = (state?.mine ?? []).filter((r) => !r.article).sort((a, b) => b.at - a.at);

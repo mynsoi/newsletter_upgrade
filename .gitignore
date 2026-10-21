@@ -2,3 +2,7 @@ _workspace/
 __pycache__/
 runs/studio/thumbs/
 trash/
+
+publish/
+.env
+.venv/
