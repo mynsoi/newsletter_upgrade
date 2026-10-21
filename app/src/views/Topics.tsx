@@ -57,7 +57,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   // 주제 묶기(2026-10-21) — 자동 카드로 메시지 단위 주제를 만든다. 버튼에 아직 묶지 않은 카드 수
   const bundling = runningJob(state.jobs, "wiki", "주제 묶기");
   const unbundled = wiki?.unbundled ?? 0;
-  const since = wiki?.bundleSince ? `발행일 ${wiki.bundleSince} 이후` : "최근 3개월";
+  const since = wiki?.bundleSince ? `발행일 ${wiki.bundleSince} 이후` : "최근 1개월";
   const judging = state.jobs.filter((j) => j.kind === "wiki-verdict" && j.status === "running");
   const backlog = newSources(state);
 

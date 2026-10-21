@@ -284,7 +284,7 @@ def wiki_state(fresh):
             "cases": tp["cases"],
         })
     log = read(W.WIKI / "log.md")
-    unbundled, n_old, n_undated = W.bundle_pool()  # 최근 3개월 발행 카드만 묶는다 — 나머지는 검색에만
+    unbundled, n_old, n_undated = W.bundle_pool()  # 최근 1개월 발행 카드만 묶는다 — 나머지는 검색에만
     return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(), "unbundled": len(unbundled),
             "bundleSince": W.recent_since(), "searchOnly": {"old": n_old, "undated": n_undated},
             "log": [l for l in log.splitlines() if l.startswith(("## ", "- "))][:40]}

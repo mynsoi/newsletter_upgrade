@@ -39,9 +39,9 @@ CARDS = WIKI / "cards.json"
 DOC_CARDS = ROOT / "sources" / "doc_cards.json"
 EXCLUDED = WIKI / "묶기제외.json"  # 주제 묶기에서 쓸 수 없다고 뺀 카드와 이유 — 다음 묶기에 다시 보내지 않는다
 BUNDLE_LIMIT = int(os.environ.get("WIKI_BUNDLE_LIMIT", "100"))  # 주제 묶기 한 번에 보는 새 카드 상한
-# 주제 묶기는 발행일이 최근 이 개월 수 안인 카드만(누를 때마다 오늘부터 셈). 그보다 오래됐거나 발행일 없는 카드는
+# 주제 묶기는 발행일이 최근 이 개월 수 안인 카드만(누를 때마다 오늘부터 셈 — 3개월은 664장이라 많아 1개월로, 10/21). 그보다 오래됐거나 발행일 없는 카드는
 # 주제로 묶지 않고 '내 주제로 쓰기' 검색(card_search.py)에만 쓴다(2026-10-21 결정 — 주제 탭은 최근 흐름 중심).
-RECENT_MONTHS = int(os.environ.get("WIKI_BUNDLE_RECENT_MONTHS", "3"))
+RECENT_MONTHS = int(os.environ.get("WIKI_BUNDLE_RECENT_MONTHS", "1"))
 BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때(기본은 계정 로그인 claude CLI의 opus)
 EXAMPLES = WIKI / "판정예시.md"
 SRC = ROOT / "sources"
