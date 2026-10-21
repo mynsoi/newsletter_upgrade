@@ -17,8 +17,10 @@
 5. **상투구 자체 검열**: `prompts/article_style.md` 6·8절(번역투·안티패턴)에 해당하는
    표현을 쓰면 스스로 재작성한다. 금지 표현 목록 파일은 2026-09 폐지 —
    `prompts/banned_phrases.txt`가 다시 생기면 그 목록도 함께 적용한다.
-6. **페이월 우회 금지**: 유료 콘텐츠는 정식 구독 계정의 브라우저 세션에서 건별 선별
-   (/browse-collect)로만 수집한다.
+6. **페이월 우회 금지**: 유료 콘텐츠는 정식 구독 계정의 브라우저 세션으로만 수집한다.
+   구독 소스(DBR·HBR Korea)는 aside 자동 수집(mentor-lab `scripts/aside_collect.py`)으로
+   목록의 새 글을 받을 수 있다(2026-10-20 개정 — 이전에는 건별 선별만). 로그인은 사람이 하고,
+   로그인이 풀려 있으면 멈춘다. 구독이 없는 유료 글(HBR 영문·MIT SMR 등)은 수집하지 않는다.
 7. **이론 카드 검수 게이트**: knowledge/theories/ 카드의 status를 Claude가 스스로
    reviewed로 바꾸지 않는다. 사람 검수(reviewed_by 기재)가 색인의 전제 조건이다.
 8. **브라우저 보조 수집 시 에이전트의 요약 금지**: 원문 그대로 저장한다. 요약·재구성된
@@ -34,6 +36,8 @@
 - DB 스키마 변경은 `migrations/`에 번호 순 SQL 파일로만 한다. 기존 마이그레이션 수정 금지.
 - 수집 경로 우선순위: API → RSS → HTML 목록(html_list.py) → 브라우저 보조(browse, 월간
   라운드·건별 선별). 뉴스레터 인박스 경로는 폐기됨(2026-09-02 — 메일 계정 운영 부담).
+  2026-10-20부터 Deloitte·BCG·DBR·HBR Korea 목록 수집과 McKinsey·Wharton 요약→전문 격상은
+  aside 자동 수집이 맡는다(작업실 서버가 Aside Browser 켜진 PC에서 6시간마다, fetched_by='aside').
 - 새 소스 추가는 `config/sources.yaml` 수정으로만 한다. 코드에 URL 하드코딩 금지.
 - 소스 변경 후에는 `make sources-doc`으로 docs/소스_카탈로그.md를 재생성해 동기화한다
   (md는 파생 문서 — 직접 수정 금지, 확정본은 sources.yaml).
