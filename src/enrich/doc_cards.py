@@ -139,18 +139,28 @@ class CardResult:
     error: str | None = None
 
 
+def card_params(model: str, prompt: str) -> dict:
+    """카드 요청 본문 — 일일 실행(messages.create)과 소급(Batch)이 같은 것을 쓴다."""
+    return {
+        "model": model,
+        "max_tokens": MAX_OUTPUT_TOKENS,
+        "output_config": {"effort": EFFORT,
+                          "format": {"type": "json_schema", "schema": CARD_SCHEMA}},
+        "messages": [{"role": "user", "content": prompt}],
+    }
+
+
 def generate_card(client, model: str, prompt: str) -> CardResult:
     """카드 1장. 예외를 밖으로 던지지 않는다 — 실패는 error로 돌려준다(스레드에서 돈다)."""
     try:
-        msg = client.messages.create(
-            model=model,
-            max_tokens=MAX_OUTPUT_TOKENS,
-            output_config={"effort": EFFORT,
-                           "format": {"type": "json_schema", "schema": CARD_SCHEMA}},
-            messages=[{"role": "user", "content": prompt}],
-        )
+        msg = client.messages.create(**card_params(model, prompt))
     except Exception as e:  # noqa: BLE001 — 한 편의 API 오류가 단계를 멈추지 않도록
         return CardResult(error=f"{type(e).__name__}: {e}")
+    return card_from_message(msg)
+
+
+def card_from_message(msg) -> CardResult:
+    """모델 응답(Message) → 카드. refusal·잘림·형식 오류는 error로 (Batch 결과도 같은 모양)."""
     usage = getattr(msg, "usage", None)
     text = "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
     reply = ModelReply(text, getattr(usage, "input_tokens", 0) or 0,
