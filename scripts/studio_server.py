@@ -275,7 +275,7 @@ def wiki_state(fresh):
         for s in srcs:
             a, d, _ = W.src_meta(s)
             c = cs.get(s, {})
-            rows.append({"path": W.rel(s), "who": " · ".join(x for x in (a, d) if x), "note": c.get("있었던 일", ""),
+            rows.append({"path": W.rel(s), "who": " · ".join(x for x in (a, d) if x), "site": W.site_name(s), "note": c.get("있었던 일", ""),
                          "claim": c.get("글쓴이가 하는 말", ""), "new": W.rel(s) in fresh})
         topics.append({
             "page": tp["page"], "field": "주제", "title": tp["title"], "thesis": tp["thesis"], "why": tp["why"],

@@ -29,6 +29,21 @@ function articleOf(t: WikiTopic, state: State) {
   return "";
 }
 
+/** 사례의 역할 — 중심·받침·반례(반례는 메시지에 조건을 다는 사례라 색을 다르게) */
+function RoleChip({ role }: { role: string }) {
+  return (
+    <Chip
+      className={cn(
+        "shrink-0 px-2 text-[11px]",
+        role === "반례" && "border-amber-400/50 text-amber-700 dark:text-amber-200",
+        role === "중심" && "border-violet-400/50 text-violet-700 dark:text-violet-200"
+      )}
+    >
+      {role || "받침"}
+    </Chip>
+  );
+}
+
 const tabOf = (t: WikiTopic): Tab => (t.status !== "쓸 수 있음" ? "쓴 글" : ((t.verdict as Tab) || "보통"));
 
 export default function Topics({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
@@ -72,6 +87,8 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
     const picking = pending === t.page;
     const fresh = t.sources.filter((s) => s.new).length;
     const busy = judging.some((j) => j.target === t.page);
+    // 메시지 단위 주제(2026-10-21): 사례마다 원문 카드를 짝지어 둔다(원문 서랍·있었던 일 전문)
+    const cases = (t.cases ?? []).map((c) => ({ c, s: t.sources.find((x) => x.path === `originals/${c.key}.md`) }));
     return {
       key: t.page,
       title: t.title,
@@ -99,7 +116,18 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
           </span>
         </div>
       ),
-      summary: <p className="line-clamp-2">{t.why}</p>,
+      summary: cases.length ? (
+        <ul className="space-y-1.5">
+          {cases.map(({ c }) => (
+            <li key={c.key} className="flex items-baseline gap-2">
+              <RoleChip role={c.role} />
+              <span className="line-clamp-2 min-w-0 flex-1 text-[13px] leading-snug">{c.line}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="line-clamp-2">{t.why}</p>
+      ),
       action: (
         <span className="flex shrink-0 items-center gap-2">
           {id && !picking && (
@@ -140,8 +168,33 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
               ))}
             </ol>
           )}
-          <p className="text-[17px] leading-relaxed text-ink">{t.thesis}</p>
-          <div className="grid grid-cols-1 gap-2.5">
+          {cases.length ? (
+            <p className="text-[15px] leading-relaxed text-ink-2">{t.why}</p>
+          ) : (
+            <p className="text-[17px] leading-relaxed text-ink">{t.thesis}</p>
+          )}
+          {cases.length > 0 && (
+            <div className="grid grid-cols-1 gap-2.5">
+              {cases.map(({ c, s }) => (
+                <button
+                  key={c.key}
+                  onClick={() => s && setOpen(s.path)}
+                  className="flex items-start gap-3 rounded-2xl border border-line bg-soft p-4 text-left transition hover:border-ink-3/40"
+                >
+                  <RoleChip role={c.role} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[15px] font-medium leading-snug text-ink">{c.line}</span>
+                    <span className="mt-1 flex items-center gap-2 text-sm text-ink-3">
+                      <span className="truncate">{[s?.site, s?.who].filter(Boolean).join(" · ")}</span>
+                      {s?.new && <Chip className="border-violet-400/40 text-violet-700 dark:text-violet-200">new</Chip>}
+                    </span>
+                    {s?.note && <span className="mt-2 line-clamp-3 block text-sm leading-relaxed text-ink-2">{s.note}</span>}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+          <div className={cn("grid grid-cols-1 gap-2.5", cases.length > 0 && "hidden")}>
             {t.sources.map((s) => (
               <button
                 key={s.path}

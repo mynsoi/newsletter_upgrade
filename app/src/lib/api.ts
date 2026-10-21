@@ -75,7 +75,7 @@ export type Job = {
 
 export type CollectRound = { id: string; request: string; saved: { url: string; site?: string; path?: string; error?: string }[] };
 
-export type WikiSource = { path: string; who: string; note: string; claim?: string; new: boolean };
+export type WikiSource = { path: string; who: string; site?: string; note: string; claim?: string; new: boolean };;
 export type WikiTopic = {
   page: string;
   field: string;
