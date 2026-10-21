@@ -1,5 +1,41 @@
 # 위키 이력
 
+## 2026-10-21 17:57
+- 묶기 붙임 bain-insights/0019, worklytics-blog/0004, dbr/0067, fastcompany-worklife/0087 → 주제/ai-lab-enterprise-reports-0002.md
+- 묶기 붙임 fastcompany-worklife/0065 → 주제/ai-lab-enterprise-reports-0004.md
+- 묶기 붙임 mit-tech-review/0014, ai-lab-enterprise-reports/0021 → 주제/ai-lab-enterprise-reports-0005.md
+- 묶기 붙임 bain-insights/0021 → 주제/bain-insights-0010.md
+- 묶기 붙임 aihr-blog/0018 → 주제/carrot-global-blog-0012.md
+- 묶기 붙임 fastcompany-worklife/0075, brookings-future-of-work/0002, dbr/0049 → 주제/charter-0005.md
+- 묶기 붙임 knowledge-wharton/0014 → 주제/dbr-0047.md
+- 묶기 붙임 charter/0013 → 주제/fastcompany-worklife-0009.md
+- 묶기 붙임 charter/0015 → 주제/fastcompany-worklife-0022.md
+- 묶기 붙임 fastcompany-worklife/0085 → 주제/knowledge-wharton-0004.md
+- 묶기 붙임 aihr-blog/0022 → 주제/mit-tech-review-0010.md
+- 묶기 새 주제(쓸 만함) AI가 써 준 글을 내 것처럼 내면, 이어지는 질문 하나에 내가 이해하지 못했다는 게 드러난다 → 주제/fastcompany-worklife-0076.md
+- 묶기 새 주제(쓸 만함) 윗사람에게 올라가는 말은 좋게 포장되므로, 진짜 사정은 직접 찾아가 물어야 들린다 → 주제/hbr-0022.md
+- 묶기 새 주제(쓸 만함) 회의에서 돋보이는 모습과 활동 점수는 일의 가치가 아니라 신호일 뿐이며, 그것을 보상하면 진짜 기여가 묻힌다 → 주제/fastcompany-worklife-0084.md
+- 묶기 새 주제(쓸 만함) AI를 어디에 쓸지는 외부 전문가보다 자기 일을 잘게 쪼개 본 실무자가 더 잘 찾는다 → 주제/dbr-0052.md
+- 묶기 새 주제(쓸 만함) AI가 답을 대신 낼수록 조직이 쌓아야 할 것은 결과물이 아니라 '왜 그렇게 판단했는지'다 → 주제/dbr-0070.md
+- 묶기 새 주제(쓸 만함) 힘든 사정을 숨기고 괜찮은 척 버티는 것이 가장 안전해 보이지만, 털어놓은 쪽이 대개 더 잘 지나간다 → 주제/fastcompany-worklife-0067.md
+- 묶기 새 주제(쓸 만함) 새 자리에서 '원래 나는 그런 사람이 아니다'라며 예전 방식을 지키는 것은 진정성이 아니라 적응을 늦추는 고집이다 → 주제/hr-bulletin-0002.md
+- 묶기 새 주제(쓸 만함) AI를 쓰라고 다그칠수록 직원은 더 쓰는 게 아니라 쓰는 척을 한다 → 주제/fastcompany-worklife-0071.md
+- 묶기 새 주제(쓸 만함) 모든 것을 잘하려 하면 지친 평범함으로 끝나므로, 무엇을 못하기로 할지 이유와 함께 밝혀야 한다 → 주제/hbr-0021.md
+- 묶기 새 주제(보통) AI가 아무리 빨리 나와도 일이 바뀌는 속도는 사람이 함께 일하는 법을 다시 익히는 속도를 넘지 못한다 → 주제/fastcompany-worklife-0086.md
+- 묶기 새 주제(보통) AI로 일이 빨라진 만큼 하루에 기대되는 양이 늘어, 일은 줄지 않고 주말로 번진다 → 주제/fastcompany-worklife-0081.md
+- 묶기 새 주제(보통) 누구나 AI가 동료의 일은 빼앗아도 내 일은 괜찮다고 믿고, 그 믿음이 내 일하는 방식을 그대로 두게 한다 → 주제/charter-0011.md
+- 묶기 새 주제(보통) 이직이 성장의 지름길이라는 통념과 달리, 한 조직 안에서 쌓은 관계와 맥락이 측정 가능한 강점이 된다 → 주제/charter-0014.md
+- 묶기 새 주제(보통) 팀의 '해 볼 수 있다'는 자신감은 격려로 생기지 않고, 실패를 책임 추궁 없이 함께 꺼내 보는 데서 생긴다 → 주제/fastcompany-worklife-0068.md
+- 묶기 새 주제(보통) 교육 기회를 성과 낮은 사람에게 몰아주는 선의가 성과 높은 사람을 소외시킬 수 있다 → 주제/fastcompany-worklife-0070.md
+- 묶기 새 주제(보통) AI가 지식을 알려 주는 시대에 회사가 길러야 할 것은 강의 수강이 아니라 일 속에서 직접 판단해 본 경험이다 → 주제/dbr-0050.md
+- 묶기 새 주제(보통) AI를 상사 자리에 앉히면 효율이 오를 것 같지만, 직원은 주도성을 잃고 결과 책임을 AI에 넘긴다 → 주제/dbr-0001.md
+- 묶기 새 주제(보통) 분위기를 읽는 힘은 타고난 감이 아니라 준비로 기르는 기술이고, 중요한 자리일수록 피로와 긴장 때문에 더 잘못 읽는다 → 주제/fastcompany-worklife-0078.md
+- 묶기 새 주제(보통) AI에게 일을 맡긴 결과는 AI의 솜씨보다 내가 원하는 것을 얼마나 정확히 전했느냐에서 갈린다 → 주제/ai-lab-enterprise-reports-0008.md
+- 묶기 새 주제(보통) 오래된 조직이 변화에 느린 것은 나이 탓이 아니라 구조 탓이고, 옛 구조가 오히려 새 변화의 자산이 되기도 한다 → 주제/dbr-0068.md
+- 묶기 새 주제(보통) AI 비용을 사람마다 한도로 묶으면 아끼는 게 아니라 안 쓰게 만든다 → 주제/bain-insights-0022.md
+- 묶기 새 주제(보통) 기후 위험은 드문 큰 재난보다 조금씩 늘어나는 더운 날에 더 많이 쌓이고, 그 비용은 현장의 사고로 나타난다 → 주제/knowledge-wharton-0001.md
+- 주제 묶기 새 카드 89 · 붙음/새 주제 54 · 뺌 35 · 못 넣음 0 · 남음 0 · 304s
+
 ## 2026-10-21 17:52
 - 묶기 붙임 bain-insights/0023 → 주제/ai-lab-enterprise-reports-0002.md
 - 묶기 붙임 mit-tech-review/0012, mit-tech-review/0005 → 주제/ai-lab-enterprise-reports-0004.md

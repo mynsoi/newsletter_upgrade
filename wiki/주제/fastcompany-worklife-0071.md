@@ -1,0 +1,33 @@
+---
+type: topic
+kind: message
+title: AI를 쓰라고 다그칠수록 직원은 더 쓰는 게 아니라 쓰는 척을 한다
+verdict: 쓸 만함
+audience: 팀장급·전 직원
+center: fastcompany-worklife/0071
+status: 쓸 수 있음
+used_in: []
+timestamp: 2026-10-21
+---
+
+# AI를 쓰라고 다그칠수록 직원은 더 쓰는 게 아니라 쓰는 척을 한다
+
+## 왜 쓸모
+사용 압박을 받는 조직에 통하는 긴장. 다만 지난 글 「AI 사용량이 성과로 이어졌나요?」와 가까워 겹침을 확인해야 한다
+
+## 이 글이 말할 것
+AI를 쓰라고 다그칠수록 직원은 더 쓰는 게 아니라 쓰는 척을 한다
+
+## 사례
+- [fastcompany-worklife/0071] (중심) Visier 조사, 미국 근로자 1,000명 중 48%가 기대에 맞추려 AI 사용 정도를 부풀렸다
+
+## 제목 후보
+
+
+## 원문
+| 원문 | 작성자 · 날짜 | 있었던 일 |
+|---|---|---|
+| [fastcompany-worklife/0071](../../sources/originals/fastcompany-worklife/0071.md) · https://www.fastcompany.com/91613307/workers-are-faking-their-interest-in-ai-to-satisfy-bosses-report-shows?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss | Peter Saalfield · 2026-09-25 | (1) 캐나다 밴쿠버의 소프트웨어 회사 Visier가 미국 풀타임 근로자 1,000명(의료, 금융, 인사 등)을 대상으로 AI 활용 방식과 회사의 AI 전략에 대한 의견을 조사했다. 응답자의 48%가 기대에 맞추기 위해 동료나 경영진에게 AI 사용 정도나 전문성을 부풀렸다고 답했다. (2) 같은 조사에서 54%는 지난 2년간 AI 때문에 자신의 역할이나 경력이 크게 바뀌었다고 답했다. 다만 영향은 사람마다 달라서 업무 성과와 만족도가 좋아졌다는 응답도, 대체로 부정적이었다는 응답도 있었다. (3) 응답자의 약 60%는 AI로 인한 변화에 대한 회사의 계획을 잘 모른다고 했고, 45%는 효과적으로 쓸 자신이 없는데도 AI를 써야 한다는 압박을 느낀다고 했다. 32%는 AI 교육과 역량 개발 기회를, 31%는 AI 관련 사안의 더 높은 투명성을 원한다고 답했다. 보고서는 '보여주기식 AI 사용'의 근본 원인을 리더십에 대한 신뢰 부족으로 결론지었다. |
+
+## 글쓴이가 하는 말
+- [fastcompany-worklife/0071] 경영진이 AI를 쓰라고만 압박하면 직원들은 쓰는 척만 하게 되므로, 리더가 구체적인 방법과 교육을 제공하고 AI가 일에 미칠 영향을 투명하게 공개해 신뢰를 쌓아야 한다는 주장이다.
