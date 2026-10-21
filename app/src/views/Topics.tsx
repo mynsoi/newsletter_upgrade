@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { IconArrowRight, IconChevronDown, IconRefresh, IconStack2, IconWand } from "@tabler/icons-react";
+import { IconArrowRight, IconChevronDown, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
 import ExpandableCards from "@/components/expandable-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -39,6 +39,9 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   const wiki = state.wiki;
   const ingesting = runningJob(state.jobs, "wiki", "넣기");
   const filtering = runningJob(state.jobs, "wiki-lint", "다시 거르기");
+  // 주제 묶기(2026-10-21) — 자동 카드로 메시지 단위 주제를 만든다. 버튼에 아직 묶지 않은 카드 수
+  const bundling = runningJob(state.jobs, "wiki", "주제 묶기");
+  const unbundled = wiki?.unbundled ?? 0;
   const judging = state.jobs.filter((j) => j.kind === "wiki-verdict" && j.status === "running");
   const backlog = newSources(state);
 
@@ -199,7 +202,23 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
                 </>
               )}
             </button>
-            {(backlog > 0 || ingesting) && (
+            {(unbundled > 0 || bundling) && (
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                className="flex items-center gap-2 bg-page px-6 py-3 text-ink"
+                onClick={() => !bundling && act("wiki-bundle").then(refresh)}
+              >
+                {bundling ? (
+                  <AITextLoading texts={["주제로 묶는 중", `새 카드 ${unbundled}장`]} className="text-sm font-medium" wrapperClassName="p-0" />
+                ) : (
+                  <>
+                    <IconSparkles className="size-4" /> 주제 묶기 {unbundled}
+                  </>
+                )}
+              </HoverBorderGradient>
+            )}
+            {/* 예전 '넣기'(astra로 원문마다 카드) — 자동 카드(main Sonnet)로 바뀌어 숨김(2026-10-21). 도는 중일 때만 보임, 명령 wiki.py --ingest는 그대로 */}
+            {ingesting && (
               <HoverBorderGradient
                 containerClassName="rounded-full"
                 className="flex items-center gap-2 bg-page px-6 py-3 text-ink"
@@ -238,6 +257,9 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       </div>
 
       <div className="mx-auto max-w-6xl space-y-16 px-12 py-12">
+        {bundling && (
+          <Working job={bundling} title="주제 묶기" status={`새 카드 ${unbundled}장 → 메시지 단위 주제(사례 1~3개) · 판정 · 쓸 만함은 제목 후보`} />
+        )}
         {(ingesting || filtering) && (
           <Working
             job={(ingesting || filtering)!}

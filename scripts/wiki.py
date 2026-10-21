@@ -34,6 +34,12 @@ ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
 TOPICS = WIKI / "주제"
 CARDS = WIKI / "cards.json"
+# 자동 카드(main Supabase document_cards — Sonnet 5.5가 문서마다 만든 카드)를 받아 둔 것. git 밖(원문을 다시 쓴 내부 자료).
+# main 표가 생기기 전에는 카드 비교 시험의 Sonnet 카드를 --import-cards로 넣어 쓴다(2026-10-21).
+DOC_CARDS = ROOT / "sources" / "doc_cards.json"
+EXCLUDED = WIKI / "묶기제외.json"  # 주제 묶기에서 쓸 수 없다고 뺀 카드와 이유 — 다음 묶기에 다시 보내지 않는다
+BUNDLE_LIMIT = int(os.environ.get("WIKI_BUNDLE_LIMIT", "100"))  # 주제 묶기 한 번에 보는 새 카드 상한
+BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때(기본은 계정 로그인 claude CLI의 opus)
 EXAMPLES = WIKI / "판정예시.md"
 SRC = ROOT / "sources"
 RUNS = ROOT / "runs" / "wiki"
@@ -110,9 +116,41 @@ def cards():
     return json.loads(CARDS.read_text(encoding="utf-8")) if CARDS.exists() else {}
 
 
+def doc_cards():
+    return json.loads(DOC_CARDS.read_text(encoding="utf-8")) if DOC_CARDS.exists() else {}
+
+
+def as_card(c):
+    """자동 카드(thesis·episodes·material_type) → 주제 지도가 읽는 카드 모양(있었던 일·글쓴이가 하는 말)."""
+    eps = [e for e in c.get("episodes", []) if e]
+    return {"있었던 일": " ".join(f"({i}) {e}" for i, e in enumerate(eps, 1)) or "(원문에 있었던 일 없음)",
+            "글쓴이가 하는 말": c.get("thesis", ""), "episodes": eps, "재료 유형": c.get("material_type", "")}
+
+
+def all_cards():
+    """주제 지도가 보는 카드 전부 — astra 카드(cards.json, 예전 넣기) 위에 자동 카드를 덮는다."""
+    cs = cards()
+    cs.update({k: as_card(c) for k, c in doc_cards().items()})
+    return cs
+
+
+def import_cards(path):
+    """--import-cards <cards.json> — 카드 비교 시험(wiki-eval/run_card_test.py)의 새 형식 카드를 자동 카드 모양으로 넣는다."""
+    src = json.loads(Path(path).read_text(encoding="utf-8"))
+    dc = doc_cards()
+    n = 0
+    for k, c in src.items():
+        if (SRC / rel(k)).is_file():
+            dc[k] = {"thesis": c.get("글쓴이가 하는 말", ""), "episodes": c.get("episodes", []),
+                     "material_type": c.get("재료 유형", ""), "from": Path(path).as_posix()}
+            n += 1
+    DOC_CARDS.write_text(json.dumps(dc, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"자동 카드 {n}장 넣음 · 모두 {len(dc)}장")
+
+
 def processed():
-    """넣은 원문 — 카드가 있는 원문(재료 없음으로 빠진 원문도 카드는 남는다)."""
-    return {rel(k) for k in cards()}
+    """넣은 원문 — 카드가 있는 원문(재료 없음으로 빠진 원문도 카드는 남는다). 자동 카드가 있는 원문도 넣은 것으로 본다."""
+    return {rel(k) for k in all_cards()}
 
 
 def backlog():
@@ -186,7 +224,9 @@ def read_topic(f):
     sec = sections(rest)
     srcs = list(dict.fromkeys(re.findall(r"\]\(\.\./\.\./sources/(originals/[^)]+?\.md)\)", sec.get("원문", ""))))
     titles = [re.sub(r"^\s*\d+[.)]\s*", "", l).strip() for l in sec.get("제목 후보", "").splitlines() if re.match(r"^\s*\d+[.)]", l)]
-    return {"page": f.relative_to(ROOT).as_posix(), "file": f, "title": unquote(meta.get("title", "")),
+    cases = [{"key": m.group(1), "role": m.group(2), "line": m.group(3).strip()}
+             for m in re.finditer(r"^- \[(.+?)\] \((.+?)\) (.*)$", sec.get("사례", ""), re.M)]
+    return {"cases": cases, "page": f.relative_to(ROOT).as_posix(), "file": f, "title": unquote(meta.get("title", "")),
             "verdict": meta.get("verdict", ""), "audience": meta.get("audience", ""), "status": meta.get("status", "쓸 수 있음"),
             "used_in": used_in(f), "center": meta.get("center", ""), "timestamp": meta.get("timestamp", ""),
             "why": sec.get("왜 쓸모", ""), "thesis": sec.get("이 글이 말할 것", ""), "sources": [key(s) for s in srcs], "titles": titles}
@@ -207,8 +247,11 @@ def write_topic(t, cs):
         claims.append(f"- [{s}] {c.get('글쓴이가 하는 말', '')}")
     titles = "\n".join(f"{i}. {x}" for i, x in enumerate(t.get("titles", []), 1))
     used = "[" + ", ".join(t.get("used_in", [])) + "]"
+    # 메시지 단위 주제(2026-10-21): 주제 = 독자에게 할 메시지 한 문장(title·이 글이 말할 것), 그 아래 받치는 사례 1~3개
+    cases_md = ("\n## 사례\n" + "\n".join(f"- [{c['key']}] ({c.get('role') or '받침'}) {c.get('line', '')}" for c in t["cases"]) + "\n") if t.get("cases") else ""
     text = f"""---
 type: topic
+kind: {'message' if t.get('cases') else 'case'}
 title: {t.get('title', '')}
 verdict: {t.get('verdict', '')}
 audience: {t.get('audience', '')}
@@ -224,8 +267,8 @@ timestamp: {date.today().isoformat()}
 {t.get('why', '')}
 
 ## 이 글이 말할 것
-{cs.get(t['center'], {}).get('글쓴이가 하는 말', '')}
-
+{t.get('thesis') if t.get('cases') else cs.get(t['center'], {}).get('글쓴이가 하는 말', '')}
+{cases_md}
 ## 제목 후보
 {titles}
 
@@ -335,7 +378,8 @@ def make_titles(t, cs, run):
     import title_candidates as tc
     srcs = [t["center"]] + [s for s in t["sources"] if s != t["center"]]
     d = run / "titles" / Path(t["page"]).stem
-    p = tc.prompt_first(cs[t["center"]]["글쓴이가 하는 말"], [[rel(s), label(rel(s))] for s in srcs], SRC)
+    thought = t.get("thesis") if t.get("cases") else cs[t["center"]]["글쓴이가 하는 말"]
+    p = tc.prompt_first(thought, [[rel(s), label(rel(s))] for s in srcs], SRC)
     text = astra(d, p)
     items = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in text.splitlines() if l.strip()]
     print(f"제목 {Path(t['page']).stem} · {len(items)}", flush=True)
@@ -358,7 +402,8 @@ def apply_filter(res, ts, cs):
     for t in ts:
         x = res.get(Path(t["page"]).stem)
         if x:
-            t.update({"verdict": x["verdict"], "title": x.get("line", t["title"]), "why": x.get("why", ""), "audience": x.get("audience", "")})
+            t.update({"verdict": x["verdict"], "title": t["title"] if t.get("cases") else x.get("line", t["title"]),
+                      "why": x.get("why", ""), "audience": x.get("audience", "")})
             write_topic(t, cs)
             n += 1
     return n
@@ -442,6 +487,145 @@ def refilter():
     log([f"- 다시 거르기 {len(res)}/{len(ts)} · 제목 후보 {n}개 · {time.time() - t0:.0f}s"])
     commit(f"주제 지도 다시 거르기 ({time.time() - t0:.0f}s)")
     print(f"다시 거르기 {len(res)}/{len(ts)} · {time.time() - t0:.0f}s")
+
+
+# ---------- 주제 묶기 — 메시지 단위 (2026-10-21) ----------
+# 카드 비교 시험에서 정한 방식: 주제 = 우리 독자에게 할 핵심 메시지 한 문장 + 받치는 사례 1~3개(가능하면 다른 발행처).
+# 지난 묶기 이후 새 카드만 보내고(재료 없음 제외, 상한 BUNDLE_LIMIT), 기존 주제를 함께 보여 줘 맞는 사례는 그 주제에 붙인다.
+# 기본은 작업실 PC의 Claude 계정 로그인(claude CLI, opus). --api는 API 키로 Opus 5.5.
+
+def site_name(k):
+    t = (SRC / rel(k)).read_text(encoding="utf-8")
+    m = re.search(r"^site_name: (.*)$", t.split("---", 2)[1], re.M) if t.startswith("---") else None
+    return m.group(1).strip() if m else k.split("/")[0]
+
+
+def excluded():
+    return json.loads(EXCLUDED.read_text(encoding="utf-8")) if EXCLUDED.exists() else {}
+
+
+def bundle_prompt(new, cs, ts):
+    have = "\n".join(f"[{Path(t['page']).stem}] {t['title']} — 사례: {', '.join(t['sources'])}" for t in ts if t["status"] == "쓸 수 있음") or "(아직 없음)"
+    cards_txt = "\n\n".join(f"[{k}] 발행처: {site_name(k)}\n글쓴이가 하는 말: {cs[k]['글쓴이가 하는 말']}\n있었던 일: {cs[k]['있었던 일']}" for k in new)
+    ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "(아직 없음)"
+    return "\n\n".join([
+        f"아래는 {READER} 칼럼 재료로 새로 들어온 원문 카드들입니다. 칼럼을 쓸 사람이 고를 '주제' 목록을 만들어 주세요.",
+        "주제란: 우리 독자(개발자가 아닌 사무·현장 직원)에게 할 **핵심 메시지 한 문장**입니다. 글 한 편이 끝까지 끌고 갈 주장이어야 합니다.\n"
+        "- 좋은 주제: 일반적이면서 논리가 있는 주장. 읽는 사람이 '아, 이런 글이 되겠구나'를 바로 알 수 있음. 통념을 뒤집거나 긴장이 있는 주장이면 더 좋음.\n"
+        "- 나쁜 주제: ① 특정 회사·연구의 사실 한 줄(그건 사례) ② '~부터 시작하자', 'AI를 잘 쓰려면 ~해야 한다' 같은 교육 자료식 구호 ③ 여러 이야기를 뭉뚱그린 분야 이름.\n"
+        "- 주제는 반드시 카드의 사례가 받쳐 줘야 합니다. 사례 없이 그럴듯하기만 한 주제는 만들지 않습니다.",
+        "할 일:\n"
+        "1. 새 카드가 [기존 주제]의 메시지를 받쳐 주면 그 주제에 사례로 붙입니다(join). 메시지가 같아야 하고, 분야만 비슷한 것은 붙이지 않습니다.\n"
+        "2. 나머지 새 카드 중 같은 메시지를 받쳐 주는 것끼리 새 주제로 묶습니다(topics). 원문 글쓴이의 주장이 똑같을 필요는 없고, 우리 독자에게 같은 메시지를 보여 주면 됩니다.\n"
+        "3. 새 주제마다 사례 1~3개. 가능하면 서로 다른 발행처에서. 첫 번째가 중심 사례. 메시지에 반대되거나 조건을 다는 사례는 role을 '반례'로, 나머지는 '중심'·'받침'.\n"
+        "4. 사례마다 line: 그 카드의 있었던 일 한 줄(누가 무엇을 했고 무엇이 드러났는지, 이름·숫자 그대로, 60자 안팎).\n"
+        "5. 새 주제마다 판정: [판정 예시]의 결을 따라 쓸 만함 · 보통 · 뺌. why 한 줄, audience(팀장급·사수급·신입사원·전 직원 중 하나 이상, '·'로).\n"
+        "6. 어느 주제에도 쓸 수 없는 카드(우리 독자와 무관하거나 재료가 없는 것)는 excluded에 이유와 함께. 새 카드는 모두 join·topics·excluded 중 한 곳에 한 번만 들어갑니다.",
+        "출력: JSON 하나만.\n"
+        '{"join": [{"topic": "<기존 주제의 [ ] 안>", "cases": [{"key": "...", "role": "받침", "line": "..."}]}], '
+        '"topics": [{"주제": "...", "cases": [{"key": "hbr-korea/0001", "role": "중심", "line": "..."}], "verdict": "쓸 만함", "why": "...", "audience": "전 직원"}], '
+        '"excluded": [{"key": "...", "reason": "..."}]}  — key는 카드의 [ ] 안 그대로.',
+        ANSWER_ONLY, GUARD,
+        "=== [판정 예시] ===\n" + ex,
+        "=== [기존 주제] ===\n" + have,
+        "=== [새 카드] ===\n" + cards_txt,
+    ])
+
+
+def claude_login(d, prompt):
+    """계정 로그인 claude CLI(opus)로 답만 받는다. 데스크톱 앱이 넣는 환경 변수는 빼서 내 계정 로그인으로 돌게 한다."""
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "prompt.md").write_text(prompt, encoding="utf-8")
+    env = {k: v for k, v in os.environ.items() if not (k.startswith("CLAUDE_CODE") or k in ("CLAUDECODE", "ANTHROPIC_BASE_URL"))}
+    r = subprocess.run([CLAUDE, "-p", "--model", "opus", "--tools", "", "--strict-mcp-config", "--no-session-persistence"],
+                       cwd=d, input=prompt, capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
+    (d / "output.md").write_text(r.stdout, encoding="utf-8")
+    (d / "run.log").write_text(r.stderr, encoding="utf-8")
+    if "Failed to authenticate" in r.stdout or "not logged in" in (r.stdout + r.stderr).lower():
+        sys.exit("claude CLI 로그인이 필요합니다 — 터미널에서 `claude`를 실행해 로그인한 뒤 다시 누르세요(또는 --api).")
+    return clean(r.stdout.strip(), str(d))
+
+
+def claude_key(d, prompt):
+    """API 키로 Opus 5.5. 이 PC(Windows·Python 3.13)는 truststore 재귀 오류가 있어 기본 SSL 문맥을 직접 준다(2026-10-21)."""
+    import ssl
+    import anthropic
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "prompt.md").write_text(prompt, encoding="utf-8")
+    key = os.environ.get("ANTHROPIC_API_KEY") or subprocess.run(
+        ["powershell", "-NoProfile", "-Command", "[Environment]::GetEnvironmentVariable('ANTHROPIC_API_KEY','User')"],
+        capture_output=True, text=True).stdout.strip()
+    c = anthropic.Anthropic(api_key=key, base_url="https://api.anthropic.com",
+                            http_client=anthropic.DefaultHttpxClient(verify=ssl.create_default_context()))
+    with c.messages.stream(model=BUNDLE_MODEL, max_tokens=32000, output_config={"effort": "high"},
+                           messages=[{"role": "user", "content": prompt}]) as st:
+        msg = st.get_final_message()
+    out = "".join(b.text for b in msg.content if b.type == "text")
+    (d / "output.md").write_text(out, encoding="utf-8")
+    (d / "run.log").write_text(json.dumps({"model": BUNDLE_MODEL, "in": msg.usage.input_tokens, "out": msg.usage.output_tokens}), encoding="utf-8")
+    return clean(out, str(d))
+
+
+def bundle(api=False):
+    """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제를 만들거나 기존 주제에 사례로 붙인다."""
+    t0 = time.time()
+    dc, cs, ts, ex = doc_cards(), all_cards(), topics(), excluded()
+    used = {s for t in ts for s in t["sources"]}
+    new = [k for k in dc if k not in used and k not in ex and (SRC / rel(k)).is_file()]
+    for k in [k for k in new if dc[k].get("material_type") == "재료 없음"]:
+        ex[k] = "재료 없음(카드)"
+    new = sorted([k for k in new if k not in ex], key=lambda k: date_of(rel(k)), reverse=True)
+    left = max(0, len(new) - BUNDLE_LIMIT)
+    new = new[:BUNDLE_LIMIT]
+    if not new:
+        EXCLUDED.write_text(json.dumps(ex, ensure_ascii=False, indent=1), encoding="utf-8")
+        print("새 카드 없음")
+        return
+    run = RUNS / ("bundle-" + time.strftime("%Y%m%d-%H%M%S"))
+    print(f"새 카드 {len(new)}장 · 기존 주제 {len(ts)}개 → {'API Opus 5.5' if api else '계정 로그인 claude(opus)'}", flush=True)
+    raw = (claude_key if api else claude_login)(run / "bundle", bundle_prompt(new, cs, ts))
+    m = re.search(r"\{.*\}", raw or "", re.S)
+    if not m:
+        sys.exit("주제 묶기 결과가 비었음 — 로그: " + str(run / "bundle"))
+    g = json.loads(m.group(0))
+    placed, lines = set(), []
+    ok = lambda c: c.get("key") in new and c["key"] not in placed
+    by = {Path(t["page"]).stem: t for t in ts}
+    for j in g.get("join", []):
+        t = by.get(j.get("topic", ""))
+        cases = [c for c in j.get("cases", []) if ok(c)]
+        if t and cases and t["status"] == "쓸 수 있음":
+            if not t["cases"]:  # 예전(사례 단위) 주제면 지금 원문을 사례로 옮겨 적는다
+                t["cases"] = [{"key": s, "role": "중심" if s == t["center"] else "받침", "line": cs.get(s, {}).get("있었던 일", "")[:80]} for s in t["sources"]]
+                t["thesis"] = t["thesis"] or t["title"]
+            t["cases"] += cases
+            t["sources"] += [c["key"] for c in cases]
+            placed |= {c["key"] for c in cases}
+            write_topic(t, cs)
+            lines.append(f"- 묶기 붙임 {', '.join(c['key'] for c in cases)} → 주제/{Path(t['page']).name}")
+    for nt in g.get("topics", []):
+        cases = [c for c in nt.get("cases", []) if ok(c)]
+        if not cases or not nt.get("주제"):
+            continue
+        placed |= {c["key"] for c in cases}
+        t = {"center": cases[0]["key"], "sources": [c["key"] for c in cases], "cases": cases, "title": nt["주제"].strip(), "thesis": nt["주제"].strip(),
+             "verdict": nt.get("verdict", ""), "why": nt.get("why", ""), "audience": nt.get("audience", ""), "status": "쓸 수 있음", "used_in": [], "titles": []}
+        f = write_topic(t, cs)
+        lines.append(f"- 묶기 새 주제({t['verdict'] or '판정 없음'}) {t['title']} → 주제/{f.name}")
+    for x in g.get("excluded", []):
+        if x.get("key") in new and x["key"] not in placed:
+            ex[x["key"]] = x.get("reason", "")
+    EXCLUDED.write_text(json.dumps(ex, ensure_ascii=False, indent=1), encoding="utf-8")
+    try:
+        nt_ = fill_titles(topics(), cs, run)  # 쓸 만함 주제의 제목 후보(astra) — 한도에 걸리면 비고, '이 주제로'를 누를 때 제목 단계가 돈다
+    except Exception as e:
+        nt_ = 0
+        print(f"제목 후보 건너뜀: {e}", flush=True)
+    write_index(topics())
+    rest = len([k for k in new if k not in placed and k not in ex])
+    log(lines + [f"- 주제 묶기 새 카드 {len(new)} · 붙음/새 주제 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 남음 {rest + left} · 제목 후보 {nt_}개 · {time.time() - t0:.0f}s"])
+    commit(f"주제 묶기: 새 카드 {len(new)}장 ({time.time() - t0:.0f}s)")
+    print(f"주제 묶기 끝 · 주제에 들어감 {len(placed)} · 뺌 {len([k for k in new if k in ex])} · 다음에 {rest + left} · {time.time() - t0:.0f}s")
 
 
 # ---------- 고르기 · 판정 · 확정 ----------
@@ -538,6 +722,10 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["--ingest"]:
         ingest(a[1:])
+    elif a[:1] == ["--bundle"]:
+        bundle(api="--api" in a)
+    elif a[:1] == ["--import-cards"]:
+        import_cards(a[1])
     elif a[:1] == ["--refilter"]:
         refilter()
     elif a[:1] == ["--claim"]:

@@ -14,3 +14,5 @@ sources/db_index.json
 runs/aside/
 # 카드 비교 시험 회차(wiki-eval/run_card_test.py) — 프롬프트에 원문 전체가 들어 있어 git 밖
 runs/card-test/
+# 자동 카드를 받아 둔 것(scripts/wiki.py doc_cards) — 원문을 다시 쓴 내부 자료라 git 밖
+sources/doc_cards.json

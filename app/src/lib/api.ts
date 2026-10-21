@@ -91,8 +91,11 @@ export type WikiTopic = {
   angles: string[];
   related: { title: string; page: string }[];
   at: string;
+  /** 메시지 단위 주제(2026-10-21)의 사례 — key 원문, role 중심·받침·반례, line 있었던 일 한 줄. 예전 사례 단위 주제는 빈 배열 */
+  cases?: { key: string; role: string; line: string }[];
 };
-export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; log: string[] };
+/** unbundled = 아직 주제로 묶지 않은 자동 카드 수('주제 묶기' 버튼) */
+export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; unbundled?: number; log: string[] };
 
 /** 내 주제로 쓰기 — 메인 화면 채팅 (scripts/my_topic.py) */
 export type MineRow = {

@@ -267,9 +267,7 @@ def sections(body):
 
 def wiki_state(fresh):
     """주제 지도를 화면용으로 읽는다 (2026-10-11 개편) — 주제마다 판정·대상 독자·왜 쓸모·제목 후보·원문 카드."""
-    if not W.TOPICS.exists():
-        return None
-    cs = W.cards()
+    cs = W.all_cards()  # 자동 카드(Sonnet) + 예전 astra 카드
     topics = []
     for tp in W.topics():
         srcs = [tp["center"]] + [s for s in tp["sources"] if s != tp["center"]]
@@ -283,9 +281,13 @@ def wiki_state(fresh):
             "page": tp["page"], "field": "주제", "title": tp["title"], "thesis": tp["thesis"], "why": tp["why"],
             "verdict": tp["verdict"], "audience": tp["audience"], "status": tp["status"].split("#")[0].strip(),
             "usedIn": tp["used_in"], "titles": tp["titles"], "sources": rows, "angles": [], "related": [], "at": tp["timestamp"],
+            "cases": tp["cases"],
         })
     log = read(W.WIKI / "log.md")
-    return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(),
+    used = {s for tp in W.topics() for s in tp["sources"]}
+    ex = W.excluded()
+    unbundled = [k for k, c in W.doc_cards().items() if k not in used and k not in ex and c.get("material_type") != "재료 없음"]
+    return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(), "unbundled": len(unbundled),
             "log": [l for l in log.splitlines() if l.startswith(("## ", "- "))][:40]}
 
 
@@ -975,6 +977,11 @@ def db_sync_loop():
         time.sleep(max(DB_EVERY, 600))
 
 
+def act_wiki_bundle(_):
+    """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제(scripts/wiki.py --bundle, 계정 로그인 claude opus)."""
+    return start("wiki", "주제 묶기", PY + ["scripts/wiki.py", "--bundle"])
+
+
 def act_wiki_ingest(_):
     return start("wiki", "넣기", PY + ["scripts/wiki.py", "--ingest"])
 
@@ -1050,7 +1057,7 @@ def act_chat(a):
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
-           "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
+           "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart,
            "publish-build": act_publish_build, "publish": act_publish}
