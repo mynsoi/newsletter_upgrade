@@ -1,7 +1,7 @@
 ---
 type: topic
 title: AI 봇 10개를 만들어도 회사는 바뀌지 않고 열어야 할 툴만 는다 — AI는 매일이 입사 첫날이라 '회사 지도'가 필요하다(키워드로 자료를 고르다 남의 회의록·단가표가 딸려 온 실패 포함)
-verdict: 쓸 만함
+verdict: 보통
 audience: 팀장급
 center: linkedin/02
 status: 쓸 수 있음
