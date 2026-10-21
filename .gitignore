@@ -12,3 +12,5 @@ sources/originals/*
 sources/db_index.json
 # aside 수집 회차 기록(scripts/aside_collect.py) — 6시간마다 쌓이는 실행 기록이라 git 밖
 runs/aside/
+# 카드 비교 시험 회차(wiki-eval/run_card_test.py) — 프롬프트에 원문 전체가 들어 있어 git 밖
+runs/card-test/
