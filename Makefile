@@ -1,4 +1,4 @@
-.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill theories topics stats sources-doc test handoff receive publish-ui site
+.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill cards-backfill-dry theories topics stats sources-doc test handoff receive publish-ui site
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -23,6 +23,9 @@ enrich:
 
 enrich-dry:
 	$(PYTHON) src/enrich/extract_claims.py --dry-run
+
+cards-backfill-dry:      # 문서 카드 소급(Batch) 사전 점검 — 대상·토큰·예상 비용·DB 크기 (실행: python src/enrich/backfill_cards.py)
+	$(PYTHON) src/enrich/backfill_cards.py --dry-run
 
 embed:                   # claim 임베딩 일반 실행 (embedding IS NULL, 일일 상한까지 — A6)
 	$(PYTHON) src/search/embed.py

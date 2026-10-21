@@ -24,6 +24,8 @@ T2~T5 잔류분은 2026-09-09에 전량 처리됐다(770건 · $3.37 · claim 99
 - 프롬프트 원본: prompts/claim_extraction.md (코드 내 프롬프트 금지 — CLAUDE.md)
 - 모델: config/settings.yaml의 enrich_model (추출은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
+- 일반 실행은 claim 다음에 문서 카드 단계(src/enrich/doc_cards.py, 2026-10-21)를 부른다.
+  --backlog·--doc-id·--dry-run에서는 돌지 않는다.
 - 일반 실행은 collected_at **역순**(최신 수집분 우선 — 2026-09-09, 그날 유입이 누적
   백로그 뒤에서 굶지 않도록), --backlog는 티어별 라운드로빈(T1이 21,000건+로 압도적이라
   순서대로면 다른 티어가 굶는다) + 실측 비용이 --cost-cap(USD)에 닿으면 새 문서를 더 이상
@@ -88,6 +90,7 @@ VALID_EVIDENCE = {"survey", "experiment", "case", "data", "theory", "opinion"}
 # 여기 없는 모델로 --cost-cap을 걸면 상한을 신뢰할 수 없으므로 main()이 즉시 중단한다.
 MODEL_PRICING: dict[str, tuple[float, float]] = {
     "claude-opus-5": (5.00, 25.00),
+    "claude-sonnet-5-5": (2.00, 10.00),   # 문서 카드(card_model, doc_cards.py)
     "claude-sonnet-5": (2.00, 10.00),
     "claude-sonnet-4-6": (3.00, 15.00),
     "claude-haiku-4-5": (1.00, 5.00),
@@ -664,6 +667,16 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  ② 백로그 {done}건 시도")
         elif remaining > 0 and not cutoff:
             print("  ② 건너뜀 — 수집 이력이 없어 신규/백로그 경계를 정할 수 없다")
+
+        # 문서 카드 — 같은 실행에서 claim 다음에 (src/enrich/doc_cards.py). 비용은 같은
+        # CostState에 쌓여 아래 총계에 들어간다. 카드 실패는 claim 결과(exit code)를 바꾸지 않는다
+        # — 실패한 문서는 카드가 없으니 다음 실행에서 다시 대상이 된다.
+        if not args.dry_run:
+            from enrich import doc_cards
+            try:
+                doc_cards.run(conn, settings, cost)
+            except Exception as e:  # noqa: BLE001
+                print(f"[카드] 단계 오류 — 건너뜀: {type(e).__name__}: {e}")
 
     if not args.dry_run:
         print(f"\n총 {stats.total_claims}건 claim 추출, 관련성 게이트 제외 {stats.gated}건, "

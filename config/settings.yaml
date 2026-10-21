@@ -27,6 +27,50 @@ enrich_enabled: true
 # 백로그 처리(--backlog)는 이 값을 쓰지 않는다 — --cost-cap이 대신 경계가 된다.
 enrich_daily_limit: 400
 
+# 문서 카드 (2026-10-21 도입 — 카드 비교 시험 1위 방식, migrations/009, src/enrich/doc_cards.py).
+# 카드 = 글쓴이가 하는 말 + 있었던 일 0~4개 + 재료 유형. 칼럼 작업실이 주제를 뽑고 원문을 찾는 재료다.
+# claim 추출(make enrich) 같은 실행에서 claim 다음에 돈다. 대상은 게이트 통과(status='enriched')·
+# card_sources 소속·전문(summary_only=0, 본문 800자 이상)·카드 없는 문서, 최신 수집분 우선.
+# card_enabled: false면 건너뛰고 정상 종료. card_daily_limit은 하루 상한 — 평소 유입은 하루 2~30편
+# (2026-10 실측), aside 백필이 몰린 날만 70~140편이다. 기존 문서 소급은 Actions가 아니라 별도
+# 스크립트(Batch API)로 한다 — Actions 무료 제공량(월 2,000분) 보호.
+# card_max_chars: 본문 앞에서 이만큼만 넣는다(시험과 같은 값, 6만 자 넘는 문서는 1% 미만).
+card_enabled: true
+card_model: claude-sonnet-5-5
+card_daily_limit: 100
+card_max_chars: 60000
+# 카드 대상 소스 — 작업실 서재 범위와 같은 28곳. arXiv 초록(T1)·T5 뉴스는 만들지 않는다.
+# manual은 sources.yaml에 없는 수기 등록 문서의 source_id다(src/collectors/source_match.py).
+card_sources:
+  - stanford-hai
+  - brookings-future-of-work
+  - oecd-employment-ai
+  - mckinsey-insights
+  - deloitte-insights
+  - bcg-publications
+  - knowledge-wharton
+  - bain-insights
+  - pwc-global-insights
+  - josh-bersin
+  - hbr
+  - hbr-korea
+  - mit-smr
+  - dbr
+  - aihr-blog
+  - mit-tech-review
+  - charter
+  - fastcompany-worklife
+  - hr-bulletin
+  - ms-worklab
+  - onemodel-blog
+  - innofit-blog
+  - carrot-global-blog
+  - worklytics-blog
+  - ai-lab-enterprise-reports
+  - google-rework
+  - flex-blog
+  - manual
+
 # A6 의미 기반 검색(pgvector) — claim 임베딩 일반 실행(일일 증분) 1회 처리 상한.
 # embedding IS NULL인 claim만 대상이라 이미 변환된 claim은 재계산하지 않는다 —
 # 이 상한은 사실상 "그날 새로 추출된 claim" 규모다. --backfill(잔여 전량)은 이 값을 쓰지 않는다.

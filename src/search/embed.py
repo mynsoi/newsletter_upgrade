@@ -20,6 +20,9 @@ migrations/005_claims_embedding.sql 참고). 키 로드는 OPENAI_API_KEY_EMBED�
   — 「GPTs are GPTs」(2023) 같은 핵심 논문이 여기 해당한다.
 - 0 또는 null이면 비우기를 끈다(전량 유지).
 
+**문서 카드 (2026-10-21, migrations/009)**: claim 다음에 같은 실행에서 카드 조각(핵심 주장 1개 +
+있었던 일 각각)을 같은 모델·차원으로 document_card_embeddings에 채운다. 아직 없는 조각만 만든다.
+
 사용:
   python src/search/embed.py              # embedding IS NULL인 claim을 상한(기본 2000)까지
   python src/search/embed.py --limit 500
@@ -30,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import calendar
+import json
 import os
 import sys
 from datetime import date
@@ -184,9 +188,6 @@ def run(limit: int | None, retention_months: int | None = DEFAULT_ARXIV_RETENTIO
     pending = select_pending(conn, limit, cutoff)
     print(f"대상 {len(pending)}건 (embedding IS NULL, 보존 경계 밖 arXiv 제외, model={MODEL}"
           + (f", limit={limit}" if limit is not None else ", 무제한(--backfill)") + ")")
-    if not pending:
-        conn.close()
-        return 0
 
     total_tokens = 0
     done = 0
@@ -202,10 +203,62 @@ def run(limit: int | None, retention_months: int | None = DEFAULT_ARXIV_RETENTIO
         done += len(batch)
         print(f"  {done}/{len(pending)}건 변환 완료")
 
+    card_parts, card_tokens = embed_cards(conn, client, limit)
+    total_tokens += card_tokens
+
     cost = total_tokens / 1_000_000 * PRICE_PER_1M_TOKENS
-    print(f"\n총 {done}건 임베딩 생성, 토큰 {total_tokens:,} — 실측 비용 ${cost:.4f}")
+    print(f"\n총 claim {done}건 · 카드 {card_parts}조각 임베딩 생성, 토큰 {total_tokens:,} "
+          f"— 실측 비용 ${cost:.4f}")
     conn.close()
     return 0
+
+
+def card_parts(card) -> list[tuple[str, str]]:
+    """카드 1장 → [(part, 텍스트)]. 핵심 주장 1개 + 있었던 일 각각 (migrations/009)."""
+    episodes = card["episodes"]
+    if isinstance(episodes, str):  # SQLite는 JSON 문자열, PostgreSQL JSONB는 이미 리스트
+        episodes = json.loads(episodes)
+    return [("thesis", card["thesis"])] + [
+        (f"episode:{i}", e) for i, e in enumerate(episodes, 1)]
+
+
+def select_pending_cards(conn, limit: int | None) -> list:
+    """조각 임베딩이 다 차지 않은 카드, 새 카드 먼저. 카드는 만든 뒤 바뀌지 않으므로
+    조각 수(1 + 있었던 일 개수)만 맞으면 끝난 카드다."""
+    sql = ("SELECT c.document_id, c.thesis, c.episodes FROM document_cards c "
+           "WHERE (SELECT COUNT(*) FROM document_card_embeddings e "
+           "       WHERE e.document_id = c.document_id) < 1 + jsonb_array_length(c.episodes) "
+           "ORDER BY c.created_at DESC")
+    params: tuple = ()
+    if limit is not None:
+        sql += " LIMIT ?"
+        params = (limit,)
+    return conn.execute(sql, params).fetchall()
+
+
+def embed_cards(conn, client, limit: int | None) -> tuple[int, int]:
+    """카드 조각 임베딩을 document_card_embeddings에 채운다. 반환: (조각 수, 토큰 수).
+
+    claim과 같은 모델·차원·저장 타입. limit은 카드 장수 기준(claim 상한과 같은 값을 쓴다 —
+    하루 카드는 card_daily_limit 이하라 사실상 그날 새 카드 전부). 이미 있는 조각은
+    ON CONFLICT로 건너뛴다 — 도중에 끊긴 카드를 다시 집어도 중복 행이 생기지 않는다.
+    """
+    cards = select_pending_cards(conn, limit)
+    print(f"카드 임베딩 대상 {len(cards)}장")
+    parts = [(c["document_id"], part, text) for c in cards for part, text in card_parts(c)]
+    tokens_total = 0
+    for i in range(0, len(parts), BATCH_SIZE):
+        batch = parts[i:i + BATCH_SIZE]
+        vecs, tokens = embed_texts(client, [t for _, _, t in batch])
+        tokens_total += tokens
+        for (doc_id, part, _), vec in zip(batch, vecs):
+            conn.execute(
+                "INSERT INTO document_card_embeddings (document_id, part, embedding) "
+                f"VALUES (?, ?, ?::{VECTOR_TYPE}) ON CONFLICT (document_id, part) DO NOTHING",
+                (doc_id, part, to_vector_literal(vec)))
+        conn.commit()
+        print(f"  카드 조각 {min(i + BATCH_SIZE, len(parts))}/{len(parts)} 변환 완료")
+    return len(parts), tokens_total
 
 
 def main(argv: list[str] | None = None) -> int:
