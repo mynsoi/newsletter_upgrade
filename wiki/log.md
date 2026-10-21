@@ -1,5 +1,8 @@
 # 위키 이력
 
+## 2026-10-21 17:59
+- 주제 묶기(이어 묶기) 3번 · 보낸 카드 289 · 제목 후보 0개 · 921s
+
 ## 2026-10-21 17:57
 - 묶기 붙임 bain-insights/0019, worklytics-blog/0004, dbr/0067, fastcompany-worklife/0087 → 주제/ai-lab-enterprise-reports-0002.md
 - 묶기 붙임 fastcompany-worklife/0065 → 주제/ai-lab-enterprise-reports-0004.md
