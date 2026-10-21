@@ -223,6 +223,67 @@ def group_and_filter(d, m, cs, client):
     return data
 
 
+# ---------- 메시지 단위 주제 (2026-10-21 추가) ----------
+# 사용자 지적: 지금 '주제'는 원문에서 있었던 일 한 줄(사례)이라, 글 주제를 고르는 사람이 무슨 글이 될지 알 수 없다.
+# → 주제 = 우리 독자에게 할 핵심 메시지 한 문장, 그 아래에 받치는 사례 1~3개(가능하면 다른 발행처). 묶는 기준도 '같은 메시지를 받치는가'.
+
+def site_name(k):
+    t = (SRC / W.rel(k)).read_text(encoding="utf-8")
+    m = re.search(r"^site_name: (.*)$", t.split("---", 2)[1], re.M)
+    return m.group(1).strip() if m else k.split("/")[0]
+
+
+def message_prompt(cs):
+    cards = "\n\n".join(
+        f"[{k}] 발행처: {site_name(k)}\n글쓴이가 하는 말: {c.get('글쓴이가 하는 말', '')}\n있었던 일: {c.get('있었던 일', '')}"
+        for k, c in cs.items())
+    ex = W.EXAMPLES.read_text(encoding="utf-8") if W.EXAMPLES.exists() else "(아직 없음)"
+    return "\n\n".join([
+        f"아래는 {W.READER} 칼럼 재료로 모은 원문 카드들입니다. 칼럼을 쓸 사람이 고를 '주제' 목록을 만들어 주세요.",
+        "주제란: 우리 독자(개발자가 아닌 사무·현장 직원)에게 할 **핵심 메시지 한 문장**입니다. 글 한 편이 끝까지 끌고 갈 주장이어야 합니다.\n"
+        "- 좋은 주제: 일반적이면서 논리가 있는 주장. 읽는 사람이 '아, 이런 글이 되겠구나'를 바로 알 수 있음. 통념을 뒤집거나 긴장이 있는 주장이면 더 좋음.\n"
+        "- 나쁜 주제: ① 특정 회사·연구의 사실 한 줄(그건 사례) ② '~부터 시작하자', 'AI를 잘 쓰려면 ~해야 한다' 같은 교육 자료식 구호 ③ 여러 이야기를 뭉뚱그린 분야 이름.\n"
+        "- 주제는 반드시 아래 카드의 사례가 받쳐 줘야 합니다. 사례 없이 그럴듯하기만 한 주제는 만들지 않습니다.",
+        "할 일:\n"
+        "1. 같은 메시지를 받쳐 주는 카드끼리 한 주제로 묶습니다. 원문 글쓴이의 주장이 똑같을 필요는 없고, 우리 독자에게 같은 메시지를 보여 주면 됩니다.\n"
+        "2. 주제마다 사례 1~3개를 고릅니다. 가능하면 서로 다른 발행처에서. 첫 번째가 중심 사례입니다. 메시지에 반대되거나 조건을 다는 사례가 있으면 role을 '반례'로.\n"
+        "3. 사례마다 line: 그 카드의 있었던 일 한 줄(누가 무엇을 했고 무엇이 드러났는지, 이름·숫자 그대로, 60자 안팎).\n"
+        "4. 판정: [판정 예시]의 결을 따라 우리 직원에게 쓸모 있는지 쓸 만함 · 보통 · 뺌. why 한 줄, audience(팀장급·사수급·신입사원·전 직원 중 하나 이상, '·'로).\n"
+        "5. 어느 주제에도 쓸 수 없는 카드(우리 독자와 무관하거나 재료가 없는 것)는 excluded에 이유와 함께. 모든 카드는 주제 하나에 들어가거나 excluded에 있어야 합니다(한 카드를 두 주제에 쓰지 않음).",
+        "출력: JSON 하나만.\n"
+        '{"topics": [{"주제": "...", "cases": [{"key": "hbr-korea/0001", "role": "중심", "line": "..."}], "verdict": "쓸 만함", "why": "...", "audience": "전 직원"}], '
+        '"excluded": [{"key": "...", "reason": "..."}]}  — key는 카드의 [ ] 안 그대로.',
+        W.ANSWER_ONLY, W.GUARD,
+        "=== [판정 예시] ===\n" + ex,
+        "=== [카드] ===\n" + cards,
+    ])
+
+
+def message_topics(d, m, cs, client):
+    f = d / m / "messages.json"
+    if f.exists():
+        return json.loads(f.read_text(encoding="utf-8"))
+    out = claude_api(client, FILTER_MODEL, message_prompt(cs), d / m / "message", effort="high", max_tokens=32000)
+    mt = re.search(r"\{.*\}", out or "", re.S)
+    data = json.loads(mt.group(0)) if mt else {"topics": [], "excluded": []}
+    for tp in data.get("topics", []):
+        tp["cases"] = [c for c in tp.get("cases", []) if c.get("key") in cs]
+    f.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[{m}] 메시지 주제 {len(data.get('topics', []))} · 뺌 {len(data.get('excluded', []))}", flush=True)
+    return data
+
+
+def run_messages(dir_):
+    d = (ROOT / dir_).resolve()
+    client = api()
+    cards = {m: json.loads((d / m / "cards.json").read_text(encoding="utf-8")) for m in METHODS}
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        list(ex.map(lambda m: message_topics(d, m, cards[m], client), METHODS))
+    u = d / "usage-messages.json"
+    u.write_text(json.dumps(USAGE, ensure_ascii=False, indent=1), encoding="utf-8")
+    page(d)
+
+
 NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
 LATIN = re.compile(r"\b[A-Z][A-Za-z0-9&.\-]{1,}(?:\s+[A-Z][A-Za-z0-9&.\-]+)*")
 
@@ -306,6 +367,31 @@ def page(d):
             eps = "".join(f"<li>{esc(e)}</li>" for e in c.get("episodes", []))
             cells += f"<td><p class=th>{esc(c.get('글쓴이가 하는 말'))}</p><ol>{eps}</ol>{'<span class=mt>' + esc(c['재료 유형']) + '</span>' if c.get('재료 유형') else ''}</td>"
         per += f"<tr><th>{esc(names[s['rel']])}<br><small>{s['tier']}</small></th>{cells}</tr>"
+    msec, mrows = "", ""
+    if all((d / m / "messages.json").exists() for m in METHODS):
+        mcols = ""
+        for m in sorted(METHODS, key=lambda x: lab[x]):
+            md = json.loads((d / m / "messages.json").read_text(encoding="utf-8"))
+            tps = md.get("topics", [])
+            pubs = [len({c["key"].split("/")[0] for c in tp["cases"]}) for tp in tps]
+            mrows += (f"<tr><th>{lab[m]}</th><td>{len(tps)}</td><td>{sum(1 for x in pubs if x > 1)}</td>"
+                      f"<td>{(sum(len(tp['cases']) for tp in tps) / len(tps)) if tps else 0:.1f}</td>"
+                      f"<td class=g>{sum(1 for tp in tps if tp.get('verdict') == '쓸 만함')}</td><td>{sum(1 for tp in tps if tp.get('verdict') == '보통')}</td>"
+                      f"<td>{sum(1 for tp in tps if tp.get('verdict') == '뺌')}</td><td>{len(md.get('excluded', []))}</td></tr>")
+            items = ""
+            for v in ("쓸 만함", "보통", "뺌"):
+                for tp in [x for x in tps if x.get("verdict") == v]:
+                    cases = "".join(f"<li><span class=role>{esc(c.get('role'))}</span> {esc(c.get('line'))} <small>— {esc(site_name(c['key']))}</small></li>" for c in tp["cases"])
+                    items += (f"<details class='t v{['쓸 만함', '보통', '뺌'].index(v)}' {'open' if v == '쓸 만함' else ''}><summary><b>{esc(v)}</b> <span class=msg>{esc(tp.get('주제'))}</span></summary>"
+                              f"<ul class=cases>{cases}</ul><p><i>왜</i> {esc(tp.get('why'))}</p><p><i>대상</i> {esc(tp.get('audience'))}</p></details>")
+            if md.get("excluded"):
+                items += "<details class=t><summary>주제에 못 쓴 카드 " + str(len(md["excluded"])) + "</summary><ul>" + "".join(
+                    f"<li>{esc(names.get(W.rel(x.get('key', '')), x.get('key')))} — {esc(x.get('reason'))}</li>" for x in md["excluded"]) + "</ul></details>"
+            mcols += f"<section><h3>{lab[m]}</h3>{items}</section>"
+        msec = (f"<h2>③ 메시지 단위 주제 (같은 카드, 다시 묶음)</h2><div class=note>주제 = 우리 독자에게 할 핵심 메시지 한 문장, 그 아래 받치는 사례(가능하면 다른 발행처). "
+                f"②의 '주제'는 원문에서 있었던 일 한 줄(사실상 사례)이라 무슨 글이 될지 알기 어렵다는 지적(2026-10-21)으로 추가. 쓸 만함은 펼쳐 둠.</div>"
+                f"<table class=sum><tr><th></th><td>주제</td><td>여러 발행처 주제</td><td>주제당 사례</td><td>쓸 만함</td><td>보통</td><td>뺌</td><td>못 쓴 카드</td></tr>{mrows}</table>"
+                f"<div class=cols style='margin-top:12px'>{mcols}</div>")
     reveal = " · ".join(f"{lab[m]} = {m} ({ {'A0': 'astra · 멘토 원래 카드', 'A': 'astra · 새 카드', 'B': 'Haiku 5.5 · 새 카드', 'C': 'Sonnet 5.5 · 새 카드'}[m] })" for m in sorted(METHODS, key=lambda x: lab[x]))
     usage = json.loads((d / "usage.json").read_text(encoding="utf-8")) if (d / "usage.json").exists() else {}
     html = f"""<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
@@ -321,14 +407,16 @@ section h3{{margin:0 0 8px;font-size:20px;text-align:center}} details.t{{border-
 .v0 summary b{{color:var(--good)}} .v2{{opacity:.6}} .multi{{font-size:12px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:0 6px}}
 details p,details ul{{margin:4px 0;font-size:14px}} i{{color:var(--ink2);font-style:normal;font-size:12px;margin-right:4px}}
 .per td{{font-size:13.5px;width:22%}} .per th{{width:12%;font-size:13px}} .th{{font-weight:600;margin:0 0 4px}} ol{{margin:0;padding-left:18px}} .mt{{font-size:12px;color:var(--ink2)}} .miss{{color:#b91c1c}}
+.msg{{font-weight:600}} .cases{{padding-left:16px}} .cases li{{margin:2px 0}} .role{{font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 4px;color:var(--ink2)}}
 .note{{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--ink2);font-size:14px}}
 @media (max-width:900px){{.cols{{grid-template-columns:1fr}} .per{{display:block;overflow-x:auto}}}}
 </style></head><body><main>
 <h1>카드 비교 시험</h1><p class=sub>{d.name} · 같은 원문 40편(게이트 통과, 분류별 고르게) · 네 방식(가·나·다·라)으로 카드를 만들고 같은 묶기·거르기(둘 다 Claude Opus 5.5, 멘토의 묶기·거르기 지시문과 판정 예시 그대로 — 묶기는 원래 astra지만 ChatGPT 사용 한도로 네 방식 모두 Opus로 맞춤)를 거침 · 방식은 맨 아래에서 공개</p>
-<div class=note>보는 순서: ① 한눈에 표 → ② 방식별 주제(쓸 만함을 펼쳐 '이 주제로 칼럼을 쓰고 싶은가') → ③ 원문별 카드(같은 원문을 네 방식이 어떻게 정리했나). 재료 유형이 비어 있는(—) 방식은 멘토 원래 카드 형식이라 기준선임이 드러납니다. 나머지 셋은 같은 새 카드 형식입니다. 숫자·영문 이름 점검은 카드 속 값이 원문에 그대로 있는지 본 거친 자동 점검입니다(번역·단위 표기 차이로 놓친 것도 셈).</div>
+<div class=note>보는 순서: ① 한눈에 표 → ② 지금 방식의 주제(사실상 사례 한 줄) → ③ 메시지 단위 주제('이 주제로 칼럼을 쓰고 싶은가') → ④ 원문별 카드(같은 원문을 네 방식이 어떻게 정리했나). 재료 유형이 비어 있는(—) 방식은 멘토 원래 카드 형식이라 기준선임이 드러납니다. 나머지 셋은 같은 새 카드 형식입니다. 숫자·영문 이름 점검은 카드 속 값이 원문에 그대로 있는지 본 거친 자동 점검입니다(번역·단위 표기 차이로 놓친 것도 셈).</div>
 <h2>① 한눈에</h2><table class=sum><tr><th></th><td>카드</td><td>주제</td><td>여러 원문 주제</td><td>쓸 만함</td><td>보통</td><td>뺌</td><td>묶기에서 뺌</td><td>숫자 원문 확인</td><td>영문 이름 원문 확인</td><td>재료 유형</td></tr>{rows}</table>
-<h2>② 방식별 주제</h2><div class=cols>{cols}</div>
-<h2>③ 원문별 카드</h2><table class=per><tr><th>원문</th>{''.join(f'<td><b>{lab[m]}</b></td>' for m in sorted(METHODS, key=lambda x: lab[x]))}</tr>{per}</table>
+<h2>② 방식별 주제 — 지금 방식(사례 단위)</h2><div class=cols>{cols}</div>
+{msec}
+<h2>④ 원문별 카드</h2><table class=per><tr><th>원문</th>{''.join(f'<td><b>{lab[m]}</b></td>' for m in sorted(METHODS, key=lambda x: lab[x]))}</tr>{per}</table>
 <h2>방식 공개</h2><details><summary>평가를 마친 뒤 펼치기</summary><p>{esc(reveal)}</p><p class=sub>API 사용량: {esc(json.dumps(usage, ensure_ascii=False))}</p></details>
 </main></body></html>"""
     out = ROOT / "docs" / f"{time.strftime('%Y-%m-%d')}-카드-비교-시험.html"
@@ -364,8 +452,11 @@ if __name__ == "__main__":
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--page")
     ap.add_argument("--dir", help="--run을 이 회차 폴더에서 이어서")
+    ap.add_argument("--messages", metavar="DIR", help="그 회차의 카드로 메시지 단위 주제를 만들어 페이지에 붙임")
     a = ap.parse_args()
-    if a.page:
+    if a.messages:
+        run_messages(a.messages)
+    elif a.page:
         page(Path(a.page))
     elif a.run:
         run(a.dir)
