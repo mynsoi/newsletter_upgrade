@@ -95,7 +95,7 @@ export type WikiTopic = {
   cases?: { key: string; role: string; line: string }[];
 };
 /** unbundled = 아직 주제로 묶지 않은 자동 카드 수('주제 묶기' 버튼) */
-export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; unbundled?: number; log: string[] };
+export type Wiki = { topics: WikiTopic[]; processed: number; backlog: string[]; unbundled?: number; bundleSince?: string; searchOnly?: { old: number; undated: number }; log: string[] };
 
 /** 내 주제로 쓰기 — 메인 화면 채팅 (scripts/my_topic.py) */
 export type MineRow = {

@@ -39,6 +39,9 @@ CARDS = WIKI / "cards.json"
 DOC_CARDS = ROOT / "sources" / "doc_cards.json"
 EXCLUDED = WIKI / "묶기제외.json"  # 주제 묶기에서 쓸 수 없다고 뺀 카드와 이유 — 다음 묶기에 다시 보내지 않는다
 BUNDLE_LIMIT = int(os.environ.get("WIKI_BUNDLE_LIMIT", "100"))  # 주제 묶기 한 번에 보는 새 카드 상한
+# 주제 묶기는 발행일이 최근 이 개월 수 안인 카드만(누를 때마다 오늘부터 셈). 그보다 오래됐거나 발행일 없는 카드는
+# 주제로 묶지 않고 '내 주제로 쓰기' 검색(card_search.py)에만 쓴다(2026-10-21 결정 — 주제 탭은 최근 흐름 중심).
+RECENT_MONTHS = int(os.environ.get("WIKI_BUNDLE_RECENT_MONTHS", "3"))
 BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때(기본은 계정 로그인 claude CLI의 opus)
 EXAMPLES = WIKI / "판정예시.md"
 SRC = ROOT / "sources"
@@ -504,6 +507,34 @@ def excluded():
     return json.loads(EXCLUDED.read_text(encoding="utf-8")) if EXCLUDED.exists() else {}
 
 
+def recent_since(today=None):
+    """오늘에서 RECENT_MONTHS개월 전 같은 날(그 달에 그날이 없으면 말일) — 'YYYY-MM-DD'."""
+    import calendar
+    import datetime as dt
+    d = today or dt.date.today()
+    y, m = divmod(d.year * 12 + d.month - 1 - RECENT_MONTHS, 12)
+    return dt.date(y, m + 1, min(d.day, calendar.monthrange(y, m + 1)[1])).isoformat()
+
+
+def bundle_pool():
+    """주제 묶기 대상 → (최근 카드 키 목록, 최근 3개월보다 오래된 수, 발행일 없는 수). 재료 없음·이미 주제에 든 것·뺀 것은 셈에서 뺀다."""
+    dc, ex = doc_cards(), excluded()
+    used = {s for t in topics() for s in t["sources"]}
+    since = recent_since()
+    pool, old, undated = [], 0, 0
+    for k, c in dc.items():
+        if k in used or k in ex or c.get("material_type") == "재료 없음" or not (SRC / rel(k)).is_file():
+            continue
+        d = date_of(rel(k))
+        if not d:
+            undated += 1
+        elif d[:10] < since:
+            old += 1
+        else:
+            pool.append(k)
+    return pool, old, undated
+
+
 def bundle_prompt(new, cs, ts):
     have = "\n".join(f"[{Path(t['page']).stem}] {t['title']} — 사례: {', '.join(t['sources'])}" for t in ts if t["status"] == "쓸 수 있음") or "(아직 없음)"
     cards_txt = "\n\n".join(f"[{k}] 발행처: {site_name(k)}\n글쓴이가 하는 말: {cs[k]['글쓴이가 하는 말']}\n있었던 일: {cs[k]['있었던 일']}" for k in new)
@@ -574,7 +605,9 @@ def bundle(api=False):
     new = [k for k in dc if k not in used and k not in ex and (SRC / rel(k)).is_file()]
     for k in [k for k in new if dc[k].get("material_type") == "재료 없음"]:
         ex[k] = "재료 없음(카드)"
-    new = sorted([k for k in new if k not in ex], key=lambda k: date_of(rel(k)), reverse=True)
+    pool, n_old, n_undated = bundle_pool()  # 최근 RECENT_MONTHS개월 발행 카드만 — 오래된·날짜 없는 카드는 검색에만
+    new = sorted([k for k in new if k not in ex and k in set(pool)], key=lambda k: date_of(rel(k)), reverse=True)
+    print(f"대상: 발행일 {recent_since()} 이후 {len(new)}장 · 묶지 않음(검색에만) 오래된 {n_old} · 발행일 없음 {n_undated}")
     left = max(0, len(new) - BUNDLE_LIMIT)
     new = new[:BUNDLE_LIMIT]
     if not new:
