@@ -2,7 +2,7 @@
 type: topic
 kind: message
 title: AI가 결과물을 쏟아낼수록 병목은 AI가 아니라 그것을 살피고 결정해야 하는 사람의 주의력이 된다
-verdict: 쓸 만함
+verdict: 보통
 audience: 팀장급·전 직원
 center: ai-lab-enterprise-reports/0002
 status: 쓸 수 있음
