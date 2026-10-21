@@ -25,6 +25,26 @@
 
 ### 1. 서재 — 원문 모으기
 
+> **2026-10-20 — 주제 재료를 Supabase로 바꿈.** Threads·LinkedIn 샘플 원문은 지웠고, 주제 재료는 팀 파이프라인(main)이
+> 매일 모으는 Supabase 문서에서 받아 옵니다. 범위는 `sources/db_scope.json`(소스 28곳 — 컨설팅·저널·기업 자료·연구기관,
+> 본문 800자 이상, 반려·요약문·초록·뉴스 제외)이고, `python3 -I scripts/db_sources.py --sync`가 원문 그대로
+> `sources/originals/<소스>/NNNN.md`로 내려 둡니다(git 밖 — 저작권 있는 원문이라 저장소에 올리지 않음, `DATABASE_URL` 필요).
+> 서재 탭은 등급별(컨설팅 · 저널·매체 · 기업 자료 · 연구기관)로 묶입니다. 경영일기는 주제 재료가 아니라 과정 1·2의 **문체 참고**라 그대로 둡니다.
+> 주제 지도 넣기는 한 번에 최근 글 40편까지(`WIKI_BATCH`)만 합니다.
+> 받기는 저절로 됩니다 — 작업실 서버가 켜질 때 한 번, 그다음 6시간마다(`DB_SYNC_HOURS`) 새 원문을 받고 반려된 원문은 정리합니다(카드가 있는 원문은 남김).
+> 바로 받고 싶으면 서재의 **Supabase 받기** 버튼을 누릅니다(마우스를 올리면 마지막 받은 시각). 주제 지도 넣기는 저절로 잇지 않고 **넣기** 버튼으로 합니다(astra 사용).
+>
+> **aside 수집(2026-10-20)** — RSS·API가 못 받는 소스는 Aside Browser로 받아 **Supabase에 저장**합니다(`scripts/aside_collect.py`, 설정 `sources/aside_sources.json`).
+> Deloitte·BCG(목록의 새 글), DBR·HBR Korea(구독 로그인 세션으로 목록의 새 글), McKinsey·Wharton(DB의 요약뿐인 글을 전문으로 격상).
+> 작업실 서버가 6시간마다(`ASIDE_COLLECT_HOURS`) Aside Browser가 켜져 있을 때만 돌고, 서재의 **aside 수집**을 비워 두고 눌러도 됩니다.
+> 글은 AI가 고르지 않고 목록 페이지의 링크 패턴으로 고르며, 본문은 main 추출기(`scripts/aside/extract_article.js`)로 원문 그대로 뽑습니다.
+> 저장 규칙은 main `store_document`와 같고(`fetched_by='aside'`, `status='new'` → main Actions가 관련성 판별·claim 추출), 끝나면 Supabase 받기가 이어져 서재에 뜹니다.
+> **과거분 백필** — 회차마다 평소 수집 뒤 2026-01-01(`backfill_since`) 이후 과거 글을 소스당 20편씩 더 받습니다. Deloitte·BCG는 사이트맵, DBR은 호별 목차(433~451호),
+> HBR Korea는 최신 글 쪽 넘기기(디지털 글 번호 1515번 이후 — 날짜가 없어 근사)와 2026년 매거진 호, McKinsey·Wharton은 격상 기간을 하한까지 넓힙니다.
+> 하한보다 오래된 글·짧은 글·날짜 없는 허브 페이지는 저장하지 않고 `runs/aside/backfill_state.json`에 적어 다시 열지 않으며, 과거 목록은 일주일마다만 새로 만듭니다.
+> 구독 소스는 하루에 여는 글 수가 40편(`daily_cap`)까지입니다. 다 받으면 로그에 '백필 끝'이 찍히고 평소 수집만 남습니다.
+> 구독 소스는 로그인을 사람이 해 두고, 로그인이 풀려 있으면 그 소스는 멈춥니다. 입력창에 요청을 적으면 예전처럼 그 요청으로 aside가 글을 찾습니다(`scripts/collect.py`, 작업실 로컬 저장).
+
 ![서재](docs/readme/screen-library.jpg)
 
 Threads·LinkedIn 글과 경영일기를 모아 두는 곳입니다. 입력창에 찾을 내용을 적고 **aside 수집**을 누르면
@@ -219,6 +239,8 @@ Windows에서 명령으로 돌릴 때는 `python3 -I` 대신 `py -3 -X utf8 -I`�
 화면 없이 명령으로도 돌릴 수 있습니다.
 
 ```bash
+python3 -I scripts/db_sources.py --sync                       # Supabase 원문 받기 (--status: 범위·받은 수)
+python3 -I scripts/aside_collect.py [--write] [--source dbr] [--limit 2]   # aside 수집 → Supabase (--write 없으면 미리보기)
 python3 -I scripts/collect.py "찾을 내용"                         # 원문 수집 (비우면 자동)
 python3 -I scripts/wiki.py --ingest                               # 아직 안 넣은 원문: 카드 → 묶기 → 거르기 → 제목 후보
 python3 -I scripts/wiki.py --refilter                             # 판정 예시로 전체 다시 거르기

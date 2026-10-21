@@ -1,0 +1,126 @@
+{
+ "_설명": "Supabase(main 파이프라인 DB)에서 작업실 원문으로 받아 올 범위. scripts/db_sources.py --sync가 읽는다. 소스를 넣고 빼려면 sources에서 지우거나 더한다. 소스 확정본은 main의 config/sources.yaml.",
+ "_뺀_이유": {
+  "arXiv·PsyArXiv·NBER": "본문이 초록(중앙값 1.2~1.5천 자) — 작업실은 원문 전체로 쓴다",
+  "academic-canon·theory-canon": "학술 정전·이론 카드 — 책 한 권 분량이거나 사례가 아닌 이론 요약",
+  "T5 뉴스": "main 규칙상 신호 감지 전용, 단독 근거 금지",
+  "excluded": "main 소스 리뷰에서 퇴출·제외된 소스"
+ },
+ "min_chars": 800,
+ "exclude_summary_only": true,
+ "exclude_rejected": true,
+ "sources": {
+  "stanford-hai": {
+   "name": "Stanford HAI",
+   "tier": "T1"
+  },
+  "brookings-future-of-work": {
+   "name": "Brookings (Future of Work)",
+   "tier": "T1"
+  },
+  "oecd-employment-ai": {
+   "name": "OECD (고용·AI)",
+   "tier": "T1"
+  },
+  "mckinsey-insights": {
+   "name": "McKinsey Insights",
+   "tier": "T2"
+  },
+  "deloitte-insights": {
+   "name": "Deloitte Insights",
+   "tier": "T2"
+  },
+  "bcg-publications": {
+   "name": "BCG Publications",
+   "tier": "T2"
+  },
+  "knowledge-wharton": {
+   "name": "Knowledge at Wharton",
+   "tier": "T2"
+  },
+  "bain-insights": {
+   "name": "Bain Insights",
+   "tier": "T2"
+  },
+  "pwc-global-insights": {
+   "name": "PwC 글로벌 Insights",
+   "tier": "T2"
+  },
+  "josh-bersin": {
+   "name": "Josh Bersin",
+   "tier": "T2"
+  },
+  "hbr": {
+   "name": "Harvard Business Review",
+   "tier": "T3"
+  },
+  "hbr-korea": {
+   "name": "HBR Korea(하버드비즈니스리뷰 한국판)",
+   "tier": "T3"
+  },
+  "mit-smr": {
+   "name": "MIT Sloan Management Review",
+   "tier": "T3"
+  },
+  "dbr": {
+   "name": "DBR(동아비즈니스리뷰)",
+   "tier": "T3"
+  },
+  "aihr-blog": {
+   "name": "AIHR Blog",
+   "tier": "T3"
+  },
+  "mit-tech-review": {
+   "name": "MIT Technology Review",
+   "tier": "T3"
+  },
+  "charter": {
+   "name": "Charter",
+   "tier": "T3"
+  },
+  "fastcompany-worklife": {
+   "name": "Fast Company (Work Life)",
+   "tier": "T3"
+  },
+  "hr-bulletin": {
+   "name": "HR블레틴",
+   "tier": "T3"
+  },
+  "ms-worklab": {
+   "name": "Microsoft WorkLab",
+   "tier": "T4"
+  },
+  "onemodel-blog": {
+   "name": "One Model Blog",
+   "tier": "T4"
+  },
+  "innofit-blog": {
+   "name": "이노핏파트너스 블로그",
+   "tier": "T4"
+  },
+  "carrot-global-blog": {
+   "name": "캐럿글로벌 블로그",
+   "tier": "T4"
+  },
+  "worklytics-blog": {
+   "name": "Worklytics",
+   "tier": "T4"
+  },
+  "ai-lab-enterprise-reports": {
+   "name": "Anthropic·OpenAI 기업 활용 리포트",
+   "tier": "T4"
+  },
+  "google-rework": {
+   "name": "Google re:Work",
+   "tier": "T4"
+  },
+  "flex-blog": {
+   "name": "플렉스(flex) 블로그",
+   "tier": "T4"
+  },
+  "manual": {
+   "name": "수기 등록",
+   "tier": "T2·T3·T4"
+  }
+ }
+}

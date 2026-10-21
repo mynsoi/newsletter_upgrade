@@ -6,6 +6,7 @@
 """
 import base64
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -130,7 +131,7 @@ def library(full=False):
         text = re.sub(r"^## \d+/\d+\s*$", "", body, flags=re.M).strip()
         rel = f.relative_to(SRC).as_posix()
         rows.append({
-            "path": rel, "site": f.parent.name, "siteName": SITES.get(f.parent.name, f.parent.name),
+            "path": rel, "site": f.parent.name, "siteName": m.get("site_name") or SITES.get(f.parent.name, f.parent.name), "tier": m.get("tier", ""),
             "url": m.get("url", ""), "author": m.get("author", ""), "headline": m.get("headline", ""),
             "title": m.get("title", ""), "date": m.get("date", ""),
             "reactions": m.get("likes") or m.get("reactions") or "", "chars": nospace(text),
@@ -340,7 +341,7 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings()}
+            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings()}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -528,9 +529,28 @@ def act_mine_swap(a):
 
 
 def collect_rounds():
+    """요청 수집(scripts/collect.py) 기록. 저장한 원문이 하나도 남지 않은 회차(2026-10-20 지운 Threads·LinkedIn 샘플)는 숨긴다."""
     out = []
     for d in sorted((ROOT / "runs" / "collect").glob("*/"), reverse=True):
-        out.append({"id": d.name, "request": read(d / "request.txt"), "saved": json.loads(read(d / "saved.json") or "[]")})
+        saved = json.loads(read(d / "saved.json") or "[]")
+        if not any((SRC / x["path"]).exists() for x in saved if x.get("path")):
+            continue
+        out.append({"id": d.name, "request": read(d / "request.txt"), "saved": saved})
+    return out
+
+
+def aside_rounds():
+    """소스 aside 수집(scripts/aside_collect.py) 회차 — runs/aside/<시각>/report.json. 미리보기 회차는 뺀다."""
+    out = []
+    for d in sorted((ROOT / "runs" / "aside").glob("2*/"), reverse=True):
+        rep = json.loads(read(d / "report.json") or "[]")
+        if not rep or any(i.get("result") == "미리보기" for r in rep for i in r.get("items", [])):
+            continue
+        n = lambda k: sum(r.get(k, 0) for r in rep)
+        out.append({"id": d.name, "new": n("new"), "upgraded": n("upgraded"), "failed": n("failed"),
+                    "stopped": sorted({r["source"] for r in rep if r.get("stopped")})})
+        if len(out) >= 12:
+            break
     return out
 
 
@@ -916,12 +936,43 @@ def publish_settings():
 
 
 def act_collect(a):
+    """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장,
+    과거분 백필(설정 backfill_since 이후)도 회차마다 조금씩 — 다 받으면 저절로 '백필 끝')
+    → 끝나면 Supabase 받기로 서재에 반영. 적으면 예전처럼 그 요청으로 aside가 글을 찾는다(scripts/collect.py, 작업실 로컬 저장).
+    주제 지도 넣기는 잇지 않는다(2026-10-20 — 원문이 수백 편이라 넣기는 '넣기' 버튼으로)."""
     req = str(a.get("request", "")).strip()
+    if not req:
+        return start("collect", "aside · 소스", PY + ["scripts/aside_collect.py", "--write"], lambda j: act_db_sync({}))
+    return start("collect", req[:40], PY + ["scripts/collect.py", req])
 
-    def after(j):  # 새 원문은 바로 위키에 넣는다 (2026-10-10 위키 채택)
-        if W.backlog():
-            act_wiki_ingest({})
-    return start("collect", req[:40] or "자동 · Threads·LinkedIn", PY + ["scripts/collect.py", req], after)
+
+ASIDE_EVERY = float(os.environ.get("ASIDE_COLLECT_HOURS", "6")) * 3600  # 소스 aside 수집 간격 — Aside Browser가 켜져 있을 때만
+
+
+def aside_loop():
+    time.sleep(120)  # 서버가 켜질 때의 Supabase 받기와 겹치지 않게
+    while True:
+        if os.environ.get("DATABASE_URL"):
+            ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True).returncode == 0
+            if ok:
+                act_collect({})
+        time.sleep(max(ASIDE_EVERY, 1800))
+
+
+DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 서버가 켜질 때 한 번, 그다음 이 간격마다
+
+
+def act_db_sync(_):
+    """Supabase 받기 — main 파이프라인이 매일 쌓는 원문을 서재로(scripts/db_sources.py). 반려된 원문은 정리(--prune, 카드 있는 원문은 남김).
+    주제 지도 넣기는 이어 붙이지 않는다 — astra를 쓰고 주제 판정은 사람이 보는 일이라 '넣기' 버튼으로."""
+    return start("db-sync", "Supabase", PY + ["scripts/db_sources.py", "--sync", "--prune"])
+
+
+def db_sync_loop():
+    while True:
+        if os.environ.get("DATABASE_URL"):
+            act_db_sync({})
+        time.sleep(max(DB_EVERY, 600))
 
 
 def act_wiki_ingest(_):
@@ -998,7 +1049,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
+           "confirm": act_confirm, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart,
@@ -1181,4 +1232,8 @@ if __name__ == "__main__":
     for srv in servers[1:]:
         threading.Thread(target=srv.serve_forever, daemon=True).start()
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
+    threading.Thread(target=db_sync_loop, daemon=True).start()
+    threading.Thread(target=aside_loop, daemon=True).start()
+    if not os.environ.get("DATABASE_URL"):
+        print("DATABASE_URL이 없어 Supabase 자동 받기를 건너뜁니다(서재의 'Supabase 받기'도 실패합니다).", flush=True)
     servers[0].serve_forever()

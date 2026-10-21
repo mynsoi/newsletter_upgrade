@@ -15,9 +15,10 @@ export function SiteIcon({ site, className }: { site: string; className?: string
   return <IconWorld className={c} />;
 }
 
-export function Chip({ children, className }: { children: React.ReactNode; className?: string }) {
+export function Chip({ children, className, title }: { children: React.ReactNode; className?: string; title?: string }) {
   return (
     <span
+      title={title}
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full border border-line bg-soft px-2.5 py-0.5 text-xs text-ink-2",
         className

@@ -2,6 +2,7 @@ export type Source = {
   path: string;
   site: string;
   siteName: string;
+  tier?: string;
   url: string;
   author: string;
   headline: string;
@@ -132,9 +133,13 @@ export type State = {
   articles: Article[];
   jobs: Job[];
   collects: CollectRound[];
+  asideRounds?: AsideRound[];
   mine?: MineRun[];
   publish?: { to: string[]; cc: string[]; webBase: string };
 };
+
+// 소스 aside 수집 회차(scripts/aside_collect.py → Supabase) — 서재 위 칩
+export type AsideRound = { id: string; new: number; upgraded: number; failed: number; stopped: string[] };
 
 export type ChatMsg = { role: "mentor" | "claude"; text: string; at: number; cost?: number };
 
@@ -210,6 +215,7 @@ export const JOB_NAMES: Record<string, string> = {
   inline: "본문 그림",
   images: "그림",
   collect: "수집",
+  "db-sync": "Supabase 받기",
   chat: "진행자",
   wiki: "위키 넣기",
   "wiki-lint": "다시 거르기",
