@@ -948,19 +948,49 @@ def act_collect(a):
 
 
 ASIDE_EVERY = float(os.environ.get("ASIDE_COLLECT_HOURS", "6")) * 3600  # 소스 aside 수집 간격 — Aside Browser가 켜져 있을 때만
+LOOPS = STUDIO / "loops.json"  # 주기 실행의 지난 실행 시각 — 서버를 다시 띄워도 간격을 이어 간다(2026-10-21: 재시작마다 돌던 문제)
+
+
+def last_run(name):
+    try:
+        return float(json.loads(LOOPS.read_text(encoding="utf-8")).get(name, 0))
+    except (OSError, ValueError):
+        return 0.0
+
+
+def mark_run(name):
+    try:
+        d = json.loads(LOOPS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        d = {}
+    d[name] = time.time()
+    LOOPS.write_text(json.dumps(d), encoding="utf-8")
+
+
+def wait_due(name, every):
+    """지난 실행에서 every초가 안 지났으면 남은 만큼 기다린다."""
+    left = last_run(name) + every - time.time()
+    if left > 0:
+        time.sleep(left)
 
 
 def aside_loop():
     time.sleep(120)  # 서버가 켜질 때의 Supabase 받기와 겹치지 않게
+    every = max(ASIDE_EVERY, 1800)
     while True:
+        wait_due("aside", every)
+        ran = False
         if os.environ.get("DATABASE_URL"):
             ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True).returncode == 0
             if ok:
+                mark_run("aside")
                 act_collect({})
-        time.sleep(max(ASIDE_EVERY, 1800))
+                ran = True
+        if not ran:
+            time.sleep(every)  # Aside가 꺼져 있었으면 기록 없이 한 간격 쉬고 다시 본다
 
 
-DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 서버가 켜질 때 한 번, 그다음 이 간격마다
+DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 지난 실행(loops.json)에서 이만큼 지나면(서버를 다시 띄워도 이어서)
 
 
 def act_db_sync(_):
@@ -970,10 +1000,14 @@ def act_db_sync(_):
 
 
 def db_sync_loop():
+    every = max(DB_EVERY, 600)
     while True:
+        wait_due("db-sync", every)
         if os.environ.get("DATABASE_URL"):
+            mark_run("db-sync")
             act_db_sync({})
-        time.sleep(max(DB_EVERY, 600))
+        else:
+            time.sleep(every)
 
 
 def act_wiki_bundle(_):
