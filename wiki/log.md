@@ -1,5 +1,39 @@
 # 위키 이력
 
+## 2026-10-21 17:52
+- 묶기 붙임 bain-insights/0023 → 주제/ai-lab-enterprise-reports-0002.md
+- 묶기 붙임 mit-tech-review/0012, mit-tech-review/0005 → 주제/ai-lab-enterprise-reports-0004.md
+- 묶기 붙임 fastcompany-worklife/0034 → 주제/charter-0005.md
+- 묶기 붙임 fastcompany-worklife/0051 → 주제/fastcompany-worklife-0009.md
+- 묶기 붙임 dbr/0048, hbr/0015 → 주제/fastcompany-worklife-0017.md
+- 묶기 붙임 fastcompany-worklife/0035 → 주제/fastcompany-worklife-0025.md
+- 묶기 붙임 aihr-blog/0014 → 주제/fastcompany-worklife-0189.md
+- 묶기 붙임 hbr/0018, bain-insights/0012 → 주제/knowledge-wharton-0004.md
+- 묶기 붙임 bain-insights/0014, hbr/0008 → 주제/mit-tech-review-0010.md
+- 묶기 붙임 fastcompany-worklife/0049, dbr/0056 → 주제/stanford-hai-0002.md
+- 묶기 새 주제(쓸 만함) AI 결과물이 기대에 못 미칠 때 바꿀 것은 더 좋은 모델이 아니라 일을 쪼개 나눠 맡기는 방식이다 → 주제/dbr-0055.md
+- 묶기 새 주제(쓸 만함) 결정이 늦어지는 것은 결정할 사람이 없어서가 아니라 누가 안을 만들고 누가 실행할지 정하지 않아서다 → 주제/bain-insights-0010.md
+- 묶기 새 주제(쓸 만함) 같은 AI 도구라도 팀장이 '더 빨리 하라'며 건네면 시킨 일에만 쓰이고, '지루한 일을 덜자'며 건네면 새 쓰임이 생긴다 → 주제/stanford-hai-0003.md
+- 묶기 새 주제(쓸 만함) 강해 보여야 하는 일터는 실수 보고를 막아, 성과 지표에는 안 잡히는 사고와 이탈 비용을 키운다 → 주제/fastcompany-worklife-0036.md
+- 묶기 새 주제(보통) AI를 얼마나 자주 쓰는지는 성과를 말해 주지 않는다 — 같은 팀 안에서도 쓰는 방식은 크게 갈린다 → 주제/onemodel-blog-0001.md
+- 묶기 새 주제(쓸 만함) 낙관하는 사람이 입을 다물면 회의는 비관하는 사람이 이끈다 → 주제/hbr-0010.md
+- 묶기 새 주제(쓸 만함) 내 계획이 받아들여지지 않는 것은 설득이 약해서가 아니라 상대의 기준을 물어보지 않았기 때문이다 → 주제/hbr-0009.md
+- 묶기 새 주제(보통) 출근만 늘리라 하고 사무실이 일할 곳이 못 되면, 직원은 일하러가 아니라 보이러 출근한다 → 주제/fastcompany-worklife-0052.md
+- 묶기 새 주제(보통) AI 전환 자체보다 그 비용을 누가 치르는지가 보일 때 직원의 신뢰가 무너진다 → 주제/fastcompany-worklife-0039.md
+- 묶기 새 주제(쓸 만함) AI를 들여도 아무것도 안 바뀌면 바꿀 것은 AI가 아니라 무엇을 성과로 세느냐다 → 주제/dbr-0047.md
+- 묶기 새 주제(보통) 다음 기회는 매일 보는 가까운 동료보다 가끔 연락하는 느슨한 관계에서 온다 → 주제/fastcompany-worklife-0046.md
+- 묶기 새 주제(쓸 만함) 실수를 들킬까 봐 동료 대신 AI에게 묻지만, 동료는 우리가 짐작하는 것보다 기꺼이 돕는다 → 주제/fastcompany-worklife-0061.md
+- 묶기 새 주제(쓸 만함) 시키는 일을 다 해 온 성실함이 리더로 세우지 못하는 이유가 되기도 한다 → 주제/fastcompany-worklife-0047.md
+- 묶기 새 주제(쓸 만함) 직원들이 시스템 사이를 메워 온 임시방편은 없앨 낭비가 아니라 일이 실제로 돌아가는 지도다 → 주제/hbr-0011.md
+- 묶기 새 주제(보통) AI가 빨리 풀어 낸 답이 쓸모 있는지는 그 분야를 아는 사람이 물어야 드러난다 → 주제/ai-lab-enterprise-reports-0005.md
+- 묶기 새 주제(보통) 지쳐서 그만두고 싶을 때 바꿀 것이 일인지 회사인지 상사인지 가리지 않으면 다음 자리에서도 같은 일을 겪는다 → 주제/fastcompany-worklife-0054.md
+- 묶기 새 주제(보통) 위기 현장 봉사는 남을 돕는 데서 끝나지 않고 직원의 적응력과 회복력을 키워 일터로 돌려보낸다 → 주제/hbr-0014.md
+- 묶기 새 주제(보통) AI 시대의 문제는 일자리가 모자라는 것이 아니라 전혀 다른 일로 옮겨 갈 길이 막혀 있는 것이다 → 주제/charter-0010.md
+- 묶기 새 주제(쓸 만함) AI에 회사 자료를 올리지 말라는 공지는 편리함을 이기지 못하므로, 막는 것은 교육이 아니라 쓰는 환경이다 → 주제/carrot-global-blog-0012.md
+- 묶기 새 주제(보통) 숫자가 정확해도 '왜'와 '그래서 무엇을'에 답하지 못하는 보고는 결정을 바꾸지 못한다 → 주제/onemodel-blog-0005.md
+- 묶기 새 주제(쓸 만함) 일하는 부모에게 필요한 것은 유연근무보다 갑자기 바뀌지 않는 일정이다 → 주제/fastcompany-worklife-0059.md
+- 주제 묶기 새 카드 100 · 붙음/새 주제 52 · 뺌 48 · 못 넣음 0 · 남음 89 · 239s
+
 ## 2026-10-21 17:48
 - 묶기 붙임 fastcompany-worklife/0191 → 주제/fastcompany-worklife-0017.md
 - 묶기 붙임 bain-insights/0003, bcg-publications/0005, bcg-publications/0007 → 주제/mit-tech-review-0010.md
