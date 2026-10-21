@@ -152,6 +152,7 @@
    ],
    "link": "^https://www\\.hbrkorea\\.com/article/view/atype/[a-z]+/category_id/[0-9_]+/article_no/\\d+",
    "container": "#article_body",
+   "date_css": ".magazin_ho dd",
    "exclude": [
     ".relate_article",
     ".fix-func-list",

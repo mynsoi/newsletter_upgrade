@@ -3,6 +3,7 @@
   python3 -I scripts/aside_collect.py                        모든 소스, 미리보기(--write 없으면 DB에 쓰지 않음)
   python3 -I scripts/aside_collect.py --write [--source dbr hbr-korea]
   python3 -I scripts/aside_collect.py --write --url <기사 주소> --source deloitte-insights   주소를 직접 줘서 한 건씩
+  python3 -I scripts/aside_collect.py --fix-dates [--write] --source hbr-korea   발행일 빈 aside 문서의 날짜만 다시 읽어 채움
   python3 -I scripts/aside_collect.py --write --backfill 2026-01-01   평소 수집에 더해 과거분(이 날짜 이후)을 회차마다 조금씩
                                                                     (날짜를 안 주면 설정 backfill_since, 빼려면 --no-backfill)
 
@@ -88,7 +89,21 @@ LINKS = ("[...document.querySelectorAll('a[href]')].map(a => ({u: a.href.split('
 def extract_expr(cfg, sid):
     opts = {"sourceId": sid, "container": cfg["container"], "exclude": cfg["exclude"],
             "fetchedBy": "aside", "licenseNote": cfg.get("license_note", "")}
-    return "(" + EXTRACT + ")(" + json.dumps(opts, ensure_ascii=False) + ")"
+    e = "(" + EXTRACT + ")(" + json.dumps(opts, ensure_ascii=False) + ")"
+    if cfg.get("date_css"):  # 날짜 meta가 없는 사이트(HBR Korea) — 화면에 적힌 날짜 칸의 글자를 함께 가져온다
+        e = (f"(() => {{ const v = {e}; const d = document.querySelector({json.dumps(cfg['date_css'])});"
+             " v.date_text = d ? (d.innerText || '').trim() : ''; return v; })()")
+    return e
+
+
+def page_date(t):
+    """화면 날짜 글자 → YYYY-MM-DD. '2026. 7. 15.'는 그날, '2026. 9-10월호'·'2026년 5월호'는 그 호 첫 달 1일
+    (예전 브라우저 수집도 호 첫 달 1일로 적었다). 못 읽으면 None."""
+    m = re.search(r"(20\d\d)\s*[.년]\s*(\d{1,2})\s*[.월]\s*(\d{1,2})\s*[.일]?", t or "")
+    if m and "호" not in t:
+        return f"{int(m[1]):04d}-{int(m[2]):02d}-{int(m[3]):02d}"
+    m = re.search(r"(20\d\d)\s*[.년]\s*(\d{1,2})(?:\s*-\s*\d{1,2})?\s*월호", t or "")
+    return f"{int(m[1]):04d}-{int(m[2]):02d}-01" if m else None
 
 
 # ---------- DB (main store.py 규칙) ----------
@@ -326,7 +341,7 @@ def run_source(c, sid, cfg, write, log, urls=None, since=None, backfill=False):
                 res["items"].append(item)
                 log(f"  멈춤: 로그인 표시가 사라짐 — {u}")
                 break
-            pub = v["published"] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v["published"] or "") else hint
+            pub = v["published"] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v["published"] or "") else (page_date(v.get("date_text")) or hint)
             if backfill and not pub and cfg["backfill"].get("require_date"):  # 날짜 없는 페이지는 허브(Deloitte 분류 페이지 등)
                 item["result"] = "날짜 없음"
                 res["short"] += 1
@@ -354,6 +369,33 @@ def run_source(c, sid, cfg, write, log, urls=None, since=None, backfill=False):
     return res
 
 
+def fix_dates(c, sid, cfg, write, log):
+    """발행일 채우기(2026-10-21) — aside로 받았는데 published_at이 빈 문서를 다시 열어 화면 날짜 칸(date_css)만 읽는다.
+    본문은 다시 받지 않는다. 쓸 때도 published_at이 빈 문서만 바꾼다(이미 있는 날짜는 덮지 않음)."""
+    rows = c.execute("""SELECT id, url FROM documents WHERE source_id = %s AND fetched_by = 'aside'
+                        AND published_at IS NULL ORDER BY collected_at""", (sid,)).fetchall()
+    log(f"  발행일 빈 문서 {len(rows)}편")
+    res = {"source": sid, "fixed": 0, "nodate": 0, "items": []}
+    expr = f"(() => {{ const d = document.querySelector({json.dumps(cfg['date_css'])}); return d ? (d.innerText || '').trim() : ''; }})()"
+    for i, r in enumerate(rows):
+        if i:
+            time.sleep(cfg["gap_seconds"])
+        v = page(r["url"], expr)
+        t = v.get("value") if v.get("ok") else ""
+        d = page_date(t)
+        res["items"].append({"url": r["url"], "text": t, "date": d})
+        if not d:
+            res["nodate"] += 1
+            log(f"  날짜 못 읽음 {r['url']} — '{t[:30]}'")
+            continue
+        if write:
+            c.execute("UPDATE documents SET published_at = %s WHERE id = %s AND published_at IS NULL", (d, r["id"]))
+            c.commit()
+        res["fixed"] += 1
+        log(f"  {d}  ({t[:20]})  {r['url'].rsplit('/', 1)[-1]}")
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--source", nargs="+")
@@ -363,6 +405,7 @@ def main():
     ap.add_argument("--no-backfill", action="store_true", help="이번엔 과거분 없이 평소 수집만")
     ap.add_argument("--check", action="store_true", help="Aside Browser가 켜져 있으면 0, 아니면 3으로 끝냄")
     ap.add_argument("--limit", type=int, help="소스마다 이번에 받을 글 수 (설정 max_per_run보다 작게 시험할 때)")
+    ap.add_argument("--fix-dates", action="store_true", help="aside로 받은 문서 중 발행일 빈 것을 다시 열어 날짜만 채움(date_css 있는 소스)")
     a = ap.parse_args()
     if a.check:
         sys.exit(0 if running() else 3)
@@ -382,6 +425,14 @@ def main():
     def log(s):
         print(s, flush=True)
     out = []
+    if a.fix_dates:
+        with connect(a.write) as c:
+            for sid in [n for n in names if srcs[n].get("date_css")]:
+                log(f"[{sid}] 발행일 채우기 {'저장' if a.write else '미리보기'}")
+                out.append(fix_dates(c, sid, srcs[sid], a.write, log))
+        (d / "fix_dates.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+        log(f"끝 · 채움 {sum(r['fixed'] for r in out)} · 못 읽음 {sum(r['nodate'] for r in out)} → {d.relative_to(ROOT).as_posix()}/fix_dates.json")
+        return
     with connect(a.write) as c:
         for sid in names:
             if sid not in srcs:
