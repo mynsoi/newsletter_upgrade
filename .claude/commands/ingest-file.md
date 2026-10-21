@@ -4,6 +4,11 @@
 
 절차:
 1. 대상 파일의 frontmatter(source_id·url·title·published)와 본문이 갖춰졌는지 확인한다.
+   필수는 url·title. source_id를 비우면 url 도메인·경로로 sources.yaml 소스를 자동 판별하고
+   (실행 시 `소스` 줄로 결과 출력), 판별 실패면 'manual'로 등재한다 — 이때 등급은
+   frontmatter `tier:`(기본 T5). `source_id: manual`은 판별 없이 수기 등재.
+   `tier:`가 소스 tier와 다르면 오류로 멈춘다. 판별 결과만 미리 보려면
+   `python src/collectors/ingest_url.py <url> --detect`.
    본문은 원문 그대로여야 한다 — 요약·재구성된 텍스트는 등재하지 않는다 (절대 규칙 8).
    PDF는 동명의 .yaml 머리말 파일과 쌍으로 넘긴다(report.pdf + report.yaml) —
    본문은 pypdf로 추출되며, 처리 후 두 파일 모두 ingested/로 이동된다.

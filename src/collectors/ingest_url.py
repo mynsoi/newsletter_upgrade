@@ -1,6 +1,13 @@
 """수기 URL 등록 — 담당자가 발견한 좋은 자료를 한 줄로 파이프라인에 태우는 경로.
 
-사용: python src/collectors/ingest_url.py <URL> [--tier T3]
+사용: python src/collectors/ingest_url.py <URL> [--source <소스ID>] [--tier T3] [--detect]
+
+소스 결정 (collectors.source_match):
+- --source <ID>   : sources.yaml 그 소스의 id·tier로 저장. --tier가 소스 tier와 다르면 오류.
+- --source manual : 판별 없이 수기(manual)로 저장 (tier는 --tier, 기본 T5).
+- 미지정          : URL 도메인·경로로 sources.yaml 소스를 자동 판별. 하나로 정해지면 그 소스,
+                    아니면 manual. 판별 결과는 실행 시 출력한다.
+- --detect        : 판별 결과만 출력하고 끝낸다 (등록·네트워크 접속 없음).
 """
 from __future__ import annotations
 
@@ -13,16 +20,34 @@ import trafilatura
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import connect, content_hash, migrate, new_id  # noqa: E402
+from collectors.source_match import SourceResolveError, resolve_source  # noqa: E402
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (manual ingest)"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser()
     p.add_argument("url")
-    p.add_argument("--tier", default="T5", choices=["T1", "T2", "T3", "T4", "T5"])
+    p.add_argument("--source", default=None,
+                   help="sources.yaml 소스 id (manual = 판별 없이 수기 등록)")
+    p.add_argument("--tier", default=None, choices=["T1", "T2", "T3", "T4", "T5"],
+                   help="manual일 때 등급 (기본 T5). 소스가 정해지면 그 tier와 같아야 함")
     p.add_argument("--title", default=None)
-    args = p.parse_args()
+    p.add_argument("--detect", action="store_true", help="소스 판별 결과만 출력")
+    args = p.parse_args(argv)
+
+    try:
+        source, note = resolve_source(args.url, args.source, args.tier)
+    except SourceResolveError as e:
+        print(f"오류: {e}")
+        return 2
+    print(f"소스 {note}")
+    if args.detect:
+        return 0
+    tier = source["tier"]
 
     from handoff import ensure_active
     ensure_active("수기 등록")
@@ -58,15 +83,15 @@ def main() -> int:
         """INSERT INTO documents (id, source_id, tier, url, title, author,
            published_at, lang, body, content_hash, status)
            VALUES (?,?,?,?,?,?,?,?,?,?, 'new')""",
-        (doc_id, "manual", args.tier, args.url, title,
+        (doc_id, source["id"], tier, args.url, title,
          (meta.author if meta else None), (meta.date if meta else None),
-         None, body, c_hash),
+         source.get("lang"), body, c_hash),
     )
     conn.execute("INSERT INTO tags (document_id, axis, value) VALUES (?, 'tier', ?) "
                  "ON CONFLICT DO NOTHING",
-                 (doc_id, args.tier))
+                 (doc_id, tier))
     conn.commit()
-    print(f"등록 완료: [{args.tier}] {title}\n  id={doc_id}")
+    print(f"등록 완료: [{source['id']} · {tier}] {title}\n  id={doc_id}")
     return 0
 
 
