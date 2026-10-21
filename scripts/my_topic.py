@@ -8,10 +8,12 @@
       python3 -I scripts/my_topic.py --brief <글> [원문 키 ...]  — 고른 원문을 바꿔 글 설정을 다시 만든다(첫째가 중심, 예: linkedin/03 threads/27)
       python3 -I scripts/my_topic.py --page <글> <이름> [점검 메모]  — 결과 페이지 docs/<오늘>-<이름>.html (작업실 /docs/)
 단계
-1. 후보(Claude, 원문 카드 전부 — 주제 지도의 판정과 상관없이): 원문 속 사람이 한 일이 주제가 말하는 것을 보여 주는가.
+0. 검색(2026-10-21): 자동 카드(main document_cards)로 후보를 수십 편까지 좁힌다 — 의미 검색 + 낱말 검색(card_search.py).
+1. 후보(Claude, 0에서 좁힌 카드 — 주제 지도의 판정과 상관없이): 원문 속 사람이 한 일이 주제가 말하는 것을 보여 주는가.
    키워드·분야가 겹치는지가 아니라. 그렇게 하지 않아 생긴 일(반대편)도 후보.
-2. 고르기(Claude, 후보 원문 전체): 중심 1 + 받침 0~2, 고른 원문마다 이 글에서 맡는 몫·가져올 사실, 나머지는 왜 이번에 빼는지.
-   하나로 좁히는 이유 — 사례를 여럿 끼우면 무엇을 말하는지 흐려진다(criteria 4), 창간호 반려 사유도 인용 과다였다.
+2. 고르기(Claude, 후보 원문 전체): 중심 1 + 받침 1~2(적어도 하나는 다른 발행처), 고른 원문마다 이 글에서 맡는 몫·가져올 사실,
+   나머지는 왜 이번에 빼는지. 원문 2~3편으로 정한 이유(2026-10-21) — 원문 1편이면 그 글을 말만 바꿔 쓰는 모방이 되고,
+   많으면 사례 나열이 된다(main claim 방식의 문제, 창간호 반려 사유도 인용 과다).
 - 주제 문장은 받은 그대로 thesis가 된다(다듬지 않는다). 문서는 Claude·astra로 나간다 — 보내도 되는 것만 넣는다.
 - 주제 지도(wiki/)는 건드리지 않는다(주제 상태·판정 예시 그대로). 글 설정에는 from_mine이 붙고, 초안은 이 표시를 보고
   "멘토가 정한 말을 원문 사례로 보여 주는" 지시를 쓴다(column_pipeline.draft_prompt).
@@ -28,6 +30,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import wiki as W  # 카드·원문 읽기·모델 부르기(답만 받기)를 같이 쓴다
+import card_search as CS  # 자동 카드로 후보 좁히기(2026-10-21) — 원문이 1,000편을 넘어 카드 전부를 Claude에게 줄 수 없다
 
 ROOT = W.ROOT
 SRC = W.SRC
@@ -116,8 +119,9 @@ def pick_prompt(topic, docs, cands, ask_target, follow=False):
         "정할 것:\n"
         "- center: 글을 이끌 중심 원문 하나 — [멘토 주제]가 말하는 것을 가장 구체적인 일로 보여 주는 원문. "
         "비슷하면 회사·사람·행사 이름과 숫자가 원문에 있어 처음 듣는 독자도 바로 알아들을 수 있는 쪽을 먼저 고릅니다(이름이 없다는 이유로 빼지는 않습니다)\n"
-        "- support: 중심을 받칠 원문. 없어도 되고 많아야 둘입니다. 중심과 다른 몫(반대편, 다른 자리의 사례)을 할 때만 넣습니다. "
-        "한 편에 사례를 여럿 끼우면 무엇을 말하는지 흐려집니다.\n"
+        "- support: 중심을 받칠 원문 1~2개. 적어도 하나는 중심과 다른 발행처(원문 머리의 첫 이름)에서 고릅니다. "
+        "같은 말을 다른 자리·다른 조직에서 보여 주거나, 반대편을 보여 주는 원문이어야 합니다. 원문 한 편만으로 쓰면 그 글을 말만 바꿔 옮기게 됩니다. "
+        "후보에 맞는 원문이 정말 없을 때만 비워 두고 rest에 이유를 적습니다. 셋을 넘기면 사례 나열이 됩니다.\n"
         "- 고른 원문마다 role(이 글에서 맡는 몫 한 줄)과 use(원문에서 가져올 사실 한두 줄 — 원문 문장을 옮기지 않고 사실만)\n"
         "- rest: 고르지 않은 후보마다 왜 이번에 빼는지 한 줄\n"
         "- point: 이 글이 말할 것 한 문장 — 독자가 한 번 듣고 그대로 따라 말할 수 있게, 중심 원문 글쓴이의 주장 안에서, [멘토 주제]에 답하게. "
@@ -137,7 +141,7 @@ def pick_prompt(topic, docs, cands, ask_target, follow=False):
 
 def point_prompt(request, center):
     """말할 것 한 문장 — 쓰기 직전에 다시 정할 때(바꿔 끼우기로 중심이 바뀜 · 예전 글). 비교 C·C2에서 쓴 지시 그대로."""
-    card = W.cards().get(W.key(center), {})
+    card = W.all_cards().get(W.key(center), {})
     return "\n\n".join([
         f"사내 뉴스레터 칼럼을 쓰기 전에, 이 글이 말할 것을 한 문장으로 정해 주세요. 독자: {W.READER}",
         f"주제(멘토 요청): {request}",
@@ -171,7 +175,7 @@ def make_brief(k, chosen=None):
         info = {p["source"]: p for p in picked}
         info.update({c["source"]: {"source": c["source"], "role": c.get("why", ""), "use": ""} for c in picks.get("_candidates", []) if c["source"] not in info})
         picked = [info.get(s, {"source": s, "role": "", "use": ""}) for s in chosen]
-    cs = W.cards()
+    cs = W.all_cards()
     bad = [p["source"] for p in picked if p["source"] not in cs]
     if bad:
         sys.exit(f"카드가 없는 원문: {bad}")
@@ -235,7 +239,10 @@ def convo_text(ts):
 def choose(d, topic, saved, ask_target, follow=False):
     """1. 후보(카드 전부) → 2. 고르기(후보 원문 통째) → picks.json"""
     t0 = time.time()
-    cs = W.cards()
+    cs, how = CS.candidates(topic)
+    print(f"검색: {how}", flush=True)
+    if not cs:
+        sys.exit("후보를 찾을 카드가 없음 — " + how)
     n = len(list(d.glob("picks-*.json"))) + (2 if (d / "picks.json").exists() else 1)  # 이어서 말한 차례는 폴더를 따로
     sfx = "" if n == 1 else f"-{n}"
     stage(d, "후보")
@@ -346,7 +353,7 @@ def page(k, name, note=""):
     topic = (d / "topic.txt").read_text(encoding="utf-8").strip()
     picks = json.loads((d / "picks.json").read_text(encoding="utf-8"))
     b = json.loads((ROOT / "briefs" / f"{k}.json").read_text(encoding="utf-8"))
-    cs = W.cards()
+    cs = W.all_cards()
     tf = ROOT / "runs" / "titles0" / k / "astra.md"
     titles = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in tf.read_text(encoding="utf-8").splitlines() if l.strip()] if tf.exists() else []
     first = {c["source"]: c for c in picks.get("_candidates", [])}

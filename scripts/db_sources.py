@@ -24,6 +24,7 @@ SRC = ROOT / "sources"
 ORIG = SRC / "originals"
 SCOPE = SRC / "db_scope.json"
 INDEX = SRC / "db_index.json"  # doc_id → originals/<사이트>/NNNN.md (git 밖)
+DOC_CARDS = SRC / "doc_cards.json"  # 자동 카드(main document_cards, Sonnet 5.5)를 받아 둔 것 — wiki.doc_cards()가 읽는다(git 밖)
 STYLE_ONLY = {"infuture"}  # wiki.STYLE_ONLY와 같음 — DB 문서가 이 이름으로 들어오지 않게
 
 
@@ -141,8 +142,39 @@ def sync(since=None, only=None, limit=None, prune=False):
                     (SRC / rel).unlink(missing_ok=True)
                     del idx[doc_id]
                     gone.append(rel)
-    INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+        INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+        sync_cards(c, idx)
     print(f"받음: 새 문서 {new} · 다시 씀 {upd} · 범위 안 {len(seen)}" + (f" · 소스 바뀜 {moved}" if moved else "") + (f" · 지움 {len(gone)}" if prune else ""))
+
+
+def card_key(rel):
+    return rel.removeprefix("originals/").removesuffix(".md")
+
+
+def sync_cards(c, idx):
+    """자동 카드 받기(2026-10-21) — 받아 둔 원문의 카드를 main document_cards에서 읽어 sources/doc_cards.json에 둔다.
+    표가 아직 없으면(main 마이그레이션 009 적용 전) 건너뛴다. 카드 임베딩은 받지 않는다 — 검색은 Supabase에서 바로 한다(card_search.py)."""
+    if not c.execute("SELECT to_regclass('public.document_cards')").fetchone()[0]:
+        print("카드: Supabase에 document_cards 표가 아직 없음 — 건너뜀")
+        return
+    rows = c.execute("""SELECT document_id, thesis, episodes, material_type, model, prompt_version
+                        FROM document_cards WHERE document_id = ANY(%s)""", (list(idx),)).fetchall()
+    dc = json.loads(DOC_CARDS.read_text(encoding="utf-8")) if DOC_CARDS.exists() else {}
+    live = {card_key(r) for r in idx.values()}
+    gone = [k for k, v in dc.items() if v.get("from") == "supabase" and k not in live]  # 원문이 빠진 카드(반려 등)
+    for k in gone:
+        del dc[k]
+    changed = 0
+    for doc_id, thesis, eps, mt, model, pv in rows:
+        eps = eps if isinstance(eps, list) else json.loads(eps or "[]")
+        card = {"thesis": thesis, "episodes": eps, "material_type": mt or "", "model": model, "prompt_version": pv,
+                "doc_id": doc_id, "from": "supabase"}
+        k = card_key(idx[doc_id])
+        if dc.get(k) != card:  # 시험에서 넣은 카드(--import-cards)도 진짜 카드가 오면 바뀐다
+            dc[k] = card
+            changed += 1
+    DOC_CARDS.write_bytes(json.dumps(dc, ensure_ascii=False, indent=1).encode("utf-8"))
+    print(f"카드: 받음 {len(rows)} · 새로·바뀜 {changed}" + (f" · 지움 {len(gone)}" if gone else "") + f" · 모두 {len(dc)}장")
 
 
 def status():
