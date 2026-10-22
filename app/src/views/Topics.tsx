@@ -94,6 +94,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
     const id = articleOf(t, state);
     const picking = pending === t.page;
     const fresh = t.sources.filter((s) => s.new).length;
+    const audiences = (t.audience || "").split("·").map((x) => x.trim()).filter(Boolean);
     const busy = judging.some((j) => j.target === t.page);
     // 메시지 단위 주제(2026-10-21): 사례마다 원문 카드를 짝지어 둔다(원문 서랍·있었던 일 전문)
     const cases = (t.cases ?? []).map((c) => ({ c, s: t.sources.find((x) => x.path === `originals/${c.key}.md`) }));
@@ -108,20 +109,19 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             background: `radial-gradient(120% 140% at 0% 0%, hsl(${hue(t.title)} 70% 45% / .45), transparent 60%), radial-gradient(120% 140% at 100% 100%, hsl(${(hue(t.title) + 70) % 360} 70% 45% / .3), transparent 55%)`,
           }}
         >
-          {/* 한 줄로(2026-10-22): 대상 독자는 칩 하나로, 발행처는 지구본 아이콘 여러 개 대신 '발행처 N곳'(올리면 이름) */}
-          <span className="flex min-w-0 items-center gap-1.5">
-            {t.audience && (
-              <Chip className="truncate whitespace-nowrap bg-page/70 px-2.5 text-ink backdrop-blur">
-                {t.audience.split("·").map((x) => x.trim()).filter(Boolean).join(" · ")}
-              </Chip>
-            )}
+          {/* 대상 독자는 칩 각각, 여럿이면 2열 격자(2×2). 발행처는 지구본 아이콘 대신 사례 수와 다를 때만 '발행처 N곳'(올리면 이름) — 2026-10-22 */}
+          <span className={cn("min-w-0 gap-1.5", audiences.length > 1 ? "grid grid-cols-2" : "flex")}>
+            {audiences.map((x) => (
+              <Chip key={x} className="justify-center whitespace-nowrap bg-page/70 px-2.5 text-ink backdrop-blur">{x}</Chip>
+            ))}
           </span>
           <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
             <Chip
               className="bg-page/70 px-2.5 tabular-nums whitespace-nowrap text-ink-2 backdrop-blur"
               title={`사례 ${t.sources.length} · 발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
             >
-              사례 {t.sources.length} · 발행처 {pubs(t)}곳
+              사례 {t.sources.length}
+              {pubs(t) < t.sources.length && ` · 발행처 ${pubs(t)}곳`}
               {latest(t) && ` · ${latest(t).slice(5).replace("-", ".")}`}
             </Chip>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
