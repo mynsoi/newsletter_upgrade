@@ -462,7 +462,7 @@ def add(k, src, as_center=False):
 
 def from_topic(page_rel, k):
     """--topic <주제 페이지> --id m-<이름> — 주제 지도의 '이 주제로'(2026-10-22). 주제를 고른 옵션 하나로 보고 take()의 확인 단계를 똑같이 거친다.
-    원문은 주제 사례 중 최대 3편(wiki.pick_sources), 나머지 사례는 추천 후보의 앞자리. 미리 지은 제목 후보가 있으면 제목 단계는 건너뛴다."""
+    원문은 주제 사례 중 최대 3편(wiki.pick_sources), 나머지 사례는 추천 후보의 앞자리."""
     page = W.page_of(page_rel)
     t = W.read_topic(page)
     rel_page = page.relative_to(ROOT).as_posix()
@@ -481,13 +481,7 @@ def from_topic(page_rel, k):
     (d / "options.json").write_text(json.dumps({"options": [opt], "from_wiki": rel_page}, ensure_ascii=False, indent=1), encoding="utf-8")
     add_turn(d, {"role": "mentor", "text": thesis, "docs": [], "from_wiki": rel_page})
     add_turn(d, {"role": "ai", "options": [opt], "from_wiki": rel_page})
-    if t["titles"]:  # 미리 지은 제목 후보 → 제목 탭 첫 회차
-        td = ROOT / "runs" / "titles0" / k
-        td.mkdir(parents=True, exist_ok=True)
-        (td / "astra.md").write_text("\n".join(f"{i}. {x}" for i, x in enumerate(t["titles"], 1)) + "\n", encoding="utf-8")
-    take(k, 1, first=[s_ for s_ in t["sources"] if s_ not in srcs])
-    if (td := ROOT / "runs" / "titles0" / k / "astra.md").exists() and not (ROOT / "runs" / "titles0" / k / "brief.json").exists():
-        shutil.copyfile(ROOT / "briefs" / f"{k}.json", td.parent / "brief.json")
+    take(k, 1, first=[s_ for s_ in t["sources"] if s_ not in srcs])  # 제목은 take()의 제목 단계에서 새로 짓는다(2026-10-23 — 주제에 미리 지은 제목은 쓰지 않음)
     ui = t["used_in"] + [f"briefs/{k}.json"]
     W.set_front(page, status="씀" if t["status"] == "씀" else "진행 중", used_in="[" + ", ".join(ui) + "]")
     W.write_index(W.topics())

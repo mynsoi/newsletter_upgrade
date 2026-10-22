@@ -182,16 +182,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       ),
       body: (
         <div className="space-y-7">
-          {(t.titles?.length ?? 0) > 0 && (
-            <ol className="grid grid-flow-col grid-cols-2 grid-rows-4 gap-x-8 gap-y-2.5">
-              {t.titles!.map((x, i) => (
-                <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink">
-                  <span className="w-4 shrink-0 text-right text-sm tabular-nums text-ink-3">{i + 1}</span>
-                  <span>{x}</span>
-                </li>
-              ))}
-            </ol>
-          )}
+          {/* 제목 후보는 주제 카드에 두지 않는다(2026-10-23) — 주제를 고른 뒤 글의 제목 단계에서 짓는다 */}
           {cases.length ? (
             <p className="text-[15px] leading-relaxed text-ink-2">{t.why}</p>
           ) : (

@@ -14,7 +14,7 @@
 2. 묶기(astra 한 번): 새 카드를 글쓴이의 주장이 같은 기존 주제에 붙이거나 새 주제로. 칼럼 재료가 없으면 뺀다
 3. 거르기(Claude 한 번): 쓸모 판정(쓸 만함·보통·뺌) · 있었던 일 한 줄 · 왜 쓸모 · 대상 독자. 기준은 금지 목록이 아니라
    판정 예시(wiki/판정예시.md — 멘토가 괜찮다고 한 판정 + 멘토가 바꾼 판정)
-4. 제목 후보(astra, 쓸 만함 주제마다 동시에): 작업실 제목 단계 그대로(title_candidates.prompt_first)
+4. (2026-10-23 없앰) 제목 후보는 주제마다 미리 짓지 않고, 주제를 고른 뒤 글의 제목 단계에서 짓는다.
 - astra·Claude는 답만 한다(읽기 전용, 파일 쓰기 없음). 위키 파일은 이 스크립트가 쓴다.
 - 원문은 인터넷 글이다 — 프롬프트마다 원문 속 지시문은 따르지 않게 하고, 결과에 비밀값·로컬 경로처럼 보이는 게 있으면 버린다.
 - 넣기·거르기·판정이 끝날 때마다 wiki/만 git에 커밋한다.
@@ -375,32 +375,7 @@ def run_filter(sel, cs, ts, run):
     return out
 
 
-# ---------- 제목 후보 ----------
-
-def make_titles(t, cs, run):
-    sys.path.insert(0, str(ROOT / "scripts"))
-    import title_candidates as tc
-    srcs = [t["center"]] + [s for s in t["sources"] if s != t["center"]]
-    d = run / "titles" / Path(t["page"]).stem
-    thought = t.get("thesis") if t.get("cases") else cs[t["center"]]["글쓴이가 하는 말"]
-    p = tc.prompt_first(thought, [[rel(s), label(rel(s))] for s in srcs], SRC)
-    (d / "prompt.md").parent.mkdir(parents=True, exist_ok=True)
-    (d / "prompt.md").write_text(p, encoding="utf-8")
-    tc.astra(d, p)
-    items = tc.pick(d, thought)  # 8개 지어 4개 고름(메시지 · 후킹 · 과장 없음, 2026-10-23)
-    print(f"제목 {Path(t['page']).stem} · {len(items)}", flush=True)
-    return t["page"], items
-
-
-def fill_titles(ts, cs, run):
-    todo = [t for t in ts if t["verdict"] == "쓸 만함" and not t["titles"]]
-    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        got = dict(ex.map(lambda t: make_titles(t, cs, run), todo))
-    for t in todo:
-        if got.get(t["page"]):
-            t["titles"] = got[t["page"]]
-            write_topic(t, cs)
-    return len([t for t in todo if t["titles"]])
+# 제목 후보는 주제마다 미리 짓지 않는다(2026-10-23) — 주제를 고른 뒤 글의 제목 단계(title_candidates)에서 짓는다.
 
 
 def apply_filter(res, ts, cs):
@@ -474,10 +449,8 @@ def ingest(paths):
     sel = [t for t in ts if t["page"] in {c["page"] for c in changed}]
     res = run_filter(sel, cs, ts, run)
     apply_filter(res, ts, cs)
-    ts = topics()
-    nt_ = fill_titles(ts, cs, run)
     write_index(topics())
-    log(lines + [f"- 거르기 {len(res)}개 · 제목 후보 {nt_}개 · {time.time() - t0:.0f}s"])
+    log(lines + [f"- 거르기 {len(res)}개 · {time.time() - t0:.0f}s"])
     commit(f"주제 지도 넣기 {len(new)}편 ({time.time() - t0:.0f}s)")
     print(f"넣기 끝 · 새 카드 {len(new)} · 바뀐 주제 {len(changed)} · {time.time() - t0:.0f}s · 남은 원문 {len(backlog())}편")
 
@@ -488,9 +461,8 @@ def refilter():
     cs, ts = cards(), topics()
     res = run_filter(ts, cs, ts, run)
     apply_filter(res, ts, cs)
-    n = fill_titles(topics(), cs, run)
     write_index(topics())
-    log([f"- 다시 거르기 {len(res)}/{len(ts)} · 제목 후보 {n}개 · {time.time() - t0:.0f}s"])
+    log([f"- 다시 거르기 {len(res)}/{len(ts)} · {time.time() - t0:.0f}s"])
     commit(f"주제 지도 다시 거르기 ({time.time() - t0:.0f}s)")
     print(f"다시 거르기 {len(res)}/{len(ts)} · {time.time() - t0:.0f}s")
 
@@ -656,15 +628,10 @@ def bundle(api=False):
             judge_missing(api, RUNS / ("bundle-judge-" + time.strftime("%Y%m%d-%H%M%S")))  # 묶기 출력에 판정이 빠진 주제(2026-10-22 7개)
         except Exception as e:
             print(f"판정 채우기 건너뜀: {e}", flush=True)
-        cs = all_cards()
-        try:
-            nt_ = fill_titles(topics(), cs, RUNS / ("bundle-titles-" + time.strftime("%Y%m%d-%H%M%S")))  # 쓸 만함 주제의 제목 후보(astra) — 한도에 걸리면 비고, '이 주제로'를 누를 때 제목 단계가 돈다
-        except Exception as e:
-            nt_ = 0
-            print(f"제목 후보 건너뜀: {e}", flush=True)
+        # 주제마다 제목 후보를 미리 짓지 않는다(2026-10-23) — 주제를 고르면 글의 제목 단계에서 짓는다
         write_index(topics())
-        log([f"- 주제 묶기(이어 묶기) {n - 1}번 · 보낸 카드 {len(sent)} · 제목 후보 {nt_}개 · {time.time() - t0:.0f}s"])
-        commit(f"주제 묶기: 제목 후보 {nt_}개 ({time.time() - t0:.0f}s)")
+        log([f"- 주제 묶기(이어 묶기) {n - 1}번 · 보낸 카드 {len(sent)} · {time.time() - t0:.0f}s"])
+        commit(f"주제 묶기: {n - 1}번 · 카드 {len(sent)}장 ({time.time() - t0:.0f}s)")
         print(f"이어 묶기 끝 · {n - 1}번 · 보낸 카드 {len(sent)} · {time.time() - t0:.0f}s")
 
 
@@ -826,10 +793,6 @@ def set_verdict(page_rel, verdict):
         ex = ex.rstrip() + "\n\n## 멘토가 바꾼 판정\n"
     ex = ex.rstrip() + f"\n- {date.today().isoformat()} [{', '.join(t['sources'])}] {t['title']} — {t['verdict'] or '판정 전'} → **{verdict}** (멘토)\n"
     EXAMPLES.write_text(ex, encoding="utf-8")
-    cs = cards()
-    if verdict == "쓸 만함" and not t["titles"]:
-        t = read_topic(page)
-        fill_titles([t], cs, RUNS / ("verdict-" + time.strftime("%Y%m%d-%H%M%S")))
     write_index(topics())
     log([f"- 판정 {Path(t['page']).name} {t['verdict'] or '판정 전'} → {verdict} (멘토)"])
     commit(f"주제 지도: 판정 바꿈 {Path(t['page']).stem} → {verdict}")
