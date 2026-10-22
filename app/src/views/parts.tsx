@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
@@ -14,15 +14,17 @@ function Spin({ texts }: { texts: string[] }) {
 }
 
 /** 본문 — prev를 주면 앞 과정에 없던 문장에 형광(비교) */
-export function Prose({ text, prev }: { text: string; prev?: string }) {
+/** after: 문단마다 뒤에 붙일 것(본문 그림 미리보기 — 1부터 센 문단 번호와 전체 문단) */
+export function Prose({ text, prev, after }: { text: string; prev?: string; after?: (n: number, all: string[]) => React.ReactNode }) {
   const kept = useMemo(() => (prev !== undefined ? keptSentences(prev, text) : null), [prev, text]);
   let idx = 0;
   return (
     <div className="prose-ko text-ink">
-      {paragraphs(text).map((p, i) => {
+      {paragraphs(text).map((p, i, all) => {
         if (/^#{1,3}\s/.test(p)) return <h4 key={i} className="mt-8 mb-3 text-lg font-semibold text-ink">{p.replace(/^#+\s*/, "")}</h4>;
         return (
-          <p key={i}>
+          <Fragment key={i}>
+          <p>
             {sentences(p.replace(/^[>*\-\s]+/, "")).map((s, j) => {
               const k = idx++;
               const fresh = kept && !kept.has(k);
@@ -33,6 +35,8 @@ export function Prose({ text, prev }: { text: string; prev?: string }) {
               );
             })}
           </p>
+          {after?.(i + 1, all)}
+          </Fragment>
         );
       })}
     </div>

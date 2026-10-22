@@ -786,7 +786,12 @@ function Now({
                     </Suspense>
                   </div>
                 ) : (
-                  <Prose text={s.text} prev={v === "비교" ? prev?.text : undefined} />
+                  <Prose
+                    text={s.text}
+                    prev={v === "비교" ? prev?.text : undefined}
+                    // 고른 본문 그림을 그 문단 뒤에 보인다(머리 그림처럼 고르면 바로 보이게, 2026-10-22)
+                    after={v === "본문" ? (n, all) => inlineAt(a!, all, n).map((it) => <img key={it.src} src={img(it.src, 900)} className="my-5 w-full rounded-xl" />) : undefined}
+                  />
                 )}
               </div>
             </>
