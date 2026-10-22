@@ -717,11 +717,36 @@ def target_of(audience):
     return "전 직원"
 
 
+MAX_SOURCES = 3  # 글 설정에 넣는 원문 상한 — 중심 1 + 받침 1~2(2026-10-22: 사례 6~9개 주제가 원문 전부를 초안에 넣던 문제)
+
+
+def pick_sources(t):
+    """주제의 원문 중 글에 쓸 2~3편 — 중심 먼저, 받침은 중심과 다른 발행처를 먼저(사례 적힌 순서대로), 반례는 마지막."""
+    srcs = [t["center"]] + [s for s in t["sources"] if s != t["center"]]
+    srcs = [s for s in srcs if (SRC / rel(s)).is_file()]
+    if len(srcs) <= MAX_SOURCES:
+        return srcs
+    role = {c["key"]: c.get("role") or "받침" for c in t.get("cases", [])}
+    home = site_name(srcs[0])
+    rest = sorted(srcs[1:], key=lambda s: (role.get(s) == "반례", site_name(s) == home))  # 안정 정렬 — 같은 무리 안은 적힌 순서
+    out = [srcs[0]]
+    for s in rest:
+        if len(out) == MAX_SOURCES:
+            break
+        if site_name(s) in {site_name(x) for x in out[1:]} and any(site_name(r) not in {site_name(x) for x in out} for r in rest if r not in out):
+            continue  # 받침끼리도 발행처가 겹치지 않게 — 다른 발행처가 남아 있으면 그쪽 먼저
+        out.append(s)
+    for s in rest:  # 발행처가 모자라 못 채웠으면 순서대로 채운다
+        if len(out) < MAX_SOURCES and s not in out:
+            out.append(s)
+    return out
+
+
 def claim(page_rel):
     """고르자마자 — 주제의 주장·원문·대상 독자로 briefs/w-<시각>.json을 만들고, 미리 뽑아 둔 제목 후보를 제목 탭에 띄운다(LLM 없이)."""
     page = page_of(page_rel)
     t = read_topic(page)
-    srcs = [t["center"]] + [s for s in t["sources"] if s != t["center"]]
+    srcs = pick_sources(t)
     k = "w-" + time.strftime("%Y%m%d-%H%M%S")
     b = {"topic": k, "label": t["title"] or t["center"], "thesis": t["thesis"], "why": t["why"],
          "sources": [[rel(s), label(rel(s))] for s in srcs if (SRC / rel(s)).is_file()],
