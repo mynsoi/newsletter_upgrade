@@ -732,9 +732,16 @@ def act_images(a):
     target = json.loads(read(pp))["steps"][-1]["file"] if pp else k
     if pp:  # 확정 칼럼은 원고 파일 이름이 그림 폴더 이름이 된다
         target = Path(target).as_posix()
+    extra = []
+    if not pp:  # 원고로 정한 과정이 있으면 그 원고로 그린다(2026-10-22 원고 → 그림 → 확정) — 없으면 마지막 과정
+        b = json.loads(read(brief_path(k)) or "{}")
+        art = next((x for x in articles() if x["id"] == k), None)
+        tp = b.get("text_pick") or {}
+        if art and tp.get("of") == len(art["steps"]) and 1 <= tp.get("n", 0) <= len(art["steps"]):
+            extra = ["--file", art["steps"][tp["n"] - 1]["file"]]
     if a.get("kind") == "inline":
-        return start("inline", k, PY + ["scripts/image_candidates.py", "--inline", target])
-    return start("images", k, PY + ["scripts/image_candidates.py", target])
+        return start("inline", k, PY + ["scripts/image_candidates.py", "--inline", target, *extra])
+    return start("images", k, PY + ["scripts/image_candidates.py", target, *extra])
 
 
 def act_inline(a):

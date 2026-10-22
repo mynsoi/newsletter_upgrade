@@ -1,6 +1,7 @@
 """그림 후보 — 마지막 과정의 원고를 astra가 읽고 머리 그림 설명을 쓰면 gti가 그린다.
 
 사용: python3 image_candidates.py <설정 이름|원고 파일>            — 머리 그림 후보
+      python3 image_candidates.py [--inline] <설정 이름> --file <원고 파일>  — 원고로 정한 과정(작업실 원고 → 그림 → 확정)을 읽고 그림 폴더는 설정 이름으로
       python3 image_candidates.py --inline <설정 이름|원고 파일>   — 본문 그림 2개(멘토 2026-10-11: "본문에 설명에 도움을 줄수있는 이미지도 한 2개정도")
 결과: runs/images/<이름>/<회차>/{prompt.md, astra.json, NN.png} · 본문 그림은 회차 폴더가 inline-<시각>,
       astra.json 항목마다 after(몇째 문단 뒤)·anchor(그 문단 첫머리)
@@ -84,8 +85,15 @@ def inline_prompt(paras):
 {numbered}"""
 
 
-def run_inline(target):
-    f = (ROOT / target).resolve() if target.endswith(".md") else latest(target)
+def source_of(target, file=None):
+    """그림이 읽을 원고 — --file(원고로 정한 과정)이 있으면 그것, 아니면 원고 파일이나 설정의 마지막 과정."""
+    if file:
+        return (ROOT / file).resolve()
+    return (ROOT / target).resolve() if target.endswith(".md") else latest(target)
+
+
+def run_inline(target, file=None):
+    f = source_of(target, file)
     name = Path(target).stem if target.endswith(".md") else target
     d = OUT / name / ("inline-" + time.strftime("%Y%m%d-%H%M%S"))
     d.mkdir(parents=True, exist_ok=True)
@@ -126,8 +134,8 @@ def draw(d, i, it):
     return png.exists()
 
 
-def run(target):
-    f = (ROOT / target).resolve() if target.endswith(".md") else latest(target)
+def run(target, file=None):
+    f = source_of(target, file)
     name = Path(target).stem if target.endswith(".md") else target
     d = OUT / name / time.strftime("%Y%m%d-%H%M%S")
     d.mkdir(parents=True, exist_ok=True)
@@ -156,10 +164,13 @@ def paint(d, items):
 
 if __name__ == "__main__":
     a = sys.argv[1:]
+    file = a[a.index("--file") + 1] if "--file" in a else None
+    if file:
+        a = a[:a.index("--file")] + a[a.index("--file") + 2:]
     if a[:1] == ["--inline"]:
-        run_inline(a[1])
+        run_inline(a[1], file)
     elif a[:1] == ["--redraw"]:
         d = (ROOT / a[1]).resolve()
         paint(d, json.loads((d / "astra.json").read_text(encoding="utf-8")))
     else:
-        run(a[0])
+        run(a[0], file)
