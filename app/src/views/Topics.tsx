@@ -17,6 +17,9 @@ export function newSources(state: State) {
 }
 
 const site = (p: string) => p.split("/")[1] ?? "";
+/** 다른 발행처 수 · 가장 최근 사례의 발행일 — 주제 정렬과 카드의 '사례 N · 월.일' */
+const pubs = (t: WikiTopic) => new Set(t.sources.map((s) => s.site || site(s.path))).size;
+const latest = (t: WikiTopic) => t.sources.reduce((x, s) => ((s.date ?? "") > x ? s.date ?? "" : x), "");
 const VERDICTS = ["쓸 만함", "보통", "뺌"] as const;
 type Tab = (typeof VERDICTS)[number] | "쓴 글";
 
@@ -66,7 +69,9 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   const byTab = useMemo(() => {
     const m: Record<Tab, WikiTopic[]> = { "쓸 만함": [], 보통: [], 뺌: [], "쓴 글": [] };
     for (const t of wiki?.topics ?? []) m[tabOf(t)].push(t);
-    for (const k of Object.keys(m) as Tab[]) m[k].sort((a, b) => b.sources.length - a.sources.length);
+    // 사례 수 → 다른 발행처 수 → 가장 최근 사례의 발행일 순(2026-10-22). 예전엔 사례 수가 같으면 파일 이름(소스 알파벳)순이었다
+    for (const k of Object.keys(m) as Tab[])
+      m[k].sort((a, b) => b.sources.length - a.sources.length || pubs(b) - pubs(a) || latest(b).localeCompare(latest(a)));
     return m;
   }, [wiki]);
 
@@ -109,6 +114,10 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             ))}
           </span>
           <span className="flex items-center gap-1.5">
+            <Chip className="bg-page/70 px-2.5 tabular-nums text-ink-2 backdrop-blur" title="사례 수 · 가장 최근 사례 발행일">
+              사례 {t.sources.length}
+              {latest(t) && ` · ${latest(t).slice(5).replace("-", ".")}`}
+            </Chip>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
             {t.status !== "쓸 수 있음" && <Chip className="bg-page/70 text-ink">{t.status}</Chip>}
             {[...new Set(t.sources.map((s) => site(s.path)))].map((sname) => (
