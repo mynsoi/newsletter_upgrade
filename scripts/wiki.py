@@ -384,10 +384,12 @@ def make_titles(t, cs, run):
     d = run / "titles" / Path(t["page"]).stem
     thought = t.get("thesis") if t.get("cases") else cs[t["center"]]["글쓴이가 하는 말"]
     p = tc.prompt_first(thought, [[rel(s), label(rel(s))] for s in srcs], SRC)
-    text = astra(d, p)
-    items = [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in text.splitlines() if l.strip()]
+    (d / "prompt.md").parent.mkdir(parents=True, exist_ok=True)
+    (d / "prompt.md").write_text(p, encoding="utf-8")
+    tc.astra(d, p)
+    items = tc.pick(d, thought)  # 8개 지어 4개 고름(메시지 · 후킹 · 과장 없음, 2026-10-23)
     print(f"제목 {Path(t['page']).stem} · {len(items)}", flush=True)
-    return t["page"], items[:8]
+    return t["page"], items
 
 
 def fill_titles(ts, cs, run):

@@ -17,3 +17,4 @@ runs/card-test/
 # 자동 카드를 받아 둔 것(scripts/wiki.py doc_cards) — 원문을 다시 쓴 내부 자료라 git 밖
 sources/doc_cards.json
 runs/studio/loops.json
+sources/originals/infuture/_title_pairs_emb.json

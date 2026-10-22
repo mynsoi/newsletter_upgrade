@@ -68,6 +68,26 @@ def round_items(f):
     return [re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", l).strip().strip("*") for l in Path(f).read_text(encoding="utf-8").splitlines() if l.strip()]
 
 
+N_WRITE, N_SHOW = 8, 4  # 2026-10-23: 8개 지어 4개 고른다(메시지 전달 · 후킹 · 과장 없음으로) — 처음부터 4개만 지으면 고를 여지가 없다
+
+
+def pairs_block(thesis):
+    """경영일기 짝 — 이 글이 말할 것과 메시지가 가까운 경영일기 글의 '핵심 메시지 → 실제 제목 → 장치 → 어떻게 바꿨나'(title_style.py).
+    짝이 아직 없으면 빈 문자열 — 그때는 제목 목록만 참고한다."""
+    try:
+        import title_style as TS
+        near = TS.similar(thesis, 8)
+        n, c = TS.stats()
+    except Exception as e:
+        print(f"경영일기 짝 건너뜀: {e}", flush=True)
+        return ""
+    if not near:
+        return ""
+    kinds = "\n".join(f"- {d}: {TS.DEVICE_NOTE[d]} — 경영일기 {n}편 중 {k}편" for d, k in sorted(c.items(), key=lambda x: -x[1]) if k)
+    ex = "\n".join(f"- 메시지: {v['message']}\n  → 제목: {v['title']}  [{', '.join(v['devices'])}]\n  어떻게: {v['how']}" for _, v in near)
+    return f"[경영일기 제목 장치]\n{kinds}\n\n[경영일기: 메시지가 가까운 글의 '메시지 → 제목']\n{ex}\n\n"
+
+
 def prompt_first(thesis, sources, src_root, message="", prev=None, target=""):
     """첫 단계 — 글을 쓰기 전에 생각 한 줄과 원문만 보고 제목 후보를 낸다 (멘토 2026-10-09: "첫 단계로 해").
     message: 멘토가 다시 뽑을 때 같이 보낸 말(원문 그대로, 2026-10-10 "제목 지을 때도 astra한테 원할 시 메시지를 같이")
@@ -85,24 +105,75 @@ def prompt_first(thesis, sources, src_root, message="", prev=None, target=""):
         ask_body = "[이번 멘토 요청 — 원문 그대로]\n" + message.strip() + "\n\n"
         if prev:
             ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
-    return f"""아래 [원문]을 재료로 사내 뉴스레터(SK E&S 전 직원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 8개 지어 주세요.
+    pairs = pairs_block(thesis)
+    how = ("- [경영일기: 메시지 → 제목]은 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」 필자가 글의 핵심 메시지를 실제로 어떻게 제목으로 바꿨는지 보여 줍니다. "
+           "제목의 겉모양이 아니라 '메시지를 어떻게 줄이고 비틀어 궁금하게 만드는지'를 따라 하세요. 그 제목들을 그대로 가져오지는 마세요.\n"
+           "- [경영일기 제목 장치]에서 후보마다 다른 장치를 쓰세요.\n" if pairs else
+           "- [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.\n")
+    return f"""아래 [원문]을 재료로 사내 뉴스레터(SK E&S 전 직원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 {N_WRITE}개 지어 주세요.
 
 이 글이 말할 것: {thesis}
 {f"대상 독자: {target}" + chr(10) if target else ""}
-- [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.
-- [멘토가 직접 지은 제목]도 참고하세요.
-- 원문이 실제로 보여 주는 것을 과장하지 않습니다.
+가장 중요한 것은 두 가지입니다.
+- 메시지: 제목만 읽어도 이 글이 말할 것을 짐작할 수 있어야 합니다(내용 요약이 아니라 핵심 한 가지).
+- 후킹: 읽고 싶게 만드는 긴장·질문·뒤집기가 있어야 합니다. 원문이 실제로 보여 주는 것을 과장하지는 않습니다.
+{how}- [멘토가 직접 지은 제목]도 참고하세요.
+- 짧게(대략 25자 이내), 한 제목에 생각 하나, 콜론·부제 없이.
 - 후보끼리는 서로 다른 결로 지어 주세요.{ask}
 
-출력: 번호를 붙인 제목 8줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
+출력: 번호를 붙인 제목 {N_WRITE}줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
 
 {ask_body}[멘토가 직접 지은 제목]
 - {MENTOR_TITLE}
 
-[제목 참고]
+{pairs}[제목 참고]
 {titles}
 
 {srcs}"""
+
+
+def pick_prompt(thesis, cands, target="", message=""):
+    numbered = "\n".join(f"{i}. {t}" for i, t in enumerate(cands, 1))
+    return f"""사내 뉴스레터(SK E&S 전 직원 대상) 칼럼의 제목 후보 {len(cands)}개입니다. 사람에게 보여 줄 {N_SHOW}개를 골라 주세요.
+
+이 글이 말할 것: {thesis}
+{f"대상 독자: {target}" + chr(10) if target else ""}{f"멘토 요청(원문 그대로): {message}" + chr(10) if message else ""}
+후보마다 세 가지를 1~5점으로 매기세요.
+- message: 제목만 읽고 이 글이 말할 것을 짐작할 수 있나
+- hook: 읽고 싶어지나(긴장·질문·뒤집기·독자를 찌르는 말) — 뻔한 요약이면 낮게
+- honest: 글이 말하지 않는 것을 약속하거나 부풀리지 않나
+그다음 message+hook이 높고 honest가 3점 이상인 후보로 {N_SHOW}개를 고르되, 결(질문·단언·금지·이유 등)이 서로 겹치지 않게 고르세요. 가장 좋은 것부터.
+
+출력: JSON 하나만. {{"scores": [{{"n": 1, "message": 4, "hook": 3, "honest": 5}}], "pick": [3, 1, 6, 8]}}
+파일을 만들거나 명령을 실행하지 마세요. 답만 주세요.
+
+[후보]
+{numbered}"""
+
+
+def pick(d, thesis, target="", message=""):
+    """astra가 지은 후보(astra.md)에서 Claude(계정 로그인)가 메시지 · 후킹 · 과장 없음으로 N_SHOW개를 골라 astra.md를 그 순서로 바꾼다.
+    지은 후보 전부는 cands.md, 점수는 pick.json. 판정이 안 되면 앞의 N_SHOW개."""
+    import json
+    import wiki as W
+    f = Path(d) / "astra.md"
+    if not f.exists():
+        return []
+    cands = round_items(f)[:N_WRITE]
+    (Path(d) / "cands.md").write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+    chosen = cands[:N_SHOW]
+    try:
+        raw = W.claude_login(Path(d) / "pick", pick_prompt(thesis, cands, target, message))
+        m = re.search(r"\{.*\}", raw or "", re.S)
+        got = json.loads(m.group(0)) if m else {}
+        idx = [int(i) for i in got.get("pick", []) if 1 <= int(i) <= len(cands)]
+        if idx:
+            chosen = [cands[i - 1] for i in dict.fromkeys(idx)][:N_SHOW]
+        (Path(d) / "pick.json").write_text(json.dumps(got, ensure_ascii=False, indent=1), encoding="utf-8")
+    except (Exception, SystemExit) as e:
+        print(f"제목 고르기 건너뜀(앞 {N_SHOW}개): {e}", flush=True)
+    f.write_text("\n".join(f"{i}. {t}" for i, t in enumerate(chosen, 1)) + "\n", encoding="utf-8")
+    return chosen
 
 
 def astra(d, p):

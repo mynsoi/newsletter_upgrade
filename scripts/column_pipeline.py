@@ -257,8 +257,9 @@ def titles_first(args):
         (d / "prompt.md").write_text(pr, encoding="utf-8")
         (d / "brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
 
-        def job(d=d, pr=pr):
+        def job(d=d, pr=pr, b=b):
             tc.astra(d, pr)
+            tc.pick(d, b["thesis"], target_line(b), msg)  # 8개 지어 4개 고름(메시지 · 후킹 · 과장 없음, 2026-10-23)
             ok = (d / "astra.md").exists()
             if ok and msg:  # 회차와 함께 남긴다 — 작업실이 후보 위에 보여 준다
                 (d / "message.txt").write_text(msg, encoding="utf-8")

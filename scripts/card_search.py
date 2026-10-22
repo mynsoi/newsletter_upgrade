@@ -51,6 +51,14 @@ def embed(text):
     return c.embeddings.create(model=EMBED_MODEL, input=[text[:8000]], dimensions=EMBED_DIM).data[0].embedding
 
 
+def embed_many(texts):
+    """여러 줄을 한 번에(경영일기 제목 짝 메시지 — title_style.py)."""
+    import httpx
+    import openai
+    c = openai.OpenAI(api_key=_key("OPENAI_API_KEY"), http_client=httpx.Client(verify=ssl.create_default_context()))
+    return [d.embedding for d in c.embeddings.create(model=EMBED_MODEL, input=[t[:8000] for t in texts], dimensions=EMBED_DIM).data]
+
+
 def semantic(text, keys_by_doc):
     """Supabase 카드 임베딩으로 문서 순위. 표가 없거나 비었으면 None."""
     import psycopg
