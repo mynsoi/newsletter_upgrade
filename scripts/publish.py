@@ -60,7 +60,7 @@ def front(text):
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if not m:
         return {}
-    return dict(re.findall(r"^(\w+):\s*'?(.*?)'?\s*$", m.group(1), re.M))
+    return dict(re.findall(r"^(\w+):[ 	]*'?(.*?)'?[ 	]*$", m.group(1), re.M))  # [ 	]* — 빈 칸이 다음 줄을 값으로 읽지 않게
 
 
 # ---------- 칼럼 읽기 ----------
@@ -93,8 +93,10 @@ def load(k):
     refs = []
     for path, label in meta.get("sources", []):
         src = ROOT / "sources" / path
-        url = front(src.read_text(encoding="utf-8")).get("url", "") if src.is_file() else ""
-        refs.append({"label": label, "url": url})
+        fm = front(src.read_text(encoding="utf-8")) if src.is_file() else {}
+        # 참고자료에 원문 제목도(2026-10-22) — '제목 (사이트, 작성자, 날짜)'. 제목 끝의 ' | 사이트명'은 뗀다
+        title = re.sub(r"\s+[|｜]\s+[^|｜]{1,40}$", "", fm.get("title", "")).strip()
+        refs.append({"label": f"{title} ({label})" if title else label, "url": fm.get("url", "")})
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
             "confirmed": conf, "pub_date": date.today().isoformat()}
