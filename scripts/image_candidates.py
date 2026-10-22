@@ -11,6 +11,7 @@
 - 다시 그리기: python3 image_candidates.py --redraw runs/images/<이름>/<회차>  (설명은 그대로, 그림 없는 것만)
 """
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -132,7 +133,10 @@ def draw(d, i, it):
                         # 한 장 40초대지만 같은 계정의 요청은 서버가 차례로 처리한다 — 6장 동시면 90초(gti 기본)를 넘겨
                         # 전부 시간 초과로 버려졌다(2026-10-20 Windows 시험: 1장 43초, 3장 동시 45·67·80초). 5분 × 2회까지 기다린다
                         "--timeout-ms", "300000", "--retries", "1"],
-                       stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=900)
+                       stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, timeout=900,
+                       # Node가 Windows 인증서 저장소를 믿게 한다 — 사내망은 HTTPS를 회사 인증서로 다시 서명해서, Node 기본 인증서만으로는
+                       # 연결이 성립하지 않고 응답 없이 시간 초과로 끝났다(2026-10-22: 이 값이 없으면 100초 초과, 있으면 48초에 그림)
+                       env={**os.environ, "NODE_USE_SYSTEM_CA": "1"})
     return png.exists()
 
 
