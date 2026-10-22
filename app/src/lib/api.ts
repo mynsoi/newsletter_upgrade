@@ -110,10 +110,13 @@ export type MineRow = {
   side: string;
   out: string;
 };
-export type MinePick = { source: string; role: string; who?: string; path?: string };
+export type MinePick = { source: string; role: string; who?: string; path?: string; note?: string };
+/** 글 옵션(2026-10-22) — 이 글이 말할 것 한 문장 + 중심 1 + 받침 1~2. 하나를 고르면(mine-take) 원문을 확인하고 제목으로 */
+export type MineOption = { message: string; center: MinePick; support: MinePick[]; why: string; audience?: string };
 export type MineTurn =
   | { role: "mentor"; text: string; docs: string[]; at: number }
-  | { role: "ai"; center: MinePick; support: MinePick[]; n_candidates: number; at: number };
+  | { role: "ai"; options: MineOption[]; at: number }
+  | { role: "ai"; center: MinePick; support: MinePick[]; n_candidates: number; option?: number; at: number };
 export type MineRun = {
   id: string;
   turns: MineTurn[];
@@ -121,7 +124,7 @@ export type MineRun = {
   docs: string[];
   target: string;
   status: "running" | "done" | "failed" | "lost";
-  stage: "문서" | "후보" | "고르기" | "제목" | "끝";
+  stage: "문서" | "후보" | "고르기" | "옵션" | "옵션 고르기" | "확인" | "제목" | "끝";
   job: string;
   picked: MineRow[];
   rest: MineRow[];

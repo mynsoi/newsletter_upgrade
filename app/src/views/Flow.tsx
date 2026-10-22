@@ -8,7 +8,7 @@ import { PillTabs } from "@/components/ui/tabs";
 import { ByChip, Chip, ClaudeMark, SiteIcon, SourceDrawer } from "@/components/studio/bits";
 import { Director, Prose, inlineAt } from "@/views/parts";
 import { DeleteButton, StageChip } from "@/views/Articles";
-import { PicksCard, useAttach } from "@/views/MineChat";
+import { OptionsCard, PicksCard, useAttach } from "@/views/MineChat";
 import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type State, type Step } from "@/lib/api";
 import { paragraphs } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,7 @@ const ro = (n: number) => ([3, 6, 0].includes(n % 10) ? "으로" : "로");
 
 const KINDS = ["mine", "titles", "write", "revise", "shorten", "images", "inline", "wiki-pick"];
 const jobOf = (jobs: Job[], id: string) => jobs.find((j) => j.status === "running" && j.target === id && KINDS.includes(j.kind));
-const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 제목: "제목 후보 짓는 중" };
+const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 옵션: "카드 보고 글 옵션 짜는 중", 확인: "고른 원문 끝까지 읽는 중", 제목: "제목 후보 짓는 중" };
 
 function jobText(j: Job, a?: A, run?: MineRun): string[] {
   if (j.kind === "mine") return [MINE_TEXT[run?.stage ?? ""] ?? "원문 고르는 중"];
@@ -166,9 +166,18 @@ function Timeline({
     const lastAi = run.turns.map((t) => t.role).lastIndexOf("ai");
     run.turns.forEach((t, i) => {
       if (t.role === "mentor") out.push(<Me key={`m${i}`} docs={t.docs}>{t.text}</Me>);
-      else if (i === lastAi && run.status !== "running" && run.picked.length)
+      else if ("options" in t) {
+        // 글 옵션 — 바로 뒤 차례가 고른 원문이면 그 번호를 '고름'으로
+        const next = run.turns[i + 1];
+        const chosen = next && next.role === "ai" && "center" in next ? next.option : undefined;
         out.push(
-          <Ai key={`a${i}`} label={<>고른 원문 · 후보 {t.n_candidates}편 중</>}>
+          <Ai key={`o${i}`} label={<>글 옵션 {t.options.length}개{chosen ? "" : " · 하나를 고르면 원문을 끝까지 읽고 확인합니다"}</>}>
+            <OptionsCard run={run} options={t.options} live={i === lastAi && run.status !== "running" && !started} chosen={chosen} onSource={onSource} refresh={refresh} />
+          </Ai>
+        );
+      } else if (i === lastAi && run.status !== "running" && run.picked.length)
+        out.push(
+          <Ai key={`a${i}`} label={t.option ? <>고른 원문 · 옵션 {t.option} · 원문 확인 뒤</> : <>고른 원문 · 후보 {t.n_candidates}편 중</>}>
             <PicksCard
               run={run}
               canSwap={!started}
@@ -281,7 +290,7 @@ function Timeline({
   if (job) {
     if (job.message && job.kind !== "mine") out.push(<Me key="jm">{job.message}</Me>);
     const steps = job.kind === "write" ? 3 : job.kind === "mine" ? 3 : 0;
-    const at = job.kind === "write" ? job.stage?.index ?? 0 : ["후보", "고르기", "제목"].indexOf(run?.stage ?? "");
+    const at = job.kind === "write" ? job.stage?.index ?? 0 : ["옵션", "확인", "제목"].indexOf(run?.stage ?? "");
     out.push(
       <div key="job" className="flex items-center gap-4 pl-1">
         {steps > 0 && (

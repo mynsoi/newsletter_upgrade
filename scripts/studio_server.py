@@ -383,17 +383,24 @@ def mine_state(jobs):
                     "out": why_out.get(s, "")}
         picked = [row(s, "중심" if i == 0 else "받침") for i, s in enumerate(now)]
         rest = [row(c["source"], "후보") for c in picks.get("_candidates", []) if c["source"] not in now]
-        status = j["status"] if j else ("done" if has_brief else "lost")
+        status = j["status"] if j else ("done" if has_brief or (d / "options.json").exists() else "lost")
         try:
             ts = MT.turns(d) if (d / "topic.txt").exists() else []
         except (OSError, ValueError, KeyError):
             ts = []
         if not ts:  # 첫 요청을 받자마자(아직 topic.txt 전)
             ts = [{"role": "mentor", "text": read(d / "request.txt").strip(), "docs": docs, "at": d.stat().st_mtime}]
-        for x in ts:  # 지난 차례의 원문에 누가 쓴 글인지 붙인다
-            for p_ in ([x["center"]] + x.get("support", [])) if x.get("role") == "ai" else []:
-                p_["who"] = W.src_meta(p_["source"])[0] if (SRC / W.rel(p_["source"])).is_file() else ""
+        for x in ts:  # 지난 차례의 원문에 누가 쓴 글인지 붙인다 — 글 옵션 차례(2026-10-22)는 옵션마다
+            if x.get("role") != "ai":
+                continue
+            groups = [[o["center"]] + o.get("support", []) for o in x["options"]] if x.get("options") else [[x["center"]] + x.get("support", [])]
+            for p_ in (p for g in groups for p in g):
+                ok_ = (SRC / W.rel(p_["source"])).is_file()
+                p_["who"] = W.src_meta(p_["source"])[0] if ok_ else ""
                 p_["path"] = W.rel(p_["source"])
+                if x.get("options"):  # 옵션은 '다른 발행처'가 보이게 글쓴이 대신 발행처 이름
+                    p_["who"] = W.site_name(p_["source"]) if ok_ else ""
+                    p_["note"] = cs.get(p_["source"], {}).get("있었던 일", "")
         out.append({"id": k, "turns": ts, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
                     "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
                     "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime})
@@ -471,6 +478,20 @@ def act_mine_more(a):
     f.write_text(msg + "\n", encoding="utf-8")
     docs = save_uploads(d, a.get("files") or [], stamp + "-")
     return start("mine", k, PY + ["scripts/my_topic.py", "--more", k, f.relative_to(ROOT).as_posix(), *docs])
+
+
+def act_mine_take(a):
+    """글 옵션 하나 고르기(2026-10-22) — 그 옵션의 원문을 끝까지 읽고 확인한 뒤 글 설정·제목 후보(my_topic.py --take)."""
+    k = safe_id(a.get("id", ""))
+    n = int(a.get("n", 0))
+    d = MINE / k
+    if not (d / "options.json").exists() or not 1 <= n <= len(json.loads(read(d / "options.json") or "{}").get("options", [])):
+        raise ValueError("잘못된 옵션")
+    if busy(k):
+        raise ValueError("이 글에서 작업이 도는 중")
+    if (ROOT / "runs" / "columns" / k / "draft.md").exists():
+        raise ValueError("쓰기를 시작한 글은 원문을 다시 고르지 않습니다 — 새 대화로 시작하세요")
+    return start("mine", k, PY + ["scripts/my_topic.py", "--take", k, str(n)])
 
 
 def act_mine_ok(a):
@@ -1092,7 +1113,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "confirm": act_confirm, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
-           "mine-ok": act_mine_ok, "delete": act_delete, "base": act_base, "restart": act_restart,
+           "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
            "publish-build": act_publish_build, "publish": act_publish}
 
 

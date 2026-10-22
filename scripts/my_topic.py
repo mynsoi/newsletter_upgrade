@@ -4,17 +4,18 @@
 사용: python3 -I scripts/my_topic.py --new <주제 파일> [--target 팀장급] [--doc <파일> ...] [--id m-<이름>]
         → runs/mine/<글>/ (topic.txt · candidates · pick · picks.json) + sources/mine/<글>/NN.md(문서를 글자만 그대로)
         → briefs/<글>.json + 제목 후보(astra, column_pipeline --titles). 작업실 글 목록에 뜨고, 제목을 고르면 과정 1·2·3
-      python3 -I scripts/my_topic.py --more <글> <말 파일> [--doc <파일> ...]  — 같은 대화에서 이어서 한 말로 원문 다시 고르기(대화 전체를 넘김)
+      python3 -I scripts/my_topic.py --take <글> <옵션 번호>  — 낸 글 옵션 중 하나를 골라 원문을 끝까지 읽고 확인 → 글 설정 + 제목 후보
+      python3 -I scripts/my_topic.py --more <글> <말 파일> [--doc <파일> ...]  — 같은 대화에서 이어서 한 말로 글 옵션 다시 내기(대화 전체를 넘김)
       python3 -I scripts/my_topic.py --brief <글> [원문 키 ...]  — 고른 원문을 바꿔 글 설정을 다시 만든다(첫째가 중심, 예: linkedin/03 threads/27)
       python3 -I scripts/my_topic.py --page <글> <이름> [점검 메모]  — 결과 페이지 docs/<오늘>-<이름>.html (작업실 /docs/)
-단계
-0. 검색(2026-10-21): 자동 카드(main document_cards)로 후보를 수십 편까지 좁힌다 — 의미 검색 + 낱말 검색(card_search.py).
-1. 후보(Claude, 0에서 좁힌 카드 — 주제 지도의 판정과 상관없이): 원문 속 사람이 한 일이 주제가 말하는 것을 보여 주는가.
-   키워드·분야가 겹치는지가 아니라. 그렇게 하지 않아 생긴 일(반대편)도 후보.
-2. 고르기(Claude, 후보 원문 전체): 중심 1 + 받침 1~2(적어도 하나는 다른 발행처), 고른 원문마다 이 글에서 맡는 몫·가져올 사실,
-   나머지는 왜 이번에 빼는지. 원문 2~3편으로 정한 이유(2026-10-21) — 원문 1편이면 그 글을 말만 바꿔 쓰는 모방이 되고,
+단계 (2026-10-22 개편 — 글 하나를 정해 주던 것을 글 옵션 여러 개로: 넓은 키워드로 물어도 각도를 사람이 고르게)
+0. 검색: 자동 카드(main document_cards)로 후보를 최대 110편까지 좁힌다 — 의미 검색 100 + 낱말 검색 10(card_search.py).
+1. 옵션(Claude, 0에서 좁힌 카드만): 글 옵션 3~5개 — 옵션마다 이 글이 말할 것 한 문장 + 중심 1 + 받침 1~2(적어도 하나는 다른 발행처).
+   넓은 주제면 옵션끼리 메시지가 다르고, 구체적인 주제면 메시지는 비슷해도 사례 묶음이 다르다. 여기서 멈추고 사람이 고른다.
+2. 확인(Claude, 고른 옵션의 원문 2~3편 전체): 카드로 정한 몫이 원문에 정말 있는지 보고, 원문마다 맡는 몫·가져올 사실을 원문 기준으로 적는다.
+   받치지 못하는 원문은 뺀다. 원문 2~3편으로 정한 이유(2026-10-21) — 원문 1편이면 그 글을 말만 바꿔 쓰는 모방이 되고,
    많으면 사례 나열이 된다(main claim 방식의 문제, 창간호 반려 사유도 인용 과다).
-- 주제 문장은 받은 그대로 thesis가 된다(다듬지 않는다). 문서는 Claude·astra로 나간다 — 보내도 되는 것만 넣는다.
+- 고른 옵션의 '말할 것' 한 문장이 thesis가 된다(사람이 옵션에서 보고 고른 문장). 받은 요청은 request에 그대로. 문서는 Claude·astra로 나간다 — 보내도 되는 것만 넣는다.
 - 주제 지도(wiki/)는 건드리지 않는다(주제 상태·판정 예시 그대로). 글 설정에는 from_mine이 붙고, 초안은 이 표시를 보고
   "멘토가 정한 말을 원문 사례로 보여 주는" 지시를 쓴다(column_pipeline.draft_prompt).
 """
@@ -107,7 +108,62 @@ def cand_prompt(topic, docs, cs, follow=False):
     ])
 
 
-# ---------- 2. 고르기 (후보 원문 전체) ----------
+# ---------- 1. 옵션 (카드만) ----------
+
+def options_prompt(topic, docs, cs, ask_target, follow=False):
+    cards_txt = "\n\n".join(f"[{k}] {W.site_name(k)}\n있었던 일: {v['있었던 일']}\n글쓴이가 하는 말: {v['글쓴이가 하는 말']}" for k, v in cs.items())
+    return "\n\n".join([
+        *([FOLLOW] if follow else []),
+        f"멘토가 {W.READER} 칼럼(공백 제외 1,500자 이하)의 주제를 정했습니다. [멘토 주제]는 멘토가 한 말 그대로이고, "
+        "구체적인 한 문장일 수도, 키워드 수준의 넓은 주제일 수도 있습니다. "
+        "[원문 카드]는 검색으로 좁힌 원문마다 발행처·있었던 일·글쓴이가 하는 말을 정리한 것입니다. 이 주제로 쓸 수 있는 글 옵션 3~5개를 내 주세요.",
+        "옵션 하나 = 이 글이 말할 것 한 문장 + 그걸 보여 줄 원문 2~3편:\n"
+        "- message: 이 글이 말할 것 한 문장 — 독자가 한 번 듣고 그대로 따라 말할 수 있게, [멘토 주제]에 답하게, 아래 원문 속 일로 뒷받침되는 말만. "
+        "'기준·체계·구조·문화·역량' 같은 뭉뚱그린 말 대신 일하는 장면의 말로\n"
+        "- center: 글을 이끌 중심 원문 하나 — message를 가장 구체적인 일로 보여 주는 원문. 비슷하면 회사·사람·행사 이름과 숫자가 있어 처음 듣는 독자도 바로 알아들을 쪽\n"
+        "- support: 중심을 받칠 원문 1~2개. 적어도 하나는 중심과 다른 발행처. 같은 말을 다른 자리·다른 조직에서 보여 주거나, 반대편(그렇게 안 해서 생긴 일)을 보여 주는 원문\n"
+        "- 고른 원문마다 role(이 글에서 맡는 몫 한 줄, 카드 속 일로)\n"
+        "- why: 이 옵션이 다른 옵션과 무엇이 다른지 한 줄"
+        + ("\n- audience: 이 글을 가장 먼저 읽어야 할 자리 — 팀장급·사수급·신입사원·전 직원 중 하나" if ask_target else ""),
+        "옵션끼리는 겹치지 않게 합니다. 주제가 넓으면 서로 다른 메시지(각도)로, 주제가 구체적이면 메시지는 비슷해도 서로 다른 사례 묶음으로. "
+        "한 원문을 두 옵션의 중심으로 쓰지 않습니다. 고르는 기준은 키워드·분야가 겹치는지가 아니라 원문 속 사람이 실제로 한 일입니다. "
+        "카드에 없는 일을 덧붙이지 않습니다. 쓸 만한 옵션이 셋이 안 되면 있는 만큼만 냅니다.",
+        "출력: JSON 하나만. {\"options\": [{\"message\": \"...\", \"center\": {\"source\": \"...\", \"role\": \"...\"}, "
+        "\"support\": [{\"source\": \"...\", \"role\": \"...\"}], \"why\": \"...\"" + (", \"audience\": \"전 직원\"" if ask_target else "") + "}]}"
+        "  — source는 카드의 [ ] 안 그대로. 가장 쓸 만한 옵션부터.",
+        W.ANSWER_ONLY, W.GUARD,
+        "=== [멘토 주제] ===\n" + topic,
+        *([docs_block(docs)] if docs else []),
+        "=== [원문 카드] ===\n" + cards_txt,
+    ])
+
+
+# ---------- 2. 확인 (고른 옵션의 원문 전체) ----------
+
+def check_prompt(topic, docs, opt):
+    srcs = [("중심", opt["center"])] + [("받침", x) for x in opt.get("support", [])]
+    blocks = "\n\n".join(f"=== [{x['source']}] {W.label(W.rel(x['source']))} — {kind}: {x.get('role', '')} ===\n" + W.body(W.rel(x["source"]))
+                         for kind, x in srcs)
+    return "\n\n".join([
+        f"멘토가 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,500자 이하)을 씁니다. 멘토는 아래 [고른 옵션]을 골랐습니다. "
+        "옵션은 원문 카드만 보고 짠 것이라, 원문을 끝까지 읽고 확인해 주세요.",
+        "할 것:\n"
+        "- 원문마다 role(이 글에서 맡는 몫 한 줄)과 use(원문에서 가져올 사실 한두 줄 — 원문 문장을 옮기지 않고 사실만)를 원문 기준으로 다시 적습니다\n"
+        "- [이 글이 말할 것]을 실제로 보여 주지 못하는 원문(카드와 달리 그 일이 원문에 없거나 결이 다름)은 drop에 넣고 이유를 한 줄로. 중심은 빼지 않습니다\n"
+        "- [이 글이 말할 것]은 멘토가 보고 고른 문장이라 그대로 둡니다. 중심 원문과 맞지 않는 데가 있으면 note에 한 줄로만 적습니다",
+        "판단은 원문에 실제로 있는 일로 합니다. 원문에 없는 일을 덧붙이지 않습니다.",
+        "출력: JSON 하나만. {\"center\": {\"source\": \"...\", \"role\": \"...\", \"use\": \"...\"}, "
+        "\"support\": [{\"source\": \"...\", \"role\": \"...\", \"use\": \"...\"}], \"drop\": [{\"source\": \"...\", \"why\": \"...\"}], \"note\": \"\"}"
+        "  — source는 [ ] 안 그대로.",
+        W.ANSWER_ONLY, W.GUARD,
+        "=== [멘토 주제] ===\n" + topic,
+        "=== [이 글이 말할 것] ===\n" + opt["message"],
+        *([docs_block(docs)] if docs else []),
+        "=== [고른 옵션의 원문] ===\n" + blocks,
+    ])
+
+
+# ---------- (예전) 2. 고르기 (후보 원문 전체) — 2026-10-22 옵션 방식 전 choose()가 쓰던 것 ----------
 
 def pick_prompt(topic, docs, cands, ask_target, follow=False):
     blocks = "\n\n".join(f"=== [{c['source']}] {W.label(W.rel(c['source']))} — 1차 이유({c.get('side', '')}): {c.get('why', '')} ===\n"
@@ -224,16 +280,100 @@ def snapshot(picks):
 
 
 def convo_text(ts):
-    """대화 전체를 고르기에 넘기는 글 — 멘토 말은 받은 그대로, 그 사이에 그때 고른 원문."""
+    """대화 전체를 옵션 짜기에 넘기는 글 — 멘토 말은 받은 그대로, 그 사이에 그때 낸 옵션·고른 원문."""
     out, first = [], True
     for x in ts:
         if x["role"] == "mentor":
             out.append(("[처음 요청]" if first else "[이어서 한 말]") + "\n" + x["text"])
             first = False
+        elif x.get("options"):
+            out.append("[그때 낸 옵션]\n" + "\n".join(f"{i}. {o['message']} — " + " / ".join(p["source"] for p in [o["center"]] + o.get("support", []))
+                                                   for i, o in enumerate(x["options"], 1)))
         else:
             s = [x["center"]] + x.get("support", [])
             out.append("[그때 고른 원문] " + " / ".join(f"{p['source']}({'중심' if i == 0 else '받침'}): {p.get('role', '')}" for i, p in enumerate(s)))
     return "\n\n".join(out)
+
+
+def suggest(d, topic, saved, ask_target, follow=False):
+    """0. 검색 → 1. 옵션(카드만) → options.json. 여기서 멈추고 사람이 하나를 고른다(--take)."""
+    t0 = time.time()
+    cs, how = CS.candidates(topic)
+    print(f"검색: {how}", flush=True)
+    if not cs:
+        sys.exit("후보를 찾을 카드가 없음 — " + how)
+    n = len(list(d.glob("options-*.json"))) + (2 if (d / "options.json").exists() else 1)
+    sfx = "" if n == 1 else f"-{n}"
+    stage(d, "옵션")
+    raw = json_of(W.claude(d / f"options{sfx}", options_prompt(topic, saved, cs, ask_target, follow))).get("options", [])
+    opts, centers = [], set()
+    for o in raw:
+        c = (o.get("center") or {}).get("source")
+        if c not in cs or c in centers or not o.get("message"):
+            continue
+        sup = [x for x in o.get("support", []) if x.get("source") in cs and x["source"] != c][:2]
+        centers.add(c)
+        opts.append({"message": o["message"].strip(), "center": {"source": c, "role": o["center"].get("role", "")},
+                     "support": [{"source": x["source"], "role": x.get("role", "")} for x in sup],
+                     "why": o.get("why", ""), "audience": o.get("audience", "")})
+    if not opts:
+        sys.exit("글 옵션이 없음 — 로그: " + str(d / f"options{sfx}"))
+    if (d / "options.json").exists():
+        (d / "options.json").rename(d / f"options-{n - 1}.json")
+    (d / "options.json").write_text(json.dumps({"options": opts, "searched": len(cs), "how": how}, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"글 옵션 {len(opts)}개 · 카드 {len(cs)}장에서 · {time.time() - t0:.0f}s", flush=True)
+    for i, o in enumerate(opts, 1):
+        print(f"  {i}. {o['message']} — {o['center']['source']} + {[x['source'] for x in o['support']]}", flush=True)
+    return opts
+
+
+def take(k, n):
+    """--take <글> <번호> — 고른 옵션의 원문을 끝까지 읽고 확인해 picks.json → 글 설정 → 제목 후보."""
+    d = MINE_RUNS / k
+    t0 = time.time()
+    if (ROOT / "runs" / "columns" / k / "draft.md").exists():
+        sys.exit("쓰기를 시작한 글은 원문을 다시 고르지 않습니다 — 새 대화로 시작하세요")
+    opts = json.loads((d / "options.json").read_text(encoding="utf-8"))["options"]
+    if not 1 <= n <= len(opts):
+        sys.exit(f"옵션 번호는 1~{len(opts)}")
+    opt = opts[n - 1]
+    meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+    ts = turns(d)
+    topic = convo_text(ts) if len([x for x in ts if x["role"] == "mentor"]) > 1 else (d / "topic.txt").read_text(encoding="utf-8").strip()
+    stage(d, "확인")
+    m = len(list(d.glob("check*/"))) + 1
+    got = json_of(W.claude(d / ("check" if m == 1 else f"check-{m}"), check_prompt(topic, meta["docs"], opt)))
+    cs = W.all_cards()
+    own = {opt["center"]["source"]} | {x["source"] for x in opt.get("support", [])}
+    center = got["center"] if (got.get("center") or {}).get("source") == opt["center"]["source"] else {**opt["center"], "use": ""}
+    drop = {x.get("source"): x.get("why", "") for x in got.get("drop", []) if x.get("source") in own and x.get("source") != center["source"]}
+    sup = [x for x in got.get("support", []) if x.get("source") in own and x["source"] not in drop and x["source"] != center["source"]]
+    sup += [{**x, "use": ""} for x in opt.get("support", []) if x["source"] not in drop and x["source"] not in {y["source"] for y in sup}]
+    others = [{"source": p["source"], "side": "", "why": f"옵션 {i}: {p.get('role', '')}"}
+              for i, o in enumerate(opts, 1) if i != n for p in [o["center"]] + o.get("support", []) if p["source"] not in own]
+    cands = {x["source"]: x for x in others + [{"source": s_, "side": "", "why": "원문 확인에서 뺌 — " + w} for s_, w in drop.items()]}
+    picks = {"center": center, "support": sup[:2], "point": opt["message"], "option": n, "note": got.get("note", ""),
+             "rest": [{"source": s_, "why": "원문 확인에서 뺌 — " + w} for s_, w in drop.items()],
+             "_candidates": list(cands.values()),
+             **({"audience": opt["audience"]} if opt.get("audience") else {})}
+    if any(p["source"] not in cs for p in [picks["center"]] + picks["support"]):
+        sys.exit("카드가 없는 원문이 섞임 — 로그: " + str(d))
+    if (d / "picks.json").exists():
+        j = len(list(d.glob("picks-*.json"))) + 1
+        (d / "picks.json").rename(d / f"picks-{j}.json")
+    (d / "picks.json").write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding="utf-8")
+    add_turn(d, {"role": "ai", **snapshot(picks), "option": n})
+    print(f"확인 · 옵션 {n} · 중심 {center['source']} · 받침 {[p['source'] for p in picks['support']]}"
+          + (f" · 뺌 {list(drop)}" if drop else "") + f" · {time.time() - t0:.0f}s", flush=True)
+    bp = make_brief(k)
+    b = json.loads(bp.read_text(encoding="utf-8"))
+    b.pop("sources_ok", None)  # 새로 고른 원문은 다시 확인받는다
+    bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
+    if not b.get("title"):
+        stage(d, "제목")
+        titles(bp, k)
+    stage(d, "끝")
+    print(f"끝 · {k} · {time.time() - t0:.0f}s")
 
 
 def choose(d, topic, saved, ask_target, follow=False):
@@ -292,19 +432,16 @@ def new(topic_file, target="", docs=(), k=""):
     saved = save_docs(k, docs)
     (d / "meta.json").write_text(json.dumps({"target": target, "docs": saved}, ensure_ascii=False, indent=1), encoding="utf-8")
     add_turn(d, {"role": "mentor", "text": topic, "docs": [x[1].removeprefix("회사 자료 — ") for x in saved]})
-    picks = choose(d, topic, saved, not target)
-    add_turn(d, {"role": "ai", **snapshot(picks)})
-    bp = make_brief(k)
-    stage(d, "제목")
-    titles(bp, k)
-    stage(d, "끝")
-    print(f"끝 · {k} · {time.time() - t0:.0f}s")
+    opts = suggest(d, topic, saved, not target)
+    add_turn(d, {"role": "ai", "options": opts})
+    stage(d, "옵션 고르기")
+    print(f"글 옵션 냄 · {k} · {time.time() - t0:.0f}s — 하나를 고르면(--take) 원문을 확인하고 제목으로")
     return k
 
 
 def more(k, msg_file, docs=()):
-    """--more <글> <말 파일> [--doc …] — 같은 대화에서 이어서 한 말로 원문을 다시 고른다(대화 전체를 넘김).
-    주제(thesis)는 처음 요청 그대로. 쓰기를 시작한 글은 다시 고르지 않는다. 제목을 아직 안 골랐으면 제목 후보도 다시."""
+    """--more <글> <말 파일> [--doc …] — 같은 대화에서 이어서 한 말로 글 옵션을 다시 낸다(대화 전체를 넘김).
+    쓰기를 시작한 글은 다시 고르지 않는다. 옵션을 고르면(--take) 그때 글 설정·제목이 바뀐다."""
     d = MINE_RUNS / k
     msg = Path(msg_file).read_text(encoding="utf-8").strip()
     if not msg or not (d / "meta.json").exists():
@@ -321,17 +458,10 @@ def more(k, msg_file, docs=()):
         for x in turns(d):
             add_turn(d, {k_: v for k_, v in x.items() if k_ != "at"})
     add_turn(d, {"role": "mentor", "text": msg, "docs": [x[1].removeprefix("회사 자료 — ") for x in saved]})
-    picks = choose(d, convo_text(turns(d)), meta["docs"], not meta.get("target"), follow=True)
-    add_turn(d, {"role": "ai", **snapshot(picks)})
-    bp = make_brief(k)
-    b = json.loads(bp.read_text(encoding="utf-8"))
-    b.pop("sources_ok", None)  # 새로 고른 원문은 다시 확인받는다
-    bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    if not b.get("title"):
-        stage(d, "제목")
-        titles(bp, k)
-    stage(d, "끝")
-    print(f"이어서 고르기 끝 · {k} · {time.time() - t0:.0f}s")
+    opts = suggest(d, convo_text(turns(d)), meta["docs"], not meta.get("target"), follow=True)
+    add_turn(d, {"role": "ai", "options": opts})
+    stage(d, "옵션 고르기")
+    print(f"이어서 글 옵션 냄 · {k} · {time.time() - t0:.0f}s")
 
 
 # ---------- 결과 페이지 (작업실 /docs/) ----------
@@ -485,6 +615,8 @@ if __name__ == "__main__":
             docs.append(rest[1])
             rest = rest[2:]
         more(a[1], a[2], docs)
+    elif a[:1] == ["--take"]:
+        take(a[1], int(a[2]))
     elif a[:1] == ["--brief"]:
         make_brief(a[1], a[2:] or None)
     elif a[:1] == ["--page"]:

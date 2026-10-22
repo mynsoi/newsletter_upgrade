@@ -3,7 +3,7 @@ import { IconArrowRight, IconChevronDown, IconCrown, IconFileText, IconMinus, Ic
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Chip, SiteIcon } from "@/components/studio/bits";
-import { act, type Job, type MineRow, type MineRun, type State, type WikiTopic } from "@/lib/api";
+import { act, type Job, type MineOption, type MineRow, type MineRun, type State, type WikiTopic } from "@/lib/api";
 import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -156,6 +156,76 @@ function Suggest({ state, go }: { state: State; go: (h: string) => void }) {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+/** 글 옵션(2026-10-22) — 옵션마다 이 글이 말할 것 한 문장과 원문 2~3편. 마지막 차례면 '이 글로'로 하나를 고른다
+ *  (고르면 그 옵션의 원문을 끝까지 읽고 확인한 뒤 고른 원문 카드·제목 후보가 이어진다). 지난 차례는 고른 것만 표시한 채로 */
+export function OptionsCard({
+  run,
+  options,
+  live,
+  chosen,
+  onSource,
+  refresh,
+}: {
+  run: MineRun;
+  options: MineOption[];
+  live: boolean;
+  chosen?: number;
+  onSource: (p: string) => void;
+  refresh: () => void;
+}) {
+  const take = (n: number) => act("mine-take", { id: run.id, n }).then(refresh);
+  return (
+    <div className={cn("space-y-2.5", !live && "opacity-70 transition hover:opacity-100")}>
+      {options.map((o, i) => {
+        const on = chosen === i + 1;
+        return (
+          <div key={i} className={cn("rounded-2xl border bg-panel-solid px-5 py-4", on ? "border-violet-400/60" : "border-line")}>
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-soft text-xs font-semibold text-ink-2">{i + 1}</span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[15.5px] font-medium leading-relaxed text-ink">{o.message}</p>
+                {o.why && <p className="mt-1 text-[13px] leading-relaxed text-ink-3">{o.why}</p>}
+                <div className="mt-3 space-y-1.5">
+                  {[o.center, ...o.support].map((p, j) => (
+                    <div key={p.source} className="flex gap-2.5 text-[13.5px] leading-relaxed">
+                      <Chip className={cn("h-fit shrink-0 whitespace-nowrap", j === 0 && "border-violet-400/50 bg-violet-500/15 text-violet-800 dark:text-violet-100")}>
+                        {j === 0 ? "중심" : "받침"}
+                      </Chip>
+                      <span className="min-w-0 text-ink-2">
+                        <button onClick={() => onSource(p.path ?? "")} className="mr-2 inline-flex items-center gap-1 text-xs text-ink-3 hover:text-ink">
+                          <SiteIcon site={p.source.split("/")[0]} className="size-3.5" />
+                          {p.who || p.source}
+                        </button>
+                        {p.role}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {(live || on || o.audience) && (
+              <div className="mt-3 flex items-center justify-between gap-3 border-t border-line pt-3">
+                {o.audience ? <Chip className="text-ink-2">{o.audience}</Chip> : <span />}
+                {live ? (
+                  <button
+                    onClick={() => take(i + 1)}
+                    className="flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
+                  >
+                    이 글로
+                    <IconArrowRight className="size-4" />
+                  </button>
+                ) : (
+                  on && <Chip className="border-violet-400/50 bg-violet-500/15 text-violet-800 dark:text-violet-100">고름</Chip>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
