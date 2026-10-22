@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { IconArrowRight, IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconRefresh, IconUsers, IconX } from "@tabler/icons-react";
+import { IconArrowRight, IconCheck, IconChevronDown, IconCrown, IconFileText, IconMinus, IconPaperclip, IconPlus, IconRefresh, IconUsers, IconX } from "@tabler/icons-react";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import { Chip, SiteIcon } from "@/components/studio/bits";
@@ -230,7 +230,10 @@ export function OptionsCard({
   );
 }
 
-/** 고른 원문 카드 — 마지막 차례는 바꿔 끼우기(중심으로·넣기·빼기)가 되고, 지난 차례는 굳힌 채로 */
+/** 고른 원문 카드 (2026-10-22 개편: 확인 결과를 보고 승인하는 화면)
+ *  맨 위 확인 결과 한 줄(+ Claude의 주의 메모) → 원문마다 맡는 몫 · 가져올 사실 → 기준(원문 2~3편 · 다른 발행처 1편 이상)과 경고
+ *  → 바꿔 넣을 원문(다른 옵션의 원문은 그 옵션 메시지별로, 확인에서 뺀 원문은 이유와 함께). 버튼은 늘 보인다.
+ *  마지막 차례만 바꿔 끼우기가 되고, 지난 차례는 굳힌 채로 */
 export function PicksCard({
   run,
   canSwap,
@@ -247,49 +250,80 @@ export function PicksCard({
   const [more, setMore] = useState(false);
   const now = run.picked.map((p) => p.source);
   const swap = (next: string[]) => act("mine-swap", { id: run.id, sources: next }).then(refresh);
+  const sites = new Set(run.picked.map((p) => p.site || p.source.split("/")[0]));
+  const warn =
+    run.picked.length < 2
+      ? "원문이 1편뿐입니다 — 한 편만으로 쓰면 그 글을 말만 바꿔 옮기게 됩니다. 아래에서 받침을 하나 넣어 보세요."
+      : run.picked.length > 3
+        ? "원문이 3편을 넘습니다 — 사례 나열이 되기 쉽습니다. 하나를 빼 보세요."
+        : sites.size < 2
+          ? "원문이 모두 같은 발행처입니다 — 다른 발행처 원문을 하나 넣어 보세요."
+          : "";
+  const groups: Record<string, MineRow[]> = {};
+  for (const p of run.rest) (groups[p.group || "후보"] ??= []).push(p);
+  const order = Object.keys(groups).sort((a, b) => (a === "확인에서 뺀 원문" ? 1 : b === "확인에서 뺀 원문" ? -1 : a.localeCompare(b)));
+  const ck = run.check;
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-panel-solid">
+      {ck && (
+        <div className="space-y-1.5 border-b border-line bg-soft/40 px-5 py-3.5 text-[13.5px] leading-relaxed">
+          <p className="flex items-center gap-2 text-ink">
+            <IconCheck className="size-4 shrink-0 text-emerald-500" />
+            옵션 {ck.option}의 원문을 끝까지 읽고 확인했습니다
+            {ck.dropped > 0 ? ` · 받치지 못하는 원문 ${ck.dropped}편을 뺐습니다` : " · 뺀 원문 없음"}
+          </p>
+          {ck.note && <p className="pl-6 text-ink-2">주의: {ck.note}</p>}
+        </div>
+      )}
       {run.picked.map((p, i) => (
         <Row key={p.source} p={p} first={i === 0} onSource={onSource}>
           {canSwap && i > 0 && (
             <>
-              <IconBtn label="중심으로" onClick={() => swap([p.source, ...now.filter((x) => x !== p.source)])}>
-                <IconCrown className="size-4" />
-              </IconBtn>
-              <IconBtn label="빼기" onClick={() => swap(now.filter((x) => x !== p.source))}>
-                <IconMinus className="size-4" />
-              </IconBtn>
+              <TextBtn onClick={() => swap([p.source, ...now.filter((x) => x !== p.source)])}>
+                <IconCrown className="size-3.5" /> 중심으로
+              </TextBtn>
+              <TextBtn onClick={() => swap(now.filter((x) => x !== p.source))}>
+                <IconMinus className="size-3.5" /> 빼기
+              </TextBtn>
             </>
           )}
         </Row>
       ))}
-      <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-3.5">
-        {run.rest.length > 0 ? (
-          <button onClick={() => setMore((m) => !m)} className="flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink">
-            후보 {run.rest.length}
-            <IconChevronDown className={cn("size-4 transition", more && "rotate-180")} />
-          </button>
-        ) : (
-          <span />
-        )}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-3.5">
+        <span className={cn("text-[13px]", warn ? "text-amber-700 dark:text-amber-300" : "text-ink-3")}>
+          {warn || `기준: 원문 2~3편 · 다른 발행처 1편 이상 — 지금 ${run.picked.length}편 · 발행처 ${sites.size}곳`}
+        </span>
         {footer}
       </div>
-      {more && (
-        <div className="border-t border-line bg-soft/40">
-          {run.rest.map((p) => (
-            <Row key={p.source} p={p} onSource={onSource}>
-              {canSwap && (
-                <>
-                  <IconBtn label="중심으로" onClick={() => swap([p.source, ...now])}>
-                    <IconCrown className="size-4" />
-                  </IconBtn>
-                  <IconBtn label="넣기" onClick={() => swap([...now, p.source])}>
-                    <IconPlus className="size-4" />
-                  </IconBtn>
-                </>
-              )}
-            </Row>
-          ))}
+      {run.rest.length > 0 && (
+        <div className="border-t border-line">
+          <button onClick={() => setMore((m) => !m)} className="flex w-full items-center gap-1.5 px-5 py-3 text-left text-sm text-ink-2 hover:text-ink">
+            바꿔 넣을 수 있는 원문 {run.rest.length}
+            <IconChevronDown className={cn("size-4 transition", more && "rotate-180")} />
+          </button>
+          {more && (
+            <div className="bg-soft/40">
+              {order.map((g) => (
+                <div key={g}>
+                  <p className="border-t border-line px-5 pt-3 pb-1 text-[12.5px] font-medium text-ink-3">{g}</p>
+                  {groups[g].map((p) => (
+                    <Row key={p.source} p={p} onSource={onSource}>
+                      {canSwap && (
+                        <>
+                          <TextBtn onClick={() => swap([p.source, ...now])}>
+                            <IconCrown className="size-3.5" /> 중심으로
+                          </TextBtn>
+                          <TextBtn onClick={() => swap([...now, p.source])}>
+                            <IconPlus className="size-3.5" /> 넣기
+                          </TextBtn>
+                        </>
+                      )}
+                    </Row>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -299,7 +333,7 @@ export function PicksCard({
 export function Row({ p, first, onSource, children }: { p: MineRow; first?: boolean; onSource: (p: string) => void; children?: React.ReactNode }) {
   const site = p.source.split("/")[0];
   return (
-    <div className="group flex gap-4 border-t border-line px-5 py-4 first:border-t-0">
+    <div className="flex gap-4 border-t border-line px-5 py-4 first:border-t-0">
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           {p.kind !== "후보" && (
@@ -308,18 +342,35 @@ export function Row({ p, first, onSource, children }: { p: MineRow; first?: bool
           {p.side === "반대편" && <Chip className="border-amber-400/40 bg-amber-500/10 text-amber-800 dark:text-amber-200">반대편</Chip>}
           <button onClick={() => onSource(p.path)} className="flex items-center gap-1.5 text-xs text-ink-3 hover:text-ink">
             <SiteIcon site={site} className="size-3.5" />
-            {p.source} · {p.who}
+            {p.site || p.source}
+            {p.who && ` · ${p.who}`}
           </button>
         </div>
         <p className="mt-2 text-[15px] leading-relaxed text-ink">{p.role}</p>
-        {p.out ? (
+        {p.use ? (
+          <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-2">
+            <span className="text-ink-3">가져올 사실 · </span>
+            {p.use}
+          </p>
+        ) : p.out ? (
           <p className="mt-1 text-[13.5px] leading-relaxed text-ink-3">{p.out}</p>
         ) : (
           p.note && <p className="mt-1 line-clamp-2 text-[13.5px] leading-relaxed text-ink-3">{p.note}</p>
         )}
       </div>
-      {children && <div className="flex shrink-0 items-start gap-1 opacity-0 transition group-hover:opacity-100">{children}</div>}
+      {children && <div className="flex shrink-0 flex-col items-end gap-1.5">{children}</div>}
     </div>
+  );
+}
+
+function TextBtn({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-1 whitespace-nowrap rounded-full border border-line px-3 py-1 text-[12.5px] text-ink-2 transition hover:bg-soft hover:text-ink"
+    >
+      {children}
+    </button>
   );
 }
 

@@ -376,12 +376,26 @@ def mine_state(jobs):
             if p_.get("source"):
                 info[p_["source"]] = {**info.get(p_["source"], {}), "role": p_.get("role", ""), "use": p_.get("use", "")}
         why_out = {x["source"]: x.get("why", "") for x in picks.get("rest", [])}
+        opt_msgs = [o.get("message", "") for o in json.loads(read(d / "options.json") or "{}").get("options", [])]
+
+        def group(s):
+            """바꿔 넣을 원문이 어디서 왔는지(2026-10-22 고른 원문 화면) — 확인에서 뺀 원문 · 다른 옵션의 원문(그 옵션 메시지)."""
+            w = info.get(s, {}).get("role", "")
+            if s in why_out or w.startswith("원문 확인에서 뺌"):
+                return "확인에서 뺀 원문"
+            m = re.match(r"옵션 (\d+):", w)
+            if m:
+                n = int(m.group(1))
+                return f"옵션 {n} · {opt_msgs[n - 1]}" if 1 <= n <= len(opt_msgs) else f"옵션 {n}"
+            return "후보"
 
         def row(s, kind):
-            a_, dt, u = W.src_meta(s) if (SRC / W.rel(s)).is_file() else ("", "", "")
+            ok_ = (SRC / W.rel(s)).is_file()
+            a_, dt, u = W.src_meta(s) if ok_ else ("", "", "")
+            role = info.get(s, {}).get("role", "")
             return {"source": s, "path": W.rel(s), "who": a_, "url": u, "kind": kind, "note": cs.get(s, {}).get("있었던 일", ""),
-                    "role": info.get(s, {}).get("role", ""), "use": info.get(s, {}).get("use", ""), "side": info.get(s, {}).get("side", ""),
-                    "out": why_out.get(s, "")}
+                    "role": re.sub(r"^옵션 \d+: ", "", role), "use": info.get(s, {}).get("use", ""), "side": info.get(s, {}).get("side", ""),
+                    "out": why_out.get(s, ""), "site": W.site_name(s) if ok_ else "", "group": group(s) if kind == "후보" else ""}
         picked = [row(s, "중심" if i == 0 else "받침") for i, s in enumerate(now)]
         rest = [row(c["source"], "후보") for c in picks.get("_candidates", []) if c["source"] not in now]
         status = j["status"] if j else ("done" if has_brief or (d / "options.json").exists() else "lost")
@@ -404,7 +418,9 @@ def mine_state(jobs):
                     p_["note"] = cs.get(p_["source"], {}).get("있었던 일", "")
         out.append({"id": k, "turns": ts, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
                     "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
-                    "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime})
+                    "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime,
+                    # 원문 확인 결과(글 옵션 방식, my_topic.take) — 고른 옵션 번호 · Claude의 주의 메모 · 뺀 원문 수
+                    "check": {"option": picks.get("option"), "note": picks.get("note", ""), "dropped": len(picks.get("rest", []))} if picks.get("option") else None})
     return out
 
 

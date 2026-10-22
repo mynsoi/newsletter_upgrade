@@ -112,6 +112,9 @@ export type MineRow = {
   use: string;
   side: string;
   out: string;
+  /** 발행처 이름 · 바꿔 넣을 원문이 어디서 왔는지(다른 옵션 메시지 / 확인에서 뺀 원문) */
+  site?: string;
+  group?: string;
 };
 export type MinePick = { source: string; role: string; who?: string; path?: string; note?: string };
 /** 글 옵션(2026-10-22) — 이 글이 말할 것 한 문장 + 중심 1 + 받침 1~2. 하나를 고르면(mine-take) 원문을 확인하고 제목으로 */
@@ -133,6 +136,8 @@ export type MineRun = {
   rest: MineRow[];
   article: string;
   at: number;
+  /** 원문 확인 결과(글 옵션 방식) — 고른 옵션 번호 · Claude의 주의 메모 · 뺀 원문 수 */
+  check?: { option: number; note: string; dropped: number } | null;
 };
 
 export type State = {
