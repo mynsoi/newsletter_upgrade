@@ -353,7 +353,7 @@ def mine_state(jobs):
     """내 주제로 쓰기(scripts/my_topic.py) — 메인 화면 채팅이 읽는다. 요청 · 올린 문서 · 진행 단계 · 고른 원문 · 나머지 후보."""
     if not MINE.exists():
         return []
-    cs = W.cards()
+    cs = W.all_cards()  # 자동 카드(main)까지 — W.cards()는 옛 astra 카드라 이제 비어 있다
     last = {}
     for j in sorted(jobs, key=lambda j: j["started"]):
         if j["kind"] == "mine":
@@ -518,7 +518,7 @@ def act_mine_swap(a):
     """고른 원문 바꿔 끼우기 — 첫째가 중심. 설정만 다시 쓴다(LLM 없음, 제목·대상 독자·분량은 그대로)."""
     k = safe_id(a.get("id", ""))
     srcs = a.get("sources") or []
-    cs = W.cards()
+    cs = W.all_cards()
     if not (MINE / k / "picks.json").exists() or not isinstance(srcs, list) or not srcs or any(s not in cs for s in srcs):
         raise ValueError("잘못된 원문")
     if busy(k, ("mine", "write")):
