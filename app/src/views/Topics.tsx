@@ -118,14 +118,22 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             ))}
           </span>
           <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
-            <Chip
-              className="bg-page/70 px-2.5 tabular-nums whitespace-nowrap text-ink-2 backdrop-blur"
-              title={`사례 ${t.sources.length} · 발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
+            {/* 발행처 · 사례 · 최근 — 3칸, 칸마다 이름(작게) 위 값(굵게) (2026-10-22). 올리면 발행처 이름과 전체 날짜 */}
+            <span
+              title={`발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
+              className="flex divide-x divide-line overflow-hidden rounded-xl border border-line bg-page/70 backdrop-blur"
             >
-              사례 {t.sources.length}
-              {pubs(t) < t.sources.length && ` · 발행처 ${pubs(t)}곳`}
-              {latest(t) && ` · ${latest(t).slice(5).replace("-", ".")}`}
-            </Chip>
+              {[
+                ["발행처", `${pubs(t)}곳`],
+                ["사례", `${t.sources.length}편`],
+                ["최근", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
+              ].map(([k, v]) => (
+                <span key={k} className="flex min-w-[3.25rem] flex-col items-center px-2.5 py-1 leading-tight">
+                  <span className="text-[10px] text-ink-3">{k}</span>
+                  <span className="text-[13px] font-semibold tabular-nums text-ink">{v}</span>
+                </span>
+              ))}
+            </span>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
             {t.status !== "쓸 수 있음" && <Chip className="bg-page/70 text-ink">{t.status}</Chip>}
           </span>
