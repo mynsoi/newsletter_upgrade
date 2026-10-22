@@ -5,8 +5,8 @@ title: AI로 일이 바뀌는 것보다, 바뀐 일과 평가 기준을 아무�
 verdict: 쓸 만함
 audience: 팀장급·전 직원
 center: fastcompany-worklife/0022
-status: 쓸 수 있음
-used_in: []
+status: 진행 중
+used_in: [briefs/m-20261022-161632.json]
 timestamp: 2026-10-22
 ---
 
