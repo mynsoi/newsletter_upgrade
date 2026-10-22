@@ -372,6 +372,9 @@ def mine_state(jobs):
         b = json.loads(read(ROOT / "briefs" / f"{k}.json") or "{}")
         now = [W.key(s[0]) for s in b.get("sources", []) if s[0].startswith("originals/")]  # 바꿔 끼운 뒤의 지금 원문(첫째가 중심)
         info = {c["source"]: {"role": c.get("why", ""), "use": "", "side": c.get("side", "")} for c in picks.get("_candidates", [])}
+        for s_, v in picks.get("_verified", {}).items():  # 넣기 전에 원문을 확인한 추천 원문 — 맡는 몫·가져올 사실
+            info[s_] = {**info.get(s_, {}), "role": v.get("role", ""), "use": v.get("use", "")}
+        cand = {c["source"]: c for c in picks.get("_candidates", [])}
         for p_ in [picks.get("center") or {}] + picks.get("support", []):
             if p_.get("source"):
                 info[p_["source"]] = {**info.get(p_["source"], {}), "role": p_.get("role", ""), "use": p_.get("use", "")}
@@ -379,9 +382,11 @@ def mine_state(jobs):
         opt_msgs = [o.get("message", "") for o in json.loads(read(d / "options.json") or "{}").get("options", [])]
 
         def group(s):
-            """바꿔 넣을 원문이 어디서 왔는지(2026-10-22 고른 원문 화면) — 확인에서 뺀 원문 · 다른 옵션의 원문(그 옵션 메시지)."""
+            """바꿔 넣을 원문이 어디서 왔는지(2026-10-22 고른 원문 화면) — 추천 원문 · 확인에서 뺀 원문 · (예전 글) 다른 옵션의 원문."""
             w = info.get(s, {}).get("role", "")
-            if s in why_out or w.startswith("원문 확인에서 뺌"):
+            if cand.get(s, {}).get("rec"):
+                return "추천 원문"
+            if s in why_out or cand.get(s, {}).get("dropped") or w.startswith(("원문 확인에서 뺌", "넣기 전 원문 확인")):
                 return "확인에서 뺀 원문"
             m = re.match(r"옵션 (\d+):", w)
             if m:
@@ -561,6 +566,14 @@ def act_mine_swap(a):
         raise ValueError("잘못된 원문")
     if busy(k, ("mine", "write")):
         raise ValueError("이 글에서 작업이 도는 중")
+    # 추천 원문(카드만 보고 고른 것)을 넣으면 그 원문을 끝까지 읽고 확인한 뒤 넣는다(2026-10-22) — Claude, 20~30초
+    picks = json.loads(read(MINE / k / "picks.json") or "{}")
+    rec = {c["source"] for c in picks.get("_candidates", []) if c.get("rec")}
+    new = [s for s in dict.fromkeys(srcs) if s in rec and s not in picks.get("_verified", {})]
+    if len(new) > 1:
+        raise ValueError("추천 원문은 한 편씩 넣어 주세요")
+    if new:
+        return start("mine", k, PY + ["scripts/my_topic.py", "--add", k, new[0], *(["--center"] if srcs[0] == new[0] else [])])
     r = subprocess.run(PY + ["scripts/my_topic.py", "--brief", k, *dict.fromkeys(srcs)], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     if r.returncode:
         raise ValueError((r.stderr or r.stdout)[-500:])
@@ -1089,15 +1102,20 @@ def act_wiki_lint(_):
 
 
 def act_wiki_pick(a):
-    """주제 카드를 고르면 그 자리에서 글 설정을 만든다 — 주제의 주장·원문·대상 독자, 미리 뽑아 둔 제목 후보가 제목 탭에 바로 뜬다.
-    (2026-10-11 개편: 카드가 이미 원문을 읽었으므로 깊게 읽기는 없다. 제목 후보가 없는 주제만 제목 단계를 돌린다)"""
+    """주제 카드의 '이 주제로' — 2026-10-22부터 '내 주제로 쓰기'와 같은 원문 확인 단계를 거친다(my_topic.py --topic).
+    주제를 고른 글 옵션 하나로 보고: 원문 최대 3편을 끝까지 읽고 확인 + 추천 원문(주제의 나머지 사례 먼저) → 고른 원문 화면 → 제목.
+    미리 지어 둔 제목 후보는 제목 탭에 그대로 뜬다. 주제 지도 기록(진행 중 · 쓴 글)은 확인이 끝날 때 남긴다."""
     page = str(a.get("page", ""))
     f = (ROOT / page).resolve()
     if not re.match(r"^wiki/주제/[^/]+\.md$", page) or not inside(f, W.TOPICS) or not f.is_file():
         raise ValueError("잘못된 주제 페이지")
-    k = W.claim(page)
-    if not (ROOT / "runs" / "titles0" / k / "astra.md").exists():
-        act_titles({"article": k})
+    k = safe_id("m-" + time.strftime("%Y%m%d-%H%M%S"))
+    d = MINE / k
+    if d.exists():
+        raise ValueError("방금 고른 주제가 있음 — 잠시 뒤 다시")
+    d.mkdir(parents=True)
+    (d / "request.txt").write_text((W.read_topic(f)["thesis"] or W.read_topic(f)["title"]).strip() + "\n", encoding="utf-8")
+    start("mine", k, PY + ["scripts/my_topic.py", "--topic", page, "--id", k])
     return {"article": k}
 
 

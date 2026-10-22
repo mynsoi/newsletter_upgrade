@@ -121,7 +121,7 @@ export type MinePick = { source: string; role: string; who?: string; path?: stri
 export type MineOption = { message: string; center: MinePick; support: MinePick[]; why: string; audience?: string };
 export type MineTurn =
   | { role: "mentor"; text: string; docs: string[]; at: number }
-  | { role: "ai"; options: MineOption[]; at: number }
+  | { role: "ai"; options: MineOption[]; at: number; from_wiki?: string }
   | { role: "ai"; center: MinePick; support: MinePick[]; n_candidates: number; option?: number; at: number };
 export type MineRun = {
   id: string;
@@ -130,7 +130,7 @@ export type MineRun = {
   docs: string[];
   target: string;
   status: "running" | "done" | "failed" | "lost";
-  stage: "문서" | "후보" | "고르기" | "옵션" | "옵션 고르기" | "확인" | "제목" | "끝";
+  stage: "문서" | "후보" | "고르기" | "옵션" | "옵션 고르기" | "확인" | "넣기 확인" | "제목" | "끝";
   job: string;
   picked: MineRow[];
   rest: MineRow[];

@@ -247,7 +247,7 @@ export function PicksCard({
   onSource: (p: string) => void;
   refresh: () => void;
 }) {
-  const [more, setMore] = useState(false);
+  const [more, setMore] = useState(true);
   const now = run.picked.map((p) => p.source);
   const swap = (next: string[]) => act("mine-swap", { id: run.id, sources: next }).then(refresh);
   const sites = new Set(run.picked.map((p) => p.site || p.source.split("/")[0]));
@@ -261,7 +261,8 @@ export function PicksCard({
           : "";
   const groups: Record<string, MineRow[]> = {};
   for (const p of run.rest) (groups[p.group || "후보"] ??= []).push(p);
-  const order = Object.keys(groups).sort((a, b) => (a === "확인에서 뺀 원문" ? 1 : b === "확인에서 뺀 원문" ? -1 : a.localeCompare(b)));
+  const rank = (g: string) => (g === "추천 원문" ? 0 : g === "확인에서 뺀 원문" ? 2 : 1);
+  const order = Object.keys(groups).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
   const ck = run.check;
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-panel-solid">
@@ -298,14 +299,17 @@ export function PicksCard({
       {run.rest.length > 0 && (
         <div className="border-t border-line">
           <button onClick={() => setMore((m) => !m)} className="flex w-full items-center gap-1.5 px-5 py-3 text-left text-sm text-ink-2 hover:text-ink">
-            바꿔 넣을 수 있는 원문 {run.rest.length}
+            추천·바꿔 넣을 수 있는 원문 {run.rest.length}
             <IconChevronDown className={cn("size-4 transition", more && "rotate-180")} />
           </button>
           {more && (
             <div className="bg-soft/40">
               {order.map((g) => (
                 <div key={g}>
-                  <p className="border-t border-line px-5 pt-3 pb-1 text-[12.5px] font-medium text-ink-3">{g}</p>
+                  <p className="border-t border-line px-5 pt-3 pb-1 text-[12.5px] font-medium text-ink-3">
+                    {g}
+                    {GROUP_NOTE[g] && <span className="ml-1.5 font-normal">— {GROUP_NOTE[g]}</span>}
+                  </p>
                   {groups[g].map((p) => (
                     <Row key={p.source} p={p} onSource={onSource}>
                       {canSwap && (
@@ -329,6 +333,11 @@ export function PicksCard({
     </div>
   );
 }
+
+const GROUP_NOTE: Record<string, string> = {
+  "추천 원문": "고른 메시지로 다시 검색한 카드에서 Claude가 골랐습니다(카드만 보고). 넣으면 그 원문을 끝까지 읽고 확인한 뒤 들어갑니다(약 30초)",
+  "확인에서 뺀 원문": "원문을 끝까지 읽어 보니 이 글을 받치지 못해 뺐습니다",
+};
 
 export function Row({ p, first, onSource, children }: { p: MineRow; first?: boolean; onSource: (p: string) => void; children?: React.ReactNode }) {
   const site = p.source.split("/")[0];

@@ -29,7 +29,7 @@ const ro = (n: number) => ([3, 6, 0].includes(n % 10) ? "으로" : "로");
 
 const KINDS = ["mine", "titles", "write", "revise", "shorten", "images", "inline", "wiki-pick"];
 const jobOf = (jobs: Job[], id: string) => jobs.find((j) => j.status === "running" && j.target === id && KINDS.includes(j.kind));
-const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 옵션: "카드 보고 글 옵션 짜는 중", 확인: "고른 원문 끝까지 읽는 중", 제목: "제목 후보 짓는 중" };
+const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 옵션: "카드 보고 글 옵션 짜는 중", 확인: "원문 끝까지 읽고 확인 · 추천 고르는 중", "넣기 확인": "추천 원문 끝까지 읽는 중", 제목: "제목 후보 짓는 중" };
 
 function jobText(j: Job, a?: A, run?: MineRun): string[] {
   if (j.kind === "mine") return [MINE_TEXT[run?.stage ?? ""] ?? "원문 고르는 중"];
@@ -171,7 +171,7 @@ function Timeline({
         const next = run.turns[i + 1];
         const chosen = next && next.role === "ai" && "center" in next ? next.option : undefined;
         out.push(
-          <Ai key={`o${i}`} label={<>글 옵션 {t.options.length}개{chosen ? "" : " · 하나를 고르면 원문을 끝까지 읽고 확인합니다"}</>}>
+          <Ai key={`o${i}`} label={t.from_wiki ? "주제 지도에서 고른 주제" : <>글 옵션 {t.options.length}개{chosen ? "" : " · 하나를 고르면 원문을 끝까지 읽고 확인합니다"}</>}>
             <OptionsCard run={run} options={t.options} live={i === lastAi && run.status !== "running" && !started} chosen={chosen} onSource={onSource} refresh={refresh} />
           </Ai>
         );

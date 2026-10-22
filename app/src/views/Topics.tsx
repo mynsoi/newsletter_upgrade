@@ -82,7 +82,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
     setPending(t.page);
     try {
       const r = await act<{ article: string }>("wiki-pick", { page: t.page });
-      go(`#/a/${r.article}/title`);
+      go(`#/a/${r.article}`); // 원문 확인부터(2026-10-22) — 확인이 끝나면 고른 원문 화면 → 제목
     } finally {
       setPending("");
     }
