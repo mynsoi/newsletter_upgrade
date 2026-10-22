@@ -106,7 +106,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       dim: tab === "뺌",
       head: (
         <div
-          className="relative flex h-24 items-end justify-between overflow-hidden px-6 pb-4"
+          className="relative flex min-h-[4.5rem] items-end justify-between gap-3 overflow-hidden px-6 pt-4 pb-4" // 위아래 같은 여백(고정 높이 h-24는 칩 위가 비었다)
           style={{
             background: `radial-gradient(120% 140% at 0% 0%, hsl(${hue(t.title)} 70% 45% / .45), transparent 60%), radial-gradient(120% 140% at 100% 100%, hsl(${(hue(t.title) + 70) % 360} 70% 45% / .3), transparent 55%)`,
           }}
