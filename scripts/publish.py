@@ -60,7 +60,7 @@ def front(text):
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if not m:
         return {}
-    return dict(re.findall(r"^(\w+):[ 	]*'?(.*?)'?[ 	]*$", m.group(1), re.M))  # [ 	]* — 빈 칸이 다음 줄을 값으로 읽지 않게
+    return dict(re.findall(r"^(\w+):[ \t]*'?(.*?)'?[ \t]*$", m.group(1), re.M))  # [ \t]* — 빈 칸이 다음 줄을 값으로 읽지 않게
 
 
 # ---------- 칼럼 읽기 ----------
