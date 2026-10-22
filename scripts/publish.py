@@ -95,8 +95,9 @@ def load(k):
         src = ROOT / "sources" / path
         fm = front(src.read_text(encoding="utf-8")) if src.is_file() else {}
         # 참고자료에 원문 제목도(2026-10-22) — '제목 (사이트, 작성자, 날짜)'. 제목 끝의 ' | 사이트명'은 뗀다
-        title = re.sub(r"\s+[|｜]\s+[^|｜]{1,40}$", "", fm.get("title", "")).strip()
-        refs.append({"label": f"{title} ({label})" if title else label, "url": fm.get("url", "")})
+        # src_title — 칼럼 제목(title)과 이름이 겹치면 칼럼 제목이 마지막 원문 제목으로 덮였다(2026-10-22 발행 미리보기 제목 버그)
+        src_title = re.sub(r"\s+[|｜]\s+[^|｜]{1,40}$", "", fm.get("title", "")).strip()
+        refs.append({"label": f"{src_title} ({label})" if src_title else label, "url": fm.get("url", "")})
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
             "confirmed": conf, "pub_date": date.today().isoformat()}
