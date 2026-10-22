@@ -719,14 +719,16 @@ sources:
   status: active
   list_url: https://www.microsoft.com/en-us/worklab
   link_pattern: href="?(/en-us/worklab/(?:[a-z0-9\-]+/)?[a-z0-9\-]{8,})
-  link_exclude: /(articles|podcasts|newsletter|work-trend-index|topics|home)$
+  # 허브·분류 페이지(글 목록·주제 모음)는 글이 아니다 — 2026-10-22 확인한 8곳을 더 뺀다
+  link_exclude: /(articles|podcasts|newsletter|work-trend-index|topics|home|ai-at-work|collaboration|innovation|leadership|manifest|performance|wellbeing|frontier-firm-resources)$
   homepage: https://www.microsoft.com/en-us/worklab
   lang: en
   allow_feed_discovery: false
   inflow_alert_days: 35
-  # 페이지에 발행일이 없다(메타·JSON·본문 모두). 사이트맵 lastmod는 수정일이라 쓰지 않는다 —
-  # 발행일 소급(backfill_pubdate.py) 대상에서 뺀다. 토픽 신호엔 안 잡히고 증거 검색엔 쓰인다
-  no_pubdate: true
+  # 발행일 메타·JSON은 없고, 본문 첫머리(부제·필자 줄 바로 뒤)에 'May 21, 2026' 글자만 있다 — 글자 날짜 인식을 켠다.
+  # 2026-10-22: 발행일 빈 36편 중 글 28편 모두 이 위치에서 날짜가 나왔다(나머지 8편은 위 허브 페이지). 예전 no_pubdate: true는 뺐다.
+  # 사이트맵 lastmod는 수정일이라 여전히 쓰지 않는다.
+  date_from_text: true
   note: '2026-08-24 검증 실패(RSS 미제공) — NL 재시도 / [자동검증 2026-08-27] API·RSS 미발견: RSS 미발견
     (시도 6건, 마지막: https://www.microsoft.com/index.xml → HTTP 404) / 2026-09-01 probe
     A(글 링크가 페이지 데이터에 정적 포함) → html 전환, NL 재시도 대체'
