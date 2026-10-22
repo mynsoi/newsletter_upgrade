@@ -23,7 +23,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import wiki as W  # noqa: E402
 
-TOP = int(os.environ.get("CARD_SEARCH_TOP", "30"))   # 의미 검색으로 넘길 문서 수
+# 의미 검색으로 넘길 문서 수. 2026-10-22 시험(주제 25개의 사례 원문 84편이 주제 문장 검색 몇 위에 나오나):
+# 30위 안 31편(37%) · 100위 안 50편(60%) → 100으로. 주제 문장을 구체적 장면 5줄로 늘려 함께 검색하는 방식은
+# 30위 23편 · 100위 45편으로 오히려 낮아 넣지 않았다(지어낸 장면이 엉뚱한 사례 쪽으로 끈다).
+TOP = int(os.environ.get("CARD_SEARCH_TOP", "100"))
 KEYWORD_TOP = 10                                       # 낱말 검색으로 더할 문서 수(의미 검색에 없던 것만)
 ALL_CAP = 200                                          # 카드 임베딩이 없을 때 넘길 카드 상한
 EMBED_MODEL, EMBED_DIM = "text-embedding-3-small", 1536
