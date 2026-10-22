@@ -52,6 +52,7 @@ def prompt(text):
 
 - 후보끼리 장면·구도가 서로 다르게
 - 글이 실제로 말하는 장면이나 생각에서 출발
+- 3:2 가로 한 장면 구도로. 'newsletter header'·'banner'·'wide'·'panoramic' 같은 말과 여러 칸 띠 그림은 쓰지 않음 — 그림 모델이 3:1 띠 배너를 그려 버린다
 {STYLE_RULE}
 - 그림 안에 글자는 넣지 않음
 
@@ -128,8 +129,12 @@ def draw(d, i, it):
     with open(d / f"{i:02d}.log", "w", encoding="utf-8") as log:
         # 본문 그림은 16:9(astra가 설명에 와이드로 쓰고 그림 서버도 그 비율로 그린다 — 3:2 검사에 걸려 전부 버려졌다, 2026-10-10)
         size, ratio, tol = ("2048x1152", "16:9", "0.05") if d.name.startswith("inline-") else ("1536x1024", "3:2", "0.2")
-        frame = " Compose it as one single scene in a standard 16:9 widescreen frame, not a panoramic strip or multi-panel sequence." if d.name.startswith("inline-") else ""
-        full = f'{STYLE["prefix"]} {it["prompt"]}{frame} {STYLE["suffix"]}'
+        # 비율을 그림 모델에 분명히 — 설명에 'wide newsletter header'가 들어가면 3:1 배너가 나와 비율 검사에서 전부 버려졌다(2026-10-22)
+        frame = (" Compose it as one single scene in a standard 16:9 widescreen frame, not a panoramic strip or multi-panel sequence."
+                 if d.name.startswith("inline-") else
+                 " Compose it as one single scene in a standard 3:2 landscape frame, not a wide banner, header strip or panorama.")
+        body = re.sub(r"\b(?:an? )?(?:wide |panoramic )?(?:newsletter )?(?:header|banner)(?: image| illustration| scene)?\b", "an illustration", it["prompt"], flags=re.I)
+        full = f'{STYLE["prefix"]} {body}{frame} {STYLE["suffix"]}'
         subprocess.run(["node", GEN, "--prompt", full, "--output", str(png), "--size", size, "--ratio", ratio,
                         "--tolerance", tol, "--model", "gpt-6-astra",
                         # 한 장 40초대지만 같은 계정의 요청은 서버가 차례로 처리한다 — 6장 동시면 90초(gti 기본)를 넘겨
