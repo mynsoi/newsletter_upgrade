@@ -279,12 +279,51 @@ function Timeline({
     );
   });
 
-  // 4. 그림 · 확정 — 과정 3 뒤
-  if (a && a.kind === "brief" && a.steps.length >= 3) {
-    out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
-    out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
+  // 4. 원고 → 그림 → 확정 — 과정 3 뒤, 한 단계씩(2026-10-22: 그림·확정·피드백이 한꺼번에 떠서 다음에 할 일이 안 보였다).
+  //    확정할 때 고른 그림까지 원고 파일에 굳히므로 그림이 확정보다 먼저. 원고를 정한 뒤 과정이 늘거나 줄면(피드백·편집·절반·다시 쓰기) 원고 단계로 돌아간다.
+  const tp = a?.textPick && a.textPick.of === a.steps.length && a.textPick.n <= a.steps.length ? a.textPick.n : 0;
+  if (a && a.kind === "brief" && a.steps.length >= 3 && !(job && ["write", "revise", "shorten"].includes(job.kind))) {
+    if (a.confirmed) {
+      out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
+      out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
+    } else if (!tp) {
+      out.push(<Ai key="text" label="원고"><TextPickCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
+    } else if (!a.imagesDone) {
+      out.push(
+        <Ai key="img" label={<>그림 · 과정 {tp} 원고</>}>
+          <div className="space-y-2.5">
+            <ImagesCard a={a} state={state} refresh={refresh} />
+            <StageNav
+              back="원고 다시 고르기"
+              onBack={() => act("text-pick", { article: a.id, n: 0 }).then(refresh)}
+              next={a.hero || a.inlinePicked.length ? "그림 정함 · 확정으로" : "그림 없이 확정으로"}
+              onNext={() => act("text-pick", { article: a.id, n: tp, images_done: true }).then(refresh)}
+            />
+          </div>
+        </Ai>
+      );
+    } else {
+      out.push(
+        <Ai key="confirm" label="확정">
+          <div className="rounded-2xl border border-line bg-panel-solid px-5 py-4">
+            <p className="text-[15px] leading-relaxed text-ink">
+              과정 {tp} 원고 · 머리 그림 {a.hero ? "있음" : "없음"} · 본문 그림 {a.inlinePicked.length}개
+            </p>
+            <p className="mt-1 text-[13px] text-ink-3">확정하면 이 원고와 그림으로 글 파일을 만들고, 발행 미리보기로 이어집니다.</p>
+            <div className="mt-3">
+              <StageNav
+                back="그림으로 돌아가기"
+                onBack={() => act("text-pick", { article: a.id, n: tp, images_done: false }).then(refresh)}
+                next={`과정 ${tp}${ro(tp)} 확정`}
+                onNext={() => act("confirm", { article: a.id, step: tp }).then(refresh)}
+              />
+            </div>
+          </div>
+        </Ai>
+      );
+    }
   }
-  if (a && a.kind === "brief" && started && !a.confirmed && !job) out.push(<Restart key="restart" a={a} refresh={refresh} />);
+  if (a && a.kind === "brief" && started && !a.confirmed && !tp && !job) out.push(<Restart key="restart" a={a} refresh={refresh} />);
 
   // 돌고 있는 작업 — 보낸 말이 있으면 먼저(제목·피드백)
   if (job) {
@@ -465,6 +504,59 @@ function Thumb({ src, on, ratio, name, chip, onClick }: { src: string; on: boole
   );
 }
 
+/** 원고 단계 — 피드백으로 더 고치거나, 마음에 드는 과정을 원고로 정해 그림 단계로 넘어간다 */
+function TextPickCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; setSel: (n: number | null) => void; refresh: () => void }) {
+  const n = sel ?? a.steps.length;
+  return (
+    <div className="rounded-2xl border border-line bg-panel-solid px-5 py-4">
+      <p className="text-[14px] leading-relaxed text-ink-2">
+        고칠 점이 있으면 아래 칸에 피드백을 보내세요 — 다음 과정이 생깁니다. 마음에 들면 그 과정을 원고로 정하고 그림으로 넘어갑니다.
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        {a.steps.map((s) => (
+          <button
+            key={s.n}
+            onClick={() => setSel(s.n)}
+            className={cn(
+              "rounded-full border px-3 py-1 text-sm tabular-nums transition",
+              s.n === n ? "border-ink bg-ink text-page" : "border-line text-ink-2 hover:text-ink"
+            )}
+          >
+            과정 {s.n}
+          </button>
+        ))}
+      </div>
+      <div className="mt-3 flex justify-end">
+        <button
+          onClick={() => act("text-pick", { article: a.id, n }).then(refresh)}
+          className="flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
+        >
+          과정 {n}{ro(n)} 원고 정하기
+          <IconArrowRight className="size-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function StageNav({ back, onBack, next, onNext }: { back: string; onBack: () => void; next: string; onNext: () => void }) {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-ink-3 hover:text-ink">
+        <IconArrowBackUp className="size-4" />
+        {back}
+      </button>
+      <button
+        onClick={onNext}
+        className="flex items-center gap-2 rounded-full border border-emerald-400/50 px-4 py-2 text-sm text-ink transition hover:bg-emerald-500/10"
+      >
+        {next}
+        <IconArrowRight className="size-4" />
+      </button>
+    </div>
+  );
+}
+
 /** 확정 — 확정할 과정을 고른다(멘토 2026-10-11: "과정은 내가 원하는 과정을 선택할수있도록도 해줘야할듯. 확정이 강요됨").
  *  과정 칩을 누르면 오른쪽 '지금 글'에 그 과정이 뜨고, 확정은 원할 때만. 확정한 뒤에도 다른 과정으로 바꿀 수 있다. */
 function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; setSel: (n: number | null) => void; refresh: () => void }) {
@@ -584,11 +676,13 @@ function Now({
       setSaving(false);
     }
   };
-  const confirm = a && s && a.kind === "brief" && !a.confirmed && !writing && (
-    <SmallBtn strong={v === "미리보기"} onClick={() => act("confirm", { article: a.id, step: s.n }).then(refresh)}>
+  // 오른쪽 '지금 글'에서는 확정 대신 '원고로 정하기'만 — 확정은 그림 단계를 거쳐 왼쪽 확정 카드에서(2026-10-22)
+  const picked = a?.textPick && a.textPick.of === a.steps.length ? a.textPick.n : 0;
+  const confirm = a && s && a.kind === "brief" && !a.confirmed && !writing && a.steps.length >= 3 && picked !== s.n && (
+    <SmallBtn strong={v === "미리보기"} onClick={() => act("text-pick", { article: a.id, n: s.n }).then(refresh)}>
       <IconCheck className="size-3.5" />
       과정 {s.n}
-      {ro(s.n)} 확정
+      {ro(s.n)} 원고 정하기
     </SmallBtn>
   );
   return (

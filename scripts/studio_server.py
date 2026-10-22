@@ -210,7 +210,8 @@ def article_from_brief(bp):
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
             "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": b.get("published"),
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
-            "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime}
+            "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime,
+            "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done"))}
 
 
 def article_from_process(pp):
@@ -885,6 +886,23 @@ def act_hero(a):
     return {"hero": src}
 
 
+def act_text_pick(a):
+    """원고 → 그림 → 확정 단계(2026-10-22). 원고로 정한 과정과 그때의 과정 수를 적는다 — 그 뒤 피드백·편집·절반·다시 쓰기로
+    과정이 늘거나 줄면 화면이 저절로 '원고' 단계로 돌아간다. n=0이면 원고 고르기로 되돌림. images_done은 그림 단계를 마쳤는지."""
+    k = safe_id(a["article"])
+    art = next(x for x in articles() if x["id"] == k)
+    if art["kind"] != "brief" or art.get("confirmed"):
+        raise ValueError("확정 전 글에서만")
+    n = int(a.get("n", 0))
+    if n:
+        if not 1 <= n <= len(art["steps"]):
+            raise ValueError("잘못된 과정 번호")
+        meta_update(k, text_pick={"n": n, "of": len(art["steps"])}, images_done=bool(a.get("images_done", False)))
+    else:
+        meta_update(k, text_pick=None, images_done=False)
+    return {"ok": True}
+
+
 def act_confirm(a):
     k, n = safe_id(a["article"]), int(a["step"])
     art = next(x for x in articles() if x["id"] == k)
@@ -1110,7 +1128,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
+           "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,

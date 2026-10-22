@@ -53,6 +53,9 @@ export type Article = {
   fromWiki?: string;
   fromMine?: boolean;
   sourcesOk?: boolean;
+  /** 원고 → 그림 → 확정(2026-10-22): 원고로 정한 과정과 그때의 과정 수(늘거나 줄면 원고 단계로 돌아감), 그림 단계를 마쳤는지 */
+  textPick?: { n: number; of: number } | null;
+  imagesDone?: boolean;
   tries?: { n: number; title: string; steps: Step[] }[];
   why?: string;
   at: number;
