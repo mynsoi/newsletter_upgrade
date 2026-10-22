@@ -598,6 +598,45 @@ def claude_key(d, prompt):
     return clean(out, str(d))
 
 
+def judge_missing(api=False, run=None):
+    """판정 채우기(2026-10-22) — 묶기 출력에 판정이 빠진 메시지 주제(verdict 빈 칸)만 골라 판정·이유·대상 독자를 채운다.
+    판정 예시(멘토가 바꾼 판정 포함)를 같이 보낸다. 멘토가 고친 판정이 아니므로 판정 예시에는 쌓지 않는다."""
+    todo = [t for t in topics() if t["status"] == "쓸 수 있음" and t.get("cases") and t["verdict"] not in VERDICTS]
+    if not todo:
+        return 0
+    cs = all_cards()
+    ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "(아직 없음)"
+    blocks = "\n\n".join(
+        f"[{Path(t['page']).stem}] 주제: {t['thesis'] or t['title']}\n"
+        + "\n".join(f"- ({c.get('role') or '받침'}) {site_name(c['key'])} — 글쓴이가 하는 말: {cs.get(c['key'], {}).get('글쓴이가 하는 말', '')} / 있었던 일: {cs.get(c['key'], {}).get('있었던 일', '')}"
+                    for c in t["cases"])
+        for t in todo)
+    prompt = "\n\n".join([
+        f"아래는 {READER} 칼럼의 주제 후보입니다. 주제마다 [판정 예시]의 결을 따라 판정해 주세요.",
+        "주제 = 우리 독자에게 할 핵심 메시지 한 문장 + 받치는 사례. 판정은 쓸 만함 · 보통 · 뺌 중 하나. "
+        "why는 왜 그렇게 판정했는지 한 줄(사례 속 일로), audience는 팀장급·사수급·신입사원·전 직원 중 하나 이상('·'로).",
+        '출력: JSON 하나만. {"verdicts": [{"topic": "<[ ] 안 그대로>", "verdict": "보통", "why": "...", "audience": "전 직원"}]}',
+        ANSWER_ONLY, GUARD,
+        "=== [판정 예시] ===\n" + ex,
+        "=== [판정할 주제] ===\n" + blocks,
+    ])
+    d = run or RUNS / ("judge-" + time.strftime("%Y%m%d-%H%M%S"))
+    raw = (claude_key if api else claude_login)(d, prompt)
+    m = re.search(r"\{.*\}", raw or "", re.S)
+    got = {x.get("topic"): x for x in (json.loads(m.group(0)).get("verdicts", []) if m else [])}
+    done = 0
+    for t in todo:
+        x = got.get(Path(t["page"]).stem)
+        if not x or x.get("verdict") not in VERDICTS:
+            continue
+        t.update({"verdict": x["verdict"], "why": x.get("why", ""), "audience": x.get("audience", "")})
+        write_topic(t, cs)
+        done += 1
+        print(f"판정 채움 {x['verdict']:4} {t['title'][:60]}", flush=True)
+    log([f"- 판정 채움 {done}/{len(todo)} (묶기 출력에 판정이 빠진 주제)"])
+    return done
+
+
 def bundle(api=False):
     """주제 묶기 — 대상(최근 RECENT_MONTHS개월) 카드를 BUNDLE_LIMIT장씩 끝까지 이어서 묶는다(2026-10-21: 버튼 한 번에 끝까지).
     한 번 보낼 때마다 저장·커밋하므로 중간에 멈춰도(계정 한도 등) 묶은 데까지는 남고, 다시 누르면 남은 카드부터 이어 간다.
@@ -611,6 +650,10 @@ def bundle(api=False):
             break
         sent |= got
     if sent:
+        try:
+            judge_missing(api, RUNS / ("bundle-judge-" + time.strftime("%Y%m%d-%H%M%S")))  # 묶기 출력에 판정이 빠진 주제(2026-10-22 7개)
+        except Exception as e:
+            print(f"판정 채우기 건너뜀: {e}", flush=True)
         cs = all_cards()
         try:
             nt_ = fill_titles(topics(), cs, RUNS / ("bundle-titles-" + time.strftime("%Y%m%d-%H%M%S")))  # 쓸 만함 주제의 제목 후보(astra) — 한도에 걸리면 비고, '이 주제로'를 누를 때 제목 단계가 돈다
@@ -802,6 +845,10 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["--ingest"]:
         ingest(a[1:])
+    elif a[:1] == ["--judge"]:  # 판정이 빈 주제만 판정 채우기
+        if judge_missing(api="--api" in a):
+            write_index(topics())
+            commit("주제 지도: 판정 빠진 주제 판정 채움")
     elif a[:1] == ["--bundle"]:
         bundle(api="--api" in a)
     elif a[:1] == ["--import-cards"]:
