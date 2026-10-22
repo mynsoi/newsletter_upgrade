@@ -1,0 +1,101 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 열정 넘치는 조력자를 멀리 하세요 (https://infuture.stibee.com/p/523)
+- title: "열정 넘치는 조력자를 멀리 하세요" [url=https://infuture.stibee.com/p/523]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "열정 넘치는 조력자를 멀리 하세요 2025. 7. 17."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 7월 17일  (No. 509)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "열정 넘치는 조력자를 멀리 하세요"
+  - table:
+    - table:
+      - table: "예전에 케이블에서 방영된 <보이스 코리아 2020>을 무심코 보다가 이 프로그램의 원조인 미국 NBC의 <더 보이스>에 관한 흥미로운 연구를 접했습니다. 뉴욕대학교의 줄리아 허(Julia D. Hur) 교수가 진행한 이 연구는 ‘누가 더 좋은 코치인가’라는 단순한 질문을 넘어 ‘우리는 어떤 기준으로 조력자를 선택하는가’에 대한 통찰을 던집니다.\n\n<더 보이스>는 참가자가 네 명의 코치 앞에서 블라인드 테스트 형식으로 노래를 부르고, 여러 코치가 동시에 \"I Want You\"를 외치면 참가자가 한 명을 선택하는 형식의 프로그램인데요, 참가자들은 어떤 코치를 선택할까요? 연구 결과는 단순했습니다. 참가자들은 코치의 경력이나 실적보다는 ‘자신에게 보이는 열의’에 더 끌렸다고 합니다. 열정을 보이는 코치를 더 선택했던 것이죠.\n\n그러면 열의 넘치는 코치를 선택한 참가자의 성과가 실제로 더 나았을까요? 실험 결과는 그렇지 않았습니다. 가창력 향상을 테스트한 후속 연구에서 실력 있는 코치의 조언을 받은 참가자들은 실력을 크게 향상시켰지만, 열의 넘치는 코치로부터 피드백을 받은 참가자들은 실질적인 향상을 이루지 못했습니다."
+      - table
+  - table:
+    - table:
+      - table: "여기서 중요한 교훈을 얻을 수 있습니다. 여러분이 조력자를 선택하는 기준은 직감이 아니라 데이터와 실적이어야 한다는 점입니다. 호감이나 열정, 긍정성은 일시적인 신뢰를 유발할 수 있지만, 그것이 여러분의 성장을 보장하지는 않습니다.\n\n그렇다면, 어떻게 해야 나에게 진정 도움이 되는 코치 혹은 멘토를 선택할 수 있을까요? 코치나 멘토를 평가할 때, 열의뿐 아니라 경력, 전문성, 실적 등을 항목화하고 그에 대한 가중치와 점수 기준을 미리 정해야 합니다. 열의에 만점을 주더라도 열의가 전체 평가에서 차지하는 비중을 작게 하면 선택의 결과가 바람직하지 않은 방향으로 가긴 어려울 테죠. 물론, 평가 결과가 미리 생각한 사람과 달라졌을 때 ‘조작’하지 않겠다는 자기와의 약속도 중요합니다.\n\n사람은 열의 있는 사람에게 자연스럽게 끌리게 되어 있습니다. 그래서 그 열정이 진정성처럼 느껴지고 ‘나를 도와줄 것 같다’는 착각을 심어주기도 하죠. 하지만 실질적인 도움은 냉정한 전문성과 검증된 역량에서 나옵니다. 트레이너를 고를 때, 배우자를 선택할 때, 심지어 상담사를 찾을 때도 마찬가지입니다.\n\n좋은 조력자를 선택한다는 건 곧 내 미래에 투자하는 일입니다. 그렇다면 열정이 아니라 실력을 먼저 따지세요. 열정은 실력이라는 토대 위에 있을 때만 진짜 힘이 됩니다.  (끝)\n\n\n*참고논문\n Hur, J. D., Ruttan, R. L., & Shea, C. T. (2020). The unexpected power of positivity: Predictions versus decisions about advisor selection. Journal of Experimental Psychology: General.\n\n\n* 공지사항\n 제가 진행하는 행사로 인해 7월 18일자는 부득이하게 휴간함을 알립니다. 구독자 여러분의 양해를 바랍니다. 감사합니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "저의 신간 <시나리오 플래닝>은 아래의 서점에서 판매되고 있습니다. 여러분의 많은 구매를 부탁 드립니다.\n\n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000214738690" [ref=e9]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=352251662" [ref=e10]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/Product/Goods/138729619" [ref=e11]
+        - text: "[다량 구매 혜택]\n한번에 10권 이상 구매를 원하신다면, 010-8998-8868로 전화 주시거나, jsyu@infuture.co.kr로 메일 주십시오. 저자 사인과 함께 특별 할인율 을 적용해 드리겠습니다. 할인율은 문의 시 알려 드리겠습니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 욱할 때는 90초만 참아 보세요 2025. 7. 16." [ref=e31]
+- link "다음 뉴스레터 왜 저 사람은 신뢰가 안 갈까?2025. 7. 21." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2304ms][0m

@@ -1,0 +1,124 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 아이디어가 좋다고 바로 제안하지 마세요 (https://infuture.stibee.com/p/584)
+- title: "아이디어가 좋다고 바로 제안하지 마세요" [url=https://infuture.stibee.com/p/584]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "아이디어가 좋다고 바로 제안하지 마세요 2025. 10. 31."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 10월 31일  (No. 566)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[금년 마지막 강좌]  AI를 활용한 시나리오 플래닝 3기\n\n 많은 분들의 요청에 따라 ‘AI를 활용한 시나리오 플래닝’ 3기를 개설합니다. 일자는 11월 15일/22일입니다. 정원이 8명이라 빨리 마감되니 서두르시기 바랍니다.\n\nchatGPT 등 AI 도구를 활용하면 그간 '좋은 건 …[+167 chars]"
+        - link [ref=e9]
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e10]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "아이디어가 좋다고 바로 제안하지 마세요"
+  - table:
+    - table:
+      - table: "\"좋은 아이디어가 떠오르면 언제든지 즉시 말해야 한다.\"\n\n여러분은 이 문장에 동의합니까? 우리는 떠오른 아이디어나 우려사항을 즉시 상사에게 전달하는 것이 진정성 있고 책임감 있는 태도라고 배웠고 그렇게 행동하면 상사로부터 좋은 평가를 받으리라 기대합니다. 즉시 말해야 준비할 여유를 가질 수 있고 무엇보다 상사에게 열정적인 직원이라는 인상을 줄 테니까요.\n\n하지만 우리가 당연시하는 '즉각적이고 신속한 의사 표현'이 오히려 좋은 아이디어를 사장시키는 결과를 만든다는 것을 아십니까?\n\n인도 방갈로르 경영대학원(IIMB)의 연구팀은 수백 명의 직원과 관리자를 대상으로 한 4개의 연구에서 아이디어를 즉시 말하는 직원보다 적절한 타이밍을 기다린 직원들이 관리자로부터 훨씬 높은 평가를 받는다는 사실을 발견했습니다. '전략적 침묵'을 택한 직원의 88.7%가 긍정적 반응을 얻은 반면, 그렇지 않은 직원은 61.1%에 그쳤으니까요. 이 결과는 '전략적 침묵', 즉 의사 표현의 타이밍을 잘 맞춰야 상사로부터 긍정적인 평가를 얻는다는 시사점을 줍니다."
+      - table
+  - table:
+    - table:
+      - table: "그러면 어떻게 해야 의사 표현의 타이밍을 잘 맞출 수 있을까요? 좋은 타이밍은 다음의 3가지가 결정합니다.\n\n1) Relevance(관련성): 조직의 우선순위와 얼마나 관련돼 있는가?아무리 좋은 아이디어라 해도 낮은 우선순위에 있는 것과 관련된 아이디어라면 상사의 관심을 받기 어렵습니다. 뜬금없는 소리로 들려서 상황 파악을 못하는 사람이라는 평가를 받겠죠. \n\n2) Readiness(준비도): 충분한 데이터(근거)와 해결책을 마련했는가?빨리 말해야 한다는 것에만 사로잡혀서 아무 근거없이 아이디어와 해결책을 말하면 선머슴이 사람잡는다는 평가를 받을 뿐입니다. \n\n3) Responsiveness(수용성): 상사가 의견을 들을 준비가 돼 있는가?상사가 다른 일로 바쁘거나 감정 상태가 부정적일 때 아이디어를 말했다가는 방해꾼이거나 눈치 없는 자라는 미운털이 박히겠죠.\n\n좋은 아이디어가 떠올랐다고 즉시 말하지 말고 위의 3가지 '타이밍 요소'가 충족됐는지 먼저 살피세요. 아이디어가 팀의 현재 우선순위와 맞는지, 설득력 있는 데이터를 갖췄는지, 상사가 들을 여유가 있는지 점검하기 바랍니다. \n\n적어도 아이디어에 대해 상사가 던질 만한 예상 질문과 답변을 준비하고 난 후에 아이디어를 제안하세요. 이렇게 하면 여러분의 좋은 아이디어가 실제로 채택될 확률이 높아질 것이고 여러분은 좋은 평가를 받을 수 있을 겁니다. \"왜 내 아이디어는 번번이 거부 당할까?\"라고 실망하거나 분노하지 말고 \"내가 타이밍을 못 맞추는 것은 아닐까?\"라고 한번쯤 반성해 보면 어떨까요? (끝)\n\n*참고논문 Parke, M. R., Tangirala, S., Sanaria, A., & Ekkirala, S. (2022). How strategic silence enables employee voice to be valued and rewarded. Organizational Behavior and Human Decision Processes, 173, 104187."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e12]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e13]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e14]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e16]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e17]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e18]
+        - link "게시하기" [ref=e19]
+        - link "웹에서 보기" [ref=e20]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e21]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e22]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e23]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e24]
+        - link "페이스북" [ref=e25]
+        - link "인스타그램" [ref=e26]
+        - link "브런치" [ref=e27]
+- text: "공유하기"
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- button [ref=e32]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e33]
+- link "이전 뉴스레터 솔직한 리더는 신뢰하기 어렵다 2025. 10. 30." [ref=e35]
+- link "다음 뉴스레터 AI에게 생각을 빼앗기지 마세요 2025. 11. 3." [ref=e37]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2008ms][0m

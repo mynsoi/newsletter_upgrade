@@ -1,0 +1,77 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 특별한 제안: 당신의 ‘씽크 파트너’가 되겠습니다 (https://infuture.stibee.com/p/600)
+- title: "특별한 제안: 당신의 ‘씽크 파트너’가 되겠습니다" [url=https://infuture.stibee.com/p/600]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "특별한 제안: 당신의 ‘씽크 파트너’가 되겠습니다 2025. 11. 21."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "경영 코칭 서비스 결정의 무게를 혼자 견디고 계신가요?"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "안녕하세요, 인퓨처컨설팅 유정식입니다.\n지금까지 만 3년간 매일 아침 뉴스레터 '유정식의 경영일기'를 통해 경영의 지혜를 나누고 있지만, 글 너머에 계신 리더분들의 실제 고민은 훨씬 더 깊고 현실적이라는 것을 잘 알고 있습니다.\n\n\"경영은 매일 새로운 정답을 요구하는 고독한 과정입니다.…[+400 chars]"
+        - list:
+          - listitem "급격한 성장으로 인한 '성장통'을 겪으며 체계적인 시스템이 필요한 기업" [ref=e9]
+          - listitem "내부 임직원에게 털어놓기 힘든 고민을 객관적으로 상의할 상대가 필요한 리더" [ref=e10]
+          - listitem "수직적인 조직문화를 개선하고 성과 중심의 HR 시스템을 구축하고 싶은 리더" [ref=e11]
+          - listitem "불확실한 미래에 대비해 '시나리오 플래닝' 기반의 전략을 수립하고 싶은 경영진" [ref=e12]
+        - text: "저의 경험과 노하우가 귀사의 성장에 거름이 되기를 바랍니다. 구체적인 코칭 철학과 커리큘럼, 그리고 진행 방식은 아래 첨부된 제안서를 통해 확인하실 수 있습니다."
+      - table:
+        - table:
+          - link "제안서 다운로드" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - text: "제안서를 보시고 궁금한 점이 있다면 다음의 연락처로 편하게 문의주세요.\n\n이메일:"
+        - link "jsyu@infuture.co.kr" [ref=e14]
+        - text: "휴대폰: 010-8998-8868"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e15]
+        - link "게시하기" [ref=e16]
+        - link "웹에서 보기" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e18]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e19]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e20]
+- text: "공유하기"
+- button [ref=e21]
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e26]
+- link "이전 뉴스레터 불안감을 능력으로 바꾸는 법: 왜 유능할수록 스스로를 의심할까?2025. 11. 21." [ref=e28]
+- link "다음 뉴스레터 현명한 포기가 맹목적인 끈기보다 낫습니다 2025. 11. 24." [ref=e30]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 3210ms][0m

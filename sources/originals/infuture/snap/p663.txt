@@ -1,0 +1,100 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → "생생하게 꿈꾸면 이루어진다"는 말을 아직 믿으세요? (https://infuture.stibee.com/p/663)
+- title: ""생생하게 꿈꾸면 이루어진다"는 말을 아직 믿으세요?" [url=https://infuture.stibee.com/p/663]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "\"생생하게 꿈꾸면 이루어진다\"는 말을 아직 믿으세요?2026. 4. 22."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 4월 22일  (No. 641)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "\"생생하게 꿈꾸면 이루어진다\"는 말을 아직 믿으세요?"
+  - table:
+    - table:
+      - table: "매일 아침 거울을 보며 \"나는 이미 성공한 CEO다\"라고 외치며 하루를 시작하는 분들이 계시는지요? 만약 그렇다면 '끌어당김의 법칙'이나 성공에 대한 '시각화', 즉 \"원하는 바를 생생하게 시각화하면 이루어진다\"는 말을 진리처럼 여길 겁니다. \n\n하지만 목표를 긍정적으로만 시각화하는 행위 자체가 오히려 목표 달성 확률을 크게 떨어뜨린다는 것에 주의해야 합니다. 심리학자 헤더 카페스(Heather Kappes)와 가브리엘 오팅겐(Gabriele Oettingen) 대학생들을 두 그룹으로 나누어 흥미로운 실험을 진행했습니다. 한 그룹에게는 다가오는 일주일 동안 모든 일이 순조롭게 풀리고 완벽한 한 주를 보내는 '긍정적인 상상'을 하도록 지시했고, 다른 그룹에게는 다가올 한 주를 현실적이고 중립적이게 생각하도록 했죠.\n\n일주일 뒤, 완벽한 한 주를 상상했던 학생들은 현실적으로 생각했던 학생들에 비해 실제로 달성한 과제의 수가 현저히 적었는데요, 가장 놀라운 것은 이들의 '생리적 반응'이었습니다. 긍정적인 상상에 빠졌던 학생들은 활력을 나타내는 수축기 혈압이 오히려 떨어졌고 스스로 느끼는 에너지 수준도 낮았거든요."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "왜 그럴까요? 우리의 뇌는 '현실'과 '생생한 상상'을 명확하게 구분하지 못합니다. 목표를 이룬 자신의 멋진 모습을 구체적으로 상상하고 기쁨을 느낄 때, 뇌는 이미 그 목표를 달성했다고 착각해 버리죠. 그래서 목표를 향해 험난한 과정을 견뎌야 할 때 필수적으로 나타나야 할 긴장감과 에너…[+756 chars]"
+        - link "https://doi.org/10.1016/j.jesp.2011.02.003" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 우리 회사의 조직문화가 망가졌다는 5가지 신호 2026. 4. 21." [ref=e30]
+- link "다음 뉴스레터 AI 시대에 우리는 어떻게 평가해야 할까?2026. 4. 23." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2126ms][0m

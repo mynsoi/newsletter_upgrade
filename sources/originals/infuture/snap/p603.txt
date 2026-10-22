@@ -1,0 +1,147 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 근거없는 자신감은 어디에서 생겨날까? (https://infuture.stibee.com/p/603)
+- title: "근거없는 자신감은 어디에서 생겨날까?" [url=https://infuture.stibee.com/p/603]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "근거없는 자신감은 어디에서 생겨날까?2025. 11. 26."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 26일  (No. 584)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "근거없는 자신감은 어디에서 생겨날까?"
+  - table:
+    - table:
+      - table: "여러분은 두 가지 마케팅 시안을 놓고 고민하고 있습니다. A안은 파격적이지만 위험 부담이 있고, B안은 안정적이지만 임팩트가 좀 약해 보입니다. 머릿속에서는 A와 B가 51 대 49로 팽팽하게 줄다리기를 하고 있는데, 멀찌감치 떨어진 팀원들은 당신의 입만 쳐다봅니다. 마감 시간에 임박하여 여러분은 \"그래, 결정했어. A안으로 갑시다!\"라고 소리를 칩니다.\n\n이 순간, 신기한 현상이 벌어집니다. 조금 전까지 짓눌리던 불안과 망설임이 구름 걷히듯 사라지고 A안이 성공할 수밖에 없는 이유들이 머릿속을 가득 채우기 시작하죠. A안이 정답이라고 확신하게 됩니다.\n\n우리는 보통 '확신이 생겼기에 결정을 내렸다'라고 간주하지만 사실 그 반대인 '결정을 내렸기 때문에 확신이 생겼다'가 맞는 말입니다. 피터 보일(Peter J. Boyle) 연구팀이 수행한 연구에 따르면, 결정을 내리는 행위 자체가 결정에 대한 '가짜 확신'을 주입한다 고 합니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "보일의 연구에 따르면, 결정 과정이 과신의 늪으로 빠지게 만드는 메커니즘은 이렇습니다."
+        - list:
+          - listitem ": A안과 B안 중에 A안이 '약간 더 낫다고 느낀다'" [ref=e9]: "미세한 신호: A안과 B안 중에 A안이 '약간 더 낫다고 느낀다'"
+          - listitem ": 그 후부터 뇌에 들어오는 모든 새로운 정보를 A안에 유리하도록 비튼다. 중립적인 정보는 'A안의 잠재력을 보여주는 신호'라고 여기고, 부정적인 정보는 '일시적인 잡음이야'라고 " [ref=e10]: "정보의 오염: 그 후부터 뇌에 들어오는 모든 새로운 정보를 A안에 유리하도록 비튼다. 중립적인 정보는 'A안의 잠재력을 보여주는 신호'라고 여기고, 부정적인 정보는 '일시적인 잡음이야'라고 무시한다."
+          - listitem ": 왜곡이 쌓여 A안은 점점 더 완벽해 보인다. A안이 완벽해 보이니까 그 후에 들어오는 정보는 더 심하게 왜곡 해석한다." [ref=e11]: "자신감 증폭: 왜곡이 쌓여 A안은 점점 더 완벽해 보인다. A안이 완벽해 보이니까 그 후에 들어오는 정보는 더 심하게 왜곡 해석한다."
+        - text: "주식 투자를 떠올려 보세요. 누군가가 스쳐지나듯 던진 긍정적인 뉴스에 해당 주식을 매수하고자 욕구가 고개를 듭니다(미세한 신호). 그 회사가 적자에서 아직 벗어나지 못했다는 부정적인 정보가 들어와도 '지금이 저가 매수의 타이밍이야'라고 좋게 해석해 버립니다(정보의 오염 1). 경쟁자가 …[+679 chars]"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[경영 코칭 서비스 제안서]  당신의 ‘씽크 파트너’가 되겠습니다\n\n\n 단순한 지식 전달자가 아닌, 리더가 직면한 난제를 함께 풀고 최적의 의사결정을 돕는 1:1 경영 코칭 서비스를 소개합니다.\n\n이런 고민을 가진 리더분들께 추천합니다."
+        - list:
+          - listitem "급격한 성장으로 인한 '성장통'을 겪으며 체계적인 시스템이 필요한 기업" [ref=e12]
+          - listitem "내부 임직원에게 털어놓기 힘든 고민을 객관적으로 상의할 상대가 필요한 CEO" [ref=e13]
+          - listitem "수직적인 조직문화를 개선하고 성과 중심의 HR 시스템을 구축하고 싶은 리더" [ref=e14]
+          - listitem "불확실한 미래에 대비해 '시나리오 플래닝' 기반의 전략을 수립하고 싶은 경영진" [ref=e15]
+        - text: "저의 경험과 노하우가 귀사의 성장에 거름이 되기를 바랍니다. 구체적인 코칭 철학과 커리큘럼, 그리고 진행 방식은 아래 링크된 제안서를 통해 확인하실 수 있습니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "제안서 다운로드" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝\n 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하여 '교육계획서'를 다운 받으시기 바랍니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e17]
+        - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e18]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e19]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e20]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e21]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e22]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e23]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e24]
+        - link "게시하기" [ref=e25]
+        - link "웹에서 보기" [ref=e26]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e27]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e28]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e29]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e30]
+        - link "페이스북" [ref=e31]
+        - link "인스타그램" [ref=e32]
+        - link "브런치" [ref=e33]
+- text: "공유하기"
+- button [ref=e34]
+- button [ref=e35]
+- button [ref=e36]
+- button [ref=e37]
+- button [ref=e38]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e39]
+- link "이전 뉴스레터 고객은 왕이지만 폭군까지 모실 필요는 없습니다 2025. 11. 25." [ref=e41]
+- link "다음 뉴스레터 조직문화 바꾼다고 성과가 좋아지지 않아요 2025. 11. 27." [ref=e43]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2656ms][0m

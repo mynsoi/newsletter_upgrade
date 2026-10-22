@@ -1,0 +1,141 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 불안감을 능력으로 바꾸는 법: 왜 유능할수록 스스로를 의심할까? (https://infuture.stibee.com/p/599)
+- title: "불안감을 능력으로 바꾸는 법: 왜 유능할수록 스스로를 의심할까?" [url=https://infuture.stibee.com/p/599]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "불안감을 능력으로 바꾸는 법: 왜 유능할수록 스스로를 의심할까?2025. 11. 21."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 21일  (No. 581)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "불안감을 능력으로 바꾸는 법: 왜 유능할수록 스스로를 의심할까?"
+  - table:
+    - table:
+      - table: "이런 장면을 상상해 보세요. 중요한 프로젝트 발표를 앞둔 회의실에서 여러분은 겉으로는 침착한 표정을 짓습니다. 완벽하게 준비된 자료, 깔끔한 정장, 여유 있는 미소까지. 그러나 여러분의 속마음은 다르겠죠.\n\n\"이번엔 운이 좋아서 프로젝트가 잘 된 거야. 내 진짜 실력이 들통나면 어쩌지? 질문 하나만 제대로 답변하지 못하면 내가 사실 거품이라는 걸 알 텐데...\"\n\n아마 남의 이야기 같지 않을 겁니다. 심리학에서는 이런 심리를 '가면 증후군(Imposter Syndrome)'이라고 부르는데요, 자신의 성취를 실력이나 노력이 아니라 운으로 돌리고, 언젠가는 자신의 무능함이 탄로 날까 봐 전전긍긍하는 심리를 뜻합니다. 서점에 가보면 불안을 부정적인 감정으로 여겨 치료하거나 극복해야 할 대상이라고 말하는 책들이 많습니다. 그런 책들은 자신감을 가져야 성공할 수 있다고 강조하죠.\n\n그러나 우리는 이런 통념을 항상 의심해야 합니다. '불안감이 오히려 나를 유능한 사람으로 만들 수 있지 않을까?'라고 말이죠. MIT 슬론 경영대학원의 바시마 테픽(Basima Tewfik) 교수는 아주 흥미로운 실험을 진행했습니다. 테픽은 투자 회사 직원들을 대상으로 가면 증후군을 겪는 정도와 실제 업무 성과, 대인 관계 능력의 상관관계를 분석했습니다.\n\n통념에 의하면 \"나는 가짜야\"라고 의기소침한 사람들의 업무 성과가 낮아야 하는데요, 결과는 정반대였습니다. 가면 증후군을 겪는 사람들은 그렇지 않은 사람들에 비해 '대인 관계 효과성(Interpersonal Effectiveness)' 점수가 월등히 높게 나타났으니까요. 동료들은 그들을 \"협조적이다\", \"내 말을 잘 들어준다\", \"상황 파악이 빠르다\"라고 평가했습니다."
+      - table
+  - table:
+    - table:
+      - table: "이유가 무엇일까요? 바로 '보상 심리' 때문입니다. 스스로 실력이 부족하다고 느끼기 때문에 무의식적으로 이를 만회(보상)하려고 더 노력한다는 것이죠. 그들은 자신의 부족함을 들키지 않기 위해 동료의 말에 더 귀를 기울이고, 남들보다 질문을 한 번 더 하고, 눈치를 살피면서 상대방이 원하는 것을 정확히 파악하려 애씁니다. 역설적이게도, '나는 부족하다'는 그 불안감이 '배려'와 '경청'이라는 긍정적 리더십으로 발현되는 것이죠.\n\n테픽이 의사 면허를 준비하는 의대생들을 대상으로 한 실험에서도 동일한 결과가 나왔습니다. 가면 증후군 성향이 높은 훈련생들은 환자를 대할 때 더 많은 질문을 던지고, 환자의 고통에 더 깊이 공감하며, 진단 결과를 더 상세하게 설명했습니다.\n\n여기서 더 중요한 것은 그들의 '실제 의술(진단 정확도)'이 자신감 넘치는 동료들에 비해 결코 떨어지지 않았다는 사실입니다. 이것은 가면 증후군은 업무 능력(Competence)을 갉아먹지 않으면서 오히려 사회적 능력(Social Skill)을 끌어올리는 촉매제 역할을 한다는 의미입니다.\n\n우리는 흔히 자신감(Confidence)이 곧 능력(Competence)이라고 착각합니다. 그래서인지 '근거 없는 자신감'으로 무장하여 남의 말을 듣지 않는 독선적인 리더들이 많은가 봅니다.\n\n혹시 여러분이 가면 증후군을 앓고 있다면 어떻게 해야 할까요? 우선, 불안을 억누르려 하지 말고 '좋은 신호'로 받아들이세요. \"내 능력은 떨어져\"라고 자책하지 말고 \"내가 이 일을 잘해내고 싶어 하는구나.\"라고 재해석해야 합니다. 불안감은 '이 일에 진심', '나는 책임감이 강한 사람'이라는 긍정적인 신호이기에 위축되지 말고 상대방에게 좀더 질문하고 좀더 경청하는 식으로 불안 에너지의 방향을 밖으로 바꾸세요.\n\n오늘 회의나 미팅에서 문득 \"내가 여기서 말을 잘못하면 어쩌지?\"라는 불안감이 든다면, 침묵하는 대신 상대방의 말에 대해 구체적인 질문을 딱 하나만 던져보세요(예: 과장님의 제안을 실행할 때 가장 우려되는 리스크는 무엇인가요?). 이 작은 질문이 당신을 '자신감 없는 사람'이 아니라 '일에 진심인 동료'로 만들어 줄 겁니다. (끝)\n\n* 참고 논문 Tewfik, B. A. (2022). The Impostor Phenomenon Revisited: Examining the Relationship between Impostor Thoughts and Interpersonal Effectiveness at Work. Academy of Management Journal, 65(3), 988–1018."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[경영 코칭 서비스 제안서]  당신의 ‘씽크 파트너’가 되겠습니다\n\n\n 단순한 지식 전달자가 아닌, 리더가 직면한 난제를 함께 풀고 최적의 의사결정을 돕는 1:1 경영 코칭 서비스를 소개합니다.\n\n이런 고민을 가진 리더분들께 추천합니다."
+        - list:
+          - listitem "급격한 성장으로 인한 '성장통'을 겪으며 체계적인 시스템이 필요한 기업" [ref=e9]
+          - listitem "내부 임직원에게 털어놓기 힘든 고민을 객관적으로 상의할 상대가 필요한 CEO" [ref=e10]
+          - listitem "수직적인 조직문화를 개선하고 성과 중심의 HR 시스템을 구축하고 싶은 리더" [ref=e11]
+          - listitem "불확실한 미래에 대비해 '시나리오 플래닝' 기반의 전략을 수립하고 싶은 경영진" [ref=e12]
+        - text: "저의 경험과 노하우가 귀사의 성장에 거름이 되기를 바랍니다. 구체적인 코칭 철학과 커리큘럼, 그리고 진행 방식은 아래 링크된 제안서를 통해 확인하실 수 있습니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "제안서 다운로드" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝\n 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하여 '교육계획서'를 다운 받으시기 바랍니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e14]
+        - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e15]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e16]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e17]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e18]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e19]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e20]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e21]
+        - link "게시하기" [ref=e22]
+        - link "웹에서 보기" [ref=e23]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e24]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e25]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e26]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e27]
+        - link "페이스북" [ref=e28]
+        - link "인스타그램" [ref=e29]
+        - link "브런치" [ref=e30]
+- text: "공유하기"
+- button [ref=e31]
+- button [ref=e32]
+- button [ref=e33]
+- button [ref=e34]
+- button [ref=e35]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e36]
+- link "이전 뉴스레터 음악을 들으면 일의 능률이 오를까요?2025. 11. 20." [ref=e38]
+- link "다음 뉴스레터 특별한 제안: 당신의 ‘씽크 파트너’가 되겠습니다 2025. 11. 21." [ref=e40]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2299ms][0m

@@ -1,0 +1,102 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 여름 휴가 때 꼭 읽어야 할 인문서 5권 (https://infuture.stibee.com/p/528)
+- title: "여름 휴가 때 꼭 읽어야 할 인문서 5권" [url=https://infuture.stibee.com/p/528]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "여름 휴가 때 꼭 읽어야 할 인문서 5권 2025. 7. 25."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 7월 25일  (No. 514)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "여름 휴가 때 꼭 읽어야 할 인문서 5권"
+  - table:
+    - table:
+      - table: "당연한 말이지만, 여름은 덥습니다. 아주 덥습니다. 그래서인지 삶의 속도가 잠시 느려지는 계절이고 느려져야 하는 계절이기도 하죠. 느려지는 법을 배우는 이 시간을 좋은 책과 함께 보내면 어떨까요? ‘나는 누구인가’, ‘어떻게 살아야 하는가(혹은 어떻게 죽어야 하는가)’와 같은 본질적인 질문을 던지기에 좋은 책 5권을 추천합니다.\n\n최근에 나온 책은 아니지만 이 책들은 여러분의 삶을 적어도 10퍼센트쯤은 바꿔놓을 만한 내용을 담고 있습니다. 저도 다시 읽어야겠네요.\n\n1. 『인간의 굴레에서』 – 서머싯 몸 (을유문화사)\n고통과 자유 사이를 오가는 한 청년의 자아 탐색기입니다.\n어디에도 속하지 못하는 사람에게 위로와 방향을 줍니다.\n\n2. 『우리는 언젠가 죽는다』 – 데이비드 실즈 (문학동네)\n파편적인 단상 속에 삶의 의미와 죽음의 그림자가 교차합니다.\n시간이 빠르게 흐른다고 느끼는 이들에게 권합니다."
+      - table
+  - table:
+    - table:
+      - table: "3 .『나는 왜 너를 사랑하는가』 – 알랭 드 보통 (은행나무)\n연애의 시작과 끝, 그 사이에 있는 철학적 심리를 분석합니다.\n이별을 겪었거나 사랑이 낯선 사람에게 특히 좋습니다.\n사랑의 의미를 재정의하고픈 이들에게도 추천합니다.\n\n4. 『호모 루덴스』 – 요한 하위징아 (까치)\n인간의 본질을 ‘놀이하는 존재’로 재정의합니다.\n일과 삶의 경계가 흐려졌다고 느끼는 사람에게 추천합니다.\n\n5. 『침묵의 세계』 – 막스 피카르트 (문학과지성사)\n말보다 깊은 의미를 가진 침묵과 그 철학적이고 존재론적인 고찰을 이야기합니다.\n소음에 지친 도시인에게 고요한 사색을 권합니다.\n\n\n[공지사항]\n저도 이번 여름을 맞아 잠시 쉬어가려 합니다. ‘유정식의 경영일기’는 8월 8일까지 휴간하고 8월 11일(월)에 다시 이어가겠습니다. 구독자 여러분의 양해를 바라며, 건강하고 유익하며 재미있는 여름 휴가를 즐기시기 바랍니다. 감사합니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 그동안 이 책 편집/교정하느라 좀 바빴습니다. <나의 소울넘버>라는 책인데요, 과거에 초판이 나왔다가 이번에 개정판으로 새로 인사를 드립니다. 아직 인쇄 전이라 지금은 예약판매 중입니다(7월 29일에 서점 배본 예정). \n\n타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e9]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e10]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e11]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e12]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e13]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e14]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e15]
+        - link "게시하기" [ref=e16]
+        - link "웹에서 보기" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e18]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e19]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e20]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e21]
+        - link "페이스북" [ref=e22]
+        - link "인스타그램" [ref=e23]
+        - link "브런치" [ref=e24]
+- text: "공유하기"
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e30]
+- link "이전 뉴스레터 연봉이 적어도 '의미있는 일'을 하시겠습니까?2025. 7. 24." [ref=e32]
+- link "다음 뉴스레터 혹한보다 무서운 것은 리더십의 붕괴 2025. 8. 11." [ref=e34]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2193ms][0m

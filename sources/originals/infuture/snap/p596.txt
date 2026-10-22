@@ -1,0 +1,114 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → '쌩초보가 많은 팀'에서 혁신이 나온다 (https://infuture.stibee.com/p/596)
+- title: "'쌩초보가 많은 팀'에서 혁신이 나온다" [url=https://infuture.stibee.com/p/596]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "'쌩초보가 많은 팀'에서 혁신이 나온다 2025. 11. 18."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 18일  (No. 578)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "'쌩초보가 많은 팀'에서 혁신이 나온다"
+  - table:
+    - table:
+      - table: "어제 칼럼에서는 '팀을 5~6명 정도로 작게 구성해야 파괴적 혁신을 기대할 수 있다'라는 점을 강조했는데요, 오늘은 이와 연관되지만 그보다 더 비직관적으로 느껴지는 주제를 언급하고자 합니다. 바로 '초보자가 많은 팀이 파괴적 혁신을 이룬다'는 점입니다.\n\n여러분의 조직을 포함한 대부분의 기업은 중요 프로젝트에 경험 많은 베테랑을 투입합니다. 너무나 당연한 조치죠. 10년 넘은 경력자가 1년 차 신입보다 지식과 경험이 많으니 더 나은 결과물을 창조할 거라고 믿기 때문입니다.\n\n이런 믿음이 옳지 않다는 것이 최근의 논문으로 증명되었습니다. 방글라데시 공과대학의 마디 무쉬피크 카말(Mahdee Mushfique Kamal)과 사우스플로리다 대학의 라이얀 압둘 바텐(Raiyan Abdul Baten) 연구팀은 1971년부터 2020년까지 50년간 발표된 2,800만 개 이상의 과학 논문을 분석했습니다.\n\n흥미롭게도 이전에 논문 발표 경험이 전혀 없는 '완전 초보자(absolute beginner)' 비율이 높은 팀일수록 파괴적이고 혁신적인 연구 결과를 발표했습니다. 이런 패턴은 물리학부터 사회과학까지 146개 학문 분야 전체에서 일관되게 나타났죠. 또한 초보자가 많은 팀의 논문은 타 연구자들로부터 더 많이 인용되는 경향을 보였습니다. 혁신적이면서도 영향력이 큰 연구를 수행한다는 증거죠."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "더 놀라운 사실은 초보자가 많은 팀은 어제자 칼럼에서 소개한 '대규모 팀의 문제'마저 극복했다는 점입니다. 일반적으로 규모가 큰 팀은 파괴적 혁신 능력이 떨어지지만, 초보자 비율이 높으면 큰 팀도 작은 팀만큼 혁신적이라는 게 연구팀의 결론입니다.\n\n왜 초보자가 많을수록 혁신적일까요? 초…[+949 chars]"
+        - link "https://doi.org/10.48550/arXiv.2509.10389" [ref=e9]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e11]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e12]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e13]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e17]
+        - link "게시하기" [ref=e18]
+        - link "웹에서 보기" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e20]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e21]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e22]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e23]
+        - link "페이스북" [ref=e24]
+        - link "인스타그램" [ref=e25]
+        - link "브런치" [ref=e26]
+- text: "공유하기"
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e32]
+- link "이전 뉴스레터'작은 팀'에서 혁신이 나온다 2025. 11. 17." [ref=e34]
+- link "다음 뉴스레터 스타가 많을수록 팀은 약해진다 2025. 11. 19." [ref=e36]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2246ms][0m

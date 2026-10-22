@@ -1,0 +1,119 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 그릿(Grit)은 마케팅의 산물 (https://infuture.stibee.com/p/568)
+- title: "그릿(Grit)은 마케팅의 산물" [url=https://infuture.stibee.com/p/568]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "그릿(Grit)은 마케팅의 산물 2025. 10. 2."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 10월 2일  (No. 552)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[강좌 추가 개설]  AI를 활용한 시나리오 플래닝 2기\n\n chatGPT 등 AI 도구를 활용하면 그간 '좋은 건 알지만 어려워서 못했던' 시나리오 플래닝을 아주 수월하게 진행할 수 있습니다. 여러분이 시나리오 플래닝 방법론을 충분히 이해한 상태에서 AI에게 '적확한' 질문을 던질 줄만 안다면, 2~4개월 걸리던 시나리오 플래닝을 단 몇 시간만에 완료할 수 있습니다.\n\n\n\n많은 분들의 요청에 따라 ‘AI를 활용한 시나리오 플래닝’ 강좌를 추가 개설합니다. 일자는 10월 18일/25일입니다. 아래 버튼을 클릭하세요!"
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e9]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "그릿(Grit)은 마케팅의 산물"
+  - table:
+    - table:
+      - table: "자투리 시간에 책을 읽으려고 이북 리더를 샀습니다. 출퇴근길에서, 잠들기 전 침대에서, 틈날 때마다 뭔가 의미 있는 것을 읽고 싶었거든요. 읽을 책을 찾다가 한때 베스트셀러였던 'Grit(그릿)'이라는 책을 발견했습니다. '재능보다 끈기가 중요하다'는 핵심 메시지를 보고 '끈기 역시 재능 아닌가?'라고 의아했지만 워낙 많은 이들이 읽은 책이니 뭔가 있겠다 싶어서 바로 구매해 읽었습니다.\n\n책은 생각보다 재미있었습니다. 성공한 사람들의 이야기, 포기하지 않는 열정의 힘, 장기 목표를 향한 일관된 노력... 읽는 내내 공감이 되더군요. 하지만 마지막 페이지를 넘기는 순간 기시감이 들었습니다. '이런 내용, 어디선가 본 것 같은데?'\n\n그리고 이런 의문이 떠올랐습니다. '그릿은 정말 새로운 개념일까? 아니면 우리가 예전부터 알고 있던 것을 매력적으로 재포장한 건 아닐까?'\n\n우리는 흔히 그릿(Grit)이 재능을 뛰어넘는 새로운 성공 요인이라고 생각합니다. '장기 목표에 대한 열정과 끈기'로 정의되는 그릿은 교육계와 경영계에서 폭발적인 반응을 얻었죠. TED 강연은 수천만 조회수를 기록했고, 관련 서적들은 베스트셀러가 됐습니다."
+      - table
+  - table:
+    - table:
+      - table: "그런데 연구 결과는 우리의 기대를 정면으로 반박합니다. 연구자는 401명의 대학생을 대상으로 그릿과 성실성(Conscientiousness)의 관계를 면밀히 분석했습니다. 분석해 보니, 그릿이 학업성취(GPA)를 예측하는 힘은 거의 전적으로 성실성에서 나온다는 사실이 밝혀졌습니다. 더 충격적인 것은 성실성과 겹치지 않는 그릿만의 고유한 부분은 학업성취를 전혀 예측하지 못했다는 점입니다.\n\n그렇다면 왜 이런 결과가 나온 걸까요? 연구자는 두 개념이 상당히 중복되기 때문이라고 말합니다. 그릿이 측정하는 '어려움 속에서도 포기하지 않는 끈기'와 '장기 목표에 대한 헌신'은 이미 심리학계가 수십 년간 연구해온 성실성의 핵심 특성입니다. 빅5 성격이론에서 성실성은 자기통제, 목표지향성, 계획성, 끈기를 포함하는 광범위한 특성입니다. 결국 그릿은 성실성이라는 큰 우산 아래 있는 개념을 재포장한 것에 가깝다는 것이 이 연구의 결론입니다.\n\n2017년 Journal of Personality and Social Psychology에 실린 대규모 메타분석에서도 그릿과 성실성의 상관계수가 0.84로 매우 높게 나타났습니다. 통계적으로 이는 두 개념이 거의 같은 것을 측정하고 있다는 의미입니다. 그릿의 두 하위요인 중 '노력의 인내'는 성실성과 거의 구별이 불가능하며, '흥미의 일관성'만이 약간의 차이를 보인다는 점을 확인했죠.\n\n이렇기에 그릿은 새로 발견된 개념이 아니라 기존 개념의 재포장이라고 볼 수 있습니다. 마케팅적으로 대성공한 브랜딩이라고도 말할 수 있죠. 그러니 우리는 그릿이라는 화려한 용어에 현혹되기보다는 자신의 성실성을 꾸준히 발전시키는 데 집중해야 합니다. '그릿을 키워야 한다'는 강박에서 벗어나 '나는 어떻게 하면 더 성실하게 목표를 추구할 수 있을까'라고 질문을 바꿔야 하지 않을까요? \n\n'하늘 아래 새로운 것은 없다'는 말이 자기계발 분야에서는 언제나 진리입니다. 자기계발에 관련된 책들은 이미 서점에 넘쳐나고, 그 대부분은 같은 내용을 다른 방식으로 포장한 것들입니다. 우리에게 필요한 것은 새로운 개념이 아니라, 오래되고 검증된 진실을 꾸준히 실천하는 것입니다. '그릿하라!'는 말에는 뭔가 있어 보이는 것, 그것뿐입니다.\n\n*참고논문 Minnigh, T. L., Sanders, J. M., Witherell, S. M., & Coyle, T. R. (2024). Grit as a predictor of academic performance: Not much more than conscientiousness. Personality and Individual Differences, 221, 112542.Credé, M., Tynan, M. C., & Harms, P. D. (2017). Much ado about grit: A meta-analytic synthesis of the grit literature. Journal of Personality and Social Psychology, 113(3), 492–511.\n\n\n* 추석 연휴 기간에 '유정식의 경영일기'도 쉬어 갑니다.   저도 푹 쉬고 10월 13일(월)에 찾아 뵙겠습니다.   즐겁고 행복한 추석 쇠시기 바랍니다. 감사합니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "이번에 공개 강좌로 모집한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e11]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e12]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e13]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e17]
+        - link "게시하기" [ref=e18]
+        - link "웹에서 보기" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e20]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e21]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e22]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e23]
+        - link "페이스북" [ref=e24]
+        - link "인스타그램" [ref=e25]
+        - link "브런치" [ref=e26]
+- text: "공유하기"
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e32]
+- link "이전 뉴스레터 여러분은 혹시 '나쁜 리더'입니까?2025. 10. 1." [ref=e34]
+- link "다음 뉴스레터 AI는 '일잘러'가 아니라 '일못러'를 키운다 2025. 10. 13." [ref=e36]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2270ms][0m

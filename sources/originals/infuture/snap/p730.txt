@@ -1,0 +1,100 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 투수의 '투구 수' 관리가 과연 합리적일까? (https://infuture.stibee.com/p/730)
+- title: "투수의 '투구 수' 관리가 과연 합리적일까?" [url=https://infuture.stibee.com/p/730]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "투수의 '투구 수' 관리가 과연 합리적일까?2026. 8. 26."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 8월 26일  (No. 707)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "투수의 '투구 수' 관리가 과연 합리적일까?"
+  - table:
+    - table:
+      - table: "얼마 전, 유튜브에서 \"투구 수 관리가 투수의 피로도를 관리할 수 없다\"는 영상을 봤습니다. 아시다시피 현대 야구에서는 투수의 부상을 방지할 목적으로 100구 안팎으로 투구 수를 엄격하게 제한합니다. 하지만 투구 수로 투수의 피로도를 관리할 수 있을까요? \n\n주자가 없는 편안한 상황에서 던진 100구와 매 이닝 주자를 득점권에 두고 심리적 압박감 속에서 던진 100구는 신체적, 정신적 소모량이 천지 차이입니다. 투수의 피로도를 결정하는 것은 단순한 공의 개수(양)가 아니라, 그 공을 던질 때의'스트레스와 압박감(질)이기 때문입니다.\n\n이런 야구의 원리가 직원들의 피로도 관리에도 똑같이 적용됩니다. 보통 직원들의 업무량을 '시간'이라는 단위로 측정하는데요, 하루 8시간을 일했으니 8시간만큼 피로할 것이라고 평면적으로 계산하곤 하죠. 하지만 직원들의 피로도는 '투구 수'가 아니라 '위기 상황에서의 투구'가 좌우합니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "A팀이 서비스 장애로 인해 수백만 명의 유저가 불편을 겪는 상황에서 이를 복구하기 위해 5시간 동안 긴급 작업을 했다고 가정해 보세요. 반면, B팀은 사내 인트라넷의 UI 변경을 위해 5시간을 일했습니다. 시스템에는 똑같이 '5시간 근무'로 찍히지만 A팀 개발자가 느낄 뇌의 피로도와 스…[+446 chars]"
+        - link "https://www.youtube.com/watch?v=PFGPG7x593s" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 직원들에게 모두 밝히는 것이 투명성일까요?2026. 8. 25." [ref=e30]
+- link "다음 뉴스레터\"대안없는 문제 제기는 하지 말라\"고 말하지 마세요 2026. 8. 27." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2322ms][0m

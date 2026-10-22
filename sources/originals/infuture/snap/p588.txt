@@ -1,0 +1,124 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 변화는 파격에서 시작됩니다 (https://infuture.stibee.com/p/588)
+- title: "변화는 파격에서 시작됩니다" [url=https://infuture.stibee.com/p/588]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "변화는 파격에서 시작됩니다 2025. 11. 6."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 6일  (No. 570)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[금년 마지막 강좌]  AI를 활용한 시나리오 플래닝 3기\n\n 많은 분들의 요청에 따라 ‘AI를 활용한 시나리오 플래닝’ 3기를 개설합니다. 일자는 11월 15일/22일입니다. 정원이 8명이라 빨리 마감되니 서두르시기 바랍니다.\n\nchatGPT 등 AI 도구를 활용하면 그간 '좋은 건 …[+167 chars]"
+        - link [ref=e9]
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e10]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "변화는 파격에서 시작됩니다"
+  - table:
+    - table:
+      - table: "2021년, 포뮬러 1의 명문 팀 윌리엄스 메르세데스는 3년째 무득점 행진을 이어가며 최약체로 전락했습니다. 과거 9번의 팀 우승과 7번의 드라이버 타이틀을 차지했던 영광은 옛말이 되었고, 재정난으로 2020년 미국 투자회사에 매각되는 처지에 놓였죠. 게다가 창업주 프랭크 윌리엄스는 2021년 세상을 떠났고요.\n\n새로 영입된 CEO 겸 감독 요스트 캐피토에게 주어진 임무는 팀 재건이었습니다. F1에서는 드라이버 역량보다 레이싱카 성능이 더 중요한데, 윌리엄스는 차량 성능 향상에 투자할 여력이 없어 악순환에 빠져 있었습니다. 0.5초를 줄이는 데 천문학적 비용이 드는 F1 시장에서 주머니 사정이 넉넉지 않은 팀이 꼴찌를 벗어나기란 쉽지 않았죠."
+      - table
+  - table:
+    - table:
+      - table: "캐피토는 파격적인 전략을 내놓았습니다. 바로 타이어 교체를 위한 피트인을 1번으로 줄이는 '원-스톱' 전략이었습니다. 업계에서는 평균 90분 레이스 동안 타이어를 두 번 교체하는 것이 정설이었죠. 타이어 교체는 필수이지만 0.1초를 다투는 레이싱에서 시간을 잃는 과정이기도 했습니다. 피트인 회수를 줄이면 마모된 타이어로 달려야 하는 리스크가 있지만, 약체팀이 조금이라도 앞서 나갈 수 있는 방법이라고 캐피토는 판단했습니다.\n\n처음에는 효과가 크지 않았지만 헝가리 그랑프리에서 두 드라이버가 7위와 8위로 골인하며 총 10점을 획득했습니다. 오랜만의 득점에 드라이버 조지 러셀은 감격의 눈물을 흘렸고, 벨기에 그랑프리에서는 2위에 오르는 기염을 토했죠. 꼴찌를 예약했던 윌리엄스는 2021년 시즌을 8위로 마무리했습니다.\n\n아인슈타인은 \"똑같은 일을 반복하면서 다른 결과를 기대하는 것은 미친 짓\"이라 말했습니다. 캐피토는 업계 정설을 폐기한 파격으로 다른 결과를 만들어냈습니다. 돈도 중요했지만, 팀에 만연한 패배감을 씻어낸 것이 더 큰 성과였죠.\n\n파격이란 \"그래야 한다\"는 가정을 \"과연 그런가?\"라고 의심하고 \"그렇지 않아도 돼\"라며 발상을 전환하는 것입니다. 내가 가진 것이 적고 능력이 부족하다면 남들과 똑같은 룰로 싸워서는 매번 질 뿐이죠. 그 룰을 의심하고 나만의 룰을 만들어보세요. 윌리엄스의 사례에서 나만의 파격적 조치를 만들어보길 바랍니다.  (끝)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e12]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e13]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e14]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e16]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e17]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e18]
+        - link "게시하기" [ref=e19]
+        - link "웹에서 보기" [ref=e20]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e21]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e22]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e23]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e24]
+        - link "페이스북" [ref=e25]
+        - link "인스타그램" [ref=e26]
+        - link "브런치" [ref=e27]
+- text: "공유하기"
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- button [ref=e32]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e33]
+- link "이전 뉴스레터 경력 5년이 신입보다 나을 건 없습니다 2025. 11. 5." [ref=e35]
+- link "다음 뉴스레터 차라리 AI에게 이사회를 맡길까요?2025. 11. 7." [ref=e37]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2410ms][0m

@@ -1,0 +1,97 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → '고정관념은 나쁘다'는 것이 고정관념 (https://infuture.stibee.com/p/680)
+- title: "'고정관념은 나쁘다'는 것이 고정관념" [url=https://infuture.stibee.com/p/680]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "'고정관념은 나쁘다'는 것이 고정관념 2026. 5. 20."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 5월 20일  (No. 658)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "'고정관념은 나쁘다'는 것이 고정관념"
+  - table:
+    - table:
+      - table: "우리는 보통 '고정관념'이나 '편견'을 무조건 부정적인 것이라고 배웁니다. \"MZ세대는 이기적이야\", \"영업직은 외향적일 거야\" 같은 단정은 해당되는 이를 좁은 틀에 가둬 차별하는 나쁜 습관이라고 말이죠. 리더십 교육에서도 \"고정관념을 버리고 직원을 제로 베이스 상태에서 보라\"는 말이 항상 나옵니다.\n\n그런데 말입니다. 고정관념이 무조건 나쁘다는 말 자체가 어쩌면 가장 강력한 고정관념일지도 모릅니다. 심리학자 리 주심(Lee Jussim)은 자신의 연구를 통해 \"사람들의 고정관념은 놀랍게도 대부분 통계적으로 현실과 일치한다\"고 주장합니다. \n\n그가 고정관념의 긍정적 측면을 주장하면서 든 대표적인 사례는 '인구통계학적 특성에 따른 직업 및 성향 예측'입니다. 정보가 전혀 없는 낯선 상황에서 누군가의 직업이 '유치원 교사'나 '간호사'라고 들었을 때 무의식적으로 그가 여성일 것이라 가정하거나, '연령대가 높은 유권자 집단'이 보수적인 투표 성향을 보일 것이라고 추론하는 것은 결코 비이성적인 망상이 아니라는 것이죠. 이는 오랜 시간 사회적 데이터가 누적된 '정확한 통계적 확률'에 기반한 합리적 어림짐작이라고 그는 말합니다."
+      - table
+  - table:
+    - table:
+      - table: "또한 '남자가 여자보다 키가 크다'는 고정관념 역시 평균적인 통계적 사실에 근거한 매우 빠르고 유용한 인지 도구라고 설명하는데요, 만약 일상생활에서 이런 통계적 확률을 무시하고 모든 것을 매번 제로 베이스에서 파악하려 한다면 엄청난 인지 에너지를 낭비한다고 말합니다.\n\n예를 들어, 제조업 기반의 보수적인 대기업 임원들을 상대로 무언가를 제안해야 한다고 해보세요. 그러면 여러분의 머릿속에는 \"이 사람들은 뜬구름 잡는 이야기보다 리스크 회피와 비용 절감을 중시할 것이다\"라는 고정관념이 자리잡고 있을 텐데요, 만약 '고정관념은 나쁜 것'이라는 강박 때문에 화려한 미래 비전을 늘어놓는다면 제안이 받아들여질 가능성이 매우 적을 겁니다. 오히려 그 고정관념을 십분 활용해서 구체적인 재무 수치와 과거의 굵직굵직한 레퍼런스를 강조한다면 그들을 설득할 수 있겠죠.\n\n고정관념은 무조건 배척해야 할 것이 아니라, 불확실성이 지배하는 세상에서 우리의 뇌가 구축해 놓은 '효율적 예측 알고리즘'에 가깝습니다. 정말 문제가 되는 것은 고정관념 자체가 아니라 상대방에 대한 '새롭고 구체적이고 개별적인 정보'가 입력됐음에도 불구하고 자신의 기존 예상을 수정하지 않으려는 아집과 경직성 입니다.\n\n여러분이 누군가를 판단할 때 무의식적으로 사용한 '고정관념' 하나를 찾아보세요. 그것이 업무의 속도와 효율을 높이는 좋은 고정관념인지, 아니면 새로운 정보를 배체시키는 나쁜 고정관념인지 검증해 보세요. 이것이 고정관념의 덫에 빠지지 않으면서도 고정관념을 잘 활용하는 방법입니다. (끝)\n\n*참고논문 Jussim, L. (2012). Social Perception and Social Reality: Why Accuracy Dominates Bias and Self-Fulfilling Prophecy. Oxford University Press.\nJussim, L., Crawford, J. T., & Rubinstein, R. S. (2015). Stereotype accuracy in social psychological research. Annual Review of Psychology, 66(1), 493-518.\n\n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 자아는 '머리'에 있을까요, '가슴'에 있을까요?2026. 5. 19." [ref=e29]
+- link "다음 뉴스레터 스타벅스가 회장님 놀이터입니까?2026. 5. 21." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2067ms][0m

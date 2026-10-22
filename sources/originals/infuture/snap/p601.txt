@@ -1,0 +1,146 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 현명한 포기가 맹목적인 끈기보다 낫습니다 (https://infuture.stibee.com/p/601)
+- title: "현명한 포기가 맹목적인 끈기보다 낫습니다" [url=https://infuture.stibee.com/p/601]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "현명한 포기가 맹목적인 끈기보다 낫습니다 2025. 11. 24."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 24일  (No. 582)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "현명한 포기가 맹목적인 끈기보다 낫습니다"
+  - table:
+    - table:
+      - table: "여러분이 몰던 자동차의 바퀴가 진흙탕에 빠졌다고 상상해 보세요. 여러분이 엑셀레이터를 깊이 밟을수록 바퀴는 더 깊이 빠져들고 엔진은 과열되어 냉각수가 터지기 일보직전일 겁니다. 이때 여러분은 어떻게 해야 할까요? \"나는 할 수 있어. 노력하면 해낼 수 있어. 포기해서는 안 돼!\"라고 스스로를 응원해야 할까요? 아니면, 보험회사나 견인차를 불러야 할까요? 당연히 후자일 겁니다.  \n\n우리는 어릴 때부터 \"포기는 배추를 셀 때나 쓰는 말이다\"라는 우스개소리를 하면서 \"포기하지 않고 끝까지 나아가야 승리를 쟁취할 수 있다\"라는 말을 귀에 못이 박히도록 듣고 자랐습니다. 하지만 포기해야 할 것을 포기하지 않는 것은 집착입니다. 그리고 우리의 정신건강을 해치고 진정한 성과를 달성하지 못하게 만드는, 좋지 않은 마인드입니다.\n\n호주 커틴 대학교(Curtin University)의 휴 리델(Hugh Riddell) 연구팀은 목표 달성에 어려움을 겪을 때 어떻게 대처하는 것이 정신 건강과 성과에 가장 좋은지를 분석했습니다.\n\n달성 불가능한 목표를 과감히 철회하고 노력을 멈추는 것, 즉 '목표 이탈(Goal Disengagement)'을 하면 패배자라는 낙인이 찍히고 오랫동안 괴로울 것이라고 짐작하겠지만, 리델의 연구 결과는 달랐습니다. 달성하기 힘든 목표를 붙잡고 끙끙대는 것보다, 과감하게 '목표 이탈'을 선택한 사람들의 스트레스 호르몬(코르티솔) 수치가 훨씬 낮았고 신체적 건강 상태도 좋았으니까요."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "그런데 '목표 이탈'에서 그치면 안 된다는 게 리델의 연구가 주는, 보다 중요한 시사점입니다. 진정한 긍정적 변화는 '목표 재관여(Goal Re-engagement)'가 일어날 때 발생한다고 리델은 강조합니다. 즉, 안 되는 목표를 버리되(Disengagement), 내 상황에 맞는 새…[+302 chars]"
+        - list:
+          - listitem "인정하기(Disengagement): \"이 목표는 '현재의 나'에게 맞지 않거나 실현 불가능하다\"는 것을 인정하고 멈추세요. 인정하는 것은 실패 선언이 아니라, 손절매(Stop-l" [ref=e9]
+          - listitem "대안 찾기(Re-engagement): \"하지만 그 목표에 쏟았던 에너지를 바로 다른 곳으로 돌려야 합니다. 승진이 막혔다면 사내 이동을 노리거나 이직을 준비하는 것, 자격증 취득" [ref=e10]
+        - text: "무조건적인 끈기는 때로 독이 됩니다. 성공하는 사람들은 포기를 모르는 사람이 아니라, '언제 포기해야 할지'를 정확히 아는 사람입니다. 꽉 쥐고 있던 낡은 밧줄을 놓아야 새로운 동아줄을 잡을 수 있죠.\n\n지금이 11월 말이니 여러분이 신년에 세웠던 목표들 중에 아무런 진전이 없지만 스트…[+426 chars]"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[경영 코칭 서비스 제안서]  당신의 ‘씽크 파트너’가 되겠습니다\n\n\n 단순한 지식 전달자가 아닌, 리더가 직면한 난제를 함께 풀고 최적의 의사결정을 돕는 1:1 경영 코칭 서비스를 소개합니다.\n\n이런 고민을 가진 리더분들께 추천합니다."
+        - list:
+          - listitem "급격한 성장으로 인한 '성장통'을 겪으며 체계적인 시스템이 필요한 기업" [ref=e11]
+          - listitem "내부 임직원에게 털어놓기 힘든 고민을 객관적으로 상의할 상대가 필요한 CEO" [ref=e12]
+          - listitem "수직적인 조직문화를 개선하고 성과 중심의 HR 시스템을 구축하고 싶은 리더" [ref=e13]
+          - listitem "불확실한 미래에 대비해 '시나리오 플래닝' 기반의 전략을 수립하고 싶은 경영진" [ref=e14]
+        - text: "저의 경험과 노하우가 귀사의 성장에 거름이 되기를 바랍니다. 구체적인 코칭 철학과 커리큘럼, 그리고 진행 방식은 아래 링크된 제안서를 통해 확인하실 수 있습니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "제안서 다운로드" [ref=e15]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝\n 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하여 '교육계획서'를 다운 받으시기 바랍니다."
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e16]
+        - table
+  - table:
+    - table:
+      - table:
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e17]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e18]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e19]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e20]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e21]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e22]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e23]
+        - link "게시하기" [ref=e24]
+        - link "웹에서 보기" [ref=e25]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e26]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e27]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e28]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e29]
+        - link "페이스북" [ref=e30]
+        - link "인스타그램" [ref=e31]
+        - link "브런치" [ref=e32]
+- text: "공유하기"
+- button [ref=e33]
+- button [ref=e34]
+- button [ref=e35]
+- button [ref=e36]
+- button [ref=e37]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e38]
+- link "이전 뉴스레터 특별한 제안: 당신의 ‘씽크 파트너’가 되겠습니다 2025. 11. 21." [ref=e40]
+- link "다음 뉴스레터 고객은 왕이지만 폭군까지 모실 필요는 없습니다 2025. 11. 25." [ref=e42]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2410ms][0m

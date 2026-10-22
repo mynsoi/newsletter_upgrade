@@ -1,0 +1,97 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 가입을 쉽게 허용하면 안 되는 이유 (https://infuture.stibee.com/p/732)
+- title: "가입을 쉽게 허용하면 안 되는 이유" [url=https://infuture.stibee.com/p/732]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "가입을 쉽게 허용하면 안 되는 이유 2026. 8. 28."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 8월 28일  (No. 709)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "가입을 쉽게 허용하면 안 되는 이유"
+  - table:
+    - table:
+      - table: "무언가를 사람들에게 권장할 때 진입 장벽을 최대한 낮추고 매끄럽게 다가설 수 있도록 만들어야 한다고 믿습니까? 그렇다면 때로는 시작을 '약간 더 어렵게' 만드는 것이 사람들이 끝까지 남아서 실천하게 만드는 비결이라고 발상을 전환하기 바랍니다.\n\n하버드 경영대학원의 애슐리 윌런스(Ashley V. Whillans) 교수 연구팀은 이 심리를 '바이인 효과(Buy-In Effect)'라고 이름 붙였는데요, 사람들은 자신이 시간과 노력을 일정 부분 투자한 행동에 더 큰 심리적 가치를 느끼고 헌신한다는 것을 말합니다.\n\n여러분도 그렇고 저도 그렇습니다만, 자신에게 이로운 행동(건강한 식단, 운동 등)을 해야 한다는 것을 머리로는 알지만 실제 행동으로 옮길 때는 엄청난 의지가 필요합니다. 이를 '의도-행동의 간극(intention-action gap)'이라고 부릅니다. 만약 어떤 프로그램에 가입 절차를 지나치게 쉽게 설정하면 사람들은 어떻게 행동할까요? \"일단 가입만 해두자\"라고 가짜로 참여하는 상태에 머무릅니다."
+      - table
+  - table:
+    - table:
+      - table: "연구팀은 오리건주 교통국과 함께 진행한 2만 7천 명 대상의 카풀(Carpool) 플랫폼 실험에서 이를 증명했습니다. 연구진은 직원들을 두 그룹으로 나눴는데요, 한 그룹은 '클릭 한 번'으로 쉽게 가입(저관여)하게 했고, 다른 그룹은 자신의 정보를 '일일이 다시 입력'하는 번거로운 과정을 거치게(고관여) 했습니다.\n\n결과는 우리의 상식과 반대였습니다. 정보를 일일이 입력하게 만든 고관여 그룹은 저관여 그룹에 비해 초기 가입자 수가 25%나 적었는데, 진입 장벽이 높으니까 이것은 당연한 결과죠. 하지만 놀랍게도 번거로움을 뚫고 가입한 사람들은 저관여 그룹보다 일주일에 1.6배 더 많은 카풀을 이용했고, 4개월 동안 무려 795번이나 더 카풀에 참여했습니다. 가입의 문턱을 조금 높였더니 허수는 빠지고 진짜 행동할 '진성 유저'들만 남아 압도적인 참여도를 보여준 것입니다.\n\n또다른 실험에서도 결과는 마찬가지였습니다. 흐릿한 그리스 문자 35개를 해독하는 작업을 완료하고 나서 두 번째 세션을 할지 말지를 선택하도록 했더니 그런 해독 작업을 하지 않은 사람들보다 두 번째 세션에 35%나 더 참여했던 것이죠. 게다가 두 번째 세션에서 고관여 그룹은 저관여 그룹보다 더 많은 작업을 수행했습니다. 이처럼 목표와 관련된 의미 있는 수고로움은 심리적 소유권을 만들어내어 끝까지 해낼 확률을 크게 높여줍니다. \n\n하지만 주의할 점이 있습니다. 무턱대고 짜증 나는 진입장벽을 설정하면 곤란합니다. 퇴직연금 자동 가입처럼 '한 번 설정하면 끝나는(Set-and-forget)' 일에는 쉽고 매끄러운 가입 절차가 효과적입니다. 그러나 꾸준한 운동이나 지속적인 카풀처럼 반복적인 행동과 후속 조치가 요구되는 일에는 반드시 목표를 되돌아보게 하는 '의미 있는 진입장벽'이 필요합니다.\n\n진정한 몰입과 헌신은 '클릭 한 번'의 편리함이 아니라 기꺼이 감수한 작은 수고로움으로부터 만들어집니다. 약간의 수고로움이 진정으로 행동할 준비가 된 사람들의 마음을 꽉 잡아주는 훌륭한 닻(Anchor)이 되어주니까요.  (끝) \n\n\n(덧붙이는 글) \n'유정식의 경영일기' 구독을 어렵게 만들면 오픈율이 훨씬 올라갈까요? ㅋㅋ\n\n*참고논문 Kristal, A. S., & Whillans, A. V. (2020). What we can learn from five naturalistic field experiments that failed to shift commuter behaviour. Nature Human Behaviour, 4(2), 169-176.\n\nDykstra, H., O'Flaherty, S., & Whillans, A. V. (2023). The Buy-In Effect: When Increasing Initial Effort Motivates Behavioral Follow-Through. Harvard Business School.\n\n\n\n\n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터\"대안없는 문제 제기는 하지 말라\"고 말하지 마세요 2026. 8. 27." [ref=e29]
+- link "다음 뉴스레터 제로 콜라를 마시면 머리가 나빠집니다 2026. 8. 31." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2306ms][0m

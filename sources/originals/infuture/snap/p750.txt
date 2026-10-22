@@ -1,0 +1,99 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → '우리와 잘 맞는 사람'이라는 평가는 온당할까? (https://infuture.stibee.com/p/750)
+- title: "'우리와 잘 맞는 사람'이라는 평가는 온당할까?" [url=https://infuture.stibee.com/p/750]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "'우리와 잘 맞는 사람'이라는 평가는 온당할까?2026. 9. 28."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 9월 28일  (No. 727)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "'우리와 잘 맞는 사람'이라는 평가는 온당할까?"
+  - table:
+    - table:
+      - table: "어떤 지원자를 인터뷰하고 나서 면접관들이 의견을 나눕니다. “경력은 괜찮은데, 소통이 좀 아쉬워요.” 무엇이 아쉬웠느냐고 물으면 이렇게 답합니다. \"말투가 낯설고, 반응하는 타이밍이 다르고, 대화가 매끄럽게 이어지지 않았다\"라고 말이죠. \n\n여러분이 만약 이런 반응을 접했다면 지원자의 소통 능력이 떨어지기보다는 그가 '우리에게 익숙한 방식으로 말하지 않았기 때문은 아닐까'라고 의심할 필요가 있습니다. 우리는 소통 능력을 역량의 일종이라 여기는데요, 그 역량이 '경력의 기회'로 연결되는 정도는 주변 사람들이 어떤 방식으로 소통하느냐에 따라서도 달라질 수 있다는 연구 결과가 있습니다.\n\n연구진은 기존에 축적된 음성 평가 데이터를 활용했는데요, 원래 이 데이터는 누군가가 대본을 읽는 목소리를 듣고서 그 목소리만으로 성별과 인종, 미국 남부 출신 여부를 추정하는 것이었습니다. 연구진은 미국 사회에서 지배적인 집단에 해당하는 '백인·남성·비남부 출신'으로 평가된 목소리들을 분류해서 그들이 현재 어떤 직업을 가지고 있는지 분석했습니다."
+      - table
+  - table:
+    - table:
+      - table: "결과는 어땠을까요? 이렇게 지배적인 집단처럼 들리는 사람들은 대인 상호작용이 많이 필요한 직업에 종사하는 경향이 더 강했습니다. 연구진은 지역별 비교도 진행했는데요, 남부 억양을 가진 백인일수록 대인 상호작용이 많은 직업에 종사했습니다. 북동부·서부 억양을 지닌 백인들에게는 이런 관계가 나타나지 않았죠.\n\n이 결과는 ‘주변 사람들과 말하는 방식이 얼마나 비슷한가’가 개인의 경력에 영향을 미칠 수 있다는 의심을 충분히 가능케 합니다. 빠르게 결론부터 말하는 팀에 신중하게 배경부터 설명하는 직원이 들어왔다고 가정해 보세요. 팀장은 그를 답답하다고 느낄 수 있습니다. 반대로 충분한 배경 설명을 중시하는 팀에서는 결론부터 말하는 사람이 성급하다는 평가를 받을 수 있겠죠. 어느 쪽이든 '자신들에게 익숙함'을 역량으로 착각할 여지가 있습니다.\n\n그렇기에 소통 능력을 평가할 때는 평가 기준을 구체화해야 합니다. “우리와 말이 잘 통한다” 대신 “상대의 요구를 정확히 파악했는가”, “오해를 확인하고 수정했는가”, “합의한 내용을 실행으로 연결했는가”를 따져야 하겠죠. 연구진은 ‘우리 문화에 잘 맞는 사람’이라는 기준을 재검토해야 한다고 강조합니다. 말하는 방식만으로 역량을 판단하지 말고 소통에 관한 명확한 기준을 세워야 하고 리더 자신도 다양한 배경의 사람들과 교류해야 한다고도 조언합니다.\n\n여러분이 누군가에게 ‘이 사람은 소통 능력이 부족하다’는 판단을 내렸다면 그 판단을 뒷받침하는 행동을 하나 적어보세요. 구체적인 행동은 떠오르지 않고 말투에 대한 인상만 남는다면 평가받아야 할 것은 그 사람의 역량이 아니라 여러분의 기준일 수 있습니다.  (끝)\n\n\n*참고논문 Noray, K., & Noray, S. (2026). Workplace communication as systemic disadvantage (Working Paper No. 26-059). Harvard Business School.\n\n \n\n\n*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e10]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e11]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e12]
+        - link "게시하기" [ref=e13]
+        - link "웹에서 보기" [ref=e14]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e15]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e16]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e18]
+        - link "페이스북" [ref=e19]
+        - link "인스타그램" [ref=e20]
+        - link "브런치" [ref=e21]
+- text: "공유하기"
+- button [ref=e22]
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e27]
+- link "이전 뉴스레터 조직의 문제는 없는 게 아니라 '리더만 모를 뿐'2026. 9. 22." [ref=e29]
+- link "다음 뉴스레터 일 잘하는 직원에겐 교육이 필요없을까요?2026. 9. 29." [ref=e31]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[system] last tab closed. `page` is now null. call openTab(url) to open a new one.
+[system] no current open tabs in this session.
+[2m[ok | 2715ms][0m

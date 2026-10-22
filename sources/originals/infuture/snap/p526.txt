@@ -1,0 +1,101 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 부자가 되려면 성격 말고 행동을 바꾸세요 (https://infuture.stibee.com/p/526)
+- title: "부자가 되려면 성격 말고 행동을 바꾸세요" [url=https://infuture.stibee.com/p/526]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "부자가 되려면 성격 말고 행동을 바꾸세요 2025. 7. 23."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 7월 23일  (No. 512)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "부자가 되려면 성격 말고 행동을 바꾸세요"
+  - table:
+    - table:
+      - table: "솔직히 저는 ‘부자들의 공통 습관 5가지’ 같은 이야기를 별로 좋아하지 않습니다. 아니, 더 솔직하게 말하면 혐오하는 편입니다. 왜냐하면 그런 글들은 대개 검증되지 않은 자기계발 문구를 재탕하거나, 예외적인 것을 보편적인 것으로 포장하는 경우가 많기 때문이죠.\n\n그럼에도 불구하고 오늘은 심리학 연구를 기반으로 한 분석이 있어서 여러분께 소개할 만하다고 판단했습니다. 영국 심리학회지에 실린 어느 연구에 따르면, 부자가 된 사람들에게서 공통적으로 발견되는 성격 특성이 5가지라고 합니다. 다시 말해, 부유한 사람일수록 통계적으로 공통적인 심리 경향이 나타난다는 것이죠.\n\n첫째, 그들은 성실성(Conscientiousness)이 높습니다. 계획을 세우고 실천하는 능력이 뛰어난 그들은 유혹을 참는 자제력도 강합니다. 일상을 충실하게 살아가려는 꾸준함이 결국 부를 형성한다는 뜻이겠죠.\n\n둘째, 감정적 안정성(Emotional Stability)이 높습니다. 그들은 감정 기복이 크지 않고, 스트레스에 휘둘리지 않기 때문에 장기적인 안목으로 일에 집중할 수 있다고 합니다.\n\n셋째, 신경증적 경향(Neuroticism)이 낮습니다. 걱정이 많고 불안에 쉽게 휩싸이는 사람은 엉뚱한 곳에 에너지를 소모하기 때문에 정작 중요한 곳에는 집중하지 못하죠. 반면에 부자가 된 사람들은 그런 부정 감정에 휘둘리지 않는다고 하네요."
+      - table
+  - table:
+    - table:
+      - table: "넷째, 외향성(Extraversion)이 높습니다. 외향성이란 말을 많이 한다는 뜻이 아닙니다. 사람들을 자주 만나 협업하고 설득하는 데 열중하고, 때로는 앞에 나서서 사람들을 리드하죠. 타인의 에너지를 끌어다 쓰는 데 능숙한 것이 그들의 특징입니다.\n\n다섯째, 겸손한 자기애(Humble Narcissism)를 가지고 있습니다. 겸손과 자기애(나르시시즘)이 뜨거운 아이스아메리카처럼 이상하게 느껴지겠지만, 겸손한 자기애란 자기 목표에 강한 확신을 갖되, 타인의 도움을 인정하고 함께 성과를 이루려는 자세를 말합니다. 그들은 혼자 잘났다고 으스대기보다 함께 잘되려는 태도를 보인다고 합니다.\n\n그런데 이 5가지 특성을 보고 이런 의문이 들지 모르겠네요. “이런 성격은 선천적인 거라서 바꾸고 싶다고 해서 바뀌지 않잖아!” 맞습니다. 성격은 웬만해선 바뀌지 않는데요, 그럼에도 여러분은 성격이 아니라 행동을 바꿈으로써 부자들의 특성을 모방할 수 있습니다.\n\n내향성이 높으면 사람을 만나는 걸 부담스러워 할 텐데요, 부자들을 따라하겠다고 억지로 사람들을 만날 필요는 없습니다. 대신, 일주일에 한번씩 믿을 만한 사람을 만나 협업을 해보는 것으로 부자들의 외향적 특성을 모방할 수 있죠. 이렇게 하다보면 어느 순간 타인들에게 외향적인 사람으로 보일 수 있을 겁니다.\n\n성실성은 어떻게 모방할 수 있을까요? 갑자기 ‘이제 무조건 계획적으로 행동할 거야!’라고 다짐한다고 해서 성실성은 높아지지 않습니다. 그 대신, 성실한 사람을 자주 만나 교류를 하다보면 그 사람의 성실함으로 여러분이 전염될 겁니다. 자극을 받게 되어 성실한 행동을 따라하게 되죠.\n\n‘나는 부자다운 성격이 아니라서 텄어!’라고 비관하지 말고 여러분이 모방할 수 있는 작은 행동 하나를 의도적으로 채용해 보세요. 성격은 바뀌지 않지만 행동은 얼마든지 바꿀 수 있습니다. 행동이 쌓이면 습관이 되는데요, 그러면 타인들에게 ‘부자답게 행동하는 사람’처럼 보이고, 이런 인상이 여러분에게 부의 기운을 가져다 주는 선순환이 일어나지 않을까요? 일단 저부터 몇 가지를 따라해 봐야겠습니다. (끝)\n\n*참고논문\n Leckelt, M., Richter, D., Schröder, C., Küfner, A. C., Grabka, M. M., & Back, M. D. (2019). The rich are different: Unravelling the perceived and self‐reported personality profiles of high‐net‐worth individuals. British Journal of Psychology, 110(4), 769-789."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "저의 신간 <시나리오 플래닝>은 아래의 서점에서 판매되고 있습니다. 여러분의 많은 구매를 부탁 드립니다.\n\n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000214738690" [ref=e9]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=352251662" [ref=e10]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/Product/Goods/138729619" [ref=e11]
+        - text: "[다량 구매 혜택]\n한번에 10권 이상 구매를 원하신다면, 010-8998-8868로 전화 주시거나, jsyu@infuture.co.kr로 메일 주십시오. 저자 사인과 함께 특별 할인율 을 적용해 드리겠습니다. 할인율은 문의 시 알려 드리겠습니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 실수는 사람이 아니라 시스템이 만든다 2025. 7. 22." [ref=e31]
+- link "다음 뉴스레터 연봉이 적어도 '의미있는 일'을 하시겠습니까?2025. 7. 24." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2109ms][0m

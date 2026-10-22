@@ -1,0 +1,101 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 일 못하는 사람의 7가지 특징 (https://infuture.stibee.com/p/518)
+- title: "일 못하는 사람의 7가지 특징" [url=https://infuture.stibee.com/p/518]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "일 못하는 사람의 7가지 특징 2025. 7. 10."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 7월 10일  (No. 504)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "일 못하는 사람의 7가지 특징"
+  - table:
+    - table:
+      - table: "어떤 사람과 일하면 이상하게 일이 자꾸 꼬입니다. 한두 번은 실수라고 넘어갈 수 있지만, 유난히 그 사람과 함께할 때만 일정이 어그러지고 소통도 안 되고 결과물이 기대에 미치지 못하죠. 이럴 때 우리는 탄식합니다. “그 사람, 정말 일 못해. 같이 일 못하겠어.”라고.\n\n아마 여러분은 다음의 7가지 특징 중에 몇 가지를 그 사람에게서 발견했기 때문에 “그 사람, 정말 일 못해”라고 한탄하거나 분노했을 겁니다. 여러분의 머리 속에 바로 떠오르는 ‘일 못하는 사람’과 아래의 7가지 특징을 대조해 보세요.\n\n1. 마감을 잘 어긴다\n“곧 될 것 같아요.” “거의 다 했어요.” 이런 말을 입버릇처럼 하지만 차일피일 일정을 미루는 사람.  문제는 단순히 늦는 게 아니라 어떻게 하겠다는 계획 자체가 없다는 겁니다. 정말 속터질 일이죠.\n\n2. 피드백을 반영하지 않는다\n 같은 실수를 반복하면서도 고치질 않습니다. 고쳐달라고 하면 “그게 더 좋아 보여서요” 같은 말로 넘어가려 하죠. 이 또한 속터지는 말입니다."
+      - table
+  - table:
+    - table:
+      - table: "3. 맥락을 놓친다\n 지시는 했지만 깜빡하고 맥락을 전달하지 못했을 때, 일을 못하는 사람은 그 맥락을 이해하지 못하고 그저 ‘시킨 대로’만 합니다. 예를 들어, “이것 좀 복사해 와. 이따 회의 때 필요해서.”라고 하면 딱 1부만 복사해 오는 꼴이죠. 참석자는 5명인데 말이죠. 또는 “그건 제 일이 아니잖아요” 같은 말로 선을 긋습니다. 문제 해결보다는 책임을 회피하는 걸 우선합니다.\n\n4. 일을 한꺼번에 하려고 한다\n 일을 세부적인 것들로 나누지 못하고 결국 덩어리째 들고서 끙끙 앓다가 마감을 지키지 못합니다. 계획 없이 무작정 시작하고, 중간에 헤메다가, 끝에 가서는 흐지부지하고 말죠.\n\n5. 소통이 느리거나 부정확하다\n 필요한 정보를 제때 묻지 않습니다. 묻더라도 애매하게 묻습니다. 설명은 긴데 요점이 빠져 있고, “그래서 뭘 말하려는 거지?”라는 생각이 먼저 듭니다. 이런 사람과 함께하면 소통이 피곤해집니다. 같이 말 섞기가 싫죠.\n\n6. 책임을 피한다\n 문제가 생기면 “지시가 명확하지 않았다”, “전달이 잘못됐다”라는 말부터 나옵니다. 남탓을 먼저 하죠. 자신이 뭘 놓쳤는지보다 왜 자기 책임이 아닌지를 설명하는 데 집중하죠.\n\n7. 자기 인식이 낮다\n 본인의 일 처리 능력을 과대평가하거나, 반대로 지나치게 과소평가하여 아무것도 시도하지 않습니다. 정말 답이 없는 상황입니다.\n\n혹시 여러분이 이 중 몇 개에 해당되는 건 아니겠죠? (끝)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "저의 신간 <시나리오 플래닝>은 아래의 서점에서 판매되고 있습니다. 여러분의 많은 구매를 부탁 드립니다.\n\n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000214738690" [ref=e9]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=352251662" [ref=e10]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/Product/Goods/138729619" [ref=e11]
+        - text: "[다량 구매 혜택]\n한번에 10권 이상 구매를 원하신다면, 010-8998-8868로 전화 주시거나, jsyu@infuture.co.kr로 메일 주십시오. 저자 사인과 함께 특별 할인율 을 적용해 드리겠습니다. 할인율은 문의 시 알려 드리겠습니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e12]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e13]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e14]
+        - link "게시하기" [ref=e15]
+        - link "웹에서 보기" [ref=e16]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e17]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e18]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e19]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e20]
+        - link "페이스북" [ref=e21]
+        - link "인스타그램" [ref=e22]
+        - link "브런치" [ref=e23]
+- text: "공유하기"
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e29]
+- link "이전 뉴스레터 리더는 스스로 고립을 감수하는 사람 2025. 7. 9." [ref=e31]
+- link "다음 뉴스레터\"나는 성공한 걸까?\" 자신에게 물어보세요 2025. 7. 11." [ref=e33]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2279ms][0m

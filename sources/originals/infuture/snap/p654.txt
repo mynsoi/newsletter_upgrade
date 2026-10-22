@@ -1,0 +1,100 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 연봉이 높다고 월요일 출근이 즐거울까요? (https://infuture.stibee.com/p/654)
+- title: "연봉이 높다고 월요일 출근이 즐거울까요?" [url=https://infuture.stibee.com/p/654]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "연봉이 높다고 월요일 출근이 즐거울까요?2026. 4. 9."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 4월 9일  (No. 632)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "연봉이 높다고 월요일 출근이 즐거울까요?"
+  - table:
+    - table:
+      - table: "여러분의 연봉이 지금보다 2~3배나 인상되어 소위 '억대 연봉자'가 되었다고 가정해 보세요. 아마도 금요일 퇴근길에 여러분은 세상을 다 가진 듯한 여유로운 표정을 지을 겁니다. 그런데 주말이 지나고 월요일 아침에 출근길을 서두르는 여러분의 기분은 어떨까요? 통장에 찍힌 숫자를 떠올리며 콧노래를 부를까요?\n\n십중팔구 여러분은 무겁고 피곤한 표정을 지을 것이고 연봉 인상 전에 '아, 회사 가기 싫어'라고 했던 마음과 똑같을 겁니다. 연봉이 높아졌다고 해서 월요일 출근길 발걸음이 그만큼 가벼워지고 웃으면서 일할 수 있는 것은 아니기 때문이죠. 우리는 돈을 많이 받으면 기쁘게 일할 것이라 짐작하지만, 돈은 우리를 회사에 남아 있게(Retention) 만들 수는 있어도 웃으며 일하게(Engagement) 만들지는 못합니다.\n\n와튼 스쿨의 마튜 킬링스워스(Matthew Killingsworth)는 소득이 높아질수록 '내 삶 전반에 대한 만족도'는 확실히 올라간다고 말하면서 그 이유는 돈이 주는 통제력과 삶의 여유 덕이라고 언급합니다. 그러나 '근무 시간 중에 느끼는 행복감'은 소득 수준과 큰 상관관계가 없다는 것을 연구 결과로 내놓았습니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "킬링스워스는 그 이유를 이렇게 말합니다. 연봉이 올라간다는 것은 그만큼 책임이 무거워지고, 더 높은 스트레스 환경에 노출되며, 자기 시간을 마음대로 통제할 자율성이 줄어듭니다. 돈은 개인 생활의 안락함을 보장하고 삶의 근심을 덜어주는 훌륭한 진통제이긴 하지만, 하루 8시간 이상을 보내는…[+536 chars]"
+        - link "https://knowledge.wharton.upenn.edu/article/more-money-makes-people-happier-but-not-at-work/" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "이번에 추가 개설한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 AI 시대에는 '합의'하지 마세요 2026. 4. 8." [ref=e30]
+- link "다음 뉴스레터 열정적인 직원일수록 변화를 거부한다?2026. 4. 10." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 1880ms][0m

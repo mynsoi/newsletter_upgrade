@@ -1,0 +1,115 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 생명을 단축(?)하는 가장 쉬운 방법 (https://infuture.stibee.com/p/547)
+- title: "생명을 단축(?)하는 가장 쉬운 방법" [url=https://infuture.stibee.com/p/547]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "생명을 단축(?)하는 가장 쉬운 방법 2025. 9. 4."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 9월 4일  (No. 532)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "생명을 단축(?)하는 가장 쉬운 방법"
+  - table:
+    - table:
+      - table: "여러분은 하루에 얼마나 오래 앉아 있나요? 아침에 일어나 출근길에는 버스나 지하철 의자에 앉고, 사무실에서는 컴퓨터 앞에 줄곧 앉아 일하다가, 퇴근하면 TV나 스마트폰을 들여다보며 또 앉아 있지 않나요? 우리는 의식하지 못한 채 하루의 대부분을 의자 위에서 보내고 있습니다.\n\n심각하게도 이런 생활습관이 생명을 단축시킬 수 있다는 데 있습니다. 울프 에켈룬(Ulf Ekelund) 연구팀은 메타 분석을 통해 무려 백만 명이 넘는 데이터를 추적했습니다. 결과는 충격적인데요, 하루 8시간 이상 앉아 생활하며 신체 활동을 별로 하지 않은 하루 4시간 미만 앉으며 활동적인 사람보다 사망 위험이 59%나 높았습니다.\n\n집에서 여러분이 조심해야 하는 것은 바로 TV 시청 혹은 인터넷 브라우징입니다. TV 앞에 3시간 이상 앉아 있으면 운동량과 상관없이 사망 위험이 증가하니까 말입니다. 활동적인 사람조차 하루 5시간 이상 TV를 보면 사망 위험이 높아집니다. 이는 TV를 시청할 때 무심코 간식을 먹을 가능성이 크기 때문이죠."
+      - table
+  - table:
+    - table:
+      - table: "하지만 이 연구는 좋은 소식도 함께 전해 줍니다. 하루에 약 60~75분 동안 중간 수준의 강도로 꾸준히 운동하면 하루에 대부분의 시간을 앉아 있다 하더라도 부정적 효과를 거의 없앨 수 있다고 합니다. 오래 앉아 있어도 1시간 이상 몸을 움직이면 위험은 크게 줄어든다는 것이죠. 반대로 신체 활동이 부족하다면 하루에 앉아 있는 시간이 4시간 미만이라 하더라도 사망 위험은 여전히 높다고 해요. 그러니까 중요한 것은 ‘얼마나 오래 앉아 있는가’라기보다 ‘얼마나 많이 움직였는가’입니다.\n\n회사 사무실에서는 PC 앞에 앉아 일하는 시간이 많을 수밖에 없어서 “도대체 어떻게 앉아 있는 시간을 줄이냐?”라고 반문할지 모르지만 방법이 있습니다. 바로 ‘서서 하는 회의(standing meeting)’를 운영하는 것입니다. 서서 회의를 하면 회의 시간이 짧아지고 논의가 간결해져 효율성이 높아집니다. 앉아 있을 때보다 몸이 긴장되어 집중력도 유지되죠. 또한, 구성원 간의 위계감이 줄어들어 더 활발한 의견 교환이 이뤄질 수 있습니다. 서서 하는 회의는 건강과 생산성을 동시에 잡을 수 있는 방법입니다.\n\n지금 이 글을 앉아서 읽고 있다면, 곧바로 자리에서 일어나 잠시 걷거나 기지개를 켜 보세요. 하루에 한 시간 남짓의 움직임이 여러분의 건강과 생명을 지켜줍니다. 앉아 있는 시간을 줄이는 것이 곧 여러분의 행복한 삶을 연장하는, 가장 손쉬운 방법입니다.  (끝)\n\n\n*참고논문\n Ekelund, U., Steene-Johannessen, J., Brown, W. J., Fagerland, M. W., Owen, N., Powell, K. E., ... & Lee, I. M. (2016). Does physical activity attenuate, or even eliminate, the detrimental association of sitting time with mortality? A harmonised meta-analysis of data from more than 1 million men and women. The lancet, 388(10051), 1302-1310."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[강좌 공지]  AI를 활용한 시나리오 플래닝"
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e9]
+        - table
+  - table:
+    - table:
+      - table: "chatGPT 등 AI 도구를 활용하면 그간 '좋은 건 알지만 어려워서 못했던' 시나리오 플래닝을 아주 수월하게 진행할 수 있습니다. 여러분이 시나리오 플래닝 방법론을 충분히 이해한 상태에서 AI에게 '적확한' 질문을 던질 줄만 안다면, 2~4개월 걸리던 시나리오 플래닝을 단 몇 시간만에 완료할 수 있습니다.\n\n25년 간 시나리오 플래닝을 컨설팅하고 강의해 온 제가 여러분을 가이드해 드리겠습니다. 제가 직접 가상의 기업 사례로 AI를 활용한 시나리오 플래닝을 시연하는 방식으로 강의가 진행됩니다. 참석자들께는 AI에 처음 던져줘야 할 '시나리오 플래닝 프롬프트'를 제공합니다. 중간 결과물이 나올 때마다 어떻게 조정해 가야 하는지, AI에게 어떤 질문을 던져야 하는지 등도 알려 드립니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e10]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e11]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e12]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e13]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e15]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e16]
+        - link "게시하기" [ref=e17]
+        - link "웹에서 보기" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e19]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e20]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e21]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e22]
+        - link "페이스북" [ref=e23]
+        - link "인스타그램" [ref=e24]
+        - link "브런치" [ref=e25]
+- text: "공유하기"
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e31]
+- link "이전 뉴스레터 돈 관계는 뭐든 확실해야 합니다 2025. 9. 3." [ref=e33]
+- link "다음 뉴스레터 직원들이 말도 안되는 소문을 퍼뜨리는 이유는?2025. 9. 5." [ref=e35]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2235ms][0m

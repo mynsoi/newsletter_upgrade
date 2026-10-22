@@ -1,0 +1,112 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 여러분의 강점은 치명적인 약점일지 모릅니다 (https://infuture.stibee.com/p/557)
+- title: "여러분의 강점은 치명적인 약점일지 모릅니다" [url=https://infuture.stibee.com/p/557]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "여러분의 강점은 치명적인 약점일지 모릅니다 2025. 9. 18."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 9월 18일  (No. 542)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "여러분의 강점은 치명적인 약점일지 모릅니다"
+  - table:
+    - table:
+      - table: "혹시 주변에 이런 사람이 있지 않나요? 회의만 하면 답답하다면서 자기가 결론을 다 내버리는 팀장. 하지만 그는 평소 ‘추진력 하나는 끝내준다’는 칭찬을 듣는 사람이죠. 본인은 막힌 속을 뻥 뚫었다고 생각할지 몰라도 회의실을 나서는 팀원들은 한숨을 쉬며 이렇게 중얼거립니다. “그렇게 혼자 정할 거면 회의를 왜 해? 우리 머리는 그냥 장식인가?” 모두가 인정하는 ‘추진력’이라는 강점이 어느새 ‘독단’과 ‘불통’으로 변하는 순간입니다.\n\n“약점은 그냥 두고 강점에 집중하세요!” 이런 말을 많이 들었을 겁니다. 저도 자주 이렇게 언급했었고요. 자기계발서에 꼭 나오는 경구 중 하나죠. 하지만 세상사 대부분이 그렇듯이 항상 정답은 아닙니다. 누구나 인정한 강점이 여러분의 발목을 잡는 덫이 될 수 있기 때문입니다.\n\n연구 결과가 이를 뒷받침합니다. 심리학자 로버트 카이저가 리더들의 역량과 성과를 분석하는 연구를 했는데요, 자신의 강점을 ‘너무 과하게’ 쓰는 리더는 오히려 성과가 뚝 떨어지더랍니다. 무엇이든 과유불급ㅇ죠. ‘꼼꼼함’이 강점인 리더는 너무 꼼꼼해서 사사건건 간섭하는 ‘마이크로 매니저’가 되거나, ‘친화력’이 강점인 리더가 귀가 너무 얇아서 우유부단하는 모습을 보이기 쉽습니다.  강점은 동전의 양면 같아서 어떻게 쓰느냐에 따라 약점이 될 수 있죠."
+      - table
+  - table:
+    - table:
+      - table: "이는 비단 리더들에게만 해당되는 이야기가 아닙니다. 여러분이 만약 분석을 기가 막히게 잘하는 사람이면 어떨까요? 업무는 누구보다 잘하겠지만 동료가 흉금을 털어놓으며 고민을 말하면 “문제는 이것이고 해결책은 바로 이것이야.”라는 말이 먼저 나와서 동료의 감정을 상하게 할 수 있죠. 공감이 우선돼야 하는데 말이죠.\n\n‘책임감’이 강한 사람은 보통 긍정적인 평가를 받지만 책임감이 과하면 모든 일을 혼자 끙끙 앓다가 번아웃에 빠지기 십상입니다. 다른 사람에게 일을 맡기지도 못해서 팀 전체의 효율을 떨어뜨리기도 하고요. 이쯤 되면 강점이 아니라 치명적인 약점 아닌가요?\n\n균형감각을 키우는 게 중요합니다. 여러분의 강점은 소중한 무기이지만, 그 무기가 여러분을 다치게 할 수 있습니다. 강점이 상황에 맞게 잘 쓰이는지, 혹시 타인이나 본인에게 오히려 상처를 주고 있는지 가끔은 성찰할 필요가 있습니다.\n\n여러분의 강점 하나를 1가지만 떠올리고, 그 강점 때문에 주변인들이 힘들어했을 만한 순간이 있었는지 반추해 보세요. 강점에 관한 주기적인 자기 성찰이 여러분의 강점을 진짜로 강력한 우위로 만들어 줄 겁니다.  (끝)\n\n\n*참고논문\n Kaiser, R. B., & Kaplan, R. E. (2006). The deeper work of executive development: Overcoming barriers to growth. In R. J. Burke & C. L. Cooper (Eds.), Inspiring leaders (pp. 256–285). Routledge/Taylor & Francis Group."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e9]
+        - table
+      - table: "이번에 공개 강좌로 모집한 'AI를 활용한 시나리오 플래닝' 과정은 수강정원이 초과되어 신청이 마감되었습니다. 여러분의 관심에 깊은 감사를 드립니다.\n\n제가 여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e10]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e11]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e12]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e13]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e14]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e15]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e16]
+        - link "게시하기" [ref=e17]
+        - link "웹에서 보기" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e19]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e20]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e21]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e22]
+        - link "페이스북" [ref=e23]
+        - link "인스타그램" [ref=e24]
+        - link "브런치" [ref=e25]
+- text: "공유하기"
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e31]
+- link "이전 뉴스레터 혁신과 성과, 둘다 잡겠다고요?2025. 9. 17." [ref=e33]
+- link "다음 뉴스레터 심리적 안전감이 높으면 과연 좋을까요?2025. 9. 19." [ref=e35]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2318ms][0m

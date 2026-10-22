@@ -1,0 +1,100 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 워크맨에서 배우는 성공제품의 비결 (https://infuture.stibee.com/p/668)
+- title: "워크맨에서 배우는 성공제품의 비결" [url=https://infuture.stibee.com/p/668]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "워크맨에서 배우는 성공제품의 비결 2026. 4. 29."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2026년 4월 29일  (No. 646)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "워크맨에서 배우는 성공제품의 비결"
+  - table:
+    - table:
+      - table: "전에 말한 적이 있지만, 고장 난 소니 워크맨의 덮개를 열고, 먼지를 털어내고, 늘어지고 끊어진 고무 벨트를 새것으로 교체하는 작업이 제 취미입니다. 죽어 있던 낡은 기계에 새 생명을 불어넣어 이어폰으로 아날로그 음악이 정상적으로 흘러나올 때의 쾌감은 이루 말할 수 없죠. 이렇게 고쳐진 일부 워크맨은 새로운 주인을 찾아갑니다.\n\n취미가 워크맨 수리다 보니 어젯자 하버드 비즈니스 리뷰에 올라온 기사들 중 'Walkman'이 들어간 글을 읽지 않을 수 없더군요. 이 기사는 워크맨을 비롯한 여러 제품의 성공 비결을 통해 앞으로의 제품 기획 방향을 제안하는 글인데요, 주제를 한마디로 요약하면, 성공은 '더하기'가 아니라 '빼기'와 '결핍'에서 시작된다는 것입니다.\n\n기사는 워크맨을 비롯한 히트작들이 가진 공통점을 분석하며, 워크맨의 성공 원리를 크게 세 가지로 설명합니다.\n\n첫째, 기술보다는 편리함(Convenience always trumps technology)입니다. 1979년 당시 오디오 시장의 화두는 거실 전체를 웅장하게 채우는 하이파이(Hi-Fi)의 완벽한 음질이었습니다. 반면 워크맨은 음질도 상대적으로 떨어지고 웅장한 사운드도 낼 수 없었죠. 기술적으로는 명백한 퇴보였습니다. 하지만 소니는 무거운 기술을 덜어냄으로써 '언제 어디서나 이동하면서 음악을 듣는다'는 압도적인 편리함을 고객에게 선사하며 당대 최고의 하이테크 오디오들을 가볍게 이겨버렸습니다."
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "둘째, 의도적인 제약(Intentional constraint)입니다. 당시 기술자들은 \"녹음 기능도 없고 스피커도 없는 녹음기가 대체 무슨 소용이냐\"며 워크맨을 조롱했습니다. 그러나 소니는 모든 기능을 다 넣으려는 강박을 버리고, 무겁고 복잡한 부품들을 과감히 잘라냈습니다. 오직 재생…[+1008 chars]"
+        - link "https://hbr.org/2026/04/how-the-walkman-gameboy-liquid-death-and-pokemon-became-surprise-hits" [ref=e9]
+        - text: "*주변 동료에게 '유정식의 경영일기' 구독을 추천해 주세요.*"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e10]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e11]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e12]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e13]
+        - link "게시하기" [ref=e14]
+        - link "웹에서 보기" [ref=e15]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e16]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e17]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e18]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e19]
+        - link "페이스북" [ref=e20]
+        - link "인스타그램" [ref=e21]
+        - link "브런치" [ref=e22]
+- text: "공유하기"
+- button [ref=e23]
+- button [ref=e24]
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e28]
+- link "이전 뉴스레터 리더가 '왜?'라는 질문을 멈춰야 하는 이유 2026. 4. 28." [ref=e30]
+- link "다음 뉴스레터 AI에게 페르소나를 부여하지 마세요 2026. 4. 30." [ref=e32]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2109ms][0m

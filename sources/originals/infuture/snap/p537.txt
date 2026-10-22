@@ -1,0 +1,102 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 죽음공포증 이겨내기 (https://infuture.stibee.com/p/537)
+- title: "죽음공포증 이겨내기" [url=https://infuture.stibee.com/p/537]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "죽음공포증 이겨내기 2025. 8. 22."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 8월 22일  (No. 523)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "죽음공포증 이겨내기"
+  - table:
+    - table:
+      - table: "나이가 50대 중반에 다가가니 죽음이 멀리 있는 일이 아니라는 느낌이 하루에 꼭 한 번 이상은 든다. 젊은 시절에는 ‘언젠가 올 먼 미래의 사건’ 정도로 여겼지만, 이제는 몸과 마음으로 죽음이 감각된다. 내가 더 이상 존재하지 않는다면 그때의 세계는 어떤 모습일까? 세상은 그대로 흘러가고 사람들은 아무렇지 않게 일상을 살아가겠지만 나는 그 세계에서 완전히 소거돼 버린다. 그 공허와 허무를 떠올릴 때마다 숨이 턱 막히고 설명하기 어려운, 검고 무거운 두려움이 엄습한다.\n\n아직은 살아있는 내가 ‘내가 없는 상태’를 상상하는 것은 불가능한 일이다. 이성적으로 평가할 수 없는 상태이니 두려운 감정에 사로잡힐 수밖에 없다.\n\n하지만 두려움에 떨며 죽을 차례만을 그저 기다리고 있을 수는 없는 일. 죽음은 인간이라면 누구나 피할 수 없는 운명이니 ‘언젠가의 죽음’을 고요히 기다려며 남은 삶을 조금이라도 가치 있게 살아야하지 싶다. 그게 내가 통제할 수 있는 선택이니까. 죽음이라는 내 통제 밖의 사건으로 괴로워하며 하루하루를 낭비하는 바보가 되기는 싫으니까....라고 마음을 다독인다."
+      - table
+  - table:
+    - table:
+      - table: "<바이센테니얼 맨>과 같은 영화들을 보면 ‘영생’을 얻은 주인공들이 등장한다. 그들은 영원히 살 수 있는 능력을 축복으로 여기지만 시간이 흐를수록 고통을 호소하곤 한다. 자신을 둘러싼 이들은 모두 죽어가고, 매일 매일은 무의미하게 반복되니 주인공은 영생을 축복이 아닌 형벌이라고 말하며 자연스러운 죽음을 간절히 원한다. 삶의 의미와 가치는 ‘끝’이 있다는 사실에서 비롯된다는 것을 그들은 깨달았을까? 죽음은 결핍이 아니라 인간됨의 조건이자 존엄의 완성임을 인식했던 것일까?\n\n영화 속 주인공이 말하는 “영생은 신이 준 형벌이다”라는 명제가 참이라면 그 대우명제인 “신의 축복이란 한계가 존재하는 삶이다.”도 참이다. ‘신이 우리 인간에게 준 축복 중 하나는 길어야 100년 밖에 못 사는 삶’이 참이라면, 죽음에 대한 두려움이 조금은 가벼워진다. 나는 이렇게 믿기로 했다. 참이든 아니든, 죽음을 기꺼이 맞이하는 데 도움이 되니까.\n\n마크 트웨인은 말을 남겼다. “나는 죽음을 두려워하지 않는다. 태어나기 전 수십억 년 동안 죽어 있었지만 전혀 불편함을 느낀 적이 없다(I do not fear death. I had been dead for billions and billions of years before I was born, and had not suffered the slightest inconvenience from it).” 오늘은 이 문장을 대여섯 번 읽었다. 내 끝모를 타나토포비아(Thanatophobia, 죽음공포증)에 좋은 치료제가 되리라 믿으며. (끝)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 그동안 이 책 편집/교정하느라 좀 바빴습니다. <나의 소울넘버>라는 책인데요, 과거에 초판이 나왔다가 이번에 개정판으로 새로 인사를 드립니다. 아직 인쇄 전이라 지금은 예약판매 중입니다(7월 29일에 서점 배본 예정). \n\n타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e9]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e10]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e11]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e12]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e13]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e14]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e15]
+        - link "게시하기" [ref=e16]
+        - link "웹에서 보기" [ref=e17]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e18]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e19]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e20]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e21]
+        - link "페이스북" [ref=e22]
+        - link "인스타그램" [ref=e23]
+        - link "브런치" [ref=e24]
+- text: "공유하기"
+- button [ref=e25]
+- button [ref=e26]
+- button [ref=e27]
+- button [ref=e28]
+- button [ref=e29]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e30]
+- link "이전 뉴스레터 계획에 매몰되면 실패가 시작된다 2025. 8. 21." [ref=e32]
+- link "다음 뉴스레터 좋은 이익과 나쁜 이익을 가르는 기준은?2025. 8. 25." [ref=e34]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2097ms][0m

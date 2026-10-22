@@ -1,0 +1,124 @@
+✔︎ Opened a new tab and set it active: tabs[0], page → 사과할 때 '주어' 하나로 수천억 원을 잃을 수 있다 (https://infuture.stibee.com/p/591)
+- title: "사과할 때 '주어' 하나로 수천억 원을 잃을 수 있다" [url=https://infuture.stibee.com/p/591]
+- banner:
+  - generic [ref=e1]:
+    - image "profile_image"
+    - text: "유정식의 경영일기"
+  - button "구독하기" [ref=e2]
+  - generic "로그인" [ref=e3]
+- text: "사과할 때 '주어' 하나로 수천억 원을 잃을 수 있다 2025. 11. 11."
+- button [ref=e4]
+- button [ref=e5]
+- button [ref=e6]
+- button [ref=e7]
+- button [ref=e8]
+- table:
+  - table:
+    - table:
+      - table: "2025년 11월 11일  (No. 573)"
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "[금년 마지막 강좌]  AI를 활용한 시나리오 플래닝 3기\n\n 마지막으로 딱 한 분만 모십니다. 많은 분들의 요청에 따라 ‘AI를 활용한 시나리오 플래닝’ 3기를 개설합니다. 일자는 11월 15일/22일입니다. \n\nchatGPT 등 AI 도구를 활용하면 그간 '좋은 건 알지만 어려워서 …[+158 chars]"
+        - link [ref=e9]
+      - table:
+        - table:
+          - link "수강 신청하기" [ref=e10]
+        - table
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "사과할 때 '주어' 하나로 수천억 원을 잃을 수 있다"
+  - table:
+    - table:
+      - table: "제품 이상으로 인해 다수의 소비자들이 피해를 입으면 그 회사의 CEO가 기자회견에 나와 어떤 식으로든 사과를 할 겁니다. 만약 다음과 같이 2가지 경우로 달리 발언한다면, 여러분은 둘 중 어떤 것이 더 진정성이 있다고 평가하겠습니까?\n\n1) 저희 회사가 일으킨 문제로 심려를 끼쳐 드려서 대단히 죄송합니다.\n2) 저의 불찰로 이같은 문제를 일으켜서 대단히 죄송합니다.\n\n둘 다 사과하고 용서를 구하는 태도가 간절하다 하더라도 청자(듣는 사람)는 2번을 보다 진정성 있는 사과로, 재발 방지를 확실히 하는 약속으로 여깁니다. 이는 드폴(DePaul) 대학의 제니퍼 타타라(Jennifer H. Tatara) 교수의 연구로 강력하게 뒷받침되는 사실입니다.\n\n타타라는 1996년부터 2023년까지 27년간 발표된 224개의 기업 사과문을 분석하여 놀라운 패턴을 발견했습니다. CEO가 \"I apologize\"라고 말한 경우, 단기 주가 수익률이 통계적으로 유의미하게 상승했던 겁니다. 반면 \"We apologize\"라고 말한 경우에는 그런 효과가 전혀 나타나지 않았습니다."
+      - table
+  - table:
+    - table:
+      - table: "구체적으로 \"I apologize\"를 사용하면 시장의 페널티, 즉 기업가치의 하락이 약 86%나 감소했습니다. 그저 단어 하나를 달리 하면 수천억 원의 시가총액 하락을 막을 수 있다는 의미죠.\n\n1982년에 누군가가 고의로 독극물을 넣은 타이레놀 캡슐을 복용하고 7명이 사망하는 초유의 사태가 발생했는데요, 존슨앤존슨(Johnson & Johnson)의 CEO는 \"I apologize\"라고 사과하고 곧바로 전국적 리콜을 단행했습니다. 1억 달러 이상의 비용이 들었지만, 주가는 크게 흔들리지는 않았죠.\n\n반대로 2016년에 스마트폰 배터리에 불이 나는 사건이 발생하자 삼성전자는 \"We are truly sorry\"라는 전면광고를 내보내며 무려 250만대의 스마트폰 리콜을 단행했습니다. 그럼에도 불구하고 주가가 계속 하락해서 수십억 달러의 시가총액이 증발하고 말았습니다.\n\n이 두 사과문에는 'I(나)'를 썼느냐, 'We(우리)'를 썼느냐의 차이만 있는데요, 투자자와 소비자들은 개인적인 책임을 지는 리더에게 '보상'을 주는 경향이 있다고 타타라는 설명합니다. 반면 'We'는 책임 소재를 희석시키려는 의도로 해석되기 쉽다고 합니다. \"We apologize\"라고 말하면 시장은 \"저 회사에는 리더십이란 게 있나?\"라고 의심한다는 것이죠.\n\n그런데 예외가 있습니다. 다양성과 관련된 문제, 즉 인종, 성별, 장애, 성소수자 차별과 같은 문제가 터졌을 때는 \"I apologize\"보다는 \"We apologize\"라고 사과해야 한다고 타타라는 말합니다. 다양성 문제는 시스템의 실패와 구조적 오류로 인해 발생한 문제이기 때문입니다.\n연구 결과를 간단하게 정리하면 이렇습니다.\n\n- 제품 결함, 운영상의 실수 등 명확한 책임 소재가 있는 사고에는 \"I apologize\"- 조직문화의 문제나 시스템의 구조적 문제로 인해 발생한 사고에는 \"We apologize\"\n\n문제와 사고의 유형에 따라 '나'라고 말해야 할지 '우리'라고 말해야 할지도 리더가 유념해야 할 사항입니다. 물론 피해 배상과 재발 방지 대책 등을 진정성 있게 실천해야 한다는 전제가 있어야 합니다. 그와 함께 '말 한 마디로 천냥 빚을 갚는다'라는 속담처럼 어떤 단어를 선택하느냐도 중요하다는 점을 기억하기 바랍니다. (끝)\n\n\n*참고논문 Tatara, J. H., Peters, C. B., & colleagues. (preparing for publication). Analysis of 224 corporate apologies between 1996 and 2023."
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table: "[기업 교육 계획서]  AI를 활용한 시나리오 플래닝"
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "교육계획서 다운로드" [ref=e11]
+        - table
+      - table: "여러분의 조직에 방문해 내부 직원 대상으로 'AI를 활용한 시나리오 플래닝' 강의를 별도로 진행할 수 있습니다. 위의 버튼을 클릭하면 '교육계획서'를 다운 받으실 수 있으니 참고하시기 바랍니다."
+  - table:
+    - table:
+      - table
+      - table:
+        - text: "제가 운영하는 출판사 '경다방'에서 신간이 출간됐습니다. 타로 혹은 수비학에 관심을 가진 분들, 타로 수비학이"
+        - link [ref=e12]
+        - text: "아니더라도 삶의 조언을 구하고 싶은 분들께 추천하는 책입니다. 페친 여러분의 구매와 열독을 부탁 드립니다. \n\n\n- 교보문고 :"
+        - link "https://product.kyobobook.co.kr/detail/S000217068192" [ref=e13]
+        - text: "- 알라딘 :"
+        - link "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=368373240" [ref=e14]
+        - text: "- 예스24:"
+        - link "https://www.yes24.com/product/goods/149287293" [ref=e15]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - text: "'유정식의 경영일기' 모두 읽기\n 지금까지 발행된 경영일기를 몰아보시려면 아래의 링크를 클릭하세요. 놓치신 글들을 모두 읽으실 수 있습니다. 주변 지인들에게 구독하라고 많이 소개해 주세요!"
+        - link "https://infuture.stibee.com/" [ref=e16]
+  - table:
+    - table:
+      - table
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "경영일기 구독 신청" [ref=e17]
+        - table
+  - table:
+    - table:
+      - table:
+        - link "공유하기" [ref=e18]
+        - link "게시하기" [ref=e19]
+        - link "웹에서 보기" [ref=e20]
+  - table:
+    - table:
+      - table:
+        - table:
+          - link "인퓨처컨설팅" [ref=e21]
+          - text: "|"
+          - link "jsyu@infuture.co.kr" [ref=e22]
+          - text: "|"
+          - link "수신거부 Unsubscribe" [ref=e23]
+  - table:
+    - table:
+      - table:
+        - link "홈페이지" [ref=e24]
+        - link "페이스북" [ref=e25]
+        - link "인스타그램" [ref=e26]
+        - link "브런치" [ref=e27]
+- text: "공유하기"
+- button [ref=e28]
+- button [ref=e29]
+- button [ref=e30]
+- button [ref=e31]
+- button [ref=e32]
+- heading [level=2]: "유정식의 경영일기 를 구독하고 이메일로 받아보세요"
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+- button "구독하기" [ref=e33]
+- link "이전 뉴스레터 여러분은 중요한 결정을 혼자 내립니까?2025. 11. 10." [ref=e35]
+- link "다음 뉴스레터 어떻게 살 것인가 고민할 때는 이 책을!2025. 11. 12." [ref=e37]
+- heading "유정식의 경영일기" [level=3]
+- text: "경영 컨설턴트 유정식이 드리는 경영 뉴스레터 <유정식의 경영일기>"
+[2m[ok | 2359ms][0m
