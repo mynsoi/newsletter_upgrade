@@ -77,6 +77,7 @@ def inline_prompt(paras):
 - 그림마다 어느 문단 뒤에 넣을지 [문단 번호]로
 - 글이 설명하는 생각·관계·흐름이 한눈에 보이게
 - 장식이 아니라 설명을 돕는 그림 — 글이 말하는 장면이나 전후 차이를 보여 줌
+- 16:9 한 화면에 들어가는 구도로. 칸을 나눈 띠 그림(나란히 놓인 두 장면, 화살표로 이은 3단계 연속 장면, 파노라마)은 쓰지 않음 — 그림 모델이 아주 긴 가로 그림을 그려 버린다. 전후 차이는 한 화면 안에서(예: 책상 양쪽, 앞과 뒤)
 {STYLE_RULE}
 - 그림 안에 글자는 넣지 않음
 - 왜 그 문단인지 한 줄로(why)
@@ -127,7 +128,8 @@ def draw(d, i, it):
     with open(d / f"{i:02d}.log", "w", encoding="utf-8") as log:
         # 본문 그림은 16:9(astra가 설명에 와이드로 쓰고 그림 서버도 그 비율로 그린다 — 3:2 검사에 걸려 전부 버려졌다, 2026-10-10)
         size, ratio, tol = ("2048x1152", "16:9", "0.05") if d.name.startswith("inline-") else ("1536x1024", "3:2", "0.2")
-        full = f'{STYLE["prefix"]} {it["prompt"]} {STYLE["suffix"]}'
+        frame = " Compose it as one single scene in a standard 16:9 widescreen frame, not a panoramic strip or multi-panel sequence." if d.name.startswith("inline-") else ""
+        full = f'{STYLE["prefix"]} {it["prompt"]}{frame} {STYLE["suffix"]}'
         subprocess.run(["node", GEN, "--prompt", full, "--output", str(png), "--size", size, "--ratio", ratio,
                         "--tolerance", tol, "--model", "gpt-6-astra",
                         # 한 장 40초대지만 같은 계정의 요청은 서버가 차례로 처리한다 — 6장 동시면 90초(gti 기본)를 넘겨
