@@ -38,15 +38,23 @@ DEVICE_NOTE = {
 
 def front(t):
     m = re.match(r"^---\n(.*?)\n---\n", t, re.S)
-    meta = dict(re.findall(r"^(\w+):[ \t]*'?(.*?)'?[ \t]*$", m.group(1), re.M)) if m else {}
+    meta = {k: unquote(v) for k, v in re.findall(r"^(\w+):[ \t]*(.*?)[ \t]*$", m.group(1), re.M)} if m else {}
     return meta, (t[m.end():] if m else t).strip()
+
+
+def unquote(v):
+    """머리말 값의 바깥 따옴표 한 쌍만 벗긴다 — "'탈권위주의'의 뜻…"처럼 따옴표로 시작하는 제목의 안쪽 따옴표는 남긴다."""
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in "'\"":
+        v = v[1:-1]
+        return v.replace("''", "'") if v and "''" in v else v
+    return v
 
 
 def articles():
     out = []
     for f in sorted(INF.glob("p*.md"), key=lambda p: int(p.stem[1:]) if p.stem[1:].isdigit() else 0):
         meta, body = front(f.read_text(encoding="utf-8"))
-        title = meta.get("title", "").strip().strip("'\"")
+        title = meta.get("title", "").strip()
         if title and len(body) >= 300:
             out.append({"id": f.stem, "title": title, "date": meta.get("date", ""), "body": body})
     return out
