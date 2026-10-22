@@ -94,7 +94,9 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
     const id = articleOf(t, state);
     const picking = pending === t.page;
     const fresh = t.sources.filter((s) => s.new).length;
-    const audiences = (t.audience || "").split("·").map((x) => x.trim()).filter(Boolean);
+    // 전 직원은 모든 계층을 포함 — 들어 있으면 '전 직원'만. 특정 계층만이면 팀장급·사수급·신입사원 순서로(2026-10-22)
+    const named = (t.audience || "").split("·").map((x) => x.trim()).filter(Boolean);
+    const audiences = named.includes("전 직원") ? ["전 직원"] : ["팀장급", "사수급", "신입사원"].filter((x) => named.includes(x));
     const busy = judging.some((j) => j.target === t.page);
     // 메시지 단위 주제(2026-10-21): 사례마다 원문 카드를 짝지어 둔다(원문 서랍·있었던 일 전문)
     const cases = (t.cases ?? []).map((c) => ({ c, s: t.sources.find((x) => x.path === `originals/${c.key}.md`) }));
