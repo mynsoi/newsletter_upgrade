@@ -752,6 +752,8 @@ def act_inline(a):
     if not item:
         raise ValueError("본문 그림 아님")
     picked = [x for x in art["inlinePicked"] if x["src"] != src]
+    if on and len(picked) >= 2:  # 본문 그림은 2장까지(2026-10-22 사용자 결정 — 2장 그려 1~2장 고름)
+        raise ValueError("본문 그림은 2장까지 — 하나를 빼고 고르세요")
     if on:
         picked.append({"src": src, "after": item["after"], "anchor": item["anchor"], "name": item["name"]})
     picked.sort(key=lambda x: x["after"])

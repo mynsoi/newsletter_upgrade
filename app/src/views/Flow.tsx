@@ -296,7 +296,9 @@ function Timeline({
             <StageNav
               back="원고 다시 고르기"
               onBack={() => act("text-pick", { article: a.id, n: 0 }).then(refresh)}
-              next={a.hero || a.inlinePicked.length ? "그림 정함 · 확정으로" : "그림 없이 확정으로"}
+              // 머리 그림 1장 + 본문 그림 1~2장을 고르거나(2026-10-22 사용자 결정), 아무것도 안 고르면 그림 없이
+              next={a.hero && a.inlinePicked.length ? "그림 정함 · 확정으로" : !a.hero && !a.inlinePicked.length ? "그림 없이 확정으로" : !a.hero ? "머리 그림 1장을 골라 주세요" : "본문 그림을 1~2장 골라 주세요"}
+              disabled={!!a.hero !== a.inlinePicked.length > 0}
               onNext={() => act("text-pick", { article: a.id, n: tp, images_done: true }).then(refresh)}
             />
           </div>
@@ -539,7 +541,7 @@ function TextPickCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; s
   );
 }
 
-function StageNav({ back, onBack, next, onNext }: { back: string; onBack: () => void; next: string; onNext: () => void }) {
+function StageNav({ back, onBack, next, onNext, disabled }: { back: string; onBack: () => void; next: string; onNext: () => void; disabled?: boolean }) {
   return (
     <div className="flex items-center justify-between gap-3">
       <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-ink-3 hover:text-ink">
@@ -548,10 +550,11 @@ function StageNav({ back, onBack, next, onNext }: { back: string; onBack: () => 
       </button>
       <button
         onClick={onNext}
-        className="flex items-center gap-2 rounded-full border border-emerald-400/50 px-4 py-2 text-sm text-ink transition hover:bg-emerald-500/10"
+        disabled={disabled}
+        className="flex items-center gap-2 rounded-full border border-emerald-400/50 px-4 py-2 text-sm text-ink transition hover:bg-emerald-500/10 disabled:border-line disabled:text-ink-3 disabled:hover:bg-transparent"
       >
         {next}
-        <IconArrowRight className="size-4" />
+        {!disabled && <IconArrowRight className="size-4" />}
       </button>
     </div>
   );

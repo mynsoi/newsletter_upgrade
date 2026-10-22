@@ -30,6 +30,8 @@ GEN = next((str(p) for p in (Path.home() / ".codex" / "skills" / "god-tibo-image
 CODEX = shutil.which("codex") or "codex"
 # 그림체는 고정한다(2026-10-20) — astra가 매번 그림체까지 정하니 정물화·아이소메트릭·회화로 제각각이 됐다.
 # main 브랜치의 '일러스트 B'를 config/image_style.json에 두고, astra는 장면·구도만 쓴다.
+# 장수 고정(2026-10-22 사용자 결정): 머리 그림 후보 4장 그려 1장 고름, 본문 그림 2장 그려 1~2장 고름(작업실 act_inline이 2장까지)
+HERO_N, INLINE_N = 4, 2
 STYLE = json.loads((ROOT / "config" / "image_style.json").read_text(encoding="utf-8"))
 STYLE_RULE = ("- 그림체는 이미 정해져 있습니다(" + STYLE["label"] + ": " + STYLE["prefix"] + ") — 설명에는 그림체·색·화풍을 쓰지 말고"
               " 장면·인물·사물·구도만 쓰세요")
@@ -45,14 +47,14 @@ def latest(name):
 
 def prompt(text):
     return f"""아래 칼럼은 사내 뉴스레터(SK E&S 전 직원 대상) 메일 맨 위에 그림 한 장과 함께 나갑니다.
-그 머리 그림의 후보를 그림 설명으로 써 주세요. 설명은 이미지 생성 모델에 그대로 넣습니다.
+그 머리 그림의 후보 {HERO_N}개를 그림 설명으로 써 주세요. 설명은 이미지 생성 모델에 그대로 넣습니다.
 
 - 후보끼리 장면·구도가 서로 다르게
 - 글이 실제로 말하는 장면이나 생각에서 출발
 {STYLE_RULE}
 - 그림 안에 글자는 넣지 않음
 
-출력: JSON 배열만 주세요. [{{"name": "짧은 이름", "prompt": "이미지 생성 모델에 넣을 설명(영어)"}}]
+출력: JSON 배열만 주세요(정확히 {HERO_N}개). [{{"name": "짧은 이름", "prompt": "이미지 생성 모델에 넣을 설명(영어)"}}]
 파일을 만들거나 명령을 실행하지 마세요.
 
 === 칼럼 ===
@@ -69,7 +71,7 @@ def paragraphs(text):
 
 def inline_prompt(paras):
     numbered = "\n\n".join(f"[{i}] {x}" for i, x in enumerate(paras, 1))
-    return f"""아래 칼럼은 사내 뉴스레터(SK E&S 전 직원 대상)에 실립니다. 본문 사이사이에 넣어, 읽는 사람이 글의 설명을 더 쉽게 이해하도록 돕는 그림을 2개 골라 그림 설명을 써 주세요. 설명은 이미지 생성 모델에 그대로 넣습니다.
+    return f"""아래 칼럼은 사내 뉴스레터(SK E&S 전 직원 대상)에 실립니다. 본문 사이사이에 넣어, 읽는 사람이 글의 설명을 더 쉽게 이해하도록 돕는 그림을 {INLINE_N}개 골라 그림 설명을 써 주세요. 설명은 이미지 생성 모델에 그대로 넣습니다.
 
 - 그림마다 어느 문단 뒤에 넣을지 [문단 번호]로
 - 글이 설명하는 생각·관계·흐름이 한눈에 보이게
@@ -78,7 +80,7 @@ def inline_prompt(paras):
 - 그림 안에 글자는 넣지 않음
 - 왜 그 문단인지 한 줄로(why)
 
-출력: JSON 배열만 주세요. [{{"after": 문단 번호, "name": "짧은 이름", "why": "그 문단을 고른 이유(한국어 한 줄)", "prompt": "이미지 생성 모델에 넣을 설명(영어)"}}]
+출력: JSON 배열만 주세요(정확히 {INLINE_N}개). [{{"after": 문단 번호, "name": "짧은 이름", "why": "그 문단을 고른 이유(한국어 한 줄)", "prompt": "이미지 생성 모델에 넣을 설명(영어)"}}]
 파일을 만들거나 명령을 실행하지 마세요.
 
 === 칼럼 (문단 번호 붙임) ===
@@ -108,7 +110,7 @@ def run_inline(target, file=None):
                        cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
-    items = json.loads(m.group(0)) if m else []
+    items = (json.loads(m.group(0)) if m else [])[:INLINE_N]  # 더 내도 앞의 INLINE_N장만 그린다
     for it in items:
         k = int(it.get("after", 0))
         it["after"] = k
@@ -149,7 +151,7 @@ def run(target, file=None):
                        cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
-    items = json.loads(m.group(0)) if m else []
+    items = (json.loads(m.group(0)) if m else [])[:HERO_N]  # 더 내도 앞의 HERO_N장만 그린다
     (d / "astra.json").write_text(json.dumps(items, ensure_ascii=False, indent=1), encoding="utf-8")
     paint(d, items)
 
