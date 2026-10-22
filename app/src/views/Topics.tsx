@@ -44,7 +44,9 @@ function RoleChip({ role }: { role: string }) {
   );
 }
 
-const tabOf = (t: WikiTopic): Tab => (t.status !== "쓸 수 있음" ? "쓴 글" : ((t.verdict as Tab) || "보통"));
+// 판정이 비었거나 모르는 값이면 '보통' 탭 — 모르는 값이 오면 탭 묶음에 없는 칸이라 화면 전체가 멈췄다(2026-10-22)
+const tabOf = (t: WikiTopic): Tab =>
+  t.status !== "쓸 수 있음" ? "쓴 글" : (["쓸 만함", "보통", "뺌"] as string[]).includes(t.verdict ?? "") ? (t.verdict as Tab) : "보통";
 
 export default function Topics({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [open, setOpen] = useState<string | null>(null);

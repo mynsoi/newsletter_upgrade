@@ -223,7 +223,8 @@ def unquote(v):
 
 def read_topic(f):
     head, rest = front(f.read_text(encoding="utf-8"))
-    meta = {k: v.strip() for k, v in re.findall(r"^(\w+):\s*(.*)$", head, re.M)}
+    # [ \t]* — \s*면 빈 칸(verdict: )이 줄을 넘어 다음 줄(audience: …)을 값으로 읽는다(2026-10-22 주제 탭이 멈춘 원인)
+    meta = {k: v.strip() for k, v in re.findall(r"^(\w+):[ \t]*(.*)$", head, re.M)}
     sec = sections(rest)
     srcs = list(dict.fromkeys(re.findall(r"\]\(\.\./\.\./sources/(originals/[^)]+?\.md)\)", sec.get("원문", ""))))
     titles = [re.sub(r"^\s*\d+[.)]\s*", "", l).strip() for l in sec.get("제목 후보", "").splitlines() if re.match(r"^\s*\d+[.)]", l)]
