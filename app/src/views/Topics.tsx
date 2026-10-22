@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { IconArrowRight, IconChevronDown, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
 import ExpandableCards from "@/components/expandable-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
@@ -118,20 +118,20 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             ))}
           </span>
           <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
-            {/* 발행처 · 사례 · 최근 — 3칸, 칸마다 이름(작게) 위 값(굵게) (2026-10-22). 올리면 발행처 이름과 전체 날짜 */}
+            {/* 발행처 · 사례 · 최근 — 왼쪽 열 이름(작게·흐리게), 오른쪽 열 값(굵게·오른쪽 정렬) (2026-10-22). 올리면 발행처 이름과 전체 날짜 */}
             <span
               title={`발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
-              className="flex divide-x divide-line overflow-hidden rounded-xl border border-line bg-page/70 backdrop-blur"
+              className="grid grid-cols-[auto_auto] items-baseline gap-x-3 gap-y-0.5 rounded-xl border border-line bg-page/70 px-3 py-1.5 leading-tight backdrop-blur"
             >
               {[
                 ["발행처", `${pubs(t)}곳`],
                 ["사례", `${t.sources.length}편`],
                 ["최근", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
               ].map(([k, v]) => (
-                <span key={k} className="flex min-w-[3.25rem] flex-col items-center px-2.5 py-1 leading-tight">
-                  <span className="text-[10px] text-ink-3">{k}</span>
-                  <span className="text-[13px] font-semibold tabular-nums text-ink">{v}</span>
-                </span>
+                <Fragment key={k}>
+                  <span className="text-[10.5px] text-ink-3">{k}</span>
+                  <span className="text-right text-[12.5px] font-semibold tabular-nums text-ink">{v}</span>
+                </Fragment>
               ))}
             </span>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
