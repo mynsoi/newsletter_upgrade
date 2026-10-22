@@ -108,23 +108,24 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             background: `radial-gradient(120% 140% at 0% 0%, hsl(${hue(t.title)} 70% 45% / .45), transparent 60%), radial-gradient(120% 140% at 100% 100%, hsl(${(hue(t.title) + 70) % 360} 70% 45% / .3), transparent 55%)`,
           }}
         >
-          <span className="flex flex-wrap items-center gap-1.5">
-            {(t.audience || "").split("·").filter(Boolean).map((a) => (
-              <Chip key={a} className="bg-page/70 px-2.5 text-ink backdrop-blur">{a}</Chip>
-            ))}
+          {/* 한 줄로(2026-10-22): 대상 독자는 칩 하나로, 발행처는 지구본 아이콘 여러 개 대신 '발행처 N곳'(올리면 이름) */}
+          <span className="flex min-w-0 items-center gap-1.5">
+            {t.audience && (
+              <Chip className="truncate whitespace-nowrap bg-page/70 px-2.5 text-ink backdrop-blur">
+                {t.audience.split("·").map((x) => x.trim()).filter(Boolean).join(" · ")}
+              </Chip>
+            )}
           </span>
-          <span className="flex items-center gap-1.5">
-            <Chip className="bg-page/70 px-2.5 tabular-nums text-ink-2 backdrop-blur" title="사례 수 · 가장 최근 사례 발행일">
-              사례 {t.sources.length}
+          <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
+            <Chip
+              className="bg-page/70 px-2.5 tabular-nums whitespace-nowrap text-ink-2 backdrop-blur"
+              title={`사례 ${t.sources.length} · 발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
+            >
+              사례 {t.sources.length} · 발행처 {pubs(t)}곳
               {latest(t) && ` · ${latest(t).slice(5).replace("-", ".")}`}
             </Chip>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
             {t.status !== "쓸 수 있음" && <Chip className="bg-page/70 text-ink">{t.status}</Chip>}
-            {[...new Set(t.sources.map((s) => site(s.path)))].map((sname) => (
-              <span key={sname} className="grid size-7 place-items-center rounded-full bg-page/60 ring-1 ring-line">
-                <SiteIcon site={sname} className="size-3.5" />
-              </span>
-            ))}
           </span>
         </div>
       ),
