@@ -260,7 +260,12 @@ def titles_first(args):
         (d / "brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
 
         def job(d=d, pr=pr, b=b):
-            tc.astra(d, pr)
+            # 8개는 gen/에 짓고 cands.md로 — astra.md(작업실이 보는 회차)에는 고른 4개만 쓴다(2026-10-23)
+            (d / "cands.md").unlink(missing_ok=True)
+            (d / "devices.json").unlink(missing_ok=True)  # 본문 회차의 장치 기록이 남아 있으면 장치당 1개 규칙이 엉뚱하게 걸린다
+            tc.astra(d / "gen", pr)
+            if (d / "gen" / "astra.md").exists():
+                (d / "cands.md").write_text((d / "gen" / "astra.md").read_text(encoding="utf-8"), encoding="utf-8")
             tc.pick(d, b["thesis"], target_line(b), msg)  # 8개 지어 4개 고름(메시지 · 후킹 · 과장 없음, 2026-10-23)
             ok = (d / "astra.md").exists()
             if ok and msg:  # 회차와 함께 남긴다 — 작업실이 후보 위에 보여 준다

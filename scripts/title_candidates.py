@@ -215,11 +215,13 @@ def device_prompt(body, thesis, group, message="", prev=None, target=""):
 
 
 def write_body(d, text, thesis="", target="", message="", prev=None):
-    """원고 본문으로 장치별 2개씩 8개를 짓고(astra 4번 동시에) astra.md에 모은다 — 다음에 pick()이 4개를 고른다."""
+    """원고 본문으로 장치별 2개씩 8개를 짓고(astra 4번 동시에) cands.md에 모은다 — 다음에 pick()이 4개를 골라 astra.md에 쓴다.
+    (astra.md는 작업실이 회차로 보여 주는 파일이라, 고르기 전 8개를 거기 쓰면 8개가 잠깐 보였다 — 2026-10-23 멘토 지적)"""
     from concurrent.futures import ThreadPoolExecutor as TPE
     body = re.sub(r"^#.*\n", "", text.replace("(끝)", "").strip(), count=1).strip()
     d = Path(d)
     d.mkdir(parents=True, exist_ok=True)
+    (d / "cands.md").unlink(missing_ok=True)
 
     def one(i_g):
         i, g = i_g
@@ -234,7 +236,7 @@ def write_body(d, text, thesis="", target="", message="", prev=None):
         got = list(ex.map(one, enumerate(DEVICE_GROUPS)))
     items = [t for g in got for t in g]
     if items:
-        (d / "astra.md").write_text("\n".join(f"{i}. {t}" for i, t in enumerate(items, 1)) + "\n", encoding="utf-8")
+        (d / "cands.md").write_text("\n".join(f"{i}. {t}" for i, t in enumerate(items, 1)) + "\n", encoding="utf-8")
         # 후보마다 어느 장치로 지었는지 — pick()이 장치당 1개만 고르게(2026-10-23)
         (d / "devices.json").write_text(json.dumps([g[0] for g, ts in zip(DEVICE_GROUPS, got) for _ in ts], ensure_ascii=False), encoding="utf-8")
     return items
@@ -262,15 +264,15 @@ def pick_prompt(thesis, cands, target="", message="", text=""):
 
 
 def pick(d, thesis, target="", message="", text=""):
-    """astra가 지은 후보(astra.md)에서 Claude(계정 로그인)가 메시지 · 후킹 · 과장 없음으로 N_SHOW개를 골라 astra.md를 그 순서로 바꾼다.
-    지은 후보 전부는 cands.md, 점수는 pick.json. 판정이 안 되면 앞의 N_SHOW개."""
+    """astra가 지은 후보(cands.md)에서 Claude(계정 로그인)가 메시지 · 후킹 · 과장 없음으로 N_SHOW개를 골라 astra.md에 쓴다.
+    작업실에는 고른 N_SHOW개만 보인다. 점수는 pick.json. 판정이 안 되면 앞의 N_SHOW개."""
     import json
     import wiki as W
     f = Path(d) / "astra.md"
-    if not f.exists():
+    src = Path(d) / "cands.md"
+    if not src.exists():
         return []
-    cands = round_items(f)[:N_WRITE]
-    (Path(d) / "cands.md").write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+    cands = round_items(src)[:N_WRITE]
     chosen = cands[:N_SHOW]
     try:
         raw = W.claude_login(Path(d) / "pick", pick_prompt(thesis, cands, target, message, text))
