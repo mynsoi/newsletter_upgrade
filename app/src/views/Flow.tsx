@@ -36,7 +36,7 @@ function jobText(j: Job, a?: A, run?: MineRun): string[] {
   if (j.kind === "titles") return ["astra", "제목 짓는 중"];
   if (j.kind === "write") {
     const i = j.stage?.index ?? 0;
-    if (i >= 3) return [j.stage?.fit ? "1,500자로 줄이는 중" : "절반으로 줄이는 중"];
+    if (i >= 3) return [j.stage?.fit ? "1,000자로 줄이는 중" : "절반으로 줄이는 중"];
     return [["과정 1 · Claude 초안", "과정 2 · astra 재작성", "과정 3 · 기준 반영"][i]];
   }
   if (j.kind === "revise") return [`과정 ${(a?.steps.length ?? 0) + 1} · 피드백 반영`];
@@ -436,7 +436,7 @@ function WriteCard({ a, refresh }: { a: A; refresh: () => void }) {
     <div className="flex items-center justify-between gap-4 rounded-2xl border border-line bg-panel-solid px-5 py-4">
       <span className="flex flex-wrap items-center gap-2">
         <Chip className="text-ink">{a.target}</Chip>
-        <Chip className="text-ink">{a.length === "half" ? "절반" : "기본"}</Chip>
+        {a.length === "half" && <Chip className="text-ink">절반</Chip>}
       </span>
       <ParticleButton
         className="h-11 shrink-0 rounded-full bg-ink px-7 text-base font-semibold text-page hover:bg-violet-500 hover:text-ink"
@@ -727,15 +727,7 @@ function Now({
               onChange={(x) => act("target", { article: a.id, target: x }).then(refresh)}
             />
           )}
-          <PillTabs
-            id="now-length"
-            tabs={[
-              { value: "full", title: "기본" },
-              { value: "half", title: "절반" },
-            ]}
-            value={a.length}
-            onChange={(x) => !writing && act("length", { article: a.id, mode: x }).then(refresh)}
-          />
+          {/* 분량 기본/절반 고르기는 없앰(2026-10-23) — 분량은 1,000자 안팎 하나 */}
         </div>
       )}
       {hero && v !== "미리보기" && <img src={img(hero, 900)} className="aspect-[3/2] w-full rounded-2xl object-cover" />}

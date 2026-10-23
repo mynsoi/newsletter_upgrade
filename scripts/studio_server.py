@@ -317,7 +317,7 @@ def job_stage(j):
     d = ROOT / "runs" / "columns" / j["target"]
     fresh = lambda pat: any(f.stat().st_mtime >= j["started"] - 2 for f in d.glob(pat))
     half = json.loads(read(ROOT / "briefs" / f"{j['target']}.json") or "{}").get("length") == "half"
-    fit = fresh("_fit-r*/prompt.md")  # 과정 3 뒤 1,500자를 넘어 줄이는 중 (2026-10-11)
+    fit = fresh("_fit-r*/prompt.md")  # 과정 3 뒤 1,100자를 넘어 1,000자로 줄이는 중 (2026-10-11, 10/23 1,000자)
     i = 3 if (half and fresh("_shorten-r*/prompt.md")) or fit else 2 if fresh("_final/prompt.md") else 1 if fresh("_r4/prompt.md") else 0
     return {"index": i, "half": half, "fit": fit}
 

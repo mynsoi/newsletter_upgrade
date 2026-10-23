@@ -52,9 +52,11 @@ def target_line(b):
     return f"{t} — {TARGETS[t]} 글의 장면과 제안을 이 사람의 자리에 맞춥니다." if TARGETS.get(t) else ""
 
 
-# 분량 — 멘토 2026-10-11: "글은 가능하면 1500자 이하" (공백 제외 — 작업실 화면의 글자 수와 같은 셈)
-MAX_CHARS = 1500
-LEN_RULE = "분량은 공백을 빼고 1,500자 이하로 합니다. 더 길면 중심 장면과 주장 위주로 줄입니다."
+# 분량 — 멘토 2026-10-11: "글은 가능하면 1500자 이하" → 2026-10-23 사용자: 1,000자 수준(시험 칼럼 953자가 원하는 분량). 공백 제외 — 작업실 화면의 글자 수와 같은 셈
+# 절반 옵션은 같은 날 없앰(작업실에서 고를 수 없음 — 예전에 절반으로 정한 글만 아래 5단계를 탄다)
+TARGET_CHARS = 1000
+MAX_CHARS = 1100  # 과정 3 뒤 이보다 길면 TARGET_CHARS로 한 번 더 줄인다
+LEN_RULE = "분량은 공백을 빼고 1,000자 안팎으로 합니다(1,100자를 넘지 않게). 더 길면 중심 장면과 주장 위주로 줄입니다."
 # 본문에는 출처 표기를 넣지 않는다(2026-10-22 사용자 결정) — 참고자료는 발행 때 글 아래에 원문 전부를 제목과 함께 붙인다(publish.py).
 # 한 원문만 '(출처: …)'로 적히면 다른 원문과 형평이 맞지 않았다. 문장 속에서 '스탠퍼드대 연구진은'처럼 누가 했는지 말하는 것은 그대로.
 OUT_RULE = ("출력: 제목과 본문만 주세요. 본문에 '(출처: …)' 같은 출처 표기나 참고자료 목록은 넣지 않습니다(참고자료는 발행할 때 글 아래에 따로 붙습니다). "
@@ -347,10 +349,10 @@ def main(paths):
         return t
     stage("기준 반영·astra", [lambda k=k: mk_final(k) for k in briefs])
 
-    # 4. 1,500자를 넘으면 줄이기 (기본 모드만 — 절반 모드는 아래에서 절반으로 줄인다)
+    # 4. 1,100자를 넘으면 1,000자로 줄이기 (기본 모드만 — 절반 모드는 아래에서 절반으로 줄인다)
     over = [k for k, b in briefs.items() if b.get("length") != "half" and chars(latest_final(b["dir"])[0]) > MAX_CHARS]
     if over:
-        stage("1,500자·astra", [lambda k=k: fit(ROOT / "briefs" / f"{k}.json") for k in over])
+        stage("1,000자·astra", [lambda k=k: fit(ROOT / "briefs" / f"{k}.json") for k in over])
 
     # 5. 절반 모드만
     half = [k for k, b in briefs.items() if b.get("length") == "half"]
@@ -412,29 +414,29 @@ def shorten_prompt(text):
 
 
 def chars(f):
-    """제목(첫 줄)을 뺀 본문의 공백 제외 글자 수."""
+    """제목('# ' 줄)을 뺀 본문의 공백 제외 글자 수 — 제목 없이 쓰는 원고(10/23~)는 첫 문단부터 센다."""
     t = Path(f).read_text(encoding="utf-8").strip() if Path(f).exists() else ""
-    rest = t.split("\n", 1)[1] if "\n" in t else t
+    rest = t.split("\n", 1)[1] if t.startswith("#") and "\n" in t else t
     return len(re.sub(r"\s", "", rest))
 
 
 def fit_prompt(text):
     standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
-        f"아래 [원고]를 공백을 빼고 {MAX_CHARS:,}자 이하로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
+        f"아래 [원고]를 공백을 빼고 {TARGET_CHARS:,}자 안팎({MAX_CHARS:,}자 이하)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
         "[기준 피드백]\n" + standing, NO_COPY, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def fit(brief_path):
-    """과정 3 뒤 1,500자를 넘으면 — 최신 원고를 1,500자 이하로 줄여 다음 과정(final-rN.md)을 만든다 (astra)."""
+    """과정 3 뒤 1,100자를 넘으면 — 최신 원고를 1,000자 안팎으로 줄여 다음 과정(final-rN.md)을 만든다 (astra)."""
     d = RUNS / Path(brief_path).stem
     cur, n = latest_final(d)
     t0 = time.time()
     out = run_astra(d / f"_fit-r{n}", fit_prompt(cur.read_text(encoding="utf-8")))
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
-    (d / f"mode-r{n}.txt").write_text("1,500자", encoding="utf-8")
-    print(f"1,500자 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · 본문 {chars(d / f'final-r{n}.md')}자")
+    (d / f"mode-r{n}.txt").write_text("1,000자", encoding="utf-8")
+    print(f"1,000자 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · 본문 {chars(d / f'final-r{n}.md')}자")
 
 
 def shorten(brief_path):

@@ -118,7 +118,7 @@ def options_prompt(topic, docs, cs, ask_target, follow=False):
     cards_txt = "\n\n".join(f"[{k}] {W.site_name(k)}\n있었던 일: {v['있었던 일']}\n글쓴이가 하는 말: {v['글쓴이가 하는 말']}" for k, v in cs.items())
     return "\n\n".join([
         *([FOLLOW] if follow else []),
-        f"멘토가 {W.READER} 칼럼(공백 제외 1,500자 이하)의 주제를 정했습니다. [멘토 주제]는 멘토가 한 말 그대로이고, "
+        f"멘토가 {W.READER} 칼럼(공백 제외 1,000자 안팎)의 주제를 정했습니다. [멘토 주제]는 멘토가 한 말 그대로이고, "
         "구체적인 한 문장일 수도, 키워드 수준의 넓은 주제일 수도 있습니다. "
         "[원문 카드]는 검색으로 좁힌 원문마다 발행처·있었던 일·글쓴이가 하는 말을 정리한 것입니다. 이 주제로 쓸 수 있는 글 옵션 3~5개를 내 주세요.",
         "옵션 하나 = 이 글이 말할 것 한 문장 + 그걸 보여 줄 원문 2~3편:\n"
@@ -164,7 +164,7 @@ def check_prompt(topic, docs, opt, recs=(), first=()):
     blocks = "\n\n".join(f"=== [{x['source']}] {W.label(W.rel(x['source']))} — {kind}: {x.get('role', '')} ===\n" + W.body(W.rel(x["source"]))
                          for kind, x in srcs)
     return "\n\n".join([
-        f"멘토가 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,500자 이하)을 씁니다. 멘토는 아래 [고른 옵션]을 골랐습니다. "
+        f"멘토가 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,000자 안팎)을 씁니다. 멘토는 아래 [고른 옵션]을 골랐습니다. "
         "옵션은 원문 카드만 보고 짠 것이라, 원문을 끝까지 읽고 확인해 주세요.",
         "할 것:\n"
         "- 원문마다 role(이 글에서 맡는 몫 한 줄)과 use(원문에서 가져올 사실 한두 줄 — 원문 문장을 옮기지 않고 사실만)를 원문 기준으로 다시 적습니다\n"
@@ -216,7 +216,7 @@ def pick_prompt(topic, docs, cands, ask_target, follow=False):
                          + W.body(W.rel(c["source"])) for c in cands)
     return "\n\n".join([
         *([FOLLOW] if follow else []),
-        f"멘토가 정한 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,500자 이하)을 씁니다. 아래 [후보 원문]은 1차로 고른 후보입니다. "
+        f"멘토가 정한 [멘토 주제]로 {W.READER} 칼럼 한 편(공백 제외 1,000자 안팎)을 씁니다. 아래 [후보 원문]은 1차로 고른 후보입니다. "
         "원문을 끝까지 읽고 이 글에 쓸 원문을 정해 주세요.",
         "정할 것:\n"
         "- center: 글을 이끌 중심 원문 하나 — [멘토 주제]가 말하는 것을 가장 구체적인 일로 보여 주는 원문. "
