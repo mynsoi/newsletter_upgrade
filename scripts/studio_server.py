@@ -708,6 +708,9 @@ def act_titles(a):
         if (d / "message.txt").exists():
             (d / "message.txt").rename(d / f"message-{n}.txt")
     cmd = PIPE + ["--titles", bp.relative_to(ROOT).as_posix()]
+    f_ = picked_file(k)
+    if f_:  # 원고를 정했으면 그 본문을 읽고 짓는다(2026-10-23 — 제목은 쓴 뒤에)
+        cmd = PIPE + ["--titles-body", bp.relative_to(ROOT).as_posix(), f_]
     if msg:
         inbox = d / "inbox"
         inbox.mkdir(parents=True, exist_ok=True)
@@ -924,6 +927,16 @@ def act_hero(a):
     return {"hero": src}
 
 
+def picked_file(k):
+    """원고로 정한 과정의 파일(원고 → 제목 → 그림 → 확정) — 없거나 그 뒤 과정이 바뀌었으면 None."""
+    b = json.loads(read(brief_path(k)) or "{}")
+    art = next((x for x in articles() if x["id"] == k), None)
+    tp = b.get("text_pick") or {}
+    if art and tp.get("of") == len(art["steps"]) and 1 <= tp.get("n", 0) <= len(art["steps"]):
+        return art["steps"][tp["n"] - 1]["file"]
+    return None
+
+
 def act_text_pick(a):
     """원고 → 그림 → 확정 단계(2026-10-22). 원고로 정한 과정과 그때의 과정 수를 적는다 — 그 뒤 피드백·편집·절반·다시 쓰기로
     과정이 늘거나 줄면 화면이 저절로 '원고' 단계로 돌아간다. n=0이면 원고 고르기로 되돌림. images_done은 그림 단계를 마쳤는지."""
@@ -935,7 +948,10 @@ def act_text_pick(a):
     if n:
         if not 1 <= n <= len(art["steps"]):
             raise ValueError("잘못된 과정 번호")
+        first = not (art.get("textPick") or {}).get("n") or (art["textPick"].get("of") != len(art["steps"]))
         meta_update(k, text_pick={"n": n, "of": len(art["steps"])}, images_done=bool(a.get("images_done", False)))
+        if first and not a.get("images_done") and not art.get("title") and not busy(k, ("titles",)):
+            act_titles({"article": k})  # 원고를 정하면 그 본문으로 제목 후보를 바로 짓는다(2026-10-23)
     else:
         meta_update(k, text_pick=None, images_done=False)
     return {"ok": True}

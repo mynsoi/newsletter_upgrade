@@ -420,10 +420,7 @@ def take(k, n, first=()):
     b = json.loads(bp.read_text(encoding="utf-8"))
     b.pop("sources_ok", None)  # 새로 고른 원문은 다시 확인받는다
     bp.write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    if not b.get("title") and not (ROOT / "runs" / "titles0" / k / "astra.md").exists():  # 주제 지도 주제는 미리 지은 제목 후보가 있다
-        stage(d, "제목")
-        titles(bp, k)
-    stage(d, "끝")
+    stage(d, "끝")  # 제목은 원고를 다 쓴 뒤 본문을 보고 짓는다(2026-10-23)
     print(f"끝 · {k} · {time.time() - t0:.0f}s")
 
 

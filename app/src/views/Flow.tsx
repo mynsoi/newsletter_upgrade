@@ -58,7 +58,8 @@ function route(a: A | undefined, run: MineRun | undefined, job: Job | undefined)
   if (job) return { mode: null, label: jobText(job, a, run)[0] };
   if (!a || a.kind === "process") return { mode: null, label: "" };
   if (a.fromMine && run && !a.sourcesOk && !a.title && !a.steps.length) return { mode: "pick", label: "원문" };
-  if (!a.steps.length) return { mode: "titles", label: "제목" };
+  const tp = a.textPick && a.textPick.of === a.steps.length ? a.textPick.n : 0;
+  if (a.steps.length >= 3 && tp && !a.imagesDone && !a.confirmed) return { mode: "titles", label: "제목" }; // 제목은 쓴 뒤에(2026-10-23)
   if (a.steps.length >= 3) return { mode: "feedback", label: "피드백" };
   return { mode: null, label: "" };
 }
@@ -233,26 +234,9 @@ function Timeline({
     );
   }
 
-  // 2. 제목 — 내 주제로 쓰기는 '이 원문으로'를 누른 뒤부터
+  // 2. 쓰기 — 내 주제로 쓰기는 '이 원문으로'를 누른 뒤부터. 제목은 쓴 뒤 원고 본문을 보고 짓는다(2026-10-23, 아래 4)
   const sourcesDone = !a?.fromMine || !run || a.sourcesOk || !!a.title || started;
   if (a && a.kind === "brief" && sourcesDone) {
-    a.titles.forEach((r, ri) => {
-      if (r.message) out.push(<Me key={`tm${ri}`}>{r.message}</Me>);
-      out.push(
-        <Ai key={`t${ri}`} label={<>제목 후보 · astra{a.titles.length > 1 && ` · ${ri + 1}회차`}</>}>
-          <TitlesCard a={a} items={r.items} live={!started} last={ri === a.titles.length - 1 && !job} refresh={refresh} />
-        </Ai>
-      );
-    });
-    if (a.title)
-      out.push(
-        <Me key="title">
-          <span className="flex items-center gap-2 font-semibold">
-            <IconCheck className="size-4 shrink-0" />
-            {a.title}
-          </span>
-        </Me>
-      );
     a.tries?.forEach((tr) => {
       out.push(
         <Ai key={`try${tr.n}`} label={<>{tr.n}번째 글 · 과정 1–{tr.steps.length}</>}>
@@ -265,7 +249,7 @@ function Timeline({
         </Me>
       );
     });
-    if (a.title && !started && job?.kind !== "write") out.push(<Ai key="write"><WriteCard a={a} refresh={refresh} /></Ai>);
+    if (!started && job?.kind !== "write") out.push(<Ai key="write"><WriteCard a={a} refresh={refresh} /></Ai>);
   }
   if (a && a.kind === "process" && a.title) out.push(<Me key="title">{a.title}</Me>);
 
@@ -289,6 +273,48 @@ function Timeline({
     } else if (!tp) {
       out.push(<Ai key="text" label="원고"><TextPickCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
     } else if (!a.imagesDone) {
+      // 제목 — 정한 원고 본문을 읽고 지은 후보(원고를 정하면 저절로 시작). 고르면 그림으로
+      a.titles.forEach((r, ri) => {
+        if (r.message) out.push(<Me key={`tm${ri}`}>{r.message}</Me>);
+        out.push(
+          <Ai key={`t${ri}`} label={<>제목 후보{a.titles.length > 1 && ` · ${ri + 1}회차`}</>}>
+            <TitlesCard a={a} items={r.items} live last={ri === a.titles.length - 1 && !job} refresh={refresh} />
+          </Ai>
+        );
+      });
+      if (!a.titles.length && job?.kind !== "titles")
+        out.push(
+          <Ai key="t-start" label="제목">
+            <div className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-panel-solid px-5 py-4">
+              <span className="text-[14px] text-ink-2">과정 {tp} 원고 본문을 읽고 제목 후보 4개를 짓습니다.</span>
+              <SmallBtn strong onClick={() => act("titles", { article: a.id }).then(refresh)}>
+                <IconSparkles className="size-3.5" />
+                제목 짓기
+              </SmallBtn>
+            </div>
+          </Ai>
+        );
+      if (a.title)
+        out.push(
+          <Me key="title">
+            <span className="flex items-center gap-2 font-semibold">
+              <IconCheck className="size-4 shrink-0" />
+              {a.title}
+            </span>
+          </Me>
+        );
+    }
+    if (!a.confirmed && tp && !a.imagesDone && !a.title) {
+      if (job?.kind !== "titles")
+        out.push(
+          <div key="t-back" className="pl-1">
+            <button onClick={() => act("text-pick", { article: a.id, n: 0 }).then(refresh)} className="flex items-center gap-1.5 text-sm text-ink-3 hover:text-ink">
+              <IconArrowBackUp className="size-4" />
+              원고 다시 고르기
+            </button>
+          </div>
+        );
+    } else if (!a.confirmed && tp && !a.imagesDone) {
       out.push(
         <Ai key="img" label={<>그림 · 과정 {tp} 원고</>}>
           <div className="space-y-2.5">
@@ -304,10 +330,11 @@ function Timeline({
           </div>
         </Ai>
       );
-    } else {
+    } else if (!a.confirmed && tp) {
       out.push(
         <Ai key="confirm" label="확정">
           <div className="rounded-2xl border border-line bg-panel-solid px-5 py-4">
+            {a.title && <p className="mb-1 text-[15px] font-semibold text-ink">{a.title}</p>}
             <p className="text-[15px] leading-relaxed text-ink">
               과정 {tp} 원고 · 머리 그림 {a.hero ? "있음" : "없음"} · 본문 그림 {a.inlinePicked.length}개
             </p>

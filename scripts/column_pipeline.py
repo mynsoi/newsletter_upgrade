@@ -4,7 +4,8 @@
 0단계 — 제목 후보 (멘토 2026-10-09: "첫 단계로 해"):
   python3 column_pipeline.py --titles briefs/t1-A.json ...  → runs/titles0/<설정>/astra.md (astra만, 쓰기 전 생각 한 줄+원문 기준)
   python3 column_pipeline.py --titles briefs/t1-A.json --message <파일>  → 멘토 메시지(파일 그대로)와 직전 회차 후보를 같이 보낸다
-  멘토가 고른 제목을 설정 파일의 "title"에 넣은 뒤 아래 1~3단계를 돌린다. title이 없으면 멈춘다.
+  2026-10-23부터 제목은 쓴 뒤에 짓는다(--titles-body). 제목 없이 1~3단계를 돌리면 초안이 가제를 붙인다.
+  python3 column_pipeline.py --titles-body briefs/<설정>.json <원고 파일> [--message <파일>]  → 원고 본문을 읽고 제목 후보(8개 지어 4개)
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
   2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs, 없으면 p724·p669 — 2026-10-09 멘토 선택)
@@ -118,7 +119,8 @@ def draft_prompt(b):
     mine = bool(b.get("from_mine"))
     parts = [
         "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요.",
-        f"제목: {b['title']}\n제목은 이대로 씁니다.",
+        (f"제목: {b['title']}\n제목은 이대로 씁니다." if b.get("title") else
+         "제목은 본문을 다 쓴 뒤 따로 짓습니다. 첫 줄에 가제 한 줄만 붙이고, 제목에 맞추려 하지 말고 말할 것을 잘 전하는 데 집중하세요."),
         f"독자: {READER}",
         *([f"이번 글의 대상 독자: {target_line(b)}"] if target_line(b) else []),
         *(mine_lines(b) if mine else [
@@ -268,13 +270,39 @@ def titles_first(args):
     stage("제목 후보·astra (쓰기 전)" + (" · 멘토 메시지" if msg else ""), jobs)
 
 
+def titles_body(args):
+    """--titles-body <설정> <원고 파일> [--message <파일>] — 다 쓴 원고 본문을 읽고 제목 후보를 짓는다(2026-10-23 사용자 결정:
+    주제 문장은 표현이 AI 같아 그걸로 지은 제목도 나아지지 않았다 — 제목은 본문을 종합해서). 8개 지어 4개 고름."""
+    import title_candidates as tc
+    paths, msg = list(args), ""
+    if "--message" in paths:
+        i = paths.index("--message")
+        msg = Path(paths[i + 1]).read_text(encoding="utf-8").strip()
+        del paths[i:i + 2]
+    bp, text_file = Path(paths[0]), ROOT / paths[1]
+    k = bp.stem
+    b = json.loads(bp.read_text(encoding="utf-8"))
+    d = ROOT / "runs" / "titles0" / k
+    d.mkdir(parents=True, exist_ok=True)
+    olds = sorted(d.glob("astra-*.md"), key=lambda p: int(p.stem.split("-")[1]))
+    prev = tc.round_items(olds[-1]) if msg and olds else None
+    (d / "message.txt").unlink(missing_ok=True)
+    text = text_file.read_text(encoding="utf-8")
+    pr = tc.prompt_body(text, b.get("thesis", ""), msg, prev, target=target_line(b))
+    (d / "prompt.md").write_text(pr, encoding="utf-8")
+    (d / "source.txt").write_text(text_file.relative_to(ROOT).as_posix(), encoding="utf-8")
+    tc.astra(d, pr)
+    tc.pick(d, b.get("thesis", ""), target_line(b), msg, text=text)
+    if (d / "astra.md").exists() and msg:
+        (d / "message.txt").write_text(msg, encoding="utf-8")
+    print("제목 후보(본문):", " / ".join(tc.round_items(d / "astra.md")) if (d / "astra.md").exists() else "없음")
+
+
 def main(paths):
     briefs = {Path(p).stem: json.loads(Path(p).read_text(encoding="utf-8")) for p in paths}
     for k, b in briefs.items():
         b["dir"] = RUNS / k
-    missing = [k for k, b in briefs.items() if "thesis" in b and not b.get("title")]
-    if missing:
-        sys.exit(f"제목이 정해지지 않은 설정: {missing} — 먼저 --titles로 후보를 뽑고 멘토가 고른 제목을 \"title\"에 넣으세요.")
+    # 제목은 쓴 뒤에 짓는다(2026-10-23) — 제목 없이도 쓴다(초안이 가제를 붙인다)
     # 1. 초안 (thesis가 있는 갈래만, 나머지는 draft_from을 공유)
     own = [k for k, b in briefs.items() if "thesis" in b]
 
@@ -450,6 +478,8 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["--titles"]:
         titles_first(a[1:])
+    elif a[:1] == ["--titles-body"]:
+        titles_body(a[1:])
     elif a[:1] == ["--set-title"]:
         set_title(a[1], a[2])
     elif a[:1] == ["--revise"]:

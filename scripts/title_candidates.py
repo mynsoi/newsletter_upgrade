@@ -135,11 +135,44 @@ def prompt_first(thesis, sources, src_root, message="", prev=None, target=""):
 {srcs}"""
 
 
-def pick_prompt(thesis, cands, target="", message=""):
+def prompt_body(text, thesis="", message="", prev=None, target=""):
+    """다 쓴 원고 본문을 읽고 제목을 짓는다(2026-10-23) — 기준은 prompt_first와 같고, 무엇을 말하는지는 본문에서 읽는다.
+    주제 문장은 참고만(표현을 따르지 않음 — 사용자: 주제 문장 표현이 AI 같아 그걸로 지은 제목도 별로였다)."""
+    body = re.sub(r"^#.*\n", "", text.replace("(끝)", "").strip(), count=1).strip()
+    ask = ask_body = ""
+    if message:
+        ask = ("\n- [이번 멘토 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
+               + (" [앞 회차 후보]는 멘토가 이미 본 후보입니다." if prev else ""))
+        ask_body = "[이번 멘토 요청 — 원문 그대로]\n" + message.strip() + "\n\n"
+        if prev:
+            ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
+    pairs = pairs_block(body[:1500])
+    return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고 이 글의 제목 후보를 {N_WRITE}개 지어 주세요.
+{f"대상 독자: {target}" + chr(10) if target else ""}
+기준은 순서대로입니다.
+1. 주제 전달(가장 중요): 본문을 읽지 않은 사람이 제목만 보고 이 글이 무엇을 말하는지 바로 알 수 있어야 합니다. 해석이 필요하면 안 됩니다.
+   무엇을 말하는지는 [본문]을 종합해서 정합니다 — 본문이 결국 독자에게 하는 말, 맺음에서 남기는 말을 중심으로.
+2. 매력적인 표현: 1을 지킨 위에서 읽고 싶게 만드는 질문·단언·뒤집기를 씁니다. 본문이 말하지 않는 것을 약속하거나 부풀리지 않습니다.
+가장 피할 것: 함축. 글자 수를 줄이려고 말을 압축하거나 비유·은유로 돌려 말하면 메시지가 흐려지고 독자가 해석해야 합니다.
+'~의 차례', '~한 기여', '숨은 비용'처럼 명사로 끊어 뜻을 감추는 말, 본문을 읽어야 알 수 있는 사례 이름·숫자만 앞세운 제목은 쓰지 않습니다.
+- [기획 때 적은 말할 것]은 참고만 하세요. 그 문장의 표현을 따르지 말고 본문이 실제로 한 말로 짓습니다.
+{"- [경영일기: 메시지 → 제목]은 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」 필자가 글의 메시지를 제목으로 옮긴 예입니다. 말투와 장치를 참고하되, 메시지를 감춰 궁금하게만 만든 제목은 따르지 말고, 그 제목들을 그대로 가져오지도 마세요." + chr(10) + "- [경영일기 제목 장치]에서 후보마다 다른 장치를 쓰세요." + chr(10) if pairs else ""}- 한 제목에 생각 하나, 콜론·부제 없이. 길이는 뜻이 분명한 쪽을 택합니다(대략 30자 안팎까지 괜찮음).
+- 후보끼리는 서로 다른 결로 지어 주세요.{ask}
+
+출력: 번호를 붙인 제목 {N_WRITE}줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
+
+{ask_body}{pairs}[기획 때 적은 말할 것]
+{thesis or "(없음)"}
+
+[본문]
+{body}"""
+
+
+def pick_prompt(thesis, cands, target="", message="", text=""):
     numbered = "\n".join(f"{i}. {t}" for i, t in enumerate(cands, 1))
     return f"""사내 뉴스레터(SK E&S 전 직원 대상) 칼럼의 제목 후보 {len(cands)}개입니다. 사람에게 보여 줄 {N_SHOW}개를 골라 주세요.
 
-이 글이 말할 것: {thesis}
+{"[본문]을 읽고 이 글이 무엇을 말하는지 먼저 정리한 뒤 판정하세요(기획 때 적은 말할 것: " + thesis + ")" if text else "이 글이 말할 것: " + thesis}
 {f"대상 독자: {target}" + chr(10) if target else ""}{f"멘토 요청(원문 그대로): {message}" + chr(10) if message else ""}
 후보마다 세 가지를 1~5점으로 매기세요.
 - message(가장 중요): 본문을 모르는 사람이 제목만 읽고 이 글이 무엇을 말하는지 한 문장으로 말할 수 있나.
@@ -152,10 +185,11 @@ def pick_prompt(thesis, cands, target="", message=""):
 파일을 만들거나 명령을 실행하지 마세요. 답만 주세요.
 
 [후보]
-{numbered}"""
+{numbered}
+{(chr(10) + "[본문]" + chr(10) + text) if text else ""}"""
 
 
-def pick(d, thesis, target="", message=""):
+def pick(d, thesis, target="", message="", text=""):
     """astra가 지은 후보(astra.md)에서 Claude(계정 로그인)가 메시지 · 후킹 · 과장 없음으로 N_SHOW개를 골라 astra.md를 그 순서로 바꾼다.
     지은 후보 전부는 cands.md, 점수는 pick.json. 판정이 안 되면 앞의 N_SHOW개."""
     import json
@@ -167,7 +201,7 @@ def pick(d, thesis, target="", message=""):
     (Path(d) / "cands.md").write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
     chosen = cands[:N_SHOW]
     try:
-        raw = W.claude_login(Path(d) / "pick", pick_prompt(thesis, cands, target, message))
+        raw = W.claude_login(Path(d) / "pick", pick_prompt(thesis, cands, target, message, text))
         m = re.search(r"\{.*\}", raw or "", re.S)
         got = json.loads(m.group(0)) if m else {}
         idx = [int(i) for i in got.get("pick", []) if 1 <= int(i) <= len(cands)]
