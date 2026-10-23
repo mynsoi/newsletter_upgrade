@@ -22,6 +22,7 @@ from urllib.parse import parse_qs, quote, unquote, urlparse
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
+import internal_ctx as IC  # 회사 맥락(2026-10-23) — 글에 딸린 사내 자료 대목
 import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
 from wiki import TARGETS  # 대상 독자 이름 — 팀장급·사수급·신입사원·전 직원
 
@@ -182,18 +183,18 @@ def image_rounds(k, inline=False):
 _NUM = {}  # 수치 원문 대조 캐시 — (원고 파일, 수정 시각, 원문) → 결과
 
 
-def num_check(f, text, srcs):
-    """원고 본문 숫자 중 고른 원문에서 못 찾은 것(scripts/num_check.py, 2026-10-23) — 원문이 없으면 None."""
+def num_check(f, text, srcs, extra=""):
+    """원고 본문 숫자 중 고른 원문(+ 넣기로 한 사내 자료 대목)에서 못 찾은 것 · 용어 표기(scripts/num_check.py, 2026-10-23) — 원문이 없으면 None."""
     if not srcs:
         return None
     import num_check as NC
-    key = (str(f), Path(f).stat().st_mtime, tuple(srcs))
+    key = (str(f), Path(f).stat().st_mtime, tuple(srcs), extra)
     if key not in _NUM:
-        _NUM[key] = NC.check(text, list(srcs))
+        _NUM[key] = NC.check(text, list(srcs), [extra] if extra else [])
     return _NUM[key]
 
 
-def step(n, f, by, feedback="", known="", mode="", srcs=()):
+def step(n, f, by, feedback="", known="", mode="", srcs=(), extra=""):
     raw = clean(read(f))
     title, body = split_title(raw)
     # 가제 줄은 보이지 않게(2026-10-23 멘토 — 제목은 원고 뒤에 짓는다) — '# 가제: …'로 오든 본문 첫 줄 '가제: …'로 오든
@@ -204,7 +205,7 @@ def step(n, f, by, feedback="", known="", mode="", srcs=()):
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()
     return {"n": n, "file": Path(f).relative_to(ROOT).as_posix(), "by": by, "title": title, "text": body, "mode": mode,
-            "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime, "numCheck": num_check(f, body, srcs)}
+            "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime, "numCheck": num_check(f, body, srcs, extra)}
 
 
 def steps_in(d, b):
@@ -212,17 +213,19 @@ def steps_in(d, b):
     standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[멘토 피드백 — 원문 그대로]\n", "").strip()
     steps = []
     srcs = tuple(s[0] for s in b.get("sources", []) if isinstance(s, (list, tuple)) and s)
+    ic = IC.load(b)
+    extra = ic["excerpt"] if ic else ""
     draft = d / "draft.md"
     if not draft.exists() and b.get("draft_from"):  # 초안을 다른 갈래와 나눠 쓴 설정
         draft = ROOT / "runs" / "columns" / b["draft_from"] / "draft.md"
     for f, by, fb in ((draft, "Claude", ""), (d / "r4.md", "astra", ""), (d / "final.md", "astra", standing)):
         if f.exists() and f.stat().st_size > 50:
-            steps.append(step(len(steps) + 1, f, by, fb, b.get("title", ""), srcs=srcs))
+            steps.append(step(len(steps) + 1, f, by, fb, b.get("title", ""), srcs=srcs, extra=extra))
     for f in sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1])):
         n = f.stem.split("-r")[1]
         if f.stat().st_size > 50:
             steps.append(step(len(steps) + 1, f, read(d / f"by-r{n}.txt").strip() or "astra", read(d / f"feedback-r{n}.txt"),
-                              b.get("title", ""), read(d / f"mode-r{n}.txt").strip(), srcs))
+                              b.get("title", ""), read(d / f"mode-r{n}.txt").strip(), srcs, extra))
     return steps
 
 
@@ -454,7 +457,8 @@ def mine_state(jobs):
                     "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
                     "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime,
                     # 원문 확인 결과(글 옵션 방식, my_topic.take) — 고른 옵션 번호 · Claude의 주의 메모 · 뺀 원문 수
-                    "check": {"option": picks.get("option"), "note": picks.get("note", ""), "dropped": len(picks.get("rest", []))} if picks.get("option") else None})
+                    "check": {"option": picks.get("option"), "note": picks.get("note", ""), "dropped": len(picks.get("rest", []))} if picks.get("option") else None,
+                    "internal": internal_row(d)})
     return out
 
 
@@ -584,6 +588,29 @@ def act_delete(a):
         W.write_index(W.topics())
         W.commit(f"주제 지도: 글 삭제 {k} → used_in에서 뺌")
     return {"trash": dst.relative_to(ROOT).as_posix()}
+
+
+def internal_row(d):
+    """원문 확인 화면의 '사내 맥락'(2026-10-23) — 추천한 사내 자료 대목과 넣을지 여부. 추천을 안 돌린 글은 None."""
+    ic = json.loads(read(d / "internal.json") or "null")
+    if not ic:
+        return None
+    return {"on": bool(ic.get("on")), "has": bool(ic.get("excerpt")), "label": ic.get("label", ""), "use": ic.get("use", ""),
+            "fact": ic.get("fact", ""), "caution": ic.get("caution", ""), "why": ic.get("why", ""), "excerpt": ic.get("excerpt", "")}
+
+
+def act_mine_internal(a):
+    """사내 맥락 넣기·빼기 — 쓰기 전에만. 초안 지시가 이 표시를 읽는다(internal_ctx.load)."""
+    k = safe_id(a.get("id", ""))
+    p = MINE / k / "internal.json"
+    ic = json.loads(read(p) or "null")
+    if not ic or not ic.get("excerpt"):
+        raise ValueError("추천한 사내 자료가 없음")
+    if busy(k, ("mine", "write")) or (ROOT / "runs" / "columns" / k / "draft.md").exists():
+        raise ValueError("쓰기를 시작한 글은 사내 맥락을 바꾸지 않습니다")
+    ic["on"] = bool(a.get("on"))
+    p.write_text(json.dumps(ic, ensure_ascii=False, indent=1), encoding="utf-8")
+    return {"id": k}
 
 
 def act_mine_swap(a):
@@ -1218,7 +1245,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
-           "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-more": act_mine_more,
+           "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
            "publish-build": act_publish_build, "publish": act_publish}
 

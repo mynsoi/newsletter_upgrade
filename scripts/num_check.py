@@ -11,6 +11,8 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
 
@@ -95,9 +97,12 @@ def found(v, approx, vals):
     return any(ok(s) for s in vals)
 
 
-def check(text, sources):
-    """원고 본문 숫자 중 원문에서 못 찾은 것 — {"total": n, "missing": [{"num", "sentence"}], "sources": n}."""
+def check(text, sources, extra=()):
+    """원고 본문 숫자 중 원문에서 못 찾은 것 — {"total": n, "missing": [{"num", "sentence"}], "sources": n, "terms": [...]}.
+    extra: 원문 말고 함께 대조할 글(넣기로 한 사내 자료 대목). terms: 용어집이 '쓰지 않는 말'로 정한 표기(2026-10-23)."""
     vals = set()
+    for t in extra:
+        vals |= source_values(t)
     n_src = 0
     for p in sources:
         f = SRC / p
@@ -110,7 +115,8 @@ def check(text, sources):
         if not found(v, approx, vals) and (disp, sent) not in seen:
             seen.add((disp, sent))
             miss.append({"num": disp, "sentence": sent[:160]})
-    return {"total": len(nums), "missing": miss, "sources": n_src}
+    import internal_ctx as IC
+    return {"total": len(nums), "missing": miss, "sources": n_src, "terms": IC.term_check(text)}
 
 
 if __name__ == "__main__":

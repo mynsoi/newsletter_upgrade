@@ -27,7 +27,12 @@ export type Step = {
   feedback: string;
   mode: string;
   at: number;
-  numCheck?: { total: number; missing: { num: string; sentence: string }[]; sources: number } | null;
+  numCheck?: {
+    total: number;
+    missing: { num: string; sentence: string }[];
+    sources: number;
+    terms?: { word: string; use: string; sentence: string }[];
+  } | null;
 };
 
 export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };
@@ -139,6 +144,8 @@ export type MineRun = {
   at: number;
   /** 원문 확인 결과(글 옵션 방식) — 고른 옵션 번호 · Claude의 주의 메모 · 뺀 원문 수 */
   check?: { option: number; note: string; dropped: number } | null;
+  /** 사내 맥락(2026-10-23) — 추천한 사내 자료 대목과 넣을지 여부. has=false면 맞는 자료 없음(why에 이유) */
+  internal?: { on: boolean; has: boolean; label: string; use: string; fact: string; caution: string; why: string; excerpt: string } | null;
 };
 
 export type State = {

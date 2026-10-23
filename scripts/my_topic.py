@@ -414,6 +414,13 @@ def take(k, n, first=()):
         (d / "picks.json").rename(d / f"picks-{j}.json")
     (d / "picks.json").write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding="utf-8")
     add_turn(d, {"role": "ai", **snapshot(picks), "option": n})
+    # 회사 맥락(2026-10-23) — 고른 메시지에 맞는 사내 자료 대목 0~1개를 추천한다. DB·임베딩이 안 되면 사내 맥락 없이 간다
+    try:
+        import internal_ctx as IC
+        ic = IC.recommend(d, opt["message"], topic)
+        print("사내 맥락:", ic.get("label") or "없음 — " + ic.get("why", ""), flush=True)
+    except Exception as e:  # noqa: BLE001
+        print(f"사내 맥락 건너뜀: {e}", flush=True)
     print(f"확인 · 옵션 {n} · 중심 {center['source']} · 받침 {[p['source'] for p in picks['support']]}"
           + (f" · 뺌 {list(drop)}" if drop else "") + f" · 추천 {[x['source'] for x in recs]} · {time.time() - t0:.0f}s", flush=True)
     bp = make_brief(k)

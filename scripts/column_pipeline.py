@@ -26,6 +26,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # python3 -I 실행에서도 title_candidates를 찾게
+import internal_ctx as IC  # noqa: E402 — 회사 맥락(사내 용어집·사내 자료 대목, 2026-10-23)
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "sources"
@@ -148,6 +149,7 @@ def draft_prompt(b):
         "옮긴 장면은 '~한 상황을 떠올려 보세요'처럼 가정으로 쓰고, 원문 속 일을 어느 회사에서 실제로 있었던 일처럼 꾸미지는 않습니다.",
         CASE_RULE,
         PEOPLE_RULE,
+        *[x for x in (IC.internal_block(IC.load(b)), IC.glossary_block()) if x],  # 회사 맥락(2026-10-23) — 넣기로 한 사내 자료 대목 · 사내 용어집
         standing_block(),
         OUT_RULE,
     ]
@@ -163,7 +165,7 @@ def r4_prompt(b, draft):
         "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다. 제목은 바꾸지 마세요.",
     ]
     parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
-    parts += [standing_block(), PEOPLE_RULE, LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.",
+    parts += [standing_block(), PEOPLE_RULE, IC.KEEP_RULE, LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.",
               "=== 원고 ===\n" + draft]
     return "\n\n".join(parts)
 
@@ -173,7 +175,7 @@ def fb_prompt(text):
     return "\n\n".join([
         "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [멘토 피드백]을 반영해 고쳐 주세요. "
         "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        fb, NO_COPY, PEOPLE_RULE, LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        fb, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def run_claude(d, prompt):
@@ -397,7 +399,7 @@ def revise(brief_path, feedback_path):
         "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
         + (" 분량은 지금 원고 정도로 둡니다." if half else " " + LEN_RULE),
-        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, OUT_RULE,
+        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
     out = run_astra(d / f"_revise-r{n}", prompt)
@@ -418,7 +420,7 @@ def shorten_prompt(text):
     return "\n\n".join([
         f"아래 [원고]를 지금의 절반 분량(공백 제외 약 {n}자)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, "
         "중심 장면과 주장 위주로 남깁니다. [기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def chars(f):
@@ -433,7 +435,7 @@ def fit_prompt(text):
     return "\n\n".join([
         f"아래 [원고]를 공백을 빼고 {TARGET_CHARS:,}자 안팎({MAX_CHARS:,}자 이하)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def fit(brief_path):

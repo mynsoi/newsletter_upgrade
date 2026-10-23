@@ -290,6 +290,7 @@ export function PicksCard({
           )}
         </Row>
       ))}
+      {run.internal && <InternalRow ic={run.internal} canSwap={canSwap} id={run.id} refresh={refresh} />}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-3.5">
         <span className={cn("text-[13px]", warn ? "text-amber-700 dark:text-amber-300" : "text-ink-3")}>
           {warn || `기준: 원문 2~3편 · 다른 발행처 1편 이상 — 지금 ${run.picked.length}편 · 발행처 ${sites.size}곳`}
@@ -330,6 +331,51 @@ export function PicksCard({
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+/** 사내 맥락(2026-10-23) — 고른 메시지에 맞는 사내 자료(경영층 메시지·SKMS·사내 안내) 대목 0~1개. 넣으면 초안이 한 곳에서 우리 회사 상황으로 옮겨 읽게 쓴다. */
+function InternalRow({ ic, canSwap, id, refresh }: { ic: NonNullable<MineRun["internal"]>; canSwap: boolean; id: string; refresh: () => void }) {
+  const [open, setOpen] = useState(false);
+  const toggle = (on: boolean) => act("mine-internal", { id, on }).then(refresh);
+  if (!ic.has)
+    return (
+      <div className="border-t border-line px-5 py-3.5 text-[13px] text-ink-3">
+        <Chip className="mr-2 text-ink-3">사내 맥락</Chip>맞는 사내 자료 없음{ic.why && ` — ${ic.why}`}
+      </div>
+    );
+  return (
+    <div className={cn("border-t border-line px-5 py-4", !ic.on && "opacity-60")}>
+      <div className="flex gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <Chip className="border-emerald-400/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-200">사내 맥락</Chip>
+            <span className="text-xs text-ink-3">{ic.on ? "넣음" : "뺌"}</span>
+          </div>
+          <p className="mt-1.5 text-[15px] font-semibold text-ink">{ic.label}</p>
+          {ic.use && <p className="mt-1 text-[13.5px] leading-relaxed text-ink-2">쓸 방향 · {ic.use}</p>}
+          {ic.fact && <p className="mt-1 text-[13.5px] leading-relaxed text-ink-2">쓸 사실 · {ic.fact}</p>}
+          {ic.caution && <p className="mt-1 text-[13px] leading-relaxed text-amber-700 dark:text-amber-300">주의 · {ic.caution}</p>}
+          <button onClick={() => setOpen((o) => !o)} className="mt-1.5 flex items-center gap-1 text-xs text-ink-3 hover:text-ink">
+            대목 보기 <IconChevronDown className={cn("size-3.5 transition", open && "rotate-180")} />
+          </button>
+          {open && <p className="mt-1.5 whitespace-pre-wrap rounded-lg bg-soft/60 px-3 py-2 text-[13px] leading-relaxed text-ink-2">{ic.excerpt}</p>}
+        </div>
+        {canSwap && (
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            {ic.on ? (
+              <TextBtn onClick={() => toggle(false)}>
+                <IconMinus className="size-3.5" /> 빼기
+              </TextBtn>
+            ) : (
+              <TextBtn onClick={() => toggle(true)}>
+                <IconPlus className="size-3.5" /> 넣기
+              </TextBtn>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

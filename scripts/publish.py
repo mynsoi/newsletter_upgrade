@@ -100,6 +100,12 @@ def load(k):
         # src_title — 칼럼 제목(title)과 이름이 겹치면 칼럼 제목이 마지막 원문 제목으로 덮였다(2026-10-22 발행 미리보기 제목 버그)
         src_title = re.sub(r"\s+[|｜]\s+[^|｜]{1,40}$", "", fm.get("title", "")).strip()
         refs.append({"label": f"{src_title} ({label})" if src_title else label, "url": fm.get("url", "")})
+    # 넣기로 한 사내 자료(2026-10-23) — main 참고자료 형식대로 외부 원문 뒤에 제목 평문, 링크 없음
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import internal_ctx as IC
+    ic = IC.load(meta)
+    if ic:
+        refs.append({"label": ic["title"] + (f" ({ic['date'][:4]})" if ic.get("date") else ""), "url": ""})
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
             "confirmed": conf, "pub_date": date.today().isoformat()}

@@ -434,31 +434,60 @@ function TitlesCard({ a, items, live, last, refresh }: { a: A; items: string[]; 
 
 /** 수치 원문 대조(2026-10-23) — 본문 숫자 중 고른 원문에서 못 찾은 것. 개수 제한은 없고, 못 찾은 숫자만 알린다. */
 function NumChip({ c }: { c?: Step["numCheck"] }) {
-  if (!c || !c.total) return null;
+  if (!c) return null;
+  const terms = c.terms ?? [];
   const n = c.missing.length;
   return (
-    <span
-      title={n ? c.missing.map((m) => `${m.num} — ${m.sentence}`).join("\n") :"본문 숫자를 고른 원문과 대조했습니다"}
-      className={cn("rounded-full border px-2 py-0.5", n ? "border-amber-500/40 text-amber-500" : "border-line")}
-    >
-      {n ? `원문에서 못 찾은 수치 ${n}` : `수치 ${c.total}개 원문 확인`}
-    </span>
+    <>
+      {c.total > 0 && (
+        <span
+          title={n ? c.missing.map((m) => `${m.num} — ${m.sentence}`).join("\n") : "본문 숫자를 고른 원문과 대조했습니다"}
+          className={cn("rounded-full border px-2 py-0.5", n ? "border-amber-500/40 text-amber-500" : "border-line")}
+        >
+          {n ? `원문에서 못 찾은 수치 ${n}` : `수치 ${c.total}개 원문 확인`}
+        </span>
+      )}
+      {terms.length > 0 && (
+        <span title={terms.map((t) => `${t.word} → ${t.use}`).join("\n")} className="rounded-full border border-amber-500/40 px-2 py-0.5 text-amber-500">
+          사내 용어 표기 {terms.length}
+        </span>
+      )}
+    </>
   );
 }
 
+/** 확정 카드의 점검(2026-10-23) — 원문에서 못 찾은 수치 · 용어집이 '쓰지 않는 말'로 정한 표기 */
 function NumList({ c }: { c?: Step["numCheck"] }) {
-  if (!c || !c.total) return null;
-  if (!c.missing.length) return <p className="mt-2 text-[13px] text-ink-3">수치 {c.total}개 · 모두 고른 원문에 있음</p>;
+  if (!c) return null;
+  const terms = c.terms ?? [];
+  if (!c.missing.length && !terms.length)
+    return c.total ? <p className="mt-2 text-[13px] text-ink-3">수치 {c.total}개 · 모두 고른 원문에 있음</p> : null;
   return (
-    <div className="mt-3 rounded-xl border border-amber-500/40 px-4 py-3 text-[13px]">
-      <p className="font-semibold text-amber-500">고른 원문에서 못 찾은 수치 {c.missing.length}개 — 확정 전에 확인해 주세요</p>
-      <ul className="mt-1.5 space-y-1 text-ink-2">
-        {c.missing.map((m, i) => (
-          <li key={i}>
-            <b className="text-ink">{m.num}</b> · {m.sentence}
-          </li>
-        ))}
-      </ul>
+    <div className="mt-3 space-y-2 rounded-xl border border-amber-500/40 px-4 py-3 text-[13px]">
+      {c.missing.length > 0 && (
+        <div>
+          <p className="font-semibold text-amber-500">고른 원문에서 못 찾은 수치 {c.missing.length}개 — 확정 전에 확인해 주세요</p>
+          <ul className="mt-1.5 space-y-1 text-ink-2">
+            {c.missing.map((m, i) => (
+              <li key={i}>
+                <b className="text-ink">{m.num}</b> · {m.sentence}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {terms.length > 0 && (
+        <div>
+          <p className="font-semibold text-amber-500">사내 용어집과 다른 표기 {terms.length}개</p>
+          <ul className="mt-1.5 space-y-1 text-ink-2">
+            {terms.map((t, i) => (
+              <li key={i}>
+                <b className="text-ink">{t.word}</b> → {t.use} · {t.sentence}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

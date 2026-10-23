@@ -18,3 +18,7 @@ runs/card-test/
 sources/doc_cards.json
 runs/studio/loops.json
 sources/originals/infuture/_title_pairs_emb.json
+# 사내 자료(Supabase internal_docs) 본문·대목 캐시와 글마다 고른 대목(scripts/internal_ctx.py) — 사내 자료 본문은 저장소에 올리지 않는다
+runs/internal/
+runs/mine/*/internal.json
+runs/mine/*/internal/
