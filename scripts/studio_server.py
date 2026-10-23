@@ -1114,7 +1114,7 @@ def db_sync_loop():
 
 
 def act_wiki_bundle(_):
-    """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제(scripts/wiki.py --bundle, 계정 로그인 claude opus)."""
+    """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제(scripts/wiki.py --bundle, astra — 2026-10-23부터)."""
     return start("wiki", "주제 묶기", PY + ["scripts/wiki.py", "--bundle"])
 
 

@@ -42,7 +42,8 @@ BUNDLE_LIMIT = int(os.environ.get("WIKI_BUNDLE_LIMIT", "100"))  # 주제 묶기 
 # 주제 묶기는 발행일이 최근 이 개월 수 안인 카드만(누를 때마다 오늘부터 셈 — 3개월은 664장이라 많아 1개월로, 10/21). 그보다 오래됐거나 발행일 없는 카드는
 # 주제로 묶지 않고 '내 주제로 쓰기' 검색(card_search.py)에만 쓴다(2026-10-21 결정 — 주제 탭은 최근 흐름 중심).
 RECENT_MONTHS = int(os.environ.get("WIKI_BUNDLE_RECENT_MONTHS", "1"))
-BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때(기본은 계정 로그인 claude CLI의 opus)
+BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때. 기본은 astra(2026-10-23 사용자 결정 — 주제 문장 표현), --claude는 계정 로그인 opus
+BUNDLE_BY = "astra"  # 주제 묶기·판정 채우기를 누가: astra | claude(계정 로그인) | api(API 키 Opus)
 EXAMPLES = WIKI / "판정예시.md"
 SRC = ROOT / "sources"
 RUNS = ROOT / "runs" / "wiki"
@@ -572,6 +573,16 @@ def claude_key(d, prompt):
     return clean(out, str(d))
 
 
+def by_name(api):
+    return {"api": "API Opus 5.5", "claude": "계정 로그인 claude(opus)"}.get(api or BUNDLE_BY, "astra")
+
+
+def bundle_llm(api, d, prompt):
+    """주제 묶기·판정 채우기 모델 — api가 False면 BUNDLE_BY(기본 astra), "api"/True면 API 키 Opus, "claude"면 계정 로그인 opus."""
+    who = "api" if api is True else (api or BUNDLE_BY)
+    return {"api": claude_key, "claude": claude_login}.get(who, astra)(d, prompt)
+
+
 def judge_missing(api=False, run=None):
     """판정 채우기(2026-10-22) — 묶기 출력에 판정이 빠진 메시지 주제(verdict 빈 칸)만 골라 판정·이유·대상 독자를 채운다.
     판정 예시(멘토가 바꾼 판정 포함)를 같이 보낸다. 멘토가 고친 판정이 아니므로 판정 예시에는 쌓지 않는다."""
@@ -595,7 +606,7 @@ def judge_missing(api=False, run=None):
         "=== [판정할 주제] ===\n" + blocks,
     ])
     d = run or RUNS / ("judge-" + time.strftime("%Y%m%d-%H%M%S"))
-    raw = (claude_key if api else claude_login)(d, prompt)
+    raw = bundle_llm(api, d, prompt)
     m = re.search(r"\{.*\}", raw or "", re.S)
     got = {x.get("topic"): x for x in (json.loads(m.group(0)).get("verdicts", []) if m else [])}
     done = 0
@@ -653,8 +664,8 @@ def bundle_once(api=False, skip=()):
         print("새 카드 없음")
         return set()
     run = RUNS / ("bundle-" + time.strftime("%Y%m%d-%H%M%S"))
-    print(f"새 카드 {len(new)}장 · 기존 주제 {len(ts)}개 → {'API Opus 5.5' if api else '계정 로그인 claude(opus)'}", flush=True)
-    raw = (claude_key if api else claude_login)(run / "bundle", bundle_prompt(new, cs, ts))
+    print(f"새 카드 {len(new)}장 · 기존 주제 {len(ts)}개 → {by_name(api)}", flush=True)
+    raw = bundle_llm(api, run / "bundle", bundle_prompt(new, cs, ts))
     m = re.search(r"\{.*\}", raw or "", re.S)
     if not m:
         sys.exit("주제 묶기 결과가 비었음 — 로그: " + str(run / "bundle"))
@@ -813,11 +824,11 @@ if __name__ == "__main__":
     if a[:1] == ["--ingest"]:
         ingest(a[1:])
     elif a[:1] == ["--judge"]:  # 판정이 빈 주제만 판정 채우기
-        if judge_missing(api="--api" in a):
+        if judge_missing(api="api" if "--api" in a else "claude" if "--claude" in a else False):
             write_index(topics())
             commit("주제 지도: 판정 빠진 주제 판정 채움")
     elif a[:1] == ["--bundle"]:
-        bundle(api="--api" in a)
+        bundle(api="api" if "--api" in a else "claude" if "--claude" in a else False)  # 기본 astra
     elif a[:1] == ["--import-cards"]:
         import_cards(a[1])
     elif a[:1] == ["--refilter"]:
