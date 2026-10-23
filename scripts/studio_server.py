@@ -527,7 +527,7 @@ def act_mine_take(a):
 
 
 def act_mine_ok(a):
-    """'이 원문으로' — 원문 단계를 마치고 제목 단계로. 이 뒤로 채팅에 보낸 말은 제목 회차로 간다."""
+    """'이 원문으로 본문 쓰기' — 원문 단계를 마치고 쓰기 단계로(제목은 원고를 고른 뒤 본문을 보고 짓는다)."""
     k = safe_id(a.get("article", ""))
     if busy(k, ("mine",)):
         raise ValueError("원문을 고르는 중")

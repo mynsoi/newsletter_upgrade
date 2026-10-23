@@ -190,7 +190,7 @@ function Timeline({
                     onClick={() => act("mine-ok", { article: a.id }).then(refresh)}
                     className="flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-page transition hover:bg-violet-500 hover:text-white"
                   >
-                    이 원문으로 제목 정하기
+                    이 원문으로 본문 쓰기
                     <IconArrowRight className="size-4" />
                   </button>
                 ) : undefined
