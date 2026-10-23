@@ -5,8 +5,8 @@ title: AI에게 답을 받아 오면 생각이 줄고, AI와 따지고 부딪히
 verdict: 쓸 만함
 audience: 전 직원
 center: stanford-hai/0002
-status: 씀
-used_in: [briefs/w-20261022-102613.json, columns/2026-10-22-w-20261022-102613.md]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-22
 ---
 
