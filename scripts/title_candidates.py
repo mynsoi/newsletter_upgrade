@@ -6,6 +6,7 @@
 참고: 「유정식의 경영일기」 최근 제목 60개(공지·강좌 제외, AI 아닌 주제 포함) + 멘토가 직접 지은 제목 1개
 """
 import html
+import json
 import re
 import shutil
 import subprocess
@@ -234,6 +235,8 @@ def write_body(d, text, thesis="", target="", message="", prev=None):
     items = [t for g in got for t in g]
     if items:
         (d / "astra.md").write_text("\n".join(f"{i}. {t}" for i, t in enumerate(items, 1)) + "\n", encoding="utf-8")
+        # 후보마다 어느 장치로 지었는지 — pick()이 장치당 1개만 고르게(2026-10-23)
+        (d / "devices.json").write_text(json.dumps([g[0] for g, ts in zip(DEVICE_GROUPS, got) for _ in ts], ensure_ascii=False), encoding="utf-8")
     return items
 
 
@@ -274,7 +277,20 @@ def pick(d, thesis, target="", message="", text=""):
         m = re.search(r"\{.*\}", raw or "", re.S)
         got = json.loads(m.group(0)) if m else {}
         idx = [int(i) for i in got.get("pick", []) if 1 <= int(i) <= len(cands)]
-        if idx:
+        devs = json.loads((Path(d) / "devices.json").read_text(encoding="utf-8")) if (Path(d) / "devices.json").exists() else []
+        if idx and len(devs) == len(cands):
+            # 장치당 1개(2026-10-23 — 판정이 같은 장치를 둘 고르기도 했다): 판정 순서대로 장치가 처음 나오는 후보만,
+            # 모자라면 아직 안 고른 장치에서 점수(전달 → 매력) 높은 후보로 채운다
+            sc = {int(x.get("n", 0)): x for x in got.get("scores", []) if isinstance(x, dict)}
+            rank = lambda i: (-sc.get(i, {}).get("message", 0), -sc.get(i, {}).get("hook", 0), i)
+            order = list(dict.fromkeys(idx)) + sorted((i for i in range(1, len(cands) + 1) if i not in idx), key=rank)
+            seen, keep = set(), []
+            for i in order:
+                if devs[i - 1] not in seen and sc.get(i, {}).get("honest", 5) >= 3:
+                    seen.add(devs[i - 1])
+                    keep.append(i)
+            chosen = [cands[i - 1] for i in keep][:N_SHOW]
+        elif idx:
             chosen = [cands[i - 1] for i in dict.fromkeys(idx)][:N_SHOW]
         (Path(d) / "pick.json").write_text(json.dumps(got, ensure_ascii=False, indent=1), encoding="utf-8")
     except (Exception, SystemExit) as e:
