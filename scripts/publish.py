@@ -104,7 +104,7 @@ def load(k):
     sys.path.insert(0, str(ROOT / "scripts"))
     import internal_ctx as IC
     ic = IC.load(meta)
-    if ic:
+    if ic and conf.get("internal"):  # 확정한 원고가 사내 자료를 쓴 경우만(studio_server.act_confirm)
         refs.append({"label": ic["title"] + (f" ({ic['date'][:4]})" if ic.get("date") else ""), "url": ""})
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,

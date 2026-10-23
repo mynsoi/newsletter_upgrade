@@ -39,7 +39,7 @@ function jobText(j: Job, a?: A, run?: MineRun): string[] {
     if (i >= 3) return [j.stage?.fit ? "1,000자로 줄이는 중" : "절반으로 줄이는 중"];
     return [["과정 1 · Claude 초안", "과정 2 · astra 재작성", "과정 3 · 기준 반영"][i]];
   }
-  if (j.kind === "revise") return [`과정 ${(a?.steps.length ?? 0) + 1} · 피드백 반영`];
+  if (j.kind === "revise") return [`과정 ${(a?.steps.length ?? 0) + 1} · ${j.message === "사내 맥락 넣기" ? "사내 맥락 넣기" : "피드백 반영"}`];
   if (j.kind === "shorten") return ["절반으로 줄이는 중"];
   if (j.kind === "images" || j.kind === "inline") {
     const what = j.kind === "images" ? "머리 그림" : "본문 그림";
@@ -184,6 +184,7 @@ function Timeline({
               canSwap={!started}
               onSource={onSource}
               refresh={refresh}
+              onWeave={a && started && !job ? () => act("weave", { article: a.id }).then(refresh) : undefined}
               footer={
                 a && !a.sourcesOk && !a.title && !started ? (
                   <button

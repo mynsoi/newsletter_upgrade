@@ -408,6 +408,41 @@ def revise(brief_path, feedback_path):
     print(f"피드백 반영 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
 
 
+def weave(brief_path, base_file=""):
+    """--weave <설정> [원고 파일] — 사내 맥락 넣어 고쳐 쓰기(2026-10-23). 원고(없으면 최신 과정)에 넣기로 한 사내 자료 대목을
+    한 곳에만 넣어 final-rN.md를 만든다. 나머지 문단은 그대로 — 멘토가 요청해 고친 문장을 지키려고(확정한 샘플 2편에 회사 맥락을 입히며 만듦).
+    사내 자료 대목은 Claude에만 넘긴다(astra에는 원고에 녹은 문장만 — 사용자 확인 2026-10-23)."""
+    k = Path(brief_path).stem
+    d = RUNS / k
+    b = json.loads(Path(brief_path).read_text(encoding="utf-8"))
+    rec = IC.load(b)
+    if not rec:
+        sys.exit("넣기로 한 사내 자료가 없습니다 — 원문 확인 화면의 '사내 맥락'에서 넣어 주세요")
+    cur = ROOT / base_file if base_file else latest_final(d)[0]
+    _, n = latest_final(d)
+    prompt = "\n\n".join([
+        "아래 [원고]는 사내 뉴스레터에 실을 칼럼으로, 멘토가 여러 번 고쳐 다듬은 글입니다. 여기에 [우리 회사 자료]의 맥락을 한 곳 입혀 주세요.",
+        "고치는 범위: 문단 하나를 고치거나 문단 하나를 더하는 데까지입니다. 나머지 문단은 한 글자도 바꾸지 말고 그대로 둡니다. "
+        "원고에 우리 회사 사정을 확인 없이 짐작해 쓴 문장(예: 회사가 실제로 하는지 모르는 일을 하는 것처럼 쓴 문장)이 있으면, 그 문장을 [우리 회사 자료]에 맞게 고치는 곳으로 삼습니다. "
+        "넣은 곳이 앞뒤 문단과 자연스럽게 이어져야 합니다. 제목은 바꾸지 마세요(원고에 제목이 없으면 본문만 씁니다). "
+        "출력은 고친 원고 전체뿐입니다 — 어디를 고쳤는지 같은 설명은 붙이지 않습니다. " + LEN_RULE,
+        IC.internal_block(rec), IC.glossary_block(), PEOPLE_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 [우리 회사 자료]에 있는 것 말고는 더하지 마세요.",
+        "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
+    t0 = time.time()
+    out = run_claude(d / f"_weave-r{n}", prompt)
+    # 앞에 붙는 설명("원고에 제목이 없어 본문만 드립니다…" + ---)을 뗀다 — 2026-10-23 첫 실행에서 붙었다
+    head = re.match(r"\A(?:(?!#)[^\n]*\n){1,3}\s*-{3,}\s*\n", out)
+    if head and len(head.group(0)) < 200:
+        out = out[head.end():].strip()
+    if not out:
+        sys.exit("사내 맥락 고쳐 쓰기 결과가 비었음 — 로그: " + str(d / f"_weave-r{n}"))
+    (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
+    (d / f"by-r{n}.txt").write_text("Claude", encoding="utf-8")
+    (d / f"mode-r{n}.txt").write_text("사내 맥락", encoding="utf-8")
+    (d / f"feedback-r{n}.txt").write_text(f"사내 맥락 넣기 — {rec['label']}\n쓸 방향: {rec.get('use', '')}", encoding="utf-8")
+    print(f"사내 맥락 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · 본문 {chars(d / f'final-r{n}.md')}자")
+
+
 def latest_final(d):
     revs = sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1]))
     return (revs[-1] if revs else d / "final.md"), len(revs) + 1
@@ -499,6 +534,8 @@ if __name__ == "__main__":
         set_title(a[1], a[2])
     elif a[:1] == ["--revise"]:
         revise(a[1], a[2])
+    elif a[:1] == ["--weave"]:
+        weave(a[1], a[2] if len(a) > 2 else "")
     elif a[:1] == ["--shorten"]:
         shorten(a[1])
     elif a[:1] == ["--shorten-file"]:

@@ -814,6 +814,26 @@ def act_revise(a):
     return j
 
 
+def act_weave(a):
+    """사내 맥락 넣어 고쳐 쓰기(2026-10-23) — 넣기로 한 사내 자료 대목을 원고 한 곳에 넣어 다음 과정을 만든다(Claude).
+    바탕 원고: 확정한 과정 → 원고로 정한 과정 → 마지막 과정 순. 확정한 글도 된다(새 과정으로 다시 확정)."""
+    k = safe_id(a["article"])
+    bp = brief_path(k)
+    b = json.loads(read(bp) or "{}")
+    if not IC.load(b):
+        raise ValueError("넣기로 한 사내 자료가 없음")
+    if busy(k, ("write", "revise", "shorten")):
+        raise ValueError("이 글에서 쓰기가 도는 중")
+    art = next(x for x in articles() if x["id"] == k)
+    if not art["steps"]:
+        raise ValueError("아직 원고가 없음 — 쓰기 전이면 초안이 사내 맥락을 넣는다")
+    conf = (b.get("confirmed") or {}).get("step")
+    base = art["steps"][conf - 1]["file"] if conf and conf <= len(art["steps"]) else picked_file(k) or art["steps"][-1]["file"]
+    j = start("revise", k, PIPE + ["--weave", bp.relative_to(ROOT).as_posix(), base])
+    j["message"] = "사내 맥락 넣기"
+    return j
+
+
 def act_images(a):
     k = safe_id(a["article"])
     pp = process_path(k)
@@ -1032,6 +1052,11 @@ def act_confirm(a):
     body = "\n\n".join(x + "".join("\n\n" + m for m in imgs.get(j, [])) for j, x in enumerate(paras, 1))
     out.write_text(f"# {title}\n\n{body}\n", encoding="utf-8")
     conf = {"date": date.today().isoformat(), "step": n, "file": out.relative_to(ROOT).as_posix(), "inline": sum(map(len, imgs.values()))}
+    # 이 원고가 사내 자료를 썼나(2026-10-23) — 초안 지시에 대목이 들어갔거나, 이 과정까지 '사내 맥락' 과정이 있었으면. 발행 참고자료가 이 표시를 본다
+    b_ = json.loads(read(brief_path(k)) or "{}") if not process_path(k) else {}
+    if IC.load(b_) and ("[우리 회사 자료 —" in read(ROOT / "runs" / "columns" / k / "_draft" / "prompt.md")
+                       or any(x.get("mode") == "사내 맥락" for x in art["steps"][:n])):
+        conf["internal"] = True
     if art.get("hero"):
         img = ROOT / "columns" / "img" / f"{out.stem}.png"
         img.parent.mkdir(exist_ok=True)
@@ -1242,7 +1267,7 @@ def act_chat(a):
 
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
-           "write": act_write, "revise": act_revise, "images": act_images, "hero": act_hero,
+           "write": act_write, "revise": act_revise, "weave": act_weave, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,

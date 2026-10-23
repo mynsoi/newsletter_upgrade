@@ -240,12 +240,15 @@ export function PicksCard({
   footer,
   onSource,
   refresh,
+  onWeave,
 }: {
   run: MineRun;
   canSwap: boolean;
   footer?: React.ReactNode;
   onSource: (p: string) => void;
   refresh: () => void;
+  /** 쓰기를 시작한 글 — 사내 맥락을 원고 한 곳에 넣어 다음 과정을 만든다(2026-10-23) */
+  onWeave?: () => void;
 }) {
   const [more, setMore] = useState(true);
   const now = run.picked.map((p) => p.source);
@@ -290,7 +293,7 @@ export function PicksCard({
           )}
         </Row>
       ))}
-      {run.internal && <InternalRow ic={run.internal} canSwap={canSwap} id={run.id} refresh={refresh} />}
+      {run.internal && <InternalRow ic={run.internal} canSwap={canSwap} id={run.id} refresh={refresh} onWeave={onWeave} />}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-3.5">
         <span className={cn("text-[13px]", warn ? "text-amber-700 dark:text-amber-300" : "text-ink-3")}>
           {warn || `기준: 원문 2~3편 · 다른 발행처 1편 이상 — 지금 ${run.picked.length}편 · 발행처 ${sites.size}곳`}
@@ -336,7 +339,19 @@ export function PicksCard({
 }
 
 /** 사내 맥락(2026-10-23) — 고른 메시지에 맞는 사내 자료(경영층 메시지·SKMS·사내 안내) 대목 0~1개. 넣으면 초안이 한 곳에서 우리 회사 상황으로 옮겨 읽게 쓴다. */
-function InternalRow({ ic, canSwap, id, refresh }: { ic: NonNullable<MineRun["internal"]>; canSwap: boolean; id: string; refresh: () => void }) {
+function InternalRow({
+  ic,
+  canSwap,
+  id,
+  refresh,
+  onWeave,
+}: {
+  ic: NonNullable<MineRun["internal"]>;
+  canSwap: boolean;
+  id: string;
+  refresh: () => void;
+  onWeave?: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const toggle = (on: boolean) => act("mine-internal", { id, on }).then(refresh);
   if (!ic.has)
@@ -362,6 +377,14 @@ function InternalRow({ ic, canSwap, id, refresh }: { ic: NonNullable<MineRun["in
           </button>
           {open && <p className="mt-1.5 whitespace-pre-wrap rounded-lg bg-soft/60 px-3 py-2 text-[13px] leading-relaxed text-ink-2">{ic.excerpt}</p>}
         </div>
+        {!canSwap && ic.on && onWeave && (
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            <TextBtn onClick={onWeave}>
+              <IconPlus className="size-3.5" /> 사내 맥락 넣어 고쳐 쓰기
+            </TextBtn>
+            <span className="max-w-48 text-right text-[11.5px] text-ink-3">원고 한 곳에만 넣어 다음 과정을 만듭니다(Claude)</span>
+          </div>
+        )}
         {canSwap && (
           <div className="flex shrink-0 flex-col items-end gap-1.5">
             {ic.on ? (
