@@ -121,10 +121,18 @@ def nospace(t):
 SITES = {"threads": "Threads", "linkedin": "LinkedIn", "infuture": "경영일기"}
 
 
+_LIB = {}  # 파일 → (수정 시각, 크기, 행) — 화면이 몇 초마다 상태를 받아 가는데 원문 1,400편을 매번 다시 읽으면 10초 넘게 걸렸다(2026-10-23)
+
+
 def library(full=False):
     rows = []
     for f in sorted((SRC / "originals").glob("*/*.md")):
         if f.name.startswith("_"):
+            continue
+        st = f.stat()
+        hit = _LIB.get(f)
+        if not full and hit and hit[0] == st.st_mtime and hit[1] == st.st_size:
+            rows.append(hit[2])
             continue
         m, body = front(read(f))
         body = body.split("*주변 동료에게")[0].strip()
@@ -137,6 +145,8 @@ def library(full=False):
             "reactions": m.get("likes") or m.get("reactions") or "", "chars": nospace(text),
             "excerpt": re.sub(r"\s+", " ", re.sub(r"^## .*$", "", text, flags=re.M)).strip()[:220], **({"text": body} if full else {}),
         })
+        if not full:
+            _LIB[f] = (st.st_mtime, st.st_size, rows[-1])
     return rows
 
 
