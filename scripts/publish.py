@@ -80,6 +80,8 @@ def load(k):
         if b.startswith("# ") and not title:
             title = b[2:].strip()
             continue
+        if not blocks and re.match(r"\**가제\s*[:：]", b):  # 가제 줄은 발행본에 넣지 않는다(2026-10-23 — 가제를 붙이던 때 확정한 글)
+            continue
         im = re.fullmatch(r"!\[(.*?)\]\((.+?)\)", b)
         if im:
             blocks.append({"type": "image", "alt": im.group(1), "src": (md.parent / im.group(2)).as_posix()})
