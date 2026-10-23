@@ -219,6 +219,7 @@ def write_body(d, text, thesis="", target="", message="", prev=None):
     (astra.md는 작업실이 회차로 보여 주는 파일이라, 고르기 전 8개를 거기 쓰면 8개가 잠깐 보였다 — 2026-10-23 멘토 지적)"""
     from concurrent.futures import ThreadPoolExecutor as TPE
     body = re.sub(r"^#.*\n", "", text.replace("(끝)", "").strip(), count=1).strip()
+    body = re.sub(r"^\**가제\s*[:：].*\n", "", body).strip()  # 예전 초안의 가제 줄이 제목에 끌려 들어가지 않게
     d = Path(d)
     d.mkdir(parents=True, exist_ok=True)
     (d / "cands.md").unlink(missing_ok=True)

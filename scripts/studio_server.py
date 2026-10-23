@@ -182,6 +182,10 @@ def image_rounds(k, inline=False):
 def step(n, f, by, feedback="", known="", mode=""):
     raw = clean(read(f))
     title, body = split_title(raw)
+    # 가제 줄은 보이지 않게(2026-10-23 멘토 — 제목은 원고 뒤에 짓는다) — '# 가제: …'로 오든 본문 첫 줄 '가제: …'로 오든
+    if re.match(r"\**가제\s*[:：]", title or ""):
+        title = ""
+    body = re.sub(r"^\**가제\s*[:：].*(\n|$)", "", body.lstrip()).strip()
     first = body.split("\n", 1)
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()

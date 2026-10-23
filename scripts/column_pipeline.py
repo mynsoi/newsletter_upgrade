@@ -4,7 +4,7 @@
 0단계 — 제목 후보 (멘토 2026-10-09: "첫 단계로 해"):
   python3 column_pipeline.py --titles briefs/t1-A.json ...  → runs/titles0/<설정>/astra.md (astra만, 쓰기 전 생각 한 줄+원문 기준)
   python3 column_pipeline.py --titles briefs/t1-A.json --message <파일>  → 멘토 메시지(파일 그대로)와 직전 회차 후보를 같이 보낸다
-  2026-10-23부터 제목은 쓴 뒤에 짓는다(--titles-body). 제목 없이 1~3단계를 돌리면 초안이 가제를 붙인다.
+  2026-10-23부터 제목은 쓴 뒤에 짓는다(--titles-body). 제목 없이 1~3단계를 돌리면 본문만 쓴다(가제 없음, 10/23).
   python3 column_pipeline.py --titles-body briefs/<설정>.json <원고 파일> [--message <파일>]  → 원고 본문을 읽고 제목 후보(8개 지어 4개)
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
@@ -120,7 +120,7 @@ def draft_prompt(b):
     parts = [
         "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요.",
         (f"제목: {b['title']}\n제목은 이대로 씁니다." if b.get("title") else
-         "제목은 본문을 다 쓴 뒤 따로 짓습니다. 첫 줄에 가제 한 줄만 붙이고, 제목에 맞추려 하지 말고 말할 것을 잘 전하는 데 집중하세요."),
+         "제목은 본문을 다 쓴 뒤 따로 짓습니다. 제목이나 가제는 붙이지 말고 본문만 쓰세요. 말할 것을 잘 전하는 데 집중하세요."),
         f"독자: {READER}",
         *([f"이번 글의 대상 독자: {target_line(b)}"] if target_line(b) else []),
         *(mine_lines(b) if mine else [
@@ -305,7 +305,7 @@ def main(paths):
     briefs = {Path(p).stem: json.loads(Path(p).read_text(encoding="utf-8")) for p in paths}
     for k, b in briefs.items():
         b["dir"] = RUNS / k
-    # 제목은 쓴 뒤에 짓는다(2026-10-23) — 제목 없이도 쓴다(초안이 가제를 붙인다)
+    # 제목은 쓴 뒤에 짓는다(2026-10-23) — 제목 없이도 쓴다(본문만, 가제 없음)
     # 1. 초안 (thesis가 있는 갈래만, 나머지는 draft_from을 공유)
     own = [k for k, b in briefs.items() if "thesis" in b]
 
