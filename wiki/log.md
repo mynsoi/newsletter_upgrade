@@ -1,5 +1,59 @@
 # 위키 이력
 
+## 2026-10-23 09:57
+- 묶기 붙임 carrot-global-blog/0011, carrot-global-blog/0016 → 주제/fastcompany-worklife-0191.md
+- 묶기 붙임 mckinsey-insights/0004 → 주제/mit-tech-review-0006.md
+- 묶기 붙임 carrot-global-blog/0013, carrot-global-blog/0015 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 carrot-global-blog/0014 → 주제/aihr-blog-0003.md
+- 묶기 붙임 mit-tech-review/0012 → 주제/fastcompany-worklife-0019.md
+- 묶기 붙임 bain-insights/0014, bain-insights/0020, aihr-blog/0018, knowledge-wharton/0014 → 주제/bain-insights-0002.md
+- 묶기 붙임 fastcompany-worklife/0059 → 주제/fastcompany-worklife-0004.md
+- 묶기 붙임 hbr-korea/0046 → 주제/mit-tech-review-0001.md
+- 묶기 붙임 bain-insights/0023, bain-insights/0019 → 주제/mckinsey-insights-0027.md
+- 묶기 붙임 fastcompany-worklife/0064 → 주제/fastcompany-worklife-0046.md
+- 묶기 붙임 bain-insights/0021, worklytics-blog/0004 → 주제/hbr-korea-0034.md
+- 묶기 붙임 fastcompany-worklife/0067, fastcompany-worklife/0079 → 주제/fastcompany-worklife-0036.md
+- 묶기 붙임 fastcompany-worklife/0065, fastcompany-worklife/0072 → 주제/hbr-korea-0038.md
+- 묶기 붙임 fastcompany-worklife/0068 → 주제/fastcompany-worklife-0007.md
+- 묶기 붙임 fastcompany-worklife/0071 → 주제/charter-0042.md
+- 묶기 붙임 fastcompany-worklife/0078 → 주제/fastcompany-worklife-0051.md
+- 묶기 붙임 brookings-future-of-work/0002, fastcompany-worklife/0075 → 주제/charter-0003.md
+- 묶기 붙임 fastcompany-worklife/0076, hbr/0020 → 주제/charter-0004.md
+- 묶기 새 주제(쓸 만함) 일터를 잠시 벗어난 경험은 경력의 공백이 아니라 일터에서 배우기 어려운 판단과 협력 능력을 쌓는 시간이 될 수 있다. → 주제/fastcompany-worklife-0054.md
+- 묶기 새 주제(보통) AI 시대에 일자리 총량이 유지되더라도 사라지는 일에서 새 일로 옮겨 갈 길이 없으면 직원의 고용 불안은 해소되지 않는다. → 주제/charter-0010.md
+- 묶기 새 주제(쓸 만함) 완벽하게 준비하려는 태도도 결정을 미루는 동안 기회를 놓치고 동료의 일을 늦춘다면 업무의 비용이 된다. → 주제/fastcompany-worklife-0053.md
+- 묶기 새 주제(쓸 만함) 공유할 때 가린 문서도 AI에 원문을 넣었다면 이미 보호 범위 밖으로 나갔을 수 있어, 보안은 발표 화면보다 입력 과정에서 갈린다. → 주제/carrot-global-blog-0012.md
+- 묶기 새 주제(쓸 만함) 말을 잘하고 일에 열심인 것처럼 보이는 모습은 실제 기여보다 조직에 익숙한 말투와 눈에 띄는 행동을 반영할 수 있다. → 주제/fastcompany-worklife-0057.md
+- 묶기 새 주제(보통) 혁신의 속도는 좋은 아이디어뿐 아니라 그 아이디어를 제품으로 바꾸는 제조·인재·공급망이 얼마나 가까이 연결돼 있는지에 달려 있다. → 주제/bain-insights-0013.md
+- 묶기 새 주제(쓸 만함) 로봇이 할 수 있는 일의 범위와 실제로 사람을 대체할 일의 범위는 도입 비용 때문에 크게 다를 수 있다. → 주제/ai-lab-enterprise-reports-0006.md
+- 묶기 새 주제(보통) 잦은 이직의 평가는 이동 횟수만이 아니라 그 이동으로 무엇을 배우고 어떤 역할로 성장했는지에 따라 달라진다. → 주제/fastcompany-worklife-0058.md
+- 묶기 새 주제(쓸 만함) 분석의 가치는 문제를 얼마나 정확히 보여줬는지보다 그 결과로 실제 운영을 무엇부터 바꿨는지에서 생긴다. → 주제/onemodel-blog-0005.md
+- 묶기 새 주제(보통) AI를 같은 도구로 도입해도 리더가 위협으로 설명하는지 성장의 기회로 설명하는지에 따라 직원이 받아들이는 변화는 달라질 수 있다. → 주제/hbr-0016.md
+- 묶기 새 주제(보통) 출근 일수를 늘리는 결정은 근무 장소만 바꾸는 것이 아니라 직원이 부담하는 시간과 생활비도 늘리는 결정이다. → 주제/fastcompany-worklife-0062.md
+- 묶기 새 주제(쓸 만함) 변화를 빨리 결정하는 것보다 영향을 받는 사람의 사정을 먼저 듣고 반영하는 편이 실행의 저항을 줄일 수 있다. → 주제/fastcompany-worklife-0085.md
+- 묶기 새 주제(보통) AI 예산을 덜 썼다는 사실은 효율의 증거가 아니라 직원이 비용을 걱정해 유용한 시도까지 포기했다는 신호일 수 있다. → 주제/bain-insights-0022.md
+- 묶기 새 주제(쓸 만함) 이름과 이메일을 지운 대화라도 업무와 경험의 조각이 남아 있으면 익명이라고 안심할 수 없다. → 주제/ai-lab-enterprise-reports-0007.md
+- 묶기 새 주제(보통) 고객에게 건네는 작은 배려는 당장의 거래를 넘어 다시 찾고 남에게 추천할 이유를 만드는 투자가 될 수 있다. → 주제/hbr-0017.md
+- 묶기 새 주제(쓸 만함) AI가 줄여 줄 것이라는 예상 비용을 계약에서 먼저 약속하면 아직 검증되지 않은 생산성이 현장의 납품 책임으로 바뀐다. → 주제/bain-insights-0018.md
+- 묶기 새 주제(보통) AI가 남의 일을 바꿀 것이라는 확신과 내 일은 안전하다는 확신은 같은 사람이 가진 낙관 편향일 수 있다. → 주제/charter-0011.md
+- 묶기 새 주제(보통) 전통을 지킨다는 것은 하던 일을 그대로 반복하는 것이 아니라 지킬 가치를 남기고 쓰임과 방식을 바꾸는 일일 수 있다. → 주제/hbr-korea-0048.md
+- 묶기 새 주제(보통) 전력 공급의 안정성은 설비 기술만이 아니라 인구가 적은 지역도 투자비를 감당할 수 있는 재원과 협력 구조에 달려 있다. → 주제/brookings-future-of-work-0001.md
+- 묶기 새 주제(보통) AI가 유용한 발견 후보를 찾았다는 성과와 그 발견의 기능·가치까지 입증됐다는 주장은 구분해서 볼 필요가 있다. → 주제/mit-tech-review-0014.md
+- 묶기 새 주제(쓸 만함) 팀장이 성과를 위해 더 애써도 목표를 함께 정하지 않았다면 팀원에게는 협력할 이유가 생기지 않을 수 있다. → 주제/hr-bulletin-0001.md
+- 묶기 새 주제(쓸 만함) 동료와의 의견 차이를 상대를 이겨야 할 문제로 다루면 논쟁과 무관한 정보 공유와 협업까지 손상될 수 있다. → 주제/charter-0012.md
+- 묶기 새 주제(쓸 만함) 성과가 낮은 직원에게만 교육을 배정하면 교육이 지원이 아니라 잘하는 직원에게 돌아오지 않는 성장 기회로 받아들여질 수 있다. → 주제/fastcompany-worklife-0070.md
+- 묶기 새 주제(쓸 만함) 생산성 점수의 큰 차이가 실제 업무 차이보다 계산식의 작은 선택에서 생겼다면 순위는 객관적인 실력표가 될 수 없다. → 주제/worklytics-blog-0003.md
+- 묶기 새 주제(보통) AI에 대한 반감에는 일자리 불안뿐 아니라 내 지식과 창작물이 동의 없이 쓰였다는 불공정의 감각도 들어 있다. → 주제/brookings-future-of-work-0003.md
+- 묶기 새 주제(쓸 만함) AI가 쓴 자료를 공유할 때는 문장의 매끈함보다 사람이 어디까지 검토하고 자기 생각으로 받아들였는지가 함께 전달돼야 한다. → 주제/hbr-0019.md
+- 묶기 새 주제(쓸 만함) AI에게 일을 대신하게 할 때 결과를 가르는 것은 실행 능력보다 내가 원하는 것을 제대로 이해했는지일 수 있다. → 주제/ai-lab-enterprise-reports-0008.md
+- 묶기 새 주제(쓸 만함) AI로 일을 빨리 처리해도 그만큼 더 많은 일을 기대받으면 절약한 시간은 휴식이 아니라 추가 업무로 채워질 수 있다. → 주제/fastcompany-worklife-0081.md
+- 묶기 새 주제(쓸 만함) 한 회사에서 쌓은 관계와 일하는 방식에 대한 이해는 이직해도 바로 옮겨지지 않는 업무 능력이다. → 주제/charter-0014.md
+- 묶기 새 주제(쓸 만함) 실패에서 배우라는 말이 실제 문화가 되려면 안 되는 일을 멈춘 결정도 평가와 인정의 대상이 되어야 한다. → 주제/fastcompany-worklife-0083.md
+- 묶기 새 주제(쓸 만함) 가입을 쉽게 만드는 것이 늘 참여를 늘리는 것은 아니며, 지속적인 실천에는 목표와 관련된 적당한 수고가 도움이 될 수 있다. → 주제/hbr-korea-0049.md
+- 묶기 새 주제(보통) 사용자가 더 원하고 더 많이 쓰는 서비스라도 그 사용을 늘리는 설계가 사용자에게 해를 줄 수 있다. → 주제/mit-smr-0001.md
+- 묶기 새 주제(보통) 동료에게 도움을 청하지 못하는 이유는 동료가 냉정해서가 아니라 우리가 거절 가능성을 너무 크게 예상하기 때문일 수 있다. → 주제/fastcompany-worklife-0061.md
+- 주제 묶기 새 카드 94 · 붙음/새 주제 72 · 뺌 22 · 못 넣음 0 · 남음 0 · 313s
+
 ## 2026-10-23 09:52
 - 묶기 붙임 charter/0005, fastcompany-worklife/0034 → 주제/charter-0003.md
 - 묶기 붙임 mit-tech-review/0004 → 주제/bain-insights-0003.md
