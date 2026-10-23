@@ -27,6 +27,7 @@ export type Step = {
   feedback: string;
   mode: string;
   at: number;
+  numCheck?: { total: number; missing: { num: string; sentence: string }[]; sources: number } | null;
 };
 
 export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };

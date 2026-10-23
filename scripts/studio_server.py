@@ -179,7 +179,21 @@ def image_rounds(k, inline=False):
     return out
 
 
-def step(n, f, by, feedback="", known="", mode=""):
+_NUM = {}  # 수치 원문 대조 캐시 — (원고 파일, 수정 시각, 원문) → 결과
+
+
+def num_check(f, text, srcs):
+    """원고 본문 숫자 중 고른 원문에서 못 찾은 것(scripts/num_check.py, 2026-10-23) — 원문이 없으면 None."""
+    if not srcs:
+        return None
+    import num_check as NC
+    key = (str(f), Path(f).stat().st_mtime, tuple(srcs))
+    if key not in _NUM:
+        _NUM[key] = NC.check(text, list(srcs))
+    return _NUM[key]
+
+
+def step(n, f, by, feedback="", known="", mode="", srcs=()):
     raw = clean(read(f))
     title, body = split_title(raw)
     # 가제 줄은 보이지 않게(2026-10-23 멘토 — 제목은 원고 뒤에 짓는다) — '# 가제: …'로 오든 본문 첫 줄 '가제: …'로 오든
@@ -190,24 +204,25 @@ def step(n, f, by, feedback="", known="", mode=""):
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()
     return {"n": n, "file": Path(f).relative_to(ROOT).as_posix(), "by": by, "title": title, "text": body, "mode": mode,
-            "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime}
+            "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime, "numCheck": num_check(f, body, srcs)}
 
 
 def steps_in(d, b):
     """한 시도의 과정 1·2·3(+ 과정 4~) — 설정 글의 runs/columns/<글>/ 또는 앞 시도 폴더."""
     standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[멘토 피드백 — 원문 그대로]\n", "").strip()
     steps = []
+    srcs = tuple(s[0] for s in b.get("sources", []) if isinstance(s, (list, tuple)) and s)
     draft = d / "draft.md"
     if not draft.exists() and b.get("draft_from"):  # 초안을 다른 갈래와 나눠 쓴 설정
         draft = ROOT / "runs" / "columns" / b["draft_from"] / "draft.md"
     for f, by, fb in ((draft, "Claude", ""), (d / "r4.md", "astra", ""), (d / "final.md", "astra", standing)):
         if f.exists() and f.stat().st_size > 50:
-            steps.append(step(len(steps) + 1, f, by, fb, b.get("title", "")))
+            steps.append(step(len(steps) + 1, f, by, fb, b.get("title", ""), srcs=srcs))
     for f in sorted(d.glob("final-r*.md"), key=lambda p: int(p.stem.split("-r")[1])):
         n = f.stem.split("-r")[1]
         if f.stat().st_size > 50:
             steps.append(step(len(steps) + 1, f, read(d / f"by-r{n}.txt").strip() or "astra", read(d / f"feedback-r{n}.txt"),
-                              b.get("title", ""), read(d / f"mode-r{n}.txt").strip()))
+                              b.get("title", ""), read(d / f"mode-r{n}.txt").strip(), srcs))
     return steps
 
 

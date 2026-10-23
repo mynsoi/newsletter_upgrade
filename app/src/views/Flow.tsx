@@ -339,6 +339,7 @@ function Timeline({
               과정 {tp} 원고 · 머리 그림 {a.hero ? "있음" : "없음"} · 본문 그림 {a.inlinePicked.length}개
             </p>
             <p className="mt-1 text-[13px] text-ink-3">확정하면 이 원고와 그림으로 글 파일을 만들고, 발행 미리보기로 이어집니다.</p>
+            <NumList c={a.steps[tp - 1]?.numCheck} />
             <div className="mt-3">
               <StageNav
                 back="그림으로 돌아가기"
@@ -427,6 +428,37 @@ function TitlesCard({ a, items, live, last, refresh }: { a: A; items: string[]; 
         </SmallBtn>
       </div>
     )}
+    </div>
+  );
+}
+
+/** 수치 원문 대조(2026-10-23) — 본문 숫자 중 고른 원문에서 못 찾은 것. 개수 제한은 없고, 못 찾은 숫자만 알린다. */
+function NumChip({ c }: { c?: Step["numCheck"] }) {
+  if (!c || !c.total) return null;
+  const n = c.missing.length;
+  return (
+    <span
+      title={n ? c.missing.map((m) => `${m.num} — ${m.sentence}`).join("\n") :"본문 숫자를 고른 원문과 대조했습니다"}
+      className={cn("rounded-full border px-2 py-0.5", n ? "border-amber-500/40 text-amber-500" : "border-line")}
+    >
+      {n ? `원문에서 못 찾은 수치 ${n}` : `수치 ${c.total}개 원문 확인`}
+    </span>
+  );
+}
+
+function NumList({ c }: { c?: Step["numCheck"] }) {
+  if (!c || !c.total) return null;
+  if (!c.missing.length) return <p className="mt-2 text-[13px] text-ink-3">수치 {c.total}개 · 모두 고른 원문에 있음</p>;
+  return (
+    <div className="mt-3 rounded-xl border border-amber-500/40 px-4 py-3 text-[13px]">
+      <p className="font-semibold text-amber-500">고른 원문에서 못 찾은 수치 {c.missing.length}개 — 확정 전에 확인해 주세요</p>
+      <ul className="mt-1.5 space-y-1 text-ink-2">
+        {c.missing.map((m, i) => (
+          <li key={i}>
+            <b className="text-ink">{m.num}</b> · {m.sentence}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -737,6 +769,7 @@ function Now({
             <span className="tabular-nums">과정 {s.n}</span>
             <ByChip by={s.by} />
             <span className="tabular-nums">{(edit === null ? s.chars : edit.replace(/\s/g, "").length).toLocaleString()}자</span>
+            {edit === null && <NumChip c={s.numCheck} />}
             {edit === null && (
               <span className="ml-auto flex rounded-full border border-line p-0.5">
                 {(["본문", "비교", "미리보기"] as const).map((x) => (
