@@ -151,7 +151,7 @@ def prompt_body(text, thesis="", message="", prev=None, target=""):
 {f"대상 독자: {target}" + chr(10) if target else ""}
 기준은 순서대로입니다.
 1. 주제 전달(가장 중요): 본문을 읽지 않은 사람이 제목만 보고 이 글이 무엇을 말하는지 바로 알 수 있어야 합니다. 해석이 필요하면 안 됩니다.
-   무엇을 말하는지는 [본문]을 종합해서 정합니다 — 본문이 결국 독자에게 하는 말, 맺음에서 남기는 말을 중심으로.
+   무엇을 말하는지는 [본문] 전체를 종합해서 정합니다 — 이 글이 독자에게 남기는 핵심 한 가지.
 2. 매력적인 표현: 1을 지킨 위에서 읽고 싶게 만드는 질문·단언·뒤집기를 씁니다. 본문이 말하지 않는 것을 약속하거나 부풀리지 않습니다.
 가장 피할 것: 함축. 글자 수를 줄이려고 말을 압축하거나 비유·은유로 돌려 말하면 메시지가 흐려지고 독자가 해석해야 합니다.
 '~의 차례', '~한 기여', '숨은 비용'처럼 명사로 끊어 뜻을 감추는 말, 본문을 읽어야 알 수 있는 사례 이름·숫자만 앞세운 제목은 쓰지 않습니다.
@@ -166,6 +166,75 @@ def prompt_body(text, thesis="", message="", prev=None, target=""):
 
 [본문]
 {body}"""
+
+
+# 장치별로 따로 짓기(2026-10-23) — 한 번에 8개를 지으면 설명형·권유형으로 몰려서, 장치마다 2개씩 따로 짓고
+# 장치마다 그 장치를 쓴 경영일기 제목 중 메시지가 분명한 것(clear 4 이상, 질문형은 3 이상 — 4점 이상 질문형이 1개뿐)만 예로 준다.
+DEVICE_GROUPS = [
+    ("통념 뒤집기", ["통념 뒤집기"], 4, "흔한 믿음과 반대되는 말을 단언합니다. 무엇이 틀렸고 무엇이 맞는지가 제목에 드러나야 합니다."),
+    ("질문", ["질문"], 3, "독자에게 묻습니다. 묻는 말 안에 글의 답이 비치게 — 답을 감춰 궁금증만 남기는 질문은 쓰지 않습니다."),
+    ("금지·권유", ["금지·권유"], 4, "하지 말라거나 하라고 말합니다. 무엇을 왜 해야(하지 말아야) 하는지가 드러나야 합니다."),
+    ("역설·이유", ["역설·대비", "이유"], 4, "두 가지를 맞세우거나('~보다 ~', '~인데 ~') '~하는 이유'로 묻습니다. 맞세운 두 쪽이 무엇인지 분명해야 합니다."),
+]
+
+
+def device_prompt(body, thesis, group, message="", prev=None, target=""):
+    import title_style as TS
+    name, devs, clear, note = group
+    ex = TS.by_device(body[:1500], devs, 4, clear)
+    exs = "\n".join(f"- 메시지: {v['message']}\n  → 제목: {v['title']}" for _, v in ex) or "(예 없음)"
+    ask = ""
+    if message:
+        ask = "\n[이번 멘토 요청 — 원문 그대로] 다른 항목과 부딪치면 이 요청을 따릅니다.\n" + message.strip() + "\n"
+        if prev:
+            ask += "[앞 회차 후보 — 멘토가 이미 본 것]\n" + "\n".join(f"- {t}" for t in prev) + "\n"
+    return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고, '{name}' 방식으로 제목 2개를 지어 주세요.
+{f"대상 독자: {target}" + chr(10) if target else ""}
+'{name}' 방식: {note}
+
+기준은 순서대로입니다.
+1. 주제 전달(가장 중요): 본문을 읽지 않은 사람이 제목만 보고 이 글이 무엇을 말하는지 바로 알 수 있어야 합니다. 해석이 필요하면 안 됩니다.
+   무엇을 말하는지는 [본문] 전체를 종합해서 정합니다 — 이 글이 독자에게 남기는 핵심 한 가지.
+2. 매력적인 표현: 1을 지킨 위에서 읽고 싶게 만듭니다. 본문이 말하지 않는 것을 약속하거나 부풀리지 않습니다.
+가장 피할 것: 함축 — 압축하거나 비유로 돌려 뜻을 감추는 말, '~의 차례'·'숨은 비용'처럼 명사로 끊는 말, 본문을 알아야 아는 사례 이름·숫자만 앞세운 제목.
+- [경영일기 예]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」에서 '{name}' 방식을 쓰면서도 메시지가 제목에 분명히 드러난 예입니다. 말투를 참고하되 그대로 가져오지는 마세요.
+- [기획 때 적은 말할 것]은 참고만 하세요. 그 문장의 표현을 따르지 말고 본문이 실제로 한 말로 짓습니다.
+- 한 제목에 생각 하나, 콜론·부제 없이, 대략 30자 안팎까지. 두 제목은 서로 다르게.
+{ask}
+출력: 번호를 붙인 제목 2줄만 주세요. 설명은 붙이지 마세요. 파일을 만들거나 명령을 실행하지 마세요.
+
+[경영일기 예 — '{name}']
+{exs}
+
+[기획 때 적은 말할 것]
+{thesis or "(없음)"}
+
+[본문]
+{body}"""
+
+
+def write_body(d, text, thesis="", target="", message="", prev=None):
+    """원고 본문으로 장치별 2개씩 8개를 짓고(astra 4번 동시에) astra.md에 모은다 — 다음에 pick()이 4개를 고른다."""
+    from concurrent.futures import ThreadPoolExecutor as TPE
+    body = re.sub(r"^#.*\n", "", text.replace("(끝)", "").strip(), count=1).strip()
+    d = Path(d)
+    d.mkdir(parents=True, exist_ok=True)
+
+    def one(i_g):
+        i, g = i_g
+        sub = d / f"dev{i + 1}"
+        p = device_prompt(body, thesis, g, message, prev, target)
+        sub.mkdir(parents=True, exist_ok=True)
+        (sub / "prompt.md").write_text(p, encoding="utf-8")
+        astra(sub, p)
+        return round_items(sub / "astra.md")[:2] if (sub / "astra.md").exists() else []
+
+    with TPE(len(DEVICE_GROUPS)) as ex:
+        got = list(ex.map(one, enumerate(DEVICE_GROUPS)))
+    items = [t for g in got for t in g]
+    if items:
+        (d / "astra.md").write_text("\n".join(f"{i}. {t}" for i, t in enumerate(items, 1)) + "\n", encoding="utf-8")
+    return items
 
 
 def pick_prompt(thesis, cands, target="", message="", text=""):

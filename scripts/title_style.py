@@ -2,6 +2,7 @@
 
 제목 목록만으로는 필자가 글의 메시지를 어떻게 제목으로 바꾸는지 알 수 없어서, 본문을 읽고 짝을 만든다.
   python3 -I scripts/title_style.py --build      본문(sources/originals/infuture/p*.md)마다 짝을 만든다(Claude, 계정 로그인). 이미 만든 글은 건너뜀
+  python3 -I scripts/title_style.py --clarity    짝마다 '제목만 보고 메시지를 알 수 있나'(clear 1~5)를 매긴다(Claude) — 장치별 예시는 4점 이상만
   python3 -I scripts/title_style.py --stats      장치별 개수
   python3 -I scripts/title_style.py --similar "<이 글이 말할 것>"   메시지가 가까운 짝(임베딩)
 결과: sources/originals/infuture/_title_pairs.json(짝, git에 — 경영일기 본문도 git에 있다) · _title_pairs_emb.json(메시지 임베딩, 다시 만들 수 있어 git 밖)
@@ -114,8 +115,8 @@ def embed_all(got):
     print(f"메시지 임베딩 {len(have)}", flush=True)
 
 
-def similar(text, n=8):
-    """메시지가 가까운 경영일기 짝 n개 — [(id, 짝)]. 임베딩이 없으면 최근 글 n개."""
+def ranked(text):
+    """메시지가 가까운 순서로 모든 짝 — [(id, 짝)]. 임베딩이 없으면 최근 글 순."""
     got = pairs()
     if not got:
         return []
@@ -124,11 +125,44 @@ def similar(text, n=8):
         emb = json.loads(EMB.read_text(encoding="utf-8"))
         q = CS.embed(text)
         score = {k: sum(a * b for a, b in zip(q, v)) for k, v in emb.items() if k in got}
-        keys = sorted(score, key=score.get, reverse=True)[:n]
+        keys = sorted(score, key=score.get, reverse=True)
     except Exception as e:
         print(f"짝 검색 건너뜀(최근 글로): {e}", flush=True)
-        keys = sorted(got, key=lambda k: got[k].get("date", ""), reverse=True)[:n]
+        keys = sorted(got, key=lambda k: got[k].get("date", ""), reverse=True)
     return [(k, got[k]) for k in keys]
+
+
+def similar(text, n=8):
+    """메시지가 가까운 경영일기 짝 n개."""
+    return ranked(text)[:n]
+
+
+def by_device(text, devices, n=4, clear=4):
+    """그 장치를 쓴 경영일기 짝 중 제목만 보고 메시지가 분명한 것(clear 이상)을, 메시지가 가까운 순으로 n개 (2026-10-23 장치별 짓기)."""
+    return [(k, v) for k, v in ranked(text) if set(v.get("devices", [])) & set(devices) and v.get("clear", 0) >= clear][:n]
+
+
+def clarity():
+    """짝마다 clear(1~5) — 본문을 모르는 사람이 제목만 보고 메시지를 알 수 있나. 사용자 기준(주제 전달 1순위, 함축 지양)에 맞는 예만 고르려고."""
+    got = pairs()
+    todo = [k for k, v in got.items() if "clear" not in v]
+    run = RUNS / ("clarity-" + time.strftime("%Y%m%d-%H%M%S"))
+    for i in range(0, len(todo), 60):
+        ks = todo[i:i + 60]
+        rows = "\n".join(f"[{k}] 제목: {got[k]['title']}\n     메시지: {got[k]['message']}" for k in ks)
+        prompt = "\n\n".join([
+            "아래는 칼럼의 제목과 그 글의 핵심 메시지입니다. 제목마다, 본문을 읽지 않은 사람이 제목만 보고 그 메시지를 알 수 있는지 1~5점으로 매겨 주세요.",
+            "5: 제목만으로 메시지가 분명함 · 3: 대략 짐작은 됨 · 1: 해석이 필요하거나 메시지를 감춤(비유·함축·사례 이름만·궁금증만)",
+            "출력: JSON 하나만. {\"scores\": {\"p752\": 4}}",
+            W.ANSWER_ONLY, W.GUARD, rows])
+        raw = W.claude_login(run / f"c{i // 60 + 1:02d}", prompt)
+        m = re.search(r"\{.*\}", raw or "", re.S)
+        sc = json.loads(m.group(0)).get("scores", {}) if m else {}
+        for k, v in sc.items():
+            if k in got:
+                got[k]["clear"] = int(v)
+        PAIRS.write_text(json.dumps(got, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"명확도 {i // 60 + 1} · {len(sc)}/{len(ks)}", flush=True)
 
 
 def stats():
@@ -144,6 +178,8 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["--build"]:
         build()
+    elif a[:1] == ["--clarity"]:
+        clarity()
     elif a[:1] == ["--stats"]:
         n, c = stats()
         print(f"짝 {n}개")

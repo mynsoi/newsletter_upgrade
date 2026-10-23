@@ -288,10 +288,8 @@ def titles_body(args):
     prev = tc.round_items(olds[-1]) if msg and olds else None
     (d / "message.txt").unlink(missing_ok=True)
     text = text_file.read_text(encoding="utf-8")
-    pr = tc.prompt_body(text, b.get("thesis", ""), msg, prev, target=target_line(b))
-    (d / "prompt.md").write_text(pr, encoding="utf-8")
     (d / "source.txt").write_text(text_file.relative_to(ROOT).as_posix(), encoding="utf-8")
-    tc.astra(d, pr)
+    tc.write_body(d, text, b.get("thesis", ""), target_line(b), msg, prev)  # 장치별 2개씩 8개(2026-10-23)
     tc.pick(d, b.get("thesis", ""), target_line(b), msg, text=text)
     if (d / "astra.md").exists() and msg:
         (d / "message.txt").write_text(msg, encoding="utf-8")
