@@ -22,3 +22,6 @@ sources/originals/infuture/_title_pairs_emb.json
 runs/internal/
 runs/mine/*/internal.json
 runs/mine/*/internal/
+# 경영일기 참고 방식 비교 시험(scripts/style_compare.py) — 지시문에 원문 전체가 들어 있어 git 밖
+runs/style-compare/
+runs/style-guide/

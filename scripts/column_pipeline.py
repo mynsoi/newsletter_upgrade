@@ -124,7 +124,8 @@ def source_blocks(b):
     return out
 
 
-def draft_prompt(b):
+def draft_prompt(b, refs=None, guide=""):
+    """refs: 문체 참고 경영일기(없으면 고정 DRAFT_REFS) · guide: 경영일기 문체 안내서(style_guide.py — 2026-10-24 비교 시험)."""
     mine = bool(b.get("from_mine"))
     parts = [
         "사내 뉴스레터에 실을 칼럼 한 편을 써 주세요.",
@@ -154,17 +155,21 @@ def draft_prompt(b):
         OUT_RULE,
     ]
     parts += source_blocks(b) if mine else [f"=== [원문 {i}] {d} ===\n" + body(SRC / p) for i, (p, d) in enumerate(b["sources"], 1)]
-    for k in DRAFT_REFS:
+    if guide:
+        parts.append("[문체 안내서] 이 필자의 글 252편에서 뽑은 짜임과 목소리입니다. 아래 [문체 참고] 글과 함께 참고합니다.\n" + guide)
+    for k in refs or DRAFT_REFS:
         parts.append("[문체 참고] " + ref(k))
     return "\n\n".join(parts)
 
 
-def r4_prompt(b, draft):
+def r4_prompt(b, draft, refs=None, guide=""):
     parts = [
         "아래 [원고]를 [참고] 글의 필자(경영 컨설턴트 유정식)가 자기 뉴스레터에 직접 썼다면 어떻게 썼을지 상상하며 다시 써 주세요.",
         "원고의 논리 전개와 사실은 그대로 두고, 문장과 이어 가는 방식만 [참고] 필자처럼 바꿉니다. [참고] 글의 내용이나 사례는 가져오지 않습니다. 제목은 바꾸지 마세요.",
     ]
-    parts += ["[참고] " + ref(k) for k in b.get("r4_refs", ["p724", "p669"])]
+    if guide:
+        parts.append("[문체 안내서] 이 필자의 글 252편에서 뽑은 짜임과 목소리입니다.\n" + guide)
+    parts += ["[참고] " + ref(k) for k in (refs or b.get("r4_refs", ["p724", "p669"]))]
     parts += [standing_block(), PEOPLE_RULE, IC.KEEP_RULE, LEN_RULE, OUT_RULE + " 원고에 없는 사실·수치·경험은 더하지 마세요.",
               "=== 원고 ===\n" + draft]
     return "\n\n".join(parts)
