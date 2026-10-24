@@ -12,9 +12,9 @@
       python3 -I scripts/my_topic.py --page <글> <이름> [점검 메모]  — 결과 페이지 docs/<오늘>-<이름>.html (작업실 /docs/)
 단계 (2026-10-22 개편 — 글 하나를 정해 주던 것을 글 옵션 여러 개로: 넓은 키워드로 물어도 각도를 사람이 고르게)
 0. 검색: 자동 카드(main document_cards)로 후보를 최대 110편까지 좁힌다 — 의미 검색 100 + 낱말 검색 10(card_search.py).
-1. 옵션(Claude, 0에서 좁힌 카드만): 글 옵션 3~5개 — 옵션마다 이 글이 말할 것 한 문장 + 중심 1 + 받침 1~2(적어도 하나는 다른 발행처).
+1. 옵션(astra — 10/24부터, 0에서 좁힌 카드만): 글 옵션 3~5개 — 옵션마다 이 글이 말할 것 한 문장 + 중심 1 + 받침 1~2(적어도 하나는 다른 발행처).
    넓은 주제면 옵션끼리 메시지가 다르고, 구체적인 주제면 메시지는 비슷해도 사례 묶음이 다르다. 여기서 멈추고 사람이 고른다.
-2. 확인(Claude, 고른 옵션의 원문 2~3편 전체): 카드로 정한 몫이 원문에 정말 있는지 보고, 원문마다 맡는 몫·가져올 사실을 원문 기준으로 적는다.
+2. 확인(astra — 10/24부터, 고른 옵션의 원문 2~3편 전체): 카드로 정한 몫이 원문에 정말 있는지 보고, 원문마다 맡는 몫·가져올 사실을 원문 기준으로 적는다.
    받치지 못하는 원문은 뺀다. 같은 호출에서 추천 원문 최대 4편도 고른다(2026-10-22) — 고른 메시지로 다시 검색한 카드 30장
    (주제 지도 주제면 그 주제의 나머지 사례가 먼저)을 카드만 보고. 사람이 추천을 넣으면(--add) 그때 그 원문을 끝까지 읽고 확인한다.
    주제 지도의 '이 주제로'(--topic)도 그 주제를 고른 옵션 하나로 보고 이 단계를 똑같이 거친다. 원문 2~3편으로 정한 이유(2026-10-21) — 원문 1편이면 그 글을 말만 바꿔 쓰는 모방이 되고,
@@ -43,6 +43,12 @@ MINE_RUNS = ROOT / "runs" / "mine"
 MINE_SRC = SRC / "mine"
 SOFFICE = shutil.which("soffice") or shutil.which("libreoffice")
 PY = [sys.executable, "-X", "utf8", "-I", "-u"]
+# 옵션·확인·넣기 확인(그리고 예전 후보·고르기·말할 것) — 2026-10-24 사용자 결정으로 Claude → astra. 사내 자료 추천(internal_ctx)은 Claude 그대로
+MT_BY = "astra"
+
+
+def llm(d, prompt):
+    return (W.astra if MT_BY == "astra" else W.claude)(d, prompt)
 
 
 # ---------- 문서 ----------
@@ -256,7 +262,7 @@ def point_prompt(request, center):
 
 
 def make_point(request, center, run_dir):
-    return W.claude(Path(run_dir), point_prompt(request, center)).strip().strip('"“”')
+    return llm(Path(run_dir), point_prompt(request, center)).strip().strip('"“”')
 
 
 def json_of(raw):
@@ -352,7 +358,7 @@ def suggest(d, topic, saved, ask_target, follow=False):
     n = len(list(d.glob("options-*.json"))) + (2 if (d / "options.json").exists() else 1)
     sfx = "" if n == 1 else f"-{n}"
     stage(d, "옵션")
-    raw = json_of(W.claude(d / f"options{sfx}", options_prompt(topic, saved, cs, ask_target, follow))).get("options", [])
+    raw = json_of(llm(d / f"options{sfx}", options_prompt(topic, saved, cs, ask_target, follow))).get("options", [])
     opts, centers = [], set()
     for o in raw:
         c = (o.get("center") or {}).get("source")
@@ -392,7 +398,7 @@ def take(k, n, first=()):
     own = {opt["center"]["source"]} | {x["source"] for x in opt.get("support", [])}
     pool = rec_pool(opt["message"], own, first)
     m = len(list(d.glob("check*/"))) + 1
-    got = json_of(W.claude(d / ("check" if m == 1 else f"check-{m}"), check_prompt(topic, meta["docs"], opt, pool, first)))
+    got = json_of(llm(d / ("check" if m == 1 else f"check-{m}"), check_prompt(topic, meta["docs"], opt, pool, first)))
     cs = W.all_cards()
     center = got["center"] if (got.get("center") or {}).get("source") == opt["center"]["source"] else {**opt["center"], "use": ""}
     drop = {x.get("source"): x.get("why", "") for x in got.get("drop", []) if x.get("source") in own and x.get("source") != center["source"]}
@@ -445,7 +451,7 @@ def add(k, src, as_center=False):
         sys.exit("넣을 수 없는 원문: " + src)
     stage(d, "넣기 확인")
     m = len(list(d.glob("add*/"))) + 1
-    got = json_of(W.claude(d / f"add-{m}", verify_prompt((d / "topic.txt").read_text(encoding="utf-8").strip(), meta["docs"],
+    got = json_of(llm(d / f"add-{m}", verify_prompt((d / "topic.txt").read_text(encoding="utf-8").strip(), meta["docs"],
                                                          picks.get("point", ""), src, as_center)))
     cands = picks.get("_candidates", [])
     if not got.get("ok"):
@@ -502,13 +508,13 @@ def choose(d, topic, saved, ask_target, follow=False):
     n = len(list(d.glob("picks-*.json"))) + (2 if (d / "picks.json").exists() else 1)  # 이어서 말한 차례는 폴더를 따로
     sfx = "" if n == 1 else f"-{n}"
     stage(d, "후보")
-    cands = json_of(W.claude(d / f"candidates{sfx}", cand_prompt(topic, saved, cs, follow))).get("candidates", [])
+    cands = json_of(llm(d / f"candidates{sfx}", cand_prompt(topic, saved, cs, follow))).get("candidates", [])
     cands = [c for c in cands if c.get("source") in cs]
     print(f"후보 {len(cands)}편 · {time.time() - t0:.0f}s", flush=True)
     if not cands:
         sys.exit("후보가 없음 — 로그: " + str(d / f"candidates{sfx}"))
     stage(d, "고르기")
-    picks = json_of(W.claude(d / f"pick{sfx}", pick_prompt(topic, saved, cands, ask_target, follow)))
+    picks = json_of(llm(d / f"pick{sfx}", pick_prompt(topic, saved, cands, ask_target, follow)))
     if not picks.get("center", {}).get("source") in cs:
         sys.exit("고르기 결과가 비었음 — 로그: " + str(d / f"pick{sfx}"))
     picks["support"] = [p for p in picks.get("support", []) if p.get("source") in cs]

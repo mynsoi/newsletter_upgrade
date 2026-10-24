@@ -456,7 +456,7 @@ def mine_state(jobs):
         out.append({"id": k, "turns": ts, "message": read(d / "topic.txt").strip() or read(d / "request.txt").strip(), "docs": docs,
                     "target": meta.get("target", ""), "status": status, "stage": st, "job": j["id"] if j else "",
                     "picked": picked, "rest": rest, "article": k if has_brief else "", "at": d.stat().st_mtime,
-                    # 원문 확인 결과(글 옵션 방식, my_topic.take) — 고른 옵션 번호 · Claude의 주의 메모 · 뺀 원문 수
+                    # 원문 확인 결과(글 옵션 방식, my_topic.take) — 고른 옵션 번호 · 주의 메모(astra, 10/24 전에는 Claude) · 뺀 원문 수
                     "check": {"option": picks.get("option"), "note": picks.get("note", ""), "dropped": len(picks.get("rest", []))} if picks.get("option") else None,
                     "internal": internal_row(d)})
     return out
@@ -622,7 +622,7 @@ def act_mine_swap(a):
         raise ValueError("잘못된 원문")
     if busy(k, ("mine", "write")):
         raise ValueError("이 글에서 작업이 도는 중")
-    # 추천 원문(카드만 보고 고른 것)을 넣으면 그 원문을 끝까지 읽고 확인한 뒤 넣는다(2026-10-22) — Claude, 20~30초
+    # 추천 원문(카드만 보고 고른 것)을 넣으면 그 원문을 끝까지 읽고 확인한 뒤 넣는다(2026-10-22) — astra(10/24부터)
     picks = json.loads(read(MINE / k / "picks.json") or "{}")
     rec = {c["source"] for c in picks.get("_candidates", []) if c.get("rec")}
     new = [s for s in dict.fromkeys(srcs) if s in rec and s not in picks.get("_verified", {})]
