@@ -110,7 +110,8 @@ def guide_prompt(got, s):
         "4. 목소리 — 어미·문장 길이·문단 길이·독자와의 거리·단정의 정도\n"
         "5. 이 필자가 하지 않는 것 — 짜임 정리에서 드러나는 것만\n"
         "6. 다양하게 쓰기 — 한 가지 도입·맺음으로 굳지 않게, 어떤 글에 어떤 방식이 맞는지\n"
-        "지킬 것: 특정 글의 내용·사례·문장을 옮기지 않습니다(이 안내서는 짜임만). 2,000자 안팎. 제목 '# 경영일기 문체 안내서'로 시작하는 마크다운.",
+        "지킬 것: 특정 글의 내용·사례·문장을 옮기지 않습니다(이 안내서는 짜임만). "
+        "우리 칼럼에는 개인 필자가 없으므로 필자 경험으로 여는 방식·필자 자신의 이야기를 털어놓는 목소리는 권하지 않습니다(10/24 사용자 결정). 2,000자 안팎. 제목 '# 경영일기 문체 안내서'로 시작하는 마크다운.",
         W.ANSWER_ONLY, W.GUARD,
         "=== [통계] ===\n" + json.dumps(s, ensure_ascii=False),
         "=== [글마다 짜임] ===\n" + rows])
@@ -137,7 +138,8 @@ def guide_text():
 
 def _pool():
     got = json.loads(STRUCT.read_text(encoding="utf-8")) if STRUCT.exists() else {}
-    return {k: v for k, v in got.items() if LEN_RANGE[0] <= v.get("chars", 0) <= LEN_RANGE[1]}
+    # 필자 경험으로 여는 글은 참고 글로 고르지 않는다(10/24) — 우리 칼럼에는 개인 필자가 없어 없는 경험을 지어내게 할 수 있다
+    return {k: v for k, v in got.items() if LEN_RANGE[0] <= v.get("chars", 0) <= LEN_RANGE[1] and v.get("open") != "필자 경험"}
 
 
 def draft_refs(message, n=2, exclude=()):
