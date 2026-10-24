@@ -183,7 +183,7 @@ def recommend_prompt(message, topic, cands, ds):
         "fact(그 대목에서 글에 쓸 사실이나 취지 한두 가지 — 대목에 있는 것만), caution(시점·확정 여부·화자 등 쓸 때 조심할 점)을 적습니다. "
         "경영층 발언은 따옴표로 옮기지 않고 취지로 쓴다는 점, 안내문이 '예정'으로 쓴 것은 확정이 아니라는 점을 caution에 반영합니다.",
         "출력: JSON 하나만. {\"pick\": \"c3\" 또는 null, \"use\": \"...\", \"fact\": \"...\", \"caution\": \"...\", \"why\": \"고르거나 고르지 않은 이유 한 줄\"}",
-        "[이 글이 말할 것]\n" + message, "[멘토가 처음 한 요청]\n" + (topic or message), "[사내 자료 대목]\n" + rows])
+        "[이 글이 말할 것]\n" + message, "[처음 요청]\n" + (topic or message), "[사내 자료 대목]\n" + rows])
 
 
 def recommend(run_dir, message, topic=""):
@@ -218,10 +218,10 @@ KEEP_RULE = "원고에 우리 회사 자료를 쓴 문장이 있으면 그 사�
 
 
 def internal_block(rec):
-    """초안 지시에 넣는 사내 맥락 — 멘토가 넣기로 한 대목만."""
+    """초안 지시에 넣는 사내 맥락 — 원문 확인 화면에서 넣기로 한 대목만."""
     if not rec or not rec.get("on") or not rec.get("excerpt"):
         return ""
-    return "\n".join([f"[우리 회사 자료 — {rec['label']}] 멘토가 이 글에 넣기로 한 사내 자료의 대목입니다.",
+    return "\n".join([f"[우리 회사 자료 — {rec['label']}] 이 글에 넣기로 한 사내 자료의 대목입니다.",
                       f"쓸 방향: {rec.get('use', '')}", f"쓸 사실: {rec.get('fact', '')}", f"주의: {rec.get('caution', '')}",
                       INTERNAL_RULE, "--- 대목 ---", rec["excerpt"]])
 

@@ -130,14 +130,31 @@ def guide():
 
 
 def guide_text():
-    """초안·재작성 지시에 넣을 안내서 — 없으면 빈 문자열."""
-    if not GUIDE.exists():
-        return ""
+    """초안·재작성 지시에 넣을 안내서 — 없으면 멈춘다(2026-10-24 사용자: 안내서를 못 읽은 채 예전 방식으로 쓰면 안 된다)."""
+    if not GUIDE.exists() or not GUIDE.read_text(encoding="utf-8").strip():
+        sys.exit(f"문체 안내서가 없습니다: {GUIDE} — git pull로 받거나 python3 -I scripts/style_guide.py --guide로 만드세요")
     return re.sub(r"\A<!--.*?-->\n", "", GUIDE.read_text(encoding="utf-8"), flags=re.S).strip()
 
 
+def ranked(text):
+    """메시지가 가까운 순서로 경영일기 — 임베딩(_title_pairs_emb.json, git 밖)이 없거나 모자라면 먼저 만든다.
+    title_style.ranked는 임베딩이 없으면 조용히 최근 글 순으로 돌아가서, 참고 글 고르기에는 이것을 쓴다(못 고르면 멈춘다)."""
+    import card_search as CS
+    got = TS.pairs()
+    emb = json.loads(TS.EMB.read_text(encoding="utf-8")) if TS.EMB.exists() else {}
+    if any(k not in emb for k in got):
+        print("경영일기 메시지 임베딩을 만듭니다(처음 한 번)", flush=True)
+        TS.embed_all(got)
+        emb = json.loads(TS.EMB.read_text(encoding="utf-8"))
+    q = CS.embed(text)
+    score = {k: sum(a * b for a, b in zip(q, v)) for k, v in emb.items() if k in got}
+    return sorted(score, key=score.get, reverse=True)
+
+
 def _pool():
-    got = json.loads(STRUCT.read_text(encoding="utf-8")) if STRUCT.exists() else {}
+    if not STRUCT.exists():
+        sys.exit(f"경영일기 짜임 정리가 없습니다: {STRUCT} — git pull로 받거나 python3 -I scripts/style_guide.py --analyze로 만드세요")
+    got = json.loads(STRUCT.read_text(encoding="utf-8"))
     # 필자 경험으로 여는 글은 참고 글로 고르지 않는다(10/24) — 우리 칼럼에는 개인 필자가 없어 없는 경험을 지어내게 할 수 있다
     return {k: v for k, v in got.items() if LEN_RANGE[0] <= v.get("chars", 0) <= LEN_RANGE[1] and v.get("open") != "필자 경험"}
 
@@ -145,16 +162,16 @@ def _pool():
 def draft_refs(message, n=2, exclude=()):
     """A — 초안 참고: 이 글의 메시지와 가까운 경영일기 n편(길이가 우리 칼럼과 비슷한 글만)."""
     pool = _pool()
-    return [k for k, _ in TS.ranked(message) if k in pool and k not in exclude][:n]
+    return [k for k in ranked(message) if k in pool and k not in exclude][:n]
 
 
 def rewrite_refs(message, open_, close, n=2, exclude=()):
     """A — 재작성 참고: 초안과 도입·맺음 방식이 같은 글 중 메시지가 가까운 n편. 모자라면 맺음만 같은 글 → 메시지만 가까운 글로 채운다."""
     pool = _pool()
-    ranked = [k for k, _ in TS.ranked(message) if k in pool and k not in exclude]
-    out = [k for k in ranked if pool[k]["open"] == open_ and pool[k]["close"] == close][:n]
-    out += [k for k in ranked if k not in out and pool[k]["close"] == close][:n - len(out)]
-    out += [k for k in ranked if k not in out][:n - len(out)]
+    order = [k for k in ranked(message) if k in pool and k not in exclude]
+    out = [k for k in order if pool[k]["open"] == open_ and pool[k]["close"] == close][:n]
+    out += [k for k in order if k not in out and pool[k]["close"] == close][:n - len(out)]
+    out += [k for k in order if k not in out][:n - len(out)]
     return out
 
 

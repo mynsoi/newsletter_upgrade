@@ -101,9 +101,9 @@ def prompt_first(thesis, sources, src_root, message="", prev=None, target=""):
     srcs = "\n\n".join(f"=== [원문 {i}] {d} ===\n" + body(Path(src_root) / p) for i, (p, d) in enumerate(sources, 1))
     ask = ask_body = ""
     if message:
-        ask = ("\n- [이번 멘토 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
-               + (" [앞 회차 후보]는 멘토가 이미 본 후보입니다." if prev else ""))
-        ask_body = "[이번 멘토 요청 — 원문 그대로]\n" + message.strip() + "\n\n"
+        ask = ("\n- [이번 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
+               + (" [앞 회차 후보]는 작성자가 이미 본 후보입니다." if prev else ""))
+        ask_body = "[이번 요청 — 받은 그대로]\n" + message.strip() + "\n\n"
         if prev:
             ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
     pairs = pairs_block(thesis)
@@ -142,9 +142,9 @@ def prompt_body(text, thesis="", message="", prev=None, target=""):
     body = re.sub(r"^#.*\n", "", text.replace("(끝)", "").strip(), count=1).strip()
     ask = ask_body = ""
     if message:
-        ask = ("\n- [이번 멘토 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
-               + (" [앞 회차 후보]는 멘토가 이미 본 후보입니다." if prev else ""))
-        ask_body = "[이번 멘토 요청 — 원문 그대로]\n" + message.strip() + "\n\n"
+        ask = ("\n- [이번 요청]을 따라 주세요. 위 항목과 부딪치면 요청을 따릅니다."
+               + (" [앞 회차 후보]는 작성자가 이미 본 후보입니다." if prev else ""))
+        ask_body = "[이번 요청 — 받은 그대로]\n" + message.strip() + "\n\n"
         if prev:
             ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
     pairs = pairs_block(body[:1500])
@@ -186,9 +186,9 @@ def device_prompt(body, thesis, group, message="", prev=None, target=""):
     exs = "\n".join(f"- 메시지: {v['message']}\n  → 제목: {v['title']}" for _, v in ex) or "(예 없음)"
     ask = ""
     if message:
-        ask = "\n[이번 멘토 요청 — 원문 그대로] 다른 항목과 부딪치면 이 요청을 따릅니다.\n" + message.strip() + "\n"
+        ask = "\n[이번 요청 — 받은 그대로] 다른 항목과 부딪치면 이 요청을 따릅니다.\n" + message.strip() + "\n"
         if prev:
-            ask += "[앞 회차 후보 — 멘토가 이미 본 것]\n" + "\n".join(f"- {t}" for t in prev) + "\n"
+            ask += "[앞 회차 후보 — 작성자가 이미 본 것]\n" + "\n".join(f"- {t}" for t in prev) + "\n"
     return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고, '{name}' 방식으로 제목 2개를 지어 주세요.
 {f"대상 독자: {target}" + chr(10) if target else ""}
 '{name}' 방식: {note}
@@ -248,7 +248,7 @@ def pick_prompt(thesis, cands, target="", message="", text=""):
     return f"""사내 뉴스레터(SK E&S 전 직원 대상) 칼럼의 제목 후보 {len(cands)}개입니다. 사람에게 보여 줄 {N_SHOW}개를 골라 주세요.
 
 {"[본문]을 읽고 이 글이 무엇을 말하는지 먼저 정리한 뒤 판정하세요(기획 때 적은 말할 것: " + thesis + ")" if text else "이 글이 말할 것: " + thesis}
-{f"대상 독자: {target}" + chr(10) if target else ""}{f"멘토 요청(원문 그대로): {message}" + chr(10) if message else ""}
+{f"대상 독자: {target}" + chr(10) if target else ""}{f"이번 요청(받은 그대로): {message}" + chr(10) if message else ""}
 후보마다 세 가지를 1~5점으로 매기세요.
 - message(가장 중요): 본문을 모르는 사람이 제목만 읽고 이 글이 무엇을 말하는지 한 문장으로 말할 수 있나.
   해석이 필요한 함축(압축·비유·명사로 끊어 뜻을 감춤, 본문을 알아야 아는 사례 이름·숫자)이면 2점 이하.

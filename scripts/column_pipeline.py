@@ -70,7 +70,7 @@ OUT_RULE = ("출력: 제목과 본문만 주세요. 본문에 '(출처: …)' �
 
 
 # 기준 피드백 속 따옴표 문장은 지난 글의 문장이다 — 새 글에 그대로 들어갔다(2026-10-11 "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠.")
-NO_COPY = ("[기준 피드백] 속 따옴표 문장과 인용된 대목은 지난 글의 문장입니다(고친 예시이거나 멘토가 걸린다고 짚은 대목). "
+NO_COPY = ("[기준 피드백] 속 따옴표 문장과 인용된 대목은 지난 글의 문장입니다(고친 예시이거나 피드백에서 걸린다고 짚은 대목). "
            "어떻게 쓰라는 뜻만 따르고, 그 문장을 이 원고에 옮겨 쓰지 마세요.")
 # 사례 설명 — 멘토 2026-10-11 "누구도 본적없는 사례를 … 좀더 단순하고 명확하게 설명하고 넘어가는게 좋을거같네" · "너무 말이 뭉뚱그려서만 얘기하니까"
 # (비교 C·C2에서 효과를 본 지시 그대로 — wiki-eval/run_compare_1011c.py)
@@ -88,7 +88,8 @@ def standing_block():
     """멘토가 지난 글들에 한 말(standing-feedback) — 받은 그대로. 2026-10-11부터 초안·재작성에도 넘긴다
     (그 전엔 과정 3에만 들어가 글의 뼈대에 닿지 않았다 — 멘토가 짚은 대목이 초안에서 생겨 재작성에서 커졌다)."""
     fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8").strip()
-    return "[멘토가 지난 글들을 읽고 한 말 — 원문 그대로] 이 글에도 지킵니다.\n" + fb.replace("[멘토 피드백 — 원문 그대로]\n", "") + "\n\n" + NO_COPY
+    # 머리말에 '멘토'를 쓰지 않는다(2026-10-24 사용자 — 앞으로는 작성자·동료도 기준 피드백을 쌓는다)
+    return "[기준 피드백 — 지난 글들을 읽고 한 말, 받은 그대로] 이 글에도 지킵니다.\n" + fb.replace("[기준 피드백 — 받은 그대로]\n", "") + "\n\n" + NO_COPY
 
 
 def body(path):
@@ -190,7 +191,7 @@ def r4_prompt(b, draft, refs=None, guide=""):
 def fb_prompt(text):
     fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
-        "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [멘토 피드백]을 반영해 고쳐 주세요. "
+        "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [기준 피드백]을 반영해 고쳐 주세요. "
         "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
         fb, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
@@ -348,30 +349,29 @@ def style_for_draft(b):
     """초안 참고: 문체 안내서 + 이 글의 메시지와 가까운 경영일기 2편(style_guide.draft_refs). 고른 글은 style.json에 남긴다."""
     if not STYLE_AUTO:
         return None, ""
-    try:
-        import style_guide as SG
-        refs = SG.draft_refs(b["thesis"], 2) or None
-        _style_note(b, draft_refs=refs or DRAFT_REFS)
-        return refs, SG.guide_text()
-    except Exception as e:  # noqa: BLE001 — 안내서·임베딩이 없으면 고정 방식으로
-        print(f"경영일기 참고 고르기 건너뜀(고정 방식): {e}", flush=True)
-        return None, ""
+    # 안내서·참고 글을 못 읽으면 예전 방식으로 돌아가지 않고 멈춘다(2026-10-24 사용자: "읽지 못하면 안 된다")
+    import style_guide as SG
+    guide = SG.guide_text()
+    refs = SG.draft_refs(b["thesis"], 2)
+    if not refs:
+        sys.exit("경영일기 참고 글을 고르지 못했습니다 — style_guide.py --refs로 확인하세요")
+    _style_note(b, draft_refs=refs)
+    return refs, guide
 
 
 def style_for_r4(b, draft):
     """재작성 참고: 문체 안내서 + 초안과 도입·맺음 짜임이 같은 글 중 메시지가 가까운 2편(초안 참고 글은 뺀다). 설정에 r4_refs가 있으면 그대로."""
     if not STYLE_AUTO or b.get("r4_refs"):
         return None, ""
-    try:
-        import style_guide as SG
-        used = json.loads((b["dir"] / "style.json").read_text(encoding="utf-8")).get("draft_refs", []) if (b["dir"] / "style.json").exists() else []
-        op, cl = SG.label(b["dir"] / "_label", draft)
-        refs = SG.rewrite_refs(b.get("thesis", ""), op, cl, 2, exclude=used) or None
-        _style_note(b, draft_shape=[op, cl], r4_refs=refs)
-        return refs, SG.guide_text()
-    except Exception as e:  # noqa: BLE001
-        print(f"재작성 참고 고르기 건너뜀(고정 방식): {e}", flush=True)
-        return None, ""
+    import style_guide as SG
+    guide = SG.guide_text()
+    used = json.loads((b["dir"] / "style.json").read_text(encoding="utf-8")).get("draft_refs", []) if (b["dir"] / "style.json").exists() else []
+    op, cl = SG.label(b["dir"] / "_label", draft)  # 짜임 꼬리표를 못 붙이면 메시지만 가까운 글로 고른다
+    refs = SG.rewrite_refs(b.get("thesis", ""), op, cl, 2, exclude=used)
+    if not refs:
+        sys.exit("재작성 참고 글을 고르지 못했습니다 — style_guide.py --refs로 확인하세요")
+    _style_note(b, draft_shape=[op, cl], r4_refs=refs)
+    return refs, guide
 
 
 def main(paths):
@@ -459,10 +459,10 @@ def revise(brief_path, feedback_path):
     fb_new = Path(feedback_path).read_text(encoding="utf-8").strip()
     standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     prompt = "\n\n".join([
-        "아래 [원고]를 [이번 멘토 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
+        "아래 [원고]를 [이번 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
         "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
         + (" 분량은 지금 원고 정도로 둡니다." if half else " " + LEN_RULE),
-        "[이번 멘토 피드백 — 원문 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
+        "[이번 피드백 — 받은 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
     out = run_astra(d / f"_revise-r{n}", prompt)
@@ -484,7 +484,7 @@ def weave(brief_path, base_file=""):
     cur = ROOT / base_file if base_file else latest_final(d)[0]
     _, n = latest_final(d)
     prompt = "\n\n".join([
-        "아래 [원고]는 사내 뉴스레터에 실을 칼럼으로, 멘토가 여러 번 고쳐 다듬은 글입니다. 여기에 [우리 회사 자료]의 맥락을 한 곳 입혀 주세요.",
+        "아래 [원고]는 사내 뉴스레터에 실을 칼럼으로, 피드백을 받아 여러 번 고쳐 다듬은 글입니다. 여기에 [우리 회사 자료]의 맥락을 한 곳 입혀 주세요.",
         "고치는 범위: 문단 하나를 고치거나 문단 하나를 더하는 데까지입니다. 나머지 문단은 한 글자도 바꾸지 말고 그대로 둡니다. "
         "원고에 우리 회사 사정을 확인 없이 짐작해 쓴 문장(예: 회사가 실제로 하는지 모르는 일을 하는 것처럼 쓴 문장)이 있으면, 그 문장을 [우리 회사 자료]에 맞게 고치는 곳으로 삼습니다. "
         "넣은 곳이 앞뒤 문단과 자연스럽게 이어져야 합니다. 제목은 바꾸지 마세요(원고에 제목이 없으면 본문만 씁니다). "

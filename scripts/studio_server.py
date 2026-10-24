@@ -210,7 +210,7 @@ def step(n, f, by, feedback="", known="", mode="", srcs=(), extra=""):
 
 def steps_in(d, b):
     """한 시도의 과정 1·2·3(+ 과정 4~) — 설정 글의 runs/columns/<글>/ 또는 앞 시도 폴더."""
-    standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[멘토 피드백 — 원문 그대로]\n", "").strip()
+    standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[기준 피드백 — 받은 그대로]\n", "").strip()
     steps = []
     srcs = tuple(s[0] for s in b.get("sources", []) if isinstance(s, (list, tuple)) and s)
     ic = IC.load(b)
