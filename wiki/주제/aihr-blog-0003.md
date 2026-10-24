@@ -3,7 +3,7 @@ type: topic
 kind: message
 title: 교육의 효과는 수료한 내용보다 현업에서 달라진 질문과 행동에 드러난다.
 verdict: 보통
-audience: 팀장급·사수급
+audience: 팀장급·시니어급
 center: aihr-blog/0003
 status: 쓸 수 있음
 used_in: []

@@ -3,7 +3,7 @@ type: topic
 kind: message
 title: 처음 실패한 사람에게는 기준을 낮추는 위로보다 다시 해낼 수 있다는 기대와 도움이 오래 남을 수 있다.
 verdict: 보통
-audience: 팀장급·사수급
+audience: 팀장급·시니어급
 center: mit-tech-review/0029
 status: 쓸 수 있음
 used_in: []

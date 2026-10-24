@@ -3,7 +3,7 @@ type: topic
 kind: message
 title: 신입에게 숙련을 요구하는 조직일수록 그 숙련을 쌓을 일자리도 함께 만들어야 한다.
 verdict: 보통
-audience: 팀장급·사수급
+audience: 팀장급·시니어급
 center: charter/0003
 status: 쓸 수 있음
 used_in: []

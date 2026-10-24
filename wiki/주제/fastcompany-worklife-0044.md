@@ -3,7 +3,7 @@ type: topic
 kind: message
 title: 후배에게 시간을 내어 중요한 대화에 참여시키는 일은 소속감을 만드는 구체적인 투자다.
 verdict: 보통
-audience: 팀장급·사수급
+audience: 팀장급·시니어급
 center: fastcompany-worklife/0044
 status: 쓸 수 있음
 used_in: []

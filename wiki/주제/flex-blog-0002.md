@@ -3,7 +3,7 @@ type: topic
 kind: message
 title: 직원은 평가표보다 평소 무엇을 기대받고 어떻게 피드백을 받았는지로 평가의 공정성을 판단한다.
 verdict: 보통
-audience: 팀장급·사수급
+audience: 팀장급·시니어급
 center: flex-blog/0002
 status: 쓸 수 있음
 used_in: []

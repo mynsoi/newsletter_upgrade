@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 export const TARGET_MODES = [
   { id: "auto", label: "독자 자동", icon: <IconUsers className="size-3.5 text-violet-300" /> },
-  ...["전 직원", "팀장급", "사수급", "신입사원"].map((t) => ({ id: t, label: t, icon: <IconUsers className="size-3.5 text-violet-300" /> })),
+  ...["전 직원", "임원급", "팀장급", "시니어급", "주니어급"].map((t) => ({ id: t, label: t, icon: <IconUsers className="size-3.5 text-violet-300" /> })),
 ];
 export const ACCEPT = ".pdf,.docx,.doc,.hwp,.hwpx,.odt,.rtf,.txt,.md";
 

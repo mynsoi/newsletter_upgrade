@@ -784,7 +784,7 @@ function Now({
           {a.kind === "brief" && (
             <PillTabs
               id="now-target"
-              tabs={["전 직원", "팀장급", "사수급", "신입사원"].map((x) => ({ value: x, title: x }))}
+              tabs={["전 직원", "임원급", "팀장급", "시니어급", "주니어급"].map((x) => ({ value: x, title: x }))}
               value={a.target}
               onChange={(x) => act("target", { article: a.id, target: x }).then(refresh)}
             />

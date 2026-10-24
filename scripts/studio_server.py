@@ -24,7 +24,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
 import internal_ctx as IC  # 회사 맥락(2026-10-23) — 글에 딸린 사내 자료 대목
 import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
-from wiki import TARGETS  # 대상 독자 이름 — 팀장급·사수급·신입사원·전 직원
+from wiki import TARGETS  # 대상 독자 이름 — 임원급·팀장급·시니어급·주니어급·전 직원(2026-10-24)
 
 DIST = ROOT / "app" / "dist"
 SRC = ROOT / "sources"
