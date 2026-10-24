@@ -7,8 +7,8 @@
   2026-10-23부터 제목은 쓴 뒤에 짓는다(--titles-body). 제목 없이 1~3단계를 돌리면 본문만 쓴다(가제 없음, 10/23).
   python3 column_pipeline.py --titles-body briefs/<설정>.json <원고 파일> [--message <파일>]  → 원고 본문을 읽고 제목 후보(8개 지어 4개)
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
-  1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 3편(p747·p724·p740) 문체 참고 + 지킬 것 2개
-  2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" (참고 2편은 설정의 r4_refs, 없으면 p724·p669 — 2026-10-09 멘토 선택)
+  1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 문체 안내서 + 메시지가 가까운 경영일기 2편(10/24부터, 예전 고정 p747·p724·p740)
+  2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" — 안내서 + 초안과 짜임이 같은 2편(10/24부터, 예전 고정 p724·p669). 설정에 r4_refs가 있으면 그대로
   3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
@@ -318,6 +318,50 @@ def titles_body(args):
     print("제목 후보(본문):", " / ".join(tc.round_items(d / "astra.md")) if (d / "astra.md").exists() else "없음")
 
 
+# 경영일기 참고 방식(2026-10-24 사용자 결정 — 비교 시험에서 "새 방식이 훨씬 좋다", runs/style-compare/20261024-133758):
+# 고정 참고 글(초안 3편·재작성 2편) 대신 문체 안내서(252편) + 글마다 고른 참고 글. False로 두면 예전 고정 방식.
+STYLE_AUTO = True
+
+
+def _style_note(b, **kw):
+    f = b["dir"] / "style.json"
+    cur = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+    cur.update(kw)
+    b["dir"].mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps(cur, ensure_ascii=False, indent=1), encoding="utf-8")
+    return cur
+
+
+def style_for_draft(b):
+    """초안 참고: 문체 안내서 + 이 글의 메시지와 가까운 경영일기 2편(style_guide.draft_refs). 고른 글은 style.json에 남긴다."""
+    if not STYLE_AUTO:
+        return None, ""
+    try:
+        import style_guide as SG
+        refs = SG.draft_refs(b["thesis"], 2) or None
+        _style_note(b, draft_refs=refs or DRAFT_REFS)
+        return refs, SG.guide_text()
+    except Exception as e:  # noqa: BLE001 — 안내서·임베딩이 없으면 고정 방식으로
+        print(f"경영일기 참고 고르기 건너뜀(고정 방식): {e}", flush=True)
+        return None, ""
+
+
+def style_for_r4(b, draft):
+    """재작성 참고: 문체 안내서 + 초안과 도입·맺음 짜임이 같은 글 중 메시지가 가까운 2편(초안 참고 글은 뺀다). 설정에 r4_refs가 있으면 그대로."""
+    if not STYLE_AUTO or b.get("r4_refs"):
+        return None, ""
+    try:
+        import style_guide as SG
+        used = json.loads((b["dir"] / "style.json").read_text(encoding="utf-8")).get("draft_refs", []) if (b["dir"] / "style.json").exists() else []
+        op, cl = SG.label(b["dir"] / "_label", draft)
+        refs = SG.rewrite_refs(b.get("thesis", ""), op, cl, 2, exclude=used) or None
+        _style_note(b, draft_shape=[op, cl], r4_refs=refs)
+        return refs, SG.guide_text()
+    except Exception as e:  # noqa: BLE001
+        print(f"재작성 참고 고르기 건너뜀(고정 방식): {e}", flush=True)
+        return None, ""
+
+
 def main(paths):
     briefs = {Path(p).stem: json.loads(Path(p).read_text(encoding="utf-8")) for p in paths}
     for k, b in briefs.items():
@@ -333,7 +377,8 @@ def main(paths):
         f = b["dir"] / "draft.md"
         if f.exists() and f.stat().st_size > 200:
             return f.read_text(encoding="utf-8")
-        t = run_claude(b["dir"] / "_draft", draft_prompt(b))
+        refs, guide = style_for_draft(b)
+        t = run_claude(b["dir"] / "_draft", draft_prompt(b, refs, guide))
         f.write_text(t, encoding="utf-8")
         return t
     stage("초안·Claude", [lambda k=k: mk_draft(k) for k in own])
@@ -346,7 +391,8 @@ def main(paths):
     # 2. 재작성
     def mk_r4(k):
         b = briefs[k]
-        t = run_astra(b["dir"] / "_r4", r4_prompt(b, draft_of(k)))
+        refs, guide = style_for_r4(b, draft_of(k))
+        t = run_astra(b["dir"] / "_r4", r4_prompt(b, draft_of(k), refs, guide))
         (b["dir"] / "r4.md").write_text(t, encoding="utf-8")
         return t
     stage("재작성·astra", [lambda k=k: mk_r4(k) for k in briefs])
