@@ -136,19 +136,34 @@ def guide_text():
     return re.sub(r"\A<!--.*?-->\n", "", GUIDE.read_text(encoding="utf-8"), flags=re.S).strip()
 
 
+LAST = {"how": ""}  # 마지막 ranked()가 어떻게 골랐는지 — 글마다 style.json에 남긴다
+
+
 def ranked(text):
-    """메시지가 가까운 순서로 경영일기 — 임베딩(_title_pairs_emb.json, git 밖)이 없거나 모자라면 먼저 만든다.
-    title_style.ranked는 임베딩이 없으면 조용히 최근 글 순으로 돌아가서, 참고 글 고르기에는 이것을 쓴다(못 고르면 멈춘다)."""
+    """메시지가 가까운 순서로 경영일기. OpenAI 키가 있으면 메시지 임베딩(_title_pairs_emb.json, git 밖 — 없으면 먼저 만든다),
+    키가 없거나 임베딩이 안 되면 메시지·제목 낱말 겹침(BM25, card_search.bm25)으로(2026-10-25 사용자: 키 없는 사용자도 쓰게).
+    title_style.ranked는 임베딩이 없으면 조용히 최근 글 순으로 돌아가서, 참고 글 고르기에는 이것을 쓴다."""
     import card_search as CS
     got = TS.pairs()
-    emb = json.loads(TS.EMB.read_text(encoding="utf-8")) if TS.EMB.exists() else {}
-    if any(k not in emb for k in got):
-        print("경영일기 메시지 임베딩을 만듭니다(처음 한 번)", flush=True)
-        TS.embed_all(got)
-        emb = json.loads(TS.EMB.read_text(encoding="utf-8"))
-    q = CS.embed(text)
-    score = {k: sum(a * b for a, b in zip(q, v)) for k, v in emb.items() if k in got}
-    return sorted(score, key=score.get, reverse=True)
+    note = "OpenAI 키 없음"
+    if CS._key("OPENAI_API_KEY"):
+        try:
+            emb = json.loads(TS.EMB.read_text(encoding="utf-8")) if TS.EMB.exists() else {}
+            if any(k not in emb for k in got):
+                print("경영일기 메시지 임베딩을 만듭니다(처음 한 번)", flush=True)
+                TS.embed_all(got)
+                emb = json.loads(TS.EMB.read_text(encoding="utf-8"))
+            q = CS.embed(text)
+            score = {k: sum(a * b for a, b in zip(q, v)) for k, v in emb.items() if k in got}
+            LAST["how"] = "메시지 임베딩"
+            return sorted(score, key=score.get, reverse=True)
+        except Exception as e:  # noqa: BLE001 — 키는 있는데 임베딩이 안 되면(네트워크 등) 낱말로
+            note = f"임베딩 실패({type(e).__name__})"
+    order = CS.bm25(text, {k: {"thesis": v.get("message", ""), "episodes": [v.get("title", "")]} for k, v in got.items()})
+    rest = sorted((k for k in got if k not in order), key=lambda k: got[k].get("date", ""), reverse=True)  # 겹치는 낱말이 없는 글은 뒤로
+    LAST["how"] = f"낱말 겹침(BM25) — {note} · 겹친 글 {len(order)}편"
+    print(f"경영일기 참고 글을 낱말로 고릅니다: {note}", flush=True)
+    return order + rest
 
 
 def _pool():

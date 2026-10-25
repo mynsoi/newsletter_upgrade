@@ -355,7 +355,7 @@ def style_for_draft(b):
     refs = SG.draft_refs(b["thesis"], 2)
     if not refs:
         sys.exit("경영일기 참고 글을 고르지 못했습니다 — style_guide.py --refs로 확인하세요")
-    _style_note(b, draft_refs=refs)
+    _style_note(b, draft_refs=refs, draft_refs_how=SG.LAST["how"])
     return refs, guide
 
 
@@ -370,7 +370,7 @@ def style_for_r4(b, draft):
     refs = SG.rewrite_refs(b.get("thesis", ""), op, cl, 2, exclude=used)
     if not refs:
         sys.exit("재작성 참고 글을 고르지 못했습니다 — style_guide.py --refs로 확인하세요")
-    _style_note(b, draft_shape=[op, cl], r4_refs=refs)
+    _style_note(b, draft_shape=[op, cl], r4_refs=refs, r4_refs_how=SG.LAST["how"])
     return refs, guide
 
 

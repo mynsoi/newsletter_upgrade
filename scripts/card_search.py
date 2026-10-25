@@ -63,7 +63,9 @@ def embed_many(texts):
 
 
 def semantic(text, keys_by_doc, depth=SEM_DEPTH):
-    """Supabase 카드 임베딩으로 문서 순위. 표가 없거나 비었으면 None."""
+    """Supabase 카드 임베딩으로 문서 순위. 표가 없거나 비었으면 None. OpenAI 키가 없으면 RuntimeError(candidates가 낱말 검색만으로)."""
+    if not _key("OPENAI_API_KEY"):
+        raise RuntimeError("OpenAI 키 없음")
     import psycopg
     url = os.environ.get("DATABASE_URL") or _key("DATABASE_URL")
     if not url:
@@ -133,7 +135,11 @@ def candidates(text):
         return {}, "받아 둔 자동 카드가 없음 — 서재에서 'Supabase 받기'를 먼저"
     idx = json.loads(INDEX.read_text(encoding="utf-8")) if INDEX.exists() else {}
     keys_by_doc = {doc: W.key(rel) for doc, rel in idx.items() if W.key(rel) in dc}
-    sem = semantic(text, keys_by_doc) if keys_by_doc else None
+    note = ""
+    try:
+        sem = semantic(text, keys_by_doc) if keys_by_doc else None
+    except Exception as e:  # noqa: BLE001 — 키가 없거나 임베딩이 안 되면 낱말 검색만으로(2026-10-25)
+        sem, note = [], f" — 의미 검색 건너뜀: {e if isinstance(e, RuntimeError) else type(e).__name__}"
     if sem is None:
         keys = sorted(dc, key=lambda k: W.date_of(W.rel(k)), reverse=True)[:ALL_CAP]
         how = f"카드 임베딩이 아직 없어 받아 둔 카드 {len(keys)}장 전부"
@@ -146,7 +152,7 @@ def candidates(text):
             for r, k in enumerate(ranked):
                 sc[k] = sc.get(k, 0) + 1 / (K_RRF + r + 1)
         keys = sorted(sc, key=sc.get, reverse=True)[:TOP]
-        how = f"의미 검색 {len(sem_keys)}편 · 낱말 검색 {len(kw_keys)}편을 순위로 섞어 상위 {len(keys)}편"
+        how = f"의미 검색 {len(sem_keys)}편 · 낱말 검색 {len(kw_keys)}편을 순위로 섞어 상위 {len(keys)}편" + note
     keys = [k for k in keys if dc[k].get("material_type") != "재료 없음" and (W.SRC / W.rel(k)).is_file()]
     return {k: W.as_card(dc[k]) for k in keys}, how
 
