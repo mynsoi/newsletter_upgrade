@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-10-25 10:26
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 29 · 85s
+
+## 2026-10-25 10:26
 - 묶기 붙임 carrot-global-blog/0045 → 주제/carrot-global-blog-0008.md
 - 묶기 붙임 mit-tech-review/0033, flex-blog/0028, flex-blog/0029 → 주제/mit-tech-review-0006.md
 - 묶기 붙임 mckinsey-insights/0038 → 주제/bain-insights-0002.md
