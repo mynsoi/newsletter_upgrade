@@ -201,8 +201,7 @@ def recommend(run_dir, message, topic=""):
     if idx:
         c = cands[idx - 1][1]
         dd = ds[c["doc"]]
-        nxt = next((x["text"] for x in chunks() if x["id"] == f"{c['doc']}#{int(c['id'].split('#')[1]) + 1}"), "")
-        c = {**c, "text": (c["text"] + ("\n\n" + nxt if nxt else ""))[:2200]}
+        # 고른 대목만 넘긴다(2026-10-25) — 다음 대목까지 붙였더니 시험 글에서 미공개 수치(AX 정량 목표)가 함께 넘어갔다
         out.update({"doc": c["doc"], "chunk": c["id"], "title": dd["title"], "speaker": dd["speaker"], "date": dd["date"],
                     "type": dd["type"], "label": label(dd), "excerpt": c["text"],
                     "use": got.get("use", ""), "fact": got.get("fact", ""), "caution": got.get("caution", "")})

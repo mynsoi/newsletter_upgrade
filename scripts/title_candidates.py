@@ -45,7 +45,7 @@ def ref_titles(n=60):
 def prompt(text):
     text = text.replace("(끝)", "").strip()
     titles = "\n".join(f"- {t}" for t in ref_titles())
-    return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 이 글의 제목 후보를 8개 지어 주세요.
+    return f"""아래 [본문]은 사내 뉴스레터(SK이노베이션 E&S 전 구성원 대상)에 실을 칼럼입니다. 이 글의 제목 후보를 8개 지어 주세요.
 
 - [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.
 - [멘토가 직접 지은 제목]도 참고하세요.
@@ -112,7 +112,7 @@ def prompt_first(thesis, sources, src_root, message="", prev=None, target=""):
            "메시지가 제목에 드러나는 쪽을 따릅니다. 그 제목들을 그대로 가져오지는 마세요.\n"
            "- [경영일기 제목 장치]에서 후보마다 다른 장치를 쓰세요.\n" if pairs else
            "- [제목 참고]는 이 뉴스레터가 문체를 참고하는 「유정식의 경영일기」의 실제 제목들입니다. 이 제목들의 결을 참고하되, 그대로 가져오지는 마세요.\n")
-    return f"""아래 [원문]을 재료로 사내 뉴스레터(SK E&S 전 직원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 {N_WRITE}개 지어 주세요.
+    return f"""아래 [원문]을 재료로 사내 뉴스레터(SK이노베이션 E&S 전 구성원 대상) 칼럼을 쓰려고 합니다. 글을 쓰기 전에 제목부터 정하려고 합니다. 제목 후보를 {N_WRITE}개 지어 주세요.
 
 이 글이 말할 것: {thesis}
 {f"대상 독자: {target}" + chr(10) if target else ""}
@@ -148,7 +148,7 @@ def prompt_body(text, thesis="", message="", prev=None, target=""):
         if prev:
             ask_body += "[앞 회차 후보]\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(prev, 1)) + "\n\n"
     pairs = pairs_block(body[:1500])
-    return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고 이 글의 제목 후보를 {N_WRITE}개 지어 주세요.
+    return f"""아래 [본문]은 사내 뉴스레터(SK이노베이션 E&S 전 구성원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고 이 글의 제목 후보를 {N_WRITE}개 지어 주세요.
 {f"대상 독자: {target}" + chr(10) if target else ""}
 기준은 순서대로입니다.
 1. 주제 전달(가장 중요): 본문을 읽지 않은 사람이 제목만 보고 이 글이 무엇을 말하는지 바로 알 수 있어야 합니다. 해석이 필요하면 안 됩니다.
@@ -189,7 +189,7 @@ def device_prompt(body, thesis, group, message="", prev=None, target=""):
         ask = "\n[이번 요청 — 받은 그대로] 다른 항목과 부딪치면 이 요청을 따릅니다.\n" + message.strip() + "\n"
         if prev:
             ask += "[앞 회차 후보 — 작성자가 이미 본 것]\n" + "\n".join(f"- {t}" for t in prev) + "\n"
-    return f"""아래 [본문]은 사내 뉴스레터(SK E&S 전 직원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고, '{name}' 방식으로 제목 2개를 지어 주세요.
+    return f"""아래 [본문]은 사내 뉴스레터(SK이노베이션 E&S 전 구성원 대상)에 실을 칼럼입니다. 본문을 끝까지 읽고, '{name}' 방식으로 제목 2개를 지어 주세요.
 {f"대상 독자: {target}" + chr(10) if target else ""}
 '{name}' 방식: {note}
 
@@ -245,7 +245,7 @@ def write_body(d, text, thesis="", target="", message="", prev=None):
 
 def pick_prompt(thesis, cands, target="", message="", text=""):
     numbered = "\n".join(f"{i}. {t}" for i, t in enumerate(cands, 1))
-    return f"""사내 뉴스레터(SK E&S 전 직원 대상) 칼럼의 제목 후보 {len(cands)}개입니다. 사람에게 보여 줄 {N_SHOW}개를 골라 주세요.
+    return f"""사내 뉴스레터(SK이노베이션 E&S 전 구성원 대상) 칼럼의 제목 후보 {len(cands)}개입니다. 사람에게 보여 줄 {N_SHOW}개를 골라 주세요.
 
 {"[본문]을 읽고 이 글이 무엇을 말하는지 먼저 정리한 뒤 판정하세요(기획 때 적은 말할 것: " + thesis + ")" if text else "이 글이 말할 것: " + thesis}
 {f"대상 독자: {target}" + chr(10) if target else ""}{f"이번 요청(받은 그대로): {message}" + chr(10) if message else ""}
