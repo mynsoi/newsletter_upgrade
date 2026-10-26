@@ -180,12 +180,16 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
           />
         )}
 
+        {/* 수집 중 카드는 격자 밖에 — 격자 안에서는 두 칸(31rem) 높이를 잡아 아래 카드와 사이가 벌어졌다(2026-10-26).
+            자기 높이만 차지해서, 로그를 펼치면 아래 카드가 그만큼 밀려난다 */}
+        {collecting.length > 0 && (
+          <div className="mt-8 space-y-4">
+            {collecting.map((j) => (
+              <Working key={j.id} job={j} title="수집" status={`aside · ${j.target}`} />
+            ))}
+          </div>
+        )}
         <BentoGrid className="mt-8 max-w-none md:auto-rows-[15.5rem] md:grid-cols-4 grid-flow-dense">
-          {collecting.map((j) => (
-            <div key={j.id} className="col-span-4 row-span-2">
-              <Working job={j} title="수집" status={`aside · ${j.target}`} />
-            </div>
-          ))}
           {rows.map((s) => (
             <SourceCard key={s.path} s={s} wide={wide(s)} fresh={fresh.has(s.path)} onOpen={() => setOpen(s.path)} />
           ))}
