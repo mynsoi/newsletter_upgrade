@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
 import internal_ctx as IC  # 회사 맥락(2026-10-23) — 글에 딸린 사내 자료 대목
+import share as SH  # 글 공유(2026-10-26) — 글이 바뀌면 운영 브랜치에 올리고 주기적으로 받는다, 작업 중 표시
 import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
 from wiki import TARGETS  # 대상 독자 이름 — 임원급·팀장급·시니어급·주니어급·전 직원(2026-10-24)
 
@@ -52,6 +53,9 @@ def save_jobs():
 
 
 def start(kind, target, cmd, after=None):
+    other = SH.locked_by_other(target) if SH.is_article(target) else None
+    if other:  # 다른 사용자가 이 글에서 작업 중(작업 중 표시는 git으로 받아 온 runs/columns/<글>/lock.json)
+        raise ValueError(f"{other.get('user')}님이 이 글에서 작업 중입니다({other.get('kind')}) — 끝나면 다시 해 주세요")
     with LOCK:
         for j in JOBS.values():
             if j["kind"] == kind and j["target"] == target and j["status"] == "running":
@@ -76,7 +80,18 @@ def start(kind, target, cmd, after=None):
         j["status"] = "done" if ok else "failed"
         j["ended"] = time.time()
         save_jobs()
+        try:  # 작업 기록 한 줄 · 작업 중 표시 풀기 · 바뀐 글 올리기(2026-10-26)
+            SH.record(j)
+            if SH.is_article(target):
+                SH.unlock(target)
+                SH.schedule(target, f"글 {target}: {kind} {'완료' if ok else '실패'}")
+            else:
+                SH.schedule("_activity", f"작업 기록: {kind} {'완료' if ok else '실패'}")
+        except Exception as e:  # noqa: BLE001
+            print(f"글 공유 준비 실패: {e}", flush=True)
 
+    if SH.is_article(target):
+        SH.lock(target, kind)
     threading.Thread(target=run, daemon=True).start()
     save_jobs()
     return j
@@ -237,7 +252,7 @@ def article_from_brief(bp):
     # 처음부터 다시 쓰기로 넘긴 앞 시도들(runs/columns/<글>.try-N) — 대화에 접힌 채로 남긴다
     tries = [{"n": int(x.name.rsplit("-", 1)[1]), "title": read(x / "title.txt").strip(), "steps": steps_in(x, b)}
              for x in sorted(d.parent.glob(f"{k}.try-*"), key=lambda x: int(x.name.rsplit("-", 1)[1]))]
-    return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""),
+    return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""), "lockedBy": SH.locked_by_other(k),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
             "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": b.get("published"),
@@ -1422,7 +1437,16 @@ class H(SimpleHTTPRequestHandler):
             a = json.loads(self.rfile.read(n) or b"{}")
             if not isinstance(a, dict):
                 raise ValueError("잘못된 요청")
-            return self.send_json(ACTIONS[name](a))
+            k = str(a.get("article") or a.get("id") or "")
+            other = SH.locked_by_other(k) if k and SH.is_article(k) else None
+            if other and name not in ("publish-build",):
+                raise ValueError(f"{other.get('user')}님이 이 글에서 작업 중입니다({other.get('kind')}) — 끝나면 다시 해 주세요")
+            res = ACTIONS[name](a)
+            if name != "publish-build":  # 글이 바뀌었으면 올린다(작업을 띄운 경우는 작업이 끝날 때 한 번 더)
+                k = k or (str(res.get("article") or res.get("id") or "") if isinstance(res, dict) else "")
+                if k:
+                    SH.schedule(k, f"글 {k}: {name}")
+            return self.send_json(res)
         except Exception as e:
             return self.send_json({"error": str(e)}, 400)
 
@@ -1453,6 +1477,7 @@ if __name__ == "__main__":
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
     threading.Thread(target=db_sync_loop, daemon=True).start()
     threading.Thread(target=aside_loop, daemon=True).start()
+    SH.start(lambda: any(j["status"] == "running" for j in JOBS.values()))  # 글 공유 — 받아 오기·올리기(2026-10-26)
     if not os.environ.get("DATABASE_URL"):
         print("DATABASE_URL이 없어 Supabase 자동 받기를 건너뜁니다(서재의 'Supabase 받기'도 실패합니다).", flush=True)
     servers[0].serve_forever()

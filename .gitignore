@@ -28,3 +28,14 @@ runs/style-guide/
 # 멘토가 채팅에 올린 회사 문서를 글자로 바꾼 것(scripts/my_topic.py save_docs)과 올린 원본 — 회사 문서라 저장소에 올리지 않는다
 sources/mine/
 runs/mine/*/upload/
+# 글 공유(scripts/share.py, 2026-10-26) — 글 폴더는 올리되, 단계별 지시문·로그 하위 폴더(원문 전문·경영일기 전문)와 그림 후보는 뺀다.
+# 고른 그림만 share.py가 git add -f로 올린다. 실행 중 작업 목록·로그는 PC마다 달라 공유하지 않는다.
+runs/columns/*/_*/
+runs/columns/*/*.log
+runs/mine/*/*/
+runs/titles0/*/*/
+runs/titles0/*/prompt.md
+runs/titles0/*/*.log
+runs/images/
+runs/studio/jobs.json
+runs/studio/logs/

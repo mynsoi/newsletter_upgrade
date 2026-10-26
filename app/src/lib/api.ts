@@ -41,6 +41,8 @@ export type InlinePick = { src: string; after: number; anchor: string; name: str
 export type Article = {
   id: string;
   kind: "brief" | "process";
+  /** 다른 사용자가 이 글에서 작업 중(글 공유, 2026-10-26) */
+  lockedBy?: { user: string; kind: string; at: number } | null;
   label: string;
   thesis: string;
   sources: [string, string][];

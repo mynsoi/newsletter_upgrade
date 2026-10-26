@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/scripts/image_candidates.py", line 152, in <module>
-    run(a[0])
-    ~~~^^^^^^
-  File "/home/hwjoo/01-projects/2026/mentoring/skens/mentor-lab/scripts/image_candidates.py", line 121, in run
-    p = prompt(f.read_text(encoding="utf-8"))
-               ^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'read_text'

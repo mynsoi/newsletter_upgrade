@@ -161,6 +161,13 @@ function Timeline({
 }) {
   const out: React.ReactNode[] = [];
   const started = !!a && a.steps.length > 0;
+  // 다른 사용자가 이 글에서 작업 중(2026-10-26 글 공유 — runs/columns/<글>/lock.json을 git으로 받아 옴). 작업실이 이 글의 작업을 막는다
+  if (a?.lockedBy)
+    out.push(
+      <div key="locked" className="rounded-2xl border border-amber-500/40 bg-amber-500/10 px-5 py-3 text-[14px] text-amber-800 dark:text-amber-200">
+        {a.lockedBy.user}님이 이 글에서 작업 중입니다({a.lockedBy.kind}) — 끝나면 바뀐 내용이 1~2분 안에 여기에 보입니다. 그동안 이 글의 작업은 막혀 있습니다.
+      </div>
+    );
 
   // 1. 시작 — 내 주제로 쓰기(대화 차례) 또는 주제 지도·설정에서 온 글
   if (run) {
