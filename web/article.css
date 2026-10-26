@@ -370,7 +370,10 @@ body {
 .email-part-body .site-header,
 .email-part-body .hero,
 .email-part-body .title-only { display: none; }
-.email-part-head .plain-title { padding: 36px 0 28px; }
+/* 메일 간격(2026-10-26 눈에 보이는 간격 2배로): 헤더 줄 → 제목 글자 43 → 86px, 제목 → 본문 글자 47 → 94px.
+   여백값은 줄높이 몫을 빼고 맞춘 값(36+43, 40+47). 머리 캡처는 아래 빈 줄을 잘라내므로 제목 아래 간격은 본문 위 여백이 맡는다 */
+.email-capture .plain-title { padding: 79px 0 0; }
+.email-capture .article-page > .article-body:first-child { padding-top: 87px; }
 .email-capture .plain-title { text-align: center; }  /* 메일 제목은 가운데(2026-10-26) — 웹 발행본은 왼쪽 그대로 */
 
 @media (prefers-reduced-motion: reduce) {
