@@ -5,8 +5,8 @@ title: 부서마다 AI가 일을 잘해도 부서 사이 정보와 인계가 끊
 verdict: 쓸 만함
 audience: 전 직원
 center: hbr-korea/0042
-status: 진행 중
-used_in: [briefs/m-20261026-104236.json]
+status: 씀
+used_in: [briefs/m-20261026-104236.json, columns/2026-10-26-m-20261026-104236.md]
 timestamp: 2026-10-23
 ---
 
