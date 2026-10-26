@@ -107,7 +107,25 @@ def claude(d, prompt):
 
 def commit(msg):
     subprocess.run(["git", "add", "-A", "wiki"], cwd=ROOT, capture_output=True)
-    subprocess.run(["git", "commit", "-q", "-m", msg, "--", "wiki"], cwd=ROOT, capture_output=True)
+    r = subprocess.run(["git", "commit", "-q", "-m", msg, "--", "wiki"], cwd=ROOT, capture_output=True)
+    if r.returncode == 0:
+        push()
+
+
+def push():
+    """작업실이 만든 커밋을 운영 브랜치(mentor-lab-integration)에 올린다(2026-10-26 — 그전엔 커밋만 하고 올리지 않아
+    다른 PC·동료가 주제 지도 변경을 못 받았다). 다른 PC가 먼저 올렸으면 받아서(rebase) 다시 올린다.
+    받다가 부딪치면 되돌리고(rebase --abort) 알리기만 한다 — 커밋은 이 PC에 남아 다음 push 때 다시 시도된다."""
+    run = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    for _ in range(2):
+        if run("push", "-q", "origin", "HEAD").returncode == 0:
+            return True
+        branch = run("branch", "--show-current").stdout.strip()
+        if run("pull", "-q", "--rebase", "--autostash", "origin", branch).returncode:
+            run("rebase", "--abort")
+            break
+    print("git push 실패 — 이 PC에 커밋은 남아 있습니다. 다음에 다시 올라가며, 계속되면 git status로 확인하세요", flush=True)
+    return False
 
 
 def body(rel):

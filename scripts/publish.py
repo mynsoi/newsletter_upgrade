@@ -369,6 +369,14 @@ INDEX = """<!DOCTYPE html>
 
 # ---------- 발행 ----------
 
+def push():
+    """운영 브랜치에 올린다 — 다른 PC·동료가 먼저 올렸으면 받아서(rebase) 다시(2026-10-26, wiki.push와 같은 방식)."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import wiki as W
+    if not W.push():
+        raise SystemExit("git push 실패 — 발행 커밋은 이 PC에 남아 있습니다. git status로 확인한 뒤 다시 발행하세요")
+
+
 def git(*args):
     r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode:
@@ -391,7 +399,7 @@ def release(k, to, cc, push=True):
     if git("diff", "--cached", "--name-only"):
         git("commit", "-m", f"발행: {a['title']}", "--", "site", a["meta"].relative_to(ROOT).as_posix())
     if push:
-        git("push", "origin", "HEAD")
+        push()
         print("4/4 커밋·푸시 — Vercel이 site/를 배포", flush=True)
     else:
         print("4/4 커밋만 (--no-push)", flush=True)
@@ -422,7 +430,7 @@ def unpublish(ks, push=True):
     if git("diff", "--cached", "--name-only", "--", *paths):
         git("commit", "-m", "웹에서 내림: " + ", ".join(ks), "--", *paths)
     if push:
-        git("push", "origin", "HEAD")
+        push()
 
 
 def main():
