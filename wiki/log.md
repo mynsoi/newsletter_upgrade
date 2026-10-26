@@ -1,5 +1,18 @@
 # 위키 이력
 
+## 2026-10-26 09:47
+- 묶기 붙임 fastcompany-worklife/0203 → 주제/charter-0004.md
+- 묶기 붙임 hbr-korea/0154 → 주제/fastcompany-worklife-0036.md
+- 묶기 붙임 bcg-publications/0053, mckinsey-insights/0035 → 주제/mit-tech-review-0006.md
+- 묶기 붙임 mckinsey-insights/0034 → 주제/worklytics-blog-0071.md
+- 묶기 붙임 deloitte-insights/0017 → 주제/hbr-korea-0038.md
+- 묶기 새 주제(보통) 오랫동안 노력해 온 목표라도 이미 들인 시간과 그 목표에 걸린 자부심만으로 계속할 이유가 되지는 않는다. → 주제/fastcompany-worklife-0202.md
+- 묶기 새 주제(쓸 만함) 서로 다른 의견을 드러내게 하는 것만으로 협력이 생기지는 않으며, 상대가 무엇을 소중히 여기는지 알아야 함께할 일을 찾을 수 있다. → 주제/charter-0047.md
+- 묶기 새 주제(보통) 직장에서 정치 이야기를 하지 않아도 퇴근 후 접한 정치 뉴스의 감정은 다음 업무와 동료를 대하는 태도에 이어질 수 있다. → 주제/fastcompany-worklife-0205.md
+- 묶기 새 주제(보통) 신기술의 완성을 기다리는 동안에도 그 기술을 함께 개발할 파트너와 사업 경험을 확보하는 경쟁은 이미 시작될 수 있다. → 주제/mckinsey-insights-0031.md
+- 묶기 새 주제(보통) 고객이 AI에 결제를 맡기지 않더라도 무엇을 살지 고르는 과정은 이미 AI의 추천에 따라 달라질 수 있다. → 주제/bcg-publications-0052.md
+- 주제 묶기 새 카드 13 · 붙음/새 주제 12 · 뺌 1 · 못 넣음 0 · 남음 0 · 62s
+
 ## 2026-10-25 10:26
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 29 · 85s
 
