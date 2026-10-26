@@ -363,11 +363,14 @@ body {
 .email-capture .references li { font-size: 19.5px; line-height: 1.6; }
 .email-capture .site-footer { font-size: 19.5px; }
 .email-capture a { color: inherit; text-decoration: none; }
-/* 상단 "웹에서 보기" 줄을 제목 아래에 넣으려고 머리(헤더·히어로)와 본문을 따로 찍는다 */
-.email-part-head .article-page,
+/* 상단 "웹에서 보기" 줄을 제목 아래에 넣으려고 머리(헤더·제목)와 본문을 따로 찍는다.
+   메일에는 머리 그림이 없다(scripts/publish.py build) — 머리 = 헤더 + 제목 글자(.title-only) */
+.email-part-head main.article-page,
 .email-part-head .site-footer { display: none; }
 .email-part-body .site-header,
-.email-part-body .hero { display: none; }
+.email-part-body .hero,
+.email-part-body .title-only { display: none; }
+.email-part-head .plain-title { padding: 36px 0 28px; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }

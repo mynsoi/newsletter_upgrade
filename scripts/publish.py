@@ -137,8 +137,8 @@ def render(a, files, body_class=""):
         hero = (f'<div class="hero">\n  <img src="{e(files[a["hero"]])}" alt="{e(a["title"])}">\n  <div class="hero-scrim"></div>\n'
                 f'  <div class="hero-caption">\n    <div class="hero-kicker">{e(cfg["kicker"])}</div>\n'
                 f'    <h1 class="hero-title">{e(a["title"])}</h1>\n  </div>\n</div>')
-    else:  # 머리 그림이 없으면 제목만 — 템플릿의 제목이 사라지지 않게
-        hero = f'<div class="article-page"><h1 class="plain-title">{e(a["title"])}</h1></div>'
+    else:  # 머리 그림이 없으면 제목만 — 템플릿의 제목이 사라지지 않게(메일은 늘 이쪽, build 참고)
+        hero = f'<div class="article-page title-only"><h1 class="plain-title">{e(a["title"])}</h1></div>'
     refs = ""
     if a["references"]:
         items = "\n".join(
@@ -180,9 +180,12 @@ def build(k):
     shutil.copyfile(WEB / "article.css", out / "style.css")
     (out / "index.html").write_text(render(a, files), encoding="utf-8")
     # email.html은 작업실 미리보기용(머리·본문을 한 장으로), 캡처는 머리·본문을 나눠 그 사이에 "웹에서 보기" 줄을 넣는다
-    (out / "email.html").write_text(render(a, files, "email-capture"), encoding="utf-8")
+    # 메일에는 머리 그림을 넣지 않는다 — 첫 화면에서 본문이 바로 보이게(팀장 의견, 2026-10-26).
+    # 머리는 헤더 + 제목 글자만. 웹 발행본(index.html)·아카이브 썸네일은 머리 그림 그대로
+    mail = {**a, "hero": ""}
+    (out / "email.html").write_text(render(mail, files, "email-capture"), encoding="utf-8")
     for part in ("head", "body"):
-        (out / f"email-{part}.html").write_text(render(a, files, f"email-capture email-part-{part}"), encoding="utf-8")
+        (out / f"email-{part}.html").write_text(render(mail, files, f"email-capture email-part-{part}"), encoding="utf-8")
     info = {"id": k, "title": a["title"], "pub_date": a["pub_date"], "hero_file": files.get(a["hero"], ""),
             "teaser": next((b["text"] for b in a["blocks"] if b["type"] == "p"), "")[:140],
             "web_url": web_url(k)}  # 웹에도 올라가는 파일 — 내부 경로(columns/…)는 넣지 않는다
