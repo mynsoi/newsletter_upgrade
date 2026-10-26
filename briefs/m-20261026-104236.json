@@ -1,0 +1,63 @@
+{
+ "topic": "m-20261026-104236",
+ "label": "부서마다 AI가 일을 잘해도 부서 사이 정보와 인계가 끊기면 고객은 더 나은 서비스를 받지 못한다.",
+ "thesis": "부서마다 AI가 일을 잘해도 부서 사이 정보와 인계가 끊기면 고객은 더 나은 서비스를 받지 못한다.",
+ "request": "부서마다 AI가 일을 잘해도 부서 사이 정보와 인계가 끊기면 고객은 더 나은 서비스를 받지 못한다.",
+ "point": "부서마다 AI가 일을 잘해도 부서 사이 정보와 인계가 끊기면 고객은 더 나은 서비스를 받지 못한다.",
+ "point_for": "originals/hbr-korea/0042.md",
+ "sources": [
+  [
+   "originals/hbr-korea/0042.md",
+   "HBR Korea(하버드비즈니스리뷰 한국판), 2026-10-07"
+  ],
+  [
+   "originals/hbr/0011.md",
+   "Harvard Business Review, 2026-10-02"
+  ],
+  [
+   "originals/mit-tech-review/0010.md",
+   "MIT Technology Review, MIT Technology Review Insights, 2026-10-02"
+  ]
+ ],
+ "roles": {
+  "originals/hbr-korea/0042.md": "부서별 AI 성과가 고객 경험으로 이어지려면 데이터 공유와 맥락을 잇는 인계가 필요하다는 중심 근거. — 가져올 사실: 글로벌 1위 구직 플랫폼은 AI SDR이 잠재 고객과 초기 대화를 진행한 뒤 대화 맥락과 다음 할 일을 정리해 영업 담당자에게 넘기도록 했다. 원문은 이 모델의 작동 요인으로 데이터 공유와 인계 조율을 꼽으며, 추가 매출 수치는 실적이 아닌 기대치로 제시한다.",
+  "originals/hbr/0011.md": "부서와 시스템 사이의 단절을 직원이 수작업으로 메우는 현실을 보여 주는 지원 부서 관점의 근거. — 가져올 사실: 원문이 인용한 Workday 조사에서 직원의 81%는 시스템·도구 간 정보 이동에 상당한 시간을 쓰고, 70%는 같은 정보를 여러 시스템에 재입력한다고 답했다. 원문은 HR 데이터와 업무 절차가 흩어져 있으면 AI도 일부 정보에 기댄 불완전한 답을 내놓을 수 있다고 설명한다.",
+  "originals/mit-tech-review/0010.md": "영업·고객지원·마케팅·재무 사이의 정보 단절이 부서별 AI 성과의 한계로 이어지는 구조를 보충. — 가져올 사실: Uniphore와 협력한 유료 후원 콘텐츠로, 영업 에이전트가 미해결 고객지원 문의를 모르거나 마케팅 시스템이 재무 부서의 고객 정보를 보지 못하는 상황을 예시로 든다. 특정 기업의 실증 사례가 아니라, 각 기능이 따로 잘 작동해도 기업 전체의 학습과 판단에 필요한 정보는 부족할 수 있다는 설명이다."
+ },
+ "target": "전 직원",
+ "from_mine": "runs/mine/m-20261026-104236",
+ "from_wiki": "wiki/주제/hbr-korea-0042.md",
+ "sources_ok": true,
+ "text_pick": {
+  "n": 3,
+  "of": 3
+ },
+ "images_done": true,
+ "title": "팀마다 AI로 빨라지면 고객도 편해질까요?",
+ "hero": "runs/images/m-20261026-104236/20261026-104920/01.png",
+ "inline": [
+  {
+   "src": "runs/images/m-20261026-104236/inline-20261026-104953/02.png",
+   "after": 6,
+   "anchor": "끊긴 업무를 지금은 사람이 이어 붙입니다. Workday 조사에서 직원 ",
+   "name": "사람이 메우는 시스템 사이"
+  }
+ ],
+ "confirmed": {
+  "date": "2026-10-26",
+  "step": 3,
+  "file": "columns/2026-10-26-m-20261026-104236.md",
+  "inline": 1,
+  "hero": "columns/img/2026-10-26-m-20261026-104236.png"
+ },
+ "published": {
+  "date": "2026-10-26",
+  "url": "https://newsletter-upgrade-three.vercel.app/qvauxq7a4vlgiaey/m-20261026-104236/",
+  "site": "site/qvauxq7a4vlgiaey/m-20261026-104236",
+  "eml": "publish/m-20261026-104236/newsletter.eml",
+  "to": [
+   "sominnlee@sk.com"
+  ],
+  "cc": []
+ }
+}
