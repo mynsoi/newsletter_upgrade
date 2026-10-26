@@ -202,9 +202,18 @@ def owner():
 
 
 def is_owner():
-    """이 PC가 기준 PC인가 — 기준 PC를 정하지 않았으면(빈 값) 모든 PC가 기준처럼 동작한다(예전 그대로)."""
+    """이 PC가 기준 PC인가 — 기준 PC를 정하지 않았으면(빈 값) 모든 PC가 기준처럼 동작한다(예전 그대로).
+    db_scope.json의 "owner_only_off_until"(YYYY-MM-DD)까지는 모든 PC가 수집·묶기를 할 수 있다 — 시연 녹화처럼 잠깐 풀 때(10/26).
+    그날이 지나면 저절로 기준 PC만으로 돌아간다. 원문 번호표(db_sources의 기준 PC)에는 영향 없음."""
     import os
     import socket
+    from datetime import date
+    try:
+        off = str(json.loads((ROOT / "sources" / "db_scope.json").read_text(encoding="utf-8")).get("owner_only_off_until") or "")
+    except (OSError, ValueError):
+        off = ""
+    if off and date.today().isoformat() <= off:
+        return True
     o = owner()
     return not o or o.lower() == (os.environ.get("COMPUTERNAME") or socket.gethostname()).strip().lower()
 
