@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-10-26 09:47
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 13 · 65s
+
+## 2026-10-26 09:47
 - 묶기 붙임 fastcompany-worklife/0203 → 주제/charter-0004.md
 - 묶기 붙임 hbr-korea/0154 → 주제/fastcompany-worklife-0036.md
 - 묶기 붙임 bcg-publications/0053, mckinsey-insights/0035 → 주제/mit-tech-review-0006.md
