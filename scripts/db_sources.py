@@ -11,11 +11,22 @@
 범위: sources/db_scope.json (소스 목록 · 최소 글자 수 · 요약문/반려 제외).
 본문은 documents.body 그대로 쓴다. claims(main이 문서에서 뽑은 주장)는 원문을 대신하지 않는다 — 글은 언제나 원문 전체로 쓴다.
 DB는 읽기 전용 트랜잭션으로만 연다. 연결 문자열은 환경변수 DATABASE_URL에서만 읽고 어디에도 쓰지 않는다.
+
+번호표 공유(2026-10-26): 원문 번호(NNNN)는 받은 순서대로 매겨져 PC마다 달랐다 — 주제 지도·글 설정이 git으로
+공유되니 다른 PC에서는 엉뚱한 원문을 가리켰다. 그래서 한 PC(db_scope.json의 "index_owner" = 그 PC의 컴퓨터 이름)만
+번호를 매기고, 번호표를 sources/db_index.shared.json(git)으로 올린다.
+  · 기준 PC(owner)   — 지금처럼 받고 번호를 매긴 뒤 공유 번호표가 바뀌었으면 커밋·push(운영 브랜치, wiki.push)
+  · 다른 PC(follower) — 공유 번호표대로 파일을 다시 쓰고 남는 파일은 지운다. 공유 번호표에 아직 없는 새 원문은
+                        받지 않는다(기준 PC가 번호를 매겨 올릴 때까지 — 작업실이 6시간마다 받는다)
+  · index_owner가 비었거나 공유 번호표가 아직 없으면 예전처럼 이 PC가 번호를 매긴다(공유 없음)
+sources/db_index.json(git 밖)은 PC마다 쓰는 번호표 그대로 — 같은 이름을 git에 넣으면 다른 PC의 pull이 막힌다.
 """
 import argparse
 import json
 import os
 import re
+import socket
+import subprocess
 import sys
 from pathlib import Path
 
@@ -24,6 +35,7 @@ SRC = ROOT / "sources"
 ORIG = SRC / "originals"
 SCOPE = SRC / "db_scope.json"
 INDEX = SRC / "db_index.json"  # doc_id → originals/<사이트>/NNNN.md (git 밖)
+SHARED = SRC / "db_index.shared.json"  # 기준 PC의 번호표 — git으로 공유, 다른 PC는 이 번호를 따른다(2026-10-26)
 DOC_CARDS = SRC / "doc_cards.json"  # 자동 카드(main document_cards, Sonnet 5.5)를 받아 둔 것 — wiki.doc_cards()가 읽는다(git 밖)
 STYLE_ONLY = {"infuture"}  # wiki.STYLE_ONLY와 같음 — DB 문서가 이 이름으로 들어오지 않게
 
@@ -34,6 +46,47 @@ def scope():
 
 def index():
     return json.loads(INDEX.read_text(encoding="utf-8")) if INDEX.exists() else {}
+
+
+def this_pc():
+    return (os.environ.get("COMPUTERNAME") or socket.gethostname()).strip()
+
+
+def role(sc):
+    """owner(번호를 매기고 공유) · follower(공유 번호를 따름) · solo(공유 없음, 예전 동작)"""
+    owner = str(sc.get("index_owner") or "").strip()
+    if not owner:
+        return "solo"
+    return "owner" if owner.lower() == this_pc().lower() else "follower"
+
+
+def shared():
+    return json.loads(SHARED.read_text(encoding="utf-8")) if SHARED.exists() else None
+
+
+def dump(idx):
+    return json.dumps(idx, ensure_ascii=False, indent=0) + "\n"
+
+
+def publish_shared(idx, push=True):
+    """기준 PC — 공유 번호표가 바뀌었으면 쓰고 커밋·push. 반환: 바뀌었는지."""
+    text = dump(idx)
+    if SHARED.exists() and SHARED.read_text(encoding="utf-8") == text:
+        return False
+    SHARED.write_text(text, encoding="utf-8")
+    rel = SHARED.relative_to(ROOT).as_posix()
+    git = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    git("add", "--", rel)
+    if git("diff", "--cached", "--quiet", "--", rel).returncode:
+        r = git("commit", "-m", f"원문 번호표: {len(idx)}편 (기준 PC {this_pc()})", "--", rel)
+        if r.returncode:
+            print("공유 번호표 커밋 실패 — " + (r.stderr or r.stdout).strip(), flush=True)
+            return True
+        if push:
+            sys.path.insert(0, str(ROOT / "scripts"))
+            import wiki as W
+            W.push()  # 실패하면 커밋은 이 PC에 남아 다음 push 때 올라간다(wiki.push가 알림)
+    return True
 
 
 def connect():
@@ -98,14 +151,47 @@ def next_no(site, used):
     return max(nums, default=0) + 1
 
 
-def sync(since=None, only=None, limit=None, prune=False):
+COLS = "id, source_id, tier, url, title, author, published_at, body"
+
+
+def file_doc_id(f):
+    """받아 둔 원문 파일 머리말의 doc_id — 파일이 없거나 머리말에 없으면 None."""
+    if not f.exists():
+        return None
+    with f.open(encoding="utf-8") as fh:
+        for i, line in enumerate(fh):
+            if line.startswith("doc_id: "):
+                return line[8:].strip()
+            if i > 12:
+                return None
+    return None
+
+
+def write_doc(r, rel, sc):
+    """원문 파일 하나 — 내용이 같으면 건드리지 않는다. 반환: 새로 썼는지."""
+    f = SRC / rel
+    text = render(r, sc)
+    if f.exists() and f.read_bytes().decode("utf-8") == text:
+        return False
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_bytes(text.encode("utf-8"))  # 줄바꿈은 LF 그대로 (Windows에서도)
+    return True
+
+
+def sync(since=None, only=None, limit=None, prune=False, push=True):
     sc = scope()
-    idx = index()
+    rl = role(sc)
+    sh = shared() if rl == "follower" else None
+    if rl == "follower" and sh is None:
+        print("공유 번호표(sources/db_index.shared.json)가 아직 없음 — 기준 PC가 올릴 때까지 이 PC 번호로 받는다", flush=True)
+    follow = sh is not None
+    before = index()
+    idx = dict(sh) if follow else before  # 따르는 PC: 번호표를 통째로 기준 PC 것으로
     w, args = where(sc, since, only)
-    sql = f"SELECT id, source_id, tier, url, title, author, published_at, body FROM documents WHERE {w} ORDER BY published_at DESC NULLS LAST, id"
+    sql = f"SELECT {COLS} FROM documents WHERE {w} ORDER BY published_at DESC NULLS LAST, id"
     if limit:
         sql += f" LIMIT {int(limit)}"
-    new = upd = moved = 0
+    new = upd = moved = waiting = 0
     seen = set()
     cards = ROOT / "wiki" / "cards.json"
     carded = set(json.loads(cards.read_text(encoding="utf-8")).keys()) if cards.exists() else set()
@@ -116,24 +202,37 @@ def sync(since=None, only=None, limit=None, prune=False):
                 continue
             seen.add(doc_id)
             rel = idx.get(doc_id)
-            if rel and rel.split("/")[1] != site and rel.removeprefix("originals/").removesuffix(".md") not in carded:
-                # DB에서 소스가 바뀐 문서(수기 등록 → 정식 소스, scripts/remap_manual.py) — 새 소스 폴더로 옮긴다.
-                # 주제 지도 카드가 이미 있는 원문은 카드가 옛 경로를 가리키니 그대로 둔다.
-                (SRC / rel).unlink(missing_ok=True)
-                rel = None
-                moved += 1
-            if not rel:
-                rel = f"originals/{site}/{next_no(site, idx.values()):04d}.md"
-                idx[doc_id] = rel
-                new += 1
-            f = SRC / rel
-            text = render(r, sc)
-            if not f.exists() or f.read_bytes().decode("utf-8") != text:
-                f.parent.mkdir(parents=True, exist_ok=True)
-                f.write_bytes(text.encode("utf-8"))  # 줄바꿈은 LF 그대로 (Windows에서도)
-                upd += 1
+            if follow:
+                if not rel:  # 기준 PC가 아직 번호를 매기지 않은 새 원문 — 기다린다
+                    waiting += 1
+                    continue
+            else:
+                if rel and rel.split("/")[1] != site and rel.removeprefix("originals/").removesuffix(".md") not in carded:
+                    # DB에서 소스가 바뀐 문서(수기 등록 → 정식 소스, scripts/remap_manual.py) — 새 소스 폴더로 옮긴다.
+                    # 주제 지도 카드가 이미 있는 원문은 카드가 옛 경로를 가리키니 그대로 둔다.
+                    (SRC / rel).unlink(missing_ok=True)
+                    rel = None
+                    moved += 1
+                if not rel:
+                    rel = f"originals/{site}/{next_no(site, idx.values()):04d}.md"
+                    idx[doc_id] = rel
+                    new += 1
+            upd += write_doc(r, rel, sc)
         gone = []
-        if prune and not since and not only and not limit:
+        if follow:
+            # 기준 PC 번호표에는 있는데 이번 범위 조회에 안 걸린 원문(범위 밖이 됐지만 주제 지도 카드가 있어 남긴 것 등) —
+            # 파일이 없으면 id로 받아 둔다. 주제 지도가 가리키는데 파일이 없으면 작업실 상태 응답이 멈춘다.
+            # 파일이 있어도 다른 글(이 PC 옛 번호)이면 같은 처리
+            lack = [d for d, rel in idx.items() if d not in seen and file_doc_id(SRC / rel) != d]
+            if lack and not (since or only or limit):
+                for r in c.execute(f"SELECT {COLS} FROM documents WHERE id = ANY(%s)", (lack,)):
+                    upd += write_doc(r, idx[r[0]], sc)
+            # 이 PC 번호에만 있던 파일은 지운다(같은 글이 기준 번호로 다시 써졌다). 번호표 밖의 파일은 건드리지 않는다
+            keep = set(idx.values())
+            for rel in set(before.values()) - keep:
+                (SRC / rel).unlink(missing_ok=True)
+                gone.append(rel)
+        elif prune and not since and not only and not limit:
             w_all, a_all = where(sc)
             alive = {x[0] for x in c.execute(f"SELECT id FROM documents WHERE {w_all}", a_all)}
             for doc_id, rel in list(idx.items()):
@@ -142,9 +241,15 @@ def sync(since=None, only=None, limit=None, prune=False):
                     (SRC / rel).unlink(missing_ok=True)
                     del idx[doc_id]
                     gone.append(rel)
-        INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+        INDEX.write_text(dump(idx), encoding="utf-8")
         sync_cards(c, idx)
-    print(f"받음: 새 문서 {new} · 다시 씀 {upd} · 범위 안 {len(seen)}" + (f" · 소스 바뀜 {moved}" if moved else "") + (f" · 지움 {len(gone)}" if prune else ""))
+    shared_note = ""
+    if rl == "owner":
+        shared_note = " · 공유 번호표 올림" if publish_shared(idx, push) else " · 공유 번호표 그대로"
+    elif follow:
+        shared_note = f" · 기준 PC 번호표 따름(기다리는 새 원문 {waiting})"
+    print(f"받음: 새 문서 {new} · 다시 씀 {upd} · 범위 안 {len(seen)}" + (f" · 소스 바뀜 {moved}" if moved else "")
+          + (f" · 지움 {len(gone)}" if prune or follow else "") + shared_note)
 
 
 def card_key(rel):
@@ -200,9 +305,10 @@ if __name__ == "__main__":
     ap.add_argument("--source", nargs="+")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--prune", action="store_true")
+    ap.add_argument("--no-push", action="store_true", help="기준 PC: 공유 번호표를 커밋만 하고 올리지 않는다")
     a = ap.parse_args()
     if a.sync:
-        sync(a.since, a.source, a.limit, a.prune)
+        sync(a.since, a.source, a.limit, a.prune, push=not a.no_push)
     elif a.status:
         status()
     else:
