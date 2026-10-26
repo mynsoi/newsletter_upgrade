@@ -164,9 +164,56 @@ def pull(busy=lambda: False):
     return True
 
 
+def untrack_local_state():
+    """실행 중 작업 목록·로그(PC마다 다름)가 이 PC git에 아직 올라가 있으면 빼 둔다(2026-10-26 — 운영 브랜치에서 뺐다).
+    받기 전에 빼지 않으면 '지운 파일을 이 PC가 고쳤다'로 받기가 막힌다. 파일은 그대로 남는다(git만 모르게)."""
+    tracked = [p for p in ("runs/studio/jobs.json", "runs/studio/logs") if git("ls-files", "--", p).stdout.strip()]
+    if not tracked:
+        return
+    with GIT:
+        git("rm", "-r", "-q", "--cached", "--", *tracked)
+        git("commit", "-q", "-m", f"작업 목록·로그를 git 밖으로(이 PC, {user()})", "--", *tracked)
+    print("실행 중 작업 목록·로그를 git에서 뺐습니다(파일은 그대로)", flush=True)
+
+
+def catch_up():
+    """켤 때 — 이 PC에만 있고 덜 올라간 글을 한 번에 올린다(공유 기능 전에 쓴 글, PC가 꺼져 못 올린 변경).
+    다 올라간 글은 아무 일도 하지 않는다."""
+    n = 0
+    for f in sorted((ROOT / "briefs").glob("*.json")):
+        k = f.stem
+        if k.startswith("standing") or not is_article(k):
+            continue
+        try:
+            if sync(k, f"글 공유: 덜 올라간 글 올리기 {k}"):
+                n += 1
+        except Exception as e:  # noqa: BLE001
+            print(f"덜 올라간 글 올리기 실패 {k}: {e}", flush=True)
+    if n:
+        print(f"덜 올라간 글 {n}편을 올렸습니다", flush=True)
+
+
+def owner():
+    """기준 PC 이름(sources/db_scope.json의 index_owner — 원문 번호표와 같은 설정). 비었으면 ''."""
+    try:
+        return str(json.loads((ROOT / "sources" / "db_scope.json").read_text(encoding="utf-8")).get("index_owner") or "").strip()
+    except (OSError, ValueError):
+        return ""
+
+
+def is_owner():
+    """이 PC가 기준 PC인가 — 기준 PC를 정하지 않았으면(빈 값) 모든 PC가 기준처럼 동작한다(예전 그대로)."""
+    import os
+    import socket
+    o = owner()
+    return not o or o.lower() == (os.environ.get("COMPUTERNAME") or socket.gethostname()).strip().lower()
+
+
 def start(busy):
-    """서버가 뜰 때 — 한 번 받고, 올리기 일꾼과 주기적 받기를 띄운다."""
+    """서버가 뜰 때 — 작업 목록 파일 정리 → 한 번 받기 → 덜 올라간 글 올리기, 그다음 올리기 일꾼과 주기적 받기."""
+    untrack_local_state()
     pull(busy)
+    threading.Thread(target=catch_up, daemon=True).start()
     threading.Thread(target=_worker, daemon=True).start()
 
     def loop():

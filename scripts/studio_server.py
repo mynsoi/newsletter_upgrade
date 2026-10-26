@@ -1169,6 +1169,9 @@ def aside_loop():
     while True:
         wait_due("aside", every)
         ran = False
+        if not SH.is_owner():  # 기준 PC만 자동 수집(2026-10-26 — 여러 PC가 같은 사이트를 겹쳐 긁지 않게)
+            time.sleep(every)
+            continue
         if os.environ.get("DATABASE_URL"):
             ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True).returncode == 0
             if ok:
@@ -1199,17 +1202,26 @@ def db_sync_loop():
             time.sleep(every)
 
 
+def owner_only(what):
+    """주제 지도를 새로 만드는 일은 기준 PC에서만(2026-10-26 — 두 PC가 같은 카드로 주제를 겹쳐 만들거나 wiki/가 부딪치지 않게)."""
+    if not SH.is_owner():
+        raise ValueError(f"{what}는 기준 PC({SH.owner()})에서만 합니다 — 기준 PC에서 눌러 주세요. 결과는 1~2분 안에 여기로 받아집니다")
+
+
 def act_wiki_bundle(_):
     """주제 묶기 — 지난 묶기 이후 새 자동 카드로 메시지 단위 주제(scripts/wiki.py --bundle, astra — 2026-10-23부터)."""
+    owner_only("주제 묶기")
     return start("wiki", "주제 묶기", PY + ["scripts/wiki.py", "--bundle"])
 
 
 def act_wiki_ingest(_):
+    owner_only("넣기")
     return start("wiki", "넣기", PY + ["scripts/wiki.py", "--ingest"])
 
 
 def act_wiki_lint(_):
     """다시 거르기 — 판정 예시가 쌓였을 때 모든 주제를 다시 거른다(Claude)."""
+    owner_only("다시 거르기")
     return start("wiki-lint", "다시 거르기", PY + ["scripts/wiki.py", "--refilter"])
 
 
