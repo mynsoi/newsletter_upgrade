@@ -50,15 +50,5 @@
   "inline": 2,
   "internal": true,
   "hero": "columns/img/2026-10-26-m-20261026-142439.png"
- },
- "published": {
-  "date": "2026-10-26",
-  "url": "https://newsletter-upgrade-three.vercel.app/qvauxq7a4vlgiaey/m-20261026-142439/",
-  "site": "site/qvauxq7a4vlgiaey/m-20261026-142439",
-  "eml": "publish/m-20261026-142439/newsletter.eml",
-  "to": [
-   "sominnlee@sk.com"
-  ],
-  "cc": []
  }
 }
