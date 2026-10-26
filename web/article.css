@@ -371,6 +371,7 @@ body {
 .email-part-body .hero,
 .email-part-body .title-only { display: none; }
 .email-part-head .plain-title { padding: 36px 0 28px; }
+.email-capture .plain-title { text-align: center; }  /* 메일 제목은 가운데(2026-10-26) — 웹 발행본은 왼쪽 그대로 */
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }

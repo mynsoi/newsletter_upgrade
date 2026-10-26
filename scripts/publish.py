@@ -37,8 +37,7 @@ ID = re.compile(r"^[0-9A-Za-z가-힣][0-9A-Za-z가-힣_.-]{0,80}$")
 SKIP = {"newsletter.eml", "email.html", "email-head.html", "email-body.html", "email_head.png", "email_body.png", "email_screenshot.png"}
 
 # 디자인 토큰 — web/article.css와 같은 값
-ACCENT, CANVAS, INK_MUTED = "#0B6E4F", "#F7F8FA", "#6E7278"
-FONT = "Malgun Gothic, sans-serif"
+CANVAS = "#F7F8FA"
 EMAIL_WIDTH = 800  # main은 600 — 데스크톱 Outlook에서 좁아 보여 넓힘(2026-10-20, 960은 넓다고 해 800). 캡처 CSS(article.css .email-capture)가 이 폭 기준
 
 
@@ -179,7 +178,7 @@ def build(k):
         shutil.copyfile(src, out / name)
     shutil.copyfile(WEB / "article.css", out / "style.css")
     (out / "index.html").write_text(render(a, files), encoding="utf-8")
-    # email.html은 작업실 미리보기용(머리·본문을 한 장으로), 캡처는 머리·본문을 나눠 그 사이에 "웹에서 보기" 줄을 넣는다
+    # email.html은 작업실 미리보기용(머리·본문을 한 장으로), 메일 캡처는 머리·본문 두 장(각각 누르면 웹페이지)
     # 메일에는 머리 그림을 넣지 않는다 — 첫 화면에서 본문이 바로 보이게(팀장 의견, 2026-10-26).
     # 머리는 헤더 + 제목 글자만. 웹 발행본(index.html)·아카이브 썸네일은 머리 그림 그대로
     mail = {**a, "hero": ""}
@@ -231,18 +230,9 @@ def capture(pages):
         br.close()
 
 
-def web_link_row(url, top=False):
-    """"웹에서 보기" 줄 — 이미지 안의 참고자료 링크는 눌리지 않으므로 웹페이지로 보낸다."""
-    if not url:
-        return ""
-    u = html.escape(url, quote=True)
-    lead = "글자가 작게 보이면" if top else "참고자료 링크는 웹페이지에서 열립니다"
-    pad = "36px 16px 14px" if top else "4px 16px 28px"  # 위: 제목 이미지와 한 줄 띄움(2026-10-26 — 붙어 보였다)
-    return (f'<tr><td align="center" style="padding:{pad};font-family:{FONT};font-size:11pt;line-height:1.5;color:{INK_MUTED};">'
-            f'{lead} &middot; <a href="{u}" target="_blank" style="color:{ACCENT};font-weight:700;text-decoration:underline;">웹에서 보기</a></td></tr>')
-
-
 def img_row(cid, w, alt, url):
+    """메일 이미지 한 줄 — 누르면 웹페이지로 간다(이미지 안의 참고자료 링크는 눌리지 않으므로).
+    2026-10-26부터 이미지 사이·아래의 '웹에서 보기' 글자 줄은 넣지 않는다 — 이미지 링크만."""
     tag = (f'<img src="cid:{cid}" width="{w}" style="display:block;width:{w}px;max-width:100%;height:auto;border:0;" '
            f'alt="{html.escape(alt, quote=True)}">')
     if url:
@@ -286,8 +276,7 @@ def build_eml(a, out, to, cc):
     full.save(out / "email_screenshot.png")  # 미리보기·검토용
     w = min(hi.width // 2, EMAIL_WIDTH)
     subject = cfg["subject_prefix"] + a["title"]
-    rows = "\n".join([img_row("article_head", w, subject, url), web_link_row(url, True),
-                      img_row("article_body", w, cfg["kicker"], url), web_link_row(url)])
+    rows = "\n".join([img_row("article_head", w, subject, url), img_row("article_body", w, cfg["kicker"], url)])
     msg = MIMEMultipart("related")
     msg["Subject"], msg["From"], msg["To"] = subject, cfg["sender"], ", ".join(to)
     if cc:
@@ -407,13 +396,13 @@ def release(k, to, cc, push=True):
     else:
         print("4/4 커밋만 (--no-push)", flush=True)
     if not info["web_url"]:
-        print("주의: config/publish.json web_base_url이 비어 있어 메일에 '웹에서 보기' 링크가 없습니다.", flush=True)
+        print("주의: config/publish.json web_base_url이 비어 있어 메일 이미지에 웹페이지 링크가 없습니다.", flush=True)
     print(json.dumps(meta["published"], ensure_ascii=False), flush=True)
 
 
 def unpublish(ks, push=True):
     """웹에서 내린다 — site/<토큰>/<글>/을 지우고 아카이브 목록을 다시 만들고, 글 설정의 published를 지운다.
-    이미 보낸 메일의 '웹에서 보기' 링크는 끊긴다."""
+    이미 보낸 메일의 이미지 링크(웹페이지)는 끊긴다."""
     paths = ["site"]
     for k in ks:
         d = SITE / settings()["web_path_token"] / k
