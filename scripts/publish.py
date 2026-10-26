@@ -237,7 +237,7 @@ def web_link_row(url, top=False):
         return ""
     u = html.escape(url, quote=True)
     lead = "글자가 작게 보이면" if top else "참고자료 링크는 웹페이지에서 열립니다"
-    pad = "14px 16px" if top else "4px 16px 28px"
+    pad = "36px 16px 14px" if top else "4px 16px 28px"  # 위: 제목 이미지와 한 줄 띄움(2026-10-26 — 붙어 보였다)
     return (f'<tr><td align="center" style="padding:{pad};font-family:{FONT};font-size:11pt;line-height:1.5;color:{INK_MUTED};">'
             f'{lead} &middot; <a href="{u}" target="_blank" style="color:{ACCENT};font-weight:700;text-decoration:underline;">웹에서 보기</a></td></tr>')
 
@@ -372,7 +372,7 @@ INDEX = """<!DOCTYPE html>
 
 # ---------- 발행 ----------
 
-def push():
+def push_branch():
     """운영 브랜치에 올린다 — 다른 PC·동료가 먼저 올렸으면 받아서(rebase) 다시(2026-10-26, wiki.push와 같은 방식)."""
     sys.path.insert(0, str(ROOT / "scripts"))
     import wiki as W
@@ -401,8 +401,8 @@ def release(k, to, cc, push=True):
     git("add", "--", "site", a["meta"].relative_to(ROOT).as_posix())
     if git("diff", "--cached", "--name-only"):
         git("commit", "-m", f"발행: {a['title']}", "--", "site", a["meta"].relative_to(ROOT).as_posix())
-    if push:
-        push()
+    if push:  # 인자 이름이 push라 함수는 push_branch — 같은 이름이면 bool을 부르다 죽는다(2026-10-26 발행 실패)
+        push_branch()
         print("4/4 커밋·푸시 — Vercel이 site/를 배포", flush=True)
     else:
         print("4/4 커밋만 (--no-push)", flush=True)
@@ -433,7 +433,7 @@ def unpublish(ks, push=True):
     if git("diff", "--cached", "--name-only", "--", *paths):
         git("commit", "-m", "웹에서 내림: " + ", ".join(ks), "--", *paths)
     if push:
-        push()
+        push_branch()
 
 
 def main():
