@@ -384,8 +384,10 @@ def with_stage(jobs):
 
 
 def state():
+    # 작업 상태는 이 순간의 복사본으로(2026-10-27) — 같은 dict를 담으면 글 목록을 읽는 1초 사이 끝난 작업이 '끝남'으로 실려
+    # 화면이 '과정 5까지 + 작업 끝남'을 받고 더 묻지 않아 새 과정이 안 보였다
     with LOCK:
-        jobs = sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60]
+        jobs = [dict(j) for j in sorted(JOBS.values(), key=lambda j: j["started"], reverse=True)[:60]]
     jobs = with_stage(jobs)
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
