@@ -791,6 +791,8 @@ function Now({
           {a.kind === "brief" && (
             <PillTabs
               id="now-target"
+              className="flex-wrap"
+              itemClassName="px-3"
               tabs={["전 직원", "임원급", "팀장급", "시니어급", "주니어급"].map((x) => ({ value: x, title: x }))}
               value={a.target}
               onChange={(x) => act("target", { article: a.id, target: x }).then(refresh)}

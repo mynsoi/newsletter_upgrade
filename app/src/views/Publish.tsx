@@ -38,9 +38,10 @@ export default function Publish({ state, id, refresh, go }: { state: State; id?:
               </span>
               <span className="min-w-0 flex-1">
                 <span className="line-clamp-2 text-sm font-medium leading-snug text-ink">{articleTitle(x)}</span>
-                <span className="mt-1 flex items-center gap-1.5 text-xs text-ink-3">
-                  확정 {x.confirmed!.date}
-                  {x.published && <Chip className="border-emerald-300/40 bg-emerald-500/15 py-0 text-emerald-700 dark:text-emerald-200">발행 {x.published.date}</Chip>}
+                {/* 확정·발행 날짜는 각각 한 덩어리로 — 좁으면 덩어리째 다음 줄로(2026-10-27: '발행 2026-10-' / '26'으로 끊겼다) */}
+                <span className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-ink-3">
+                  <span className="whitespace-nowrap">확정 {x.confirmed!.date}</span>
+                  {x.published && <Chip className="whitespace-nowrap border-emerald-300/40 bg-emerald-500/15 py-0 text-emerald-700 dark:text-emerald-200">발행 {x.published.date}</Chip>}
                 </span>
               </span>
             </button>

@@ -128,12 +128,15 @@ export const PillTabs = ({
   value,
   onChange,
   className,
+  itemClassName,
   id = "pilltab",
 }: {
   tabs: { title: React.ReactNode; value: string }[];
   value: string;
   onChange: (v: string) => void;
   className?: string;
+  /** 탭 하나의 여백 등 — 좁은 자리에서 px를 줄일 때(2026-10-27) */
+  itemClassName?: string;
   id?: string;
 }) => {
   return (
@@ -142,7 +145,7 @@ export const PillTabs = ({
         <button
           key={tab.value}
           onClick={() => onChange(tab.value)}
-          className="relative px-5 py-2 rounded-full"
+          className={cn("relative shrink-0 whitespace-nowrap px-5 py-2 rounded-full", itemClassName)} // 글자가 탭 안에서 줄바꿈되지 않게(2026-10-27)
         >
           {value === tab.value && (
             <motion.div
