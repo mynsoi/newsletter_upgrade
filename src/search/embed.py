@@ -21,7 +21,11 @@ migrations/005_claims_embedding.sql 참고). 키 로드는 OPENAI_API_KEY_EMBED�
 - 0 또는 null이면 비우기를 끈다(전량 유지).
 
 **문서 카드 (2026-10-21, migrations/009)**: claim 다음에 같은 실행에서 카드 조각(핵심 주장 1개 +
-있었던 일 각각)을 같은 모델·차원으로 document_card_embeddings에 채운다. 아직 없는 조각만 만든다.
+있었던 일 각각)을 같은 모델로 document_card_embeddings에 채운다. 아직 없는 조각만 만든다.
+
+**차원 (2026-10-28, migrations/010)**: claims는 768차원, 카드는 1536차원이다. 요청 차원은 상수가
+아니라 각 컬럼의 선언 차원(column_dims)을 따른다 — 코드와 DB 차원이 어긋나면 저장·검색이 실패하고,
+DB를 먼저 바꾸든 코드를 먼저 배포하든 같은 코드가 동작하게 하기 위해서다.
 
 사용:
   python src/search/embed.py              # embedding IS NULL인 claim을 상한(기본 2000)까지
@@ -35,6 +39,7 @@ import argparse
 import calendar
 import json
 import os
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -51,6 +56,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 MODEL = "text-embedding-3-small"
+# 컬럼 차원을 읽지 못할 때의 기본값(모델 원래 차원). 실제 요청 차원은 column_dims()가 정한다.
 DIMENSIONS = 1536
 # 저장 타입 — 2바이트 반정밀도 halfvec (migrations/006). 값·인덱스 용량이 vector의
 # 절반이고 코사인 상위 k 정렬은 동등하다. 텍스트 입력 형식은 vector와 같으므로
@@ -88,20 +94,34 @@ def to_vector_literal(vec: list[float]) -> str:
     return "[" + ",".join(repr(float(x)) for x in vec) + "]"
 
 
-def embed_texts(client, texts: list[str]) -> tuple[list[list[float]], int]:
+def column_dims(conn, table: str) -> int:
+    """table.embedding 컬럼의 선언 차원 — 'halfvec(768)' → 768. 읽지 못하면 DIMENSIONS.
+
+    text-embedding-3-small의 dimensions 요청은 앞부분 절단 + 재정규화와 같아서, 768차원
+    요청 결과는 1536차원 벡터를 subvector로 자른 값과 코사인 순위가 같다(migrations/010).
+    """
+    row = conn.execute(
+        "SELECT format_type(atttypid, atttypmod) AS t FROM pg_attribute "
+        "WHERE attrelid = to_regclass(?) AND attname = 'embedding' AND NOT attisdropped",
+        (table,)).fetchone()
+    m = re.search(r"\((\d+)\)", row["t"] if row and row["t"] else "")
+    return int(m.group(1)) if m else DIMENSIONS
+
+
+def embed_texts(client, texts: list[str], dims: int = DIMENSIONS) -> tuple[list[list[float]], int]:
     """텍스트 목록을 한 번의 API 호출로 임베딩. 반환: (임베딩 목록, 사용 토큰 수)."""
-    resp = client.embeddings.create(model=MODEL, input=texts, dimensions=DIMENSIONS)
+    resp = client.embeddings.create(model=MODEL, input=texts, dimensions=dims)
     usage = getattr(resp, "usage", None)
     tokens = getattr(usage, "total_tokens", 0) or 0
     return [d.embedding for d in resp.data], tokens
 
 
-def embed_one(text: str) -> list[float] | None:
-    """질의 1건 임베딩 (검색용) — 키가 없으면 None."""
+def embed_one(text: str, dims: int = DIMENSIONS) -> list[float] | None:
+    """질의 1건 임베딩 (검색용) — 키가 없으면 None. dims는 비교할 컬럼의 차원(column_dims)."""
     client = get_client()
     if client is None:
         return None
-    vecs, _ = embed_texts(client, [text])
+    vecs, _ = embed_texts(client, [text], dims)
     return vecs[0]
 
 
@@ -191,10 +211,11 @@ def run(limit: int | None, retention_months: int | None = DEFAULT_ARXIV_RETENTIO
 
     total_tokens = 0
     done = 0
+    dims = column_dims(conn, "claims")
     for i in range(0, len(pending), BATCH_SIZE):
         batch = pending[i:i + BATCH_SIZE]
         texts = [r["claim_text"] for r in batch]
-        vecs, tokens = embed_texts(client, texts)
+        vecs, tokens = embed_texts(client, texts, dims)
         total_tokens += tokens
         for row, vec in zip(batch, vecs):
             conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
@@ -239,7 +260,7 @@ def select_pending_cards(conn, limit: int | None) -> list:
 def embed_cards(conn, client, limit: int | None) -> tuple[int, int]:
     """카드 조각 임베딩을 document_card_embeddings에 채운다. 반환: (조각 수, 토큰 수).
 
-    claim과 같은 모델·차원·저장 타입. limit은 카드 장수 기준(claim 상한과 같은 값을 쓴다 —
+    claim과 같은 모델·저장 타입, 차원은 이 표의 컬럼 차원(1536 — claims는 768로 줄였다, migrations/010). limit은 카드 장수 기준(claim 상한과 같은 값을 쓴다 —
     하루 카드는 card_daily_limit 이하라 사실상 그날 새 카드 전부). 이미 있는 조각은
     ON CONFLICT로 건너뛴다 — 도중에 끊긴 카드를 다시 집어도 중복 행이 생기지 않는다.
     """
@@ -247,9 +268,10 @@ def embed_cards(conn, client, limit: int | None) -> tuple[int, int]:
     print(f"카드 임베딩 대상 {len(cards)}장")
     parts = [(c["document_id"], part, text) for c in cards for part, text in card_parts(c)]
     tokens_total = 0
+    dims = column_dims(conn, "document_card_embeddings")
     for i in range(0, len(parts), BATCH_SIZE):
         batch = parts[i:i + BATCH_SIZE]
-        vecs, tokens = embed_texts(client, [t for _, _, t in batch])
+        vecs, tokens = embed_texts(client, [t for _, _, t in batch], dims)
         tokens_total += tokens
         for (doc_id, part, _), vec in zip(batch, vecs):
             conn.execute(
