@@ -3,5 +3,14 @@
   "p755",
   "p711"
  ],
- "draft_refs_how": "메시지 임베딩"
+ "draft_refs_how": "메시지 임베딩",
+ "draft_shape": [
+  "질문",
+  "권유·제안"
+ ],
+ "r4_refs": [
+  "p647",
+  "p580"
+ ],
+ "r4_refs_how": "메시지 임베딩"
 }
