@@ -194,7 +194,7 @@ def test_pruned_arxiv_is_not_reselected_on_postgres(monkeypatch):
                 "INSERT INTO documents (id, source_id, tier, url, title, body, status, published_at) "
                 "VALUES (?,?,?,?,?,?, 'enriched', ?)",
                 (doc_id, marker, "T1", f"http://x/{doc_id}", "t", "b", pub))
-        vec = embed.to_vector_literal([0.1] * embed.DIMENSIONS)
+        vec = embed.to_vector_literal([0.1] * embed.column_dims(conn, "claims"))
         for claim_id, doc_id in ((old_claim, old_doc), (new_claim, new_doc)):
             conn.execute(
                 "INSERT INTO claims (id, document_id, claim_text, evidence_type, stance, embedding) "
@@ -298,7 +298,7 @@ def test_semantic_search_ranks_by_cosine_distance_on_postgres():
             del sys.modules[mod]
     import db
     assert db.IS_POSTGRES
-    from search.embed import VECTOR_TYPE, to_vector_literal
+    from search.embed import VECTOR_TYPE, column_dims, to_vector_literal
     from search.semantic import hybrid_search, semantic_search
 
     conn = db.connect()
@@ -319,15 +319,16 @@ def test_semantic_search_ranks_by_cosine_distance_on_postgres():
             (far_id, doc_id, "먼 벡터 claim", "neutral"))
         conn.commit()
 
-        near_vec = [1.0] + [0.0] * 1535
-        far_vec = [0.0] * 1535 + [1.0]
+        dims = column_dims(conn, "claims")  # 768 (migrations/010)
+        near_vec = [1.0] + [0.0] * (dims - 1)
+        far_vec = [0.0] * (dims - 1) + [1.0]
         conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
                     (to_vector_literal(near_vec), near_id))
         conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
                     (to_vector_literal(far_vec), far_id))
         conn.commit()
 
-        query_vec = [0.99] + [0.01] * 1535
+        query_vec = [0.99] + [0.01] * (dims - 1)
         rows = semantic_search(conn, query_vec, limit=5)
         mine = [r for r in rows if r["document_id"] == doc_id]
         assert mine and mine[0]["id"] == near_id  # 코사인 거리상 가까운 claim이 먼저 나온다

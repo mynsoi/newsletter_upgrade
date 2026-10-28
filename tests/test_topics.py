@@ -472,7 +472,7 @@ def test_knn_edges_and_centroid_on_postgres():
             del sys.modules[mod]
     import db
     assert db.IS_POSTGRES
-    from search.embed import VECTOR_TYPE
+    from search.embed import VECTOR_TYPE, column_dims
     from topics.discover import (article_axis, cluster_centroid, fetch_window_claims,
                                  knn_edges, leader_cluster, resolve_window, signal_counts,
                                  to_vector_literal, window_totals)
@@ -497,8 +497,9 @@ def test_knn_edges_and_centroid_on_postgres():
                 (doc_id, src, f"http://{marker}/{doc_id}",
                  (as_of - timedelta(days=1)).isoformat()))
         ids = {}
-        vecs = {"n1": [1.0] + [0.0] * 1535, "n2": [0.99, 0.01] + [0.0] * 1534,
-                "far": [0.0] * 1535 + [1.0]}
+        dims = column_dims(conn, "claims")  # 768 (migrations/010)
+        vecs = {"n1": [1.0] + [0.0] * (dims - 1), "n2": [0.99, 0.01] + [0.0] * (dims - 2),
+                "far": [0.0] * (dims - 1) + [1.0]}
         for key, vec in vecs.items():
             cid = db.new_id()
             ids[key] = cid

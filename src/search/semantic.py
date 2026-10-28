@@ -23,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import connect, migrate  # noqa: E402
-from search.embed import VECTOR_TYPE, embed_one, to_vector_literal  # noqa: E402
+from search.embed import VECTOR_TYPE, column_dims, embed_one, to_vector_literal  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -131,7 +131,7 @@ def hybrid_search(query: str, *, tiers: list[str] | None = None,
                                       published_after=published_after,
                                       published_before=published_before, limit=limit,
                                       include_from_summary=include_from_summary)
-        vec = embed_one(query) if conn.is_postgres else None
+        vec = embed_one(query, column_dims(conn, "claims")) if conn.is_postgres else None
         semantic_hits = (
             semantic_search(conn, vec, tiers=tiers, stances=stances,
                             published_after=published_after,

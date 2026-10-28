@@ -52,13 +52,13 @@ WINDOW_DAYS = 14      # "최근 2주" — 신호를 재는 창
 BASELINE_DAYS = 28    # 급증도의 비교 기준이 되는 직전 창
 
 # --- 군집화 --------------------------------------------------------------- #
-# 군집화에 쓰는 차원. claims.embedding은 halfvec(1536)이고 여기서는 앞 CLUSTER_DIMS 차원만
+# 군집화에 쓰는 차원. claims.embedding은 halfvec(768)(migrations/010)이고 여기서는 앞 CLUSTER_DIMS 차원만
 # subvector로 잘라 쓴다. OpenAI text-embedding-3-small의 절단은 재정규화만 하면 dimensions
 # 파라미터와 동등하고, 코사인(<=>)은 배율 불변이라 재정규화도 필요 없다
 # (docs/phase2-plan.md 수요 트리거 목록의 차원 축소 실측 근거와 같은 성질).
 # 군집화는 "비슷한 것끼리 묶는" 거친 작업이라 256차원으로 충분하고, 3,700건 규모의
 # 전량 비교(k-NN 그래프)를 10초대로 끝내려면 차원을 줄이는 편이 실용적이다.
-# 증거 수집(hybrid_search)은 이 축약을 쓰지 않는다 — 그쪽은 1536 전량 그대로다.
+# 증거 수집(hybrid_search)은 이 축약을 쓰지 않는다 — 그쪽은 768 전량 그대로다.
 CLUSTER_DIMS = 256
 KNN_K = 40            # claim 하나가 가질 수 있는 이웃 상한 = 묶음 크기 상한(+리더 1)
 SIM_THRESHOLD = 0.62  # 이 코사인 유사도 이상만 같은 주제로 본다
@@ -265,7 +265,7 @@ def iso_week_label(d: date) -> str:
 # DB 질의 (PostgreSQL + pgvector 전용)                                         #
 # --------------------------------------------------------------------------- #
 def _sub(col: str, dims: int) -> str:
-    """halfvec(1536) 컬럼을 dims 차원 vector 로 자르는 SQL 조각."""
+    """halfvec(768) 컬럼을 dims 차원 vector 로 자르는 SQL 조각."""
     return f"subvector({col}::vector, 1, {int(dims)})"
 
 
@@ -276,7 +276,7 @@ def _no_nan(sim: str) -> str:
     **PostgreSQL은 NaN을 모든 수보다 크게 취급한다.** 그래서 `sim >= threshold` 필터를
     NaN이 그대로 통과해 엉뚱한 간선·집계가 생긴다
     (`SELECT (1 - ('[0,0,0]'::vector <=> '[1,0,0]'::vector)) >= 0.9` 이 실제로 true다).
-    임베딩 1536차원 전체로는 0이 아니어도 `_sub`로 앞 dims 차원만 자르면 영벡터가 될 수
+    임베딩 768차원 전체로는 0이 아니어도 `_sub`로 앞 dims 차원만 자르면 영벡터가 될 수
     있으므로 이 저장소에서도 실제로 발생할 수 있는 조건이다.
     PostgreSQL에서 NaN = NaN 은 true라 `<> 'NaN'` 으로 NaN만 정확히 걸러진다.
     """
