@@ -3,7 +3,7 @@
   {
    "n": 1,
    "message": 5,
-   "hook": 4,
+   "hook": 3,
    "honest": 5
   },
   {
@@ -14,45 +14,45 @@
   },
   {
    "n": 3,
-   "message": 4,
-   "hook": 3,
+   "message": 3,
+   "hook": 4,
    "honest": 4
   },
   {
    "n": 4,
    "message": 4,
-   "hook": 4,
+   "hook": 3,
    "honest": 5
   },
   {
    "n": 5,
-   "message": 5,
-   "hook": 3,
+   "message": 4,
+   "hook": 4,
    "honest": 4
   },
   {
    "n": 6,
-   "message": 5,
+   "message": 2,
    "hook": 3,
-   "honest": 5
+   "honest": 2
   },
   {
    "n": 7,
    "message": 5,
    "hook": 3,
-   "honest": 5
+   "honest": 4
   },
   {
    "n": 8,
    "message": 4,
-   "hook": 5,
-   "honest": 5
+   "hook": 4,
+   "honest": 4
   }
  ],
  "pick": [
+  5,
   8,
   1,
-  4,
-  2
+  4
  ]
 }
