@@ -2,9 +2,9 @@
  "scores": [
   {
    "n": 1,
-   "message": 5,
+   "message": 2,
    "hook": 3,
-   "honest": 5
+   "honest": 4
   },
   {
    "n": 2,
@@ -14,45 +14,45 @@
   },
   {
    "n": 3,
-   "message": 3,
-   "hook": 4,
+   "message": 2,
+   "hook": 3,
    "honest": 4
   },
   {
    "n": 4,
    "message": 4,
-   "hook": 3,
-   "honest": 5
+   "hook": 4,
+   "honest": 4
   },
   {
    "n": 5,
+   "message": 2,
+   "hook": 3,
+   "honest": 4
+  },
+  {
+   "n": 6,
    "message": 4,
    "hook": 4,
    "honest": 4
   },
   {
-   "n": 6,
-   "message": 2,
-   "hook": 3,
-   "honest": 2
-  },
-  {
    "n": 7,
-   "message": 5,
+   "message": 2,
    "hook": 3,
    "honest": 4
   },
   {
    "n": 8,
-   "message": 4,
+   "message": 5,
    "hook": 4,
-   "honest": 4
+   "honest": 5
   }
  ],
  "pick": [
-  5,
-  8,
   1,
-  4
+  8,
+  4,
+  2
  ]
 }
