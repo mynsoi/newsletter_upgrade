@@ -3,56 +3,56 @@
   {
    "n": 1,
    "message": 4,
-   "hook": 3,
+   "hook": 4,
    "honest": 4
   },
   {
    "n": 2,
-   "message": 4,
+   "message": 3,
    "hook": 4,
-   "honest": 5
+   "honest": 3
   },
   {
    "n": 3,
-   "message": 5,
-   "hook": 4,
-   "honest": 5
+   "message": 4,
+   "hook": 3,
+   "honest": 4
   },
   {
    "n": 4,
    "message": 3,
-   "hook": 5,
-   "honest": 4
+   "hook": 3,
+   "honest": 3
   },
   {
    "n": 5,
-   "message": 4,
-   "hook": 3,
-   "honest": 4
+   "message": 3,
+   "hook": 2,
+   "honest": 3
   },
   {
    "n": 6,
-   "message": 5,
+   "message": 4,
    "hook": 3,
-   "honest": 5
+   "honest": 4
   },
   {
    "n": 7,
    "message": 4,
-   "hook": 2,
+   "hook": 5,
    "honest": 5
   },
   {
    "n": 8,
-   "message": 4,
+   "message": 5,
    "hook": 3,
-   "honest": 4
+   "honest": 5
   }
  ],
  "pick": [
-  3,
-  2,
-  6,
-  8
+  7,
+  1,
+  8,
+  6
  ]
 }
