@@ -22,6 +22,9 @@
  "target": "전 직원",
  "from_mine": "runs/mine/m-20261028-144227",
  "sources_ok": true,
- "text_pick": null,
+ "text_pick": {
+  "n": 4,
+  "of": 4
+ },
  "images_done": false
 }
