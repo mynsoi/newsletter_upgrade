@@ -38,7 +38,8 @@ def user():
 
 def is_article(k):
     return bool(k) and re.fullmatch(r"[A-Za-z0-9가-힣._-]+", k) and (
-        (ROOT / "briefs" / f"{k}.json").exists() or (ROOT / "runs" / "mine" / k).is_dir() or git("ls-files", f"briefs/{k}.json").stdout.strip())
+        (ROOT / "briefs" / f"{k}.json").exists() or (ROOT / "runs" / "mine" / k).is_dir() or git("ls-files", f"briefs/{k}.json").stdout.strip()
+        or git("ls-files", f"runs/mine/{k}").stdout.strip())  # 원문 찾기에서 멈춰 지운 글(설정 없음)의 삭제도 올리게
 
 
 def _images(k):

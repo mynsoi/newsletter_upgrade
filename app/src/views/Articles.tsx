@@ -61,7 +61,7 @@ export default function Articles({ state, refresh, go }: { state: State; refresh
             src: a.hero ? img(a.hero, 900) : a.confirmed?.hero ? img(a.confirmed.hero, 900) : undefined,
             fallback: <Cover a={a} />,
             badge: <StageChip a={a} />,
-            action: a.kind === "brief" ? <DeleteButton a={a} refresh={refresh} /> : undefined,
+            action: a.kind === "brief" ? <DeleteButton id={a.id} refresh={refresh} /> : undefined,
             onClick: () => go(`#/a/${a.id}`),
             overlay: (
               <div>
@@ -76,8 +76,9 @@ export default function Articles({ state, refresh, go }: { state: State; refresh
   );
 }
 
-/** 글 삭제 — 두 번 눌러야(지우지 않고 trash/로 옮긴다). 확정 기준 글에는 없다. 카드와 글 화면이 같이 쓴다 */
-export function DeleteButton({ a, refresh, onDone, className }: { a: Article; refresh: () => void; onDone?: () => void; className?: string }) {
+/** 글 삭제 — 두 번 눌러야(지우지 않고 trash/로 옮긴다). 확정 기준 글에는 없다. 카드와 글 화면이 같이 쓴다.
+ *  원문 찾기 단계에서 멈춘 글(글 설정 전)도 지운다(2026-10-28) */
+export function DeleteButton({ id, refresh, onDone, className }: { id: string; refresh: () => void; onDone?: () => void; className?: string }) {
   const [arm, setArm] = useState(false);
   useEffect(() => {
     if (!arm) return;
@@ -90,7 +91,7 @@ export function DeleteButton({ a, refresh, onDone, className }: { a: Article; re
       onClick={async (e) => {
         e.stopPropagation(); // 카드를 눌러 글로 들어가지 않게
         if (!arm) return setArm(true);
-        await act("delete", { article: a.id });
+        await act("delete", { article: id });
         onDone?.();
         refresh();
       }}

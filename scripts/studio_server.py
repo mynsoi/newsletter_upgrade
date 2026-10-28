@@ -584,7 +584,9 @@ def act_delete(a):
     k = safe_id(a.get("article", ""))
     if process_path(k):
         raise ValueError("확정 기준 글은 지우지 않습니다")
-    bp = brief_path(k)
+    bp = ROOT / "briefs" / f"{k}.json"
+    if not bp.exists() and not (MINE / k).is_dir():  # 원문 찾기에서 멈춘 글은 설정 없이 runs/mine/<글>만 있다(2026-10-28)
+        raise ValueError("설정 없음: " + k)
     if busy(k):
         raise ValueError("이 글에서 작업이 도는 중")
     b = json.loads(read(bp) or "{}")

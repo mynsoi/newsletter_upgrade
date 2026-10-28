@@ -87,7 +87,7 @@ export default function Flow({ state, id, refresh, go }: { state: State; id: str
         <header className="flex items-center gap-4 border-b border-line bg-page/80 px-10 py-4 backdrop-blur-xl">
           {a ? <StageChip a={a} /> : <Chip className="text-ink">원문</Chip>}
           <h1 className="line-clamp-1 min-w-0 flex-1 text-lg font-semibold text-ink">{title}</h1>
-          {a && a.kind === "brief" && <DeleteButton a={a} refresh={refresh} onDone={() => go("#/articles")} />}
+          {(a ? a.kind === "brief" : !job) && <DeleteButton id={id} refresh={refresh} onDone={() => go("#/articles")} />}
         </header>
 
         <div ref={box} className="flex-1 overflow-y-auto">
