@@ -45,3 +45,5 @@
 {"at": 1793166217, "user": "tksruf501", "article": "m-20261028-144227", "kind": "mine", "status": "done", "secs": 69}
 {"at": 1793166313, "user": "tksruf501", "article": "m-20261028-144227", "kind": "mine", "status": "done", "secs": 61}
 {"at": 1793168229, "user": "tksruf501", "article": "m-20261028-144227", "kind": "write", "status": "done", "secs": 140}
+{"at": 1793168552, "user": "tksruf501", "article": "m-20261028-144227", "kind": "revise", "status": "done", "secs": 34}
+{"at": 1793168553, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 16}
