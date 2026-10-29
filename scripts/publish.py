@@ -103,7 +103,8 @@ def load(k):
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
             "confirmed": conf, "pub_date": date.today().isoformat(),
-            "notice": meta.get("notice", "")}  # 제목 아래 안내 상자 — 이 글에만 손으로 넣은 값(2026-10-29 개편 안내). 없으면 그대로
+            "notice": meta.get("notice", ""),  # 제목 아래 안내 상자 — 이 글에만 손으로 넣은 값(2026-10-29 개편 안내). 없으면 그대로
+            "footer": meta.get("footer")}  # 이 글만 바닥글을 바꿀 때(2026-10-29). 없으면 config/publish.json
 
 
 # ---------- HTML ----------
@@ -148,7 +149,7 @@ def render(a, files, body_class=""):
     rep = {
         "{{ title }}": e(a["title"]), "{{ kicker }}": e(cfg["kicker"]), "{{ issue_label }}": e(a["pub_date"]),
         "{{ hero_html }}": hero, "{{ tldr_html }}": notice,
-        "{{ body_html }}": "\n    ".join(body), "{{ references_html }}": refs, "{{ footer }}": cfg["footer"],
+        "{{ body_html }}": "\n    ".join(body), "{{ references_html }}": refs, "{{ footer }}": a.get("footer") or cfg["footer"],
         "{{ body_class }}": body_class,
     }
     page = (WEB / "article.html").read_text(encoding="utf-8")
