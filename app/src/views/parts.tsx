@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { IconArrowDown, IconArrowUp } from "@tabler/icons-react";
 import AI_Prompt from "@/components/kokonutui/ai-prompt";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { ClaudeMark, MiniMd } from "@/components/studio/bits";
-import { act, getChat, runningJob, type Article as A, type ChatMsg, type State } from "@/lib/api";
+import { act, getChat, img, runningJob, type Article as A, type ChatMsg, type State } from "@/lib/api";
 import { keptSentences, paragraphs, sentences } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -103,5 +104,36 @@ export function inlineAt(a: A, paras: string[], n: number) {
   return a.inlinePicked.filter((it) => {
     const hit = it.anchor ? paras.findIndex((p) => p.startsWith(it.anchor.slice(0, 20))) + 1 : 0;
     return (hit || Math.min(it.after, paras.length)) === n;
+  });
+}
+
+/** n째 문단 뒤의 본문 그림 — move가 있으면 ↑↓로 한 문단씩 옮긴다(2026-10-29 사용자: 자동으로 정한 자리를 바꿀 수 있게).
+ *  옮긴 자리는 이 원고의 문단 번호와 첫머리로 저장돼 확정할 때도 그 자리에 들어간다 */
+export function InlineImgs({ a, paras, n, move }: { a: A; paras: string[]; n: number; move?: () => void }) {
+  return inlineAt(a, paras, n).map((it) => {
+    const go = (t: number) => act("inline-move", { article: a.id, src: it.src, after: t, anchor: paras[t - 1].slice(0, 40) }).then(move);
+    return (
+      <div key={it.src} className="group relative my-5">
+        <img src={img(it.src, 900)} className="w-full rounded-xl" />
+        {move && (
+          <div className="absolute top-3 right-3 flex gap-1 opacity-80 transition group-hover:opacity-100">
+            {[
+              { t: n - 1, label: "↑ 한 문단 위로", icon: <IconArrowUp className="size-4" /> },
+              { t: n + 1, label: "↓ 한 문단 아래로", icon: <IconArrowDown className="size-4" /> },
+            ].map((b) => (
+              <button
+                key={b.label}
+                title={b.label}
+                disabled={b.t < 1 || b.t > paras.length}
+                onClick={() => go(b.t)}
+                className="rounded-full border border-white/30 bg-black/60 p-1.5 text-white backdrop-blur transition hover:bg-black/80 disabled:opacity-30"
+              >
+                {b.icon}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    );
   });
 }

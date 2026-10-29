@@ -6,7 +6,7 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import ParticleButton from "@/components/kokonutui/particle-button";
 import { PillTabs } from "@/components/ui/tabs";
 import { ByChip, Chip, ClaudeMark, SiteIcon, SourceDrawer } from "@/components/studio/bits";
-import { Director, Prose, inlineAt } from "@/views/parts";
+import { Director, InlineImgs, Prose } from "@/views/parts";
 import { DeleteButton, StageChip } from "@/views/Articles";
 import { OptionsCard, PicksCard, useAttach } from "@/views/MineChat";
 import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type State, type Step } from "@/lib/api";
@@ -537,6 +537,7 @@ function StepCard({ s, active, onOpen, last }: { s: Step; active: boolean; onOpe
 function ImagesCard({ a, state, refresh }: { a: A; state: State; refresh: () => void }) {
   const [old, setOld] = useState(false);
   const picked = new Set(a.inlinePicked.map((x) => x.src));
+  const pickedAt = new Map(a.inlinePicked.map((x) => [x.src, x.after])); // 옮긴 자리를 후보 칩에도
   const busyHero = state.jobs.some((j) => j.status === "running" && j.target === a.id && j.kind === "images");
   const busyInline = state.jobs.some((j) => j.status === "running" && j.target === a.id && j.kind === "inline");
   const pastN = Math.max(0, a.images.length - 1) + Math.max(0, a.inline.length - 1);
@@ -550,7 +551,7 @@ function ImagesCard({ a, state, refresh }: { a: A; state: State; refresh: () => 
   const inlineRound = (r: A["inline"][number]) => (
     <div key={r.id} className="grid grid-cols-4 gap-2">
       {r.items.filter((x) => x.src).map((x) => (
-        <Thumb key={x.src} src={x.src} on={picked.has(x.src)} ratio="aspect-video" name={x.why ? `${x.name} — ${x.why}` : x.name} chip={x.after ? `문단 ${x.after}` : ""} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} />
+        <Thumb key={x.src} src={x.src} on={picked.has(x.src)} ratio="aspect-video" name={x.why ? `${x.name} — ${x.why}` : x.name} chip={(pickedAt.get(x.src) ?? x.after) ? `문단 ${pickedAt.get(x.src) ?? x.after}` : ""} onClick={() => act("inline", { article: a.id, src: x.src, on: !picked.has(x.src) }).then(refresh)} />
       ))}
     </div>
   );
@@ -763,6 +764,7 @@ function Now({
   const writing = !!job && ["write", "revise", "shorten"].includes(job.kind);
   const hero = a?.hero || a?.confirmed?.hero || "";
   const v = view === "비교" && !prev ? "본문" : view;
+  const movable = !!a && !a.confirmed && !writing; // 고른 본문 그림 자리 옮기기 — 확정 전에만
   const save = async () => {
     if (!a || !s || edit === null || saving) return;
     setSaving(true);
@@ -858,9 +860,7 @@ function Now({
                   {paragraphs(s.text).map((p_, i, all) => (
                     <div key={i}>
                       <p>{p_}</p>
-                      {inlineAt(a!, all, i + 1).map((it) => (
-                        <img key={it.src} src={img(it.src, 900)} className="my-5 w-full rounded-xl" />
-                      ))}
+                      <InlineImgs a={a!} paras={all} n={i + 1} move={movable ? refresh : undefined} />
                     </div>
                   ))}
                 </div>
@@ -881,7 +881,7 @@ function Now({
                     text={s.text}
                     prev={v === "비교" ? prev?.text : undefined}
                     // 고른 본문 그림을 그 문단 뒤에 보인다(머리 그림처럼 고르면 바로 보이게, 2026-10-22)
-                    after={v === "본문" ? (n, all) => inlineAt(a!, all, n).map((it) => <img key={it.src} src={img(it.src, 900)} className="my-5 w-full rounded-xl" />) : undefined}
+                    after={v === "본문" ? (n, all) => <InlineImgs a={a!} paras={all} n={n} move={movable ? refresh : undefined} /> : undefined}
                   />
                 )}
               </div>

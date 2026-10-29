@@ -888,6 +888,26 @@ def act_inline(a):
     return {"inline": picked}
 
 
+def act_inline_move(a):
+    """고른 본문 그림의 자리 옮기기(2026-10-29 사용자 — 자동으로 정한 자리를 바꿀 수 있게). 화면이 보고 있는 원고의
+    몇째 문단 뒤인지(after)와 그 문단 첫머리(anchor)를 받는다 — 확정할 때도 같은 규칙(첫머리로 찾고, 못 찾으면 번호)으로 넣는다."""
+    k, src = safe_id(a["article"]), image_src(a["src"])
+    after, anchor = int(a.get("after") or 0), str(a.get("anchor") or "")[:40]
+    if after < 1:
+        raise ValueError("잘못된 문단 번호")
+    art = next(x for x in articles() if x["id"] == k)
+    if art.get("confirmed"):
+        raise ValueError("확정한 글은 그림 자리를 바꿀 수 없음")
+    picked = [dict(x) for x in art["inlinePicked"]]
+    it = next((x for x in picked if x["src"] == src), None)
+    if not it:
+        raise ValueError("고른 본문 그림 아님")
+    it["after"], it["anchor"] = after, anchor
+    picked.sort(key=lambda x: x["after"])
+    meta_update(k, inline=picked)
+    return {"inline": picked}
+
+
 def act_length(a):
     """분량 두 가지: full(기본) / half(절반). 절반으로 바꾸면 마지막 과정을 줄여 다음 과정을 만든다."""
     k, mode = safe_id(a["article"]), a.get("mode")
@@ -1305,7 +1325,7 @@ def act_chat(a):
 
 ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "weave": act_weave, "images": act_images, "hero": act_hero,
-           "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "length": act_length, "target": act_target, "edit": act_edit,
+           "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "inline-move": act_inline_move, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
