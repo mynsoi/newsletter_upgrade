@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-build="20261029-154005">
+<html lang="ko" data-build="20261029-154611">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,20 +94,26 @@ h1 b{font-weight:800}
 .rowlab{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--ink-mute);margin:0 0 8px 2px}
 .grid3.r1,.grid3.r2{margin-bottom:16px}
 #p1 .card{min-height:0;padding:16px 22px 14px}
-#p1 .card h3{font-size:20px}
-#p1 .card li{font-size:14px;padding:5px 0 5px 15px;line-height:1.5}
-#p1 .card li::before{top:12px}
+#p1 .card h3{font-size:22px}
+#p1 .card li{font-size:15px;padding:8px 0 8px 16px;line-height:1.55}
+#p1 .card li::before{top:16px}
 #p1 .tier{font-size:13px;gap:8px 10px;margin-top:10px}
 #p1 .flow .st{font-size:12px;padding:10px 8px}
 #p1 .flow .st b{font-size:13px}
 #p1 .tags .tag{font-size:12px;padding:4px 10px}
 #p1 .grid3.r1,#p1 .grid3.r2{margin-bottom:20px}
 #p1 .rowlab{font-size:12px;margin-bottom:8px}
-#p1 .body{padding-top:8px}
+#p1 .body{padding-top:22px}
 #p1 .ph{padding-top:30px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-#p1 .grid2.r1{grid-template-columns:.9fr 1.1fr;margin-bottom:12px}
-#p1 .grid2.r2{grid-template-columns:.8fr 1.2fr;margin-bottom:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#p1 .card.part{padding:22px 26px 20px}
+#p1 .sub{font-size:13px;font-weight:800;letter-spacing:.8px;color:var(--ink-mute);margin:16px 0 2px;padding-top:14px;border-top:1px solid var(--hairline)}
+#p1 .tier{font-size:13.5px;gap:9px 12px;margin-top:8px}
+#p1 ul.detail{margin:6px 0 0;padding-left:0}
+#p1 ul.detail li{font-size:13.5px;color:var(--ink-2);border-top:none;padding:4px 0 4px 16px;line-height:1.5}
+#p1 ul.detail li::before{background:var(--primary-subdued);top:12px}
+#p1 .flow .st{font-size:12px;padding:11px 6px}
+#p1 .flow .st b{font-size:13.5px}
 /* ===== 3페이지: 도식 + 화면 ===== */
 .p3{display:grid;grid-template-columns:740px 1fr;gap:24px;align-items:start}
 .diagram{background:var(--canvas);border:1px solid var(--hairline);border-radius:12px;padding:10px 12px 6px;box-shadow:var(--shadow2)}
@@ -234,23 +240,10 @@ body.editing .b.hidden-blk{display:block!important}
   </div>
 
   <div class="body">
-    <div class="rowlab" data-edit>재료 — 모으고 저장하기</div>
-    <div class="grid2 r1">
-      <div class="card blk">
+    <div class="grid2 cols">
+      <div class="card blk part">
         <div class="blktools"><button data-act="left">◀</button><button data-act="right">▶</button><button data-act="hide">숨김</button></div>
-        <h3><span class="num">1</span><span data-edit>수집 소스 — 41곳</span></h3>
-        <div class="tier">
-          <div class="k">T1<small>연구기관</small></div><div class="v" data-edit>Stanford HAI · Brookings · OECD · arXiv · PsyArXiv · NBER</div>
-          <div class="k">T2<small>컨설팅</small></div><div class="v" data-edit>McKinsey · BCG · Bain · Deloitte · PwC · Wharton · Josh Bersin</div>
-          <div class="k">T3<small>저널·매체</small></div><div class="v" data-edit>HBR · HBR Korea · DBR · MIT SMR · MIT Tech Review · Fast Company · Charter · AIHR · HR블레틴</div>
-          <div class="k">T4<small>기업 자료</small></div><div class="v" data-edit>Microsoft WorkLab · Google re:Work · Anthropic·OpenAI 리포트 · Worklytics · One Model · flex · 이노핏 · 캐럿글로벌</div>
-          <div class="k">T5<small>뉴스</small></div><div class="v" data-edit>AI타임스 · 지디넷 · 더에이아이 · AI포스트 · 한국경제 IT · 동아일보 경제 (신호 감지용)</div>
-        </div>
-      </div>
-
-      <div class="card blk">
-        <div class="blktools"><button data-act="left">◀</button><button data-act="right">▶</button><button data-act="hide">숨김</button></div>
-        <h3><span class="num">2</span><span data-edit>소스 수집과 저장</span><small data-edit>매일 06:00 자동</small></h3>
+        <h3><span class="num">1</span><span data-edit>소스 수집</span><small data-edit>매일 06:00 자동</small></h3>
         <div class="flow">
           <div class="st"><b>① 수집</b>RSS · API · HTML</div><div class="ar">›</div>
           <div class="st"><b>② 중복 제거</b></div><div class="ar">›</div>
@@ -265,38 +258,40 @@ body.editing .b.hidden-blk{display:block!important}
           <li data-edit><b>④ 카드 만들기</b> — 원문마다 핵심 주장과 사례를 정리한 카드를 만들어 글감을 찾을 때 씁니다.</li>
           <li data-edit><b>⑤ 저장</b> — 원문 전체와 카드를 모두 Supabase(클라우드 DB)에 저장합니다. 칼럼 작업실은 여기서 글감이 될 원문만 받아 둡니다.</li>
         </ul>
-      </div>
-    </div>
-
-    <div class="rowlab" data-edit>글 — 쓰고 검증하기</div>
-    <div class="grid2 r2">
-      <div class="card cream blk">
-        <div class="blktools"><button data-act="left">◀</button><button data-act="right">▶</button><button data-act="hide">숨김</button></div>
-        <h3><span class="num">3</span><span data-edit>글쓰기 문체</span></h3>
-        <ul>
-          <li data-edit><b>레퍼런스 칼럼 252편을 학습</b>해 도입·전개·맺음·목소리 규칙을 담은 <b>문체 안내서</b>와 <b>제목 짓는 규칙</b>을 만들었고, 본문과 제목은 이 규칙에 따라 씁니다.</li>
-          <li data-edit><b>글을 쓸 때는</b> 문체 안내서와 함께, 쓰려는 주제와 가장 비슷한 레퍼런스 <b>2편의 실제 스타일</b>을 항상 참고합니다.</li>
-          <li data-edit><b>사용자 피드백은</b> 쌓아 두었다가 규칙으로 만들어 문체 안내서를 계속 업데이트할 예정입니다.</li>
-        </ul>
+        <div class="sub" data-edit>수집 소스 — 41곳</div>
+        <div class="tier">
+          <div class="k">T1<small>연구기관</small></div><div class="v" data-edit>Stanford HAI · Brookings · OECD · arXiv · PsyArXiv · NBER</div>
+          <div class="k">T2<small>컨설팅</small></div><div class="v" data-edit>McKinsey · BCG · Bain · Deloitte · PwC · Wharton · Josh Bersin</div>
+          <div class="k">T3<small>저널·매체</small></div><div class="v" data-edit>HBR · HBR Korea · DBR · MIT SMR · MIT Tech Review · Fast Company · Charter · AIHR · HR블레틴</div>
+          <div class="k">T4<small>기업 자료</small></div><div class="v" data-edit>Microsoft WorkLab · Google re:Work · Anthropic·OpenAI 리포트 · Worklytics · One Model · flex · 이노핏 · 캐럿글로벌</div>
+          <div class="k">T5<small>뉴스</small></div><div class="v" data-edit>AI타임스 · 지디넷 · 더에이아이 · AI포스트 · 한국경제 IT · 동아일보 경제 (신호 감지용)</div>
+        </div>
       </div>
 
-      <div class="card blk">
+      <div class="card blk part">
         <div class="blktools"><button data-act="left">◀</button><button data-act="right">▶</button><button data-act="hide">숨김</button></div>
-        <h3><span class="num">4</span><span data-edit>글쓰기 방법</span></h3>
+        <h3><span class="num">2</span><span data-edit>글쓰기</span><small data-edit>칼럼 작업실</small></h3>
         <div class="flow">
           <div class="st"><b>① 주제</b>추천 또는 직접 요청</div><div class="ar">›</div>
           <div class="st"><b>② 원문 고르기</b>중심 1 + 받침 2</div><div class="ar">›</div>
-          <div class="st"><b>③ 제목</b></div><div class="ar">›</div>
-          <div class="st hot"><b>④ 초안 → 재작성</b></div><div class="ar">›</div>
-          <div class="st"><b>⑤ 피드백 · 그림 · 확정</b></div><div class="ar">›</div>
-          <div class="st"><b>⑥ 본문 검증</b></div>
+          <div class="st hot"><b>③ 초안 · 재작성 · 피드백</b></div><div class="ar">›</div>
+          <div class="st"><b>④ 제목</b></div><div class="ar">›</div>
+          <div class="st"><b>⑤ 그림</b></div><div class="ar">›</div>
+          <div class="st"><b>⑥ 검증 · 확정</b></div>
         </div>
         <ul>
           <li data-edit><b>① 주제</b> — AI가 추천하고 사람은 고르기만 합니다. 하고 싶은 말을 적어 시작할 수도 있습니다.</li>
-          <li data-edit><b>② 원문 고르기 · ③ 제목</b> — 카드에서 글감 원문을 고르고, 학습한 규칙으로 제목 후보를 냅니다.</li>
-          <li data-edit><b>④ 초안 → 재작성</b> — 원문 전체를 읽고 초안을 쓰고, 문체 규칙으로 다시 씁니다.</li>
-          <li data-edit><b>⑤ 피드백 · 그림 · 확정</b> — 피드백을 보내면 다음 판이 쌓이고, AI가 머리 그림 1장과 본문 그림 2장을 그립니다. 확정하면 웹·메일로 발행됩니다.</li>
-          <li data-edit><b>⑥ 본문 검증</b> — 본문의 숫자가 원문에 있는지, 용어 표기와 분량(1,500자)이 맞는지 자동으로 확인하고, 사람이 판마다 바뀐 문장을 비교해 최종 확인합니다.</li>
+          <li data-edit><b>② 원문 고르기</b> — 카드에서 글감이 될 원문을 중심 1편과 받침 2편으로 고르고, "이 글이 말할 것" 한 문장을 정합니다.</li>
+          <li data-edit><b>③ 초안 · 재작성 · 피드백</b> — 원문 전체를 읽고 초안을 쓰고, 문체 규칙으로 다시 씁니다. 피드백을 보내면 다음 판이 쌓입니다.
+            <ul class="detail">
+              <li data-edit><b>문체 규칙</b> — 레퍼런스 칼럼 252편을 학습해 도입·전개·맺음·목소리 규칙을 담은 문체 안내서와 제목 짓는 규칙을 만들었습니다.</li>
+              <li data-edit><b>참고 글 2편</b> — 쓸 때마다 문체 안내서와 함께, 주제가 가장 비슷한 레퍼런스 2편의 실제 스타일을 참고합니다.</li>
+              <li data-edit><b>피드백 규칙화</b> — 사용자 피드백은 쌓아 두었다가 규칙으로 만들어 문체 안내서를 계속 업데이트할 예정입니다.</li>
+            </ul>
+          </li>
+          <li data-edit><b>④ 제목</b> — 완성된 본문을 읽고 학습한 제목 규칙에 따라 후보를 내고, 사람이 고릅니다.</li>
+          <li data-edit><b>⑤ 그림</b> — AI가 글을 읽고 머리 그림 1장과 본문 그림 2장을 그리고, 사람이 고릅니다.</li>
+          <li data-edit><b>⑥ 검증 · 확정</b> — 본문의 숫자가 원문에 있는지, 용어 표기와 분량(1,500자)이 맞는지 자동으로 확인하고, 사람이 판을 골라 확정하면 웹·메일로 발행됩니다.</li>
         </ul>
       </div>
     </div>
