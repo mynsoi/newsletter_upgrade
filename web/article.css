@@ -396,3 +396,13 @@ body {
 .references a:hover { color: var(--accent); }
 .email-capture .plain-title { font-size: 36px; }
 .email-capture .references a { text-decoration: none; }
+
+/* 제목 아래 안내 상자(publish.py notice — 글 메타에 notice가 있을 때만). 상자가 본문 앞에 서므로 본문 위 여백(:first-child)을 상자가 맡는다
+   한 문장 한 줄(2026-10-29) — 가장 긴 줄 약 43em: 웹 14px ≈ 601px(안쪽 632), 메일 14.5px ≈ 623px(안쪽 648) */
+.notice { margin: 40px 0 8px; padding: 18px 20px; background: #EDEFF2; border-radius: 12px; }
+.notice p { font-size: 14px; line-height: 1.75; color: var(--ink-secondary); word-break: keep-all; }
+.notice .notice-note { font-size: 12.6px; color: var(--ink-muted); margin-top: 12px; }  /* 문장 글씨의 0.9배, 반 줄 띄움 */
+.notice + .article-body { padding-top: 32px; }
+.email-capture .notice { margin-top: 87px; padding: 22px 24px 22px 32px; }  /* 왼쪽 여백이 좁아 보여 왼쪽을 더(2026-10-29) */
+.email-capture .notice p { font-size: 14.5px; line-height: 1.6; white-space: nowrap; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게 */
+.email-capture .notice .notice-note { font-size: 13px; margin-top: 12px; }

@@ -102,7 +102,8 @@ def load(k):
     # 사내 자료는 원고에 썼어도 참고자료에 올리지 않는다(2026-10-29 사용자 — 발행본에 내부 자료 이름이 나가지 않게. 10/23엔 제목을 붙였었다)
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
-            "confirmed": conf, "pub_date": date.today().isoformat()}
+            "confirmed": conf, "pub_date": date.today().isoformat(),
+            "notice": meta.get("notice", "")}  # 제목 아래 안내 상자 — 이 글에만 손으로 넣은 값(2026-10-29 개편 안내). 없으면 그대로
 
 
 # ---------- HTML ----------
@@ -139,9 +140,14 @@ def render(a, files, body_class=""):
             f'      <li><a href="{e(r["url"])}" target="_blank" rel="noopener">{e(r["label"])}</a></li>' if r["url"]
             else f"      <li>{e(r['label'])}</li>" for r in a["references"])
         refs = f'<section class="references">\n    <h3>참고자료</h3>\n    <ul>\n{items}\n    </ul>\n  </section>'
+    notice = ""
+    if a.get("notice"):
+        lines = [x for x in a["notice"].split("\n") if x.strip()]  # '※'로 시작하는 줄은 작은 회색 글씨(담당자 등)
+        notice = '<aside class="notice">' + "".join(
+            f'<p class="notice-note">{inline(x)}</p>' if x.startswith("※") else f"<p>{inline(x)}</p>" for x in lines) + "</aside>"
     rep = {
         "{{ title }}": e(a["title"]), "{{ kicker }}": e(cfg["kicker"]), "{{ issue_label }}": e(a["pub_date"]),
-        "{{ hero_html }}": hero, "{{ tldr_html }}": "",
+        "{{ hero_html }}": hero, "{{ tldr_html }}": notice,
         "{{ body_html }}": "\n    ".join(body), "{{ references_html }}": refs, "{{ footer }}": cfg["footer"],
         "{{ body_class }}": body_class,
     }
