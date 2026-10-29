@@ -5,8 +5,8 @@ title: AI 도구를 널리 배포했다는 사실은 회사의 중요한 문제�
 verdict: 쓸 만함
 audience: 전 직원
 center: bain-insights/0002
-status: 씀
-used_in: [briefs/m-20261026-095504.json, columns/2026-10-26-m-20261026-095504.md]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-25
 ---
 
