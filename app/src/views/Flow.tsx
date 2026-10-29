@@ -263,7 +263,7 @@ function Timeline({
 
   // 3. 과정 — 과정 4부터 앞에 멘토 피드백(받은 그대로)
   a?.steps.forEach((s, i) => {
-    if (s.n >= 4 && s.feedback && !s.mode && s.by !== "멘토") out.push(<Me key={`f${s.n}`}>{s.feedback}</Me>);
+    if (s.n >= 4 && s.feedback && !s.mode && (s.by === "Claude" || s.by === "astra")) out.push(<Me key={`f${s.n}`}>{s.feedback}</Me>);
     out.push(
       <Ai key={`s${s.n}`} label={<><span className="tabular-nums">과정 {s.n}</span><ByChip by={s.by} />{s.mode && <Chip>{s.mode}</Chip>}</>}>
         <StepCard s={s} active={(sel ?? a.steps.length) === s.n} onOpen={() => setSel(s.n)} last={i === a.steps.length - 1} />

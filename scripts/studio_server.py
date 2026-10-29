@@ -931,8 +931,14 @@ def blocks(t):
     return [x.strip() for x in re.split(r"\n\s*\n", t) if x.strip()]
 
 
+def editor_name():
+    """사람이 쓴 과정에 붙는 이름 — PC마다 `git config studio.name <이름>`으로 바꾼다. 없으면 '사용자'(2026-10-29 사용자: '멘토'로 뜨지 않게).
+    예전 기록의 '멘토'는 그대로 둔다(그때는 멘토가 고쳤다)."""
+    return SH.git("config", "studio.name").stdout.strip() or "사용자"
+
+
 def act_edit(a):
-    """직접 편집 — 사람이 고친 원고를 덮어쓰지 않고 '멘토'가 쓴 다음 과정으로 쌓는다
+    """직접 편집 — 사람이 고친 원고를 덮어쓰지 않고 사람(editor_name)이 쓴 다음 과정으로 쌓는다
     (멘토 2026-10-10: "과정, 확정에서 뷰어를 에디터로 만들어서 직접 사람이 편집할 수도 있게").
     설정 글은 final-rN.md로 남겨 다음 피드백 반영·절반 줄이기가 이 원고를 바탕으로 이어지게 한다."""
     k = safe_id(a["article"])
@@ -964,12 +970,12 @@ def act_edit(a):
         f = d / f"edit-{time.strftime('%Y%m%d-%H%M%S')}.md"
         f.write_text(body, encoding="utf-8")
         p = json.loads(read(pp))
-        p["steps"].append({"file": f.relative_to(ROOT).as_posix(), "by": "멘토", "mode": mode})
+        p["steps"].append({"file": f.relative_to(ROOT).as_posix(), "by": editor_name(), "mode": mode})
         pp.write_text(json.dumps(p, ensure_ascii=False, indent=1), encoding="utf-8")
     else:
         r = len(list(d.glob("final-r*.md"))) + 1  # column_pipeline.revise()와 같은 번호 규칙
         (d / f"final-r{r}.md").write_text(body, encoding="utf-8")
-        (d / f"by-r{r}.txt").write_text("멘토", encoding="utf-8")
+        (d / f"by-r{r}.txt").write_text(editor_name(), encoding="utf-8")
         (d / f"mode-r{r}.txt").write_text(mode, encoding="utf-8")
     return {"n": n + 1}
 
@@ -991,7 +997,7 @@ def act_base(a):
     d = ROOT / "runs" / "columns" / k
     r = len(list(d.glob("final-r*.md"))) + 1
     (d / f"final-r{r}.md").write_text((f"# {title}\n\n" if title else "") + src["text"].strip() + "\n", encoding="utf-8")
-    (d / f"by-r{r}.txt").write_text("멘토", encoding="utf-8")
+    (d / f"by-r{r}.txt").write_text(editor_name(), encoding="utf-8")
     (d / f"mode-r{r}.txt").write_text(f"과정 {base}에서 이어 감", encoding="utf-8")
     return {"n": n + 1}
 
