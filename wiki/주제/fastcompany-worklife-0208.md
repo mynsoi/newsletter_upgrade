@@ -3,12 +3,12 @@ type: topic
 kind: message
 title: AI가 분석과 회의 준비를 줄여도 리더가 고객과 구성원을 직접 이해하는 데 쓰는 시간의 가치는 줄어들지 않는다.
 verdict: 쓸 만함
+judged_by: 사람
 audience: 임원급·팀장급
 center: fastcompany-worklife/0208
 status: 쓸 수 있음
 used_in: []
-timestamp: 2026-10-29
-judged_by: 사람
+timestamp: 2026-11-02
 ---
 
 # AI가 분석과 회의 준비를 줄여도 리더가 고객과 구성원을 직접 이해하는 데 쓰는 시간의 가치는 줄어들지 않는다.
@@ -21,6 +21,7 @@ AI가 분석과 회의 준비를 줄여도 리더가 고객과 구성원을 직�
 
 ## 사례
 - [fastcompany-worklife/0208] (중심) Honeywell의 비말 카푸르는 시간의 약 40%를 고객·파트너에게 쓰며 제품과 인수 아이디어를 검증한다고 밝혔다.
+- [mckinsey-insights/0046] (받침) Businessolver 설문에서 CEO들은 공감의 중요성을 낮게 보고 직원과 교감하는 시간도 줄었다고 답했다.
 
 ## 제목 후보
 
@@ -29,6 +30,8 @@ AI가 분석과 회의 준비를 줄여도 리더가 고객과 구성원을 직�
 | 원문 | 작성자 · 날짜 | 있었던 일 |
 |---|---|---|
 | [fastcompany-worklife/0208](../../sources/originals/fastcompany-worklife/0208.md) · https://www.fastcompany.com/91628235/9-ceos-tell-us-how-they-manage-time?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss | Stephanie Mehta · 2026-10-26 | (1) Pacsun의 브리엔 올슨은 시간의 약 30%를 경영진과의 일대일 면담, 주간 회의, 전략 논의에 쓴다고 답했다. Mission North의 타일러 페리는 약 25%를, David's Bridal의 켈리 쿡은 약 30%를 직속 보고자와 경영진에게 쓴다고 했다. 반면 Kapital의 르네 사울은 50%를 직속 보고자와 그 팀원들에게 쓴다고 해 가장 두드러졌다. (2) Honeywell의 비말 카푸르는 시간의 약 40%를 고객과 파트너에게 쓰며 영업팀과 현장에 함께 나가 고객을 만난다고 했다. 여기서 중요한 제품이나 인수 결정에 앞서 아이디어를 검증한다고 밝혔다. Sage의 라지 메흐라도 고객과 팀에 각각 약 40%를 쓰며, 회의에 노트북 대신 공책을 들고 가서 구성원에게 온전히 집중한다고 했다. (3) 응답한 CEO 대부분은 읽기와 성찰, 구조화되지 않은 사고에 시간의 5~15%를 따로 떼어 둔다고 했다. Remote의 요브 판 데르 보르트는 절반 이상을 무언가를 만들고 탐색하는 데 쓴다고 했고, Mission North의 페리는 성찰이 달력 밖에서 일과 시간 이후에도 일어난다고 했다. (4) Pacsun의 올슨은 AI가 정보 종합, 실적 분석, 회의 준비에 큰 도움이 된다고 했고, David's Bridal의 쿡은 분석에서 결정까지의 시간이 줄었다고 했다. RRA의 콘스탄틴 알렉산드라키스는 AI가 시간 배분을 점검하는 데도 쓰일 수 있다고 보았다. 이 조사는 하버드의 노리아와 포터가 2018년 연구에서 CEO의 고객 접촉 시간이 약 3%라고 밝힌 것과 대비되며, 이번 조사는 자가 보고 방식이다. |
+| [mckinsey-insights/0046](../../sources/originals/mckinsey-insights/0046.md) · https://www.mckinsey.com/capabilities/people-and-organization/our-insights/what-ai-cant-replace-and-why-it-matters-for-value |  · 2026-10-27 | (1) Businessolver가 10년째 CEO와 직원을 대상으로 하는 직장 공감 설문에서 CEO들은 공감의 중요성을 1~2년 전보다 낮게 봤고 직원과 교감할 시간도 줄었다고 답했다. 글쓴이는 AI 도입이 사람에 대한 투자 감소와 겹친다고 본다. (2) 다른 설문에서 경영진의 40%는 직원이 AI로 주당 8시간 이상 아낀다고 믿었지만 직원의 3분의 2는 주당 2시간 이하라고 답했다. 또 다른 설문에서는 Z세대 직원의 44%가 회사의 AI 도입을 일부러 방해한 적이 있다고 인정했다. (3) 스탠퍼드의 연구에서는 아첨하는 AI 챗봇과 갈등 상황을 이야기한 사람들이 상대와 화해하거나 사과할 마음이 덜했다. 반대로 반박하는 챗봇과 대화한 사람들은 화해하려는 마음이 더 컸지만 그 챗봇을 다시 쓰고 싶어 하는 마음은 덜했다. (4) Workday 보고서에 따르면 직원의 76%가 AI를 가장 많이 쓰는 용도로 동료와의 관계를 포함한 조언 구하기를 꼽았다. 이와 함께 사람 동료나 멘토에게 같은 조언을 구하는 일은 덜 편하게 느끼게 됐다. |
 
 ## 글쓴이가 하는 말
 - [fastcompany-worklife/0208] CEO 아홉 명이 스스로 밝힌 일정을 보면 시간의 대부분이 직속 보고자와 경영진, 고객에게 쓰이고 있다. 글쓴이는 AI가 일을 돕긴 해도 일의 본질을 바꾸지는 않았으며, 달력이 CEO만 할 수 있는 일과 생각할 시간을 반영하는지가 중요하다고 본다.
+- [mckinsey-insights/0046] AI가 일을 빠르게 해 주는 시대일수록 관리자와 리더가 직원을 알고 아끼며 편이 되어 주는 사람 사이의 공감과 신뢰가 더 중요해진다. 이를 소홀히 한 채 속도만 앞세워 AI를 도입하면 직원의 신뢰를 잃어 오히려 성과에도 손해가 된다는 주장이다.
