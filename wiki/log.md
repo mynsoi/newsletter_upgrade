@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-02 15:22
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 30 · 122s
+
+## 2026-11-02 15:22
 - 묶기 붙임 charter/0054 → 주제/fastcompany-worklife-0085.md
 - 묶기 붙임 carrot-global-blog/0051 → 주제/carrot-global-blog-0008.md
 - 묶기 붙임 carrot-global-blog/0052 → 주제/aihr-blog-0003.md
