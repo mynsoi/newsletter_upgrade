@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-02 15:48
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 31 · 145s
+
+## 2026-11-02 15:48
 - 묶기 붙임 fastcompany-worklife/0218 → 주제/charter-0003.md
 - 묶기 붙임 mckinsey-insights/0050, bain-insights/0075, bcg-publications/0361 → 주제/bcg-publications-0052.md
 - 묶기 붙임 josh-bersin/0059 → 주제/aihr-blog-0002.md
