@@ -1,5 +1,29 @@
 # 위키 이력
 
+## 2026-11-02 15:48
+- 묶기 붙임 fastcompany-worklife/0218 → 주제/charter-0003.md
+- 묶기 붙임 mckinsey-insights/0050, bain-insights/0075, bcg-publications/0361 → 주제/bcg-publications-0052.md
+- 묶기 붙임 josh-bersin/0059 → 주제/aihr-blog-0002.md
+- 묶기 붙임 hbr/0062 → 주제/fastcompany-worklife-0007.md
+- 묶기 붙임 fastcompany-worklife/0219 → 주제/charter-0042.md
+- 묶기 붙임 hbr-korea/0311 → 주제/hbr-0016.md
+- 묶기 붙임 hbr/0063 → 주제/hbr-korea-0038.md
+- 묶기 붙임 aihr-blog/0059, aihr-blog/0060 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 fastcompany-worklife/0222 → 주제/brookings-future-of-work-0003.md
+- 묶기 붙임 hbr-korea/0256 → 주제/hbr-korea-0048.md
+- 묶기 붙임 hbr-korea/0222 → 주제/charter-0004.md
+- 묶기 새 주제(쓸 만함) AI가 자료를 모으는 일을 맡을수록 사람의 판단이 필요한 지점을 중심으로 업무 전체를 다시 나누는 변화가 중요해진다. → 주제/mckinsey-insights-0045.md
+- 묶기 새 주제(쓸 만함) AI가 정보를 전달할 수 있게 됐다고 조직의 위계를 없애면 그 안에서 이루어지던 조율과 후배 육성까지 잃을 수 있다. → 주제/charter-0055.md
+- 묶기 새 주제(쓸 만함) AI가 눈에 보이는 업무를 처리해도 사람이 쌓아 온 내부 노하우와 판단까지 대체됐다는 뜻은 아니다. → 주제/fastcompany-worklife-0220.md
+- 묶기 새 주제(보통) 구성원의 끈기를 요구하는 리더십보다 협업과 집중이 가능한 환경을 만드는 리더십이 성과의 조건을 바꿀 수 있다. → 주제/hbr-korea-0290.md
+- 묶기 새 주제(쓸 만함) AI에 일을 맡긴 조직의 책임은 최종 결과를 확인하는 데서 끝나지 않고 누가 승인한 AI가 어떤 행동을 했는지 설명하는 데까지 넓어진다. → 주제/mit-tech-review-0043.md
+- 묶기 새 주제(쓸 만함) AI를 도입한 조직의 초기 활력이 지속되려면 도구의 확산 속도만큼 업무 기대치의 설명과 관리자의 지원도 따라가야 한다. → 주제/fastcompany-worklife-0221.md
+- 묶기 새 주제(쓸 만함) 하이브리드 근무의 성과는 출근 일수보다 함께할 일과 혼자 집중할 일을 팀이 어떻게 나누는지에 달려 있다. → 주제/fastcompany-worklife-0225.md
+- 묶기 새 주제(뺌) AI로 사업모델이 흔들릴 때 경쟁력은 새 요금제를 한 번 맞히는 능력보다 계속 시험하고 바꿀 수 있는 운영 체계에서 나올 수 있다. → 주제/bcg-publications-0360.md
+- 묶기 새 주제(쓸 만함) AI의 공통 기반을 전사에서 관리하는 것과 활용 방법을 현장에 맡기는 것은 양립할 수 있다. → 주제/mckinsey-insights-0042.md
+- 묶기 새 주제(보통) 경영진 사이의 긴장은 없애야 할 불화가 아니라 서로 다른 판단을 의사결정에 반영하는 장치가 될 수 있다. → 주제/bcg-publications-0275.md
+- 주제 묶기 새 카드 31 · 붙음/새 주제 26 · 뺌 5 · 못 넣음 0 · 남음 0 · 134s
+
 ## 2026-11-02 15:22
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 30 · 122s
 
