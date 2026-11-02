@@ -60,6 +60,8 @@ def _paths(k):
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "runs" / "columns").glob(f"{k}.try-*")]
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "columns").glob(f"*-{k}*") if p.is_file()]
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "columns" / "img").glob(f"*-{k}*")]
+    # 지운 확정본·그림(고른 그림 runs/images 포함)은 디스크에 없어 위 glob에 안 잡힌다 — git이 아는 파일도 넣어야 삭제가 올라간다(2026-11-02, 10/29 삭제 2편이 반만 올라감)
+    cands += git("-c", "core.quotepath=off", "ls-files", "--", f"columns/*-{k}*", f"runs/columns/{k}.try-*", f"runs/images/{k}").stdout.splitlines()
     # 있거나(새로·바뀜) 이미 올라가 있던(지움) 경로만 — 없는 경로를 git add에 주면 실패한다
     return [p for p in dict.fromkeys(cands) if (ROOT / p).exists() or git("ls-files", "--", p).stdout.strip()]
 
