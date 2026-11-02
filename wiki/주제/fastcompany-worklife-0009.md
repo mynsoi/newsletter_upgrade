@@ -2,18 +2,19 @@
 type: topic
 kind: message
 title: 반복되는 문제에 더 열심히 대응하는 것이 오히려 문제를 키울 때가 있다.
-verdict: 쓸 만함
+verdict: 뺌
 audience: 전 직원
 center: fastcompany-worklife/0009
 status: 쓸 수 있음
 used_in: []
 timestamp: 2026-10-23
+judged_by: 사람
 ---
 
 # 반복되는 문제에 더 열심히 대응하는 것이 오히려 문제를 키울 때가 있다.
 
 ## 왜 쓸모
-현장 유지관리와 반복 업무 모두에서 노력의 양보다 원인과 구조를 보게 하는 사례다.
+사람 판정(2026-11-02): 뺌 — 칼럼 목적과 안 맞음
 
 ## 이 글이 말할 것
 반복되는 문제에 더 열심히 대응하는 것이 오히려 문제를 키울 때가 있다.
