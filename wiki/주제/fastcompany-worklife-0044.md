@@ -8,6 +8,7 @@ center: fastcompany-worklife/0044
 status: 쓸 수 있음
 used_in: []
 timestamp: 2026-10-23
+judged_by: 사람
 ---
 
 # 후배에게 시간을 내어 중요한 대화에 참여시키는 일은 소속감을 만드는 구체적인 투자다.

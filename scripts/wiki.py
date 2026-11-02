@@ -4,7 +4,8 @@
 예전 방식(astra가 원문을 한 편씩 읽고 공통 권고로 합치던 위키)은 git 기록에 남아 있다.
 
 사용: python3 scripts/wiki.py --ingest [원문 경로...]   — 경로가 없으면 아직 안 넣은 원문 전부(경영일기 제외)
-      python3 scripts/wiki.py --refilter               — 모든 주제를 다시 거른다(판정 예시가 쌓였을 때)
+      python3 scripts/wiki.py --refilter               — 판정 기준으로 다시 판정(사람이 정한 판정은 그대로, 2026-11-02)
+      python3 scripts/wiki.py --judge-test             — 판정 검증: 사람 판정을 가리고 모델이 기준대로 판정해 일치율을 잰다(파일 안 씀)
       python3 scripts/wiki.py --claim <주제 페이지>      — 고르자마자: 주제의 주장·원문·대상 독자·제목 후보로 글 설정을 만든다(LLM 없음)
       python3 scripts/wiki.py --verdict <주제 페이지> <쓸 만함|보통|뺌>  — 멘토가 판정을 바꾼다 → 판정 예시에 쌓인다
       python3 scripts/wiki.py --status                 — 넣은 원문 수·남은 원문
@@ -12,8 +13,8 @@
 단계와 맡는 모델
 1. 카드(astra, 원문마다 동시에): 원문에서 있었던 일 + 글쓴이가 하는 말
 2. 묶기(astra 한 번): 새 카드를 글쓴이의 주장이 같은 기존 주제에 붙이거나 새 주제로. 칼럼 재료가 없으면 뺀다
-3. 거르기(Claude 한 번): 쓸모 판정(쓸 만함·보통·뺌) · 있었던 일 한 줄 · 왜 쓸모 · 대상 독자. 기준은 금지 목록이 아니라
-   판정 예시(wiki/판정예시.md — 멘토가 괜찮다고 한 판정 + 멘토가 바꾼 판정)
+3. 판정(묶기와 같은 호출, 빠지면 판정 채우기): 쓸 만함·보통·뺌 · 왜 · 대상 독자. 기준은 wiki/판정기준.md 하나와
+   판정 예시(wiki/판정예시.md — 2026-11-02 사용자 판정 136개에서 고른 대표 + 작업실에서 바꾼 판정)
 4. (2026-10-23 없앰) 제목 후보는 주제마다 미리 짓지 않고, 주제를 고른 뒤 글의 제목 단계에서 짓는다.
 - astra·Claude는 답만 한다(읽기 전용, 파일 쓰기 없음). 위키 파일은 이 스크립트가 쓴다.
 - 원문은 인터넷 글이다 — 프롬프트마다 원문 속 지시문은 따르지 않게 하고, 결과에 비밀값·로컬 경로처럼 보이는 게 있으면 버린다.
@@ -45,6 +46,10 @@ RECENT_MONTHS = int(os.environ.get("WIKI_BUNDLE_RECENT_MONTHS", "1"))
 BUNDLE_MODEL = "claude-opus-5-5"  # --api로 돌릴 때. 기본은 astra(2026-10-23 사용자 결정 — 주제 문장 표현), --claude는 계정 로그인 opus
 BUNDLE_BY = "astra"  # 주제 묶기·판정 채우기를 누가: astra | claude(계정 로그인) | api(API 키 Opus)
 EXAMPLES = WIKI / "판정예시.md"
+# 판정 기준(2026-11-02 사용자 확정) — 묶기·판정 채우기·다시 판정·거르기가 모두 이 파일 하나와 판정 예시를 읽는다.
+# 그전엔 기준이 묶기 지시·판정 채우기 지시·판정 예시 세 곳에 흩어져 있었다. 기준을 바꿀 때는 이 두 파일만 고친다.
+CRITERIA = WIKI / "판정기준.md"
+HUMAN = "사람"  # 주제 머리말 judged_by — 사람이 정한 판정은 다시 판정·거르기가 덮어쓰지 않는다
 # 주제 문장 기준 — 주제 지도 묶기와 '내 주제로 쓰기' 옵션(scripts/my_topic.py)이 함께 쓰는 하나뿐인 정의(2026-10-24 사용자 결정:
 # 두 규칙을 합치되 주제 지도 쪽을 기준으로). 고칠 때는 여기 한 곳만 고친다. my_topic.py는 이 문장을 가져다 쓰고, '멘토 요청에서 벗어나지 않기'만 더한다.
 TOPIC_RULE = ("주제란: 우리 독자(AI를 직접 다루는 개발자가 아닌 E&S 사업·지원 부서 구성원)에게 할 **핵심 메시지 한 문장**입니다. 글 한 편이 끝까지 끌고 갈 주장이어야 합니다.\n"
@@ -70,6 +75,16 @@ ANSWER_ONLY = "파일을 만들거나 명령을 실행하지 말고 답변으로
 # 이름 목록은 보조일 뿐(표현을 바꾸면 피해 간다). 긴 토큰 모양도 잡는다. 실제 방어는 읽기 전용 실행 · HTML escape · Tailscale 안에서만 열리는 화면.
 LEAK = re.compile(r"sk-[A-Za-z0-9]{10,}|api[_-]?key|access_token|refresh_token|BEGIN [A-Z ]*PRIVATE|auth\.json|/home/|\.codex/|ANTHROPIC_|OPENAI_API"
                   r"|[A-Za-z0-9+/_=-]{32,}", re.I)
+
+
+def judge_guide():
+    """프롬프트에 넣을 [판정 기준] + [판정 예시]."""
+    read_ = lambda f: f.read_text(encoding="utf-8") if f.exists() else "(아직 없음)"
+    return "=== [판정 기준] ===\n" + read_(CRITERIA) + "\n\n=== [판정 예시] ===\n" + read_(EXAMPLES)
+
+
+JUDGE_RULE = ("판정은 [판정 기준]을 따르고, 애매하면 [판정 예시]의 결을 따릅니다. 첫 질문은 '칼럼의 목적(AI 시대의 일하는 방식·조직문화·AI 트렌드)에 맞는가'입니다. "
+              "근거의 질·에너지 업종과의 관련·사례 수로는 판정을 올리거나 내리지 않습니다.")
 
 
 # ---------- 모델 부르기 (답만 받는다) ----------
@@ -259,7 +274,7 @@ def read_topic(f):
     cases = [{"key": m.group(1), "role": m.group(2), "line": m.group(3).strip()}
              for m in re.finditer(r"^- \[(.+?)\] \((.+?)\) (.*)$", sec.get("사례", ""), re.M)]
     return {"cases": cases, "page": f.relative_to(ROOT).as_posix(), "file": f, "title": unquote(meta.get("title", "")),
-            "verdict": meta.get("verdict", ""), "audience": meta.get("audience", ""), "status": meta.get("status", "쓸 수 있음"),
+            "verdict": meta.get("verdict", ""), "judged_by": meta.get("judged_by", ""), "audience": meta.get("audience", ""), "status": meta.get("status", "쓸 수 있음"),
             "used_in": used_in(f), "center": meta.get("center", ""), "timestamp": meta.get("timestamp", ""),
             "why": sec.get("왜 쓸모", ""), "thesis": sec.get("이 글이 말할 것", ""), "sources": [key(s) for s in srcs], "titles": titles}
 
@@ -286,7 +301,7 @@ type: topic
 kind: {'message' if t.get('cases') else 'case'}
 title: {t.get('title', '')}
 verdict: {t.get('verdict', '')}
-audience: {t.get('audience', '')}
+{'judged_by: ' + t['judged_by'] + chr(10) if t.get('judged_by') else ''}audience: {t.get('audience', '')}
 center: {t['center']}
 status: {t.get('status', '쓸 수 있음')}
 used_in: {used}
@@ -370,12 +385,9 @@ def filter_prompt(sel, cs, ts):
         f"[{Path(t['page']).stem}] 원문 {', '.join(t['sources'])}\n" + "\n".join(
             f"  {s}: 있었던 일 — {cs.get(s, {}).get('있었던 일', '')} / 글쓴이가 하는 말 — {cs.get(s, {}).get('글쓴이가 하는 말', '')}"
             for s in [t["center"]] + [x for x in t["sources"] if x != t["center"]]) for t in sel)
-    ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "(아직 없음)"
     return "\n\n".join([
-        f"아래 주제들은 {READER} 칼럼 후보입니다. 멘토가 쓸 만한 주제를 고를 수 있게 걸러 주세요.",
-        "기준: E&S의 개발자가 아닌 사업·지원 부서 구성원이 AI와 일하는 데 쓸모가 있는가(원문이 개인 사례여도 직원에게 통하면 됩니다) · "
-        "교육 자료에 이미 있는 말이 아닌가 · 구체적인 사례가 있는가 · 이미 쓴 글과 겹치지 않는가.\n"
-        "[판정 예시]는 멘토가 괜찮다고 한 판정과 멘토가 바꾼 판정입니다. 이 결을 따르세요.",
+        f"아래 주제들은 {READER} 칼럼 후보입니다. 쓸 만한 주제를 고를 수 있게 걸러 주세요.",
+        JUDGE_RULE + " 이미 쓴 글과 겹치는지도 봅니다.",
         "주제마다 정할 것:\n"
         "- verdict: 쓸 만함 · 보통 · 뺌 중 하나\n"
         "- line: 원문에서 있었던 일 한 줄(60자 안팎, 사실만 — 누가 무엇을 했고 무엇이 드러났는지)\n"
@@ -385,7 +397,7 @@ def filter_prompt(sel, cs, ts):
         "  — page는 주제의 [ ] 안 그대로. 모든 주제를 빠짐없이.",
         ANSWER_ONLY, GUARD,
         "=== [이미 쓴 글] ===\n" + wtxt,
-        "=== [판정 예시] ===\n" + ex,
+        judge_guide(),
         "=== [주제] ===\n" + body_,
     ])
 
@@ -410,7 +422,7 @@ def apply_filter(res, ts, cs):
     n = 0
     for t in ts:
         x = res.get(Path(t["page"]).stem)
-        if x:
+        if x and t.get("judged_by") != HUMAN:  # 사람이 정한 판정은 덮어쓰지 않는다(2026-11-02)
             t.update({"verdict": x["verdict"], "title": t["title"] if t.get("cases") else x.get("line", t["title"]),
                       "why": x.get("why", ""), "audience": x.get("audience", "")})
             write_topic(t, cs)
@@ -483,18 +495,6 @@ def ingest(paths):
     print(f"넣기 끝 · 새 카드 {len(new)} · 바뀐 주제 {len(changed)} · {time.time() - t0:.0f}s · 남은 원문 {len(backlog())}편")
 
 
-def refilter():
-    run = RUNS / ("refilter-" + time.strftime("%Y%m%d-%H%M%S"))
-    t0 = time.time()
-    cs, ts = cards(), topics()
-    res = run_filter(ts, cs, ts, run)
-    apply_filter(res, ts, cs)
-    write_index(topics())
-    log([f"- 다시 거르기 {len(res)}/{len(ts)} · {time.time() - t0:.0f}s"])
-    commit(f"주제 지도 다시 거르기 ({time.time() - t0:.0f}s)")
-    print(f"다시 거르기 {len(res)}/{len(ts)} · {time.time() - t0:.0f}s")
-
-
 # ---------- 주제 묶기 — 메시지 단위 (2026-10-21) ----------
 # 카드 비교 시험에서 정한 방식: 주제 = 우리 독자에게 할 핵심 메시지 한 문장 + 받치는 사례 1~3개(가능하면 다른 발행처).
 # 지난 묶기 이후 새 카드만 보내고(재료 없음 제외, 상한 BUNDLE_LIMIT), 기존 주제를 함께 보여 줘 맞는 사례는 그 주제에 붙인다.
@@ -541,7 +541,6 @@ def bundle_pool():
 def bundle_prompt(new, cs, ts):
     have = "\n".join(f"[{Path(t['page']).stem}] {t['title']} — 사례: {', '.join(t['sources'])}" for t in ts if t["status"] == "쓸 수 있음") or "(아직 없음)"
     cards_txt = "\n\n".join(f"[{k}] 발행처: {site_name(k)}\n글쓴이가 하는 말: {cs[k]['글쓴이가 하는 말']}\n있었던 일: {cs[k]['있었던 일']}" for k in new)
-    ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "(아직 없음)"
     return "\n\n".join([
         f"아래는 {READER} 칼럼 재료로 새로 들어온 원문 카드들입니다. 칼럼을 쓸 사람이 고를 '주제' 목록을 만들어 주세요.",
         TOPIC_RULE,
@@ -550,14 +549,15 @@ def bundle_prompt(new, cs, ts):
         "2. 나머지 새 카드 중 같은 메시지를 받쳐 주는 것끼리 새 주제로 묶습니다(topics). 원문 글쓴이의 주장이 똑같을 필요는 없고, 우리 독자에게 같은 메시지를 보여 주면 됩니다.\n"
         "3. 새 주제마다 사례 1~3개. 가능하면 서로 다른 발행처에서. 첫 번째가 중심 사례. 메시지에 반대되거나 조건을 다는 사례는 role을 '반례'로, 나머지는 '중심'·'받침'.\n"
         "4. 사례마다 line: 그 카드의 있었던 일 한 줄(누가 무엇을 했고 무엇이 드러났는지, 이름·숫자 그대로, 60자 안팎).\n"
-        "5. 새 주제마다 판정: [판정 예시]의 결을 따라 쓸 만함 · 보통 · 뺌. why 한 줄, audience(전 직원이 읽을 글이면 '전 직원' 하나만 — 전 직원은 모든 계층을 포함. 특정 계층에 맞는 글일 때만 임원급·팀장급·시니어급·주니어급 중 한두 개를 '·'로 — 넷 모두라면 '전 직원').\n"
+        "5. 새 주제마다 판정: 쓸 만함 · 보통 · 뺌 — [판정 기준]을 따르고 애매하면 [판정 예시]의 결을 따릅니다. 첫 질문은 칼럼의 목적(AI 시대의 일하는 방식·조직문화·AI 트렌드)에 맞는가이고, "
+        "근거의 질·에너지 업종과의 관련·사례 수로는 판정을 올리거나 내리지 않습니다. why 한 줄(기준의 어느 줄에 해당하는지), audience(전 직원이 읽을 글이면 '전 직원' 하나만 — 전 직원은 모든 계층을 포함. 특정 계층에 맞는 글일 때만 임원급·팀장급·시니어급·주니어급 중 한두 개를 '·'로 — 넷 모두라면 '전 직원').\n"
         "6. 어느 주제에도 쓸 수 없는 카드(우리 독자와 무관하거나 재료가 없는 것)는 excluded에 이유와 함께. 새 카드는 모두 join·topics·excluded 중 한 곳에 한 번만 들어갑니다.",
         "출력: JSON 하나만.\n"
         '{"join": [{"topic": "<기존 주제의 [ ] 안>", "cases": [{"key": "...", "role": "받침", "line": "..."}]}], '
         '"topics": [{"주제": "...", "cases": [{"key": "hbr-korea/0001", "role": "중심", "line": "..."}], "verdict": "쓸 만함", "why": "...", "audience": "전 직원"}], '
         '"excluded": [{"key": "...", "reason": "..."}]}  — key는 카드의 [ ] 안 그대로.',
         ANSWER_ONLY, GUARD,
-        "=== [판정 예시] ===\n" + ex,
+        judge_guide(),
         "=== [기존 주제] ===\n" + have,
         "=== [새 카드] ===\n" + cards_txt,
     ])
@@ -607,43 +607,82 @@ def bundle_llm(api, d, prompt):
     return {"api": claude_key, "claude": claude_login}.get(who, astra)(d, prompt)
 
 
-def judge_missing(api=False, run=None):
-    """판정 채우기(2026-10-22) — 묶기 출력에 판정이 빠진 메시지 주제(verdict 빈 칸)만 골라 판정·이유·대상 독자를 채운다.
-    판정 예시(멘토가 바꾼 판정 포함)를 같이 보낸다. 멘토가 고친 판정이 아니므로 판정 예시에는 쌓지 않는다."""
-    todo = [t for t in topics() if t["status"] == "쓸 수 있음" and t.get("cases") and t["verdict"] not in VERDICTS]
-    if not todo:
-        return 0
+def judge(todo, api=False, run=None):
+    """메시지 주제들을 판정 기준·예시로 판정한다 → {주제 페이지 이름: {verdict, why, audience}}. 파일은 쓰지 않는다.
+    판정 채우기·다시 판정·판정 검증이 같이 쓴다(2026-11-02)."""
     cs = all_cards()
-    ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "(아직 없음)"
     blocks = "\n\n".join(
         f"[{Path(t['page']).stem}] 주제: {t['thesis'] or t['title']}\n"
         + "\n".join(f"- ({c.get('role') or '받침'}) {site_name(c['key'])} — 글쓴이가 하는 말: {cs.get(c['key'], {}).get('글쓴이가 하는 말', '')} / 있었던 일: {cs.get(c['key'], {}).get('있었던 일', '')}"
                     for c in t["cases"])
         for t in todo)
     prompt = "\n\n".join([
-        f"아래는 {READER} 칼럼의 주제 후보입니다. 주제마다 [판정 예시]의 결을 따라 판정해 주세요.",
-        "주제 = 우리 독자에게 할 핵심 메시지 한 문장 + 받치는 사례. 판정은 쓸 만함 · 보통 · 뺌 중 하나. "
-        "why는 왜 그렇게 판정했는지 한 줄(사례 속 일로), audience는 전 직원이 읽을 글이면 '전 직원' 하나만(전 직원은 모든 계층을 포함), 특정 계층에 맞는 글일 때만 임원급·팀장급·시니어급·주니어급 중 한두 개('·'로, 넷 모두라면 '전 직원').",
-        '출력: JSON 하나만. {"verdicts": [{"topic": "<[ ] 안 그대로>", "verdict": "보통", "why": "...", "audience": "전 직원"}]}',
+        f"아래는 {READER} 칼럼의 주제 후보입니다. 주제마다 판정해 주세요.",
+        "주제 = 우리 독자에게 할 핵심 메시지 한 문장 + 받치는 사례. 판정은 쓸 만함 · 보통 · 뺌 중 하나. " + JUDGE_RULE + " "
+        "why는 왜 그렇게 판정했는지 한 줄(기준의 어느 줄에 해당하는지), audience는 전 직원이 읽을 글이면 '전 직원' 하나만(전 직원은 모든 계층을 포함), 특정 계층에 맞는 글일 때만 임원급·팀장급·시니어급·주니어급 중 한두 개('·'로, 넷 모두라면 '전 직원').",
+        '출력: JSON 하나만. {"verdicts": [{"topic": "<[ ] 안 그대로>", "verdict": "보통", "why": "...", "audience": "전 직원"}]} — 모든 주제를 빠짐없이.',
         ANSWER_ONLY, GUARD,
-        "=== [판정 예시] ===\n" + ex,
+        judge_guide(),
         "=== [판정할 주제] ===\n" + blocks,
     ])
     d = run or RUNS / ("judge-" + time.strftime("%Y%m%d-%H%M%S"))
     raw = bundle_llm(api, d, prompt)
     m = re.search(r"\{.*\}", raw or "", re.S)
     got = {x.get("topic"): x for x in (json.loads(m.group(0)).get("verdicts", []) if m else [])}
+    return {k: x for k, x in got.items() if x.get("verdict") in VERDICTS}
+
+
+def judge_write(todo, got, label):
+    cs = all_cards()
     done = 0
     for t in todo:
         x = got.get(Path(t["page"]).stem)
-        if not x or x.get("verdict") not in VERDICTS:
+        if not x:
             continue
         t.update({"verdict": x["verdict"], "why": x.get("why", ""), "audience": x.get("audience", "")})
         write_topic(t, cs)
         done += 1
-        print(f"판정 채움 {x['verdict']:4} {t['title'][:60]}", flush=True)
-    log([f"- 판정 채움 {done}/{len(todo)} (묶기 출력에 판정이 빠진 주제)"])
+        print(f"{label} {x['verdict']:4} {t['title'][:60]}", flush=True)
+    log([f"- {label} {done}/{len(todo)}"])
     return done
+
+
+def judge_missing(api=False, run=None):
+    """판정 채우기(2026-10-22) — 묶기 출력에 판정이 빠진 메시지 주제(verdict 빈 칸)만 골라 판정·이유·대상 독자를 채운다."""
+    todo = [t for t in topics() if t["status"] == "쓸 수 있음" and t.get("cases") and t["verdict"] not in VERDICTS]
+    return judge_write(todo, judge(todo, api, run), "판정 채움") if todo else 0
+
+
+def rejudge(api=False):
+    """다시 판정(2026-11-02) — 판정 기준을 바꾼 뒤 기존 주제에 적용한다. 사람이 정한 판정(judged_by: 사람)은 그대로 둔다.
+    작업실 '다시 거르기' 버튼이 이것을 부른다(그전 --refilter는 사람 판정까지 덮어썼다)."""
+    t0 = time.time()
+    todo = [t for t in topics() if t["status"] == "쓸 수 있음" and t.get("cases") and t.get("judged_by") != HUMAN]
+    print(f"다시 판정할 주제 {len(todo)}개(사람이 정한 판정은 그대로)", flush=True)
+    n = judge_write(todo, judge(todo, api, RUNS / ("rejudge-" + time.strftime("%Y%m%d-%H%M%S"))), "다시 판정") if todo else 0
+    write_index(topics())
+    commit(f"주제 지도: 판정 기준으로 다시 판정 {n}/{len(todo)} ({time.time() - t0:.0f}s)")
+    print(f"다시 판정 {n}/{len(todo)} · {time.time() - t0:.0f}s")
+
+
+def judge_test(api=False):
+    """판정 검증(2026-11-02) — 사람이 정한 판정을 가린 채 모델이 기준대로 판정해 얼마나 맞는지 잰다. 파일은 쓰지 않는다.
+    판정 예시에 나온 주제는 답을 보고 푸는 셈이라 뺀다. 결과는 runs/wiki/judge-test-<시각>/result.json."""
+    ex = set(re.findall(r"^- \[([^\]]+)\]", EXAMPLES.read_text(encoding="utf-8"), re.M)) if EXAMPLES.exists() else set()
+    todo = [t for t in topics() if t.get("cases") and t.get("judged_by") == HUMAN and Path(t["page"]).stem not in ex]
+    d = RUNS / ("judge-test-" + time.strftime("%Y%m%d-%H%M%S"))
+    got = judge(todo, api, d)
+    rows = [{"page": Path(t["page"]).stem, "human": t["verdict"], "model": got.get(Path(t["page"]).stem, {}).get("verdict", ""),
+             "why": got.get(Path(t["page"]).stem, {}).get("why", ""), "title": t["title"]} for t in todo]
+    ok = [r for r in rows if r["model"]]
+    same = sum(r["human"] == r["model"] for r in ok)
+    pairs = {}
+    for r in ok:
+        pairs[f"{r['human']} → {r['model']}"] = pairs.get(f"{r['human']} → {r['model']}", 0) + 1
+    (d / "result.json").write_text(json.dumps({"same": same, "judged": len(ok), "asked": len(rows), "pairs": pairs, "rows": rows},
+                                              ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"판정 검증: {len(ok)}/{len(rows)}개 판정 · 사람과 같음 {same} ({same / max(len(ok), 1):.0%}) · 사람 → 모델 {pairs}")
+    print(d / "result.json")
 
 
 def bundle(api=False):
@@ -818,21 +857,24 @@ def claim(page_rel):
 
 
 def set_verdict(page_rel, verdict):
-    """멘토가 판정을 바꾼다 — 페이지에 적고 판정 예시에 쌓아 다음 거르기가 따르게 한다."""
+    """작업실에서 판정을 바꾼다 — 페이지에 적고(사람이 정한 판정으로 표시해 다시 판정이 덮어쓰지 않게) 판정 예시에 쌓아 다음 판정이 따르게 한다."""
     if verdict not in VERDICTS:
         sys.exit("잘못된 판정: " + verdict)
     page = page_of(page_rel)
     t = read_topic(page)
     if t["verdict"] == verdict:
+        if t.get("judged_by") != HUMAN:  # 같은 판정을 다시 누르면 '사람이 확인함'으로만
+            set_front(page, judged_by=HUMAN)
         return
-    set_front(page, verdict=verdict)
+    set_front(page, verdict=verdict, judged_by=HUMAN)
     ex = EXAMPLES.read_text(encoding="utf-8") if EXAMPLES.exists() else "# 판정 예시\n"
-    if "## 멘토가 바꾼 판정" not in ex:
-        ex = ex.rstrip() + "\n\n## 멘토가 바꾼 판정\n"
-    ex = ex.rstrip() + f"\n- {date.today().isoformat()} [{', '.join(t['sources'])}] {t['title']} — {t['verdict'] or '판정 전'} → **{verdict}** (멘토)\n"
+    if "## 작업실에서 바꾼 판정" not in ex:
+        ex = ex.rstrip() + "\n\n## 작업실에서 바꾼 판정\n"
+    # [ ] 안은 주제 페이지 이름 — 판정 검증(judge_test)이 예시에 나온 주제를 빼고 잰다
+    ex = ex.rstrip() + f"\n- [{Path(t['page']).stem}] {t['title']} — {t['verdict'] or '판정 전'} → **{verdict}** ({date.today().isoformat()})\n"
     EXAMPLES.write_text(ex, encoding="utf-8")
     write_index(topics())
-    log([f"- 판정 {Path(t['page']).name} {t['verdict'] or '판정 전'} → {verdict} (멘토)"])
+    log([f"- 판정 {Path(t['page']).name} {t['verdict'] or '판정 전'} → {verdict} (작업실)"])
     commit(f"주제 지도: 판정 바꿈 {Path(t['page']).stem} → {verdict}")
 
 
@@ -858,8 +900,10 @@ if __name__ == "__main__":
         bundle(api="api" if "--api" in a else "claude" if "--claude" in a else False)  # 기본 astra
     elif a[:1] == ["--import-cards"]:
         import_cards(a[1])
-    elif a[:1] == ["--refilter"]:
-        refilter()
+    elif a[:1] == ["--refilter"]:  # 작업실 '다시 거르기' — 2026-11-02부터 판정 기준으로 다시 판정(사람 판정은 그대로)
+        rejudge(api="api" if "--api" in a else "claude" if "--claude" in a else False)
+    elif a[:1] == ["--judge-test"]:
+        judge_test(api="api" if "--api" in a else "claude" if "--claude" in a else False)
     elif a[:1] == ["--claim"]:
         print(claim(a[1]))
     elif a[:1] == ["--verdict"]:

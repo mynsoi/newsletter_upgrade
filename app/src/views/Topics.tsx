@@ -129,12 +129,20 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
                 ["발행처", `${pubs(t)}곳`],
                 ["사례", `${t.sources.length}편`],
                 ["최근 발행", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
-              ].map(([k, v]) => (
-                <span key={k} className="flex min-w-[3.25rem] flex-col items-center gap-0.5 px-2.5 py-1 leading-tight">
-                  <span className="text-[10px] text-ink-3">{k}</span>
-                  <span className="text-[13px] font-semibold tabular-nums text-ink">{v}</span>
-                </span>
-              ))}
+              ].map(([k, v]) => {
+                // 사례 1편 — 판정은 그대로 두고 표시만(2026-11-02 사용자 결정). 글을 쓸 때 받침 원문을 넣도록
+                const thin = k === "사례" && t.sources.length === 1;
+                return (
+                  <span
+                    key={k}
+                    title={thin ? "사례가 1편 — 글을 쓸 때 추천 원문에서 받침 원문을 넣으세요" : undefined}
+                    className={cn("flex min-w-[3.25rem] flex-col items-center gap-0.5 px-2.5 py-1 leading-tight", thin && "bg-amber-500/20")}
+                  >
+                    <span className={cn("text-[10px]", thin ? "text-amber-700 dark:text-amber-200" : "text-ink-3")}>{thin ? "사례 보강" : k}</span>
+                    <span className={cn("text-[13px] font-semibold tabular-nums", thin ? "text-amber-800 dark:text-amber-100" : "text-ink")}>{v}</span>
+                  </span>
+                );
+              })}
             </span>
             {fresh > 0 && <Chip className="border-violet-400/50 bg-violet-500/20 text-violet-800 dark:text-violet-100">new {fresh}</Chip>}
             {t.status !== "쓸 수 있음" && <Chip className="bg-page/70 text-ink">{t.status}</Chip>}
@@ -333,7 +341,7 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
           <Working
             job={(ingesting || filtering)!}
             title={ingesting ? "주제 넣기" : "다시 거르기"}
-            status={ingesting ? `카드 → 묶기 → 거르기 → 제목 후보 · 남은 ${backlog}편` : "Claude가 판정 예시를 보고 다시 거르는 중"}
+            status={ingesting ? `카드 → 묶기 → 거르기 → 제목 후보 · 남은 ${backlog}편` : "판정 기준으로 다시 판정하는 중 · 사람이 정한 판정은 그대로"}
           />
         )}
         <ExpandableCards items={items} />

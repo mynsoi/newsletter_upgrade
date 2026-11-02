@@ -8,6 +8,7 @@ center: aihr-blog/0003
 status: 쓸 수 있음
 used_in: []
 timestamp: 2026-10-23
+judged_by: 사람
 ---
 
 # 교육의 효과는 수료한 내용보다 현업에서 달라진 질문과 행동에 드러난다.

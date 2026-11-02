@@ -2,18 +2,19 @@
 type: topic
 kind: message
 title: AI의 사용량이 늘어나는 것과 AI가 회사에 남기는 가치가 늘어나는 것은 별개의 일이다.
-verdict: 보통
+verdict: 쓸 만함
 audience: 팀장급
 center: mckinsey-insights/0030
 status: 쓸 수 있음
 used_in: []
 timestamp: 2026-10-23
+judged_by: 사람
 ---
 
 # AI의 사용량이 늘어나는 것과 AI가 회사에 남기는 가치가 늘어나는 것은 별개의 일이다.
 
 ## 왜 쓸모
-조직의 도입·예산 판단에는 유용하지만 일반 직원이 사용량 과금을 직접 관리하는 경우는 적다.
+사람 판정(2026-11-02): 쓸 만함 — 직원 일에 바로 닿음
 
 ## 이 글이 말할 것
 AI의 사용량이 늘어나는 것과 AI가 회사에 남기는 가치가 늘어나는 것은 별개의 일이다.
