@@ -263,6 +263,9 @@ function Timeline({
   if (a && a.kind === "process" && a.title) out.push(<Me key="title">{a.title}</Me>);
 
   // 3. 과정 — 과정 4부터 앞에 멘토 피드백(받은 그대로)
+  //    확정 뒤 다시 고치는 중(확정한 과정 뒤에 과정이 더 있음, 2026-11-03 사용자: 그림·규칙 후보가 계속 떠서 불편) —
+  //    그때 정한 그림·규칙 후보는 확정한 과정 바로 뒤에 접어 두고, 아래는 피드백 → 새 과정 → 바꿔 확정만
+  const reedit = !!a?.confirmed?.step && a.confirmed.step < a.steps.length;
   a?.steps.forEach((s, i) => {
     if (s.n >= 4 && s.feedback && !s.mode && (s.by === "Claude" || s.by === "astra")) out.push(<Me key={`f${s.n}`}>{s.feedback}</Me>);
     out.push(
@@ -270,13 +273,34 @@ function Timeline({
         <StepCard s={s} active={(sel ?? a.steps.length) === s.n} onOpen={() => setSel(s.n)} last={i === a.steps.length - 1} />
       </Ai>
     );
+    if (reedit && a.kind === "brief" && s.n === a.confirmed!.step) {
+      const rc = a.ruleCands?.items ?? [];
+      const put = rc.filter((x) => x.state?.d === "넣기").length;
+      const open = rc.filter((x) => !x.state && x.kind === "새 규칙").length;
+      out.push(
+        <Ai key="was" label={<>과정 {s.n} 확정 때 정한 것</>}>
+          <div className="grid gap-2">
+            <Folded summary={<>그림 · 머리 그림 {a.hero || a.confirmed?.hero ? "1장" : "없음"} · 본문 그림 {a.inlinePicked.length}장</>}>
+              <ImagesCard a={a} state={state} refresh={refresh} />
+            </Folded>
+            {rc.length > 0 && (
+              <Folded summary={<>규칙 후보 {rc.length}개 · 넣음 {put}{open > 0 && ` · 정하지 않은 새 규칙 ${open}`}</>}>
+                <RuleCandsCard a={a} refresh={refresh} />
+              </Folded>
+            )}
+          </div>
+        </Ai>
+      );
+    }
   });
 
   // 4. 원고 → 그림 → 확정 — 과정 3 뒤, 한 단계씩(2026-10-22: 그림·확정·피드백이 한꺼번에 떠서 다음에 할 일이 안 보였다).
   //    확정할 때 고른 그림까지 원고 파일에 굳히므로 그림이 확정보다 먼저. 원고를 정한 뒤 과정이 늘거나 줄면(피드백·편집·절반·다시 쓰기) 원고 단계로 돌아간다.
   const tp = a?.textPick && a.textPick.of === a.steps.length && a.textPick.n <= a.steps.length ? a.textPick.n : 0;
   if (a && a.kind === "brief" && a.steps.length >= 3 && !(job && ["write", "revise", "shorten"].includes(job.kind))) {
-    if (a.confirmed) {
+    if (a.confirmed && reedit) {
+      out.push(<Ai key="confirm" label="바꿔 확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
+    } else if (a.confirmed) {
       out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
       out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
       if (a.ruleCands?.items.length && job?.kind !== "rules")
@@ -663,7 +687,8 @@ function StageNav({ back, onBack, next, onNext, disabled }: { back: string; onBa
 /** 확정 — 확정할 과정을 고른다(멘토 2026-10-11: "과정은 내가 원하는 과정을 선택할수있도록도 해줘야할듯. 확정이 강요됨").
  *  과정 칩을 누르면 오른쪽 '지금 글'에 그 과정이 뜨고, 확정은 원할 때만. 확정한 뒤에도 다른 과정으로 바꿀 수 있다. */
 function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; setSel: (n: number | null) => void; refresh: () => void }) {
-  const n = sel ?? a.confirmed?.step ?? a.steps.length;
+  const reedit = !!a.confirmed?.step && a.confirmed.step < a.steps.length; // 확정 뒤 다시 고치는 중이면 새 과정이 기본
+  const n = sel ?? (reedit ? a.steps.length : a.confirmed?.step ?? a.steps.length);
   const same = a.confirmed?.step === n;
   return (
     <div className={cn("rounded-2xl border px-5 py-4", a.confirmed ? "border-emerald-400/40 bg-emerald-500/[0.06]" : "border-line bg-panel-solid")}>
@@ -693,6 +718,23 @@ function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; se
           {!same && <IconArrowRight className="size-4" />}
         </button>
       </div>
+      {reedit && !same && (
+        <p className="mt-2 text-xs text-ink-3">그림은 지난번에 고른 그대로 들어갑니다 — 바꾸려면 위 '과정 {a.confirmed!.step} 확정 때 정한 것'에서 그림을 펼치세요. 바꿔 확정하면 새 피드백의 규칙 후보가 이 아래에 나옵니다.</p>
+      )}
+    </div>
+  );
+}
+
+/** 접힌 한 줄 — 누르면 펼친다(확정 뒤 다시 고칠 때 지난 그림·규칙 후보) */
+function Folded({ summary, children }: { summary: React.ReactNode; children: React.ReactNode }) {
+  const [on, setOn] = useState(false);
+  return (
+    <div className={cn("rounded-2xl border border-line", on ? "bg-transparent" : "bg-panel-solid")}>
+      <button onClick={() => setOn(!on)} className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-ink-2 hover:text-ink">
+        <IconChevronDown className={cn("size-4 shrink-0 transition", !on && "-rotate-90")} />
+        <span className="min-w-0 truncate">{summary}</span>
+      </button>
+      {on && <div className="px-2 pb-2">{children}</div>}
     </div>
   );
 }
