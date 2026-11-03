@@ -6,8 +6,8 @@ verdict: 쓸 만함
 judged_by: 사람
 audience: 팀장급
 center: mit-tech-review/0006
-status: 쓸 수 있음
-used_in: []
+status: 진행 중
+used_in: [briefs/m-20261103-155909.json]
 timestamp: 2026-11-02
 ---
 
