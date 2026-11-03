@@ -5,8 +5,8 @@ title: 모두가 혼자 AI를 잘 써도 함께 논의하고 결정하는 방식
 verdict: 쓸 만함
 audience: 전 직원
 center: hbr-korea/0041
-status: 진행 중
-used_in: [briefs/m-20261103-174556.json]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-23
 judged_by: 사람
 ---
