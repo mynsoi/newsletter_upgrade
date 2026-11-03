@@ -408,5 +408,5 @@ body {
   .notice p { font-size: min(14px, 2.22cqw); letter-spacing: -0.01em; white-space: nowrap; }
 }
 .email-capture .notice { margin-top: 87px; padding: 22px 24px 22px 32px; }  /* 왼쪽 여백이 좁아 보여 왼쪽을 더(2026-10-29) */
-.email-capture .notice p { font-size: 14.5px; line-height: 1.76; white-space: nowrap; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게 */
+.email-capture .notice p { font-size: 14.5px; line-height: 1.76; white-space: nowrap; letter-spacing: -0.02em; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게. 자간 -0.02em(2026-11-03 첫 줄이 오른쪽 여백을 5px 먹어서) */
 .email-capture .notice .notice-note { font-size: 13px; margin-top: 13px; }  /* 줄간격은 2026-10-29 1.1배로(웹 1.75 → 1.925, 메일 1.6 → 1.76) */
