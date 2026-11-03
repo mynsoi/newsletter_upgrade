@@ -26,7 +26,29 @@
   "n": 4,
   "of": 4
  },
- "images_done": false,
+ "images_done": true,
  "title": "AI를 써 보라면서 기존 마감은 그대로인가요?",
- "hero": "runs/images/m-20261103-163559/20261103-164348/01.png"
+ "hero": "runs/images/m-20261103-163559/20261103-164348/01.png",
+ "inline": [
+  {
+   "src": "runs/images/m-20261103-163559/inline-20261103-173545/01.png",
+   "after": 2,
+   "anchor": "그렇지 않습니다. 원래 방식으로 자료를 끝내고 마지막에 AI로 문장만 다",
+   "name": "기존 업무 위에 얹힌 AI"
+  },
+  {
+   "src": "runs/images/m-20261103-163559/inline-20261103-173545/02.png",
+   "after": 9,
+   "anchor": "이번 주 1 on 1(정기 일대일 면담)에서 물어보세요. “지금 하는 일",
+   "name": "시도할 시간을 실제로 비워 주기"
+  }
+ ],
+ "confirmed": {
+  "date": "2026-11-03",
+  "step": 4,
+  "file": "columns/2026-11-03-m-20261103-163559.md",
+  "inline": 2,
+  "internal": true,
+  "hero": "columns/img/2026-11-03-m-20261103-163559.png"
+ }
 }
