@@ -9,7 +9,7 @@ import { ByChip, Chip, ClaudeMark, SiteIcon, SourceDrawer } from "@/components/s
 import { Director, InlineImgs, Prose } from "@/views/parts";
 import { DeleteButton, StageChip } from "@/views/Articles";
 import { OptionsCard, PicksCard, useAttach } from "@/views/MineChat";
-import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type State, type Step } from "@/lib/api";
+import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type RuleCand, type State, type Step } from "@/lib/api";
 import { paragraphs } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
@@ -757,6 +757,7 @@ function RuleCandsCard({ a, refresh }: { a: A; refresh: () => void }) {
                 </p>
               )}
               {it.why && <p className="text-xs text-ink-3">{it.why}</p>}
+              {!!it.shown?.length && <RuleEvidence shown={it.shown} quote={mine} open={mine && !it.state} />}
               {!it.state && (
                 <div className="mt-1 flex flex-wrap items-center gap-1.5">
                   {editing ? (
@@ -784,6 +785,53 @@ function RuleCandsCard({ a, refresh }: { a: A; refresh: () => void }) {
         })}
       </div>
       {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
+    </div>
+  );
+}
+
+
+/** 규칙 후보의 근거 — 받은 피드백과 그 피드백으로 글에서 실제 바뀐 문장(전 → 후). 새 규칙은 펼쳐서, 나머지는 접어서 */
+function RuleEvidence({ shown, quote, open }: { shown: NonNullable<RuleCand["shown"]>; quote: boolean; open: boolean }) {
+  const [on, setOn] = useState(open);
+  const [all, setAll] = useState(false);
+  const total = shown.reduce((s, x) => s + x.changes.length, 0);
+  const MAX = 3;
+  let left = all ? Infinity : MAX;
+  return (
+    <div className="mt-1">
+      <button onClick={() => setOn(!on)} className="flex items-center gap-1 text-xs text-ink-3 hover:text-ink">
+        <IconChevronDown className={cn("size-3.5 transition", !on && "-rotate-90")} />
+        글에서 바뀐 곳 {total}곳
+      </button>
+      {on && (
+        <div className="mt-2 grid gap-3">
+          {shown.map((x) => {
+            const ch = x.changes.slice(0, Math.max(left, 0));
+            left -= ch.length;
+            return (
+              <div key={x.n} className="grid gap-1.5">
+                {quote && (
+                  <p className="whitespace-pre-line border-l-2 border-line pl-3 text-[13px] leading-relaxed text-ink-2">
+                    <span className="text-ink-3">과정 {x.n + 3} 피드백 · </span>{x.feedback}
+                  </p>
+                )}
+                {ch.map(([b, f], j) => (
+                  <div key={j} className="grid gap-1 rounded-lg bg-black/[0.03] px-3 py-2 text-[13px] leading-relaxed dark:bg-white/[0.04]">
+                    {b && <p className="text-ink-3"><span className="mr-1.5 text-red-400">전</span><span className="line-through decoration-red-400/40">{b}</span></p>}
+                    {f && <p className="text-ink"><span className="mr-1.5 text-emerald-500">후</span>{f}</p>}
+                  </div>
+                ))}
+                {!x.changes.length && <p className="text-xs text-ink-3">과정 {x.n + 3}에서 바뀐 문장을 찾지 못했습니다.</p>}
+              </div>
+            );
+          })}
+          {total > MAX && (
+            <button onClick={() => setAll(!all)} className="justify-self-start text-xs text-ink-3 hover:text-ink">
+              {all ? "접기" : `바뀐 곳 ${total - MAX}곳 더 보기`}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

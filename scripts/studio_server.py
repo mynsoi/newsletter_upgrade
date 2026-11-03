@@ -263,7 +263,7 @@ def article_from_brief(bp):
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
             "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime,
             "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done")),
-            "ruleCands": json.loads(read(d / "rule-cands.json") or "null"), "ruleCount": rule_count()}
+            "ruleCands": rule_cands_view(d), "ruleCount": rule_count()}
 
 
 def article_from_process(pp):
@@ -1135,6 +1135,18 @@ def rule_cands_start(k):
     old = json.loads(read(d / "rule-cands.json") or "null")
     if fbs and (not old or old.get("of") != fbs):
         start("rules", k, PIPE + ["--rule-cands", brief_path(k).relative_to(ROOT).as_posix()])
+
+
+def rule_cands_view(d):
+    """규칙 후보 + 후보마다 그 피드백으로 실제 바뀐 문장(2026-11-03 사용자: 규칙만 보면 판단이 어렵다 — 글에서 어디가 고쳐졌는지 같이)."""
+    rc = json.loads(read(d / "rule-cands.json") or "null")
+    if not rc or not rc.get("items"):
+        return rc
+    import column_pipeline as CP
+    fbs = {x["n"]: x for x in CP.feedbacks(d)}
+    for it in rc["items"]:
+        it["shown"] = [{"n": n, "feedback": fbs[n]["feedback"], "changes": fbs[n]["changes"]} for n in it.get("fb", []) if n in fbs]
+    return rc
 
 
 def rule_count():

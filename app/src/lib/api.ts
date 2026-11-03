@@ -45,6 +45,8 @@ export type RuleCand = {
   why: string;
   feedback: string[];
   state: { d: "넣기" | "안 넣기"; text: string; by: string; at: string } | null;
+  /** 그 피드백과 그때 실제 바뀐 문장 [전, 후] — 서버가 붙인다 */
+  shown?: { n: number; feedback: string; changes: [string, string][] }[];
 };
 
 export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };
