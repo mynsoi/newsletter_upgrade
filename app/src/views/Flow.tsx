@@ -719,7 +719,7 @@ function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; se
         </button>
       </div>
       {reedit && !same && (
-        <p className="mt-2 text-xs text-ink-3">그림은 지난번에 고른 그대로 들어갑니다 — 바꾸려면 위 '과정 {a.confirmed!.step} 확정 때 정한 것'에서 그림을 펼치세요. 바꿔 확정하면 새 피드백의 규칙 후보가 이 아래에 나옵니다.</p>
+        <p className="mt-2 text-xs text-ink-3">그림은 지난번에 고른 그대로 들어갑니다 — 본문 그림 자리는 오른쪽 글에서 ↑↓로 옮기고, 그림을 바꾸려면 위 '과정 {a.confirmed!.step} 확정 때 정한 것'에서 펼치세요. 바꿔 확정하면 새 피드백의 규칙 후보가 이 아래에 나옵니다.</p>
       )}
     </div>
   );
@@ -948,7 +948,7 @@ function Now({
   const writing = !!job && ["write", "revise", "shorten"].includes(job.kind);
   const hero = a?.hero || a?.confirmed?.hero || "";
   const v = view === "비교" && !prev ? "본문" : view;
-  const movable = !!a && !a.confirmed && !writing; // 고른 본문 그림 자리 옮기기 — 확정 전에만
+  const movable = !!a && !writing; // 고른 본문 그림 자리 옮기기 — 확정한 글도(확정한 과정이 마지막이면 확정본이 바로 바뀌고, 아니면 바꿔 확정할 때)
   const save = async () => {
     if (!a || !s || edit === null || saving) return;
     setSaving(true);

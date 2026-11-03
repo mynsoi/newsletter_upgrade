@@ -901,8 +901,8 @@ def act_inline_move(a):
     if after < 1:
         raise ValueError("잘못된 문단 번호")
     art = next(x for x in articles() if x["id"] == k)
-    if art.get("confirmed"):
-        raise ValueError("확정한 글은 그림 자리를 바꿀 수 없음")
+    if busy(k, ("write", "revise", "shorten")):
+        raise ValueError("이 글에서 쓰기가 도는 중")
     picked = [dict(x) for x in art["inlinePicked"]]
     it = next((x for x in picked if x["src"] == src), None)
     if not it:
@@ -910,6 +910,10 @@ def act_inline_move(a):
     it["after"], it["anchor"] = after, anchor
     picked.sort(key=lambda x: x["after"])
     meta_update(k, inline=picked)
+    # 확정한 글도 옮긴다(2026-11-03 사용자) — 확정한 과정이 마지막이면 확정본을 바로 다시 만들고, 확정 뒤 새 과정이 있으면 바꿔 확정할 때 들어간다
+    conf = (art.get("confirmed") or {}).get("step")
+    if conf and conf == len(art["steps"]):
+        act_confirm({"article": k, "step": conf})
     return {"inline": picked}
 
 
