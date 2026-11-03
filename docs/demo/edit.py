@@ -21,14 +21,16 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
-REC = ROOT / "_workspace" / "demo"
-OUTDIR = REC / "edit"
-NARR = json.loads((Path(__file__).parent / "narration.json").read_text(encoding="utf-8"))
+args = sys.argv[1:]
+R2 = "--r2" in args  # 2차 심사판(11/3) — record.py --r2가 찍은 _workspace/demo/r2, narration-r2.json, 아래 'if R2:' 구성
+REC = ROOT / "_workspace" / "demo" / ("r2" if R2 else "")
+OUTDIR = ROOT / "_workspace" / "demo" / "edit"
+NARR = json.loads((Path(__file__).parent / ("narration-r2.json" if R2 else "narration.json")).read_text(encoding="utf-8"))
 W, H, FPS = 1920, 1080, 30
 CPS = 5.5  # 내레이션 빠르기 — 공백 뺀 글자/초
-args = sys.argv[1:]
 ONLY = {int(x) for x in args[args.index("--only") + 1].split(",")} if "--only" in args else None
-NAME = args[args.index("--out") + 1] if "--out" in args else "rough-v1"
+NAME = args[args.index("--out") + 1] if "--out" in args else ("r2-v1" if R2 else "rough-v1")
+SUBS = R2 and "--no-subs" not in args  # 2차는 자막을 화면에 입힌다(--no-subs면 .srt만)
 AUDIO = Path(args[args.index("--audio") + 1]) if "--audio" in args else None  # 타입캐스트 음성 폴더 — 챕터마다 <n>.mp3 또는 문장마다 <n>-<k>.mp3
 
 PRET = ROOT / "app" / "node_modules" / "pretendard" / "dist" / "public" / "static"  # 작업실 화면과 같은 Pretendard(10/26 사용자)
@@ -112,6 +114,57 @@ ANCHORS = {
     8: [("c8", "메뉴 발행", 0), ("c8mail", "메일 미리보기", 0), ("c8web", "아카이브의 발행된 칼럼", 0)],
     9: [("ending", None, 1.0)],
 }
+
+if R2:  # 2차 심사판 — 둘러보기 → 글쓰기 A(추천 주제)·B(직접 입력) → 피드백이 규칙이 된다 → 발행(미리보기·.eml)
+    CHAPTERS = [
+        {"n": 1, "title": "한눈에 보기", "sub": "모으기는 자동, 쓰기는 AI, 고르기만 사람", "parts": [("title", None), ("flow", None)]},
+        {"n": 2, "title": "화면 둘러보기", "sub": "서재 · 주제 · 글 · 발행", "parts": [("clip", "s2")]},
+        {"n": 3, "title": "글쓰기 A — 추천 주제로", "sub": "클릭 한 번으로 근거 확인까지", "parts": [("clip", "s3")]},
+        {"n": 4, "title": "글쓰기 B — 직접 정해서", "sub": "쓰기 전에 메시지부터 고른다", "parts": [("clip", "c4"), ("clip", "c5"), ("clip", "s4")]},
+        {"n": 5, "title": "피드백이 규칙이 된다", "sub": "쓸수록 손이 덜 가는 이유", "parts": [("clip", "s5"), ("clip", "c7"), ("clip", "c7b"), ("clip", "s5r"), ("stat", None)]},
+        {"n": 6, "title": "발행", "sub": "웹과 메일, 버튼 두 번", "parts": [("clip", "s6"), ("clip", "c8web"), ("ending", None)]},
+    ]
+    NO_SQUEEZE = {"c8web"}
+    KEEP_CLIPS = {"c8web"}
+    CLIP_END = {"c8web": 33.0, "c7": 80.5}  # c7은 본문 그림을 누르기 전까지(뒤는 c7b가 이어 찍음)
+    WAIT_AI = {"글 옵션": ["astra"], "원문 끝까지": ["astra", "Claude"], "과정 1·2·3": ["Claude", "astra"], "피드백": ["astra"],
+               "제목 후보": ["astra"], "본문 그림": ["astra", "gti"], "규칙 후보": ["astra"], "규칙 파일": [], "발행본": [], "캡처": []}
+    CALLOUT = {
+        "Supabase 받기": "6시간마다 저절로 받음", "원문 전문": "요약 없이 원문 전체", "판정 칸": "판정을 바꾸면 다음 거르기의 기준",
+        "추천 주제 고르기": "AI 추천 주제로 시작", "다른 추천": "아직 안 쓴 주제 4개씩", "주제 카드 —": "사람 판정 · 중심 · 받침 원문",
+        "중심": "중심 사례", "받침": "받침 사례", "사내 맥락": "맞는 사내 자료도 함께", "대상 독자": "대상 독자", "바뀐 문장 형광": "앞 과정에서 바뀐 문장",
+        "하고 싶은 말": "하고 싶은 말을 그대로", "옵션 1 —": "이 글이 말할 것 + 실제 사례", "이 글로": "이 옵션으로",
+        "문체 피드백": "문체 피드백 — 적은 그대로 astra에게", "피드백으로 고친 문장": "짚은 곳만 고침",
+        "원고 정하기": "이 과정을 원고로", "제목 고르기": "제목 후보 4개 중 하나", "본문 그림 1 —": "넣을 문단까지 정해 옴",
+        "수치·용어 점검": "숫자가 모두 원문에 있는지 점검", "새 규칙 후보": "피드백 → 글쓰기 규칙 후보", "받은 피드백": "근거 ① 받은 피드백",
+        "고치기 전 문장": "근거 ② 바뀌기 전", "고친 뒤 문장": "근거 ② 바뀐 뒤", "규칙에 넣기": "다음 글부터 적용", "규칙에 넣음": "규칙 파일에 저장 · 다른 PC에도",
+        "글쓰기 규칙 파일": "briefs/글쓰기규칙.md — 방금 더해진 한 줄",
+        "웹 미리보기 —": "웹 아카이브 모양", "메일 미리보기 —": "그대로 보낼 이미지 메일", "한 번 더 누르면 발행": "두 번 눌러 발행",
+        "발행 완료": "웹 배포 완료", "메일 파일(.eml)": "메일 파일 받기 → Outlook에서 발송", "받음": "newsletter.eml 저장됨",
+        "아카이브의 발행된 칼럼": "웹 아카이브의 발행된 칼럼",
+    }
+    ZOOMS = [
+        ("s2", "Supabase 받기", "Supabase 받기", 1.6), ("s2", "판정 칸", "판정 칸", 1.5),
+        ("s3", "주제 카드", "주제 카드", 1.35), ("s3", "지금 글 — 비교", "바뀐 문장 형광", 1.4),
+        ("c4", "하고 싶은 말", "하고 싶은 말 — 입력", 1.6),
+        ("s5", "문체 피드백", "문체 피드백 — 입력", 1.6), ("s5", "지금 글 — 비교", "피드백으로 고친 문장", 1.4),
+        ("c7b", "수치·용어 점검", "확정", 1.5),
+        ("s5r", "새 규칙 후보", "고친 뒤 문장", 1.45), ("s5r", "규칙에 넣기", "규칙에 넣음", 1.5), ("s5r", "글쓰기 규칙 파일", "글쓰기 규칙 파일", 1.5),
+        ("s6", "받는 사람", "한 번 더 누르면 발행", 1.6), ("s6", "발행 완료", "받음", 1.5),
+    ]
+    NUMBERS = [("s2", "탭 컨설팅", "탭 전체", "원문 2,183편 · 경영일기 252편"), ("s2", "메뉴 주제", "탭 쓸 만함", "주제 158개")]
+    CUTS = {"s3": [("다른 추천", "추천 주제 고르기", 1.6)]}  # 고를 주제가 나올 때까지 '다른 추천'을 13번 넘긴 구간
+    ANCHORS = {
+        1: [("title", None, 0), ("flow", None, 0.4), ("flow", None, 5.6), ("flow", None, 9.4)],
+        2: [("s2", "메뉴 서재", 0), ("s2", "탭 컨설팅", 0), ("s2", "원문 열기", 0), ("s2", "Supabase 받기", 0), ("s2", "메뉴 주제", 0),
+            ("s2", "탭 보통", 0), ("s2", "메뉴 글", 0)],
+        3: [("s3", "추천 주제 1", 0), ("s3", "다른 추천", 0), ("s3", "추천 주제 고르기", 0), ("s3", "원문 끝까지 읽고 확인 시작", 0),
+            ("s3", "쓰기", 0), ("s3", "지금 글 — 비교", 0)],
+        4: [("c4", "하고 싶은 말", 0), ("c4", "글 옵션 시작", 0), ("c4", "옵션 1", 0), ("c5", "원문 끝까지 읽고 확인 시작", 0)],
+        5: [("s5", "문체 피드백", 0), ("s5", "피드백 → 과정 4 시작", 0), ("c7", "원고 정하기", 0), ("c7b", "수치·용어 점검", 0),
+            ("s5r", "규칙 후보 — 이 글의", 0), ("s5r", "받은 피드백", 0), ("s5r", "규칙에 넣기", 0), ("stat", None, 0.3)],
+        6: [("s6", "웹 미리보기", 0), ("s6", "받는 사람", 0), ("c8web", "아카이브의 발행된 칼럼", 0), ("ending", None, 0.6)],
+    }
 # 빈 구간 자르기(10/26 사용자: 5분 안팎으로, 비는 곳은 날려도 됨) — 문장이 끝나고 KEEP_AFTER초, 다음 문장 KEEP_BEFORE초 전까지 말 없이 지나가는
 # 화면은 잘라 0.4초 교차 전환으로 잇고, 챕터 끝에 말 없이 남는 화면도 자른다
 KEEP_AFTER, KEEP_BEFORE, XF = 2.4, 2.6, 0.4
@@ -243,7 +296,7 @@ class Clip:
         self.events = []
         for i, m in enumerate(acts):
             nxt = acts[i + 1]["sec"] if i + 1 < len(acts) else m["sec"] + 6
-            hold = {"click": 0.35, "hover": 1.5, "type": 4.5}[m["kind"]]  # 클릭 테두리는 누른 직후 사라진다(화면이 바뀌면 자리가 어긋남)
+            hold = {"click": 0.35, "hover": 1.5, "type": 4.5, "download": 2.2}[m["kind"]]  # 클릭 테두리는 누른 직후 사라진다(화면이 바뀌면 자리가 어긋남)
             x, y, w, h = m["box"]
             z = 1.0 if w > 1150 or h > 480 else max(1.2, min(1.6, W * 0.68 / max(w, h * 2.4)))  # 요소가 화면 폭의 2/3 안에 들게
             self.events.append({"t": m["sec"], "end": max(m["sec"] + 0.25, min(m["sec"] + hold, nxt - 0.25)), "box": m["box"], "z": z,
@@ -266,7 +319,7 @@ class Clip:
             self.zooms.append({"t0": a["t"] - 0.9, "t1": max(b["end"], b["t"] + 1.4) + 0.6, "cx": (x0_ + x1_) / 2, "cy": (y0_ + y1_) / 2, "z": z})
         lab = lambda pre: next((m["sec"] for m in self.marks if m["label"].startswith(pre)), None)
         self.numbers = [(lab(a), lab(b) + 1.5, text) for c, a, b, text in NUMBERS if c == name and lab(a) is not None and lab(b) is not None]
-        self.cuts = [(lab(a) + 0.2, lab(b) - 0.4) for a, b in CUTS.get(name, []) if lab(a) is not None and lab(b) is not None]
+        self.cuts = [(lab(c[0]) + (c[2] if len(c) > 2 else 0.2), lab(c[1]) - 0.4) for c in CUTS.get(name, []) if lab(c[0]) is not None and lab(c[1]) is not None]
         self.scrolls = [(m["sec"], m["sec"] + m.get("dur", 1.0)) for m in self.marks if m["kind"] == "scroll"]
         self._cache = (None, None)
 
@@ -377,7 +430,7 @@ def overlay_clip(img, seg, ev, cam, s, clip):
         ais = next((v for k, v in WAIT_AI.items() if seg["wait"].startswith(k)), [])
         x = W - 40
         for name in reversed(ais):
-            w, _ = pill(d, (x, H - 40), f"{name} 작업 중", 26, bg=(20, 20, 28, 235), dot=AI_COLOR[name], anchor="rb")
+            w, _ = pill(d, (x, 110) if SUBS else (x, H - 40), f"{name} 작업 중", 26, bg=(20, 20, 28, 235), dot=AI_COLOR[name], anchor="rt" if SUBS else "rb")
             x -= w + 12
 
 
@@ -466,6 +519,250 @@ def ending(t, dur):
     return fade(img, t, dur, 0.5)
 
 
+# ---------- 2차 화면(11/3) — 제품 소개 영상처럼: 은은한 빛 배경, 움직이는 글자, 구조도, 숫자 카드, 입힌 자막 ----------
+
+_glow = {}
+
+
+def glow_bg(key="a"):
+    """어두운 바탕에 보라·장미 빛이 번진 배경 — 한 번 만들어 둔다"""
+    if key not in _glow:
+        img = Image.new("RGB", (W, H), BG)
+        lay = Image.new("RGB", (W, H), (0, 0, 0))
+        d = ImageDraw.Draw(lay)
+        spots = {"a": [((-200, -300, 900, 600), (70, 45, 140)), ((1250, 500, 2300, 1400), (110, 30, 70))],
+                 "b": [((600, -500, 1700, 400), (60, 40, 130)), ((-300, 700, 700, 1500), (40, 60, 120))]}[key]
+        for box, col in spots:
+            d.ellipse(box, fill=col)
+        lay = lay.filter(ImageFilter.GaussianBlur(220))
+        _glow[key] = Image.blend(img, lay, 0.55)
+    return _glow[key].copy()
+
+
+def rise(t, at, dur=0.55):
+    """at초에 나타나기 시작 — (불투명도 0~1, 아래에서 올라오는 픽셀)"""
+    a = ease((t - at) / dur)
+    return a, (1 - a) * 28
+
+
+def text_a(img, xy, s, f, fill, a, anchor="la"):
+    """불투명도 a로 글자 — 겹쳐 그려 섞는다"""
+    if a <= 0.01:
+        return
+    lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(lay).text(xy, s, font=f, fill=fill[:3] + (int(255 * a),), anchor=anchor)
+    img.paste(lay, (0, 0), lay)
+
+
+def title_card2(t, dur):
+    img = glow_bg("a")
+    a, dy = rise(t, 0.15)
+    text_a(img, (W / 2, 360 + dy), "시연 영상  ·  2차 심사", font(30, True), VIOLET, a, "mm")
+    a, dy = rise(t, 0.35)
+    text_a(img, (W / 2, 480 + dy), "AI 뉴스레터 칼럼 제작 자동화", font(108, True), INK, a, "mm")
+    a, dy = rise(t, 0.65)
+    text_a(img, (W / 2, 600 + dy), "원문 수집부터 발행까지, 한 화면에서", font(40), INK3, a, "mm")
+    return fade(img, t, dur, 0.4)
+
+
+def card2(n, title, sub, t, dur):
+    img = glow_bg("b")
+    d = ImageDraw.Draw(img, "RGBA")
+    a, dy = rise(t, 0.05)
+    text_a(img, (236, 300 + dy), f"{n:02d}", font(150, True), VIOLET, a)
+    a, dy = rise(t, 0.2)
+    text_a(img, (240, 500 + dy), title, font(86, True), INK, a)
+    a, dy = rise(t, 0.35)
+    text_a(img, (244, 625 + dy), sub, font(38), INK3, a)
+    # 진행 막대 — 챕터 2~6
+    xs = 240
+    for k in range(2, 7):
+        on = k <= n
+        w_ = 150
+        col = VIOLET + (230,) if k == n else (VIOLET + (110,) if on else (255, 255, 255, 40))
+        grow = ease((t - 0.3) / 0.6) if k == n else 1
+        d.rounded_rectangle([xs, 860, xs + w_ * grow, 866], radius=3, fill=col)
+        xs += w_ + 14
+    return fade(img, t, dur, 0.3)
+
+
+AUTO = [("소스 41곳", "RSS · API · 브라우저", "aside"), ("수집 · claim 추출", "GitHub Actions", ""), ("칼럼 재료 받기", "서재 · 6시간마다", ""),
+        ("카드 · 주제 묶기", "주제 지도", "astra · Claude"), ("대화로 글쓰기", "과정 1 · 2 · 3", "Claude · astra"), ("수치 검증 · 그림", "원문 대조 · 용어", "astra · gti"),
+        ("발행", "웹 · 메일(.eml)", "")]
+HUMAN = {3: ("주제 고르기", "추천 또는 직접 적기"), 4: ("피드백", "받은 그대로 다음 과정"), 5: ("확정", "그림 · 과정을 골라 확정")}
+FX0, FW, FG = 70, 232, 26
+FY_H, FH_H, FY_A, FH_A = 410, 118, 660, 132
+
+
+def _arrow(d, pts, col, width=3, dash=False, head=True):
+    for (x1, y1), (x2, y2) in zip(pts, pts[1:]):
+        if dash:
+            L = math.hypot(x2 - x1, y2 - y1)
+            n_ = max(1, int(L / 14))
+            for k in range(0, n_, 2):
+                a_, b_ = k / n_, min(1, (k + 1) / n_)
+                d.line([x1 + (x2 - x1) * a_, y1 + (y2 - y1) * a_, x1 + (x2 - x1) * b_, y1 + (y2 - y1) * b_], fill=col, width=width)
+        else:
+            d.line([x1, y1, x2, y2], fill=col, width=width)
+    if head:
+        (x1, y1), (x2, y2) = pts[-2], pts[-1]
+        ang = math.atan2(y2 - y1, x2 - x1)
+        s_ = 13
+        d.polygon([(x2, y2), (x2 - s_ * math.cos(ang - 0.45), y2 - s_ * math.sin(ang - 0.45)), (x2 - s_ * math.cos(ang + 0.45), y2 - s_ * math.sin(ang + 0.45))], fill=col)
+
+
+def flow2(t, dur):
+    """오프닝 구조도(프로젝트 소개 보고 2페이지와 같은 구조) — 아래 줄(자동·AI)이 켜지고, 위 줄 사람 칸 셋이 켜지고, 피드백 고리가 규칙으로"""
+    img = glow_bg("a")
+    d = ImageDraw.Draw(img, "RGBA")
+    a, dy = rise(t, 0.0)
+    text_a(img, (FX0, 96 + dy), "칼럼 한 편이 나오기까지", font(30, True), VIOLET, a)
+    text_a(img, (FX0, 142 + dy), "모으기는 자동, 쓰기는 AI, 고르기만 사람", font(66, True), INK, a)
+    # 범례
+    lx = W - 70
+    for name, col in (("자동 · AI", VIOLET), ("사람", ROSE)):
+        f = font(24, True)
+        tw = d.textlength(name, font=f)
+        text_a(img, (lx - tw, 120), name, f, INK3, a)
+        d.rounded_rectangle([lx - tw - 34, 122, lx - tw - 12, 144], radius=5, outline=col + (int(255 * a),), width=3)
+        lx -= tw + 70
+    # 구간 머리말
+    cx = lambda i: FX0 + i * (FW + FG)
+    for (i0, i1, name), at in (((0, 2, "모으기 · 자동"), 0.5), ((3, 4, "쓰기 · AI + 사람"), 0.5), ((5, 6, "마무리"), 0.5)):
+        a_ = ease((t - at) / 0.5)
+        x0_, x1_ = cx(i0), cx(i1) + FW
+        f = font(24, True)
+        tw = d.textlength(name, font=f)
+        mid = (x0_ + x1_) / 2
+        y = 330
+        d.line([x0_, y, mid - tw / 2 - 18, y], fill=(255, 255, 255, int(60 * a_)), width=2)
+        d.line([mid + tw / 2 + 18, y, x1_, y], fill=(255, 255, 255, int(60 * a_)), width=2)
+        text_a(img, (mid, y), name, f, INK3, a_, "mm")
+    # 아래 줄 — 자동·AI
+    for i, (name, sub, ai) in enumerate(AUTO):
+        on = ease((t - 0.7 - i * 0.38) / 0.45)
+        if on <= 0:
+            continue
+        x, y = cx(i), FY_A + (1 - on) * 24
+        d.rounded_rectangle([x, y, x + FW, y + FH_A], radius=20, fill=(26, 23, 40, int(240 * on)), outline=VIOLET + (int(200 * on),), width=3)
+        text_a(img, (x + FW / 2, y + 50), name, font(30, True), INK, on, "mm")
+        text_a(img, (x + FW / 2, y + 92), sub, font(21), INK3, on, "mm")
+        if i < len(AUTO) - 1 and on > 0.9:
+            _arrow(d, [(x + FW + 3, FY_A + FH_A / 2), (x + FW + FG - 3, FY_A + FH_A / 2)], (150, 140, 190, 255), 3)
+        if ai:
+            a_ = ease((t - 3.6 - i * 0.08) / 0.4)
+            xs = x + 6
+            for nm in ai.split(" · "):
+                f = font(20, True)
+                text_a(img, (xs + 20, FY_A + FH_A + 30), nm, f, (200, 200, 215), a_, "lm")
+                d.ellipse([xs, FY_A + FH_A + 22, xs + 14, FY_A + FH_A + 36], fill=AI_COLOR[nm] + (int(255 * a_),))
+                xs += 20 + d.textlength(nm, font=f) + 18
+    # 위 줄 — 사람
+    for k, (col_, (name, sub)) in enumerate(HUMAN.items()):
+        on = ease((t - 5.4 - k * 0.6) / 0.45)
+        if on <= 0:
+            continue
+        x, y = cx(col_), FY_H + (1 - on) * 24
+        d.rounded_rectangle([x, y, x + FW, y + FH_H], radius=20, fill=(62, 20, 36, int(245 * on)), outline=ROSE + (int(230 * on),), width=3)
+        text_a(img, (x + FW / 2, y + 44), name, font(32, True), (255, 236, 240), on, "mm")
+        text_a(img, (x + FW / 2, y + 84), sub, font(20), (225, 180, 190), on, "mm")
+        rc = ROSE + (int(220 * on),)
+        if col_ == 3:  # 주제 지도 → 주제 고르기 → 글쓰기
+            _arrow(d, [(x + 70, FY_A - 4), (x + 70, FY_H + FH_H + 6)], rc)
+            _arrow(d, [(x + FW - 50, FY_H + FH_H + 4), (x + FW - 50, FY_H + FH_H + 40), (cx(4) + 40, FY_H + FH_H + 40), (cx(4) + 40, FY_A - 6)], rc)
+        elif col_ == 4:  # 글쓰기 ⇄ 피드백
+            _arrow(d, [(x + FW - 70, FY_A - 4), (x + FW - 70, FY_H + FH_H + 6)], rc)
+            _arrow(d, [(x + FW - 120, FY_H + FH_H + 4), (x + FW - 120, FY_A - 6)], rc, dash=True)
+        else:  # 수치 검증 → 확정 → 발행
+            _arrow(d, [(x + 70, FY_A - 4), (x + 70, FY_H + FH_H + 6)], rc)
+            _arrow(d, [(x + FW + 4, FY_H + FH_H / 2), (cx(6) + FW / 2, FY_H + FH_H / 2), (cx(6) + FW / 2, FY_A - 6)], rc)
+    # 피드백 → 글쓰기 규칙 — 마지막 문장에 맞춰
+    on = ease((t - 9.2) / 0.6)
+    if on > 0:
+        x = cx(4)
+        pulse = 0.5 + 0.5 * math.sin((t - 9.2) * 4)
+        d.rounded_rectangle([x - 8, FY_H - 8, x + FW + 8, FY_A + FH_A + 8], radius=26, outline=VIOLET + (int((140 + 90 * pulse) * on),), width=3)
+        f = font(24, True)
+        s = "피드백은 글쓰기 규칙으로 쌓임"
+        tw = d.textlength(s, font=f)
+        px, py = x + FW / 2 - (tw + 40) / 2, FY_H - 64 - (1 - on) * 14
+        d.rounded_rectangle([px, py, px + tw + 40, py + 46], radius=23, fill=(91, 33, 182, int(240 * on)))
+        text_a(img, (px + 20, py + 23), s, f, (255, 255, 255), on, "lm")
+    return fade(img, t, dur, 0.4)
+
+
+def stat_card(t, dur):
+    """5장 끝 숫자 카드 — 11/2 검증: 피드백을 규칙으로 올린 뒤 같은 글을 다시 쓰자 규칙으로 올린 지적 7건 중 5건이 처음부터 나오지 않음(f53c582)"""
+    img = glow_bg("b")
+    d = ImageDraw.Draw(img, "RGBA")
+    a, dy = rise(t, 0.1)
+    text_a(img, (W / 2, 250 + dy), "피드백을 규칙으로 올린 뒤, 같은 글을 다시 쓰자", font(36, True), INK3, a, "mm")
+    k = int(round(5 * ease((t - 0.5) / 1.3)))
+    a, dy = rise(t, 0.4)
+    big = font(210, True)
+    s1, s2 = f"{k}", " / 7"
+    w1, w2 = d.textlength(s1, font=big), d.textlength(s2, font=big)
+    x = W / 2 - (w1 + w2) / 2
+    text_a(img, (x, 450 + dy), s1, big, VIOLET, a, "lm")
+    text_a(img, (x + w1, 450 + dy), s2, big, (90, 90, 110), a, "lm")
+    a, dy = rise(t, 1.0)
+    text_a(img, (W / 2, 620 + dy), "지적이 처음부터 나오지 않았습니다", font(56, True), INK, a, "mm")
+    for i in range(7):
+        on = ease((t - 1.4 - i * 0.18) / 0.3)
+        cx_, cy_ = W / 2 + (i - 3) * 86, 760
+        good = i < 5
+        col = VIOLET if good else (90, 90, 110)
+        d.ellipse([cx_ - 26, cy_ - 26, cx_ + 26, cy_ + 26], fill=col + (int((235 if good else 120) * on),))
+        if good and on > 0.5:
+            d.line([(cx_ - 11, cy_), (cx_ - 3, cy_ + 9), (cx_ + 13, cy_ - 9)], fill=(255, 255, 255, int(255 * on)), width=5, joint="curve")
+    a, _ = rise(t, 2.6)
+    text_a(img, (W / 2, 870), "11/2 검증 · 10/28 두 편을 새 글쓰기 규칙으로 다시 씀", font(24), INK3, a * 0.8, "mm")
+    return fade(img, t, dur, 0.35)
+
+
+def ending2(t, dur):
+    img = glow_bg("a")
+    d = ImageDraw.Draw(img, "RGBA")
+    rows = [("사람은 판단만", "고르고, 피드백하고, 확정한다"), ("원문에 근거한 글", "끝까지 읽고, 숫자까지 점검한다"), ("피드백은 규칙으로", "쓸수록 손이 덜 간다")]
+    for i, (h, s) in enumerate(rows):
+        a, dy = rise(t, 0.4 + i * 1.1)
+        y = 300 + i * 130 + dy
+        col = tuple(int(BG[k] + (VIOLET[k] - BG[k]) * a) for k in range(3))
+        d.line([(244, y + 30), (262, y + 48), (296, y + 10)], fill=col, width=8, joint="curve")
+        text_a(img, (330, y), h, font(56, True), INK, a)
+        text_a(img, (330 + d.textlength(h, font=font(56, True)) + 28, y + 14), s, font(38), INK3, a)
+    a, dy = rise(t, 4.8, 0.7)
+    text_a(img, (240, 760 + dy), "AI 뉴스레터 칼럼 제작 자동화", font(66, True), VIOLET, a)
+    return fade(img, t, dur, 0.6)
+
+
+def caption(img, now):
+    """입힌 자막 — 지금 읽는 문장, 화면 아래 가운데. 한 줄 34자 안팎, 두 줄까지"""
+    cur = next((x for x in SCHED if x[0] - 0.05 <= now <= x[1] + 0.25), None)
+    if not cur:
+        return img
+    text = cur[2]
+    f = font(40, True)
+    d = ImageDraw.Draw(img, "RGBA")
+    words, rows, line = text.split(" "), [], ""
+    for w_ in words:
+        if line and d.textlength(f"{line} {w_}", font=f) > 1320:
+            rows.append(line)
+            line = w_
+        else:
+            line = f"{line} {w_}".strip()
+    rows.append(line)
+    a = min(ease((now - cur[0] + 0.05) / 0.2), 1 - ease((now - cur[1] - 0.05) / 0.2))
+    lh = 58
+    bw = max(d.textlength(r, font=f) for r in rows) + 64
+    bh = lh * len(rows) + 30
+    x0, y0 = (W - bw) / 2, H - 52 - bh
+    d.rounded_rectangle([x0, y0, x0 + bw, y0 + bh], radius=18, fill=(8, 8, 12, int(200 * a)))
+    for i, r in enumerate(rows):
+        text_a(img, (W / 2, y0 + 15 + lh * i + lh / 2), r, f, (255, 255, 255), a, "mm")
+    return img
+
+
 # ---------- 타임라인 ----------
 
 def build():
@@ -474,7 +771,7 @@ def build():
         if ONLY and ch["n"] not in ONLY:
             continue
         need = plan(ch["n"])[1] + 1.2
-        if 2 <= ch["n"] <= 8:
+        if ch["n"] >= 2 and ch["title"]:
             tl.append({"kind": "card", "ch": ch, "dur": CARD_S})
         body = []
         for kind, name in ch["parts"]:
@@ -484,7 +781,9 @@ def build():
             elif kind == "title":
                 body.append({"kind": "title", "dur": TITLE_S})
             elif kind == "flow":
-                body.append({"kind": "flow", "dur": 12.0})
+                body.append({"kind": "flow", "dur": 14.5 if R2 else 12.0})
+            elif kind == "stat":
+                body.append({"kind": "stat", "dur": 8.0})
             elif kind == "ending":
                 body.append({"kind": "ending", "dur": 10.5})  # 마무리 10~12초(10/26 사용자)
         sched = fit(ch["n"], body, clips)
@@ -509,7 +808,7 @@ def _at(body, clips, spec):
     """기준 장면이 본문 시작에서 몇 초 뒤에 오는지"""
     what, label, off = spec
     t = 0.0
-    if what in ("title", "flow", "ending"):
+    if what in ("title", "flow", "ending", "stat"):
         for sg in body:
             if sg.get("kind") == what:
                 return t + off
@@ -723,19 +1022,23 @@ def render(tl, clips, total):
             t = f / FPS
             kind = seg["kind"]
             if kind == "card":
-                img = card(seg["ch"]["n"], seg["ch"]["title"], seg["ch"]["sub"], t, seg["dur"])
+                img = (card2 if R2 else card)(seg["ch"]["n"], seg["ch"]["title"], seg["ch"]["sub"], t, seg["dur"])
                 z, cx, cy = 1.0, W / 2, H / 2
             elif kind == "title":
-                img = title_card(t, seg["dur"])
+                img = (title_card2 if R2 else title_card)(t, seg["dur"])
             elif kind == "flow":
-                img = flow(t, seg["dur"])
+                img = (flow2 if R2 else flow)(t, seg["dur"])
+            elif kind == "stat":
+                img = stat_card(t, seg["dur"])
             elif kind == "ending":
-                img = ending(t, seg["dur"])
+                img = (ending2 if R2 else ending)(t, seg["dur"])
             elif kind == "xfade":
                 (ca, sa), (cb, sb) = seg["a"], seg["b"]
                 img = Image.blend(clip_image(clips[ca], sa, seg, True), clip_image(clips[cb], sb, seg, True), ease(t / seg["dur"]))
             else:
                 img = clip_image(clips[seg["clip"]], seg["s0"] + t * seg["speed"], seg, seg.get("hold") or seg["speed"] > 1.5)
+            if SUBS and kind != "card":
+                img = caption(img, seg["out0"] + t)
             p.stdin.write(img.tobytes())
             k += 1
             if k % 900 == 0:
