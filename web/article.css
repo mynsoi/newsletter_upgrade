@@ -403,6 +403,7 @@ body {
 .notice p { font-size: 14px; line-height: 1.925; color: var(--ink-secondary); word-break: keep-all; }
 .notice .notice-note { font-size: 12.6px; color: var(--ink-muted); margin-top: 13.5px; }  /* 문장 글씨의 0.9배, 반 줄 띄움 */
 .notice + .article-body { padding-top: 32px; }
+@media (min-width: 720px) { .notice p { letter-spacing: -0.01em; white-space: nowrap; } }  /* 한 문장 = 한 줄(2026-11-03) — 좁은 화면은 그대로 줄바꿈 */
 .email-capture .notice { margin-top: 87px; padding: 22px 24px 22px 32px; }  /* 왼쪽 여백이 좁아 보여 왼쪽을 더(2026-10-29) */
 .email-capture .notice p { font-size: 14.5px; line-height: 1.76; white-space: nowrap; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게 */
 .email-capture .notice .notice-note { font-size: 13px; margin-top: 13px; }  /* 줄간격은 2026-10-29 1.1배로(웹 1.75 → 1.925, 메일 1.6 → 1.76) */
