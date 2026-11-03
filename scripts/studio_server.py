@@ -262,7 +262,8 @@ def article_from_brief(bp):
             "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": b.get("published"),
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
             "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime,
-            "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done"))}
+            "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done")),
+            "ruleCands": json.loads(read(d / "rule-cands.json") or "null"), "ruleCount": rule_count()}
 
 
 def article_from_process(pp):
@@ -1116,7 +1117,50 @@ def act_confirm(a):
         src_page = json.loads(read(brief_path(k))).get("from_wiki", "")
         if src_page:
             subprocess.run(PY + ["scripts/wiki.py", "--written", src_page, conf["file"]], cwd=ROOT, capture_output=True)
+        rule_cands_start(k)
     return conf
+
+
+# ---------- 규칙 후보(2026-11-03 사용자: 피드백마다가 아니라 확정할 때 그 글의 피드백을 모아 한 번에 · 넣으면 바로 올린다) ----------
+
+def rule_cands_start(k):
+    """확정한 글에 피드백이 있고 아직 그 피드백들로 후보를 안 만들었으면 만든다(astra, 20~30초)."""
+    import column_pipeline as CP
+    d = ROOT / "runs" / "columns" / k
+    fbs = [x["n"] for x in CP.feedbacks(d)]
+    old = json.loads(read(d / "rule-cands.json") or "null")
+    if fbs and (not old or old.get("of") != fbs):
+        start("rules", k, PIPE + ["--rule-cands", brief_path(k).relative_to(ROOT).as_posix()])
+
+
+def rule_count():
+    import column_pipeline as CP
+    return CP.rule_count()
+
+
+def act_rule_decide(a):
+    """규칙 후보 하나를 정한다 — '넣기'면 글쓰기 규칙 파일에 한 줄 더하고(다음 글부터 적용), 글과 함께 올린다."""
+    import column_pipeline as CP
+    k, i, dec = safe_id(a["article"]), int(a["i"]), str(a.get("d") or "")
+    if dec not in ("넣기", "안 넣기"):
+        raise ValueError("잘못된 결정")
+    f = ROOT / "runs" / "columns" / k / "rule-cands.json"
+    res = json.loads(read(f) or "null")
+    if not res or not 0 <= i < len(res["items"]):
+        raise ValueError("규칙 후보가 없습니다")
+    it = res["items"][i]
+    if it.get("state"):
+        raise ValueError("이미 정한 후보입니다")
+    text = re.sub(r"\s+", " ", str(a.get("text") or it.get("rule") or "")).strip()
+    if dec == "넣기":
+        if not text:
+            raise ValueError("넣을 규칙 문장을 적어 주세요")
+        if len(text) > 400:
+            raise ValueError("규칙이 너무 깁니다 — 한두 문장으로 줄여 주세요")
+        CP.add_rule(text, it.get("group") or "문장과 표현")
+    it["state"] = {"d": dec, "text": text if dec == "넣기" else "", "by": editor_name(), "at": time.strftime("%Y-%m-%d %H:%M")}
+    f.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    return {"article": k, "item": it}
 
 
 MAIL = re.compile(r"^[^@\s,<>\"]+@[^@\s,<>\"]+\.[^@\s,<>\"]+$")
@@ -1333,7 +1377,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
-           "publish-build": act_publish_build, "publish": act_publish}
+           "publish-build": act_publish_build, "publish": act_publish, "rule-decide": act_rule_decide}
 
 
 # ---------- 그림 축소본 ----------

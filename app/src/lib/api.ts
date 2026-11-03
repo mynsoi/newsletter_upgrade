@@ -36,6 +36,17 @@ export type Step = {
   stray?: string[]; // 피드백이 짚지 않았는데 바뀐 문단(첫머리)
 };
 
+export type RuleCand = {
+  fb: number[];
+  kind: "새 규칙" | "이 글만" | "이미 있음";
+  rule: string;
+  group: string;
+  same: string;
+  why: string;
+  feedback: string[];
+  state: { d: "넣기" | "안 넣기"; text: string; by: string; at: string } | null;
+};
+
 export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };
 export type InlinePick = { src: string; after: number; anchor: string; name: string };
 
@@ -66,6 +77,9 @@ export type Article = {
   textPick?: { n: number; of: number } | null;
   imagesDone?: boolean;
   tries?: { n: number; title: string; steps: Step[] }[];
+  /** 확정할 때 이 글의 피드백을 모아 만든 규칙 후보(2026-11-03) · 지금 글쓰기 규칙 수 */
+  ruleCands?: { made: string; of: number[]; items: RuleCand[] } | null;
+  ruleCount?: number;
   why?: string;
   at: number;
   error?: string;
@@ -237,6 +251,7 @@ export const JOB_NAMES: Record<string, string> = {
   write: "과정 1–3",
   revise: "과정 +1",
   shorten: "절반",
+  rules: "규칙 후보",
   inline: "본문 그림",
   images: "그림",
   collect: "수집",

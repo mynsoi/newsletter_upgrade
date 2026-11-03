@@ -27,7 +27,7 @@ const ProseEditor = lazy(() => import("@/components/studio/editor").then((m) => 
 /** 숫자 뒤 '로/으로' — 1·2·4·5·7·8·9는 로, 3·6·0은 으로(삼·육·영·십) */
 const ro = (n: number) => ([3, 6, 0].includes(n % 10) ? "으로" : "로");
 
-const KINDS = ["mine", "titles", "write", "revise", "shorten", "images", "inline", "wiki-pick"];
+const KINDS = ["mine", "titles", "write", "revise", "shorten", "images", "inline", "wiki-pick", "rules"];
 const jobOf = (jobs: Job[], id: string) => jobs.find((j) => j.status === "running" && j.target === id && KINDS.includes(j.kind));
 const MINE_TEXT: Record<string, string> = { 문서: "문서 읽는 중", 후보: "원문 카드 보는 중", 고르기: "원문 읽고 고르는 중", 옵션: "카드 보고 글 옵션 짜는 중", 확인: "원문 끝까지 읽고 확인 · 추천 고르는 중", "넣기 확인": "추천 원문 끝까지 읽는 중", 제목: "제목 후보 짓는 중" };
 
@@ -41,6 +41,7 @@ function jobText(j: Job, a?: A, run?: MineRun): string[] {
   }
   if (j.kind === "revise") return [`과정 ${(a?.steps.length ?? 0) + 1} · ${j.message === "사내 맥락 넣기" ? "사내 맥락 넣기" : "피드백 반영"}`];
   if (j.kind === "shorten") return ["절반으로 줄이는 중"];
+  if (j.kind === "rules") return ["astra", "이 글의 피드백에서 규칙 후보 찾는 중"];
   if (j.kind === "images" || j.kind === "inline") {
     const what = j.kind === "images" ? "머리 그림" : "본문 그림";
     const s = j.istage;
@@ -278,6 +279,8 @@ function Timeline({
     if (a.confirmed) {
       out.push(<Ai key="img" label="그림"><ImagesCard a={a} state={state} refresh={refresh} /></Ai>);
       out.push(<Ai key="confirm" label="확정"><ConfirmCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
+      if (a.ruleCands?.items.length && job?.kind !== "rules")
+        out.push(<Ai key="rules" label="규칙 후보"><RuleCandsCard a={a} refresh={refresh} /></Ai>);
     } else if (!tp) {
       out.push(<Ai key="text" label="원고"><TextPickCard a={a} sel={sel} setSel={setSel} refresh={refresh} /></Ai>);
     } else if (!a.imagesDone) {
@@ -690,6 +693,97 @@ function ConfirmCard({ a, sel, setSel, refresh }: { a: A; sel: number | null; se
           {!same && <IconArrowRight className="size-4" />}
         </button>
       </div>
+    </div>
+  );
+}
+
+
+/** 규칙 후보 — 확정할 때 이 글의 피드백을 모아 astra가 고른 것(2026-11-03 사용자: 피드백마다 말고 확정 때 한 번에).
+ *  넣으면 글쓰기 규칙 파일(briefs/글쓰기규칙.md)에 한 줄 더해져 다음 글부터 쓰이고, 다른 PC에도 바로 올라간다. 지우거나 바꾸는 건 파일에서. */
+const RULE_LIMIT = 20;
+function RuleCandsCard({ a, refresh }: { a: A; refresh: () => void }) {
+  const rc = a.ruleCands!;
+  const [edit, setEdit] = useState<Record<number, string>>({});
+  const [busy, setBusy] = useState<number | null>(null);
+  const [err, setErr] = useState("");
+  const decide = (i: number, d: "넣기" | "안 넣기", text?: string) => {
+    setBusy(i);
+    setErr("");
+    act("rule-decide", { article: a.id, i, d, text: text ?? "" })
+      .then(() => {
+        setEdit((e) => { const n = { ...e }; delete n[i]; return n; });
+        refresh();
+      })
+      .catch((e) => setErr(String(e.message || e)))
+      .finally(() => setBusy(null));
+  };
+  const order = rc.items.map((it, i) => ({ it, i })).sort((x, y) => (x.it.kind === "새 규칙" ? 0 : 1) - (y.it.kind === "새 규칙" ? 0 : 1));
+  const left = rc.items.filter((it) => !it.state && it.kind === "새 규칙").length;
+  return (
+    <div className="rounded-2xl border border-line bg-panel-solid px-5 py-4">
+      <p className="text-[14px] text-ink-2">
+        이 글의 피드백 {rc.of.length}건을 보고 다음 글에도 지킬 만한 것을 골랐습니다.
+        {left > 0 ? ` 넣을지 정해 주세요 — 넣으면 다음 글부터 쓰입니다.` : " 새 규칙 후보는 모두 정했습니다."}
+      </p>
+      {(a.ruleCount ?? 0) > RULE_LIMIT && (
+        <p className="mt-2 text-xs text-amber-500">글쓰기 규칙이 {a.ruleCount}개입니다. 많아지면 지시가 길어지고 서로 부딪힐 수 있어 한 번 정리해 보는 것이 좋습니다.</p>
+      )}
+      <div className="mt-3 grid gap-2.5">
+        {order.map(({ it, i }) => {
+          const mine = it.kind === "새 규칙";
+          const editing = edit[i] !== undefined;
+          return (
+            <div key={i} className={cn("grid gap-1.5 rounded-xl border px-4 py-3", mine && !it.state ? "border-violet-400/40" : "border-line", !mine && !it.state && "opacity-75")}>
+              <div className="flex flex-wrap items-center gap-1.5 text-xs text-ink-3">
+                <Chip className={cn(mine && "border-violet-400/50 bg-violet-500/15 text-violet-800 dark:text-violet-100")}>{it.kind}</Chip>
+                {it.group && mine && <span>{it.group}</span>}
+                <span className="tabular-nums">· 과정 {it.fb.map((n) => n + 3).join("·")} 피드백</span>
+                {it.state && (
+                  <span className={cn("ml-auto", it.state.d === "넣기" ? "text-emerald-500" : "text-ink-3")}>
+                    {it.state.d === "넣기" ? "규칙에 넣음" : "넣지 않음"} · {it.state.by} · {it.state.at}
+                  </span>
+                )}
+              </div>
+              {editing ? (
+                <textarea
+                  value={edit[i]}
+                  onChange={(e) => setEdit({ ...edit, [i]: e.target.value })}
+                  rows={3}
+                  className="w-full rounded-lg border border-line bg-transparent px-3 py-2 text-[14px] leading-relaxed text-ink"
+                />
+              ) : (
+                <p className={cn("text-[14.5px] leading-relaxed text-ink", it.kind === "이 글만" && it.state?.d !== "넣기" && "line-clamp-2")} title={it.feedback.join("\n\n")}>
+                  {it.state?.d === "넣기" ? it.state.text : mine ? it.rule : it.kind === "이미 있음" ? `이미 있는 규칙: ${it.same}` : it.feedback.join(" / ")}
+                </p>
+              )}
+              {it.why && <p className="text-xs text-ink-3">{it.why}</p>}
+              {!it.state && (
+                <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  {editing ? (
+                    <>
+                      <SmallBtn strong onClick={() => decide(i, "넣기", edit[i])}>고친 대로 넣기</SmallBtn>
+                      <SmallBtn onClick={() => setEdit((e) => { const n = { ...e }; delete n[i]; return n; })}>취소</SmallBtn>
+                    </>
+                  ) : mine ? (
+                    <>
+                      <SmallBtn strong onClick={() => decide(i, "넣기")}>규칙에 넣기</SmallBtn>
+                      <SmallBtn onClick={() => setEdit({ ...edit, [i]: it.rule })}>고쳐서 넣기</SmallBtn>
+                      <SmallBtn onClick={() => decide(i, "안 넣기")}>넣지 않기</SmallBtn>
+                    </>
+                  ) : (
+                    <>
+                      <SmallBtn onClick={() => setEdit({ ...edit, [i]: it.rule || it.feedback.join(" ") })}>그래도 규칙으로</SmallBtn>
+                      <SmallBtn onClick={() => decide(i, "안 넣기")}>{it.kind === "이 글만" ? "이 글만으로 두기" : "확인"}</SmallBtn>
+                    </>
+                  )}
+                  {busy === i && <span className="text-xs text-ink-3">저장 중…</span>}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
     </div>
   );
 }

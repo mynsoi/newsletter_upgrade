@@ -56,7 +56,8 @@ def _paths(k):
     if k == "_activity":  # 글이 아닌 작업(수집·묶기 등)의 기록만
         return [p for p in [f"runs/studio/activity/{user()}.jsonl"] if (ROOT / p).exists()]
     cands = [f"briefs/{k}.json", f"runs/mine/{k}", f"runs/columns/{k}", f"runs/titles0/{k}", f"runs/studio/chat/{k}.jsonl",
-             f"runs/studio/activity/{user()}.jsonl"]
+             f"runs/studio/activity/{user()}.jsonl",
+             "briefs/글쓰기규칙.md"]  # 확정할 때 규칙 후보를 넣으면 바로 다른 PC에도(2026-11-03)
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "runs" / "columns").glob(f"{k}.try-*")]
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "columns").glob(f"*-{k}*") if p.is_file()]
     cands += [p.relative_to(ROOT).as_posix() for p in (ROOT / "columns" / "img").glob(f"*-{k}*")]
