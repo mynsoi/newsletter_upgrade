@@ -811,6 +811,11 @@ function Now({
             <ByChip by={s.by} />
             <span className="tabular-nums">{(edit === null ? s.chars : edit.replace(/\s/g, "").length).toLocaleString()}자</span>
             {edit === null && <NumChip c={s.numCheck} />}
+            {edit === null && !!s.stray?.length && (
+              <span title={"피드백이 짚지 않았는데 바뀐 문단\n" + s.stray.join("\n")} className="rounded-full border border-amber-500/40 px-2 py-0.5 text-amber-500">
+                짚지 않은 문단 {s.stray.length}곳 바뀜
+              </span>
+            )}
             {edit === null && (
               <span className="ml-auto flex rounded-full border border-line p-0.5">
                 {(["본문", "비교", "미리보기"] as const).map((x) => (

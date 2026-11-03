@@ -33,6 +33,7 @@ export type Step = {
     sources: number;
     terms?: { word: string; use: string; sentence: string }[];
   } | null;
+  stray?: string[]; // 피드백이 짚지 않았는데 바뀐 문단(첫머리)
 };
 
 export type ImageItem = { name: string; prompt: string; src: string; after?: number; anchor?: string; why?: string };

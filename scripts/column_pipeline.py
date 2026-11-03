@@ -9,7 +9,7 @@
 단계 (확정본 「AI를 쓰는데도 퇴근 시간이 그대로인 이유」와 같은 절차):
   1. 초안   — Claude(claude -p, 빈 폴더): 원문 통째 + 경영일기 문체 안내서 + 메시지가 가까운 경영일기 2편(10/24부터, 예전 고정 p747·p724·p740)
   2. 재작성 — astra(codex exec): "경영일기 필자가 이 원고를 직접 썼다면" — 안내서 + 초안과 짜임이 같은 2편(10/24부터, 예전 고정 p724·p669). 설정에 r4_refs가 있으면 그대로
-  3. 기준   — astra: briefs/standing-feedback.md(멘토 피드백 원문)를 반영해 고침
+  3. 기준   — astra: briefs/글쓰기규칙.md(받은 피드백을 정리한 규칙, 2026-11-02~ · 그 전엔 standing-feedback.md 원문)에 어긋난 곳을 고침
 결과: runs/columns/<topic>-<variant>/{draft,r4,final}.md (+ 각 단계 지시문·로그)
 설정: thesis(이 글이 말할 것) · sources([[경로, 설명], ...] 첫째가 중심 재료) · r4_refs · draft_from(초안을 다른 갈래와 공유)
 분량 두 가지 (멘토 2026-10-10: "분량을 절반으로 … 모드를 두 가지로"): 설정 "length"가 "half"면 3단계 뒤에
@@ -69,8 +69,8 @@ OUT_RULE = ("출력: 제목과 본문만 주세요. 본문에 '(출처: …)' �
             "파일을 만들거나 명령을 실행하지 말고 답변으로만 주세요.")
 
 
-# 기준 피드백 속 따옴표 문장은 지난 글의 문장이다 — 새 글에 그대로 들어갔다(2026-10-11 "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠.")
-NO_COPY = ("[기준 피드백] 속 따옴표 문장과 인용된 대목은 지난 글의 문장입니다(고친 예시이거나 피드백에서 걸린다고 짚은 대목). "
+# 규칙 속 예시 문장은 지난 글의 문장이다 — 기준 피드백 원문을 넘기던 때 새 글에 그대로 들어갔다(2026-10-11 "AI를 써도 검증 부담은 사라지지 않습니다. 형태만 바뀔 뿐이죠.")
+NO_COPY = ("[글쓰기 규칙] 속 예시 문장은 지난 글에서 고친 예입니다. "
            "어떻게 쓰라는 뜻만 따르고, 그 문장을 이 원고에 옮겨 쓰지 마세요.")
 # 사례 설명 — 멘토 2026-10-11 "누구도 본적없는 사례를 … 좀더 단순하고 명확하게 설명하고 넘어가는게 좋을거같네" · "너무 말이 뭉뚱그려서만 얘기하니까"
 # (비교 C·C2에서 효과를 본 지시 그대로 — wiki-eval/run_compare_1011c.py)
@@ -81,15 +81,27 @@ CASE_RULE = ("사례는 처음 듣는 독자도 바로 알아듣게 씁니다. �
 # 과정 3(기준 반영)에서 "미국 금융업계의 한 임원"으로 흐려졌다. 기준 피드백의 '원문을 쓴 강사·대표는 언급하지 말라'를 사례 속 인물에게까지 적용한 것.
 PEOPLE_RULE = ("사람 이름은 두 경우를 나눕니다. 사례의 주인공(그 사람이 한 일이 곧 사례인 사람)은 원문에 나온 이름과 소속·직함을 밝힙니다 — "
                "'한 임원', '어느 회사 대표'처럼 흐리게 부르지 않습니다. 원문을 쓰거나 전한 사람(기자·강사·칼럼 필자·인터뷰어)은 글에 중요하지 않으면 "
-               "언급하지 않습니다. 지난 글 피드백의 '강사·대표를 빼라'는 이 두 번째 경우입니다. 원문에 이름이 없으면 지어내지 않습니다.")
+               "언급하지 않습니다. [글쓰기 규칙]의 '원문을 쓴 사람과 매체는 소개하지 않는다'는 이 두 번째 경우입니다. 원문에 이름이 없으면 지어내지 않습니다.")
+
+# 받은 피드백을 규칙으로 정리한 파일(2026-11-02 사용자 검토 — 기준 피드백 원문 standing-feedback.md는 기록으로만 둔다)
+RULES = ROOT / "briefs" / "글쓰기규칙.md"
+FIX_HEAD = "## 고칠 때"
 
 
-def standing_block():
-    """멘토가 지난 글들에 한 말(standing-feedback) — 받은 그대로. 2026-10-11부터 초안·재작성에도 넘긴다
-    (그 전엔 과정 3에만 들어가 글의 뼈대에 닿지 않았다 — 멘토가 짚은 대목이 초안에서 생겨 재작성에서 커졌다)."""
-    fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8").strip()
-    # 머리말에 '멘토'를 쓰지 않는다(2026-10-24 사용자 — 앞으로는 작성자·동료도 기준 피드백을 쌓는다)
-    return "[기준 피드백 — 지난 글들을 읽고 한 말, 받은 그대로] 이 글에도 지킵니다.\n" + fb.replace("[기준 피드백 — 받은 그대로]\n", "") + "\n\n" + NO_COPY
+def rules_text(fixing=False):
+    """규칙 본문 — 제목·머리 설명은 빼고 '## ' 묶음부터. '고칠 때' 묶음은 피드백 반영(fixing)에만 넣는다."""
+    t = RULES.read_text(encoding="utf-8")
+    t = t[t.index("\n## ") + 1:] if "\n## " in t else t
+    if not fixing and FIX_HEAD in t:
+        head, _, rest = t.partition(FIX_HEAD)
+        t = head + (rest[rest.index("\n## ") + 1:] if "\n## " in rest else "")
+    return t.strip()
+
+
+def standing_block(fixing=False):
+    """[글쓰기 규칙] — 지난 글들에 받은 피드백을 정리한 규칙. 초안·재작성·기준 반영·피드백 반영·줄이기에 모두 넘긴다.
+    2026-10-11~11-01에는 기준 피드백(standing-feedback.md)을 받은 그대로 넘겼다 — 지난 글 문장이 새 글에 새고, 그 글에만 맞는 말이 섞였다."""
+    return "[글쓰기 규칙 — 지난 글들에 받은 피드백을 정리한 것] 이 글에도 지킵니다.\n" + rules_text(fixing) + "\n\n" + NO_COPY
 
 
 def body(path):
@@ -189,11 +201,10 @@ def r4_prompt(b, draft, refs=None, guide=""):
 
 
 def fb_prompt(text):
-    fb = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
-        "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [기준 피드백]을 반영해 고쳐 주세요. "
-        "원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        fb, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        "아래 [원고]는 우리 사내 뉴스레터의 기준 방식으로 쓴 글입니다. 글의 흐름·문체·논리는 그대로 두고, 아래 [글쓰기 규칙]에 어긋난 곳을 찾아 고쳐 주세요. "
+        "어긋나지 않은 문장은 그대로 둡니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        standing_block(), PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), LEN_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def run_claude(d, prompt):
@@ -414,6 +425,7 @@ def main(paths):
         b = briefs[k]
         t = run_astra(b["dir"] / "_final", fb_prompt((b["dir"] / "r4.md").read_text(encoding="utf-8")))
         (b["dir"] / "final.md").write_text(t, encoding="utf-8")
+        (b["dir"] / "rules.txt").write_text(rules_text(), encoding="utf-8")  # 과정 3에 쓴 규칙 — 작업실이 이 과정의 '반영한 것'으로 보여 준다
         meta = {kk: vv for kk, vv in b.items() if kk != "dir"}
         if b.get("draft_from"):
             meta["thesis"] = briefs[b["draft_from"]].get("thesis")
@@ -457,18 +469,37 @@ def revise(brief_path, feedback_path):
     cur, n = latest_final(d)
     half = json.loads(Path(brief_path).read_text(encoding="utf-8")).get("length") == "half"
     fb_new = Path(feedback_path).read_text(encoding="utf-8").strip()
-    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     prompt = "\n\n".join([
-        "아래 [원고]를 [이번 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 말하는 곳만 고칩니다. "
-        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
+        # 짚은 곳만 — 2026-10-28 사용자가 "피드백 준 내용 외에는 수정하지 마세요"를 세 번 덧붙였다(11/02 규칙으로 채택)
+        "아래 [원고]를 [이번 피드백]대로 고쳐 주세요. 글의 흐름·문체·논리는 그대로 두고 피드백이 짚은 곳만 고칩니다. "
+        "피드백이 짚지 않은 문장은 한 글자도 바꾸지 않습니다 — 피드백이 글 전체(전체 메시지, 전체 흐름)를 말할 때만 넓게 고칩니다. "
+        "[글쓰기 규칙]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요."
         + (" 분량은 지금 원고 정도로 둡니다." if half else " " + LEN_RULE),
-        "[이번 피드백 — 받은 그대로]\n" + fb_new, "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
+        "[이번 피드백 — 받은 그대로]\n" + fb_new, standing_block(fixing=True), PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
     out = run_astra(d / f"_revise-r{n}", prompt)
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
     (d / f"feedback-r{n}.txt").write_text(fb_new, encoding="utf-8")
     print(f"피드백 반영 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
+    stray = untouched_changes(cur.read_text(encoding="utf-8"), out, fb_new)
+    if stray:  # 작업실 과정 카드에 '짚지 않은 문단 N곳 바뀜'으로 보인다
+        (d / f"stray-r{n}.txt").write_text("\n".join(p[:60] for p in stray), encoding="utf-8")
+        print(f"확인: 피드백이 짚지 않은 문단 {len(stray)}곳이 바뀌었습니다 — " + " / ".join(p[:30] + "…" for p in stray))
+
+
+def untouched_changes(before, after, fb):
+    """피드백이 원고 문장을 따옴표 등으로 짚었을 때(원고 문단과 15자 넘게 겹침), 짚지 않은 문단 중 바뀐 것 — 알림만 한다(2026-11-02 규칙 '짚은 곳만').
+    짚은 문장이 없는 피드백(글 전체를 말하는 피드백)은 넓게 고치는 게 맞으니 보지 않는다."""
+    sq = lambda s: re.sub(r"\s", "", s)  # noqa: E731
+    paras = [p.strip() for p in before.split("\n\n") if p.strip() and not p.lstrip().startswith("#")]
+    f = sq(fb)
+    hit = lambda p: any(sq(p)[i:i + 15] in f for i in range(0, max(1, len(sq(p)) - 14), 5))  # noqa: E731
+    touched = [p for p in paras if hit(p)]
+    if not touched:
+        return []
+    now = {sq(p) for p in after.split("\n\n")}
+    return [p for p in paras if p not in touched and sq(p) not in now]
 
 
 def weave(brief_path, base_file=""):
@@ -514,11 +545,10 @@ def latest_final(d):
 def shorten_prompt(text):
     title, *rest = text.strip().split("\n", 1)
     n = round(len(re.sub(r"\s", "", rest[0] if rest else text)) / 2 / 10) * 10
-    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
         f"아래 [원고]를 지금의 절반 분량(공백 제외 약 {n}자)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, "
-        "중심 장면과 주장 위주로 남깁니다. [기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        "중심 장면과 주장 위주로 남깁니다. [글쓰기 규칙]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        standing_block(), PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def chars(f):
@@ -529,11 +559,10 @@ def chars(f):
 
 
 def fit_prompt(text):
-    standing = (ROOT / "briefs" / "standing-feedback.md").read_text(encoding="utf-8")
     return "\n\n".join([
         f"아래 [원고]를 공백을 빼고 {TARGET_CHARS:,}자 안팎({MAX_CHARS:,}자 이하)으로 줄여 주세요. 글의 흐름·문체·필자의 생각은 살리고, 중심 장면과 주장 위주로 남깁니다. "
-        "[기준 피드백]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
-        "[기준 피드백]\n" + standing, NO_COPY, PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
+        "[글쓰기 규칙]도 계속 지킵니다. 원고에 없는 사실·수치·경험은 더하지 마세요. 제목은 바꾸지 마세요.",
+        standing_block(), PEOPLE_RULE, IC.KEEP_RULE, OUT_RULE, "=== [원고] ===\n" + text])
 
 
 def fit(brief_path):

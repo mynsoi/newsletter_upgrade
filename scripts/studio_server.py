@@ -225,7 +225,9 @@ def step(n, f, by, feedback="", known="", mode="", srcs=(), extra=""):
 
 def steps_in(d, b):
     """한 시도의 과정 1·2·3(+ 과정 4~) — 설정 글의 runs/columns/<글>/ 또는 앞 시도 폴더."""
-    standing = read(ROOT / "briefs" / "standing-feedback.md").replace("[기준 피드백 — 받은 그대로]\n", "").strip()
+    # 과정 3에 쓴 기준 — 2026-11-02부터 글쓰기 규칙(rules.txt로 남김), 그 전 글은 기준 피드백 원문
+    standing = (read(d / "rules.txt").strip() if (d / "rules.txt").exists() else
+                read(ROOT / "briefs" / "standing-feedback.md").replace("[기준 피드백 — 받은 그대로]\n", "").strip())
     steps = []
     srcs = tuple(s[0] for s in b.get("sources", []) if isinstance(s, (list, tuple)) and s)
     ic = IC.load(b)
@@ -241,6 +243,8 @@ def steps_in(d, b):
         if f.stat().st_size > 50:
             steps.append(step(len(steps) + 1, f, read(d / f"by-r{n}.txt").strip() or "astra", read(d / f"feedback-r{n}.txt"),
                               b.get("title", ""), read(d / f"mode-r{n}.txt").strip(), srcs, extra))
+            # 피드백 반영이 짚지 않은 문단까지 바꿨을 때(column_pipeline.untouched_changes, 2026-11-02)
+            steps[-1]["stray"] = [x for x in read(d / f"stray-r{n}.txt").splitlines() if x.strip()]
     return steps
 
 
