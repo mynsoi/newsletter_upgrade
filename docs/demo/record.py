@@ -12,7 +12,7 @@
 주제 지도 판정은 바꾸지 않는다(판정 예시에 쌓이므로) — 판정 칸에 마우스만 올린다.
 
 2차 심사판(11/3, 계획: docs/2026-11-03-시연영상-2차심사-계획.md) — --r2를 붙이면 _workspace/demo/r2에 따로 찍고(1차 프레임은 그대로),
-  챕터를 안 적으면 s2 → s3 → c4 → c5 → s4 → s5 → c7 → s5r → c8 → c8web 순서.
+  챕터를 안 적으면 s2 → s3 → c4 → c5 → s4 → s5 → c7 → s5r → s6 → c8web 순서.
   s2 메뉴·탭 둘러보기 · s3 글쓰기 A(추천 주제 → 원문 확인 → 쓰기) · s4 글쓰기 B의 쓰기(c4·c5 다음) · s5 문체 피드백 → 과정 4
   · s5r 확정 뒤 규칙 후보 → 규칙에 넣기 → 규칙 파일. 글 A는 state.json의 article_a, 글 B는 article.
   s5r은 briefs/글쓰기규칙.md에 실제로 한 줄을 넣는다(다른 PC에도 올라감) — 촬영 뒤 그 줄을 지우고 공유한다(11/3 사용자).
@@ -49,10 +49,10 @@ OPTION_KEY = "탐색 시간"  # 리허설에서 고른 옵션의 말할 것에 �
 REC_KEYS = ("DBS", "아틀라시안", "Atlassian")  # 넣기로 보여 줄 추천 원문
 FEEDBACK = "두 번째 문단의 사례 설명을 한 문장 줄이고, 맺음은 독자에게 묻는 문장으로 끝내 주세요."
 # 2차 — 글 A의 추천 주제(11/3 리허설에서 돌린 것, 없으면 첫 카드)와 글 B의 문체 피드백(지금 규칙 11개와 겹치지 않는 것)
-PICK_KEY = "자료를 많이 가진 회사라도"
+PICK_KEY = "AI에 건네는 피드백에는"  # 11/3 녹화 1회차에 쓴 주제 — 5장(피드백이 규칙이 된다)과 맞물림
 STYLE_FEEDBACK = "'~할 수 있습니다', '~일지도 모릅니다' 같은 흐린 끝맺음을 줄이고 단정해서 써 주세요."
-CHAPTERS = ["c1", "c2", "c3", "c4", "c5", "c5b", "c6", "c7", "c8", "c8mail", "c8web", "s2", "s3", "s4", "s5", "s5r"]
-CHAPTERS_R2 = ["s2", "s3", "c4", "c5", "s4", "s5", "c7", "s5r", "c8", "c8web"]
+CHAPTERS = ["c1", "c2", "c3", "c4", "c5", "c5b", "c6", "c7", "c8", "c8mail", "c8web", "s2", "s3", "s4", "s5", "s5r", "s6", "c7b"]
+CHAPTERS_R2 = ["s2", "s3", "c4", "c5", "s4", "s5", "c7", "s5r", "s6", "c8web"]
 VIEW = {"width": 1920, "height": 1080}  # 스크린캐스트는 기기 배율을 무시하고 CSS 픽셀로 찍는다 — 1080p 원본으로(10/26 시험: dsf 1.25·2 모두 1536×864)
 
 CURSOR_JS = """
@@ -182,6 +182,10 @@ POS = {"x": VIEW["width"] / 2, "y": VIEW["height"] / 2}
 def glide(pg, loc, pause=0.5, fx=0.5):
     loc.scroll_into_view_if_needed()
     b = loc.bounding_box()
+    if b and b["y"] + b["height"] > VIEW["height"] - 200:  # 화면 맨 아래면 입력창에 가려 클릭이 빗나간다(11/3) — 가운데로
+        loc.evaluate("e => e.scrollIntoView({block: 'center', behavior: 'smooth'})")
+        pg.wait_for_timeout(700)
+        b = loc.bounding_box()
     x, y = b["x"] + b["width"] * fx, b["y"] + b["height"] / 2
     d = ((x - POS["x"]) ** 2 + (y - POS["y"]) ** 2) ** 0.5
     pg.mouse.move(x, y, steps=max(8, min(40, int(d / 18))))
@@ -435,21 +439,37 @@ def c7(pg):
         r.wait(lambda: art(k)["titles"] and not busy(k), "제목 후보", 900)
         t = art(k)["titles"][-1]["items"][0]
         click(r, pg.get_by_role("button").filter(has_text=t).last, "제목 고르기", after=2.0)
+        # 한 글에 일은 하나씩 — 머리 그림이 도는 동안 누른 본문 그림은 시작되지 않는다(11/3 녹화에서 50분 멈춤)
         click(r, btn(pg, "머리 그림"), "머리 그림 그리기", after=1.0)
+        r.wait(lambda: art(k)["images"] and not busy(k), "머리 그림 그리기", 1800)
+        pictures(r, pg, k)
+
+
+def c7b(pg):
+    """c7이 머리 그림까지 그리고 멈췄을 때 — 본문 그림부터 이어 찍는다(편집에서 c7 뒤에 붙인다)"""
+    k = saved()["article"]
+    go(pg, f"#/a/{k}")
+    with Rec(pg, "c7b") as r:
+        pictures(r, pg, k)
+
+
+def pictures(r, pg, k):
+    """본문 그림 그리기 → 머리 그림·본문 그림 고르기 → 점검 → 확정"""
+    if not art(k)["inline"]:
         click(r, btn(pg, "본문 그림"), "본문 그림 그리기", after=1.0)
-        r.wait(lambda: art(k)["images"] and art(k)["inline"] and not busy(k), "그림 그리기", 3000)
-        hero = pg.locator("div.grid-cols-4").first.locator("button")
-        click(r, hero.first, "머리 그림 고르기", after=1.2)
-        inline = pg.locator("div.grid-cols-4").last.locator("button")
-        for i in range(min(2, inline.count())):
-            hover(r, inline.nth(i), f"본문 그림 {i + 1} — 문단·고른 이유", 2.0)
-            click(r, inline.nth(i), f"본문 그림 {i + 1} 고르기", after=1.0)
-        click(r, btn(pg, "그림 정함 · 확정으로"), "그림 정함 · 확정으로", after=2.0)
-        chk = pg.get_by_text("수치", exact=False).last
-        if chk.count():
-            hover(r, chk, "수치·용어 점검", 2.5)
-        click(r, pg.get_by_role("button", name="확정").last, "확정", after=3.0)
-        hover(r, pg.get_by_text("확정됨").last, "확정됨", 1.5)
+        r.wait(lambda: art(k)["inline"] and not busy(k), "본문 그림 그리기", 1800)
+    hero = pg.locator("div.grid-cols-4").first.locator("button")
+    click(r, hero.first, "머리 그림 고르기", after=1.2)
+    inline = pg.locator("div.grid-cols-4").last.locator("button")
+    for i in range(min(2, inline.count())):
+        hover(r, inline.nth(i), f"본문 그림 {i + 1} — 문단·고른 이유", 2.0)
+        click(r, inline.nth(i), f"본문 그림 {i + 1} 고르기", after=1.0)
+    click(r, btn(pg, "그림 정함 · 확정으로"), "그림 정함 · 확정으로", after=2.0)
+    chk = pg.get_by_text("수치", exact=False).last
+    if chk.count():
+        hover(r, chk, "수치·용어 점검", 2.5)
+    click(r, pg.get_by_role("button", name="확정").last, "확정", after=3.0)
+    hover(r, pg.get_by_text("확정됨").last, "확정됨", 1.5)
 
 
 def c8(pg):
@@ -561,6 +581,10 @@ def s2(pg):
 def s3(pg):
     """3장 글쓰기 A — 추천 주제 → (자동) 원문 끝까지 확인·사내 맥락 → 본문 쓰기 → 쓰기 → 과정 1·2·3 → 비교.
     11/3 리허설: 원문 확인 약 2분, 쓰기 약 2분 30초. 글 옵션 단계는 없다."""
+    # 고를 주제가 추천 목록에 있는지 먼저 본다(없으면 다른 추천을 끝없이 넘김)
+    tp = [x for x in state()["wiki"]["topics"] if x["verdict"] == "쓸 만함" and x["status"] == "쓸 수 있음" and PICK_KEY in x["title"]]
+    if not tp:
+        sys.exit(f"추천 주제에 '{PICK_KEY}'가 없습니다 — PICK_KEY를 바꿀 것")
     go(pg, "#/articles")
     with Rec(pg, "s3") as r:
         cards = pg.locator("div.grid.grid-cols-2 > button")
@@ -568,12 +592,11 @@ def s3(pg):
         for i in range(min(cards.count(), 4)):
             hover(r, cards.nth(i), f"추천 주제 {i + 1}", 0.8)
         click(r, btn(pg, "다른 추천"), "다른 추천", after=1.5)
-        for _ in range(12):  # 고를 주제가 보일 때까지 넘긴다(4개씩 돌아감)
+        for _ in range(60):  # 고를 주제가 보일 때까지 넘긴다(4개씩 돌아감 — 편집에서 자름)
             if cards.filter(has_text=PICK_KEY).count():
                 break
-            click(r, btn(pg, "다른 추천"), "다른 추천", pause=0.2, after=0.8)
-        pick = cards.filter(has_text=PICK_KEY)
-        click(r, pick if pick.count() else cards.first, "추천 주제 고르기", after=2.0)
+            click(r, btn(pg, "다른 추천"), "다른 추천", pause=0.2, after=0.6)
+        click(r, cards.filter(has_text=PICK_KEY), "추천 주제 고르기", after=2.0)
         t0 = time.time()
         while "#/a/" not in pg.url and time.time() - t0 < 30:
             pg.wait_for_timeout(500)
@@ -586,7 +609,11 @@ def s3(pg):
             t = pg.get_by_text(name, exact=True)
             if t.count():
                 hover(r, t.last, name, 1.6)
-        click(r, btn(pg, "이 원문으로 본문 쓰기"), "이 원문으로 본문 쓰기", after=1.5)
+        for _ in range(3):  # 화면이 움직이는 중이면 한 번에 안 눌릴 때가 있다(11/3 재녹화)
+            click(r, btn(pg, "이 원문으로 본문 쓰기"), "이 원문으로 본문 쓰기", after=1.5)
+            pg.wait_for_timeout(3000)
+            if btn(pg, "쓰기", True).count():
+                break
         hover(r, pg.locator("div.rounded-2xl").filter(has=btn(pg, "쓰기", True)).locator("span").first, "대상 독자", 1.2)
         click(r, btn(pg, "쓰기", True), "쓰기", after=2.0)
         r.wait(lambda: len(art(k)["steps"]) >= 3 and not busy(k), "과정 1·2·3", 1800)
@@ -666,6 +693,56 @@ def s5r(pg):
         pg.wait_for_timeout(1500)
 
 
+def s6(pg):
+    """6장 발행 — 메일 발송은 찍을 수 없어(Outlook은 VDI 안) 웹·메일 미리보기를 천천히 보여 주고, 발행 뒤 메일 파일(.eml)을 받는 데까지(11/3 사용자).
+    실제로 발행된다(웹 배포 · .eml) — 촬영 뒤 unpublish."""
+    if not TO:
+        sys.exit("s6은 --to <받는 사람>이 있어야 합니다")
+    k = saved()["article"]
+    go(pg, f"#/a/{k}")
+    with Rec(pg, "s6") as r:
+        click(r, menu_link(pg, "#/publish"), "메뉴 발행", after=2.0)
+        if "#/publish" not in pg.url:
+            click(r, menu_link(pg, "#/publish"), "메뉴 발행", after=2.0)
+        glide(pg, pg.locator("main h2, main h1").last, 0.8)
+        click(r, pg.locator("aside.w-80 button").filter(has_text=art(k)["title"][:10]), "확정한 글 고르기", after=1.0, fx=0.8)
+        r.wait(lambda: pg.locator("iframe[title='미리보기']").count() > 0, "발행본 만들기", 600)
+        pg.wait_for_timeout(2500)
+        frame = pg.locator("iframe[title='미리보기']")
+        hover(r, frame, "웹 미리보기 — 아카이브에 올라갈 칼럼", 1.5)
+        for _ in range(4):
+            scroll(r, 480, at=frame, speed=420)
+            pg.wait_for_timeout(900)
+        click(r, btn(pg, "메일", True), "메일 미리보기", after=2.5)
+        frame = pg.locator("iframe[title='미리보기']")
+        hover(r, frame, "메일 미리보기 — 그대로 보낼 이미지 메일", 1.5)
+        for _ in range(4):
+            scroll(r, 450, at=frame, speed=380)
+            pg.wait_for_timeout(900)
+        type_in(r, pg.locator("textarea").first, TO, "받는 사람", send=False)
+        b = pg.locator("button").filter(has_text="발행").last
+        click(r, b, "발행", after=1.2)
+        click(r, b, "한 번 더 누르면 발행", after=2.0)
+        r.wait(lambda: (art(k) or {}).get("published") and not busy(k), "캡처 · 메일 · 커밋·푸시", 1800)
+        pg.wait_for_timeout(2000)
+        save(published=True)
+        done = pg.locator("div.border-emerald-400\\/30")
+        if done.count():
+            hover(r, done.first, "발행 완료 — 웹 주소", 2.0)
+        eml = pg.get_by_role("link", name="메일 파일(.eml)")
+        glide(pg, eml, 0.6)
+        r.mark("메일 파일(.eml) 받기", eml)
+        with pg.expect_download() as dl:
+            pg.mouse.down()
+            pg.wait_for_timeout(90)
+            pg.mouse.up()
+        f = OUT / dl.value.suggested_filename
+        dl.value.save_as(f)
+        r.mark(f"받음 · {f.name}", eml, "download")
+        print(f"  · .eml {f}", flush=True)
+        pg.wait_for_timeout(2500)
+
+
 def rules_page(added):
     """briefs/글쓰기규칙.md를 작업실과 같은 어두운 화면으로 — 방금 넣은 줄만 형광. 파일 내용 그대로(꾸미지 않음)"""
     import html
@@ -724,8 +801,8 @@ def build(names):
 
 
 def main():
-    if args[:1] == ["build"]:
-        return build([a for a in args[1:] if a in CHAPTERS] or [c for c in CHAPTERS if (OUT / c / "frames.json").exists()])
+    if "build" in args:
+        return build([a for a in args if a in CHAPTERS] or [c for c in CHAPTERS if (OUT / c / "frames.json").exists()])
     names = [a for a in args if a in CHAPTERS] or (CHAPTERS_R2 if R2 else CHAPTERS[:11])
     OUT.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
