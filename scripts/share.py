@@ -77,9 +77,11 @@ def sync(k, msg):
         imgs = _images(k)
         if imgs:
             git("add", "-f", "--", *imgs)
-        if not git("diff", "--cached", "--name-only").stdout.strip():
+        # 이 글의 경로에서 올린 파일만 커밋 — 다른 작업(발행 등)이 올려 둔(staged) 파일까지 쓸어 담지 않게(2026-11-03 발행과 부딪힘)
+        staged = git("-c", "core.quotepath=off", "diff", "--cached", "--name-only", "--", *paths, *imgs).stdout.splitlines() if paths or imgs else []
+        if not staged:
             return False
-        r = git("commit", "-q", "-m", f"{msg} ({user()})")
+        r = git("commit", "-q", "-m", f"{msg} ({user()})", "--", *staged)
         if r.returncode:
             print(f"글 공유 커밋 실패 {k}: {(r.stderr or r.stdout).strip()[:200]}", flush=True)
             return False

@@ -389,9 +389,13 @@ def release(k, to, cc, push=True):
     meta["published"] = {"date": a["pub_date"], "url": info["web_url"], "site": dest.relative_to(ROOT).as_posix(),
                          "eml": eml.relative_to(ROOT).as_posix(), "to": to, "cc": cc}
     a["meta"].write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
-    git("add", "--", "site", a["meta"].relative_to(ROOT).as_posix())
-    if git("diff", "--cached", "--name-only"):
-        git("commit", "-m", f"발행: {a['title']}", "--", "site", a["meta"].relative_to(ROOT).as_posix())
+    mine = ["site", a["meta"].relative_to(ROOT).as_posix()]
+    git("add", "--", *mine)
+    if git("diff", "--cached", "--name-only", "--", *mine):
+        # 작업실 자동 공유가 그 사이 이 파일들을 먼저 커밋했으면 커밋할 게 없어 실패한다(2026-11-03 발행 실패) — 남은 변경이 없으면 괜찮다
+        r = subprocess.run(["git", "commit", "-m", f"발행: {a['title']}", "--", *mine], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if r.returncode and git("status", "--porcelain", "--", *mine):
+            raise SystemExit(f"git commit 실패: {(r.stderr or r.stdout).strip()}")
     if push:  # 인자 이름이 push라 함수는 push_branch — 같은 이름이면 bool을 부르다 죽는다(2026-10-26 발행 실패)
         push_branch()
         print("4/4 커밋·푸시 — Vercel이 site/를 배포", flush=True)
