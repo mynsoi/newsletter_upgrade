@@ -109,3 +109,4 @@
 {"at": 1793697787, "user": "tksruf501", "article": "m-20261028-142633", "kind": "rules", "status": "done", "secs": 14}
 {"at": 1793698864, "user": "tksruf501", "article": "m-20261028-142633", "kind": "publish", "status": "done", "secs": 18}
 {"at": 1793715806, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 25}
+{"at": 1793716101, "user": "tksruf501", "article": "aside · 소스", "kind": "collect", "status": "failed", "secs": 198}
