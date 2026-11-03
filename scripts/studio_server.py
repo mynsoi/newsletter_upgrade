@@ -1090,6 +1090,10 @@ def act_confirm(a):
         raise ValueError("잘못된 과정 번호")
     st = art["steps"][n - 1]
     out = ROOT / "columns" / f"{date.today().isoformat()}-{k}.md"
+    if not process_path(k):  # 바꿔 확정(2026-11-03) — 다른 날 확정한 예전 확정본·그림이 남아 같은 글이 두 벌이 되지 않게. 그림은 아래서 다시 복사한다
+        for f in [*(ROOT / "columns").glob(f"*-{k}.md"), *(ROOT / "columns" / "img").glob(f"*-{k}.png"), *(ROOT / "columns" / "img").glob(f"*-{k}-*.png")]:
+            if f != out:
+                f.unlink()
     title = art["title"] or st["title"]
     paras = [x for x in re.split(r"\n\s*\n", st["text"]) if x.strip()]
     imgs = {}

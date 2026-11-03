@@ -882,7 +882,8 @@ def mark_written(page_rel, column_rel):
     """확정 — 주제 페이지에 '씀'과 칼럼 파일을 적는다."""
     page = WIKI / page_rel if not page_rel.startswith("wiki/") else ROOT / page_rel
     if page.is_file():
-        ui = used_in(page) + [column_rel]
+        k = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", Path(column_rel).stem)  # 바꿔 확정이면 같은 글의 예전 확정본 경로는 뺀다
+        ui = [u for u in used_in(page) if not (u.startswith("columns/") and re.sub(r"^\d{4}-\d{2}-\d{2}-", "", Path(u).stem) == k)] + [column_rel]
         set_front(page, status="씀", used_in="[" + ", ".join(dict.fromkeys(ui)) + "]")
         write_index(topics())
         commit(f"주제 지도: 확정 표시 {column_rel}")

@@ -558,8 +558,11 @@ def rule_cands_prompt(fbs):
 def rule_cands(brief_path):
     """--rule-cands <설정> — 확정한 글의 피드백을 모아 규칙 후보를 만든다(astra) → rule-cands.json. 넣을지는 작업실에서 사람이 정한다."""
     d = RUNS / Path(brief_path).stem
-    fbs = feedbacks(d)
-    res = {"made": time.strftime("%Y-%m-%d %H:%M"), "of": [x["n"] for x in fbs], "items": []}
+    allfb = feedbacks(d)
+    # 바꿔 확정(2026-11-03) — 지난번에 후보를 만든 피드백은 다시 묻지 않는다. 그때 후보(정한 것·안 정한 것)는 그대로 두고 새 피드백만 판단
+    old = json.loads((d / "rule-cands.json").read_text(encoding="utf-8")) if (d / "rule-cands.json").exists() else {}
+    fbs = [x for x in allfb if x["n"] not in old.get("of", [])]
+    res = {"made": time.strftime("%Y-%m-%d %H:%M"), "of": [x["n"] for x in allfb], "items": list(old.get("items", []))}
     if fbs:
         out = run_astra(d / "_rules", rule_cands_prompt(fbs))
         m = re.search(r"\{.*\}", out, re.S)
@@ -571,10 +574,12 @@ def rule_cands(brief_path):
             res["items"].append({"fb": fb_n, "kind": it["kind"], "rule": str(it.get("rule") or "").strip(), "group": str(it.get("group") or "").strip(),
                                  "same": str(it.get("same") or "").strip(), "why": str(it.get("why") or "").strip(),
                                  "feedback": [x["feedback"] for x in fbs if x["n"] in fb_n], "state": None})
-        if not res["items"]:
+        if len(res["items"]) == len(old.get("items", [])):
             sys.exit("규칙 후보 결과를 읽지 못했습니다 — 로그: " + str(d / "_rules"))
     (d / "rule-cands.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"규칙 후보: 피드백 {len(fbs)}건 → " + ", ".join(f"{k} {sum(i['kind'] == k for i in res['items'])}" for k in RULE_KINDS))
+    new = res["items"][len(old.get("items", [])):]
+    print(f"규칙 후보: 새 피드백 {len(fbs)}건 → " + ", ".join(f"{k} {sum(i['kind'] == k for i in new)}" for k in RULE_KINDS)
+          + (f" · 지난 후보 {len(old['items'])}개는 그대로" if old.get("items") else ""))
 
 
 def add_rule(text, group):
