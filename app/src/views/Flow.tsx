@@ -1125,7 +1125,7 @@ function EmphCard({ items, onApply }: { items: { text: string; why: string }[]; 
   return (
     <div className="mb-5 rounded-2xl border border-violet-400/40 bg-violet-500/[0.06] px-5 py-4">
       <p className="text-sm font-semibold text-ink">강조 추천 {items.length}개</p>
-      <p className="mt-0.5 text-xs text-ink-3">고른 문장에 굵게 + 밑줄을 씌운 채 편집기가 열립니다. 편집기에서 더 고치거나 풀고, 저장하면 다음 과정으로 쌓입니다.</p>
+      <p className="mt-0.5 text-xs text-ink-3">고른 문장을 굵게 강조한 채 편집기가 열립니다. 편집기에서 더 고치거나 풀고, 저장하면 다음 과정으로 쌓입니다.</p>
       <div className="mt-3 space-y-2">
         {items.map((it, i) => (
           <label key={i} className="flex cursor-pointer gap-3 rounded-xl border border-line bg-panel-solid px-4 py-3">

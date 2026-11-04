@@ -112,7 +112,7 @@ def load(k):
 def inline(s):
     s = html.escape(s, quote=False)
     s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
-    s = re.sub(r"==(.+?)==", r'<strong class="key">\1</strong>', s)  # 강조(굵게+밑줄) — 작업실 편집기의 강조 버튼(2026-11-04)
+    s = re.sub(r"==(.+?)==", r'<strong class="key">\1</strong>', s)  # 강조(굵게) — 작업실 편집기의 강조 버튼(2026-11-04)
     return s.replace("\n", "<br>")
 
 

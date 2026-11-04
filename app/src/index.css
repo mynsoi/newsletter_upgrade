@@ -194,8 +194,8 @@ body { min-width: 1280px; -webkit-font-smoothing: antialiased; background: var(-
 .prose-ko p { margin: 0 0 1.15em; word-break: keep-all; }
 .prose-ko { font-size: 17px; line-height: 1.95; letter-spacing: -0.003em; }
 .s-add { background: linear-gradient(transparent 62%, rgb(139 92 246 / 0.35) 62%); }
-/* 강조(==…==) — 발행본(web/article.css strong.key)과 같게 굵게 + 밑줄 */
-strong.key { font-weight: 700; text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; text-underline-offset: 5px; text-decoration-skip-ink: none; }
+/* 강조(==…==) — 발행본(web/article.css strong.key)과 같게 굵게(2026-11-04 사용자: 밑줄은 뺌) */
+strong.key { font-weight: 700; }
 /* 원고 에디터 — 보기 화면과 같은 글꼴·문단 간격, 제목 줄은 보기의 h4처럼 */
 .ed { caret-color: rgb(139 92 246); min-height: 12rem; }
 .ed h1, .ed h2, .ed h3 { margin: 2rem 0 0.75rem; font-size: 1.125rem; line-height: 1.75rem; font-weight: 600; }

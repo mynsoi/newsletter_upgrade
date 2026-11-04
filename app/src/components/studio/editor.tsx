@@ -10,13 +10,13 @@ import { UndoRedo } from "@tiptap/extensions";
 import { fromDoc, toDoc, type DocNode } from "@/lib/doc";
 import { cn } from "@/lib/utils";
 
-/** 강조(굵게+밑줄) — 원고에는 ==…==로 남고 발행본에서 굵게+밑줄로 그려진다(2026-11-04 사용자: 버튼 하나로) */
+/** 강조(굵게) — 원고에는 ==…==로 남고 발행본에서 굵게 그려진다(2026-11-04 사용자: 버튼 하나로, 밑줄은 뺌) */
 const Emph = Mark.create({
   name: "emph",
   parseHTML: () => [{ tag: "strong.key" }],
   renderHTML: () => ["strong", { class: "key" }, 0],
   addKeyboardShortcuts() {
-    return { "Mod-u": () => this.editor.commands.toggleMark(this.name) };
+    return { "Mod-b": () => this.editor.commands.toggleMark(this.name) };
   },
 });
 
@@ -62,7 +62,7 @@ export function ProseEditor({
         <button
           type="button"
           aria-pressed={on}
-          title="고른 문장을 굵게 + 밑줄로 (Ctrl+U) — 다시 누르면 풀림"
+          title="고른 문장을 굵게 (Ctrl+B) — 다시 누르면 풀림"
           // 누르는 순간 선택이 풀리지 않게 mousedown에서 처리
           onMouseDown={(e) => {
             e.preventDefault();
@@ -73,9 +73,9 @@ export function ProseEditor({
             on ? "border-ink bg-ink text-page" : "border-line text-ink-2 hover:border-ink-3 hover:text-ink"
           )}
         >
-          <span className="underline decoration-2 underline-offset-[3px]">강조</span>
+          <b>강조</b>
         </button>
-        <span className="text-xs text-ink-3">문장을 드래그한 뒤 누르면 굵게 + 밑줄 · Ctrl+U</span>
+        <span className="text-xs text-ink-3">문장을 드래그한 뒤 누르면 굵게 · Ctrl+B</span>
       </div>
       <EditorContent editor={editor} />
     </>
