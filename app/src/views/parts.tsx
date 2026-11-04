@@ -5,7 +5,7 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { ClaudeMark, MiniMd } from "@/components/studio/bits";
 import { act, getChat, img, runningJob, type Article as A, type ChatMsg, type State } from "@/lib/api";
-import { keptSentences, paragraphs, sentences } from "@/lib/text";
+import { emphParts, keptSentences, paragraphs, sentences } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 /** 글(대화) 화면이 쓰는 조각 — 예전 글 화면(Article.tsx, 2026-10-11 지움)에서 옮겨 왔다: 본문 그리기 · 진행자 창 · 본문 그림 자리 */
@@ -23,15 +23,18 @@ export function Prose({ text, prev, after }: { text: string; prev?: string; afte
     <div className="prose-ko text-ink">
       {paragraphs(text).map((p, i, all) => {
         if (/^#{1,3}\s/.test(p)) return <h4 key={i} className="mt-8 mb-3 text-lg font-semibold text-ink">{p.replace(/^#+\s*/, "")}</h4>;
+        let open = false; // 강조가 문장 경계를 넘을 때 다음 문장으로 이어 간다
         return (
           <Fragment key={i}>
           <p>
             {sentences(p.replace(/^[>*\-\s]+/, "")).map((s, j) => {
               const k = idx++;
               const fresh = kept && !kept.has(k);
+              const r = emphParts(s, open);
+              open = r.open;
               return (
                 <span key={j} className={cn(fresh && "s-add text-ink")}>
-                  {s}{" "}
+                  {r.parts.map((x, m) => (x.em ? <strong key={m} className="key">{x.t}</strong> : <Fragment key={m}>{x.t}</Fragment>))}{" "}
                 </span>
               );
             })}

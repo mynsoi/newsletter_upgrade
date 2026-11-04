@@ -219,8 +219,9 @@ def step(n, f, by, feedback="", known="", mode="", srcs=(), extra=""):
     first = body.split("\n", 1)
     if known and not title and first[0].strip().strip("*\"'「」") == known:  # 머리표 없이 제목만 첫 줄에 쓴 원고
         title, body = known, (first[1] if len(first) > 1 else "").strip()
+    plain = re.sub(r"==(.+?)==", r"\1", body, flags=re.S)  # 강조 표시(==…==)는 글자 수·수치 대조에서 뺀다(2026-11-04)
     return {"n": n, "file": Path(f).relative_to(ROOT).as_posix(), "by": by, "title": title, "text": body, "mode": mode,
-            "chars": nospace(body), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime, "numCheck": num_check(f, body, srcs, extra)}
+            "chars": nospace(plain), "feedback": feedback.strip(), "at": Path(f).stat().st_mtime, "numCheck": num_check(f, plain, srcs, extra)}
 
 
 def steps_in(d, b):
@@ -263,7 +264,8 @@ def article_from_brief(bp):
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
             "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime,
             "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done")),
-            "ruleCands": rule_cands_view(d), "ruleCount": rule_count()}
+            "ruleCands": rule_cands_view(d), "ruleCount": rule_count(),
+            "emph": json.loads(read(d / "emph.json") or "null")}  # 강조 추천(column_pipeline --emph) — 어느 과정 파일을 보고 골랐는지 file로
 
 
 def article_from_process(pp):
@@ -1067,6 +1069,20 @@ def picked_file(k):
     return None
 
 
+def act_emph(a):
+    """강조 추천 — 고른 과정의 원고에서 강조할 문장 1~3개를 Claude가 추천한다(2026-11-04 사용자: AI가 추천하고 사람이 고쳐 확정).
+    넣는 일은 편집기에서 사람이 한다: 추천을 받아 편집을 열면 고른 문장에 강조가 들어간 채로 열리고, 저장하면 다음 과정으로 쌓인다."""
+    k = safe_id(a["article"])
+    bp = brief_path(k)
+    art = next((x for x in articles() if x["id"] == k), None)
+    if not art or not art["steps"]:
+        raise ValueError("추천할 원고가 없음")
+    n = int(a.get("step") or len(art["steps"]))
+    if not 1 <= n <= len(art["steps"]):
+        raise ValueError("잘못된 과정 번호")
+    return start("emph", k, PIPE + ["--emph", bp.relative_to(ROOT).as_posix(), art["steps"][n - 1]["file"]])
+
+
 def act_text_pick(a):
     """원고 → 그림 → 확정 단계(2026-10-22). 원고로 정한 과정과 그때의 과정 수를 적는다 — 그 뒤 피드백·편집·절반·다시 쓰기로
     과정이 늘거나 줄면 화면이 저절로 '원고' 단계로 돌아간다. n=0이면 원고 고르기로 되돌림. images_done은 그림 단계를 마쳤는지."""
@@ -1397,7 +1413,7 @@ ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_tit
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
-           "publish-build": act_publish_build, "publish": act_publish, "rule-decide": act_rule_decide}
+           "publish-build": act_publish_build, "publish": act_publish, "rule-decide": act_rule_decide, "emph": act_emph}
 
 
 # ---------- 그림 축소본 ----------

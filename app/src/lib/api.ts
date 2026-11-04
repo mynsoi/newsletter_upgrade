@@ -82,6 +82,8 @@ export type Article = {
   /** 확정할 때 이 글의 피드백을 모아 만든 규칙 후보(2026-11-03) · 지금 글쓰기 규칙 수 */
   ruleCands?: { made: string; of: number[]; items: RuleCand[] } | null;
   ruleCount?: number;
+  /** 강조 추천(2026-11-04) — file: 추천할 때 읽은 과정 파일. 넣을지는 편집기에서 사람이 정한다 */
+  emph?: { file: string; made: string; items: { text: string; why: string }[] } | null;
   why?: string;
   at: number;
   error?: string;
@@ -254,6 +256,7 @@ export const JOB_NAMES: Record<string, string> = {
   revise: "과정 +1",
   shorten: "절반",
   rules: "규칙 후보",
+  emph: "강조 추천",
   inline: "본문 그림",
   images: "그림",
   collect: "수집",

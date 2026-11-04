@@ -7,7 +7,17 @@ export const sentences = (t: string) =>
     .map((s) => s.trim())
     .filter(Boolean);
 
-const norm = (s: string) => s.replace(/\s/g, "");
+const norm = (s: string) => s.replace(/\s|==/g, ""); // 강조 표시만 바뀐 문장은 새 문장으로 치지 않는다
+
+/** 강조(==…==)로 나눈 조각 — open: 앞 문장에서 강조가 열린 채 넘어왔는지(문장 나누기가 강조 한가운데를 자를 때) */
+export function emphParts(s: string, open = false): { parts: { t: string; em: boolean }[]; open: boolean } {
+  const parts: { t: string; em: boolean }[] = [];
+  s.split("==").forEach((t, i) => {
+    if (i) open = !open;
+    if (t) parts.push({ t, em: open });
+  });
+  return { parts, open };
+}
 
 export function paragraphs(t: string) {
   return t

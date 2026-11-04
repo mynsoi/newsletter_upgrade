@@ -10,7 +10,8 @@ import { Director, InlineImgs, Prose } from "@/views/parts";
 import { DeleteButton, StageChip } from "@/views/Articles";
 import { OptionsCard, PicksCard, useAttach } from "@/views/MineChat";
 import { act, articleTitle, img, openLog, type Article as A, type Job, type MinePick, type MineRun, type RuleCand, type State, type Step } from "@/lib/api";
-import { paragraphs } from "@/lib/text";
+import { emphParts, paragraphs } from "@/lib/text";
+import { applyEmph, plainText } from "@/lib/doc";
 import { cn } from "@/lib/utils";
 
 // 편집기(Tiptap)는 '편집'을 누를 때만 받아 온다
@@ -993,7 +994,7 @@ function Now({
           <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <span className="tabular-nums">과정 {s.n}</span>
             <ByChip by={s.by} />
-            <span className="tabular-nums">{(edit === null ? s.chars : edit.replace(/\s/g, "").length).toLocaleString()}자</span>
+            <span className="tabular-nums">{(edit === null ? s.chars : plainText(edit).replace(/\s/g, "").length).toLocaleString()}자</span>
             {edit === null && <NumChip c={s.numCheck} />}
             {edit === null && !!s.stray?.length && (
               <span title={"피드백이 짚지 않았는데 바뀐 문단\n" + s.stray.join("\n")} className="rounded-full border border-amber-500/40 px-2 py-0.5 text-amber-500">
@@ -1029,6 +1030,12 @@ function Now({
                     <IconPencil className="size-3.5" />
                     편집
                   </SmallBtn>
+                  {a.kind === "brief" && (
+                    <SmallBtn onClick={() => job?.kind !== "emph" && act("emph", { article: a.id, step: s.n }).then(refresh)}>
+                      <IconSparkles className="size-3.5" />
+                      {job?.kind === "emph" ? "강조 문장 고르는 중…" : a.emph?.file === s.file ? "강조 다시 추천" : "강조 추천"}
+                    </SmallBtn>
+                  )}
                   {a.kind === "brief" && s.n < latest && (
                     <SmallBtn onClick={() => act("base", { article: a.id, step: s.n }).then(() => (setSel(null), refresh()))}>
                       <IconArrowBackUp className="size-3.5" />
@@ -1040,6 +1047,9 @@ function Now({
               )
             )}
           </div>
+          {edit === null && a?.emph && a.emph.file === s.file && job?.kind !== "emph" && (
+            <EmphCard key={a.emph.made} items={a.emph.items} onApply={(picks) => (setView("본문"), setEdit(applyEmph(s.text, picks)))} />
+          )}
           {v === "미리보기" && edit === null ? (
             <article className="overflow-hidden rounded-2xl border border-line bg-[#fbfaf7] text-neutral-900 shadow-xl">
               {hero && <img src={img(hero, 900)} className="aspect-[3/2] w-full object-cover" />}
@@ -1048,7 +1058,7 @@ function Now({
                 <div className="prose-ko mt-5 text-[14.5px] text-neutral-800">
                   {paragraphs(s.text).map((p_, i, all) => (
                     <div key={i}>
-                      <p>{p_}</p>
+                      <p>{emphLine(p_)}</p>
                       <InlineImgs a={a!} paras={all} n={i + 1} move={movable ? refresh : undefined} />
                     </div>
                   ))}
@@ -1099,6 +1109,40 @@ function Now({
             ))}
         </div>
       )}
+    </div>
+  );
+}
+
+/** 문단 하나를 강조(==…==) 조각으로 그린다 — 미리보기용 */
+function emphLine(p: string) {
+  return emphParts(p).parts.map((x, i) => (x.em ? <strong key={i} className="key">{x.t}</strong> : <span key={i}>{x.t}</span>));
+}
+
+/** 강조 추천(2026-11-04) — Claude가 고른 문장을 보여 주고, 사람이 고른 것만 강조를 씌워 편집기를 연다. 저장해야 원고(다음 과정)가 된다 */
+function EmphCard({ items, onApply }: { items: { text: string; why: string }[]; onApply: (picks: string[]) => void }) {
+  const [on, setOn] = useState<boolean[]>(() => items.map(() => true));
+  const picks = items.filter((_, i) => on[i]).map((x) => x.text);
+  return (
+    <div className="mb-5 rounded-2xl border border-violet-400/40 bg-violet-500/[0.06] px-5 py-4">
+      <p className="text-sm font-semibold text-ink">강조 추천 {items.length}개</p>
+      <p className="mt-0.5 text-xs text-ink-3">고른 문장에 굵게 + 밑줄을 씌운 채 편집기가 열립니다. 편집기에서 더 고치거나 풀고, 저장하면 다음 과정으로 쌓입니다.</p>
+      <div className="mt-3 space-y-2">
+        {items.map((it, i) => (
+          <label key={i} className="flex cursor-pointer gap-3 rounded-xl border border-line bg-panel-solid px-4 py-3">
+            <input type="checkbox" className="mt-1 size-4 accent-violet-500" checked={on[i]} onChange={() => setOn(on.map((x, j) => (j === i ? !x : x)))} />
+            <span className="min-w-0">
+              <strong className="key text-[14.5px] leading-relaxed text-ink">{it.text}</strong>
+              {it.why && <span className="mt-1 block text-xs text-ink-3">{it.why}</span>}
+            </span>
+          </label>
+        ))}
+      </div>
+      <div className="mt-3 flex justify-end">
+        <SmallBtn strong onClick={() => picks.length && onApply(picks)}>
+          <IconPencil className="size-3.5" />
+          {picks.length ? `고른 ${picks.length}개 강조해서 편집` : "문장을 골라 주세요"}
+        </SmallBtn>
+      </div>
     </div>
   );
 }
