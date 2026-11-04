@@ -78,7 +78,9 @@ def sync(k, msg):
         if imgs:
             git("add", "-f", "--", *imgs)
         # 이 글의 경로에서 올린 파일만 커밋 — 다른 작업(발행 등)이 올려 둔(staged) 파일까지 쓸어 담지 않게(2026-11-03 발행과 부딪힘)
-        staged = git("-c", "core.quotepath=off", "diff", "--cached", "--name-only", "--", *paths, *imgs).stdout.splitlines() if paths or imgs else []
+        # --no-renames: 바꿔 확정은 내용이 같은 파일을 날짜만 바꿔 다시 쓰므로 git이 '이름 바꾸기'로 보고 새 이름만 내놓는다 —
+        # 그러면 지운 옛 확정본·그림이 커밋에서 빠져 두 벌이 남았다(2026-11-04, 11/3 확정본 3개)
+        staged = git("-c", "core.quotepath=off", "diff", "--cached", "--name-only", "--no-renames", "--", *paths, *imgs).stdout.splitlines() if paths or imgs else []
         if not staged:
             return False
         r = git("commit", "-q", "-m", f"{msg} ({user()})", "--", *staged)
