@@ -68,6 +68,7 @@ NO_SQUEEZE = {"c8web", "c8mail"}
 # 말이 없어도 자르지 않는 클립(10/26 사용자: 메일·웹 결과물은 스크롤해서 길게) · 클립 끝을 앞당기는 곳(c8web 마지막 스크롤은 바닥에 닿아 흔들림)
 KEEP_CLIPS = {"c8mail", "c8web"}
 CLIP_END = {"c8web": 33.0}
+CLIP_START = {}
 # 일하는 AI — 기다림 표시 이름의 앞부분으로
 WAIT_AI = {"글 옵션": ["astra"], "원문 끝까지": ["astra", "Claude"], "추천 원문": ["astra"], "과정 1·2·3": ["Claude", "astra"],
            "피드백": ["astra"], "제목 후보": ["astra"], "그림 그리기": ["astra", "gti"]}
@@ -126,7 +127,8 @@ if R2:  # 2차 심사판 — 둘러보기 → 글쓰기 A(추천 주제)·B(직�
     ]
     NO_SQUEEZE = {"c8web"}
     KEEP_CLIPS = {"c8web"}
-    CLIP_END = {"c8web": 33.0, "c7": 80.5}  # c7은 본문 그림을 누르기 전까지(뒤는 c7b가 이어 찍음)
+    CLIP_END = {"c8web": 14.6, "c7": 80.5}  # c7은 본문 그림을 누르기 전까지(뒤는 c7b가 이어 찍음)
+    CLIP_START = {"c8web": 7.6}  # 웹 칼럼은 열린 뒤 스크롤 두 번, 7초 안팎만(11/4 사용자: 5:10~5:16 정도)
     WAIT_AI = {"글 옵션": ["astra"], "원문 끝까지": ["astra", "Claude"], "과정 1·2·3": ["Claude", "astra"], "피드백": ["astra"],
                "제목 후보": ["astra"], "본문 그림": ["astra", "gti"], "규칙 후보": ["astra"], "규칙 파일": [], "발행본": [], "캡처": []}
     CALLOUT = {
@@ -152,7 +154,7 @@ if R2:  # 2차 심사판 — 둘러보기 → 글쓰기 A(추천 주제)·B(직�
         ("s5r", "새 규칙 후보", "고친 뒤 문장", 1.45), ("s5r", "규칙에 넣기", "규칙에 넣음", 1.5), ("s5r", "글쓰기 규칙 파일", "글쓰기 규칙 파일", 1.5),
         ("s6", "받는 사람", "한 번 더 누르면 발행", 1.6), ("s6", "발행 완료", "받음", 1.5),
     ]
-    NUMBERS = [("s2", "탭 컨설팅", "탭 전체", "원문 2,183편 · 경영일기 252편"), ("s2", "메뉴 주제", "탭 쓸 만함", "주제 158개")]
+    NUMBERS = [("s2", "탭 컨설팅", "탭 전체", "원문 2,183편 · 경영일기 252편"), ("s2", "탭 보통", "탭 쓸 만함", "주제 158개")]  # '메뉴 주제'는 첫머리 마우스 올림과 이름이 같다
     CUTS = {"s3": [("다른 추천", "추천 주제 고르기", 1.6)]}  # 고를 주제가 나올 때까지 '다른 추천'을 13번 넘긴 구간
     ANCHORS = {
         1: [("title", None, 0), ("flow", None, 0.4), ("flow", None, 5.6), ("flow", None, 9.4)],
@@ -163,11 +165,13 @@ if R2:  # 2차 심사판 — 둘러보기 → 글쓰기 A(추천 주제)·B(직�
         4: [("c4", "하고 싶은 말", 0), ("c4", "글 옵션 시작", 0), ("c4", "옵션 1", 0), ("c5", "원문 끝까지 읽고 확인 시작", 0)],
         5: [("s5", "문체 피드백", 0), ("s5", "피드백 → 과정 4 시작", 0), ("c7", "원고 정하기", 0), ("c7b", "수치·용어 점검", 0),
             ("s5r", "규칙 후보 — 이 글의", 0), ("s5r", "받은 피드백", 0), ("s5r", "규칙에 넣기", 0), ("stat", None, 0.3)],
-        6: [("s6", "웹 미리보기", 0), ("s6", "받는 사람", 0), ("c8web", "아카이브의 발행된 칼럼", 0), ("ending", None, 0.6)],
+        6: [("s6", "웹 미리보기", 0), ("s6", "받는 사람", 0), ("c8web", "스크롤", 0), ("ending", None, 0.6)],
     }
 # 빈 구간 자르기(10/26 사용자: 5분 안팎으로, 비는 곳은 날려도 됨) — 문장이 끝나고 KEEP_AFTER초, 다음 문장 KEEP_BEFORE초 전까지 말 없이 지나가는
 # 화면은 잘라 0.4초 교차 전환으로 잇고, 챕터 끝에 말 없이 남는 화면도 자른다
 KEEP_AFTER, KEEP_BEFORE, XF = 2.4, 2.6, 0.4
+if R2:
+    KEEP_AFTER, KEEP_BEFORE = 1.3, 1.5  # 말 없는 틈을 5.4초 → 3초 안팎으로(11/4 사용자: 자막 없이 빈 화면 구간)
 SCHED = []  # (절대 시작, 끝, 자막, TTS 글, 챕터, 문장 wav)
 
 
@@ -332,7 +336,7 @@ class Clip:
     def segments(self):
         """원본 시간을 (s0, s1, 빠르기, 기다림) 조각으로 — 앞뒤 군더더기를 자르고, 기다림은 빨리, 빈 곳은 4배로"""
         acts = [m["sec"] for m in self.marks if m["kind"] != "wait"]
-        start = max(0.0, (min(acts + [w[0] for w in self.waits]) if acts or self.waits else 0) - 1.5)
+        start = max(0.0, (min(acts + [w[0] for w in self.waits]) if acts or self.waits else 0) - 1.5, CLIP_START.get(self.name, 0.0))
         end = self.end if self.name in NO_SQUEEZE or not acts else min(self.end, max(acts + [w[1] for w in self.waits]) + 2.5)
         end = min(end, CLIP_END.get(self.name, end))
         cuts, t = [], start
@@ -736,22 +740,59 @@ def ending2(t, dur):
     return fade(img, t, dur, 0.6)
 
 
+CAP_W = 1680  # 자막 한 줄 최대 폭(40px 굵게 — 한글 40자 안팎)
+
+
+def cap_pieces(text):
+    """자막 조각 — 한 줄에 들어가면 그대로, 아니면 문장마다, 문장도 길면 쉼표에서 나눈다(11/4 사용자: 가능한 한 줄, 두 줄이면 문장 단위로).
+    조각은 읽는 시간을 글자 수로 나눠 차례로 띄운다. [(줄 목록, 글자 수)]"""
+    f = font(40, True)
+    fits = lambda x: f.getlength(x) <= CAP_W
+    if fits(text):
+        return [([text], len(text))]
+    out = []
+    for sent in re.split(r"(?<=[.?!])\s+", text):
+        parts = [sent]
+        while any(not fits(p) and ", " in p for p in parts):  # 쉼표 중 가운데에 가까운 곳에서 둘로
+            i = next(k for k, p in enumerate(parts) if not fits(p) and ", " in p)
+            p = parts[i]
+            cuts = [m.end() for m in re.finditer(", ", p)]
+            c = min(cuts, key=lambda x: abs(x - len(p) / 2))
+            parts[i:i + 1] = [p[:c].strip(), p[c:].strip()]
+        for p in parts:
+            rows = [p] if fits(p) else _wrap2(p, f)
+            out.append((rows, len(p)))
+    return out
+
+
+def _wrap2(p, f):
+    """쉼표도 없이 긴 한 문장 — 가운데에 가까운 띄어쓰기에서 두 줄로"""
+    sp = [i for i, ch in enumerate(p) if ch == " "]
+    c = min(sp, key=lambda i: abs(f.getlength(p[:i]) - f.getlength(p) / 2)) if sp else len(p)
+    return [p[:c].strip(), p[c:].strip()]
+
+
+def cap_timed(a, b, text):
+    """(시작, 끝, 줄 목록) — 조각마다 글자 수에 비례한 시간"""
+    ps = cap_pieces(text)
+    tot = sum(n for _, n in ps) or 1
+    out, t = [], a
+    for rows, n in ps:
+        d_ = (b - a) * n / tot
+        out.append((t, t + d_, rows))
+        t += d_
+    return out
+
+
 def caption(img, now):
-    """입힌 자막 — 지금 읽는 문장, 화면 아래 가운데. 한 줄 34자 안팎, 두 줄까지"""
+    """입힌 자막 — 지금 읽는 문장(조각), 화면 아래 가운데"""
     cur = next((x for x in SCHED if x[0] - 0.05 <= now <= x[1] + 0.25), None)
     if not cur:
         return img
-    text = cur[2]
+    pieces = cap_timed(cur[0], cur[1], cur[2])
+    rows = next((r for a_, b_, r in pieces if now < b_), pieces[-1][2])
     f = font(40, True)
     d = ImageDraw.Draw(img, "RGBA")
-    words, rows, line = text.split(" "), [], ""
-    for w_ in words:
-        if line and d.textlength(f"{line} {w_}", font=f) > 1320:
-            rows.append(line)
-            line = w_
-        else:
-            line = f"{line} {w_}".strip()
-    rows.append(line)
     a = min(ease((now - cur[0] + 0.05) / 0.2), 1 - ease((now - cur[1] - 0.05) / 0.2))
     lh = 58
     bw = max(d.textlength(r, font=f) for r in rows) + 64
@@ -804,8 +845,9 @@ def build():
     return tl, clips, t
 
 
-def _at(body, clips, spec):
-    """기준 장면이 본문 시작에서 몇 초 뒤에 오는지"""
+def _at(body, clips, spec, seen=None):
+    """기준 장면이 본문 시작에서 몇 초 뒤에 오는지. seen(클립 → 앞 문장이 쓴 원본 초)이 있으면 그 뒤의 표시만 찾는다
+    (11/4: s2에서 '메뉴 주제'가 둘러보기 첫머리의 같은 이름 표시에 붙어 화면이 1분 가까이 멈췄다)"""
     what, label, off = spec
     t = 0.0
     if what in ("title", "flow", "ending", "stat"):
@@ -814,9 +856,12 @@ def _at(body, clips, spec):
                 return t + off
             t += sg["dur"]
         return None
-    sec = next((m["sec"] for m in clips[what].marks if m["label"].startswith(label)), None) if what in clips else None
+    after = (seen or {}).get(what, -1.0)
+    sec = next((m["sec"] for m in clips[what].marks if m["label"].startswith(label) and m["sec"] > after), None) if what in clips else None
     if sec is None:
         return None
+    if seen is not None:
+        seen[what] = sec
     for sg in body:
         if sg.get("clip") == what and sg.get("kind", "clip") == "clip" and sg["speed"] > 0 and sec <= sg["s1"]:
             return t + max(0.0, (sec - sg["s0"]) / sg["speed"]) + off
@@ -840,8 +885,9 @@ def _hold(body, at, dur):
                 body.insert(i, {"kind": "clip", "clip": sg["a"][0], "s0": sg["a"][1], "s1": sg["a"][1], "speed": 0.0, "dur": dur, "hold": True})
             elif sg.get("hold"):
                 sg["dur"] += dur
-            else:
-                sg["dur"] += dur  # 카드·흐름도·엔딩은 그 화면을 늘린다
+            else:  # 카드·흐름도·엔딩은 그 자리에서 움직임을 멈추고 늘린다(늘리기만 하면 뒤 장면의 움직임이 말보다 앞서 간다)
+                sg.setdefault("pauses", []).append((max(0.0, at - t), dur))
+                sg["dur"] += dur
             return
         t += sg["dur"]
 
@@ -911,9 +957,9 @@ def fit(n, body, clips):
     """문장을 기준 장면에 맞춰 놓고, 앞 문장이 길면 화면을 멈춰 기다리게 한다 → [(본문 기준 시작, 끝, 자막, TTS, wav)]"""
     items = plan(n)[0]
     specs = ANCHORS.get(n, [])
-    out, cur = [], 0.5
+    out, cur, seen = [], 0.5, {}
     for k, (text, tts, a, b, wav) in enumerate(items):
-        at = _at(body, clips, specs[k]) if k < len(specs) else None
+        at = _at(body, clips, specs[k], seen) if k < len(specs) else None
         start = cur
         if at is not None:
             want = max(0.0, at - LEAD)
@@ -923,6 +969,11 @@ def fit(n, body, clips):
                 _hold(body, want, cur - want)
         out.append((start, start + (b - a), text, tts, wav))
         cur = start + (b - a) + GAP
+    # 챕터 첫머리 — 첫 문장 1.4초 전까지 말 없이 지나가는 화면은 자른다(11/4: 4·6장 첫머리 10초 넘게 빔)
+    if out and out[0][0] > 2.4:
+        cut = _cut(body, 0.6, out[0][0] - 1.4)
+        if cut:
+            out = [(a - cut, b - cut, *r) for a, b, *r in out]
     # 빈 구간 — 뒤에서부터 잘라야 앞 시각이 그대로다
     gaps = [(out[i][1] + KEEP_AFTER, out[i + 1][0] - KEEP_BEFORE) for i in range(len(out) - 1)]
     for x, y in reversed(gaps):
@@ -930,8 +981,13 @@ def fit(n, body, clips):
             cut = _cut(body, x, y)
             if cut:
                 out = [(a - cut, b - cut, *r) if a >= y else (a, b, *r) for a, b, *r in out]
-    if out:  # 챕터 끝 — 마지막 문장 뒤 1.2초까지만
+    if out:  # 챕터 끝 — 마지막 문장 뒤 1.2초까지만(흐름도·숫자 카드·엔딩은 1.5초까지)
         _truncate(body, out[-1][1] + 1.2)
+        last = body[-1]
+        if last.get("kind") in ("title", "flow", "stat", "ending"):
+            extra = sum(sg["dur"] for sg in body) - (out[-1][1] + 1.5)
+            if extra > 0:
+                last["dur"] = max(1.0, last["dur"] - extra)
     have = sum(sg["dur"] for sg in body)
     need = (out[-1][1] + 0.8) if out else 0
     if need > have:
@@ -955,17 +1011,9 @@ def ts(x, sep=","):
 def write_texts(subs, total):
     OUTDIR.mkdir(parents=True, exist_ok=True)
     srt = []
-    for i, (a, b, text, _, _) in enumerate(subs, 1):
-        # 자막은 한 줄 40자 안팎으로 나눈다
-        words, rows, cur = text.split(" "), [], ""
-        for w_ in words:
-            if len(cur) + len(w_) > 38 and cur:
-                rows.append(cur)
-                cur = w_
-            else:
-                cur = f"{cur} {w_}".strip()
-        rows.append(cur)
-        srt.append(f"{i}\n{ts(a)} --> {ts(b)}\n" + "\n".join(rows) + "\n")
+    for a, b, text, _, _ in subs:  # 화면에 입히는 자막과 같은 조각으로
+        for a_, b_, rows in cap_timed(a, b, text):
+            srt.append(f"{len(srt) + 1}\n{ts(a_)} --> {ts(b_)}\n" + "\n".join(rows) + "\n")
     (OUTDIR / f"{NAME}.srt").write_text("\n".join(srt), encoding="utf-8")
     md = [f"# 시연 영상 내레이션 — {NAME}", "", f"전체 {int(total // 60)}분 {int(total % 60)}초 · " + (f"음성 {AUDIO.name} 길이 기준" if AUDIO else f"초당 {CPS}자 기준(TTS 음성을 받으면 실제 길이로 다시 맞춘다)"), ""]
     tts = []
@@ -1021,17 +1069,21 @@ def render(tl, clips, total):
         for f in range(n):
             t = f / FPS
             kind = seg["kind"]
+            ta = t  # 흐름도·카드 움직임 시각 — 멈춤 구간만큼 늦춘다
+            for p_, d_ in seg.get("pauses", []):
+                if t > p_:
+                    ta -= min(d_, t - p_)
             if kind == "card":
                 img = (card2 if R2 else card)(seg["ch"]["n"], seg["ch"]["title"], seg["ch"]["sub"], t, seg["dur"])
                 z, cx, cy = 1.0, W / 2, H / 2
             elif kind == "title":
-                img = (title_card2 if R2 else title_card)(t, seg["dur"])
+                img = (title_card2 if R2 else title_card)(ta, seg["dur"] - (t - ta))
             elif kind == "flow":
-                img = (flow2 if R2 else flow)(t, seg["dur"])
+                img = (flow2 if R2 else flow)(ta, seg["dur"] - (t - ta))
             elif kind == "stat":
-                img = stat_card(t, seg["dur"])
+                img = stat_card(ta, seg["dur"] - (t - ta))
             elif kind == "ending":
-                img = (ending2 if R2 else ending)(t, seg["dur"])
+                img = (ending2 if R2 else ending)(ta, seg["dur"] - (t - ta))
             elif kind == "xfade":
                 (ca, sa), (cb, sb) = seg["a"], seg["b"]
                 img = Image.blend(clip_image(clips[ca], sa, seg, True), clip_image(clips[cb], sb, seg, True), ease(t / seg["dur"]))
