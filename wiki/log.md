@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-05 11:12
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 60 · 236s
+
+## 2026-11-05 11:12
 - 묶기 붙임 onemodel-blog/0019 → 주제/carrot-global-blog-0012.md
 - 묶기 붙임 aihr-blog/0064 → 주제/bain-insights-0010.md
 - 묶기 붙임 hbr/0068 → 주제/fastcompany-worklife-0036.md
