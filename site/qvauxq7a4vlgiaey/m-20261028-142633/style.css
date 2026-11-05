@@ -237,6 +237,11 @@ body {
   font-weight: 700;
   color: var(--ink);
 }
+/* 강조 문장(==…==) — 굵게 + 진녹색(2026-11-04 사용자: 밑줄은 빼고 글자색을 페이지 강조색으로) */
+.article-body strong.key {
+  font-weight: 700;
+  color: var(--accent);
+}
 
 /* 소제목 이미지 */
 .section-image {
