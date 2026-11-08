@@ -7,7 +7,7 @@ audience: 전 직원
 center: fastcompany-worklife/0225
 status: 쓸 수 있음
 used_in: []
-timestamp: 2026-11-02
+timestamp: 2026-11-08
 ---
 
 # 하이브리드 근무의 성과는 출근 일수보다 함께할 일과 혼자 집중할 일을 팀이 어떻게 나누는지에 달려 있다.
@@ -20,6 +20,7 @@ timestamp: 2026-11-02
 
 ## 사례
 - [fastcompany-worklife/0225] (중심) Cassandra James가 지원한 디렉터는 수요일에 대면 회의를 모으고 목요일을 재택 집중일로 정해 생산성을 높였다.
+- [charter/0059] (받침) Groops는 리더가 목표를 정하고 팀이 직접 만날 빈도를 정하며 서로의 소통 방식을 공유한다.
 
 ## 제목 후보
 
@@ -28,6 +29,8 @@ timestamp: 2026-11-02
 | 원문 | 작성자 · 날짜 | 있었던 일 |
 |---|---|---|
 | [fastcompany-worklife/0225](../../sources/originals/fastcompany-worklife/0225.md) · https://www.fastcompany.com/91625827/11-hybrid-work-rules-that-actually-make-sense-hybrid-work-work-from-home-leadership?partner=rss&utm_source=rss&utm_medium=feed&utm_campaign=rss+fastcompany&utm_content=rss | Featured · 2026-10-29 | (1) Cassandra James가 함께 일한 한 디렉터는 팀 캘린더에서 매주 목요일을 회의 없는 재택 집중의 날로 막고 수요일에 대면 회의를 몰아 두었다. 그 결과 업무에 남는 시간이 아니라 제대로 된 시간이 배정되어 생산성이 올랐고, 목요일이 신뢰로 느껴져 사기도 올랐다고 한다. (2) Lisa Jeffs가 컨설팅으로 지원한 한 회사는 주 2일 출근을 시행했다. 출근일 하나는 짧은 팀 회의로 시작해 각자의 일이 어떤 변화를 만들었는지 나누게 했고, 나머지 시간은 문제 해결, 멘토링, 대화가 필요한 의사결정처럼 대면이 쉬운 일에 썼다. 반면 출근해도 하루 종일 화상회의만 하고 돌아가는 곳에서는 사기와 생산성이 빠르게 떨어지는 것을 보았다고 한다. (3) Nick Anisimov의 FirstHR 팀은 직원이 사무실에 나올 요일을 스스로 정하게 하고 근무 시간이 아닌 결과를 본다. 새벽이나 토요일에 나와 혼자 일하는 사람도 있고 주 4일 출근하는 사람도 있다. 이 방식으로 이직이 줄고 성과와 팀 분위기가 좋아졌다고 한다. (4) Jocelyn Bermudez의 팀은 모든 프로젝트, 마감, 담당자를 Asana에 기록하고 거기에 없으면 일어나지 않은 일로 본다. 이 규칙으로 상태 보고 회의가 없어졌고, 주 1회 팀 회의는 문제 해결용으로, 1대1은 15~30분 고정 안건으로 진행한다. |
+| [charter/0059](../../sources/originals/charter/0059.md) · https://www.charterworks.com/charter-leadership-forum-how-to-design-in-person-gatherings-that-actually-build-trust/ | Charter Leadership Forum · 2026-11-06 | (1) Pinterest는 2022년에 PinFlex를 도입한 뒤 본사가 있는 베이 지역 밖에서도 채용할 수 있게 되어 인원이 늘었다. 이 회사는 성과를 출근 여부가 아니라 영향력으로 판단하며, 유연근무는 직원 설문에서 가장 높은 점수를 받는 항목 중 하나로 남아 있다. (2) 한 기관의 2026 Trust at Work Report에서는 경영진의 79%가 경영진이 직원에게 늘 사실대로 말한다고 믿었지만 일반 직원은 46%만 그렇게 답했다. 이 조사는 신뢰의 간극이 근무 장소보다 리더가 만들고 있다고 믿는 경험과 직원이 실제로 겪는 경험 사이에 있음을 보여 준다. (3) 한 전문가는 시니어 리더를 위한 'Interesting Person Parties'를 연다. 사전에 깊은 연결을 원하는 마음을 다들 과소평가한다는 연구를 공유하고, 한 주제의 짧은 강연이나 패널 뒤에 전문 코치가 이끄는 소그룹 대화를 거쳐 네트워킹으로 이어 간다. 그 결과 처음 만난 사람들이 믿을 만한 동료처럼 느끼며 돌아간다고 한다. (4) Groops에서는 팀원 모두가 서로에게 필요한 것, 선호하는 소통 방식, 원하는 만남의 빈도, 싫어하는 점까지 적은 사용 설명서를 작성한다. 리더는 사업과 문화 목표를 세우고, 얼마나 자주 직접 만날지는 팀이 정하게 한다. |
 
 ## 글쓴이가 하는 말
 - [fastcompany-worklife/0225] 하이브리드 근무는 출근 요일이나 방식을 일률적으로 정하는 것으로는 성과와 사기가 오르지 않는다. 기대치와 소통 방식을 분명히 하고 시간이 아닌 결과로 평가하며, 출근에 이유를 줄 때 성과와 사기가 함께 오른다는 것이다.
+- [charter/0059] 분산 근무에서 신뢰를 지키려면 사무실 출근을 늘리는 것으로는 부족하다. 모임을 언제, 왜 열지 의도를 갖고 설계하고 직원이 존중받고 있다고 느끼게 해야 한다는 주장이다.

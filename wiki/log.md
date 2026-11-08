@@ -1,5 +1,29 @@
 # 위키 이력
 
+## 2026-11-08 21:28
+- 묶기 붙임 josh-bersin/0060, carrot-global-blog/0055 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 aihr-blog/0067 → 주제/hbr-korea-0290.md
+- 묶기 붙임 charter/0059 → 주제/fastcompany-worklife-0225.md
+- 묶기 붙임 hbr-korea/0331, charter/0058 → 주제/fastcompany-worklife-0024.md
+- 묶기 붙임 fastcompany-worklife/0236 → 주제/charter-0042.md
+- 묶기 붙임 fastcompany-worklife/0240 → 주제/mckinsey-insights-0042.md
+- 묶기 붙임 innofit-blog/0040 → 주제/bain-insights-0002.md
+- 묶기 붙임 flex-blog/0034 → 주제/mckinsey-insights-0027.md
+- 묶기 붙임 aihr-blog/0068 → 주제/hbr-0015.md
+- 묶기 붙임 mckinsey-insights/0060, hbr/0069 → 주제/mckinsey-insights-0045.md
+- 묶기 붙임 mckinsey-insights/0061 → 주제/dbr-0271.md
+- 묶기 붙임 knowledge-wharton/0016 → 주제/ai-lab-enterprise-reports-0022.md
+- 묶기 새 주제(보통) 조직 안의 경쟁은 승자를 정한 뒤에도 끝나지 않으며, 패자의 반응을 방치하면 개인의 승리가 팀의 손실로 이어질 수 있다. → 주제/knowledge-wharton-0015.md
+- 묶기 새 주제(보통) 로봇이 일을 해내는 장면만으로 자율화 수준을 판단하면, 그 뒤에서 여전히 일하는 사람의 몫을 놓칠 수 있다. → 주제/mit-tech-review-0049.md
+- 묶기 새 주제(쓸 만함) AI가 지난 일을 기억하게 해도 기록의 오류를 고치지 않으면, 같은 실수를 더 일관되게 반복할 수 있다. → 주제/ai-lab-enterprise-reports-0024.md
+- 묶기 새 주제(쓸 만함) AI가 비전문가에게 새 일을 할 능력을 열어 줘도, 조직이 그 일을 허용하는 범위까지 저절로 넓어지지는 않는다. → 주제/fastcompany-worklife-0237.md
+- 묶기 새 주제(쓸 만함) AI를 쓰기 쉬운 업무와 성과를 좌우하는 업무는 다를 수 있어, 활용이 많은 곳만 보면 변화의 핵심을 놓칠 수 있다. → 주제/ai-lab-enterprise-reports-0023.md
+- 묶기 새 주제(보통) AI 도입의 협력사는 계약을 성사시키는 역할을 넘어, 실제 업무에 정착한 결과까지 함께 책임지는 역할로 바뀌고 있다. → 주제/mckinsey-insights-0064.md
+- 묶기 새 주제(뺌) 더 높은 급여를 주더라도 소득의 예측 가능성까지 보장하지 않으면 유능한 직원을 붙잡기 어려울 수 있다. → 주제/hbr-korea-0332.md
+- 묶기 새 주제(보통) 조직이 신뢰를 잃은 뒤에는 사과의 표현보다 피해를 줄이기 위해 실제로 무엇을 바꾸고 부담했는지가 관계를 좌우한다. → 주제/knowledge-wharton-0017.md
+- 묶기 새 주제(쓸 만함) 부서마다 AI를 따로 잘 만드는 것보다 함께 쓸 역량을 재사용하는 편이 중요해질수록, 전환의 과제는 기술 개발에서 부서 간 조정으로 옮겨간다. → 주제/bcg-publications-0474.md
+- 주제 묶기 새 카드 37 · 붙음/새 주제 25 · 뺌 12 · 못 넣음 0 · 남음 0 · 100s
+
 ## 2026-11-05 11:12
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 60 · 236s
 
