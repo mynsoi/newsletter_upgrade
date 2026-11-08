@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-08 21:28
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 37 · 110s
+
+## 2026-11-08 21:28
 - 묶기 붙임 josh-bersin/0060, carrot-global-blog/0055 → 주제/carrot-global-blog-0008.md
 - 묶기 붙임 aihr-blog/0067 → 주제/hbr-korea-0290.md
 - 묶기 붙임 charter/0059 → 주제/fastcompany-worklife-0225.md
