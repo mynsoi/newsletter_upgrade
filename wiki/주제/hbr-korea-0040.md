@@ -5,8 +5,8 @@ title: AI에 건네는 피드백에는 원본 문서만큼이나 회사의 판�
 verdict: 쓸 만함
 audience: 전 직원
 center: hbr-korea/0040
-status: 진행 중
-used_in: [briefs/m-20261103-175640.json]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-10-23
 judged_by: 사람
 ---
