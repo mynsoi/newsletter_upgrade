@@ -49,7 +49,7 @@ OPTION_KEY = "탐색 시간"  # 리허설에서 고른 옵션의 말할 것에 �
 REC_KEYS = ("DBS", "아틀라시안", "Atlassian")  # 넣기로 보여 줄 추천 원문
 FEEDBACK = "두 번째 문단의 사례 설명을 한 문장 줄이고, 맺음은 독자에게 묻는 문장으로 끝내 주세요."
 # 2차 — 글 A의 추천 주제(11/3 리허설에서 돌린 것, 없으면 첫 카드)와 글 B의 문체 피드백(지금 규칙 11개와 겹치지 않는 것)
-PICK_KEY = "AI에 건네는 피드백에는"  # 11/3 녹화 1회차에 쓴 주제 — 5장(피드백이 규칙이 된다)과 맞물림
+PICK_KEY = "자료를 많이 가진 회사라도"  # 주제 탭 첫 줄에 있고 사례가 많은 주제(11/9 재녹화, 11/3 리허설에서 돌려 봄)
 STYLE_FEEDBACK = "'~할 수 있습니다', '~일지도 모릅니다' 같은 흐린 끝맺음을 줄이고 단정해서 써 주세요."
 CHAPTERS = ["c1", "c2", "c3", "c4", "c5", "c5b", "c6", "c7", "c8", "c8mail", "c8web", "s2", "s3", "s4", "s5", "s5r", "s6", "c7b"]
 CHAPTERS_R2 = ["s2", "s3", "c4", "c5", "s4", "s5", "c7", "s5r", "s6", "c8web"]
@@ -560,7 +560,8 @@ def s2(pg):
         pg.keyboard.press("Escape")
         pg.wait_for_timeout(1000)
         scroll(r, -420)
-        hover(r, btn(pg, "Supabase 받기"), "Supabase 받기 — 6시간마다 자동", 2.0)
+        hover(r, btn(pg, "aside 수집"), "aside 수집 — RSS 없는 사이트", 4.0)  # 11/9 사용자: 수집을 설명한다
+        hover(r, btn(pg, "Supabase 받기"), "Supabase 받기 — 6시간마다 자동", 4.0)
         click(r, menu_link(pg, "#/topics"), "메뉴 주제", after=2.0)
         scroll(r, 420)
         for name in ("보통", "뺌", "쓴 글", "쓸 만함"):
@@ -587,16 +588,15 @@ def s3(pg):
         sys.exit(f"추천 주제에 '{PICK_KEY}'가 없습니다 — PICK_KEY를 바꿀 것")
     go(pg, "#/articles")
     with Rec(pg, "s3") as r:
-        cards = pg.locator("div.grid.grid-cols-2 > button")
-        cards.first.wait_for(state="visible", timeout=30000)
-        for i in range(min(cards.count(), 4)):
-            hover(r, cards.nth(i), f"추천 주제 {i + 1}", 0.8)
-        click(r, btn(pg, "다른 추천"), "다른 추천", after=1.5)
-        for _ in range(60):  # 고를 주제가 보일 때까지 넘긴다(4개씩 돌아감 — 편집에서 자름)
-            if cards.filter(has_text=PICK_KEY).count():
-                break
-            click(r, btn(pg, "다른 추천"), "다른 추천", pause=0.2, after=0.6)
-        click(r, cards.filter(has_text=PICK_KEY), "추천 주제 고르기", after=2.0)
+        # 11/9 사용자: A안은 메인 추천 카드가 아니라 주제 탭에서 '이 주제로'를 누른다
+        click(r, menu_link(pg, "#/topics"), "메뉴 주제", after=2.0)
+        click(r, btn(pg, "쓸 만함"), "탭 쓸 만함", after=1.5)
+        card = pg.locator("h3").filter(has_text=PICK_KEY)
+        hover(r, pg.locator("h3").first, "추천 주제 카드", 1.2)
+        hover(r, card, "추천 주제 카드 — 고를 주제", 1.8)
+        click(r, card, "주제 펼치기", after=2.0)
+        hover(r, btn(pg, "이 주제로").last, "이 주제로 — 버튼", 1.8)
+        click(r, btn(pg, "이 주제로").last, "이 주제로 쓰기", after=2.0)
         t0 = time.time()
         while "#/a/" not in pg.url and time.time() - t0 < 30:
             pg.wait_for_timeout(500)
