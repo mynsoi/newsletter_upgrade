@@ -1,3 +1,0 @@
-{"role": "mentor", "text": "AI에 건네는 피드백에는 원본 문서만큼이나 회사의 판단 기준과 노하우가 담길 수 있다.", "docs": [], "from_wiki": "wiki/주제/hbr-korea-0040.md", "at": 1793696200.866789}
-{"role": "ai", "options": [{"message": "AI에 건네는 피드백에는 원본 문서만큼이나 회사의 판단 기준과 노하우가 담길 수 있다.", "center": {"source": "hbr-korea/0040", "role": "OpenAI와 Anthropic의 약관은 프롬프트 학습 제한과 피드백 활용을 별도로 취급했다."}, "support": [], "why": "사람 판정(2026-11-02): 쓸 만함 — 메시지가 새로움, 직원 일에 바로 닿음", "audience": "전 직원"}], "from_wiki": "wiki/주제/hbr-korea-0040.md", "at": 1793696200.8677917}
-{"role": "ai", "center": {"source": "hbr-korea/0040", "role": "AI 답변을 고치는 과정에도 직원의 전문성이 담기며, 피드백의 보호·활용 조건은 별도로 살펴야 한다는 중심 근거."}, "support": [], "n_candidates": 4, "option": 1, "at": 1793696245.546272}
