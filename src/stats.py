@@ -10,6 +10,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from db import ROOT, connect, migrate  # noqa: E402
 
+# Windows 콘솔(cp949)에서 '—' 같은 글자로 UnicodeEncodeError가 나며 죽지 않도록(rss.py 등과 동일, 2026-11-10)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 
 def section(title: str) -> None:
     print(f"\n## {title}")
