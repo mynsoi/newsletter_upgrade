@@ -723,7 +723,9 @@ sources:
   feed_url: https://hrbulletin.net/feed/
   lang: ko
   verified: true
-  inflow_alert_days: 14
+  # 2026-11-10 14 → 45일 — 발행이 월 1~2편으로 줄어(2025년 13편·2026년 14편, 최근 10/26·9/28·9/21)
+  # 정상인데도 경보가 떴다. 피드 최신 50편은 모두 받아 둔 상태(DB 대조).
+  inflow_alert_days: 45
   note: 국내 HR 큐레이션 NL. 2026-08-27 주소 확인(hrbulletin.net) — RSS 실측 통과
 - id: wanted-insaloon
   name: 원티드 인살롱
