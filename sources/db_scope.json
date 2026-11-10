@@ -3,8 +3,9 @@
  "_뺀_이유": {
   "arXiv·PsyArXiv·NBER": "본문이 초록(중앙값 1.2~1.5천 자) — 작업실은 원문 전체로 쓴다",
   "academic-canon·theory-canon": "학술 정전·이론 카드 — 책 한 권 분량이거나 사례가 아닌 이론 요약",
-  "T5 뉴스": "main 규칙상 신호 감지 전용, 단독 근거 금지",
-  "excluded": "main 소스 리뷰에서 퇴출·제외된 소스"
+  "T5 뉴스": "main 규칙상 신호 감지 전용, 단독 근거 금지 (예외: hrdive — 2026-11-10 편입, 무관 판정 8%·미국 기업 인사 사례)",
+  "excluded": "main 소스 리뷰에서 퇴출·제외된 소스",
+  "hbr·mit-smr": "2026-11-10 제외 — 구독이 없어 대부분 요약뿐(HBR 210편 중 133편, MIT SMR 52편 중 47편). HBR 핵심 글은 hbr-korea가 다룬다. main PR #20"
  },
  "min_chars": 800,
  "exclude_summary_only": true,
@@ -50,16 +51,8 @@
    "name": "Josh Bersin",
    "tier": "T2"
   },
-  "hbr": {
-   "name": "Harvard Business Review",
-   "tier": "T3"
-  },
   "hbr-korea": {
    "name": "HBR Korea(하버드비즈니스리뷰 한국판)",
-   "tier": "T3"
-  },
-  "mit-smr": {
-   "name": "MIT Sloan Management Review",
    "tier": "T3"
   },
   "dbr": {
@@ -117,6 +110,14 @@
   "flex-blog": {
    "name": "플렉스(flex) 블로그",
    "tier": "T4"
+  },
+  "hrdive": {
+   "name": "HR Dive",
+   "tier": "T5"
+  },
+  "one-useful-thing": {
+   "name": "One Useful Thing (Ethan Mollick)",
+   "tier": "T3"
   },
   "manual": {
    "name": "수기 등록",
