@@ -6,8 +6,8 @@ verdict: 쓸 만함
 judged_by: 사람
 audience: 전 직원
 center: charter/0042
-status: 진행 중
-used_in: [briefs/m-20261110-163551.json]
+status: 쓸 수 있음
+used_in: []
 timestamp: 2026-11-08
 ---
 
