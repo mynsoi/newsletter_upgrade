@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { IconArrowRight, IconChevronDown, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
+import { IconArrowRight, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
 import ExpandableCards from "@/components/expandable-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -8,7 +8,7 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, SiteIcon, SourceDrawer } from "@/components/studio/bits";
 import { Working } from "@/components/studio/working";
 import { act, runningJob, type State, type WikiTopic } from "@/lib/api";
-import { hue, roundWhen } from "@/lib/text";
+import { hue } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 /** 아직 주제 지도에 넣지 않은 원문 수 — 메뉴의 점과 '넣기' 버튼에 쓴다 */
@@ -55,7 +55,6 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   const [open, setOpen] = useState<string | null>(null);
   const [pending, setPending] = useState("");
   const [tab, setTab] = useState<Tab>("쓸 만함");
-  const [showOld, setShowOld] = useState(false);
   const wiki = state.wiki;
   const ingesting = runningJob(state.jobs, "wiki", "넣기");
   const filtering = runningJob(state.jobs, "wiki-lint", "다시 거르기");
@@ -345,32 +344,6 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
           />
         )}
         <ExpandableCards items={items} />
-
-        {state.topics.length > 0 && (
-          <section>
-            <button onClick={() => setShowOld(!showOld)} className="flex items-center gap-2 text-sm text-ink-3 hover:text-ink">
-              <IconChevronDown className={cn("size-4 transition", showOld && "rotate-180")} />
-              이전 방식 회차 {state.topics.length}
-            </button>
-            {showOld && (
-              <div className="mt-6 space-y-10 opacity-70">
-                {state.topics.map((r) => (
-                  <div key={r.id}>
-                    <div className="mb-3 text-sm tabular-nums text-ink-3">{roundWhen(r.id)}</div>
-                    <div className="grid grid-cols-3 gap-3">
-                      {r.items.map((x) => (
-                        <div key={x.n} className="rounded-2xl border border-line bg-panel p-4">
-                          <div className="font-medium text-ink">{x.name}</div>
-                          <div className="mt-1 line-clamp-2 text-sm text-ink-2">{x.thesis}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
       </div>
       <SourceDrawer path={open} onClose={() => setOpen(null)} />
     </div>

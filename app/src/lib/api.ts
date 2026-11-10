@@ -14,9 +14,6 @@ export type Source = {
   text?: string;
 };
 
-export type Topic = { n: number; name: string; thesis: string; sources: string[]; brief: string };
-export type TopicRound = { id: string; items: Topic[] };
-
 export type Step = {
   n: number;
   file: string;
@@ -172,7 +169,6 @@ export type MineRun = {
 export type State = {
   wiki: Wiki | null;
   library: Source[];
-  topics: TopicRound[];
   articles: Article[];
   jobs: Job[];
   collects: CollectRound[];

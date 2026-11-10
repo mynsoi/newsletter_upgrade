@@ -291,24 +291,6 @@ def articles():
     return out
 
 
-def topic_rounds():
-    out = []
-    picked = {}
-    for bp in (ROOT / "briefs").glob("*.json"):
-        b = json.loads(read(bp))
-        if b.get("from_topics"):
-            picked[b["topic"]] = bp.stem
-    for d in sorted((ROOT / "runs" / "topics").glob("*/"), reverse=True):
-        items = json.loads(read(d / "astra.json") or "[]")
-        if not items:  # 실패한 회차는 보이지 않게
-            continue
-        for i, it in enumerate(items, 1):
-            it["n"] = i
-            it["brief"] = picked.get(f"{d.name}-{i}", "")
-        out.append({"id": d.name, "items": items})
-    return out
-
-
 def sections(body):
     out, cur = {}, None
     for line in body.splitlines():
@@ -398,7 +380,7 @@ def state():
     jobs = with_stage(jobs)
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
-    return {"library": library(), "topics": topic_rounds(), "articles": articles(), "jobs": jobs,
+    return {"library": library(), "articles": articles(), "jobs": jobs,
             "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings()}
 
 
@@ -757,22 +739,6 @@ def live_of(j):
     cands = [c for c in cands if c.is_file() and c.stat().st_mtime >= j["started"] - 5]
     cands.sort(key=lambda c: c.stat().st_mtime, reverse=True)
     return [{"name": c.relative_to(ROOT).as_posix(), "text": tail(c)} for c in cands[:3]]
-
-
-def act_topics(_):
-    return start("topics", "", PY + ["scripts/topic_candidates.py"])
-
-
-def act_pick_topic(a):
-    rnd, n = str(a["round"]), str(int(a["n"]))
-    if not re.match(r"^\d{8}-\d{6}$", rnd) or not (ROOT / "runs" / "topics" / rnd / "astra.json").exists():
-        raise ValueError("잘못된 주제 회차")
-    r = subprocess.run(PY + ["scripts/topic_candidates.py", "--pick", rnd, n], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
-    if r.returncode:
-        raise ValueError(r.stderr[-500:])
-    k = f"{rnd}-{n}"
-    act_titles({"article": k})
-    return {"article": k}
 
 
 def act_titles(a):
@@ -1407,7 +1373,7 @@ def act_chat(a):
     return start("chat", k, cmd, after)
 
 
-ACTIONS = {"topics": act_topics, "pick-topic": act_pick_topic, "titles": act_titles_ui, "title": act_title,
+ACTIONS = {"titles": act_titles_ui, "title": act_title,
            "write": act_write, "revise": act_revise, "weave": act_weave, "images": act_images, "hero": act_hero,
            "confirm": act_confirm, "text-pick": act_text_pick, "collect": act_collect, "db-sync": act_db_sync, "chat": act_chat, "inline": act_inline, "inline-move": act_inline_move, "length": act_length, "target": act_target, "edit": act_edit,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
