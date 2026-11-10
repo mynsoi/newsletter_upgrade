@@ -1,6 +1,8 @@
 """sources.yaml의 모든 소스에 수집 경로를 배정하고 유형별로 검증한다.
 
-사용: make validate  (또는 python src/collectors/validate_sources.py)
+사용: make validate  (또는 python src/collectors/validate_sources.py [소스ID ...])
+     소스를 주면 그것만 검사한다(제외 소스도). 안 주면 제외(excluded) 아닌 전체.
+     결과는 바뀐 소스의 바뀐 키만 sources.yaml에 고쳐 쓴다 — 주석·다른 소스는 그대로(2026-11-10).
 
 경로 배정 원칙 (소스마다 1순위 → 3순위 순서로 시도):
 1. API   — 공식 API가 알려진 도메인(arXiv, PsyArXiv/OSF 등 KNOWN_APIS 내장 목록)이면
@@ -27,6 +29,7 @@ sources.yaml에 기록되며, 사람이 적은 note 본문은 보존된다.
 """
 from __future__ import annotations
 
+import copy
 import json
 import re
 import sys
@@ -259,7 +262,10 @@ def set_auto_note(source: dict, reason: str | None) -> None:
     """note의 '[자동검증 …]' 세그먼트만 갱신·제거하고 사람이 적은 본문은 보존한다."""
     note = source.get("note") or ""
     if AUTO_NOTE in note:
-        note = note.split(AUTO_NOTE)[0].rstrip().rstrip("/").rstrip()
+        # '[자동검증 …]' 조각만 뺀다 — 그 뒤에 사람이 ' / '로 덧붙인 메모는 남긴다(2026-11-10: 예전엔 뒤를 통째로 잘라
+        # WorkLab의 '2026-09-01 probe A … html 전환' 같은 기록이 사라졌다).
+        parts = [p.strip() for p in note.split(" / ")]
+        note = " / ".join(p for p in parts if p and not p.startswith(AUTO_NOTE))
     if reason:
         stamp = f"{AUTO_NOTE}{date.today().isoformat()}] {reason}"
         note = f"{note} / {stamp}" if note else stamp
@@ -343,9 +349,78 @@ def validate_source(source: dict, client: httpx.Client) -> tuple[str, str]:
 
 # ---------- 실행 ----------
 
-def main() -> int:
-    data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8"))
+def _render_key(key: str, value) -> list[str]:
+    """`  key: value` 줄(긴 값은 4칸 들여쓴 이어짐 줄 포함) — sources.yaml의 기존 모양 그대로."""
+    text = yaml.safe_dump({key: value}, allow_unicode=True, sort_keys=False, width=100,
+                          default_flow_style=False)
+    return ["  " + line for line in text.rstrip("\n").split("\n")]
+
+
+def write_back(original: str, before: dict[str, dict], after: dict[str, dict]) -> str:
+    """바뀐 소스의 바뀐 키만 원문 텍스트에서 고친다 — 주석·다른 소스·키 순서는 그대로 둔다.
+
+    2026-11-10: 예전에는 파일 전체를 yaml.dump로 다시 써서 머리 주석·소스별 주석이 사라지고,
+    검사하지 않은 소스의 줄 모양까지 바뀌었다. 고칠 수 있는 것은 최상위 스칼라 키(type·verified·
+    note·feed_url·endpoint·test_query·subscription_status 등)뿐이다. 결과를 다시 읽어 after와
+    같은지 확인하고, 다르면 ValueError — 원본을 망가뜨리지 않는다.
+    """
+    lines = original.split("\n")
+    starts = [i for i, l in enumerate(lines) if l.startswith("- id: ")] + [len(lines)]
+    out = lines[:starts[0]]
+    for a, b in zip(starts, starts[1:]):
+        blk = lines[a:b]
+        sid = blk[0][len("- id: "):].strip().strip("'\"")
+        old, new = before.get(sid), after.get(sid)
+        if old is None or new is None or old == new:
+            out += blk
+            continue
+        # 블록 끝의 빈 줄·주석(다음 소스 머리 주석일 수 있다)은 그대로 뒤에 둔다
+        tail_at = len(blk)
+        while tail_at > 1 and (not blk[tail_at - 1].strip() or blk[tail_at - 1].lstrip().startswith("#")):
+            tail_at -= 1
+        body, tail = blk[:tail_at], blk[tail_at:]
+        for key in list(dict.fromkeys([*old, *new])):
+            if key == "id" or old.get(key, object()) == new.get(key, object()):
+                continue
+            if isinstance(old.get(key), (dict, list)) or isinstance(new.get(key), (dict, list)):
+                raise ValueError(f"{sid}.{key}: 목록·사전 값은 자동으로 고치지 않는다")
+            at = next((i for i, l in enumerate(body) if l.startswith(f"  {key}:")), None)
+            end = at
+            if at is not None:
+                end = at + 1
+                while end < len(body) and body[end].startswith("    "):
+                    end += 1  # 긴 값의 이어짐 줄
+            repl = _render_key(key, new[key]) if key in new else []
+            if at is None:
+                body = body + repl
+            else:
+                body = body[:at] + repl + body[end:]
+        out += body + tail
+    text = "\n".join(out)
+    check = {s["id"]: s for s in (yaml.safe_load(text) or {}).get("sources", [])}
+    if any(check.get(sid) != src for sid, src in after.items()):
+        raise ValueError("부분 갱신 결과가 검증 결과와 다르다 — sources.yaml을 쓰지 않았다")
+    return text
+
+
+def main(argv: list[str] | None = None) -> int:
+    """argv: 검사할 소스 id(없으면 제외(excluded) 아닌 전체). 이름으로 준 소스는 제외 상태여도 검사한다."""
+    only = [a for a in (argv or []) if not a.startswith("-")]
+    original = SOURCES_PATH.read_text(encoding="utf-8")
+    data = yaml.safe_load(original)
     sources = data.get("sources", [])
+    unknown = [i for i in only if i not in {s["id"] for s in sources}]
+    if unknown:
+        print(f"오류: sources.yaml에 없는 소스 {', '.join(unknown)}")
+        return 2
+    if only:
+        sources = [s for s in sources if s["id"] in only]
+    else:
+        excluded = [s["id"] for s in sources if s.get("status") == "excluded"]
+        sources = [s for s in sources if s.get("status") != "excluded"]
+        if excluded:
+            print(f"(제외 소스 {len(excluded)}곳은 검사하지 않음 — 이름으로 주면 검사)")
+    before = {s["id"]: copy.deepcopy(s) for s in sources}
     rows: list[tuple[str, str, str, str]] = []
     net = {"rss": [0, 0], "api": [0, 0], "html": [0, 0]}  # type → [통과, 전체]
     news = {s: 0 for s in NEWSLETTER_STATUSES}
@@ -375,10 +450,10 @@ def main() -> int:
             if mark == "FAIL":
                 fail += 1
 
-    SOURCES_PATH.write_text(
-        yaml.dump(data, allow_unicode=True, sort_keys=False, default_flow_style=False),
-        encoding="utf-8",
-    )
+    after = {s["id"]: s for s in sources}
+    changed = [sid for sid in after if before[sid] != after[sid]]
+    if changed:
+        SOURCES_PATH.write_text(write_back(original, before, after), encoding="utf-8")
 
     print("소스 검증 결과:")
     print(f"  {'ID':<22} {'유형':<16} {'결과':<5} 상세")
@@ -409,4 +484,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))
