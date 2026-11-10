@@ -154,3 +154,4 @@
 {"at": 1794269731, "user": "tksruf501", "article": "aside · 소스", "kind": "collect", "status": "failed", "secs": 16}
 {"at": 1794276680, "user": "tksruf501", "article": "aside · 소스", "kind": "collect", "status": "done", "secs": 662}
 {"at": 1794276696, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 17}
+{"at": 1794291218, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 25}
