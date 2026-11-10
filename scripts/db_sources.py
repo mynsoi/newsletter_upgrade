@@ -167,6 +167,28 @@ def file_doc_id(f):
     return None
 
 
+REF_DIRS = ("wiki", "briefs", "columns")
+REF_RE = re.compile(r"(?<![\w-])([a-z0-9][a-z0-9-]*/\d{4})(?!\d)")
+
+
+def referenced():
+    """주제 지도(wiki)·브리프·글이 가리키는 원문 키(<사이트>/NNNN). --prune은 이 원문을 지우지 않는다.
+
+    2026-11-10: 서재 범위에서 hbr·mit-smr을 빼자 --prune이 원문 72편을 지웠는데, 주제 지도가 그중 30편을
+    가리키고 있어 작업실 상태 응답(/api/state)이 FileNotFoundError로 멈췄다. 예전 보호 목록은 옛 astra 카드
+    (wiki/cards.json)뿐이었다. 넉넉히 잡아도(사이트/네 자리 번호 모양이면 모두) 지우지 않을 뿐이라 해가 없다.
+    """
+    keys = set()
+    for d in REF_DIRS:
+        base = ROOT / d
+        if not base.exists():
+            continue
+        for p in base.rglob("*"):
+            if p.is_file() and p.suffix in (".md", ".json"):
+                keys |= set(REF_RE.findall(p.read_text(encoding="utf-8", errors="replace")))
+    return keys
+
+
 def write_doc(r, rel, sc):
     """원문 파일 하나 — 내용이 같으면 건드리지 않는다. 반환: 새로 썼는지."""
     f = SRC / rel
@@ -195,6 +217,7 @@ def sync(since=None, only=None, limit=None, prune=False, push=True):
     seen = set()
     cards = ROOT / "wiki" / "cards.json"
     carded = set(json.loads(cards.read_text(encoding="utf-8")).keys()) if cards.exists() else set()
+    carded |= referenced()  # 주제 지도·브리프·글이 가리키는 원문도 지우지 않는다(2026-11-10 — referenced 참고)
     with connect() as c:
         for r in c.execute(sql, args):
             doc_id, site = r[0], r[1]
