@@ -156,11 +156,18 @@ def collect_source(source: dict, conn, client: httpx.Client) -> dict:
             stats["failed"] = -1  # 목록 자체 실패
         return stats
 
-    for url in dict.fromkeys(links[:MAX_ITEMS_PER_LIST]):
+    # 상한은 '본문을 새로 받는 글 수'에 건다(2026-11-10). 예전에는 링크 앞 50개만 봐서, 목록을 여러 개
+    # 준 소스(WorkLab 카테고리 10곳)는 이미 받은 홈 목록 링크가 매일 칸을 다 차지해 뒤 목록에 닿지 못했다.
+    fetched_n = 0
+    for url in dict.fromkeys(links):
         stats["seen"] += 1
         if conn.execute("SELECT 1 FROM documents WHERE url = ?", (url,)).fetchone():
             stats["dup"] += 1
             continue
+        if fetched_n >= MAX_ITEMS_PER_LIST:
+            stats["deferred"] = stats.get("deferred", 0) + 1  # 다음 실행으로
+            continue
+        fetched_n += 1
         if not robots_allows(url, client):
             stats["robots"] += 1
             continue
@@ -236,6 +243,7 @@ def run(source_ids: list[str] | None = None, *, force: bool = False) -> dict:
             else:
                 extra = f" / robots 제외 {st['robots']}" if st["robots"] else ""
                 up = f" / 격상 {st['up']}" if st.get("up") else ""
+                up += f" / 다음 실행으로 {st['deferred']}" if st.get("deferred") else ""
                 print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문실패 {st['failed']}"
                       f" (링크 {st['seen']}건{extra})")
             time.sleep(REQUEST_INTERVAL)
