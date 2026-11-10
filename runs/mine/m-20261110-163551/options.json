@@ -1,0 +1,24 @@
+{
+ "options": [
+  {
+   "message": "AI를 많이 쓰게 만드는 압박은 AI 덕분에 더 잘 일하게 만드는 지원과 다르다.",
+   "center": {
+    "source": "charter/0042",
+    "role": "Charter의 5,002명 조사에서 AI로 일과 삶이 모두 크게 나아진 사람은 열 명 중 한 명 정도였다."
+   },
+   "support": [
+    {
+     "source": "bain-insights/0004",
+     "role": "Bain 조사에서는 자발적으로 AI를 쓰는 사람이 업무상 의무로 쓰는 사람보다 고용 불안이 적었다."
+    },
+    {
+     "source": "stanford-hai/0003",
+     "role": "같은 LawBot을 받은 로펌 두 부서 중 탐색 시간과 지원을 제공한 부서는 실험이 70% 많았다."
+    }
+   ],
+   "why": "사람 판정(2026-11-02): 쓸 만함 — 메시지가 새로움, 직원 일에 바로 닿음",
+   "audience": "전 직원"
+  }
+ ],
+ "from_wiki": "wiki/주제/charter-0042.md"
+}
