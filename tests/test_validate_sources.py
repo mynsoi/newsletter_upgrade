@@ -352,3 +352,88 @@ def test_main_network_failure_exit_code(sources_file, monkeypatch):
     assert vs.main() == 1
     saved = yaml.safe_load(sources_file.read_text(encoding="utf-8"))["sources"][0]
     assert saved["type"] == "rss" and saved["verified"] is False
+
+
+# ---------- 2026-11-10: 지정 소스만 검사 · 부분 갱신(주석 보존) · 제외 소스 건너뜀 ----------
+
+COMMENTED = """# 머리 주석 — 지워지면 안 된다
+#   결정 로그 …
+sources:
+- id: rss-a
+  name: 소스 A
+  type: rss
+  # 소스별 주석도 남아야 한다
+  status: active
+  feed_url: http://ok.com/feed
+  verified: false
+  note: 사람이 적은 메모
+- id: rss-b
+  name: 소스 B
+  type: rss
+  status: active
+  feed_url: http://dead.com/feed
+  verified: true
+  list_url:
+    - http://x/1
+- id: old-src
+  name: 퇴출
+  type: rss
+  status: excluded
+  feed_url: http://gone.com/feed
+"""
+
+
+def test_main_only_named_sources_and_keeps_comments(sources_file, monkeypatch):
+    sources_file.write_text(COMMENTED, encoding="utf-8")
+    client = FakeClient({"http://ok.com/feed": FakeResponse(200, FEED_XML)})
+    monkeypatch.setattr(vs.httpx, "Client", lambda **kw: client)
+    assert vs.main(["rss-a"]) == 0
+    text = sources_file.read_text(encoding="utf-8")
+    assert text.startswith("# 머리 주석 — 지워지면 안 된다\n#   결정 로그 …\n")
+    assert "  # 소스별 주석도 남아야 한다\n" in text
+    saved = {s["id"]: s for s in yaml.safe_load(text)["sources"]}
+    assert saved["rss-a"]["verified"] is True and saved["rss-a"]["note"] == "사람이 적은 메모"
+    # 지정하지 않은 소스는 요청도, 변경도 없다
+    assert not any("dead.com" in c for c in client.calls)
+    assert text.split("- id: rss-b")[1] == COMMENTED.split("- id: rss-b")[1]
+
+
+def test_main_skips_excluded_unless_named(sources_file, monkeypatch, capsys):
+    sources_file.write_text(COMMENTED, encoding="utf-8")
+    client = FakeClient({"http://ok.com/feed": FakeResponse(200, FEED_XML),
+                         "http://dead.com/feed": FakeResponse(200, FEED_XML)})
+    monkeypatch.setattr(vs.httpx, "Client", lambda **kw: client)
+    vs.main()
+    assert "제외 소스 1곳은 검사하지 않음" in capsys.readouterr().out
+    assert not any("gone.com" in c for c in client.calls)
+    text = sources_file.read_text(encoding="utf-8")
+    assert text.startswith("# 머리 주석")
+    assert "  list_url:\n    - http://x/1\n" in text   # 목록 값 모양도 그대로
+
+
+def test_main_rejects_unknown_source_id(sources_file):
+    sources_file.write_text(COMMENTED, encoding="utf-8")
+    assert vs.main(["no-such"]) == 2
+    assert sources_file.read_text(encoding="utf-8") == COMMENTED
+
+
+def test_write_back_adds_and_removes_keys_and_long_notes():
+    original = COMMENTED
+    data = {s["id"]: s for s in yaml.safe_load(original)["sources"]}
+    before = {k: dict(v) for k, v in data.items()}
+    after = {k: dict(v) for k, v in data.items()}
+    after["rss-a"]["note"] = "아주 긴 메모 " * 20                  # 여러 줄로 접힌다
+    after["rss-a"]["subscription_status"] = "구독 대기"            # 새 키
+    del after["rss-b"]["verified"]                                  # 지운 키
+    text = vs.write_back(original, before, after)
+    saved = {s["id"]: s for s in yaml.safe_load(text)["sources"]}
+    assert saved == after
+    assert text.startswith("# 머리 주석")
+
+
+def test_set_auto_note_keeps_human_text_after_auto_segment():
+    s = {"note": "사람 메모 1 / [자동검증 2026-08-27] RSS 미발견 (시도 6건) / 2026-09-01 probe A → html 전환"}
+    vs.set_auto_note(s, None)
+    assert s["note"] == "사람 메모 1 / 2026-09-01 probe A → html 전환"
+    vs.set_auto_note(s, "html 검사 실패: 링크 0")
+    assert s["note"].startswith("사람 메모 1 / 2026-09-01 probe A → html 전환 / [자동검증 ")
