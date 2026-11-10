@@ -187,3 +187,19 @@ def test_handoff_roundtrip_and_guard(tmp_path, monkeypatch):
     conn = sq.connect(data_b / "pipeline.db")
     assert conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0] == 2
     conn.close()
+
+
+def test_store_document_strips_cdata_title(test_db):
+    """bain-insights 피드는 제목을 이스케이프된 CDATA로 보낸다 — 저장 전에 벗긴다(2026-11-10)."""
+    conn, db = test_db
+    from collectors.store import clean_title, store_document
+    assert clean_title("<![CDATA[ Industrial CEOs: Is AI the Least of Their Worries?]]>") \
+        == "Industrial CEOs: Is AI the Least of Their Worries?"
+    assert clean_title("보통 제목") == "보통 제목"
+    assert clean_title("<![CDATA[]]>") == "(무제)" and clean_title(None) == "(무제)"
+    src = {"id": "bain-insights", "tier": "T2", "type": "rss", "lang": "en"}
+    assert store_document(conn, src, url="http://x/bain-1",
+                          title="<![CDATA[The Rebirth of Customer Success]]>",
+                          text="본문 " * 500) == "new"
+    row = conn.execute("SELECT title FROM documents WHERE url='http://x/bain-1'").fetchone()
+    assert row["title"] == "The Rebirth of Customer Success"

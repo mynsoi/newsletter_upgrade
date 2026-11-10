@@ -16,6 +16,7 @@ rss/api 수집기가 문서를 저장할 때 반드시 이 모듈을 거친다.
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -23,6 +24,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import content_hash, new_id  # noqa: E402
 
 SUMMARY_ONLY_THRESHOLD = 800  # A3: 이 길이 미만은 요약뿐인 문서로 간주
+_CDATA_RE = re.compile(r"<!\[CDATA\[(.*?)\]\]>", re.S)
+
+
+def clean_title(title: str | None) -> str:
+    """제목 정리 — CDATA 래퍼를 벗기고 앞뒤 공백을 지운다. 비면 '(무제)'.
+
+    bain-insights 피드는 제목을 `&lt;![CDATA[…]]&gt;`로 이스케이프해 보내서, feedparser가 래퍼를 글자로
+    남긴다(2026-09-03 발견, 11/10까지 bain 154편 전부). 수집 경로와 무관하게 여기서 벗긴다.
+    """
+    t = _CDATA_RE.sub(lambda m: m.group(1), title or "").strip()
+    return t or "(무제)"
 
 
 def store_document(conn, source: dict, *, url: str, title: str, text: str,
@@ -62,7 +74,7 @@ def store_document(conn, source: dict, *, url: str, title: str, text: str,
         summary_only = 0
     else:
         summary_only = 1 if len(text.strip()) < SUMMARY_ONLY_THRESHOLD else 0
-    title = title or "(무제)"
+    title = clean_title(title)
     conn.execute(
         """INSERT INTO documents
            (id, source_id, tier, url, title, author, published_at,
