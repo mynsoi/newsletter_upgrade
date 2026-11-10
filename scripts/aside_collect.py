@@ -60,26 +60,37 @@ def repl(js, timeout=170):
 
 
 def running():
-    """Aside Browser가 켜져 있는지 — 작업실 주기 실행이 꺼져 있을 때 조용히 건너뛰려고."""
+    """Aside Browser가 켜져 있고 탭을 열고 닫을 수 있는지 — 작업실 주기 실행이 못 돌 때 조용히 건너뛰려고.
+    (2026-11-10 — 예전엔 console.log만 봐서, 켜진 직후 탭 조종이 안 되는 상태를 걸러내지 못했다)"""
+    js = ("await (async () => { const p = await openTab('about:blank'); console.log('@@JSON@@1');"
+          " try { await closeTab(p); } catch (e) {} })();")
     try:
-        r = subprocess.run([ASIDE, "repl", "--host", "local", "console.log('@@JSON@@1')"], stdin=subprocess.DEVNULL,
+        r = subprocess.run([ASIDE, "repl", "--host", "local", js], stdin=subprocess.DEVNULL,
                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     except (OSError, subprocess.TimeoutExpired):
         return False
     return "@@JSON@@1" in r.stdout
 
 
-def page(url, expr, wait=8, via=None):
+def page(url, expr, wait=8, via=None, tries=2):
     """탭을 열고 기다린 뒤 expr(문자열 JS)을 페이지에서 평가해 결과를 돌려준다. 페이지 글자 일부(표시 확인용)도 함께.
-    via: 먼저 그 페이지를 열고 같은 탭에서 url로 이동한다 — 새 탭으로 바로 열면 403을 내는 사이트(HBR Korea 목록 2쪽 이후)."""
+    via: 먼저 그 페이지를 열고 같은 탭에서 url로 이동한다 — 새 탭으로 바로 열면 403을 내는 사이트(HBR Korea 목록 2쪽 이후).
+    결과는 탭을 닫기 전에 찍고, 닫기 실패는 무시한다(2026-11-10 — 빈 탭으로 열리면 closeTab이
+    'Unsupported command: Aside.controlTab'을 내며 결과까지 버려 회차 전체가 죽었다). 응답이 없으면 한 번 더 연다."""
     go = (f" const p = await openTab({json.dumps(via)}); await sleep(5000); await p.evaluate({json.dumps('location.href = ' + json.dumps(url))});"
           if via else f" const p = await openTab({json.dumps(url)});")
     js = ("await (async () => { const sleep = ms => new Promise(r => setTimeout(r, ms));"
           f"{go} await sleep({int(wait * 1000)}); let out;"
           f" try {{ out = {{ ok: true, value: await p.evaluate({json.dumps(expr)}) }}; }} catch (e) {{ out = {{ ok: false, err: String(e) }}; }}"
           " try { out.href = await p.evaluate('location.href'); out.head = await p.evaluate('(document.body && document.body.innerText || \"\").slice(0, 3000)'); } catch (e) {}"
-          " await closeTab(p); console.log('@@JSON@@' + JSON.stringify(out)); })();")
-    return repl(js)
+          " console.log('@@JSON@@' + JSON.stringify(out)); try { await closeTab(p); } catch (e) {} })();")
+    for i in range(tries):
+        try:
+            return repl(js)
+        except RuntimeError:
+            if i == tries - 1:
+                raise
+            time.sleep(20)
 
 
 LINKS = ("[...document.querySelectorAll('a[href]')].map(a => ({u: a.href.split('#')[0].split('?')[0], "
@@ -433,20 +444,37 @@ def main():
         (d / "fix_dates.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         log(f"끝 · 채움 {sum(r['fixed'] for r in out)} · 못 읽음 {sum(r['nodate'] for r in out)} → {d.relative_to(ROOT).as_posix()}/fix_dates.json")
         return
+    errors = []  # 소스 하나가 죽어도 나머지는 받는다(2026-11-10 — 예전엔 첫 소스 오류로 회차 전체가 멈췄다)
+    (d / "report.json").write_text("[]", encoding="utf-8")  # 중간에 죽어도 회차 목록에 남게
     with connect(a.write) as c:
         for sid in names:
             if sid not in srcs:
                 sys.exit(f"모르는 소스: {sid}")
             cfg = srcs[sid]
             log(f"[{sid}] {'저장' if a.write else '미리보기'}")
-            # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
-            out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
-            if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
-                log(f"[{sid}] 백필 {a.backfill} 이후")
-                out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
+            try:
+                # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
+                out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
+                if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
+                    log(f"[{sid}] 백필 {a.backfill} 이후")
+                    out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
+            except Exception as e:  # noqa: BLE001
+                if "Aside Browser가 꺼져" in str(e):
+                    raise
+                try:
+                    c.rollback()  # 이 소스에서 덜 끝난 것만 버린다(저장한 글은 한 편마다 이미 commit됨)
+                except Exception:  # noqa: BLE001
+                    pass
+                msg = f"{type(e).__name__}: {str(e).strip()[-300:]}"
+                log(f"  [오류] {msg} — 이 소스는 건너뜀")
+                errors.append(sid)
+                out.append({"source": sid, "error": msg})
             (d / "report.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     tot = {k: sum(r.get(k, 0) for r in out) for k in ("new", "upgraded", "dup", "short", "old", "failed")}
-    log(f"끝 · 신규 {tot['new']} · 격상 {tot['upgraded']} · 중복 {tot['dup']} · 짧음 {tot['short']} · 기간 밖 {tot['old']} · 실패 {tot['failed']} → {d.relative_to(ROOT).as_posix()}/report.json")
+    log(f"끝 · 신규 {tot['new']} · 격상 {tot['upgraded']} · 중복 {tot['dup']} · 짧음 {tot['short']} · 기간 밖 {tot['old']} · 실패 {tot['failed']}"
+        + (f" · 오류 {len(errors)}곳({', '.join(errors)})" if errors else "") + f" → {d.relative_to(ROOT).as_posix()}/report.json")
+    if errors and len(errors) == len(names):
+        sys.exit(1)  # 모든 소스가 죽었을 때만 작업 실패 — 일부면 받은 것을 Supabase 받기로 잇는다
 
 
 if __name__ == "__main__":
