@@ -18,14 +18,14 @@
 
 ```
 GitHub Actions (매일 06:00 KST) ──collect·enrich·embed──▶ Supabase PostgreSQL ◀── PC (Claude Code로 작업)
-   rss → api → html 순 수집, 일일 잠금,                      documents · claims(halfvec 임베딩) · internal_docs
-   무유입 경보(7일) → 이슈 자동 생성                           articles · article_sources(인용 원장)
+   rss → api → html 순 수집, 일일 잠금,                      documents · document_cards(+카드 임베딩) · internal_docs
+   무유입 경보(7일) → 이슈 자동 생성                           articles  (claims·article_sources는 11/10부터 미사용)
 
-아티클: /topics → /draft(-layers) → /publish → 로컬 발행 도구(web/) → .eml 이미지 메일 + Vercel 정적 사이트(site/)
+발행: /publish → 로컬 발행 도구(web/) → .eml 이미지 메일 + Vercel 정적 사이트(site/)
 ```
 
 - **수집 경로** (기획서 4.2): API(arXiv·OSF, 소급 가능) → RSS → HTML 목록 수집(A-PDF 포함) → 브라우저 보조(`/browse-round` 월간 라운드, `/browse-collect` 건별) → 유료 소스는 구독 세션에서 건별 선별 → 수기(`/ingest-url`, `/ingest-file`). 뉴스레터 인박스 경로는 폐기(2026-09-02).
-- **품질 게이트**: 관련성 판별(경량 모델) → 본문 길이 임계(800자 미만 `summary_only`, API 초록형 면제) → claim 추출(지침 v2, `prompts/claim_extraction.md`) → 아티클 검증(`src/verify_article.py` — 실사용 claim 기준 출처 3곳+·상반 stance·40% 룰·수치 대조). T5 뉴스 요약분 claim은 `from_summary=1`로 토픽 신호에만 쓰고 증거에서는 제외.
+- **품질 게이트**: 관련성 판별(경량 모델, `src/enrich/relevance.py`) → 본문 길이 임계(800자 미만 `summary_only`, API 초록형 면제) → 문서 카드(`src/enrich/doc_cards.py`) → 카드 임베딩. 2026-11-10 claim 추출·claim 임베딩과 이를 읽던 아티클 기능(토픽 발굴·증거 검색·`verify_article`·인용 원장)을 지웠다 — 칼럼 작업실이 카드만 읽는다.
 - **내부 자료**: 공개 가능 판단이 끝난 자료만 등록(등급 체계는 2026-09-03 폐지). `internal/`의 텍스트는 아티클 생성 시 외부 API로 전송된다 — 전송돼도 되는 내용만("사보에 실려도 되는가").
 - **비밀값**: `DATABASE_URL`, `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`(임베딩·이미지)는 각 PC 환경변수 + GitHub Secrets에만. 어떤 파일에도 쓰지 않는다.
 
@@ -47,11 +47,9 @@ claude                           # Claude Code 실행 후 /status
 |---|---|
 | `make validate` | 전 소스 접속 검증 (API 질의 / RSS 4단계 / HTML 목록 링크 수) — PC·Actions 양쪽에서 |
 | `make collect` | rss+api+html 통합 수집 (하루 1회 잠금, 우회 `--force`) |
-| `make enrich` | 관련성 게이트 + claim 추출 (`enrich_enabled` 확인, 일일 상한 400) |
-| `make embed` | claim 임베딩 증분 (arXiv는 6개월 보존 후 자동 비움) |
-| `make topics` | 토픽 발굴 → `content/topics/YYYY-WW.md` |
-| `make theories` / `make sync` | 이론 카드(reviewed만) / 내부 자료 색인 |
-| `make citations` | 소스별 인용 횟수 (월간 소스 리뷰용) |
+| `make enrich` | 관련성 판별 + 문서 카드 (`enrich_enabled` 확인, 일일 상한 400) |
+| `make embed` | 카드 임베딩 증분 |
+| `make sync` | 내부 자료 색인 |
 | `make publish-ui` | 로컬 발행 도구 (http://localhost:5001, Windows는 `발행도구.bat`) |
 | `make site SLUG=...` | 발행물 → `site/` 정적 내보내기 (Vercel 배포) |
 | `make sources-doc` | 소스 카탈로그 md 재생성 |
@@ -61,7 +59,7 @@ Claude Code 슬래시 커맨드: `/collect` `/status` `/topics` `/draft` `/draft
 
 ## 소스 카탈로그 (41건 active)
 
-T1 실증 연구 · T2 컨설팅/싱크탱크 · T3 저널 · T4 기업 1차 자료 · T5 뉴스(신호 감지 전용, 단독 근거 금지) · TC 이론 카드. 2026-09 월간 리뷰로 정식 23 · 연장 7(2026-12-31 재판정) · 퇴출·휴면 7. 판정은 `make citations` 인용 원장 기준. 상세는 `docs/소스_카탈로그.md`, 리뷰 기록은 `content/reports/source-review-2026-09.md`.
+T1 실증 연구 · T2 컨설팅/싱크탱크 · T3 저널 · T4 기업 1차 자료 · T5 뉴스(신호 감지 전용, 단독 근거 금지) · TC 이론 카드. 2026-09 월간 리뷰로 정식 23 · 연장 7(2026-12-31 재판정) · 퇴출·휴면 7. 판정은 인용 원장 기준(`make citations` — 2026-11-10 claim 제거와 함께 삭제). 상세는 `docs/소스_카탈로그.md`, 리뷰 기록은 `content/reports/source-review-2026-09.md`.
 
 ## 협업 규칙 (2인)
 
@@ -74,11 +72,11 @@ T1 실증 연구 · T2 컨설팅/싱크탱크 · T3 저널 · T4 기업 1차 자
 
 ```
 config/       sources.yaml(소스 확정본) · settings.yaml(모델·플래그·web_base_url)
-src/          collectors/(rss·api·html_list·pubdate·store·validate) · enrich/ · search/(embed·semantic) · topics/
-              db.py · verify_article.py · article_ledger.py · internal_sync.py · load_theories.py
+src/          collectors/(rss·api·html_list·pubdate·store·validate) · enrich/(relevance·doc_cards·llm) · search/(embed)
+              db.py · internal_sync.py
 migrations/   001~008 (pgvector halfvec · from_summary)
-prompts/      article_style.md(문체 정본) · segment_layers.md · claim_extraction.md · relevance_gate.md · glossary_internal.md
-knowledge/    theories/ 이론 카드 77장 (reviewed만 색인)
+prompts/      article_style.md(문체 정본) · segment_layers.md · relevance_gate.md · doc_card.md · glossary_internal.md
+knowledge/    theories/ 이론 카드 77장 (파일만 — DB 색인은 11/10 제거)
 internal/     공개 가능 내부 자료 (git 제외, 템플릿·등록 목록만 추적)
 content/      topics · evidence · angles · drafts · published · rejected(사유 README) · reports
 web/          발행 도구 — server.py(웹 UI) · email_renderer.py(.eml 이미지 메일) · site_export.py · fonts/

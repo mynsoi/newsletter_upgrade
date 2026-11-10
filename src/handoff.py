@@ -63,7 +63,7 @@ def ensure_active(task_name: str) -> None:
 def counts() -> dict:
     conn = sqlite3.connect(DATA_DIR / "pipeline.db")
     c = {}
-    for table in ["documents", "claims", "internal_docs", "articles"]:
+    for table in ["documents", "document_cards", "internal_docs", "articles"]:
         try:
             c[table] = conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
         except sqlite3.OperationalError:
@@ -95,7 +95,7 @@ def export() -> int:
     set_state("handed_off", note=f"exported to {out.name}")
     c = manifest["counts"]
     print(f"내보내기 완료: {out}")
-    print(f"  문서 {c['documents']} / claim {c['claims']} / 내부 {c['internal_docs']} / 아티클 {c['articles']}")
+    print(f"  문서 {c['documents']} / 카드 {c['document_cards']} / 내부 {c['internal_docs']} / 아티클 {c['articles']}")
     print("이 PC는 '이관됨' 상태가 되어 쓰기 작업이 잠깁니다.")
     print("→ 이 파일을 상대방에게 전달하고, 상대 PC에서 make receive FILE=<경로> 를 실행하세요.")
     return 0

@@ -1,4 +1,4 @@
-.PHONY: citations init validate collect collect-fast sync enrich embed embed-backfill cards-backfill-dry theories topics stats sources-doc test handoff receive publish-ui site
+.PHONY: init validate collect collect-fast sync enrich embed embed-backfill cards-backfill-dry stats sources-doc test handoff receive publish-ui site
 
 # .venv가 있으면 그 파이썬을 사용 (Windows: Scripts/, Linux·Actions: bin/), 없으면 python3
 PYTHON := $(or $(wildcard .venv/Scripts/python.exe),$(wildcard .venv/bin/python),python3)
@@ -18,35 +18,26 @@ collect-fast:            # 본문 추출 없이 피드 요약만 (빠른 동작 
 sync:
 	$(PYTHON) src/internal_sync.py
 
-enrich:
-	$(PYTHON) src/enrich/extract_claims.py
+enrich:                  # 관련성 판별 → enriched/rejected → 문서 카드 (claim 추출은 2026-11-10 제거)
+	$(PYTHON) src/enrich/relevance.py
 
 enrich-dry:
-	$(PYTHON) src/enrich/extract_claims.py --dry-run
+	$(PYTHON) src/enrich/relevance.py --dry-run
 
 cards-backfill-dry:      # 문서 카드 소급(Batch) 사전 점검 — 대상·토큰·예상 비용·DB 크기 (실행: python src/enrich/backfill_cards.py)
 	$(PYTHON) src/enrich/backfill_cards.py --dry-run
 
-embed:                   # claim 임베딩 일반 실행 (embedding IS NULL, 일일 상한까지 — A6)
+embed:                   # 카드 임베딩 일반 실행 (조각이 덜 찬 카드, 일일 상한까지)
 	$(PYTHON) src/search/embed.py
 
-embed-backfill:          # claim 임베딩 상한 없이 잔여 전량 변환
+embed-backfill:          # 카드 임베딩 상한 없이 잔여 전량 변환
 	$(PYTHON) src/search/embed.py --backfill
-
-theories:
-	$(PYTHON) src/load_theories.py
-
-topics:                  # 토픽 발굴 — content/topics/YYYY-WW.md 생성 (③단계)
-	$(PYTHON) src/topics/discover.py
 
 sources-doc:             # sources.yaml → docs/소스_카탈로그.md 재생성 (md 직접 수정 금지)
 	$(PYTHON) src/sources_doc.py
 
 stats:
 	$(PYTHON) src/stats.py
-
-citations:               # 소스별 인용 횟수 — 인용 원장(article_sources), 월간 소스 리뷰용
-	$(PYTHON) src/article_ledger.py sources
 
 handoff:
 	$(PYTHON) src/handoff.py

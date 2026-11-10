@@ -2,11 +2,11 @@
 document_cards에 저장 (migrations/009).
 
 2026-10-21 카드 비교 시험(게이트 통과 원문 40편, 방식을 가린 평가)에서 Claude Sonnet 5.5 카드가
-칼럼 주제를 뽑고 원문을 찾는 데 claim보다 나았다 — claim 추출은 그대로 두고 카드를 덧붙인다.
+칼럼 주제를 뽑고 원문을 찾는 데 claim보다 나았다. 2026-11-10 claim 추출은 없앴고 카드만 남았다.
 작업실(mentor-lab)은 카드 표를 읽기만 한다. 주제 묶기는 작업실 쪽 몫이다.
 
 사용:
-  python src/enrich/extract_claims.py          # 일일 실행 — claim 추출 다음에 이 단계가 돈다
+  python src/enrich/relevance.py              # 일일 실행 — 관련성 판별 다음에 이 단계가 돈다
   python src/enrich/doc_cards.py [--limit N]   # 카드 단계만 단독 실행
   python src/enrich/doc_cards.py --preview 10  # DB에 쓰지 않고 표본 카드를 output/에 미리보기
 
@@ -16,7 +16,7 @@ document_cards에 저장 (migrations/009).
 - 구조화 출력(output_config.format JSON 스키마)으로 JSON 깨짐을 막는다 — 시험에서 스키마 없이
   Haiku가 40편 중 1편 JSON을 깨뜨렸다. 스키마 키는 지시문의 출력 키(한국어) 그대로다.
 - refusal·API 오류·파싱 실패는 행을 쓰지 않고 건너뛴다 → 다음 실행에서 다시 대상이 된다.
-- 비용은 claim 추출과 같은 CostState에 기록된다(extract_claims.MODEL_PRICING).
+- 비용은 관련성 판별과 같은 CostState에 기록된다(enrich/llm.py MODEL_PRICING).
 - 기존 문서 소급은 이 스크립트가 아니라 Batch API 별도 스크립트로 한다(Actions 시간 보호).
 """
 from __future__ import annotations
@@ -36,7 +36,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, connect, migrate  # noqa: E402
-from enrich.extract_claims import CostState, ModelReply  # noqa: E402
+from enrich.llm import CostState, ModelReply  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -230,7 +230,7 @@ def make_cards(conn, docs, settings: dict, cost: CostState, *, client=None,
 
 def run(conn, settings: dict, cost: CostState, *, limit: int | None = None,
         client=None) -> CardStats:
-    """일일 실행의 카드 단계 (extract_claims.main이 claim 다음에 부른다)."""
+    """일일 실행의 카드 단계 (relevance.main이 판별 다음에 부른다)."""
     if settings.get("card_enabled", True) is False:
         print("\n[카드] card_enabled: false — 건너뜀. 정상 종료.")
         return CardStats()
@@ -278,7 +278,7 @@ def write_preview(stats: CardStats, cost: CostState) -> Path:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(description="문서 카드 생성 (claim 다음 단계)")
+    p = argparse.ArgumentParser(description="문서 카드 생성 (관련성 판별 다음 단계)")
     p.add_argument("--limit", type=int, default=None,
                    help=f"처리 상한(미지정 시 settings의 card_daily_limit, 기본 {DEFAULT_DAILY_LIMIT})")
     p.add_argument("--preview", type=int, metavar="N",

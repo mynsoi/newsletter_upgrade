@@ -1,30 +1,30 @@
-"""status='new' 문서에서 claim을 추출해 claims 테이블에 저장.
+"""status='new' 문서의 관련성을 판별해 enriched / rejected로 나눈다 (A1 게이트).
 
 사용: ANTHROPIC_API_KEY 설정 후
-      python src/enrich/extract_claims.py [--limit N] [--dry-run]
-      python src/enrich/extract_claims.py --backlog --limit 500 --cost-cap 5
-      python src/enrich/extract_claims.py --backlog --cost-cap 100   # 잔여 전량, 비용 상한만
+      python src/enrich/relevance.py [--limit N] [--dry-run]
+      python src/enrich/relevance.py --backlog --limit 500 --cost-cap 5
+      python src/enrich/relevance.py --backlog --cost-cap 100   # 잔여 전량, 비용 상한만
 
-백로그 계층 (2026-09-04 확정 — 실측 규모는 그 시점 기준):
-  계층1  --exclude-sources 'arxiv-*'          922건   arXiv 제외 전부      ✅ 완료
-  계층2  --published-after 2026-03-01       7,414건   arXiv 최근 6개월     ✅ 완료
-                                                     (계층1이 끝나면 잔여는 arXiv뿐)
-  계층3  (필터 없음)                      13,699건   arXiv 12개월 이전분
+**2026-11-10 claim 추출 제거.** 이 파일은 extract_claims.py였다. 판별을 통과한 문서마다 claim을
+뽑아 claims 테이블에 넣었는데, 실제로 쓰는 칼럼 작업실(mentor-lab-integration)은 claims를 읽지
+않고 문서 카드(document_cards)만 읽는다. 그래서 claim 추출·claim 임베딩과 그것을 읽던 아티클
+기능(/topics·/draft 증거 검색·verify_article·인용 원장·이론 카드 색인)을 지우고 판별만 남겼다.
+흐름: 판별 → status='enriched'(관련) / 'rejected'(무관) → 문서 카드(doc_cards.py) → 카드 임베딩
+(search/embed.py).
 
-**계층 3 보류는 2026-09-09 해제됐다.** 별도 실행 대신 일일 실행 2단계의 ②(남는 칸)로
-매일 조금씩 소진한다 — 상한 1000건 중 그날 유입(300~500건)을 뺀 만큼이 여기로 간다.
-게이트 차단율이 66~76%(2026-09-04 실측)로 다른 소스(0~6%)보다 높다는 사실은 그대로지만,
-일일 여유 용량으로 흡수하므로 별도 예산 결정이 필요 없다.
-T2~T5 잔류분은 2026-09-09에 전량 처리됐다(770건 · $3.37 · claim 993건).
-
+- 장문은 청크로 나눠 판별한다(pack_chunks). 한 청크라도 관련 있으면 그 자리에서 멈추고 enriched로
+  바꾼다 — 판정 결과는 claim이 있던 때(청크 하나라도 관련 → 통과)와 같고 호출 수만 줄었다.
+  판별 호출이 실패하면 그 문서는 판정하지 않고 잠금만 풀어 다음 실행에서 다시 판별한다.
+  예전에는 판별 오류를 '관련 있음'으로 보고 claim 추출로 넘겼는데, API 전체가 막히면(2026-09-13
+  크레딧 소진) 추출도 실패해 문서가 new로 남았다. 추출이 없어진 지금 같은 규칙을 두면 판별 없이
+  전부 enriched가 되므로 재시도로 바꿨다.
 - summary_only(본문 800자 미만) 문서는 원칙적으로 제외하되, **T5(신호 감지 전용 소스)만
-  예외로 포함**한다(SUMMARY_CLAIM_TIERS · migrations/008). 여기서 나온 claim은
-  claims.from_summary=1로 표시돼 토픽 신호 집계에는 쓰이고 증거 수집에서는 기본 제외된다.
-  소급 실행은 --only-summary.
-- 프롬프트 원본: prompts/claim_extraction.md (코드 내 프롬프트 금지 — CLAUDE.md)
-- 모델: config/settings.yaml의 enrich_model (추출은 경량 모델 — 기획서 8장)
+  예외로 포함**한다(SUMMARY_GATE_TIERS · migrations/008). claim이 없어진 뒤로는 이 판정 결과를
+  쓰는 곳이 없다(카드·작업실은 summary_only=0만 쓴다) — T5 수집 중단 때 같이 정리할 대상이다.
+- 프롬프트 원본: prompts/relevance_gate.md (코드 내 프롬프트 금지 — CLAUDE.md)
+- 모델: config/settings.yaml의 enrich_model (판별은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
-- 일반 실행은 claim 다음에 문서 카드 단계(src/enrich/doc_cards.py, 2026-10-21)를 부른다.
+- 일반 실행은 판별 다음에 문서 카드 단계(src/enrich/doc_cards.py, 2026-10-21)를 부른다.
   --backlog·--doc-id·--dry-run에서는 돌지 않는다.
 - 일반 실행은 collected_at **역순**(최신 수집분 우선 — 2026-09-09, 그날 유입이 누적
   백로그 뒤에서 굶지 않도록), --backlog는 티어별 라운드로빈(T1이 21,000건+로 압도적이라
@@ -34,7 +34,6 @@ T2~T5 잔류분은 2026-09-09에 전량 처리됐다(770건 · $3.37 · claim 99
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import sys
 from dataclasses import dataclass, field
@@ -44,110 +43,42 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import (  # noqa: E402
-    ROOT, claim_document_for_enrich, connect, migrate, new_id, release_enrich_lock,
+    ROOT, claim_document_for_enrich, connect, migrate, release_enrich_lock,
 )
+from enrich.llm import CostState, ModelReply, _price_for, call_model  # noqa: E402,F401
 
 # Windows 콘솔(cp949)에서 한글·특수문자 출력이 깨지거나 UnicodeEncodeError 로
 # 죽지 않도록 (rss.py·api.py 와 동일). Actions(UTF-8)에서는 영향 없음.
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-PROMPT_PATH = ROOT / "prompts" / "claim_extraction.md"
 GATE_PROMPT_PATH = ROOT / "prompts" / "relevance_gate.md"
 SETTINGS_PATH = ROOT / "config" / "settings.yaml"
+# 청크 크기. claim 추출 프롬프트 한도(24k)에 맞춰 두었던 값을 그대로 쓴다 — 판별은 청크마다
+# 앞 GATE_BODY_CHARS만 보므로, 값을 바꾸면 장문의 판정 범위가 달라진다.
 MAX_BODY_CHARS = 24000
 GATE_BODY_CHARS = 4000
 DEFAULT_DAILY_LIMIT = 500  # settings.yaml에 enrich_daily_limit이 없을 때의 정상 운영 상한
 
-# 장문 분할 — 프롬프트 한도를 넘는 본문이 조용히 잘리는 것을 막는다.
-# 임계를 8만 자로 두면 24k~80k 구간(2026-09-04 실측 26건)이 계속 잘리므로
-# 프롬프트 한도와 같은 값으로 잡았다. 비용 사정이 바뀌면 이 상수만 올리면 된다.
 LONG_DOC_CHARS = MAX_BODY_CHARS
-MAX_CHUNKS = 8            # 문서당 청크 상한 (비용 방어 — 24k×8 = 최대 19.2만 자 처리)
-MIN_CHUNK_CHARS = 200     # 이보다 짧은 조각은 버린다 (claim이 나올 수 없는데 호출만 소모)
-MAX_CLAIMS_PER_DOC = 20   # 문서당 claim 상한 (장문 1건이 근거 풀을 잠식하지 않도록)
-# 응답 토큰 상한. 2026-09-28 2,000 → 8,000: claim이 많이 나오는 24k 청크에서 응답이 상한에
-# 걸려 JSON 배열이 닫히지 않고 "JSON 배열을 찾을 수 없음"으로 반복 실패했다(aihr-blog
-# 「11 HR Trends for 2027」 3회 연속). 실제 출력 토큰만 과금되므로 상한을 올려도 비용은
-# 늘지 않는다. claim 20건 + 근거 문장이 넉넉히 들어가는 크기다.
-MAX_OUTPUT_TOKENS = 8000
+MAX_CHUNKS = 8            # 문서당 청크 상한 (비용 방어 — 24k×8 = 최대 19.2만 자 판별)
+MIN_CHUNK_CHARS = 200     # 이보다 짧은 조각은 버린다 (판단할 내용이 없는데 호출만 소모)
+# 판별 응답은 RELEVANT / IRRELEVANT 한 단어다(prompts/relevance_gate.md).
+GATE_MAX_TOKENS = 16
 HEADING_RE = re.compile(r"^(#{1,4}\s+\S|제?\s?\d+\s*(장|절|부)\b|CHAPTER\b|Chapter\b)")
 
 BACKLOG_BATCH_SIZE = 500  # --backlog 시 한 번에 DB에서 가져오는 문서 수 (본문 전체 메모리 적재 방지)
 TIER_ORDER = ("T1", "T2", "T3", "T4", "T5")
 
-# summary_only(본문 800자 미만) 문서 중 claim 추출을 허용하는 티어 (migrations/008).
+# summary_only(본문 800자 미만) 문서 중 판별 대상에 넣는 티어 (migrations/008).
 # T5는 "요즘 무슨 일이 있나" 신호 감지 전용 소스라(기획서 4.1) RSS가 요약 몇 줄만 주는 것이
-# 정상이다. 여기서 나온 claim은 claims.from_summary=1로 표시돼 토픽 신호 집계에는 쓰이고
-# 증거 수집(hybrid_search)에서는 기본 제외된다.
-# T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다.
-SUMMARY_CLAIM_TIERS = ("T5",)
-
-VALID_STANCE = {"optimistic", "cautious", "conditional", "neutral"}
-VALID_EVIDENCE = {"survey", "experiment", "case", "data", "theory", "opinion"}
-
-# $ / 1M 토큰 (input, output) — Anthropic 공식 요금표 기준(claude-api 스킬 캐시 2026-06-24).
-# 여기 없는 모델로 --cost-cap을 걸면 상한을 신뢰할 수 없으므로 main()이 즉시 중단한다.
-MODEL_PRICING: dict[str, tuple[float, float]] = {
-    "claude-opus-5": (5.00, 25.00),
-    "claude-sonnet-5-5": (2.00, 10.00),   # 문서 카드(card_model, doc_cards.py)
-    "claude-sonnet-5": (2.00, 10.00),
-    "claude-sonnet-4-6": (3.00, 15.00),
-    "claude-haiku-4-5": (1.00, 5.00),
-}
-_DATED_SUFFIX_RE = re.compile(r"-\d{8}$")
+# 정상이다. T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다.
+SUMMARY_GATE_TIERS = ("T5",)
 
 # 실패율이 이 값 미만이면 "정상 종료"로 본다(exit 0, 경고 로그만 남김) — 대량 백로그
-# 실행에서 개별 문서 1~2건의 일시적 API/파싱 오류로 워크플로 전체가 실패 처리되는 것을
+# 실행에서 개별 문서 1~2건의 일시적 오류로 워크플로 전체가 실패 처리되는 것을
 # 막기 위함. 실패 문서는 락이 해제돼 다음 실행에서 자동 재시도되므로 데이터 유실은 없다.
 FAILURE_RATE_WARN_THRESHOLD = 0.05
-
-
-def _price_for(model: str) -> tuple[float, float] | None:
-    """모델 ID(날짜 접미사 포함 가능)로 (입력가, 출력가)를 찾는다. 모르면 None."""
-    if model in MODEL_PRICING:
-        return MODEL_PRICING[model]
-    return MODEL_PRICING.get(_DATED_SUFFIX_RE.sub("", model))
-
-
-@dataclass
-class ModelReply:
-    text: str
-    input_tokens: int = 0
-    output_tokens: int = 0
-    truncated: bool = False   # stop_reason='max_tokens' — 응답이 상한에서 잘렸다
-
-
-@dataclass
-class CostState:
-    """게이트+추출 호출을 누적 집계 — 실측 비용을 --cost-cap과 비교하는 근거."""
-    cap: float | None = None
-    calls: int = 0
-    input_tokens: int = 0
-    output_tokens: int = 0
-    cost: float = 0.0
-    cap_hit: bool = False
-    tier_counts: dict[str, int] = field(default_factory=dict)
-
-    def record(self, model: str, reply: ModelReply) -> None:
-        self.calls += 1
-        self.input_tokens += reply.input_tokens
-        self.output_tokens += reply.output_tokens
-        price = _price_for(model)
-        if price:
-            self.cost += reply.input_tokens / 1_000_000 * price[0]
-            self.cost += reply.output_tokens / 1_000_000 * price[1]
-
-    def cap_reached(self) -> bool:
-        return self.cap is not None and self.cost >= self.cap
-
-
-def build_prompt(title: str, tier: str, body: str) -> str:
-    template = PROMPT_PATH.read_text(encoding="utf-8")
-    return (template
-            .replace("{title}", title or "(무제)")
-            .replace("{tier}", tier)
-            .replace("{body}", body[:MAX_BODY_CHARS]))
 
 
 def split_sections(body: str) -> list[tuple[str, str]]:
@@ -211,41 +142,23 @@ def pack_chunks(body: str, chunk_chars: int = MAX_BODY_CHARS,
         else:
             merged.append((head, text))
 
-    # 합치고도 남은 아주 짧은 조각은 버린다 — claim이 나올 수 없는데 호출만 잡아먹는다
+    # 합치고도 남은 아주 짧은 조각은 버린다 — 판단할 내용이 없는데 호출만 잡아먹는다
     kept = [(h, t) for h, t in merged if len(t) >= MIN_CHUNK_CHARS] or merged[:1]
     return [(h or f"본문 {i + 1}", t) for i, (h, t) in enumerate(kept[:max_chunks])]
 
 
-def parse_claims(raw: str) -> list[dict]:
-    """모델 출력에서 JSON 배열을 파싱. 코드펜스가 섞여 있으면 제거."""
-    text = raw.strip()
-    if text.startswith("```"):
-        text = text.strip("`")
-        if text.startswith("json"):
-            text = text[4:]
-    start, end = text.find("["), text.rfind("]")
-    if start == -1 or end == -1:
-        raise ValueError("JSON 배열을 찾을 수 없음")
-    items = json.loads(text[start:end + 1])
-    valid = []
-    for it in items:
-        if not it.get("claim_text"):
-            continue
-        if it.get("stance") not in VALID_STANCE:
-            it["stance"] = "neutral"
-        if it.get("evidence_type") not in VALID_EVIDENCE:
-            it["evidence_type"] = "opinion"
-        valid.append(it)
-    return valid
+def doc_chunks(body: str) -> list[tuple[str, str]]:
+    """판별 단위. 장문만 나누고, 나머지는 문서 전체가 한 청크다."""
+    return pack_chunks(body) if len(body) > LONG_DOC_CHARS else [("전체", body)]
 
 
 def summary_gate_sql() -> str:
-    """추출 대상 문서의 summary_only 조건. SUMMARY_CLAIM_TIERS는 요약뿐이어도 통과시킨다.
+    """판별 대상 문서의 summary_only 조건. SUMMARY_GATE_TIERS는 요약뿐이어도 통과시킨다.
 
-    티어 값은 코드 상수(SUMMARY_CLAIM_TIERS)라 SQL에 리터럴로 박아도 안전하다 —
+    티어 값은 코드 상수(SUMMARY_GATE_TIERS)라 SQL에 리터럴로 박아도 안전하다 —
     외부 입력이 섞이지 않는다.
     """
-    tiers = ", ".join(f"'{t}'" for t in SUMMARY_CLAIM_TIERS)
+    tiers = ", ".join(f"'{t}'" for t in SUMMARY_GATE_TIERS)
     return f"(COALESCE(summary_only, 0) = 0 OR tier IN ({tiers}))"
 
 
@@ -294,7 +207,7 @@ def select_target_docs(conn, limit: int, exclude_sources: list[str] | None = Non
                        published_after: str | None = None, tiers: list[str] | None = None,
                        collected_since: str | None = None, collected_before: str | None = None,
                        only_summary: bool = False):
-    """추출 대상: status='new'이면서 summary_gate_sql()을 통과한 문서(전문 문서 + T5
+    """판별 대상: status='new'이면서 summary_gate_sql()을 통과한 문서(전문 문서 + T5
     요약분), **최신 수집분 우선** (collected_at 역순, 일반 실행).
 
     2026-09-09 오름차순 → 내림차순. 오름차순일 때 일일 상한 500칸이 관문 수집(2026-08-31)의
@@ -320,7 +233,7 @@ def select_target_docs_round_robin(conn, limit: int, exclude_sources: list[str] 
                                    collected_since: str | None = None,
                                    collected_before: str | None = None,
                                    only_summary: bool = False):
-    """추출 대상을 티어별로 번갈아 뽑는다 (T1이 21,000건+로 압도적이라 순서대로면 다른
+    """판별 대상을 티어별로 번갈아 뽑는다 (T1이 21,000건+로 압도적이라 순서대로면 다른
     티어가 굶는다). 윈도우 함수로 "티어 내 순번"을 매겨 그 순번 우선으로 정렬한다
     — collected_at 순은 티어 내에서 유지된다. (O(n log n) — SQLite 3.25+·PostgreSQL 공통)
 
@@ -383,30 +296,15 @@ def check_relevance(title: str, body: str, model: str, cost: CostState | None = 
     prompt = (template
               .replace("{title}", title or "(무제)")
               .replace("{body}", body[:GATE_BODY_CHARS]))
-    reply = call_model(prompt, model)
+    reply = call_model(prompt, model, GATE_MAX_TOKENS)
     if cost is not None:
         cost.record(model, reply)
     return not reply.text.strip().upper().startswith("IRRELEVANT")
 
 
-def call_model(prompt: str, model: str) -> ModelReply:
-    import anthropic  # 지연 임포트 — dry-run 시 SDK 불필요
-    client = anthropic.Anthropic()
-    msg = client.messages.create(
-        model=model,
-        max_tokens=MAX_OUTPUT_TOKENS,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = "".join(b.text for b in msg.content if getattr(b, "type", "") == "text")
-    usage = getattr(msg, "usage", None)
-    return ModelReply(text, getattr(usage, "input_tokens", 0) or 0,
-                      getattr(usage, "output_tokens", 0) or 0,
-                      getattr(msg, "stop_reason", None) == "max_tokens")
-
-
 @dataclass
 class RunStats:
-    total_claims: int = 0
+    passed: int = 0
     gated: int = 0
     locked: int = 0
     gate_errors: int = 0
@@ -415,9 +313,12 @@ class RunStats:
 
 
 def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
-    """문서 1건: 락 선점 → 청크별 게이트+추출 → 저장. 실패 시 락 해제(재시도 가능)."""
-    body = d["body"] or ""
-    chunks = pack_chunks(body) if len(body) > LONG_DOC_CHARS else [("전체", body)]
+    """문서 1건: 락 선점 → 청크별 판별(관련 청크가 나오면 멈춤) → enriched / rejected.
+
+    판별 호출이 실패하거나 DB 쓰기가 실패하면 판정을 남기지 않고 락을 풀어 다음 실행이 다시
+    집게 한다(failed_docs — 실패율이 exit code를 정한다).
+    """
+    chunks = doc_chunks(d["body"] or "")
     cost.tier_counts[d["tier"]] = cost.tier_counts.get(d["tier"], 0) + 1
 
     if not claim_document_for_enrich(conn, d["id"]):
@@ -426,89 +327,54 @@ def process_doc(conn, d, model: str, cost: CostState, stats: RunStats) -> None:
         return
     stats.processed_count += 1
 
-    claims: list[dict] = []
-    seen_texts: set[str] = set()
-    any_relevant = False
-    chunk_failed = False
-    for label, text in chunks:
+    relevant_at = None
+    try:
+        for i, (label, text) in enumerate(chunks):
+            try:
+                relevant = check_relevance(d["title"], text, model, cost)
+            except Exception:
+                stats.gate_errors += 1
+                raise
+            if relevant:
+                relevant_at = i
+                break
+        if relevant_at is None:
+            conn.execute(
+                "UPDATE documents SET status='rejected', enrich_locked_at=NULL WHERE id=?",
+                (d["id"],))
+            conn.execute(
+                "INSERT INTO tags (document_id, axis, value) VALUES (?, 'gate', 'off_topic') "
+                "ON CONFLICT DO NOTHING",
+                (d["id"],))
+        else:
+            conn.execute(
+                "UPDATE documents SET status='enriched', enrich_locked_at=NULL WHERE id=?",
+                (d["id"],))
+        conn.commit()
+    except Exception as e:  # noqa: BLE001 — 개별 문서 실패가 배치를 중단시키지 않도록
         try:
-            relevant = check_relevance(d["title"], text, model, cost)
-        except Exception as e:  # noqa: BLE001 — 게이트 실패가 추출을 막지 않도록
-            stats.gate_errors += 1
-            print(f"  게이트 오류 [{d['id']}/{label[:20]}]: {type(e).__name__} — 추출 진행")
-            relevant = True
-        if not relevant:
-            continue
-        any_relevant = True
-        try:
-            reply = call_model(build_prompt(d["title"], d["tier"], text), model)
-            cost.record(model, reply)
-            if reply.truncated:
-                # 잘린 응답은 파싱하지 않는다 — 앞부분만 저장하면 근거가 반쪽이 된다.
-                # 파싱 오류로 뭉개지 않고 원인을 그대로 알린다(MAX_OUTPUT_TOKENS 참고).
-                raise ValueError(
-                    f"응답이 출력 상한({MAX_OUTPUT_TOKENS} 토큰)에서 잘렸다 — "
-                    f"청크를 더 쪼개거나 MAX_OUTPUT_TOKENS를 올려야 한다")
-            for c in parse_claims(reply.text):
-                key = c["claim_text"].strip()
-                if key in seen_texts:      # 청크 경계에서 같은 주장이 겹칠 수 있다
-                    continue
-                seen_texts.add(key)
-                claims.append(c)
-        except Exception as e:  # noqa: BLE001 — 개별 문서 실패가 배치를 중단시키지 않도록
-            chunk_failed = True
-            print(f"  실패 [{d['id']}/{label[:20]}]: {type(e).__name__}: {e}")
-            break
-        if len(claims) >= MAX_CLAIMS_PER_DOC:
-            break
-
-    if chunk_failed:
+            conn.rollback()
+        except Exception:  # noqa: BLE001
+            pass
         release_enrich_lock(conn, d["id"])  # 실패 → 잠금 해제, 다음 실행이 재시도
-        stats.failed_docs.append(d["id"])   # 기술적 처리 실패(API 호출·파싱) — 최종 exit code에 반영
+        stats.failed_docs.append(d["id"])
+        print(f"  실패 [{d['id']}]: {type(e).__name__}: {e} — 판정 보류, 다음 실행에서 재시도")
         return
 
-    if not any_relevant:
-        conn.execute(
-            "UPDATE documents SET status='rejected', enrich_locked_at=NULL WHERE id=?",
-            (d["id"],))
-        conn.execute(
-            "INSERT INTO tags (document_id, axis, value) VALUES (?, 'gate', 'off_topic') "
-            "ON CONFLICT DO NOTHING",
-            (d["id"],))
-        conn.commit()
+    if relevant_at is None:
         stats.gated += 1
         print(f"  무관 [{d['tier']}] {d['title'][:50]} → rejected (관련성 게이트)")
         return
-
-    claims = claims[:MAX_CLAIMS_PER_DOC]
-    # 요약뿐인 문서(T5)에서 나온 claim은 from_summary=1로 표시한다 — 토픽 신호에는 쓰이고
-    # 증거 수집(hybrid_search)에서는 기본 제외된다 (migrations/008).
-    from_summary = 1 if (d["summary_only"] or 0) else 0
-    for c in claims:
-        conf = c.get("confidence")
-        conn.execute(
-            """INSERT INTO claims
-               (id, document_id, claim_text, evidence_type, stance, metric, confidence,
-                from_summary)
-               VALUES (?,?,?,?,?,?,?,?)""",
-            (new_id(), d["id"], c["claim_text"], c["evidence_type"],
-             c["stance"], c.get("metric"),
-             float(conf) if conf is not None else None, from_summary),
-        )
-    conn.execute(
-        "UPDATE documents SET status='enriched', enrich_locked_at=NULL WHERE id=?",
-        (d["id"],))
-    conn.commit()
-    stats.total_claims += len(claims)
-    split_note = f" (분할 {len(chunks)}청크)" if len(chunks) > 1 else ""
-    summary_note = " ※요약뿐(from_summary=1)" if from_summary else ""
-    print(f"  완료 [{d['tier']}] {d['title'][:50]} → claim {len(claims)}건{split_note}{summary_note}")
+    stats.passed += 1
+    split_note = (f" (분할 {len(chunks)}청크 중 {relevant_at + 1}번째에서 통과)"
+                  if len(chunks) > 1 else "")
+    summary_note = " ※요약뿐" if (d["summary_only"] or 0) else ""
+    print(f"  통과 [{d['tier']}] {d['title'][:50]} → enriched{split_note}{summary_note}")
 
 
 def print_dry_run(d, body: str) -> None:
-    chunks = pack_chunks(body) if len(body) > LONG_DOC_CHARS else [("전체", body)]
+    chunks = doc_chunks(body)
     covered = sum(len(t) for _, t in chunks)
-    prompt = build_prompt(d["title"], d["tier"], body)
     note = ""
     if len(chunks) > 1:
         pct = covered * 100 // max(len(body), 1)
@@ -516,7 +382,7 @@ def print_dry_run(d, body: str) -> None:
                 + (f"  ※ MAX_CHUNKS({MAX_CHUNKS}) 상한으로 뒷부분 제외"
                    if len(chunks) >= MAX_CHUNKS else ""))
     print(f"  DRY  [{d['tier']}] {(d['title'] or '')[:60]}  "
-          f"(본문 {len(body):,}자, prompt {len(prompt):,}자){note}")
+          f"(본문 {len(body):,}자, 판별 최대 {len(chunks)}회){note}")
     for label, text in chunks[:MAX_CHUNKS] if len(chunks) > 1 else []:
         print(f"         · {label[:44]:<44} {len(text):,}자")
 
@@ -539,8 +405,8 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"처리할 티어만 지정(쉼표 구분). 예: 'T2,T3,T4,T5'. "
                         f"허용값 {'/'.join(TIER_ORDER)}")
     p.add_argument("--only-summary", action="store_true",
-                   help=f"summary_only=1 문서만 처리 (소급 실행 전용). 추출 대상이 되는 티어는 "
-                        f"{'/'.join(SUMMARY_CLAIM_TIERS)} 뿐이므로 사실상 그 티어의 요약분이다")
+                   help=f"summary_only=1 문서만 처리 (소급 실행 전용). 판별 대상이 되는 티어는 "
+                        f"{'/'.join(SUMMARY_GATE_TIERS)} 뿐이므로 사실상 그 티어의 요약분이다")
     p.add_argument("--dry-run", action="store_true",
                    help="API 호출 없이 대상 문서와 분할 계획만 출력")
     p.add_argument("--doc-id", help="특정 문서 1건만 처리 (장문 분할 점검용)")
@@ -576,17 +442,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     from handoff import ensure_active
-    ensure_active("claim 추출")
+    ensure_active("관련성 판별")
     settings = yaml.safe_load(SETTINGS_PATH.read_text(encoding="utf-8")) or {}
     if settings.get("enrich_enabled", True) is False and not args.dry_run:
-        print("enrich_enabled: false — claim 추출 비활성화 상태(크레딧 대기). "
+        print("enrich_enabled: false — 판별·카드 비활성화 상태(크레딧 대기). "
               "config/settings.yaml에서 true로 변경 시 재개. 정상 종료.")
         return 0
     model = settings.get("enrich_model", "claude-haiku-4-5-20251001")
 
     if args.cost_cap is not None and not args.dry_run and _price_for(model) is None:
         print(f"오류: 모델 `{model}`의 단가를 모른다 — --cost-cap을 신뢰할 수 없어 중단한다. "
-              f"src/enrich/extract_claims.py의 MODEL_PRICING에 단가를 추가할 것.")
+              f"src/enrich/llm.py의 MODEL_PRICING에 단가를 추가할 것.")
         return 2
 
     conn = connect()
@@ -640,7 +506,7 @@ def main(argv: list[str] | None = None) -> int:
                        + (f", 티어={','.join(tiers)}" if tiers else "")
                        + (", 요약뿐 문서만(--only-summary)" if args.only_summary else ""))
         print(f"일반 실행 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— summary_only는 {'/'.join(SUMMARY_CLAIM_TIERS)}만 포함{filter_note}")
+              f"— summary_only는 {'/'.join(SUMMARY_GATE_TIERS)}만 포함{filter_note}")
 
         # 1단계: 이번 수집분을 먼저 비운다 (최신 순).
         fresh = select_target_docs(conn, base_limit, collected_since=cutoff, **common)
@@ -668,8 +534,8 @@ def main(argv: list[str] | None = None) -> int:
         elif remaining > 0 and not cutoff:
             print("  ② 건너뜀 — 수집 이력이 없어 신규/백로그 경계를 정할 수 없다")
 
-        # 문서 카드 — 같은 실행에서 claim 다음에 (src/enrich/doc_cards.py). 비용은 같은
-        # CostState에 쌓여 아래 총계에 들어간다. 카드 실패는 claim 결과(exit code)를 바꾸지 않는다
+        # 문서 카드 — 같은 실행에서 판별 다음에 (src/enrich/doc_cards.py). 비용은 같은
+        # CostState에 쌓여 아래 총계에 들어간다. 카드 실패는 판별 결과(exit code)를 바꾸지 않는다
         # — 실패한 문서는 카드가 없으니 다음 실행에서 다시 대상이 된다.
         if not args.dry_run:
             from enrich import doc_cards
@@ -679,7 +545,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"[카드] 단계 오류 — 건너뜀: {type(e).__name__}: {e}")
 
     if not args.dry_run:
-        print(f"\n총 {stats.total_claims}건 claim 추출, 관련성 게이트 제외 {stats.gated}건, "
+        print(f"\n판별 통과 {stats.passed}건, 관련성 게이트 제외 {stats.gated}건, "
               f"동시성 잠금으로 건너뜀 {stats.locked}건, 게이트 오류 {stats.gate_errors}건, "
               f"처리 실패 {len(stats.failed_docs)}건.")
         print(f"API 호출 {cost.calls}회 (입력 {cost.input_tokens:,} / 출력 {cost.output_tokens:,} 토큰) "
@@ -688,7 +554,7 @@ def main(argv: list[str] | None = None) -> int:
         if stats.failed_docs:
             failure_rate = (len(stats.failed_docs) / stats.processed_count
                             if stats.processed_count else 1.0)
-            print(f"[실패] 기술적 처리 실패(API 호출·파싱) {len(stats.failed_docs)}건 "
+            print(f"[실패] 기술적 처리 실패(판별 API·DB 쓰기) {len(stats.failed_docs)}건 "
                   f"— doc id: {', '.join(stats.failed_docs)}")
             print("정상 처리분은 반영됨. 실패 문서는 잠금 해제됨 — 재실행 시 자동 재시도.")
             if failure_rate < FAILURE_RATE_WARN_THRESHOLD:
@@ -698,7 +564,6 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[오류] 실패율 {failure_rate:.1%} — 허용 기준"
                   f"({FAILURE_RATE_WARN_THRESHOLD:.0%}) 이상이라 exit 1.")
             return 1
-        print("다음: eval/claim_spotcheck.md 절차로 정확도 스팟체크")
     return 0
 
 

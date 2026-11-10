@@ -52,7 +52,7 @@ def test_requests_use_document_id_and_card_params(test_db):
 
 def test_collect_maps_by_custom_id_and_skips_failures(test_db):
     from enrich import backfill_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     for d in ("a", "b", "c", "d", "e"):
         add_doc(conn, d)

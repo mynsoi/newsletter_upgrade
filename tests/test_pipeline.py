@@ -15,7 +15,7 @@ def test_db(tmp_path, monkeypatch):
     monkeypatch.delenv("DATABASE_URL", raising=False)  # 로컬 테스트는 SQLite 모드 강제
     # db 및 db를 참조하는 모듈 재로드로 경로 반영 (모듈 캐시가 이전 임시 DB에 묶이는 것 방지)
     for mod in list(sys.modules):
-        if mod in ("db", "handoff", "internal_sync", "load_theories", "stats") \
+        if mod in ("db", "handoff", "internal_sync", "stats") \
                 or mod.startswith(("collectors", "enrich")):
             del sys.modules[mod]
     import db
@@ -32,6 +32,16 @@ def test_migrations_apply_and_are_idempotent(test_db):
     for t in ["documents", "claims", "tags", "internal_docs", "articles", "article_sources"]:
         assert t in tables, f"{t} 테이블 누락"
     assert db.migrate(conn) == []  # 재실행 시 추가 적용 없음
+
+
+def test_migration_drafts_are_never_applied(test_db):
+    """migrations/drafts/는 사람이 직접 실행하는 초안이다 — 일일 make init이 운영 DB에 적용하면 안 된다."""
+    conn, db = test_db
+    drafts = {p.name for p in (db.MIGRATIONS_DIR / "drafts").glob("*.sql")}
+    assert drafts, "초안 파일이 있어야 이 테스트가 의미 있다"
+    applied = {r["filename"] for r in conn.execute("SELECT filename FROM schema_migrations")}
+    assert not drafts & applied
+    assert not drafts & {p.name for p in db.MIGRATIONS_DIR.glob("*.sql")}
 
 
 def test_content_hash_normalizes_whitespace_and_case(test_db):
@@ -137,70 +147,6 @@ def test_internal_sync_simplified_policy(test_db, tmp_path, monkeypatch):
     assert isync.sync() == 0
     row = conn.execute("SELECT api_eligible FROM internal_docs WHERE id='skms/legacy-b.md'").fetchone()
     assert row["api_eligible"] == 1
-
-
-def test_claim_parsing_handles_fences_and_invalid_fields(test_db):
-    from enrich.extract_claims import parse_claims
-    raw = """```json
-[
- {"claim_text": "테스트 주장", "stance": "optimistic", "evidence_type": "survey",
-  "metric": "47%", "confidence": 0.8},
- {"claim_text": "분류 오류 주장", "stance": "banana", "evidence_type": "??"},
- {"stance": "neutral"}
-]
-```"""
-    claims = parse_claims(raw)
-    assert len(claims) == 2  # claim_text 없는 항목 제외
-    assert claims[0]["metric"] == "47%"
-    assert claims[1]["stance"] == "neutral" and claims[1]["evidence_type"] == "opinion"
-
-
-def test_theory_loader_gates_and_claims(test_db, tmp_path, monkeypatch):
-    conn, db = test_db
-    import load_theories as lt
-
-    tdir = tmp_path / "theories"
-    tdir.mkdir()
-    card = """---
-theory: 심리적 안전감 (Psychological Safety)
-originators: Edmondson
-year: 1999
-field: 팀·리더십
-status: {status}
-reviewed_by: {reviewer}
----
-## 핵심 명제
-- 팀의 심리적 안전감은 학습 행동을 매개로 팀 성과에 기여한다
-- 심리적 안전감은 개인 성격이 아니라 팀 수준에서 형성되는 집단 특성이다
-## 경계 조건
-- 책무성이 함께 높지 않으면 안전감만으로는 성과로 이어지지 않는다
-## AI 시대 연결점
-- AI 실험·실패 공유 문화의 전제 조건 분석 렌즈
-"""
-    (tdir / "psych-safety.md").write_text(
-        card.format(status="draft", reviewer=""), encoding="utf-8")
-    monkeypatch.setattr(lt, "THEORY_DIR", tdir)
-
-    lt.load()
-    assert conn.execute(
-        "SELECT COUNT(*) n FROM documents WHERE source_id='theory-canon'").fetchone()["n"] == 0  # draft 거부
-
-    (tdir / "psych-safety.md").write_text(
-        card.format(status="reviewed", reviewer="홍길동"), encoding="utf-8")
-    lt.load()
-    doc = conn.execute(
-        "SELECT * FROM documents WHERE source_id='theory-canon'").fetchone()
-    assert doc is not None and doc["tier"] == "T1"
-    rows = conn.execute(
-        "SELECT stance FROM claims WHERE document_id=?", (doc["id"],)).fetchall()
-    assert len(rows) == 3  # 명제 2 + 경계조건 1
-    assert sum(1 for r in rows if r["stance"] == "conditional") == 1
-
-    # 카드 수정 시 claim 교체 (누적 아님)
-    (tdir / "psych-safety.md").write_text(
-        card.format(status="reviewed", reviewer="홍길동") + "\n", encoding="utf-8")
-    lt.load()  # 해시 동일(공백 정규화) → 변경 없음
-    assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 3
 
 
 def test_handoff_roundtrip_and_guard(tmp_path, monkeypatch):

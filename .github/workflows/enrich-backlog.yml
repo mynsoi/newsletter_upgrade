@@ -1,13 +1,17 @@
-# 백로그 claim 추출 — 수동 실행 전용(workflow_dispatch)
+# 백로그 관련성 판별 — 수동 실행 전용(workflow_dispatch)
+#
+# 2026-11-10 claim 추출 제거: 이 워크플로는 이제 판별만 한다(src/enrich/relevance.py --backlog).
+# 판별을 통과한 문서는 enriched가 되고, 카드는 다음 일일 실행의 카드 단계가 만든다
+# (--backlog는 카드 단계를 돌리지 않는다). 아래 계층·연쇄 설명은 claim 추출 시절 기록이다.
 #
 # 일일 정상 운영분(config/settings.yaml enrich_daily_limit)은 collect.yml(daily-collect)의
-# "claim 추출(make enrich)" 단계가 **최신 수집분부터** 매일 처리한다. 이 워크플로는 그
+# "관련성 판별·문서 카드(make enrich)" 단계가 **최신 수집분부터** 매일 처리한다. 이 워크플로는 그
 # 바깥의 대량 백로그(추출 대기 누적분)를 티어별 라운드로빈 + 비용 상한으로 처리한다.
 # 즉 분업은 방향으로 갈린다 — 일일은 큐의 최신 끝, 백로그는 티어를 고르게 훑는다.
 #
 # ⚠ Actions 사용 시간 (2026-09-22): 무료 제공량(월 2,000분)을 9월에 다 썼고, 이 워크플로의
 # 연쇄 실행이 그중 504분을 차지했다. 지출 한도는 올리지 않기로 했으므로 **대량 처리는 PC에서
-# 같은 명령으로 돌린다** — `python src/enrich/extract_claims.py --backlog --cost-cap N ...`
+# 같은 명령으로 돌린다** — `python src/enrich/relevance.py --backlog --cost-cap N ...`
 # (인자는 아래 inputs와 같다. 소스별로 --exclude-sources를 나눠 두 프로세스로 돌리면 시간이
 # 반으로 준다 — 문서 잠금이 있어 겹쳐도 안전하다). 이 워크플로는 PC를 쓸 수 없을 때만 쓴다.
 #
@@ -28,7 +32,6 @@
 #
 # only_summary (2026-09-10 추가): migrations/008로 추출 대상에 편입된 T5 요약뿐 문서
 # (summary_only=1)만 처리하는 소급 실행 모드. 스크립트의 --only-summary로 전달된다.
-# 여기서 나온 claim은 from_summary=1로 저장돼 토픽 신호에는 쓰이고 증거 수집에서는 제외된다.
 # PC 실행이 사내망의 api.anthropic.com 차단으로 불가능한 것도 이 경로를 쓰는 이유이며,
 # "수집·추출 주체는 Actions"라는 원칙과도 맞다.
 #
@@ -71,7 +74,7 @@ on:
         required: false
         default: ""
       only_summary:
-        description: "요약뿐인 문서(T5 summary_only)만 처리 — migrations/008 편입분 소급 추출"
+        description: "요약뿐인 문서(T5 summary_only)만 처리 — migrations/008 편입분 소급 판별"
         type: boolean
         required: false
         default: false
@@ -167,9 +170,9 @@ jobs:
             FILTER_ARGS="$FILTER_ARGS --only-summary"
           fi
 
-          echo "실행: python src/enrich/extract_claims.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT$FILTER_ARGS"
+          echo "실행: python src/enrich/relevance.py --backlog --cost-cap $REMAIN_COST --limit $BATCH_LIMIT$FILTER_ARGS"
           set +e
-          python src/enrich/extract_claims.py --backlog --cost-cap "$REMAIN_COST" --limit "$BATCH_LIMIT" $FILTER_ARGS 2>&1 | tee enrich-backlog.log
+          python src/enrich/relevance.py --backlog --cost-cap "$REMAIN_COST" --limit "$BATCH_LIMIT" $FILTER_ARGS 2>&1 | tee enrich-backlog.log
           EC=${PIPESTATUS[0]}
           set -e
 
@@ -183,7 +186,7 @@ jobs:
         if: always()
         run: |
           {
-            echo "## 백로그 claim 추출 결과 (회차 ${{ inputs.chain_iteration }}/12)"
+            echo "## 백로그 관련성 판별 결과 (회차 ${{ inputs.chain_iteration }}/12)"
             echo
             echo '```'
             tail -n 20 enrich-backlog.log || true
@@ -248,7 +251,7 @@ jobs:
           if [ -z "$STOP_REASON" ]; then
             # 같은 계층 필터를 적용해 센다 — 보류 계층(arXiv 옛날분)을 잔여로 오인하면
             # 처리할 게 없는데도 12회까지 헛돈다.
-            REMAIN_NEW=$(python src/enrich/extract_claims.py --count-remaining $FILTER_ARGS)
+            REMAIN_NEW=$(python src/enrich/relevance.py --count-remaining $FILTER_ARGS)
             echo "- 잔여 백로그(현재 계층 기준): ${REMAIN_NEW}건" >> "$GITHUB_STEP_SUMMARY"
             if [ "$REMAIN_NEW" -le 0 ]; then
               STOP_REASON="백로그 소진(잔여 0건)"

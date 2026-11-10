@@ -201,13 +201,12 @@ def migrate(conn: Connection) -> list[str]:
 # --------------------------------------------------------------------------- #
 _SEARCH = {
     "documents": ("search_documents", "documents", ("title", "body")),
-    "claims": ("search_claims", "claims", ("claim_text",)),
     "internal": ("search_internal", "internal_docs", ("title", "body")),
 }
 
 
 def search(conn: Connection, target: str, query: str) -> list:
-    """target ∈ {documents, claims, internal} 에서 query 를 포함하는 행 목록 반환."""
+    """target ∈ {documents, internal} 에서 query 를 포함하는 행 목록 반환."""
     fn, table, cols = _SEARCH[target]
     if conn.is_postgres:
         return conn.execute(f"SELECT * FROM {fn}(?)", (query,)).fetchall()
@@ -219,7 +218,7 @@ def search(conn: Connection, target: str, query: str) -> list:
 
 
 # --------------------------------------------------------------------------- #
-# 실행 잠금 — 하루 1회 수집 보장 / claim 추출 문서 단위 동시성 제어              #
+# 실행 잠금 — 하루 1회 수집 보장 / 관련성 판별 문서 단위 동시성 제어              #
 # (SQLite·PostgreSQL 공통: 잠금 타임스탬프는 파이썬 UTC 문자열로 통일해          #
 #  두 백엔드의 CURRENT_TIMESTAMP 표현/시간대 차이에 의존하지 않는다)             #
 # --------------------------------------------------------------------------- #
@@ -322,7 +321,7 @@ def collection_done_today(conn: Connection) -> bool:
 
 def claim_document_for_enrich(conn: Connection, doc_id: str, *,
                               reclaim_hours: int = 6) -> bool:
-    """문서를 claim 추출 대상으로 원자적으로 선점한다.
+    """문서를 판별(enrich) 대상으로 원자적으로 선점한다. (함수 이름의 claim은 '선점' 뜻 — claims 표와 무관)
 
     status='new' 이고 (미선점 또는 reclaim_hours 초과한 선점)일 때만 성공.
     반환 True: 이 프로세스가 소유 / False: 다른 프로세스가 처리 중이거나 상태가 바뀜.

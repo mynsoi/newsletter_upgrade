@@ -10,4 +10,5 @@
 3. 사용자에게 검수를 요청한다: "원전이나 교과서와 대조해 확인 후,
    frontmatter의 status를 reviewed로, reviewed_by에 이름을 기재해 주세요."
    ※ 절대 Claude가 스스로 reviewed로 바꾸지 않는다 — 사람 검수가 색인의 전제 조건이다.
-4. 사용자가 검수 완료를 알리면 `make theories` 실행 → 색인 결과 보고
+4. 사용자가 검수 완료를 알리면 결과를 보고한다. (DB 색인 `make theories`는 2026-11-10 claim 제거와 함께
+   지웠다 — 이론 카드는 claims 표에 명제를 넣어 /topics·/draft가 쓰게 하던 것이라, 지금은 파일로만 남는다.)
