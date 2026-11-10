@@ -12,6 +12,9 @@
 #   2026-09-04 유료 소스 약관 검토 생략 결정 — 건별 소량·내부 한정 원칙으로 운영
 #   2026-09-30 월간 소스 리뷰(시험 소스 37곳) — 정식 23 · 연장 7(~2026-12-31) · 퇴출·휴면 7. content/reports/source-review-2026-09.md
 #
+#   2026-11-10 claim 추출 제거 후 범위 정리 — 15건 excluded(arXiv 3·NBER·PsyArXiv·T5 국내 뉴스 6·HRTech·academic-canon·HBR·MIT SMR),
+#              One Useful Thing 시험 편입, WorkLab 목록에 카테고리 페이지 추가. active 27(= 작업실 카드 대상)
+#
 # 주의: make validate 는 이 파일을 yaml.dump 로 재기록하므로 이 주석 블록이 사라질 수 있다.
 #       사라졌으면 git 이력(α4 반영 커밋)에서 복원할 것.
 sources:
@@ -24,7 +27,9 @@ sources:
   topics: AI 거버넌스 · 일하는 방식 — AI가 직무·조직·사회에 미치는 영향의 실증
   frequency: 일 (수십 편)
   constraints: 초록 기반 claim. 핵심 근거로 쓸 때 전문(무료 PDF) 열람 권장. 과거분 소급 완료
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(논문 초록, 카드 대상 아님), 무관 판정 약 70% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   feed_url: https://rss.arxiv.org/rss/cs.CY
   endpoint: https://export.arxiv.org/api/query
   test_query: https://export.arxiv.org/api/query?search_query=cat:cs.CY&sortBy=submittedDate&sortOrder=descending&max_results=3
@@ -40,7 +45,9 @@ sources:
   topics: 일하는 방식 · AI 리터러시 — 사람과 AI가 함께 일하는 방식의 실험 근거
   frequency: 일 (수십 편)
   constraints: 초록 기반. 기술 논문 비중 높아 관련성 게이트 의존
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(논문 초록, 카드 대상 아님), 무관 판정 약 70% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   feed_url: https://rss.arxiv.org/rss/cs.HC
   endpoint: https://export.arxiv.org/api/query
   test_query: https://export.arxiv.org/api/query?search_query=cat:cs.HC&sortBy=submittedDate&sortOrder=descending&max_results=3
@@ -56,7 +63,9 @@ sources:
   topics: 평가·보상 · 채용 · 일하는 방식 — 노동시장·생산성 효과의 계량 근거
   frequency: 일 (수십 편)
   constraints: 주제 무관 경제학 논문 다수 → 게이트 차단율 높은 것이 정상. 시험 운영 중
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(논문 초록, 카드 대상 아님), 무관 판정 약 80% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://rss.arxiv.org/rss/econ.GN
   endpoint: https://export.arxiv.org/api/query
@@ -93,7 +102,9 @@ sources:
   topics: 평가·보상 · 채용 · 일하는 방식 — 고용·임금·기술 변화의 대규모 데이터 실증
   frequency: 주 (약 25편)
   constraints: PC에서는 403(봇 차단), Actions에서만 수집. 키워드 필터 전제(주제 무관 논문 다수)
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(워킹페이퍼 초록, 카드 대상 아님), 무관 판정 약 70% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://back.nber.org/rss/new.xml
   homepage: https://www.nber.org
@@ -132,7 +143,9 @@ sources:
   topics: 조직 문화 · 리더십 · 인재 육성 — 조직심리 실증, 이론 카드와 직접 연결
   frequency: 주
   constraints: OSF API로 수집(초록). 필드 전반 논문 중 조직 관련만 게이트 통과
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(프리프린트 초록, 카드 대상 아님), 무관 판정 약 90% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   endpoint: https://api.osf.io/v2/preprints/
   test_query: https://api.osf.io/v2/preprints/?filter[provider]=psyarxiv&page[size]=3
@@ -501,7 +514,9 @@ sources:
   topics: 리더십 · 조직 설계 · 인재 육성 · 일하는 방식 — 광역
   frequency: 일
   constraints: RSS는 요약만 → 전문은 구독 뉴스레터(C1 계약). 사내망 이슈로 http 경로 사용
-  status: active
+  # 2026-11-10 수집 중단 — 구독 없음, 210편 중 133편이 요약뿐. 핵심 글은 HBR Korea(한국어 전문)가 다룬다 (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   feed_url: http://feeds.hbr.org/harvardbusiness
   lang: en
   verified: true
@@ -553,7 +568,9 @@ sources:
   topics: 조직 설계 · AI 리터러시 · 일하는 방식 — 연구 기반 에세이 (광역)
   frequency: 주 수회
   constraints: 구독 병행(C1)
-  status: active
+  # 2026-11-10 수집 중단 — 구독 없음, 52편 중 47편이 요약뿐(작업실 서재 3편) (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   feed_url: https://sloanreview.mit.edu/feed/
   lang: en
   verified: true
@@ -659,6 +676,23 @@ sources:
   verified: true
   inflow_alert_days: 14
   note: 일하는 방식 전문 NL. 2026-08-27 주소 확인(charterworks.com) — RSS도 제공, 실측 통과
+- id: one-useful-thing
+  name: One Useful Thing (Ethan Mollick)
+  tier: T3
+  type: rss
+  role: T3 전문 — AI와 일하는 방식 연구자 겸 실무자 칼럼
+  description: 와튼스쿨 이선 몰릭의 뉴스레터. 생성형 AI를 일에 쓰는 법과 조직 영향을 연구·실험과 함께 다룬다.
+  topics: AI와 일 · AI 리터러시 — 연구 기반 실무 에세이
+  frequency: 주
+  constraints: Substack RSS(최근 20편). 유료 글은 없음
+  status: active
+  confirmed_at: '2026-11-10'
+  trial_until: '2027-02-28'
+  feed_url: https://www.oneusefulthing.org/feed
+  lang: en
+  verified: true
+  inflow_alert_days: 21
+  note: 2026-11-10 신규 시험 편입 — RSS 200·20편(최신 11/9), 본문 추출 6,700자·로컬 SQLite 수집 20/20 확인. 칼럼 주제(AI와 일)와 거의 겹친다. 작업실 카드 대상(card_sources)
 - id: fastcompany-worklife
   name: Fast Company (Work Life)
   tier: T3
@@ -717,7 +751,19 @@ sources:
   frequency: 월
   constraints: RSS 미제공 → 뉴스레터. Work Trend Index는 PDF 수기 등록
   status: active
-  list_url: https://www.microsoft.com/en-us/worklab
+  # 2026-11-10 카테고리 페이지 추가 — 홈 목록(28편)은 다 받았는데 9/2 이후 신규 0이었다. 홈에 안 걸리는
+  # 글이 카테고리 페이지에 수십 편 있었다(leadership 32·culture 11·podcast 6 등, DB 대조). 목록마다 상한 50.
+  list_url:
+    - https://www.microsoft.com/en-us/worklab
+    - https://www.microsoft.com/en-us/worklab/ai-at-work
+    - https://www.microsoft.com/en-us/worklab/leadership
+    - https://www.microsoft.com/en-us/worklab/culture
+    - https://www.microsoft.com/en-us/worklab/collaboration
+    - https://www.microsoft.com/en-us/worklab/innovation
+    - https://www.microsoft.com/en-us/worklab/performance
+    - https://www.microsoft.com/en-us/worklab/wellbeing
+    - https://www.microsoft.com/en-us/worklab/work-trend-index
+    - https://www.microsoft.com/en-us/worklab/podcast
   link_pattern: href="?(/en-us/worklab/(?:[a-z0-9\-]+/)?[a-z0-9\-]{8,})
   # 허브·분류 페이지(글 목록·주제 모음)는 글이 아니다 — 2026-10-22 확인한 8곳을 더 뺀다
   link_exclude: /(articles|podcasts|newsletter|work-trend-index|topics|home|ai-at-work|collaboration|innovation|leadership|manifest|performance|wellbeing|frontier-firm-resources)$
@@ -946,7 +992,9 @@ sources:
   topics: AI 리터러시 — 국내 AI 업계 신호 (AI 전문지군 1순위)
   frequency: 일 (약 50편)
   constraints: AI 산업 뉴스 중심 → 일·조직 교집합만 게이트 통과
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 65% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://www.aitimes.com/rss/allArticle.xml
   lang: ko
@@ -961,7 +1009,9 @@ sources:
   topics: AI 리터러시 — 국내 IT 산업 신호
   frequency: 일 (약 30편)
   constraints: 한경IT와 역할 중복 → 시험 기간 후 택일 검토
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 77% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://feeds.feedburner.com/zdkorea
   homepage: https://zdnet.co.kr
@@ -977,7 +1027,9 @@ sources:
   topics: AI 리터러시 — AI 전문지군 2순위
   frequency: 일 (약 50편)
   constraints: AI타임스와 보도 중복 관찰 대상
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 45% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://www.newstheai.com/rss/allArticle.xml
   lang: ko
@@ -992,7 +1044,9 @@ sources:
   topics: AI 리터러시 — AI 전문지군 3순위
   frequency: 일 (약 50편)
   constraints: 지속성·중복 관찰 대상
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 58% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://www.aipostkorea.com/rss/allArticle.xml
   lang: ko
@@ -1007,7 +1061,9 @@ sources:
   topics: AI 리터러시 · 일하는 방식 — 국내 IT 경제 신호
   frequency: 일 (약 50편)
   constraints: 섹션 한정. 지디넷과 택일 시험
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 79% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   feed_url: https://www.hankyung.com/feed/it
   lang: ko
   verified: true
@@ -1060,7 +1116,9 @@ sources:
   topics: (광역 경제) — 종합지 경제 신호
   frequency: 일 (약 50편)
   constraints: 섹션 한정
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5 국내 뉴스), 무관 판정 약 85% (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   trial_until: '2026-12-31'
   feed_url: https://rss.donga.com/economy.xml
@@ -1077,7 +1135,9 @@ sources:
   topics: AI 리터러시 · 채용 — HR테크 벤더 동향
   frequency: 일
   constraints: 보도자료성 claim 유입 관찰 대상. HR Dive와 중복 시 제외 검토
-  status: active
+  # 2026-11-10 수집 중단 — 작업실 범위 밖(T5), 벤더 보도자료 전재·HR Dive와 중복 (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-08-31'
   feed_url: https://techrseries.com/feed/
   lang: en
@@ -1109,7 +1169,9 @@ sources:
   topics: AX & 일의 미래 · 조직 문화 · People Analytics — 학술·기관 1차 문헌
   frequency: 비정기 (수기)
   constraints: 수기 등록 전용(/ingest-file). 공개·오픈액세스본만 등재(절대 규칙 6). 자동 검증 대상 아님
-  status: active
+  # 2026-11-10 수집 중단 — 수기 백필 전용, 작업실 범위 밖(카드 대상 아님). 기존 5편은 DB에 남는다 (claim 추출 제거 후 범위 정리)
+  status: excluded
+  excluded_at: '2026-11-10'
   confirmed_at: '2026-09-02'
   lang: en
   note: 2026-09-02 신설 — C 카테고리 학술 PDF 백필용. arXiv/NBER 전용 소스로 커버되지 않는 저널·기관보고서·전문서

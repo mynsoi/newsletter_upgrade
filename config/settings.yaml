@@ -42,7 +42,10 @@ card_enabled: true
 card_model: claude-sonnet-5-5
 card_daily_limit: 100
 card_max_chars: 60000
-# 카드 대상 소스 — 작업실 서재 범위와 같은 28곳. arXiv 초록(T1)·T5 뉴스는 만들지 않는다.
+# 카드 대상 소스 — arXiv 초록(T1)·T5 국내 뉴스는 만들지 않는다.
+# 2026-11-10: hbr·mit-smr 제외(구독 없음 — 대부분 요약뿐), hrdive 추가(T5지만 무관 판정 8%, 미국 기업 인사 사례·조사 수치),
+# one-useful-thing 신규 시험 편입.
+# 작업실 서재 범위(column-studio sources/db_scope.json)도 같이 맞춰야 한다 — 이 목록은 카드 생성 범위만 정한다.
 # manual은 sources.yaml에 없는 수기 등록 문서의 source_id다(src/collectors/source_match.py).
 card_sources:
   - stanford-hai
@@ -55,9 +58,7 @@ card_sources:
   - bain-insights
   - pwc-global-insights
   - josh-bersin
-  - hbr
   - hbr-korea
-  - mit-smr
   - dbr
   - aihr-blog
   - mit-tech-review
@@ -72,6 +73,8 @@ card_sources:
   - ai-lab-enterprise-reports
   - google-rework
   - flex-blog
+  - hrdive
+  - one-useful-thing
   - manual
 
 # 카드 임베딩(make embed) 1회 처리 상한 — 카드 장수 기준. 조각이 덜 찬 카드만 대상이라

@@ -114,6 +114,30 @@ def test_collect_source_two_stage_and_dedup(test_db, hcol):
     assert not any("first-article" in c for c in client.calls[calls_before:])
 
 
+def test_fetch_cap_counts_new_pages_not_already_collected_links(test_db, hcol, monkeypatch):
+    """이미 받은 링크는 상한 칸을 차지하지 않는다 — 뒤쪽 목록의 새 글에도 닿아야 한다."""
+    conn, db = test_db
+    monkeypatch.setattr(hcol, "MAX_ITEMS_PER_LIST", 2)
+    old = [f"/news/old-article-{i}" for i in range(5)]
+    for u in old:
+        conn.execute("INSERT INTO documents (id, source_id, tier, url, title, body, status) "
+                     "VALUES (?, 'test-html', 'T1', ?, 't', 'b', 'enriched')", (db.new_id(), "https://ex.com" + u))
+    conn.commit()
+    home = "".join(f'<a href="{u}">x</a>' for u in old)
+    cat = "".join(f'<a href="/news/new-article-{i}">x</a>' for i in range(3))
+    responses = {"https://ex.com/robots.txt": FakeResponse(200, "User-agent: *\nAllow: /"),
+                 "https://ex.com/news": FakeResponse(200, home),
+                 "https://ex.com/news/cat": FakeResponse(200, cat)}
+    for i in range(3):
+        responses[f"https://ex.com/news/new-article-{i}"] = FakeResponse(
+            200, ARTICLE_HTML.replace("영향 분석", f"분석 {i}"))
+    src = {**SOURCE, "list_url": ["https://ex.com/news", "https://ex.com/news/cat"]}
+    stats = hcol.collect_source(src, conn, FakeClient(responses))
+    assert stats["dup"] == 5 and stats["new"] == 2 and stats["deferred"] == 1
+    stats2 = hcol.collect_source(src, conn, FakeClient(responses))
+    assert stats2["new"] == 1  # 남은 1편은 다음 실행에서
+
+
 def test_collect_respects_robots(test_db, hcol):
     conn, db = test_db
     client = FakeClient({
