@@ -355,13 +355,14 @@ def test_release_enrich_lock(test_db):
     assert db.claim_document_for_enrich(conn, "D1") is True
 
 
-def _run_enrich(monkeypatch, model_output="[]", settings_extra="", argv=None):
-    """model_output: 문자열(고정 응답) | ModelReply | Exception(항상 raise) |
+def _run_enrich(monkeypatch, model_output="RELEVANT", settings_extra="", argv=None):
+    """판별 모델 응답을 고정하고 relevance 모듈을 돌려준다.
+
+    model_output: 문자열(고정 응답) | ModelReply | Exception(항상 raise) |
     list(호출 순서별 응답/예외 — 문자열은 ModelReply(text, 0, 0)로 자동 래핑됨).
-    check_relevance는 항상 True로 고정(별도 게이트 동작을 테스트하는 케이스는 직접 patch)."""
-    import enrich.extract_claims as ec
-    monkeypatch.setattr(sys, "argv", ["extract_claims"] + (argv or []))
-    monkeypatch.setattr(ec, "check_relevance", lambda *a, **k: True)
+    호출 기록은 ec._calls에 남는다(판별 호출 수 확인용)."""
+    import enrich.relevance as ec
+    monkeypatch.setattr(sys, "argv", ["relevance"] + (argv or []))
 
     class _FakeSettings:  # 실제 config의 enrich_enabled: false와 무관하게 테스트는 활성 상태로
         def read_text(self, encoding=None):
@@ -386,12 +387,17 @@ def _run_enrich(monkeypatch, model_output="[]", settings_extra="", argv=None):
     else:
         def call(*a, **k):
             return _wrap(model_output)
-    monkeypatch.setattr(ec, "call_model", call)
+    calls = []
+
+    def recorded(prompt, model, max_tokens):
+        calls.append(prompt)
+        return call(prompt, model, max_tokens)
+    monkeypatch.setattr(ec, "call_model", recorded)
+    monkeypatch.setattr(ec, "_calls", calls, raising=False)
     return ec
 
 
-CLAIM_JSON = """[{"claim_text": "AI 도입이 협업 방식을 바꾼다", "stance": "optimistic",
-                 "evidence_type": "case", "confidence": 0.7}]"""
+RELEVANT = "RELEVANT"
 
 
 def test_enrich_main_skips_locked_doc_and_cleans_lock(test_db, monkeypatch):
@@ -400,14 +406,14 @@ def test_enrich_main_skips_locked_doc_and_cleans_lock(test_db, monkeypatch):
     _add_new_doc(conn, "D1")
     assert db.claim_document_for_enrich(conn, "D0") is True  # 다른 프로세스가 선점한 상태
 
-    ec = _run_enrich(monkeypatch, CLAIM_JSON)
+    ec = _run_enrich(monkeypatch, RELEVANT)
     assert ec.main() == 0  # 잠금 건너뜀은 실패가 아님
 
     d0 = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D0'").fetchone()
     d1 = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
     assert d0["status"] == "new" and d0["enrich_locked_at"] is not None  # 건드리지 않음
     assert d1["status"] == "enriched" and d1["enrich_locked_at"] is None  # 완료 + 잠금 정리
-    assert conn.execute("SELECT COUNT(*) n FROM claims WHERE document_id='D1'").fetchone()["n"] == 1
+    assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0  # claim은 더 안 만든다
 
 
 def test_enrich_main_releases_lock_on_model_failure(test_db, monkeypatch):
@@ -433,29 +439,47 @@ def test_enrich_main_exit_nonzero_on_api_failure(test_db, monkeypatch, capsys):
         assert row["status"] == "new" and row["enrich_locked_at"] is None
 
 
-def test_enrich_main_parse_error_counts_as_failure(test_db, monkeypatch):
+def test_irrelevant_doc_is_rejected_with_gate_tag(test_db, monkeypatch):
     conn, db = test_db
     _add_new_doc(conn, "D1")
-    ec = _run_enrich(monkeypatch, "이건 JSON 배열이 아님")  # parse_claims → ValueError
-    assert ec.main() == 1
-    assert conn.execute(
-        "SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
+    ec = _run_enrich(monkeypatch, "IRRELEVANT")
+    assert ec.main() == 0  # 무관 판정은 실패가 아니다
+    row = conn.execute(
+        "SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
+    assert row["status"] == "rejected" and row["enrich_locked_at"] is None
+    tag = conn.execute(
+        "SELECT value FROM tags WHERE document_id='D1' AND axis='gate'").fetchone()
+    assert tag["value"] == "off_topic"
 
 
-def test_enrich_main_zero_claims_is_not_failure(test_db, monkeypatch):
+def test_relevant_doc_goes_straight_to_enriched_without_claims(test_db, monkeypatch):
+    """claim 추출 없이 판별 1회로 enriched — 카드 단계(status='enriched')의 입력이 된다."""
     conn, db = test_db
     _add_new_doc(conn, "D1")
-    ec = _run_enrich(monkeypatch, "[]")  # 정상 응답, claim 0건
+    ec = _run_enrich(monkeypatch, RELEVANT)
     assert ec.main() == 0
     row = conn.execute(
         "SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
     assert row["status"] == "enriched" and row["enrich_locked_at"] is None
+    assert len(ec._calls) == 1                       # 판별 1회뿐(추출 호출 없음)
+    assert "RELEVANT 또는 IRRELEVANT" in ec._calls[0]  # 판별 프롬프트(prompts/relevance_gate.md)
     assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0
+
+
+def test_gate_error_keeps_doc_new_instead_of_passing_it(test_db, monkeypatch):
+    """판별 API가 막혀도(크레딧 소진 등) 판별 없이 enriched로 넘기지 않는다 — new로 남겨 재시도."""
+    conn, db = test_db
+    _add_new_doc(conn, "D1")
+    ec = _run_enrich(monkeypatch, RuntimeError("credit balance is too low"))
+    assert ec.main() == 1
+    out_row = conn.execute(
+        "SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
+    assert out_row["status"] == "new" and out_row["enrich_locked_at"] is None
 
 
 def test_pack_chunks_splits_long_body_by_section(test_db):
     """장문 분할: 소제목 경계 우선, 한도 초과 절은 문단으로 재분할, 짧은 조각 제외."""
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
 
     short = "짧은 본문. " * 10
     assert len(ec.pack_chunks(short)) == 1  # 한도 이하는 그대로 1청크
@@ -470,7 +494,7 @@ def test_pack_chunks_splits_long_body_by_section(test_db):
     ])
     chunks = ec.pack_chunks(body)
     assert 1 < len(chunks) <= ec.MAX_CHUNKS
-    assert all(len(t) <= ec.MAX_BODY_CHARS for _, t in chunks)   # 프롬프트 한도 준수
+    assert all(len(t) <= ec.MAX_BODY_CHARS for _, t in chunks)   # 청크 한도 준수
     assert all(len(t) >= ec.MIN_CHUNK_CHARS for _, t in chunks)  # 무의미한 조각 없음
     assert any("장" in label for label, _ in chunks)             # 소제목이 라벨로 살아 있음
 
@@ -479,36 +503,44 @@ def test_pack_chunks_splits_long_body_by_section(test_db):
     assert len(ec.pack_chunks(huge)) == ec.MAX_CHUNKS
 
 
-def test_enrich_long_doc_merges_chunk_claims_with_cap(test_db, monkeypatch):
-    """청크별 추출 결과를 합치되 중복 claim은 제거하고 문서당 상한을 적용한다."""
-    conn, db = test_db
+def _add_long_doc(conn, doc_id):
     long_body = ("서로 다른 문단 내용. " * 2500 + "\n\n") * 3  # 한도 초과 → 분할
     conn.execute(
         "INSERT INTO documents (id, source_id, tier, url, title, body, status, summary_only) "
-        "VALUES ('L1','s','T2','http://x/l1','장문', ?, 'new', 0)", (long_body,))
+        "VALUES (?,'s','T2',?,'장문', ?, 'new', 0)", (doc_id, f"http://x/{doc_id}", long_body))
     conn.commit()
 
-    # 청크마다 같은 claim 1건 + 고유 claim 1건을 반환 → 중복 1건만 남아야 함
-    seq = []
-    for i in range(ec_chunk_count := 5):
-        seq.append(f'[{{"claim_text": "공통 주장", "stance": "neutral", "evidence_type": "case"}},'
-                   f' {{"claim_text": "고유 주장 {i}", "stance": "neutral", "evidence_type": "case"}}]')
-    ec = _run_enrich(monkeypatch, seq)
-    monkeypatch.setattr(ec, "MAX_CLAIMS_PER_DOC", 4)
-    assert ec.main() == 0
 
-    texts = [r["claim_text"] for r in conn.execute(
-        "SELECT claim_text FROM claims WHERE document_id='L1'")]
-    assert len(texts) <= 4                      # 문서당 상한 적용
-    assert texts.count("공통 주장") == 1        # 청크 경계 중복 제거
+def test_long_doc_stops_judging_at_first_relevant_chunk(test_db, monkeypatch):
+    """청크 하나라도 관련 있으면 통과(예전과 같은 판정) — 그 뒤 청크는 판별하지 않는다."""
+    conn, db = test_db
+    _add_long_doc(conn, "L1")
+    ec = _run_enrich(monkeypatch, ["IRRELEVANT", RELEVANT,
+                                   AssertionError("관련 청크 다음은 호출되면 안 됨")])
+    assert len(ec.doc_chunks(conn.execute(
+        "SELECT body FROM documents WHERE id='L1'").fetchone()["body"])) >= 3
+    assert ec.main() == 0
+    assert len(ec._calls) == 2
     assert conn.execute(
         "SELECT status FROM documents WHERE id='L1'").fetchone()["status"] == "enriched"
+
+
+def test_long_doc_rejected_only_when_every_chunk_is_irrelevant(test_db, monkeypatch):
+    conn, db = test_db
+    _add_long_doc(conn, "L1")
+    ec = _run_enrich(monkeypatch, "IRRELEVANT")
+    assert ec.main() == 0
+    n_chunks = len(ec.doc_chunks(conn.execute(
+        "SELECT body FROM documents WHERE id='L1'").fetchone()["body"]))
+    assert len(ec._calls) == n_chunks
+    assert conn.execute(
+        "SELECT status FROM documents WHERE id='L1'").fetchone()["status"] == "rejected"
 
 
 def test_select_target_docs_round_robin_interleaves_tiers(test_db):
     """T1이 21,000건+로 압도적이어도 라운드로빈은 다른 티어를 굶기지 않는다."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_new_doc(conn, "A1", tier="T1", collected_at="2026-01-01 00:00:01")
     _add_new_doc(conn, "A2", tier="T1", collected_at="2026-01-01 00:00:02")
     _add_new_doc(conn, "B1", tier="T2", collected_at="2026-01-01 00:00:01")
@@ -534,7 +566,7 @@ def _add_doc_with_source(conn, doc_id, source_id, published_at, tier="T3"):
 
 def test_build_doc_filters_passes_like_pattern_as_parameter(test_db):
     """'%'가 SQL 본문에 들어가면 psycopg가 자리표시자로 오인한다 — 반드시 파라미터로."""
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     where, params = ec.build_doc_filters(["arxiv-*"], "2026-03-01")
     assert "%" not in where                      # SQL 조각에는 % 리터럴이 없어야 한다
     assert params == ["arxiv-%", "2026-03-01"]   # 와일드카드는 파라미터 값 안에서만
@@ -544,7 +576,7 @@ def test_build_doc_filters_passes_like_pattern_as_parameter(test_db):
 def test_tier_filters_exclude_sources_and_old_docs(test_db):
     """계층1(arXiv 제외)·계층2(발행일 하한)가 의도한 문서만 집는지 실측."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_doc_with_source(conn, "AX_OLD", "arxiv-cs-hc", "2025-06-01")
     _add_doc_with_source(conn, "AX_NEW", "arxiv-cs-cy", "2026-06-01")
     _add_doc_with_source(conn, "HBR", "hbr-korea", "2026-08-01")
@@ -569,7 +601,7 @@ def test_normal_run_takes_newest_collected_first(test_db):
     """일반 실행(일일 수집)은 최신 수집분부터 집는다 — 그날 들어온 문서가 누적 백로그
     뒤에서 굶지 않도록 한 2026-09-09 변경. 백로그 경로(라운드로빈)는 이 규칙과 무관하다."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_new_doc(conn, "OLD", collected_at="2026-08-31 08:47:29")
     _add_new_doc(conn, "MID", collected_at="2026-09-05 06:10:00")
     _add_new_doc(conn, "NEW", collected_at="2026-09-09 06:10:00")
@@ -589,7 +621,7 @@ def _add_collection_run(conn, started_at, run_date="2026-09-09"):
 def test_latest_collection_cutoff_uses_run_start(test_db):
     """신규/백로그 경계는 달력일이 아니라 '가장 최근 수집 실행의 시작 시각'이다."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     assert ec.latest_collection_cutoff(conn) is None  # 수집 이력 없음
     _add_collection_run(conn, "2026-09-08 21:04:02", run_date="2026-09-09")
     _add_collection_run(conn, "2026-09-07 21:04:40", run_date="2026-09-08")
@@ -600,7 +632,7 @@ def test_normal_run_fresh_inflow_first_then_backlog(test_db, monkeypatch):
     """일일 실행 2단계: 이번 수집분을 먼저 비우고, 남는 칸으로 그 이전 백로그를 처리한다.
     상한이 부족하면 백로그가 밀리고 신규분은 절대 밀리지 않는다."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_collection_run(conn, "2026-09-09 00:00:00")
     _add_new_doc(conn, "OLD_A", collected_at="2026-08-31 08:47:29", tier="T1")
     _add_new_doc(conn, "OLD_B", collected_at="2026-09-01 08:00:00", tier="T5")
@@ -608,7 +640,7 @@ def test_normal_run_fresh_inflow_first_then_backlog(test_db, monkeypatch):
     _add_new_doc(conn, "FRESH_2", collected_at="2026-09-09 00:06:00", tier="T5")
 
     # 상한 3 = 신규 2건 전부 + 백로그 1건
-    ec_mod = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--limit", "3"])
+    ec_mod = _run_enrich(monkeypatch, RELEVANT, argv=["--limit", "3"])
     assert ec_mod.main() == 0
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
     assert statuses["FRESH_1"] == "enriched" and statuses["FRESH_2"] == "enriched"
@@ -619,13 +651,13 @@ def test_normal_run_fresh_inflow_first_then_backlog(test_db, monkeypatch):
 def test_normal_run_fresh_inflow_never_starved_by_backlog(test_db, monkeypatch):
     """백로그가 상한보다 많아도 신규 수집분이 먼저다 (2026-09-09 전환의 핵심)."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_collection_run(conn, "2026-09-09 00:00:00")
     for i in range(5):
         _add_new_doc(conn, f"BACKLOG_{i}", collected_at=f"2026-08-31 08:47:{i:02d}", tier="T1")
     _add_new_doc(conn, "FRESH", collected_at="2026-09-09 00:05:00", tier="T3")
 
-    ec_mod = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--limit", "1"])
+    ec_mod = _run_enrich(monkeypatch, RELEVANT, argv=["--limit", "1"])
     assert ec_mod.main() == 0
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
     assert statuses["FRESH"] == "enriched"
@@ -635,7 +667,7 @@ def test_normal_run_fresh_inflow_never_starved_by_backlog(test_db, monkeypatch):
 def test_tier_filter_limits_selection(test_db):
     """--tiers 는 지정한 티어만 집는다 (T2~T5 잔류분 처리용)."""
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     _add_new_doc(conn, "A1", tier="T1")
     _add_new_doc(conn, "B1", tier="T2")
     _add_new_doc(conn, "E1", tier="T5")
@@ -651,7 +683,7 @@ def test_unknown_tier_value_is_rejected(test_db, monkeypatch, capsys):
     """티어 오타를 그냥 두면 0건을 집고 '잔여 없음'으로 오인한다 — 즉시 중단."""
     conn, db = test_db
     _add_new_doc(conn, "D1")
-    ec = _run_enrich(monkeypatch, "[]", argv=["--tiers", "T2,T9"])
+    ec = _run_enrich(monkeypatch, RELEVANT, argv=["--tiers", "T2,T9"])
     assert ec.main() == 2
     assert "알 수 없는 티어" in capsys.readouterr().out
     assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
@@ -663,7 +695,7 @@ def test_backlog_tier1_leaves_excluded_docs_untouched(test_db, monkeypatch):
     _add_doc_with_source(conn, "AX1", "arxiv-cs-hc", "2025-06-01")
     _add_doc_with_source(conn, "HBR1", "hbr-korea", "2026-08-01")
 
-    ec = _run_enrich(monkeypatch, CLAIM_JSON,
+    ec = _run_enrich(monkeypatch, RELEVANT,
                      argv=["--backlog", "--exclude-sources", "arxiv-*"])
     assert ec.main() == 0
 
@@ -677,7 +709,7 @@ def test_published_after_rejects_bad_date_format(test_db, monkeypatch, capsys):
     """형식이 틀리면 조용히 0건을 집어 '백로그가 비었다'로 오인하기 쉽다 — 즉시 중단."""
     conn, db = test_db
     _add_new_doc(conn, "D1")
-    ec = _run_enrich(monkeypatch, "[]", argv=["--backlog", "--published-after", "2026/03/01"])
+    ec = _run_enrich(monkeypatch, RELEVANT, argv=["--backlog", "--published-after", "2026/03/01"])
     assert ec.main() == 2
     assert "YYYY-MM-DD" in capsys.readouterr().out
     assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
@@ -689,7 +721,7 @@ def test_backlog_processes_round_robin_across_tiers(test_db, monkeypatch, capsys
         _add_new_doc(conn, f"T1_{i}", tier="T1", collected_at=f"2026-01-01 00:00:0{i}")
         _add_new_doc(conn, f"T2_{i}", tier="T2", collected_at=f"2026-01-01 00:00:0{i}")
 
-    ec = _run_enrich(monkeypatch, CLAIM_JSON, argv=["--backlog", "--limit", "4"])
+    ec = _run_enrich(monkeypatch, RELEVANT, argv=["--backlog", "--limit", "4"])
     assert ec.main() == 0
 
     out = capsys.readouterr().out
@@ -703,15 +735,16 @@ def test_backlog_cost_cap_stops_before_next_doc_but_finishes_current(test_db, mo
     """상한 도달 시 진행 중이던 문서는 끝까지 처리하고, 다음 문서는 아예 손대지 않는다
     (락도 걸지 않는다 — 재시도가 아니라 '아직 처리 안 함' 상태로 남긴다)."""
     conn, db = test_db
-    import enrich.extract_claims as ec_probe
+    import enrich.relevance as ec_probe
     for i, doc_id in enumerate(["A", "B", "C"]):
         _add_new_doc(conn, doc_id, tier="T3", collected_at=f"2026-01-01 00:00:0{i}")
 
     # $1/$5 per 1M 토큰 — 문서 1건당(청크 1개) 입력 2,000,000 토큰 = $2.00
-    replies = [ec_probe.ModelReply(CLAIM_JSON, 2_000_000, 0),
-              ec_probe.ModelReply(CLAIM_JSON, 2_000_000, 0)]
+    replies = [ec_probe.ModelReply(RELEVANT, 2_000_000, 0),
+              ec_probe.ModelReply(RELEVANT, 2_000_000, 0)]
     ec = _run_enrich(monkeypatch, replies, argv=["--backlog", "--cost-cap", "3"])
-    monkeypatch.setitem(ec.MODEL_PRICING, "test-model", (1.0, 5.0))
+    import enrich.llm as llm
+    monkeypatch.setitem(llm.MODEL_PRICING, "test-model", (1.0, 5.0))
     assert ec.main() == 0
 
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
@@ -725,7 +758,7 @@ def test_cost_cap_rejects_unknown_model_pricing(test_db, monkeypatch, capsys):
     """단가를 모르는 모델로 --cost-cap을 걸면 상한을 신뢰할 수 없으므로 아예 중단한다."""
     conn, db = test_db
     _add_new_doc(conn, "D1")
-    ec = _run_enrich(monkeypatch, "[]", argv=["--cost-cap", "5"])  # test-model은 가격표에 없음
+    ec = _run_enrich(monkeypatch, RELEVANT, argv=["--cost-cap", "5"])  # test-model은 가격표에 없음
     assert ec.main() == 2
     assert "단가를 모른다" in capsys.readouterr().out
     assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
@@ -735,35 +768,10 @@ def test_normal_run_default_limit_comes_from_settings(test_db, monkeypatch):
     conn, db = test_db
     for i in range(3):
         _add_new_doc(conn, f"D{i}")
-    ec = _run_enrich(monkeypatch, "[]", settings_extra="enrich_daily_limit: 2\n")
+    ec = _run_enrich(monkeypatch, RELEVANT, settings_extra="enrich_daily_limit: 2\n")
     assert ec.main() == 0
     statuses = [r["status"] for r in conn.execute("SELECT status FROM documents")]
     assert statuses.count("enriched") == 2 and statuses.count("new") == 1
-
-
-def test_truncated_reply_fails_loudly_and_keeps_doc_new(test_db, monkeypatch, capsys):
-    """응답이 출력 상한에서 잘리면(stop_reason='max_tokens') 앞부분만 저장하지 않고 실패한다.
-    2026-09-28: max_tokens=2000이던 시절 24k 청크에서 JSON이 닫히지 않아 "JSON 배열을 찾을
-    수 없음"으로 반복 실패했다 — 원인이 드러나는 메시지로 바꾼 회귀 테스트."""
-    conn, db = test_db
-    import enrich.extract_claims as ec
-    _add_new_doc(conn, "D1")
-    # 잘린 응답: 배열이 닫히지 않았고 stop_reason이 max_tokens
-    cut = CLAIM_JSON.rstrip().rstrip("]").rstrip()
-    ec_mod = _run_enrich(monkeypatch, ec.ModelReply(cut, 10, 20, True))
-    assert ec_mod.main() == 1
-    out = capsys.readouterr().out
-    assert "출력 상한" in out and "잘렸" in out
-    assert "JSON 배열을 찾을 수 없음" not in out           # 원인을 뭉개지 않는다
-    assert conn.execute("SELECT status FROM documents WHERE id='D1'").fetchone()["status"] == "new"
-    assert conn.execute("SELECT count(*) c FROM claims").fetchone()["c"] == 0  # 반쪽 저장 없음
-
-
-def test_output_token_cap_is_generous_enough_for_claim_cap():
-    """claim 상한(20건)을 담을 수 있는 출력 상한인지 — 2000으로 되돌아가면 잡는다."""
-    import enrich.extract_claims as ec
-    assert ec.MAX_OUTPUT_TOKENS >= 4000
-    assert ec.ModelReply("x").truncated is False   # 기본값은 '잘리지 않음'
 
 
 def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
@@ -771,7 +779,7 @@ def test_enrich_main_partial_failure_is_nonzero(test_db, monkeypatch):
     _add_new_doc(conn, "D1")
     _add_new_doc(conn, "D2")
     # select_target_docs는 collected_at 역순 — 먼저 처리된 문서 성공, 나중 문서 API 오류
-    ec = _run_enrich(monkeypatch, [CLAIM_JSON, RuntimeError("timeout")])
+    ec = _run_enrich(monkeypatch, [RELEVANT, RuntimeError("timeout")])
     assert ec.main() == 1
     statuses = {r["id"]: r["status"] for r in conn.execute("SELECT id, status FROM documents")}
     assert "enriched" in statuses.values()  # 성공분은 반영
@@ -786,7 +794,7 @@ def test_enrich_main_low_failure_rate_is_success_with_warning(test_db, monkeypat
     for i, doc_id in enumerate(doc_ids):
         _add_new_doc(conn, doc_id, collected_at=f"2026-01-01 00:00:{i:02d}")
 
-    replies = [CLAIM_JSON] * 20 + [RuntimeError("일시적 오류")]
+    replies = [RELEVANT] * 20 + [RuntimeError("일시적 오류")]
     ec = _run_enrich(monkeypatch, replies, argv=["--limit", "21"])
     assert ec.main() == 0
     out = capsys.readouterr().out
@@ -808,7 +816,7 @@ def test_enrich_main_exact_5pct_failure_rate_is_hard_failure(test_db, monkeypatc
     for i, doc_id in enumerate(doc_ids):
         _add_new_doc(conn, doc_id, collected_at=f"2026-01-01 01:00:{i:02d}")
 
-    replies = [CLAIM_JSON] * 19 + [RuntimeError("오류")]
+    replies = [RELEVANT] * 19 + [RuntimeError("오류")]
     ec = _run_enrich(monkeypatch, replies, argv=["--limit", "20"])
     assert ec.main() == 1
 

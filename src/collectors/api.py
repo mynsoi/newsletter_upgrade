@@ -10,7 +10,7 @@
   python src/collectors/api.py <source_id> ...                   # 특정 소스만
 
 중복 제거·summary_only 규칙은 collectors.store.store_document로 RSS 수집기와 동일 적용.
-관련성 게이트(A1)는 enrich 단계(extract_claims)에서 rss/api 문서 공통으로 적용된다.
+관련성 게이트(A1)는 enrich 단계(relevance.py)에서 rss/api 문서 공통으로 적용된다.
 """
 from __future__ import annotations
 

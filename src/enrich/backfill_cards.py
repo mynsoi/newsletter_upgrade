@@ -37,7 +37,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from db import ROOT, connect  # noqa: E402
 from enrich import doc_cards  # noqa: E402
-from enrich.extract_claims import CostState, _price_for  # noqa: E402
+from enrich.llm import CostState, _price_for  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

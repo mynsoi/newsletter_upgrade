@@ -1,19 +1,19 @@
-# 일일 수집 워크플로 — rss + api 수집 → claim 추출
+# 일일 수집 워크플로 — rss + api 수집 → 관련성 판별 → 문서 카드 → 카드 임베딩
 #
 # 스케줄: 매일 21:00 UTC = 06:00 KST(익일). 수동 실행(workflow_dispatch)도 가능.
 # 중복 방지: make collect 은 src/collectors/collect.py 오케스트레이터를 통해
 #   collection_runs(run_date PK, KST 달력일) 를 원자적으로 선점한다. 오늘 이미
 #   completed 면 "오늘 완료됨"으로 즉시 종료(정상). 도중 실패는 failed 로 남아
 #   다음 실행이 자동 재시도한다. → Actions 와 개발 PC 가 같은 잠금을 공유한다.
-# claim 추출 순서: 일일 실행은 **최신 수집분 우선**(collected_at 역순, 상한은
+# 관련성 판별 순서: 일일 실행은 **최신 수집분 우선**(collected_at 역순, 상한은
 #   config/settings.yaml enrich_daily_limit)이다. 그날 유입을 그날 처리하는 것이 목적이고,
 #   누적 백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
 #   상한이 그날 유입보다 크면 남는 칸이 백로그 최신 쪽부터 채워져 용량이 놀지 않는다.
-# claim 임베딩(A6, pgvector 의미 검색): enrich 뒤 그날 신규 claim만 변환한다
-#   (embedding IS NULL 대상 — src/search/embed.py). 변환 전에 발행 6개월이 지난 arXiv claim의
-#   벡터를 비운다(settings.yaml embed_arxiv_retention_months — DB 용량 절감, 2026-09-22).
-#   비운 claim은 대상에서 빠지므로 다시 채워지지 않는다. OPENAI_API_KEY_EMBED 우선,
-#   없으면 OPENAI_API_KEY, 둘 다 없으면 "건너뜀(키 대기)"으로 성공 처리한다.
+# enrich 단계(src/enrich/relevance.py): 판별 통과 문서를 status='enriched'로 바꾸고, 같은 실행에서
+#   문서 카드(src/enrich/doc_cards.py)를 만든다. 칼럼 작업실은 카드와 카드 임베딩만 읽는다.
+#   2026-11-10 claim 추출·claim 임베딩 제거 — claims 표는 더 이상 쓰지 않는다.
+# 카드 임베딩: enrich 뒤 조각이 덜 찬 카드만 변환한다(src/search/embed.py).
+#   OPENAI_API_KEY_EMBED 우선, 없으면 OPENAI_API_KEY, 둘 다 없으면 "건너뜀(키 대기)"으로 성공 처리한다.
 # 비밀값: DATABASE_URL, ANTHROPIC_API_KEY, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는
 #   GitHub Secrets 로만 주입한다.
 name: daily-collect
@@ -81,7 +81,7 @@ jobs:
             make collect 2>&1 | tee logs/collect.log
           fi
 
-      - name: claim 추출 (make enrich)
+      - name: 관련성 판별·문서 카드 (make enrich)
         id: enrich
         continue-on-error: true
         run: |
@@ -91,7 +91,7 @@ jobs:
           fi
           make enrich 2>&1 | tee logs/enrich.log
 
-      - name: claim 임베딩 (make embed)
+      - name: 카드 임베딩 (make embed)
         id: embed
         continue-on-error: true
         run: |

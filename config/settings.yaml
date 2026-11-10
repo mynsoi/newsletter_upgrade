@@ -2,34 +2,37 @@
 # (b_grade_api_approved는 2026-09-03 등급 체계 미운용 확정으로 제거됨 —
 #  internal/은 공개 가능 자료 전용, 색인 문서는 전부 API 전송 가능)
 
-# claim 추출에 사용할 모델 (태깅·추출은 경량, 작성은 상위 모델 — 기획서 8장)
+# 관련성 판별에 사용할 모델 (판별은 경량, 작성은 상위 모델 — 기획서 8장)
+# (2026-11-10 claim 추출 제거 — 이 모델은 이제 판별만 한다. src/enrich/relevance.py)
 enrich_model: claude-haiku-4-5-20251001
 # 2026-09-08 claude-sonnet-4-6 → claude-opus-5. 블라인드 문체 테스트 5종 비교 결과
 # (2인 + AI 평가, eval/style-feedback-log.md). 이 값이 작성 모델의 정본이다.
 write_model: claude-opus-5
 
-# claim 추출(게이트+추출 API 호출) 활성화 여부.
+# enrich 단계(관련성 판별 + 문서 카드) 활성화 여부.
 # 2026-09-04 true — 크레딧 충전 완료, 재개. false로 바꾸면 스킵하고 정상 종료(실패 이슈 안 뜸).
+# false면 판별·카드가 통째로 멈춰 새 문서가 status='new'로 쌓인다(작업실 서재엔 판별 전 문서로 보임).
 enrich_enabled: true
 
 # 일반 실행(일일 스케줄·수동 make enrich) 1회 처리 상한. --limit로 재정의 가능.
 # 2026-08-31 관측: 상한 30건이 실제 병목이었음(기획서 8장) — 정상 운영 500건으로 상향.
 # 2026-09-09 500 → 1000. 일일 유입이 300~500건대라 500칸은 유입분을 덮고 나면 남는 칸이
 # 적었다. 상한을 올려 그날 유입을 먼저 비우고 남는 칸으로 백로그를 함께 줄인다
-# (2단계 처리 — src/enrich/extract_claims.py main()).
+# (2단계 처리 — src/enrich/relevance.py main()).
 # 2026-09-22 1000 → 400. Actions 무료 제공량(월 2,000분)을 9월에 다 써 9/22부터 예약 실행이
 # 막혔다(지출 한도 미설정 — 올리지 않기로 결정). 초과 원인은 ②단계 백로그 처리(하루 25~30분)와
 # enrich-backlog 수동 연쇄(504분)였고, T1 백로그는 9/22 PC에서 일괄 처리했다.
 # 백로그가 비면 추출 시간은 상한이 아니라 그날 유입량이 정한다 — 이 값은 시간을 줄이는
 # 장치가 아니라 **상한선**이다. 최근 추출 대상 유입은 하루 82~343건(평균 약 240)이라
 # 400이면 최대치를 덮고, 유입이 몰리거나 격상이 쏟아지는 날에도 추출이 20분 안팎에서 멈춘다.
+# (위 시간은 claim 추출이 있던 때 실측이다. 2026-11-10부터는 판별만 하므로 훨씬 짧다.)
 # 300 이하로 내리면 유입을 다 못 비워 백로그가 다시 생긴다.
 # 백로그 처리(--backlog)는 이 값을 쓰지 않는다 — --cost-cap이 대신 경계가 된다.
 enrich_daily_limit: 400
 
 # 문서 카드 (2026-10-21 도입 — 카드 비교 시험 1위 방식, migrations/009, src/enrich/doc_cards.py).
 # 카드 = 글쓴이가 하는 말 + 있었던 일 0~4개 + 재료 유형. 칼럼 작업실이 주제를 뽑고 원문을 찾는 재료다.
-# claim 추출(make enrich) 같은 실행에서 claim 다음에 돈다. 대상은 게이트 통과(status='enriched')·
+# 관련성 판별(make enrich) 같은 실행에서 판별 다음에 돈다. 대상은 게이트 통과(status='enriched')·
 # card_sources 소속·전문(summary_only=0, 본문 800자 이상)·카드 없는 문서, 최신 수집분 우선.
 # card_enabled: false면 건너뛰고 정상 종료. card_daily_limit은 하루 상한 — 평소 유입은 하루 2~30편
 # (2026-10 실측), aside 백필이 몰린 날만 70~140편이다. 기존 문서 소급은 Actions가 아니라 별도
@@ -71,19 +74,10 @@ card_sources:
   - flex-blog
   - manual
 
-# A6 의미 기반 검색(pgvector) — claim 임베딩 일반 실행(일일 증분) 1회 처리 상한.
-# embedding IS NULL인 claim만 대상이라 이미 변환된 claim은 재계산하지 않는다 —
-# 이 상한은 사실상 "그날 새로 추출된 claim" 규모다. --backfill(잔여 전량)은 이 값을 쓰지 않는다.
-# 2026-09-09 최초 도입.
+# 카드 임베딩(make embed) 1회 처리 상한 — 카드 장수 기준. 조각이 덜 찬 카드만 대상이라
+# 이미 변환된 조각은 재계산하지 않는다. --backfill(잔여 전량)은 이 값을 쓰지 않는다.
+# 2026-09-09 claim 임베딩 상한으로 도입, 2026-11-10 claim 임베딩 제거 후 카드 상한으로만 쓴다.
 embed_daily_limit: 2000
-
-# arXiv claim 임베딩 보존 기간(개월). 발행 후 이 기간이 지난 arXiv claim은 벡터를 비우고
-# 다시 채우지 않는다 — src/search/embed.py가 매 실행 앞에서 경계 넘은 분을 비운다.
-# 2026-09-22 도입: DB 387MB(무료 500MB·400MB 트리거 직전)에서 arXiv claim이 70%(23,634건)였다.
-# /topics는 발행일 최근 42일 창만 써서 영향 없음. 증거 수집에서는 키워드 검색으로만 걸린다.
-# 사람이 골라 넣은 문서(fetched_by='browse')는 기간과 무관하게 유지. 0이면 비활성(전량 유지).
-# 값을 늘리면 경계 안으로 돌아온 claim은 다음 실행부터 다시 임베딩된다(일 상한 embed_daily_limit, 소액).
-embed_arxiv_retention_months: 6
 
 # 웹 발행 — Vercel 정적 배포 (2026-10-05 도입, 창간호 런치 인프라)
 # 발행물은 site/<web_path_token>/<slug>/에, 아카이브 목록은 site/<web_path_token>/index.html에 쌓인다

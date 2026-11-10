@@ -202,7 +202,7 @@ def test_cross_collector_dedup(test_db, api, tmp_path):
 
 def test_select_target_docs_excludes_summary_only(test_db):
     conn, db = test_db
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     for i, so in enumerate([0, 1]):
         conn.execute(
             "INSERT INTO documents (id, source_id, tier, url, body, status, summary_only) "
@@ -215,19 +215,19 @@ def test_select_target_docs_excludes_summary_only(test_db):
 
 def test_enrich_disabled_flag_skips_cleanly(test_db, tmp_path, monkeypatch):
     """enrich_enabled: false면 API 호출 없이 정상 종료(0) — 크레딧 대기 중 안전장치."""
-    import enrich.extract_claims as ec
+    import enrich.relevance as ec
     settings = tmp_path / "settings.yaml"
     settings.write_text("enrich_enabled: false\n", encoding="utf-8")
     monkeypatch.setattr(ec, "SETTINGS_PATH", settings)
     monkeypatch.setattr(ec, "call_model",
                         lambda *a: (_ for _ in ()).throw(AssertionError("호출되면 안 됨")))
-    monkeypatch.setattr(sys, "argv", ["extract_claims.py"])
+    monkeypatch.setattr(sys, "argv", ["relevance.py"])
     assert ec.main() == 0
 
 
 def test_check_relevance_parses_verdict(monkeypatch):
-    import enrich.extract_claims as ec
-    monkeypatch.setattr(ec, "call_model", lambda prompt, model: ec.ModelReply("IRRELEVANT"))
+    import enrich.relevance as ec
+    monkeypatch.setattr(ec, "call_model", lambda prompt, model, max_tokens: ec.ModelReply("IRRELEVANT"))
     assert ec.check_relevance("제목", "본문", "m") is False
-    monkeypatch.setattr(ec, "call_model", lambda prompt, model: ec.ModelReply("relevant — 관련 문서"))
+    monkeypatch.setattr(ec, "call_model", lambda prompt, model, max_tokens: ec.ModelReply("relevant — 관련 문서"))
     assert ec.check_relevance("제목", "본문", "m") is True

@@ -344,7 +344,7 @@ def render_article_html(article: dict, image_paths: dict, body_class: str = "") 
     body_html = "\n".join(body_parts)
 
     # 참고자료 — `[제목](url)` 마크다운 링크를 <a>로 바꾼다.
-    # 형식은 verify_article.reference_lines()가 정한다(draft.md ⑤): 외부 문서만 하이퍼링크가
+    # 형식은 예전 verify_article.reference_lines()가 정했다(2026-11-10 삭제): 외부 문서만 하이퍼링크가
     # 붙고 이론 카드·내부 자료는 평문이므로, 링크가 없는 줄은 이스케이프만 거쳐 그대로 나간다.
     ref_items = "\n".join(
         f"      <li>{_render_ref(ref)}</li>" for ref in article["references"]

@@ -94,7 +94,7 @@ def test_select_targets_conditions(test_db):
 
 def test_run_saves_structured_cards_and_records_cost(test_db):
     from enrich import doc_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     add_doc(conn, "d1")
     add_doc(conn, "d2", source="dbr")
@@ -128,7 +128,7 @@ def test_run_saves_structured_cards_and_records_cost(test_db):
 
 def test_rerun_makes_no_duplicates(test_db):
     from enrich import doc_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     add_doc(conn, "d1")
     doc_cards.run(conn, SETTINGS, CostState(), client=FakeClient())
@@ -143,7 +143,7 @@ def test_rerun_makes_no_duplicates(test_db):
 
 def test_card_disabled_skips_without_calls(test_db):
     from enrich import doc_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     add_doc(conn, "d1")
     client = FakeClient()
@@ -154,7 +154,7 @@ def test_card_disabled_skips_without_calls(test_db):
 
 def test_refusal_and_bad_output_are_skipped_then_retried(test_db):
     from enrich import doc_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     add_doc(conn, "refused", collected_at="2026-10-21 06:00:00")
     add_doc(conn, "broken", collected_at="2026-10-20 06:00:00")
@@ -182,7 +182,7 @@ def test_refusal_and_bad_output_are_skipped_then_retried(test_db):
 
 def test_api_error_does_not_stop_others(test_db):
     from enrich import doc_cards
-    from enrich.extract_claims import CostState
+    from enrich.llm import CostState
     conn = test_db
     add_doc(conn, "boom")
     add_doc(conn, "fine")

@@ -1,47 +1,35 @@
-"""claims.claim_text를 OpenAI 임베딩으로 변환해 claims.embedding(halfvec)에 저장.
+"""문서 카드 조각을 OpenAI 임베딩으로 변환해 document_card_embeddings(halfvec)에 저장 (migrations/009).
 
-PostgreSQL 전용 — SQLite 모드는 vector 컬럼이 없으므로 즉시 정상 종료(키워드 검색만 사용,
-migrations/005_claims_embedding.sql 참고). 키 로드는 OPENAI_API_KEY_EMBED가 있으면 그것을,
-없으면 OPENAI_API_KEY를 쓴다(환경변수 전용 — CLAUDE.md 절대 규칙 4: 비밀값은 파일에 쓰지
-않는다. .env로 주입해도 결국 os.environ을 거치므로 동일하게 동작한다). 둘 다 없으면
-실패가 아니라 "건너뜀(키 대기)"으로 성공 종료한다(collect.yml 일일 파이프라인이 이 단계로
-막히지 않도록).
+카드 1장 = 조각 1 + 있었던 일 개수: 핵심 주장(thesis) 1개 + 있었던 일(episode) 각각. 아직 없는
+조각만 만든다(ON CONFLICT DO NOTHING — 재실행해도 중복 비용이 들지 않는다). 100조각씩 배치 API 호출.
+칼럼 작업실(mentor-lab-integration)이 이 표로 원문을 찾는다.
 
-이미 embedding이 있는 claim은 건너뛴다(WHERE embedding IS NULL) — 재실행해도 중복 비용이
-들지 않는다(증분 안전). 100건씩 배치 API 호출.
+**2026-11-10 claim 임베딩 제거.** 예전에는 claims.embedding(768차원)을 먼저 채우고 발행 6개월이
+지난 arXiv claim 벡터를 비운 다음 카드를 했다. claim 추출을 없애면서(src/enrich/relevance.py)
+claim 임베딩과 arXiv 벡터 비우기(--prune-only, embed_arxiv_retention_months)도 뺐다.
+claims 표의 벡터·인덱스 정리는 migrations/drafts/의 용량 회수 초안을 사람이 따로 실행한다.
 
-**arXiv 보존 기간 (2026-09-22)**: 발행 N개월(settings.yaml embed_arxiv_retention_months,
-기본 6)이 지난 arXiv claim은 벡터를 비우고 다시 채우지 않는다. DB 용량(Supabase 무료 500MB)
-절감용이다. 매 실행 앞에서 경계를 넘은 분을 비우고, 임베딩 대상 선정에서도 같은 조건을 뺀다
-— 후자가 없으면 비운 claim이 "embedding IS NULL"로 다음 날 다시 채워진다.
-- 토픽 발굴(/topics)은 발행일 기준 최근 42일 창만 쓰므로 영향이 없다.
-- 증거 수집(hybrid_search)에서 해당 claim은 키워드 검색으로만 걸린다(의미 검색 제외).
-- 사람이 골라 넣은 문서(documents.fetched_by='browse')는 기간과 무관하게 유지한다
-  — 「GPTs are GPTs」(2023) 같은 핵심 논문이 여기 해당한다.
-- 0 또는 null이면 비우기를 끈다(전량 유지).
+PostgreSQL 전용 — SQLite 모드는 vector 컬럼이 없으므로 즉시 정상 종료. 키 로드는
+OPENAI_API_KEY_EMBED가 있으면 그것을, 없으면 OPENAI_API_KEY를 쓴다(환경변수 전용 — CLAUDE.md
+절대 규칙 4: 비밀값은 파일에 쓰지 않는다). 둘 다 없으면 실패가 아니라 "건너뜀(키 대기)"으로
+성공 종료한다(collect.yml 일일 파이프라인이 이 단계로 막히지 않도록).
 
-**문서 카드 (2026-10-21, migrations/009)**: claim 다음에 같은 실행에서 카드 조각(핵심 주장 1개 +
-있었던 일 각각)을 같은 모델로 document_card_embeddings에 채운다. 아직 없는 조각만 만든다.
-
-**차원 (2026-10-28, migrations/010)**: claims는 768차원, 카드는 1536차원이다. 요청 차원은 상수가
-아니라 각 컬럼의 선언 차원(column_dims)을 따른다 — 코드와 DB 차원이 어긋나면 저장·검색이 실패하고,
-DB를 먼저 바꾸든 코드를 먼저 배포하든 같은 코드가 동작하게 하기 위해서다.
+**차원**: 요청 차원은 상수가 아니라 컬럼의 선언 차원(column_dims)을 따른다(카드는 1536) — 코드와
+DB 차원이 어긋나면 저장·검색이 실패하고, DB를 먼저 바꾸든 코드를 먼저 배포하든 같은 코드가
+동작하게 하기 위해서다.
 
 사용:
-  python src/search/embed.py              # embedding IS NULL인 claim을 상한(기본 2000)까지
+  python src/search/embed.py              # 조각이 덜 찬 카드를 상한(기본 2000장)까지
   python src/search/embed.py --limit 500
   python src/search/embed.py --backfill    # 상한 없이 잔여 전량 변환
-  python src/search/embed.py --prune-only  # 보존 기간 지난 arXiv 벡터 비우기만 (임베딩 없음)
 """
 from __future__ import annotations
 
 import argparse
-import calendar
 import json
 import os
 import re
 import sys
-from datetime import date
 from pathlib import Path
 
 import yaml
@@ -51,7 +39,7 @@ from db import ROOT, IS_POSTGRES, connect, migrate  # noqa: E402
 
 SETTINGS_PATH = ROOT / "config" / "settings.yaml"
 
-# Windows 콘솔(cp949)에서 한글 출력이 깨지지 않도록 (rss.py·extract_claims.py와 동일)
+# Windows 콘솔(cp949)에서 한글 출력이 깨지지 않도록 (rss.py·relevance.py와 동일)
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -66,11 +54,6 @@ BATCH_SIZE = 100
 DEFAULT_DAILY_LIMIT = 2000
 # $ / 1M 토큰 — OpenAI 공식 요금표(text-embedding-3-small). 단가가 바뀌면 이 값만 갱신.
 PRICE_PER_1M_TOKENS = 0.02
-# arXiv 보존 기간 기본값(개월) — settings.yaml embed_arxiv_retention_months가 없을 때.
-DEFAULT_ARXIV_RETENTION_MONTHS = 6
-# LIKE 패턴은 SQL 본문이 아니라 파라미터로 넘긴다 — '%'가 SQL 문자열에 있으면 psycopg가
-# 자리표시자로 오인한다(extract_claims.build_doc_filters와 같은 이유).
-ARXIV_SOURCE_PATTERN = "arxiv-%"
 
 
 def api_key() -> str | None:
@@ -95,11 +78,7 @@ def to_vector_literal(vec: list[float]) -> str:
 
 
 def column_dims(conn, table: str) -> int:
-    """table.embedding 컬럼의 선언 차원 — 'halfvec(768)' → 768. 읽지 못하면 DIMENSIONS.
-
-    text-embedding-3-small의 dimensions 요청은 앞부분 절단 + 재정규화와 같아서, 768차원
-    요청 결과는 1536차원 벡터를 subvector로 자른 값과 코사인 순위가 같다(migrations/010).
-    """
+    """table.embedding 컬럼의 선언 차원 — 'halfvec(1536)' → 1536. 읽지 못하면 DIMENSIONS."""
     row = conn.execute(
         "SELECT format_type(atttypid, atttypmod) AS t FROM pg_attribute "
         "WHERE attrelid = to_regclass(?) AND attname = 'embedding' AND NOT attisdropped",
@@ -114,124 +93,6 @@ def embed_texts(client, texts: list[str], dims: int = DIMENSIONS) -> tuple[list[
     usage = getattr(resp, "usage", None)
     tokens = getattr(usage, "total_tokens", 0) or 0
     return [d.embedding for d in resp.data], tokens
-
-
-def embed_one(text: str, dims: int = DIMENSIONS) -> list[float] | None:
-    """질의 1건 임베딩 (검색용) — 키가 없으면 None. dims는 비교할 컬럼의 차원(column_dims)."""
-    client = get_client()
-    if client is None:
-        return None
-    vecs, _ = embed_texts(client, [text], dims)
-    return vecs[0]
-
-
-def months_ago(today: date, months: int) -> date:
-    """today에서 months개월 전 같은 날(그 달에 없는 날이면 말일). 예: 8/31 - 6개월 = 2/28."""
-    y, m = divmod(today.month - 1 - months, 12)
-    year, month = today.year + y, m + 1
-    return date(year, month, min(today.day, calendar.monthrange(year, month)[1]))
-
-
-def arxiv_cutoff(months: int | None, today: date | None = None) -> str | None:
-    """보존 경계 발행일(YYYY-MM-DD). months가 0·None이면 None — 비우기 비활성."""
-    if not months:
-        return None
-    return months_ago(today or date.today(), months).isoformat()
-
-
-def stale_arxiv_docs_sql(cutoff: str) -> tuple[str, list]:
-    """보존 기간이 지난 arXiv 문서 id를 고르는 서브쿼리와 파라미터.
-
-    published_at이 NULL인 문서는 경계 밖이라고 단정할 근거가 없어 **유지**한다
-    (NULL < ?는 참이 아니다). fetched_by='browse'(사람이 골라 넣은 문서)도 유지한다.
-    """
-    return ("SELECT id FROM documents WHERE source_id LIKE ? AND published_at < ? "
-            "AND COALESCE(fetched_by, '') <> 'browse'",
-            [ARXIV_SOURCE_PATTERN, cutoff])
-
-
-def prune_stale_arxiv(conn, cutoff: str | None) -> int:
-    """경계를 넘은 arXiv claim의 벡터를 NULL로 비운다. 반환: 비운 건수."""
-    if cutoff is None:
-        return 0
-    sub, params = stale_arxiv_docs_sql(cutoff)
-    cur = conn.execute("UPDATE claims SET embedding = NULL "
-                       f"WHERE embedding IS NOT NULL AND document_id IN ({sub})", tuple(params))
-    conn.commit()
-    return cur.rowcount or 0
-
-
-def select_pending(conn, limit: int | None, cutoff: str | None = None) -> list:
-    """임베딩 대상: embedding IS NULL이면서 보존 기간이 지난 arXiv가 아닌 claim."""
-    sql = "SELECT id, claim_text FROM claims WHERE embedding IS NULL"
-    params: list = []
-    if cutoff is not None:
-        sub, params = stale_arxiv_docs_sql(cutoff)
-        sql += f" AND document_id NOT IN ({sub})"
-    sql += " ORDER BY id"
-    if limit is not None:
-        sql += " LIMIT ?"
-        params = [*params, limit]
-    return conn.execute(sql, tuple(params)).fetchall()
-
-
-def run(limit: int | None, retention_months: int | None = DEFAULT_ARXIV_RETENTION_MONTHS,
-        prune_only: bool = False) -> int:
-    if not IS_POSTGRES:
-        print("SQLite 모드 — claims.embedding 컬럼 없음(pgvector는 PostgreSQL 전용). "
-              "의미 검색 건너뜀 — 키워드 검색만 사용. 정상 종료.")
-        return 0
-
-    # 일반 실행은 키부터 본다 — 키가 없으면 DB에 연결하지 않고 끝낸다(일일 파이프라인이
-    # 이 단계로 막히지 않도록). --prune-only는 API를 쓰지 않으므로 키 없이 돈다.
-    client = None
-    if not prune_only:
-        client = get_client()
-        if client is None:
-            print("OPENAI_API_KEY_EMBED / OPENAI_API_KEY 미설정 — 건너뜀(키 대기). 정상 종료.")
-            return 0
-
-    cutoff = arxiv_cutoff(retention_months)
-    conn = connect()
-    migrate(conn)
-
-    pruned = prune_stale_arxiv(conn, cutoff)
-    if cutoff is None:
-        print("arXiv 보존 기간 비활성 — 비우기 건너뜀")
-    else:
-        print(f"arXiv 보존 경계 {cutoff} (발행 {retention_months}개월, browse 제외) — "
-              f"벡터 비움 {pruned}건")
-    if prune_only:
-        conn.close()
-        return 0
-
-    pending = select_pending(conn, limit, cutoff)
-    print(f"대상 {len(pending)}건 (embedding IS NULL, 보존 경계 밖 arXiv 제외, model={MODEL}"
-          + (f", limit={limit}" if limit is not None else ", 무제한(--backfill)") + ")")
-
-    total_tokens = 0
-    done = 0
-    dims = column_dims(conn, "claims")
-    for i in range(0, len(pending), BATCH_SIZE):
-        batch = pending[i:i + BATCH_SIZE]
-        texts = [r["claim_text"] for r in batch]
-        vecs, tokens = embed_texts(client, texts, dims)
-        total_tokens += tokens
-        for row, vec in zip(batch, vecs):
-            conn.execute(f"UPDATE claims SET embedding = ?::{VECTOR_TYPE} WHERE id = ?",
-                         (to_vector_literal(vec), row["id"]))
-        conn.commit()
-        done += len(batch)
-        print(f"  {done}/{len(pending)}건 변환 완료")
-
-    card_parts, card_tokens = embed_cards(conn, client, limit)
-    total_tokens += card_tokens
-
-    cost = total_tokens / 1_000_000 * PRICE_PER_1M_TOKENS
-    print(f"\n총 claim {done}건 · 카드 {card_parts}조각 임베딩 생성, 토큰 {total_tokens:,} "
-          f"— 실측 비용 ${cost:.4f}")
-    conn.close()
-    return 0
 
 
 def card_parts(card) -> list[tuple[str, str]]:
@@ -260,9 +121,9 @@ def select_pending_cards(conn, limit: int | None) -> list:
 def embed_cards(conn, client, limit: int | None) -> tuple[int, int]:
     """카드 조각 임베딩을 document_card_embeddings에 채운다. 반환: (조각 수, 토큰 수).
 
-    claim과 같은 모델·저장 타입, 차원은 이 표의 컬럼 차원(1536 — claims는 768로 줄였다, migrations/010). limit은 카드 장수 기준(claim 상한과 같은 값을 쓴다 —
-    하루 카드는 card_daily_limit 이하라 사실상 그날 새 카드 전부). 이미 있는 조각은
-    ON CONFLICT로 건너뛴다 — 도중에 끊긴 카드를 다시 집어도 중복 행이 생기지 않는다.
+    차원은 이 표의 컬럼 차원(1536). limit은 카드 장수 기준(embed_daily_limit — 하루 카드는
+    card_daily_limit 이하라 사실상 그날 새 카드 전부). 이미 있는 조각은 ON CONFLICT로
+    건너뛴다 — 도중에 끊긴 카드를 다시 집어도 중복 행이 생기지 않는다.
     """
     cards = select_pending_cards(conn, limit)
     print(f"카드 임베딩 대상 {len(cards)}장")
@@ -283,14 +144,34 @@ def embed_cards(conn, client, limit: int | None) -> tuple[int, int]:
     return len(parts), tokens_total
 
 
+def run(limit: int | None) -> int:
+    if not IS_POSTGRES:
+        print("SQLite 모드 — 카드 임베딩 컬럼 없음(pgvector는 PostgreSQL 전용). 건너뜀. 정상 종료.")
+        return 0
+
+    # 키부터 본다 — 키가 없으면 DB에 연결하지 않고 끝낸다(일일 파이프라인이 이 단계로 막히지 않도록).
+    client = get_client()
+    if client is None:
+        print("OPENAI_API_KEY_EMBED / OPENAI_API_KEY 미설정 — 건너뜀(키 대기). 정상 종료.")
+        return 0
+
+    conn = connect()
+    migrate(conn)
+    print(f"카드 임베딩 (model={MODEL}"
+          + (f", limit={limit}장" if limit is not None else ", 무제한(--backfill)") + ")")
+    parts, tokens = embed_cards(conn, client, limit)
+    cost = tokens / 1_000_000 * PRICE_PER_1M_TOKENS
+    print(f"\n카드 {parts}조각 임베딩 생성, 토큰 {tokens:,} — 실측 비용 ${cost:.4f}")
+    conn.close()
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(description="claims.claim_text → OpenAI 임베딩 저장")
-    p.add_argument("--backfill", action="store_true", help="상한 없이 잔여 claim 전량 변환")
+    p = argparse.ArgumentParser(description="문서 카드 조각 → OpenAI 임베딩 저장")
+    p.add_argument("--backfill", action="store_true", help="상한 없이 잔여 카드 전량 변환")
     p.add_argument("--limit", type=int, default=None,
-                   help=f"처리 상한(미지정 시 일반 실행은 {DEFAULT_DAILY_LIMIT}, "
+                   help=f"카드 장수 상한(미지정 시 일반 실행은 {DEFAULT_DAILY_LIMIT}, "
                         f"--backfill은 무제한)")
-    p.add_argument("--prune-only", action="store_true",
-                   help="보존 기간이 지난 arXiv claim의 벡터 비우기만 하고 임베딩은 하지 않는다")
     args = p.parse_args(argv)
     settings = yaml.safe_load(SETTINGS_PATH.read_text(encoding="utf-8")) or {}
     if args.limit is not None:
@@ -299,8 +180,7 @@ def main(argv: list[str] | None = None) -> int:
         limit = None
     else:
         limit = settings.get("embed_daily_limit", DEFAULT_DAILY_LIMIT)
-    retention = settings.get("embed_arxiv_retention_months", DEFAULT_ARXIV_RETENTION_MONTHS)
-    return run(limit, retention, prune_only=args.prune_only)
+    return run(limit)
 
 
 if __name__ == "__main__":

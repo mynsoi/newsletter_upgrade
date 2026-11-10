@@ -10,7 +10,7 @@
 | # | 단계 | 실행 | 담당 | 산출·확인 |
 |---|---|---|---|---|
 | 1 | 승인 | 🙋 ✋ | 편집 담당 + 리더 | 체크리스트 통과 · 머리말 `<!-- 발행 승인: YYYY-MM-DD -->` |
-| 2 | /publish 기록 | 🤖 ✋ | Claude | content/published/ 이동 · DB approved · 인용 원장 |
+| 2 | /publish 기록 | 🤖 ✋ | Claude | content/published/ 이동 · DB approved |
 | 3 | 발행 도구 | 🙋 | 편집 담당 | output/{slug}/ (웹 HTML·이미지·article.json) |
 | 4 | make site | 🤖 | Claude | site/{token}/{slug}/ + 아카이브 갱신 |
 | 5 | 커밋·push | 🤖 ✋ | Claude (push는 사람 승인) | origin/main → Vercel 자동 배포 |
@@ -25,7 +25,7 @@
 체크리스트를 사용자와 함께 확인한다:
 □ 톤·강도·민감표현: 직군·세대·조직을 일반화하는 표현이 없는가
 □ 경영층 인용: 실명·직책 정확, 발언 맥락 왜곡 없음, supersedes 체크(최신 메시지와 정합)
-□ 검증 리포트의 플래그 전건 해소 · 리포트 10장(발행 전 사람 확인 항목) 처리
+□ 출처·수치가 원문과 맞는지 사람이 대조 (검증 리포트 `verify_article`은 2026-11-10 claim 제거와 함께 지웠다)
 □ 저작권: 원문 문장 전재 없음, 출처 목록 완비
 □ 편집자 노트(`<!-- note -->`)가 있으면 문안 확정 — 검증·분량 대상이 아니므로 사람이 읽는다
 
@@ -36,10 +36,7 @@
 ## 2. /publish 기록 🤖 ✋
 
 - 파일을 content/published/{slug}.md로 이동, articles 테이블 status='approved' 갱신.
-- **인용 원장 기록 (필수)**: `python src/article_ledger.py record {slug}`
-  본문의 `<!-- claims: -->` 주석을 문단 단위로 article_sources에 쓴다(재실행 안전 — 본문을 고쳐
-  재승인하면 다시 돌린다). DB에 없는 claim이 있으면 기록하지 않고 실패한다 — 검증 리포트를 다시
-  확인할 것. 이 원장이 비면 "6개월 무인용 소스 퇴출"(기획서 4.2)을 셀 수 없다.
+- 인용 원장(article_sources) 기록 단계는 2026-11-10 claim 제거와 함께 없앴다(src/article_ledger.py 삭제).
 
 ## 3. 발행 도구 🙋
 
