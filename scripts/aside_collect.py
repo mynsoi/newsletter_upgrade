@@ -323,6 +323,14 @@ def run_source(c, sid, cfg, write, log, urls=None, since=None, backfill=False):
                 log("  백필 끝 — 남은 과거 글 없음")
         else:
             todo = [(u, None) for u in (urls or candidates(c, sid, cfg, log, since if cfg["mode"] == "upgrade" else None))]
+            if not urls:
+                # 한 번 열어 짧음·날짜 없음·기간 밖으로 판정한 글은 다시 열지 않는다(2026-11-10). 예전엔 평소 회차가
+                # seen을 보지 않아, 저장하지 않은 짧은 글(McKinsey 86자 페이지)이 매 회차 max_per_run 한 칸을 차지했다.
+                # 다시 열게 하려면 runs/aside/backfill_state.json의 seen에서 그 주소를 지운다. --url로 준 주소는 늘 연다.
+                skipped = sum(1 for u, _ in todo if u in seen)
+                todo = [(u, d) for u, d in todo if u not in seen]
+                if skipped:
+                    log(f"  이미 열어 본 글 {skipped}편 건너뜀(짧음·날짜 없음·기간 밖)")
     except PermissionError as e:
         log(f"  멈춤: {e}")
         res["stopped"] = str(e)
