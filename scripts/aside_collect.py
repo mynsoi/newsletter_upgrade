@@ -231,6 +231,22 @@ def save_state(st):
     STATE.write_text(json.dumps(st, ensure_ascii=False, indent=0), encoding="utf-8")
 
 
+MONTHS = {m: i for i, m in enumerate(("January", "February", "March", "April", "May", "June", "July", "August",
+                                      "September", "October", "November", "December"), 1)}
+
+
+def toc_day(t):
+    """DBR 목차 글자에서 발행일(YYYY-MM-DD). 예전 표기 '발행일 : 2026-10-15', 지금 표기 'November 2026 Issue 2'
+    (2026-11-11 확인 — 예전 표기가 사라져 날짜를 못 읽었다). 월 호수는 1호=1일, 2호=15일로 어림한다(하한 비교용)."""
+    m = re.search(r"발행일\s*:\s*(\d{4}-\d{2}-\d{2})", t)
+    if m:
+        return m.group(1)
+    m = re.search(r"\b(" + "|".join(MONTHS) + r")\s+(\d{4})\s+Issue\s+(\d)", t)
+    if m:
+        return f"{m.group(2)}-{MONTHS[m.group(1)]:02d}-{'15' if m.group(3) == '2' else '01'}"
+    return None
+
+
 def backfill_candidates(c, sid, cfg, since, log):
     """과거 목록에서 하한 이후 글 [(주소, 아는 발행일 또는 None)] — 최신 글부터."""
     b = cfg["backfill"]
@@ -256,14 +272,19 @@ def backfill_candidates(c, sid, cfg, since, log):
         nums = [int(m.group(1)) for x in (r.get("value") or []) if (m := re.search(b["issue_no"], x["u"]))]
         n = max(nums or [0])
         time.sleep(cfg["gap_seconds"])
+        unknown = 0
         while n > 0:
-            r = page(b["toc"].format(n=n), LINKS + ".concat([{u: '@@', t: document.body.innerText.slice(0, 1500)}])", wait=7)
+            r = page(b["toc"].format(n=n), LINKS + ".concat([{u: '@@', t: document.body.innerText.slice(0, 3000)}])", wait=7)
             L = r.get("value") or []
             if not L:
                 break
-            m = re.search(r"발행일\s*:\s*(\d{4}-\d{2}-\d{2})", L[-1]["t"])
-            day = m.group(1) if m else None
+            day = toc_day(L[-1]["t"])
             if day and day < since:
+                break
+            # 날짜를 못 읽는 호가 이어지면 멈춘다 — 예전엔 목차 표기가 바뀐 뒤 1호까지 내려가 11,574편 목록이 됐다(2026-11-11)
+            unknown = 0 if day else unknown + 1
+            if unknown >= 3:
+                log(f"  {n}호까지 목차 발행일을 연속 3번 못 읽음 — 멈춤(목차 표기 확인 필요)")
                 break
             links = [canon(cfg, x["u"]) for x in L[:-1] if re.search(cfg["link"], x["u"])]
             out += [(u, day) for u in dict.fromkeys(links)]
@@ -382,6 +403,16 @@ def run_source(c, sid, cfg, write, log, urls=None, since=None, backfill=False):
                 item["result"] = "미리보기"
             res["items"].append(item)
             log(f"  {item['result']:6} {v['chars']:>6}자 {v['published'] or '날짜 없음':10} {v['title'][:60]}")
+            if backfill and item.get("result") == "기간 밖" and cfg["backfill"].get("kind") == "issues":
+                # 호별 목차 목록은 최신 호부터라 기간 밖 글이 나오면 그 뒤는 모두 더 오래됐다 — 목록을 여기서 끝낸다.
+                # (2026-11-11: 목차 날짜를 못 읽어 11,574편 목록이 만들어졌고, 매 회차 구독 열람 20편을 2025년 글에 썼다)
+                lst = st["lists"][sid]["list"]
+                at = next((i for i, (x, _) in enumerate(lst) if x == u), None)
+                if at is not None:
+                    st["lists"][sid]["list"] = lst[:at]
+                    log(f"  기간 밖 글이 나옴 — 과거 목록을 여기서 끝냄(뒤 {len(lst) - at}편 버림)")
+                save_state(st)
+                break
         save_state(st)
         time.sleep(cfg["gap_seconds"])
     save_state(st)
