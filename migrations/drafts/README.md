@@ -75,4 +75,17 @@ SELECT indexrelname, pg_size_pretty(pg_relation_size(indexrelid))
 
 ### 실행 기록
 
-실행하면 여기에 날짜·단계·전후 크기를 적는다.
+**2026-11-11 1·3단계 실행 (2단계 행 삭제는 하지 않음 — 표를 지울 때 함께)**
+- 조건 확인: PR #19 머지 후 일일 수집(11/11 수동 실행 #42929775809) 전 단계 성공, claims 새 행 0.
+  실행 전 claims에 기대는 뷰 없음, claims 접근 중인 세션 없음.
+- 세션 풀러(5432), statement_timeout 0으로 실행.
+
+| 시점 | DB 전체 | claims 합계 | claims 표 | 비고 |
+|---|---|---|---|---|
+| 실행 전 | 400MB | 174MB | 77MB | HNSW 72MB · trgm 21MB · 기타 인덱스 4MB, 행 53,970 · 벡터 36,097 |
+| 1단계 후 | 307MB | 81MB | 77MB | 인덱스 2개·`search_claims()`·`embedding` 열 삭제 (한 트랜잭션) |
+| 3단계 후 | **244MB** | 18MB | 14MB | `VACUUM (FULL, ANALYZE) claims` 3.2초 |
+
+- 회수 156MB. 행 53,970·인용 원장 23행(가리키는 claim 모두 존재) 그대로. 작업실 상태 응답 정상.
+- 남은 일: claims·article_sources 표 삭제는 별도 마이그레이션(`001_init.sql`·`005`~`010`·SQLite 스키마 정리와 함께,
+  머지 시점은 사람이 정한다 — `make init`이 운영 DB에 자동 적용하므로).
