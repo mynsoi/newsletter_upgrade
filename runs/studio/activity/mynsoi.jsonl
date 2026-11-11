@@ -60,3 +60,4 @@
 {"at": 1794298452, "user": "mynsoi", "article": "m-20261110-171000", "kind": "mine", "status": "done", "secs": 38}
 {"at": 1794298892, "user": "mynsoi", "article": "m-20261110-171000", "kind": "write", "status": "done", "secs": 116}
 {"at": 1794299894, "user": "mynsoi", "article": "m-20261110-171000", "kind": "write", "status": "done", "secs": 123}
+{"at": 1794358464, "user": "mynsoi", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 14}
