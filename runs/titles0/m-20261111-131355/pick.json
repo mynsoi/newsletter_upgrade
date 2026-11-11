@@ -8,33 +8,33 @@
   },
   {
    "n": 2,
-   "message": 4,
-   "hook": 5,
+   "message": 5,
+   "hook": 4,
    "honest": 5
   },
   {
    "n": 3,
    "message": 5,
-   "hook": 4,
+   "hook": 5,
    "honest": 5
   },
   {
    "n": 4,
    "message": 4,
-   "hook": 4,
+   "hook": 3,
    "honest": 4
   },
   {
    "n": 5,
    "message": 5,
-   "hook": 3,
-   "honest": 5
+   "hook": 4,
+   "honest": 4
   },
   {
    "n": 6,
-   "message": 4,
-   "hook": 2,
-   "honest": 4
+   "message": 5,
+   "hook": 3,
+   "honest": 5
   },
   {
    "n": 7,
@@ -45,14 +45,14 @@
   {
    "n": 8,
    "message": 4,
-   "hook": 4,
+   "hook": 3,
    "honest": 4
   }
  ],
  "pick": [
-  2,
-  1,
   3,
-  8
+  1,
+  5,
+  6
  ]
 }
