@@ -203,3 +203,9 @@ def test_store_document_strips_cdata_title(test_db):
                           text="본문 " * 500) == "new"
     row = conn.execute("SELECT title FROM documents WHERE url='http://x/bain-1'").fetchone()
     assert row["title"] == "The Rebirth of Customer Success"
+
+
+def test_tests_never_see_production_database_url():
+    """tests/conftest.py가 운영 DB 주소를 빼 둔다 — 개발 PC 환경에 DATABASE_URL이 있어도 테스트는 SQLite."""
+    import os
+    assert "DATABASE_URL" not in os.environ
