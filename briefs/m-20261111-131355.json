@@ -26,5 +26,6 @@
  },
  "target": "전 직원",
  "from_mine": "runs/mine/m-20261111-131355",
- "from_wiki": "wiki/주제/charter-0004.md"
+ "from_wiki": "wiki/주제/charter-0004.md",
+ "sources_ok": true
 }
