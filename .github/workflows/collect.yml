@@ -1,6 +1,9 @@
 # 일일 수집 워크플로 — rss + api 수집 → 관련성 판별 → 문서 카드 → 카드 임베딩
 #
-# 스케줄: 매일 21:00 UTC = 06:00 KST(익일). 수동 실행(workflow_dispatch)도 가능.
+# 스케줄: 매일 19:00 UTC = 04:00 KST(익일). 수동 실행(workflow_dispatch)도 가능.
+#   2026-11-11 21:00 → 19:00 UTC: GitHub가 예약 실행을 매일 3~6시간 늦게 띄워(11/3~11/10 실제 시작 09:04~12:03 KST)
+#   새 글·카드가 점심 무렵에야 작업실에 들어왔다. 늦어져도 출근 전후에 끝나도록 2시간 당겼다.
+#   collection_runs의 날짜는 KST 달력일이라 04시 실행도 그날 1회로 잡힌다(중복 없음).
 # 중복 방지: make collect 은 src/collectors/collect.py 오케스트레이터를 통해
 #   collection_runs(run_date PK, KST 달력일) 를 원자적으로 선점한다. 오늘 이미
 #   completed 면 "오늘 완료됨"으로 즉시 종료(정상). 도중 실패는 failed 로 남아
@@ -20,7 +23,7 @@ name: daily-collect
 
 on:
   schedule:
-    - cron: "0 21 * * *"   # 21:00 UTC / 06:00 KST(익일)
+    - cron: "0 19 * * *"   # 19:00 UTC / 04:00 KST(익일)
   workflow_dispatch:
     inputs:
       force:

@@ -1,7 +1,8 @@
 """하루 1회 수집 보장 잠금 + claim 추출 문서 단위 동시성 제어 테스트.
 
 - SQLite 모드: 기본 (test_db 픽스처가 PIPELINE_DB 설정 + DATABASE_URL 해제 + 모듈 리로드)
-- PostgreSQL 모드: DATABASE_URL 이 설정돼 있을 때만 실행 (test_locks_on_postgres)
+- PostgreSQL 모드: 시험용 DB 주소 TEST_DATABASE_URL 이 있을 때만 실행 (test_locks_on_postgres).
+  운영 DB 주소(DATABASE_URL)는 tests/conftest.py가 테스트 시작 때 환경에서 뺀다 (2026-11-11)
 """
 import os
 import sys
@@ -822,11 +823,12 @@ def test_enrich_main_exact_5pct_failure_rate_is_hard_failure(test_db, monkeypatc
 
 
 # --------------------------------------------------------------------------- #
-# PostgreSQL 모드 (DATABASE_URL 설정 시에만)                                   #
+# PostgreSQL 모드 (TEST_DATABASE_URL 설정 시에만 — 운영 DB 금지)              #
 # --------------------------------------------------------------------------- #
-@pytest.mark.skipif(not os.environ.get("DATABASE_URL"),
-                    reason="DATABASE_URL 미설정 — PostgreSQL 잠금 테스트 생략")
+@pytest.mark.skipif(not os.environ.get("TEST_DATABASE_URL"),
+                    reason="TEST_DATABASE_URL 미설정 — PostgreSQL 잠금 테스트 생략(운영 DB에는 돌리지 않는다)")
 def test_locks_on_postgres(monkeypatch):
+    monkeypatch.setenv("DATABASE_URL", os.environ["TEST_DATABASE_URL"])
     sys.modules.pop("db", None)
     import db
     assert db.IS_POSTGRES
