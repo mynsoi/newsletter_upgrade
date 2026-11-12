@@ -407,16 +407,18 @@ body {
    한 문장 한 줄(2026-10-29) — 가장 긴 줄 약 43em: 웹 14px ≈ 601px(안쪽 632), 메일 14.5px ≈ 623px(안쪽 648) */
 .notice { margin: 40px 0 8px; padding: 18px 20px; background: #EDEFF2; border-radius: 12px; display: flex; gap: 12px; align-items: flex-start; }
 /* 공지 아이콘(2026-11-12) — 첫 줄 높이에 맞춰 세운다 */
-.notice-icon { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--accent); }
+.notice-icon { flex: none; width: 21px; height: 21px; margin-top: 4px; color: var(--accent); }
 .notice-text { flex: 1; min-width: 0; }
-.notice p { font-size: 14px; line-height: 1.925; color: var(--ink-secondary); word-break: keep-all; }
+/* 글씨 키움(2026-11-12 사용자) — 본문(웹 16.5 · 휴대폰 15.5 · 메일 20px)보다 작게: 웹 15.5 · 휴대폰 14.5 · 메일 16px */
+.notice p { font-size: 14.5px; line-height: 1.925; color: var(--ink-secondary); word-break: keep-all; }
 .notice .notice-note { font-size: 12.6px; color: var(--ink-muted); margin-top: 13.5px; }  /* 문장 글씨의 0.9배, 반 줄 띄움 */
+.notice strong.key { font-weight: 700; color: var(--accent); }  /* ==AI Focus Day== 강조 — 아이콘과 같은 진녹색 */
 .notice + .article-body { padding-top: 32px; }
 @media (min-width: 600px) {  /* 한 문장 = 한 줄(2026-11-03) — 상자 폭에 맞춰 글씨를 줄인다(작업실 발행 미리보기는 626px), 휴대폰은 그대로 줄바꿈 */
   .notice-text { container-type: inline-size; }  /* 아이콘을 뺀 글 칸 폭 기준 */
-  .notice p { font-size: min(14px, 2.3cqw); letter-spacing: -0.01em; white-space: nowrap; }
+  .notice p { font-size: min(15.5px, 2.58cqw);  /* 2.58cqw = 글 칸 600px에서 15.5px — 가장 긴 줄 약 38em까지 한 줄 */ letter-spacing: -0.01em; white-space: nowrap; }
 }
 .email-capture .notice { margin-top: 87px; padding: 22px 32px; }  /* 왼쪽 여백이 좁아 보여 왼쪽을 더(2026-10-29) → 가장 긴 첫 줄 오른쪽도 같게 좌우 32px(2026-11-03) */
-.email-capture .notice p { font-size: 14.5px; line-height: 1.76; white-space: nowrap; letter-spacing: -0.025em; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게. 자간 -0.025em(2026-11-03 좌우 32px 안에 첫 줄이 들어가게) */
-.email-capture .notice-icon { width: 21px; height: 21px; margin-top: 3px; }
+.email-capture .notice p { font-size: 16px; line-height: 1.76; white-space: nowrap; letter-spacing: -0.025em; }  /* 메일은 800px 고정 캡처 — 줄이 넘어가지 않게. 자간 -0.025em(2026-11-03 좌우 32px 안에 첫 줄이 들어가게) */
+.email-capture .notice-icon { width: 22px; height: 22px; margin-top: 3px; }
 .email-capture .notice .notice-note { font-size: 13px; margin-top: 13px; }  /* 줄간격은 2026-10-29 1.1배로(웹 1.75 → 1.925, 메일 1.6 → 1.76) */

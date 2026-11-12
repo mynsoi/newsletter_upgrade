@@ -4,7 +4,7 @@
  "web_path_token": "qvauxq7a4vlgiaey",
  "kicker": "Insight Weekly",
  "footer": "Insight Weekly · 기업문화AX팀 발행<br>매주 AI Focus Day에 발행됩니다.",
- "notice": "오늘 오후는 AI Focus Day입니다.\n국내외 아티클과 SKMS, 경영층 어록, 우리 회사의 맥락을 학습한 AI가 한 편의 글을 준비했습니다.\nAI 시대의 변화가 우리의 일하는 방식과 문화에 어떤 의미를 갖는지, 이 글과 함께 짚어 보세요.",
+ "notice": "오늘 오후는 ==AI Focus Day==입니다.\n국내외 아티클과 SKMS, 경영층 어록, 우리 회사의 맥락을 학습한 AI가 한 편의 글을 준비했습니다.\nAI 시대의 변화가 우리의 일하는 방식과 문화에 어떤 의미를 갖는지, 이 글과 함께 짚어 보세요.",
  "_notice_설명": "notice — 모든 발행본 제목 아래 안내 상자(줄바꿈 \\n = 한 줄). 빈 문자열이면 상자를 넣지 않는다. 글 메타(briefs/<글>.json)에 notice를 두면 그 글만 그 값으로 바뀐다.",
  "subject_prefix": "[Insight Weekly] ",
  "sender": "Insight Weekly <noreply@example.com>",
