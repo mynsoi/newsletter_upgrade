@@ -39,6 +39,8 @@
   라운드·건별 선별). 뉴스레터 인박스 경로는 폐기됨(2026-09-02 — 메일 계정 운영 부담).
   2026-10-20부터 Deloitte·BCG·DBR·HBR Korea 목록 수집과 McKinsey·Wharton 요약→전문 격상은
   aside 자동 수집이 맡는다(작업실 서버가 Aside Browser 켜진 PC에서 6시간마다, fetched_by='aside').
+  2026-11-12 OECD(고용·AI) 목록 수집도 aside로 옮김(사용자 결정). 확정 목록은 작업실
+  `sources/aside_sources.json` — 여기 있는 소스는 /browse-round에서 돌지 않는다.
 - 새 소스 추가는 `config/sources.yaml` 수정으로만 한다. 코드에 URL 하드코딩 금지.
 - 소스 변경 후에는 `make sources-doc`으로 docs/소스_카탈로그.md를 재생성해 동기화한다
   (md는 파생 문서 — 직접 수정 금지, 확정본은 sources.yaml).

@@ -3,6 +3,12 @@
 한 달에 한 번, 브라우저 보조 수집 전체를 순서대로 수행한다. 개별 소스 절차는
 `/browse-collect`(browse-collect.md)를 그대로 따른다 — 이 커맨드는 순서·보고·마무리만 담당.
 
+> **aside가 맡는 소스는 이 라운드에서 돌지 않는다 (2026-10-20~, 2026-11-12 OECD 추가).**
+> 작업실(column-studio)의 aside 자동 수집이 6시간마다 목록 수집(Deloitte·BCG·DBR·HBR Korea·OECD)과
+> 요약→전문 격상(McKinsey·Wharton)을 한다. 확정 목록은 작업실 `sources/aside_sources.json`이다.
+> sources.yaml에서는 이 소스들도 `type: browse`로 남아 있으므로, ②~④를 돌기 전에 그 목록에 있는
+> 소스를 빼고 남은 것만 진행한다. 남은 소스가 없으면 보고서에 "aside 담당 — 라운드 대상 없음"으로 적는다.
+
 ## ① 사전 점검
 
 1. 시작 시각을 기록한다 (보고서의 소요 시간 기준).
