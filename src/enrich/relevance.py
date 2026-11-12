@@ -21,6 +21,9 @@
 - summary_only(본문 800자 미만) 문서는 원칙적으로 제외하되, **T5(신호 감지 전용 소스)만
   예외로 포함**한다(SUMMARY_GATE_TIERS · migrations/008). claim이 없어진 뒤로는 이 판정 결과를
   쓰는 곳이 없다(카드·작업실은 summary_only=0만 쓴다) — T5 수집 중단 때 같이 정리할 대상이다.
+- 2026-11-12: settings.summary_gate_sources(McKinsey·Wharton)의 요약분도 판별한다 — 격상 전 선판별.
+  작업실 aside 격상은 rejected를 건너뛰므로, 업종 글처럼 무관한 글에 열람(차단에 민감)을 쓰지 않는다.
+  관련 있음(enriched)으로 남은 요약분은 격상되면 status='new'로 돌아가 전문으로 다시 판별된다.
 - 프롬프트 원본: prompts/relevance_gate.md (코드 내 프롬프트 금지 — CLAUDE.md)
 - 모델: config/settings.yaml의 enrich_model (판별은 경량 모델 — 기획서 8장)
 - 외부 문서(documents)만 대상. 내부 자료는 이 스크립트를 거치지 않음.
@@ -72,8 +75,21 @@ TIER_ORDER = ("T1", "T2", "T3", "T4", "T5")
 
 # summary_only(본문 800자 미만) 문서 중 판별 대상에 넣는 티어 (migrations/008).
 # T5는 "요즘 무슨 일이 있나" 신호 감지 전용 소스라(기획서 4.1) RSS가 요약 몇 줄만 주는 것이
-# 정상이다. T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다.
+# 정상이다. T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다
+# (aside 격상 소스는 예외 — summary_gate_sources, 격상 전 선판별).
 SUMMARY_GATE_TIERS = ("T5",)
+# 소스 id는 SQL에 리터럴로 넣으므로 형식을 검사한다(settings.yaml은 사람이 고치는 파일이라 오타 방어).
+SOURCE_ID_RE = re.compile(r"[a-z0-9][a-z0-9-]*")
+
+
+def summary_gate_sources() -> tuple[str, ...]:
+    """요약뿐이어도 판별하는 소스(settings.summary_gate_sources) — 격상 전 선판별 대상(2026-11-12)."""
+    settings = yaml.safe_load(SETTINGS_PATH.read_text(encoding="utf-8")) or {}
+    ids = tuple(str(x) for x in settings.get("summary_gate_sources") or ())
+    bad = [x for x in ids if not SOURCE_ID_RE.fullmatch(x)]
+    if bad:
+        raise ValueError(f"settings.summary_gate_sources 형식 오류: {bad}")
+    return ids
 
 # 실패율이 이 값 미만이면 "정상 종료"로 본다(exit 0, 경고 로그만 남김) — 대량 백로그
 # 실행에서 개별 문서 1~2건의 일시적 오류로 워크플로 전체가 실패 처리되는 것을
@@ -152,14 +168,20 @@ def doc_chunks(body: str) -> list[tuple[str, str]]:
     return pack_chunks(body) if len(body) > LONG_DOC_CHARS else [("전체", body)]
 
 
-def summary_gate_sql() -> str:
-    """판별 대상 문서의 summary_only 조건. SUMMARY_GATE_TIERS는 요약뿐이어도 통과시킨다.
+def summary_gate_sql(sources: tuple[str, ...] | None = None) -> str:
+    """판별 대상 문서의 summary_only 조건. SUMMARY_GATE_TIERS와 summary_gate_sources는
+    요약뿐이어도 통과시킨다.
 
-    티어 값은 코드 상수(SUMMARY_GATE_TIERS)라 SQL에 리터럴로 박아도 안전하다 —
-    외부 입력이 섞이지 않는다.
+    티어 값은 코드 상수, 소스 id는 형식 검사(SOURCE_ID_RE)를 거친 값이라 SQL에 리터럴로
+    박아도 안전하다 — 외부 입력이 섞이지 않는다.
     """
+    if sources is None:
+        sources = summary_gate_sources()
     tiers = ", ".join(f"'{t}'" for t in SUMMARY_GATE_TIERS)
-    return f"(COALESCE(summary_only, 0) = 0 OR tier IN ({tiers}))"
+    cond = f"COALESCE(summary_only, 0) = 0 OR tier IN ({tiers})"
+    if sources:
+        cond += f" OR source_id IN ({', '.join(f"'{x}'" for x in sources)})"
+    return f"({cond})"
 
 
 def build_doc_filters(exclude_sources: list[str] | None = None,
@@ -489,9 +511,16 @@ def main(argv: list[str] | None = None) -> int:
                                                   only_summary=args.only_summary)
             if not docs:
                 break
+            judged_before = stats.passed + stats.gated
             process_batch(conn, docs, model, cost, stats, dry_run=args.dry_run)
             processed += len(docs)
             if cost.cap_hit or args.dry_run:
+                break
+            if stats.passed + stats.gated == judged_before:
+                # 한 배치에서 판정이 하나도 안 났다(API 키 없음·접속 불가·크레딧 소진, 남은 게 잠긴 문서뿐 등).
+                # 실패·잠금 문서는 new로 남아 다음 배치에 그대로 다시 잡히므로, 멈추지 않으면 같은 실패를
+                # 끝없이 반복한다(2026-11-12 실제 발생 — 85건 배치를 5바퀴 돌았다).
+                print("  이번 배치에서 판정 0건 — 백로그 처리를 멈춘다(문서는 new로 남아 다음 실행에서 재시도)")
                 break
         print(f"백로그 처리 {processed}건 시도 (티어 분포: "
               f"{', '.join(f'{t} {cost.tier_counts.get(t, 0)}' for t in TIER_ORDER if cost.tier_counts.get(t))})")
@@ -506,7 +535,7 @@ def main(argv: list[str] | None = None) -> int:
                        + (f", 티어={','.join(tiers)}" if tiers else "")
                        + (", 요약뿐 문서만(--only-summary)" if args.only_summary else ""))
         print(f"일반 실행 (model={model}, dry_run={args.dry_run}, limit={base_limit}) "
-              f"— summary_only는 {'/'.join(SUMMARY_GATE_TIERS)}만 포함{filter_note}")
+              f"— summary_only는 {'/'.join(SUMMARY_GATE_TIERS + summary_gate_sources())}만 포함{filter_note}")
 
         # 1단계: 이번 수집분을 먼저 비운다 (최신 순).
         fresh = select_target_docs(conn, base_limit, collected_since=cutoff, **common)
