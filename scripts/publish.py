@@ -103,7 +103,8 @@ def load(k):
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
             "confirmed": conf, "pub_date": date.today().isoformat(),
-            "notice": meta.get("notice", ""),  # 제목 아래 안내 상자 — 이 글에만 손으로 넣은 값(2026-10-29 개편 안내). 없으면 그대로
+            # 제목 아래 안내 상자 — 글 메타에 notice가 있으면 그 값(빈 값이면 상자 없음), 없으면 config/publish.json의 notice(2026-11-12 사용자: 매 발행본 기본으로)
+            "notice": meta["notice"] if "notice" in meta else settings().get("notice", ""),
             "footer": meta.get("footer")}  # 이 글만 바닥글을 바꿀 때(2026-10-29). 없으면 config/publish.json
 
 
@@ -145,8 +146,13 @@ def render(a, files, body_class=""):
     notice = ""
     if a.get("notice"):
         lines = [x for x in a["notice"].split("\n") if x.strip()]  # '※'로 시작하는 줄은 작은 회색 글씨(담당자 등)
-        notice = '<aside class="notice">' + "".join(
-            f'<p class="notice-note">{inline(x)}</p>' if x.startswith("※") else f"<p>{inline(x)}</p>" for x in lines) + "</aside>"
+        # 왼쪽에 공지 아이콘(확성기, 2026-11-12) — 메일 캡처에도 그대로 찍히게 인라인 SVG
+        icon = ('<svg class="notice-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" '
+                'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+                '<path d="M3 10.5v3a1 1 0 0 0 1 1h2.5L13 19V5L6.5 9.5H4a1 1 0 0 0-1 1z" fill="currentColor" fill-opacity=".15"/>'
+                '<path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg>')
+        notice = '<aside class="notice">' + icon + '<div class="notice-text">' + "".join(
+            f'<p class="notice-note">{inline(x)}</p>' if x.startswith("※") else f"<p>{inline(x)}</p>" for x in lines) + "</div></aside>"
     rep = {
         "{{ title }}": e(a["title"]), "{{ kicker }}": e(cfg["kicker"]), "{{ issue_label }}": e(a["pub_date"]),
         "{{ hero_html }}": hero, "{{ tldr_html }}": notice,
