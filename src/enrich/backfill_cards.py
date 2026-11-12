@@ -54,6 +54,8 @@ CUSTOM_ID_RE = re.compile(r"^[a-zA-Z0-9_-]{1,64}$")  # Batch custom_id 허용 �
 
 
 def make_client():
+    from ssl_compat import repair_truststore_injection
+    repair_truststore_injection()  # 개발 PC의 SSL 주입 충돌(src/ssl_compat.py)
     import anthropic
     return anthropic.Anthropic(
         base_url=API_BASE_URL,

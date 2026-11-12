@@ -65,6 +65,8 @@ def get_client():
     key = api_key()
     if not key:
         return None
+    from ssl_compat import repair_truststore_injection
+    repair_truststore_injection()  # 개발 PC의 SSL 주입 충돌(src/ssl_compat.py)
     import openai
     return openai.OpenAI(api_key=key)
 

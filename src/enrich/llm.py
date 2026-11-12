@@ -60,6 +60,8 @@ class CostState:
 
 
 def call_model(prompt: str, model: str, max_tokens: int) -> ModelReply:
+    from ssl_compat import repair_truststore_injection
+    repair_truststore_injection()  # 개발 PC의 SSL 주입 충돌(src/ssl_compat.py)
     import anthropic  # 지연 임포트 — dry-run 시 SDK 불필요
     client = anthropic.Anthropic()
     msg = client.messages.create(
