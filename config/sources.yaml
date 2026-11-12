@@ -201,7 +201,8 @@ sources:
 - id: oecd-employment-ai
   name: OECD (고용·AI)
   tier: T1
-  type: html
+  type: browse
+  browse_mode: list  # 2026-11-12 aside 수집으로 이관 — main 자동 수집(html)에서 제외
   role: T1 거버넌스 — 고용·AI 국제 정책 지표
   description: OECD 고용·AI 정책 리포트. 국제 비교 지표와 권고.
   topics: AI 거버넌스 · 채용 — 국가 간 비교 통계·정책 권고
