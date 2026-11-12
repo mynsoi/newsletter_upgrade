@@ -241,6 +241,27 @@
     "figcaption",
     "form"
    ]
+  },
+  "oecd-employment-ai": {
+   "mode": "list",
+   "tier": "T1",
+   "lang": "en",
+   "list_urls": [
+    "https://www.oecd.org/en/topics/employment.html",
+    "https://www.oecd.org/en/topics/artificial-intelligence.html",
+    "https://www.oecd.org/en/topics/future-of-work.html"
+   ],
+   "link": "^https://www\\.oecd\\.org/en/(publications/[a-z0-9-]+_[0-9a-f]{8}-en\\.html|blogs/20\\d\\d/\\d\\d/[a-z0-9-]+\\.html)$",
+   "key": "_([0-9a-f]{8})-en\\.html$",
+   "container": "main",
+   "exclude": [
+    "nav",
+    "aside",
+    "footer",
+    "form",
+    "[class*='breadcrumb']",
+    "[class*='newsletter']"
+   ]
   }
  }
 }
