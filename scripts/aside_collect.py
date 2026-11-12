@@ -189,7 +189,9 @@ def store(c, sid, cfg, url, title, text, published):
 def candidates(c, sid, cfg, log, since=None):
     if cfg["mode"] == "upgrade":
         lower = "%s::date" if since else f"current_date - {int(cfg.get('days', 30))}"
+        # rejected 제외(2026-11-12): main이 요약으로 먼저 판별해 무관이면 격상하지 않는다(summary_gate_sources).
         rows = c.execute(f"""SELECT url FROM documents WHERE source_id = %s AND summary_only = 1
+                             AND status <> 'rejected'
                              AND coalesce(published_at, collected_at::date) >= {lower}
                              ORDER BY published_at DESC NULLS LAST""", (sid, since) if since else (sid,)).fetchall()
         skip = re.compile(cfg["skip_url"]) if cfg.get("skip_url") else None
