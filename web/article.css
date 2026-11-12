@@ -412,7 +412,18 @@ body {
 /* 글씨 키움(2026-11-12 사용자) — 본문(웹 16.5 · 휴대폰 15.5 · 메일 20px)보다 작게: 웹 15.5 · 휴대폰 14.5 · 메일 16px */
 .notice p { font-size: 14.5px; line-height: 1.925; color: var(--ink-secondary); word-break: keep-all; }
 .notice .notice-note { font-size: 12.6px; color: var(--ink-muted); margin-top: 13.5px; }  /* 문장 글씨의 0.9배, 반 줄 띄움 */
-.notice strong.key { font-weight: 700; color: var(--accent); }  /* ==AI Focus Day== 강조 — 아이콘과 같은 진녹색 */
+/* ==AI Focus Day== 강조 — 본문 강조(굵은 진녹색 글자)와 다르게 진녹색 배지 + 반짝이 아이콘(2026-11-12 사용자) */
+.notice strong.key {
+  display: inline-flex; align-items: center; gap: 0.3em;
+  padding: 0.1em 0.65em 0.1em 0.5em; margin: 0 0.15em;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: 0.92em; line-height: 1.4;
+  border-radius: 999px; letter-spacing: 0; vertical-align: 0.05em;
+}
+.notice strong.key::before {
+  content: ""; width: 0.95em; height: 0.95em; flex: none; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z'/%3E%3Cpath d='M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z'/%3E%3Cpath d='M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 .notice + .article-body { padding-top: 32px; }
 @media (min-width: 600px) {  /* 한 문장 = 한 줄(2026-11-03) — 상자 폭에 맞춰 글씨를 줄인다(작업실 발행 미리보기는 626px), 휴대폰은 그대로 줄바꿈 */
   .notice-text { container-type: inline-size; }  /* 아이콘을 뺀 글 칸 폭 기준 */
