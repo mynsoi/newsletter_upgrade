@@ -1,5 +1,54 @@
 # 위키 이력
 
+## 2026-11-12 10:57
+- 묶기 붙임 dbr/0365 → 주제/hbr-korea-0048.md
+- 묶기 붙임 dbr/0371 → 주제/bain-insights-0071.md
+- 묶기 붙임 mckinsey-insights/0096, mckinsey-insights/0075, mckinsey-insights/0070, hrdive/0040 → 주제/mckinsey-insights-0045.md
+- 묶기 붙임 aihr-blog/0071, hrdive/0034 → 주제/mckinsey-insights-0026.md
+- 묶기 붙임 carrot-global-blog/0056 → 주제/bcg-publications-0431.md
+- 묶기 붙임 aihr-blog/0069, hrdive/0020 → 주제/fastcompany-worklife-0081.md
+- 묶기 붙임 mit-tech-review/0050 → 주제/fastcompany-worklife-0195.md
+- 묶기 붙임 mit-tech-review/0051 → 주제/bcg-publications-0404.md
+- 묶기 붙임 fastcompany-worklife/0248 → 주제/hbr-0019.md
+- 묶기 붙임 fastcompany-worklife/0249 → 주제/fastcompany-worklife-0216.md
+- 묶기 붙임 mckinsey-insights/0074 → 주제/hbr-korea-0038.md
+- 묶기 붙임 one-useful-thing/0001 → 주제/hbr-korea-0045.md
+- 묶기 붙임 hrdive/0004 → 주제/fastcompany-worklife-0220.md
+- 묶기 붙임 mckinsey-insights/0078 → 주제/hbr-korea-0034.md
+- 묶기 붙임 hrdive/0011, hrdive/0042 → 주제/fastcompany-worklife-0221.md
+- 묶기 붙임 hrdive/0017 → 주제/brookings-future-of-work-0003.md
+- 묶기 붙임 hrdive/0019, hrdive/0030 → 주제/fastcompany-worklife-0022.md
+- 묶기 붙임 hrdive/0021 → 주제/worklytics-blog-0070.md
+- 묶기 붙임 hrdive/0023, hrdive/0060 → 주제/bain-insights-0003.md
+- 묶기 붙임 hrdive/0025 → 주제/fastcompany-worklife-0036.md
+- 묶기 붙임 hrdive/0039 → 주제/aihr-blog-0051.md
+- 묶기 붙임 hrdive/0041 → 주제/fastcompany-worklife-0212.md
+- 묶기 붙임 hrdive/0055 → 주제/aihr-blog-0002.md
+- 묶기 붙임 hrdive/0048 → 주제/fastcompany-worklife-0004.md
+- 묶기 붙임 hrdive/0026 → 주제/aihr-blog-0014.md
+- 묶기 붙임 hrdive/0032 → 주제/fastcompany-worklife-0191.md
+- 묶기 새 주제(쓸 만함) AI로 필요한 역량이 바뀌면 직원의 능력을 설명하는 조직의 공통 기준도 다시 만들어져야 한다. → 주제/flex-blog-0036.md
+- 묶기 새 주제(보통) 의견을 내도 좋다는 새 리더의 말만으로는 지시에 따르던 팀의 회의 방식이 바뀌지 않는다. → 주제/dbr-0366.md
+- 묶기 새 주제(쓸 만함) AI를 각자의 업무에 보급해도 함께 돌아가는 업무 체계를 바꾸지 않으면 조직 전체의 성과는 따라오지 않는다. → 주제/bcg-publications-0495.md
+- 묶기 새 주제(보통) AI의 위험을 각자 다른 기준으로 기록하면 안전을 위한 투자가 늘어도 피해가 줄었는지는 알기 어렵다. → 주제/knowledge-wharton-0019.md
+- 묶기 새 주제(쓸 만함) AI가 일을 덜어 주는 동시에 관리할 일도 늘리면 혼자 해낼 수 있는 범위와 감당할 수 있는 범위가 달라진다. → 주제/fastcompany-worklife-0251.md
+- 묶기 새 주제(쓸 만함) 일의 구조가 바뀌어 생긴 문제를 직원의 역량 부족으로 진단하면 교육을 빨리 만들어도 문제는 남는다. → 주제/carrot-global-blog-0059.md
+- 묶기 새 주제(보통) 평가 항목을 실제 업무에 맞춰도 그 일을 보지 못한 사람이 평가하면 직원이 느끼는 공정성은 달라지지 않을 수 있다. → 주제/carrot-global-blog-0058.md
+- 묶기 새 주제(쓸 만함) AI가 동료 간 실력 차이를 줄여 줄 것이라는 기대와 달리 스스로 도구를 만들고 일을 넓히는 사람에게 기회가 더 몰릴 수 있다. → 주제/hbr-korea-0333.md
+- 묶기 새 주제(쓸 만함) AI가 판단 기준을 정하고 결과의 타당성까지 스스로 평가하면 검증 절차가 있어도 독립적인 견제는 사라질 수 있다. → 주제/knowledge-wharton-0018.md
+- 묶기 새 주제(보통) 한 사람에게 고객 관계의 책임과 모든 전문 업무를 함께 맡기면 인원을 늘려도 대응의 혼선은 풀리지 않는다. → 주제/bain-insights-0077.md
+- 묶기 새 주제(쓸 만함) 새 과제를 승인하면서 기존 일을 멈추지 않는 조직은 우선순위를 바꾸는 대신 업무량만 늘린다. → 주제/fastcompany-worklife-0246.md
+- 묶기 새 주제(보통) AI 에이전트가 거래에 참여할수록 경쟁 우위에는 독자적인 기술뿐 아니라 경쟁자와도 함께 쓸 규칙을 만드는 능력이 포함된다. → 주제/fastcompany-worklife-0247.md
+- 묶기 새 주제(쓸 만함) 변화에 지친 조직은 새 변화의 양보다 설명도 마무리도 되지 않은 이전 변화의 부담을 더 크게 겪을 수 있다. → 주제/hrdive-0005.md
+- 묶기 새 주제(쓸 만함) AI가 아낀 시간은 저절로 성장 기회가 되지 않으며 조직이 그 시간에 맡길 일을 바꿔야 한다. → 주제/hrdive-0022.md
+- 묶기 새 주제(쓸 만함) AI로 당장의 업무를 끝내기 쉬워져도 직접 해보며 익히던 기회가 줄면 조직의 다음 전문가는 자라기 어렵다. → 주제/hrdive-0029.md
+- 묶기 새 주제(쓸 만함) AI가 답변을 넘어 여러 단계의 일을 수행하기 시작하면 사람의 역할도 질문 작성에서 업무 위임과 결과 평가로 옮겨간다. → 주제/one-useful-thing-0002.md
+- 묶기 새 주제(보통) AI가 채용에 필요한 역량을 바꾼다고 해서 학력이 사람을 고르는 기준에서 곧 사라지는 것은 아니다. → 주제/hrdive-0056.md
+- 묶기 새 주제(보통) 젊은 직원이 일의 이유를 따져 묻는 태도는 의욕 부족보다 조직이 설명하지 못한 관행을 드러내는 신호일 수 있다. → 주제/hrdive-0059.md
+- 묶기 새 주제(뺌) 출근 방식이 달라진 뒤에도 복장 기준을 암묵적으로 남겨 두면 직원은 업무와 무관한 눈치 보기에 시간을 쓰게 된다. → 주제/fastcompany-worklife-0255.md
+- 묶기 새 주제(뺌) 오프라인 매장의 성과는 매장 안에서 일어난 매출만으로는 판단할 수 없다. → 주제/dbr-0369.md
+- 주제 묶기 새 카드 100 · 붙음/새 주제 60 · 뺌 40 · 못 넣음 0 · 남음 28 · 217s
+
 ## 2026-11-09 09:55
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 2 · 32s
 
