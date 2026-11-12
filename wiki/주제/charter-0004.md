@@ -7,7 +7,7 @@ judged_by: 사람
 audience: 전 직원
 center: charter/0004
 status: 씀
-used_in: [briefs/m-20261111-131355.json, columns/2026-11-11-m-20261111-131355.md]
+used_in: [briefs/m-20261111-131355.json, columns/2026-11-12-m-20261111-131355.md]
 timestamp: 2026-11-02
 ---
 
