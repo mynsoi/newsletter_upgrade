@@ -128,6 +128,8 @@ def select_targets(conn, sources: list[str], limit: int, *, skip_existing: bool 
 
 
 def make_client():
+    from ssl_compat import repair_truststore_injection
+    repair_truststore_injection()  # 개발 PC의 SSL 주입 충돌(src/ssl_compat.py)
     import anthropic  # 지연 임포트 — 대상이 없거나 꺼져 있으면 SDK 불필요
     return anthropic.Anthropic()
 
