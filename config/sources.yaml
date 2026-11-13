@@ -215,6 +215,24 @@ sources:
   - https://www.oecd.org/en/topics/employment.html
   - https://www.oecd.org/en/topics/artificial-intelligence.html
   link_pattern: href="((?:https://www\.oecd\.org)?/en/(?:publications|blogs|data/insights)/[^"]+\.html)"
+  browse_container: main  # 2026-11-13 aside 실측
+  browse_exclude:
+    - nav
+    - aside
+    - footer
+    - form
+    - dialog
+    - .overlay
+    - .jumplinks
+    - .content-language-picker
+    - .cmp-share
+    - .list-title-link
+    - .link-list
+    - ".two-column-container:not(:has(p))"
+    - .cmp-teaser--information
+    - "[class*='breadcrumb']"
+    - "[class*='doormat']"
+    - "[class*='newsletter']"
   homepage: https://www.oecd.org
   lang: en
   allow_feed_discovery: false
