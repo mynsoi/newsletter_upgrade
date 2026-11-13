@@ -1001,6 +1001,7 @@ sources:
   status: active
   confirmed_at: '2026-08-31'
   feed_url: https://www.hrdive.com/feeds/news/
+  request_interval: 5  # robots.txt Crawl-delay: 5 (2026-11-12 확인 — 기본 3초보다 길다)
   lang: en
   verified: true
   note: 편입 권고, T5 1순위 — NL 병행. 2026-08-27 피드 실측 통과
