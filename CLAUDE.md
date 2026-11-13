@@ -11,7 +11,7 @@
 2. **증거 부족 시 중단**: 독립 출처 3곳 미만이거나 상반 관점이 없으면
    초안을 쓰지 않고 "증거 부족" 리포트를 반환한다. 억지로 생성하지 않는다.
 3. **수치 날조 금지**: 수치·인용은 수집된 원문에 있는 것만 쓴다. 추정·보간·반올림 변경 금지.
-   (2026-11-10 claim 추출 제거 — 예전 기준이던 `claims` 테이블은 더 이상 채워지지 않는다.)
+   (2026-11-10 claim 추출 제거, 2026-11-13 `claims`·`article_sources` 표 삭제 — migrations/011.)
 4. **내부 자료 (2026-09-03 단순화)**: `internal/`에는 공개 가능 판단이 끝난 자료만 등록한다.
    등급 체계 미운용. 이 폴더의 텍스트는 아티클 생성 시 외부 API로 전송된다 —
    전송돼도 되는 내용만 올린다. 판단 기준: "사보에 실려도 되는가."
@@ -90,4 +90,4 @@ DATABASE_URL 없으면 SQLite 로컬 모드(테스트용). 비밀값은 절대 �
 문서 카드(document_cards) → 카드 임베딩만 한다(src/enrich/relevance.py·doc_cards.py, src/search/embed.py).
 칼럼 작업실(mentor-lab-integration)이 카드만 읽기 때문이다. claims를 읽던 아티클 기능
 (/topics 토픽 발굴, /draft 증거 검색, verify_article, 인용 원장, 이론 카드 색인)은 함께 지웠다.
-claims 표의 용량 회수는 `migrations/drafts/`의 초안을 사람이 따로 실행한다(자동 적용 대상 아님).
+claims·article_sources 표는 2026-11-13 지웠다(migrations/011, 삭제 전 백업은 git 밖 data/backups/).

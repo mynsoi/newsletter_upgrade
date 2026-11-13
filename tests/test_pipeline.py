@@ -29,8 +29,10 @@ def test_migrations_apply_and_are_idempotent(test_db):
     conn, db = test_db
     tables = {r["name"] for r in conn.execute(
         "SELECT name FROM sqlite_master WHERE type IN ('table','virtual table') OR type='table'")}
-    for t in ["documents", "claims", "tags", "internal_docs", "articles", "article_sources"]:
+    for t in ["documents", "tags", "internal_docs", "articles", "document_cards"]:
         assert t in tables, f"{t} 테이블 누락"
+    # claim 추출 제거(11/10) 뒤 011에서 지운 표 — 새 DB에도 남지 않는다(2026-11-13)
+    assert not {"claims", "article_sources"} & tables
     assert db.migrate(conn) == []  # 재실행 시 추가 적용 없음
 
 

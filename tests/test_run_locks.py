@@ -414,7 +414,6 @@ def test_enrich_main_skips_locked_doc_and_cleans_lock(test_db, monkeypatch):
     d1 = conn.execute("SELECT status, enrich_locked_at FROM documents WHERE id='D1'").fetchone()
     assert d0["status"] == "new" and d0["enrich_locked_at"] is not None  # 건드리지 않음
     assert d1["status"] == "enriched" and d1["enrich_locked_at"] is None  # 완료 + 잠금 정리
-    assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0  # claim은 더 안 만든다
 
 
 def test_enrich_main_releases_lock_on_model_failure(test_db, monkeypatch):
@@ -464,7 +463,6 @@ def test_relevant_doc_goes_straight_to_enriched_without_claims(test_db, monkeypa
     assert row["status"] == "enriched" and row["enrich_locked_at"] is None
     assert len(ec._calls) == 1                       # 판별 1회뿐(추출 호출 없음)
     assert "RELEVANT 또는 IRRELEVANT" in ec._calls[0]  # 판별 프롬프트(prompts/relevance_gate.md)
-    assert conn.execute("SELECT COUNT(*) n FROM claims").fetchone()["n"] == 0
 
 
 def test_gate_error_keeps_doc_new_instead_of_passing_it(test_db, monkeypatch):
