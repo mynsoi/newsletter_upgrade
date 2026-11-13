@@ -209,3 +209,35 @@ def test_tests_never_see_production_database_url():
     """tests/conftest.py가 운영 DB 주소를 빼 둔다 — 개발 PC 환경에 DATABASE_URL이 있어도 테스트는 SQLite."""
     import os
     assert "DATABASE_URL" not in os.environ
+
+
+def test_fetch_failure_log_shows_status_code_and_block_hints(capsys):
+    """본문 실패 로그에 응답 코드·차단 단서를 남긴다(2026-11-12 HR Dive — 'HTTPStatusError'만으로는 원인을 몰랐다)."""
+    import httpx
+    import collectors.rss as rss
+    req = httpx.Request("GET", "http://x/a")
+    resp = httpx.Response(403, request=req, headers={"server": "cloudflare", "cf-mitigated": "challenge"})
+
+    class C:
+        def get(self, url, **kw):
+            return resp
+
+    assert rss.fetch_url("http://x/a", C()) is None
+    out = capsys.readouterr().out
+    assert "HTTP 403" in out and "server=cloudflare" in out and "cf-mitigated=challenge" in out
+    assert rss.describe_http_error(httpx.ConnectError("x")) == "ConnectError"
+
+
+def test_rss_counts_summary_fallback_and_uses_source_interval(test_db, monkeypatch):
+    """본문 페이지 실패로 피드 요약을 저장하면 '요약 대체'로 센다 · 소스별 request_interval을 쓴다."""
+    conn, db = test_db
+    import collectors.rss as rss
+    fixture = (Path(__file__).parent / "fixtures" / "sample_feed.xml").read_text(encoding="utf-8")
+    monkeypatch.setattr(rss, "fetch_url",
+                        lambda url, client, curl_headers=None: fixture if url.endswith("/feed") else None)
+    slept = []
+    monkeypatch.setattr(rss.time, "sleep", slept.append)
+    source = {"id": "t", "tier": "T5", "feed_url": "http://x/feed", "lang": "en", "request_interval": 5}
+    stats = rss.collect_source(source, conn, client=None, fetch_full=True)
+    assert stats["fallback"] == 2 and stats["new"] == 2
+    assert slept == [5.0, 5.0]

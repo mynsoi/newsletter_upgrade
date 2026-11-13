@@ -90,8 +90,18 @@ def fetch_url(url: str, client: httpx.Client,
         if curl_headers is not None:
             print(f"    ! httpx 실패({type(e).__name__}) → curl 폴백: {url}")
             return fetch_via_curl(url, curl_headers)
-        print(f"    ! fetch 실패 {url}: {type(e).__name__}")
+        print(f"    ! fetch 실패 {url}: {describe_http_error(e)}")
         return None
+
+
+def describe_http_error(e: httpx.HTTPError) -> str:
+    """실패 원인을 로그에서 가릴 수 있게 응답 코드와 차단 단서를 붙인다(2026-11-12 — HR Dive 본문이
+    11/7부터 Actions에서만 실패했는데 로그에 'HTTPStatusError'만 남아 403인지 429인지 알 수 없었다)."""
+    resp = getattr(e, "response", None) if isinstance(e, httpx.HTTPStatusError) else None
+    if resp is None:
+        return type(e).__name__
+    hints = [f"{k}={resp.headers[k]}" for k in ("server", "cf-mitigated", "retry-after") if k in resp.headers]
+    return f"HTTP {resp.status_code}" + (f" ({', '.join(hints)})" if hints else "")
 
 
 def extract_body(html: str) -> str | None:
@@ -107,7 +117,9 @@ def parse_date(entry) -> str | None:
 
 
 def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = True) -> dict:
-    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "up": 0}
+    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "up": 0, "fallback": 0}
+    # 소스별 요청 간격(sources.yaml request_interval) — robots.txt Crawl-delay가 기본값보다 긴 소스용
+    interval = float(source.get("request_interval", REQUEST_INTERVAL))
     curl_headers = source.get("request_headers")  # 있으면 httpx 실패 시 curl 폴백
     feed_xml = fetch_url(source["feed_url"], client, curl_headers)
     if feed_xml is None:
@@ -131,8 +143,10 @@ def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = 
         body = None
         published = parse_date(entry)
         if fetch_full:
-            time.sleep(REQUEST_INTERVAL)
+            time.sleep(interval)
             html = fetch_url(url, client, curl_headers)
+            if not html:
+                stats["fallback"] += 1  # 본문 페이지 실패 → 피드 요약으로 저장(본문실패와 별개)
             if html:
                 body = extract_body(html)
                 # 피드에 날짜가 없는 소스(NBER 등)는 본문 페이지의 표준 메타에서 찾는다
@@ -180,6 +194,7 @@ def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
                 print("    → 피드 접속 실패")
             else:
                 up = f" / 격상 {st['up']}" if st.get("up") else ""
+                up += f" / 요약 대체 {st['fallback']}" if st.get("fallback") else ""
                 print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문실패 {st['failed']} (피드 {st['seen']}건)")
             time.sleep(REQUEST_INTERVAL)
 
