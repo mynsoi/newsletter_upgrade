@@ -16,8 +16,11 @@ import { cn } from "@/lib/utils";
 const ORDER = ["T2", "T3", "T4", "T1", "infuture"];
 // Supabase에서 받은 원문(scripts/db_sources.py)은 사이트가 서른 곳 가까이라 등급으로 묶어 탭을 만든다
 const TIER: Record<string, string> = { T1: "연구기관", T2: "컨설팅", T3: "저널·매체", T4: "기업 자료" };
-const group = (s: Source) => (s.tier ? s.tier : s.site);
-const groupName = (s: Source) => (s.tier ? TIER[s.tier] ?? s.tier : s.siteName);
+// T5(뉴스 — 지금은 HR Dive뿐, 2026-11-10 편입)는 화면에서만 "저널·매체"로 묶는다(2026-11-13).
+// main의 등급은 그대로 T5다 — 요약 판별 예외·"단독 근거 금지" 규칙이 T5에 걸려 있다.
+const tierOf = (t: string) => (t === "T5" ? "T3" : t);
+const group = (s: Source) => (s.tier ? tierOf(s.tier) : s.site);
+const groupName = (s: Source) => (s.tier ? TIER[tierOf(s.tier)] ?? s.tier : s.siteName);
 
 export default function Library({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [site, setSiteRaw] = useState("all");
