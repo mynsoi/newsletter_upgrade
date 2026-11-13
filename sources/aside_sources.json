@@ -259,7 +259,17 @@
     "aside",
     "footer",
     "form",
+    "dialog",
+    ".overlay",
+    ".jumplinks",
+    ".content-language-picker",
+    ".cmp-share",
+    ".list-title-link",
+    ".link-list",
+    ".two-column-container:not(:has(p))",
+    ".cmp-teaser--information",
     "[class*='breadcrumb']",
+    "[class*='doormat']",
     "[class*='newsletter']"
    ]
   }
