@@ -1,0 +1,245 @@
+"""파이프라인 핵심 동작 테스트 (네트워크 불필요 — 로컬 픽스처 사용)."""
+import os
+import sys
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "src"))
+
+
+@pytest.fixture()
+def test_db(tmp_path, monkeypatch):
+    monkeypatch.setenv("PIPELINE_DB", str(tmp_path / "test.db"))
+    monkeypatch.delenv("DATABASE_URL", raising=False)  # 로컬 테스트는 SQLite 모드 강제
+    # db 및 db를 참조하는 모듈 재로드로 경로 반영 (모듈 캐시가 이전 임시 DB에 묶이는 것 방지)
+    for mod in list(sys.modules):
+        if mod in ("db", "handoff", "internal_sync", "stats") \
+                or mod.startswith(("collectors", "enrich")):
+            del sys.modules[mod]
+    import db
+    conn = db.connect()
+    db.migrate(conn)
+    yield conn, db
+    conn.close()
+
+
+def test_migrations_apply_and_are_idempotent(test_db):
+    conn, db = test_db
+    tables = {r["name"] for r in conn.execute(
+        "SELECT name FROM sqlite_master WHERE type IN ('table','virtual table') OR type='table'")}
+    for t in ["documents", "tags", "internal_docs", "articles", "document_cards"]:
+        assert t in tables, f"{t} 테이블 누락"
+    # claim 추출 제거(11/10) 뒤 011에서 지운 표 — 새 DB에도 남지 않는다(2026-11-13)
+    assert not {"claims", "article_sources"} & tables
+    assert db.migrate(conn) == []  # 재실행 시 추가 적용 없음
+
+
+def test_migration_drafts_are_never_applied(test_db):
+    """migrations/drafts/는 사람이 직접 실행하는 초안이다 — 일일 make init이 운영 DB에 적용하면 안 된다."""
+    conn, db = test_db
+    drafts = {p.name for p in (db.MIGRATIONS_DIR / "drafts").glob("*.sql")}
+    assert drafts, "초안 파일이 있어야 이 테스트가 의미 있다"
+    applied = {r["filename"] for r in conn.execute("SELECT filename FROM schema_migrations")}
+    assert not drafts & applied
+    assert not drafts & {p.name for p in db.MIGRATIONS_DIR.glob("*.sql")}
+
+
+def test_content_hash_normalizes_whitespace_and_case(test_db):
+    _, db = test_db
+    assert db.content_hash("Hello  World") == db.content_hash("hello world\n")
+    assert db.content_hash("a") != db.content_hash("b")
+
+
+def test_rss_collect_with_local_fixture(test_db, tmp_path, monkeypatch):
+    conn, db = test_db
+    import collectors.rss as rss
+
+    fixture = (Path(__file__).parent / "fixtures" / "sample_feed.xml").read_text(encoding="utf-8")
+    monkeypatch.setattr(rss, "fetch_url", lambda url, client, curl_headers=None: fixture)
+
+    source = {"id": "test-src", "tier": "T3", "feed_url": "http://x/feed", "lang": "en"}
+    stats = rss.collect_source(source, conn, client=None, fetch_full=False)
+    assert stats["new"] == 2
+    # 재수집 시 전량 중복 처리
+    stats2 = rss.collect_source(source, conn, client=None, fetch_full=False)
+    assert stats2["new"] == 0 and stats2["dup"] == 2
+
+    row = conn.execute("SELECT tier, status, body FROM documents LIMIT 1").fetchone()
+    assert row["tier"] == "T3" and row["status"] == "new"
+    assert row["body"]  # 원문이 body 컬럼에 저장됨 (raw_path 파일 대체)
+    # 검색 동작 (FTS5 → db.search: PostgreSQL 검색함수 / SQLite LIKE 폴백)
+    hit = db.search(conn, "documents", "productivity")
+    assert len(hit) >= 1
+
+
+def test_fetch_url_curl_fallback(monkeypatch):
+    """request_headers 소스는 httpx 실패 시 curl 폴백, 그 외 소스는 기존과 동일."""
+    import httpx
+    import collectors.rss as rss
+
+    class BoomClient:
+        def get(self, url, **kw):
+            raise httpx.HTTPError("403")
+
+    monkeypatch.setattr(rss, "fetch_via_curl", lambda url, headers=None: "<rss>ok</rss>")
+    assert rss.fetch_url("http://x/feed", BoomClient(),
+                         curl_headers={"User-Agent": "UA"}) == "<rss>ok</rss>"
+    assert rss.fetch_url("http://x/feed", BoomClient()) is None
+
+
+def test_fetch_via_curl_builds_command(monkeypatch):
+    import collectors.rss as rss
+    calls = {}
+
+    class R:
+        returncode = 0
+        stdout = "<rss/>".encode()
+
+    monkeypatch.setattr(rss.subprocess, "run",
+                        lambda cmd, capture_output, timeout: calls.setdefault("cmd", cmd) and R() or R())
+    out = rss.fetch_via_curl("http://x/feed", {"User-Agent": "UA1", "Accept": "a/b"})
+    assert out == "<rss/>"
+    cmd = calls["cmd"]
+    assert cmd[0] == "curl" and cmd[-1] == "http://x/feed"
+    assert "User-Agent: UA1" in cmd and "Accept: a/b" in cmd
+
+
+def test_internal_sync_simplified_policy(test_db, tmp_path, monkeypatch):
+    """등급 미운용(2026-09-03): 등록 문서는 전부 api_eligible=1,
+    구 등급 표기(B·C 등)가 남은 파일은 안전 가드로 등록 보류."""
+    conn, db = test_db
+    import internal_sync as isync
+
+    internal = tmp_path / "internal"
+    (internal / "skms").mkdir(parents=True)
+    (internal / "skms" / "a-doc.md").write_text(
+        "---\ntitle: 공개자료\ntype: skms\nsecurity: A\ndate: 2026-01-01\n---\n본문 A",
+        encoding="utf-8")
+    (internal / "skms" / "no-grade.md").write_text(
+        "---\ntitle: 표기없음\ntype: skms\ndate: 2026-01-01\n---\n본문 무표기",
+        encoding="utf-8")
+    (internal / "skms" / "legacy-b.md").write_text(
+        "---\ntitle: 구B표기\ntype: skms\nsecurity: B\ndate: 2026-01-01\n---\n본문 B",
+        encoding="utf-8")
+    (internal / "skms" / "legacy-c.md").write_text(
+        "---\ntitle: 구C표기\ntype: skms\nsecurity: C\ndate: 2026-01-01\n---\n절대 등록 금지",
+        encoding="utf-8")
+    (internal / "skms" / "_TEMPLATE.md").write_text("---\nsecurity: A\n---\n템플릿", encoding="utf-8")
+    (internal / "내부자료_등록목록.md").write_text("# 목록", encoding="utf-8")  # 루트 파일 제외 확인
+
+    monkeypatch.setattr(isync, "INTERNAL_DIR", internal)
+    rc = isync.sync()
+    assert rc == 1  # 보류 발생 시 비정상 코드로 표면화
+
+    rows = {r["id"]: r for r in conn.execute("SELECT * FROM internal_docs")}
+    assert rows["skms/a-doc.md"]["api_eligible"] == 1
+    assert rows["skms/no-grade.md"]["api_eligible"] == 1   # 표기 없어도 등록 (등급 미운용)
+    assert rows["skms/no-grade.md"]["security"] == "A"     # 스키마 호환 고정값
+    assert "skms/legacy-b.md" not in rows  # 구 등급 표기 → 보류
+    assert "skms/legacy-c.md" not in rows
+    assert not any("TEMPLATE" in k or "등록목록" in k for k in rows)
+
+    # 표기 제거 후 재확인하면 등록됨 (C 표기 파일은 삭제됐다고 가정)
+    (internal / "skms" / "legacy-b.md").write_text(
+        "---\ntitle: 구B표기\ntype: skms\ndate: 2026-01-01\n---\n본문 B (공개 확인 완료)",
+        encoding="utf-8")
+    (internal / "skms" / "legacy-c.md").unlink()
+    assert isync.sync() == 0
+    row = conn.execute("SELECT api_eligible FROM internal_docs WHERE id='skms/legacy-b.md'").fetchone()
+    assert row["api_eligible"] == 1
+
+
+def test_handoff_roundtrip_and_guard(tmp_path, monkeypatch):
+    import sqlite3 as sq
+    import handoff as ho
+
+    data_a = tmp_path / "pc_a" / "data"
+    data_a.mkdir(parents=True)
+    conn = sq.connect(data_a / "pipeline.db")
+    conn.execute("CREATE TABLE documents (id TEXT)"); conn.execute("INSERT INTO documents VALUES ('d1'),('d2')")
+    conn.execute("CREATE TABLE claims (id TEXT)"); conn.execute("INSERT INTO claims VALUES ('c1')")
+    conn.commit(); conn.close()
+    (data_a / "raw").mkdir(); (data_a / "raw" / "d1.txt").write_text("원문", encoding="utf-8")
+
+    # PC-A에서 내보내기
+    monkeypatch.setattr(ho, "DATA_DIR", data_a)
+    monkeypatch.setattr(ho, "HANDOFF_DIR", tmp_path / "pc_a" / "handoff")
+    assert ho.get_state() == "active"
+    assert ho.export() == 0
+    assert ho.get_state() == "handed_off"
+    zips = list((tmp_path / "pc_a" / "handoff").glob("*.zip"))
+    assert len(zips) == 1
+
+    # 이관됨 상태에서 쓰기 가드 작동
+    with pytest.raises(SystemExit):
+        ho.ensure_active("수집")
+    # 이중 내보내기 차단
+    assert ho.export() == 1
+
+    # PC-B에서 받기
+    data_b = tmp_path / "pc_b" / "data"
+    monkeypatch.setattr(ho, "DATA_DIR", data_b)
+    assert ho.receive(str(zips[0])) == 0
+    assert ho.get_state() == "active"
+    assert (data_b / "raw" / "d1.txt").read_text(encoding="utf-8") == "원문"
+    ho.ensure_active("수집")  # 활성 상태에서는 통과
+
+    conn = sq.connect(data_b / "pipeline.db")
+    assert conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0] == 2
+    conn.close()
+
+
+def test_store_document_strips_cdata_title(test_db):
+    """bain-insights 피드는 제목을 이스케이프된 CDATA로 보낸다 — 저장 전에 벗긴다(2026-11-10)."""
+    conn, db = test_db
+    from collectors.store import clean_title, store_document
+    assert clean_title("<![CDATA[ Industrial CEOs: Is AI the Least of Their Worries?]]>") \
+        == "Industrial CEOs: Is AI the Least of Their Worries?"
+    assert clean_title("보통 제목") == "보통 제목"
+    assert clean_title("<![CDATA[]]>") == "(무제)" and clean_title(None) == "(무제)"
+    src = {"id": "bain-insights", "tier": "T2", "type": "rss", "lang": "en"}
+    assert store_document(conn, src, url="http://x/bain-1",
+                          title="<![CDATA[The Rebirth of Customer Success]]>",
+                          text="본문 " * 500) == "new"
+    row = conn.execute("SELECT title FROM documents WHERE url='http://x/bain-1'").fetchone()
+    assert row["title"] == "The Rebirth of Customer Success"
+
+
+def test_tests_never_see_production_database_url():
+    """tests/conftest.py가 운영 DB 주소를 빼 둔다 — 개발 PC 환경에 DATABASE_URL이 있어도 테스트는 SQLite."""
+    import os
+    assert "DATABASE_URL" not in os.environ
+
+
+def test_fetch_failure_log_shows_status_code_and_block_hints(capsys):
+    """본문 실패 로그에 응답 코드·차단 단서를 남긴다(2026-11-12 HR Dive — 'HTTPStatusError'만으로는 원인을 몰랐다)."""
+    import httpx
+    import collectors.rss as rss
+    req = httpx.Request("GET", "http://x/a")
+    resp = httpx.Response(403, request=req, headers={"server": "cloudflare", "cf-mitigated": "challenge"})
+
+    class C:
+        def get(self, url, **kw):
+            return resp
+
+    assert rss.fetch_url("http://x/a", C()) is None
+    out = capsys.readouterr().out
+    assert "HTTP 403" in out and "server=cloudflare" in out and "cf-mitigated=challenge" in out
+    assert rss.describe_http_error(httpx.ConnectError("x")) == "ConnectError"
+
+
+def test_rss_counts_summary_fallback_and_uses_source_interval(test_db, monkeypatch):
+    """본문 페이지 실패로 피드 요약을 저장하면 '요약 대체'로 센다 · 소스별 request_interval을 쓴다."""
+    conn, db = test_db
+    import collectors.rss as rss
+    fixture = (Path(__file__).parent / "fixtures" / "sample_feed.xml").read_text(encoding="utf-8")
+    monkeypatch.setattr(rss, "fetch_url",
+                        lambda url, client, curl_headers=None: fixture if url.endswith("/feed") else None)
+    slept = []
+    monkeypatch.setattr(rss.time, "sleep", slept.append)
+    source = {"id": "t", "tier": "T5", "feed_url": "http://x/feed", "lang": "en", "request_interval": 5}
+    stats = rss.collect_source(source, conn, client=None, fetch_full=True)
+    assert stats["fallback"] == 2 and stats["new"] == 2
+    assert slept == [5.0, 5.0]

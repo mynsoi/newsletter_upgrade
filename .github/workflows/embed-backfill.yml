@@ -1,0 +1,75 @@
+# 2026-11-13 main → mentor-lab-integration 통합: 수집 묶음은 pipeline/ 폴더에 있다. 모든 run 단계는 pipeline/에서 돈다.
+# 예약(schedule)은 기본 브랜치에서만 돈다 — 기본 브랜치를 바꾸기 전까지 이 브랜치의 예약은 동작하지 않는다.
+# 카드 임베딩 일괄 백필 — 수동 실행 전용(workflow_dispatch)
+#
+# 조각이 덜 찬 문서 카드를 상한 없이(--backfill) 전량 임베딩한다. 일일 증분은 collect.yml의
+# "카드 임베딩(make embed)" 단계가 담당한다(이미 있는 조각은 건너뛰어 증분 안전).
+# 2026-11-10 claim 임베딩 제거 — 예전의 claim 전량 백필·동의어 리콜 검수 단계
+# (scripts/semantic_recall_check.py)는 claim 하이브리드 검색과 함께 지웠다.
+#
+# 비밀값: DATABASE_URL, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는 GitHub Secrets 로만 주입한다.
+name: embed-backfill
+
+on:
+  workflow_dispatch: {}
+
+concurrency:
+  group: embed-backfill
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  embed-backfill:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipeline
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      OPENAI_API_KEY_EMBED: ${{ secrets.OPENAI_API_KEY_EMBED }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install -e .
+
+      - name: 마이그레이션 (make init)
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::secrets.DATABASE_URL 미설정" ; exit 1
+          fi
+          make init
+
+      - name: 임베딩 백필 (make embed-backfill)
+        run: |
+          if [ -z "${OPENAI_API_KEY_EMBED:-}${OPENAI_API_KEY:-}" ]; then
+            echo "::error::secrets.OPENAI_API_KEY_EMBED / OPENAI_API_KEY 둘 다 미설정" ; exit 1
+          fi
+          make embed-backfill 2>&1 | tee embed-backfill.log
+
+      - name: 요약 (Step Summary)
+        if: always()
+        run: |
+          {
+            echo "## 임베딩 백필 결과"
+            echo
+            echo '```'
+            tail -n 30 embed-backfill.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 로그 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: embed-backfill-logs
+          path: pipeline/embed-backfill.log
+          retention-days: 30
+          if-no-files-found: warn

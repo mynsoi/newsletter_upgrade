@@ -1,0 +1,16 @@
+-- 008_claims_from_summary.sql — 요약뿐인 문서에서 나온 claim 표시 (토픽 발굴 ④)
+--
+-- 배경: 002가 도입한 summary_only(본문 800자 미만)는 claim 추출 대상에서 통째로 빠져 있었다.
+-- 그런데 T5(일반·전문 뉴스)는 애초에 "요즘 무슨 일이 있나" 신호 감지 전용 소스이고
+-- (기획서 4.1), RSS가 요약 몇 줄만 주는 것이 정상 상태다. 그 517건(2026-09-10 실측)을
+-- 통째로 버리면 토픽 발굴의 급증 신호가 가장 빠른 소스를 못 보고 계산된다.
+--
+-- 해법: T5 summary_only 문서도 게이트·추출 대상에 넣되 나온 claim에 from_summary=1을 찍어
+-- 용도를 갈라 쓴다.
+--   · 토픽 신호 집계(src/topics/discover.py)  — 포함 (무슨 일이 일어나는지의 신호)
+--   · 증거 수집(search/semantic.py hybrid_search) — 기본 제외
+--     (Phase 0 교훈: 예고문 몇 줄에서 뽑은 claim은 논지의 근거로 쓸 수 없다 — 기획서 4장)
+-- T2~T4의 summary_only는 브라우저 격상(/browse-round)을 기다리는 문서라 그대로 제외한다.
+--
+-- SQLite / PostgreSQL 공통 구문 (방언 마커 불필요).
+ALTER TABLE claims ADD COLUMN from_summary INTEGER DEFAULT 0;

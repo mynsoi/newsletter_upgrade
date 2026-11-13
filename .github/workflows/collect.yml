@@ -1,0 +1,247 @@
+# 2026-11-13 main → mentor-lab-integration 통합: 수집 묶음은 pipeline/ 폴더에 있다. 모든 run 단계는 pipeline/에서 돈다.
+# 예약(schedule)은 기본 브랜치에서만 돈다 — 기본 브랜치를 바꾸기 전까지 이 브랜치의 예약은 동작하지 않는다.
+# 일일 수집 워크플로 — rss + api 수집 → 관련성 판별 → 문서 카드 → 카드 임베딩
+#
+# 스케줄: 매일 19:00 UTC = 04:00 KST(익일). 수동 실행(workflow_dispatch)도 가능.
+#   2026-11-11 21:00 → 19:00 UTC: GitHub가 예약 실행을 매일 3~6시간 늦게 띄워(11/3~11/10 실제 시작 09:04~12:03 KST)
+#   새 글·카드가 점심 무렵에야 작업실에 들어왔다. 늦어져도 출근 전후에 끝나도록 2시간 당겼다.
+#   collection_runs의 날짜는 KST 달력일이라 04시 실행도 그날 1회로 잡힌다(중복 없음).
+# 중복 방지: make collect 은 src/collectors/collect.py 오케스트레이터를 통해
+#   collection_runs(run_date PK, KST 달력일) 를 원자적으로 선점한다. 오늘 이미
+#   completed 면 "오늘 완료됨"으로 즉시 종료(정상). 도중 실패는 failed 로 남아
+#   다음 실행이 자동 재시도한다. → Actions 와 개발 PC 가 같은 잠금을 공유한다.
+# 관련성 판별 순서: 일일 실행은 **최신 수집분 우선**(collected_at 역순, 상한은
+#   config/settings.yaml enrich_daily_limit)이다. 그날 유입을 그날 처리하는 것이 목적이고,
+#   누적 백로그는 enrich-backlog.yml(티어 라운드로빈 + 비용 상한)이 따로 담당한다.
+#   상한이 그날 유입보다 크면 남는 칸이 백로그 최신 쪽부터 채워져 용량이 놀지 않는다.
+# enrich 단계(src/enrich/relevance.py): 판별 통과 문서를 status='enriched'로 바꾸고, 같은 실행에서
+#   문서 카드(src/enrich/doc_cards.py)를 만든다. 칼럼 작업실은 카드와 카드 임베딩만 읽는다.
+#   2026-11-10 claim 추출·claim 임베딩 제거 — claims 표는 더 이상 쓰지 않는다.
+# 카드 임베딩: enrich 뒤 조각이 덜 찬 카드만 변환한다(src/search/embed.py).
+#   OPENAI_API_KEY_EMBED 우선, 없으면 OPENAI_API_KEY, 둘 다 없으면 "건너뜀(키 대기)"으로 성공 처리한다.
+# 비밀값: DATABASE_URL, ANTHROPIC_API_KEY, OPENAI_API_KEY_EMBED/OPENAI_API_KEY 는
+#   GitHub Secrets 로만 주입한다.
+name: daily-collect
+
+on:
+  schedule:
+    - cron: "0 19 * * *"   # 19:00 UTC / 04:00 KST(익일)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "하루 1회 제한을 무시하고 재수집 (collect.py --force)"
+        type: boolean
+        default: false
+
+# 스케줄과 수동 실행이 겹쳐도 러너를 낭비하지 않도록 (잠금은 DB에서도 걸리지만 이중 안전)
+concurrency:
+  group: daily-collect
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipeline
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY_EMBED: ${{ secrets.OPENAI_API_KEY_EMBED }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        id: deps
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          pip install -e . 2>&1 | tee logs/deps.log
+
+      - name: 마이그레이션 (make init)
+        id: init
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::secrets.DATABASE_URL 미설정" ; exit 1
+          fi
+          make init 2>&1 | tee logs/init.log
+
+      - name: 수집 (make collect)
+        id: collect
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ "${{ inputs.force }}" = "true" ]; then
+            python src/collectors/collect.py --force 2>&1 | tee logs/collect.log
+          else
+            make collect 2>&1 | tee logs/collect.log
+          fi
+
+      - name: 관련성 판별·문서 카드 (make enrich)
+        id: enrich
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "::error::secrets.ANTHROPIC_API_KEY 미설정" ; exit 1
+          fi
+          make enrich 2>&1 | tee logs/enrich.log
+
+      - name: 카드 임베딩 (make embed)
+        id: embed
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          make embed 2>&1 | tee logs/embed.log
+
+      - name: 현황 요약 (make stats)
+        id: stats
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          make stats 2>&1 | tee logs/stats.log
+
+      - name: 로그 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-collect-logs
+          path: pipeline/logs/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: 결과 판정 및 실패 알림 (Issue)
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          R_DEPS: ${{ steps.deps.outcome }}
+          R_INIT: ${{ steps.init.outcome }}
+          R_COLLECT: ${{ steps.collect.outcome }}
+          R_ENRICH: ${{ steps.enrich.outcome }}
+          R_EMBED: ${{ steps.embed.outcome }}
+        run: |
+          set -euo pipefail
+          LABEL="daily-collect-failure"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          NOW_KST="$(TZ=Asia/Seoul date '+%F %T KST')"
+
+          gh label create "$LABEL" --color B60205 \
+            --description "일일 수집 워크플로 실패 (자동)" 2>/dev/null || true
+
+          # 무유입 경보 — HTML 파서·피드가 조용히 깨지는 것 감지 (성공/실패와 무관하게 이슈로 경고)
+          ALERT_LABEL="inflow-alert"
+          ALERTS="$(grep "무유입 경보" logs/collect.log 2>/dev/null || true)"
+          if [ -n "$ALERTS" ]; then
+            gh label create "$ALERT_LABEL" --color D93F0B \
+              --description "소스 무유입 경보 (자동)" 2>/dev/null || true
+            {
+              echo "## 소스 무유입 경보 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo
+              echo '```'
+              echo "$ALERTS"
+              echo '```'
+              echo
+              echo "목록·피드 구조 변경으로 수집이 조용히 깨졌는지 점검하세요 (\`make validate\`)."
+            } > alert-body.md
+            EX_ALERT="$(gh issue list --label "$ALERT_LABEL" --state open --limit 1 --json number --jq '.[0].number // empty' || true)"
+            if [ -n "$EX_ALERT" ]; then
+              gh issue comment "$EX_ALERT" --body-file alert-body.md
+              echo "무유입 경보 — 기존 이슈 #$EX_ALERT 에 코멘트 추가"
+            else
+              gh issue create --title "무유입 경보 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$ALERT_LABEL" --body-file alert-body.md
+            fi
+          fi
+
+          # 카드 경보(2026-11-12) — 카드 실패는 판별 exit code를 바꾸지 않아 워크플로가 "성공"으로 끝난다.
+          # 전량 실패·절반 이상 실패·단계 오류를 잡는다(src/enrich/card_health.py). 판별 단계가 실패한 날은
+          # 아래 실패 이슈가 따로 잡으므로 판별이 성공한 날만 본다.
+          CARD_LABEL="card-alert"
+          CARD_ALERTS=""
+          if [ "$R_ENRICH" = "success" ]; then
+            CARD_ALERTS="$(python src/enrich/card_health.py logs/enrich.log || true)"
+          fi
+          if [ -n "$CARD_ALERTS" ]; then
+            gh label create "$CARD_LABEL" --color FBCA04 \
+              --description "문서 카드 단계 경보 (자동)" 2>/dev/null || true
+            {
+              echo "## 문서 카드 경보 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo
+              echo '```'
+              echo "$CARD_ALERTS"
+              echo '```'
+              echo
+              echo "작업실은 카드만 읽으므로 카드가 안 만들어지면 새 글이 서재에 들어가지 않는다."
+              echo "실패한 문서는 다음 실행에서 다시 대상이 된다 — 같은 경보가 이어지면 모델 이름·크레딧·응답 형식을 점검하세요."
+            } > card-alert-body.md
+            EX_CARD="$(gh issue list --label "$CARD_LABEL" --state open --limit 1 --json number --jq '.[0].number // empty' || true)"
+            if [ -n "$EX_CARD" ]; then
+              gh issue comment "$EX_CARD" --body-file card-alert-body.md
+              echo "카드 경보 — 기존 이슈 #$EX_CARD 에 코멘트 추가"
+            else
+              gh issue create --title "문서 카드 경보 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$CARD_LABEL" --body-file card-alert-body.md
+            fi
+          fi
+
+          FAILED=""
+          for pair in "deps:$R_DEPS" "init:$R_INIT" "collect:$R_COLLECT" "enrich:$R_ENRICH" "embed:$R_EMBED"; do
+            name="${pair%%:*}"; res="${pair#*:}"
+            if [ "$res" != "success" ]; then FAILED="$FAILED $name($res)"; fi
+          done
+
+          open_issue() {
+            gh issue list --label "$LABEL" --state open --limit 1 --json number --jq '.[0].number // empty'
+          }
+
+          if [ -n "$FAILED" ]; then
+            {
+              echo "## 일일 수집 실패 — $NOW_KST"
+              echo
+              echo "- run: $RUN_URL"
+              echo "- 실패/미실행 단계:$FAILED"
+              echo
+              for f in collect enrich embed init deps; do
+                if [ -f "logs/$f.log" ]; then
+                  echo "<details><summary>logs/$f.log (마지막 40줄)</summary>"
+                  echo; echo '```'
+                  tail -n 40 "logs/$f.log"
+                  echo '```'; echo '</details>'
+                fi
+              done
+            } > issue-body.md
+
+            EXISTING="$(open_issue || true)"
+            if [ -n "$EXISTING" ]; then
+              gh issue comment "$EXISTING" --body-file issue-body.md
+              echo "기존 이슈 #$EXISTING 에 재발 코멘트 추가"
+            else
+              gh issue create --title "일일 수집 실패 ($(TZ=Asia/Seoul date +%F))" \
+                --label "$LABEL" --body-file issue-body.md
+            fi
+            exit 1
+          fi
+
+          # 전 단계 성공 — 열려 있던 실패 이슈가 있으면 자동 종료
+          EXISTING="$(open_issue || true)"
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" \
+              --comment "정상 복구 — run 성공 ($NOW_KST). 자동 종료. $RUN_URL"
+            echo "이슈 #$EXISTING 자동 종료"
+          fi

@@ -1,0 +1,12 @@
+# 수집 묶음(2026-11-13 main에서 옮겨 옴) — main .gitignore에서 이 폴더에 해당하는 것만
+data/
+logs/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.env
+.venv/
+# 사내 자료 본문은 저장소에 올리지 않는다(make sync가 읽는 internal/ — 이 폴더로는 옮기지 않았다)
+internal/**/*.md
+!internal/**/_TEMPLATE*.md

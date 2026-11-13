@@ -1,0 +1,213 @@
+"""RSS/Atom 수집기.
+
+sources.yaml의 type=rss 소스를 순회하며:
+  피드 파싱 → 신규 항목 판별(URL/해시 중복 제거) → 본문 추출 → raw 저장 → DB 등록
+
+정책 (CLAUDE.md 절대 규칙):
+  - robots/ToS 준수: 요청 간 REQUEST_INTERVAL 대기, User-Agent 명시
+  - 페이월 우회 시도 없음 — 본문 추출 실패 시 피드 요약만 저장하고 넘어감
+"""
+from __future__ import annotations
+
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.parse import urljoin
+
+import feedparser
+import httpx
+import trafilatura
+import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from db import ROOT, collection_done_today, connect, migrate  # noqa: E402
+from collectors.store import store_document  # noqa: E402
+from collectors.pubdate import extract_published  # noqa: E402
+
+# Windows 콘솔(cp949)에서 한글·특수문자 출력 깨짐 방지
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+SOURCES_PATH = ROOT / "config" / "sources.yaml"
+USER_AGENT = "SK-CultureInsights-Pipeline/0.1 (internal research; contact: pipeline-admin)"
+REQUEST_INTERVAL = 3.0  # 초 — 같은 도메인 연속 요청 간격
+MAX_ITEMS_PER_FEED = 50
+
+
+def load_sources() -> list[dict]:
+    data = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8"))
+    return data.get("sources", [])
+
+
+def select_targets(sources: list[dict], source_type: str,
+                   source_ids: list[str] | None = None) -> list[dict]:
+    """수집 대상 — 유형이 맞고 **status가 active인** 소스만. rss·api·html_list 공용.
+
+    2026-10-01 수정: 종전에는 type만 보고 골라서, 월간 소스 리뷰(9/30)에서 excluded로 바꾼
+    mk-economy·chosun-economy·arxiv-cs-si가 다음 날 그대로 수집됐다(87건). 그 전까지 퇴출된
+    소스는 뉴스레터·브라우저·수기 유형이라 자동 수집 대상이 아니어서 드러나지 않았다.
+    소스를 직접 지정해도(--source) 퇴출 소스는 건너뛰고 알린다.
+    """
+    if source_ids:
+        sources = [s for s in sources if s["id"] in source_ids]
+    typed = [s for s in sources if s.get("type") == source_type]
+    skipped = [s["id"] for s in typed if s.get("status") != "active"]
+    if skipped:
+        print(f"  (건너뜀 — status가 active 아님: {', '.join(skipped)})")
+    return [s for s in typed if s.get("status") == "active"]
+
+
+def fetch_via_curl(url: str, headers: dict | None = None) -> str | None:
+    """curl 폴백 — WAF가 파이썬 HTTP 클라이언트의 TLS 지문을 차단하는 소스용.
+
+    예: Knowledge at Wharton — httpx는 브라우저형 헤더로도 403이지만 curl은 통과
+    (2026-08-27 probe run 33068739104 실측). request_headers 가 등재된 소스만 사용.
+    """
+    cmd = ["curl", "-sSL", "--fail", "--max-time", "30"]
+    for k, v in (headers or {}).items():
+        cmd += ["-H", f"{k}: {v}"]
+    cmd.append(url)
+    try:
+        r = subprocess.run(cmd, capture_output=True, timeout=45)
+        if r.returncode == 0 and r.stdout:
+            return r.stdout.decode("utf-8", errors="replace")
+    except (subprocess.TimeoutExpired, OSError):
+        pass
+    print(f"    ! curl 폴백도 실패 {url}")
+    return None
+
+
+def fetch_url(url: str, client: httpx.Client,
+              curl_headers: dict | None = None) -> str | None:
+    """httpx 로 요청, 실패 시 curl_headers 가 주어진 소스만 curl 폴백."""
+    try:
+        r = client.get(url, follow_redirects=True, timeout=20)
+        r.raise_for_status()
+        return r.text
+    except httpx.HTTPError as e:
+        if curl_headers is not None:
+            print(f"    ! httpx 실패({type(e).__name__}) → curl 폴백: {url}")
+            return fetch_via_curl(url, curl_headers)
+        print(f"    ! fetch 실패 {url}: {describe_http_error(e)}")
+        return None
+
+
+def describe_http_error(e: httpx.HTTPError) -> str:
+    """실패 원인을 로그에서 가릴 수 있게 응답 코드와 차단 단서를 붙인다(2026-11-12 — HR Dive 본문이
+    11/7부터 Actions에서만 실패했는데 로그에 'HTTPStatusError'만 남아 403인지 429인지 알 수 없었다)."""
+    resp = getattr(e, "response", None) if isinstance(e, httpx.HTTPStatusError) else None
+    if resp is None:
+        return type(e).__name__
+    hints = [f"{k}={resp.headers[k]}" for k in ("server", "cf-mitigated", "retry-after") if k in resp.headers]
+    return f"HTTP {resp.status_code}" + (f" ({', '.join(hints)})" if hints else "")
+
+
+def extract_body(html: str) -> str | None:
+    return trafilatura.extract(html, include_comments=False, include_tables=False)
+
+
+def parse_date(entry) -> str | None:
+    for key in ("published_parsed", "updated_parsed"):
+        t = entry.get(key)
+        if t:
+            return time.strftime("%Y-%m-%d", t)
+    return None
+
+
+def collect_source(source: dict, conn, client: httpx.Client, fetch_full: bool = True) -> dict:
+    stats = {"seen": 0, "new": 0, "dup": 0, "failed": 0, "up": 0, "fallback": 0}
+    # 소스별 요청 간격(sources.yaml request_interval) — robots.txt Crawl-delay가 기본값보다 긴 소스용
+    interval = float(source.get("request_interval", REQUEST_INTERVAL))
+    curl_headers = source.get("request_headers")  # 있으면 httpx 실패 시 curl 폴백
+    feed_xml = fetch_url(source["feed_url"], client, curl_headers)
+    if feed_xml is None:
+        stats["failed"] = -1  # 피드 자체 실패
+        return stats
+
+    feed = feedparser.parse(feed_xml)
+    # 일부 피드(HBR 등)는 항목 링크가 상대 경로 — 사이트 링크 기준으로 절대 URL화
+    link_base = feed.feed.get("link") or source["feed_url"]
+    for entry in feed.entries[:MAX_ITEMS_PER_FEED]:
+        stats["seen"] += 1
+        url = entry.get("link")
+        if not url:
+            continue
+        url = urljoin(link_base, url)
+        if conn.execute("SELECT 1 FROM documents WHERE url = ?", (url,)).fetchone():
+            stats["dup"] += 1
+            continue
+
+        summary = entry.get("summary", "") or ""
+        body = None
+        published = parse_date(entry)
+        if fetch_full:
+            time.sleep(interval)
+            html = fetch_url(url, client, curl_headers)
+            if not html:
+                stats["fallback"] += 1  # 본문 페이지 실패 → 피드 요약으로 저장(본문실패와 별개)
+            if html:
+                body = extract_body(html)
+                # 피드에 날짜가 없는 소스(NBER 등)는 본문 페이지의 표준 메타에서 찾는다
+                if published is None:
+                    published = extract_published(
+                        html, text_dates=bool(source.get("date_from_text")))
+        text = body or summary
+
+        # 저장은 공용 로직으로 — 중복 제거·summary_only 규칙을 api 수집기와 동일 적용
+        result = store_document(
+            conn, source, url=url, title=entry.get("title", "(무제)"), text=text,
+            author=entry.get("author"), published=published)
+        stats[{"new": "new", "dup": "dup", "empty": "failed", "upgraded": "up"}[result]] += 1
+    conn.commit()
+    return stats
+
+
+def run(source_ids: list[str] | None = None, fetch_full: bool = True, *,
+        force: bool = False) -> dict:
+    """반환: {"targets": 대상 소스 수, "failed": 소스 단위 실패 수} — 오케스트레이터가
+    전량 실패를 판정하는 데 쓴다."""
+    from handoff import ensure_active
+    ensure_active("수집")
+    conn = connect()
+    migrate(conn)
+
+    # 하루 1회 잠금 확인. force=True 는 오케스트레이터(collect.py)가 이미 daily
+    # lock 을 선점했다는 내부 신호이며, 이때는 재확인을 생략한다.
+    if not force and collection_done_today(conn):
+        print("오늘 수집이 이미 완료됨 — 우회하려면 --force")
+        conn.close()
+        return {"targets": 0, "failed": 0}
+
+    targets = select_targets(load_sources(), "rss", source_ids)
+    print(f"수집 대상 {len(targets)}개 소스 (전문 추출: {fetch_full})")
+
+    headers = {"User-Agent": USER_AGENT}
+    failed_feeds = []
+    with httpx.Client(headers=headers) as client:
+        for s in targets:
+            print(f"  {s['id']} [{s['tier']}] {s['name']}")
+            st = collect_source(s, conn, client, fetch_full)
+            if st["failed"] == -1:
+                failed_feeds.append(s["id"])
+                print("    → 피드 접속 실패")
+            else:
+                up = f" / 격상 {st['up']}" if st.get("up") else ""
+                up += f" / 요약 대체 {st['fallback']}" if st.get("fallback") else ""
+                print(f"    → 신규 {st['new']} / 중복 {st['dup']}{up} / 본문실패 {st['failed']} (피드 {st['seen']}건)")
+            time.sleep(REQUEST_INTERVAL)
+
+    if failed_feeds:
+        print(f"\n[경고] 피드 실패 소스: {', '.join(failed_feeds)}")
+        print("      `make validate`로 URL을 점검하고 sources.yaml을 수정하세요.")
+    conn.close()
+    return {"targets": len(targets), "failed": len(failed_feeds)}
+
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    fast = "--no-body" in args
+    force = "--force" in args
+    ids = [a for a in args if not a.startswith("--")] or None
+    run(ids, fetch_full=not fast, force=force)
