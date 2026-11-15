@@ -25,7 +25,9 @@ name: daily-collect
 
 on:
   schedule:
-    - cron: "0 19 * * *"   # 19:00 UTC / 04:00 KST(익일)
+    # 2026-11-16 정각(19:00 UTC) → 18:17 UTC. 11/12~16 정각 예약이 매일 4~6시간 늦게 시작했다 — GitHub 예약은
+    # 이용이 몰리는 정각에 많이 밀린다. 분을 정각이 아닌 값으로 옮겨 본다(효과는 기본 브랜치 전환 뒤 확인).
+    - cron: "17 18 * * *"   # 18:17 UTC / 03:17 KST(익일)
   workflow_dispatch:
     inputs:
       force:

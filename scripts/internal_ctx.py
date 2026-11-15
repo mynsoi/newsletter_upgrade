@@ -29,18 +29,23 @@ _GLOSS = None
 
 
 def glossary():
-    """main의 사내 용어집 — 원본은 main 브랜치 prompts/glossary_internal.md(복사본을 두지 않는다). 머리말·'이 파일을 쓰는 자리'는 뗀다."""
+    """사내 용어집 — 원본은 pipeline/prompts/glossary_internal.md(2026-11-16 main에서 옮겨 옴, 복사본을 두지 않는다).
+    예전에는 main 브랜치에서 git show로 읽었다 — main을 보관하면 갱신이 끊기므로 이 브랜치의 파일을 먼저 읽는다.
+    머리말·'이 파일을 쓰는 자리'는 뗀다."""
     global _GLOSS
     if _GLOSS is None:
         t = ""
-        try:
-            r = subprocess.run(["git", "show", "origin/main:prompts/glossary_internal.md"], cwd=ROOT, capture_output=True,
-                               text=True, encoding="utf-8", timeout=20)
-            t = r.stdout if r.returncode == 0 else ""
-        except (OSError, subprocess.SubprocessError):
-            pass
-        if not t and (ROOT / "prompts" / "glossary_internal.md").is_file():
-            t = (ROOT / "prompts" / "glossary_internal.md").read_text(encoding="utf-8")
+        for p in (ROOT / "pipeline" / "prompts" / "glossary_internal.md", ROOT / "prompts" / "glossary_internal.md"):
+            if p.is_file():
+                t = p.read_text(encoding="utf-8")
+                break
+        if not t:  # 예전 체크아웃(pipeline/ 없음) 대비 — main의 마지막 판
+            try:
+                r = subprocess.run(["git", "show", "origin/main:prompts/glossary_internal.md"], cwd=ROOT, capture_output=True,
+                                   text=True, encoding="utf-8", timeout=20)
+                t = r.stdout if r.returncode == 0 else ""
+            except (OSError, subprocess.SubprocessError):
+                pass
         t = re.split(r"^## 이 파일을 쓰는 자리", t, flags=re.M)[0]
         t = re.sub(r"\A# .*?\n(?=## )", "", t, flags=re.S)  # 머리말(작성 절차·CLAUDE.md 안내)
         _GLOSS = t.strip()
