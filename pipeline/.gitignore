@@ -7,6 +7,7 @@ __pycache__/
 *.egg-info/
 .env
 .venv/
-# 사내 자료 본문은 저장소에 올리지 않는다(make sync가 읽는 internal/ — 이 폴더로는 옮기지 않았다)
+# 사내 자료 본문은 저장소에 올리지 않는다(make sync가 읽는 internal/ — 2026-11-16 main 폴더에서 복사해 옴, 본문은 git 밖)
 internal/**/*.md
 !internal/**/_TEMPLATE*.md
+!internal/내부자료_등록목록.md

@@ -64,10 +64,11 @@ make sources-doc # sources.yaml → docs/소스_카탈로그.md 재생성
 make test        # 테스트
 ```
 
-커맨드(.claude/commands): /collect /status /sync-internal /add-theory /publish
-/ingest-url /ingest-file(브라우저 경로 진입점) /browse-collect(목록·건별 개별 절차)
-/browse-round(월간 브라우저 라운드 전체 — 목록 순회+격상+유료 건별 보조+보고서.
-본문 저장은 scripts/browse/extract_article.js, 에이전트는 본문 미열람)
+커맨드(저장소 루트 .claude/commands, 2026-11-16 main에서 옮김): /collect(PC 수동 수집 — 비상용)
+/status /sync-internal(사내 자료 재색인 — pipeline/internal/, 본문은 git 밖) /ingest-url(주소 수기 등록).
+/browse-round·/browse-collect·/ingest-file·/publish·/publish-ui·/add-theory·/handoff·/receive는 옮기지 않았다
+(aside가 브라우저 수집을 맡고 남은 browse 소스는 모두 excluded, 발행은 작업실, 이론 색인·핸드오프 폐기).
+필요하면 태그 main-final-2026-11-16에서 꺼낸다.
 
 ## 문체 규칙 (아티클 생성 시)
 
