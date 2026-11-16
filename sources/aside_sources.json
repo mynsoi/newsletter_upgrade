@@ -272,6 +272,27 @@
     "[class*='doormat']",
     "[class*='newsletter']"
    ]
+  },
+  "hrdive": {
+   "mode": "upgrade",
+   "_note": "2026-11-16 편입 — RSS 본문 요청이 Actions에서 Cloudflare 403(11/7~)이라 RSS 요약만 남은 글을 aside로 격상. robots Crawl-delay 5초라 간격 10초. 11/16 시험 2편 통과(Cloudflare 검사 없음, 본문 3.4~4.0천 자).",
+   "tier": "T5",
+   "lang": "en",
+   "max_per_run": 5,
+   "gap_seconds": 10,
+   "days": 30,
+   "container": ".article-body",
+   "exclude": [
+    ".text-to-speech",
+    ".hybrid-ad-wrapper",
+    ".inline-signup",
+    ".pullquote",
+    "form",
+    "nav",
+    "aside",
+    "footer",
+    "figcaption"
+   ]
   }
  }
 }
