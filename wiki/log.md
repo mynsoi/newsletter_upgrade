@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-16 13:59
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 51 · 124s
+
+## 2026-11-16 13:59
 - 묶기 붙임 stanford-hai/0013 → 주제/stanford-hai-0010.md
 - 묶기 붙임 fastcompany-worklife/0273 → 주제/hbr-0055.md
 - 묶기 붙임 worklytics-blog/0074 → 주제/worklytics-blog-0065.md
