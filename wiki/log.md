@@ -1,5 +1,38 @@
 # 위키 이력
 
+## 2026-11-16 13:59
+- 묶기 붙임 stanford-hai/0013 → 주제/stanford-hai-0010.md
+- 묶기 붙임 fastcompany-worklife/0273 → 주제/hbr-0055.md
+- 묶기 붙임 worklytics-blog/0074 → 주제/worklytics-blog-0065.md
+- 묶기 붙임 carrot-global-blog/0061, aihr-blog/0074 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 fastcompany-worklife/0271 → 주제/fastcompany-worklife-0220.md
+- 묶기 붙임 fastcompany-worklife/0265 → 주제/fastcompany-worklife-0024.md
+- 묶기 붙임 fastcompany-worklife/0266 → 주제/hbr-korea-0038.md
+- 묶기 붙임 fastcompany-worklife/0268 → 주제/aihr-blog-0014.md
+- 묶기 붙임 fastcompany-worklife/0257 → 주제/fastcompany-worklife-0004.md
+- 묶기 붙임 fastcompany-worklife/0258 → 주제/fastcompany-worklife-0212.md
+- 묶기 붙임 mckinsey-insights/0099 → 주제/hbr-korea-0034.md
+- 묶기 붙임 dbr/0372 → 주제/dbr-0369.md
+- 묶기 붙임 bcg-publications/0496 → 주제/bcg-publications-0474.md
+- 묶기 붙임 carrot-global-blog/0060 → 주제/bain-insights-0076.md
+- 묶기 붙임 bcg-publications/0498 → 주제/bcg-publications-0222.md
+- 묶기 새 주제(쓸 만함) AI 사용량이 제자리여도 사람이 직접 하던 일을 AI가 맡는 범위는 계속 넓어질 수 있다. → 주제/onemodel-blog-0020.md
+- 묶기 새 주제(쓸 만함) AI로 직원을 더 자주 확인할 수 있게 되면, 성과가 좋은 직원에게도 계속 일하고 있음을 증명하는 부담이 생길 수 있다. → 주제/fastcompany-worklife-0270.md
+- 묶기 새 주제(보통) 한 리더에게 크게 의존하는 조직에서는 후계자의 부재가 그 리더를 견제할 선택지까지 줄일 수 있다. → 주제/knowledge-wharton-0020.md
+- 묶기 새 주제(쓸 만함) AI 분석이 누구에게나 쉬워질수록 현장에서만 알아볼 수 있는 맥락과 경험의 가치는 더 커질 수 있다. → 주제/hbr-korea-0334.md
+- 묶기 새 주제(쓸 만함) AI가 심사한다는 사실만으로도 사람들은 검증을 피하기 쉽다고 생각해 제출하는 정보를 바꿀 수 있다. → 주제/dbr-0375.md
+- 묶기 새 주제(쓸 만함) AI 전환을 기술 안건으로만 다루면, 그 기술을 쓸 사람의 역량과 신뢰를 바꾸는 책임은 조직의 의사결정에서 빠질 수 있다. → 주제/deloitte-insights-0060.md
+- 묶기 새 주제(보통) 직원의 기술 학습 의지를 나이로 판단하면 이미 새 역량을 쌓고 있는 사람에게서 성장 기회를 거둘 수 있다. → 주제/aihr-blog-0072.md
+- 묶기 새 주제(보통) 익숙한 경력 이름으로 사람을 고르면 실제 업무에 필요한 능력을 갖춘 인재도 놓칠 수 있다. → 주제/fastcompany-worklife-0259.md
+- 묶기 새 주제(보통) 새 기술을 갖춘 것보다 일하며 쌓은 고유한 데이터를 다음 판단에 되돌려 쓰는 구조가 AI의 차이를 만들 수 있다. → 주제/dbr-0378.md
+- 묶기 새 주제(보통) AI 확산이 빨라져도 큰 기업과 젊은 이용자의 경험이 곧 모두의 경험이 되는 것은 아니다. → 주제/oecd-employment-ai-0028.md
+- 묶기 새 주제(보통) AI는 사람의 학습을 흉내 내는 기술인 동시에 사람이 어떻게 배우고 경험하는지 탐구하는 도구가 되고 있다. → 주제/stanford-hai-0012.md
+- 묶기 새 주제(보통) 사업부별로 잘 성장해 온 회사도 다음 성장을 위해서는 함께 집중할 고객과 일하는 방식을 다시 정해야 할 수 있다. → 주제/bain-insights-0079.md
+- 묶기 새 주제(보통) 성과를 축하하는 문화와 남은 문제를 계속 찾는 문화는 함께 작동할 수 있다. → 주제/mckinsey-insights-0098.md
+- 묶기 새 주제(뺌) 매력적인 회사의 사명은 입사를 결심하게 할 수 있어도 입사 뒤의 만족과 정착까지 보장하지는 않는다. → 주제/knowledge-wharton-0021.md
+- 묶기 새 주제(뺌) 직무를 먼저 분석하면 채용에서 더 많은 사람을 심사하는 대신 필요한 능력을 더 일찍 가려낼 수 있다. → 주제/aihr-blog-0073.md
+- 주제 묶기 새 카드 51 · 붙음/새 주제 33 · 뺌 18 · 못 넣음 0 · 남음 0 · 115s
+
 ## 2026-11-12 10:59
 - 주제 묶기(이어 묶기) 2번 · 보낸 카드 128 · 323s
 
