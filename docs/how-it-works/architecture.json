@@ -9,7 +9,7 @@
     "id": "click-path",
     "label": "버튼 한 번",
     "focus": [
-     "mentor",
+     "user",
      "ui",
      "server"
     ],
@@ -21,23 +21,37 @@
     "focus": [
      "server",
      "pipeline",
+     "mine",
      "claude",
      "astra"
     ],
-    "note": "초안은 Claude, 제목과 재작성·피드백 반영은 astra."
+    "note": "초안은 Claude, 원문 정하기와 재작성·피드백 반영·제목은 astra."
    },
    {
     "id": "material",
     "label": "재료와 그림",
     "focus": [
      "server",
-     "collect",
-     "aside",
      "wiki",
      "images",
-     "gti"
+     "gti",
+     "collect",
+     "aside",
+     "dbsync",
+     "actions",
+     "supabase"
     ],
-    "note": "원문 수집, 주제 지도, 그림 후보."
+    "note": "수집은 GitHub Actions와 aside가 Supabase에 쌓고, 작업실이 받아 주제를 묶는다."
+   },
+   {
+    "id": "publish",
+    "label": "발행",
+    "focus": [
+     "server",
+     "publish",
+     "site"
+    ],
+    "note": "확정한 칼럼을 웹 발행본과 메일 파일로 만든다."
    }
   ],
   "legend": {
@@ -53,19 +67,22 @@
     },
     "external": {
      "label": "사람 · 수집 도구"
+    },
+    "database": {
+     "label": "저장소"
     }
    }
   }
  },
  "components": [
   {
-   "id": "mentor",
+   "id": "user",
    "type": "external",
-   "label": "멘토",
+   "label": "사용자",
    "sublabel": "브라우저",
    "pos": [
     40,
-    400
+    610
    ],
    "size": [
     130,
@@ -79,7 +96,7 @@
    "sublabel": "React · app/",
    "pos": [
     240,
-    400
+    610
    ],
    "size": [
     150,
@@ -91,21 +108,21 @@
    "type": "backend",
    "label": "작업실 서버",
    "sublabel": "studio_server.py",
-   "tag": "버튼 → 명령",
    "pos": [
     460,
-    400
+    610
    ],
    "size": [
     160,
     64
-   ]
+   ],
+   "tag": "버튼 → 명령"
   },
   {
    "id": "pipeline",
    "type": "backend",
    "label": "column_pipeline.py",
-   "sublabel": "제목 · 과정 1~",
+   "sublabel": "과정 1~ · 제목",
    "pos": [
     720,
     220
@@ -116,13 +133,27 @@
    ]
   },
   {
-   "id": "wiki",
+   "id": "mine",
    "type": "backend",
-   "label": "wiki.py",
-   "sublabel": "카드 · 묶기 · 제목",
+   "label": "my_topic.py",
+   "sublabel": "글 옵션 · 원문 확인",
    "pos": [
     720,
     350
+   ],
+   "size": [
+    190,
+    64
+   ]
+  },
+  {
+   "id": "wiki",
+   "type": "backend",
+   "label": "wiki.py",
+   "sublabel": "주제 묶기 · 판정",
+   "pos": [
+    720,
+    480
    ],
    "size": [
     190,
@@ -136,7 +167,7 @@
    "sublabel": "그림 후보",
    "pos": [
     720,
-    480
+    610
    ],
    "size": [
     190,
@@ -146,11 +177,53 @@
   {
    "id": "collect",
    "type": "backend",
-   "label": "collect.py",
-   "sublabel": "원문 수집",
+   "label": "aside_collect.py",
+   "sublabel": "브라우저 수집",
    "pos": [
     720,
-    740
+    870
+   ],
+   "size": [
+    190,
+    64
+   ]
+  },
+  {
+   "id": "dbsync",
+   "type": "backend",
+   "label": "db_sources.py",
+   "sublabel": "원문 · 카드 받기",
+   "pos": [
+    720,
+    1000
+   ],
+   "size": [
+    190,
+    64
+   ]
+  },
+  {
+   "id": "actions",
+   "type": "backend",
+   "label": "pipeline/",
+   "sublabel": "GitHub Actions · 매일",
+   "pos": [
+    720,
+    1130
+   ],
+   "size": [
+    190,
+    64
+   ]
+  },
+  {
+   "id": "publish",
+   "type": "backend",
+   "label": "publish.py",
+   "sublabel": "웹 · 메일 발행본",
+   "pos": [
+    720,
+    1260
    ],
    "size": [
     190,
@@ -168,7 +241,7 @@
    ],
    "size": [
     180,
-    194
+    64
    ]
   },
   {
@@ -178,11 +251,11 @@
    "sublabel": "codex exec gpt-6-astra",
    "pos": [
     1070,
-    350
+    220
    ],
    "size": [
     180,
-    194
+    454
    ]
   },
   {
@@ -190,20 +263,6 @@
    "type": "cloud",
    "label": "gti",
    "sublabel": "그림 생성 gpt-6-astra",
-   "pos": [
-    1070,
-    610
-   ],
-   "size": [
-    180,
-    64
-   ]
-  },
-  {
-   "id": "aside",
-   "type": "external",
-   "label": "aside",
-   "sublabel": "브라우저 수집",
    "pos": [
     1070,
     740
@@ -214,24 +273,52 @@
    ]
   },
   {
-   "id": "mine",
-   "type": "backend",
-   "label": "my_topic.py",
-   "sublabel": "원문 고르기 · 말할 것",
+   "id": "aside",
+   "type": "external",
+   "label": "aside",
+   "sublabel": "Aside Browser",
    "pos": [
-    720,
-    90
+    1070,
+    870
    ],
    "size": [
-    190,
+    180,
+    64
+   ]
+  },
+  {
+   "id": "supabase",
+   "type": "database",
+   "label": "Supabase",
+   "sublabel": "원문 · 문서 카드",
+   "pos": [
+    1070,
+    1065
+   ],
+   "size": [
+    180,
+    64
+   ]
+  },
+  {
+   "id": "site",
+   "type": "database",
+   "label": "site/ · .eml",
+   "sublabel": "Vercel 배포 · 메일 파일",
+   "pos": [
+    1070,
+    1260
+   ],
+   "size": [
+    180,
     64
    ]
   }
  ],
  "connections": [
   {
-   "id": "mentor-ui",
-   "from": "mentor",
+   "id": "user-ui",
+   "from": "user",
    "to": "ui",
    "label": "누름",
    "variant": "emphasis"
@@ -249,6 +336,11 @@
    "to": "pipeline"
   },
   {
+   "id": "server-mine",
+   "from": "server",
+   "to": "mine"
+  },
+  {
    "id": "server-wiki",
    "from": "server",
    "to": "wiki"
@@ -264,6 +356,16 @@
    "to": "collect"
   },
   {
+   "id": "server-dbsync",
+   "from": "server",
+   "to": "dbsync"
+  },
+  {
+   "id": "server-publish",
+   "from": "server",
+   "to": "publish"
+  },
+  {
    "id": "pipeline-claude",
    "from": "pipeline",
    "to": "claude",
@@ -273,18 +375,30 @@
    "id": "pipeline-astra",
    "from": "pipeline",
    "to": "astra",
-   "label": "제목 · 과정 2~"
+   "label": "과정 2~",
+   "labelSegment": 0,
+   "labelDy": 16
+  },
+  {
+   "id": "mine-astra",
+   "from": "mine",
+   "to": "astra",
+   "label": "원문 확인",
+   "labelSegment": 0
   },
   {
    "id": "wiki-astra",
    "from": "wiki",
-   "to": "astra"
+   "to": "astra",
+   "label": "묶기 · 판정",
+   "labelSegment": 0
   },
   {
    "id": "images-astra",
    "from": "images",
    "to": "astra",
-   "label": "그림 설명"
+   "label": "그림 설명",
+   "labelSegment": 0
   },
   {
    "id": "images-gti",
@@ -299,15 +413,22 @@
    "label": "원문 그대로"
   },
   {
-   "id": "server-mine",
-   "from": "server",
-   "to": "mine"
+   "id": "dbsync-supabase",
+   "from": "dbsync",
+   "to": "supabase",
+   "label": "받기"
   },
   {
-   "id": "mine-claude",
-   "from": "mine",
-   "to": "claude",
-   "label": "고르기"
+   "id": "actions-supabase",
+   "from": "actions",
+   "to": "supabase",
+   "label": "수집 · 카드"
+  },
+  {
+   "id": "publish-site",
+   "from": "publish",
+   "to": "site",
+   "label": "내보내기"
   }
  ],
  "cards": [
@@ -316,23 +437,23 @@
    "title": "화면과 서버",
    "items": [
     "버튼은 서버를 거쳐 스크립트 하나를 실행할 뿐",
-    "작업마다 진행 로그가 runs/studio/에 남음"
+    "작업 기록은 runs/studio/에 남고, 글이 바뀌면 그 글의 파일만 git으로 올림"
    ]
   },
   {
    "dot": "violet",
    "title": "AI 분담",
    "items": [
-    "Claude: 원문 고르기·말할 것, 과정 1 초안, 주제 거르기, 진행자(입력창 드롭다운)",
-    "astra: 원문 카드 · 묶기 · 제목, 과정 2부터 끝까지, 그림 설명",
-    "gti: 그림"
+    "Claude: 과정 1 초안, 사내 맥락 넣기, 강조 추천, 진행자(입력창 드롭다운)",
+    "astra: 주제 묶기·판정, 글 옵션·원문 확인, 과정 2부터 끝까지, 제목, 그림 설명",
+    "gti: 그림 · 수집 묶음(pipeline/): 관련성 판별과 문서 카드"
    ]
   },
   {
    "dot": "amber",
    "title": "파일로 이어짐",
    "items": [
-    "sources/originals → wiki/ · runs/mine/ → briefs/ → runs/ → columns/",
+    "Supabase → sources/originals · wiki/ → runs/mine/ → briefs/ → runs/columns/ → columns/ → site/",
     "단계 사이는 전부 파일, 지운 글은 trash/로"
    ]
   }

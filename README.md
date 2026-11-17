@@ -14,7 +14,7 @@
 ## 한눈에 보기
 
 ![칼럼 한 편이 나오기까지](docs/readme/diagram-flow.png)
-<sub>도식도 2026-10 기준입니다 — 지금은 제목을 본문 뒤에 짓고, 원문은 Supabase에서 받습니다(아래 설명이 맞습니다).</sub>
+<sub>빨간 칸이 사람이 고르는 것, 검은 테두리가 AI가 하는 것입니다.</sub>
 
 ```
 수집(Actions · aside) → Supabase → 서재 → 주제 지도 ─┐
@@ -199,7 +199,7 @@ trash/               지운 글(git 밖) — 되살릴 수 있게 옮겨만 둠
 ```
 
 두 도식은 클릭해서 따라가 볼 수 있는 페이지로도 있습니다. 작업실 서버를 켠 뒤
-http://localhost:8771/docs/2026-10-10-동작-원리.html 에서 여세요(2026-10 기준, GitHub에서는 열리지 않습니다).
+http://localhost:8771/docs/2026-10-10-동작-원리.html 에서 여세요(GitHub에서는 열리지 않습니다). 도식을 고치려면 `docs/how-it-works/*.json`을 고쳐 archify로 HTML을 다시 만들고 `python3 docs/readme/capture_diagrams.py`로 그림을 찍습니다.
 
 ## 여러 PC에서 쓰기
 

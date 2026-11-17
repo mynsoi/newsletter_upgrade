@@ -7,7 +7,7 @@
   "legend": {
    "entries": {
     "frontend": {
-     "label": "멘토가 고르는 것"
+     "label": "사람이 고르는 것"
     },
     "cloud": {
      "label": "AI가 하는 것"
@@ -26,33 +26,35 @@
     "label": "재료가 쌓이는 길",
     "focus": [
      "collect",
-     "ingest"
+     "bundle"
     ],
-    "note": "원문은 그대로 저장되고, 원문마다 카드가 되어 같은 주장끼리 묶이고, 쓸 만한 주제가 걸러진다."
+    "note": "원문은 Supabase에 그대로 쌓이고, 문서마다 만든 카드로 같은 메시지끼리 주제를 묶어 판정한다."
    },
    {
     "id": "writing",
     "label": "글이 되는 길",
     "focus": [
      "pick",
-     "brief",
-     "title",
+     "options",
+     "choose",
      "write",
      "feedback"
     ],
-    "note": "추천 주제를 고르거나 메인 채팅에 하고 싶은 말을 적으면 대화가 열린다. 원문과 말할 것 한 문장을 고르고, 제목 → 과정 1·2·3 → 피드백으로 다듬는다."
+    "note": "추천 주제를 고르거나 메인 채팅에 하고 싶은 말을 적으면 대화가 열린다. 글 옵션과 원문을 고르면 과정 1·2·3이 돌고 피드백으로 다듬는다."
    },
    {
     "id": "finish",
     "label": "마무리",
     "focus": [
-     "write",
+     "textpick",
+     "titles",
+     "titlepick",
      "images",
      "confirm",
      "column",
-     "ingest"
+     "bundle"
     ],
-    "note": "그림을 고르고 원하는 과정을 골라 확정하면 칼럼이 저장되고, 주제 지도에서 온 글이면 씀이 표시된다."
+    "note": "원고를 정하면 제목을 짓고, 그림을 골라 확정하면 칼럼이 저장된다. 주제 지도에서 온 글이면 씀이 표시된다."
    }
   ],
   "viewBox": [
@@ -65,27 +67,27 @@
    "id": "collect",
    "type": "external",
    "label": "원문 수집",
-   "sublabel": "aside → sources/",
+   "sublabel": "→ Supabase",
    "pos": [
     40,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
   {
-   "id": "ingest",
+   "id": "bundle",
    "type": "cloud",
-   "label": "주제 지도 넣기",
-   "sublabel": "astra · Claude → wiki/",
+   "label": "주제 묶기 · 판정",
+   "sublabel": "astra → wiki/",
    "pos": [
-    260,
+    230,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
@@ -95,39 +97,39 @@
    "label": "주제 · 요청",
    "sublabel": "추천 · 메인 채팅",
    "pos": [
-    370,
+    325,
     110
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
   {
-   "id": "brief",
+   "id": "options",
    "type": "cloud",
-   "label": "원문 · 말할 것",
-   "sublabel": "Claude 고르기",
+   "label": "글 옵션 · 원문 확인",
+   "sublabel": "astra",
    "pos": [
-    480,
+    420,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
   {
-   "id": "title",
+   "id": "choose",
    "type": "frontend",
-   "label": "제목 고르기",
-   "sublabel": "astra 후보 중",
+   "label": "옵션 · 원문 고르기",
+   "sublabel": "말할 것 한 문장",
    "pos": [
-    590,
+    515,
     110
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
@@ -137,11 +139,11 @@
    "label": "과정 1 · 2 · 3",
    "sublabel": "Claude → astra ×2",
    "pos": [
-    700,
+    610,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
@@ -151,11 +153,53 @@
    "label": "피드백",
    "sublabel": "받은 그대로 astra에",
    "pos": [
-    700,
+    610,
     490
    ],
    "size": [
-    160,
+    150,
+    64
+   ]
+  },
+  {
+   "id": "textpick",
+   "type": "frontend",
+   "label": "원고 정하기",
+   "sublabel": "과정 골라서",
+   "pos": [
+    705,
+    110
+   ],
+   "size": [
+    150,
+    64
+   ]
+  },
+  {
+   "id": "titles",
+   "type": "cloud",
+   "label": "제목 후보",
+   "sublabel": "astra · 8개 중 4개",
+   "pos": [
+    800,
+    300
+   ],
+   "size": [
+    150,
+    64
+   ]
+  },
+  {
+   "id": "titlepick",
+   "type": "frontend",
+   "label": "제목 고르기",
+   "sublabel": "후보 중 하나",
+   "pos": [
+    895,
+    110
+   ],
+   "size": [
+    150,
     64
    ]
   },
@@ -165,11 +209,11 @@
    "label": "그림 후보",
    "sublabel": "astra 설명 → gti",
    "pos": [
-    920,
+    990,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
@@ -177,13 +221,13 @@
    "id": "confirm",
    "type": "frontend",
    "label": "그림 · 확정",
-   "sublabel": "과정 골라서",
+   "sublabel": "머리 1 · 본문 1~2",
    "pos": [
-    1030,
+    1085,
     110
    ],
    "size": [
-    160,
+    150,
     64
    ]
   },
@@ -191,55 +235,55 @@
    "id": "column",
    "type": "database",
    "label": "확정 칼럼",
-   "sublabel": "columns/",
+   "sublabel": "columns/ → 발행",
    "pos": [
-    1140,
+    1180,
     300
    ],
    "size": [
-    160,
+    150,
     64
    ]
   }
  ],
  "connections": [
   {
-   "id": "auto-ingest",
+   "id": "cards",
    "from": "collect",
-   "to": "ingest",
-   "label": "자동으로",
+   "to": "bundle",
+   "label": "새 카드",
    "variant": "emphasis"
   },
   {
    "id": "show-map",
-   "from": "ingest",
+   "from": "bundle",
    "to": "pick",
    "fromSide": "top",
    "toSide": "bottom"
   },
   {
-   "id": "claim",
+   "id": "start",
    "from": "pick",
-   "to": "brief",
+   "to": "options",
    "fromSide": "bottom",
    "toSide": "top",
    "variant": "emphasis"
   },
   {
-   "id": "offer-titles",
-   "from": "brief",
-   "to": "title",
+   "id": "offer-options",
+   "from": "options",
+   "to": "choose",
    "fromSide": "top",
    "toSide": "bottom"
   },
   {
    "id": "start-writing",
-   "from": "title",
+   "from": "choose",
    "to": "write",
-   "label": "쓰기",
    "fromSide": "bottom",
    "toSide": "top",
-   "variant": "emphasis"
+   "variant": "emphasis",
+   "label": "본문 쓰기"
   },
   {
    "id": "read-draft",
@@ -259,10 +303,33 @@
    "labelDx": 36
   },
   {
-   "id": "to-images",
+   "id": "to-text",
    "from": "write",
+   "to": "textpick",
+   "fromSide": "top",
+   "toSide": "bottom"
+  },
+  {
+   "id": "make-titles",
+   "from": "textpick",
+   "to": "titles",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "variant": "emphasis"
+  },
+  {
+   "id": "offer-titles",
+   "from": "titles",
+   "to": "titlepick",
+   "fromSide": "top",
+   "toSide": "bottom"
+  },
+  {
+   "id": "make-images",
+   "from": "titlepick",
    "to": "images",
-   "label": "다 되면",
+   "fromSide": "bottom",
+   "toSide": "top",
    "variant": "emphasis"
   },
   {
@@ -276,27 +343,27 @@
    "id": "save-column",
    "from": "confirm",
    "to": "column",
-   "label": "저장",
    "fromSide": "bottom",
    "toSide": "top",
-   "variant": "emphasis"
+   "variant": "emphasis",
+   "label": "저장"
   },
   {
    "id": "mark-used",
    "from": "column",
-   "to": "ingest",
+   "to": "bundle",
    "label": "주제 지도에 씀 표시",
    "fromSide": "bottom",
    "toSide": "bottom",
    "variant": "dashed",
    "via": [
     [
-     1220,
-     580
+     1255,
+     600
     ],
     [
-     340,
-     580
+     305,
+     600
     ]
    ]
   }
@@ -306,25 +373,25 @@
    "dot": "cyan",
    "title": "모으기",
    "items": [
-    "원문은 요약하지 않고 전체를 저장",
-    "원문마다 카드 → 같은 주장끼리 묶기 → 쓸모 거르기 → 제목 후보"
+    "원문은 요약하지 않고 전체를 Supabase에 저장",
+    "문서마다 카드 → 같은 메시지끼리 주제로 묶기 → 쓸 만함·보통·뺌 판정"
    ]
   },
   {
    "dot": "rose",
    "title": "쓰기",
    "items": [
-    "말할 것 한 문장을 먼저 정하고, 사례는 원문의 이름·숫자 그대로 짧게",
-    "멘토 말(기준 피드백)은 초안·재작성·기준 반영 모두에 받은 그대로",
-    "과정마다 1,500자 이하, 넘으면 한 번 더 줄임"
+    "말할 것 한 문장과 원문 2~3편을 먼저 정하고, 사례는 원문의 이름·숫자 그대로",
+    "글쓰기 규칙을 모든 쓰기 단계가 읽고, 피드백은 받은 그대로 넘김",
+    "공백을 빼고 1,000자 안팎 — 1,100자를 넘으면 한 번 더 줄임"
    ]
   },
   {
    "dot": "amber",
    "title": "확정",
    "items": [
-    "머리 그림 하나와 본문 그림 둘, 확정할 과정은 골라서(바꿀 수 있음)",
-    "주제 지도에서 온 글은 확정하면 씀으로 남음"
+    "원고를 정한 뒤 제목 → 그림(머리 1, 본문 1~2) → 확정, 확정할 과정은 바꿀 수 있음",
+    "확정할 때 그 글의 피드백에서 규칙 후보가 나오고, 주제 지도에서 온 글은 씀으로 남음"
    ]
   }
  ]

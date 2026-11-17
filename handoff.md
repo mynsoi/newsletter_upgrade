@@ -148,7 +148,7 @@
 
 **문서·정리**
 - README의 화면 캡처 8장은 2026-11-17에 다시 찍었다(`python3 docs/readme/capture.py <작업실 주소>` — Playwright 크로미움이 없으면 Edge·Chrome을 쓴다).
-  도식 두 장(`diagram-flow.png`·`diagram-architecture.png`)은 2026-10 것 그대로다. 그림 후보가 보이는 캡처는 그림을 그린 PC에서 찍어야 한다.
+  도식 두 장도 같은 날 지금 흐름으로 다시 만들었다 — 원본 `docs/how-it-works/{flow,architecture}.json` → archify `deliver` → `python3 docs/readme/capture_diagrams.py`. 그림 후보가 보이는 캡처는 그림을 그린 PC에서 찍어야 한다.
 - 2026-11-17 10월 시험 잔재를 지웠다 — `wiki-hook/`, `drafts/`, `view/`(+`scripts/build_view.py`·`ai_tells.py`), `runs/`의 `astra-*`·`claude-*`·`_F`·`standard`·`rewrite`·`direct`·`sim`·
   `skilltest`·`company-rule-test`·`topic-*`·`compare-1011`. 필요하면 git 이력에서 꺼낸다(삭제 직전 커밋 `5524734`).
   그 폴더를 읽고 쓰던 `wiki-eval/`의 10월 시험 스크립트(`run_*.py`·`build_*_page.py` 등)는 기록으로 남겼고, 다시 돌리면 동작하지 않는다.
@@ -164,7 +164,7 @@
 2. 본문을 쓴 뒤 버려지는 글 줄이기 — 과정 1 뒤에 사람이 보고 넘기는 단계, astra 빈 결과를 실패로 처리.
 3. 공유 상태를 화면에 표시하고 작업에 시간 제한 걸기.
 4. "24시간 수집 없음" 경보.
-5. README 도식 두 장 다시 만들기(화면 캡처와 시험 잔재 정리는 2026-11-17에 함).
+5. (2026-11-17에 함) README 화면 캡처·도식 다시 만들기, 시험 잔재 정리.
 
 ## 10. 기록 위치
 
