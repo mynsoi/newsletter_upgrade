@@ -1,3 +1,0 @@
-Skill korean-lover
-Read /home/hwjoo/.claude/skills/korean-lover/references/detection-patterns.md
-Read /home/hwjoo/.claude/skills/korean-lover/references/correction-recipes.md

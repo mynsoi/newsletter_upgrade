@@ -1,4 +1,4 @@
-// 원고 문단·문장 나누기와 앞 과정 대비 새로 들어온 문장 찾기 (build_view.py의 문장 LCS를 옮김)
+// 원고 문단·문장 나누기와 앞 과정 대비 새로 들어온 문장 찾기 (예전 비교 화면 생성기 build_view.py의 문장 LCS를 옮김 — 그 스크립트는 2026-11-17 삭제)
 
 export const sentences = (t: string) =>
   t

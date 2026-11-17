@@ -148,9 +148,12 @@
 
 **문서·정리**
 - README의 화면 캡처와 도식 두 장은 2026-10 것이다(`python3 docs/readme/capture.py`로 다시 찍을 수 있는지는 확인하지 못했다).
-- `runs/README.md`는 10월 시험 기록이다.
-- 현행 코드가 참조하지 않는 시험 잔재: `wiki-hook/`, `drafts/`, `view/`(+`scripts/build_view.py`), `runs/astra-*`·`claude-*`·`topic-*`·`compare-1011/`,
-  `scripts/topic_candidates.py`·`sim_compare.py`·`style_compare.py`·`ai_tells.py`. `scripts/chat_router.py`(하나의 채팅 판단기)는 서버에 연결되지 않았다.
+- 2026-11-17 10월 시험 잔재를 지웠다 — `wiki-hook/`, `drafts/`, `view/`(+`scripts/build_view.py`·`ai_tells.py`), `runs/`의 `astra-*`·`claude-*`·`_F`·`standard`·`rewrite`·`direct`·`sim`·
+  `skilltest`·`company-rule-test`·`topic-*`·`compare-1011`. 필요하면 git 이력에서 꺼낸다(삭제 직전 커밋 `5524734`).
+  그 폴더를 읽고 쓰던 `wiki-eval/`의 10월 시험 스크립트(`run_*.py`·`build_*_page.py` 등)는 기록으로 남겼고, 다시 돌리면 동작하지 않는다.
+- 아직 남은 것: `scripts/topic_candidates.py`·`sim_compare.py`·`style_compare.py`(현행 흐름에서 부르지 않음), `runs/columns/`의 10월 시험 글 폴더
+  (`t1-A`~`t3-C`·`sim-C`·`sim-N`·`w-20261010-161003`·`zz-d-1011`·`m-20261011-173414` — 글 설정이 없지만 코드와 README 캡처 스크립트가 이름을 가리킨다),
+  `runs/titles/`·`runs/wiki/`·`runs/collect/`의 10월 기록, `design/refs/`. `scripts/chat_router.py`(하나의 채팅 판단기)는 서버에 연결되지 않았다.
 - 원격 브랜치는 `main`·`mentor-lab`·`mentor-lab-integration` 셋뿐이다. PC에 지워진 브랜치 표시가 남아 있으면 `git fetch --prune`.
 
 ## 9. 다음에 할 것 (제안)

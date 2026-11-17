@@ -1,3 +1,0 @@
-astra-D1-b exit=0 141s
-astra-D1-a exit=0 184s
-ALLDONE
