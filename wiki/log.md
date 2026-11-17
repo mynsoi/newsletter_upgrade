@@ -1,5 +1,30 @@
 # 위키 이력
 
+## 2026-11-17 16:41
+- 묶기 붙임 bain-insights/0082, bain-insights/0081 → 주제/bcg-publications-0495.md
+- 묶기 붙임 carrot-global-blog/0062 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 fastcompany-worklife/0279, oecd-employment-ai/0058 → 주제/fastcompany-worklife-0004.md
+- 묶기 붙임 mit-tech-review/0055 → 주제/bcg-publications-0404.md
+- 묶기 붙임 bain-insights/0083 → 주제/mit-tech-review-0008.md
+- 묶기 붙임 hbr-korea/0337 → 주제/charter-0001.md
+- 묶기 붙임 hrdive/0256 → 주제/fastcompany-worklife-0235.md
+- 묶기 붙임 hrdive/0254 → 주제/flex-blog-0036.md
+- 묶기 붙임 mckinsey-insights/0193 → 주제/bcg-publications-0474.md
+- 묶기 붙임 hrdive/0258 → 주제/hbr-0016.md
+- 묶기 붙임 hrdive/0257 → 주제/fastcompany-worklife-0225.md
+- 묶기 붙임 hrdive/0261 → 주제/aihr-blog-0003.md
+- 묶기 붙임 hrdive/0267 → 주제/charter-0003.md
+- 묶기 붙임 worklytics-blog/0076 → 주제/hbr-korea-0034.md
+- 묶기 새 주제(보통) 일에서 문제 해결과 정보 처리의 비중이 커졌다고 해서 그 변화를 모두 AI의 효과로 설명할 수는 없다. → 주제/oecd-employment-ai-0054.md
+- 묶기 새 주제(쓸 만함) AI와 함께 과제를 잘 끝내는 모습만으로는 사람이 혼자서도 쓸 수 있는 지식을 얻었는지 알기 어렵다. → 주제/stanford-hai-0014.md
+- 묶기 새 주제(보통) 합병 뒤 하나의 조직이 되는 데에는 새 비전을 설명하는 것만큼 인수된 회사의 사람들이 의사결정에 자리를 갖는 일이 중요하다. → 주제/fastcompany-worklife-0277.md
+- 묶기 새 주제(쓸 만함) AI를 감시하는 장치도 AI가 고칠 수 있다면, 안전장치를 마련했다는 사실만으로 통제를 보장할 수 없다. → 주제/mit-tech-review-0054.md
+- 묶기 새 주제(보통) 직원을 정교한 평가표에 분류해도 관리자의 인상을 서로 검증하지 않으면 인재 판단의 주관성은 남는다. → 주제/aihr-blog-0075.md
+- 묶기 새 주제(뺌) AI 에이전트의 운영비는 모델 가격만이 아니라 어떤 일을 얼마나 자주 맡기도록 설계했는지에 따라 달라진다. → 주제/knowledge-wharton-0022.md
+- 묶기 새 주제(보통) 리더가 모든 일에 힘을 쏟으면 오히려 자신만이 책임질 중요한 일에 대응할 여유를 잃을 수 있다. → 주제/bain-insights-0084.md
+- 묶기 새 주제(쓸 만함) AI 코칭이 늘어날수록 상사의 코칭은 대체되는 업무가 아니라 AI 학습의 효과를 키우는 조건이 될 수 있다. → 주제/hrdive-0266.md
+- 주제 묶기 새 카드 41 · 붙음/새 주제 24 · 뺌 17 · 못 넣음 0 · 남음 0 · 111s
+
 ## 2026-11-16 13:59
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 51 · 124s
 
