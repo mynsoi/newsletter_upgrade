@@ -1,8 +1,9 @@
 """회사 맥락 — 사내 용어집과 사내 자료(Supabase internal_docs)로 칼럼에 우리 회사 맥락을 입힌다 (2026-10-23 사용자 결정).
 
-main 파이프라인의 원칙을 1,000자 칼럼에 맞게 가볍게 옮긴다(docs/기획서.md 7장, prompts/article_style.md):
+예전 main 아티클 파이프라인의 원칙을 1,000자 칼럼에 맞게 가볍게 옮긴다(원문은 태그 main-final-2026-11-16의
+docs/기획서.md 7장 · prompts/article_style.md — 이 브랜치에는 없다):
   - 사내 자료는 인용·나열이 아니라 해석의 렌즈 — 맞을 때만 한 곳에서. 맞는 자료가 없으면 "사내 맥락 없음"이 정상
-  - 용어집(main의 prompts/glossary_internal.md)은 사내 명칭을 언급할 때만 따른다
+  - 용어집(pipeline/prompts/glossary_internal.md)은 사내 명칭을 언급할 때만 따른다
   - 사내 자료는 읽기 전용으로만 읽고, 본문·대목은 저장소에 올리지 않는다(runs/internal/, runs/mine/<글>/internal.json — git 밖)
   - 사내 자료 대목은 초안(Claude)에만 넘긴다. astra(과정 2~)에는 원고에 녹은 문장만 간다(사용자 확인 2026-10-23)
   python3 -I scripts/internal_ctx.py --search "<이 글이 말할 것>"   비슷한 대목(임베딩)

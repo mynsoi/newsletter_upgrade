@@ -117,7 +117,6 @@
 | `scripts/column_pipeline.py`의 `LEN_RULE`·`CASE_RULE`·`PEOPLE_RULE` | 코드에 든 지시(분량·사례 설명·인물 표기). 규칙 파일과 겹치는 내용이 있다 |
 | `pipeline/prompts/` | 수집 묶음의 판별·카드 프롬프트, 사내 용어집 |
 | `briefs/standing-feedback.md` · `criteria.md` | **기록.** 2026-10의 피드백 원문과 기준 — 코드가 읽지 않는다 |
-| `docs/2026-10-11-handoff.html` | 10-11판 handoff의 HTML — 낡았다 |
 
 ## 8. 알려진 문제
 
@@ -149,7 +148,7 @@
 
 **문서·정리**
 - README의 화면 캡처와 도식 두 장은 2026-10 것이다(`python3 docs/readme/capture.py`로 다시 찍을 수 있는지는 확인하지 못했다).
-- `columns/README.md`는 지운 글만 적혀 있고, `runs/README.md`는 10월 시험 기록이다.
+- `runs/README.md`는 10월 시험 기록이다. `sources/원문목록.md`의 경영일기 표는 45편 그대로다(지금 본문은 252편).
 - 현행 코드가 참조하지 않는 시험 잔재: `wiki-hook/`, `drafts/`, `view/`(+`scripts/build_view.py`), `runs/astra-*`·`claude-*`·`topic-*`·`compare-1011/`,
   `scripts/topic_candidates.py`·`sim_compare.py`·`style_compare.py`·`ai_tells.py`. `scripts/chat_router.py`(하나의 채팅 판단기)는 서버에 연결되지 않았다.
 - 원격 브랜치는 `main`·`mentor-lab`·`mentor-lab-integration` 셋뿐이다. PC에 지워진 브랜치 표시가 남아 있으면 `git fetch --prune`.

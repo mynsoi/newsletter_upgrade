@@ -2,11 +2,15 @@
 # (b_grade_api_approved는 2026-09-03 등급 체계 미운용 확정으로 제거됨 —
 #  internal/은 공개 가능 자료 전용, 색인 문서는 전부 API 전송 가능)
 
+# ('기획서'·eval/·web/ 은 예전 main 아티클 파이프라인의 문서·폴더다 — 이 브랜치에는 없고 태그 main-final-2026-11-16에 있다.)
+
 # 관련성 판별에 사용할 모델 (판별은 경량, 작성은 상위 모델 — 기획서 8장)
 # (2026-11-10 claim 추출 제거 — 이 모델은 이제 판별만 한다. src/enrich/relevance.py)
 enrich_model: claude-haiku-4-5-20251001
 # 2026-09-08 claude-sonnet-4-6 → claude-opus-5. 블라인드 문체 테스트 5종 비교 결과
 # (2인 + AI 평가, eval/style-feedback-log.md). 이 값이 작성 모델의 정본이다.
+# 2026-11-13 통합 뒤 잔재 — 아티클 작성 기능이 이 브랜치에 없어 pipeline/ 코드는 이 값을 읽지 않는다.
+# 칼럼 작성 모델은 작업실 스크립트(scripts/column_pipeline.py)가 정한다.
 write_model: claude-opus-5
 
 # enrich 단계(관련성 판별 + 문서 카드) 활성화 여부.
@@ -87,6 +91,8 @@ card_sources:
 embed_daily_limit: 2000
 
 # 웹 발행 — Vercel 정적 배포 (2026-10-05 도입, 창간호 런치 인프라)
+# 2026-11-13 통합 뒤 잔재 — 아래 설명의 web/site_export.py는 이 브랜치에 없고, pipeline/ 코드는 web_* 값을 읽지 않는다.
+# 지금 발행 설정의 정본은 저장소 루트 config/publish.json(scripts/publish.py)이다 — 주소·토큰은 거기 값과 같다.
 # 발행물은 site/<web_path_token>/<slug>/에, 아카이브 목록은 site/<web_path_token>/index.html에 쌓인다
 # (web/site_export.py). 저장소 루트의 vercel.json이 site/를 출력 디렉토리로 쓰고 전 경로에
 # X-Robots-Tag: noindex를 붙인다. 토큰은 추측 불가 경로용 — 바꾸면 이미 보낸 메일의 링크가 끊긴다.

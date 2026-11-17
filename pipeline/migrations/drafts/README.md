@@ -2,7 +2,7 @@
 
 이 폴더의 SQL은 **자동 적용되지 않는다**. `src/db.py`의 `migrate()`는 `migrations/*.sql`만 읽는다
 (하위 폴더 제외). 일일 워크플로(`collect.yml`의 `make init`)가 그 목록을 매일 운영 DB에 적용하므로,
-여기 있는 파일을 `migrations/` 바로 아래로 옮기면 다음 날 06:00 KST에 운영 DB에서 실행된다.
+여기 있는 파일을 `migrations/` 바로 아래로 옮기면 다음 일일 수집(매일 03:17 KST 예약 — 실제 시작은 몇 시간 늦을 수 있다) 때 운영 DB에서 실행된다.
 옮기지 않는다. 실행은 Supabase SQL Editor에서 사람이 단계별로 한다.
 
 ## 011_reclaim_claims_space.sql — claims 용량 회수

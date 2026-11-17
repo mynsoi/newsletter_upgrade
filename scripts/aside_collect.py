@@ -20,7 +20,7 @@
 - aside는 브라우저만 조종한다. 어떤 글을 받을지는 AI가 아니라 목록 페이지의 링크 패턴이 정한다(페이지 속 지시문은 읽히지 않는다).
 - 본문은 main 추출기(scripts/aside/extract_article.js)로 원문 그대로 뽑는다. 요약·재구성 없음. 본문은 화면·로그에 찍지 않는다(글자 수만).
 - 저장은 main의 store_document 규칙 그대로: 같은 URL이면 건너뛰되 요약뿐인 문서는 전문으로 교체(격상), 같은 본문(해시)은 건너뜀,
-  800자 미만은 summary_only=1, 새 문서는 status='new'(main Actions가 관련성 판별·claim 추출), fetched_by='aside'.
+  800자 미만은 summary_only=1, 새 문서는 status='new'(일일 수집 Actions가 관련성 판별·문서 카드 — pipeline/, claim 추출은 2026-11-10 제거), fetched_by='aside'.
 - 페이지 사이는 gap_seconds 이상 쉰다. stop_marker(McKinsey의 Access Denied)가 보이면 그 소스는 그 회차에서 멈춘다(우회하지 않음).
 DB 연결 문자열은 환경변수 DATABASE_URL에서만 읽는다.
 """
