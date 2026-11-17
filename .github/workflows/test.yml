@@ -1,5 +1,5 @@
 # 2026-11-13 main → mentor-lab-integration 통합: 수집 묶음은 pipeline/ 폴더에 있다. 모든 run 단계는 pipeline/에서 돈다.
-# 예약(schedule)은 기본 브랜치에서만 돈다 — 기본 브랜치를 바꾸기 전까지 이 브랜치의 예약은 동작하지 않는다.
+# 예약(schedule)은 기본 브랜치에서만 돈다 — 2026-11-16 기본 브랜치를 mentor-lab-integration으로 바꿔 이 브랜치의 파일이 운영본이다(main은 보관용, 예약 멈춤).
 # PR 테스트 워크플로
 #
 # DATABASE_URL을 주입하지 않는다 — 공유 Supabase에 PR마다 테스트 데이터를 쓰지 않기 위해서다.
