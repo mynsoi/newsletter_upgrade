@@ -148,7 +148,7 @@
 
 **문서·정리**
 - README의 화면 캡처와 도식 두 장은 2026-10 것이다(`python3 docs/readme/capture.py`로 다시 찍을 수 있는지는 확인하지 못했다).
-- `runs/README.md`는 10월 시험 기록이다. `sources/원문목록.md`의 경영일기 표는 45편 그대로다(지금 본문은 252편).
+- `runs/README.md`는 10월 시험 기록이다.
 - 현행 코드가 참조하지 않는 시험 잔재: `wiki-hook/`, `drafts/`, `view/`(+`scripts/build_view.py`), `runs/astra-*`·`claude-*`·`topic-*`·`compare-1011/`,
   `scripts/topic_candidates.py`·`sim_compare.py`·`style_compare.py`·`ai_tells.py`. `scripts/chat_router.py`(하나의 채팅 판단기)는 서버에 연결되지 않았다.
 - 원격 브랜치는 `main`·`mentor-lab`·`mentor-lab-integration` 셋뿐이다. PC에 지워진 브랜치 표시가 남아 있으면 `git fetch --prune`.
