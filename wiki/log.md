@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-17 16:41
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 41 · 122s
+
+## 2026-11-17 16:41
 - 묶기 붙임 bain-insights/0082, bain-insights/0081 → 주제/bcg-publications-0495.md
 - 묶기 붙임 carrot-global-blog/0062 → 주제/carrot-global-blog-0008.md
 - 묶기 붙임 fastcompany-worklife/0279, oecd-employment-ai/0058 → 주제/fastcompany-worklife-0004.md
