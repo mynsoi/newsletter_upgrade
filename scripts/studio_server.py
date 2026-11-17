@@ -1,4 +1,4 @@
-"""칼럼 작업실 서버 — app/dist 화면을 내주고, 화면의 버튼을 기존 명령(column_pipeline·topic_candidates·image_candidates·collect)에 잇는다.
+"""칼럼 작업실 서버 — app/dist 화면을 내주고, 화면의 버튼을 기존 명령(column_pipeline·my_topic·wiki·image_candidates·publish·collect 등)에 잇는다.
 
 사용: python3 scripts/studio_server.py [포트=8771]
 - 비밀번호 없음(멘토 결정 2026-10-09). 파이프라인 로직은 여기서 다시 짜지 않고 명령을 백그라운드로 돌리기만 한다.
