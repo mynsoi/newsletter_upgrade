@@ -6,7 +6,8 @@
   python3 -I scripts/style_guide.py --analyze   글마다 구조 꼬리표(Claude, 계정 로그인 — 이미 한 글은 건너뜀) → _structure.json
   python3 -I scripts/style_guide.py --guide     꼬리표 + 글자 수·문단 통계로 안내서 → _style_guide.md
   python3 -I scripts/style_guide.py --refs "<이 글이 말할 것>"   고를 참고 글 보기
-결과는 sources/originals/infuture/(경영일기 본문과 같은 곳, git에): _structure.json · _style_guide.md
+결과는 sources/originals/infuture/(경영일기 본문과 같은 곳)에 두고 git에 올린다: _structure.json · _style_guide.md
+(본문 p*.md는 2026-11-18부터 git 밖 — Supabase에서 받는다, scripts/style_refs.py)
 """
 import json
 import re

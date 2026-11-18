@@ -71,7 +71,8 @@
 
 `.gitignore`가 막고 있는 것 — 새 폴더를 만들 때 같은 기준으로 판단한다.
 
-- Supabase에서 받은 원문(`sources/originals/*`, 경영일기 제외), 받아 둔 자동 카드(`sources/doc_cards.json`)
+- Supabase에서 받은 원문(`sources/originals/*`), 받아 둔 자동 카드(`sources/doc_cards.json`)
+- 경영일기 본문(`sources/originals/infuture/p*.md`·`snap/` — 2026-11-18부터. Supabase `reference_files`에서 받는다, `scripts/style_refs.py`). 분석 결과 5개 파일만 git에
 - 사내 자료 본문과 고른 대목(`pipeline/internal/**/*.md`, `runs/internal/`, `runs/mine/*/internal*`)
 - 채팅에 올린 회사 문서(`sources/mine/`, `runs/mine/*/upload/`)
 - 원문 전문이 든 단계별 지시문·로그(`runs/columns/*/_*/`, `runs/wiki/bundle-*/` 등), 그림 후보 전부(`runs/images/`, 고른 그림만 올림)
@@ -125,7 +126,8 @@
 2026-11-17 전체 점검에서 나온 것. 코드를 읽어 확인한 것이고 대부분 아직 고치지 않았다.
 
 **공개 범위**
-- 저장소가 Public인데 경영일기 원문 묶음(`sources/originals/infuture/`, 511개 파일)과 10월 시험의 지시문(`runs/` 아래 `prompt.md` 292개)이 올라가 있다.
+- 경영일기 본문은 2026-11-18에 git에서 빼 Supabase로 옮겼지만, **그 전 커밋 이력에는 본문 252편이 남아 있다.** 10월 시험의 지시문(`runs/` 아래 `prompt.md`)도 11-17에 지웠으나 이력에는 있다.
+- Supabase의 기존 표(`documents`·`internal_docs`·`document_cards` 등)는 RLS가 꺼져 있고 anon 역할에 모든 권한이 있다 — 프로젝트의 anon 키를 아는 사람은 REST로 읽고 쓸 수 있다. 새 표 `reference_files`만 막아 두었다.
 - 진행자 채팅(`act_chat`)은 로그인 없이 `claude -p --permission-mode bypassPermissions`를 실행한다. Tailscale 주소로 접속할 수 있는 사람은 그 PC에서 명령을 실행할 수 있다.
 - 웹 발행본은 경로 토큰이 공개돼 있어 주소를 아는 사람은 누구나 본다. 사내 자료를 쓴 글도 같은 주소로 나간다.
 

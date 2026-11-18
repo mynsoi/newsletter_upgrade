@@ -46,6 +46,8 @@
 - **설정**: `config/settings.yaml` — 모델·일일 상한·카드 대상 소스. 카드 대상(`card_sources`)을 바꾸면
   작업실 서재 범위(루트 `sources/db_scope.json`)도 같이 맞춘다.
   (`write_model`·`web_*` 값은 main 아티클 기능의 잔재다 — 이 폴더의 코드는 읽지 않는다.)
+- **참고 원문**: `reference_files` 표(migrations/012)는 작업실이 쓰는 경영일기 본문 보관함이다(루트 `scripts/style_refs.py`).
+  수집·판별·카드 대상이 아니다. REST로는 읽히지 않게 RLS를 켜고 anon 권한을 걷어 두었다.
 - **사내 자료**: `internal/` → `make sync` → `internal_docs` 표. 사내 용어집 `prompts/glossary_internal.md`는
   작업실(`scripts/internal_ctx.py`)이 여기서 직접 읽는다 — 복사본을 두지 않는다.
 

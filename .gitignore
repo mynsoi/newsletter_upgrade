@@ -6,9 +6,21 @@ trash/
 publish/
 .env
 .venv/
-# Supabase에서 받아 온 원문(scripts/db_sources.py) — 저작권 있는 원문이라 저장소에 올리지 않는다. 경영일기(문체 참고)만 git에.
+# Supabase에서 받아 온 원문(scripts/db_sources.py) — 저작권 있는 원문이라 저장소에 올리지 않는다.
 sources/originals/*
+# 경영일기(문체·제목 참고)도 본문은 올리지 않는다(2026-11-18 — Supabase reference_files에서 받음, scripts/style_refs.py).
+# git에 남기는 것은 본문을 분석한 결과와 제목 목록뿐이다.
 !sources/originals/infuture/
+sources/originals/infuture/*
+!sources/originals/infuture/_structure.json
+!sources/originals/infuture/_style_guide.md
+!sources/originals/infuture/_title_pairs.json
+!sources/originals/infuture/_titles.tsv
+!sources/originals/infuture/_ai_list.tsv
+# 10월 초 수집 시험 때의 경영일기 본문 사본
+sources/infuture/
+sources/infuture.raw.txt
+sources/infuture.clean.txt
 sources/db_index.json
 # aside 수집 회차 기록(scripts/aside_collect.py) — 6시간마다 쌓이는 실행 기록이라 git 밖
 runs/aside/

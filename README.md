@@ -47,7 +47,7 @@
 
 - **서재 범위**는 `sources/db_scope.json`입니다(소스 28곳 — 연구기관·컨설팅·저널·기업 자료, 본문 800자 이상, 반려·요약문 제외).
   서버가 켜질 때 한 번, 그다음 6시간마다(`DB_SYNC_HOURS`) 범위 안 원문을 `sources/originals/<소스>/NNNN.md`로 받습니다. 바로 받으려면 서재의 **Supabase 받기**.
-- 받은 원문은 **git에 올리지 않습니다**(저작권 있는 원문). 경영일기(문체·제목 참고)만 git에 있습니다.
+- 받은 원문은 **git에 올리지 않습니다**(저작권 있는 원문). 경영일기(문체·제목 참고) 본문도 Supabase에 두고 받아 씁니다(`scripts/style_refs.py` — Supabase 받기 때 함께 받음). git에는 본문을 분석한 결과(문체 안내서·짜임 꼬리표·제목 짝)만 있습니다.
 - **aside 수집**은 글을 AI가 고르지 않고 목록 페이지의 링크 패턴으로 고르며, 본문은 추출기(`scripts/aside/extract_article.js`)로 원문 그대로 뽑습니다.
   설정은 `sources/aside_sources.json`. 구독 소스(DBR·HBR Korea)는 사람이 Aside Browser에 로그인해 두고, 로그인이 풀려 있으면 그 소스는 멈춥니다.
   회차마다 2026-01-01 이후 과거 글도 조금씩 더 받습니다(백필). 서재의 **aside 수집**을 비워 두고 눌러도 한 회차가 돕니다.
@@ -186,7 +186,7 @@ python3 -I scripts/publish.py unpublish <글…>                # 웹에서 내�
 
 ```
 pipeline/            수집 묶음 — 수집 → 판별 → 카드 → 임베딩 (GitHub Actions, Supabase에 저장)
-sources/originals/   Supabase에서 받은 원문 (소스별, 원문 그대로 — git 밖. 경영일기 infuture/만 git에)
+sources/originals/   Supabase에서 받은 원문 (소스별, 원문 그대로 — git 밖. 경영일기 infuture/는 분석 결과만 git에)
 sources/db_scope.json · aside_sources.json · db_index.shared.json   서재 범위 · aside 수집 설정 · 원문 번호표(PC끼리 공유)
 wiki/                주제 지도 — 주제(주제/*.md: 메시지·사례·판정·대상 독자), 판정 기준, 판정 예시
 runs/mine/<글>/      원문 정하기 — 요청, 대화 차례, 글 옵션, 고른 원문
@@ -258,6 +258,7 @@ Windows에서 명령으로 돌릴 때는 `python3 -I` 대신 `py -3 -X utf8 -I`�
 ```bash
 python3 -I scripts/db_sources.py --sync                       # Supabase 원문 받기 (--status: 범위·받은 수, --prune: 범위에서 빠진 원문 정리)
 python3 -I scripts/aside_collect.py [--write] [--source dbr] # aside 수집 → Supabase (--write 없으면 미리보기)
+python3 -I scripts/style_refs.py --pull                       # 경영일기 본문 받기 (--status · 새 글을 받은 뒤 올리기: --push)
 python3 -I scripts/wiki.py --bundle                           # 주제 묶기 — 새 카드로 주제 만들기 + 판정 (기준 PC)
 python3 -I scripts/wiki.py --refilter                         # 판정 기준으로 다시 판정 (사람이 정한 판정은 그대로)
 python3 -I scripts/my_topic.py --new <요청.txt> [--doc <문서>]  # 글 옵션 내기

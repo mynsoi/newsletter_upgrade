@@ -2,7 +2,8 @@
 
 원천은 DB다. 작업실은 지금까지처럼 sources/originals/<사이트>/NNNN.md 파일을 읽고,
 이 스크립트가 DB 문서를 그 모양(머리말 + 원문 그대로)으로 내려 둔다. 받아 온 파일은 git에 넣지 않는다
-(.gitignore — 저작권 있는 원문이라 저장소에 올리지 않는다). 경영일기(infuture, 문체 참고)는 그대로 git에 있다.
+(.gitignore — 저작권 있는 원문이라 저장소에 올리지 않는다). 경영일기(infuture, 문체 참고) 본문도 2026-11-18부터 git 밖이다 —
+Supabase reference_files 표에서 받는다(scripts/style_refs.py, --sync 끝에 함께 받음).
 
   python3 -I scripts/db_sources.py --status                      범위 안 DB 문서 수 · 받아 둔 수 (소스별)
   python3 -I scripts/db_sources.py --sync [--since 2026-08-01] [--source hbr ...] [--limit N]
@@ -266,6 +267,12 @@ def sync(since=None, only=None, limit=None, prune=False, push=True):
                     gone.append(rel)
         INDEX.write_text(dump(idx), encoding="utf-8")
         sync_cards(c, idx)
+    try:  # 경영일기 본문(문체 참고) — git 대신 Supabase reference_files에서(2026-11-18, scripts/style_refs.py)
+        sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I 실행에서도 찾게
+        import style_refs
+        style_refs.pull(quiet=True)
+    except Exception as e:
+        print(f"참고 원문 받기 건너뜀: {e}")
     shared_note = ""
     if rl == "owner":
         shared_note = " · 공유 번호표 올림" if publish_shared(idx, push) else " · 공유 번호표 그대로"

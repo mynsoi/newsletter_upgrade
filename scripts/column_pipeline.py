@@ -115,7 +115,13 @@ def body(path):
 
 def ref(k):
     # "(끝)"은 경영일기 필자의 맺음 표시 — 우리 글에 따라 붙지 않게 참고 글에서부터 뺀다 (2026-10-09 멘토)
-    t = body(SRC / "originals" / "infuture" / f"{k}.md").replace("(끝)", "").rstrip()
+    f = SRC / "originals" / "infuture" / f"{k}.md"
+    if not f.exists():  # 경영일기 본문은 git 밖(2026-11-18) — 아직 안 받은 PC면 여기서 한 번 받는다
+        import style_refs
+        style_refs.pull(quiet=True)
+        if not f.exists():
+            sys.exit(f"경영일기 참고 글이 없습니다: {f.relative_to(ROOT).as_posix()} — python -I scripts/style_refs.py --pull (DATABASE_URL 필요)")
+    t = body(f).replace("(끝)", "").rstrip()
     return f"=== 유정식의 경영일기 {k} ===\n" + t
 
 
@@ -749,6 +755,7 @@ def fetch_infuture(post_id):
     """--fetch-infuture <번호> — 경영일기 글 한 편을 aside REPL 스냅샷으로 받아 원문 파일로 저장 (shadow DOM 본문)."""
     inf = SRC / "originals" / "infuture"
     snap = inf / "snap" / f"p{post_id}.txt"
+    snap.parent.mkdir(parents=True, exist_ok=True)  # 본문·스냅샷은 git 밖(2026-11-18) — 받은 뒤 scripts/style_refs.py --push로 Supabase에 올린다
     js = (f"const tF{post_id} = await openTab('https://infuture.stibee.com/p/{post_id}'); "
           f"const sF{post_id} = await snapshot(tF{post_id}); console.log(sF{post_id}.tree); await closeTab(tF{post_id});")
     r = subprocess.run([ASIDE, "repl", "--host", "local", js], stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=180)

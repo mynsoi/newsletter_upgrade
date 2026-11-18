@@ -5,7 +5,7 @@
   python3 -I scripts/title_style.py --clarity    짝마다 '제목만 보고 메시지를 알 수 있나'(clear 1~5)를 매긴다(Claude) — 장치별 예시는 4점 이상만
   python3 -I scripts/title_style.py --stats      장치별 개수
   python3 -I scripts/title_style.py --similar "<이 글이 말할 것>"   메시지가 가까운 짝(임베딩)
-결과: sources/originals/infuture/_title_pairs.json(짝, git에 — 경영일기 본문도 git에 있다) · _title_pairs_emb.json(메시지 임베딩, 다시 만들 수 있어 git 밖)
+결과: sources/originals/infuture/_title_pairs.json(짝, git에 — 본문 p*.md는 2026-11-18부터 git 밖, scripts/style_refs.py로 받는다) · _title_pairs_emb.json(메시지 임베딩, 다시 만들 수 있어 git 밖)
 """
 import json
 import re
