@@ -47,7 +47,7 @@
   작업실 서재 범위(루트 `sources/db_scope.json`)도 같이 맞춘다.
   (`write_model`·`web_*` 값은 main 아티클 기능의 잔재다 — 이 폴더의 코드는 읽지 않는다.)
 - **참고 원문**: `reference_files` 표(migrations/012)는 작업실이 쓰는 경영일기 본문 보관함이다(루트 `scripts/style_refs.py`).
-  수집·판별·카드 대상이 아니다. REST로는 읽히지 않게 RLS를 켜고 anon 권한을 걷어 두었다.
+  수집·판별·카드 대상이 아니다.
 - **사내 자료**: `internal/` → `make sync` → `internal_docs` 표. 사내 용어집 `prompts/glossary_internal.md`는
   작업실(`scripts/internal_ctx.py`)이 여기서 직접 읽는다 — 복사본을 두지 않는다.
 
@@ -74,6 +74,9 @@
   **기본 브랜치에 올라간 SQL은 다음 일일 수집의 `make init`에서 운영 DB에 바로 적용된다** —
   되돌리기 스크립트가 없으니 표·열을 지우는 변경은 백업(git 밖 `data/backups/`)을 먼저 뜬다.
   `migrations/drafts/`는 자동 적용되지 않는, 사람이 직접 실행하는 초안이다.
+- **새 표를 만들 때는 같은 마이그레이션에서 `ENABLE ROW LEVEL SECURITY`를 켠다**(012처럼). Supabase는 웹 주소(REST)와
+  익명 키로도 표에 닿을 수 있어서, 2026-11-19 모든 표의 RLS를 켜고 anon·authenticated 권한을 걷었다(migrations/013).
+  새 표의 기본 권한은 걷어 두었지만 RLS는 표마다 켜야 한다. 수집 묶음과 작업실은 직접 연결(표 주인)이라 RLS를 받지 않는다.
 - 판별에서 떨어진 문서는 지우지 않는다(`status='rejected'`로 남긴다).
 
 ## 실행 명령
