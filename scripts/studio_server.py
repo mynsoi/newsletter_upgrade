@@ -260,7 +260,7 @@ def article_from_brief(bp):
     return {"id": k, "kind": "brief", "label": b.get("label", k), "thesis": b.get("thesis", ""), "lockedBy": SH.locked_by_other(k),
             "sources": b.get("sources", []), "title": b.get("title", ""), "titles": title_rounds(k),
             "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True), "inlinePicked": b.get("inline", []),
-            "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": b.get("published"),
+            "length": b.get("length", "full"), "target": b.get("target", "전 직원"), "hero": b.get("hero", ""), "confirmed": b.get("confirmed"), "published": published_view(b.get("published"), k),
             "fromTopics": b.get("from_topics", ""), "fromWiki": b.get("from_wiki", ""), "fromMine": bool(b.get("from_mine")),
             "sourcesOk": bool(b.get("sources_ok")), "why": b.get("why", ""), "tries": tries, "at": bp.stat().st_mtime,
             "textPick": b.get("text_pick"), "imagesDone": bool(b.get("images_done")),
@@ -275,7 +275,7 @@ def article_from_process(pp):
     return {"id": k, "kind": "process", "label": p["title"], "thesis": p.get("thesis", ""), "sources": p.get("sources", []),
             "title": p["title"], "titles": [], "steps": steps, "images": image_rounds(k), "inline": image_rounds(k, True),
             "inlinePicked": p.get("inline", []), "length": p.get("length", "full"), "target": p.get("target", "전 직원"), "hero": p.get("hero", ""),
-            "confirmed": p.get("confirmed"), "published": p.get("published"), "fromTopics": "", "at": pp.stat().st_mtime}
+            "confirmed": p.get("confirmed"), "published": published_view(p.get("published"), k), "fromTopics": "", "at": pp.stat().st_mtime}
 
 
 def articles():
@@ -1197,10 +1197,30 @@ def act_publish(a):
     return start("publish", k, PY + ["scripts/publish.py", "release", k, "--to", ",".join(to), "--cc", ",".join(cc)])
 
 
+def recipients_for(k=None):
+    """받는 사람 — git 밖 publish/recipients.json(이 PC에만)에서. 그 글에 쓴 주소 → 마지막에 쓴 주소 → config/publish.json 기본값 순.
+    2026-11-18부터 글 설정(briefs/, Public 저장소)에는 주소를 적지 않는다."""
+    try:
+        r = json.loads(read(ROOT / "publish" / "recipients.json") or "{}")
+    except ValueError:
+        r = {}
+    try:
+        c = json.loads(read(ROOT / "config" / "publish.json") or "{}")
+    except ValueError:
+        c = {}
+    x = (r.get(k) if k else None) or r.get("_last") or {}
+    return {"to": x.get("to") or c.get("to", []), "cc": x.get("cc") or c.get("cc", [])}
+
+
+def published_view(pub, k):
+    """화면에 줄 발행 기록 — 받는 사람은 이 PC의 기록에서 채운다(글 설정에 남아 있던 옛 주소는 쓰지 않는다)."""
+    return {**{f: v for f, v in pub.items() if f not in ("to", "cc")}, **recipients_for(k)} if pub else pub
+
+
 def publish_settings():
     try:
         c = json.loads(read(ROOT / "config" / "publish.json"))
-        return {"to": c.get("to", []), "cc": c.get("cc", []), "webBase": c.get("web_base_url", "")}
+        return {**recipients_for(), "webBase": c.get("web_base_url", "")}
     except Exception:
         return {"to": [], "cc": [], "webBase": ""}
 

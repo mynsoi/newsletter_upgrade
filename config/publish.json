@@ -8,6 +8,7 @@
  "_notice_설명": "notice — 모든 발행본 제목 아래 안내 상자(줄바꿈 \\n = 한 줄). 빈 문자열이면 상자를 넣지 않는다. 글 메타(briefs/<글>.json)에 notice를 두면 그 글만 그 값으로 바뀐다.",
  "subject_prefix": "[Insight Weekly] ",
  "sender": "Insight Weekly <noreply@example.com>",
+ "_to_설명": "to·cc는 비워 둔다 — 이 파일은 Public 저장소에 올라간다. 받는 사람은 발행한 PC의 publish/recipients.json(git 밖)에만 남는다(2026-11-18).",
  "to": [],
  "cc": []
 }

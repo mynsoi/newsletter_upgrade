@@ -10,7 +10,7 @@ HTML 구조·디자인과 메일 방식은 main 브랜치(web/server.py · web/e
   python3 -I scripts/publish.py build <글>                         # 미리보기만 — publish/<글>/ (git 밖)
   python3 -I scripts/publish.py release <글> --to a@x,b@x [--cc …] [--no-push]
   python3 -I scripts/publish.py unpublish <글…> [--no-push]          # 웹에서 내리기(아카이브 목록도 다시)
-설정: config/publish.json (web_base_url · web_path_token · 보내는 사람 · 기본 수신자)
+설정: config/publish.json (web_base_url · web_path_token · 보내는 사람). 받는 사람은 git 밖 publish/recipients.json에만 남긴다(주소 공개 방지)
 """
 import argparse
 import html
@@ -39,6 +39,26 @@ SKIP = {"newsletter.eml", "email.html", "email-head.html", "email-body.html", "e
 # 디자인 토큰 — web/article.css와 같은 값
 CANVAS = "#F7F8FA"
 EMAIL_WIDTH = 800  # main은 600 — 데스크톱 Outlook에서 좁아 보여 넓힘(2026-10-20, 960은 넓다고 해 800). 캡처 CSS(article.css .email-capture)가 이 폭 기준
+
+
+# 받는 사람 주소는 git에 올리지 않는다(2026-11-18 — 저장소가 Public이라 글 설정에 적으면 주소가 공개된다).
+# 이 PC에만 두는 파일: publish/recipients.json (publish/는 .gitignore) — {"<글>": {"to": [...], "cc": [...]}, "_last": {...}}
+RECIPIENTS = ROOT / "publish" / "recipients.json"
+
+
+def recipients():
+    try:
+        return json.loads(RECIPIENTS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def save_recipients(k, to, cc):
+    """이 글에 쓴 받는 사람을 이 PC에만 적어 둔다 — 다시 발행할 때 화면에 채워 주고, 다른 글의 기본값(_last)으로도 쓴다."""
+    r = recipients()
+    r[k] = r["_last"] = {"to": to, "cc": cc}
+    RECIPIENTS.parent.mkdir(parents=True, exist_ok=True)
+    RECIPIENTS.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def settings():
@@ -394,7 +414,8 @@ def release(k, to, cc, push=True):
     print("3/4 사이트 —", dest.relative_to(ROOT).as_posix(), flush=True)
     meta = json.loads(a["meta"].read_text(encoding="utf-8"))
     meta["published"] = {"date": a["pub_date"], "url": info["web_url"], "site": dest.relative_to(ROOT).as_posix(),
-                         "eml": eml.relative_to(ROOT).as_posix(), "to": to, "cc": cc}
+                         "eml": eml.relative_to(ROOT).as_posix()}  # 받는 사람은 여기 적지 않는다 — save_recipients
+    save_recipients(k, to, cc)
     a["meta"].write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     mine = ["site", a["meta"].relative_to(ROOT).as_posix()]
     git("add", "--", *mine)
