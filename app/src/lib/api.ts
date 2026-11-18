@@ -175,6 +175,7 @@ export type State = {
   asideRounds?: AsideRound[];
   mine?: MineRun[];
   publish?: { to: string[]; cc: string[]; webBase: string };
+  director?: boolean; // 진행자가 켜져 있나(서버 STUDIO_DIRECTOR=1) — 기본은 꺼짐(2026-11-19)
 };
 
 // 소스 aside 수집 회차(scripts/aside_collect.py → Supabase) — 서재 위 칩

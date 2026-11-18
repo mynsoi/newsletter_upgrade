@@ -176,7 +176,7 @@ python3 -I scripts/publish.py unpublish <글…>                # 웹에서 내�
 
 | 누가 | 맡은 일 |
 |---|---|
-| Claude (`claude -p --model opus`) | 과정 1 초안, 사내 자료 대목 추천·사내 맥락 넣기, 강조 추천, 진행자(입력창 드롭다운 — 말로 작업을 부탁하는 비상구) |
+| Claude (`claude -p --model opus`) | 과정 1 초안, 사내 자료 대목 추천·사내 맥락 넣기, 강조 추천 |
 | astra (`codex exec -m gpt-6-astra`) | 주제 묶기·판정, 글 옵션·원문 확인, 과정 2부터 끝까지, 제목, 그림 설명, 규칙 후보 |
 | gti (gpt-6-astra) | 그림 |
 | aside | 브라우저로 원문 수집 |
@@ -233,6 +233,7 @@ cd .. && python3 -I scripts/studio_server.py 8771
 ```
 
 - 서버는 이 컴퓨터(localhost)에서만 열립니다. Tailscale을 쓰면 그 주소에도 열려 내 다른 기기에서 접속할 수 있습니다. 로그인은 없습니다.
+- 진행자(입력창에서 Claude에게 말로 작업을 부탁하는 기능)는 꺼 두었습니다(2026-11-19). 로그인 없는 작업실에서 권한 확인 없이 명령을 실행하는 통로라서입니다. 쓰려면 환경변수 `STUDIO_DIRECTOR=1`로 서버를 띄웁니다.
 - 화면 코드만 고쳤으면 `npm run build`만 다시 하면 됩니다. 서버 코드를 고쳤으면 진행 중인 작업이 없을 때 재시작하세요.
   재시작하면 진행 중인 작업과 그 후처리가 끊깁니다.
 - 수집은 `aside`(Windows) 또는 `aside-win`(WSL) 명령을 씁니다. 그림은 `~/.codex/skills/god-tibo-imagen`이 있으면 그것을,

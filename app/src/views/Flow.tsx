@@ -98,14 +98,14 @@ export default function Flow({ state, id, refresh, go }: { state: State; id: str
           </div>
         </div>
 
-        <ChatInput a={a} run={run} job={job} refresh={refresh} onDirector={() => setDirector(true)} />
+        <ChatInput a={a} run={run} job={job} refresh={refresh} director={!!state.director} onDirector={() => setDirector(true)} />
       </section>
 
       <aside className="h-screen overflow-y-auto bg-soft/30">
         <Now a={a} run={run} job={job} sel={sel} setSel={setSel} refresh={refresh} onSource={setSrc} />
       </aside>
 
-      {a && <Director a={a} state={state} open={director} onClose={() => setDirector(false)} refresh={refresh} />}
+      {a && state.director && <Director a={a} state={state} open={director} onClose={() => setDirector(false)} refresh={refresh} />}
       <SourceDrawer path={src} onClose={() => setSrc(null)} />
     </div>
   );
@@ -882,14 +882,15 @@ function RuleEvidence({ shown, quote, open }: { shown: NonNullable<RuleCand["sho
 
 /* ---------- 입력 ---------- */
 
-function ChatInput({ a, run, job, refresh, onDirector }: { a?: A; run?: MineRun; job?: Job; refresh: () => void; onDirector: () => void }) {
+function ChatInput({ a, run, job, refresh, director, onDirector }: { a?: A; run?: MineRun; job?: Job; refresh: () => void; director: boolean; onDirector: () => void }) {
   const r = route(a, run, job);
-  const fixed = a?.kind === "process"; // 확정 기준 글 — 원문·제목 단계가 없어 진행자만
+  // 확정 기준 글 — 원문·제목 단계가 없어 진행자만. 진행자가 꺼져 있으면(기본, 2026-11-19) 입력창이 잠긴다
+  const fixed = a?.kind === "process" && director;
   const [mode, setMode] = useState(fixed ? "director" : "auto");
   const at = useAttach();
   const modes = [
     ...(fixed ? [] : [{ id: "auto", label: r.label || "—", icon: <IconSparkles className="size-3.5 text-violet-300" /> }]),
-    ...(a ? [{ id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> }] : []),
+    ...(a && director ? [{ id: "director", label: "진행자", icon: <ClaudeMark className="size-3.5" /> }] : []),
   ];
   const off = mode === "auto" && !r.mode;
   const send = async (v: string) => {

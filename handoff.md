@@ -128,7 +128,7 @@
 **공개 범위**
 - 경영일기 본문은 2026-11-18에 git에서 빼 Supabase로 옮겼지만, **그 전 커밋 이력에는 본문 252편이 남아 있다.** 10월 시험의 지시문(`runs/` 아래 `prompt.md`)도 11-17에 지웠으나 이력에는 있다.
 - Supabase의 기존 표(`documents`·`internal_docs`·`document_cards` 등)는 RLS가 꺼져 있고 anon 역할에 모든 권한이 있다 — 프로젝트의 anon 키를 아는 사람은 REST로 읽고 쓸 수 있다. 새 표 `reference_files`만 막아 두었다.
-- 진행자 채팅(`act_chat`)은 로그인 없이 `claude -p --permission-mode bypassPermissions`를 실행한다. Tailscale 주소로 접속할 수 있는 사람은 그 PC에서 명령을 실행할 수 있다.
+- 진행자 채팅(`act_chat`)은 2026-11-19에 껐다(기본 꺼짐, `STUDIO_DIRECTOR=1`로 서버를 띄우면 켜짐). 켜면 로그인 없이 `claude -p --permission-mode bypassPermissions`를 실행하므로, Tailscale 주소로 접속할 수 있는 사람은 그 PC에서 명령을 실행할 수 있다.
 - 웹 발행본은 경로 토큰이 공개돼 있어 주소를 아는 사람은 누구나 본다. 사내 자료를 쓴 글도 같은 주소로 나간다.
 
 **수율**
@@ -164,7 +164,7 @@
 
 ## 9. 다음에 할 것 (제안)
 
-1. 공개 범위 결정 — 저장소를 Private으로 돌릴지, 진행자 채팅을 localhost로 한정할지.
+1. Supabase 기존 표의 접근 권한 막기(RLS·anon 권한) — 8절 공개 범위. 저장소를 Private으로 돌릴지는 Actions 사용 시간(월 2,000분) 때문에 보류.
 2. 본문을 쓴 뒤 버려지는 글 줄이기 — 과정 1 뒤에 사람이 보고 넘기는 단계, astra 빈 결과를 실패로 처리.
 3. 공유 상태를 화면에 표시하고 작업에 시간 제한 걸기.
 4. "24시간 수집 없음" 경보.

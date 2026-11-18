@@ -381,7 +381,7 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings()}
+            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings(), "director": DIRECTOR_ON}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -1355,6 +1355,9 @@ def act_wiki_verdict(a):
 
 
 DIRECTOR = ROOT / "scripts" / "director_system.md"
+# 진행자(입력창 드롭다운에서 말로 작업을 부탁하는 비상구)는 꺼 둔다(2026-11-19 사용자 결정 — 한 번도 쓰지 않았고,
+# 로그인 없는 작업실에서 권한 확인 없이 명령을 실행하는 통로라서). 되살리려면 환경변수 STUDIO_DIRECTOR=1로 서버를 띄운다.
+DIRECTOR_ON = os.environ.get("STUDIO_DIRECTOR", "") == "1"
 
 
 def director_prompt():
@@ -1366,6 +1369,8 @@ def director_prompt():
 
 
 def act_chat(a):
+    if not DIRECTOR_ON:
+        raise ValueError("진행자는 꺼져 있습니다 — 쓰려면 STUDIO_DIRECTOR=1로 작업실 서버를 다시 띄우세요")
     k, msg = safe_id(a["article"]), str(a["message"]).strip()
     sess_f = STUDIO / "chat" / "sessions.json"
     sess = json.loads(read(sess_f) or "{}")
