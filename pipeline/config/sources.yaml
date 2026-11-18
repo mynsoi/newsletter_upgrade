@@ -927,15 +927,33 @@ sources:
   confirmed_at: '2026-08-31'
   list_url:
   - https://www.anthropic.com/research
-  - https://openai.com/news/
-  link_pattern: href="((?:https://www\.anthropic\.com)?/(?:research|news)/[A-Za-z0-9\-]+|/index/[A-Za-z0-9\-]+)"
+  link_pattern: href="((?:https://www\.anthropic\.com)?/(?:research|news)/[A-Za-z0-9\-]+)"
   link_exclude: /(research/index|news/rss|research$|news$)
   lang: en
   allow_feed_discovery: false
   inflow_alert_days: 35
   request_headers: *id001
-  note: 발행 시 /ingest-url — 피드 등재 아님 / 2026-09-01 probe A(Anthropic 정적 200·OpenAI curl
-    200, news RSS 존재 확인) → html 전환, 수기 대체
+  note: '발행 시 /ingest-url — 피드 등재 아님 / 2026-09-01 probe A(Anthropic 정적 200·OpenAI curl 200, news RSS 존재
+    확인) → html 전환, 수기 대체 / 2026-11-18 OpenAI 목록 제거 — openai.com/news/가 Actions·PC 모두 Cloudflare 403(매일 실패)이라
+    openai-news(RSS + aside 격상)로 분리. 기존 OpenAI 4편은 이 소스에 남김. PC 검증은 사내망이 anthropic.com을
+    차단해(생성형 AI 분류) 실패로 나온다 — Actions 수집은 정상(11/18 링크 24개)'
+- id: openai-news
+  name: OpenAI News
+  tier: T4
+  type: rss
+  role: T4 1차 — OpenAI 발표·고객 사례·연구 (aside 격상)
+  description: OpenAI 공식 뉴스 피드. 제품 출시·고객 사례(customer-stories)·사용 실태 연구. AI 사용 실태 1차 자료.
+  topics: AI 리터러시 · 일하는 방식 — 기업 도입 사례·사용 데이터
+  frequency: 일
+  constraints: 기사 본문은 Cloudflare 403이라 RSS 요약만 저장 → 작업실 aside 격상이 전문으로 바꾼다
+  status: active
+  confirmed_at: '2026-11-18'
+  feed_url: https://openai.com/news/rss.xml
+  lang: en
+  verified: true
+  note: 2026-11-18 편입 — RSS는 PC 200(1,406편, 수집은 최근 50편 상한). 기사 페이지는 Actions·PC 403
+    (cf-mitigated=challenge), Aside Browser로는 통과(시험 3편, 본문 6.0~8.1천 자). 발행일은 RSS 날짜를 쓴다
+    (기사 페이지에 발행일 meta 없음). 고객 사례는 브라우저 언어 때문에 한국어판(/ko-KR/)으로 열린다
 - id: google-rework
   name: Google re:Work
   tier: T4

@@ -293,6 +293,25 @@
     "footer",
     "figcaption"
    ]
+  },
+  "openai-news": {
+   "mode": "upgrade",
+   "_note": "2026-11-18 편입 — OpenAI 기사 페이지가 Actions·PC 모두 Cloudflare 403이라 RSS 요약(150자 안팎)만 남는 글을 aside로 격상. 11/18 시험 3편 통과(검사 없음, 본문 6.0~8.1천 자). 'article > div:last-child'는 글 끝 Keep reading(관련 글) 칸. 고객 사례는 한국어판으로 열린다.",
+   "tier": "T4",
+   "lang": "en",
+   "max_per_run": 5,
+   "gap_seconds": 10,
+   "days": 30,
+   "container": "article",
+   "exclude": [
+    "nav",
+    "form",
+    "aside",
+    "footer",
+    "figcaption",
+    "button",
+    "article > div:last-child"
+   ]
   }
  }
 }
