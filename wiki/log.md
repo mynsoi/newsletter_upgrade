@@ -1,5 +1,8 @@
 # 위키 이력
 
+## 2026-11-19 17:43
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 59 · 134s
+
 ## 2026-11-19 17:42
 - 묶기 붙임 brookings-future-of-work/0010 → 주제/mckinsey-insights-0026.md
 - 묶기 붙임 stanford-hai/0015 → 주제/mckinsey-insights-0027.md
