@@ -1,5 +1,34 @@
 # 위키 이력
 
+## 2026-11-19 17:42
+- 묶기 붙임 brookings-future-of-work/0010 → 주제/mckinsey-insights-0026.md
+- 묶기 붙임 stanford-hai/0015 → 주제/mckinsey-insights-0027.md
+- 묶기 붙임 fastcompany-worklife/0286 → 주제/fastcompany-worklife-0033.md
+- 묶기 붙임 bain-insights/0087, mckinsey-insights/0194 → 주제/bcg-publications-0495.md
+- 묶기 붙임 carrot-global-blog/0063 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 fastcompany-worklife/0283 → 주제/hbr-korea-0315.md
+- 묶기 붙임 fastcompany-worklife/0282, fastcompany-worklife/0280 → 주제/fastcompany-worklife-0004.md
+- 묶기 붙임 bain-insights/0085 → 주제/dbr-0378.md
+- 묶기 붙임 flex-blog/0041 → 주제/mit-tech-review-0006.md
+- 묶기 붙임 hrdive/0271 → 주제/hrdive-0029.md
+- 묶기 붙임 bcg-publications/0500 → 주제/hrdive-0022.md
+- 묶기 붙임 bcg-publications/0501 → 주제/mckinsey-insights-0045.md
+- 묶기 붙임 bcg-publications/0506, bcg-publications/0508 → 주제/bain-insights-0003.md
+- 묶기 붙임 hrdive/0280 → 주제/fastcompany-worklife-0221.md
+- 묶기 새 주제(보통) 팀의 업무 지표는 관리자를 줄 세우는 점수보다 어디서 일하는 방식이 막히는지 함께 묻는 자료로 쓸 때 쓸모가 커진다. → 주제/worklytics-blog-0077.md
+- 묶기 새 주제(쓸 만함) AI가 혼자 연습할 기회를 늘려 줘도 교육의 지속성과 실력 향상까지 학습자 혼자 책임질 수 있는 것은 아니다. → 주제/carrot-global-blog-0064.md
+- 묶기 새 주제(보통) 직원의 독단성을 고치려다 주도성까지 꺾으면 리더가 원했던 공유 대신 모든 일을 승인받으려는 의존이 생길 수 있다. → 주제/hr-bulletin-0055.md
+- 묶기 새 주제(보통) AI가 기술적으로 많은 일을 할 수 있어도 산업의 규칙과 경쟁 구조가 그대로면 경제 전체의 변화는 더딜 수 있다. → 주제/fastcompany-worklife-0287.md
+- 묶기 새 주제(보통) 지원 부서가 전략적 역할을 얻는 데에는 전문 지식뿐 아니라 그 지식을 사업의 선택과 연결하는 능력이 필요하다. → 주제/hrdive-0278.md
+- 묶기 새 주제(보통) 같은 기술로 전환하더라도 모든 부서가 같은 속도와 방식으로 움직여야 하는 것은 아니다. → 주제/mckinsey-insights-0197.md
+- 묶기 새 주제(쓸 만함) 현장 직원의 아이디어가 새 사업이 되려면 의견을 듣는 창구를 넘어 직접 팀을 꾸리고 시험할 수 있는 경로가 있어야 한다. → 주제/hbr-korea-0338.md
+- 묶기 새 주제(보통) AI가 개별 작업을 자동화해도 여러 업체의 데이터가 필요한 판단을 연결하는 책임은 현업 조직에 남는다. → 주제/bcg-publications-0510.md
+- 묶기 새 주제(쓸 만함) 외부 AI를 잘 활용하는 조직은 모든 기술을 직접 만드는 조직이 아니라 업무 지식과 판단 기준을 자기 안에 남기는 조직일 수 있다. → 주제/deloitte-insights-0061.md
+- 묶기 새 주제(쓸 만함) 교육을 업무와 떨어진 시간에만 배치하면 정작 새 기술이 필요한 순간에는 배운 내용을 꺼내 쓰지 못할 수 있다. → 주제/deloitte-insights-0062.md
+- 묶기 새 주제(보통) 급여 같은 반복 업무도 처리 인력을 늘리기보다 지급 절차를 바꾸면 인원 증가를 감당하는 방식이 달라질 수 있다. → 주제/hrdive-0273.md
+- 묶기 새 주제(보통) 전략 과제를 부서별로 나눠 맡기면 각 부서가 감당할 수 있는 수준으로 목표가 줄어들 수 있다. → 주제/mckinsey-insights-0195.md
+- 주제 묶기 새 카드 59 · 붙음/새 주제 32 · 뺌 27 · 못 넣음 0 · 남음 0 · 123s
+
 ## 2026-11-17 16:41
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 41 · 122s
 
