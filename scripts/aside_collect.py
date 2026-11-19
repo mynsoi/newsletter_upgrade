@@ -487,30 +487,50 @@ def main():
         return
     errors = []  # 소스 하나가 죽어도 나머지는 받는다(2026-11-10 — 예전엔 첫 소스 오류로 회차 전체가 멈췄다)
     (d / "report.json").write_text("[]", encoding="utf-8")  # 중간에 죽어도 회차 목록에 남게
-    with connect(a.write) as c:
+    # DB 연결이 끊기면 다시 연결해 그 소스를 한 번 더 받는다(2026-11-19 — 브라우저를 기다리는 사이 Supabase가
+    # 연결을 닫으면 그 소스뿐 아니라 뒤의 소스 전부가 'connection is closed'로 건너뛰어졌다)
+    import psycopg
+    c = connect(a.write)
+    try:
         for sid in names:
             if sid not in srcs:
                 sys.exit(f"모르는 소스: {sid}")
             cfg = srcs[sid]
             log(f"[{sid}] {'저장' if a.write else '미리보기'}")
-            try:
-                # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
-                out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
-                if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
-                    log(f"[{sid}] 백필 {a.backfill} 이후")
-                    out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
-            except Exception as e:  # noqa: BLE001
-                if "Aside Browser가 꺼져" in str(e):
-                    raise
+            for attempt in (1, 2):
+                if c.closed or c.broken:
+                    log("  DB 연결이 끊겨 다시 연결")
+                    c = connect(a.write)
+                n_before = len(out)
                 try:
-                    c.rollback()  # 이 소스에서 덜 끝난 것만 버린다(저장한 글은 한 편마다 이미 commit됨)
-                except Exception:  # noqa: BLE001
-                    pass
-                msg = f"{type(e).__name__}: {str(e).strip()[-300:]}"
-                log(f"  [오류] {msg} — 이 소스는 건너뜀")
-                errors.append(sid)
-                out.append({"source": sid, "error": msg})
+                    # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
+                    out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
+                    if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
+                        log(f"[{sid}] 백필 {a.backfill} 이후")
+                        out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
+                    break
+                except Exception as e:  # noqa: BLE001
+                    if "Aside Browser가 꺼져" in str(e):
+                        raise
+                    try:
+                        c.rollback()  # 이 소스에서 덜 끝난 것만 버린다(저장한 글은 한 편마다 이미 commit됨)
+                    except Exception:  # noqa: BLE001
+                        pass
+                    msg = f"{type(e).__name__}: {str(e).strip()[-300:]}"
+                    if attempt == 1 and isinstance(e, psycopg.OperationalError):
+                        log(f"  [DB 끊김] {msg[:120]} — 다시 연결해 이 소스를 한 번 더")
+                        del out[n_before:]  # 백필 앞부분만 남은 결과는 버리고 다시 받는다(저장분은 중복으로 걸러짐)
+                        continue
+                    log(f"  [오류] {msg} — 이 소스는 건너뜀")
+                    errors.append(sid)
+                    out.append({"source": sid, "error": msg})
+                    break
             (d / "report.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    finally:
+        try:
+            c.close()
+        except Exception:  # noqa: BLE001
+            pass
     tot = {k: sum(r.get(k, 0) for r in out) for k in ("new", "upgraded", "dup", "short", "old", "failed")}
     log(f"끝 · 신규 {tot['new']} · 격상 {tot['upgraded']} · 중복 {tot['dup']} · 짧음 {tot['short']} · 기간 밖 {tot['old']} · 실패 {tot['failed']}"
         + (f" · 오류 {len(errors)}곳({', '.join(errors)})" if errors else "") + f" → {d.relative_to(ROOT).as_posix()}/report.json")

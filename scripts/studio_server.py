@@ -1237,6 +1237,7 @@ def act_collect(a):
 
 
 ASIDE_EVERY = float(os.environ.get("ASIDE_COLLECT_HOURS", "6")) * 3600  # 소스 aside 수집 간격 — Aside Browser가 켜져 있을 때만
+ASIDE_RETRY = 600  # Aside Browser가 꺼져 있을 때 다시 확인하는 간격(초)
 LOOPS = STUDIO / "loops.json"  # 주기 실행의 지난 실행 시각 — 서버를 다시 띄워도 간격을 이어 간다(2026-10-21: 재시작마다 돌던 문제)
 
 
@@ -1279,7 +1280,9 @@ def aside_loop():
                 act_collect({})
                 ran = True
         if not ran:
-            time.sleep(every)  # Aside가 꺼져 있었으면 기록 없이 한 간격 쉬고 다시 본다
+            # Aside가 꺼져 있었으면 기록 없이 10분 뒤 다시 본다(2026-11-19 — 예전엔 한 간격(6시간)을 쉬어,
+            # PC를 켤 때 서버가 Aside보다 10초 먼저 확인하자 오전 회차가 통째로 빠졌다). DATABASE_URL이 없으면 한 간격.
+            time.sleep(ASIDE_RETRY if os.environ.get("DATABASE_URL") else every)
 
 
 DB_EVERY = float(os.environ.get("DB_SYNC_HOURS", "6")) * 3600  # Supabase 받기 간격 — 지난 실행(loops.json)에서 이만큼 지나면(서버를 다시 띄워도 이어서)
