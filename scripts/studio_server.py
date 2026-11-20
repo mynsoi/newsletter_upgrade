@@ -65,6 +65,9 @@ for d in ("logs", "chat", "thumbs"):
 
 JOBS = {}
 LOCK = threading.Lock()
+# 6시간마다 저절로 도는 작업 — 기록 한 줄은 적되 그 한 줄만을 위한 커밋은 만들지 않는다(2026-11-20: 최근 2주 커밋의 23%가
+# '작업 기록: db-sync 완료' 같은 줄이었고, 그 사이 다른 PC의 올리기가 거절되곤 했다). 적힌 줄은 다음 글 커밋에 함께 실려 간다.
+QUIET_KINDS = {"collect", "db-sync"}
 JOBS_FILE = STUDIO / "jobs.json"
 if JOBS_FILE.exists():
     for j in json.loads(JOBS_FILE.read_text(encoding="utf-8")):
@@ -165,7 +168,7 @@ def start(kind, target, cmd, after=None):
             if SH.is_article(target):
                 SH.unlock(target)
                 SH.schedule(target, f"글 {target}: {kind} {'완료' if ok else '실패'}")
-            else:
+            elif kind not in QUIET_KINDS:
                 SH.schedule("_activity", f"작업 기록: {kind} {'완료' if ok else '실패'}")
         except Exception as e:  # noqa: BLE001
             print(f"글 공유 준비 실패: {e}", flush=True)
