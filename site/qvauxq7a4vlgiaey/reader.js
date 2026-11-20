@@ -5,7 +5,7 @@
    수치를 못 받으면(API 없음·끊김) 아무것도 보이지 않는다. 작업실 미리보기에서는 모양만 보인다. */
 (function () {
   "use strict";
-  var API = "/api/reader";
+  var API = "/api/reader/";  // 끝 슬래시 — vercel.json trailingSlash가 없는 주소를 308으로 돌린다
   var PREVIEW = /^\/publish\//.test(location.pathname) || location.protocol === "file:";
 
   var mem = {};
