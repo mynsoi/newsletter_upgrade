@@ -180,6 +180,8 @@ export type State = {
   director?: boolean; // 진행자가 켜져 있나(서버 STUDIO_DIRECTOR=1) — 기본은 꺼짐(2026-11-19)
   /** 글 공유(git 올리기·받아 오기)가 안 되고 있으면 그 문제들 — 화면 위 띠로 알린다(2026-11-20) */
   share?: { problems: { what: "push" | "pull"; label: string; since: number; msg: string }[] };
+  /** 일일 수집이 오래 없으면(기본 30시간) — 마지막으로 끝난 수집이 몇 시간 전인지. 화면 위 띠로 알린다(2026-11-20) */
+  collectGap?: { hours: number; lastOk: number; failed: boolean } | null;
 };
 
 // 소스 aside 수집 회차(scripts/aside_collect.py → Supabase) — 서재 위 칩

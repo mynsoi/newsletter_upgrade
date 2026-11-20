@@ -111,7 +111,8 @@ make test         # 테스트
 | `test.yml` | PR · 수동 | `make test` (SQLite) |
 
 - 실패·무유입·카드 이상은 GitHub 이슈로만 알린다(라벨 `daily-collect-failure` · `inflow-alert` · `card-alert`).
-  예약이 아예 뜨지 않은 날은 이슈도 생기지 않는다 — `/status`로 최근 실행을 확인한다.
+  예약이 아예 뜨지 않은 날은 이슈도 생기지 않는다 — 작업실 화면이 대신 알린다(마지막으로 끝난 수집이 30시간보다
+  오래되면 위쪽 띠, 루트 `scripts/studio_server.py`의 `collect_gap`). 작업실을 안 켜 둔 날은 `/status`로 최근 실행을 확인한다.
 - 예약 실행이 실패했거나 늦으면 `gh workflow run daily-collect`가 먼저고, 안 되면 PC에서 `/collect`.
 - `test.yml`은 PR에서만 돈다. 이 브랜치에 직접 푸시한 변경은 테스트 없이 다음 수집에 반영되니,
   `src/`·`migrations/`를 고쳤으면 푸시 전에 `make test`를 돌린다.

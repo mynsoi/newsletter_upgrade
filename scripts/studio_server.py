@@ -438,7 +438,7 @@ def state():
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "articles": articles(), "jobs": jobs,
             "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings(), "director": DIRECTOR_ON,
-            "share": SH.status()}
+            "share": SH.status(), "collectGap": collect_gap()}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -1370,6 +1370,55 @@ def db_sync_loop():
             time.sleep(600)
 
 
+# 일일 수집 공백 알림(2026-11-20) — 수집 실패는 GitHub 이슈로 오지만, GitHub가 예약을 아예 띄우지 않은 날은 이슈도 없다.
+# Supabase의 collection_runs(수집 묶음이 하루 한 줄씩 남긴다, 시각은 UTC)를 30분마다 읽어, 마지막으로 끝난 수집이
+# COLLECT_GAP_HOURS보다 오래됐으면 화면 위 띠로 알린다. 예약이 평소에도 21~24시간 간격에서 ±3시간쯤 흔들려(가장 긴
+# 정상 간격 26.7시간, 2026-11) 24시간으로 자르면 헛알림이 난다 — 기본 30시간.
+COLLECT_GAP_HOURS = float(os.environ.get("STUDIO_COLLECT_GAP_HOURS", "30"))
+COLLECT_WATCH_EVERY = 1800
+COLLECT_SEEN = {"checked": 0.0, "lastOk": 0.0, "last": None}
+
+
+def collect_check():
+    """마지막 수집 기록을 읽어 COLLECT_SEEN에 둔다(읽기 전용 연결). 못 읽으면 예외."""
+    import psycopg
+    from datetime import timezone
+    with psycopg.connect(os.environ["DATABASE_URL"], prepare_threshold=None, connect_timeout=20) as c:
+        c.read_only = True
+        rows = c.execute("SELECT status, started_at, finished_at FROM collection_runs ORDER BY started_at DESC LIMIT 10").fetchall()
+    ts = lambda v: v.replace(tzinfo=timezone.utc).timestamp() if v else 0.0
+    ok = [ts(r[1]) for r in rows if r[0] == "completed"]
+    with LOCK:
+        COLLECT_SEEN.update(checked=time.time(), lastOk=max(ok) if ok else 0.0,
+                            last={"status": rows[0][0], "started": ts(rows[0][1])} if rows else None)
+
+
+def collect_gap(now=None):
+    """수집이 끊겼으면 {hours, lastOk, failed}, 아니면 None. 확인한 지 오래됐으면(DB에 못 닿음) 모르는 것이니 알리지 않는다."""
+    now = now or time.time()
+    with LOCK:
+        seen = dict(COLLECT_SEEN)
+    if not seen["lastOk"] or now - seen["checked"] > 3 * COLLECT_WATCH_EVERY:
+        return None
+    last = seen["last"] or {}
+    if last.get("status") == "running" and now - last.get("started", 0) < 3 * 3600:
+        return None  # 지금 수집이 돌고 있다
+    hours = (now - seen["lastOk"]) / 3600
+    if hours < COLLECT_GAP_HOURS:
+        return None
+    return {"hours": int(hours), "lastOk": seen["lastOk"], "failed": last.get("status") == "failed"}
+
+
+def collect_watch_loop():
+    while True:
+        try:
+            if os.environ.get("DATABASE_URL"):
+                collect_check()
+        except Exception as e:  # noqa: BLE001 — 네트워크가 잠깐 끊겨도 다음 바퀴에 다시 본다
+            print(f"수집 기록 확인 실패(30분 뒤 다시): {type(e).__name__}", flush=True)
+        time.sleep(COLLECT_WATCH_EVERY)
+
+
 def owner_only(what):
     """주제 지도를 새로 만드는 일은 기준 PC에서만(2026-10-26 — 두 PC가 같은 카드로 주제를 겹쳐 만들거나 wiki/가 부딪치지 않게)."""
     if not SH.is_owner():
@@ -1703,6 +1752,7 @@ if __name__ == "__main__":
     print("칼럼 작업실 " + " · ".join(f"http://{h}:{port}" for h in binds), flush=True)
     threading.Thread(target=db_sync_loop, daemon=True).start()
     threading.Thread(target=aside_loop, daemon=True).start()
+    threading.Thread(target=collect_watch_loop, daemon=True).start()
     SH.start(lambda: any(j["status"] == "running" for j in JOBS.values()))  # 글 공유 — 받아 오기·올리기(2026-10-26)
     try:  # 위에서 한 번 받아 온 뒤 — 받아 온 화면 코드가 지금 빌드와 다르면 다시 빌드
         build_app_if_stale()

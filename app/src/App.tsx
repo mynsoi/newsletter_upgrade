@@ -253,10 +253,13 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
 function ShareAlert({ state }: { state: State | null }) {
   const [open, setOpen] = useState(false);
   const ps = state?.share?.problems ?? [];
-  if (!ps.length) return null;
+  const gap = state?.collectGap;
+  if (!ps.length && !gap) return null;
   const mins = (t: number) => Math.max(1, Math.round((Date.now() / 1000 - t) / 60));
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-3 z-[80] flex justify-center pl-[60px]">
+    <div className="pointer-events-none fixed inset-x-0 top-3 z-[80] flex flex-col items-center gap-2 pl-[60px]">
+      {gap && <CollectGapAlert gap={gap} />}
+      {ps.length > 0 && (
       <button
         onClick={() => setOpen((o) => !o)}
         className="pointer-events-auto max-w-[640px] rounded-2xl border border-amber-400/50 bg-panel-solid px-4 py-2.5 text-left shadow-xl"
@@ -276,7 +279,34 @@ function ShareAlert({ state }: { state: State | null }) {
             </div>
           ))}
       </button>
+      )}
     </div>
+  );
+}
+
+function CollectGapAlert({ gap }: { gap: NonNullable<State["collectGap"]> }) {
+  const [open, setOpen] = useState(false);
+  const d = new Date(gap.lastOk * 1000);
+  const when = `${d.getMonth() + 1}월 ${d.getDate()}일 ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const span = gap.hours >= 48 ? `${Math.floor(gap.hours / 24)}일째` : `${gap.hours}시간째`;
+  return (
+    <button
+      onClick={() => setOpen((o) => !o)}
+      className="pointer-events-auto max-w-[640px] rounded-2xl border border-amber-400/50 bg-panel-solid px-4 py-2.5 text-left shadow-xl"
+    >
+      <div className="text-sm font-semibold text-amber-700 dark:text-amber-300">
+        일일 수집이 {span} 없습니다 — 마지막 수집 {when}
+        {gap.failed ? " · 그 뒤 실행은 실패" : ""}
+      </div>
+      <div className="mt-0.5 text-xs text-ink-2">서재에 새 원문이 들어오지 않고 있습니다. 눌러서 확인 방법 보기.</div>
+      {open && (
+        <div className="mt-2 text-xs leading-relaxed text-ink-2">
+          GitHub 저장소의 Actions → daily-collect에서 최근 실행을 확인하고, 없거나 실패했으면 Run workflow로 다시 돌립니다.
+          {gap.failed ? " 실패 사유는 저장소 이슈(daily-collect-failure)에 있습니다." : " 예약이 아예 뜨지 않은 날은 이슈도 생기지 않습니다."}
+          <br />그래도 안 되면 PC에서 /collect로 직접 수집합니다. 수집이 끝나면 이 알림은 30분 안에 사라집니다.
+        </div>
+      )}
+    </button>
   );
 }
 
