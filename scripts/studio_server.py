@@ -52,6 +52,7 @@ import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 �
 import internal_ctx as IC  # 회사 맥락(2026-10-23) — 글에 딸린 사내 자료 대목
 import share as SH  # 글 공유(2026-10-26) — 글이 바뀌면 운영 브랜치에 올리고 주기적으로 받는다, 작업 중 표시
 import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
+import reader_stats as RS  # 발행 사이트의 조회수·좋아요(2026-11-20) — 발행 탭이 읽는다
 from wiki import TARGETS  # 대상 독자 이름 — 임원급·팀장급·시니어급·주니어급·전 직원(2026-10-24)
 
 DIST = ROOT / "app" / "dist"
@@ -1312,6 +1313,19 @@ def publish_settings():
         return {"to": [], "cc": [], "webBase": ""}
 
 
+READER_EVERY = 60  # 초 — 발행 탭이 열려 있어도 DB는 이 간격으로만 읽는다
+_reader, _reader_lock = {"at": 0.0, "data": {}}, threading.Lock()
+
+
+def reader_stats_view():
+    """발행 사이트의 조회수·좋아요 {"<글>": {"views", "likes", "days"}} — Supabase 직접 연결(scripts/reader_stats.py).
+    닿지 못하거나 표가 아직 없으면 빈 값(화면은 수치 칸을 그리지 않는다)."""
+    with _reader_lock:
+        if time.time() - _reader["at"] >= READER_EVERY:
+            _reader["data"], _reader["at"] = RS.stats(), time.time()
+        return _reader["data"]
+
+
 def act_collect(a):
     """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장,
     과거분 백필(설정 backfill_since 이후)도 회차마다 조금씩 — 다 받으면 저절로 '백필 끝')
@@ -1635,6 +1649,8 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json(row or {}, 200 if row else 404)
         if u.path == "/api/chat":
             return self.send_json(chat_log(q.get("article", [""])[0]))
+        if u.path == "/api/reader-stats":
+            return self.send_json(reader_stats_view())
         if u.path == "/api/log":
             j = JOBS.get(q.get("id", [""])[0])
             if not j:
@@ -1656,7 +1672,7 @@ class H(SimpleHTTPRequestHandler):
             if not inside(f, ROOT / "publish" / k) or not f.is_file():
                 return self.send_error(404)
             ctype = {".html": "text/html; charset=utf-8", ".css": "text/css", ".png": "image/png",
-                     ".json": "application/json", ".eml": "message/rfc822"}.get(f.suffix)
+                     ".json": "application/json", ".eml": "message/rfc822", ".js": "text/javascript; charset=utf-8"}.get(f.suffix)
             if not ctype:
                 return self.send_error(404)
             b = f.read_bytes()

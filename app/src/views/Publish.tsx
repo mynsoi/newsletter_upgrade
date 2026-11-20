@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { IconDownload, IconExternalLink, IconMail, IconSend } from "@tabler/icons-react";
+import { IconDownload, IconExternalLink, IconEye, IconHeart, IconMail, IconSend } from "@tabler/icons-react";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { PillTabs } from "@/components/ui/tabs";
 import { Chip } from "@/components/studio/bits";
 import { Cover } from "@/views/Articles";
-import { act, articleTitle, img, openLog, runningJob, type Article, type State } from "@/lib/api";
+import { act, articleTitle, getReaderStats, img, openLog, runningJob, type Article, type ReaderStats, type State } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,6 +20,14 @@ const heroOf = (a: Article) => a.confirmed?.hero || a.hero;
 export default function Publish({ state, id, refresh, go }: { state: State; id?: string; refresh: () => void; go: (h: string) => void }) {
   const list = state.articles.filter((a) => a.confirmed).sort((x, y) => (y.confirmed!.date + y.at).localeCompare(x.confirmed!.date + x.at));
   const a = list.find((x) => x.id === id) ?? list[0];
+  // 발행 사이트의 조회수·좋아요 — 탭을 열 때와 1분마다(서버도 1분에 한 번만 DB를 읽는다)
+  const [stats, setStats] = useState<ReaderStats>({});
+  useEffect(() => {
+    const load = () => getReaderStats().then(setStats);
+    load();
+    const t = setInterval(load, 60_000);
+    return () => clearInterval(t);
+  }, []);
   return (
     <div className="flex min-h-screen">
       <aside className="w-80 shrink-0 border-r border-line px-5 py-10">
@@ -42,6 +50,9 @@ export default function Publish({ state, id, refresh, go }: { state: State; id?:
                 <span className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-ink-3">
                   <span className="whitespace-nowrap">확정 {x.confirmed!.date}</span>
                   {x.published && <Chip className="whitespace-nowrap border-emerald-300/40 bg-emerald-500/15 py-0 text-emerald-700 dark:text-emerald-200">발행 {x.published.date}</Chip>}
+                  {x.published && stats[x.id] && (
+                    <span className="whitespace-nowrap tabular-nums">조회 {stats[x.id].views.toLocaleString()} · 좋아요 {stats[x.id].likes.toLocaleString()}</span>
+                  )}
                 </span>
               </span>
             </button>
@@ -49,12 +60,39 @@ export default function Publish({ state, id, refresh, go }: { state: State; id?:
           {!list.length && <p className="px-2 text-sm text-ink-3">확정한 글 없음</p>}
         </div>
       </aside>
-      {a && <Detail key={a.id} a={a} state={state} refresh={refresh} />}
+      {a && <Detail key={a.id} a={a} state={state} refresh={refresh} stat={stats[a.id]} />}
     </div>
   );
 }
 
-function Detail({ a, state, refresh }: { a: Article; state: State; refresh: () => void }) {
+/** 최근 14일 날짜별 조회수 막대 — 기록이 없는 날은 0. 날짜는 한국 기준(서버가 세는 날짜와 같게) */
+function ViewBars({ days }: { days: [string, number][] }) {
+  const by = new Map(days);
+  const now = Date.now() + 9 * 3600 * 1000;
+  const row = Array.from({ length: 14 }, (_, i) => {
+    const d = new Date(now - (13 - i) * 86400 * 1000).toISOString().slice(0, 10);
+    return [d, by.get(d) ?? 0] as const;
+  });
+  const max = Math.max(1, ...row.map(([, n]) => n));
+  return (
+    <div>
+      <div className="flex h-12 items-end gap-1" role="img" aria-label="최근 14일 날짜별 조회수">
+        {row.map(([d, n]) => (
+          <div key={d} title={`${d} · 조회 ${n.toLocaleString()}`} className="flex h-full flex-1 items-end">
+            <div className={cn("w-full rounded-sm", n ? "bg-emerald-600/70 dark:bg-emerald-400/70" : "bg-line")} style={{ height: n ? `${Math.max(8, (n / max) * 100)}%` : "2px" }} />
+          </div>
+        ))}
+      </div>
+      <div className="mt-1 flex justify-between text-xs tabular-nums text-ink-3">
+        <span>{row[0][0].slice(5)}</span>
+        <span>최근 14일 조회</span>
+        <span>{row[13][0].slice(5)}</span>
+      </div>
+    </div>
+  );
+}
+
+function Detail({ a, state, refresh, stat }: { a: Article; state: State; refresh: () => void; stat?: ReaderStats[string] }) {
   const [view, setView] = useState("web");
   const [v, setV] = useState(0); // 미리보기를 다시 만들 때마다 iframe을 새로 불러온다
   const [err, setErr] = useState("");
@@ -153,6 +191,15 @@ function Detail({ a, state, refresh }: { a: Article; state: State; refresh: () =
           {a.published && (
             <div className="space-y-2 rounded-2xl border border-emerald-400/30 bg-emerald-500/5 p-5 text-sm">
               <div className="font-medium text-ink">발행 {a.published.date}</div>
+              {stat && (
+                <div className="space-y-3 border-b border-emerald-400/20 pb-3">
+                  <div className="flex items-center gap-4 tabular-nums text-ink">
+                    <span className="flex items-center gap-1.5"><IconEye className="size-4 shrink-0 text-ink-3" /> 조회 {stat.views.toLocaleString()}</span>
+                    <span className="flex items-center gap-1.5"><IconHeart className="size-4 shrink-0 text-ink-3" /> 좋아요 {stat.likes.toLocaleString()}</span>
+                  </div>
+                  <ViewBars days={stat.days} />
+                </div>
+              )}
               {a.published.url ? (
                 <a href={a.published.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-ink-2 hover:text-ink">
                   <IconExternalLink className="size-4 shrink-0" /> <span className="truncate">{a.published.url}</span>

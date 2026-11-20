@@ -10,6 +10,9 @@ HTML 구조·디자인과 메일 방식은 main 브랜치(web/server.py · web/e
   python3 -I scripts/publish.py build <글>                         # 미리보기만 — publish/<글>/ (git 밖)
   python3 -I scripts/publish.py release <글> --to a@x,b@x [--cc …] [--no-push]
   python3 -I scripts/publish.py unpublish <글…> [--no-push]          # 웹에서 내리기(아카이브 목록도 다시)
+  python3 -I scripts/publish.py refresh [--no-push]                  # 이미 발행한 글에 조회수·좋아요 자리 붙이기(본문·발행일은 그대로)
+조회수·좋아요(2026-11-20): 글·목록 페이지가 reader.js로 /api/reader(Vercel 함수 api/reader.py)를 부른다. 발행·내리기 때 발행 목록을
+  Supabase site_articles 표에 맞춘다(scripts/reader_stats.py) — 표에 있는 글만 수치를 받는다. 메일에는 넣지 않는다.
 설정: config/publish.json (web_base_url · web_path_token · 보내는 사람). 받는 사람은 git 밖 publish/recipients.json에만 남긴다(주소 공개 방지)
 """
 import argparse
@@ -35,6 +38,10 @@ ID = re.compile(r"^[0-9A-Za-z가-힣][0-9A-Za-z가-힣_.-]{0,80}$")
 
 # 웹에 올리지 않는 발행 부산물 (메일용)
 SKIP = {"newsletter.eml", "email.html", "email-head.html", "email-body.html", "email_head.png", "email_body.png", "email_screenshot.png"}
+
+# 조회수·좋아요 자리(web/reader.js가 채운다 — 수치를 받기 전에는 숨김). 메일 캡처용 변형에는 넣지 않는다
+READER_BAR = '<div class="reader-bar" data-article="{id}" hidden></div>'
+READER_SCRIPT = '<script src="reader.js" defer></script>'
 
 # 디자인 토큰 — web/article.css와 같은 값
 CANVAS = "#F7F8FA"
@@ -178,6 +185,8 @@ def render(a, files, body_class=""):
         "{{ hero_html }}": hero, "{{ tldr_html }}": notice,
         "{{ body_html }}": "\n    ".join(body), "{{ references_html }}": refs, "{{ footer }}": a.get("footer") or cfg["footer"],
         "{{ body_class }}": body_class,
+        "{{ reader_html }}": "" if body_class else READER_BAR.format(id=e(a["id"])),
+        "{{ reader_script }}": "" if body_class else READER_SCRIPT,
     }
     page = (WEB / "article.html").read_text(encoding="utf-8")
     for key, v in rep.items():
@@ -206,6 +215,7 @@ def build(k):
             raise SystemExit("그림 없음: " + src)
         shutil.copyfile(src, out / name)
     shutil.copyfile(WEB / "article.css", out / "style.css")
+    shutil.copyfile(WEB / "reader.js", out / "reader.js")
     (out / "index.html").write_text(render(a, files), encoding="utf-8")
     # email.html은 작업실 미리보기용(머리·본문을 한 장으로), 메일 캡처는 머리·본문 두 장(각각 누르면 웹페이지)
     # 메일에는 머리 그림을 넣지 않는다 — 첫 화면에서 본문이 바로 보이게(팀장 의견, 2026-10-26).
@@ -346,8 +356,9 @@ def build_index():
         entries.append((x.get("pub_date", ""), m.parent.name, x))
     entries.sort(key=lambda t: (t[0], t[1]), reverse=True)
     e = html.escape
+    shutil.copyfile(WEB / "reader.js", token_dir / "reader.js")  # 목록 카드의 조회·좋아요 수치
     cards = "\n".join(
-        f'<a class="card" href="{e(quote(s))}/">'
+        f'<a class="card" data-article="{e(s)}" href="{e(quote(s))}/">'
         + (f'<img src="{e(quote(s))}/{e(x["hero_file"])}" alt="" loading="lazy">' if x.get("hero_file") else "")
         + f'<div class="card-body"><div class="card-meta">{e(x.get("pub_date", ""))}</div><h2>{e(x.get("title", s))}</h2>'
         f'<p>{e(x.get("teaser", ""))}</p></div></a>' for _, s, x in entries) or '<p class="empty">아직 발행된 글이 없습니다.</p>'
@@ -383,6 +394,7 @@ INDEX = """<!DOCTYPE html>
 <main>
 {{ cards }}
 </main>
+<script src="reader.js" defer></script>
 </body>
 </html>
 """
@@ -405,6 +417,43 @@ def git(*args):
     return r.stdout.strip()
 
 
+def sync_reader():
+    """발행 목록을 DB에 맞춘다(조회수·좋아요가 받을 글) — 닿지 못해도 발행은 막지 않고 알리기만 한다."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import reader_stats as RS
+    ok, msg = RS.sync()
+    print(("조회수·좋아요 — " if ok else "주의: 조회수·좋아요 발행 목록을 DB에 맞추지 못했습니다 — ") + msg
+          + ("" if ok else " (나중에: python -I scripts/reader_stats.py sync)"), flush=True)
+
+
+def refresh(push=True):
+    """이미 발행한 글에 조회수·좋아요 자리를 붙인다 — 본문·발행일·style.css는 건드리지 않는다(다시 발행하면 발행일이 그날로 바뀌므로).
+    index.html에 자리와 스크립트 줄만 끼우고 reader.js를 새로 복사한다. 이미 붙은 글은 reader.js만 바뀐다."""
+    token_dir = SITE / settings()["web_path_token"]
+    for m in sorted(token_dir.glob("*/article.json")):
+        d, k = m.parent, m.parent.name
+        page = (d / "index.html").read_text(encoding="utf-8")
+        if 'class="reader-bar"' not in page:
+            bar = READER_BAR.format(id=html.escape(k))
+            for mark in ('<section class="references">', "</main>"):  # 참고자료 위, 없으면 본문 끝
+                if mark in page:
+                    page = page.replace(mark, bar + "\n\n  " + mark, 1)
+                    break
+            else:
+                raise SystemExit(f"자리를 찾지 못했습니다: {k}")
+            page = page.replace("</body>", READER_SCRIPT + "\n</body>", 1)
+            (d / "index.html").write_text(page, encoding="utf-8")
+            print("붙임 —", k, flush=True)
+        shutil.copyfile(WEB / "reader.js", d / "reader.js")
+    build_index()
+    sync_reader()
+    git("add", "-A", "--", "site")
+    if git("diff", "--cached", "--name-only", "--", "site"):
+        git("commit", "-m", "발행본에 조회수·좋아요 자리", "--", "site")
+    if push:
+        push_branch()
+
+
 def release(k, to, cc, push=True):
     a, out, info = build(k)
     print("1/4 웹 발행본 —", out.relative_to(ROOT).as_posix(), flush=True)
@@ -412,6 +461,7 @@ def release(k, to, cc, push=True):
     print("2/4 메일 —", eml.relative_to(ROOT).as_posix(), flush=True)
     dest = export_site(k, out)
     print("3/4 사이트 —", dest.relative_to(ROOT).as_posix(), flush=True)
+    sync_reader()
     meta = json.loads(a["meta"].read_text(encoding="utf-8"))
     meta["published"] = {"date": a["pub_date"], "url": info["web_url"], "site": dest.relative_to(ROOT).as_posix(),
                          "eml": eml.relative_to(ROOT).as_posix()}  # 받는 사람은 여기 적지 않는다 — save_recipients
@@ -452,6 +502,7 @@ def unpublish(ks, push=True):
             paths.append(mp.relative_to(ROOT).as_posix())
         print("내림 —", k, flush=True)
     build_index()
+    sync_reader()
     git("add", "-A", "--", *paths)
     if git("diff", "--cached", "--name-only", "--", *paths):
         git("commit", "-m", "웹에서 내림: " + ", ".join(ks), "--", *paths)
@@ -472,10 +523,14 @@ def main():
     u = sub.add_parser("unpublish")
     u.add_argument("article", nargs="+")
     u.add_argument("--no-push", action="store_true")
+    f = sub.add_parser("refresh")
+    f.add_argument("--no-push", action="store_true")
     args = ap.parse_args()
     split = lambda v: [x.strip() for x in v.split(",") if x.strip()]
     if args.cmd == "unpublish":
         return unpublish(args.article, not args.no_push)
+    if args.cmd == "refresh":
+        return refresh(not args.no_push)
     if args.cmd == "build":
         _, out, info = build(args.article)
         print(json.dumps({**info, "dir": out.relative_to(ROOT).as_posix()}, ensure_ascii=False))

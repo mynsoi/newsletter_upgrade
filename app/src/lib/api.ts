@@ -204,6 +204,17 @@ export async function getSource(path: string): Promise<Source> {
   return r.json();
 }
 
+/** 발행 사이트의 조회수·좋아요 — 글별 합계와 최근 날짜별 조회수(scripts/reader_stats.py). 못 읽으면 빈 값 */
+export type ReaderStats = Record<string, { views: number; likes: number; days: [string, number][] }>;
+export async function getReaderStats(): Promise<ReaderStats> {
+  try {
+    const r = await fetch("/api/reader-stats");
+    return r.ok ? await r.json() : {};
+  } catch {
+    return {};
+  }
+}
+
 export async function getChat(article: string): Promise<ChatMsg[]> {
   const r = await fetch("/api/chat?article=" + encodeURIComponent(article));
   return r.json();
