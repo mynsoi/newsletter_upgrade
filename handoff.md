@@ -86,7 +86,9 @@
 ## 5. 운영 주의 (겪은 것)
 
 - **서버 재시작은 도는 작업이 없을 때만**(`curl -s localhost:8771/api/jobs`의 running). 재시작하면 진행 중이던 작업은 끊긴 것(`lost`)으로 남고 후처리·커밋이 빠진다.
-  화면 코드만 바꿨으면 `cd app && npm run build`만.
+  이 PC에서 화면 코드만 바꿨으면 `cd app && npm run build`만.
+  받아 온 화면 코드는 서버가 켤 때 지금 빌드와 비교해 다르면 다시 빌드한다(2026-11-20, `studio_server.py`의 `build_app_if_stale` —
+  표식 `app/dist/.built-from`에 `HEAD:app`의 git 해시를 적어 둔다. 커밋하지 않은 화면 수정은 못 알아보니 손으로 빌드).
 - **astra가 끊기면 빈 결과가 난다.** 주제 묶기·원문 정하기·과정 2~·제목·그림 설명이 모두 astra다. 과정이 생기지 않거나 내용이 비면 astra 연결부터 확인한다.
 - **그림(gti)** 은 무조건 gpt-6-astra로, god-tibo-imagen 스크립트로 부른다. 같은 계정 요청을 차례로 처리하므로 한 장 5분 × 재시도 1회, 동시 2장.
   사내망에서는 `NODE_USE_SYSTEM_CA=1`이 필요하다(스크립트가 넣는다). 비율은 머리 3:2, 본문 16:9.

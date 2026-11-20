@@ -1648,6 +1648,47 @@ def tailnet_ips():
     return list(dict.fromkeys(ips))
 
 
+BUILT = DIST / ".built-from"  # 지금 화면(app/dist)을 어느 코드로 빌드했나 — vite가 빌드할 때 dist를 비우므로 손으로 빌드하면 사라진다
+
+
+def build_app_if_stale():
+    """켤 때 — 받아 온 화면 코드(app/)가 지금 빌드와 다르면 다시 빌드한다(2026-11-20).
+    app/dist는 git 밖이라, 그전엔 다른 PC에서 받아 온 화면 변경이 손으로 npm run build를 하기 전까지 보이지 않았다.
+    패키지 목록(package-lock.json)도 바뀌었으면 npm install부터. 실패하면 알리고 지금 화면으로 그대로 뜬다. 끄기: STUDIO_NO_BUILD=1"""
+    if os.environ.get("STUDIO_NO_BUILD") == "1":
+        return
+    rev = SH.git("rev-parse", "HEAD:app").stdout.strip()
+    lock = SH.git("rev-parse", "HEAD:app/package-lock.json").stdout.strip()
+    if not rev:
+        return
+    try:
+        was = json.loads(BUILT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        was = {}
+    if (DIST / "index.html").exists() and was.get("app") == rev:
+        return
+    npm = shutil.which("npm")
+    if not npm or not (ROOT / "app" / "node_modules").is_dir():
+        print("화면 코드가 바뀌었지만 npm 또는 app/node_modules가 없어 빌드하지 못했습니다 — setup-windows.cmd(또는 cd app && npm install && npm run build)", flush=True)
+        return
+    steps = ([["install", "--no-audit", "--no-fund"]] if was.get("lock") and was.get("lock") != lock else []) + [["run", "build"]]
+    print("화면 코드가 바뀌어 다시 빌드합니다(잠시만요)…", flush=True)
+    t = time.time()
+    for args in steps:
+        try:
+            r = subprocess.run([npm, *args], cwd=ROOT / "app", stdin=subprocess.DEVNULL, capture_output=True, text=True,
+                               encoding="utf-8", errors="replace", timeout=900)
+        except (OSError, subprocess.TimeoutExpired) as e:
+            print(f"화면 빌드 실패(npm {' '.join(args)}): {e} — 지금 화면으로 그대로 띄웁니다", flush=True)
+            return
+        if r.returncode:
+            print(f"화면 빌드 실패(npm {' '.join(args)}) — 지금 화면으로 그대로 띄웁니다. cd app && npm install && npm run build로 확인하세요\n"
+                  + (r.stdout + r.stderr).strip()[-800:], flush=True)
+            return
+    BUILT.write_text(json.dumps({"app": rev, "lock": lock}), encoding="utf-8")
+    print(f"화면 빌드됨 · {time.time() - t:.0f}s", flush=True)
+
+
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8771
     binds = ["127.0.0.1"] + tailnet_ips()
@@ -1663,6 +1704,10 @@ if __name__ == "__main__":
     threading.Thread(target=db_sync_loop, daemon=True).start()
     threading.Thread(target=aside_loop, daemon=True).start()
     SH.start(lambda: any(j["status"] == "running" for j in JOBS.values()))  # 글 공유 — 받아 오기·올리기(2026-10-26)
+    try:  # 위에서 한 번 받아 온 뒤 — 받아 온 화면 코드가 지금 빌드와 다르면 다시 빌드
+        build_app_if_stale()
+    except Exception as e:  # noqa: BLE001 — 빌드 문제로 작업실이 안 뜨면 안 된다
+        print(f"화면 빌드 확인 실패: {e}", flush=True)
     if not os.environ.get("DATABASE_URL"):
         print("DATABASE_URL이 없어 Supabase 자동 받기를 건너뜁니다(서재의 'Supabase 받기'도 실패합니다).", flush=True)
     servers[0].serve_forever()
