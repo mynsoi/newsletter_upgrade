@@ -67,6 +67,7 @@ export default function Publish({ state, id, refresh, go }: { state: State; id?:
 
 /** 최근 14일 날짜별 조회수 막대 — 기록이 없는 날은 0. 날짜는 한국 기준(서버가 세는 날짜와 같게) */
 function ViewBars({ days }: { days: [string, number][] }) {
+  const [hover, setHover] = useState<number | null>(null);
   const by = new Map(days);
   const now = Date.now() + 9 * 3600 * 1000;
   const row = Array.from({ length: 14 }, (_, i) => {
@@ -74,14 +75,44 @@ function ViewBars({ days }: { days: [string, number][] }) {
     return [d, by.get(d) ?? 0] as const;
   });
   const max = Math.max(1, ...row.map(([, n]) => n));
+  const label = (d: string) => `${+d.slice(5, 7)}월 ${+d.slice(8)}일 (${"일월화수목금토"[new Date(d + "T00:00:00Z").getUTCDay()]})`;
   return (
     <div>
-      <div className="flex h-12 items-end gap-1" role="img" aria-label="최근 14일 날짜별 조회수">
-        {row.map(([d, n]) => (
-          <div key={d} title={`${d} · 조회 ${n.toLocaleString()}`} className="flex h-full flex-1 items-end">
-            <div className={cn("w-full rounded-sm", n ? "bg-emerald-600/70 dark:bg-emerald-400/70" : "bg-line")} style={{ height: n ? `${Math.max(8, (n / max) * 100)}%` : "2px" }} />
+      {/* 막대 위에 그날 조회수(2026-11-20 — 막대만으로는 값을 알 수 없었다). 0인 날은 숫자를 적지 않는다. 1,000부터는 '1.2천'처럼 줄여 적는다.
+          마우스를 올리면 날짜·조회수 말풍선(브라우저 기본 툴팁 대신) — 양 끝 막대에서는 카드 밖으로 나가지 않게 안쪽으로 붙인다 */}
+      <div className="relative" onMouseLeave={() => setHover(null)}>
+        {hover !== null && (
+          <div
+            className="pointer-events-none absolute bottom-full z-10 mb-1.5 whitespace-nowrap rounded-lg bg-neutral-900 px-2.5 py-1.5 text-xs shadow-lg ring-1 ring-white/10 dark:bg-neutral-100 dark:ring-black/10"
+            style={{ left: `${((hover + 0.5) / 14) * 100}%`, transform: `translateX(${hover < 2 ? "-20%" : hover > 11 ? "-80%" : "-50%"})` }}
+          >
+            <div className="text-neutral-400 dark:text-neutral-500">{label(row[hover][0])}</div>
+            <div className="mt-0.5 flex items-center gap-1.5 font-semibold tabular-nums text-white dark:text-neutral-900">
+              <span className="size-2 rounded-full bg-emerald-400 dark:bg-emerald-600" />
+              조회 {row[hover][1].toLocaleString()}
+            </div>
           </div>
-        ))}
+        )}
+        <div className="flex h-16 gap-1" role="img" aria-label="최근 14일 날짜별 조회수">
+          {row.map(([d, n], i) => (
+            <div key={d} onMouseEnter={() => setHover(i)} className="flex min-w-0 flex-1 cursor-default flex-col">
+              <div className="flex min-h-0 flex-1 flex-col justify-end">
+                {n > 0 && (
+                  <span className="mb-1 self-center whitespace-nowrap text-[10px] font-medium leading-none tabular-nums text-ink-2">
+                    {n < 1000 ? n : new Intl.NumberFormat("ko", { notation: "compact", maximumFractionDigits: 1 }).format(n)}
+                  </span>
+                )}
+                <div
+                  className={cn(
+                    "w-full shrink-0 rounded-sm transition-colors",
+                    n ? (hover === i ? "bg-emerald-500 dark:bg-emerald-300" : "bg-emerald-600/70 dark:bg-emerald-400/70") : hover === i ? "bg-ink-3" : "bg-line"
+                  )}
+                  style={{ height: n ? `${Math.max(4, (n / max) * 46)}px` : "2px" }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="mt-1 flex justify-between text-xs tabular-nums text-ink-3">
         <span>{row[0][0].slice(5)}</span>
