@@ -19,6 +19,33 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, quote, unquote, urlparse
 
+RESTART_CODE = 75  # 서버가 "코드가 바뀌었으니 다시 띄워 달라"며 끝날 때의 종료 코드
+
+
+def supervise():
+    """지킴이(2026-11-20) — 진짜 서버를 자식 프로세스로 띄우고, 자식이 RESTART_CODE로 끝나면 다시 띄운다.
+    받아 온 서버 코드(scripts/)는 이미 떠 있는 파이썬에는 적용되지 않아, 그전엔 사람이 서버를 껐다 켜야 했다
+    (꺼져 있던 PC는 두 번 — 처음 켤 때 받아 오고, 다시 켜야 새 코드로 돈다). 지킴이는 이 파일의 맨 위만 읽고
+    작업실 모듈을 하나도 싣지 않으므로 코드가 바뀌어도 그대로 두면 된다. 끄기: STUDIO_NO_RESTART=1"""
+    cmd = [sys.executable, *sys.orig_argv[1:]]
+    env = {**os.environ, "STUDIO_CHILD": "1"}
+    recent = []
+    while True:
+        try:
+            rc = subprocess.call(cmd, env=env)
+        except KeyboardInterrupt:
+            sys.exit(0)
+        if rc != RESTART_CODE:
+            sys.exit(rc)
+        recent = [t for t in recent if time.time() - t < 600] + [time.time()]
+        if len(recent) > 5:  # 다시 시작이 되풀이되면 멈춘다(있어서는 안 되는 일 — 창을 닫지 않고 알린다)
+            sys.exit("작업실이 10분 사이 여섯 번 다시 시작했습니다 — 멈춥니다. 다시 실행해 보고, 되풀이되면 STUDIO_NO_RESTART=1로 띄우세요.")
+        print("작업실을 새 코드로 다시 띄웁니다…", flush=True)
+
+
+if __name__ == "__main__" and os.environ.get("STUDIO_CHILD") != "1" and os.environ.get("STUDIO_NO_RESTART") != "1":
+    supervise()
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
@@ -1738,6 +1765,52 @@ def build_app_if_stale():
     print(f"화면 빌드됨 · {time.time() - t:.0f}s", flush=True)
 
 
+CAN_RESTART = os.environ.get("STUDIO_CHILD") == "1"  # 지킴이(supervise) 아래에서 돌 때만 스스로 끝낸다
+CODE_WATCH_EVERY = 60
+
+
+def code_rev():
+    return SH.git("rev-parse", "HEAD:scripts").stdout.strip()
+
+
+BOOT_REV = code_rev()  # 이 프로세스가 실은 서버 코드(scripts/) — 받아 오기 전에 잡아 둔다
+
+
+def restart_if_code_changed():
+    """받아 온 서버 코드(scripts/)가 이 프로세스가 실은 것과 다르면, 도는 작업이 없을 때 끝낸다 — 지킴이가 새 코드로 다시 띄운다.
+    git 작업 중(올리기·받아 오기)에는 끝내지 않도록 SH.GIT을 잡고 끝낸다. 화면은 몇 초 뒤 저절로 다시 이어진다."""
+    if not CAN_RESTART or not BOOT_REV:
+        return
+    rev = code_rev()
+    if not rev or rev == BOOT_REV:
+        return
+    with LOCK:
+        if any(j["status"] == "running" for j in JOBS.values()):
+            return  # 작업이 끝난 뒤 다음 확인 때
+    with SH.GIT:
+        print("서버 코드가 바뀌었습니다 — 다시 시작합니다", flush=True)
+        os._exit(RESTART_CODE)
+
+
+def code_watch_loop():
+    """켜 둔 채로도 새 코드가 적용되게(2026-11-20) — 1분마다: 서버 코드가 바뀌었으면 다시 시작, 화면 코드만 바뀌었으면 다시 빌드."""
+    while True:
+        time.sleep(CODE_WATCH_EVERY)
+        try:
+            restart_if_code_changed()
+            with LOCK:
+                busy = any(j["status"] == "running" for j in JOBS.values())
+            app = SH.git("rev-parse", "HEAD:app").stdout.strip()
+            if not busy and app and app != code_watch_loop.tried:  # 같은 코드로는 한 번만 시도(실패 알림이 1분마다 되풀이되지 않게)
+                code_watch_loop.tried = app
+                build_app_if_stale()
+        except Exception as e:  # noqa: BLE001
+            print(f"코드 변경 확인 실패: {e}", flush=True)
+
+
+code_watch_loop.tried = ""
+
+
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8771
     binds = ["127.0.0.1"] + tailnet_ips()
@@ -1754,7 +1827,9 @@ if __name__ == "__main__":
     threading.Thread(target=aside_loop, daemon=True).start()
     threading.Thread(target=collect_watch_loop, daemon=True).start()
     SH.start(lambda: any(j["status"] == "running" for j in JOBS.values()))  # 글 공유 — 받아 오기·올리기(2026-10-26)
-    try:  # 위에서 한 번 받아 온 뒤 — 받아 온 화면 코드가 지금 빌드와 다르면 다시 빌드
+    restart_if_code_changed()  # 위에서 한 번 받아 왔다 — 서버 코드가 바뀌었으면 여기서 끝나고 지킴이가 새 코드로 다시 띄운다
+    threading.Thread(target=code_watch_loop, daemon=True).start()
+    try:  # 받아 온 화면 코드가 지금 빌드와 다르면 다시 빌드
         build_app_if_stale()
     except Exception as e:  # noqa: BLE001 — 빌드 문제로 작업실이 안 뜨면 안 된다
         print(f"화면 빌드 확인 실패: {e}", flush=True)
