@@ -52,6 +52,57 @@ def save_jobs():
     JOBS_FILE.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+# 작업 시간 상한(분) — 외부 호출(Claude·astra·aside)이 응답 없이 멈추면 작업이 끝없이 '실행 중'으로 남아 같은 작업을 다시 누를 수 없고
+# 글의 '작업 중' 표시도 안 풀렸다(서버를 다시 띄워야 풀림). 넘으면 중단하고 실패로 남긴다(2026-11-20).
+# 지금까지 가장 길었던 실행: 쓰기 3분 · 주제 묶기 6분 · 수집 142분(과거분 받기) — 넉넉히 잡는다. STUDIO_JOB_MINUTES로 전부 바꿀 수 있다.
+JOB_MINUTES = {"collect": 180, "wiki": 60, "wiki-lint": 60}
+JOB_MINUTES_DEFAULT = 30
+
+
+def job_minutes(kind):
+    try:
+        return float(os.environ["STUDIO_JOB_MINUTES"])
+    except (KeyError, ValueError):
+        return JOB_MINUTES.get(kind, JOB_MINUTES_DEFAULT)
+
+
+def kill_tree(proc):
+    """작업과 그 작업이 띄운 프로세스(claude·codex·aside)까지 끝낸다 — 부모만 끝내면 자식이 로그 파일을 쥔 채 남는다."""
+    try:
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
+        else:
+            import signal
+            os.killpg(proc.pid, signal.SIGKILL)
+    except (OSError, ProcessLookupError):
+        pass
+    try:
+        proc.kill()
+    except OSError:
+        pass
+
+
+def run_limited(cmd, log, minutes):
+    """명령을 돌려 로그에 쓴다 → 성공했나. 상한을 넘거나 띄우지 못하면 로그에 사유를 남기고 False."""
+    with open(log, "w", encoding="utf-8") as f:
+        try:
+            proc = subprocess.Popen(cmd, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=f, stderr=subprocess.STDOUT,
+                                    **({} if os.name == "nt" else {"start_new_session": True}))
+        except OSError as e:
+            f.write(f"\n[실행 실패] {e}\n")
+            return False
+        try:
+            return proc.wait(timeout=minutes * 60) == 0
+        except subprocess.TimeoutExpired:
+            kill_tree(proc)
+            try:
+                proc.wait(timeout=30)
+            except subprocess.TimeoutExpired:
+                pass
+            f.write(f"\n[시간 초과] {minutes:g}분이 지나도 끝나지 않아 중단했습니다 — 다시 실행해 주세요\n")
+            return False
+
+
 def start(kind, target, cmd, after=None):
     other = SH.locked_by_other(target) if SH.is_article(target) else None
     if other:  # 다른 사용자가 이 글에서 작업 중(작업 중 표시는 git으로 받아 온 runs/columns/<글>/lock.json)
@@ -67,9 +118,11 @@ def start(kind, target, cmd, after=None):
         JOBS[jid] = j
 
     def run():
-        with open(log, "w", encoding="utf-8") as f:
-            r = subprocess.run(cmd, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=f, stderr=subprocess.STDOUT)
-        ok = r.returncode == 0
+        try:
+            ok = run_limited(cmd, log, job_minutes(kind))
+        except Exception as e:  # noqa: BLE001 — 여기서 죽으면 작업이 '실행 중'으로 남는다
+            ok = False
+            print(f"작업 실행 실패 {kind} {target}: {e}", flush=True)
         if ok and after:
             try:
                 after(j)
@@ -384,7 +437,8 @@ def state():
     collects = collect_rounds()
     fresh = {x["path"] for x in collects[0]["saved"] if x.get("path")} if collects else set()
     return {"library": library(), "articles": articles(), "jobs": jobs,
-            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings(), "director": DIRECTOR_ON}
+            "collects": collects, "asideRounds": aside_rounds(), "wiki": wiki_state(fresh), "mine": mine_state(jobs), "publish": publish_settings(), "director": DIRECTOR_ON,
+            "share": SH.status()}
 
 
 MINE = ROOT / "runs" / "mine"
@@ -1271,17 +1325,21 @@ def aside_loop():
     time.sleep(120)  # 서버가 켜질 때의 Supabase 받기와 겹치지 않게
     every = max(ASIDE_EVERY, 1800)
     while True:
-        wait_due("aside", every)
         ran = False
-        if not SH.is_owner():  # 기준 PC만 자동 수집(2026-10-26 — 여러 PC가 같은 사이트를 겹쳐 긁지 않게)
-            time.sleep(every)
-            continue
-        if os.environ.get("DATABASE_URL"):
-            ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True).returncode == 0
-            if ok:
-                mark_run("aside")
-                act_collect({})
-                ran = True
+        try:  # 한 바퀴가 죽어도 반복은 이어 간다(2026-11-20 — 예외 한 번에 자동 수집이 서버를 다시 띄울 때까지 멈췄다)
+            wait_due("aside", every)
+            if not SH.is_owner():  # 기준 PC만 자동 수집(2026-10-26 — 여러 PC가 같은 사이트를 겹쳐 긁지 않게)
+                time.sleep(every)
+                continue
+            if os.environ.get("DATABASE_URL"):
+                ok = subprocess.run(PY + ["scripts/aside_collect.py", "--check"], cwd=ROOT, stdin=subprocess.DEVNULL, capture_output=True,
+                                    timeout=300).returncode == 0
+                if ok:
+                    mark_run("aside")
+                    act_collect({})
+                    ran = True
+        except Exception as e:  # noqa: BLE001
+            print(f"aside 자동 수집 반복 실패(10분 뒤 다시): {e}", flush=True)
         if not ran:
             # Aside가 꺼져 있었으면 기록 없이 10분 뒤 다시 본다(2026-11-19 — 예전엔 한 간격(6시간)을 쉬어,
             # PC를 켤 때 서버가 Aside보다 10초 먼저 확인하자 오전 회차가 통째로 빠졌다). DATABASE_URL이 없으면 한 간격.
@@ -1300,12 +1358,16 @@ def act_db_sync(_):
 def db_sync_loop():
     every = max(DB_EVERY, 600)
     while True:
-        wait_due("db-sync", every)
-        if os.environ.get("DATABASE_URL"):
-            mark_run("db-sync")
-            act_db_sync({})
-        else:
-            time.sleep(every)
+        try:  # 한 바퀴가 죽어도 반복은 이어 간다(2026-11-20)
+            wait_due("db-sync", every)
+            if os.environ.get("DATABASE_URL"):
+                mark_run("db-sync")
+                act_db_sync({})
+            else:
+                time.sleep(every)
+        except Exception as e:  # noqa: BLE001
+            print(f"Supabase 받기 반복 실패(10분 뒤 다시): {e}", flush=True)
+            time.sleep(600)
 
 
 def owner_only(what):

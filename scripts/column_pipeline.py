@@ -252,11 +252,26 @@ def run_astra(d, prompt):
     d.mkdir(parents=True, exist_ok=True)
     (d / "prompt.md").write_text(prompt, encoding="utf-8")
     out = d / "output.md"
-    with open(d / "run.log", "w", encoding="utf-8") as log:
-        subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
-                        "--ephemeral", "--color", "never", "-o", str(out), "-"],
-                       cwd=d, input=prompt, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
-    return out.read_text(encoding="utf-8").strip() if out.exists() else ""
+    text = ""
+    for i in range(2):  # 연결이 끊기거나 한도에 걸리면 오류 없이 빈 답이 온다 — 비면 한 번 더(2026-11-20)
+        out.unlink(missing_ok=True)  # 같은 폴더의 지난 실행 결과가 이번 답으로 읽히지 않게
+        with open(d / "run.log", "w" if i == 0 else "a", encoding="utf-8") as log:
+            subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
+                            "--ephemeral", "--color", "never", "-o", str(out), "-"],
+                           cwd=d, input=prompt, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
+        text = out.read_text(encoding="utf-8").strip() if out.exists() else ""
+        if text:
+            break
+        print(f"astra 빈 결과({d.name})" + (" — 한 번 더 시도" if i == 0 else ""), flush=True)
+    return text
+
+
+def need(text, what, d):
+    """빈 결과는 원고로 저장하지 않는다 — 작업을 실패로 끝내 직전 원고를 그대로 둔다(2026-11-20: 빈 final-rN.md가
+    '최신 원고'가 되고 작업은 완료로 보였다). 여러 편을 함께 돌릴 때는 나머지가 끝난 뒤 실패로 끝난다."""
+    if not (text or "").strip():
+        sys.exit(f"{what} 결과가 비었음 — 원고는 그대로 둡니다. 다시 실행해 주세요. 로그: {d}")
+    return text
 
 
 def stage(name, jobs):
@@ -409,7 +424,7 @@ def main(paths):
         if f.exists() and f.stat().st_size > 200:
             return f.read_text(encoding="utf-8")
         refs, guide = style_for_draft(b)
-        t = run_claude(b["dir"] / "_draft", draft_prompt(b, refs, guide))
+        t = need(run_claude(b["dir"] / "_draft", draft_prompt(b, refs, guide)), "초안(과정 1)", b["dir"] / "_draft")
         f.write_text(t, encoding="utf-8")
         return t
     stage("초안·Claude", [lambda k=k: mk_draft(k) for k in own])
@@ -423,7 +438,7 @@ def main(paths):
     def mk_r4(k):
         b = briefs[k]
         refs, guide = style_for_r4(b, draft_of(k))
-        t = run_astra(b["dir"] / "_r4", r4_prompt(b, draft_of(k), refs, guide))
+        t = need(run_astra(b["dir"] / "_r4", r4_prompt(b, draft_of(k), refs, guide)), "재작성(과정 2)", b["dir"] / "_r4")
         (b["dir"] / "r4.md").write_text(t, encoding="utf-8")
         return t
     stage("재작성·astra", [lambda k=k: mk_r4(k) for k in briefs])
@@ -431,7 +446,7 @@ def main(paths):
     # 3. 기준 반영
     def mk_final(k):
         b = briefs[k]
-        t = run_astra(b["dir"] / "_final", fb_prompt((b["dir"] / "r4.md").read_text(encoding="utf-8")))
+        t = need(run_astra(b["dir"] / "_final", fb_prompt((b["dir"] / "r4.md").read_text(encoding="utf-8"))), "기준 반영(과정 3)", b["dir"] / "_final")
         (b["dir"] / "final.md").write_text(t, encoding="utf-8")
         (b["dir"] / "rules.txt").write_text(rules_text(), encoding="utf-8")  # 과정 3에 쓴 규칙 — 작업실이 이 과정의 '반영한 것'으로 보여 준다
         meta = {kk: vv for kk, vv in b.items() if kk != "dir"}
@@ -486,7 +501,7 @@ def revise(brief_path, feedback_path):
         "[이번 피드백 — 받은 그대로]\n" + fb_new, standing_block(fixing=True), PEOPLE_RULE, IC.KEEP_RULE, IC.glossary_block(), OUT_RULE,
         "=== [원고] ===\n" + cur.read_text(encoding="utf-8")])
     t0 = time.time()
-    out = run_astra(d / f"_revise-r{n}", prompt)
+    out = need(run_astra(d / f"_revise-r{n}", prompt), "피드백 반영", d / f"_revise-r{n}")
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
     (d / f"feedback-r{n}.txt").write_text(fb_new, encoding="utf-8")
     print(f"피드백 반영 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")
@@ -683,7 +698,7 @@ def fit(brief_path):
     d = RUNS / Path(brief_path).stem
     cur, n = latest_final(d)
     t0 = time.time()
-    out = run_astra(d / f"_fit-r{n}", fit_prompt(cur.read_text(encoding="utf-8")))
+    out = need(run_astra(d / f"_fit-r{n}", fit_prompt(cur.read_text(encoding="utf-8"))), "1,000자 줄이기", d / f"_fit-r{n}")
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
     (d / f"mode-r{n}.txt").write_text("1,000자", encoding="utf-8")
     print(f"1,000자 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · 본문 {chars(d / f'final-r{n}.md')}자")
@@ -694,7 +709,7 @@ def shorten(brief_path):
     d = RUNS / Path(brief_path).stem
     cur, n = latest_final(d)
     t0 = time.time()
-    out = run_astra(d / f"_shorten-r{n}", shorten_prompt(cur.read_text(encoding="utf-8")))
+    out = need(run_astra(d / f"_shorten-r{n}", shorten_prompt(cur.read_text(encoding="utf-8"))), "절반 줄이기", d / f"_shorten-r{n}")
     (d / f"final-r{n}.md").write_text(out, encoding="utf-8")
     (d / f"mode-r{n}.txt").write_text("절반", encoding="utf-8")
     print(f"절반 r{n}: {cur.name} → final-r{n}.md · {time.time() - t0:.0f}s · {len(out)}자")

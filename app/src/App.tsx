@@ -115,6 +115,7 @@ export default function App() {
           />
         </div>
       )}
+      <ShareAlert state={state} />
       <Nav state={state} view={view} current={parts[1]} go={go} />
       <LogDrawer state={state} id={logJob} onClose={() => setLogJob(null)} onPick={setLogJob} />
       <main id="main" className="relative min-h-screen pl-[60px]">
@@ -244,6 +245,37 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
           </div>
         </SidebarBody>
       </Sidebar>
+    </div>
+  );
+}
+
+/** 글 공유가 안 되고 있을 때의 띠 — 조용히 실패해 다른 PC와 어긋난 줄 모르던 문제(2026-11-20). 누르면 git이 낸 사유가 펼쳐진다 */
+function ShareAlert({ state }: { state: State | null }) {
+  const [open, setOpen] = useState(false);
+  const ps = state?.share?.problems ?? [];
+  if (!ps.length) return null;
+  const mins = (t: number) => Math.max(1, Math.round((Date.now() / 1000 - t) / 60));
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-3 z-[80] flex justify-center pl-[60px]">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="pointer-events-auto max-w-[640px] rounded-2xl border border-amber-400/50 bg-panel-solid px-4 py-2.5 text-left shadow-xl"
+      >
+        <div className="text-sm font-semibold text-amber-700 dark:text-amber-300">
+          다른 PC와 글 공유가 안 되고 있습니다 — {ps.map((p) => `${p.label} ${mins(p.since)}분째 실패`).join(" · ")}
+        </div>
+        <div className="mt-0.5 text-xs text-ink-2">
+          {ps.some((p) => p.what === "pull") ? "이 PC의 글이 최신이 아닐 수 있습니다. " : ""}
+          {ps.some((p) => p.what === "push") ? "이 PC에서 고친 내용이 다른 PC에 아직 없습니다. " : ""}
+          네트워크·GitHub 로그인을 확인해 주세요.
+        </div>
+        {open &&
+          ps.map((p) => (
+            <div key={p.what} className="mt-2 whitespace-pre-wrap break-all font-mono text-[11px] text-ink-3">
+              {p.label}: {p.msg || "사유 없음"}
+            </div>
+          ))}
+      </button>
     </div>
   );
 }

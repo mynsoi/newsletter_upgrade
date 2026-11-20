@@ -23,6 +23,32 @@ GIT = threading.Lock()  # 이 서버 안의 git 작업은 한 번에 하나(pull
 _pending, _plock = {}, threading.Lock()
 _user = None
 
+# ---------- 공유 상태 — 올리기·받아 오기가 실패하면 화면에 알린다(2026-11-20) ----------
+# 그전엔 실패가 서버 창에만 한 줄 찍혀, 받기가 막힌 PC가 옛 상태로 계속 쓰거나 올라간 줄 알았다.
+PULL_GRACE = 240  # 초 — 받아 오기는 90초마다 다시 하므로 잠깐의 끊김은 알리지 않는다(연달아 실패해 이만큼 지나면 알림)
+_status, _slock = {}, threading.Lock()  # {"push"|"pull": {"ok", "at", "since"(처음 실패한 때), "msg"}}
+
+
+def note(what, ok, msg=""):
+    """올리기(push)·받아 오기(pull) 결과를 적어 둔다. 사유에는 주소에 섞인 로그인 정보가 남지 않게 한다."""
+    msg = re.sub(r"//[^/@\s]+@", "//", (msg or "").strip())[-300:]
+    with _slock:
+        prev = _status.get(what, {})
+        _status[what] = {"ok": ok, "at": time.time(), "msg": "" if ok else msg,
+                         "since": None if ok else (prev.get("since") or time.time())}
+
+
+def status():
+    """화면에 알릴 공유 문제 — 올리기는 실패하면 바로(다음 변경 때까지 다시 시도하지 않는다), 받아 오기는 PULL_GRACE 넘게 이어질 때."""
+    now, out = time.time(), []
+    with _slock:
+        st = {k: dict(v) for k, v in _status.items()}
+    for what, label in (("pull", "받아 오기"), ("push", "올리기")):
+        s = st.get(what)
+        if s and not s["ok"] and (what == "push" or now - s["since"] >= PULL_GRACE):
+            out.append({"what": what, "label": label, "since": s["since"], "msg": s["msg"]})
+    return {"problems": out}
+
 
 def git(*a):
     return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -86,8 +112,11 @@ def sync(k, msg):
         r = git("commit", "-q", "-m", f"{msg} ({user()})", "--", *staged)
         if r.returncode:
             print(f"글 공유 커밋 실패 {k}: {(r.stderr or r.stdout).strip()[:200]}", flush=True)
+            note("push", False, "커밋 실패: " + (r.stderr or r.stdout))
             return False
-        return W.push()
+        ok = W.push()
+        note("push", ok, W.PUSH_ERR)
+        return ok
 
 
 def schedule(k, msg):
@@ -110,6 +139,7 @@ def _worker():
                 sync(k, m)
             except Exception as e:  # noqa: BLE001 — 공유 실패가 작업실을 멈추지 않게
                 print(f"글 공유 실패 {k}: {e}", flush=True)
+                note("push", False, str(e))
 
 
 # ---------- 작업 중 표시 · 작업 기록 ----------
@@ -168,7 +198,13 @@ def pull(busy=lambda: False):
         if r.returncode:
             git("rebase", "--abort")
             print(f"받아 오기 실패: {(r.stderr or r.stdout).strip()[:200]}", flush=True)
+            note("pull", False, r.stderr or r.stdout)
             return False
+        # 받기가 되면 원격과 이어진 것 — 올리지 못한 커밋이 없으면 올리기 문제도 풀린 것으로 본다(다른 경로로 올라간 경우)
+        ahead = git("rev-list", "--count", "@{u}..HEAD")
+        if ahead.returncode == 0 and ahead.stdout.strip() == "0":
+            note("push", True)
+    note("pull", True)
     return True
 
 
@@ -240,4 +276,5 @@ def start(busy):
                 pull(busy)
             except Exception as e:  # noqa: BLE001
                 print(f"받아 오기 실패: {e}", flush=True)
+                note("pull", False, str(e))
     threading.Thread(target=loop, daemon=True).start()

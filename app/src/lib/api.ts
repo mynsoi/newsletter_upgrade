@@ -178,6 +178,8 @@ export type State = {
   mine?: MineRun[];
   publish?: { to: string[]; cc: string[]; webBase: string };
   director?: boolean; // 진행자가 켜져 있나(서버 STUDIO_DIRECTOR=1) — 기본은 꺼짐(2026-11-19)
+  /** 글 공유(git 올리기·받아 오기)가 안 되고 있으면 그 문제들 — 화면 위 띠로 알린다(2026-11-20) */
+  share?: { problems: { what: "push" | "pull"; label: string; since: number; msg: string }[] };
 };
 
 // 소스 aside 수집 회차(scripts/aside_collect.py → Supabase) — 서재 위 칩
