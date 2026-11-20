@@ -305,6 +305,7 @@ def sections(body):
 def wiki_state(fresh):
     """주제 지도를 화면용으로 읽는다 (2026-10-11 개편) — 주제마다 판정·대상 독자·왜 쓸모·제목 후보·원문 카드."""
     cs = W.all_cards()  # 자동 카드(Sonnet) + 예전 astra 카드
+    since = W.recent_since()
     topics = []
     for tp in W.topics():
         srcs = [tp["center"]] + [s for s in tp["sources"] if s != tp["center"]]
@@ -319,11 +320,13 @@ def wiki_state(fresh):
             "verdict": tp["verdict"], "audience": tp["audience"], "status": tp["status"].split("#")[0].strip(),
             "usedIn": tp["used_in"], "titles": tp["titles"], "sources": rows, "angles": [], "related": [], "at": tp["timestamp"],
             "cases": tp["cases"],
+            # 핫함(2026-11-20) — 최근 1개월 사례 수·발행처 수·최근 발행일. 화면의 핫·지난 주제 탭과 정렬이 쓴다
+            "heat": W.heat_of([(r["date"], r["site"]) for r in rows], since),
         })
     log = read(W.WIKI / "log.md")
     unbundled, n_old, n_undated = W.bundle_pool()  # 최근 1개월 발행 카드만 묶는다 — 나머지는 검색에만
     return {"topics": topics, "processed": len(W.processed()), "backlog": W.backlog(), "unbundled": len(unbundled),
-            "bundleSince": W.recent_since(), "searchOnly": {"old": n_old, "undated": n_undated},
+            "bundleSince": since, "hotMin": W.HOT_MIN_PUBS, "searchOnly": {"old": n_old, "undated": n_undated},
             "log": [l for l in log.splitlines() if l.startswith(("## ", "- "))][:40]}
 
 

@@ -526,6 +526,36 @@ def recent_since(today=None):
     return dt.date(y, m + 1, min(d.day, calendar.monthrange(y, m + 1)[1])).isoformat()
 
 
+# 핫함(2026-11-20 사용자 결정) — 판정(쓸 만함·보통·뺌, 독자에게 쓸 만한가)과 따로, 날짜로 계산한다:
+# 최근 RECENT_MONTHS개월 안에 발행된 사례가 몇 편이고 몇 곳의 발행처에서 나왔는가. 발행처가 HOT_MIN_PUBS곳 이상인
+# 쓸 만함 주제가 작업실 '핫' 탭, 최근 사례가 하나도 없는 주제는 '지난 주제' 탭(파일·판정은 그대로 — 새 사례가 붙으면 돌아온다).
+HOT_MIN_PUBS = int(os.environ.get("WIKI_HOT_MIN_PUBS", "2"))
+
+
+def heat_of(dated, since=None):
+    """(발행일, 발행처) 목록 → 최근 사례 수·발행처 수·가장 최근 발행일 {"recent": n, "pubs": n, "latest": "YYYY-MM-DD"}.
+    작업실(studio_server.wiki_state)은 이미 읽은 원문 날짜·발행처로 이것을 부른다."""
+    since = since or recent_since()
+    rec = [(d[:10], s) for d, s in dated if d and d[:10] >= since]
+    return {"recent": len(rec), "pubs": len({s for _, s in rec}), "latest": max((d for d, _ in rec), default="")}
+
+
+def heat(t, since=None):
+    """주제 하나의 핫함 — 원문 파일에서 발행일·발행처를 읽는다(서재에서 빠진 원문은 건너뜀)."""
+    dated = []
+    for k in t["sources"]:
+        try:
+            dated.append((date_of(rel(k)) or "", site_name(k)))
+        except OSError:
+            pass
+    return heat_of(dated, since)
+
+
+def joinable(t):
+    """주제 묶기에서 새 카드를 붙일 수 있는 주제 — 쓸 수 있음이고 판정이 뺌이 아닌 것. 지난 주제도 넣는다(새 사례가 붙어 되살아나게)."""
+    return t["status"] == "쓸 수 있음" and t["verdict"] != "뺌"
+
+
 def bundle_pool():
     """주제 묶기 대상 → (최근 카드 키 목록, 최근 3개월보다 오래된 수, 발행일 없는 수). 재료 없음·이미 주제에 든 것·뺀 것은 셈에서 뺀다."""
     dc, ex = doc_cards(), excluded()
@@ -546,14 +576,15 @@ def bundle_pool():
 
 
 def bundle_prompt(new, cs, ts):
-    have = "\n".join(f"[{Path(t['page']).stem}] {t['title']} — 사례: {', '.join(t['sources'])}" for t in ts if t["status"] == "쓸 수 있음") or "(아직 없음)"
+    have = "\n".join(f"[{Path(t['page']).stem}] {t['title']} — 사례: {', '.join(t['sources'])}" for t in ts if joinable(t)) or "(아직 없음)"
     cards_txt = "\n\n".join(f"[{k}] 발행처: {site_name(k)}\n글쓴이가 하는 말: {cs[k]['글쓴이가 하는 말']}\n있었던 일: {cs[k]['있었던 일']}" for k in new)
     return "\n\n".join([
         f"아래는 {READER} 칼럼 재료로 새로 들어온 원문 카드들입니다. 칼럼을 쓸 사람이 고를 '주제' 목록을 만들어 주세요.",
         TOPIC_RULE,
         "할 일:\n"
-        "1. 새 카드가 [기존 주제]의 메시지를 받쳐 주면 그 주제에 사례로 붙입니다(join). 메시지가 같아야 하고, 분야만 비슷한 것은 붙이지 않습니다.\n"
-        "2. 나머지 새 카드 중 같은 메시지를 받쳐 주는 것끼리 새 주제로 묶습니다(topics). 원문 글쓴이의 주장이 똑같을 필요는 없고, 우리 독자에게 같은 메시지를 보여 주면 됩니다.\n"
+        "1. 새 카드가 [기존 주제]의 메시지를 받쳐 주면 그 주제에 사례로 붙입니다(join). 메시지가 같아야 하고, 분야만 비슷한 것은 붙이지 않습니다. "
+        "같은 메시지를 다른 발행처가 다룬 카드는 비슷한 새 주제를 따로 만들지 말고 기존 주제에 붙입니다 — 주제 탭은 최근 한 달 안에 여러 발행처가 다룬 주제를 '핫'으로 올리므로, 같은 메시지가 여러 주제로 흩어지면 핫한 흐름이 보이지 않습니다.\n"
+        "2. 나머지 새 카드 중 같은 메시지를 받쳐 주는 것끼리 새 주제로 묶습니다(topics). 원문 글쓴이의 주장이 똑같을 필요는 없고, 우리 독자에게 같은 메시지를 보여 주면 됩니다. 발행처가 다른 카드끼리 같은 메시지면 한 주제로 모읍니다.\n"
         "3. 새 주제마다 사례 1~3개. 가능하면 서로 다른 발행처에서. 첫 번째가 중심 사례. 메시지에 반대되거나 조건을 다는 사례는 role을 '반례'로, 나머지는 '중심'·'받침'.\n"
         "4. 사례마다 line: 그 카드의 있었던 일 한 줄(누가 무엇을 했고 무엇이 드러났는지, 이름·숫자 그대로, 60자 안팎).\n"
         "5. 새 주제마다 판정: 쓸 만함 · 보통 · 뺌 — [판정 기준]을 따르고 애매하면 [판정 예시]의 결을 따릅니다. 첫 질문은 칼럼의 목적(AI 시대의 일하는 방식·조직문화·AI 트렌드)에 맞는가이고, "
@@ -746,7 +777,7 @@ def bundle_once(api=False, skip=()):
     for j in g.get("join", []):
         t = by.get(j.get("topic", ""))
         cases = [c for c in j.get("cases", []) if ok(c)]
-        if t and cases and t["status"] == "쓸 수 있음":
+        if t and cases and joinable(t):
             if not t["cases"]:  # 예전(사례 단위) 주제면 지금 원문을 사례로 옮겨 적는다
                 t["cases"] = [{"key": s, "role": "중심" if s == t["center"] else "받침", "line": cs.get(s, {}).get("있었던 일", "")[:80]} for s in t["sources"]]
                 t["thesis"] = t["thesis"] or t["title"]

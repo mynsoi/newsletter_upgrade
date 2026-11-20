@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { IconArrowRight, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
+import { IconArrowRight, IconFlameFilled, IconRefresh, IconSparkles, IconStack2, IconWand } from "@tabler/icons-react";
 import ExpandableCards from "@/components/expandable-cards";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -21,7 +21,36 @@ const site = (p: string) => p.split("/")[1] ?? "";
 const pubs = (t: WikiTopic) => new Set(t.sources.map((s) => s.site || site(s.path))).size;
 const latest = (t: WikiTopic) => t.sources.reduce((x, s) => ((s.date ?? "") > x ? s.date ?? "" : x), "");
 const VERDICTS = ["쓸 만함", "보통", "뺌"] as const;
-type Tab = (typeof VERDICTS)[number] | "쓴 글";
+// 핫·지난 주제(2026-11-20) — 판정과 따로 날짜로 나눈다. 핫 = 쓸 만함 중 최근 1개월 발행처 hotMin곳 이상(쓸 만함 탭에도 함께 보임),
+// 지난 주제 = 최근 1개월 사례가 없는 쓸 수 있는 주제(판정 탭에서 빠짐, 새 사례가 붙으면 돌아온다)
+type Tab = "핫" | (typeof VERDICTS)[number] | "지난 주제" | "쓴 글";
+const TABS: Tab[] = ["핫", "쓸 만함", "보통", "뺌", "지난 주제", "쓴 글"];
+const recentOf = (t: WikiTopic) => t.heat ?? { recent: 0, pubs: 0, latest: "" };
+/** 핫 탭 이름 — 불꽃 + 주황·빨강 그라데이션 HOT(2026-11-20 — 글자 '핫'만으로는 밋밋했다) */
+function HotLabel({ small = false }: { small?: boolean }) {
+  return (
+    <span className="inline-flex items-center gap-1">
+      <IconFlameFilled className={cn("text-orange-500 drop-shadow-[0_0_6px_rgba(249,115,22,.7)]", small ? "size-3.5" : "size-4")} />
+      <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 bg-clip-text font-medium tracking-wider text-transparent">HOT</span>
+    </span>
+  );
+}
+
+/** '최근 한 달(10.20 이후)' — 기준일은 서버가 오늘부터 센다 */
+const recentLabel = (since?: string) => (since ? `최근 한 달(${since.slice(5).replace("-", ".")} 이후)` : "최근 한 달");
+/** 탭 아래에 보이는 그 탭의 기준 */
+function tabNote(tab: Tab, recent: string, hotMin: number) {
+  switch (tab) {
+    case "핫":
+      return `쓸 만함 판정 중 ${recent} 발행처 ${hotMin}곳 이상이 다룬 주제 · 발행처 많은 순`;
+    case "지난 주제":
+      return `${recent} 사례가 없는 주제 · 새 사례가 붙으면 판정 탭으로 돌아갑니다`;
+    case "쓴 글":
+      return "이 주제로 쓰는 중이거나 이미 쓴 주제";
+    default:
+      return `${tab} 판정 중 ${recent} 사례가 있는 주제 · 발행처 많은 순`;
+  }
+}
 
 /** 주제 페이지의 used_in(briefs/<id>.json · columns/<id>.md)에서 작업실 글 id를 찾는다 */
 function articleOf(t: WikiTopic, state: State) {
@@ -49,12 +78,18 @@ function RoleChip({ role }: { role: string }) {
 
 // 판정이 비었거나 모르는 값이면 '보통' 탭 — 모르는 값이 오면 탭 묶음에 없는 칸이라 화면 전체가 멈췄다(2026-10-22)
 const tabOf = (t: WikiTopic): Tab =>
-  t.status !== "쓸 수 있음" ? "쓴 글" : (["쓸 만함", "보통", "뺌"] as string[]).includes(t.verdict ?? "") ? (t.verdict as Tab) : "보통";
+  t.status !== "쓸 수 있음"
+    ? "쓴 글"
+    : recentOf(t).recent === 0
+      ? "지난 주제"
+      : (["쓸 만함", "보통", "뺌"] as string[]).includes(t.verdict ?? "")
+        ? (t.verdict as Tab)
+        : "보통";
 
 export default function Topics({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [open, setOpen] = useState<string | null>(null);
   const [pending, setPending] = useState("");
-  const [tab, setTab] = useState<Tab>("쓸 만함");
+  const [tab, setTab] = useState<Tab>("핫");
   const wiki = state.wiki;
   const ingesting = runningJob(state.jobs, "wiki", "넣기");
   const filtering = runningJob(state.jobs, "wiki-lint", "다시 거르기");
@@ -65,14 +100,25 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
   const judging = state.jobs.filter((j) => j.kind === "wiki-verdict" && j.status === "running");
   const backlog = newSources(state);
 
+  const hotMin = wiki?.hotMin ?? 2;
   const byTab = useMemo(() => {
-    const m: Record<Tab, WikiTopic[]> = { "쓸 만함": [], 보통: [], 뺌: [], "쓴 글": [] };
-    for (const t of wiki?.topics ?? []) m[tabOf(t)].push(t);
-    // 사례 수 → 다른 발행처 수 → 가장 최근 사례의 발행일 순(2026-10-22). 예전엔 사례 수가 같으면 파일 이름(소스 알파벳)순이었다
-    for (const k of Object.keys(m) as Tab[])
-      m[k].sort((a, b) => b.sources.length - a.sources.length || pubs(b) - pubs(a) || latest(b).localeCompare(latest(a)));
+    const m: Record<Tab, WikiTopic[]> = { 핫: [], "쓸 만함": [], 보통: [], 뺌: [], "지난 주제": [], "쓴 글": [] };
+    for (const t of wiki?.topics ?? []) {
+      const k = tabOf(t);
+      m[k].push(t);
+      if (k === "쓸 만함" && recentOf(t).pubs >= hotMin) m.핫.push(t);
+    }
+    // 판정 탭·핫: 최근 1개월 발행처 수 → 최근 사례 수 → 최근 발행일(2026-11-20 — 예전엔 전체 기간 사례 수라 오래 쌓인 주제가 위에 남았다).
+    // 지난 주제·쓴 글: 가장 최근 사례의 발행일 → 사례 수
+    const hot = (a: WikiTopic, b: WikiTopic) => {
+      const x = recentOf(a), y = recentOf(b);
+      return y.pubs - x.pubs || y.recent - x.recent || y.latest.localeCompare(x.latest);
+    };
+    const past = (a: WikiTopic, b: WikiTopic) => latest(b).localeCompare(latest(a)) || b.sources.length - a.sources.length;
+    for (const k of TABS) m[k].sort(k === "지난 주제" || k === "쓴 글" ? past : hot);
     return m;
-  }, [wiki]);
+  }, [wiki, hotMin]);
+  const recentView = tab !== "지난 주제" && tab !== "쓴 글"; // 카드의 숫자를 최근 1개월 기준으로 보여 줄 탭
 
   // 누르면 서버가 그 자리에서 글 설정을 만들고 id를 돌려준다 → 바로 그 글의 제목 화면으로(제목 후보가 이미 떠 있다)
   const pick = async (t: WikiTopic, again = false) => {
@@ -124,11 +170,18 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
               title={`발행처: ${[...new Set(t.sources.map((s) => s.site || site(s.path)))].join(", ")}${latest(t) ? ` · 가장 최근 사례 ${latest(t)}` : ""}`}
               className="flex divide-x divide-line overflow-hidden rounded-xl border border-line bg-page/70 backdrop-blur"
             >
-              {[
-                ["발행처", `${pubs(t)}곳`],
-                ["사례", `${t.sources.length}편`],
-                ["최근 발행", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
-              ].map(([k, v]) => {
+              {(recentView
+                ? [
+                    ["한 달 발행처", `${recentOf(t).pubs}곳`],
+                    ["사례", recentOf(t).recent === t.sources.length ? `${t.sources.length}편` : `${recentOf(t).recent}/${t.sources.length}편`],
+                    ["최근 발행", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
+                  ]
+                : [
+                    ["발행처", `${pubs(t)}곳`],
+                    ["사례", `${t.sources.length}편`],
+                    ["최근 발행", latest(t) ? latest(t).slice(5).replace("-", ".") : "—"],
+                  ]
+              ).map(([k, v]) => {
                 // 사례 1편 — 판정은 그대로 두고 표시만(2026-11-02 사용자 결정). 글을 쓸 때 받침 원문을 넣도록
                 const thin = k === "사례" && t.sources.length === 1;
                 return (
@@ -314,14 +367,14 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
       </AuroraBackground>
 
       <div className="sticky top-0 z-30 border-b border-line bg-page/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center px-12 py-3">
+        <div className="mx-auto max-w-6xl px-12 py-3">
           <PillTabs
             id="verdicttab"
-            tabs={(["쓸 만함", "보통", "뺌", "쓴 글"] as Tab[]).map((v) => ({
+            tabs={TABS.map((v) => ({
               value: v,
               title: (
                 <span className="flex items-center gap-2">
-                  {v}
+                  {v === "핫" ? <HotLabel /> : v}
                   <span className="tabular-nums text-ink-3">{byTab[v].length}</span>
                 </span>
               ),
@@ -329,6 +382,12 @@ export default function Topics({ state, refresh, go }: { state: State; refresh: 
             value={tab}
             onChange={(v) => setTab(v as Tab)}
           />
+          {/* 고른 탭의 기준 — 탭 바로 아래, 탭 이름을 앞에 붙여 어느 탭 설명인지 보이게(2026-11-20 — 탭 줄 오른쪽 끝에 두니 연결이 안 보였다) */}
+          <p className="mt-2 truncate px-1 text-[13px] text-ink-3">
+            {tab === "핫" ? <HotLabel small /> : <span className="font-semibold text-ink-2">{tab}</span>}
+            <span className="mx-2 text-ink-3/60">·</span>
+            {tabNote(tab, recentLabel(wiki?.bundleSince), hotMin)}
+          </p>
         </div>
       </div>
 
