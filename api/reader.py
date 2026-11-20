@@ -8,6 +8,8 @@
   POST /api/reader  {"article", "visitor", "like"}    → 같은 모양                               (좋아요 켜기 true · 끄기 false)
 
 환경변수(Vercel 프로젝트 설정): SUPABASE_URL(https://<프로젝트>.supabase.co) · SUPABASE_ANON_KEY(익명 키 — anon 또는 publishable).
+환경변수는 다음 배포부터 적용된다. 대시보드의 Redeploy는 vercel.json의 ignoreCommand(site/·api/·vercel.json 변경 없음 → 건너뜀)에
+막혀 취소되니, 값을 바꾼 뒤에는 이 폴더나 site/를 바꾼 커밋을 올리거나 다음 발행을 기다린다(2026-11-20).
 표준 라이브러리만 쓴다 — vercel.json이 설치 단계를 건너뛰므로 패키지를 더하지 않는다.
 이 PC에서 띄워 볼 때: python api/reader.py 8790 (같은 환경변수 필요)
 """
