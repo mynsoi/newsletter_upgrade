@@ -225,10 +225,32 @@ def build(k):
     for part in ("head", "body"):
         (out / f"email-{part}.html").write_text(render(mail, files, f"email-capture email-part-{part}"), encoding="utf-8")
     info = {"id": k, "title": a["title"], "pub_date": a["pub_date"], "hero_file": files.get(a["hero"], ""),
-            "teaser": next((b["text"] for b in a["blocks"] if b["type"] == "p"), "")[:140],
+            "teaser": teaser(b["text"] for b in a["blocks"] if b["type"] == "p"),
             "web_url": web_url(k)}  # 웹에도 올라가는 파일 — 내부 경로(columns/…)는 넣지 않는다
     (out / "article.json").write_text(json.dumps(info, ensure_ascii=False, indent=1), encoding="utf-8")
     return a, out, info
+
+
+TEASER_LEN = 200  # 목록 카드는 2줄만 보여 준다(INDEX의 .card p) — 넓은 화면의 2줄(90자 안팎)을 넉넉히 채울 길이
+
+
+def teaser(paragraphs):
+    """목록 카드의 미리보기 글 — 첫 문단이 짧으면 다음 문단까지 이어 붙인다(2026-11-20: 첫 문단 길이대로라 카드마다 1줄·3줄로 달랐다).
+    굵게·강조 표시는 떼고, 줄바꿈은 빈칸으로."""
+    out = ""
+    for t in paragraphs:
+        t = re.sub(r"\*\*|==", "", t)
+        out = (out + " " + " ".join(t.split())).strip()
+        if len(out) >= TEASER_LEN:
+            break
+    return out[:TEASER_LEN]
+
+
+def teaser_from_page(page):
+    """발행된 index.html에서 본문 문단을 읽어 미리보기 글을 다시 만든다(refresh — 확정 원고를 다시 읽지 않고 발행된 그대로에서)."""
+    m = re.search(r'<article class="article-body">(.*?)</article>', page, re.S)
+    body = re.sub(r"<blockquote>.*?</blockquote>", "", m.group(1), flags=re.S) if m else ""
+    return teaser(html.unescape(re.sub(r"<[^>]+>", "", x.replace("<br>", " "))) for x in re.findall(r"<p>(.*?)</p>", body, re.S))
 
 
 # ---------- 메일 (main web/email_renderer.py 방법 B) ----------
@@ -385,7 +407,8 @@ INDEX = """<!DOCTYPE html>
   .card-body { padding:20px 24px; }
   .card-meta { font-size:13px; color:var(--muted); }
   .card h2 { margin:6px 0 10px; font-size:20px; line-height:1.4; letter-spacing:-0.02em; word-break:keep-all; }
-  .card p { margin:0; color:var(--ink2); font-size:15px; line-height:1.7; word-break:keep-all; }
+  .card p { margin:0; color:var(--ink2); font-size:15px; line-height:1.7; word-break:keep-all;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
   .empty { color:var(--muted); }
 </style>
 </head>
@@ -427,7 +450,7 @@ def sync_reader():
 
 
 def refresh(push=True):
-    """이미 발행한 글에 조회수·좋아요 자리를 붙인다 — 본문·발행일·style.css는 건드리지 않는다(다시 발행하면 발행일이 그날로 바뀌므로).
+    """이미 발행한 글에 조회수·좋아요 자리를 붙이고 목록(미리보기 글 포함)을 다시 만든다 — 본문·발행일·style.css는 건드리지 않는다(다시 발행하면 발행일이 그날로 바뀌므로).
     index.html에 자리와 스크립트 줄만 끼우고 reader.js를 새로 복사한다. 이미 붙은 글은 reader.js만 바뀐다."""
     token_dir = SITE / settings()["web_path_token"]
     for m in sorted(token_dir.glob("*/article.json")):
@@ -445,6 +468,11 @@ def refresh(push=True):
             (d / "index.html").write_text(page, encoding="utf-8")
             print("붙임 —", k, flush=True)
         shutil.copyfile(WEB / "reader.js", d / "reader.js")
+        info = json.loads(m.read_text(encoding="utf-8"))  # 목록 미리보기 글도 지금 방식으로(본문에서 다시)
+        t = teaser_from_page(page)
+        if t and t != info.get("teaser"):
+            info["teaser"] = t
+            m.write_text(json.dumps(info, ensure_ascii=False, indent=1), encoding="utf-8")
     build_index()
     sync_reader()
     git("add", "-A", "--", "site")
