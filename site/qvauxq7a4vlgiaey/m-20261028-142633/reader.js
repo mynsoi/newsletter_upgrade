@@ -1,5 +1,5 @@
 /* 발행 사이트의 조회수·좋아요 (scripts/publish.py가 글 폴더와 목록 폴더에 복사한다).
-   글 페이지: <div class="reader-bar" data-article="<글>" hidden> 를 채운다.  목록 페이지: .card[data-article] 마다 수치를 붙인다.
+   글 페이지: <div class="reader-bar" data-article="<글>" hidden> 에 좋아요 버튼을, 머리줄 발행일 옆(.site-header-meta)에 조회수를 넣는다.  목록 페이지: .card[data-article] 마다 수치를 붙인다.
    로그인이 없어 '같은 브라우저' 기준이다 — 브라우저에 무작위 방문자 값을 두고(iw:visitor), 조회는 글마다 하루 한 번만 센다.
    모양(CSS)도 여기서 넣는다 — 이미 발행한 글의 style.css를 건드리지 않고 붙일 수 있게.
    수치를 못 받으면(API 없음·끊김) 아무것도 보이지 않는다. 작업실 미리보기에서는 모양만 보인다. */
@@ -47,8 +47,11 @@
       ".reader-like svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}" +
       ".reader-like[aria-pressed=true]{border-color:var(--accent,#0B6E4F);background:var(--accent-soft,#DCEFE7);color:var(--accent,#0B6E4F)}" +
       ".reader-like[aria-pressed=true] svg{fill:currentColor}" +
-      ".reader-like-count,.reader-views b{font-variant-numeric:tabular-nums}" +
-      ".reader-views b{font-weight:600;color:var(--ink-secondary,#3D4148)}" +
+      ".reader-like-count,.reader-views{font-variant-numeric:tabular-nums}" +
+      ".site-header-meta.has-views{display:inline-flex;align-items:center;gap:14px}" +
+      ".reader-views{display:inline-flex;align-items:center;gap:5px}" +
+      ".reader-views[hidden]{display:none}" +
+      ".reader-views svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}" +
       ".card-stats{margin-top:12px;font-size:13px;color:var(--muted,#6E7278);font-variant-numeric:tabular-nums}" +
       "@media (prefers-reduced-motion:reduce){.reader-like{transition:none}}";
     document.head.appendChild(s);
@@ -60,14 +63,22 @@
     bar.innerHTML =
       '<button type="button" class="reader-like" aria-pressed="false">' +
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>' +
-      '<span>좋아요</span><span class="reader-like-count"></span></button>' +
-      '<span class="reader-views">조회 <b></b></span>';
-    var btn = bar.querySelector(".reader-like"), likeN = bar.querySelector(".reader-like-count"), viewN = bar.querySelector(".reader-views b");
+      '<span>좋아요</span><span class="reader-like-count"></span></button>';
+    // 조회수는 머리줄의 발행일 옆에 눈 아이콘 + 숫자로(2026-11-20) — 머리줄이 없는 페이지면 좋아요 옆에
+    var views = document.createElement("span");
+    views.className = "reader-views";
+    views.hidden = true;
+    views.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg><span></span>';
+    var meta = document.querySelector(".site-header-meta");
+    if (meta) meta.classList.add("has-views");
+    (meta || bar).appendChild(views);
+    var btn = bar.querySelector(".reader-like"), likeN = bar.querySelector(".reader-like-count"), viewN = views.lastChild;
 
     function paint() {
       btn.setAttribute("aria-pressed", state.liked ? "true" : "false");
       likeN.textContent = num(state.likes);
       viewN.textContent = num(state.views);
+      views.setAttribute("aria-label", "조회 " + num(state.views));
     }
     function take(x) { state = { views: x.views, likes: x.likes, liked: !!x.liked }; paint(); }
 
@@ -85,9 +96,9 @@
     post({ article: id, visitor: who, view: first }).then(function (x) {
       if (first) set(key, today());
       take(x);
-      bar.hidden = false;
+      bar.hidden = views.hidden = false;
     }, function () {
-      if (PREVIEW) { paint(); bar.hidden = false; }  // 작업실 미리보기 — 모양만
+      if (PREVIEW) { paint(); bar.hidden = views.hidden = false; }  // 작업실 미리보기 — 모양만
     });
   }
 
