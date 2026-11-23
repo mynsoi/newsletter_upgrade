@@ -1,5 +1,28 @@
 # 위키 이력
 
+## 2026-11-23 15:30
+- 묶기 붙임 mckinsey-insights/0202, fastcompany-worklife/0298 → 주제/charter-0010.md
+- 묶기 붙임 fastcompany-worklife/0300 → 주제/hbr-korea-0041.md
+- 묶기 붙임 fastcompany-worklife/0295 → 주제/bain-insights-0022.md
+- 묶기 붙임 carrot-global-blog/0065 → 주제/carrot-global-blog-0008.md
+- 묶기 붙임 innofit-blog/0041 → 주제/hrdive-0022.md
+- 묶기 붙임 fastcompany-worklife/0294, hrdive/0292 → 주제/charter-0003.md
+- 묶기 붙임 hrdive/0291 → 주제/fastcompany-worklife-0212.md
+- 묶기 붙임 mckinsey-insights/0200 → 주제/dbr-0378.md
+- 묶기 붙임 hrdive/0284 → 주제/aihr-blog-0002.md
+- 묶기 붙임 hrdive/0290 → 주제/mckinsey-insights-0197.md
+- 묶기 붙임 bcg-publications/0513 → 주제/mckinsey-insights-0045.md
+- 묶기 새 주제(쓸 만함) AI에게 목표를 맡겨도 필요한 데이터와 실행 권한을 주지 않으면 위임은 지시만 늘리고 일은 끝내지 못할 수 있다. → 주제/onemodel-blog-0022.md
+- 묶기 새 주제(보통) 리더의 은퇴를 개인의 결심에만 맡기면 후계자의 성장과 조직의 지속성도 그 사람의 결심을 기다리게 된다. → 주제/hbr-korea-0340.md
+- 묶기 새 주제(보통) 금전적 보상이 충분해진 뒤에도 조직을 움직이는 것은 일의 의미와 스스로 시도할 재량이다. → 주제/fastcompany-worklife-0291.md
+- 묶기 새 주제(보통) AI가 공격 속도를 높일수록 조직의 보안 약점은 새 기술보다 아무도 바꾸려 하지 않는 오래된 시스템에서 드러날 수 있다. → 주제/bcg-publications-0511.md
+- 묶기 새 주제(쓸 만함) AI 전환 초기에 일이 더 복잡해지는 것은 실패의 신호만이 아니라 기존 업무와 새 역할이 겹치는 과도기의 모습일 수 있다. → 주제/hbr-korea-0339.md
+- 묶기 새 주제(쓸 만함) AI로 오래된 업무를 옮길 때의 큰 변화는 기존 양식을 더 빨리 처리하는 데서보다 더는 필요 없는 복잡함을 줄이는 데서 나올 수 있다. → 주제/mckinsey-insights-0201.md
+- 묶기 새 주제(쓸 만함) AI가 보상 데이터를 더 잘 분석해도 직원의 신뢰는 관리자가 그 근거와 성장 경로를 설명하는 대화에서 만들어진다. → 주제/hrdive-0294.md
+- 묶기 새 주제(보통) AI로 판단을 빨리 전달할수록 상대는 효율보다 자신이 제대로 검토받지 못했다는 신호로 받아들일 수 있다. → 주제/hrdive-0286.md
+- 묶기 새 주제(보통) 출근 정책의 수용성은 출근 일수뿐 아니라 회사가 현장 근무의 불편을 얼마나 줄이고 변화의 이유를 설명하는지에 달려 있다. → 주제/hrdive-0285.md
+- 주제 묶기 새 카드 42 · 붙음/새 주제 23 · 뺌 19 · 못 넣음 0 · 남음 0 · 102s
+
 ## 2026-11-19 17:43
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 59 · 134s
 
