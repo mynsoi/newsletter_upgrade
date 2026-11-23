@@ -103,6 +103,10 @@
    "name": "Anthropic·OpenAI 기업 활용 리포트",
    "tier": "T4"
   },
+  "openai-news": {
+   "name": "OpenAI News",
+   "tier": "T4"
+  },
   "google-rework": {
    "name": "Google re:Work",
    "tier": "T4"

@@ -79,6 +79,7 @@ card_sources:
   - carrot-global-blog
   - worklytics-blog
   - ai-lab-enterprise-reports
+  - openai-news  # 2026-11-23 — 11/18 ai-lab-enterprise-reports에서 분리하며 빠뜨려 판별 통과분에 카드가 안 생겼다
   - google-rework
   - flex-blog
   - hrdive
