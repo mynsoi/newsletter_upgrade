@@ -31,7 +31,7 @@
   "n": 13,
   "of": 13
  },
- "images_done": false,
+ "images_done": true,
  "title": "AX Flywheel, 첫 성과를 다음 일로 잇는 법",
  "inline": [
   {
@@ -41,5 +41,13 @@
    "name": "성과를 다음 변화에 쓰기"
   }
  ],
- "hero": "runs/images/m-20261124-151145/20261124-155308/01.png"
+ "hero": "runs/images/m-20261124-151145/20261124-155308/01.png",
+ "confirmed": {
+  "date": "2026-11-24",
+  "step": 13,
+  "file": "columns/2026-11-24-m-20261124-151145.md",
+  "inline": 1,
+  "internal": true,
+  "hero": "columns/img/2026-11-24-m-20261124-151145.png"
+ }
 }
