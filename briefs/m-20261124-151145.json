@@ -26,5 +26,10 @@
  },
  "target": "전 직원",
  "from_mine": "runs/mine/m-20261124-151145",
- "sources_ok": true
+ "sources_ok": true,
+ "text_pick": {
+  "n": 11,
+  "of": 11
+ },
+ "images_done": false
 }
