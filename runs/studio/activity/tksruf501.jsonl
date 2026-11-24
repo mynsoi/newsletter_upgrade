@@ -235,3 +235,6 @@
 {"at": 1795485615, "user": "tksruf501", "article": "m-20261124-104008", "kind": "revise", "status": "done", "secs": 28}
 {"at": 1795485917, "user": "tksruf501", "article": "m-20261124-104008", "kind": "revise", "status": "failed", "secs": 13}
 {"at": 1795485990, "user": "tksruf501", "article": "m-20261124-104008", "kind": "revise", "status": "failed", "secs": 27}
+{"at": 1795495714, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 25}
+{"at": 1795496599, "user": "tksruf501", "article": "aside · 소스", "kind": "collect", "status": "done", "secs": 772}
+{"at": 1795496628, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 30}
