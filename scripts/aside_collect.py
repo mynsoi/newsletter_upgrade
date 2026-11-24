@@ -154,6 +154,30 @@ def canon(cfg, u):
     return u
 
 
+def live(c, write, log):
+    """연결이 살아 있으면 그대로, 끊겼으면 새로 연결해 돌려준다 — 브라우저를 오래 쓰는 단계 뒤 DB를 다시 쓰기 전에 부른다."""
+    import psycopg
+    for _ in (1, 2):  # 두 번째는 실패한 트랜잭션을 되돌린 뒤
+        if c.closed or c.broken:
+            break
+        try:
+            c.execute("SELECT 1").fetchone()
+            return c
+        except psycopg.OperationalError:
+            break
+        except psycopg.Error:
+            try:
+                c.rollback()
+            except Exception:  # noqa: BLE001
+                break
+    log("  DB 연결이 끊겨 다시 연결")
+    try:
+        c.close()
+    except Exception:  # noqa: BLE001
+        pass
+    return connect(write)
+
+
 def known(c, sid, cfg):
     rows = c.execute("SELECT url, canonical_url FROM documents WHERE source_id = %s", (sid,)).fetchall()
     return {key_of(cfg, u) for r in rows for u in (r["url"], r["canonical_url"]) if u}
@@ -497,15 +521,20 @@ def main():
                 sys.exit(f"모르는 소스: {sid}")
             cfg = srcs[sid]
             log(f"[{sid}] {'저장' if a.write else '미리보기'}")
+            normal = None  # 평소 수집 결과 — 백필에서 끊겨 다시 받을 때 평소 수집(목록 확인)을 되풀이하지 않게
             for attempt in (1, 2):
-                if c.closed or c.broken:
-                    log("  DB 연결이 끊겨 다시 연결")
-                    c = connect(a.write)
+                c = live(c, a.write, log)
                 n_before = len(out)
                 try:
-                    # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
-                    out.append(run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None))
-                    if a.backfill and not a.url and cfg.get("backfill") and not out[-1].get("stopped"):
+                    if normal is None:
+                        # upgrade 소스는 백필 때 격상 기간을 하한까지 넓혀 한 번만
+                        normal = run_source(c, sid, cfg, a.write, log, a.url, since=a.backfill if cfg["mode"] == "upgrade" else None)
+                        out.append(normal)
+                        n_before = len(out)
+                    if a.backfill and not a.url and cfg.get("backfill") and not normal.get("stopped"):
+                        # 2026-11-24 — HBR Korea는 평소 수집에서 목록 페이지를 여는 동안 연결을 놀려 두고, 백필의 첫 DB 요청에서
+                        # 끊겼다(11/19·11/23). 다시 받을 때도 목록 확인부터 되풀이해 같은 자리에서 또 끊겼다 → 백필 직전에 연결을 확인한다
+                        c = live(c, a.write, log)
                         log(f"[{sid}] 백필 {a.backfill} 이후")
                         out.append(run_source(c, sid, cfg, a.write, log, since=a.backfill, backfill=True))
                     break
