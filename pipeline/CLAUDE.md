@@ -113,6 +113,9 @@ make test         # 테스트
 - 실패·무유입·카드 이상은 GitHub 이슈로만 알린다(라벨 `daily-collect-failure` · `inflow-alert` · `card-alert`).
   예약이 아예 뜨지 않은 날은 이슈도 생기지 않는다 — 작업실 화면이 대신 알린다(마지막으로 끝난 수집이 30시간보다
   오래되면 위쪽 띠, 루트 `scripts/studio_server.py`의 `collect_gap`). 작업실을 안 켜 둔 날은 `/status`로 최근 실행을 확인한다.
+- 무유입 경보(`inflow-alert`)는 매일 댓글을 달지 않는다(2026-11-24, `src/collectors/inflow_alert.py`) — 새 소스가 생겼거나
+  지난 알림에서 7일이 지났을 때만 알리고, 무유입 소스가 하나도 없으면 이슈를 닫는다. 경보는 "수집이 깨졌다"와
+  "매체가 글을 안 냈다"를 구분하지 못하니, 뜨면 피드를 직접 받아 최근 글 날짜부터 본다.
 - 예약 실행이 실패했거나 늦으면 `gh workflow run daily-collect`가 먼저고, 안 되면 PC에서 `/collect`.
 - `test.yml`은 PR에서만 돈다. 이 브랜치에 직접 푸시한 변경은 테스트 없이 다음 수집에 반영되니,
   `src/`·`migrations/`를 고쳤으면 푸시 전에 `make test`를 돌린다.
