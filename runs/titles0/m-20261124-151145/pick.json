@@ -2,43 +2,43 @@
  "scores": [
   {
    "n": 1,
-   "message": 3,
+   "message": 4,
    "hook": 3,
    "honest": 4
   },
   {
    "n": 2,
-   "message": 3,
-   "hook": 3,
-   "honest": 4
+   "message": 5,
+   "hook": 4,
+   "honest": 5
   },
   {
    "n": 3,
-   "message": 3,
+   "message": 4,
    "hook": 3,
    "honest": 4
   },
   {
    "n": 4,
-   "message": 3,
+   "message": 4,
    "hook": 3,
    "honest": 4
   },
   {
    "n": 5,
-   "message": 3,
+   "message": 4,
    "hook": 3,
    "honest": 4
   },
   {
    "n": 6,
-   "message": 3,
-   "hook": 3,
-   "honest": 4
+   "message": 5,
+   "hook": 4,
+   "honest": 5
   },
   {
    "n": 7,
-   "message": 3,
+   "message": 4,
    "hook": 3,
    "honest": 4
   },
@@ -50,8 +50,9 @@
   }
  ],
  "pick": [
+  6,
+  2,
   8,
   1
- ],
- "note": "후보 1~7은 같은 제목이라 결이 겹치지 않는 4개를 고를 수 없어 2개만 골랐습니다. 1은 message 3점으로 기준(4점 이상)에 못 미칩니다. 'Flywheel'과 '첫 바퀴'는 비유라서, 제목만으로는 '첫 성과를 다음 전환의 재원으로 돌린다'는 핵심을 알기 어렵습니다. 그래도 이번에 요청된 제목이라 두 번째로 넣었습니다."
+ ]
 }
