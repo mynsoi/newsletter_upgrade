@@ -20,6 +20,9 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I 실행에서도 astra_limit를 찾게
+import astra_limit as AL  # noqa: E402 — astra 사용 한도 안내(2026-11-24)
+
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "images"
 # gti는 무조건 gpt-6-astra (멘토 2026-10-09). 전역 npm gti는 기본 gpt-5.4라 400이 나서,
@@ -111,6 +114,7 @@ def run_inline(target, file=None):
         subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
                        cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
+    AL.report(d / "run.log")
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = (json.loads(m.group(0)) if m else [])[:INLINE_N]  # 더 내도 앞의 INLINE_N장만 그린다
@@ -160,6 +164,7 @@ def run(target, file=None):
         subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
                        cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
+    AL.report(d / "run.log")
     raw = out.read_text(encoding="utf-8") if out.exists() else ""
     m = re.search(r"\[.*\]", raw, re.S)
     items = (json.loads(m.group(0)) if m else [])[:HERO_N]  # 더 내도 앞의 HERO_N장만 그린다

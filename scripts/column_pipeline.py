@@ -26,6 +26,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # python3 -I 실행에서도 title_candidates를 찾게
+import astra_limit as AL  # noqa: E402 — astra 사용 한도 안내(2026-11-24)
 import internal_ctx as IC  # noqa: E402 — 회사 맥락(사내 용어집·사내 자료 대목, 2026-10-23)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -262,6 +263,8 @@ def run_astra(d, prompt):
         text = out.read_text(encoding="utf-8").strip() if out.exists() else ""
         if text:
             break
+        if AL.report(d / "run.log"):  # 사용 한도 — 다시 해도 같으니 바로 끝낸다(2026-11-24)
+            break
         print(f"astra 빈 결과({d.name})" + (" — 한 번 더 시도" if i == 0 else ""), flush=True)
     return text
 
@@ -270,7 +273,8 @@ def need(text, what, d):
     """빈 결과는 원고로 저장하지 않는다 — 작업을 실패로 끝내 직전 원고를 그대로 둔다(2026-11-20: 빈 final-rN.md가
     '최신 원고'가 되고 작업은 완료로 보였다). 여러 편을 함께 돌릴 때는 나머지가 끝난 뒤 실패로 끝난다."""
     if not (text or "").strip():
-        sys.exit(f"{what} 결과가 비었음 — 원고는 그대로 둡니다. 다시 실행해 주세요. 로그: {d}")
+        limit = AL.reason(Path(d) / "run.log")
+        sys.exit(f"{what} 결과가 비었음 — 원고는 그대로 둡니다. " + (limit or f"다시 실행해 주세요. 로그: {d}"))
     return text
 
 

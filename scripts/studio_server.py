@@ -50,6 +50,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import wiki as W  # 주제 위키(2026-10-10 채택) — 넣은 원문·남은 원문 계산을 같이 쓴다
 import internal_ctx as IC  # 회사 맥락(2026-10-23) — 글에 딸린 사내 자료 대목
+import astra_limit as AL  # astra 사용 한도 안내(2026-11-24)
 import share as SH  # 글 공유(2026-10-26) — 글이 바뀌면 운영 브랜치에 올리고 주기적으로 받는다, 작업 중 표시
 import my_topic as MT  # 내 주제로 쓰기 — 대화 차례(turns)를 같이 읽는다
 import reader_stats as RS  # 발행 사이트의 조회수·좋아요(2026-11-20) — 발행 탭이 읽는다
@@ -134,6 +135,19 @@ def run_limited(cmd, log, minutes):
             return False
 
 
+def limit_note(log):
+    """실패한 작업의 로그에 astra 사용 한도 안내가 있으면 맨 끝에 다시 적는다(2026-11-24) — 화면의 실패 알림은 로그의 마지막
+    줄을 보여 주는데, 한도 안내 뒤에 다른 줄(빈 결과·건수 요약)이 이어져 사유가 묻혔다."""
+    try:
+        lines = [l for l in tail(log, 20000).splitlines() if l.strip()]
+        hit = [l for l in lines if AL.MARK in l]
+        if hit and AL.MARK not in lines[-1]:
+            with open(log, "a", encoding="utf-8") as f:
+                f.write(chr(10) + hit[-1].strip() + chr(10))
+    except OSError:
+        pass
+
+
 def start(kind, target, cmd, after=None):
     other = SH.locked_by_other(target) if SH.is_article(target) else None
     if other:  # 다른 사용자가 이 글에서 작업 중(작업 중 표시는 git으로 받아 온 runs/columns/<글>/lock.json)
@@ -161,6 +175,8 @@ def start(kind, target, cmd, after=None):
                 ok = False
                 with open(log, "a", encoding="utf-8") as f:
                     f.write(f"\n[후처리 실패] {e}\n")
+        if not ok:
+            limit_note(log)
         j["status"] = "done" if ok else "failed"
         j["ended"] = time.time()
         save_jobs()

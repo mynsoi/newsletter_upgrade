@@ -14,6 +14,9 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I 실행에서도 astra_limit를 찾게
+import astra_limit as AL  # noqa: E402 — astra 사용 한도 안내(2026-11-24)
+
 ROOT = Path(__file__).resolve().parent.parent
 INF = ROOT / "sources" / "originals" / "infuture"
 OUT = ROOT / "runs" / "titles"
@@ -309,6 +312,7 @@ def astra(d, p):
         subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],
                        cwd=d, input=p, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
+    AL.report(d / "astra.log")
 
 
 def claude(d, p):

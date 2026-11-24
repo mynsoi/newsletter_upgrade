@@ -38,6 +38,9 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # python -I 실행에서도 astra_limit를 찾게
+import astra_limit as AL  # noqa: E402 — astra 사용 한도 안내(2026-11-24)
+
 ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
 TOPICS = WIKI / "주제"
@@ -112,6 +115,8 @@ def astra(d, prompt):
                             "--ephemeral", "--color", "never", "-o", str(d / "output.md"), "-"],
                            cwd=d, input=prompt, text=True, encoding="utf-8", stdout=log, stderr=subprocess.STDOUT)
         if (d / "output.md").exists() and (d / "output.md").read_text(encoding="utf-8").strip():
+            break
+        if AL.report(d / "run.log"):  # 사용 한도 — 다시 해도 같다(2026-11-24)
             break
     text = (d / "output.md").read_text(encoding="utf-8").strip() if (d / "output.md").exists() else ""
     return clean(text, str(d))
