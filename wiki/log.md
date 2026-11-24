@@ -1,5 +1,8 @@
 # 위키 이력
 
+## 2026-11-24 17:38
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 57 · 229s
+
 ## 2026-11-24 17:37
 - 묶기 붙임 ai-lab-enterprise-reports/0025 → 주제/bcg-publications-0495.md
 - 묶기 붙임 openai-news/0037 → 주제/onemodel-blog-0022.md
