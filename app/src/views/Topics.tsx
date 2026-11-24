@@ -16,6 +16,11 @@ export function newSources(state: State) {
   return state.wiki?.backlog.length ?? 0;
 }
 
+/** 아직 주제로 묶지 않은 카드 수 — 사이드바 주제 아이콘의 보라색 점('주제 묶기' 버튼이 보일 때와 같은 조건) */
+export function unbundledCards(state: State) {
+  return state.wiki?.unbundled ?? 0;
+}
+
 const site = (p: string) => p.split("/")[1] ?? "";
 /** 다른 발행처 수 · 가장 최근 사례의 발행일 — 주제 정렬과 카드의 '사례 N · 월.일' */
 const pubs = (t: WikiTopic) => new Set(t.sources.map((s) => s.site || site(s.path))).size;

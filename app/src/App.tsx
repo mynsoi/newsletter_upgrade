@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { Sidebar, SidebarBody, SidebarLink, useSidebar } from "@/components/ui/sidebar";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import Library from "@/views/Library";
-import Topics, { newSources } from "@/views/Topics";
+import Topics, { unbundledCards } from "@/views/Topics";
 import { ThemeToggle } from "@/components/application/theme/theme-toggle";
 import Articles from "@/views/Articles";
 import Flow from "@/views/Flow";
@@ -162,7 +162,7 @@ function Nav({ state, view, current, go }: { state: State | null; view: string; 
       icon: (
         <span className="relative shrink-0">
           <IconBulb className="size-5 text-ink-2" />
-          {state && newSources(state) > 0 && <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-violet-500" />}
+          {state && unbundledCards(state) > 0 && <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-violet-500" />}
         </span>
       ),
     },
