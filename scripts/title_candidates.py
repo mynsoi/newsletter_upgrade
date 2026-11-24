@@ -308,6 +308,7 @@ def pick(d, thesis, target="", message="", text=""):
 def astra(d, p):
     d.mkdir(parents=True, exist_ok=True)
     out = d / "astra.md"
+    out.unlink(missing_ok=True)  # 지난 회차의 답이 이번 답으로 읽히지 않게(2026-11-24 — astra가 빈 답이면 옛 후보가 그대로 다시 나왔다)
     with open(d / "astra.log", "w", encoding="utf-8") as log:
         subprocess.run([CODEX, "exec", "-m", "gpt-6-astra", "-C", str(d), "--skip-git-repo-check", "-s", "read-only",
                         "--ephemeral", "--color", "never", "-o", str(out), "-"],

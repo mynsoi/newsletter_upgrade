@@ -173,11 +173,16 @@ def run(target, file=None):
 
 
 def paint(d, items):
+    # 설명도 그림도 하나 없으면 작업을 실패로 끝낸다(2026-11-24 — 그전엔 '완료'로 끝나 화면에 아무 알림 없이 후보만 안 생겼다)
+    if not items:
+        sys.exit("그림 설명을 받지 못했습니다 — " + (AL.reason(d / "run.log") or f"다시 실행해 주세요. 로그: {d}"))
     todo = [(i, it) for i, it in enumerate(items, 1) if not (d / f"{i:02d}.png").exists()]
     with ThreadPoolExecutor(max_workers=2) as ex:  # 머리·본문 그림 작업이 같이 돌면 4장 — 그 이상은 기다리는 줄만 길어진다
         list(ex.map(lambda a: draw(d, *a), todo))
     ok = sum(1 for i in range(1, len(items) + 1) if (d / f"{i:02d}.png").exists())
     print(f"그림 후보 {ok}/{len(items)} → {d.relative_to(ROOT)}")
+    if not ok:
+        sys.exit(f"그림을 한 장도 그리지 못했습니다 — 다시 실행해 주세요. 로그: {d}")
 
 
 if __name__ == "__main__":

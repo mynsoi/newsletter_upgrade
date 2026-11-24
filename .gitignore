@@ -60,3 +60,5 @@ runs/title-style/
 # .claude는 로컬 설정(launch.json 등)이라 빼되, 수집 커맨드(2026-11-16 main에서 옮김)는 올린다
 .claude/*
 !.claude/commands/
+# codex가 .claude/commands를 보고 PC마다 저절로 만드는 사본(2026-11-23 처음 생김) — 원본은 .claude/commands
+.agents/

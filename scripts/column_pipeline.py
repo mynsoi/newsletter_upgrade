@@ -301,6 +301,23 @@ def ensure_point(bp, b):
         print("말할 것:", point, flush=True)
 
 
+def titles_ok(d):
+    """이번 회차(astra.md)에 제목 후보가 하나라도 있나. 빈 회차 파일은 지운다 — 작업실에 빈 회차로 보이지 않게."""
+    import title_candidates as tc
+    f = d / "astra.md"
+    if f.exists() and tc.round_items(f):
+        return True
+    f.unlink(missing_ok=True)
+    return False
+
+
+def titles_failed(d, subs):
+    """제목 후보가 하나도 없으면 작업을 실패로 끝낸다(2026-11-24 — 그전엔 '완료'로 끝나 화면에 아무 알림 없이 후보만 안 생겼다).
+    astra 사용 한도 때문이면 그 안내를 붙인다."""
+    limit = next((r for r in (AL.reason(d / s / "astra.log") for s in subs) if r), "")
+    sys.exit("제목 후보를 받지 못했습니다 — " + (limit or f"다시 실행해 주세요. 로그: {d}"))
+
+
 def titles_first(args):
     """--titles <설정> ... [--message <파일>] — 메시지는 파일 내용 그대로 astra에게 (멘토 2026-10-10)."""
     import title_candidates as tc
@@ -310,7 +327,7 @@ def titles_first(args):
         i = paths.index("--message")
         msg = Path(paths[i + 1]).read_text(encoding="utf-8").strip()
         del paths[i:i + 2]
-    jobs = []
+    jobs, dirs = [], []
     for pth in paths:
         k = Path(pth).stem
         b = json.loads(Path(pth).read_text(encoding="utf-8"))
@@ -335,12 +352,16 @@ def titles_first(args):
             if (d / "gen" / "astra.md").exists():
                 (d / "cands.md").write_text((d / "gen" / "astra.md").read_text(encoding="utf-8"), encoding="utf-8")
             tc.pick(d, b["thesis"], target_line(b), msg)  # 8개 지어 4개 고름(메시지 · 후킹 · 과장 없음, 2026-10-23)
-            ok = (d / "astra.md").exists()
+            ok = titles_ok(d)
             if ok and msg:  # 회차와 함께 남긴다 — 작업실이 후보 위에 보여 준다
                 (d / "message.txt").write_text(msg, encoding="utf-8")
             return ok
         jobs.append(job)
-    stage("제목 후보·astra (쓰기 전)" + (" · 멘토 메시지" if msg else ""), jobs)
+        dirs.append(d)
+    res = stage("제목 후보·astra (쓰기 전)" + (" · 멘토 메시지" if msg else ""), jobs)
+    for d, ok in zip(dirs, res):
+        if not ok:
+            titles_failed(d, ["gen"])
 
 
 def titles_body(args):
@@ -364,9 +385,11 @@ def titles_body(args):
     (d / "source.txt").write_text(text_file.relative_to(ROOT).as_posix(), encoding="utf-8")
     tc.write_body(d, text, b.get("thesis", ""), target_line(b), msg, prev)  # 장치별 2개씩 8개(2026-10-23)
     tc.pick(d, b.get("thesis", ""), target_line(b), msg, text=text)
-    if (d / "astra.md").exists() and msg:
+    if not titles_ok(d):
+        titles_failed(d, [f"dev{i}" for i in range(1, len(tc.DEVICE_GROUPS) + 1)])
+    if msg:
         (d / "message.txt").write_text(msg, encoding="utf-8")
-    print("제목 후보(본문):", " / ".join(tc.round_items(d / "astra.md")) if (d / "astra.md").exists() else "없음")
+    print("제목 후보(본문):", " / ".join(tc.round_items(d / "astra.md")))
 
 
 # 경영일기 참고 방식(2026-10-24 사용자 결정 — 비교 시험에서 "새 방식이 훨씬 좋다", runs/style-compare/20261024-133758):
