@@ -1,5 +1,46 @@
 # 위키 이력
 
+## 2026-11-24 17:37
+- 묶기 붙임 ai-lab-enterprise-reports/0025 → 주제/bcg-publications-0495.md
+- 묶기 붙임 openai-news/0037 → 주제/onemodel-blog-0022.md
+- 묶기 붙임 fastcompany-worklife/0308 → 주제/hrdive-0081.md
+- 묶기 붙임 fastcompany-worklife/0302, openai-news/0012, openai-news/0011 → 주제/hbr-0066.md
+- 묶기 붙임 fastcompany-worklife/0305 → 주제/fastcompany-worklife-0190.md
+- 묶기 붙임 hbr-korea/0341 → 주제/mckinsey-insights-0041.md
+- 묶기 붙임 bcg-publications/0519 → 주제/fastcompany-worklife-0221.md
+- 묶기 붙임 openai-news/0002 → 주제/dbr-0055.md
+- 묶기 붙임 bcg-publications/0515 → 주제/hbr-korea-0042.md
+- 묶기 붙임 openai-news/0005 → 주제/worklytics-blog-0070.md
+- 묶기 붙임 openai-news/0003 → 주제/mit-tech-review-0043.md
+- 묶기 붙임 openai-news/0008 → 주제/bain-insights-0071.md
+- 묶기 붙임 openai-news/0009 → 주제/fastcompany-worklife-0049.md
+- 묶기 붙임 bcg-publications/0517 → 주제/mckinsey-insights-0045.md
+- 묶기 붙임 openai-news/0014, openai-news/0034 → 주제/hrdive-0022.md
+- 묶기 붙임 openai-news/0013, openai-news/0025 → 주제/hbr-0015.md
+- 묶기 붙임 openai-news/0015, openai-news/0027 → 주제/knowledge-wharton-0018.md
+- 묶기 붙임 openai-news/0020 → 주제/mit-tech-review-0014.md
+- 묶기 붙임 bcg-publications/0518 → 주제/fastcompany-worklife-0208.md
+- 묶기 붙임 openai-news/0023, openai-news/0036 → 주제/dbr-0271.md
+- 묶기 붙임 openai-news/0024 → 주제/fastcompany-worklife-0216.md
+- 묶기 붙임 openai-news/0030 → 주제/mckinsey-insights-0042.md
+- 묶기 붙임 openai-news/0033 → 주제/hbr-korea-0034.md
+- 묶기 붙임 openai-news/0035 → 주제/stanford-hai-0014.md
+- 묶기 새 주제(쓸 만함) AI에 넘긴 일도 다시 사람에게 돌아올 수 있으므로, 업무 분담은 한 번 정하고 끝내는 자동화 목록이 될 수 없다. → 주제/onemodel-blog-0023.md
+- 묶기 새 주제(보통) 교육이 성장 경로가 되려면 수업과 평가가 따로 끝나는 대신 평가에서 발견한 부족함이 다음 학습으로 이어져야 한다. → 주제/carrot-global-blog-0066.md
+- 묶기 새 주제(쓸 만함) AI를 썼다는 이유로 사람의 능력을 낮게 평가하면, 조직은 같은 품질의 결과를 얻고도 활용 사실을 숨기게 만들 수 있다. → 주제/fastcompany-worklife-0303.md
+- 묶기 새 주제(뺌) AI 에이전트가 스스로 지출하는 속도는 사람이 사후에 비용을 확인하는 예산 관리의 속도를 앞지를 수 있다. → 주제/bain-insights-0088.md
+- 묶기 새 주제(보통) AI가 보안 취약점을 빨리 찾아낼수록 수정 속도와 변경의 안전성을 함께 높이지 못한 조직은 대응 자체로 새 장애를 만들 수 있다. → 주제/bain-insights-0089.md
+- 묶기 새 주제(보통) 관리자가 주말 근무를 요구하지 않아도 월요일 아침에 답해야 할 질문이 직원의 일요일을 업무 준비 시간으로 바꿀 수 있다. → 주제/hrdive-0296.md
+- 묶기 새 주제(쓸 만함) 직급에 따른 AI 활용 격차는 직원의 의지 차이뿐 아니라 회사가 학습과 지원을 누구에게 먼저 배분했는지를 보여 줄 수 있다. → 주제/hrdive-0298.md
+- 묶기 새 주제(보통) 입사할 때 약속한 성장 기회가 실제 역할과 경력 경로로 이어지지 않으면 사람을 끌어온 이유가 떠나게 하는 이유로 바뀐다. → 주제/hrdive-0297.md
+- 묶기 새 주제(쓸 만함) AI 보고서의 완성도에는 보기 좋은 문장과 양식뿐 아니라 사람이 근거와 계산 과정을 되짚을 수 있는 구조도 포함된다. → 주제/openai-news-0001.md
+- 묶기 새 주제(뺌) 피지컬 AI의 가치는 로봇 자체를 만드는 곳뿐 아니라 기존 설비와 연결하고 안정적으로 운영하는 곳에서도 크게 생길 수 있다. → 주제/mckinsey-insights-0203.md
+- 묶기 새 주제(쓸 만함) AI가 기존 프로그램의 화면을 직접 다루게 되면 사람이 남아 있던 이유가 전문적 판단 때문인지 단순한 시스템 간 전달 때문인지 드러난다. → 주제/openai-news-0021.md
+- 묶기 새 주제(쓸 만함) AI가 요청을 기다리지 않고 할 일을 찾아 제안하기 시작하면 사람의 역할에는 결과 확인뿐 아니라 어떤 제안을 실행할지 고르는 일이 더해진다. → 주제/openai-news-0022.md
+- 묶기 새 주제(보통) 학생의 AI 사용이 교사의 지도 역량보다 빨리 늘면 도구의 보급은 학습 혁신보다 지도 공백을 먼저 키울 수 있다. → 주제/openai-news-0029.md
+- 묶기 새 주제(쓸 만함) AI가 일부 작업을 대신하면 직무가 단순히 줄어드는 데 그치지 않고 예전에는 따로 맡기던 일을 한 역할에 묶는 방식도 바뀐다. → 주제/openai-news-0031.md
+- 주제 묶기 새 카드 57 · 붙음/새 주제 49 · 뺌 8 · 못 넣음 0 · 남음 0 · 216s
+
 ## 2026-11-23 15:31
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 42 · 112s
 
