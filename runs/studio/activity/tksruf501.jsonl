@@ -261,3 +261,5 @@
 {"at": 1795507871, "user": "tksruf501", "article": "m-20261124-151145", "kind": "publish", "status": "done", "secs": 28}
 {"at": 1795509492, "user": "tksruf501", "article": "주제 묶기", "kind": "wiki", "status": "done", "secs": 240}
 {"at": 1795564384, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 17}
+{"at": 1795564973, "user": "tksruf501", "article": "aside · 소스", "kind": "collect", "status": "done", "secs": 478}
+{"at": 1795565026, "user": "tksruf501", "article": "Supabase", "kind": "db-sync", "status": "done", "secs": 55}
