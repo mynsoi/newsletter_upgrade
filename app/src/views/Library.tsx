@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
-import { IconArrowRight, IconDatabase, IconSparkles, IconWorldSearch } from "@tabler/icons-react";
+import { IconAlertTriangleFilled, IconArrowRight, IconDatabase, IconPlayerPauseFilled, IconSparkles, IconWorldSearch } from "@tabler/icons-react";
+import { createPortal } from "react-dom";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
@@ -8,7 +9,7 @@ import { PillTabs } from "@/components/ui/tabs";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { Chip, Reactions, SiteIcon, SourceDrawer, sourceName } from "@/components/studio/bits";
-import { act, runningJob, type Source, type State } from "@/lib/api";
+import { act, runningJob, type AsideRound, type Source, type State } from "@/lib/api";
 import { Working } from "@/components/studio/working";
 import { roundWhen } from "@/lib/text";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,78 @@ const TIER: Record<string, string> = { T1: "연구기관", T2: "컨설팅", T3: 
 const tierOf = (t: string) => (t === "T5" ? "T3" : t);
 const group = (s: Source) => (s.tier ? tierOf(s.tier) : s.site);
 const groupName = (s: Source) => (s.tier ? TIER[tierOf(s.tier)] ?? s.tier : s.siteName);
+
+/** 글 주소 끝 조각(slug)을 읽을 수 있게 — 실패한 글은 제목을 받기 전에 실패하는 일이 많다 */
+const slugTitle = (t: string) => (/^[a-z0-9-]+$/.test(t) ? t.replace(/-/g, " ").replace(/^./, (c) => c.toUpperCase()) : t);
+
+/** aside 회차 칩 — 실패·멈춘 소스가 있으면 마우스를 올렸을 때 내용 카드를 띄운다(2026-11-25 사용자: 기본 툴팁 대신 디자인 있게).
+ *  서재 머리 영역이 overflow-hidden이라 카드는 body에 붙여(portal) 칩 아래에 고정 위치로 그린다 */
+function RoundChip({ c, names }: { c: AsideRound; names: Map<string, string> }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const f = c.failures ?? [];
+  const warn = c.failed > 0 || c.stopped.length > 0;
+  const W = 380;
+  const open = () => {
+    if (!warn || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    setPos({ top: r.bottom + 10, left: Math.max(12, Math.min(r.left, window.innerWidth - W - 12)) });
+  };
+  const name = (id: string) => names.get(id) ?? id;
+  return (
+    <span ref={ref} onMouseEnter={open} onMouseLeave={() => setPos(null)} className={cn(warn && "cursor-help")}>
+      <Chip className={cn("bg-page/60 backdrop-blur", warn && "border-amber-400/50")}>
+        <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
+        <span>aside · 소스</span>
+        <span className="tabular-nums text-violet-700 dark:text-violet-300">
+          신규 {c.new}
+          {c.upgraded > 0 && ` · 격상 ${c.upgraded}`}
+        </span>
+        {warn && <IconAlertTriangleFilled className="size-3.5 text-amber-500" />}
+      </Chip>
+      {pos &&
+        createPortal(
+          <div
+            style={{ top: pos.top, left: pos.left, width: W }}
+            className="pointer-events-none fixed z-[100] overflow-hidden rounded-2xl border border-line bg-panel-solid text-left shadow-2xl shadow-black/10 animate-in fade-in slide-in-from-top-1 duration-150"
+          >
+            <div className="flex items-center gap-2.5 border-b border-line bg-amber-500/[0.07] px-4 py-3">
+              <span className="flex size-7 items-center justify-center rounded-full bg-amber-500/15">
+                <IconAlertTriangleFilled className="size-4 text-amber-500" />
+              </span>
+              <div className="min-w-0">
+                <div className="text-[13px] font-semibold text-ink">
+                  {[f.length > 0 && `실패 ${f.length}편`, c.stopped.length > 0 && `멈춘 소스 ${c.stopped.length}곳`].filter(Boolean).join(" · ")}
+                </div>
+                <div className="text-[11.5px] tabular-nums text-ink-3">
+                  {roundWhen(c.id)} 회차 · 신규 {c.new} · 격상 {c.upgraded}
+                </div>
+              </div>
+            </div>
+            <div className="max-h-80 space-y-2 overflow-y-auto p-3">
+              {c.stopped.map((s) => (
+                <div key={"s" + s} className="flex items-center gap-2 rounded-xl bg-soft px-3 py-2 text-[12.5px] text-ink-2">
+                  <IconPlayerPauseFilled className="size-3.5 shrink-0 text-amber-500" />
+                  <span className="font-medium text-ink">{name(s)}</span>
+                  <span className="text-ink-3">수집이 멈췄습니다</span>
+                </div>
+              ))}
+              {f.map((x, i) => (
+                <div key={i} className="rounded-xl bg-soft px-3 py-2.5">
+                  <div className="flex items-start gap-2">
+                    <span className="mt-px shrink-0 rounded-full border border-line bg-page px-2 py-px text-[10.5px] font-medium text-ink-2">{name(x.source)}</span>
+                    <span className="line-clamp-2 min-w-0 text-[12.5px] font-medium leading-snug text-ink">{slugTitle(x.title)}</span>
+                  </div>
+                  <div className="mt-1.5 break-all text-[11.5px] leading-snug text-amber-700 dark:text-amber-300">{x.error}</div>
+                </div>
+              ))}
+            </div>
+          </div>,
+          document.body
+        )}
+    </span>
+  );
+}
 
 export default function Library({ state, refresh, go }: { state: State; refresh: () => void; go: (h: string) => void }) {
   const [site, setSiteRaw] = useState("all");
@@ -56,6 +129,9 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
       if (group(s) === site && s.site !== "manual") m.set(s.site, { name: s.siteName, n: (m.get(s.site)?.n ?? 0) + 1 });
     return [...m.entries()].sort((a, b) => b[1].n - a[1].n);
   }, [state.library, site]);
+
+  // 소스 id → 이름(aside 회차 카드에 씀)
+  const siteNames = useMemo(() => new Map(state.library.map((s) => [s.site, s.siteName] as [string, string])), [state.library]);
 
   // 수집 기록 칩 — 소스 aside 수집(Supabase)과 요청 수집(로컬)을 시각순으로 섞어 최근 6개
   const rounds = useMemo(
@@ -130,15 +206,7 @@ export default function Library({ state, refresh, go }: { state: State; refresh:
             <div className="mt-5 flex flex-wrap gap-2">
               {rounds.map((c) =>
                 "new" in c ? (
-                  <Chip key={"a" + c.id} className="bg-page/60 backdrop-blur" title={c.stopped.length ? `멈춘 소스: ${c.stopped.join(", ")}` : undefined}>
-                    <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>
-                    <span>aside · 소스</span>
-                    <span className="tabular-nums text-violet-700 dark:text-violet-300">
-                      신규 {c.new}
-                      {c.upgraded > 0 && ` · 격상 ${c.upgraded}`}
-                    </span>
-                    {(c.failed > 0 || c.stopped.length > 0) && <span className="tabular-nums text-amber-600 dark:text-amber-300">!</span>}
-                  </Chip>
+                  <RoundChip key={"a" + c.id} c={c} names={siteNames} />
                 ) : (
                   <Chip key={c.id} className="bg-page/60 backdrop-blur">
                     <span className="tabular-nums text-ink-3">{roundWhen(c.id)}</span>

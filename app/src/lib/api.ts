@@ -185,7 +185,7 @@ export type State = {
 };
 
 // 소스 aside 수집 회차(scripts/aside_collect.py → Supabase) — 서재 위 칩
-export type AsideRound = { id: string; new: number; upgraded: number; failed: number; stopped: string[] };
+export type AsideRound = { id: string; new: number; upgraded: number; failed: number; stopped: string[]; failures?: { source: string; title: string; error: string }[] };
 
 export type ChatMsg = { role: "mentor" | "claude"; text: string; at: number; cost?: number };
 

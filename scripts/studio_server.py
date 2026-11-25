@@ -759,6 +759,19 @@ def collect_rounds():
     return out
 
 
+def aside_failures(rep):
+    """회차의 실패 글 — 서재 칩 툴팁용(2026-11-25 사용자). 글 주소 끝 조각 + 오류 첫 줄('Error: ' 되풀이는 뺀다)"""
+    out = []
+    for r in rep:
+        for i in r.get("items", []):
+            if not i.get("error"):
+                continue
+            slug = [s for s in i.get("url", "").split("?")[0].split("/") if s and not s.isdigit()][-1:] or [i.get("url", "")]
+            err = re.sub(r"^(Error:\s*)+", "", str(i["error"]).strip().splitlines()[0]).strip()
+            out.append({"source": r["source"], "title": i.get("title") or slug[0], "error": err[:160]})
+    return out
+
+
 def aside_rounds():
     """소스 aside 수집(scripts/aside_collect.py) 회차 — runs/aside/<시각>/report.json. 미리보기 회차는 뺀다."""
     out = []
@@ -768,7 +781,8 @@ def aside_rounds():
             continue
         n = lambda k: sum(r.get(k, 0) for r in rep)
         out.append({"id": d.name, "new": n("new"), "upgraded": n("upgraded"), "failed": n("failed"),
-                    "stopped": sorted({r["source"] for r in rep if r.get("stopped")})})
+                    "stopped": sorted({r["source"] for r in rep if r.get("stopped")}),
+                    "failures": aside_failures(rep)})
         if len(out) >= 12:
             break
     return out
