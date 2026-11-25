@@ -2,7 +2,7 @@
 
 HTML 구조·디자인과 메일 방식은 main 브랜치(web/server.py · web/email_renderer.py · web/site_export.py)를 따른다.
 - 웹: web/article.html + web/article.css (Offpiste식 1컬럼, Pine Green)
-- 메일: 웹페이지의 메일 전용 변형(email-head.html · email-body.html)을 800px 폭으로 찍어 넣은 이미지 메일.
+- 메일: 웹페이지의 메일 전용 변형(email.html)을 800px 폭으로 한 장 찍어 넣은 이미지 메일.
   보내지는 않는다 — .eml을 Outlook에서 열어 확인한 뒤 사람이 보낸다.
 - 배포: site/<web_path_token>/<글>/ 로 복사하고 아카이브 목록을 다시 만든 뒤 커밋·푸시 → vercel.json이 site/를 배포.
 
@@ -37,6 +37,7 @@ SETTINGS = ROOT / "config" / "publish.json"
 ID = re.compile(r"^[0-9A-Za-z가-힣][0-9A-Za-z가-힣_.-]{0,80}$")
 
 # 웹에 올리지 않는 발행 부산물 (메일용)
+# email-head/-body·email_head/_body는 2026-11-25 이전(머리·본문 두 장) 파일 — 예전 미리보기 폴더에 남아 있어도 사이트로 복사하지 않게 둔다
 SKIP = {"newsletter.eml", "email.html", "email-head.html", "email-body.html", "email_head.png", "email_body.png", "email_screenshot.png"}
 
 # 조회수·좋아요 자리(web/reader.js가 채운다 — 수치를 받기 전에는 숨김). 메일 캡처용 변형에는 넣지 않는다
@@ -129,7 +130,9 @@ def load(k):
     # 사내 자료는 원고에 썼어도 참고자료에 올리지 않는다(2026-10-29 사용자 — 발행본에 내부 자료 이름이 나가지 않게. 10/23엔 제목을 붙였었다)
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
-            "confirmed": conf, "pub_date": date.today().isoformat(),
+            "confirmed": conf,
+            # 다시 발행(제목 고치기 등)은 처음 발행한 날짜를 그대로 쓴다(2026-11-25 — 날짜가 고친 날로 바뀌어 아카이브 순서가 흔들리지 않게)
+            "pub_date": (meta.get("published") or {}).get("date") or date.today().isoformat(),
             # 제목 아래 안내 상자 — 글 메타에 notice가 있으면 그 값(빈 값이면 상자 없음), 없으면 config/publish.json의 notice(2026-11-12 사용자: 매 발행본 기본으로)
             "notice": meta["notice"] if "notice" in meta else settings().get("notice", ""),
             "footer": meta.get("footer")}  # 이 글만 바닥글을 바꿀 때(2026-10-29). 없으면 config/publish.json
@@ -195,7 +198,7 @@ def render(a, files, body_class=""):
 
 
 def build(k):
-    """publish/<글>/ — 웹 발행본(index.html)과 메일 캡처용 변형 두 장, 그림, article.json"""
+    """publish/<글>/ — 웹 발행본(index.html)과 메일 캡처용 변형(email.html), 그림, article.json"""
     a = load(k)
     out = OUT / k
     out.mkdir(parents=True, exist_ok=True)
@@ -217,13 +220,12 @@ def build(k):
     shutil.copyfile(WEB / "article.css", out / "style.css")
     shutil.copyfile(WEB / "reader.js", out / "reader.js")
     (out / "index.html").write_text(render(a, files), encoding="utf-8")
-    # email.html은 작업실 미리보기용(머리·본문을 한 장으로), 메일 캡처는 머리·본문 두 장(각각 누르면 웹페이지)
+    # email.html — 작업실 미리보기이자 메일 캡처 원본. 한 장으로 찍는다(2026-11-25 사용자 — 예전엔 머리·본문 두 장이었다.
+    # 사이에 '웹에서 보기' 줄을 넣으려던 구조인데 그 줄은 10/26에 없앴고, 머리 아래를 바짝 잘라 내다 제목 y 꼬리가 잘렸다)
     # 메일에는 머리 그림을 넣지 않는다 — 첫 화면에서 본문이 바로 보이게(팀장 의견, 2026-10-26).
     # 머리는 헤더 + 제목 글자만. 웹 발행본(index.html)·아카이브 썸네일은 머리 그림 그대로
     mail = {**a, "hero": ""}
     (out / "email.html").write_text(render(mail, files, "email-capture"), encoding="utf-8")
-    for part in ("head", "body"):
-        (out / f"email-{part}.html").write_text(render(mail, files, f"email-capture email-part-{part}"), encoding="utf-8")
     info = {"id": k, "title": a["title"], "pub_date": a["pub_date"], "hero_file": files.get(a["hero"], ""),
             "teaser": teaser(b["text"] for b in a["blocks"] if b["type"] == "p"),
             "web_url": web_url(k)}  # 웹에도 올라가는 파일 — 내부 경로(columns/…)는 넣지 않는다
@@ -264,7 +266,9 @@ def web_url(k):
 def trim_bottom(img, pad=60):
     """하단의 빈 영역(균일 색상 행)을 지우고 pad 픽셀만 남긴다."""
     w, h = img.size
-    xs = list(range(10, w - 10, max(1, w // 30)))
+    # 가로 모든 칸을 본다(2026-11-25) — 예전엔 w//30(2배율 1600px에서 53px) 간격이라 y·g 같은 가는 꼬리가 칸 사이에 끼면
+    # 빈 줄로 보고 잘랐다(머리 캡처는 pad 0이라 제목 y 꼬리가 잘림). 아래에서 위로 보다 글자를 만나면 멈추므로 비용은 작다
+    xs = list(range(10, w - 10))
     px = img.convert("RGB").load()
     for y in range(h - 1, -1, -1):
         row = [px[x, y] for x in xs]
@@ -328,24 +332,18 @@ def png_part(path, cid):
 def build_eml(a, out, to, cc):
     from PIL import Image
     cfg, url = settings(), web_url(a["id"])
-    head, body = out / "email_head.png", out / "email_body.png"
-    capture([(out / "email-head.html", head, 0), (out / "email-body.html", body, 60)])
-    hi, bi = Image.open(head), Image.open(body)
-    full = Image.new("RGB", (hi.width, hi.height + bi.height))
-    full.paste(hi, (0, 0))
-    full.paste(bi, (0, hi.height))
-    full.save(out / "email_screenshot.png")  # 미리보기·검토용
-    w = min(hi.width // 2, EMAIL_WIDTH)
+    shot = out / "email_screenshot.png"  # 메일에 넣는 한 장(작업실 검토에도 이 파일)
+    capture([(out / "email.html", shot, 60)])
+    w = min(Image.open(shot).width // 2, EMAIL_WIDTH)
     subject = cfg["subject_prefix"] + a["title"]
-    rows = "\n".join([img_row("article_head", w, subject, url), img_row("article_body", w, cfg["kicker"], url)])
+    rows = img_row("article", w, subject, url)
     msg = MIMEMultipart("related")
     msg["Subject"], msg["From"], msg["To"] = subject, cfg["sender"], ", ".join(to)
     if cc:
         msg["Cc"] = ", ".join(cc)
     msg["X-Unsent"] = "1"  # Outlook이 받은 메일이 아니라 보낼 초안으로 연다
     msg.attach(MIMEText(wrap_mail(rows), "html", "utf-8"))
-    msg.attach(png_part(head, "article_head"))
-    msg.attach(png_part(body, "article_body"))
+    msg.attach(png_part(shot, "article"))
     (out / "newsletter.eml").write_bytes(msg.as_bytes())
     return out / "newsletter.eml"
 
