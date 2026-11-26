@@ -130,9 +130,8 @@ def load(k):
     # 사내 자료는 원고에 썼어도 참고자료에 올리지 않는다(2026-10-29 사용자 — 발행본에 내부 자료 이름이 나가지 않게. 10/23엔 제목을 붙였었다)
     return {"id": k, "meta": mp, "title": title or meta.get("title", k), "blocks": blocks,
             "hero": (ROOT / hero).as_posix() if hero else "", "references": refs,
-            "confirmed": conf,
-            # 다시 발행(제목 고치기 등)은 처음 발행한 날짜를 그대로 쓴다(2026-11-25 — 날짜가 고친 날로 바뀌어 아카이브 순서가 흔들리지 않게)
-            "pub_date": (meta.get("published") or {}).get("date") or date.today().isoformat(),
+            # 발행일은 발행(다시 발행 포함)한 날 — 웹·아카이브·메일 모두(2026-11-26 사용자. 11/25에 처음 발행일 유지로 바꿨다가 되돌림)
+            "confirmed": conf, "pub_date": date.today().isoformat(),
             # 제목 아래 안내 상자 — 글 메타에 notice가 있으면 그 값(빈 값이면 상자 없음), 없으면 config/publish.json의 notice(2026-11-12 사용자: 매 발행본 기본으로)
             "notice": meta["notice"] if "notice" in meta else settings().get("notice", ""),
             "footer": meta.get("footer")}  # 이 글만 바닥글을 바꿀 때(2026-10-29). 없으면 config/publish.json
