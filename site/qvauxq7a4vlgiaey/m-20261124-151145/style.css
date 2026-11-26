@@ -369,15 +369,10 @@ body {
 .email-capture .references li { font-size: 19.5px; line-height: 1.6; }
 .email-capture .site-footer { font-size: 19.5px; }
 .email-capture a { color: inherit; text-decoration: none; }
-/* 상단 "웹에서 보기" 줄을 제목 아래에 넣으려고 머리(헤더·제목)와 본문을 따로 찍는다.
-   메일에는 머리 그림이 없다(scripts/publish.py build) — 머리 = 헤더 + 제목 글자(.title-only) */
-.email-part-head main.article-page,
-.email-part-head .site-footer { display: none; }
-.email-part-body .site-header,
-.email-part-body .hero,
-.email-part-body .title-only { display: none; }
+/* 메일에는 머리 그림이 없다(scripts/publish.py build) — 헤더 + 제목 글자(.title-only) + 본문을 한 장으로 찍는다(2026-11-25부터.
+   예전엔 '웹에서 보기' 줄을 끼우려고 머리·본문을 따로 찍었다 — .email-part-* 규칙은 그때 것이라 지웠다) */
 /* 메일 간격(2026-10-26 눈에 보이는 간격 2배로): 헤더 줄 → 제목 글자 43 → 86px, 제목 → 본문 글자 47 → 94px.
-   여백값은 줄높이 몫을 빼고 맞춘 값(36+43, 40+47). 머리 캡처는 아래 빈 줄을 잘라내므로 제목 아래 간격은 본문 위 여백이 맡는다 */
+   여백값은 줄높이 몫을 빼고 맞춘 값(36+43, 40+47). 제목 아래 간격은 제목 줄높이 몫 + 본문 위 여백 */
 .email-capture .plain-title { padding: 79px 0 0; }
 .email-capture .article-page > .article-body:first-child { padding-top: 87px; }
 .email-capture .plain-title { text-align: center; }  /* 메일 제목은 가운데(2026-10-26) — 웹 발행본은 왼쪽 그대로 */
