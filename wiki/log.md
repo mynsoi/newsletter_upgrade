@@ -1,5 +1,27 @@
 # 위키 이력
 
+## 2026-11-26 10:19
+- 묶기 붙임 openai-news/0038 → 주제/one-useful-thing-0002.md
+- 묶기 붙임 openai-news/0039 → 주제/bcg-publications-0474.md
+- 묶기 붙임 openai-news/0040 → 주제/hbr-korea-0333.md
+- 묶기 붙임 onemodel-blog/0024 → 주제/mckinsey-insights-0030.md
+- 묶기 붙임 fastcompany-worklife/0312 → 주제/hrdive-0029.md
+- 묶기 붙임 bain-insights/0090 → 주제/hbr-korea-0038.md
+- 묶기 붙임 hbr-korea/0343, mckinsey-insights/0204, mckinsey-insights/0207, mckinsey-insights/0205 → 주제/bcg-publications-0495.md
+- 묶기 붙임 dbr/0383 → 주제/hbr-korea-0042.md
+- 묶기 붙임 dbr/0382 → 주제/bain-insights-0003.md
+- 묶기 붙임 dbr/0379 → 주제/mckinsey-insights-0045.md
+- 묶기 붙임 hrdive/0303 → 주제/fastcompany-worklife-0081.md
+- 묶기 붙임 bcg-publications/0520 → 주제/dbr-0378.md
+- 묶기 새 주제(쓸 만함) AI 사용 금지를 푼다는 결정은 위험도 사라졌다는 신호로 읽힐 수 있어, 허용 범위의 변화와 위험의 변화는 따로 설명돼야 한다. → 주제/hbr-korea-0342.md
+- 묶기 새 주제(보통) 리더를 따르는 사람이 많다는 사실만으로는 그 리더에게 반대 의견도 자유롭게 말할 수 있는 조직인지 알 수 없다. → 주제/fastcompany-worklife-0310.md
+- 묶기 새 주제(쓸 만함) AI를 자주 쓰는 사람의 의견만으로 발전 방향을 정하면, 덜 지원받고 더 불안해하는 사람의 경험은 변화에서 빠질 수 있다. → 주제/fastcompany-worklife-0313.md
+- 묶기 새 주제(보통) AI의 발전 속도와 사람들의 신뢰는 함께 높아지는 것이 아니므로, 기술이 빨라지는 미래만으로 변화를 예상하면 다른 경로를 놓칠 수 있다. → 주제/knowledge-wharton-0024.md
+- 묶기 새 주제(뺌) 고객이 AI로 공급업체를 찾기 시작하면, 깊이 있는 전문 콘텐츠가 많아도 기본적인 제품·거래 정보가 부족한 회사는 후보에서 빠질 수 있다. → 주제/dbr-0380.md
+- 묶기 새 주제(보통) 공식 신고 창구가 있어도 그 단계까지 갈 부담이 크다면, 조직의 문제는 해결되기 전에 침묵 속에 쌓일 수 있다. → 주제/hrdive-0300.md
+- 묶기 새 주제(뺌) AI 사용량이 많은 곳에는 혁신과 낭비가 함께 있을 수 있어, 일괄적인 비용 제한은 둘을 함께 줄일 수 있다. → 주제/mckinsey-insights-0206.md
+- 주제 묶기 새 카드 29 · 붙음/새 주제 24 · 뺌 5 · 못 넣음 0 · 남음 0 · 85s
+
 ## 2026-11-24 17:38
 - 주제 묶기(이어 묶기) 1번 · 보낸 카드 57 · 229s
 
