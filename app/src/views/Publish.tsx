@@ -4,7 +4,7 @@ import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { PillTabs } from "@/components/ui/tabs";
 import { Chip } from "@/components/studio/bits";
 import { Cover } from "@/views/Articles";
-import { act, articleTitle, getReaderStats, img, openLog, runningJob, type Article, type ReaderStats, type State } from "@/lib/api";
+import { act, articleTitle, getReaderChat, getReaderStats, img, openLog, runningJob, type Article, type ChatMode, type ReaderChat, type ReaderStats, type State } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 /**
@@ -118,6 +118,106 @@ function ViewBars({ days }: { days: [string, number][] }) {
         <span>{row[0][0].slice(5)}</span>
         <span>최근 14일 조회</span>
         <span>{row[13][0].slice(5)}</span>
+      </div>
+    </div>
+  );
+}
+
+const CHAT_MODES: { value: ChatMode; title: string; hint: string }[] = [
+  { value: "off", title: "꺼짐", hint: "글 페이지에 질문 버튼이 보이지 않습니다." },
+  { value: "test", title: "시험", hint: "글 주소 끝에 ?chat=1을 붙인 사람에게만 버튼이 보입니다." },
+  { value: "on", title: "켜짐", hint: "모든 독자에게 질문 버튼이 보입니다." },
+];
+const CHAT_DAILY = 300; // 사이트 전체 하루 상한(migrations/017의 site_chat_begin과 같은 값)
+const chatTime = (at: string) =>
+  new Date(at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
+
+/**
+ * 발행 사이트의 챗봇 — 켜기·시험·끄기(사이트 전체)와 이 글에 들어온 독자 질문·답변(scripts/reader_stats.py chat).
+ * 독자는 글 페이지 오른쪽 아래 '이 글에 대해 물어보기'로 묻고, 그 글과 참고 원문을 근거로 한 답을 받는다(api/chat.py).
+ * 1분마다 다시 읽는다. 누가 물었는지는 기록하지 않는다.
+ */
+function Chatbot({ id }: { id: string }) {
+  const [data, setData] = useState<ReaderChat | null>(null);
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
+  const load = () => getReaderChat(id).then(setData);
+  useEffect(() => {
+    load();
+    const t = setInterval(load, 60_000);
+    return () => clearInterval(t);
+  }, [id]);
+  const setMode = async (mode: ChatMode) => {
+    setBusy(true);
+    setErr("");
+    await act("chat-mode", { mode }).catch((e) => setErr(e.message));
+    await load();
+    setBusy(false);
+  };
+  if (!data) return null;
+  if (!data.ready)
+    return (
+      <div className="rounded-2xl border border-line p-5 text-sm text-ink-3">
+        <div className="font-medium text-ink">챗봇</div>
+        <p className="mt-1">챗봇을 아직 쓸 수 없습니다 — DB에 챗봇 표가 적용되기 전이거나 연결이 끊겼습니다.</p>
+      </div>
+    );
+  return (
+    <div className="rounded-2xl border border-line p-5 text-sm">
+      <div className="flex items-center gap-2">
+        <span className="font-medium text-ink">챗봇</span>
+        <span className="ml-auto text-xs tabular-nums text-ink-3">오늘 질문 {data.today} / {CHAT_DAILY}</span>
+      </div>
+      <div className="mt-3 flex rounded-full border border-line p-0.5" role="group" aria-label="챗봇 켜기">
+        {CHAT_MODES.map((m) => (
+          <button
+            key={m.value}
+            disabled={busy}
+            aria-pressed={data.mode === m.value}
+            onClick={() => data.mode !== m.value && setMode(m.value)}
+            className={cn("flex-1 whitespace-nowrap rounded-full px-2 py-1.5 text-xs font-medium transition", data.mode === m.value ? "bg-soft text-ink" : "text-ink-3 hover:text-ink")}
+          >
+            {m.title}
+          </button>
+        ))}
+      </div>
+      <p className="mt-2 text-xs text-ink-3">{CHAT_MODES.find((m) => m.value === data.mode)!.hint} 모든 글에 적용됩니다.</p>
+      {!data.secret && (
+        <p className="mt-2 text-xs text-amber-700 dark:text-amber-200">
+          비밀값이 아직 없어 켜도 답하지 못합니다 — python -I scripts/reader_stats.py chat-secret 으로 만들어 Vercel의 CHAT_SECRET에 넣어 주세요.
+        </p>
+      )}
+      {!data.context && (
+        <p className="mt-2 text-xs text-amber-700 dark:text-amber-200">
+          이 글은 근거 자료가 없어 질문 버튼이 보이지 않습니다 — 원고와 원문이 있는 PC에서 python -I scripts/publish.py refresh 를 돌려 주세요.
+        </p>
+      )}
+      {err && <p className="mt-2 text-xs text-rose-600 dark:text-rose-300">{err}</p>}
+      <div className="mt-3 border-t border-line pt-3">
+        <div className="text-xs font-medium text-ink-2">이 글의 독자 질문 <span className="tabular-nums text-ink-3">{data.questions.length}</span></div>
+        {data.questions.length > 0 ? (
+          <ul className="mt-2 max-h-[28rem] space-y-2 overflow-y-auto">
+            {data.questions.map((x) => (
+              <li key={x.id} className="rounded-xl bg-soft p-3">
+                <button onClick={() => setOpen(open === x.id ? null : x.id)} aria-expanded={open === x.id} className="block w-full text-left">
+                  <span className="block break-words font-medium leading-snug text-ink">{x.question}</span>
+                  <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tabular-nums text-ink-3">
+                    <span className="whitespace-nowrap">{chatTime(x.at)}</span>
+                    {x.ms != null && <span className="whitespace-nowrap">{(x.ms / 1000).toFixed(1)}초</span>}
+                    {x.status === "refused" && <Chip className="py-0">모델이 거절</Chip>}
+                    {x.status === "error" && <Chip className="border-rose-300/40 bg-rose-500/15 py-0 text-rose-700 dark:text-rose-200">실패</Chip>}
+                    {x.status === "started" && <Chip className="py-0">끊김</Chip>}
+                    {x.dropped > 0 && <Chip className="border-amber-300/40 bg-amber-500/15 py-0 text-amber-700 dark:text-amber-200">원문 겹침 {x.dropped}문장 뺌</Chip>}
+                  </span>
+                </button>
+                {open === x.id && <p className="mt-2 whitespace-pre-wrap break-words border-t border-line pt-2 leading-relaxed text-ink-2">{x.answer || "답변 없음"}</p>}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-ink-3">아직 질문이 없습니다.</p>
+        )}
       </div>
     </div>
   );
@@ -246,6 +346,7 @@ function Detail({ a, state, refresh, stat }: { a: Article; state: State; refresh
               </div>
             </div>
           )}
+          {a.published && <Chatbot id={a.id} />}
         </div>
       </div>
     </div>

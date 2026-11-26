@@ -206,6 +206,20 @@ export async function getSource(path: string): Promise<Source> {
 
 /** 발행 사이트의 조회수·좋아요 — 글별 합계와 최근 날짜별 조회수(scripts/reader_stats.py). 못 읽으면 빈 값 */
 export type ReaderStats = Record<string, { views: number; likes: number; days: [string, number][] }>;
+/** 발행 사이트의 챗봇(작업실용) — 켜짐 여부·준비 상태와 이 글에 들어온 독자 질문. ready가 거짓이면 아직 쓸 수 없다(DB 적용 전·연결 실패) */
+export type ChatMode = "off" | "test" | "on";
+export type ReaderQuestion = { id: number; question: string; answer: string; status: "started" | "done" | "refused" | "error"; at: string; ms: number | null; dropped: number };
+export type ReaderChat = { ready: boolean; mode: ChatMode; secret: boolean; context: boolean; today: number; questions: ReaderQuestion[] };
+export async function getReaderChat(article: string): Promise<ReaderChat> {
+  const none: ReaderChat = { ready: false, mode: "off", secret: false, context: false, today: 0, questions: [] };
+  try {
+    const r = await fetch("/api/reader-chat?article=" + encodeURIComponent(article));
+    return r.ok ? await r.json() : none;
+  } catch {
+    return none;
+  }
+}
+
 export async function getReaderStats(): Promise<ReaderStats> {
   try {
     const r = await fetch("/api/reader-stats");

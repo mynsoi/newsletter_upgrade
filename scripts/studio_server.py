@@ -1356,6 +1356,16 @@ def reader_stats_view():
         return _reader["data"]
 
 
+def reader_chat_view(k):
+    """발행 탭의 챗봇 상자 — 켜짐 여부, 준비 상태, 이 글에 들어온 독자 질문(scripts/reader_stats.py chat)."""
+    return RS.chat(safe_id(k))
+
+
+def act_chat_mode(a):
+    """챗봇 끄기·시험·켜기 — {"mode": "off"|"test"|"on"}. 모든 글에 바로 적용된다."""
+    return {"mode": RS.set_chat_mode(str(a.get("mode") or ""))}
+
+
 def act_collect(a):
     """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장,
     과거분 백필(설정 backfill_since 이후)도 회차마다 조금씩 — 다 받으면 저절로 '백필 끝')
@@ -1595,7 +1605,7 @@ ACTIONS = {"titles": act_titles_ui, "title": act_title,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
-           "publish-build": act_publish_build, "publish": act_publish, "rule-decide": act_rule_decide, "emph": act_emph}
+           "publish-build": act_publish_build, "publish": act_publish, "chat-mode": act_chat_mode, "rule-decide": act_rule_decide, "emph": act_emph}
 
 
 # ---------- 그림 축소본 ----------
@@ -1681,6 +1691,8 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json(chat_log(q.get("article", [""])[0]))
         if u.path == "/api/reader-stats":
             return self.send_json(reader_stats_view())
+        if u.path == "/api/reader-chat":
+            return self.send_json(reader_chat_view(q.get("article", [""])[0]))
         if u.path == "/api/log":
             j = JOBS.get(q.get("id", [""])[0])
             if not j:
