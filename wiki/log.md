@@ -1,6 +1,9 @@
 # 위키 이력
 
 ## 2026-11-26 10:19
+- 주제 묶기(이어 묶기) 1번 · 보낸 카드 29 · 94s
+
+## 2026-11-26 10:19
 - 묶기 붙임 openai-news/0038 → 주제/one-useful-thing-0002.md
 - 묶기 붙임 openai-news/0039 → 주제/bcg-publications-0474.md
 - 묶기 붙임 openai-news/0040 → 주제/hbr-korea-0333.md
