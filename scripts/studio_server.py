@@ -1356,24 +1356,6 @@ def reader_stats_view():
         return _reader["data"]
 
 
-def reader_comments_view(k):
-    """발행 탭의 댓글 목록 — 글 하나의 댓글(숨긴 것·승인 대기 포함)과 받는 방식."""
-    return RS.comments(safe_id(k))
-
-
-def act_comment_set(a):
-    """댓글 숨기기·되살리기·승인 — {"comment": 번호, "status": "hidden"|"visible"}. 사이트에 바로 반영된다."""
-    if not RS.set_comment(int(a.get("comment") or 0), str(a.get("status") or "")):
-        raise ValueError("댓글을 찾지 못했습니다(쓴 사람이 이미 지웠을 수 있습니다)")
-    _reader["at"] = 0.0  # 댓글 수를 바로 다시 읽게
-    return {"ok": True}
-
-
-def act_comment_mode(a):
-    """댓글 받는 방식 — {"mode": "open"|"moderated"|"closed"}. 모든 글에 바로 적용된다."""
-    return {"mode": RS.set_mode(str(a.get("mode") or ""))}
-
-
 def act_collect(a):
     """수집. 비우면 소스 aside 수집(scripts/aside_collect.py — Deloitte·BCG·DBR·HBR Korea·McKinsey·Wharton을 Supabase에 저장,
     과거분 백필(설정 backfill_since 이후)도 회차마다 조금씩 — 다 받으면 저절로 '백필 끝')
@@ -1613,7 +1595,7 @@ ACTIONS = {"titles": act_titles_ui, "title": act_title,
            "wiki-ingest": act_wiki_ingest, "wiki-bundle": act_wiki_bundle, "wiki-lint": act_wiki_lint, "wiki-pick": act_wiki_pick,
            "wiki-verdict": act_wiki_verdict, "mine": act_mine, "mine-swap": act_mine_swap, "mine-internal": act_mine_internal, "mine-more": act_mine_more,
            "mine-ok": act_mine_ok, "mine-take": act_mine_take, "delete": act_delete, "base": act_base, "restart": act_restart,
-           "publish-build": act_publish_build, "publish": act_publish, "comment-set": act_comment_set, "comment-mode": act_comment_mode, "rule-decide": act_rule_decide, "emph": act_emph}
+           "publish-build": act_publish_build, "publish": act_publish, "rule-decide": act_rule_decide, "emph": act_emph}
 
 
 # ---------- 그림 축소본 ----------
@@ -1699,8 +1681,6 @@ class H(SimpleHTTPRequestHandler):
             return self.send_json(chat_log(q.get("article", [""])[0]))
         if u.path == "/api/reader-stats":
             return self.send_json(reader_stats_view())
-        if u.path == "/api/reader-comments":
-            return self.send_json(reader_comments_view(q.get("article", [""])[0]))
         if u.path == "/api/log":
             j = JOBS.get(q.get("id", [""])[0])
             if not j:

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { IconDownload, IconExternalLink, IconEye, IconHeart, IconMail, IconMessage, IconSend } from "@tabler/icons-react";
+import { IconDownload, IconExternalLink, IconEye, IconHeart, IconMail, IconSend } from "@tabler/icons-react";
 import AITextLoading from "@/components/kokonutui/ai-text-loading";
 import { PillTabs } from "@/components/ui/tabs";
 import { Chip } from "@/components/studio/bits";
 import { Cover } from "@/views/Articles";
-import { act, articleTitle, getReaderStats, getSiteComments, img, openLog, runningJob, type Article, type CommentMode, type ReaderStats, type SiteComment, type SiteComments, type State } from "@/lib/api";
+import { act, articleTitle, getReaderStats, img, openLog, runningJob, type Article, type ReaderStats, type State } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 /**
@@ -51,11 +51,7 @@ export default function Publish({ state, id, refresh, go }: { state: State; id?:
                   <span className="whitespace-nowrap">확정 {x.confirmed!.date}</span>
                   {x.published && <Chip className="whitespace-nowrap border-emerald-300/40 bg-emerald-500/15 py-0 text-emerald-700 dark:text-emerald-200">발행 {x.published.date}</Chip>}
                   {x.published && stats[x.id] && (
-                    <span className="whitespace-nowrap tabular-nums">
-                      조회 {stats[x.id].views.toLocaleString()} · 좋아요 {stats[x.id].likes.toLocaleString()}
-                      {stats[x.id].comments ? ` · 댓글 ${stats[x.id].comments!.toLocaleString()}` : ""}
-                      {stats[x.id].pending ? <span className="text-amber-600 dark:text-amber-300"> · 승인 대기 {stats[x.id].pending}</span> : null}
-                    </span>
+                    <span className="whitespace-nowrap tabular-nums">조회 {stats[x.id].views.toLocaleString()} · 좋아요 {stats[x.id].likes.toLocaleString()}</span>
                   )}
                 </span>
               </span>
@@ -124,100 +120,6 @@ function ViewBars({ days }: { days: [string, number][] }) {
         <span>{row[13][0].slice(5)}</span>
       </div>
     </div>
-  );
-}
-
-const MODES: { value: CommentMode; title: string; hint: string }[] = [
-  { value: "open", title: "바로 공개", hint: "등록하면 바로 보입니다." },
-  { value: "moderated", title: "승인 뒤 공개", hint: "여기서 승인한 댓글만 보입니다." },
-  { value: "closed", title: "닫힘", hint: "새 댓글을 받지 않습니다. 있던 댓글은 그대로 보입니다." },
-];
-const commentTime = (at: string) =>
-  new Date(at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
-
-/**
- * 발행 사이트의 댓글 — 글 하나의 댓글(숨긴 것·승인 대기 포함)을 보고 숨기기·되살리기·승인한다(scripts/reader_stats.py).
- * 받는 방식(바로 공개·승인 뒤 공개·닫힘)은 사이트 전체 설정이라 어느 글에서 바꿔도 모든 글에 적용된다.
- * 1분마다 다시 읽는다. 쓴 사람이 지운 댓글은 여기에도 나오지 않는다.
- */
-function Comments({ id }: { id: string }) {
-  const [data, setData] = useState<SiteComments | null>(null);
-  const [err, setErr] = useState("");
-  const [busy, setBusy] = useState(false);
-  const load = () => getSiteComments(id).then(setData);
-  useEffect(() => {
-    load();
-    const t = setInterval(load, 60_000);
-    return () => clearInterval(t);
-  }, [id]);
-  const run = async (name: string, body: Record<string, unknown>) => {
-    setBusy(true);
-    setErr("");
-    await act(name, body).catch((e) => setErr(e.message));
-    await load();
-    setBusy(false);
-  };
-  if (!data) return null;
-  if (!data.ready)
-    return (
-      <div className="rounded-2xl border border-line p-5 text-sm text-ink-3">
-        <div className="font-medium text-ink">댓글</div>
-        <p className="mt-1">댓글을 아직 읽을 수 없습니다 — DB에 댓글 표가 적용되기 전이거나 연결이 끊겼습니다.</p>
-      </div>
-    );
-  const pending = data.comments.filter((c) => c.status === "pending").length;
-  const shown = data.comments.filter((c) => c.status === "visible").length;
-  return (
-    <div className="rounded-2xl border border-line p-5 text-sm">
-      <div className="flex items-center gap-2">
-        <span className="font-medium text-ink">댓글 <span className="tabular-nums text-ink-3">{shown}</span></span>
-        {pending > 0 && <Chip className="border-amber-300/40 bg-amber-500/15 py-0 text-amber-700 dark:text-amber-200">승인 대기 {pending}</Chip>}
-      </div>
-      <div className="mt-3 flex rounded-full border border-line p-0.5" role="group" aria-label="댓글 받는 방식">
-        {MODES.map((m) => (
-          <button
-            key={m.value}
-            disabled={busy}
-            aria-pressed={data.mode === m.value}
-            onClick={() => data.mode !== m.value && run("comment-mode", { mode: m.value })}
-            className={cn("flex-1 whitespace-nowrap rounded-full px-2 py-1.5 text-xs font-medium transition", data.mode === m.value ? "bg-soft text-ink" : "text-ink-3 hover:text-ink")}
-          >
-            {m.title}
-          </button>
-        ))}
-      </div>
-      <p className="mt-2 text-xs text-ink-3">{MODES.find((m) => m.value === data.mode)!.hint} 모든 글에 적용됩니다.</p>
-      {err && <p className="mt-2 text-xs text-rose-600 dark:text-rose-300">{err}</p>}
-      {data.comments.length > 0 ? (
-        <ul className="mt-3 max-h-[28rem] space-y-3 overflow-y-auto border-t border-line pt-3">
-          {data.comments.map((c) => (
-            <CommentRow key={c.id} c={c} busy={busy} set={(status) => run("comment-set", { comment: c.id, status })} />
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-3 border-t border-line pt-3 text-ink-3">아직 댓글이 없습니다.</p>
-      )}
-    </div>
-  );
-}
-
-function CommentRow({ c, busy, set }: { c: SiteComment; busy: boolean; set: (status: "visible" | "hidden") => void }) {
-  const btn = "rounded-full border border-line px-2.5 py-1 text-xs font-medium text-ink-2 transition hover:border-ink-3 hover:text-ink disabled:opacity-40";
-  return (
-    <li className={cn("rounded-xl p-3", c.status === "hidden" ? "bg-soft/50" : c.status === "pending" ? "bg-amber-500/10" : "bg-soft")}>
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-        <span className={cn("min-w-0 break-all font-medium", c.status === "hidden" ? "text-ink-3" : "text-ink")}>{c.name}</span>
-        <span className="whitespace-nowrap text-xs tabular-nums text-ink-3">{commentTime(c.at)}</span>
-        {c.status === "hidden" && <Chip className="py-0 text-ink-3">숨김</Chip>}
-        {c.status === "pending" && <Chip className="border-amber-300/40 bg-amber-500/15 py-0 text-amber-700 dark:text-amber-200">승인 대기</Chip>}
-      </div>
-      <p className={cn("mt-1 whitespace-pre-wrap break-words leading-relaxed", c.status === "hidden" ? "text-ink-3 line-through decoration-ink-3/40" : "text-ink-2")}>{c.body}</p>
-      <div className="mt-2 flex gap-1.5">
-        {c.status === "pending" && <button disabled={busy} onClick={() => set("visible")} className={btn}>승인</button>}
-        {c.status !== "hidden" && <button disabled={busy} onClick={() => set("hidden")} className={btn}>숨기기</button>}
-        {c.status === "hidden" && <button disabled={busy} onClick={() => set("visible")} className={btn}>되살리기</button>}
-      </div>
-    </li>
   );
 }
 
@@ -322,10 +224,9 @@ function Detail({ a, state, refresh, stat }: { a: Article; state: State; refresh
               <div className="font-medium text-ink">발행 {a.published.date}</div>
               {stat && (
                 <div className="space-y-3 border-b border-emerald-400/20 pb-3">
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 tabular-nums text-ink">
+                  <div className="flex items-center gap-4 tabular-nums text-ink">
                     <span className="flex items-center gap-1.5"><IconEye className="size-4 shrink-0 text-ink-3" /> 조회 {stat.views.toLocaleString()}</span>
                     <span className="flex items-center gap-1.5"><IconHeart className="size-4 shrink-0 text-ink-3" /> 좋아요 {stat.likes.toLocaleString()}</span>
-                    <span className="flex items-center gap-1.5"><IconMessage className="size-4 shrink-0 text-ink-3" /> 댓글 {(stat.comments ?? 0).toLocaleString()}</span>
                   </div>
                   <ViewBars days={stat.days} />
                 </div>
@@ -345,7 +246,6 @@ function Detail({ a, state, refresh, stat }: { a: Article; state: State; refresh
               </div>
             </div>
           )}
-          {a.published && <Comments id={a.id} />}
         </div>
       </div>
     </div>

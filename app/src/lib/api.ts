@@ -205,19 +205,7 @@ export async function getSource(path: string): Promise<Source> {
 }
 
 /** 발행 사이트의 조회수·좋아요 — 글별 합계와 최근 날짜별 조회수(scripts/reader_stats.py). 못 읽으면 빈 값 */
-export type ReaderStats = Record<string, { views: number; likes: number; comments?: number; pending?: number; days: [string, number][] }>;
-/** 발행 사이트의 댓글(작업실용 — 숨긴 것·승인 대기 포함)과 받는 방식. ready가 거짓이면 아직 쓸 수 없다(DB 적용 전·연결 실패) */
-export type SiteComment = { id: number; name: string; body: string; at: string; status: "visible" | "pending" | "hidden" };
-export type CommentMode = "open" | "moderated" | "closed";
-export type SiteComments = { ready: boolean; mode: CommentMode; comments: SiteComment[] };
-export async function getSiteComments(article: string): Promise<SiteComments> {
-  try {
-    const r = await fetch("/api/reader-comments?article=" + encodeURIComponent(article));
-    return r.ok ? await r.json() : { ready: false, mode: "open", comments: [] };
-  } catch {
-    return { ready: false, mode: "open", comments: [] };
-  }
-}
+export type ReaderStats = Record<string, { views: number; likes: number; days: [string, number][] }>;
 export async function getReaderStats(): Promise<ReaderStats> {
   try {
     const r = await fetch("/api/reader-stats");
